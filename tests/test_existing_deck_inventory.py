@@ -41,6 +41,14 @@ class ExistingDeckInventoryTests(unittest.TestCase):
         self.assertFalse(self.report["slides"][0]["has_transition"])
         self.assertTrue(self.report["slides"][1]["has_transition"])
 
+    def test_transition_summary_exposes_existing_transition(self):
+        first,second=self.report["slides"]
+        self.assertIsNone(first["transition_summary"])
+        self.assertIsNotNone(second["transition_summary"])
+        variants=second["transition_summary"]["variants"]
+        names={name for variant in variants for name in variant["descendants"]}
+        self.assertTrue("morph" in names or "fade" in names)
+
     def test_speaker_notes_are_detected_when_present(self):
         notes=[slide["speaker_notes"] for slide in self.report["slides"] if slide["speaker_notes"]]
         self.assertTrue(notes)
