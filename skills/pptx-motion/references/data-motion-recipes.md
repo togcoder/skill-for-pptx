@@ -114,8 +114,10 @@ This requires a component insertion backend and exact PowerPoint QA.
 
 ### Fallback implementation: stepped text
 
-Create a small number of intermediate text states and sequence them automatically
-inside one click beat, ending on the untouched source value.
+T014 implements this structurally. It clones the source KPI textbox for a small
+set of intermediate values, sequences entrance/exit effects automatically inside
+one click beat, and reveals the untouched source textbox last. Source geometry,
+style and final text remain unchanged.
 
 This mirrors the general mechanism Microsoft documents for a countdown using
 multiple number textboxes, but remains our synthesized count-up implementation,
@@ -167,5 +169,5 @@ Pending:
 - exact-file PowerPoint playback matrix for native chart builds;
 - extended Office chart (`cx:chart`) subtype inventory;
 - odometer component insertion;
-- stepped-text counter writer;
+- exact-file PowerPoint playback for the stepped-text counter writer;
 - exact-file PowerPoint playback for both families.
