@@ -1,0 +1,109 @@
+{
+  "source": "build/T006-motion-semantics-source-v2/timeline.pptx",
+  "source_sha256": "eefbaab33d9e355462999dee123ac946e1c166a3db32524a49469a91f949b218",
+  "variants": [
+    {
+      "variant": "local-remove",
+      "basis": "stage-local",
+      "fill": "remove",
+      "candidate": "build/T006-motion-semantics-matrix-v2/local-remove.pptx",
+      "sha256": "eefbaab33d9e355462999dee123ac946e1c166a3db32524a49469a91f949b218",
+      "changed_uncompressed_parts": [],
+      "behaviors": [
+        {
+          "stage": "a-to-b",
+          "delay_ms": 0,
+          "duration_ms": 900,
+          "path": "M 0 0 L 0.250000 0.000000 E",
+          "fill": "remove"
+        },
+        {
+          "stage": "b-to-c",
+          "delay_ms": 900,
+          "duration_ms": 900,
+          "path": "M 0 0 L 0.250000 0.000000 E",
+          "fill": "remove"
+        }
+      ]
+    },
+    {
+      "variant": "local-hold",
+      "basis": "stage-local",
+      "fill": "hold",
+      "candidate": "build/T006-motion-semantics-matrix-v2/local-hold.pptx",
+      "sha256": "dbe4807e308fdcb33744819f29a462a1198f3ce1eb1fa85c4b6a2a13edf2ecdc",
+      "changed_uncompressed_parts": [
+        "ppt/slides/slide1.xml"
+      ],
+      "behaviors": [
+        {
+          "stage": "a-to-b",
+          "delay_ms": 0,
+          "duration_ms": 900,
+          "path": "M 0 0 L 0.250000 0.000000 E",
+          "fill": "hold"
+        },
+        {
+          "stage": "b-to-c",
+          "delay_ms": 900,
+          "duration_ms": 900,
+          "path": "M 0 0 L 0.250000 0.000000 E",
+          "fill": "hold"
+        }
+      ]
+    },
+    {
+      "variant": "anchored-remove",
+      "basis": "authored-layout",
+      "fill": "remove",
+      "candidate": "build/T006-motion-semantics-matrix-v2/anchored-remove.pptx",
+      "sha256": "67b81d46adf74e6ab830b48685a6486bbb168e6b6f1876f18a21a6672b353a6d",
+      "changed_uncompressed_parts": [
+        "ppt/slides/slide1.xml"
+      ],
+      "behaviors": [
+        {
+          "stage": "a-to-b",
+          "delay_ms": 0,
+          "duration_ms": 900,
+          "path": "M 0 0 L 0.250000 0.000000 E",
+          "fill": "remove"
+        },
+        {
+          "stage": "b-to-c",
+          "delay_ms": 900,
+          "duration_ms": 900,
+          "path": "M 0.250000 0 L 0.500000 0.000000 E",
+          "fill": "remove"
+        }
+      ]
+    },
+    {
+      "variant": "anchored-hold",
+      "basis": "authored-layout",
+      "fill": "hold",
+      "candidate": "build/T006-motion-semantics-matrix-v2/anchored-hold.pptx",
+      "sha256": "4ccab14b4b263cb35668f20e7e0a8047572790cc188db5af783120feaa0f1aad",
+      "changed_uncompressed_parts": [
+        "ppt/slides/slide1.xml"
+      ],
+      "behaviors": [
+        {
+          "stage": "a-to-b",
+          "delay_ms": 0,
+          "duration_ms": 900,
+          "path": "M 0 0 L 0.250000 0.000000 E",
+          "fill": "hold"
+        },
+        {
+          "stage": "b-to-c",
+          "delay_ms": 900,
+          "duration_ms": 900,
+          "path": "M 0.250000 0 L 0.500000 0.000000 E",
+          "fill": "hold"
+        }
+      ]
+    }
+  ],
+  "powerpoint_playback_verified": false
+}

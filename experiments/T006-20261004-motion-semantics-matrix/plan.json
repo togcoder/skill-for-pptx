@@ -1,0 +1,81 @@
+{
+  "version": "0.1",
+  "kind": "native-timeline-plan",
+  "brief": "Move one native circle from A to B, then from B to C on one slide.",
+  "canvas": {"width": 1.0, "height": 0.5625},
+  "data_provenance": "Synthetic geometry for a controlled motion-semantics fixture.",
+  "objects": [
+    {"id": "mover", "kind": "shape", "persistent": true, "morph_name": "!!mover", "geometry": "ellipse", "fill": "#FF7849", "stroke": "#FFF4E8", "stroke_width": 2},
+    {"id": "target-b", "kind": "shape", "persistent": true, "morph_name": "!!target-b", "geometry": "ellipse", "fill": "none", "stroke": "#58C4DD", "stroke_width": 4},
+    {"id": "target-c", "kind": "shape", "persistent": true, "morph_name": "!!target-c", "geometry": "ellipse", "fill": "none", "stroke": "#8ED081", "stroke_width": 4},
+    {"id": "label-a", "kind": "text", "persistent": true, "morph_name": "!!label-a", "geometry": "textbox", "text": "A", "font_size": 24, "text_color": "#FFF4E8", "bold": true},
+    {"id": "label-b", "kind": "text", "persistent": true, "morph_name": "!!label-b", "geometry": "textbox", "text": "B", "font_size": 24, "text_color": "#58C4DD", "bold": true},
+    {"id": "label-c", "kind": "text", "persistent": true, "morph_name": "!!label-c", "geometry": "textbox", "text": "C", "font_size": 24, "text_color": "#8ED081", "bold": true},
+    {"id": "title", "kind": "text", "persistent": true, "morph_name": "!!title", "geometry": "textbox", "text": "Two-stage motion fixture", "font_size": 38, "text_color": "#FFF4E8", "bold": true},
+    {"id": "caption", "kind": "text", "persistent": true, "morph_name": "!!caption", "geometry": "textbox", "text": "A to B to C, 900 ms per stage", "font_size": 22, "text_color": "#B9B4C2", "bold": false}
+  ],
+  "slides": [
+    {
+      "id": "two-stage-motion",
+      "message": "Controlled two-stage motion-path semantics fixture",
+      "initial_objects": {
+        "mover": {"x": 0.17, "y": 0.4966665, "w": 0.06, "h": 0.106667, "rotation_deg": 0, "opacity": 1},
+        "target-b": {"x": 0.42, "y": 0.4966665, "w": 0.06, "h": 0.106667, "rotation_deg": 0, "opacity": 1},
+        "target-c": {"x": 0.67, "y": 0.4966665, "w": 0.06, "h": 0.106667, "rotation_deg": 0, "opacity": 1},
+        "label-a": {"x": 0.16, "y": 0.66, "w": 0.08, "h": 0.07, "rotation_deg": 0, "opacity": 1},
+        "label-b": {"x": 0.41, "y": 0.66, "w": 0.08, "h": 0.07, "rotation_deg": 0, "opacity": 1},
+        "label-c": {"x": 0.66, "y": 0.66, "w": 0.08, "h": 0.07, "rotation_deg": 0, "opacity": 1},
+        "title": {"x": 0.08, "y": 0.10, "w": 0.84, "h": 0.10, "rotation_deg": 0, "opacity": 1},
+        "caption": {"x": 0.08, "y": 0.22, "w": 0.84, "h": 0.07, "rotation_deg": 0, "opacity": 1}
+      },
+      "timeline": [
+        {
+          "id": "a-to-b",
+          "operation": "move",
+          "trigger": "on_click",
+          "duration_ms": 900,
+          "effects": [
+            {"type": "motion_path", "target": "mover", "path_kind": "polyline", "points": [{"x": 0.20, "y": 0.55}, {"x": 0.45, "y": 0.55}]}
+          ]
+        },
+        {
+          "id": "b-to-c",
+          "operation": "move",
+          "trigger": "after_previous",
+          "duration_ms": 900,
+          "effects": [
+            {"type": "motion_path", "target": "mover", "path_kind": "polyline", "points": [{"x": 0.45, "y": 0.55}, {"x": 0.70, "y": 0.55}]}
+          ]
+        }
+      ],
+      "expected_final_objects": {
+        "mover": {"x": 0.67, "y": 0.4966665, "w": 0.06, "h": 0.106667, "rotation_deg": 0, "opacity": 1},
+        "target-b": {"x": 0.42, "y": 0.4966665, "w": 0.06, "h": 0.106667, "rotation_deg": 0, "opacity": 1},
+        "target-c": {"x": 0.67, "y": 0.4966665, "w": 0.06, "h": 0.106667, "rotation_deg": 0, "opacity": 1},
+        "label-a": {"x": 0.16, "y": 0.66, "w": 0.08, "h": 0.07, "rotation_deg": 0, "opacity": 1},
+        "label-b": {"x": 0.41, "y": 0.66, "w": 0.08, "h": 0.07, "rotation_deg": 0, "opacity": 1},
+        "label-c": {"x": 0.66, "y": 0.66, "w": 0.08, "h": 0.07, "rotation_deg": 0, "opacity": 1},
+        "title": {"x": 0.08, "y": 0.10, "w": 0.84, "h": 0.10, "rotation_deg": 0, "opacity": 1},
+        "caption": {"x": 0.08, "y": 0.22, "w": 0.84, "h": 0.07, "rotation_deg": 0, "opacity": 1}
+      }
+    }
+  ],
+  "research_metadata": {
+    "references": [
+      {"author": "Microsoft", "url": "https://learn.microsoft.com/en-us/openspecs/office_standards/ms-oi29500/498c3cfa-652c-49b3-a82c-33fd94468af8", "accessed": "2026-10-04"},
+      {"author": "Microsoft", "url": "https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.presentation.animatemotion?view=openxml-3.0.1", "accessed": "2026-10-04"},
+      {"author": "Microsoft", "url": "https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.presentation.commonbehavior?view=openxml-3.0.1", "accessed": "2026-10-04"}
+    ],
+    "motion_packing": {
+      "policy": "resource-local-native-timeline",
+      "semantic_scene_count": 1,
+      "legacy_state_count": 3,
+      "final_slide_count": 1,
+      "requested_motion_events": 2,
+      "packed_motion_events": 2,
+      "packing_ratio": 2,
+      "resource_set_changes": 0,
+      "native_playback_verified": false
+    }
+  }
+}

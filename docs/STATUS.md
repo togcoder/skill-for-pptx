@@ -2,6 +2,20 @@
 
 Cập nhật ngày 04/10/2026, giờ Việt Nam. Phiên bản nguồn nghiên cứu v0.7 (thêm T005 compound intent).
 
+## T006 controlled motion semantics matrix — 2026-10-04 20:08 UTC
+
+PR #12 prepares four exact one-slide files that differ only by stage-local vs
+authored-layout motion paths and fill=remove vs fill=hold. Every file has two
+900 ms motion behaviors in one click group. Four finalizers pass with no layout
+warnings; all static renders were viewed and are pixel-identical. Exact audit
+finds no uncontrolled package/XML difference. **83 tests pass.**
+
+No PowerPoint runtime was available, so there is no winning native variant and
+the production writer/source skill remain unchanged. Highest-value next action:
+run all four exact hashes using
+experiments/T006-20261004-motion-semantics-matrix/playback-checklist.json.
+Only then revise path anchoring/fill and rebuild the full packed candidate.
+
 ## T006 full packed candidate — 2026-10-04 19:16 UTC / 05-10 Vietnam
 
 Built `output/T006_packed_candidate.pptx`: **1 slide, 31 native objects, 6 stages,
@@ -199,7 +213,7 @@ PPTX H001: `output/PPTX_Motion_Lab_H001.pptx`; dùng hash trong bằng chứng H
 ## Việc tiếp theo theo giá trị
 
 1. Hai đường ưu tiên: (a) dùng `output/T006_packed_candidate.pptx` đã freeze hash trong báo cáo packed-validation để kiểm playback PowerPoint và đối chiếu fixture hai chặng về origin/fill/trigger; (b) T007 lấy một deck thật 3–10 slide, inventory → script/infer → motion-direct một slide bằng resource có sẵn, tối đa một helper component, không đổi slide count. Không dựng lại candidate cũ nếu chưa có giả thuyết mới. Không quay lại waypoint slides nếu playback lỗi; sửa trong cùng slide và giữ baseline. T001/native exact-hash vẫn là cổng nghiệm thu; M1 pending.
-2. Nếu chưa có PowerPoint, nghiên cứu timing/path và chuẩn bị fixture/capture có kiểm tra cấu trúc. Không gọi mô phỏng là playback hoặc tăng số đối tượng là tăng chất lượng hiệu ứng. T002 đã xử lý carrier proxy cũ; không lặp khi thiếu giả thuyết mới.
+2. Nếu chưa có PowerPoint, không lặp ma trận origin/fill vừa tạo. Chọn T007/T008 hoặc chuẩn bị một fixture native khác chỉ khi có biến số mới rõ ràng. Không gọi mô phỏng là playback hoặc tăng số đối tượng là tăng chất lượng hiệu ứng.
 3. Chia phần việc theo task trong `research/tasks/`. Nhận claim/nhánh riêng trước khi làm để tránh trùng. Skill và renderer hiện vẫn phụ thuộc môi trường Work như `docs/ENVIRONMENT.md`.
 4. Chuẩn bị công cụ thu bằng chứng trên PowerPoint Windows khi phù hợp, không giả lập kết quả. Benchmark 18 lượt chưa thực hiện.
 
