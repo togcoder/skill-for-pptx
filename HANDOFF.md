@@ -72,6 +72,12 @@ Branch CI đã pass 55 tests + Python/Node/shell syntax. Đọc
 `experiments/T006-20261004-native-timing/REPORT.md` trước khi sửa writer.
 PowerPoint exact-file playback vẫn chưa có, nên không gọi writer là verified.
 
+T007 đã đi thêm một bước cho deck thật: `scripts/patch_existing_timeline.py`
+target object bằng slide-local native ID + name, không yêu cầu `!!`, giữ
+untargeted slide byte-identical và từ chối timing cũ chưa biết merge. Intake có
+`design_profile` để làm cơ sở sinh component đúng font/palette/geometry.
+Đọc `experiments/T007-20261004-source-object-patcher/REPORT.md`.
+
 ## Chặng mới nhất
 
 PR #3, `experiments/T005-20261004-codex-choreography/REPORT.md`: compound intent compiler `scripts/choreography.py`, hai PPTX và transfer agent. Lỗi oracle waypoint đã sửa và giữ test. Người dùng ưu tiên hiệu ứng phức tạp bám ý định, không chỉ tăng số khối. Nhận T006 native timeline/path tiếp theo nếu phù hợp môi trường, hoặc T001 exact-hash playback. Đây là một recipe hạn chế, chưa hiểu mọi prompt hay chứng minh motion ấn tượng. Không cài personal skill trong lượt nghiên cứu.
@@ -88,7 +94,7 @@ PR #1, `experiments/T003-20261004-codex-layer01/REPORT.md`: giữ cả thất b�
 | T004 | Khả năng chạy ngoài Work | Backend adapter tách biệt, cùng hợp đồng, parity tests; giữ backend cũ làm đối chứng |
 | T005 | Bám ý định compound prompt | Recipe đầu đã xong; giữ yêu cầu/giả định riêng, mở rộng chỉ với kiểm thử mới |
 | T006 | Native timeline/path nâng cao | Writer/runner cấu trúc đã có; tiếp theo tạo full 1-slide candidate và exact-hash PowerPoint playback |
-| T007 | Existing Deck Motion Director | Intake + director contract scaffold; mục tiêu là script/infer/research → reuse deck → synthesize gaps → native motion |
+| T007 | Existing Deck Motion Director | Intake + director contract + arbitrary source-object timing patcher + design fingerprint; tiếp theo director-beat compiler và helper-component insertion |
 
 Mỗi task có brief và acceptance criteria trong `research/tasks/T00x.md`.
 Danh sách này chưa giao việc cho model nào. Model có môi trường PowerPoint
