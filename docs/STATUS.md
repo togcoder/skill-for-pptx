@@ -1,5 +1,29 @@
 # PPTX Motion Lab — checkpoint
 
+## T013 native chart execution — 2026-10-05
+
+T012 semantic chart recipes now have a structural native execution path.
+
+`existing-deck-timeline-patch` v0.3 supports `chart_entrance` on exact
+existing chart graphicFrames and emits:
+
+- chart sub-targets via `p:graphicEl/a:chart`;
+- `seriesIdx/categoryIdx/bldStep`;
+- `p:bldGraphic/p:bldSub/a:bldChart`;
+- chart-type-specific conservative entrance filters;
+- density guard with requested/effective build receipt.
+
+Default fan-out limit is 24; excessive point-level builds degrade to series or
+whole-chart rather than creating hundreds of effects.
+
+CI run 37238145782: **112/112 tests pass** + Python compile. Structural read-back
+confirms chart build mode and sub-target indices.
+
+PowerPoint playback is still pending; this is not a native-playback claim.
+
+Task: `research/tasks/T013-native-chart-execution.md`.
+Report: `experiments/T013-20261005-native-chart-execution/REPORT.md`.
+
 ## T012 semantic data motion — 2026-10-05
 
 User added a new product requirement: charts need type-specific animation, and
