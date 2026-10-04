@@ -97,7 +97,17 @@ untargeted slide byte-identical và từ chối timing cũ chưa biết merge. I
 `design_profile` để làm cơ sở sinh component đúng font/palette/geometry.
 Đọc `experiments/T007-20261004-source-object-patcher/REPORT.md`.
 
-## Chỉ thị T015 — không còn viết tay patch JSON cho chart/KPI
+## Chỉ thị T016 — real package đã là regression bắt buộc
+
+Chart/KPI pipeline đã chạy qua PPTX package thật. Model sau không được đánh giá
+chỉ bằng isolated slide XML.
+
+Bài học mới: ChartML có thể dùng `strLit/numLit` thay vì `strCache/numCache`;
+inventory phải hiểu cả hai. Không sửa test bằng cách bỏ category-count check.
+
+T016 giữ byte-identical cho untargeted slide, chart part và relationship part,
+nhưng PowerPoint playback vẫn pending.
+
 
 Với slide mà toàn bộ motion beats đều là data-motion được hỗ trợ, dùng
 `scripts/compile_data_motion_patch.py` để bridge Director v0.3 → patch v0.4.
@@ -183,6 +193,7 @@ PR #1, `experiments/T003-20261004-codex-layer01/REPORT.md`: giữ cả thất b�
 | T013 | Native Chart Execution | chart_entrance v0.3 → a:chart sub-targets + bldGraphic/bldChart + density guard; 112 tests pass; PowerPoint playback pending |
 | T014 | KPI Counter Execution | number_counter v0.4 → source-style proxy stack + entrance/exit chain + untouched source final value; 120 tests pass; playback pending |
 | T015 | Director → Execution | compile Director v0.3 data-motion → patch v0.4, preserve click groups, explicit counter fallback, block mixed unsupported slides; 126 tests pass |
+| T016 | Real-Package Integration | real PPTX → inventory → Director → compiler → chart+counter patch → readback; literal ChartML parser bug fixed; 130 tests pass |
 
 Mỗi task có brief và acceptance criteria trong `research/tasks/T00x.md`.
 Danh sách này chưa giao việc cho model nào. Model có môi trường PowerPoint

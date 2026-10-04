@@ -255,12 +255,16 @@ CHART_TYPE_MAP={
 
 
 def _cache_point_count(parent):
+    """Count ChartML points from either referenced caches or inline literals."""
     if parent is None:
         return None
     counts=[]
-    for cache_name in ("strCache","numCache","multiLvlStrCache"):
-        for cache in parent.findall(f".//{{{C}}}{cache_name}"):
-            points=cache.findall(f".//{{{C}}}pt")
+    for container_name in (
+        "strCache","numCache","multiLvlStrCache",
+        "strLit","numLit","multiLvlStrData",
+    ):
+        for container in parent.findall(f".//{{{C}}}{container_name}"):
+            points=container.findall(f".//{{{C}}}pt")
             counts.append(len(points))
     return max(counts) if counts else None
 

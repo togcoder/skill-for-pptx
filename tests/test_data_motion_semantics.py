@@ -61,6 +61,27 @@ class DataMotionSemanticTests(unittest.TestCase):
         self.assertEqual(recipe["preferred_build"],"category-elements")
         self.assertFalse(recipe["animate_background"])
 
+    def test_chart_summary_counts_literal_category_and_value_points(self):
+        xml=b"""<?xml version="1.0" encoding="UTF-8"?>
+<c:chartSpace xmlns:c="http://schemas.openxmlformats.org/drawingml/2006/chart">
+  <c:chart><c:plotArea><c:lineChart>
+    <c:ser>
+      <c:cat><c:strLit><c:pt idx="0"><c:v>Q1</c:v></c:pt><c:pt idx="1"><c:v>Q2</c:v></c:pt><c:pt idx="2"><c:v>Q3</c:v></c:pt><c:pt idx="3"><c:v>Q4</c:v></c:pt></c:strLit></c:cat>
+      <c:val><c:numLit><c:pt idx="0"><c:v>10</c:v></c:pt><c:pt idx="1"><c:v>20</c:v></c:pt><c:pt idx="2"><c:v>30</c:v></c:pt><c:pt idx="3"><c:v>40</c:v></c:pt></c:numLit></c:val>
+    </c:ser>
+  </c:lineChart></c:plotArea></c:chart>
+</c:chartSpace>"""
+        buf=io.BytesIO()
+        with ZipFile(buf,"w") as z:
+            z.writestr("ppt/charts/chart-lit.xml",xml)
+        buf.seek(0)
+        with ZipFile(buf) as z:
+            summary=_chart_summary(z,"ppt/charts/chart-lit.xml")
+        self.assertEqual(summary["primary_type"],"line")
+        self.assertEqual(summary["series_count"],1)
+        self.assertEqual(summary["category_count"],4)
+        self.assertEqual(summary["point_count"],4)
+
     def test_chart_recipe_differs_by_chart_semantics(self):
         line=chart_motion_recipe({"primary_type":"line","series_count":1})
         pie=chart_motion_recipe({"primary_type":"pie","series_count":1})
