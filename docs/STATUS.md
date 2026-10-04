@@ -2,6 +2,33 @@
 
 Cập nhật ngày 04/10/2026, giờ Việt Nam. Phiên bản nguồn nghiên cứu v0.7 (thêm T005 compound intent).
 
+## Product destination — T007 Existing Deck Motion Director
+
+Người dùng đã mở rộng đích đến: hệ thống phải nhận **file PPTX có sẵn** và tự
+đạo diễn chuyển động. Nếu có script/storyboard thì bám script. Nếu không có,
+ưu tiên speaker notes, sau đó tự phân tích trình tự báo cáo; chỉ nghiên cứu ngoài
+khi cần và phù hợp. Nếu narrative thiếu component thì tự tạo helper component
+trong đúng visual framework của deck, không sinh decoration vô cớ.
+
+Tài liệu chuẩn: `docs/PRODUCT_TARGET.md`.
+Task: `research/tasks/T007-existing-deck-motion-director.md`.
+
+Scaffold hiện có:
+- `scripts/inspect_existing_deck.py`: source-hash + slide/object/text/geometry/
+  relationships/timing/transition/notes/theme/media inventory;
+- `skills/pptx-motion/references/existing-deck-director.md`: director contract;
+- `scripts/validate_director_plan.py`: buộc script source, source grounding,
+  preserve slide count, target resource validity và justification cho component;
+- final branch CI run `37214340363`: **67/67 tests pass**, `py_compile` pass.
+
+Report: `experiments/T007-20261004-existing-deck-director/REPORT.md`. Phần còn
+pending: inference trên deck thật không có script, synthesis component theo design
+system, director-beat → T006 timeline adapter, và patch/playback exact-file.
+
+Default mới: preserve source slide count/order/content; resource cũ được reuse
+trước; same-resource motion phải pack trong slide; generated component chỉ lấp
+narrative gap.
+
 ## T006 native timing writer — đã có backend cấu trúc, playback còn pending
 
 T006 đã tiến từ planning sang writer native hạn chế. `scripts/pack_timeline.py`
@@ -109,7 +136,7 @@ PPTX H001: `output/PPTX_Motion_Lab_H001.pptx`; dùng hash trong bằng chứng H
 
 ## Việc tiếp theo theo giá trị
 
-1. Ưu tiên cao nhất: chạy full T005 candidate qua pipeline T006 mới để tạo `output/T006_packed_candidate.pptx` **1 slide**, freeze SHA-256 rồi phát exact file trong Microsoft PowerPoint. Không quay lại waypoint slides nếu playback lỗi; trước tiên thử hierarchy afterEffect/withEffect kiểu PowerPoint-authored trong cùng slide. T001/native exact-hash vẫn là cổng nghiệm thu; M1 pending.
+1. Hai đường ưu tiên song song: (a) hoàn tất exact-file playback cho T006 native writer; (b) T007 lấy một deck thật 3–10 slide, inventory → script/infer → motion-direct một slide bằng resource có sẵn, tối đa một helper component, không đổi slide count. Chạy full T005 candidate qua pipeline T006 mới để tạo `output/T006_packed_candidate.pptx` **1 slide**, freeze SHA-256 rồi phát exact file trong Microsoft PowerPoint. Không quay lại waypoint slides nếu playback lỗi; trước tiên thử hierarchy afterEffect/withEffect kiểu PowerPoint-authored trong cùng slide. T001/native exact-hash vẫn là cổng nghiệm thu; M1 pending.
 2. Nếu chưa có PowerPoint, nghiên cứu timing/path và chuẩn bị fixture/capture có kiểm tra cấu trúc. Không gọi mô phỏng là playback hoặc tăng số đối tượng là tăng chất lượng hiệu ứng. T002 đã xử lý carrier proxy cũ; không lặp khi thiếu giả thuyết mới.
 3. Chia phần việc theo task trong `research/tasks/`. Nhận claim/nhánh riêng trước khi làm để tránh trùng. Skill và renderer hiện vẫn phụ thuộc môi trường Work như `docs/ENVIRONMENT.md`.
 4. Chuẩn bị công cụ thu bằng chứng trên PowerPoint Windows khi phù hợp, không giả lập kết quả. Benchmark 18 lượt chưa thực hiện.
