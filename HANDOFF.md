@@ -57,6 +57,12 @@ mục tiêu. T006 phải thử nén chuỗi burst → orbit → focus → split 
 restore xuống 1 slide vì resource set đã tồn tại xuyên suốt. Nếu không đạt 1
 slide, phải chứng minh blocker và dùng số slide tối thiểu.
 
+Bước planning đầu tiên đã có ở `skills/pptx-motion/references/native-timeline.md`
+và `scripts/pack_timeline.py`: dùng geometry T005 nhưng gom 12 legacy states thành
+1 slide/6 stage, orbit waypoint thành motion-path points. Đây chưa ghi native
+`<p:timing>` vào PPTX; model sau tiếp tục từ contract/compiler này thay vì dựng
+lại state-per-slide.
+
 ## Chặng mới nhất
 
 PR #3, `experiments/T005-20261004-codex-choreography/REPORT.md`: compound intent compiler `scripts/choreography.py`, hai PPTX và transfer agent. Lỗi oracle waypoint đã sửa và giữ test. Người dùng ưu tiên hiệu ứng phức tạp bám ý định, không chỉ tăng số khối. Nhận T006 native timeline/path tiếp theo nếu phù hợp môi trường, hoặc T001 exact-hash playback. Đây là một recipe hạn chế, chưa hiểu mọi prompt hay chứng minh motion ấn tượng. Không cài personal skill trong lượt nghiên cứu.
