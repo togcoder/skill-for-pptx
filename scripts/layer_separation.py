@@ -74,7 +74,7 @@ def make_plan(config, *, ablate_binding=False):
         add(carrier, 'rect', frame(x,y,520,52), fill='#24212C', stroke=color)
         # Children are flattened native shapes, positioned in carrier-local coordinates.
         for suffix, geom, dx, dy, width, height, kwargs in [
-            ('number','textbox',14,10,42,32,dict(text=f'{i+1:02}',size=23,color=color)),
+            ('number','textbox',14,10,60,32,dict(text=f'{i+1:02}',size=23,color=color)),
             ('trace','rect',78,25,310,2,dict(fill=color)),
             ('node','ellipse',382,16,20,20,dict(fill=color)),
             ('end','rect',438,14,57,24,dict(fill=color)),
@@ -115,6 +115,13 @@ def make_plan(config, *, ablate_binding=False):
 
 def binding_metrics(plan):
     """Endpoint relative offsets; invariance also holds under linear translation."""
+    selected={binding[key] for binding in plan['research_metadata']['bindings'] for key in ['parent','child']}
+    for oid in selected:
+        first=plan['states'][0]['objects'][oid]
+        for state in plan['states']:
+            f=state['objects'][oid]
+            if f['rotation_deg']!=0 or any(abs(f[k]-first[k])>1e-9 for k in ['w','h']):
+                raise ValueError('Binding proxy requires zero rotation and constant size')
     violations=[]
     maximum=0.0
     for state in plan['states']:

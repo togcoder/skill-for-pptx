@@ -26,3 +26,7 @@ Không có căn cứ để gọi cách tiếp cận này là phát minh đầu t
 ## Bổ sung cho E002 v0.3
 
 [Microsoft NonVisualShapeDrawingProperties — Presentation](https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.presentation.nonvisualshapedrawingproperties?view=openxml-3.0.1), đọc 04/10/2026: thuộc tính txBox phân biệt textbox được khai báo với shape chứa chữ. E002 vận dụng ý nghĩa thuộc tính để sửa biểu diễn; không sao chép template, hình hoặc mã nguồn bên ngoài. Tài liệu thuộc Microsoft; không coi việc truy cập công khai là quyền phân phối mọi tài nguyên của trang.
+
+## T003 — layer separation
+
+Nguồn Microsoft Morph tips và Presentation Process layer diagram/terms đã đọc ngày 2026-10-04 UTC. [Ledger chi tiết](../experiments/T003-20261004-codex-layer01/SOURCES.md) phân biệt quan sát văn bản với video chưa xem, và ghi rõ không tái phân phối tài sản. Demo dùng hình 2D tự dựng, không tái hiện extrusion 3D.

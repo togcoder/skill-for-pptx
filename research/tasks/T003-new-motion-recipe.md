@@ -1,6 +1,6 @@
 # T003 — A more expressive motion recipe
 
-Status: queued. Owner: unassigned. Check open claims/PRs before starting.
+Status: partially completed. First study by Codex/root in PR #1, `experiments/T003-20261004-codex-layer01/REPORT.md`. A 2D layer recipe, two-topic output and measured/visual repairs are available. Native playback and inspection of source animation choreography remain pending. Check claims/PRs; use a new claim and experiment for any extension, preserving these baselines.
 
 Purpose: improve the creative range beyond repeated three-block focus demos.
 Select one impressive effect from a primary source, inspect what actually moves,

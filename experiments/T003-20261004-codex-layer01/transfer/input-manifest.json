@@ -1,0 +1,12 @@
+{
+  "docs/STATUS.md": "e0cd75ff7010a7ded782c23726a52e1baa6984da33017d89d0ee8bb169d98aee",
+  "scripts/layer_separation.py": "8488d417db5bf4d380663e68c587783b621e88a4fdea8b39dbe061fa3d08ddc2",
+  "scripts/validate_plan.py": "bbf4321eaf902ef494ad51728b625e39ef1f3c887c91d61a18b13a9a7c9b2aeb",
+  "skills/pptx-motion/SKILL.md": "09b6aa7043aa55b320da5b7f2ba263ee014195032fc9875667406c7a90cacc32",
+  "skills/pptx-motion/references/plan-contract.md": "7fb9b635280138ab56a09bf25d7931e6d290e432960b033e607b90e1151be316",
+  "skills/pptx-motion/references/layer-separation.md": "b4944436f05c86970cc1bc28ddaf60c51d0ea81c6cf53eada7c8217ae08bfe16",
+  "skills/pptx-motion/references/motion-paths.md": "63f51efa547dcd4cb4024285baf77f021f4dbef3902156bd03280e0371703cc0",
+  "skills/pptx-motion/references/recipes.md": "66724f8866a67f3b5c240801d43517862bf3cfa25ba259382770205c1e88adea",
+  "skills/pptx-motion/references/evaluation.md": "bab100a5b01d361f5303c4a3385c923cbf16a656d5711037a61745ed41444a74",
+  "skills/pptx-motion/agents/openai.yaml": "295536d055595f93975cdb12065609124d14b3cfa439cfd0b98e7102467c78da"
+}

@@ -1,0 +1,45 @@
+{
+  "title": "Nền tảng học trực tuyến",
+  "subtitle": "Bốn lớp phối hợp để vận hành hành trình học tập.",
+  "brief": "Giải thích kiến trúc một nền tảng học trực tuyến qua 4 lớp bằng hiệu ứng tách lớp rồi ghép lại, nhãn tiếng Việt ngắn và dễ đọc.",
+  "layers": [
+    {
+      "id": "interface",
+      "label": "Giao diện",
+      "role": "Xem bài • làm bài • theo dõi"
+    },
+    {
+      "id": "learning-services",
+      "label": "Dịch vụ học tập",
+      "role": "Khóa học • kiểm tra • tiến độ"
+    },
+    {
+      "id": "content-data",
+      "label": "Nội dung & dữ liệu",
+      "role": "Video • tài liệu • kết quả"
+    },
+    {
+      "id": "infrastructure",
+      "label": "Hạ tầng",
+      "role": "Máy chủ • lưu trữ • bảo mật"
+    }
+  ],
+  "references": [
+    {
+      "url": "https://support.microsoft.com/en-us/powerpoint/morph-transition-tips-and-tricks",
+      "author": "Microsoft",
+      "source_access_date_reported_by_local_reference": "2026-10-04",
+      "local_reference_inspected_date": "2026-10-04",
+      "evidence_inspected": "Chỉ đọc tài liệu cục bộ recipes.md, plan-contract.md và layer-separation.md; không truy cập trang nguồn, không quan sát phát lại PowerPoint.",
+      "reuse_conditions": "Kế thừa nguyên tắc tên !! ổn định; không sao chép nội dung đa phương tiện hay mẫu nguồn."
+    },
+    {
+      "url": "https://www.presentation-process.com/layer-diagram.html",
+      "author": "Presentation Process",
+      "source_access_date_reported_by_local_reference": "2026-10-04",
+      "local_reference_inspected_date": "2026-10-04",
+      "evidence_inspected": "Chỉ đọc mô tả nguồn trong layer-separation.md; không truy cập bài gốc, không kiểm chứng hoạt ảnh nguồn.",
+      "reuse_conditions": "Chỉ kế thừa ý tưởng các lớp; bố cục 2D gốc của generator, không dùng tài sản ngoài hoặc sao chép hiệu ứng 3D."
+    }
+  ]
+}

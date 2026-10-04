@@ -1,0 +1,20 @@
+{
+  "python_version": "3.12.14",
+  "platform": "linux",
+  "plan_and_geometry_checks_available": true,
+  "lxml_available": true,
+  "work_builder_prerequisites_present": true,
+  "work_builder_checks": {
+    "runtime_node_exists": true,
+    "runtime_python_exists": true,
+    "artifact_tool_package_exists": true,
+    "runtime_override_dir_exists": true,
+    "host_finalizer_exists": true,
+    "host_renderer_exists": true
+  },
+  "powerpoint_executable_on_path": false,
+  "powerpoint_playback_verified": false,
+  "limitations": [
+    "Presence checks do not prove executables run or PowerPoint is usable. PowerPoint outside PATH may exist. Follow host instructions before authoring."
+  ]
+}

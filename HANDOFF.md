@@ -26,12 +26,13 @@ rubric cố định và cập nhật skill từ bằng chứng.
 
 | Nội dung | Trạng thái |
 |---|---|
-| Nguồn skill | v0.4 nghiên cứu trong repo, chưa cài thành personal skill |
+| Nguồn skill | v0.5 nghiên cứu trong repo, chưa cài thành personal skill |
 | Backend | artifact-tool của ChatGPT Work, 16:9, rect/ellipse/textbox native, opacity=1, Morph byObject |
-| Kiểm tra tự động | 29 unit tests, chưa phải kiểm tra schema OOXML đầy đủ |
+| Kiểm tra tự động | 34 unit tests, chưa phải kiểm tra schema OOXML đầy đủ |
 | E002 | Sửa 14 khai báo textbox; checker H001 giữ nguyên đạt 93/93; ảnh không đổi |
 | H002/E003 | Nhãn ORBIT chồng 2→0 theo mô hình tuyến tính |
 | H003/E004 | Nhãn Việt dài chồng 4→0; khối nền vẫn chồng 6→6 theo mô hình |
+| T003 | Tách lớp 2D trên hai chủ đề; binding fixture 16→0; sửa wrap số trên 27 vị trí; choreography nguồn và native pending |
 | File và ảnh | PPTX tại `output/`, bằng chứng và ảnh cuối trong từng experiment |
 | PowerPoint playback | Chưa có; M1 chưa đạt, điểm native motion và editing để null |
 
@@ -40,6 +41,10 @@ thí nghiệm thực tế. Không nhầm E004 nhãn dài với benchmark E04 g�
 H001/H002 có agent dùng đề mới với ngữ cảnh hạn chế; H003 là đề mới do cùng
 người nghiên cứu thực hiện, không phải holdout độc lập. E002/E003/E004 là các
 lượt sửa theo lỗi đã biết, không phải đề chưa từng thấy.
+
+## Chặng mới nhất
+
+PR #1, `experiments/T003-20261004-codex-layer01/REPORT.md`: giữ cả thất bại và sửa, generator `scripts/layer_separation.py`, reference `layer-separation.md`. Đọc CHECKPOINT trong experiment và claim trước khi nhận việc. T003 chỉ hoàn tất phần recipe 2D; cần quan sát choreography nguồn và playback để kết luận hiệu ứng ấn tượng. Không dựng lại 5 file đã lưu nếu chưa có giả thuyết mới.
 
 ## Việc có giá trị nhất để nhận
 
