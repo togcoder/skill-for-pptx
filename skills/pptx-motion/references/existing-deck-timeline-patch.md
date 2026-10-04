@@ -1,4 +1,4 @@
-# Existing-deck native timeline patch contract v0.1
+# Existing-deck native timeline patch contract v0.2
 
 This contract is the low-level bridge between a semantic motion-director plan and
 an existing PPTX package.
@@ -21,7 +21,7 @@ identity.
 
 ## Root
 
-- `version`: `"0.1"`
+- `version`: `"0.2"` for presenter-paced patches; `"0.1"` remains accepted as the legacy one-click baseline
 - `kind`: `"existing-deck-timeline-patch"`
 - `source_sha256`
 - `slides`
@@ -33,20 +33,32 @@ The source hash must match the exact PPTX being patched.
 Each slide patch contains:
 
 - `source_index`: one-based slide index;
-- `stages`: ordered stage list.
+- `stages`: ordered stage list;
+- `click_beats`: required in v0.2 and partitions stage IDs into presenter clicks.
 
-v0.1 only patches slides with **no existing `p:timing`**. Existing slide
+v0.1/v0.2 currently patch only slides with **no existing `p:timing`**. T008 owns safe merge/continuation of pre-existing timing. Existing slide
 transitions are preserved. Untargeted slide/package bytes must remain unchanged.
 
 ## Stage
 
 - `id`
 - `duration_ms`
-- `trigger`: first stage `on-click`, later stages `after-previous`
+- `trigger`: `on-click`, `with-previous`, or `after-previous`
 - `effects`
 
-All stages remain inside one native click group using cumulative delays. This is
-the same experimental scheduling model as T006.
+For v0.1, the historical behavior remains one native click group with cumulative
+delays.
+
+For v0.2:
+
+- every click beat's first stage is `on-click`;
+- later stages in that click beat use `with-previous` or `after-previous`;
+- click beats partition all stages in exact order;
+- the writer emits one direct `mainSeq` click group per click beat;
+- effect behavior delays remain zero unless a real animation delay is explicitly
+  authored.
+
+Do not use delays to approximate presenter speaking time.
 
 ## Target
 
@@ -85,6 +97,7 @@ The patcher must:
 - reject source hash mismatch;
 - reject unknown slide/object targets;
 - reject duplicate stage IDs;
+- reject invalid v0.2 click-beat partitions or nested `on-click` stages;
 - reject target slides that already have timing;
 - preserve existing transitions;
 - alter only the targeted slide XML parts;
