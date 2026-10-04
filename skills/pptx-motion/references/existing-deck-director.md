@@ -1,4 +1,4 @@
-# Existing-deck director contract v0.3
+# Existing-deck director contract v0.4
 
 Use this contract after `scripts/inspect_existing_deck.py` and before adding
 motion to an existing PPTX.
@@ -9,7 +9,7 @@ The director plan is a semantic plan. It does not contain raw PresentationML.
 
 Required fields:
 
-- `version`: `"0.3"` for semantic data-motion plans; `"0.2"` remains the click-rhythm baseline and `"0.1"` the legacy flat-beat baseline
+- `version`: `"0.4"` for generic + data semantic motion plans; `"0.3"` remains the data-motion baseline, `"0.2"` click-rhythm, and `"0.1"` legacy flat-beat
 - `kind`: `"existing-deck-motion-director"`
 - `source`
 - `user_instruction`
@@ -138,6 +138,34 @@ explicitly requested a data/content change.
 
 Chart animation or number counting never creates its own click automatically.
 It belongs to the click beat chosen by the narrative Director.
+
+### Generic report motion — v0.4
+
+Ordinary source objects use a deliberately small semantic vocabulary before
+expanding to low-level timing:
+
+- `reveal`: one or more objects appear together/in order;
+- `stagger-reveal` / `process-reveal`: ordered targets appear automatically
+  inside one presenter click;
+- `focus` / `emphasize`: one source object pulses in place via scale-up then
+  scale-down;
+- `move`: one source object follows explicit `motion_parameters.points`;
+- `rotate`: one source object rotates by explicit
+  `motion_parameters.by_deg`.
+
+Read `scripts/generic_motion_recipes.py`.
+
+Rules:
+
+- chart targets still require chart `data_motion`; generic reveal is not a
+  backdoor to treat charts as plain shapes;
+- focus/emphasize/move/rotate require exactly one target;
+- reveal/process operations preserve the supplied target order;
+- move and rotate never guess destination/angle in the low-level compiler;
+- one semantic beat may expand to multiple automatic stages while preserving one
+  presenter click;
+- generic motion must not introduce helper components unless the Director plan
+  separately justifies them.
 
 ### Click beat
 
