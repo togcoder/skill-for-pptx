@@ -1,0 +1,106 @@
+{
+  "changed_textboxes": 14,
+  "changes": [
+    {
+      "slide": 1,
+      "name": "!!h001-process-title",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!h001-collect-step",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!h001-collect-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!h001-inspect-step",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!h001-inspect-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!h001-decide-step",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!h001-decide-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!h001-process-title",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!h001-collect-step",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!h001-collect-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!h001-decide-step",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!h001-decide-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!h001-inspect-step",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!h001-inspect-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    }
+  ],
+  "source_sha256": "3d59b50afbc2c084e560e0b5d04d990b4f6890a66afca86dc6b951156a436e96",
+  "sha256": "9edf3fe2c825f7223adefcd73f13cc576cc57936d0ae47084deb940b66049f87",
+  "powerpoint_playback_verified": false
+}

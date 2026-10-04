@@ -1,0 +1,9 @@
+{
+  "input": "/workspace/scratch/7379e9724021/pptx-motion-lab/output/PPTX_Motion_Lab_E002.pptx",
+  "outputDir": "/workspace/scratch/7379e9724021/pptx-motion-lab/experiments/E002/final-render",
+  "slideCount": 2,
+  "paths": [
+    "/workspace/scratch/7379e9724021/pptx-motion-lab/experiments/E002/final-render/slide-1.png",
+    "/workspace/scratch/7379e9724021/pptx-motion-lab/experiments/E002/final-render/slide-2.png"
+  ]
+}

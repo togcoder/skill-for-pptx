@@ -1,0 +1,4 @@
+interface:
+  display_name: "PPTX Motion Lab"
+  short_description: "Plan and verify editable PowerPoint motion"
+  default_prompt: "Use $pptx-motion to create an editable PowerPoint motion experiment from my short brief and report what has been verified."

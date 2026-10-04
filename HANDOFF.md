@@ -1,0 +1,107 @@
+# Handoff — PPTX Motion Lab
+
+Repo chính: https://github.com/togcoder/skill-for-pptx (private).
+Chủ dự án: togcoder. Cập nhật bàn giao: 04/10/2026.
+
+## Bắt đầu trong 5 phút
+
+1. Fetch nhánh mới nhất, xem thay đổi chưa commit và các nhánh/PR đang mở.
+2. Đọc `AGENTS.md`, tài liệu này, `docs/STATUS.md` và
+   `skills/pptx-motion/SKILL.md`. Đọc reference theo phần việc, không nạp toàn bộ
+   lịch sử thí nghiệm vào ngữ cảnh nếu không cần.
+3. Đọc `docs/COLLABORATION.md`, chọn một task chưa có người làm trong
+   `research/tasks/`, rồi tạo nhánh riêng. Xác nhận claim trước khi dựng bài thử.
+4. Chạy `python3 scripts/check_environment.py` để chọn phần việc môi trường hỗ trợ.
+5. Đọc brief, rubric và report của baseline liên quan. Giữ nguyên baseline.
+
+## Mục tiêu sản phẩm
+
+Người dùng ra một câu lệnh ngắn, AI tạo được PPTX chỉnh sửa được với chuyển động
+có chủ đích, độc đáo và ấn tượng. Sản phẩm cốt lõi là skill, thư viện công thức,
+mã dựng và bộ đánh giá có thể dùng lại. QCC chỉ là một đề thử. Nghiên cứu nguồn
+mới khi cần, ghi URL/tác giả/ngày xem/điều kiện sử dụng, tự dựng đầu ra, chấm theo
+rubric cố định và cập nhật skill từ bằng chứng.
+
+## Điểm xuất phát đã có bằng chứng
+
+| Nội dung | Trạng thái |
+|---|---|
+| Nguồn skill | v0.4 nghiên cứu trong repo, chưa cài thành personal skill |
+| Backend | artifact-tool của ChatGPT Work, 16:9, rect/ellipse/textbox native, opacity=1, Morph byObject |
+| Kiểm tra tự động | 29 unit tests, chưa phải kiểm tra schema OOXML đầy đủ |
+| E002 | Sửa 14 khai báo textbox; checker H001 giữ nguyên đạt 93/93; ảnh không đổi |
+| H002/E003 | Nhãn ORBIT chồng 2→0 theo mô hình tuyến tính |
+| H003/E004 | Nhãn Việt dài chồng 4→0; khối nền vẫn chồng 6→6 theo mô hình |
+| File và ảnh | PPTX tại `output/`, bằng chứng và ảnh cuối trong từng experiment |
+| PowerPoint playback | Chưa có; M1 chưa đạt, điểm native motion và editing để null |
+
+`E01`–`E04` trong đề cương là nhóm nghiên cứu dự kiến; `E001`–`E004` là mã
+thí nghiệm thực tế. Không nhầm E004 nhãn dài với benchmark E04 gồm 18 lượt.
+H001/H002 có agent dùng đề mới với ngữ cảnh hạn chế; H003 là đề mới do cùng
+người nghiên cứu thực hiện, không phải holdout độc lập. E002/E003/E004 là các
+lượt sửa theo lỗi đã biết, không phải đề chưa từng thấy.
+
+## Việc có giá trị nhất để nhận
+
+| Task | Phần việc | Điều kiện đầu ra |
+|---|---|---|
+| T001 | Playback PowerPoint | Exact hash, phiên bản, repair warning, video/ghi màn hình, kết luận từng chuyển cảnh |
+| T002 | Đường đi khối nền | Giữ baseline/rubric H003, đo cả nhãn và khối, không hy sinh khả năng đọc |
+| T003 | Công thức hiệu ứng mới | Nguồn sơ cấp, ý đồ rõ, hai chủ đề khác nhau, PPTX và đánh giá riêng từng lớp |
+| T004 | Khả năng chạy ngoài Work | Backend adapter tách biệt, cùng hợp đồng, parity tests; giữ backend cũ làm đối chứng |
+
+Mỗi task có brief và acceptance criteria trong `research/tasks/T00x.md`.
+Danh sách này chưa giao việc cho model nào. Model có môi trường PowerPoint
+nên nhận T001; model chỉ có Python có thể làm phân tích T002 hoặc chuẩn bị T004.
+
+## Cách chạy
+
+Đọc `docs/ENVIRONMENT.md`. Phần kiểm tra kế hoạch/hình học chỉ cần Python.
+Kiểm tra ZIP/XML và unit tests cần lxml (đã thử 6.1.1 với Python 3.12.14).
+Tạo PPTX hiện phụ thuộc runtime Work; không giả định máy khác có artifact-tool.
+
+```bash
+python3 scripts/check_environment.py
+python3 scripts/validate_plan.py experiments/E004/plan.json
+python3 -m unittest discover -s tests -v
+python3 scripts/inspect_pptx.py output/PPTX_Motion_Lab_E004.pptx
+python3 experiments/E004/verify_pair.py
+```
+
+Để dựng một plan mới trong Work, đọc skill Presentations của host, gọi marker
+của host và dùng đường dẫn mới:
+
+```bash
+bash scripts/run_experiment.sh PLAN.json build/UNIQUE_RUN output/UNIQUE_DECK.pptx
+```
+
+Render file PPTX cuối, xem từng slide, rồi dùng `docs/POWERPOINT_QA.md` cho
+playback thật. Không dùng PNG, LibreOffice hoặc mô phỏng HTML thay bằng chứng
+animation PowerPoint. Không nới rubric để giấu lỗi hoặc gọi sơ đồ khối đơn
+giản là đã đạt mục tiêu sáng tạo của sản phẩm.
+
+## Prompt giao cho model khác
+
+> Tiếp tục PPTX Motion Lab tại https://github.com/togcoder/skill-for-pptx.
+> Đọc AGENTS.md, HANDOFF.md, docs/STATUS.md và skill nguồn. Kiểm tra task/nhánh/PR
+> đang chạy, nhận một task chưa có người làm phù hợp môi trường rồi tạo nhánh
+> riêng. Giữ baseline và rubric, làm một thay đổi có giả thuyết rõ, tạo bằng
+> chứng, lưu cả thất bại. Phân biệt kiểm tra cấu trúc, ảnh tĩnh và playback
+> PowerPoint. Cập nhật báo cáo, nguồn skill nếu có cải thiện được chứng minh,
+> và mở PR kèm handoff cho lượt sau. Nếu hết quota, lưu checkpoint nếu còn làm
+> được, dừng lượt, không mua thêm hoặc lặp yêu cầu.
+
+Repo private: mỗi model/agent cần phiên GitHub được chủ tài khoản cấp quyền.
+Link repo không tự cấp quyền truy cập. Không đưa token vào prompt hoặc repo.
+
+## Lịch sử và điểm tiếp tục
+
+Đọc `docs/RECOVERY.md` và `docs/GITHUB_HANDOFF.md`. Lịch sử trước khi nhập GitHub
+được giữ nguyên trong `archive/pre-github-v0.4.bundle`; nhánh main GitHub giữ
+commit README khởi tạo của chủ repo rồi nhận snapshot dự án. Snapshot không
+phải một nghiên cứu mới, và không reset các kết quả đã có.
+
+Khi xong một chặng, ghi commit đầu vào, file đầu ra/hash, lệnh đã chạy, lỗi,
+giới hạn và bước tiếp. Chỉ cập nhật checkpoint chính khi tích hợp kết quả đã
+review. Các model có thể nghiên cứu song song ở nhánh riêng theo quy trình
+claim, nhưng không cùng ghi một experiment hoặc force-push main.

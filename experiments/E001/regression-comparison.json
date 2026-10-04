@@ -1,0 +1,23 @@
+{
+  "scope": "seven targeted synthetic package-regression cases, not animation quality",
+  "baseline": {
+    "run": 7,
+    "passed": 1,
+    "failed": [
+      "test_bad_identity_does_not_leave_output (test_morph_package.MorphPackageTests.test_bad_identity_does_not_leave_output)",
+      "test_existing_animation_on_late_slide_is_preserved (test_morph_package.MorphPackageTests.test_existing_animation_on_late_slide_is_preserved)",
+      "test_fractional_duration_rejected_without_output (test_morph_package.MorphPackageTests.test_fractional_duration_rejected_without_output)",
+      "test_reapplying_to_animated_deck_rejected (test_morph_package.MorphPackageTests.test_reapplying_to_animated_deck_rejected)",
+      "test_slide_relationship_order_and_durations (test_morph_package.MorphPackageTests.test_slide_relationship_order_and_durations)"
+    ],
+    "errors": [
+      "test_mismatch_does_not_leave_partial_output (test_morph_package.MorphPackageTests.test_mismatch_does_not_leave_partial_output)"
+    ]
+  },
+  "candidate": {
+    "run": 7,
+    "passed": 7,
+    "failed": [],
+    "errors": []
+  }
+}

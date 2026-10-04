@@ -1,0 +1,32 @@
+[
+  {
+    "case": "stationary separation",
+    "expected": null,
+    "actual": null,
+    "passed": true
+  },
+  {
+    "case": "touching edges",
+    "expected": null,
+    "actual": null,
+    "passed": true
+  },
+  {
+    "case": "reciprocal exchange",
+    "expected": [
+      0.25,
+      0.75
+    ],
+    "actual": [
+      0.25,
+      0.75
+    ],
+    "passed": true
+  },
+  {
+    "case": "crossing different rows",
+    "expected": null,
+    "actual": null,
+    "passed": true
+  }
+]

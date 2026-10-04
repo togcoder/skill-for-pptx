@@ -1,0 +1,9 @@
+{
+  "scripts/render_plan.mjs": "4001866f3aca2e0baceb25100a63608e0ab3ce1015f216fa8e64c9cd108314eb",
+  "scripts/add_morph.py": "817a8f31f7abbe6709b4522dbbe0b583d912137cce04a8db92d24ee02e85e874",
+  "scripts/run_experiment.sh": "b7583f8375f3d48f57266a489f95b0d12d9ae3794a31b06b69a2e44fee17c403",
+  "skills/pptx-motion/SKILL.md": "f02933b2ef337f495b27ead63eb942a6625da576b548fc311b32c92ac08012f5",
+  "experiments/E001/baseline/plan.json": "89538e99b86c420b3d1cd8c7ad9b2f7ba679e9ae1891c46f8d4def4e949472e0",
+  "experiments/E001/rubric.json": "97dac4ef48de8868b980e39268d47d2a0331c7ee8b62a336dd5b30760d90fc7a",
+  "output/PPTX_Motion_Lab_E001.pptx": "b3b4e28c14f00bc4fe05d6a71400752819413661e1280eb92301b4a6305e7c37"
+}

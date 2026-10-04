@@ -1,0 +1,10 @@
+{
+  "valid": false,
+  "errors": [
+    "transition community-focus/transport-focus: track must be an array of object IDs",
+    "transition transport-focus/infrastructure-focus: track must be an array of object IDs"
+  ],
+  "scope": "motion-plan-v0.1",
+  "pptx_generated": false,
+  "playback_verified": false
+}

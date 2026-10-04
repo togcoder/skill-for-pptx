@@ -1,0 +1,15 @@
+{
+  "valid": true,
+  "errors": [],
+  "scope": "motion-plan-v0.1",
+  "pptx_generated": false,
+  "playback_verified": false
+}
+Inspect result written to file: /workspace/scratch/7379e9724021/pptx-motion-lab/build/e004-r1/raw.pptx.inspect.ndjson
+{
+  "slides": 3,
+  "morph_transitions": 2,
+  "sha256": "96fc9825ea7e75d98812455662a9bca544b92eef56bb6e99a7a5a73ea68e6688",
+  "powerpoint_playback_verified": false
+}
+{"font":"Bitstream Charter","slides":3,"output":"/workspace/scratch/7379e9724021/pptx-motion-lab/output/PPTX_Motion_Lab_E004.pptx"}

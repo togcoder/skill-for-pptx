@@ -1,0 +1,68 @@
+test_bad_identity_does_not_leave_output (test_morph_package.MorphPackageTests.test_bad_identity_does_not_leave_output) ... FAIL
+test_destination_not_overwritten (test_morph_package.MorphPackageTests.test_destination_not_overwritten) ... ok
+test_existing_animation_on_late_slide_is_preserved (test_morph_package.MorphPackageTests.test_existing_animation_on_late_slide_is_preserved) ... FAIL
+test_fractional_duration_rejected_without_output (test_morph_package.MorphPackageTests.test_fractional_duration_rejected_without_output) ... FAIL
+test_mismatch_does_not_leave_partial_output (test_morph_package.MorphPackageTests.test_mismatch_does_not_leave_partial_output) ... ERROR
+test_reapplying_to_animated_deck_rejected (test_morph_package.MorphPackageTests.test_reapplying_to_animated_deck_rejected) ... FAIL
+test_slide_relationship_order_and_durations (test_morph_package.MorphPackageTests.test_slide_relationship_order_and_durations) ... FAIL
+
+======================================================================
+ERROR: test_mismatch_does_not_leave_partial_output (test_morph_package.MorphPackageTests.test_mismatch_does_not_leave_partial_output)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/7379e9724021/pptx-motion-lab/tests/test_morph_package.py", line 50, in test_mismatch_does_not_leave_partial_output
+    with self.assertRaises(ValueError): patch(self.src,self.plan,self.out)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/7379e9724021/pptx-motion-lab/experiments/E001/baseline/add_morph.py", line 26, in patch
+    tr=plan['transitions'][index-1]
+       ~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+IndexError: list index out of range
+
+======================================================================
+FAIL: test_bad_identity_does_not_leave_output (test_morph_package.MorphPackageTests.test_bad_identity_does_not_leave_output)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/7379e9724021/pptx-motion-lab/tests/test_morph_package.py", line 58, in test_bad_identity_does_not_leave_output
+    with self.assertRaises(ValueError): patch(self.src,self.plan,self.out)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_existing_animation_on_late_slide_is_preserved (test_morph_package.MorphPackageTests.test_existing_animation_on_late_slide_is_preserved)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/7379e9724021/pptx-motion-lab/tests/test_morph_package.py", line 54, in test_existing_animation_on_late_slide_is_preserved
+    with self.assertRaises(ValueError): patch(self.src,self.plan,self.out)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_fractional_duration_rejected_without_output (test_morph_package.MorphPackageTests.test_fractional_duration_rejected_without_output)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/7379e9724021/pptx-motion-lab/tests/test_morph_package.py", line 66, in test_fractional_duration_rejected_without_output
+    with self.assertRaises(ValueError): patch(self.src,self.plan,self.out)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_reapplying_to_animated_deck_rejected (test_morph_package.MorphPackageTests.test_reapplying_to_animated_deck_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/7379e9724021/pptx-motion-lab/tests/test_morph_package.py", line 71, in test_reapplying_to_animated_deck_rejected
+    self.assertFalse((self.d/'twice.pptx').exists())
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_slide_relationship_order_and_durations (test_morph_package.MorphPackageTests.test_slide_relationship_order_and_durations)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/7379e9724021/pptx-motion-lab/tests/test_morph_package.py", line 44, in test_slide_relationship_order_and_durations
+    if expected is None: self.assertIsNone(morph)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <Element {http://schemas.microsoft.com/office/powerpoint/2015/09/main}morph at 0x7f6dd6861ac0> is not None
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.014s
+
+FAILED (failures=5, errors=1)

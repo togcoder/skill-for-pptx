@@ -1,0 +1,604 @@
+{
+  "version": "0.1",
+  "brief": "Tạo ba cảnh PowerPoint cho một triển lãm sáng tạo: bốn hình tròn màu tụ quanh một tâm, mở ra thành bốn mô-đun, rồi xếp thành một dòng hành trình. Cảm giác liền mạch, bố cục táo bạo, tất cả vẫn chỉnh sửa được. Mỗi mô-đun mang một từ: Imagine, Make, Share, Evolve.",
+  "canvas": {
+    "width": 16,
+    "height": 9,
+    "units": "normalized"
+  },
+  "data_provenance": "none",
+  "objects": [
+    {
+      "id": "canvas-background",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!canvas-background",
+      "geometry": "rect",
+      "fill": "#161419",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "",
+      "font_size": 32,
+      "text_color": "#161419"
+    },
+    {
+      "id": "journey-rail",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!journey-rail",
+      "geometry": "rect",
+      "fill": "#F3EFE7",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "",
+      "font_size": 32,
+      "text_color": "#161419"
+    },
+    {
+      "id": "imagine-circle",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!imagine-circle",
+      "geometry": "ellipse",
+      "fill": "#AC91FF",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "",
+      "font_size": 32,
+      "text_color": "#161419"
+    },
+    {
+      "id": "make-circle",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!make-circle",
+      "geometry": "ellipse",
+      "fill": "#FF8065",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "",
+      "font_size": 32,
+      "text_color": "#161419"
+    },
+    {
+      "id": "share-circle",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!share-circle",
+      "geometry": "ellipse",
+      "fill": "#5EDCD2",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "",
+      "font_size": 32,
+      "text_color": "#161419"
+    },
+    {
+      "id": "evolve-circle",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!evolve-circle",
+      "geometry": "ellipse",
+      "fill": "#D6F77D",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "",
+      "font_size": 32,
+      "text_color": "#161419"
+    },
+    {
+      "id": "shared-center",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!shared-center",
+      "geometry": "ellipse",
+      "fill": "#F3EFE7",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "",
+      "font_size": 32,
+      "text_color": "#161419"
+    },
+    {
+      "id": "imagine-label",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!imagine-label",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Imagine",
+      "font_size": 36,
+      "text_color": "#161419"
+    },
+    {
+      "id": "make-label",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!make-label",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Make",
+      "font_size": 36,
+      "text_color": "#161419"
+    },
+    {
+      "id": "share-label",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!share-label",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Share",
+      "font_size": 36,
+      "text_color": "#161419"
+    },
+    {
+      "id": "evolve-label",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!evolve-label",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Evolve",
+      "font_size": 36,
+      "text_color": "#161419"
+    },
+    {
+      "id": "exhibition-kicker",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!exhibition-kicker",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "CREATIVE EXHIBITION",
+      "font_size": 17,
+      "text_color": "#F3EFE7"
+    },
+    {
+      "id": "exhibition-title",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!exhibition-title",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Create, together.",
+      "font_size": 64,
+      "text_color": "#F3EFE7"
+    }
+  ],
+  "states": [
+    {
+      "id": "gather",
+      "message": "Bốn hình tròn tụ quanh cùng một tâm; màu sắc và từ khóa xác lập danh tính xuyên cảnh.",
+      "objects": {
+        "canvas-background": {
+          "x": 0.0,
+          "y": 0.0,
+          "w": 1.0,
+          "h": 1.0,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "journey-rail": {
+          "x": 0.49375,
+          "y": 0.598611111,
+          "w": 0.0125,
+          "h": 0.002777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "shared-center": {
+          "x": 0.496875,
+          "y": 0.594444444,
+          "w": 0.00625,
+          "h": 0.011111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "exhibition-kicker": {
+          "x": 0.0625,
+          "y": 0.05,
+          "w": 0.328125,
+          "h": 0.041666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "exhibition-title": {
+          "x": 0.0625,
+          "y": 0.130555556,
+          "w": 0.875,
+          "h": 0.133333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "imagine-circle": {
+          "x": 0.29921875,
+          "y": 0.340277778,
+          "w": 0.175,
+          "h": 0.311111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "imagine-label": {
+          "x": 0.30703125,
+          "y": 0.456944444,
+          "w": 0.159375,
+          "h": 0.077777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "make-circle": {
+          "x": 0.35390625,
+          "y": 0.548611111,
+          "w": 0.175,
+          "h": 0.311111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "make-label": {
+          "x": 0.36171875,
+          "y": 0.665277778,
+          "w": 0.159375,
+          "h": 0.077777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "share-circle": {
+          "x": 0.47109375,
+          "y": 0.340277778,
+          "w": 0.175,
+          "h": 0.311111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "share-label": {
+          "x": 0.47890625,
+          "y": 0.456944444,
+          "w": 0.159375,
+          "h": 0.077777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "evolve-circle": {
+          "x": 0.52578125,
+          "y": 0.548611111,
+          "w": 0.175,
+          "h": 0.311111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "evolve-label": {
+          "x": 0.53359375,
+          "y": 0.665277778,
+          "w": 0.159375,
+          "h": 0.077777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        }
+      }
+    },
+    {
+      "id": "unfold",
+      "message": "Cụm mở thành bốn mô-đun riêng trên hai cao độ. Thứ tự trái sang phải Imagine, Make, Share, Evolve được giữ để giảm nguy cơ giao cắt.",
+      "objects": {
+        "canvas-background": {
+          "x": 0.0,
+          "y": 0.0,
+          "w": 1.0,
+          "h": 1.0,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "journey-rail": {
+          "x": 0.49375,
+          "y": 0.598611111,
+          "w": 0.0125,
+          "h": 0.002777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "shared-center": {
+          "x": 0.496875,
+          "y": 0.594444444,
+          "w": 0.00625,
+          "h": 0.011111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "exhibition-kicker": {
+          "x": 0.0625,
+          "y": 0.05,
+          "w": 0.328125,
+          "h": 0.041666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "exhibition-title": {
+          "x": 0.0625,
+          "y": 0.130555556,
+          "w": 0.875,
+          "h": 0.133333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "imagine-circle": {
+          "x": 0.08125,
+          "y": 0.322222222,
+          "w": 0.18125,
+          "h": 0.322222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "imagine-label": {
+          "x": 0.0921875,
+          "y": 0.444444444,
+          "w": 0.159375,
+          "h": 0.077777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "make-circle": {
+          "x": 0.3,
+          "y": 0.555555556,
+          "w": 0.18125,
+          "h": 0.322222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "make-label": {
+          "x": 0.3109375,
+          "y": 0.677777778,
+          "w": 0.159375,
+          "h": 0.077777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "share-circle": {
+          "x": 0.51875,
+          "y": 0.322222222,
+          "w": 0.18125,
+          "h": 0.322222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "share-label": {
+          "x": 0.5296875,
+          "y": 0.444444444,
+          "w": 0.159375,
+          "h": 0.077777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "evolve-circle": {
+          "x": 0.7375,
+          "y": 0.555555556,
+          "w": 0.18125,
+          "h": 0.322222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "evolve-label": {
+          "x": 0.7484375,
+          "y": 0.677777778,
+          "w": 0.159375,
+          "h": 0.077777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        }
+      }
+    },
+    {
+      "id": "journey",
+      "message": "Bốn mô-đun cùng về một hàng, nối thành hành trình Imagine → Make → Share → Evolve; tâm chung trở thành điểm giữa đường nối.",
+      "objects": {
+        "canvas-background": {
+          "x": 0.0,
+          "y": 0.0,
+          "w": 1.0,
+          "h": 1.0,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "journey-rail": {
+          "x": 0.1,
+          "y": 0.598611111,
+          "w": 0.8,
+          "h": 0.002777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "shared-center": {
+          "x": 0.496875,
+          "y": 0.594444444,
+          "w": 0.00625,
+          "h": 0.011111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "exhibition-kicker": {
+          "x": 0.0625,
+          "y": 0.05,
+          "w": 0.328125,
+          "h": 0.041666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "exhibition-title": {
+          "x": 0.0625,
+          "y": 0.130555556,
+          "w": 0.875,
+          "h": 0.133333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "imagine-circle": {
+          "x": 0.0875,
+          "y": 0.45,
+          "w": 0.16875,
+          "h": 0.3,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "imagine-label": {
+          "x": 0.0921875,
+          "y": 0.561111111,
+          "w": 0.159375,
+          "h": 0.077777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "make-circle": {
+          "x": 0.30625,
+          "y": 0.45,
+          "w": 0.16875,
+          "h": 0.3,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "make-label": {
+          "x": 0.3109375,
+          "y": 0.561111111,
+          "w": 0.159375,
+          "h": 0.077777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "share-circle": {
+          "x": 0.525,
+          "y": 0.45,
+          "w": 0.16875,
+          "h": 0.3,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "share-label": {
+          "x": 0.5296875,
+          "y": 0.561111111,
+          "w": 0.159375,
+          "h": 0.077777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "evolve-circle": {
+          "x": 0.74375,
+          "y": 0.45,
+          "w": 0.16875,
+          "h": 0.3,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "evolve-label": {
+          "x": 0.7484375,
+          "y": 0.561111111,
+          "w": 0.159375,
+          "h": 0.077777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        }
+      }
+    }
+  ],
+  "transitions": [
+    {
+      "from": "gather",
+      "to": "unfold",
+      "kind": "morph",
+      "duration_ms": 1200,
+      "track": [
+        "journey-rail",
+        "imagine-circle",
+        "make-circle",
+        "share-circle",
+        "evolve-circle",
+        "shared-center",
+        "imagine-label",
+        "make-label",
+        "share-label",
+        "evolve-label"
+      ]
+    },
+    {
+      "from": "unfold",
+      "to": "journey",
+      "kind": "morph",
+      "duration_ms": 1200,
+      "track": [
+        "journey-rail",
+        "imagine-circle",
+        "make-circle",
+        "share-circle",
+        "evolve-circle",
+        "shared-center",
+        "imagine-label",
+        "make-label",
+        "share-label",
+        "evolve-label"
+      ]
+    }
+  ],
+  "research_metadata": {
+    "experiment": "E001",
+    "variant": "baseline",
+    "created_date": "2026-10-03",
+    "frozen_prompt": "Tạo ba cảnh PowerPoint cho một triển lãm sáng tạo: bốn hình tròn màu tụ quanh một tâm, mở ra thành bốn mô-đun, rồi xếp thành một dòng hành trình. Cảm giác liền mạch, bố cục táo bạo, tất cả vẫn chỉnh sửa được. Mỗi mô-đun mang một từ: Imagine, Make, Share, Evolve.",
+    "recipes": [
+      "radial-rearrange",
+      "persistent-anchor"
+    ],
+    "assumptions": [
+      "Ba cảnh tương ứng ba slide 16:9, tiến slide bằng thao tác trình chiếu; mỗi chuyển tiếp dự kiến 1200 ms.",
+      "Mỗi mô-đun giữ hình tròn cùng màu và một nhãn chữ; không cần đổi loại hình học để mở rộng thành mô-đun.",
+      "Bố cục táo bạo dùng nền tối, bốn màu sáng, tiêu đề lớn và khoảng trống rõ; màu không biểu diễn dữ liệu đo lường.",
+      "Các nhãn đặt giữa mô-đun; kiểu chữ cụ thể và căn giữa do bộ thực thi quyết định theo khả năng hỗ trợ.",
+      "Tọa độ là tỷ lệ chiều rộng và chiều cao slide; kích thước ellipse đã hiệu chỉnh tỷ lệ 16:9 để hiển thị thành hình tròn.",
+      "Không dùng opacity một phần, ảnh, video, biểu đồ, nhóm, đường cong easing tùy chỉnh hoặc animation trong slide."
+    ],
+    "mechanism": {
+      "identity": "Mỗi hình và nhãn có một semantic id cùng morph_name !! duy nhất, giữ nguyên trong cả ba trạng thái. Numeric shape ID do renderer cấp riêng trên từng slide.",
+      "layer_order": "Nền → đường nối → bốn hình tròn → dấu tâm → nhãn → tiêu đề. Đường nối giãn ra phía sau các hình ở cảnh cuối.",
+      "spatial_rule": "Thứ tự hoành độ Imagine < Make < Share < Evolve được bảo toàn. Từ unfold tới journey, hoành độ không đổi; chỉ cao độ và kích thước thay đổi.",
+      "anchor": "Dấu tâm 8 px giữ nguyên ở (640, 432) trên canvas 1280×720; đường nối mở quanh cùng vị trí này.",
+      "masking": "Không dùng mặt nạ. Chồng lấp các hình ở gather là có chủ đích; các nhãn ở tâm từng hình và ở lớp trên.",
+      "timing": "Hai Morph liền kề, mỗi lần 1200 ms. Kế hoạch không khẳng định easing, đường chuyển động hoặc playback đã được kiểm chứng."
+    },
+    "reference": {
+      "url": "https://powerpointschool.com/free-animated-powerpoint-presentation-template/",
+      "title": "Free Animated PowerPoint Presentation Template",
+      "author": "PowerPoint School",
+      "access_date": "2026-10-03",
+      "evidence_available": [
+        "Trang mô tả của tác giả đã đọc.",
+        "Ảnh giới thiệu tĩnh liên kết trong trang đã xem."
+      ],
+      "observed_mechanism": "Tác giả mô tả dùng Morph giữa slide và lưu ý đưa các nhóm lên lớp trước khi thay tài nguyên. Ảnh tĩnh chỉ cung cấp bố cục, không chứng minh thời gian hay chuyển động.",
+      "evidence_not_obtained": [
+        "Chưa xem phát video tham chiếu.",
+        "Chưa tải hoặc khảo sát PPTX của tác giả.",
+        "Chưa chạy PowerPoint."
+      ],
+      "reuse_conditions": "Trang cho tải miễn phí và nêu attribution là tùy chọn; chưa xác minh quyền phân phối lại tệp nguồn. Kế hoạch chỉ tham khảo nguyên lý, không sao chép bố cục đầy đủ hay đưa tài nguyên bên ngoài vào repo."
+    },
+    "verification": {
+      "stage": "plan-only",
+      "pptx_generated": false,
+      "powerpoint_playback_verified": false,
+      "remaining_checks": [
+        "Renderer hỗ trợ đầy đủ các trường kiểu dáng đã dùng.",
+        "Kiểm tra căn chữ, độ chồng lấp và tỷ lệ hình tròn trên từng slide sau render.",
+        "Kiểm tra ghép Morph, tính liên tục và nhịp khi phát trong PowerPoint."
+      ]
+    }
+  }
+}

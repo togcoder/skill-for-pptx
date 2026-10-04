@@ -1,0 +1,67 @@
+{
+  "assumption": "Synchronized linear interpolation of unrotated plan boxes at 1280x720; not native playback",
+  "selected_ids": [
+    "read-label",
+    "relax-label",
+    "create-label"
+  ],
+  "pairs": [
+    {
+      "transition": "read-focus -> relax-focus",
+      "objects": [
+        "read-label",
+        "relax-label"
+      ],
+      "positive_area_overlap_interval": null,
+      "midpoint_center_distance_px": 420.0
+    },
+    {
+      "transition": "read-focus -> relax-focus",
+      "objects": [
+        "read-label",
+        "create-label"
+      ],
+      "positive_area_overlap_interval": null,
+      "midpoint_center_distance_px": 232.59406699226014
+    },
+    {
+      "transition": "read-focus -> relax-focus",
+      "objects": [
+        "relax-label",
+        "create-label"
+      ],
+      "positive_area_overlap_interval": null,
+      "midpoint_center_distance_px": 232.59406699226014
+    },
+    {
+      "transition": "relax-focus -> create-focus",
+      "objects": [
+        "read-label",
+        "relax-label"
+      ],
+      "positive_area_overlap_interval": null,
+      "midpoint_center_distance_px": 232.59406699226014
+    },
+    {
+      "transition": "relax-focus -> create-focus",
+      "objects": [
+        "read-label",
+        "create-label"
+      ],
+      "positive_area_overlap_interval": null,
+      "midpoint_center_distance_px": 232.59406699226014
+    },
+    {
+      "transition": "relax-focus -> create-focus",
+      "objects": [
+        "relax-label",
+        "create-label"
+      ],
+      "positive_area_overlap_interval": null,
+      "midpoint_center_distance_px": 420.0
+    }
+  ],
+  "overlapping_pairs": 0,
+  "native_playback_verified": false,
+  "motion_quality_score": null
+}

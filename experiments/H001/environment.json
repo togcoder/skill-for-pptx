@@ -1,0 +1,22 @@
+{
+  "utc_date": "2026-10-03",
+  "os": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "python": "3.12.14",
+  "runtime": {
+    "CODEX_PRIMARY_RUNTIME_ROOT": "/opt/codex/runtimes/codex-primary-runtime",
+    "CODEX_PRIMARY_RUNTIME_PYTHON": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "CODEX_PRIMARY_RUNTIME_NODE": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "CODEX_PRIMARY_RUNTIME_BUNDLE_VERSION": "26.927.11222",
+    "CODEX_PRIMARY_RUNTIME": "/opt/codex/runtimes/codex-primary-runtime",
+    "CODEX_PRIMARY_RUNTIME_NODE_MODULES": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/node_modules"
+  },
+  "source_sha256_at_plan_freeze": {
+    "scripts/render_plan.mjs": "4001866f3aca2e0baceb25100a63608e0ab3ce1015f216fa8e64c9cd108314eb",
+    "scripts/run_experiment.sh": "b7583f8375f3d48f57266a489f95b0d12d9ae3794a31b06b69a2e44fee17c403",
+    "scripts/add_morph.py": "817a8f31f7abbe6709b4522dbbe0b583d912137cce04a8db92d24ee02e85e874",
+    "scripts/inspect_pptx.py": "0e7fe3c1e140d2034d2e024c18a2b4e495dea80abb8381537845be4714913a62",
+    "scripts/validate_plan.py": "bbf4321eaf902ef494ad51728b625e39ef1f3c887c91d61a18b13a9a7c9b2aeb",
+    "docs/STATUS.md": "ed2875ce7e99406a0730bef6f789efd9addc58d129ca42a17e1650bba81f5afb"
+  },
+  "git_status_at_plan_freeze": " M README.md\n M scripts/add_morph.py\n M skills/pptx-motion/SKILL.md\n M skills/pptx-motion/agents/openai.yaml\n?? experiments/E001/baseline-regression.txt\n?? experiments/E001/baseline/add_morph.py\n?? experiments/E001/candidate-regression.txt\n?? experiments/E001/package-inventory.json\n?? experiments/E001/regression-comparison.json\n?? experiments/E001/rubric.json\n?? experiments/H001/\n?? output/\n?? scripts/render_plan.mjs\n?? scripts/run_experiment.sh\n?? skills/pptx-motion/references/\n?? tests/test_morph_package.py\n"
+}

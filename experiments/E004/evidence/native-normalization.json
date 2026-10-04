@@ -1,0 +1,113 @@
+{
+  "changed_textboxes": 15,
+  "changes": [
+    {
+      "slide": 1,
+      "name": "!!title",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!footer",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!transport-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!community-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!infrastructure-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!title",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!footer",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!infrastructure-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!transport-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!community-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!title",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!footer",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!community-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!infrastructure-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!transport-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    }
+  ],
+  "source_sha256": "e1ddc4d482675783b6a18d996b68cd51430cb99cbd8febf123087e42f5207e16",
+  "sha256": "d441d5acf2766515a0ea1334c02c573ad1d04f23c4b5f652c825127dc37c46ec",
+  "powerpoint_playback_verified": false
+}

@@ -1,0 +1,91 @@
+{
+  "file": "local-media/reference-layout.pptx",
+  "sha256": "c447f1169810fecf8f47e6b30cb0add826adaad408e4c900c3e4e8b07337c243",
+  "scope": "package-inventory-v0.1",
+  "errors": [],
+  "slides": [
+    {
+      "index": 1,
+      "part": "ppt/slides/slide1.xml",
+      "forced_morph_names": [],
+      "morph_elements": 1,
+      "morph_options": [
+        "byObject"
+      ],
+      "timing_elements": 1
+    },
+    {
+      "index": 2,
+      "part": "ppt/slides/slide2.xml",
+      "forced_morph_names": [],
+      "morph_elements": 1,
+      "morph_options": [
+        "byObject"
+      ],
+      "timing_elements": 1
+    },
+    {
+      "index": 3,
+      "part": "ppt/slides/slide3.xml",
+      "forced_morph_names": [],
+      "morph_elements": 1,
+      "morph_options": [
+        "byObject"
+      ],
+      "timing_elements": 1
+    },
+    {
+      "index": 4,
+      "part": "ppt/slides/slide4.xml",
+      "forced_morph_names": [],
+      "morph_elements": 1,
+      "morph_options": [
+        "byObject"
+      ],
+      "timing_elements": 1
+    },
+    {
+      "index": 5,
+      "part": "ppt/slides/slide5.xml",
+      "forced_morph_names": [],
+      "morph_elements": 1,
+      "morph_options": [
+        "byObject"
+      ],
+      "timing_elements": 1
+    },
+    {
+      "index": 6,
+      "part": "ppt/slides/slide6.xml",
+      "forced_morph_names": [],
+      "morph_elements": 1,
+      "morph_options": [
+        "byObject"
+      ],
+      "timing_elements": 1
+    },
+    {
+      "index": 7,
+      "part": "ppt/slides/slide7.xml",
+      "forced_morph_names": [],
+      "morph_elements": 1,
+      "morph_options": [
+        "byObject"
+      ],
+      "timing_elements": 1
+    },
+    {
+      "index": 8,
+      "part": "ppt/slides/slide8.xml",
+      "forced_morph_names": [],
+      "morph_elements": 1,
+      "morph_options": [
+        "byObject"
+      ],
+      "timing_elements": 1
+    }
+  ],
+  "playback_verified": false,
+  "full_schema_validated": false,
+  "note": "Inventory checks only. Open and play this exact file in PowerPoint before claiming compatibility or motion correctness."
+}

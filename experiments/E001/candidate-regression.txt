@@ -1,0 +1,12 @@
+test_bad_identity_does_not_leave_output (test_morph_package.MorphPackageTests.test_bad_identity_does_not_leave_output) ... ok
+test_destination_not_overwritten (test_morph_package.MorphPackageTests.test_destination_not_overwritten) ... ok
+test_existing_animation_on_late_slide_is_preserved (test_morph_package.MorphPackageTests.test_existing_animation_on_late_slide_is_preserved) ... ok
+test_fractional_duration_rejected_without_output (test_morph_package.MorphPackageTests.test_fractional_duration_rejected_without_output) ... ok
+test_mismatch_does_not_leave_partial_output (test_morph_package.MorphPackageTests.test_mismatch_does_not_leave_partial_output) ... ok
+test_reapplying_to_animated_deck_rejected (test_morph_package.MorphPackageTests.test_reapplying_to_animated_deck_rejected) ... ok
+test_slide_relationship_order_and_durations (test_morph_package.MorphPackageTests.test_slide_relationship_order_and_durations) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.016s
+
+OK

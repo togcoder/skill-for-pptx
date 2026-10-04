@@ -1,0 +1,10 @@
+{
+  "font": "Bitstream Charter",
+  "canvas": [
+    1280,
+    720
+  ],
+  "slides": 2,
+  "renderer": "artifact-tool",
+  "native_playback_verified": false
+}

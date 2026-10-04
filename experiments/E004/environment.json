@@ -1,0 +1,10 @@
+{
+  "checked_at_utc": "2026-10-04T04:08:25.639102+00:00",
+  "runtime_bundle": "26.927.11222",
+  "node": "v24.19.0",
+  "python": "3.12.14",
+  "artifact_tool": "2.8.77",
+  "font": "Bitstream Charter",
+  "renderer": "artifact-tool via host render_presentation.mjs",
+  "native_powerpoint_executed": false
+}

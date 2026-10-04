@@ -1,0 +1,49 @@
+{
+  "experiment": "H002",
+  "reviewed_at_utc": "2026-10-04T03:37:49.244589+00:00",
+  "pptx": "output/PPTX_Motion_Lab_H002.pptx",
+  "pptx_sha256": "f311537bce6345a640dec81f5868deee25eb8583c372d77bbf7531ef9df57a11",
+  "plan_sha256": "b44f262106ebf361db995884c2bcddb140ac6851af56bf23e9f93262c207f417",
+  "rubric_sha256": "6b017fab76d818a87cca88857efc237199a99ba5be2a8d5569f80a4bd5789fff",
+  "renderer": {
+    "name": "@oai/artifact-tool",
+    "version": "2.8.77",
+    "runtime_bundle": "26.927.11222",
+    "canvas": [
+      1280,
+      720
+    ],
+    "scale": 1,
+    "input": "exact final PPTX imported by host render_presentation.mjs"
+  },
+  "font": "Bitstream Charter",
+  "structure_checked": true,
+  "layout_reviewed": true,
+  "slides_visually_inspected": [
+    {
+      "slide": 1,
+      "path": "build/h002/final-render/slide-1.png",
+      "observations": "All three named rings visible. Correct central mode and two side modes. No visible text clipping or unintended static overlap."
+    },
+    {
+      "slide": 2,
+      "path": "build/h002/final-render/slide-2.png",
+      "observations": "All three named rings visible. Correct central mode and two side modes. No visible text clipping or unintended static overlap."
+    },
+    {
+      "slide": 3,
+      "path": "build/h002/final-render/slide-3.png",
+      "observations": "All three named rings visible. Correct central mode and two side modes. No visible text clipping or unintended static overlap."
+    }
+  ],
+  "native_motion": null,
+  "powerpoint_playback_verified": false,
+  "application_editing": null,
+  "limitations": [
+    "No PowerPoint application/version playback or editing evidence.",
+    "Static endpoint renders cannot verify transition trajectories, matching behavior or cadence.",
+    "Reciprocal center/side swaps may bring ring labels together mid-transition; this is a plan-derived risk, not observed playback.",
+    "Read begins enlarged on slide 1. No separate entry enlargement state exists within the three-slide brief.",
+    "The early ad hoc XML checker initially mishandled absolute package relationships. The saved H002 checker now resolves absolute/relative relationships and passes. This was a checker failure, not a PPTX mutation."
+  ]
+}

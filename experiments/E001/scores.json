@@ -1,0 +1,70 @@
+{
+  "rubric": "rubric.json",
+  "reviewer": "assistant, unblinded, subjective ratings separate from objective metrics",
+  "pptx_sha256": "b3b4e28c14f00bc4fe05d6a71400752819413661e1280eb92301b4a6305e7c37",
+  "objective": [
+    {
+      "slide": 1,
+      "native_shapes_including_text": 13,
+      "shapes_with_text": 6,
+      "raster_pictures": 0,
+      "morph_duration_ms": []
+    },
+    {
+      "slide": 2,
+      "native_shapes_including_text": 13,
+      "shapes_with_text": 6,
+      "raster_pictures": 0,
+      "morph_duration_ms": [
+        1200
+      ]
+    },
+    {
+      "slide": 3,
+      "native_shapes_including_text": 13,
+      "shapes_with_text": 6,
+      "raster_pictures": 0,
+      "morph_duration_ms": [
+        1200
+      ]
+    }
+  ],
+  "ratings": {
+    "brief_coverage": {
+      "score": 4,
+      "reason": "Four requested words and three requested spatial states are present."
+    },
+    "native_editability": {
+      "score": 4,
+      "reason": "Each slide contains 13 native shapes including 6 text shapes and no raster slide image; actual editing in PowerPoint remains untested."
+    },
+    "identity_structure": {
+      "score": 4,
+      "reason": "13 unique forced names persist across three slides; two destination Morph declarations have 1200 ms durations."
+    },
+    "static_readability": {
+      "score": 4,
+      "reason": "All three final-slide renders reviewed at 1280x720; no label clipping or unintentional text occlusion. Carrier overlap in the first state is intentional."
+    },
+    "native_motion": {
+      "score": null,
+      "reason": "No PowerPoint application or native playback recording is available."
+    },
+    "creative_quality": {
+      "score": 3,
+      "scope": "static composition only",
+      "reason": "Clear colored cluster-to-row study; simple composition does not yet establish a distinctive motion style."
+    }
+  },
+  "aggregate_score": null,
+  "playback_verified": false,
+  "static_renderer": "LibreOfficeDev 26.8.0.0.alpha0 2c87e51eeaa2b413ff4ae097b2705eea1995d8e5",
+  "authoring_font": "Bitstream Charter",
+  "full_schema_validated": false,
+  "environment": {
+    "os": "Linux",
+    "architecture": "x86_64",
+    "python": "3.12.14",
+    "lxml": "6.1.1"
+  }
+}

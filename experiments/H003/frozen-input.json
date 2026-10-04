@@ -1,0 +1,5 @@
+{
+  "plan_sha256": "c5c37705d6fd157639e41cf9180843e0b04d67fbb5a2710f75fe93ead6cbf256",
+  "rubric_sha256": "6e9df27d62b4703779272fe3f21bf2d1e91a75fd82d1ed3799ebc1d59d44f64c",
+  "note": "Corrected required track after preflight rejection. Rubric and geometry unchanged."
+}

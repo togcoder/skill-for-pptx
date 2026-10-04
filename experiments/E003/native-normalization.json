@@ -1,0 +1,134 @@
+{
+  "changed_textboxes": 18,
+  "changes": [
+    {
+      "slide": 1,
+      "name": "!!brand",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!product-kind",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!mode-caption",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!read-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!relax-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!create-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!brand",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!product-kind",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!mode-caption",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!read-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!relax-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!create-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!brand",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!product-kind",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!mode-caption",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!read-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!relax-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!create-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    }
+  ],
+  "source_sha256": "f4d34d3811a41135921207774c49f59663b4d653433a3749427d541a8e72b394",
+  "sha256": "703188f76997c18d3659d2d591b60e40ca84bd5a38890b63c7c7ce0954e1f6e8",
+  "powerpoint_playback_verified": false
+}

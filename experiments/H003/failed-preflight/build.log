@@ -1,0 +1,29 @@
+{
+  "valid": false,
+  "errors": [
+    "transition community-focus/transport-focus: track must be an array of object IDs",
+    "transition transport-focus/infrastructure-focus: track must be an array of object IDs"
+  ],
+  "scope": "motion-plan-v0.1",
+  "pptx_generated": false,
+  "playback_verified": false
+}
+node:internal/errors:985
+  const err = new Error(message);
+              ^
+
+Error: Command failed: /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3 /workspace/scratch/7379e9724021/pptx-motion-lab/scripts/validate_plan.py /workspace/scratch/7379e9724021/pptx-motion-lab/experiments/H003/plan.json
+    at genericNodeError (node:internal/errors:985:15)
+    at wrappedFn (node:internal/errors:539:14)
+    at checkExecSyncError (node:child_process:942:11)
+    at execFileSync (node:child_process:978:15)
+    at file:///workspace/scratch/7379e9724021/pptx-motion-lab/build/h003/render_plan.mjs:13:1 {
+  status: 1,
+  signal: null,
+  output: [ null, null, null ],
+  pid: 44,
+  stdout: null,
+  stderr: null
+}
+
+Node.js v24.19.0

@@ -1,0 +1,722 @@
+{
+  "experiment": "H001",
+  "pptx_sha256": "9edf3fe2c825f7223adefcd73f13cc576cc57936d0ae47084deb940b66049f87",
+  "plan_sha256": "030e32a9af57c0b8bc183b19458da6bf7d6a02eef65b114b76fa283b029ed078",
+  "passed": true,
+  "failures": [],
+  "checks": [
+    {
+      "check": "two ordered slides",
+      "passed": true
+    },
+    {
+      "check": "slide 1 exact unique semantic names",
+      "passed": true
+    },
+    {
+      "check": "slide 1 collect-inspect-link geometry",
+      "passed": true
+    },
+    {
+      "check": "slide 1 collect-inspect-link native type",
+      "passed": true
+    },
+    {
+      "check": "slide 1 collect-inspect-link text",
+      "passed": true
+    },
+    {
+      "check": "slide 1 inspect-decide-link geometry",
+      "passed": true
+    },
+    {
+      "check": "slide 1 inspect-decide-link native type",
+      "passed": true
+    },
+    {
+      "check": "slide 1 inspect-decide-link text",
+      "passed": true
+    },
+    {
+      "check": "slide 1 process-title geometry",
+      "passed": true
+    },
+    {
+      "check": "slide 1 process-title native type",
+      "passed": true
+    },
+    {
+      "check": "slide 1 process-title text",
+      "passed": true
+    },
+    {
+      "check": "slide 1 collect-block geometry",
+      "passed": true
+    },
+    {
+      "check": "slide 1 collect-block native type",
+      "passed": true
+    },
+    {
+      "check": "slide 1 collect-block text",
+      "passed": true
+    },
+    {
+      "check": "slide 1 collect-step geometry",
+      "passed": true
+    },
+    {
+      "check": "slide 1 collect-step native type",
+      "passed": true
+    },
+    {
+      "check": "slide 1 collect-step text",
+      "passed": true
+    },
+    {
+      "check": "slide 1 collect-label geometry",
+      "passed": true
+    },
+    {
+      "check": "slide 1 collect-label native type",
+      "passed": true
+    },
+    {
+      "check": "slide 1 collect-label text",
+      "passed": true
+    },
+    {
+      "check": "slide 1 inspect-block geometry",
+      "passed": true
+    },
+    {
+      "check": "slide 1 inspect-block native type",
+      "passed": true
+    },
+    {
+      "check": "slide 1 inspect-block text",
+      "passed": true
+    },
+    {
+      "check": "slide 1 inspect-step geometry",
+      "passed": true
+    },
+    {
+      "check": "slide 1 inspect-step native type",
+      "passed": true
+    },
+    {
+      "check": "slide 1 inspect-step text",
+      "passed": true
+    },
+    {
+      "check": "slide 1 inspect-label geometry",
+      "passed": true
+    },
+    {
+      "check": "slide 1 inspect-label native type",
+      "passed": true
+    },
+    {
+      "check": "slide 1 inspect-label text",
+      "passed": true
+    },
+    {
+      "check": "slide 1 decide-block geometry",
+      "passed": true
+    },
+    {
+      "check": "slide 1 decide-block native type",
+      "passed": true
+    },
+    {
+      "check": "slide 1 decide-block text",
+      "passed": true
+    },
+    {
+      "check": "slide 1 decide-step geometry",
+      "passed": true
+    },
+    {
+      "check": "slide 1 decide-step native type",
+      "passed": true
+    },
+    {
+      "check": "slide 1 decide-step text",
+      "passed": true
+    },
+    {
+      "check": "slide 1 decide-label geometry",
+      "passed": true
+    },
+    {
+      "check": "slide 1 decide-label native type",
+      "passed": true
+    },
+    {
+      "check": "slide 1 decide-label text",
+      "passed": true
+    },
+    {
+      "check": "first slide has no Morph",
+      "passed": true
+    },
+    {
+      "check": "slide 1 no raster or video",
+      "passed": true
+    },
+    {
+      "check": "slide 2 exact unique semantic names",
+      "passed": true
+    },
+    {
+      "check": "slide 2 collect-inspect-link geometry",
+      "passed": true
+    },
+    {
+      "check": "slide 2 collect-inspect-link native type",
+      "passed": true
+    },
+    {
+      "check": "slide 2 collect-inspect-link text",
+      "passed": true
+    },
+    {
+      "check": "slide 2 inspect-decide-link geometry",
+      "passed": true
+    },
+    {
+      "check": "slide 2 inspect-decide-link native type",
+      "passed": true
+    },
+    {
+      "check": "slide 2 inspect-decide-link text",
+      "passed": true
+    },
+    {
+      "check": "slide 2 process-title geometry",
+      "passed": true
+    },
+    {
+      "check": "slide 2 process-title native type",
+      "passed": true
+    },
+    {
+      "check": "slide 2 process-title text",
+      "passed": true
+    },
+    {
+      "check": "slide 2 collect-block geometry",
+      "passed": true
+    },
+    {
+      "check": "slide 2 collect-block native type",
+      "passed": true
+    },
+    {
+      "check": "slide 2 collect-block text",
+      "passed": true
+    },
+    {
+      "check": "slide 2 collect-step geometry",
+      "passed": true
+    },
+    {
+      "check": "slide 2 collect-step native type",
+      "passed": true
+    },
+    {
+      "check": "slide 2 collect-step text",
+      "passed": true
+    },
+    {
+      "check": "slide 2 collect-label geometry",
+      "passed": true
+    },
+    {
+      "check": "slide 2 collect-label native type",
+      "passed": true
+    },
+    {
+      "check": "slide 2 collect-label text",
+      "passed": true
+    },
+    {
+      "check": "slide 2 decide-block geometry",
+      "passed": true
+    },
+    {
+      "check": "slide 2 decide-block native type",
+      "passed": true
+    },
+    {
+      "check": "slide 2 decide-block text",
+      "passed": true
+    },
+    {
+      "check": "slide 2 decide-step geometry",
+      "passed": true
+    },
+    {
+      "check": "slide 2 decide-step native type",
+      "passed": true
+    },
+    {
+      "check": "slide 2 decide-step text",
+      "passed": true
+    },
+    {
+      "check": "slide 2 decide-label geometry",
+      "passed": true
+    },
+    {
+      "check": "slide 2 decide-label native type",
+      "passed": true
+    },
+    {
+      "check": "slide 2 decide-label text",
+      "passed": true
+    },
+    {
+      "check": "slide 2 inspect-block geometry",
+      "passed": true
+    },
+    {
+      "check": "slide 2 inspect-block native type",
+      "passed": true
+    },
+    {
+      "check": "slide 2 inspect-block text",
+      "passed": true
+    },
+    {
+      "check": "slide 2 inspect-step geometry",
+      "passed": true
+    },
+    {
+      "check": "slide 2 inspect-step native type",
+      "passed": true
+    },
+    {
+      "check": "slide 2 inspect-step text",
+      "passed": true
+    },
+    {
+      "check": "slide 2 inspect-label geometry",
+      "passed": true
+    },
+    {
+      "check": "slide 2 inspect-label native type",
+      "passed": true
+    },
+    {
+      "check": "slide 2 inspect-label text",
+      "passed": true
+    },
+    {
+      "check": "destination has one byObject Morph",
+      "passed": true
+    },
+    {
+      "check": "destination duration equals plan",
+      "passed": true
+    },
+    {
+      "check": "slide 2 no raster or video",
+      "passed": true
+    },
+    {
+      "check": "Microsoft mechanism URL in both notes",
+      "passed": true
+    },
+    {
+      "check": "no hardcoded E001 provenance in notes",
+      "passed": true
+    },
+    {
+      "check": "no embedded media",
+      "passed": true
+    },
+    {
+      "check": "Inspect grows in both dimensions",
+      "passed": true
+    },
+    {
+      "check": "Inspect stays centered horizontally",
+      "passed": true
+    },
+    {
+      "check": "slide 1 collect block on canvas",
+      "passed": true
+    },
+    {
+      "check": "slide 1 inspect block on canvas",
+      "passed": true
+    },
+    {
+      "check": "slide 1 decide block on canvas",
+      "passed": true
+    },
+    {
+      "check": "slide 1 left-center-right sequence",
+      "passed": true
+    },
+    {
+      "check": "slide 2 collect block on canvas",
+      "passed": true
+    },
+    {
+      "check": "slide 2 inspect block on canvas",
+      "passed": true
+    },
+    {
+      "check": "slide 2 decide block on canvas",
+      "passed": true
+    },
+    {
+      "check": "slide 2 left-center-right sequence",
+      "passed": true
+    }
+  ],
+  "slides": [
+    {
+      "index": 1,
+      "ordered_part": "ppt/slides/slide1.xml",
+      "native_rectangles": 5,
+      "native_textboxes": 7,
+      "morph_duration_ms": null,
+      "objects": {
+        "!!h001-collect-inspect-link": {
+          "geometry_emu": [
+            3619500,
+            3971925,
+            1095375,
+            57150
+          ],
+          "text": "",
+          "textbox": false,
+          "preset_geometry": "rect",
+          "font_sizes_hundredth_pt": []
+        },
+        "!!h001-inspect-decide-link": {
+          "geometry_emu": [
+            7477125,
+            3971925,
+            1095375,
+            57150
+          ],
+          "text": "",
+          "textbox": false,
+          "preset_geometry": "rect",
+          "font_sizes_hundredth_pt": []
+        },
+        "!!h001-collect-block": {
+          "geometry_emu": [
+            857250,
+            2952750,
+            2762250,
+            2095500
+          ],
+          "text": "",
+          "textbox": false,
+          "preset_geometry": "rect",
+          "font_sizes_hundredth_pt": []
+        },
+        "!!h001-inspect-block": {
+          "geometry_emu": [
+            4714875,
+            2952750,
+            2762250,
+            2095500
+          ],
+          "text": "",
+          "textbox": false,
+          "preset_geometry": "rect",
+          "font_sizes_hundredth_pt": []
+        },
+        "!!h001-decide-block": {
+          "geometry_emu": [
+            8572500,
+            2952750,
+            2762250,
+            2095500
+          ],
+          "text": "",
+          "textbox": false,
+          "preset_geometry": "rect",
+          "font_sizes_hundredth_pt": []
+        },
+        "!!h001-process-title": {
+          "geometry_emu": [
+            762000,
+            742950,
+            10668000,
+            800100
+          ],
+          "text": "Quy trình ba bước",
+          "textbox": true,
+          "preset_geometry": "rect",
+          "font_sizes_hundredth_pt": [
+            "3600"
+          ]
+        },
+        "!!h001-collect-step": {
+          "geometry_emu": [
+            952500,
+            3209925,
+            2571750,
+            381000
+          ],
+          "text": "01",
+          "textbox": true,
+          "preset_geometry": "rect",
+          "font_sizes_hundredth_pt": [
+            "1800"
+          ]
+        },
+        "!!h001-inspect-step": {
+          "geometry_emu": [
+            4810125,
+            3209925,
+            2571750,
+            381000
+          ],
+          "text": "02",
+          "textbox": true,
+          "preset_geometry": "rect",
+          "font_sizes_hundredth_pt": [
+            "1800"
+          ]
+        },
+        "!!h001-decide-step": {
+          "geometry_emu": [
+            8667750,
+            3209925,
+            2571750,
+            381000
+          ],
+          "text": "03",
+          "textbox": true,
+          "preset_geometry": "rect",
+          "font_sizes_hundredth_pt": [
+            "1800"
+          ]
+        },
+        "!!h001-collect-label": {
+          "geometry_emu": [
+            952500,
+            3648075,
+            2571750,
+            742950
+          ],
+          "text": "Collect",
+          "textbox": true,
+          "preset_geometry": "rect",
+          "font_sizes_hundredth_pt": [
+            "3900"
+          ]
+        },
+        "!!h001-inspect-label": {
+          "geometry_emu": [
+            4810125,
+            3648075,
+            2571750,
+            742950
+          ],
+          "text": "Inspect",
+          "textbox": true,
+          "preset_geometry": "rect",
+          "font_sizes_hundredth_pt": [
+            "3900"
+          ]
+        },
+        "!!h001-decide-label": {
+          "geometry_emu": [
+            8667750,
+            3648075,
+            2571750,
+            742950
+          ],
+          "text": "Decide",
+          "textbox": true,
+          "preset_geometry": "rect",
+          "font_sizes_hundredth_pt": [
+            "3900"
+          ]
+        }
+      }
+    },
+    {
+      "index": 2,
+      "ordered_part": "ppt/slides/slide2.xml",
+      "native_rectangles": 5,
+      "native_textboxes": 7,
+      "morph_duration_ms": "1600",
+      "objects": {
+        "!!h001-collect-inspect-link": {
+          "geometry_emu": [
+            2667000,
+            3971925,
+            619125,
+            57150
+          ],
+          "text": "",
+          "textbox": false,
+          "preset_geometry": "rect",
+          "font_sizes_hundredth_pt": []
+        },
+        "!!h001-inspect-decide-link": {
+          "geometry_emu": [
+            8905875,
+            3971925,
+            619125,
+            57150
+          ],
+          "text": "",
+          "textbox": false,
+          "preset_geometry": "rect",
+          "font_sizes_hundredth_pt": []
+        },
+        "!!h001-collect-block": {
+          "geometry_emu": [
+            571500,
+            3190875,
+            2095500,
+            1619250
+          ],
+          "text": "",
+          "textbox": false,
+          "preset_geometry": "rect",
+          "font_sizes_hundredth_pt": []
+        },
+        "!!h001-inspect-block": {
+          "geometry_emu": [
+            3286125,
+            2143125,
+            5619750,
+            3714750
+          ],
+          "text": "",
+          "textbox": false,
+          "preset_geometry": "rect",
+          "font_sizes_hundredth_pt": []
+        },
+        "!!h001-decide-block": {
+          "geometry_emu": [
+            9525000,
+            3190875,
+            2095500,
+            1619250
+          ],
+          "text": "",
+          "textbox": false,
+          "preset_geometry": "rect",
+          "font_sizes_hundredth_pt": []
+        },
+        "!!h001-process-title": {
+          "geometry_emu": [
+            762000,
+            742950,
+            10668000,
+            800100
+          ],
+          "text": "Quy trình ba bước",
+          "textbox": true,
+          "preset_geometry": "rect",
+          "font_sizes_hundredth_pt": [
+            "3600"
+          ]
+        },
+        "!!h001-collect-step": {
+          "geometry_emu": [
+            619125,
+            3333750,
+            2000250,
+            304800
+          ],
+          "text": "01",
+          "textbox": true,
+          "preset_geometry": "rect",
+          "font_sizes_hundredth_pt": [
+            "1800"
+          ]
+        },
+        "!!h001-inspect-step": {
+          "geometry_emu": [
+            3381375,
+            3086100,
+            5429250,
+            419100
+          ],
+          "text": "02",
+          "textbox": true,
+          "preset_geometry": "rect",
+          "font_sizes_hundredth_pt": [
+            "1800"
+          ]
+        },
+        "!!h001-decide-step": {
+          "geometry_emu": [
+            9572625,
+            3333750,
+            2000250,
+            304800
+          ],
+          "text": "03",
+          "textbox": true,
+          "preset_geometry": "rect",
+          "font_sizes_hundredth_pt": [
+            "1800"
+          ]
+        },
+        "!!h001-collect-label": {
+          "geometry_emu": [
+            619125,
+            3705225,
+            2000250,
+            647700
+          ],
+          "text": "Collect",
+          "textbox": true,
+          "preset_geometry": "rect",
+          "font_sizes_hundredth_pt": [
+            "3900"
+          ]
+        },
+        "!!h001-inspect-label": {
+          "geometry_emu": [
+            3381375,
+            3590925,
+            5429250,
+            857250
+          ],
+          "text": "Inspect",
+          "textbox": true,
+          "preset_geometry": "rect",
+          "font_sizes_hundredth_pt": [
+            "3900"
+          ]
+        },
+        "!!h001-decide-label": {
+          "geometry_emu": [
+            9572625,
+            3705225,
+            2000250,
+            647700
+          ],
+          "text": "Decide",
+          "textbox": true,
+          "preset_geometry": "rect",
+          "font_sizes_hundredth_pt": [
+            "3900"
+          ]
+        }
+      }
+    }
+  ],
+  "inspect_width_ratio": 2.0344827586206895,
+  "inspect_height_ratio": 1.7727272727272727,
+  "native_powerpoint_playback_verified": false,
+  "application_editability_verified": false,
+  "boundary": "Ordered OOXML objects and declared transitions only. No PowerPoint execution or full OOXML schema certification."
+}

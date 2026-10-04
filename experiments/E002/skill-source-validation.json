@@ -1,0 +1,8 @@
+{
+  "scope": "repository research-source validation; not personal skill installation",
+  "skill_sha256": "cd52c7522810c696e37de4ac9ca623aa88439532c70f16a07b5cf202e83c45d5",
+  "missing_references": [],
+  "todo_placeholders": false,
+  "name": "pptx-motion",
+  "valid": true
+}

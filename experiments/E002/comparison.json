@@ -1,0 +1,38 @@
+{
+  "baseline_sha256": "3d59b50afbc2c084e560e0b5d04d990b4f6890a66afca86dc6b951156a436e96",
+  "candidate_sha256": "9edf3fe2c825f7223adefcd73f13cc576cc57936d0ae47084deb940b66049f87",
+  "static_pixel_comparison": [
+    {
+      "slide": 1,
+      "size": [
+        1280,
+        720
+      ],
+      "changed_pixels": 0,
+      "total_pixels": 921600,
+      "identical": true
+    },
+    {
+      "slide": 2,
+      "size": [
+        1280,
+        720
+      ],
+      "changed_pixels": 0,
+      "total_pixels": 921600,
+      "identical": true
+    }
+  ],
+  "changed_parts": [
+    "ppt/slides/slide1.xml",
+    "ppt/slides/slide2.xml"
+  ],
+  "all_non_slide_parts_byte_identical": true,
+  "slide_xml_equal_after_removing_added_txBox": true,
+  "h001_checker_sha256": "f85c42b1855ab98393d274d4daa8b47e15709ebdaf83ebbaac5200e5675cf518",
+  "h001_rubric_sha256": "8bc9219e70f8e0114a8e0b6d252fd623a45a0f54e221abfa865a9270e713a21f",
+  "baseline_failed_checks": 14,
+  "candidate_failed_checks": 0,
+  "total_frozen_checks": 93,
+  "powerpoint_playback_verified": false
+}

@@ -1,0 +1,402 @@
+{
+  "version": "0.1",
+  "brief": "Tạo hai slide PowerPoint mô tả một quy trình ba bước bằng các khối và chữ chỉnh sửa được: Collect, Inspect, Decide. Cảnh đầu là tổng quan cả ba bước; cảnh sau phóng lớn Inspect ở giữa, vẫn giữ Collect và Decide ở hai bên để người xem không mất bối cảnh. Chuyển cảnh bằng Morph.",
+  "canvas": {
+    "width": 16,
+    "height": 9,
+    "units": "normalized"
+  },
+  "data_provenance": "user-provided",
+  "objects": [
+    {
+      "id": "collect-inspect-link",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!h001-collect-inspect-link",
+      "geometry": "rect",
+      "fill": "#827F88",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "inspect-decide-link",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!h001-inspect-decide-link",
+      "geometry": "rect",
+      "fill": "#827F88",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "collect-block",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!h001-collect-block",
+      "geometry": "rect",
+      "fill": "#34516A",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "inspect-block",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!h001-inspect-block",
+      "geometry": "rect",
+      "fill": "#EDB469",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "decide-block",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!h001-decide-block",
+      "geometry": "rect",
+      "fill": "#35645C",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "process-title",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!h001-process-title",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Quy trình ba bước",
+      "font_size": 48,
+      "text_color": "#FFFFFF",
+      "bold": true
+    },
+    {
+      "id": "collect-step",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!h001-collect-step",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "01",
+      "font_size": 24,
+      "text_color": "#D8E2EA",
+      "bold": false
+    },
+    {
+      "id": "inspect-step",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!h001-inspect-step",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "02",
+      "font_size": 24,
+      "text_color": "#302820",
+      "bold": false
+    },
+    {
+      "id": "decide-step",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!h001-decide-step",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "03",
+      "font_size": 24,
+      "text_color": "#D5E8E1",
+      "bold": false
+    },
+    {
+      "id": "collect-label",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!h001-collect-label",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Collect",
+      "font_size": 52,
+      "text_color": "#FFFFFF",
+      "bold": true
+    },
+    {
+      "id": "inspect-label",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!h001-inspect-label",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Inspect",
+      "font_size": 52,
+      "text_color": "#211E23",
+      "bold": true
+    },
+    {
+      "id": "decide-label",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!h001-decide-label",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Decide",
+      "font_size": 52,
+      "text_color": "#FFFFFF",
+      "bold": true
+    }
+  ],
+  "states": [
+    {
+      "id": "overview",
+      "message": "Tổng quan quy trình gồm Collect, Inspect và Decide.",
+      "objects": {
+        "collect-inspect-link": {
+          "x": 0.296875,
+          "y": 0.5791666666666667,
+          "w": 0.08984375,
+          "h": 0.008333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "inspect-decide-link": {
+          "x": 0.61328125,
+          "y": 0.5791666666666667,
+          "w": 0.08984375,
+          "h": 0.008333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "process-title": {
+          "x": 0.0625,
+          "y": 0.10833333333333334,
+          "w": 0.875,
+          "h": 0.11666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "collect-block": {
+          "x": 0.0703125,
+          "y": 0.4305555555555556,
+          "w": 0.2265625,
+          "h": 0.3055555555555556,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "collect-step": {
+          "x": 0.078125,
+          "y": 0.46805555555555556,
+          "w": 0.2109375,
+          "h": 0.05555555555555555,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "collect-label": {
+          "x": 0.078125,
+          "y": 0.5319444444444444,
+          "w": 0.2109375,
+          "h": 0.10833333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "inspect-block": {
+          "x": 0.38671875,
+          "y": 0.4305555555555556,
+          "w": 0.2265625,
+          "h": 0.3055555555555556,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "inspect-step": {
+          "x": 0.39453125,
+          "y": 0.46805555555555556,
+          "w": 0.2109375,
+          "h": 0.05555555555555555,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "inspect-label": {
+          "x": 0.39453125,
+          "y": 0.5319444444444444,
+          "w": 0.2109375,
+          "h": 0.10833333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "decide-block": {
+          "x": 0.703125,
+          "y": 0.4305555555555556,
+          "w": 0.2265625,
+          "h": 0.3055555555555556,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "decide-step": {
+          "x": 0.7109375,
+          "y": 0.46805555555555556,
+          "w": 0.2109375,
+          "h": 0.05555555555555555,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "decide-label": {
+          "x": 0.7109375,
+          "y": 0.5319444444444444,
+          "w": 0.2109375,
+          "h": 0.10833333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        }
+      }
+    },
+    {
+      "id": "inspect-focus",
+      "message": "Inspect là bước được tập trung. Collect và Decide vẫn hiển thị ở hai bên để giữ ngữ cảnh.",
+      "objects": {
+        "collect-inspect-link": {
+          "x": 0.21875,
+          "y": 0.5791666666666667,
+          "w": 0.05078125,
+          "h": 0.008333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "inspect-decide-link": {
+          "x": 0.73046875,
+          "y": 0.5791666666666667,
+          "w": 0.05078125,
+          "h": 0.008333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "process-title": {
+          "x": 0.0625,
+          "y": 0.10833333333333334,
+          "w": 0.875,
+          "h": 0.11666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "collect-block": {
+          "x": 0.046875,
+          "y": 0.4652777777777778,
+          "w": 0.171875,
+          "h": 0.2361111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "collect-step": {
+          "x": 0.05078125,
+          "y": 0.4861111111111111,
+          "w": 0.1640625,
+          "h": 0.044444444444444446,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "collect-label": {
+          "x": 0.05078125,
+          "y": 0.5402777777777777,
+          "w": 0.1640625,
+          "h": 0.09444444444444444,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "decide-block": {
+          "x": 0.78125,
+          "y": 0.4652777777777778,
+          "w": 0.171875,
+          "h": 0.2361111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "decide-step": {
+          "x": 0.78515625,
+          "y": 0.4861111111111111,
+          "w": 0.1640625,
+          "h": 0.044444444444444446,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "decide-label": {
+          "x": 0.78515625,
+          "y": 0.5402777777777777,
+          "w": 0.1640625,
+          "h": 0.09444444444444444,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "inspect-block": {
+          "x": 0.26953125,
+          "y": 0.3125,
+          "w": 0.4609375,
+          "h": 0.5416666666666666,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "inspect-step": {
+          "x": 0.27734375,
+          "y": 0.45,
+          "w": 0.4453125,
+          "h": 0.06111111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "inspect-label": {
+          "x": 0.27734375,
+          "y": 0.5236111111111111,
+          "w": 0.4453125,
+          "h": 0.125,
+          "rotation_deg": 0,
+          "opacity": 1
+        }
+      }
+    }
+  ],
+  "transitions": [
+    {
+      "from": "overview",
+      "to": "inspect-focus",
+      "kind": "morph",
+      "duration_ms": 1600,
+      "track": [
+        "collect-inspect-link",
+        "inspect-decide-link",
+        "collect-block",
+        "inspect-block",
+        "decide-block",
+        "process-title",
+        "collect-step",
+        "inspect-step",
+        "decide-step",
+        "collect-label",
+        "inspect-label",
+        "decide-label"
+      ]
+    }
+  ],
+  "research_metadata": {
+    "experiment": "H001",
+    "recipe": "Overview to detail",
+    "references": [
+      {
+        "title": "Morph transition: Tips and tricks",
+        "author": "Microsoft Support",
+        "url": "https://support.microsoft.com/en-us/powerpoint/morph-transition-tips-and-tricks",
+        "accessed_utc": "2026-10-03",
+        "evidence_inspected": "Official text describing unique matching !! names, destination-slide Morph, and position/size changes for zoom; no native playback observed.",
+        "reuse_conditions": "Technical mechanism only. No Microsoft images, video or template objects copied into the deck."
+      }
+    ]
+  }
+}

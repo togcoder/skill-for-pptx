@@ -1,0 +1,55 @@
+{
+  "file": "output/PPTX_Motion_Lab_H001.pptx",
+  "sha256": "3d59b50afbc2c084e560e0b5d04d990b4f6890a66afca86dc6b951156a436e96",
+  "scope": "package-inventory-v0.1",
+  "errors": [],
+  "slides": [
+    {
+      "index": 1,
+      "part": "ppt/slides/slide1.xml",
+      "forced_morph_names": [
+        "!!h001-collect-inspect-link",
+        "!!h001-inspect-decide-link",
+        "!!h001-collect-block",
+        "!!h001-inspect-block",
+        "!!h001-decide-block",
+        "!!h001-process-title",
+        "!!h001-collect-step",
+        "!!h001-inspect-step",
+        "!!h001-decide-step",
+        "!!h001-collect-label",
+        "!!h001-inspect-label",
+        "!!h001-decide-label"
+      ],
+      "morph_elements": 0,
+      "morph_options": [],
+      "timing_elements": 0
+    },
+    {
+      "index": 2,
+      "part": "ppt/slides/slide2.xml",
+      "forced_morph_names": [
+        "!!h001-collect-inspect-link",
+        "!!h001-inspect-decide-link",
+        "!!h001-collect-block",
+        "!!h001-inspect-block",
+        "!!h001-decide-block",
+        "!!h001-process-title",
+        "!!h001-collect-step",
+        "!!h001-inspect-step",
+        "!!h001-decide-step",
+        "!!h001-collect-label",
+        "!!h001-inspect-label",
+        "!!h001-decide-label"
+      ],
+      "morph_elements": 1,
+      "morph_options": [
+        "byObject"
+      ],
+      "timing_elements": 0
+    }
+  ],
+  "playback_verified": false,
+  "full_schema_validated": false,
+  "note": "Inventory checks only. Open and play this exact file in PowerPoint before claiming compatibility or motion correctness."
+}

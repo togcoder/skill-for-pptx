@@ -1,0 +1,26 @@
+{
+  "candidate_sha256": "517dd23371c7768d19cb0286e4f3292cdbaebffc045a1e5884ae00fd403d6164",
+  "errors": [],
+  "passed": true,
+  "slides": [
+    {
+      "slide": 1,
+      "native_objects": 11,
+      "textboxes": 6,
+      "morph_count": 0
+    },
+    {
+      "slide": 2,
+      "native_objects": 11,
+      "textboxes": 6,
+      "morph_count": 1
+    },
+    {
+      "slide": 3,
+      "native_objects": 11,
+      "textboxes": 6,
+      "morph_count": 1
+    }
+  ],
+  "powerpoint_playback_verified": false
+}

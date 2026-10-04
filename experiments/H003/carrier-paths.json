@@ -1,0 +1,85 @@
+{
+  "assumption": "Synchronized linear interpolation of unrotated plan boxes at 1280x720; not native playback",
+  "selected_ids": [
+    "community-block",
+    "transport-block",
+    "infrastructure-block"
+  ],
+  "pairs": [
+    {
+      "transition": "community-focus -> transport-focus",
+      "objects": [
+        "community-block",
+        "transport-block"
+      ],
+      "positive_area_overlap_interval": [
+        0.0625,
+        0.9375
+      ],
+      "midpoint_center_distance_px": 420.0
+    },
+    {
+      "transition": "community-focus -> transport-focus",
+      "objects": [
+        "community-block",
+        "infrastructure-block"
+      ],
+      "positive_area_overlap_interval": [
+        0.14285714285714285,
+        0.6615384615384615
+      ],
+      "midpoint_center_distance_px": 232.59406699226014
+    },
+    {
+      "transition": "community-focus -> transport-focus",
+      "objects": [
+        "transport-block",
+        "infrastructure-block"
+      ],
+      "positive_area_overlap_interval": [
+        0.3384615384615385,
+        0.8571428571428571
+      ],
+      "midpoint_center_distance_px": 232.59406699226014
+    },
+    {
+      "transition": "transport-focus -> infrastructure-focus",
+      "objects": [
+        "community-block",
+        "transport-block"
+      ],
+      "positive_area_overlap_interval": [
+        0.14285714285714285,
+        0.6615384615384615
+      ],
+      "midpoint_center_distance_px": 232.59406699226014
+    },
+    {
+      "transition": "transport-focus -> infrastructure-focus",
+      "objects": [
+        "community-block",
+        "infrastructure-block"
+      ],
+      "positive_area_overlap_interval": [
+        0.3384615384615385,
+        0.8571428571428571
+      ],
+      "midpoint_center_distance_px": 232.59406699226014
+    },
+    {
+      "transition": "transport-focus -> infrastructure-focus",
+      "objects": [
+        "transport-block",
+        "infrastructure-block"
+      ],
+      "positive_area_overlap_interval": [
+        0.0625,
+        0.9375
+      ],
+      "midpoint_center_distance_px": 420.0
+    }
+  ],
+  "overlapping_pairs": 6,
+  "native_playback_verified": false,
+  "motion_quality_score": null
+}

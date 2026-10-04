@@ -1,0 +1,73 @@
+{
+  "experiment": "H002",
+  "frozen_at_utc": "2026-10-04T03:34:07.781674+00:00",
+  "evaluation_source": "skills/pptx-motion/references/evaluation.md",
+  "objective_criteria": {
+    "slides": 3,
+    "state_order": [
+      "Read",
+      "Relax",
+      "Create"
+    ],
+    "ring_labels_per_slide": [
+      "Read",
+      "Relax",
+      "Create"
+    ],
+    "central_ring_diameter_px": 360,
+    "side_ring_diameter_px": 180,
+    "central_x_px": 640,
+    "two_side_rings_visible": true,
+    "objects_per_slide": 11,
+    "native_textboxes_per_slide": 6,
+    "native_ellipses_per_slide": 4,
+    "native_rectangles_per_slide": 1,
+    "pictures": 0,
+    "videos": 0,
+    "morph_destination_slides": [
+      2,
+      3
+    ],
+    "duration_ms": 1100,
+    "unique_forced_names_per_slide": 11,
+    "exact_forced_name_match": true,
+    "final_package_rendered": true,
+    "every_final_slide_visually_inspected": true
+  },
+  "ratings": {
+    "brief_coverage": {
+      "range": [
+        0,
+        5
+      ],
+      "evidence": "Exact count/state/label inventory plus human reading."
+    },
+    "static_readability": {
+      "range": [
+        0,
+        5
+      ],
+      "evidence": "Full-size final PPTX renders, no clipped labels or unintended static overlap."
+    },
+    "creative_quality": {
+      "range": [
+        0,
+        5
+      ],
+      "evidence": "Reviewer judgment of static composition only."
+    },
+    "native_motion": {
+      "range": [
+        0,
+        5
+      ],
+      "value": null,
+      "evidence": "Remain null until exact-hash playback in named PowerPoint version."
+    },
+    "real_application_editing": {
+      "value": null,
+      "evidence": "Remain null until editing exact deck in PowerPoint."
+    }
+  },
+  "composite_percentage": null
+}

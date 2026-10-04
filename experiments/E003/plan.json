@@ -1,0 +1,489 @@
+{
+  "version": "0.1",
+  "brief": "Tạo 3 slide giới thiệu đèn bàn giả tưởng ORBIT. Ba vòng sáng Read, Relax, Create lần lượt phóng lớn ở trung tâm; hai vòng còn lại vẫn hiện ở hai bên. Ít chữ, màu nổi bật, dùng Morph và các đối tượng PowerPoint native.",
+  "canvas": {
+    "width": 16,
+    "height": 9,
+    "units": "normalized"
+  },
+  "data_provenance": "synthetic",
+  "objects": [
+    {
+      "id": "lamp-stem",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!lamp-stem",
+      "geometry": "rect",
+      "fill": "#9E97AC",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "lamp-base",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!lamp-base",
+      "geometry": "ellipse",
+      "fill": "#9E97AC",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "read-ring",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!read-ring",
+      "geometry": "ellipse",
+      "fill": "none",
+      "stroke": "#54E7FF",
+      "stroke_width": 14
+    },
+    {
+      "id": "relax-ring",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!relax-ring",
+      "geometry": "ellipse",
+      "fill": "none",
+      "stroke": "#BAFA64",
+      "stroke_width": 14
+    },
+    {
+      "id": "create-ring",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!create-ring",
+      "geometry": "ellipse",
+      "fill": "none",
+      "stroke": "#FF659D",
+      "stroke_width": 14
+    },
+    {
+      "id": "read-label",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!read-label",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Read",
+      "font_size": 38,
+      "text_color": "#54E7FF",
+      "bold": true
+    },
+    {
+      "id": "relax-label",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!relax-label",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Relax",
+      "font_size": 38,
+      "text_color": "#BAFA64",
+      "bold": true
+    },
+    {
+      "id": "create-label",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!create-label",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Create",
+      "font_size": 38,
+      "text_color": "#FF659D",
+      "bold": true
+    },
+    {
+      "id": "brand",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!brand",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "ORBIT",
+      "font_size": 64,
+      "text_color": "#FFFFFF",
+      "bold": true
+    },
+    {
+      "id": "product-kind",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!product-kind",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Đèn bàn giả tưởng",
+      "font_size": 24,
+      "text_color": "#C1BACD",
+      "bold": false
+    },
+    {
+      "id": "mode-caption",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!mode-caption",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Tập trung",
+      "font_size": 40,
+      "text_color": "#FFFFFF",
+      "bold": false
+    }
+  ],
+  "states": [
+    {
+      "id": "read-focus",
+      "message": "ORBIT là đèn bàn giả tưởng. Read ở trung tâm, vòng sáng đường kính gấp đôi hai vòng còn lại ở hai bên. Dữ liệu và hình dáng minh họa.",
+      "objects": {
+        "lamp-stem": {
+          "x": 0.49453125,
+          "y": 0.6958333333333333,
+          "w": 0.0109375,
+          "h": 0.12361111111111112,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "lamp-base": {
+          "x": 0.4140625,
+          "y": 0.8083333333333333,
+          "w": 0.171875,
+          "h": 0.030555555555555555,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "brand": {
+          "x": 0.04375,
+          "y": 0.04722222222222222,
+          "w": 0.203125,
+          "h": 0.10555555555555556,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "product-kind": {
+          "x": 0.690625,
+          "y": 0.0763888888888889,
+          "w": 0.265625,
+          "h": 0.05277777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "mode-caption": {
+          "x": 0.296875,
+          "y": 0.8777777777777778,
+          "w": 0.40625,
+          "h": 0.08333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1,
+          "text": "Tập trung"
+        },
+        "read-ring": {
+          "x": 0.359375,
+          "y": 0.19444444444444445,
+          "w": 0.28125,
+          "h": 0.5,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "read-label": {
+          "x": 0.421875,
+          "y": 0.39999999999999997,
+          "w": 0.15625,
+          "h": 0.08888888888888889,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "relax-ring": {
+          "x": 0.1015625,
+          "y": 0.5972222222222222,
+          "w": 0.140625,
+          "h": 0.25,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "relax-label": {
+          "x": 0.09375,
+          "y": 0.6777777777777778,
+          "w": 0.15625,
+          "h": 0.08888888888888889,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "create-ring": {
+          "x": 0.7578125,
+          "y": 0.5972222222222222,
+          "w": 0.140625,
+          "h": 0.25,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "create-label": {
+          "x": 0.75,
+          "y": 0.6777777777777778,
+          "w": 0.15625,
+          "h": 0.08888888888888889,
+          "rotation_deg": 0,
+          "opacity": 1
+        }
+      }
+    },
+    {
+      "id": "relax-focus",
+      "message": "ORBIT là đèn bàn giả tưởng. Relax ở trung tâm, vòng sáng đường kính gấp đôi hai vòng còn lại ở hai bên. Dữ liệu và hình dáng minh họa.",
+      "objects": {
+        "lamp-stem": {
+          "x": 0.49453125,
+          "y": 0.6958333333333333,
+          "w": 0.0109375,
+          "h": 0.12361111111111112,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "lamp-base": {
+          "x": 0.4140625,
+          "y": 0.8083333333333333,
+          "w": 0.171875,
+          "h": 0.030555555555555555,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "brand": {
+          "x": 0.04375,
+          "y": 0.04722222222222222,
+          "w": 0.203125,
+          "h": 0.10555555555555556,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "product-kind": {
+          "x": 0.690625,
+          "y": 0.0763888888888889,
+          "w": 0.265625,
+          "h": 0.05277777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "mode-caption": {
+          "x": 0.296875,
+          "y": 0.8777777777777778,
+          "w": 0.40625,
+          "h": 0.08333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1,
+          "text": "Thư giãn"
+        },
+        "read-ring": {
+          "x": 0.7578125,
+          "y": 0.5972222222222222,
+          "w": 0.140625,
+          "h": 0.25,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "read-label": {
+          "x": 0.75,
+          "y": 0.6777777777777778,
+          "w": 0.15625,
+          "h": 0.08888888888888889,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "relax-ring": {
+          "x": 0.359375,
+          "y": 0.19444444444444445,
+          "w": 0.28125,
+          "h": 0.5,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "relax-label": {
+          "x": 0.421875,
+          "y": 0.39999999999999997,
+          "w": 0.15625,
+          "h": 0.08888888888888889,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "create-ring": {
+          "x": 0.1015625,
+          "y": 0.5972222222222222,
+          "w": 0.140625,
+          "h": 0.25,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "create-label": {
+          "x": 0.09375,
+          "y": 0.6777777777777778,
+          "w": 0.15625,
+          "h": 0.08888888888888889,
+          "rotation_deg": 0,
+          "opacity": 1
+        }
+      }
+    },
+    {
+      "id": "create-focus",
+      "message": "ORBIT là đèn bàn giả tưởng. Create ở trung tâm, vòng sáng đường kính gấp đôi hai vòng còn lại ở hai bên. Dữ liệu và hình dáng minh họa.",
+      "objects": {
+        "lamp-stem": {
+          "x": 0.49453125,
+          "y": 0.6958333333333333,
+          "w": 0.0109375,
+          "h": 0.12361111111111112,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "lamp-base": {
+          "x": 0.4140625,
+          "y": 0.8083333333333333,
+          "w": 0.171875,
+          "h": 0.030555555555555555,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "brand": {
+          "x": 0.04375,
+          "y": 0.04722222222222222,
+          "w": 0.203125,
+          "h": 0.10555555555555556,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "product-kind": {
+          "x": 0.690625,
+          "y": 0.0763888888888889,
+          "w": 0.265625,
+          "h": 0.05277777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "mode-caption": {
+          "x": 0.296875,
+          "y": 0.8777777777777778,
+          "w": 0.40625,
+          "h": 0.08333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1,
+          "text": "Sáng tạo"
+        },
+        "read-ring": {
+          "x": 0.1015625,
+          "y": 0.5972222222222222,
+          "w": 0.140625,
+          "h": 0.25,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "read-label": {
+          "x": 0.09375,
+          "y": 0.6777777777777778,
+          "w": 0.15625,
+          "h": 0.08888888888888889,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "relax-ring": {
+          "x": 0.7578125,
+          "y": 0.5972222222222222,
+          "w": 0.140625,
+          "h": 0.25,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "relax-label": {
+          "x": 0.75,
+          "y": 0.6777777777777778,
+          "w": 0.15625,
+          "h": 0.08888888888888889,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "create-ring": {
+          "x": 0.359375,
+          "y": 0.19444444444444445,
+          "w": 0.28125,
+          "h": 0.5,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "create-label": {
+          "x": 0.421875,
+          "y": 0.39999999999999997,
+          "w": 0.15625,
+          "h": 0.08888888888888889,
+          "rotation_deg": 0,
+          "opacity": 1
+        }
+      }
+    }
+  ],
+  "transitions": [
+    {
+      "from": "read-focus",
+      "to": "relax-focus",
+      "kind": "morph",
+      "duration_ms": 1100,
+      "track": [
+        "lamp-stem",
+        "lamp-base",
+        "read-ring",
+        "relax-ring",
+        "create-ring",
+        "read-label",
+        "relax-label",
+        "create-label",
+        "brand",
+        "product-kind",
+        "mode-caption"
+      ]
+    },
+    {
+      "from": "relax-focus",
+      "to": "create-focus",
+      "kind": "morph",
+      "duration_ms": 1100,
+      "track": [
+        "lamp-stem",
+        "lamp-base",
+        "read-ring",
+        "relax-ring",
+        "create-ring",
+        "read-label",
+        "relax-label",
+        "create-label",
+        "brand",
+        "product-kind",
+        "mode-caption"
+      ]
+    }
+  ],
+  "research_metadata": {
+    "experiment": "E003",
+    "recipe": "Overview to detail",
+    "original_composition": true,
+    "references": [
+      {
+        "author": "Microsoft Support",
+        "title": "Morph transition: Tips and tricks",
+        "url": "https://support.microsoft.com/en-us/powerpoint/morph-transition-tips-and-tricks",
+        "access_date": "2026-10-04",
+        "evidence": "Official page text inspected for forced !! object matching and zoom by resizing; no reference media used.",
+        "reuse": "Technical principle only; no text, template or media copied into slide artwork."
+      }
+    ],
+    "route_assumption": "Three triangular slots, cyclic identity order. Linear label-box proxy only; PowerPoint playback pending."
+  }
+}

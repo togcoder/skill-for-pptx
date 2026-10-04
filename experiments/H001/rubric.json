@@ -1,0 +1,77 @@
+{
+  "experiment": "H001",
+  "frozen_before_candidate": true,
+  "scale": "0-5 for observed subjective judgments, null for unobserved properties. No aggregate percentage.",
+  "objective_criteria": [
+    {
+      "id": "slide-count",
+      "target": 2
+    },
+    {
+      "id": "required-labels",
+      "target": [
+        "Collect",
+        "Inspect",
+        "Decide"
+      ],
+      "scope": "each slide as native text"
+    },
+    {
+      "id": "object-identities",
+      "target": 12,
+      "scope": "exact planned unique forced names on each ordered slide"
+    },
+    {
+      "id": "inspect-growth",
+      "target": "Inspect block centered on x=0.5 and larger in width and height on slide 2"
+    },
+    {
+      "id": "context-preservation",
+      "target": "Collect and Decide blocks and labels wholly on canvas and left/right of Inspect on both slides"
+    },
+    {
+      "id": "morph",
+      "target": "one byObject Morph on destination slide 2, duration 1600 ms"
+    },
+    {
+      "id": "native-elements",
+      "target": "5 native rectangle objects and 7 textboxes per slide, no images/video"
+    }
+  ],
+  "subjective_criteria": [
+    {
+      "id": "static-readability",
+      "anchors": {
+        "0": "Required text illegible or missing",
+        "3": "Readable with minor layout concerns",
+        "5": "All required text cleanly readable with no clipping or collisions"
+      }
+    },
+    {
+      "id": "static-focus",
+      "anchors": {
+        "0": "The focus is unclear",
+        "3": "Inspect visible as the focus while context remains",
+        "5": "Size and space establish Inspect clearly while all steps remain easy to recognize"
+      }
+    },
+    {
+      "id": "native-motion-continuity",
+      "anchors": {
+        "0": "Observed identity failure",
+        "3": "Observed coherent motion with minor flaws",
+        "5": "Observed fluid motion preserving identities"
+      },
+      "required_evidence": "Exact final PPTX opened in named PowerPoint version with captured Slide Show evidence"
+    },
+    {
+      "id": "real-application-editability",
+      "anchors": {
+        "0": "Unable to edit required elements",
+        "3": "Core elements edited with limitations",
+        "5": "All required shapes/text successfully edited"
+      },
+      "required_evidence": "Edit operation in named PowerPoint version"
+    }
+  ]
+}

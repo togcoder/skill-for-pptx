@@ -1,0 +1,81 @@
+{
+  "file": "output/PPTX_Motion_Lab_E001.pptx",
+  "sha256": "b3b4e28c14f00bc4fe05d6a71400752819413661e1280eb92301b4a6305e7c37",
+  "scope": "package-inventory-v0.1",
+  "errors": [],
+  "slides": [
+    {
+      "index": 1,
+      "part": "ppt/slides/slide1.xml",
+      "forced_morph_names": [
+        "!!canvas-background",
+        "!!journey-rail",
+        "!!imagine-circle",
+        "!!make-circle",
+        "!!share-circle",
+        "!!evolve-circle",
+        "!!shared-center",
+        "!!imagine-label",
+        "!!make-label",
+        "!!share-label",
+        "!!evolve-label",
+        "!!exhibition-kicker",
+        "!!exhibition-title"
+      ],
+      "morph_elements": 0,
+      "morph_options": [],
+      "timing_elements": 0
+    },
+    {
+      "index": 2,
+      "part": "ppt/slides/slide2.xml",
+      "forced_morph_names": [
+        "!!canvas-background",
+        "!!journey-rail",
+        "!!imagine-circle",
+        "!!make-circle",
+        "!!share-circle",
+        "!!evolve-circle",
+        "!!shared-center",
+        "!!imagine-label",
+        "!!make-label",
+        "!!share-label",
+        "!!evolve-label",
+        "!!exhibition-kicker",
+        "!!exhibition-title"
+      ],
+      "morph_elements": 1,
+      "morph_options": [
+        "byObject"
+      ],
+      "timing_elements": 0
+    },
+    {
+      "index": 3,
+      "part": "ppt/slides/slide3.xml",
+      "forced_morph_names": [
+        "!!canvas-background",
+        "!!journey-rail",
+        "!!imagine-circle",
+        "!!make-circle",
+        "!!share-circle",
+        "!!evolve-circle",
+        "!!shared-center",
+        "!!imagine-label",
+        "!!make-label",
+        "!!share-label",
+        "!!evolve-label",
+        "!!exhibition-kicker",
+        "!!exhibition-title"
+      ],
+      "morph_elements": 1,
+      "morph_options": [
+        "byObject"
+      ],
+      "timing_elements": 0
+    }
+  ],
+  "playback_verified": false,
+  "full_schema_validated": false,
+  "note": "Inventory checks only. Open and play this exact file in PowerPoint before claiming compatibility or motion correctness."
+}

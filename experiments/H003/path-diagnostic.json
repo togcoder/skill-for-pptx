@@ -1,0 +1,79 @@
+{
+  "assumption": "Synchronized linear interpolation of unrotated plan boxes at 1280x720; not native playback",
+  "selected_ids": [
+    "community-label",
+    "transport-label",
+    "infrastructure-label"
+  ],
+  "pairs": [
+    {
+      "transition": "community-focus -> transport-focus",
+      "objects": [
+        "community-label",
+        "transport-label"
+      ],
+      "positive_area_overlap_interval": null,
+      "midpoint_center_distance_px": 420.0
+    },
+    {
+      "transition": "community-focus -> transport-focus",
+      "objects": [
+        "community-label",
+        "infrastructure-label"
+      ],
+      "positive_area_overlap_interval": [
+        0.52,
+        0.6190476190476191
+      ],
+      "midpoint_center_distance_px": 232.59406699226014
+    },
+    {
+      "transition": "community-focus -> transport-focus",
+      "objects": [
+        "transport-label",
+        "infrastructure-label"
+      ],
+      "positive_area_overlap_interval": [
+        0.38095238095238093,
+        0.48
+      ],
+      "midpoint_center_distance_px": 232.59406699226014
+    },
+    {
+      "transition": "transport-focus -> infrastructure-focus",
+      "objects": [
+        "community-label",
+        "transport-label"
+      ],
+      "positive_area_overlap_interval": [
+        0.52,
+        0.6190476190476191
+      ],
+      "midpoint_center_distance_px": 232.59406699226014
+    },
+    {
+      "transition": "transport-focus -> infrastructure-focus",
+      "objects": [
+        "community-label",
+        "infrastructure-label"
+      ],
+      "positive_area_overlap_interval": [
+        0.38095238095238093,
+        0.48
+      ],
+      "midpoint_center_distance_px": 232.59406699226014
+    },
+    {
+      "transition": "transport-focus -> infrastructure-focus",
+      "objects": [
+        "transport-label",
+        "infrastructure-label"
+      ],
+      "positive_area_overlap_interval": null,
+      "midpoint_center_distance_px": 420.0
+    }
+  ],
+  "overlapping_pairs": 4,
+  "native_playback_verified": false,
+  "motion_quality_score": null
+}

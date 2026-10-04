@@ -1,0 +1,21 @@
+{
+  "version": "1.0",
+  "frozen_before_run": true,
+  "experiment": "E001",
+  "scoring": "0 absent, 1 severe failure, 2 major gap, 3 usable with limitations, 4 meets brief, 5 exceeds brief with specific evidence",
+  "dimensions": {
+    "brief_coverage": "Four named modules, three requested states, all labels present and meaningful",
+    "native_editability": "Native text and native geometry in actual PPTX; no flattening into a slide image",
+    "identity_structure": "One-to-one forced names, correct transition destinations and declared duration, no duplicate local IDs",
+    "static_readability": "Visual inspection of all exported slides for occlusion, clipping, wrapping and contrast",
+    "native_motion": "PowerPoint playback recording with app/version and SHA256 of exact deck",
+    "creative_quality": "Subjective reviewer assessment of visual hierarchy, composition and purposeful motion; motion remains unscored without playback"
+  },
+  "rules": [
+    "Unobservable dimensions are null, never zero or full marks.",
+    "Report objective counts separately from subjective scores.",
+    "No aggregate success score while native_motion is null.",
+    "No causal claim about model improvement from one hand-authored example.",
+    "Use the same prompt, plan and renderer settings when comparing patcher revisions."
+  ]
+}

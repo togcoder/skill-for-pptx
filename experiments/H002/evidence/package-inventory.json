@@ -1,0 +1,75 @@
+{
+  "file": "output/PPTX_Motion_Lab_H002.pptx",
+  "sha256": "f311537bce6345a640dec81f5868deee25eb8583c372d77bbf7531ef9df57a11",
+  "scope": "package-inventory-v0.1",
+  "errors": [],
+  "slides": [
+    {
+      "index": 1,
+      "part": "ppt/slides/slide1.xml",
+      "forced_morph_names": [
+        "!!lamp-stem",
+        "!!lamp-base",
+        "!!read-ring",
+        "!!relax-ring",
+        "!!create-ring",
+        "!!read-label",
+        "!!relax-label",
+        "!!create-label",
+        "!!brand",
+        "!!product-kind",
+        "!!mode-caption"
+      ],
+      "morph_elements": 0,
+      "morph_options": [],
+      "timing_elements": 0
+    },
+    {
+      "index": 2,
+      "part": "ppt/slides/slide2.xml",
+      "forced_morph_names": [
+        "!!lamp-stem",
+        "!!lamp-base",
+        "!!read-ring",
+        "!!relax-ring",
+        "!!create-ring",
+        "!!read-label",
+        "!!relax-label",
+        "!!create-label",
+        "!!brand",
+        "!!product-kind",
+        "!!mode-caption"
+      ],
+      "morph_elements": 1,
+      "morph_options": [
+        "byObject"
+      ],
+      "timing_elements": 0
+    },
+    {
+      "index": 3,
+      "part": "ppt/slides/slide3.xml",
+      "forced_morph_names": [
+        "!!lamp-stem",
+        "!!lamp-base",
+        "!!read-ring",
+        "!!relax-ring",
+        "!!create-ring",
+        "!!read-label",
+        "!!relax-label",
+        "!!create-label",
+        "!!brand",
+        "!!product-kind",
+        "!!mode-caption"
+      ],
+      "morph_elements": 1,
+      "morph_options": [
+        "byObject"
+      ],
+      "timing_elements": 0
+    }
+  ],
+  "playback_verified": false,
+  "full_schema_validated": false,
+  "note": "Inventory checks only. Open and play this exact file in PowerPoint before claiming compatibility or motion correctness."
+}

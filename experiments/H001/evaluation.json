@@ -1,0 +1,134 @@
+{
+  "experiment": "H001",
+  "evaluation_utc": "2026-10-03",
+  "pptx_sha256": "3d59b50afbc2c084e560e0b5d04d990b4f6890a66afca86dc6b951156a436e96",
+  "plan_sha256": "030e32a9af57c0b8bc183b19458da6bf7d6a02eef65b114b76fa283b029ed078",
+  "rubric_sha256": "8bc9219e70f8e0114a8e0b6d252fd623a45a0f54e221abfa865a9270e713a21f",
+  "rubric_unchanged_after_candidate": true,
+  "stages": {
+    "planned": true,
+    "implemented": true,
+    "structure_checked": true,
+    "layout_reviewed": true,
+    "native_powerpoint_playback_verified": false
+  },
+  "objective_results": [
+    {
+      "id": "slide-count",
+      "pass": true,
+      "actual": 2,
+      "evidence": "package-inventory.json"
+    },
+    {
+      "id": "required-labels",
+      "pass": true,
+      "actual": "Collect, Inspect, Decide on both slides as native text; also visually inspected",
+      "evidence": [
+        "plan-package-comparison.json",
+        "final-render/slide-1.png",
+        "final-render/slide-2.png"
+      ]
+    },
+    {
+      "id": "object-identities",
+      "pass": true,
+      "actual": "12 exact planned unique !! names on each slide, ordered by presentation relationships",
+      "evidence": "plan-package-comparison.json"
+    },
+    {
+      "id": "inspect-growth",
+      "pass": true,
+      "actual": {
+        "x_center_fraction": 0.5,
+        "width_ratio": 2.0344827586206895,
+        "height_ratio": 1.7727272727272727
+      },
+      "evidence": "plan-package-comparison.json"
+    },
+    {
+      "id": "context-preservation",
+      "pass": true,
+      "actual": "All three blocks on canvas and in left-center-right order in both scenes. Both full-size final renders inspected.",
+      "evidence": [
+        "plan-package-comparison.json",
+        "final-render/slide-1.png",
+        "final-render/slide-2.png"
+      ]
+    },
+    {
+      "id": "morph",
+      "pass": true,
+      "actual": "One declared byObject Morph on ordered slide 2, p14:dur=1600",
+      "evidence": "plan-package-comparison.json"
+    },
+    {
+      "id": "native-elements",
+      "pass": false,
+      "actual": "Each slide contains 12 native p:sp rectangle shapes: 5 without text and 7 with native text. None of the seven text-bearing shapes has cNvSpPr txBox=1, so the frozen strict formal-textbox expectation fails. There are no raster or video elements.",
+      "evidence": "plan-package-comparison.json",
+      "semantic_editability_boundary": "Native text-bearing shapes satisfy the requested editable blocks/text structurally. Actual PowerPoint editing was not attempted."
+    }
+  ],
+  "subjective_results": [
+    {
+      "id": "static-readability",
+      "score": 5,
+      "reviewer": "author",
+      "rationale": "Every required label is fully visible and readable on both final renders, with no observed clipping or collisions.",
+      "evidence": [
+        "final-render/slide-1.png",
+        "final-render/slide-2.png"
+      ]
+    },
+    {
+      "id": "static-focus",
+      "score": 4,
+      "reviewer": "author",
+      "rationale": "The much larger central Inspect block establishes focus while smaller side blocks preserve the sequence; the fixed label font limits the sense of a complete object zoom.",
+      "evidence": [
+        "final-render/slide-1.png",
+        "final-render/slide-2.png"
+      ]
+    },
+    {
+      "id": "native-motion-continuity",
+      "score": null,
+      "rationale": "No named PowerPoint version or captured Slide Show playback was available."
+    },
+    {
+      "id": "real-application-editability",
+      "score": null,
+      "rationale": "No edit operation in PowerPoint was performed."
+    }
+  ],
+  "strict_comparison": {
+    "passed": false,
+    "failed_native_type_assertions": 14,
+    "source_preserved": "verify_package.py",
+    "output_preserved": "plan-package-comparison.json"
+  },
+  "unit_tests": {
+    "run": 19,
+    "passed": 19,
+    "evidence": "unit-tests.txt"
+  },
+  "powerpoint": {
+    "application": null,
+    "version": null,
+    "repair_warning": "not_checked",
+    "font_substitution": "not_checked",
+    "recorded_playback": null
+  },
+  "limitations": [
+    "Morph XML and endpoint images do not establish PowerPoint playback or its interpolation.",
+    "The fixed-font backend grows the Inspect carrier but does not enlarge the Inspect label font between slides.",
+    "Text labels export as native text-bearing rectangle shapes, not formal txBox=1 textboxes. The strict frozen criterion remains failed.",
+    "Native text/shape presence is structural editability evidence only; real PowerPoint editing is unobserved.",
+    "Unsupported viewers may use the declared fade fallback, whose timing need not match the Morph duration.",
+    "Bitstream Charter is the renderer-selected font; target-system font substitution was not tested.",
+    "No full OOXML schema validation or broad generalization claim follows from this single forward task."
+  ],
+  "file_size_bytes": 23466,
+  "uploads_or_publication": false,
+  "existing_source_or_status_edits_by_H001": false
+}

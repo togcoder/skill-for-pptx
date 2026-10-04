@@ -1,0 +1,18 @@
+{
+  "experiment": "H001",
+  "selected_recipe_source": {
+    "title": "Morph transition: Tips and tricks",
+    "author": "Microsoft Support",
+    "url": "https://support.microsoft.com/en-us/powerpoint/morph-transition-tips-and-tricks",
+    "accessed_utc": "2026-10-03",
+    "evidence_inspected": "Official text describing unique matching !! names, destination-slide Morph, and position/size changes for zoom; no native playback observed.",
+    "reuse_conditions": "Technical mechanism only. No Microsoft images, video or template objects copied into the deck."
+  },
+  "additional_page_inspected": {
+    "author": "PowerPoint School",
+    "url": "https://powerpointschool.com/free-animated-powerpoint-presentation-template/",
+    "accessed_utc": "2026-10-03",
+    "evidence_inspected": "Page text only to assess a renderer hardcoded attribution that the parent subsequently corrected. No template downloaded or used by H001.",
+    "reuse_conditions": "No external reference media or template shapes copied or redistributed."
+  }
+}

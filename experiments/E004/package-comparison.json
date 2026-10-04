@@ -1,0 +1,58 @@
+{
+  "pair_errors": [],
+  "decks": {
+    "H003": {
+      "sha256": "398a742c0f2ba46d6757ead2ac9668ef4dc4840ffa48011985699d1f2eb420cc",
+      "errors": [],
+      "slides": [
+        {
+          "slide": 1,
+          "native_objects": 8,
+          "textboxes": 5,
+          "morph_count": 0
+        },
+        {
+          "slide": 2,
+          "native_objects": 8,
+          "textboxes": 5,
+          "morph_count": 1
+        },
+        {
+          "slide": 3,
+          "native_objects": 8,
+          "textboxes": 5,
+          "morph_count": 1
+        }
+      ],
+      "passed": true,
+      "powerpoint_playback_verified": false
+    },
+    "E004": {
+      "sha256": "96fc9825ea7e75d98812455662a9bca544b92eef56bb6e99a7a5a73ea68e6688",
+      "errors": [],
+      "slides": [
+        {
+          "slide": 1,
+          "native_objects": 8,
+          "textboxes": 5,
+          "morph_count": 0
+        },
+        {
+          "slide": 2,
+          "native_objects": 8,
+          "textboxes": 5,
+          "morph_count": 1
+        },
+        {
+          "slide": 3,
+          "native_objects": 8,
+          "textboxes": 5,
+          "morph_count": 1
+        }
+      ],
+      "passed": true,
+      "powerpoint_playback_verified": false
+    }
+  },
+  "passed": true
+}

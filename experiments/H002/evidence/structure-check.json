@@ -1,0 +1,173 @@
+{
+  "experiment": "H002",
+  "sha256": "f311537bce6345a640dec81f5868deee25eb8583c372d77bbf7531ef9df57a11",
+  "errors": [],
+  "slides": [
+    {
+      "index": 1,
+      "part": "ppt/slides/slide1.xml",
+      "shape_count": 11,
+      "counts": {
+        "textboxes": 6,
+        "native_nonempty_text_carriers": 6,
+        "ellipse": 4,
+        "rect": 1,
+        "pictures": 0
+      },
+      "forced_name_count": 11,
+      "morph_count": 0,
+      "duration_values": [],
+      "ring_geometry": [
+        {
+          "name": "!!read-ring",
+          "pixels": {
+            "x": 460.0,
+            "y": 140.0,
+            "cx": 360.0,
+            "cy": 360.0
+          }
+        },
+        {
+          "name": "!!relax-ring",
+          "pixels": {
+            "x": 130.0,
+            "y": 260.0,
+            "cx": 180.0,
+            "cy": 180.0
+          }
+        },
+        {
+          "name": "!!create-ring",
+          "pixels": {
+            "x": 970.0,
+            "y": 260.0,
+            "cx": 180.0,
+            "cy": 180.0
+          }
+        }
+      ],
+      "text": [
+        "Read",
+        "Relax",
+        "Create",
+        "ORBIT",
+        "Đèn bàn giả tưởng",
+        "Tập trung"
+      ]
+    },
+    {
+      "index": 2,
+      "part": "ppt/slides/slide2.xml",
+      "shape_count": 11,
+      "counts": {
+        "textboxes": 6,
+        "native_nonempty_text_carriers": 6,
+        "ellipse": 4,
+        "rect": 1,
+        "pictures": 0
+      },
+      "forced_name_count": 11,
+      "morph_count": 1,
+      "duration_values": [
+        "1100"
+      ],
+      "ring_geometry": [
+        {
+          "name": "!!read-ring",
+          "pixels": {
+            "x": 130.0,
+            "y": 260.0,
+            "cx": 180.0,
+            "cy": 180.0
+          }
+        },
+        {
+          "name": "!!relax-ring",
+          "pixels": {
+            "x": 460.0,
+            "y": 140.0,
+            "cx": 360.0,
+            "cy": 360.0
+          }
+        },
+        {
+          "name": "!!create-ring",
+          "pixels": {
+            "x": 970.0,
+            "y": 260.0,
+            "cx": 180.0,
+            "cy": 180.0
+          }
+        }
+      ],
+      "text": [
+        "Read",
+        "Relax",
+        "Create",
+        "ORBIT",
+        "Đèn bàn giả tưởng",
+        "Thư giãn"
+      ]
+    },
+    {
+      "index": 3,
+      "part": "ppt/slides/slide3.xml",
+      "shape_count": 11,
+      "counts": {
+        "textboxes": 6,
+        "native_nonempty_text_carriers": 6,
+        "ellipse": 4,
+        "rect": 1,
+        "pictures": 0
+      },
+      "forced_name_count": 11,
+      "morph_count": 1,
+      "duration_values": [
+        "1100"
+      ],
+      "ring_geometry": [
+        {
+          "name": "!!read-ring",
+          "pixels": {
+            "x": 130.0,
+            "y": 260.0,
+            "cx": 180.0,
+            "cy": 180.0
+          }
+        },
+        {
+          "name": "!!relax-ring",
+          "pixels": {
+            "x": 970.0,
+            "y": 260.0,
+            "cx": 180.0,
+            "cy": 180.0
+          }
+        },
+        {
+          "name": "!!create-ring",
+          "pixels": {
+            "x": 460.0,
+            "y": 140.0,
+            "cx": 360.0,
+            "cy": 360.0
+          }
+        }
+      ],
+      "text": [
+        "Read",
+        "Relax",
+        "Create",
+        "ORBIT",
+        "Đèn bàn giả tưởng",
+        "Sáng tạo"
+      ]
+    }
+  ],
+  "media_parts": [],
+  "structure_checked": true,
+  "full_schema_validated": false,
+  "native_motion": null,
+  "powerpoint_playback_verified": false,
+  "real_application_editing": null
+}

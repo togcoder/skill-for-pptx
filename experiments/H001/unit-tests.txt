@@ -1,0 +1,24 @@
+test_bad_identity_does_not_leave_output (test_morph_package.MorphPackageTests.test_bad_identity_does_not_leave_output) ... ok
+test_destination_not_overwritten (test_morph_package.MorphPackageTests.test_destination_not_overwritten) ... ok
+test_existing_animation_on_late_slide_is_preserved (test_morph_package.MorphPackageTests.test_existing_animation_on_late_slide_is_preserved) ... ok
+test_fractional_duration_rejected_without_output (test_morph_package.MorphPackageTests.test_fractional_duration_rejected_without_output) ... ok
+test_mismatch_does_not_leave_partial_output (test_morph_package.MorphPackageTests.test_mismatch_does_not_leave_partial_output) ... ok
+test_reapplying_to_animated_deck_rejected (test_morph_package.MorphPackageTests.test_reapplying_to_animated_deck_rejected) ... ok
+test_slide_relationship_order_and_durations (test_morph_package.MorphPackageTests.test_slide_relationship_order_and_durations) ... ok
+test_bad_transition_order (test_plan_contract.ContractTests.test_bad_transition_order) ... ok
+test_bool_is_not_dimension (test_plan_contract.ContractTests.test_bool_is_not_dimension) ... ok
+test_duplicate_forced_name (test_plan_contract.ContractTests.test_duplicate_forced_name) ... ok
+test_explicit_offcanvas (test_plan_contract.ContractTests.test_explicit_offcanvas) ... ok
+test_invalid_kind_does_not_crash (test_plan_contract.ContractTests.test_invalid_kind_does_not_crash) ... ok
+test_missing_persistent_object (test_plan_contract.ContractTests.test_missing_persistent_object) ... ok
+test_no_native_chart_morph_claim (test_plan_contract.ContractTests.test_no_native_chart_morph_claim) ... ok
+test_nonfinite_geometry (test_plan_contract.ContractTests.test_nonfinite_geometry) ... ok
+test_unknown_track (test_plan_contract.ContractTests.test_unknown_track) ... ok
+test_unplanned_offcanvas (test_plan_contract.ContractTests.test_unplanned_offcanvas) ... ok
+test_valid_plan (test_plan_contract.ContractTests.test_valid_plan) ... ok
+test_zero_duration (test_plan_contract.ContractTests.test_zero_duration) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 0.013s
+
+OK

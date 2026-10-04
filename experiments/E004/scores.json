@@ -1,0 +1,24 @@
+{
+  "method": "Subjective, nonblind, same researcher, static renders only",
+  "rubric": "experiments/H003/rubric.json",
+  "H003": {
+    "brief_coverage": 4,
+    "static_readability": 5,
+    "creative_quality": 2,
+    "native_motion": null,
+    "real_application_editing": null
+  },
+  "E004": {
+    "brief_coverage": 4,
+    "static_readability": 5,
+    "creative_quality": 2,
+    "native_motion": null,
+    "real_application_editing": null
+  },
+  "composite_percentage": null,
+  "all_final_slides_inspected": true,
+  "image_size": [
+    1280,
+    720
+  ]
+}

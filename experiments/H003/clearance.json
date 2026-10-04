@@ -1,0 +1,12 @@
+{
+  "assumption": "Three equal unrotated constant-size label boxes, symmetric triangle, synchronized linear cyclic routing",
+  "half_span_px": 420.0,
+  "label_width_px": 360.0,
+  "label_height_px": 96.0,
+  "vertical_gap_px": 200.0,
+  "minimum_vertical_gap_px": 252.0,
+  "predicted_positive_area_overlap_free": false,
+  "vertical_margin_px": -52.0,
+  "native_playback_verified": false,
+  "motion_quality_score": null
+}

@@ -1,0 +1,14 @@
+{
+  "checked_at_utc": "2026-10-04T04:08:25.639197+00:00",
+  "authenticated_login": "togcoder",
+  "account_id": 101056204,
+  "accessible_owned_repositories": 5,
+  "all_returned_entries_report_push_permission": true,
+  "requested_target": "togcoder/pptx-motion-lab",
+  "target_get_status": 404,
+  "target_verified": false,
+  "connector_create_repository_exposed": false,
+  "local_gh_available": false,
+  "github_mutation_attempted": false,
+  "pushed": false
+}
