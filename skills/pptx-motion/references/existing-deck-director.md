@@ -35,11 +35,15 @@ The source hash must match the inventory used to make the plan.
 
 - `provided`
 - `speaker-notes`
+- `existing-timing`
 - `inferred`
 - `researched`
 
 Priority is defined in `docs/PRODUCT_TARGET.md`. A lower-priority source may
-not silently override a higher-priority source.
+not silently override a higher-priority source. `existing-timing` means the
+source deck's current animation/transition sequence is being used as primary
+director evidence; the executor must preserve that choreography unless the plan
+contains an explicit justified override.
 
 `script` also includes:
 
@@ -117,6 +121,16 @@ beautiful or more impressive. It must fill a narrative/interaction role.
 If slide count changes, each added/removed slide must have an explicit semantic
 reason in `research_metadata.slide_count_changes`. Animation convenience is not
 a valid reason.
+
+## Autonomy and existing-motion rules
+
+A director plan may be produced even when the user supplies no animation script.
+In that case the model must first derive a defensible report sequence from deck
+evidence and only use external research when needed.
+
+When the inventory reports existing native timing, the plan must not assume a
+fresh slide. Existing timing is a resource to understand and continue. Destructive
+replacement requires explicit justification in research metadata.
 
 ## Output responsibilities
 
