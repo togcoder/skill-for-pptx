@@ -2,6 +2,30 @@
 
 Cập nhật ngày 04/10/2026, giờ Việt Nam. Phiên bản nguồn nghiên cứu v0.7 (thêm T005 compound intent).
 
+## T007 autonomy + existing-motion continuation — latest
+
+The product target is now explicit at the stronger autonomy level requested by
+the user: **PPTX + optional high-level goal is enough input**. The model should
+not require object-by-object animation instructions. It must discover/use a
+script, infer one when absent, research reporting structure only when necessary,
+reuse deck resources, synthesize only justified missing components, and return
+the same report motion-directed.
+
+Existing native animation is now first-class source evidence. Script priority is:
+provided script → speaker notes → existing timing/choreography → visible
+narrative → inferred narrative → researched narrative. Existing timing must be
+preserved/extended by default rather than rejected or deleted.
+
+`inspect_existing_deck.py` now exposes transition and timing choreography:
+effect types, source targets, durations, start conditions, numeric delays,
+build groups and an order hint with an explicit structural-evidence boundary.
+
+Branch CI run 37215400829: **75/75 tests pass** plus Python compile. New tasks:
+`T008-existing-motion-continuation.md` and
+`T009-autonomous-no-script-benchmark.md`.
+
+Report: `experiments/T007-20261004-autonomy-existing-motion/REPORT.md`.
+
 ## Product destination — T007 Existing Deck Motion Director
 
 Người dùng đã mở rộng đích đến: hệ thống phải nhận **file PPTX có sẵn** và tự

@@ -72,6 +72,13 @@ class ExistingDeckTimelinePatchTests(unittest.TestCase):
         self.assertEqual(final["errors"],[])
         self.assertEqual(final["slides"][0]["timing_elements"],1)
         self.assertEqual(final["slides"][1]["timing_elements"],0)
+        reinventory=inspect_existing_deck(out)
+        summary=reinventory["slides"][0]["timing_summary"]
+        self.assertIsNotNone(summary)
+        self.assertEqual(summary["effect_count"],2)
+        self.assertEqual([effect["type"] for effect in summary["effects"]],["animMotion","animScale"])
+        self.assertEqual({effect["target_spid"] for effect in summary["effects"]},{shape["id"]})
+        self.assertEqual(summary["order_basis"],"numeric-behavior-delay")
         with ZipFile(SOURCE) as before, ZipFile(out) as after:
             self.assertEqual(
                 before.read(final["slides"][1]["part"]),

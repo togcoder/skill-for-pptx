@@ -40,11 +40,17 @@ Use the strongest available source in this order:
 
 1. explicit user-provided script / storyboard / animation instructions;
 2. speaker notes or report script already associated with the deck;
-3. explicit narrative structure visible in slide titles, order, callouts,
+3. existing native animation / transition choreography already authored in the deck;
+4. explicit narrative structure visible in slide titles, order, callouts,
    diagrams, tables, charts and hierarchy;
-4. inferred reporting sequence from the full deck;
-5. external research on the report/story pattern when the deck is incomplete and
+5. inferred reporting sequence from the full deck;
+6. external research on the report/story pattern when the deck is incomplete and
    external research is appropriate and permitted.
+
+Existing animation is first-class evidence. Inventory and interpret it before
+editing. Unless a stronger script explicitly overrides it, preserve the existing
+choreography and extend or repair it instead of replacing the slide with a fresh
+timing tree.
 
 Never silently override an explicit script with a prettier inferred story.
 
@@ -139,6 +145,36 @@ Across slides:
 - use slide boundaries for real narrative/scene changes;
 - use Morph only when it is the appropriate cross-slide mechanism;
 - do not convert same-slide motion into waypoint slides.
+
+## North-star autonomy contract
+
+The normal product input may be only one existing PPTX plus an optional high-level
+goal. The AI must not require the user to specify object-by-object animations.
+
+It should autonomously discover or create the report script, decide the sequence,
+reuse existing resources, identify resource gaps, synthesize only the missing
+components, choreograph the deck and verify the result.
+
+Ask the user only when a missing decision could materially change facts,
+permissions, branding constraints or the intended conclusion. Missing low-level
+animation instructions are not a reason to stop.
+
+The ideal output should still feel like the user's original deck—same report,
+same evidence and same visual identity—but professionally motion-directed.
+
+## Existing-motion continuation
+
+When the source deck already contains animation:
+
+1. parse existing timing targets, effect types and start conditions;
+2. map effects back to the source objects;
+3. treat the current animation sequence as director context;
+4. preserve it by default;
+5. add, extend or repair only what the chosen script requires;
+6. never reject an animated deck merely because native timing already exists.
+
+A "fresh timing only" patcher is a research-backend limitation, not an acceptable
+product limitation.
 
 ## Desired autonomous workflow
 
