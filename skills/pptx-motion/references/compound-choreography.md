@@ -16,10 +16,7 @@ operation order and constraints before choosing a visual recipe.
    requested order or substitute a different mechanism to make it pass.
 3. Emit an intent JSON with every key below. AI performs the language-to-intent
    translation; the script only validates and compiles structured intent.
-4. Check capabilities before export. True 3D, camera perspective, fluid motion,
-   organic shapes, continuous custom curves, arbitrary synchronization,
-   single-slide timeline and autoplay are unsupported in this recipe. Report the
-   mismatch. Propose a new experiment/backend instead of claiming exact delivery.
+4. Check capabilities before export. This T005 compiler is a **legacy Morph baseline**: true 3D, camera perspective, fluid motion, organic shapes, continuous custom curves, arbitrary synchronization, single-slide timeline and autoplay are unsupported here. Do not generalize that limitation into the target architecture. For new development, read `../../../docs/MOTION_PACKING.md` and prefer the T006 native-timeline path when consecutive actions reuse the same resources. Report unsupported demands instead of claiming exact delivery.
 5. Compile with `python3 scripts/choreography.py INTENT.json PLAN.json`; then
    use the normal plan/export/review workflow. Use fresh output paths.
 
@@ -59,8 +56,7 @@ Orbit centers follow sampled circle positions, then Morph interpolates between
 adjacent states. For radius R and step delta, a **linear geometric proxy** has
 maximum radial deviation `R*(1-cos(delta/2))`. More waypoints reduce that proxy,
 but do not prove native playback smoothness or continuous angular velocity.
-The current deck requires one click per transition. Do not call it an automatic
-timeline. The zoom is a node transform, not an actual camera.
+The current T005 deck requires one click per transition. Do not call it an automatic timeline. It is intentionally retained as a multi-slide structural baseline, not as the preferred architecture. Because the persistent resource set is already present across burst/orbit/focus/split/reassemble/restore, T006 should attempt to pack that sequence into one native slide timeline. The zoom is a node transform, not an actual camera.
 
 Verify explicit requirements against geometry and actual PPTX. Keep semantic
 checks, package checks, static inspection and native playback separate. Inspect
