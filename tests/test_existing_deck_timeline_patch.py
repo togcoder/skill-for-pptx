@@ -52,6 +52,59 @@ def write_plan(path,source,slide_index,shape):
     return plan
 
 
+def write_plan_v2(path,source,slide_index,shape):
+    geom=shape["geometry"]
+    cx=geom["x"]+geom["w"]/2
+    cy=geom["y"]+geom["h"]/2
+    target={"source_id":shape["id"],"source_name":shape["name"]}
+    plan={
+        "version":"0.2",
+        "kind":"existing-deck-timeline-patch",
+        "source_sha256":hashlib.sha256(Path(source).read_bytes()).hexdigest(),
+        "slides":[{
+            "source_index":slide_index,
+            "stages":[
+                {
+                    "id":"move",
+                    "duration_ms":500,
+                    "trigger":"on-click",
+                    "effects":[{
+                        "type":"motion_path",
+                        "target":target,
+                        "points":[{"x":cx,"y":cy},{"x":cx+0.01,"y":cy}],
+                    }],
+                },
+                {
+                    "id":"focus",
+                    "duration_ms":600,
+                    "trigger":"on-click",
+                    "effects":[{
+                        "type":"scale",
+                        "target":target,
+                        "from_x":1.0,"from_y":1.0,"to_x":1.08,"to_y":1.08,
+                    }],
+                },
+                {
+                    "id":"settle",
+                    "duration_ms":300,
+                    "trigger":"after-previous",
+                    "effects":[{
+                        "type":"rotate",
+                        "target":target,
+                        "by_deg":8,
+                    }],
+                },
+            ],
+            "click_beats":[
+                {"id":"beat-1","stages":["move"]},
+                {"id":"beat-2","stages":["focus","settle"]},
+            ],
+        }],
+    }
+    path.write_text(json.dumps(plan),encoding="utf-8")
+    return plan
+
+
 class ExistingDeckTimelinePatchTests(unittest.TestCase):
     def setUp(self):
         self.temp=tempfile.TemporaryDirectory()
@@ -87,6 +140,35 @@ class ExistingDeckTimelinePatchTests(unittest.TestCase):
                 before.read(final["slides"][1]["part"]),
                 after.read(final["slides"][1]["part"]),
             )
+
+    def test_v2_existing_deck_keeps_multiple_presenter_clicks_on_one_slide(self):
+        inventory=inspect_existing_deck(SOURCE)
+        shape=inventory["slides"][0]["shapes"][0]
+        plan_path=self.work/"plan-v2.json"
+        write_plan_v2(plan_path,SOURCE,1,shape)
+        out=self.work/"out-v2.pptx"
+        report=patch_existing(SOURCE,plan_path,out)
+        self.assertEqual(report["patched_slides"],[1])
+        self.assertEqual(report["click_beat_count"],2)
+        self.assertEqual(report["receipts"][0]["writer_mode"],"presenter-paced-click-beats")
+        reinventory=inspect_existing_deck(out)
+        summary=reinventory["slides"][0]["timing_summary"]
+        self.assertEqual(summary["click_group_count"],2)
+        self.assertEqual([g["effect_count"] for g in summary["click_groups"]],[1,2])
+        self.assertIn("clickEffect",summary["click_groups"][0]["start_node_types"])
+        self.assertIn("clickEffect",summary["click_groups"][1]["start_node_types"])
+        self.assertIn("afterEffect",summary["click_groups"][1]["start_node_types"])
+        self.assertEqual(inspect(out)["slides"][0]["timing_elements"],1)
+
+    def test_v2_rejects_on_click_nested_inside_declared_click_beat(self):
+        inventory=inspect_existing_deck(SOURCE)
+        shape=inventory["slides"][0]["shapes"][0]
+        plan_path=self.work/"bad-v2.json"
+        plan=write_plan_v2(plan_path,SOURCE,1,shape)
+        plan["slides"][0]["stages"][2]["trigger"]="on-click"
+        plan_path.write_text(json.dumps(plan),encoding="utf-8")
+        with self.assertRaisesRegex(ValueError,"nested on-click"):
+            patch_existing(SOURCE,plan_path,self.work/"bad-v2.pptx")
 
     def test_plain_nonforced_name_can_be_patched(self):
         renamed=self.work/"renamed.pptx"
