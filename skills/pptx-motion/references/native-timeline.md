@@ -28,7 +28,7 @@ authors valid native timing XML. Real PowerPoint playback remains a separate gat
 
 UTF-8 JSON:
 
-- `version`: `"0.1"`
+- `version`: `"0.2"` for presenter-paced click-beat plans; `"0.1"` remains accepted only for the legacy one-click baseline
 - `kind`: `"native-timeline-plan"`
 - `brief`: verbatim user intent
 - `canvas`: same normalized 16:9 convention as the Morph plan
@@ -75,7 +75,7 @@ writer must not replace beat boundaries with cumulative delays.
 
 ## Effect
 
-v0.1 planning effects:
+v0.1/v0.2 planning effects:
 
 ### motion_path
 
@@ -140,8 +140,7 @@ waypoint slides.
 
 The writer maps stable semantic `!!` names to local PowerPoint shape IDs,
 requires exact identity parity, emits unique timing-node IDs and build-list
-pairs, refuses pre-existing timing, and patches atomically. `visibility` is
-deliberately rejected in v0.1.
+pairs, refuses pre-existing timing, and patches atomically. `visibility` is deliberately rejected by the current writer until a playback-safe representation is proven.
 
 This scheduling model is still experimental. Structural/package checks and
 LibreOffice loadability do not establish that PowerPoint will preserve every
