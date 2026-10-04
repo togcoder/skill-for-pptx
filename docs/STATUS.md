@@ -43,9 +43,17 @@ frequency để làm basis khi sau này phải sinh helper component.
 Final temporary CI run `37214809106`: **73/73 tests pass** + `py_compile`
 pass. Report: `experiments/T007-20261004-source-object-patcher/REPORT.md`.
 
+Helper-component insertion cũng đã có v0.1:
+`scripts/insert_helper_components.py` clone native `p:sp` donor trên cùng slide,
+cấp ID/name mới, đổi geometry/text theo plan nhưng giữ donor style. Output bắt
+buộc re-inventory trước khi animate. Final temp CI run `37215145147`:
+**77/77 tests pass**.
+
+Report: `experiments/T007-20261004-helper-components/REPORT.md`.
+
 Phần còn thiếu cho product path: director beat → concrete patch-plan compiler;
-native helper-component insertion + re-inventory; no-script narrative test trên
-deck thật; exact-file PowerPoint playback.
+automatic donor selection/layout checking; no-script narrative test trên deck
+thật; exact-file PowerPoint playback.
 
 ## T006 native timing writer — đã có backend cấu trúc, playback còn pending
 
