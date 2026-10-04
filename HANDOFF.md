@@ -18,10 +18,11 @@ Chủ dự án: togcoder. Cập nhật bàn giao: 04/10/2026.
 
 Đọc `docs/PRODUCT_TARGET.md`. Đích đến là **AI Motion Director cho PowerPoint có
 sẵn**: nhận deck hiện hữu, hiểu report/story và resource; nếu có script thì bám
-script, nếu không thì dùng notes hoặc tự suy luận trình tự báo cáo rồi tạo script;
-chỉ nghiên cứu ngoài khi phù hợp; thiếu component mới tạo thêm trong đúng design
-language của deck; sau đó chèn native motion vào resource hiện có và giữ slide
-count/order/content theo mặc định.
+script, nếu không thì dùng notes, choreography native đang có, hoặc tự suy luận
+trình tự báo cáo rồi tạo script; chỉ nghiên cứu ngoài khi phù hợp; thiếu component
+mới tạo thêm trong đúng design language của deck; sau đó giữ/nối/sửa motion hiện
+có thay vì xóa timing cũ, và giữ slide count/order/content theo mặc định. North-star:
+người dùng có thể chỉ thả PPTX + mục tiêu chung, không cần chỉ từng animation.
 
 Fresh-deck prompt, QCC và các recipe hiện tại là bài thử/backend building blocks,
 không phải đích sản phẩm cuối.
@@ -95,6 +96,8 @@ PR #1, `experiments/T003-20261004-codex-layer01/REPORT.md`: giữ cả thất b�
 | T005 | Bám ý định compound prompt | Recipe đầu đã xong; giữ yêu cầu/giả định riêng, mở rộng chỉ với kiểm thử mới |
 | T006 | Native timeline/path nâng cao | Writer/runner cấu trúc đã có; tiếp theo tạo full 1-slide candidate và exact-hash PowerPoint playback |
 | T007 | Existing Deck Motion Director | Intake + director contract + arbitrary source-object timing patcher + design fingerprint; tiếp theo director-beat compiler và helper-component insertion |
+| T008 | Existing Motion Continuation | Đọc timing có sẵn, preserve/extend/retime có chủ đích; không xóa timing để làm lại từ đầu |
+| T009 | Autonomous No-Script Benchmark | Chỉ PPTX + mục tiêu chung → tự dựng report script → gap → component → motion → exact-file playback |
 
 Mỗi task có brief và acceptance criteria trong `research/tasks/T00x.md`.
 Danh sách này chưa giao việc cho model nào. Model có môi trường PowerPoint
@@ -133,7 +136,7 @@ giản là đã đạt mục tiêu sáng tạo của sản phẩm.
 > Tiếp tục PPTX Motion Lab tại https://github.com/togcoder/skill-for-pptx.
 > Đọc AGENTS.md, HANDOFF.md, docs/PRODUCT_TARGET.md, docs/STATUS.md, docs/MOTION_PACKING.md và skill nguồn. Kiểm tra task/nhánh/PR
 > đang chạy, nhận một task chưa có người làm phù hợp môi trường rồi tạo nhánh
-> riêng. Nếu đầu vào là PPTX có sẵn: inventory trước, dùng script có sẵn nếu có; nếu không thì notes → inferred narrative → researched narrative; giữ source content/slide count mặc định và chỉ tạo component mới khi có narrative gap. HARD RULE: slide là scene/execution container, không phải motion frame;
+> riêng. Nếu đầu vào là PPTX có sẵn: inventory trước, dùng script có sẵn nếu có; nếu không thì notes → existing timing/choreography → visible narrative → inferred narrative → researched narrative; giữ source content/slide count mặc định và chỉ tạo component mới khi có narrative gap. HARD RULE: slide là scene/execution container, không phải motion frame;
 > khi các action dùng chung resource set, pack tối đa vào một native slide timeline
 > và không tạo waypoint/state slide chỉ vì dễ làm. Mọi slide boundary thêm mới phải
 > có lý do semantic/kỹ thuật. Giữ baseline và rubric, làm một thay đổi có giả thuyết rõ, tạo bằng
