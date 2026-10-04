@@ -97,7 +97,17 @@ untargeted slide byte-identical và từ chối timing cũ chưa biết merge. I
 `design_profile` để làm cơ sở sinh component đúng font/palette/geometry.
 Đọc `experiments/T007-20261004-source-object-patcher/REPORT.md`.
 
-## Chỉ thị T016 — real package đã là regression bắt buộc
+## Chỉ thị T017 — generic motion phải giữ semantic beat/click
+
+Một motion beat có thể compile thành nhiều stage. `stagger-reveal` và
+`focus` là regression chuẩn: không được biến mỗi stage thành click riêng.
+
+Chart vẫn phải đi data-motion, không được dùng `shape_entrance` để né chart
+semantics. Move/rotate chỉ compile khi có tham số cụ thể.
+
+H001 hiện là transfer fixture thật cho generic path. PowerPoint runtime QA là
+ưu tiên cao hơn việc mở rộng effect gallery.
+
 
 Chart/KPI pipeline đã chạy qua PPTX package thật. Model sau không được đánh giá
 chỉ bằng isolated slide XML.
@@ -194,6 +204,7 @@ PR #1, `experiments/T003-20261004-codex-layer01/REPORT.md`: giữ cả thất b�
 | T014 | KPI Counter Execution | number_counter v0.4 → source-style proxy stack + entrance/exit chain + untouched source final value; 120 tests pass; playback pending |
 | T015 | Director → Execution | compile Director v0.3 data-motion → patch v0.4, preserve click groups, explicit counter fallback, block mixed unsupported slides; 126 tests pass |
 | T016 | Real-Package Integration | real PPTX → inventory → Director → compiler → chart+counter patch → readback; literal ChartML parser bug fixed; 130 tests pass |
+| T017 | Generic Report Motion | Director v0.4 + patch v0.5: reveal/stagger/focus/explicit move/rotate; H001 real-deck transfer; 140 tests pass |
 
 Mỗi task có brief và acceptance criteria trong `research/tasks/T00x.md`.
 Danh sách này chưa giao việc cho model nào. Model có môi trường PowerPoint
