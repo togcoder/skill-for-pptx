@@ -1,0 +1,16 @@
+name: t016-real-package-temp-ci
+on:
+  push:
+    branches:
+      - work/T016-real-package-data-motion-20261005
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install lxml
+      - run: python -m py_compile scripts/*.py
+      - run: python -m unittest discover -s tests -v
