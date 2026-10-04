@@ -27,8 +27,8 @@ rubric cố định và cập nhật skill từ bằng chứng.
 | Nội dung | Trạng thái |
 |---|---|
 | Nguồn skill | v0.7 nghiên cứu trong repo, chưa cài thành personal skill |
-| Backend | artifact-tool của ChatGPT Work, 16:9, rect/ellipse/textbox native, opacity=1, Morph byObject |
-| Kiểm tra tự động | 41 unit tests, chưa phải kiểm tra schema OOXML đầy đủ |
+| Backend | Morph baseline + T006 packed-timeline research path; artifact-tool 16:9 rect/ellipse/textbox; timing writer motion/scale/rotate, PowerPoint playback pending |
+| Kiểm tra tự động | 55 unit tests pass trên T006 branch; thêm py_compile + Node/shell syntax; chưa phải schema OOXML đầy đủ |
 | E002 | Sửa 14 khai báo textbox; checker H001 giữ nguyên đạt 93/93; ảnh không đổi |
 | H002/E003 | Nhãn ORBIT chồng 2→0 theo mô hình tuyến tính |
 | H003/E004 | Nhãn Việt dài chồng 4→0; khối nền vẫn chồng 6→6 theo mô hình |
@@ -57,11 +57,16 @@ mục tiêu. T006 phải thử nén chuỗi burst → orbit → focus → split 
 restore xuống 1 slide vì resource set đã tồn tại xuyên suốt. Nếu không đạt 1
 slide, phải chứng minh blocker và dùng số slide tối thiểu.
 
-Bước planning đầu tiên đã có ở `skills/pptx-motion/references/native-timeline.md`
-và `scripts/pack_timeline.py`: dùng geometry T005 nhưng gom 12 legacy states thành
-1 slide/6 stage, orbit waypoint thành motion-path points. Đây chưa ghi native
-`<p:timing>` vào PPTX; model sau tiếp tục từ contract/compiler này thay vì dựng
-lại state-per-slide.
+Bước planning có ở `skills/pptx-motion/references/native-timeline.md` và
+`scripts/pack_timeline.py`: geometry T005 được gom 12 legacy states thành
+1 slide/6 stage, orbit waypoint thành motion-path points.
+
+T006 hiện đã có writer native hạn chế: `scripts/add_timeline.py` ghi motion,
+scale và rotate vào một packed timing group; `scripts/run_timeline_experiment.sh`
+nối validate → artifact-tool source → textbox normalize → timing → finalizer.
+Branch CI đã pass 55 tests + Python/Node/shell syntax. Đọc
+`experiments/T006-20261004-native-timing/REPORT.md` trước khi sửa writer.
+PowerPoint exact-file playback vẫn chưa có, nên không gọi writer là verified.
 
 ## Chặng mới nhất
 
@@ -78,7 +83,7 @@ PR #1, `experiments/T003-20261004-codex-layer01/REPORT.md`: giữ cả thất b�
 | T003 | Công thức hiệu ứng mới | Nguồn sơ cấp, ý đồ rõ, hai chủ đề khác nhau, PPTX và đánh giá riêng từng lớp |
 | T004 | Khả năng chạy ngoài Work | Backend adapter tách biệt, cùng hợp đồng, parity tests; giữ backend cũ làm đối chứng |
 | T005 | Bám ý định compound prompt | Recipe đầu đã xong; giữ yêu cầu/giả định riêng, mở rộng chỉ với kiểm thử mới |
-| T006 | Native timeline/path nâng cao | Chuỗi tự chạy có trigger rõ, kiểm tra cấu trúc và playback PowerPoint thật |
+| T006 | Native timeline/path nâng cao | Writer/runner cấu trúc đã có; tiếp theo tạo full 1-slide candidate và exact-hash PowerPoint playback |
 
 Mỗi task có brief và acceptance criteria trong `research/tasks/T00x.md`.
 Danh sách này chưa giao việc cho model nào. Model có môi trường PowerPoint
@@ -103,6 +108,8 @@ của host và dùng đường dẫn mới:
 
 ```bash
 bash scripts/run_experiment.sh PLAN.json build/UNIQUE_RUN output/UNIQUE_DECK.pptx
+# Hoặc với native-timeline-plan:
+bash scripts/run_timeline_experiment.sh PLAN.json build/UNIQUE_TIMELINE_RUN output/UNIQUE_TIMELINE_DECK.pptx
 ```
 
 Render file PPTX cuối, xem từng slide, rồi dùng `docs/POWERPOINT_QA.md` cho
