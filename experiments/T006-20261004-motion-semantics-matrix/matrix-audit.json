@@ -1,0 +1,120 @@
+{
+  "findings": [],
+  "variants": {
+    "local-remove": {
+      "path": "output/T006_motion_semantics_local_remove.pptx",
+      "sha256": "eefbaab33d9e355462999dee123ac946e1c166a3db32524a49469a91f949b218",
+      "slide_part": "ppt/slides/slide1.xml",
+      "motion_count": 2,
+      "click_group_count": 1,
+      "behaviors": [
+        {
+          "path": "M 0 0 L 0.250000 0.000000 E",
+          "fill": "remove",
+          "origin": "layout",
+          "path_edit_mode": "relative",
+          "delay_ms": 0,
+          "duration_ms": 900,
+          "target_spid": "9"
+        },
+        {
+          "path": "M 0 0 L 0.250000 0.000000 E",
+          "fill": "remove",
+          "origin": "layout",
+          "path_edit_mode": "relative",
+          "delay_ms": 900,
+          "duration_ms": 900,
+          "target_spid": "9"
+        }
+      ],
+      "powerpoint_playback_verified": false
+    },
+    "local-hold": {
+      "path": "output/T006_motion_semantics_local_hold.pptx",
+      "sha256": "dbe4807e308fdcb33744819f29a462a1198f3ce1eb1fa85c4b6a2a13edf2ecdc",
+      "slide_part": "ppt/slides/slide1.xml",
+      "motion_count": 2,
+      "click_group_count": 1,
+      "behaviors": [
+        {
+          "path": "M 0 0 L 0.250000 0.000000 E",
+          "fill": "hold",
+          "origin": "layout",
+          "path_edit_mode": "relative",
+          "delay_ms": 0,
+          "duration_ms": 900,
+          "target_spid": "9"
+        },
+        {
+          "path": "M 0 0 L 0.250000 0.000000 E",
+          "fill": "hold",
+          "origin": "layout",
+          "path_edit_mode": "relative",
+          "delay_ms": 900,
+          "duration_ms": 900,
+          "target_spid": "9"
+        }
+      ],
+      "powerpoint_playback_verified": false
+    },
+    "anchored-remove": {
+      "path": "output/T006_motion_semantics_anchored_remove.pptx",
+      "sha256": "67b81d46adf74e6ab830b48685a6486bbb168e6b6f1876f18a21a6672b353a6d",
+      "slide_part": "ppt/slides/slide1.xml",
+      "motion_count": 2,
+      "click_group_count": 1,
+      "behaviors": [
+        {
+          "path": "M 0 0 L 0.250000 0.000000 E",
+          "fill": "remove",
+          "origin": "layout",
+          "path_edit_mode": "relative",
+          "delay_ms": 0,
+          "duration_ms": 900,
+          "target_spid": "9"
+        },
+        {
+          "path": "M 0.250000 0 L 0.500000 0.000000 E",
+          "fill": "remove",
+          "origin": "layout",
+          "path_edit_mode": "relative",
+          "delay_ms": 900,
+          "duration_ms": 900,
+          "target_spid": "9"
+        }
+      ],
+      "powerpoint_playback_verified": false
+    },
+    "anchored-hold": {
+      "path": "output/T006_motion_semantics_anchored_hold.pptx",
+      "sha256": "4ccab14b4b263cb35668f20e7e0a8047572790cc188db5af783120feaa0f1aad",
+      "slide_part": "ppt/slides/slide1.xml",
+      "motion_count": 2,
+      "click_group_count": 1,
+      "behaviors": [
+        {
+          "path": "M 0 0 L 0.250000 0.000000 E",
+          "fill": "hold",
+          "origin": "layout",
+          "path_edit_mode": "relative",
+          "delay_ms": 0,
+          "duration_ms": 900,
+          "target_spid": "9"
+        },
+        {
+          "path": "M 0.250000 0 L 0.500000 0.000000 E",
+          "fill": "hold",
+          "origin": "layout",
+          "path_edit_mode": "relative",
+          "delay_ms": 900,
+          "duration_ms": 900,
+          "target_spid": "9"
+        }
+      ],
+      "powerpoint_playback_verified": false
+    }
+  },
+  "normalization": "Only p:animMotion@path and its p:cBhvr/p:cTn@fill replaced before canonical comparison.",
+  "evidence_boundary": "Package and timing comparison only; no native playback.",
+  "powerpoint_playback_verified": false
+}

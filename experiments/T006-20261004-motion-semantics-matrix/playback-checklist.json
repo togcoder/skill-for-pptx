@@ -1,0 +1,74 @@
+{
+  "experiment": "T006-20261004-motion-semantics-matrix",
+  "application": null,
+  "version": null,
+  "os": null,
+  "screen_or_capture_resolution": null,
+  "native_playback_verified": false,
+  "files": [
+    {
+      "variant": "local-remove",
+      "path": "output/T006_motion_semantics_local_remove.pptx",
+      "sha256": "eefbaab33d9e355462999dee123ac946e1c166a3db32524a49469a91f949b218",
+      "repair_warning": "not_checked",
+      "one_click_starts_sequence": null,
+      "position_at_900ms": null,
+      "stage_2_starts_from_b_without_jump": null,
+      "position_at_1800ms": null,
+      "position_after_wait": null,
+      "animation_pane_editable": null,
+      "evidence_files": []
+    },
+    {
+      "variant": "local-hold",
+      "path": "output/T006_motion_semantics_local_hold.pptx",
+      "sha256": "dbe4807e308fdcb33744819f29a462a1198f3ce1eb1fa85c4b6a2a13edf2ecdc",
+      "repair_warning": "not_checked",
+      "one_click_starts_sequence": null,
+      "position_at_900ms": null,
+      "stage_2_starts_from_b_without_jump": null,
+      "position_at_1800ms": null,
+      "position_after_wait": null,
+      "animation_pane_editable": null,
+      "evidence_files": []
+    },
+    {
+      "variant": "anchored-remove",
+      "path": "output/T006_motion_semantics_anchored_remove.pptx",
+      "sha256": "67b81d46adf74e6ab830b48685a6486bbb168e6b6f1876f18a21a6672b353a6d",
+      "repair_warning": "not_checked",
+      "one_click_starts_sequence": null,
+      "position_at_900ms": null,
+      "stage_2_starts_from_b_without_jump": null,
+      "position_at_1800ms": null,
+      "position_after_wait": null,
+      "animation_pane_editable": null,
+      "evidence_files": []
+    },
+    {
+      "variant": "anchored-hold",
+      "path": "output/T006_motion_semantics_anchored_hold.pptx",
+      "sha256": "4ccab14b4b263cb35668f20e7e0a8047572790cc188db5af783120feaa0f1aad",
+      "repair_warning": "not_checked",
+      "one_click_starts_sequence": null,
+      "position_at_900ms": null,
+      "stage_2_starts_from_b_without_jump": null,
+      "position_at_1800ms": null,
+      "position_after_wait": null,
+      "animation_pane_editable": null,
+      "evidence_files": []
+    }
+  ],
+  "reference_positions": {
+    "normalized_slide_centers": {"A": [0.2, 0.55], "B": [0.45, 0.55], "C": [0.7, 0.55]},
+    "render_pixel_centers_1280x720": {"A": [256, 396], "B": [576, 396], "C": [896, 396]}
+  },
+  "instructions": [
+    "Open the exact hash without resaving before the first run.",
+    "Record any repair warning and inspect the Animation Pane.",
+    "Start Slide Show and click once only.",
+    "Capture the position near 900 ms, the start of stage 2, near 1800 ms, and after a further wait.",
+    "Repeat from a fresh slideshow launch for every variant.",
+    "Do not infer a winner from static thumbnails or package checks."
+  ]
+}

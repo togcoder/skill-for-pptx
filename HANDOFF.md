@@ -41,6 +41,7 @@ không phải đích sản phẩm cuối.
 | T003 | Tách lớp 2D trên hai chủ đề; binding fixture 16→0; sửa wrap số trên 27 vị trí; choreography nguồn và native pending |
 | T005 | Intent nghiêm ngặt cho chuỗi 6 thao tác, 2 chủ đề/22 ảnh cuối; chord proxy 65,608→1,916 px; vẫn click-through, chưa native playback |
 | T006 full candidate | 1 slide/31 objects/6 stages/82 behaviors; sửa lỗi mất chữ mở đầu; exact final render đã xem; 47 path-origin model mismatches còn cần native diagnosis |
+| T006 semantics matrix | 4 exact one-slide fixtures isolate local/anchored path × remove/hold fill; 83 tests, all static renders checked; native winner pending |
 | File và ảnh | PPTX tại `output/`, bằng chứng và ảnh cuối trong từng experiment |
 | PowerPoint playback | Chưa có; M1 chưa đạt, điểm native motion và editing để null |
 
@@ -57,6 +58,12 @@ The full candidate now exists. Start from its frozen hash and playback checklist
 not another duplicate build. Resolve origin/fill/trigger semantics with a native
 two-stage path fixture before extending this timing writer. PR #5 was closed as
 superseded; PR #11 owns this validation experiment. No actual playback yet.
+
+The requested two-stage fixture now exists at
+experiments/T006-20261004-motion-semantics-matrix/REPORT.md with four exact
+hashes and a playback checklist (PR #12). Do not generate another origin/fill
+matrix. Play all four files in PowerPoint first; production timing remains
+unchanged until that evidence exists.
 
 Người dùng đã sửa hướng phát triển ngày 04/10/2026: **không dùng mặc định một
 chuyển động/state = một slide**. Đọc `docs/MOTION_PACKING.md`. Nếu nhiều chuyển

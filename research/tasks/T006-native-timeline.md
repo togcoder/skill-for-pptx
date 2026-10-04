@@ -9,6 +9,12 @@ flags later-stage path origins, and fill/trigger behavior remains unverified.
 Next: exact-hash playback plus a PowerPoint-authored two-stage path fixture.
 Do not repeat the same generation or declare T006 complete from static evidence.
 
+Controlled follow-up: experiments/T006-20261004-motion-semantics-matrix/
+contains four one-slide exact files that isolate stage-local/authored-layout
+paths and remove/hold behavior fill. All four pass structural/static checks and
+83 tests pass, but no native winner exists yet. Run the four-file playback
+checklist before changing add_timeline.py.
+
 User priority: advanced effects from a short natural-language prompt that keep
 all requested actions and constraints **while packing as many motions as possible
 into one slide when they reuse the same resources**. Read
