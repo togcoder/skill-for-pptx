@@ -1,4 +1,4 @@
-# Native timeline contract v0.1
+# Native timeline contract v0.2
 
 This contract is the first executable planning layer for T006. It is intentionally
 separate from the legacy Morph plan contract.
@@ -60,9 +60,18 @@ A stage is an ordered motion event inside one slide:
 - `duration_ms`: positive integer
 - `effects`: one or more effects
 
-For the first T006 packed sequence, only the first stage is `on_click`; later
-stages are `after_previous`, so a single click can run the compound sequence.
-This is a research choice, not a universal product requirement.
+v0.1 used only one `on_click` stage and chained the rest automatically. That is
+now a legacy pacing baseline.
+
+v0.2 adds `click_beats` at slide level. Each click beat partitions one or more
+timeline stages:
+
+- first stage of a beat: `on_click`;
+- concurrent continuation: `with_previous`;
+- automatic serial continuation: `after_previous`.
+
+Every timeline stage appears in exactly one beat and in the same order. The
+writer must not replace beat boundaries with cumulative delays.
 
 ## Effect
 
@@ -114,13 +123,20 @@ The first T006 target for radial drill-down is one semantic scene, one slide,
 six requested/packed operations, zero resource-set changes, and native playback
 unverified until exact-hash PowerPoint evidence exists.
 
-## Current writer v0.1
+## Current writer v0.1 / v0.2
 
-`scripts/add_timeline.py` now maps this contract to a restricted PresentationML
-timing tree for `motion_path`, `scale`, and `rotate`. It uses one packed
-`clickEffect` group per semantic slide. Stage start times become cumulative
-behavior delays, so same-stage effects share a delay and later stages remain
-inside the same slide instead of becoming slide waypoints.
+`scripts/add_timeline.py` maps the contract to restricted PresentationML timing
+for `motion_path`, `scale`, and `rotate`.
+
+- v0.1 is retained as the historical one-click cumulative-delay writer.
+- v0.2 emits multiple presenter click groups under `mainSeq`.
+- each beat-first stage uses `clickEffect`;
+- later stages use `withEffect` or `afterEffect`;
+- effect behavior delays are zero unless a real animation delay is explicitly
+  planned.
+
+Both versions keep stages inside the same slide instead of manufacturing
+waypoint slides.
 
 The writer maps stable semantic `!!` names to local PowerPoint shape IDs,
 requires exact identity parity, emits unique timing-node IDs and build-list
