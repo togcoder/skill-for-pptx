@@ -1,6 +1,12 @@
 # PPTX Motion Lab — checkpoint
 
-Cập nhật ngày 04/10/2026, giờ Việt Nam. Phiên bản nguồn nghiên cứu v0.5 (thêm T003, công thức tách lớp 2D).
+Cập nhật ngày 04/10/2026, giờ Việt Nam. Phiên bản nguồn nghiên cứu v0.6 (thêm T002 tight carriers).
+
+## Kết quả mới nhất — T002
+
+PR #2, `experiments/T002-20261004-codex-tight-carriers/REPORT.md` giữ E004 bất biến và chỉ siết carrier quanh label. Trong cùng proxy tuyến tính, label giữ 0/6 cặp chồng và carrier giảm 6/6→0/6. Candidate có 3 slide, 8 đối tượng native/slide, 5 textbox/slide, 2 Morph 1100 ms; 3/3 ảnh cuối đã xem và 34 tests đạt. SHA-256 `c41f2289bfd662f2642ea611b119d8aeaf35678425cba4cf4b7ffe0640922186`.
+
+Tradeoff: focus emphasis tĩnh chủ quan giảm 4/5→3/5; creative vẫn 2/5. Đây là sửa rủi ro geometry, không chứng minh motion đẹp hoặc playback đúng. Native motion/editing null. Nguồn v0.6 chưa cài personal skill. Bước tiếp: exact-hash PowerPoint playback so E004/T002, hoặc T004 portable backend; T002 tiếp theo phải có giả thuyết mới về emphasis/z-order.
 
 ## Kết quả mới nhất — T003
 

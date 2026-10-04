@@ -1,0 +1,23 @@
+{
+  "method": "Subjective, nonblind, same researcher, full-size static renders only",
+  "rubric": "rubric.json",
+  "E004": {
+    "brief_coverage": 4,
+    "static_readability": 5,
+    "creative_quality": 2,
+    "focus_emphasis": 4,
+    "native_motion": null,
+    "real_application_editing": null
+  },
+  "T002": {
+    "brief_coverage": 4,
+    "static_readability": 5,
+    "creative_quality": 2,
+    "focus_emphasis": 3,
+    "native_motion": null,
+    "real_application_editing": null
+  },
+  "rationale": "Tight carriers preserve complete labels and endpoint readability but reduce the size contrast between focus and context. Static composition remains a simple three-block diagram.",
+  "composite_percentage": null,
+  "all_candidate_final_slides_inspected": true
+}

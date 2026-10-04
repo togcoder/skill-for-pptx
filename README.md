@@ -6,10 +6,11 @@ Repo chính: [togcoder/skill-for-pptx](https://github.com/togcoder/skill-for-ppt
 
 **Model mới bắt đầu tại [HANDOFF.md](HANDOFF.md)**. Quy trình cộng tác và các task song song nằm ở [docs/COLLABORATION.md](docs/COLLABORATION.md).
 
-**Bản nghiên cứu v0.5:** đã có đường dựng PPTX thử nghiệm, kiểm tra cấu trúc và ảnh tĩnh. Chưa xác nhận chuyển động trong PowerPoint. Nguồn skill trong repo chưa được cài vào tài khoản.
+**Bản nghiên cứu v0.6:** đã có đường dựng PPTX thử nghiệm, kiểm tra cấu trúc và ảnh tĩnh. Chưa xác nhận chuyển động trong PowerPoint. Nguồn skill trong repo chưa được cài vào tài khoản.
 
 ## Kết quả hiện có
 
+- T002: giữ nguyên đường label sạch của E004 và siết carrier theo chữ. Proxy carrier giảm 6/6→0/6, nhưng focus emphasis tĩnh giảm 4/5→3/5. [Báo cáo](experiments/T002-20261004-codex-tight-carriers/REPORT.md). Native playback chưa kiểm chứng.
 - T003: công thức tách/ghép 3–5 lớp, hai chủ đề, 5 PPTX gồm bản lỗi và bản sửa; 15 ảnh cuối đã xem. Sửa số xuống dòng bằng thay đổi duy nhất chiều rộng textbox. Bộ kiểm tra hiện có 34 tests đạt. [Báo cáo và giới hạn](experiments/T003-20261004-codex-layer01/REPORT.md). Chưa có playback PowerPoint hoặc quan sát choreography nguồn.
 
 - E001: ba cảnh “tụ cụm, mở rộng, xếp hàng” với Imagine, Make, Share, Evolve. Mỗi slide có 13 đối tượng native.
