@@ -570,6 +570,15 @@ def _timing_inventory(root,shapes):
         target=node.find(".//p:spTgt",NS)
         spid=target.get("spid") if target is not None else None
         conditions=_timing_conditions(behavior_ctn)
+        properties=_timing_effect_properties(node,kind)
+        chart_target=node.find(".//a:chart",NS)
+        if chart_target is not None:
+            properties=dict(properties or {})
+            properties["chart_target"]={
+                "series_index":chart_target.get("seriesIdx"),
+                "category_index":chart_target.get("categoryIdx"),
+                "build_step":chart_target.get("bldStep"),
+            }
         effects.append({
             "sequence_index":len(effects)+1,
             "type":kind,
@@ -579,19 +588,28 @@ def _timing_inventory(root,shapes):
             "node_type":behavior_ctn.get("nodeType") if behavior_ctn is not None else None,
             "start_conditions":conditions,
             "numeric_delay_ms":_numeric_delay(conditions),
-            "properties":_timing_effect_properties(node,kind),
+            "properties":properties,
         })
 
     build_entries=[]
     for item in timing.findall("p:bldLst/*",NS):
         spid=item.get("spid")
+        build_value=item.get("build")
+        anim_bg=item.get("animBg")
+        if _local_name(item.tag)=="bldGraphic":
+            chart_build=item.find("p:bldSub/a:bldChart",NS)
+            if chart_build is not None:
+                build_value=chart_build.get("bld")
+                anim_bg=chart_build.get("animBg")
+            elif item.find("p:bldAsOne",NS) is not None:
+                build_value="asWhole"
         build_entries.append({
             "type":_local_name(item.tag),
             "spid":spid,
             "target":by_id.get(spid),
             "group_id":item.get("grpId"),
-            "build":item.get("build"),
-            "anim_bg":item.get("animBg"),
+            "build":build_value,
+            "anim_bg":anim_bg,
         })
 
     all_numeric=bool(effects) and all(effect["numeric_delay_ms"] is not None for effect in effects)
