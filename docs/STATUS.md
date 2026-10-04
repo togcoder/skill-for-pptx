@@ -29,6 +29,24 @@ Default mới: preserve source slide count/order/content; resource cũ được 
 trước; same-resource motion phải pack trong slide; generated component chỉ lấp
 narrative gap.
 
+### T007 source-object patcher checkpoint
+
+Đã thêm `scripts/patch_existing_timeline.py` và
+`existing-deck-timeline-patch.md`: object deck thật được target bằng source
+slide + native `cNvPr id` + name, không cần `!!`. Patcher kiểm source SHA-256,
+chỉ sửa slide được chọn, giữ slide khác byte-identical, preserve transition và
+từ chối merge timing cũ mù quáng.
+
+Deck intake cũng đã có `design_profile` gồm font/fill/line/text-color/geometry
+frequency để làm basis khi sau này phải sinh helper component.
+
+Final temporary CI run `37214809106`: **73/73 tests pass** + `py_compile`
+pass. Report: `experiments/T007-20261004-source-object-patcher/REPORT.md`.
+
+Phần còn thiếu cho product path: director beat → concrete patch-plan compiler;
+native helper-component insertion + re-inventory; no-script narrative test trên
+deck thật; exact-file PowerPoint playback.
+
 ## T006 native timing writer — đã có backend cấu trúc, playback còn pending
 
 T006 đã tiến từ planning sang writer native hạn chế. `scripts/pack_timeline.py`
