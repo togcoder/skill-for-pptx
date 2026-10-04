@@ -12,6 +12,7 @@ from inspect_existing_deck import inspect_existing_deck
 from patch_existing_timeline import patch_existing
 from make_powerpoint_qa_manifest import build_manifest
 from verify_powerpoint_qa import verify
+from build_powerpoint_qa_fixture import build_qa_fixture
 
 SOURCE=ROOT/"output"/"PPTX_Motion_Lab_H001.pptx"
 
@@ -135,6 +136,21 @@ class PowerPointQaHarnessTests(unittest.TestCase):
         evidence["slides"][0]["effects"][0]["shape_name"]="wrong-shape"
         result=verify(self.manifest,evidence)
         self.assertFalse(result["claims"]["native_application_parse_verified"])
+
+    def test_composite_qa_fixture_has_chart_counter_and_focus_clicks(self):
+        composite=self.work/"composite.pptx"
+        manifest_path=self.work/"composite-manifest.json"
+        result=build_qa_fixture(composite,manifest_path)
+        manifest=json.loads(manifest_path.read_text(encoding="utf-8"))
+        self.assertEqual(result["sha256"],manifest["pptx_sha256"])
+        self.assertEqual(manifest["slide_count"],2)
+        by_slide={slide["index"]:slide for slide in manifest["slides"]}
+        self.assertEqual(by_slide[1]["expected_click_count"],2)
+        self.assertEqual(by_slide[2]["expected_click_count"],1)
+        self.assertIn("Trend Chart",by_slide[1]["expected_target_names"])
+        self.assertIn("Hero KPI",by_slide[1]["expected_target_names"])
+        self.assertGreater(by_slide[1]["structural_effect_count"],2)
+        self.assertEqual(by_slide[2]["structural_effect_count"],2)
 
     def test_probe_script_contains_native_click_apis_and_visual_capture_boundary(self):
         script=(ROOT/"scripts"/"powerpoint_native_probe.ps1").read_text(encoding="utf-8")
