@@ -674,6 +674,7 @@ def patch(source, plan_path, destination):
     return {
         "slides": len(plan["slides"]),
         "packed_timing_groups": len(receipts),
+        "click_beat_count": sum(receipt.get("click_beat_count", 1) for receipt in receipts),
         "receipts": receipts,
         "source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
         "sha256": hashlib.sha256(destination.read_bytes()).hexdigest(),
