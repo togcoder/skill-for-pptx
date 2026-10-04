@@ -97,7 +97,18 @@ untargeted slide byte-identical và từ chối timing cũ chưa biết merge. I
 `design_profile` để làm cơ sở sinh component đúng font/palette/geometry.
 Đọc `experiments/T007-20261004-source-object-patcher/REPORT.md`.
 
-## Chỉ thị T014 — counter phải kết thúc ở object nguồn
+## Chỉ thị T015 — không còn viết tay patch JSON cho chart/KPI
+
+Với slide mà toàn bộ motion beats đều là data-motion được hỗ trợ, dùng
+`scripts/compile_data_motion_patch.py` để bridge Director v0.3 → patch v0.4.
+Compiler giữ click grouping, resolve source object và ghi fallback counter.
+
+Nếu slide còn generic motion chưa có execution contract, **block slide**. Không
+được bỏ beat đó rồi compile phần còn lại, vì sẽ làm sai nhịp T010/T011.
+
+Bài học test: `bldLst` có thể chứa lẫn `bldP` và `bldGraphic`; không suy
+semantic từ vị trí trong danh sách, phải match type + spid.
+
 
 Counter v0.4 không rewrite KPI source. Nó clone source shape làm proxy trung gian,
 animate các proxy trong cùng click beat, rồi reveal chính source shape ở cuối.
@@ -171,6 +182,7 @@ PR #1, `experiments/T003-20261004-codex-layer01/REPORT.md`: giữ cả thất b�
 | T012 | Semantic Data Motion | Nhận diện chart subtype + hero KPI; chart dùng recipe riêng theo encoding, KPI highlight dùng count-up/down và giữ nguyên giá trị nguồn |
 | T013 | Native Chart Execution | chart_entrance v0.3 → a:chart sub-targets + bldGraphic/bldChart + density guard; 112 tests pass; PowerPoint playback pending |
 | T014 | KPI Counter Execution | number_counter v0.4 → source-style proxy stack + entrance/exit chain + untouched source final value; 120 tests pass; playback pending |
+| T015 | Director → Execution | compile Director v0.3 data-motion → patch v0.4, preserve click groups, explicit counter fallback, block mixed unsupported slides; 126 tests pass |
 
 Mỗi task có brief và acceptance criteria trong `research/tasks/T00x.md`.
 Danh sách này chưa giao việc cho model nào. Model có môi trường PowerPoint

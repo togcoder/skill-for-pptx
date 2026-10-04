@@ -1,5 +1,26 @@
 # PPTX Motion Lab — checkpoint
 
+## T015 Director → execution compiler — 2026-10-05
+
+The manual bridge between Director v0.3 and patch v0.4 is removed for complete
+data-motion slides.
+
+`scripts/compile_data_motion_patch.py` compiles chart/KPI semantic beats into
+`chart_entrance` / `number_counter`, resolves exact source targets and
+preserves Director click grouping.
+
+Safety: mixed/unsupported slides are blocked instead of partially compiled.
+Odometer → stepped-text fallback is explicit and can be disabled.
+
+Final CI run 37238859486: **126/126 tests pass** + Python compile. Integration
+regression preserves two presenter clicks across Director → patch → timing
+read-back.
+
+PowerPoint playback remains pending.
+
+Task: `research/tasks/T015-director-to-execution.md`.
+Report: `experiments/T015-20261005-director-to-execution/REPORT.md`.
+
 ## T014 KPI counter execution — 2026-10-05
 
 T012 hero-metric counters now have a structural v0.4 execution path.
