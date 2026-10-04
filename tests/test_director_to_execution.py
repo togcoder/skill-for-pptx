@@ -223,8 +223,11 @@ class DirectorToExecutionTests(unittest.TestCase):
 
         summary=_timing_inventory(root,shapes)
         self.assertEqual(summary["click_group_count"],2)
-        self.assertEqual(summary["build_entries"][0]["type"],"bldGraphic")
-        self.assertEqual(summary["build_entries"][0]["build"],"series")
+        chart_build=next(
+            entry for entry in summary["build_entries"]
+            if entry["type"]=="bldGraphic" and entry["spid"]=="7"
+        )
+        self.assertEqual(chart_build["build"],"series")
         # Two chart series plus counter proxy entrance/exits + final KPI entrance.
         self.assertGreater(summary["effect_count"],3)
         self.assertEqual(summary["click_groups"][0]["target_spids"],["7"])
