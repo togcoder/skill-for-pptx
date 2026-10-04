@@ -5,9 +5,25 @@ description: Develop editable PowerPoint motion from short prompts using explici
 
 # PPTX Motion
 
-Create a reviewable motion experiment from a short instruction. Read the project checkpoint before continuing. Treat this as research source; do not install the skill or publish a release as a side effect.
+Create or augment a reviewable PowerPoint motion artifact. The preferred product path is to motion-direct an existing PPTX; generating a fresh motion experiment is a supporting path. Read `../../docs/PRODUCT_TARGET.md` and the project checkpoint before continuing. Treat this as research source; do not install the skill or publish a release as a side effect.
 
-## Workflow
+## Existing-deck entry path
+
+When the user supplies an existing PPTX:
+
+1. Run `python3 scripts/inspect_existing_deck.py SOURCE.pptx --output INVENTORY.json`.
+2. Read [existing-deck-director.md](references/existing-deck-director.md).
+3. Use an explicit script if supplied. Otherwise prefer speaker notes, then infer
+   the report sequence from the deck. Research externally only when appropriate
+   and clearly separate researched structure/facts from user data.
+4. Draft an `existing-deck-motion-director` plan and validate it with
+   `python3 scripts/validate_director_plan.py PLAN.json INVENTORY.json`.
+5. Preserve source slide count/order/content by default. Create helper components
+   only for a justified narrative role and match the existing visual system.
+6. Convert approved slide beats to packed native timelines. Do not rebuild
+   existing resources merely because the generator path is easier.
+
+## Workflow for fresh motion experiments
 
 1. Freeze the short prompt and the requested outcome. Resolve routine design choices and record assumptions. Separate semantic message, object identity and motion. Read `../../docs/MOTION_PACKING.md`: do **not** treat slide count as motion count. Partition the request into semantic scenes and motion events, cluster adjacent events that reuse the same resource set, and target the minimum slide count by packing the maximum feasible number of motions into each slide timeline.
    For a compound request, read [compound-choreography.md](references/compound-choreography.md). Extract every explicit action, target, quantity, order and constraint before choosing a recipe. Keep design assumptions separate. Use its strict intent contract when the radial drill-down recipe fits; report unsupported demands instead of silently simplifying them.
@@ -37,6 +53,8 @@ Check native text content and formal textbox type separately. The pipeline norma
 
 ## Current source layout
 
+- `scripts/inspect_existing_deck.py`: read-only PPTX intake inventory for T007
+- `scripts/validate_director_plan.py`: validates existing-deck motion-director plans
 - `scripts/render_plan.mjs`: restricted native scene renderer
 - `scripts/add_morph.py`: experimental transition insertion
 - `scripts/normalize_textboxes.py`: plan-scoped native textbox declaration
