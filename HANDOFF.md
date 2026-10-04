@@ -97,7 +97,19 @@ untargeted slide byte-identical và từ chối timing cũ chưa biết merge. I
 `design_profile` để làm cơ sở sinh component đúng font/palette/geometry.
 Đọc `experiments/T007-20261004-source-object-patcher/REPORT.md`.
 
-## Chỉ thị T012 — chart và số không phải shape thường
+## Chỉ thị T013 — chart recipe đã có writer cấu trúc
+
+Model sau không được quay lại animate chart như generic shape nếu v0.3 patch path
+phù hợp. Dùng `chart_entrance`, giữ exact source chart, và để writer fan-out
+series/category/point qua `a:chart` sub-targets.
+
+Density guard mặc định 24. Nếu fan-out bị hạ granularity, phải giữ receipt và
+không gọi đó là recipe gốc đã được thực thi đầy đủ.
+
+Native PowerPoint playback cho chart vẫn pending. T014 tiếp theo: counter
+component dạng stacked source-style proxies + sequential exit, kết thúc bằng
+textbox nguồn không thay đổi.
+
 
 Khi inventory gặp chart, model phải đọc
 `skills/pptx-motion/references/data-motion-recipes.md` và dùng chart subtype /
@@ -144,6 +156,7 @@ PR #1, `experiments/T003-20261004-codex-layer01/REPORT.md`: giữ cả thất b�
 | T010 | Presenter-paced Click Beats | Slide → click beat → stage → effects; giữ 1 slide nhưng dừng đúng nhịp presenter, không dùng delay để giả thời gian nói |
 | T011 | Director Click Rhythm | Bắt AI Director tự nhóm motion beats thành presenter clicks có purpose/stable state/boundary reason, rồi giữ nhịp đó khi patch existing deck |
 | T012 | Semantic Data Motion | Nhận diện chart subtype + hero KPI; chart dùng recipe riêng theo encoding, KPI highlight dùng count-up/down và giữ nguyên giá trị nguồn |
+| T013 | Native Chart Execution | chart_entrance v0.3 → a:chart sub-targets + bldGraphic/bldChart + density guard; 112 tests pass; PowerPoint playback pending |
 
 Mỗi task có brief và acceptance criteria trong `research/tasks/T00x.md`.
 Danh sách này chưa giao việc cho model nào. Model có môi trường PowerPoint

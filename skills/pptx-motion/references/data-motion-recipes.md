@@ -155,9 +155,16 @@ Implemented:
 - deterministic chart/counter recipe selector;
 - Director v0.3 semantic validation.
 
+Implemented structurally in T013:
+
+- native chart-build writer with `p:bldGraphic/a:bldChart`;
+- chart sub-target fan-out using `seriesIdx/categoryIdx/bldStep`;
+- density guard that reduces excessive point-level fan-out;
+- timing inventory read-back for chart targets/builds.
+
 Pending:
 
-- native chart-build writer/fan-out and PowerPoint playback matrix;
+- exact-file PowerPoint playback matrix for native chart builds;
 - extended Office chart (`cx:chart`) subtype inventory;
 - odometer component insertion;
 - stepped-text counter writer;
