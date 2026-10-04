@@ -286,6 +286,34 @@ class DirectorPlanTests(unittest.TestCase):
         plan["slides"][0]["beats"][2]["data_motion"]["to_value"]=99.9
         self.assertTrue(any("to_value does not match source number" in x for x in validate(plan,inv)))
 
+    def plan_v4_generic(self):
+        plan=copy.deepcopy(self.plan_v2())
+        plan["version"]="0.4"
+        return plan
+
+    def test_valid_v4_generic_reveal_and_focus_plan(self):
+        self.assertEqual(validate(self.plan_v4_generic(),self.inventory),[])
+
+    def test_v4_focus_requires_one_target(self):
+        bad=self.plan_v4_generic()
+        bad["slides"][1]["beats"][0]["targets"].append(
+            bad["slides"][1]["beats"][0]["targets"][0]
+        )
+        self.assertTrue(any("operation focus requires exactly one target" in x for x in validate(bad,self.inventory)))
+
+    def test_v4_move_requires_explicit_points(self):
+        bad=self.plan_v4_generic()
+        beat=bad["slides"][1]["beats"][0]
+        beat["operation"]="move"
+        self.assertTrue(any("move requires motion_parameters.points" in x for x in validate(bad,self.inventory)))
+
+    def test_v4_rotate_requires_explicit_degrees(self):
+        bad=self.plan_v4_generic()
+        beat=bad["slides"][1]["beats"][0]
+        beat["operation"]="rotate"
+        beat["motion_parameters"]={}
+        self.assertTrue(any("rotate requires finite motion_parameters.by_deg" in x for x in validate(bad,self.inventory)))
+
     def test_source_hash_mismatch_fails(self):
         bad=self.plan();bad["source"]["pptx_sha256"]="0"*64
         self.assertIn("source.pptx_sha256 does not match inventory",validate(bad,self.inventory))
