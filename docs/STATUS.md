@@ -1,5 +1,28 @@
 # PPTX Motion Lab — checkpoint
 
+## T016 real-package data motion — 2026-10-05
+
+T012–T015 now pass a real PPTX package integration, not only isolated XML.
+
+A fixture derived from the valid H001 deck adds a native two-series/four-category
+line chart plus `98.5%` KPI, then executes:
+
+`inventory -> Director v0.3 -> compiler -> patch v0.4 -> output inventory`.
+
+First CI exposed a genuine inventory gap: inline ChartML `strLit/numLit` points
+were not counted. Parser fixed; regression added.
+
+Final run 37239255072: **130/130 tests pass** + Python compile.
+
+Package audit confirms two presenter clicks, source KPI preservation, native
+chart build read-back, unchanged slide count, and byte-identical untargeted
+slide/chart/relationship parts.
+
+PowerPoint runtime playback remains pending.
+
+Task: `research/tasks/T016-real-package-data-motion.md`.
+Report: `experiments/T016-20261005-real-package-data-motion/REPORT.md`.
+
 ## T015 Director → execution compiler — 2026-10-05
 
 The manual bridge between Director v0.3 and patch v0.4 is removed for complete
