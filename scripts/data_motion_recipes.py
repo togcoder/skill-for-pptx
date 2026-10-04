@@ -176,7 +176,7 @@ def number_counter_recipe(number_semantics):
         "suffix":suffix,
         "preferred_implementation":"odometer-proxy",
         "fallback_implementation":"stepped-text",
-        "preserve_final_text":raw_number,
+        "preserve_final_text":number_semantics.get("raw",""),
         "requires_narrative_highlight":True,
         "requires_native_playback":True,
     }
