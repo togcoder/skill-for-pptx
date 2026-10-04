@@ -16,12 +16,19 @@ from zipfile import ZipFile, ZIP_DEFLATED
 
 from lxml import etree as E
 
+A="http://schemas.openxmlformats.org/drawingml/2006/main"
+C="http://schemas.openxmlformats.org/drawingml/2006/chart"
+
 try:
     from .inspect_pptx import inspect, P
     from .add_timeline import (
         _q, _sub, _behavior_ctn, _path_data, _rotation_units,
         inspect_timing_root, ROOT_CTN_ID, MAIN_SEQ_ID, CLICK_BUCKET_ID,
         PACKED_GROUP_ID, FIRST_BEHAVIOR_ID,
+    )
+    from .chart_native_timing import (
+        VALID_FILTERS, chart_fanout, concrete_chart_filter,
+        guard_chart_fanout, ooxml_build_token,
     )
 except ImportError:
     from inspect_pptx import inspect, P
@@ -30,8 +37,12 @@ except ImportError:
         inspect_timing_root, ROOT_CTN_ID, MAIN_SEQ_ID, CLICK_BUCKET_ID,
         PACKED_GROUP_ID, FIRST_BEHAVIOR_ID,
     )
+    from chart_native_timing import (
+        VALID_FILTERS, chart_fanout, concrete_chart_filter,
+        guard_chart_fanout, ooxml_build_token,
+    )
 
-NS={"p":P}
+NS={"p":P,"a":A,"c":C}
 
 
 def _target_key(target):
@@ -54,8 +65,8 @@ def validate_patch_plan(plan):
     errors += [f"missing field: {k}" for k in sorted(required-plan.keys())]
     if errors:
         return errors
-    if plan["version"] not in ("0.1","0.2"):
-        errors.append("version must be 0.1 or 0.2")
+    if plan["version"] not in ("0.1","0.2","0.3"):
+        errors.append("version must be 0.1, 0.2 or 0.3")
     if plan["kind"]!="existing-deck-timeline-patch":
         errors.append("kind must be existing-deck-timeline-patch")
     sha=plan["source_sha256"]
@@ -139,13 +150,36 @@ def validate_patch_plan(plan):
                     value=effect.get("by_deg")
                     if type(value) not in (int,float) or not math.isfinite(value):
                         errors.append(f"slide {idx}: invalid rotate by_deg")
+                elif kind=="chart_entrance":
+                    if plan["version"]!="0.3":
+                        errors.append(f"slide {idx}: chart_entrance requires patch plan v0.3")
+                    build=effect.get("build")
+                    if build not in ("as-whole","series","category","series-elements","category-elements"):
+                        errors.append(f"slide {idx}: unsupported chart build {build}")
+                    sc=effect.get("series_count")
+                    cc=effect.get("category_count")
+                    if type(sc) is not int or sc<1:
+                        errors.append(f"slide {idx}: chart_entrance series_count must be positive integer")
+                    if build in ("category","series-elements","category-elements") and (type(cc) is not int or cc<1):
+                        errors.append(f"slide {idx}: chart_entrance category_count must be positive integer")
+                    filt=effect.get("filter")
+                    if filt is not None and filt not in VALID_FILTERS:
+                        errors.append(f"slide {idx}: unsupported chart entrance filter {filt}")
+                    limit=effect.get("fanout_limit",24)
+                    if type(limit) is not int or limit<1:
+                        errors.append(f"slide {idx}: fanout_limit must be positive integer")
+                    if type(effect.get("animate_background",False)) is not bool:
+                        errors.append(f"slide {idx}: animate_background must be boolean")
+                    chart_type=effect.get("chart_type")
+                    if not isinstance(chart_type,str) or not chart_type:
+                        errors.append(f"slide {idx}: chart_entrance chart_type must be nonempty")
                 else:
                     errors.append(f"slide {idx}: unsupported effect type {kind}")
 
-        if plan["version"]=="0.2":
+        if plan["version"] in ("0.2","0.3"):
             click_beats=slide.get("click_beats")
             if not isinstance(click_beats,list) or not click_beats:
-                errors.append(f"slide {idx}: click_beats must be nonempty for v0.2")
+                errors.append(f"slide {idx}: click_beats must be nonempty for v0.2/v0.3")
             else:
                 flattened=[]
                 beat_ids=set()
@@ -193,6 +227,40 @@ def _shape_targets(root):
             raise ValueError(f"duplicate source object identity: {key}")
         result[key]=sid
     return result
+
+
+def _chart_target_ids(root):
+    result=set()
+    for frame in root.findall(".//p:graphicFrame",NS):
+        props=frame.find("p:nvGraphicFramePr/p:cNvPr",NS)
+        data=frame.find("a:graphic/a:graphicData",NS)
+        if props is None or data is None:
+            continue
+        uri=(data.get("uri") or "").lower()
+        if "chart" in uri or data.find(".//c:chart",NS) is not None:
+            sid=props.get("id")
+            if sid:
+                result.add(sid)
+    return result
+
+
+def _chart_anim_effect_node(parent,spid,behavior_id,duration_ms,delay_ms,filter_name,step=None):
+    effect=_sub(parent,"animEffect",transition="in",filter=filter_name)
+    behavior=_sub(effect,"cBhvr")
+    _behavior_ctn(behavior,behavior_id,duration_ms,delay_ms)
+    target=_sub(behavior,"tgtEl")
+    sp=_sub(target,"spTgt",spid=spid)
+    if step is not None:
+        series_idx,category_idx,build_step=step
+        graphic=_sub(sp,"graphicEl")
+        E.SubElement(
+            graphic,
+            E.QName(A,"chart"),
+            seriesIdx=str(series_idx),
+            categoryIdx=str(category_idx),
+            bldStep=build_step,
+        )
+    return effect
 
 
 def _scale_node(parent,effect,spid,behavior_id,duration_ms,delay_ms):
@@ -309,6 +377,7 @@ TRIGGER_NODE_TYPE={
 
 def _build_click_beat_existing_timing(slide_patch,root):
     available=_shape_targets(root)
+    chart_target_ids=_chart_target_ids(root)
     stages=slide_patch["stages"]
     stage_by_id={stage["id"]:stage for stage in stages}
     click_beats=slide_patch["click_beats"]
@@ -325,6 +394,7 @@ def _build_click_beat_existing_timing(slide_patch,root):
     next_id=3
     animated={}
     stage_build_pairs=set()
+    chart_builds={}
     receipts=[]
     behavior_count=0
 
@@ -368,25 +438,87 @@ def _build_click_beat_existing_timing(slide_patch,root):
                         f"source object not found on slide {slide_patch['source_index']}: "
                         f"id={key[0]!r}, name={key[1]!r}"
                     )
-                behavior_id=next_id; next_id+=1
                 kind=effect["type"]
-                if kind=="motion_path":
-                    _motion_node(stage_children,effect,spid,behavior_id,stage["duration_ms"],0)
-                elif kind=="scale":
-                    _scale_node(stage_children,effect,spid,behavior_id,stage["duration_ms"],0)
-                elif kind=="rotate":
-                    _rotate_node(stage_children,effect,spid,behavior_id,stage["duration_ms"],0)
+                if kind=="chart_entrance":
+                    if spid not in chart_target_ids:
+                        raise ValueError(
+                            f"source object is not a chart on slide {slide_patch['source_index']}: "
+                            f"id={key[0]!r}, name={key[1]!r}"
+                        )
+                    guard=guard_chart_fanout(
+                        effect["build"],
+                        effect["series_count"],
+                        effect.get("category_count"),
+                        effect.get("fanout_limit",24),
+                    )
+                    effective_build=guard["effective_build"]
+                    steps=chart_fanout(
+                        effective_build,
+                        effect["series_count"],
+                        effect.get("category_count"),
+                    )
+                    filter_name=effect.get("filter") or concrete_chart_filter(effect["chart_type"])
+                    if filter_name not in VALID_FILTERS:
+                        raise ValueError(f"unsupported chart entrance filter: {filter_name}")
+                    targets=steps if steps else [None]
+                    unit_duration=max(1,stage["duration_ms"]//len(targets))
+                    behavior_ids=[]
+                    for sub_index,step in enumerate(targets):
+                        behavior_id=next_id; next_id+=1
+                        _chart_anim_effect_node(
+                            stage_children,spid,behavior_id,unit_duration,
+                            sub_index*unit_duration,filter_name,step
+                        )
+                        behavior_ids.append(behavior_id)
+                        behavior_count+=1
+
+                    build_record={
+                        "build":effective_build,
+                        "requested_build":effect["build"],
+                        "group_id":str(group_id),
+                        "animate_background":effect.get("animate_background",False),
+                    }
+                    previous=chart_builds.get(spid)
+                    if previous and (
+                        previous["build"]!=build_record["build"]
+                        or previous["animate_background"]!=build_record["animate_background"]
+                    ):
+                        raise ValueError(
+                            f"chart {key[1]!r} receives conflicting build modes on one slide"
+                        )
+                    chart_builds[spid]=build_record
+                    animated[key]=spid
+                    effect_receipts.append({
+                        "type":kind,
+                        "source_id":key[0],
+                        "source_name":key[1],
+                        "behavior_ids":behavior_ids,
+                        "filter":filter_name,
+                        "requested_build":effect["build"],
+                        "effective_build":effective_build,
+                        "fanout_count":len(targets),
+                        "fanout_degraded":guard["degraded"],
+                        "fanout_reason":guard["reason"],
+                    })
                 else:
-                    raise ValueError(f"unsupported effect type: {kind}")
-                animated[key]=spid
-                stage_targets.add(spid)
-                behavior_count+=1
-                effect_receipts.append({
-                    "type":kind,
-                    "source_id":key[0],
-                    "source_name":key[1],
-                    "behavior_id":behavior_id,
-                })
+                    behavior_id=next_id; next_id+=1
+                    if kind=="motion_path":
+                        _motion_node(stage_children,effect,spid,behavior_id,stage["duration_ms"],0)
+                    elif kind=="scale":
+                        _scale_node(stage_children,effect,spid,behavior_id,stage["duration_ms"],0)
+                    elif kind=="rotate":
+                        _rotate_node(stage_children,effect,spid,behavior_id,stage["duration_ms"],0)
+                    else:
+                        raise ValueError(f"unsupported effect type: {kind}")
+                    animated[key]=spid
+                    stage_targets.add(spid)
+                    behavior_count+=1
+                    effect_receipts.append({
+                        "type":kind,
+                        "source_id":key[0],
+                        "source_name":key[1],
+                        "behavior_id":behavior_id,
+                    })
             for spid in stage_targets:
                 stage_build_pairs.add((spid,str(group_id)))
             stage_receipts.append({
@@ -412,15 +544,34 @@ def _build_click_beat_existing_timing(slide_patch,root):
     _sub(_sub(cond,"tgtEl"),"sldTgt")
 
     build=_sub(timing,"bldLst")
+    chart_spids=set(chart_builds)
     for key,spid in sorted(animated.items(),key=lambda item:(int(item[0][0]),item[0][1])):
-        _sub(build,"bldP",spid=spid,grpId="0",animBg="1")
+        if spid not in chart_spids:
+            _sub(build,"bldP",spid=spid,grpId="0",animBg="1")
     for spid,group_id in sorted(stage_build_pairs,key=lambda item:(int(item[0]),int(item[1]))):
-        _sub(build,"bldP",spid=spid,grpId=group_id,animBg="1")
+        if spid not in chart_spids:
+            _sub(build,"bldP",spid=spid,grpId=group_id,animBg="1")
+    for spid,record in sorted(chart_builds.items(),key=lambda item:int(item[0])):
+        graphic=_sub(build,"bldGraphic",spid=spid,grpId=record["group_id"])
+        if record["build"]=="as-whole":
+            _sub(graphic,"bldAsOne")
+        else:
+            sub=_sub(graphic,"bldSub")
+            E.SubElement(
+                sub,
+                E.QName(A,"bldChart"),
+                bld=ooxml_build_token(record["build"]),
+                animBg="1" if record["animate_background"] else "0",
+            )
 
     return timing,{
         "writer_mode":"presenter-paced-click-beats",
         "click_beat_count":len(click_beats),
         "behavior_count":behavior_count,
+        "chart_builds":[
+            {"spid":spid,**record}
+            for spid,record in sorted(chart_builds.items(),key=lambda item:int(item[0]))
+        ],
         "animated_objects":[{"source_id":k[0],"source_name":k[1]} for k in animated],
         "click_beats":receipts,
     }
