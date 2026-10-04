@@ -46,6 +46,12 @@ class ExistingDeckInventoryTests(unittest.TestCase):
         self.assertTrue(notes)
         self.assertTrue(any("Collect" in note and "Inspect" in note for note in notes))
 
+    def test_design_fingerprint_is_exposed(self):
+        profile=self.report["design_profile"]
+        self.assertTrue(profile["fill_colors"])
+        self.assertTrue(profile["geometry_presets"])
+        self.assertTrue(any(shape["style"] for slide in self.report["slides"] for shape in slide["shapes"]))
+
     def test_package_capabilities_are_exposed(self):
         self.assertTrue(self.report["package"]["has_theme"])
         self.assertTrue(self.report["slide_size_emu"]["width"]>0)
