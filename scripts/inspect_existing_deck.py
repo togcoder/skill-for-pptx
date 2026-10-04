@@ -261,8 +261,8 @@ def inspect_existing_deck(path):
                     "shape_count":len(shapes),
                     "shapes":shapes,
                     "relationships":_relationship_summary(relationships),
-                    "has_transition":root.find(f"{{{P}}}transition") is not None,
-                    "has_timing":root.find(f"{{{P}}}timing") is not None,
+                    "has_transition":root.find(f".//{{{P}}}transition") is not None,
+                    "has_timing":root.find(f".//{{{P}}}timing") is not None,
                     "layout_part":next((r["resolved_target"] for r in relationships if r["type"].endswith("/slideLayout")),None),
                 })
 
