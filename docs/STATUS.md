@@ -2,6 +2,20 @@
 
 Cập nhật ngày 04/10/2026, giờ Việt Nam. Phiên bản nguồn nghiên cứu v0.7 (thêm T005 compound intent).
 
+## T006 planning compiler — đang triển khai
+
+Đã thêm `skills/pptx-motion/references/native-timeline.md` và
+`scripts/pack_timeline.py`. Compiler mới tái sử dụng geometry oracle T005 nhưng
+không xuất waypoint thành slide: candidate 12 legacy states được mô hình hóa thành
+1 semantic slide với 6 timeline stages; orbit samples trở thành points của một
+motion-path plan. `tests/test_timeline_packing.py` khóa mục tiêu 12→1, 6 stage,
+transfer 1 slide và focus motion+scale trên cùng resource.
+
+Đây mới là intermediate planning contract, chưa phải backend ghi `<p:timing>` vào
+PPTX và chưa có playback PowerPoint. Nguồn Microsoft xác nhận animation là
+slide-local/time-based, hỗ trợ nhiều effect trên một object và motion paths; claim
+được lưu tại `research/claims/T006-single-slide-native-timeline.md`.
+
 ## Chỉ thị mới — resource-local motion packing
 
 Người dùng yêu cầu đổi kiến trúc: không coi mỗi chuyển động/state là một slide.
