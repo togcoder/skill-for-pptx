@@ -257,6 +257,183 @@ def _relationship_summary(relationships):
     return out
 
 
+
+TIMING_EFFECT_TAGS={
+    "anim","animClr","animEffect","animMotion","animRot","animScale",
+    "set","audio","video","cmd",
+}
+
+
+def _local_name(tag):
+    return tag.rsplit("}",1)[-1] if "}" in tag else tag
+
+
+def _timing_conditions(ctn):
+    if ctn is None:
+        return []
+    out=[]
+    for cond in ctn.findall("p:stCondLst/p:cond",NS):
+        item={"delay":cond.get("delay"),"event":cond.get("evt")}
+        tn=cond.find("p:tn",NS)
+        if tn is not None and tn.get("val") is not None:
+            item["time_node_ref"]=tn.get("val")
+        sp=cond.find("p:tgtEl/p:spTgt",NS)
+        if sp is not None and sp.get("spid") is not None:
+            item["shape_target"]=sp.get("spid")
+        out.append(item)
+    return out
+
+
+def _timing_effect_properties(node,kind):
+    if kind=="animMotion":
+        return {
+            "origin":node.get("origin"),
+            "path":node.get("path"),
+            "path_edit_mode":node.get("pathEditMode"),
+        }
+    if kind=="animScale":
+        out={}
+        for child_name in ("from","to","by"):
+            child=node.find(f"p:{child_name}",NS)
+            if child is not None:
+                out[child_name]=dict(child.attrib)
+        return out
+    if kind=="animRot":
+        return {key:node.get(key) for key in ("by","from","to") if node.get(key) is not None}
+    if kind=="animEffect":
+        return {key:node.get(key) for key in ("transition","filter","prLst") if node.get(key) is not None}
+    if kind in ("anim","set"):
+        attrs=[x.text for x in node.findall("p:cBhvr/p:attrNameLst/p:attrName",NS) if x.text]
+        result={"attributes":attrs}
+        if kind=="set":
+            to=node.find("p:to",NS)
+            if to is not None and len(list(to)):
+                child=list(to)[0]
+                result["to"]={"kind":_local_name(child.tag),**dict(child.attrib)}
+        return result
+    return dict(node.attrib)
+
+
+def _numeric_delay(conditions):
+    values=[]
+    for cond in conditions:
+        raw=cond.get("delay")
+        if raw is None:
+            continue
+        try:
+            values.append(int(raw))
+        except (TypeError,ValueError):
+            continue
+    return min(values) if values else None
+
+
+def _timing_inventory(root,shapes):
+    timing=root.find("p:timing",NS)
+    if timing is None:
+        return None
+
+    by_id={
+        str(shape["id"]):{
+            "id":str(shape["id"]),
+            "name":shape.get("name"),
+            "text":shape.get("text"),
+            "kind":shape.get("kind"),
+        }
+        for shape in shapes if shape.get("id") is not None
+    }
+
+    time_nodes=[]
+    node_type_counts=Counter()
+    for ctn in timing.findall(".//p:cTn",NS):
+        item={
+            "id":ctn.get("id"),
+            "node_type":ctn.get("nodeType"),
+            "duration":ctn.get("dur"),
+            "fill":ctn.get("fill"),
+            "group_id":ctn.get("grpId"),
+            "preset_class":ctn.get("presetClass"),
+            "preset_id":ctn.get("presetID"),
+            "start_conditions":_timing_conditions(ctn),
+        }
+        if item["node_type"]:
+            node_type_counts[item["node_type"]]+=1
+        time_nodes.append(item)
+
+    effects=[]
+    for node in timing.iter():
+        kind=_local_name(node.tag)
+        if kind not in TIMING_EFFECT_TAGS:
+            continue
+        behavior_ctn=node.find("p:cBhvr/p:cTn",NS)
+        if behavior_ctn is None:
+            behavior_ctn=node.find("p:cTn",NS)
+        target=node.find(".//p:spTgt",NS)
+        spid=target.get("spid") if target is not None else None
+        conditions=_timing_conditions(behavior_ctn)
+        effects.append({
+            "sequence_index":len(effects)+1,
+            "type":kind,
+            "target_spid":spid,
+            "target":by_id.get(spid),
+            "duration":behavior_ctn.get("dur") if behavior_ctn is not None else None,
+            "node_type":behavior_ctn.get("nodeType") if behavior_ctn is not None else None,
+            "start_conditions":conditions,
+            "numeric_delay_ms":_numeric_delay(conditions),
+            "properties":_timing_effect_properties(node,kind),
+        })
+
+    build_entries=[]
+    for item in timing.findall("p:bldLst/*",NS):
+        spid=item.get("spid")
+        build_entries.append({
+            "type":_local_name(item.tag),
+            "spid":spid,
+            "target":by_id.get(spid),
+            "group_id":item.get("grpId"),
+            "build":item.get("build"),
+            "anim_bg":item.get("animBg"),
+        })
+
+    all_numeric=bool(effects) and all(effect["numeric_delay_ms"] is not None for effect in effects)
+    if all_numeric:
+        order=sorted(
+            ({"effect_index":effect["sequence_index"],"delay_ms":effect["numeric_delay_ms"]} for effect in effects),
+            key=lambda item:(item["delay_ms"],item["effect_index"]),
+        )
+        order_basis="numeric-behavior-delay"
+    else:
+        order=[{"effect_index":effect["sequence_index"],"delay_ms":effect["numeric_delay_ms"]} for effect in effects]
+        order_basis="document-order-partial"
+
+    return {
+        "effect_count":len(effects),
+        "time_node_count":len(time_nodes),
+        "node_type_counts":[{"value":key,"count":count} for key,count in node_type_counts.most_common()],
+        "effects":effects,
+        "order_hint":order,
+        "order_basis":order_basis,
+        "build_entries":build_entries,
+        "note":"Timing inventory is structural evidence. Event/master relationships can make runtime order more complex than this summary.",
+    }
+
+
+def _transition_inventory(root):
+    nodes=root.findall(".//p:transition",NS)
+    if not nodes:
+        return None
+    out=[]
+    for transition in nodes:
+        descendants=[]
+        for child in transition.iter():
+            if child is transition:
+                continue
+            name=_local_name(child.tag)
+            if name not in descendants:
+                descendants.append(name)
+        out.append({"attributes":dict(transition.attrib),"descendants":descendants})
+    return {"count":len(nodes),"variants":out}
+
+
 def inspect_existing_deck(path):
     path=Path(path)
     report={
@@ -323,6 +500,8 @@ def inspect_existing_deck(path):
                     "relationships":_relationship_summary(relationships),
                     "has_transition":root.find(f".//{{{P}}}transition") is not None,
                     "has_timing":root.find(f".//{{{P}}}timing") is not None,
+                    "transition_summary":_transition_inventory(root),
+                    "timing_summary":_timing_inventory(root,shapes),
                     "layout_part":next((r["resolved_target"] for r in relationships if r["type"].endswith("/slideLayout")),None),
                 })
 
