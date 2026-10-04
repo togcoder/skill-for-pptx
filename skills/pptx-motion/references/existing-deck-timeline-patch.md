@@ -1,4 +1,4 @@
-# Existing-deck native timeline patch contract v0.2
+# Existing-deck native timeline patch contract v0.3
 
 This contract is the low-level bridge between a semantic motion-director plan and
 an existing PPTX package.
@@ -21,7 +21,7 @@ identity.
 
 ## Root
 
-- `version`: `"0.2"` for presenter-paced patches; `"0.1"` remains accepted as the legacy one-click baseline
+- `version`: `"0.3"` for presenter-paced chart-capable patches; `"0.2"` remains the click-beat baseline and `"0.1"` the legacy one-click baseline
 - `kind`: `"existing-deck-timeline-patch"`
 - `source_sha256`
 - `slides`
@@ -34,9 +34,9 @@ Each slide patch contains:
 
 - `source_index`: one-based slide index;
 - `stages`: ordered stage list;
-- `click_beats`: required in v0.2 and partitions stage IDs into presenter clicks.
+- `click_beats`: required in v0.2/v0.3 and partitions stage IDs into presenter clicks.
 
-v0.1/v0.2 currently patch only slides with **no existing `p:timing`**. T008 owns safe merge/continuation of pre-existing timing. Existing slide
+v0.1/v0.2/v0.3 currently patch only slides with **no existing `p:timing`**. T008 owns safe merge/continuation of pre-existing timing. Existing slide
 transitions are preserved. Untargeted slide/package bytes must remain unchanged.
 
 ## Stage
@@ -90,6 +90,36 @@ PowerPoint motion path.
 - `type="rotate"`
 - `by_deg`: finite degree delta
 
+### chart_entrance — v0.3
+
+Targets must be an actual top-level chart graphicFrame in the source slide.
+
+Required fields:
+
+- `type="chart_entrance"`
+- `target`
+- `chart_type`
+- `build`: `as-whole`, `series`, `category`, `series-elements`, or
+  `category-elements`
+- `series_count`
+- `category_count` when the build needs categories
+- `animate_background`
+- optional `filter`; otherwise the writer chooses a conservative type-specific
+  entrance filter
+- optional `fanout_limit`, default 24
+
+For a per-element build the writer expands one semantic effect into
+`p:graphicEl/a:chart` sub-targets using `seriesIdx`, `categoryIdx`, and
+`bldStep`.
+
+The build list uses `p:bldGraphic`; non-whole builds contain
+`p:bldSub/a:bldChart`. The writer records both requested and effective build
+mode.
+
+If fan-out exceeds the configured limit, the writer degrades granularity instead
+of creating an unbounded number of animation behaviors. This is an execution
+safety rule, not permission to change the chart's data.
+
 ## Preservation
 
 The patcher must:
@@ -97,7 +127,9 @@ The patcher must:
 - reject source hash mismatch;
 - reject unknown slide/object targets;
 - reject duplicate stage IDs;
-- reject invalid v0.2 click-beat partitions or nested `on-click` stages;
+- reject invalid v0.2/v0.3 click-beat partitions or nested `on-click` stages;
+- reject `chart_entrance` against non-chart source objects;
+- record density-guard degradation for chart fan-out;
 - reject target slides that already have timing;
 - preserve existing transitions;
 - alter only the targeted slide XML parts;
