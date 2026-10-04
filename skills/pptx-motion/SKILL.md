@@ -10,6 +10,7 @@ Create a reviewable motion experiment from a short instruction. Read the project
 ## Workflow
 
 1. Freeze the short prompt and the intended slide count. Resolve routine design choices and record assumptions. Separate semantic message, object identity and motion.
+   For a compound request, read [compound-choreography.md](references/compound-choreography.md). Extract every explicit action, target, quantity, order and constraint before choosing a recipe. Keep design assumptions separate. Use its strict intent contract when the radial drill-down recipe fits; report unsupported demands instead of silently simplifying them.
 2. Choose a recipe from [recipes.md](references/recipes.md). Record the original source URL, author, access date, evidence actually inspected and reuse conditions. Do not copy reference media into distributed artifacts.
 3. Read [plan-contract.md](references/plan-contract.md). Draft ordered states and consecutive transitions. Use stable semantic IDs and unique names beginning with `!!`. Reuse the same names across states. Plan labels and their carriers separately so that both stay readable.
    Count visible states separately from transitions: N slides provide N−1 between-slide transitions. The first pose is already visible. For swapping labels or cycling focus, read [motion-paths.md](references/motion-paths.md) and inspect intermediate-path risks before exporting.

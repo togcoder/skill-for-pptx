@@ -1,6 +1,6 @@
 {
   "scope": "repository research-source validation; not personal skill installation",
-  "source_version": "0.6",
+  "source_version": "0.7",
   "frontmatter": {
     "name": "pptx-motion",
     "description": "Develop editable PowerPoint motion from short prompts using explicit scene states, stable object identity and evidence gates. Use for requests to prototype Morph, motion recipes, motion plans, or research and improve a PPTX motion generator. This repository contains an experimental source skill, with structural and static checks only until PowerPoint playback is supplied."

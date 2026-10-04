@@ -1,0 +1,36 @@
+{
+  "version": "0.1",
+  "recipe": "radial-drilldown",
+  "prompt": "Bung một lõi thành 12 nút, xoay cả vòng, phóng nút 3, tách nó thành 4 lớp rồi ghép lại; chữ luôn đứng thẳng.",
+  "title": "Cấu trúc một hệ thống",
+  "node_count": 12,
+  "focus_node": 3,
+  "layer_count": 4,
+  "orbit_degrees": 90,
+  "orbit_segments": 1,
+  "direction": "clockwise",
+  "keep_labels_upright": true,
+  "operations": [
+    "burst",
+    "orbit",
+    "focus",
+    "split",
+    "reassemble",
+    "restore"
+  ],
+  "requirements": [
+    "12 nút",
+    "xoay cả vòng",
+    "phóng nút 3",
+    "tách 4 lớp",
+    "ghép lại",
+    "chữ đứng thẳng"
+  ],
+  "assumptions": [
+    "Xoay cả vòng nghĩa là xoay toàn bộ vòng, chưa chỉ định góc; chọn 90 độ thuận kim đồng hồ",
+    "6 đoạn quỹ đạo 15 độ, không phải đường cong native",
+    "Đồ thị 2D và dữ liệu giả lập",
+    "Kết thúc trở lại vòng sau khi xoay",
+    "Bấm chuyển từng trạng thái, không tự phát"
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "render_source": "Final exact PPTX via host renderer",
+  "files": [
+    {
+      "path": "experiments/T005-20261004-codex-choreography/candidate-renders/slide-1.png",
+      "sha256": "e59786df48f36903370672c6737826ead2f56cab811b856a0179fc0d81da050f"
+    },
+    {
+      "path": "experiments/T005-20261004-codex-choreography/candidate-renders/slide-10.png",
+      "sha256": "6081c0d12dfe27998e19266081b0ccdba44997f3dc6fdf809fabd8f211c7cf9d"
+    },
+    {
+      "path": "experiments/T005-20261004-codex-choreography/candidate-renders/slide-11.png",
+      "sha256": "bcc51a9e3a05ca9e4904435d3e5ae464b9c59d486e68aba0e5b4f4e1613a61be"
+    },
+    {
+      "path": "experiments/T005-20261004-codex-choreography/candidate-renders/slide-12.png",
+      "sha256": "adf59fc70e31dc7a292b27bc852c568788b97778790f68dfcd93cbf5be40e8a7"
+    },
+    {
+      "path": "experiments/T005-20261004-codex-choreography/candidate-renders/slide-2.png",
+      "sha256": "6df5ec37fefd79ab3fa889f8a1a708f9bb5c75a307b134bbd51d9e246608893c"
+    },
+    {
+      "path": "experiments/T005-20261004-codex-choreography/candidate-renders/slide-3.png",
+      "sha256": "37c7c5fe3264bc7614a294a3622f7c7e015b37507e937f610dddd8524367de2d"
+    },
+    {
+      "path": "experiments/T005-20261004-codex-choreography/candidate-renders/slide-4.png",
+      "sha256": "5eb53e49529da30ed47de6184e10ad7808177b1e1ee42215d3b348e24ccce934"
+    },
+    {
+      "path": "experiments/T005-20261004-codex-choreography/candidate-renders/slide-5.png",
+      "sha256": "1064af1eccdbf38d082e21ad38ebc1da4808a4f33042be1827c032eb349059d0"
+    },
+    {
+      "path": "experiments/T005-20261004-codex-choreography/candidate-renders/slide-6.png",
+      "sha256": "87a2f9c0c141a1726ff58b315a5d1371a432d44dfbfaa1febe80d444f4d52002"
+    },
+    {
+      "path": "experiments/T005-20261004-codex-choreography/candidate-renders/slide-7.png",
+      "sha256": "5a192c2c7b29c6d8a5ac919a5c679ad6a30462d65ed9d158082ae6affbc5a001"
+    },
+    {
+      "path": "experiments/T005-20261004-codex-choreography/candidate-renders/slide-8.png",
+      "sha256": "a89801e955f996d20dedc57fbaf491a093e261b3d328882cd5c43fe0ef27958b"
+    },
+    {
+      "path": "experiments/T005-20261004-codex-choreography/candidate-renders/slide-9.png",
+      "sha256": "6d2a6279e2659c265073b5fa92c5cf6c9f3818f36eff49bb825be7ee26cb756f"
+    },
+    {
+      "path": "experiments/T005-20261004-codex-choreography/transfer-renders/slide-1.png",
+      "sha256": "8be4f4c5b4b4526877c1d7d0d05b69b806e943335d7c40f51c319b3789e77ec3"
+    },
+    {
+      "path": "experiments/T005-20261004-codex-choreography/transfer-renders/slide-10.png",
+      "sha256": "53106c61e6f3dd7ec3e3c240dbeb103c0a715b52b32205725dfca36402533d9a"
+    },
+    {
+      "path": "experiments/T005-20261004-codex-choreography/transfer-renders/slide-2.png",
+      "sha256": "d6d17861bb3e4b50bab9994f5b8bb419ad11710f0a90d567c6c306860407d21d"
+    },
+    {
+      "path": "experiments/T005-20261004-codex-choreography/transfer-renders/slide-3.png",
+      "sha256": "92e378f6eb0755ac551711836d1ed5f2a31f92a414ab07a39eab5283ec45446e"
+    },
+    {
+      "path": "experiments/T005-20261004-codex-choreography/transfer-renders/slide-4.png",
+      "sha256": "95b6936117165d6d4e98305fff1dd570542da20e902f74f4740088c15f13ccb4"
+    },
+    {
+      "path": "experiments/T005-20261004-codex-choreography/transfer-renders/slide-5.png",
+      "sha256": "1e320318d3f7417502e05cdef8b46ee6995b9988ffc16fd3cf57362063378458"
+    },
+    {
+      "path": "experiments/T005-20261004-codex-choreography/transfer-renders/slide-6.png",
+      "sha256": "af3b5c7437e9bbeeca8071db49d7d38a8cb2aa7acb5d21a7a661b595fbdf7000"
+    },
+    {
+      "path": "experiments/T005-20261004-codex-choreography/transfer-renders/slide-7.png",
+      "sha256": "877028d93a86e9cf42ec4e8824e3a77852287dacfe96403742bed4b6626f0987"
+    },
+    {
+      "path": "experiments/T005-20261004-codex-choreography/transfer-renders/slide-8.png",
+      "sha256": "a4803b7eded6fda5b74eafe5425059fef94803735e58fad3e01a2a2d612391e0"
+    },
+    {
+      "path": "experiments/T005-20261004-codex-choreography/transfer-renders/slide-9.png",
+      "sha256": "02458681c4a3f72dad5947d0bc9d6d3781f4026830b42ab5e3e750ba8d3afbf3"
+    }
+  ],
+  "static_inspection_record": "See REPORT.md; hashes are not a visual-review or playback oracle."
+}

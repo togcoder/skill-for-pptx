@@ -6,7 +6,9 @@ Repo chính: [togcoder/skill-for-pptx](https://github.com/togcoder/skill-for-ppt
 
 **Model mới bắt đầu tại [HANDOFF.md](HANDOFF.md)**. Quy trình cộng tác và các task song song nằm ở [docs/COLLABORATION.md](docs/COLLABORATION.md).
 
-**Bản nghiên cứu v0.6:** đã có đường dựng PPTX thử nghiệm, kiểm tra cấu trúc và ảnh tĩnh. Chưa xác nhận chuyển động trong PowerPoint. Nguồn skill trong repo chưa được cài vào tài khoản.
+**Bản nghiên cứu v0.7:** đã có đường dựng PPTX thử nghiệm, kiểm tra cấu trúc và ảnh tĩnh. Chưa xác nhận chuyển động trong PowerPoint. Nguồn skill trong repo chưa được cài vào tài khoản.
+
+Mới nhất: [T005 compound choreography](experiments/T005-20261004-codex-choreography/REPORT.md) biến intent từ prompt ngắn thành chuỗi bung nút, xoay, phóng, tách lớp và ghép lại. Hai PPTX/22 ảnh cuối đã kiểm tra, 41 tests đạt. Đây là một recipe 2D hạn chế, cần bấm từng Morph; chưa phải bộ tạo mọi hiệu ứng phức tạp. [T006](research/tasks/T006-native-timeline.md) ưu tiên timeline/path và playback thật tiếp theo.
 
 ## Kết quả hiện có
 

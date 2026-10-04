@@ -1,0 +1,2454 @@
+{
+  "version": "0.1",
+  "brief": "Bung một lõi thành 12 nút, xoay cả vòng, phóng nút 3, tách nó thành 4 lớp rồi ghép lại; chữ luôn đứng thẳng.",
+  "canvas": {
+    "width": 16,
+    "height": 9,
+    "units": "normalized"
+  },
+  "data_provenance": "synthetic",
+  "objects": [
+    {
+      "id": "node-1",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-1",
+      "geometry": "ellipse",
+      "fill": "#2B2A35",
+      "stroke": "#696674",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "label-1",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!label-1",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "01",
+      "font_size": 26,
+      "text_color": "#F6F2E8",
+      "bold": true
+    },
+    {
+      "id": "node-2",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-2",
+      "geometry": "ellipse",
+      "fill": "#2B2A35",
+      "stroke": "#696674",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "label-2",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!label-2",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "02",
+      "font_size": 26,
+      "text_color": "#F6F2E8",
+      "bold": true
+    },
+    {
+      "id": "node-3-layer-1",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-3-layer-1",
+      "geometry": "rect",
+      "fill": "#56C4AE",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "node-3-layer-2",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-3-layer-2",
+      "geometry": "rect",
+      "fill": "#409C9B",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "node-3-layer-3",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-3-layer-3",
+      "geometry": "rect",
+      "fill": "#307C8D",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "node-3-layer-4",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-3-layer-4",
+      "geometry": "rect",
+      "fill": "#245B79",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "label-3",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!label-3",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "03",
+      "font_size": 26,
+      "text_color": "#F6F2E8",
+      "bold": true
+    },
+    {
+      "id": "node-4",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-4",
+      "geometry": "ellipse",
+      "fill": "#2B2A35",
+      "stroke": "#696674",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "label-4",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!label-4",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "04",
+      "font_size": 26,
+      "text_color": "#F6F2E8",
+      "bold": true
+    },
+    {
+      "id": "node-5",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-5",
+      "geometry": "ellipse",
+      "fill": "#2B2A35",
+      "stroke": "#696674",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "label-5",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!label-5",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "05",
+      "font_size": 26,
+      "text_color": "#F6F2E8",
+      "bold": true
+    },
+    {
+      "id": "node-6",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-6",
+      "geometry": "ellipse",
+      "fill": "#2B2A35",
+      "stroke": "#696674",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "label-6",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!label-6",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "06",
+      "font_size": 26,
+      "text_color": "#F6F2E8",
+      "bold": true
+    },
+    {
+      "id": "node-7",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-7",
+      "geometry": "ellipse",
+      "fill": "#2B2A35",
+      "stroke": "#696674",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "label-7",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!label-7",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "07",
+      "font_size": 26,
+      "text_color": "#F6F2E8",
+      "bold": true
+    },
+    {
+      "id": "node-8",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-8",
+      "geometry": "ellipse",
+      "fill": "#2B2A35",
+      "stroke": "#696674",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "label-8",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!label-8",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "08",
+      "font_size": 26,
+      "text_color": "#F6F2E8",
+      "bold": true
+    },
+    {
+      "id": "node-9",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-9",
+      "geometry": "ellipse",
+      "fill": "#2B2A35",
+      "stroke": "#696674",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "label-9",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!label-9",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "09",
+      "font_size": 26,
+      "text_color": "#F6F2E8",
+      "bold": true
+    },
+    {
+      "id": "node-10",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-10",
+      "geometry": "ellipse",
+      "fill": "#2B2A35",
+      "stroke": "#696674",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "label-10",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!label-10",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "10",
+      "font_size": 26,
+      "text_color": "#F6F2E8",
+      "bold": true
+    },
+    {
+      "id": "node-11",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-11",
+      "geometry": "ellipse",
+      "fill": "#2B2A35",
+      "stroke": "#696674",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "label-11",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!label-11",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "11",
+      "font_size": 26,
+      "text_color": "#F6F2E8",
+      "bold": true
+    },
+    {
+      "id": "node-12",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-12",
+      "geometry": "ellipse",
+      "fill": "#2B2A35",
+      "stroke": "#696674",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "label-12",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!label-12",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "12",
+      "font_size": 26,
+      "text_color": "#F6F2E8",
+      "bold": true
+    },
+    {
+      "id": "core",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!core",
+      "geometry": "ellipse",
+      "fill": "#C37745",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "core-label",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!core-label",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "CORE",
+      "font_size": 25,
+      "text_color": "#F6F2E8",
+      "bold": true
+    },
+    {
+      "id": "title",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!title",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Cấu trúc một hệ thống",
+      "font_size": 44,
+      "text_color": "#F6F2E8",
+      "bold": true
+    },
+    {
+      "id": "phase",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!phase",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "",
+      "font_size": 28,
+      "text_color": "#F6F2E8",
+      "bold": true
+    }
+  ],
+  "states": [
+    {
+      "id": "core",
+      "message": "Lõi hệ thống",
+      "objects": {
+        "node-1": {
+          "x": 0.30390625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-1": {
+          "x": 0.3046875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-2": {
+          "x": 0.30390625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-2": {
+          "x": 0.3046875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-1": {
+          "x": 0.30390625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.016666666666666666,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-2": {
+          "x": 0.30390625,
+          "y": 0.5486111111111112,
+          "w": 0.0484375,
+          "h": 0.016666666666666666,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-3": {
+          "x": 0.30390625,
+          "y": 0.5652777777777778,
+          "w": 0.0484375,
+          "h": 0.016666666666666666,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-4": {
+          "x": 0.30390625,
+          "y": 0.5819444444444445,
+          "w": 0.0484375,
+          "h": 0.016666666666666666,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-3": {
+          "x": 0.3046875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-4": {
+          "x": 0.30390625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-4": {
+          "x": 0.3046875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-5": {
+          "x": 0.30390625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-5": {
+          "x": 0.3046875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-6": {
+          "x": 0.30390625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-6": {
+          "x": 0.3046875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-7": {
+          "x": 0.30390625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-7": {
+          "x": 0.3046875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-8": {
+          "x": 0.30390625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-8": {
+          "x": 0.3046875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-9": {
+          "x": 0.30390625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-9": {
+          "x": 0.3046875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-10": {
+          "x": 0.30390625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-10": {
+          "x": 0.3046875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-11": {
+          "x": 0.30390625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-11": {
+          "x": 0.3046875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-12": {
+          "x": 0.30390625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-12": {
+          "x": 0.3046875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "core": {
+          "x": 0.27890625,
+          "y": 0.4777777777777778,
+          "w": 0.0984375,
+          "h": 0.175,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "core-label": {
+          "x": 0.284375,
+          "y": 0.5333333333333333,
+          "w": 0.0875,
+          "h": 0.06388888888888888,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "title": {
+          "x": 0.046875,
+          "y": 0.0375,
+          "w": 0.90625,
+          "h": 0.10277777777777777,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "phase": {
+          "x": 0.046875,
+          "y": 0.1375,
+          "w": 0.90625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1,
+          "text": "Lõi hệ thống"
+        }
+      }
+    },
+    {
+      "id": "burst",
+      "message": "12 nút thành một vòng",
+      "objects": {
+        "node-1": {
+          "x": 0.30390625,
+          "y": 0.22083333333333333,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-1": {
+          "x": 0.3046875,
+          "y": 0.225,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-2": {
+          "x": 0.39140625,
+          "y": 0.2625143188226191,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-2": {
+          "x": 0.3921875,
+          "y": 0.26668098548928576,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-1": {
+          "x": 0.4554606956622768,
+          "y": 0.3763888888888889,
+          "w": 0.0484375,
+          "h": 0.016666666666666666,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-2": {
+          "x": 0.4554606956622768,
+          "y": 0.39305555555555555,
+          "w": 0.0484375,
+          "h": 0.016666666666666666,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-3": {
+          "x": 0.4554606956622768,
+          "y": 0.4097222222222222,
+          "w": 0.0484375,
+          "h": 0.016666666666666666,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-4": {
+          "x": 0.4554606956622768,
+          "y": 0.4263888888888889,
+          "w": 0.0484375,
+          "h": 0.016666666666666666,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-3": {
+          "x": 0.4562419456622768,
+          "y": 0.38055555555555554,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-4": {
+          "x": 0.47890625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-4": {
+          "x": 0.4796875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-5": {
+          "x": 0.4554606956622768,
+          "y": 0.6875,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-5": {
+          "x": 0.4562419456622768,
+          "y": 0.6916666666666667,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-6": {
+          "x": 0.39140625,
+          "y": 0.8013745700662698,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-6": {
+          "x": 0.3921875,
+          "y": 0.8055412367329364,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-7": {
+          "x": 0.30390625,
+          "y": 0.8430555555555556,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-7": {
+          "x": 0.3046875,
+          "y": 0.8472222222222222,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-8": {
+          "x": 0.21640625000000005,
+          "y": 0.8013745700662699,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-8": {
+          "x": 0.21718750000000003,
+          "y": 0.8055412367329365,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-9": {
+          "x": 0.15235180433772322,
+          "y": 0.6875,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-9": {
+          "x": 0.15313305433772323,
+          "y": 0.6916666666666667,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-10": {
+          "x": 0.12890625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-10": {
+          "x": 0.1296875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-11": {
+          "x": 0.15235180433772325,
+          "y": 0.3763888888888889,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-11": {
+          "x": 0.15313305433772323,
+          "y": 0.38055555555555554,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-12": {
+          "x": 0.2164062499999999,
+          "y": 0.26251431882261916,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-12": {
+          "x": 0.21718749999999992,
+          "y": 0.2666809854892858,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "core": {
+          "x": 0.27890625,
+          "y": 0.4777777777777778,
+          "w": 0.0984375,
+          "h": 0.175,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "core-label": {
+          "x": 0.284375,
+          "y": 0.5333333333333333,
+          "w": 0.0875,
+          "h": 0.06388888888888888,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "title": {
+          "x": 0.046875,
+          "y": 0.0375,
+          "w": 0.90625,
+          "h": 0.10277777777777777,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "phase": {
+          "x": 0.046875,
+          "y": 0.1375,
+          "w": 0.90625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1,
+          "text": "12 nút thành một vòng"
+        }
+      }
+    },
+    {
+      "id": "orbit-1",
+      "message": "Xoay thuận chiều kim đồng hồ",
+      "objects": {
+        "node-1": {
+          "x": 0.47890625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-1": {
+          "x": 0.4796875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-2": {
+          "x": 0.4554606956622768,
+          "y": 0.6875,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-2": {
+          "x": 0.4562419456622768,
+          "y": 0.6916666666666667,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-1": {
+          "x": 0.39140625,
+          "y": 0.8013745700662698,
+          "w": 0.0484375,
+          "h": 0.016666666666666666,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-2": {
+          "x": 0.39140625,
+          "y": 0.8180412367329364,
+          "w": 0.0484375,
+          "h": 0.016666666666666666,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-3": {
+          "x": 0.39140625,
+          "y": 0.8347079033996031,
+          "w": 0.0484375,
+          "h": 0.016666666666666666,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-4": {
+          "x": 0.39140625,
+          "y": 0.8513745700662697,
+          "w": 0.0484375,
+          "h": 0.016666666666666666,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-3": {
+          "x": 0.3921875,
+          "y": 0.8055412367329364,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-4": {
+          "x": 0.30390625,
+          "y": 0.8430555555555556,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-4": {
+          "x": 0.3046875,
+          "y": 0.8472222222222222,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-5": {
+          "x": 0.21640625000000005,
+          "y": 0.8013745700662699,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-5": {
+          "x": 0.21718750000000003,
+          "y": 0.8055412367329365,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-6": {
+          "x": 0.15235180433772322,
+          "y": 0.6875,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-6": {
+          "x": 0.15313305433772323,
+          "y": 0.6916666666666667,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-7": {
+          "x": 0.12890625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-7": {
+          "x": 0.1296875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-8": {
+          "x": 0.15235180433772325,
+          "y": 0.3763888888888889,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-8": {
+          "x": 0.15313305433772323,
+          "y": 0.38055555555555554,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-9": {
+          "x": 0.2164062499999999,
+          "y": 0.26251431882261916,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-9": {
+          "x": 0.21718749999999992,
+          "y": 0.2666809854892858,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-10": {
+          "x": 0.30390624999999993,
+          "y": 0.22083333333333333,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-10": {
+          "x": 0.30468749999999994,
+          "y": 0.225,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-11": {
+          "x": 0.39140625,
+          "y": 0.2625143188226191,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-11": {
+          "x": 0.3921875,
+          "y": 0.26668098548928576,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-12": {
+          "x": 0.45546069566227676,
+          "y": 0.3763888888888887,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-12": {
+          "x": 0.4562419456622767,
+          "y": 0.3805555555555554,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "core": {
+          "x": 0.27890625,
+          "y": 0.4777777777777778,
+          "w": 0.0984375,
+          "h": 0.175,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "core-label": {
+          "x": 0.284375,
+          "y": 0.5333333333333333,
+          "w": 0.0875,
+          "h": 0.06388888888888888,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "title": {
+          "x": 0.046875,
+          "y": 0.0375,
+          "w": 0.90625,
+          "h": 0.10277777777777777,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "phase": {
+          "x": 0.046875,
+          "y": 0.1375,
+          "w": 0.90625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1,
+          "text": "Xoay thuận chiều kim đồng hồ"
+        }
+      }
+    },
+    {
+      "id": "focus",
+      "message": "Phóng nút 03",
+      "objects": {
+        "node-1": {
+          "x": 0.47890625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-1": {
+          "x": 0.4796875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-2": {
+          "x": 0.4554606956622768,
+          "y": 0.6875,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-2": {
+          "x": 0.4562419456622768,
+          "y": 0.6916666666666667,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-1": {
+          "x": 0.6375,
+          "y": 0.43194444444444446,
+          "w": 0.19375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-2": {
+          "x": 0.6375,
+          "y": 0.4986111111111111,
+          "w": 0.19375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-3": {
+          "x": 0.6375,
+          "y": 0.5652777777777778,
+          "w": 0.19375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-4": {
+          "x": 0.6375,
+          "y": 0.6319444444444444,
+          "w": 0.19375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-3": {
+          "x": 0.7109375,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-4": {
+          "x": 0.30390625,
+          "y": 0.8430555555555556,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-4": {
+          "x": 0.3046875,
+          "y": 0.8472222222222222,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-5": {
+          "x": 0.21640625000000005,
+          "y": 0.8013745700662699,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-5": {
+          "x": 0.21718750000000003,
+          "y": 0.8055412367329365,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-6": {
+          "x": 0.15235180433772322,
+          "y": 0.6875,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-6": {
+          "x": 0.15313305433772323,
+          "y": 0.6916666666666667,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-7": {
+          "x": 0.12890625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-7": {
+          "x": 0.1296875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-8": {
+          "x": 0.15235180433772325,
+          "y": 0.3763888888888889,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-8": {
+          "x": 0.15313305433772323,
+          "y": 0.38055555555555554,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-9": {
+          "x": 0.2164062499999999,
+          "y": 0.26251431882261916,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-9": {
+          "x": 0.21718749999999992,
+          "y": 0.2666809854892858,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-10": {
+          "x": 0.30390624999999993,
+          "y": 0.22083333333333333,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-10": {
+          "x": 0.30468749999999994,
+          "y": 0.225,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-11": {
+          "x": 0.39140625,
+          "y": 0.2625143188226191,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-11": {
+          "x": 0.3921875,
+          "y": 0.26668098548928576,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-12": {
+          "x": 0.45546069566227676,
+          "y": 0.3763888888888887,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-12": {
+          "x": 0.4562419456622767,
+          "y": 0.3805555555555554,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "core": {
+          "x": 0.27890625,
+          "y": 0.4777777777777778,
+          "w": 0.0984375,
+          "h": 0.175,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "core-label": {
+          "x": 0.284375,
+          "y": 0.5333333333333333,
+          "w": 0.0875,
+          "h": 0.06388888888888888,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "title": {
+          "x": 0.046875,
+          "y": 0.0375,
+          "w": 0.90625,
+          "h": 0.10277777777777777,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "phase": {
+          "x": 0.046875,
+          "y": 0.1375,
+          "w": 0.90625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1,
+          "text": "Phóng nút 03"
+        }
+      }
+    },
+    {
+      "id": "split",
+      "message": "4 lớp bên trong nút 03",
+      "objects": {
+        "node-1": {
+          "x": 0.47890625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-1": {
+          "x": 0.4796875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-2": {
+          "x": 0.4554606956622768,
+          "y": 0.6875,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-2": {
+          "x": 0.4562419456622768,
+          "y": 0.6916666666666667,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-1": {
+          "x": 0.6375,
+          "y": 0.3861111111111111,
+          "w": 0.19375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-2": {
+          "x": 0.6375,
+          "y": 0.48333333333333334,
+          "w": 0.19375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-3": {
+          "x": 0.6375,
+          "y": 0.5805555555555556,
+          "w": 0.19375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-4": {
+          "x": 0.6375,
+          "y": 0.6777777777777778,
+          "w": 0.19375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-3": {
+          "x": 0.7109375,
+          "y": 0.31527777777777777,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-4": {
+          "x": 0.30390625,
+          "y": 0.8430555555555556,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-4": {
+          "x": 0.3046875,
+          "y": 0.8472222222222222,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-5": {
+          "x": 0.21640625000000005,
+          "y": 0.8013745700662699,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-5": {
+          "x": 0.21718750000000003,
+          "y": 0.8055412367329365,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-6": {
+          "x": 0.15235180433772322,
+          "y": 0.6875,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-6": {
+          "x": 0.15313305433772323,
+          "y": 0.6916666666666667,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-7": {
+          "x": 0.12890625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-7": {
+          "x": 0.1296875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-8": {
+          "x": 0.15235180433772325,
+          "y": 0.3763888888888889,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-8": {
+          "x": 0.15313305433772323,
+          "y": 0.38055555555555554,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-9": {
+          "x": 0.2164062499999999,
+          "y": 0.26251431882261916,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-9": {
+          "x": 0.21718749999999992,
+          "y": 0.2666809854892858,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-10": {
+          "x": 0.30390624999999993,
+          "y": 0.22083333333333333,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-10": {
+          "x": 0.30468749999999994,
+          "y": 0.225,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-11": {
+          "x": 0.39140625,
+          "y": 0.2625143188226191,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-11": {
+          "x": 0.3921875,
+          "y": 0.26668098548928576,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-12": {
+          "x": 0.45546069566227676,
+          "y": 0.3763888888888887,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-12": {
+          "x": 0.4562419456622767,
+          "y": 0.3805555555555554,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "core": {
+          "x": 0.27890625,
+          "y": 0.4777777777777778,
+          "w": 0.0984375,
+          "h": 0.175,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "core-label": {
+          "x": 0.284375,
+          "y": 0.5333333333333333,
+          "w": 0.0875,
+          "h": 0.06388888888888888,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "title": {
+          "x": 0.046875,
+          "y": 0.0375,
+          "w": 0.90625,
+          "h": 0.10277777777777777,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "phase": {
+          "x": 0.046875,
+          "y": 0.1375,
+          "w": 0.90625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1,
+          "text": "4 lớp bên trong nút 03"
+        }
+      }
+    },
+    {
+      "id": "reassemble",
+      "message": "Ghép lại nút 03",
+      "objects": {
+        "node-1": {
+          "x": 0.47890625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-1": {
+          "x": 0.4796875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-2": {
+          "x": 0.4554606956622768,
+          "y": 0.6875,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-2": {
+          "x": 0.4562419456622768,
+          "y": 0.6916666666666667,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-1": {
+          "x": 0.6375,
+          "y": 0.43194444444444446,
+          "w": 0.19375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-2": {
+          "x": 0.6375,
+          "y": 0.4986111111111111,
+          "w": 0.19375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-3": {
+          "x": 0.6375,
+          "y": 0.5652777777777778,
+          "w": 0.19375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-4": {
+          "x": 0.6375,
+          "y": 0.6319444444444444,
+          "w": 0.19375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-3": {
+          "x": 0.7109375,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-4": {
+          "x": 0.30390625,
+          "y": 0.8430555555555556,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-4": {
+          "x": 0.3046875,
+          "y": 0.8472222222222222,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-5": {
+          "x": 0.21640625000000005,
+          "y": 0.8013745700662699,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-5": {
+          "x": 0.21718750000000003,
+          "y": 0.8055412367329365,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-6": {
+          "x": 0.15235180433772322,
+          "y": 0.6875,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-6": {
+          "x": 0.15313305433772323,
+          "y": 0.6916666666666667,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-7": {
+          "x": 0.12890625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-7": {
+          "x": 0.1296875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-8": {
+          "x": 0.15235180433772325,
+          "y": 0.3763888888888889,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-8": {
+          "x": 0.15313305433772323,
+          "y": 0.38055555555555554,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-9": {
+          "x": 0.2164062499999999,
+          "y": 0.26251431882261916,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-9": {
+          "x": 0.21718749999999992,
+          "y": 0.2666809854892858,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-10": {
+          "x": 0.30390624999999993,
+          "y": 0.22083333333333333,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-10": {
+          "x": 0.30468749999999994,
+          "y": 0.225,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-11": {
+          "x": 0.39140625,
+          "y": 0.2625143188226191,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-11": {
+          "x": 0.3921875,
+          "y": 0.26668098548928576,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-12": {
+          "x": 0.45546069566227676,
+          "y": 0.3763888888888887,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-12": {
+          "x": 0.4562419456622767,
+          "y": 0.3805555555555554,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "core": {
+          "x": 0.27890625,
+          "y": 0.4777777777777778,
+          "w": 0.0984375,
+          "h": 0.175,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "core-label": {
+          "x": 0.284375,
+          "y": 0.5333333333333333,
+          "w": 0.0875,
+          "h": 0.06388888888888888,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "title": {
+          "x": 0.046875,
+          "y": 0.0375,
+          "w": 0.90625,
+          "h": 0.10277777777777777,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "phase": {
+          "x": 0.046875,
+          "y": 0.1375,
+          "w": 0.90625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1,
+          "text": "Ghép lại nút 03"
+        }
+      }
+    },
+    {
+      "id": "restore",
+      "message": "Trở về hệ thống",
+      "objects": {
+        "node-1": {
+          "x": 0.47890625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-1": {
+          "x": 0.4796875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-2": {
+          "x": 0.4554606956622768,
+          "y": 0.6875,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-2": {
+          "x": 0.4562419456622768,
+          "y": 0.6916666666666667,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-1": {
+          "x": 0.39140625,
+          "y": 0.8013745700662698,
+          "w": 0.0484375,
+          "h": 0.016666666666666666,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-2": {
+          "x": 0.39140625,
+          "y": 0.8180412367329364,
+          "w": 0.0484375,
+          "h": 0.016666666666666666,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-3": {
+          "x": 0.39140625,
+          "y": 0.8347079033996031,
+          "w": 0.0484375,
+          "h": 0.016666666666666666,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-4": {
+          "x": 0.39140625,
+          "y": 0.8513745700662697,
+          "w": 0.0484375,
+          "h": 0.016666666666666666,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-3": {
+          "x": 0.3921875,
+          "y": 0.8055412367329364,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-4": {
+          "x": 0.30390625,
+          "y": 0.8430555555555556,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-4": {
+          "x": 0.3046875,
+          "y": 0.8472222222222222,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-5": {
+          "x": 0.21640625000000005,
+          "y": 0.8013745700662699,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-5": {
+          "x": 0.21718750000000003,
+          "y": 0.8055412367329365,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-6": {
+          "x": 0.15235180433772322,
+          "y": 0.6875,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-6": {
+          "x": 0.15313305433772323,
+          "y": 0.6916666666666667,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-7": {
+          "x": 0.12890625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-7": {
+          "x": 0.1296875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-8": {
+          "x": 0.15235180433772325,
+          "y": 0.3763888888888889,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-8": {
+          "x": 0.15313305433772323,
+          "y": 0.38055555555555554,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-9": {
+          "x": 0.2164062499999999,
+          "y": 0.26251431882261916,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-9": {
+          "x": 0.21718749999999992,
+          "y": 0.2666809854892858,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-10": {
+          "x": 0.30390624999999993,
+          "y": 0.22083333333333333,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-10": {
+          "x": 0.30468749999999994,
+          "y": 0.225,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-11": {
+          "x": 0.39140625,
+          "y": 0.2625143188226191,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-11": {
+          "x": 0.3921875,
+          "y": 0.26668098548928576,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-12": {
+          "x": 0.45546069566227676,
+          "y": 0.3763888888888887,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-12": {
+          "x": 0.4562419456622767,
+          "y": 0.3805555555555554,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "core": {
+          "x": 0.27890625,
+          "y": 0.4777777777777778,
+          "w": 0.0984375,
+          "h": 0.175,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "core-label": {
+          "x": 0.284375,
+          "y": 0.5333333333333333,
+          "w": 0.0875,
+          "h": 0.06388888888888888,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "title": {
+          "x": 0.046875,
+          "y": 0.0375,
+          "w": 0.90625,
+          "h": 0.10277777777777777,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "phase": {
+          "x": 0.046875,
+          "y": 0.1375,
+          "w": 0.90625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1,
+          "text": "Trở về hệ thống"
+        }
+      }
+    }
+  ],
+  "transitions": [
+    {
+      "from": "core",
+      "to": "burst",
+      "kind": "morph",
+      "duration_ms": 1000,
+      "track": [
+        "node-1",
+        "label-1",
+        "node-2",
+        "label-2",
+        "node-3-layer-1",
+        "node-3-layer-2",
+        "node-3-layer-3",
+        "node-3-layer-4",
+        "label-3",
+        "node-4",
+        "label-4",
+        "node-5",
+        "label-5",
+        "node-6",
+        "label-6",
+        "node-7",
+        "label-7",
+        "node-8",
+        "label-8",
+        "node-9",
+        "label-9",
+        "node-10",
+        "label-10",
+        "node-11",
+        "label-11",
+        "node-12",
+        "label-12",
+        "core",
+        "core-label",
+        "title",
+        "phase"
+      ]
+    },
+    {
+      "from": "burst",
+      "to": "orbit-1",
+      "kind": "morph",
+      "duration_ms": 350,
+      "track": [
+        "node-1",
+        "label-1",
+        "node-2",
+        "label-2",
+        "node-3-layer-1",
+        "node-3-layer-2",
+        "node-3-layer-3",
+        "node-3-layer-4",
+        "label-3",
+        "node-4",
+        "label-4",
+        "node-5",
+        "label-5",
+        "node-6",
+        "label-6",
+        "node-7",
+        "label-7",
+        "node-8",
+        "label-8",
+        "node-9",
+        "label-9",
+        "node-10",
+        "label-10",
+        "node-11",
+        "label-11",
+        "node-12",
+        "label-12",
+        "core",
+        "core-label",
+        "title",
+        "phase"
+      ]
+    },
+    {
+      "from": "orbit-1",
+      "to": "focus",
+      "kind": "morph",
+      "duration_ms": 1000,
+      "track": [
+        "node-1",
+        "label-1",
+        "node-2",
+        "label-2",
+        "node-3-layer-1",
+        "node-3-layer-2",
+        "node-3-layer-3",
+        "node-3-layer-4",
+        "label-3",
+        "node-4",
+        "label-4",
+        "node-5",
+        "label-5",
+        "node-6",
+        "label-6",
+        "node-7",
+        "label-7",
+        "node-8",
+        "label-8",
+        "node-9",
+        "label-9",
+        "node-10",
+        "label-10",
+        "node-11",
+        "label-11",
+        "node-12",
+        "label-12",
+        "core",
+        "core-label",
+        "title",
+        "phase"
+      ]
+    },
+    {
+      "from": "focus",
+      "to": "split",
+      "kind": "morph",
+      "duration_ms": 1000,
+      "track": [
+        "node-1",
+        "label-1",
+        "node-2",
+        "label-2",
+        "node-3-layer-1",
+        "node-3-layer-2",
+        "node-3-layer-3",
+        "node-3-layer-4",
+        "label-3",
+        "node-4",
+        "label-4",
+        "node-5",
+        "label-5",
+        "node-6",
+        "label-6",
+        "node-7",
+        "label-7",
+        "node-8",
+        "label-8",
+        "node-9",
+        "label-9",
+        "node-10",
+        "label-10",
+        "node-11",
+        "label-11",
+        "node-12",
+        "label-12",
+        "core",
+        "core-label",
+        "title",
+        "phase"
+      ]
+    },
+    {
+      "from": "split",
+      "to": "reassemble",
+      "kind": "morph",
+      "duration_ms": 1000,
+      "track": [
+        "node-1",
+        "label-1",
+        "node-2",
+        "label-2",
+        "node-3-layer-1",
+        "node-3-layer-2",
+        "node-3-layer-3",
+        "node-3-layer-4",
+        "label-3",
+        "node-4",
+        "label-4",
+        "node-5",
+        "label-5",
+        "node-6",
+        "label-6",
+        "node-7",
+        "label-7",
+        "node-8",
+        "label-8",
+        "node-9",
+        "label-9",
+        "node-10",
+        "label-10",
+        "node-11",
+        "label-11",
+        "node-12",
+        "label-12",
+        "core",
+        "core-label",
+        "title",
+        "phase"
+      ]
+    },
+    {
+      "from": "reassemble",
+      "to": "restore",
+      "kind": "morph",
+      "duration_ms": 1000,
+      "track": [
+        "node-1",
+        "label-1",
+        "node-2",
+        "label-2",
+        "node-3-layer-1",
+        "node-3-layer-2",
+        "node-3-layer-3",
+        "node-3-layer-4",
+        "label-3",
+        "node-4",
+        "label-4",
+        "node-5",
+        "label-5",
+        "node-6",
+        "label-6",
+        "node-7",
+        "label-7",
+        "node-8",
+        "label-8",
+        "node-9",
+        "label-9",
+        "node-10",
+        "label-10",
+        "node-11",
+        "label-11",
+        "node-12",
+        "label-12",
+        "core",
+        "core-label",
+        "title",
+        "phase"
+      ]
+    }
+  ],
+  "research_metadata": {
+    "recipe": "radial-drilldown",
+    "intent": {
+      "version": "0.1",
+      "recipe": "radial-drilldown",
+      "prompt": "Bung một lõi thành 12 nút, xoay cả vòng, phóng nút 3, tách nó thành 4 lớp rồi ghép lại; chữ luôn đứng thẳng.",
+      "title": "Cấu trúc một hệ thống",
+      "node_count": 12,
+      "focus_node": 3,
+      "layer_count": 4,
+      "orbit_degrees": 90,
+      "orbit_segments": 1,
+      "direction": "clockwise",
+      "keep_labels_upright": true,
+      "operations": [
+        "burst",
+        "orbit",
+        "focus",
+        "split",
+        "reassemble",
+        "restore"
+      ],
+      "requirements": [
+        "12 nút",
+        "xoay cả vòng",
+        "phóng nút 3",
+        "tách 4 lớp",
+        "ghép lại",
+        "chữ đứng thẳng"
+      ],
+      "assumptions": [
+        "Xoay cả vòng nghĩa là xoay toàn bộ vòng, chưa chỉ định góc; chọn 90 độ thuận kim đồng hồ",
+        "6 đoạn quỹ đạo 15 độ, không phải đường cong native",
+        "Đồ thị 2D và dữ liệu giả lập",
+        "Kết thúc trở lại vòng sau khi xoay",
+        "Bấm chuyển từng trạng thái, không tự phát"
+      ]
+    },
+    "references": [
+      "https://support.microsoft.com/en-us/powerpoint/morph-transition-tips-and-tricks"
+    ],
+    "approximation": "piecewise linear orbit; click-through Morph; native playback unverified",
+    "orbit_radius_px": 224,
+    "orbit_step_degrees": 90.0,
+    "chord_radial_error_px": 65.60808101421334,
+    "launch_occlusion": "node shapes and labels stack behind core shape",
+    "focus_scale": 4,
+    "native_playback_verified": false
+  }
+}
