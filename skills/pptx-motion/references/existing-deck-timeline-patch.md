@@ -1,4 +1,4 @@
-# Existing-deck native timeline patch contract v0.4
+# Existing-deck native timeline patch contract v0.5
 
 This contract is the low-level bridge between a semantic motion-director plan and
 an existing PPTX package.
@@ -21,7 +21,7 @@ identity.
 
 ## Root
 
-- `version`: `"0.4"` for chart + KPI-counter patches; `"0.3"` remains chart-capable, `"0.2"` click-beat, and `"0.1"` legacy one-click
+- `version`: `"0.5"` for generic + chart + KPI patches; `"0.4"` remains counter-capable, `"0.3"` chart-capable, `"0.2"` click-beat, and `"0.1"` legacy one-click
 - `kind`: `"existing-deck-timeline-patch"`
 - `source_sha256`
 - `slides`
@@ -147,6 +147,21 @@ Within one presenter click beat:
 
 This is a synthesized stepped-text counter, not a claim of native PowerPoint
 numeric interpolation.
+
+### shape_entrance — v0.5
+
+Use for ordinary non-chart source objects.
+
+- `type="shape_entrance"`
+- exact source `target`
+- `filter`: one verified `p:animEffect` filter such as `fade` or directional
+  `wipe(...)`
+
+Charts are rejected on this path and must use `chart_entrance`.
+
+A semantic reveal may compile to several `shape_entrance` stages inside one
+presenter click. The first stage inherits the motion beat trigger; later stages
+normally use `after-previous`.
 
 ## Preservation
 

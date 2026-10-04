@@ -67,8 +67,8 @@ def validate_patch_plan(plan):
     errors += [f"missing field: {k}" for k in sorted(required-plan.keys())]
     if errors:
         return errors
-    if plan["version"] not in ("0.1","0.2","0.3","0.4"):
-        errors.append("version must be 0.1, 0.2, 0.3 or 0.4")
+    if plan["version"] not in ("0.1","0.2","0.3","0.4","0.5"):
+        errors.append("version must be 0.1, 0.2, 0.3, 0.4 or 0.5")
     if plan["kind"]!="existing-deck-timeline-patch":
         errors.append("kind must be existing-deck-timeline-patch")
     sha=plan["source_sha256"]
@@ -153,7 +153,7 @@ def validate_patch_plan(plan):
                     if type(value) not in (int,float) or not math.isfinite(value):
                         errors.append(f"slide {idx}: invalid rotate by_deg")
                 elif kind=="chart_entrance":
-                    if plan["version"] not in ("0.3","0.4"):
+                    if plan["version"] not in ("0.3","0.4","0.5"):
                         errors.append(f"slide {idx}: chart_entrance requires patch plan v0.3+")
                     build=effect.get("build")
                     if build not in ("as-whole","series","category","series-elements","category-elements"):
@@ -176,8 +176,8 @@ def validate_patch_plan(plan):
                     if not isinstance(chart_type,str) or not chart_type:
                         errors.append(f"slide {idx}: chart_entrance chart_type must be nonempty")
                 elif kind=="number_counter":
-                    if plan["version"]!="0.4":
-                        errors.append(f"slide {idx}: number_counter requires patch plan v0.4")
+                    if plan["version"] not in ("0.4","0.5"):
+                        errors.append(f"slide {idx}: number_counter requires patch plan v0.4+")
                     for key in ("from_value","to_value"):
                         value=effect.get(key)
                         if type(value) not in (int,float) or not math.isfinite(value):
@@ -197,10 +197,16 @@ def validate_patch_plan(plan):
                     filt=effect.get("filter","fade")
                     if filt not in VALID_FILTERS:
                         errors.append(f"slide {idx}: unsupported counter filter {filt}")
+                elif kind=="shape_entrance":
+                    if plan["version"]!="0.5":
+                        errors.append(f"slide {idx}: shape_entrance requires patch plan v0.5")
+                    filt=effect.get("filter","fade")
+                    if filt not in VALID_FILTERS:
+                        errors.append(f"slide {idx}: unsupported shape entrance filter {filt}")
                 else:
                     errors.append(f"slide {idx}: unsupported effect type {kind}")
 
-        if plan["version"] in ("0.2","0.3","0.4"):
+        if plan["version"] in ("0.2","0.3","0.4","0.5"):
             click_beats=slide.get("click_beats")
             if not isinstance(click_beats,list) or not click_beats:
                 errors.append(f"slide {idx}: click_beats must be nonempty for v0.2+")
@@ -551,6 +557,27 @@ def _build_click_beat_existing_timing(slide_patch,root):
                         "fanout_count":len(targets),
                         "fanout_degraded":guard["degraded"],
                         "fanout_reason":guard["reason"],
+                    })
+                elif kind=="shape_entrance":
+                    if spid in chart_target_ids:
+                        raise ValueError(
+                            f"shape_entrance cannot target chart {key[1]!r}; use chart_entrance"
+                        )
+                    behavior_id=next_id; next_id+=1
+                    filter_name=effect.get("filter","fade")
+                    _simple_anim_effect_node(
+                        stage_children,spid,behavior_id,stage["duration_ms"],0,
+                        "in",filter_name
+                    )
+                    animated[key]=spid
+                    stage_targets.add(spid)
+                    behavior_count+=1
+                    effect_receipts.append({
+                        "type":kind,
+                        "source_id":key[0],
+                        "source_name":key[1],
+                        "behavior_id":behavior_id,
+                        "filter":filter_name,
                     })
                 elif kind=="number_counter":
                     component=effect.get("_counter_component")

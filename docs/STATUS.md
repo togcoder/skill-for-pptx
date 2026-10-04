@@ -1,5 +1,25 @@
 # PPTX Motion Lab — checkpoint
 
+## T017 generic report motion — 2026-10-05
+
+Generic existing-deck semantics now bridge to native timing for reveal, staggered
+reveal, process reveal, focus/emphasis, explicit move and explicit rotate.
+
+Director v0.4 + `scripts/compile_director_patch.py` expand one semantic beat to
+multiple automatic stages while preserving click groups. Patch v0.5 adds generic
+`shape_entrance` and rejects charts on that path.
+
+H001 real-deck transfer passes: 3-stage reveal in one click on slide 1, 2-stage
+focus pulse in one click on slide 2, no slide inflation, source text/geometry
+preserved and existing transition retained.
+
+CI run 37239720520: **140/140 tests pass** + Python compile.
+
+PowerPoint runtime remains the decisive missing gate.
+
+Task: `research/tasks/T017-generic-report-motion.md`.
+Report: `experiments/T017-20261005-generic-report-motion/REPORT.md`.
+
 ## T016 real-package data motion — 2026-10-05
 
 T012–T015 now pass a real PPTX package integration, not only isolated XML.
