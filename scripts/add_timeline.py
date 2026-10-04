@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 """Inject a packed native animation timeline into fresh PPTX slide XML.
 
-Research backend for T006. It supports motion-path, scale and rotate behaviors
-from native-timeline-plan v0.1. It does not prove PowerPoint playback: the exact
-output still requires native PowerPoint QA.
+Research backend for T006/T010. It supports motion-path, scale and rotate
+behaviors from native-timeline-plan. It does not prove PowerPoint playback: the
+exact output still requires native PowerPoint QA.
 
-The writer intentionally keeps one click group per slide and schedules packed
-stages with cumulative delays. Intermediate waypoints stay inside animMotion
-path data; they never become PowerPoint slides.
+v0.1 plans retain the historical one-click packed writer for reproducibility.
+v0.2 plans use presenter-paced click beats: multiple click groups can live on
+one slide, while stages inside a beat use clickEffect / withEffect / afterEffect
+semantics. Intermediate waypoints stay inside animMotion path data and never
+become PowerPoint slides.
 """
 import argparse
 import hashlib
@@ -172,7 +174,7 @@ def _rotate_node(parent, effect, spid, behavior_id, duration_ms, delay_ms):
     return rotate
 
 
-def build_timing(slide_plan, objects, forced_name_to_spid):
+def _build_legacy_timing(slide_plan, objects, forced_name_to_spid):
     """Build one PresentationML timing tree for a packed semantic slide."""
     initial = slide_plan["initial_objects"]
     stages = slide_plan["timeline"]
@@ -317,6 +319,243 @@ def build_timing(slide_plan, objects, forced_name_to_spid):
     }
 
 
+
+TRIGGER_NODE_TYPE = {
+    "on_click": "clickEffect",
+    "with_previous": "withEffect",
+    "after_previous": "afterEffect",
+}
+
+
+def _resolved_click_beats(slide_plan):
+    stages = slide_plan.get("timeline", [])
+    stage_by_id = {stage["id"]: stage for stage in stages}
+    beats = slide_plan.get("click_beats")
+    if not beats:
+        return [{
+            "id": "legacy-packed-beat",
+            "purpose": "Legacy single-click packed sequence.",
+            "pause_after": "slide_complete",
+            "stages": stages,
+        }]
+    resolved = []
+    for beat in beats:
+        resolved.append({
+            "id": beat["id"],
+            "purpose": beat["purpose"],
+            "pause_after": beat.get("pause_after"),
+            "stages": [stage_by_id[stage_id] for stage_id in beat["stages"]],
+        })
+    return resolved
+
+
+def _build_click_beat_timing(slide_plan, objects, forced_name_to_spid):
+    """Build presenter-paced click groups while keeping all beats on one slide."""
+    initial = slide_plan["initial_objects"]
+    beats = _resolved_click_beats(slide_plan)
+    if not beats:
+        raise ValueError("click_beats must not be empty")
+
+    expected_names = {objects[oid]["morph_name"] for oid in initial}
+    if set(forced_name_to_spid) != expected_names:
+        missing = sorted(expected_names - set(forced_name_to_spid))
+        extra = sorted(set(forced_name_to_spid) - expected_names)
+        raise ValueError(
+            f"source shape identities differ from timeline plan; missing={missing}, extra={extra}"
+        )
+
+    timing = E.Element(_q("timing"))
+    tn_list = _sub(timing, "tnLst")
+    root_par = _sub(tn_list, "par")
+    root_ctn = _sub(
+        root_par,
+        "cTn",
+        id=ROOT_CTN_ID,
+        dur="indefinite",
+        restart="never",
+        nodeType="tmRoot",
+    )
+    root_children = _sub(root_ctn, "childTnLst")
+    sequence = _sub(root_children, "seq", concurrent="1", nextAc="seek")
+    seq_ctn = _sub(
+        sequence,
+        "cTn",
+        id=MAIN_SEQ_ID,
+        dur="indefinite",
+        nodeType="mainSeq",
+    )
+    main_children = _sub(seq_ctn, "childTnLst")
+
+    next_id = 3
+    animated = set()
+    stage_build_pairs = set()
+    beat_receipts = []
+    total_stage_duration = 0
+    behavior_count = 0
+
+    for beat_index, beat in enumerate(beats, 1):
+        outer_id = next_id
+        next_id += 1
+        inner_id = next_id
+        next_id += 1
+
+        outer_par = _sub(main_children, "par")
+        outer_ctn = _sub(outer_par, "cTn", id=outer_id, fill="hold")
+        outer_start = _sub(outer_ctn, "stCondLst")
+        _sub(outer_start, "cond", delay="indefinite")
+        outer_children = _sub(outer_ctn, "childTnLst")
+
+        inner_par = _sub(outer_children, "par")
+        inner_ctn = _sub(inner_par, "cTn", id=inner_id, fill="hold")
+        inner_start = _sub(inner_ctn, "stCondLst")
+        _sub(inner_start, "cond", delay="0")
+        beat_children = _sub(inner_ctn, "childTnLst")
+
+        stage_receipts = []
+        for stage_index, stage in enumerate(beat["stages"]):
+            trigger = stage["trigger"]
+            node_type = TRIGGER_NODE_TYPE.get(trigger)
+            if node_type is None:
+                raise ValueError(f"unsupported stage trigger: {trigger}")
+            if stage_index == 0 and trigger != "on_click":
+                raise ValueError(f"click beat {beat['id']} must start with on_click")
+            if stage_index > 0 and trigger == "on_click":
+                raise ValueError(f"nested on_click stage in click beat {beat['id']}")
+
+            stage_group_id = next_id
+            next_id += 1
+            stage_par = _sub(beat_children, "par")
+            stage_ctn = _sub(
+                stage_par,
+                "cTn",
+                id=stage_group_id,
+                dur=stage["duration_ms"],
+                fill="hold",
+                nodeType=node_type,
+                grpId=stage_group_id,
+            )
+            stage_start = _sub(stage_ctn, "stCondLst")
+            _sub(stage_start, "cond", delay="0")
+            stage_children = _sub(stage_ctn, "childTnLst")
+
+            effect_receipts = []
+            stage_targets = set()
+            for effect in stage["effects"]:
+                oid = effect["target"]
+                if oid not in initial:
+                    raise ValueError(
+                        f"effect targets object absent from initial slide: {oid}"
+                    )
+                name = objects[oid]["morph_name"]
+                spid = forced_name_to_spid[name]
+                behavior_id = next_id
+                next_id += 1
+                kind = effect["type"]
+                if kind == "motion_path":
+                    _motion_node(
+                        stage_children,
+                        effect,
+                        spid,
+                        behavior_id,
+                        stage["duration_ms"],
+                        0,
+                    )
+                elif kind == "scale":
+                    _scale_node(
+                        stage_children,
+                        effect,
+                        initial[oid],
+                        spid,
+                        behavior_id,
+                        stage["duration_ms"],
+                        0,
+                    )
+                elif kind == "rotate":
+                    _rotate_node(
+                        stage_children,
+                        effect,
+                        spid,
+                        behavior_id,
+                        stage["duration_ms"],
+                        0,
+                    )
+                elif kind == "visibility":
+                    raise ValueError(
+                        "visibility timing is not implemented in T010 writer v0.2"
+                    )
+                else:
+                    raise ValueError(f"unsupported timeline effect: {kind}")
+
+                animated.add(oid)
+                stage_targets.add(spid)
+                behavior_count += 1
+                effect_receipts.append({
+                    "type": kind,
+                    "target": oid,
+                    "spid": spid,
+                    "behavior_id": behavior_id,
+                })
+
+            for spid in stage_targets:
+                stage_build_pairs.add((spid, str(stage_group_id)))
+
+            total_stage_duration += stage["duration_ms"]
+            stage_receipts.append({
+                "id": stage["id"],
+                "operation": stage["operation"],
+                "trigger": trigger,
+                "node_type": node_type,
+                "group_id": stage_group_id,
+                "duration_ms": stage["duration_ms"],
+                "effects": effect_receipts,
+            })
+
+        beat_receipts.append({
+            "index": beat_index,
+            "id": beat["id"],
+            "purpose": beat["purpose"],
+            "pause_after": beat.get("pause_after"),
+            "outer_time_node_id": outer_id,
+            "inner_time_node_id": inner_id,
+            "stages": stage_receipts,
+        })
+
+    previous = _sub(sequence, "prevCondLst")
+    cond = _sub(previous, "cond", evt="onPrev", delay="0")
+    _sub(_sub(cond, "tgtEl"), "sldTgt")
+    following = _sub(sequence, "nextCondLst")
+    cond = _sub(following, "cond", evt="onNext", delay="0")
+    _sub(_sub(cond, "tgtEl"), "sldTgt")
+
+    build_list = _sub(timing, "bldLst")
+    animated_spids = sorted(
+        {forced_name_to_spid[objects[oid]["morph_name"]] for oid in animated},
+        key=int,
+    )
+    for spid in animated_spids:
+        _sub(build_list, "bldP", spid=spid, grpId="0", animBg="1")
+    for spid, group_id in sorted(stage_build_pairs, key=lambda item: (int(item[0]), int(item[1]))):
+        _sub(build_list, "bldP", spid=spid, grpId=group_id, animBg="1")
+
+    return timing, {
+        "writer_mode": "presenter-paced-click-beats",
+        "click_beat_count": len(beats),
+        "total_stage_duration_ms": total_stage_duration,
+        "behavior_count": behavior_count,
+        "animated_objects": sorted(animated),
+        "click_beats": beat_receipts,
+    }
+
+
+def build_timing(slide_plan, objects, forced_name_to_spid):
+    """Dispatch legacy one-click or v0.2 presenter-paced click-beat timing."""
+    if slide_plan.get("click_beats"):
+        return _build_click_beat_timing(slide_plan, objects, forced_name_to_spid)
+    timing, receipt = _build_legacy_timing(slide_plan, objects, forced_name_to_spid)
+    receipt = {"writer_mode": "legacy-one-click-packed", "click_beat_count": 1, **receipt}
+    return timing, receipt
+
+
 def inspect_timing_root(root):
     """Structural checks for the exact subset this writer emits."""
     errors = []
@@ -435,6 +674,7 @@ def patch(source, plan_path, destination):
     return {
         "slides": len(plan["slides"]),
         "packed_timing_groups": len(receipts),
+        "click_beat_count": sum(receipt.get("click_beat_count", 1) for receipt in receipts),
         "receipts": receipts,
         "source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
         "sha256": hashlib.sha256(destination.read_bytes()).hexdigest(),

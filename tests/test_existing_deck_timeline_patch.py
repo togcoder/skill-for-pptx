@@ -79,6 +79,9 @@ class ExistingDeckTimelinePatchTests(unittest.TestCase):
         self.assertEqual([effect["type"] for effect in summary["effects"]],["animMotion","animScale"])
         self.assertEqual({effect["target_spid"] for effect in summary["effects"]},{shape["id"]})
         self.assertEqual(summary["order_basis"],"numeric-behavior-delay")
+        self.assertEqual(summary["click_group_count"],1)
+        self.assertEqual(summary["click_groups"][0]["effect_count"],2)
+        self.assertIn("clickEffect",summary["click_groups"][0]["start_node_types"])
         with ZipFile(SOURCE) as before, ZipFile(out) as after:
             self.assertEqual(
                 before.read(final["slides"][1]["part"]),

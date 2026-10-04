@@ -136,9 +136,15 @@ For each slide:
 
 - keep the existing resources;
 - build a local motion script;
-- pack multiple motion events into native timing tracks;
+- partition that script into presenter-controlled **click beats**;
+- inside each beat, distinguish concurrent motion from automatic sequential motion;
+- pack multiple motion events into native timing tracks without collapsing all
+  presenter beats into the first click;
 - reuse the same semantic object identities across the timeline;
 - create only the minimum additions required by the script.
+
+A useful stable explanatory state normally ends a click beat. An indivisible
+visual transformation normally stays inside one beat.
 
 Across slides:
 
@@ -205,8 +211,8 @@ For every planned beat, decide whether an existing object can perform the role.
 Create a component only for genuine gaps.
 
 ### CHOREOGRAPH
-Translate the script into native per-slide timeline actions. Apply
-`docs/MOTION_PACKING.md`.
+Translate the script into scenes, click beats, stages and effects. Apply both
+`docs/MOTION_PACKING.md` and `docs/CLICK_BEAT_CHOREOGRAPHY.md`.
 
 ### BUILD
 Patch or rebuild only what is necessary. Preserve source content and design

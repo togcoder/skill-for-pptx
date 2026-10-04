@@ -22,13 +22,24 @@ class TimelinePackingTests(unittest.TestCase):
         plan=compile_packed_timeline(intent)
         self.assertEqual(len(legacy["states"]),12)
         self.assertEqual(len(plan["slides"]),1)
-        self.assertEqual([s["operation"] for s in plan["slides"][0]["timeline"]],
+        slide=plan["slides"][0]
+        self.assertEqual([s["operation"] for s in slide["timeline"]],
                          ["burst","orbit","focus","split","reassemble","restore"])
+        self.assertEqual(
+            [beat["stages"] for beat in slide["click_beats"]],
+            [["burst"],["orbit"],["focus","split"],["reassemble","restore"]],
+        )
+        self.assertEqual(
+            [s["trigger"] for s in slide["timeline"]],
+            ["on_click","on_click","on_click","after_previous","on_click","after_previous"],
+        )
         meta=plan["research_metadata"]["motion_packing"]
         self.assertEqual(meta["legacy_state_count"],12)
         self.assertEqual(meta["final_slide_count"],1)
         self.assertEqual(meta["packed_motion_events"],6)
         self.assertEqual(meta["resource_set_changes"],0)
+        self.assertEqual(meta["click_beat_count"],4)
+        self.assertTrue(meta["presenter_paced"])
         self.assertEqual(validate_timeline(plan),[])
 
     def test_orbit_waypoints_become_path_points_not_slides(self):
@@ -63,12 +74,28 @@ class TimelinePackingTests(unittest.TestCase):
         kinds={e["type"] for e in focus["effects"] if e["target"]==target}
         self.assertEqual(kinds,{"motion_path","scale"})
 
-    def test_transfer_also_packs_to_one_slide(self):
+    def test_transfer_also_packs_to_one_slide_with_presenter_beats(self):
         intent=self.load(EXPERIMENT/"transfer"/"intent.json")
         plan=compile_packed_timeline(intent)
         self.assertEqual(len(plan["slides"]),1)
         self.assertEqual(plan["research_metadata"]["motion_packing"]["packed_motion_events"],6)
+        self.assertEqual(len(plan["slides"][0]["click_beats"]),4)
         self.assertEqual(validate_timeline(plan),[])
+
+    def test_validator_rejects_click_beat_partition_mismatch(self):
+        intent=self.load(EXPERIMENT/"candidate.intent.json")
+        plan=compile_packed_timeline(intent)
+        bad=copy.deepcopy(plan)
+        bad["slides"][0]["click_beats"][2]["stages"]=["focus"]
+        self.assertTrue(any("partition timeline stages" in e for e in validate_timeline(bad)))
+
+    def test_validator_rejects_on_click_inside_existing_beat(self):
+        intent=self.load(EXPERIMENT/"candidate.intent.json")
+        plan=compile_packed_timeline(intent)
+        bad=copy.deepcopy(plan)
+        split=next(s for s in bad["slides"][0]["timeline"] if s["id"]=="split")
+        split["trigger"]="on_click"
+        self.assertTrue(any("on_click must start a declared click beat" in e for e in validate_timeline(bad)))
 
     def test_validator_rejects_unknown_target(self):
         intent=self.load(EXPERIMENT/"candidate.intent.json")

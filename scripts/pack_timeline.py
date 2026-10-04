@@ -100,8 +100,8 @@ def validate_timeline(plan):
     errors += [f"missing field: {k}" for k in sorted(required - plan.keys())]
     if errors:
         return errors
-    if plan["version"] != "0.1":
-        errors.append("version must be 0.1")
+    if plan["version"] not in ("0.1", "0.2"):
+        errors.append("version must be 0.1 or 0.2")
     if plan["kind"] != "native-timeline-plan":
         errors.append("kind must be native-timeline-plan")
     if not isinstance(plan["objects"], list) or not plan["objects"]:
@@ -123,6 +123,7 @@ def validate_timeline(plan):
             continue
         initial = slide.get("initial_objects")
         stages = slide.get("timeline")
+        beats = slide.get("click_beats")
         if not isinstance(initial, dict):
             errors.append(f"{slide.get('id','slide')}: initial_objects must be an object")
             continue
@@ -135,14 +136,57 @@ def validate_timeline(plan):
         stage_ids = [s.get("id") for s in stages if isinstance(s, dict)]
         if len(stage_ids) != len(set(stage_ids)):
             errors.append(f"{slide.get('id','slide')}: stage ids must be unique")
+
+        if plan["version"] == "0.2":
+            if not isinstance(beats, list) or not beats:
+                errors.append(f"{slide.get('id','slide')}: click_beats must be nonempty for v0.2")
+            else:
+                seen_beat_ids = set()
+                flattened = []
+                for beat in beats:
+                    if not isinstance(beat, dict):
+                        errors.append(f"{slide.get('id','slide')}: click beat must be an object")
+                        continue
+                    beat_id = beat.get("id")
+                    if not isinstance(beat_id, str) or not beat_id:
+                        errors.append(f"{slide.get('id','slide')}: click beat id must be nonempty")
+                    elif beat_id in seen_beat_ids:
+                        errors.append(f"{slide.get('id','slide')}: duplicate click beat id {beat_id}")
+                    else:
+                        seen_beat_ids.add(beat_id)
+                    if not isinstance(beat.get("purpose"), str) or not beat["purpose"].strip():
+                        errors.append(f"{slide.get('id','slide')}: click beat {beat_id} purpose must be nonempty")
+                    beat_stages = beat.get("stages")
+                    if not isinstance(beat_stages, list) or not beat_stages:
+                        errors.append(f"{slide.get('id','slide')}: click beat {beat_id} stages must be nonempty")
+                        continue
+                    flattened.extend(beat_stages)
+                    if beat_stages[0] not in stage_ids:
+                        errors.append(f"{slide.get('id','slide')}: click beat {beat_id} starts with unknown stage")
+                if flattened != stage_ids:
+                    errors.append(f"{slide.get('id','slide')}: click_beats must partition timeline stages in order exactly once")
+
+        beat_starts = set()
+        if isinstance(beats, list):
+            for beat in beats:
+                if isinstance(beat, dict) and isinstance(beat.get("stages"), list) and beat["stages"]:
+                    beat_starts.add(beat["stages"][0])
+
         for i, stage in enumerate(stages):
             if not isinstance(stage, dict):
                 errors.append("stage must be an object")
                 continue
             trigger = stage.get("trigger")
-            expected = "on_click" if i == 0 else "after_previous"
-            if trigger != expected:
-                errors.append(f"{stage.get('id','stage')}: trigger must be {expected}")
+            if trigger not in ("on_click", "with_previous", "after_previous"):
+                errors.append(f"{stage.get('id','stage')}: unsupported trigger {trigger}")
+            if plan["version"] == "0.2":
+                should_click = stage.get("id") in beat_starts
+                if should_click and trigger != "on_click":
+                    errors.append(f"{stage.get('id','stage')}: first stage of a click beat must be on_click")
+                if not should_click and trigger == "on_click":
+                    errors.append(f"{stage.get('id','stage')}: on_click must start a declared click beat")
+            elif i == 0 and trigger != "on_click":
+                errors.append(f"{stage.get('id','stage')}: first legacy stage must be on_click")
             duration = stage.get("duration_ms")
             if type(duration) is not int or duration <= 0:
                 errors.append(f"{stage.get('id','stage')}: duration_ms must be positive integer")
@@ -215,14 +259,14 @@ def compile_packed_timeline(intent):
         {
             "id": "orbit",
             "operation": "orbit",
-            "trigger": "after_previous",
+            "trigger": "on_click",
             "duration_ms": 350 * intent["orbit_segments"],
             "effects": _orbit_effects(orbit_states, object_ids),
         },
         {
             "id": "focus",
             "operation": "focus",
-            "trigger": "after_previous",
+            "trigger": "on_click",
             "duration_ms": 1000,
             "effects": _pair_effects(final_orbit, state_by_id["focus"], object_ids),
         },
@@ -236,7 +280,7 @@ def compile_packed_timeline(intent):
         {
             "id": "reassemble",
             "operation": "reassemble",
-            "trigger": "after_previous",
+            "trigger": "on_click",
             "duration_ms": 1000,
             "effects": _pair_effects(state_by_id["split"], state_by_id["reassemble"], object_ids),
         },
@@ -250,7 +294,7 @@ def compile_packed_timeline(intent):
     ]
 
     plan = {
-        "version": "0.1",
+        "version": "0.2",
         "kind": "native-timeline-plan",
         "brief": intent["prompt"],
         "canvas": legacy["canvas"],
@@ -261,6 +305,32 @@ def compile_packed_timeline(intent):
             "message": "Packed radial drill-down sequence",
             "initial_objects": {oid: _initial_frame(state_by_id["core"]["objects"][oid]) for oid in object_ids},
             "timeline": stages,
+            "click_beats": [
+                {
+                    "id": "beat-reveal",
+                    "purpose": "Reveal the system structure, then hold so the presenter can explain the topology.",
+                    "stages": ["burst"],
+                    "pause_after": "presenter_explanation",
+                },
+                {
+                    "id": "beat-orbit",
+                    "purpose": "Show the relationship/orbit as a distinct presenter-controlled idea.",
+                    "stages": ["orbit"],
+                    "pause_after": "presenter_explanation",
+                },
+                {
+                    "id": "beat-drill-down",
+                    "purpose": "Move attention to the selected node and immediately unfold its internal layers as one continuous drill-down.",
+                    "stages": ["focus", "split"],
+                    "pause_after": "presenter_explanation",
+                },
+                {
+                    "id": "beat-close-detail",
+                    "purpose": "Close the detail view and return to the system context as one continuous resolution.",
+                    "stages": ["reassemble", "restore"],
+                    "pause_after": "slide_complete",
+                },
+            ],
             "expected_final_objects": {oid: _geom(state_by_id["restore"]["objects"][oid]) for oid in object_ids},
         }],
         "research_metadata": {
@@ -276,6 +346,8 @@ def compile_packed_timeline(intent):
                 "packed_motion_events": len(stages),
                 "packing_ratio": len(stages),
                 "resource_set_changes": 0,
+                "click_beat_count": 4,
+                "presenter_paced": True,
                 "native_playback_verified": False,
             },
         },

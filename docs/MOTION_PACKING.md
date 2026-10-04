@@ -6,6 +6,10 @@ This document is a hard planning rule for all future work in PPTX Motion Lab.
 
 A slide is a **scene/execution container**, not a motion frame.
 
+**Packing is spatial/resource architecture, not presenter pacing.** A slide may
+contain several click beats. Read `docs/CLICK_BEAT_CHOREOGRAPHY.md` before
+deciding whether consecutive motions should fire from the same click.
+
 When consecutive actions reuse the same semantic objects/assets and stay in the
 same scene, pack as many of those actions as PowerPoint can robustly express
 into **one slide timeline**. Do not create a new slide merely to represent an
@@ -73,9 +77,10 @@ Define:
 `packing_ratio = requested_motion_events / final_slide_count`
 
 Use it only as an efficiency diagnostic. Do not inflate it by merging unrelated
-scenes or making an unreadable timeline. The real objective is **maximum
-feasible packing while preserving intent, editability, readability, and native
-PowerPoint playback**.
+scenes or making an unreadable timeline. A high packing ratio with poor
+click/presenter rhythm is a failure. The real objective is **maximum feasible
+resource packing while preserving intent, presenter pacing, editability,
+readability, and native PowerPoint playback**.
 
 ## Model behavior
 

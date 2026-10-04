@@ -6,7 +6,8 @@ Chủ dự án: togcoder. Cập nhật bàn giao: 04/10/2026.
 ## Bắt đầu trong 5 phút
 
 1. Fetch nhánh mới nhất, xem thay đổi chưa commit và các nhánh/PR đang mở.
-2. Đọc `AGENTS.md`, tài liệu này, `docs/PRODUCT_TARGET.md`, `docs/STATUS.md` và
+2. Đọc `AGENTS.md`, tài liệu này, `docs/PRODUCT_TARGET.md`, `docs/STATUS.md`,
+   `docs/MOTION_PACKING.md`, `docs/CLICK_BEAT_CHOREOGRAPHY.md` và
    `skills/pptx-motion/SKILL.md`. Đọc reference theo phần việc, không nạp toàn bộ
    lịch sử thí nghiệm vào ngữ cảnh nếu không cần.
 3. Đọc `docs/COLLABORATION.md`, chọn một task chưa có người làm trong
@@ -33,7 +34,7 @@ không phải đích sản phẩm cuối.
 |---|---|
 | Nguồn skill | v0.7 nghiên cứu trong repo, chưa cài thành personal skill |
 | Backend | Morph baseline + T006 packed-timeline research path; artifact-tool 16:9 rect/ellipse/textbox; timing writer motion/scale/rotate, PowerPoint playback pending |
-| Kiểm tra tự động | 79 unit tests pass tại T006 full candidate; chưa phải schema OOXML đầy đủ |
+| Kiểm tra tự động | 86 unit tests pass trên T010 click-beat branch; py_compile pass; chưa phải schema OOXML đầy đủ |
 | E002 | Sửa 14 khai báo textbox; checker H001 giữ nguyên đạt 93/93; ảnh không đổi |
 | H002/E003 | Nhãn ORBIT chồng 2→0 theo mô hình tuyến tính |
 | H003/E004 | Nhãn Việt dài chồng 4→0; khối nền vẫn chồng 6→6 theo mô hình |
@@ -66,7 +67,9 @@ matrix. Play all four files in PowerPoint first; production timing remains
 unchanged until that evidence exists.
 
 Người dùng đã sửa hướng phát triển ngày 04/10/2026: **không dùng mặc định một
-chuyển động/state = một slide**. Đọc `docs/MOTION_PACKING.md`. Nếu nhiều chuyển
+chuyển động/state = một slide**. Ngày 05/10/2026 người dùng sửa tiếp: **gom vào
+một slide không có nghĩa click đầu chạy sạch mọi motion**. Đọc cả
+`docs/MOTION_PACKING.md` và `docs/CLICK_BEAT_CHOREOGRAPHY.md`. Nếu nhiều chuyển
 động dùng chung semantic objects/assets và vẫn thuộc cùng một scene, phải gom
 tối đa số chuyển động khả thi vào **một slide timeline native**. Chỉ tách slide
 khi có lý do semantic hoặc giới hạn PowerPoint/backend được ghi rõ.
@@ -80,10 +83,11 @@ Bước planning có ở `skills/pptx-motion/references/native-timeline.md` và
 `scripts/pack_timeline.py`: geometry T005 được gom 12 legacy states thành
 1 slide/6 stage, orbit waypoint thành motion-path points.
 
-T006 hiện đã có writer native hạn chế: `scripts/add_timeline.py` ghi motion,
-scale và rotate vào một packed timing group; `scripts/run_timeline_experiment.sh`
+T006/T010 hiện có hai mode writer: v0.1 giữ one-click packed timing làm baseline
+lịch sử; v0.2 tạo nhiều presenter click-beat trong cùng slide. `scripts/add_timeline.py`
+ghi motion, scale và rotate; `scripts/run_timeline_experiment.sh`
 nối validate → artifact-tool source → textbox normalize → timing → finalizer.
-Branch CI đã pass 55 tests + Python/Node/shell syntax. Đọc
+Historical T006 CI đã pass 55 tests; T010 click-beat hiện pass 86 tests + Python compile. Đọc
 `experiments/T006-20261004-native-timing/REPORT.md` trước khi sửa writer.
 PowerPoint exact-file playback vẫn chưa có, nên không gọi writer là verified.
 
@@ -112,6 +116,7 @@ PR #1, `experiments/T003-20261004-codex-layer01/REPORT.md`: giữ cả thất b�
 | T007 | Existing Deck Motion Director | Intake + director contract + arbitrary source-object timing patcher + design fingerprint; tiếp theo director-beat compiler và helper-component insertion |
 | T008 | Existing Motion Continuation | Đọc timing có sẵn, preserve/extend/retime có chủ đích; không xóa timing để làm lại từ đầu |
 | T009 | Autonomous No-Script Benchmark | Chỉ PPTX + mục tiêu chung → tự dựng report script → gap → component → motion → exact-file playback |
+| T010 | Presenter-paced Click Beats | Slide → click beat → stage → effects; giữ 1 slide nhưng dừng đúng nhịp presenter, không dùng delay để giả thời gian nói |
 
 Mỗi task có brief và acceptance criteria trong `research/tasks/T00x.md`.
 Danh sách này chưa giao việc cho model nào. Model có môi trường PowerPoint
@@ -148,12 +153,14 @@ giản là đã đạt mục tiêu sáng tạo của sản phẩm.
 ## Prompt giao cho model khác
 
 > Tiếp tục PPTX Motion Lab tại https://github.com/togcoder/skill-for-pptx.
-> Đọc AGENTS.md, HANDOFF.md, docs/PRODUCT_TARGET.md, docs/STATUS.md, docs/MOTION_PACKING.md và skill nguồn. Kiểm tra task/nhánh/PR
+> Đọc AGENTS.md, HANDOFF.md, docs/PRODUCT_TARGET.md, docs/STATUS.md, docs/MOTION_PACKING.md, docs/CLICK_BEAT_CHOREOGRAPHY.md và skill nguồn. Kiểm tra task/nhánh/PR
 > đang chạy, nhận một task chưa có người làm phù hợp môi trường rồi tạo nhánh
 > riêng. Nếu đầu vào là PPTX có sẵn: inventory trước, dùng script có sẵn nếu có; nếu không thì notes → existing timing/choreography → visible narrative → inferred narrative → researched narrative; giữ source content/slide count mặc định và chỉ tạo component mới khi có narrative gap. HARD RULE: slide là scene/execution container, không phải motion frame;
 > khi các action dùng chung resource set, pack tối đa vào một native slide timeline
-> và không tạo waypoint/state slide chỉ vì dễ làm. Mọi slide boundary thêm mới phải
-> có lý do semantic/kỹ thuật. Giữ baseline và rubric, làm một thay đổi có giả thuyết rõ, tạo bằng
+> và không tạo waypoint/state slide chỉ vì dễ làm. SAU KHI pack, phải chia timeline
+> thành presenter click-beats: trạng thái ổn định cần thuyết trình thì dừng chờ click;
+> motion đồng thời dùng with-previous; motion nối tự động dùng after-previous. Không
+> dùng delay dài để giả thời gian presenter nói. Mọi slide/click boundary phải có lý do. Giữ baseline và rubric, làm một thay đổi có giả thuyết rõ, tạo bằng
 > chứng, lưu cả thất bại. Phân biệt kiểm tra cấu trúc, ảnh tĩnh và playback
 > PowerPoint. Cập nhật báo cáo, nguồn skill nếu có cải thiện được chứng minh,
 > và mở PR kèm handoff cho lượt sau. Nếu hết quota, lưu checkpoint nếu còn làm

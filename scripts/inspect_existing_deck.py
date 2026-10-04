@@ -327,6 +327,55 @@ def _numeric_delay(conditions):
     return min(values) if values else None
 
 
+
+def _timing_click_groups(timing,by_id):
+    """Recover presenter click groups conservatively from mainSeq direct children."""
+    main=timing.find(".//p:cTn[@nodeType='mainSeq']",NS)
+    if main is None:
+        return []
+    children=main.find("p:childTnLst",NS)
+    if children is None:
+        return []
+
+    groups=[]
+    for direct in list(children):
+        if _local_name(direct.tag)!="par":
+            continue
+        group_effects=[]
+        start_types=[]
+        target_ids=[]
+        for node in direct.iter():
+            kind=_local_name(node.tag)
+            if kind in TIMING_EFFECT_TAGS:
+                target=node.find(".//p:spTgt",NS)
+                spid=target.get("spid") if target is not None else None
+                behavior_ctn=node.find("p:cBhvr/p:cTn",NS)
+                if behavior_ctn is None:
+                    behavior_ctn=node.find("p:cTn",NS)
+                group_effects.append({
+                    "type":kind,
+                    "target_spid":spid,
+                    "target":by_id.get(spid),
+                    "duration":behavior_ctn.get("dur") if behavior_ctn is not None else None,
+                })
+                if spid is not None and spid not in target_ids:
+                    target_ids.append(spid)
+        for ctn in direct.findall(".//p:cTn",NS):
+            node_type=ctn.get("nodeType")
+            if node_type in ("clickEffect","withEffect","afterEffect") and node_type not in start_types:
+                start_types.append(node_type)
+        if group_effects or start_types:
+            groups.append({
+                "index":len(groups)+1,
+                "effect_count":len(group_effects),
+                "effect_types":[item["type"] for item in group_effects],
+                "start_node_types":start_types,
+                "target_spids":target_ids,
+                "targets":[by_id.get(spid) for spid in target_ids],
+            })
+    return groups
+
+
 def _timing_inventory(root,shapes):
     timing=root.find("p:timing",NS)
     if timing is None:
@@ -405,8 +454,12 @@ def _timing_inventory(root,shapes):
         order=[{"effect_index":effect["sequence_index"],"delay_ms":effect["numeric_delay_ms"]} for effect in effects]
         order_basis="document-order-partial"
 
+    click_groups=_timing_click_groups(timing,by_id)
+
     return {
         "effect_count":len(effects),
+        "click_group_count":len(click_groups),
+        "click_groups":click_groups,
         "time_node_count":len(time_nodes),
         "node_type_counts":[{"value":key,"count":count} for key,count in node_type_counts.most_common()],
         "effects":effects,
