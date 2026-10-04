@@ -25,7 +25,7 @@ When the user supplies an existing PPTX:
    hero metric requires a counter recipe rather than generic Fade/Zoom.
 5. Preserve source slide count/order/content by default. Create helper components
    only for a justified narrative role and match the existing visual system.
-6. For Director v0.3 slides made entirely of supported chart/KPI data-motion, compile with `python3 scripts/compile_data_motion_patch.py DIRECTOR.json INVENTORY.json --output PATCH.json`, then apply the v0.4 patch path. The compiler must block mixed unsupported slides rather than silently dropping beats. Convert other approved slide click-beats only when their low-level execution contract is explicit; never invent missing geometry/effect parameters.  For arbitrary source objects, read [existing-deck-timeline-patch.md](references/existing-deck-timeline-patch.md) and target the exact source slide-local ID + name. Patch v0.2 supports multiple click groups on one fresh source slide. Do not rebuild or rename existing resources merely because the generator path is easier.
+6. For Director v0.4, compile supported generic + data motion with `python3 scripts/compile_director_patch.py DIRECTOR.json INVENTORY.json --output PATCH.json`, then apply the v0.5 patch path. The compiler may expand one semantic motion beat into multiple automatic stages but must preserve presenter click groups. Unknown/mixed unsupported slides are blocked rather than silently dropping beats. Use the older data-only compiler only for frozen T015 reproduction. Never invent missing move/rotate geometry.  For arbitrary source objects, read [existing-deck-timeline-patch.md](references/existing-deck-timeline-patch.md) and target the exact source slide-local ID + name. Patch v0.2 supports multiple click groups on one fresh source slide. Do not rebuild or rename existing resources merely because the generator path is easier.
 
 ## Workflow for fresh motion experiments
 
@@ -61,6 +61,7 @@ Check native text content and formal textbox type separately. The pipeline norma
 - `scripts/validate_director_plan.py`: validates director plans including click rhythm and v0.3 semantic data motion
 - `scripts/data_motion_recipes.py`: deterministic chart/KPI recipe selector
 - `scripts/compile_data_motion_patch.py`: strict Director v0.3 chart/KPI → existing-deck patch v0.4 compiler
+- `scripts/compile_director_patch.py`: Director v0.4 generic+data → patch v0.5 compiler
 - `scripts/patch_existing_timeline.py`: patches native timing onto exact existing source objects without requiring `!!` names
 - `scripts/render_plan.mjs`: restricted native scene renderer
 - `scripts/add_morph.py`: experimental transition insertion
