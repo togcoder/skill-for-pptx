@@ -88,6 +88,11 @@ class DirectorPlanTests(unittest.TestCase):
         bad=self.plan();bad["slides"][0]["beats"][0]["targets"]=["not-in-slide"]
         self.assertTrue(any("unknown targets" in x for x in validate(bad,self.inventory)))
 
+    def test_existing_timing_is_valid_script_source(self):
+        plan=self.plan();plan["script"]["source"]="existing-timing"
+        plan["script"]["evidence"]=["Existing slide timing targets and order."]
+        self.assertEqual(validate(plan,self.inventory),[])
+
     def test_researched_script_requires_sources(self):
         bad=self.plan();bad["script"]["source"]="researched"
         self.assertIn("researched script requires research_metadata.sources",validate(bad,self.inventory))
