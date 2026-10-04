@@ -12,14 +12,17 @@ Create or augment a reviewable PowerPoint motion artifact. The preferred product
 When the user supplies an existing PPTX:
 
 1. Run `python3 scripts/inspect_existing_deck.py SOURCE.pptx --output INVENTORY.json`.
-2. Read [existing-deck-director.md](references/existing-deck-director.md).
+2. Read [existing-deck-director.md](references/existing-deck-director.md) and [data-motion-recipes.md](references/data-motion-recipes.md).
 3. Use an explicit script if supplied. Otherwise prefer speaker notes, then infer
    the report sequence from the deck. Research externally only when appropriate
    and clearly separate researched structure/facts from user data.
-4. Draft an `existing-deck-motion-director` v0.2 plan and validate it with
+4. Draft an `existing-deck-motion-director` v0.3 plan and validate it with
    `python3 scripts/validate_director_plan.py PLAN.json INVENTORY.json`. Separate
    motion beats from presenter click beats: every click beat must state the audience
-   purpose, stable state and why a later click boundary is needed.
+   purpose, stable state and why a later click boundary is needed. If inventory
+   exposes charts or standalone numeric KPI candidates, classify their semantic
+   role before choosing motion; chart targets require chart data-motion, while a
+   hero metric requires a counter recipe rather than generic Fade/Zoom.
 5. Preserve source slide count/order/content by default. Create helper components
    only for a justified narrative role and match the existing visual system.
 6. Convert approved slide click-beats to packed native timelines without flattening their presenter rhythm. For arbitrary source objects, read [existing-deck-timeline-patch.md](references/existing-deck-timeline-patch.md) and target the exact source slide-local ID + name. Patch v0.2 supports multiple click groups on one fresh source slide. Do not rebuild or rename existing resources merely because the generator path is easier.
@@ -54,8 +57,9 @@ Check native text content and formal textbox type separately. The pipeline norma
 
 ## Current source layout
 
-- `scripts/inspect_existing_deck.py`: read-only PPTX intake inventory for T007
-- `scripts/validate_director_plan.py`: validates existing-deck motion-director plans
+- `scripts/inspect_existing_deck.py`: read-only PPTX intake inventory including chart subtype/dimensions and standalone numeric candidates
+- `scripts/validate_director_plan.py`: validates director plans including click rhythm and v0.3 semantic data motion
+- `scripts/data_motion_recipes.py`: deterministic chart/KPI recipe selector
 - `scripts/patch_existing_timeline.py`: patches native timing onto exact existing source objects without requiring `!!` names
 - `scripts/render_plan.mjs`: restricted native scene renderer
 - `scripts/add_morph.py`: experimental transition insertion
