@@ -97,6 +97,20 @@ untargeted slide byte-identical và từ chối timing cũ chưa biết merge. I
 `design_profile` để làm cơ sở sinh component đúng font/palette/geometry.
 Đọc `experiments/T007-20261004-source-object-patcher/REPORT.md`.
 
+## Chỉ thị T012 — chart và số không phải shape thường
+
+Khi inventory gặp chart, model phải đọc
+`skills/pptx-motion/references/data-motion-recipes.md` và dùng chart subtype /
+series/category/point count để chọn recipe. Director v0.3 sẽ từ chối chart target
+không có `data_motion`.
+
+Standalone number chỉ là candidate. Chỉ khi narrative coi nó là hero KPI/result/
+target thì dùng counter. Counter không được đổi final source value/format và
+không tự tạo click mới.
+
+Backend native chart-build và counter component vẫn pending; không tuyên bố
+playback chỉ vì semantic tests pass.
+
 ## Chỉ thị T011 — AI phải hiểu nhịp trước khi viết XML
 
 T010 đã sửa writer. T011 đưa cùng nguyên tắc lên tầng Director: **motion beat
@@ -129,6 +143,7 @@ PR #1, `experiments/T003-20261004-codex-layer01/REPORT.md`: giữ cả thất b�
 | T009 | Autonomous No-Script Benchmark | Chỉ PPTX + mục tiêu chung → tự dựng report script → gap → component → motion → exact-file playback |
 | T010 | Presenter-paced Click Beats | Slide → click beat → stage → effects; giữ 1 slide nhưng dừng đúng nhịp presenter, không dùng delay để giả thời gian nói |
 | T011 | Director Click Rhythm | Bắt AI Director tự nhóm motion beats thành presenter clicks có purpose/stable state/boundary reason, rồi giữ nhịp đó khi patch existing deck |
+| T012 | Semantic Data Motion | Nhận diện chart subtype + hero KPI; chart dùng recipe riêng theo encoding, KPI highlight dùng count-up/down và giữ nguyên giá trị nguồn |
 
 Mỗi task có brief và acceptance criteria trong `research/tasks/T00x.md`.
 Danh sách này chưa giao việc cho model nào. Model có môi trường PowerPoint
