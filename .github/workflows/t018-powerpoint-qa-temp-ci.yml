@@ -1,0 +1,30 @@
+name: t018-powerpoint-qa-temp-ci
+on:
+  push:
+    branches:
+      - work/T018-powerpoint-native-qa-20261005
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install lxml
+      - run: python -m py_compile scripts/*.py
+      - name: Parse PowerShell QA probe
+        shell: pwsh
+        run: |
+          $tokens=$null
+          $errors=$null
+          [void][System.Management.Automation.Language.Parser]::ParseFile(
+            (Resolve-Path "scripts/powerpoint_native_probe.ps1"),
+            [ref]$tokens,
+            [ref]$errors
+          )
+          if ($errors.Count -gt 0) {
+            $errors | ForEach-Object { Write-Error $_.Message }
+            exit 1
+          }
+      - run: python -m unittest discover -s tests -v
