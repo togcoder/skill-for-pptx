@@ -1,0 +1,1660 @@
+{
+  "version": "0.1",
+  "brief": "Giải thích kiến trúc một nền tảng học trực tuyến qua 4 lớp bằng hiệu ứng tách lớp rồi ghép lại, nhãn tiếng Việt ngắn và dễ đọc.",
+  "canvas": {
+    "width": 16,
+    "height": 9,
+    "units": "normalized"
+  },
+  "data_provenance": "synthetic",
+  "objects": [
+    {
+      "id": "eyebrow",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!eyebrow",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "KIẾN TRÚC / BỐN LỚP",
+      "font_size": 16,
+      "text_color": "#AAA2B8",
+      "bold": false
+    },
+    {
+      "id": "title",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!title",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Nền tảng học trực tuyến",
+      "font_size": 52,
+      "text_color": "#F7F4FA",
+      "bold": true
+    },
+    {
+      "id": "subtitle",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!subtitle",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Bốn lớp phối hợp để vận hành hành trình học tập.",
+      "font_size": 24,
+      "text_color": "#C9C1D4",
+      "bold": false
+    },
+    {
+      "id": "divider",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!divider",
+      "geometry": "rect",
+      "fill": "#393240",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "scene",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!scene",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "01 / TỔNG THỂ",
+      "font_size": 23,
+      "text_color": "#E9E3F0",
+      "bold": true
+    },
+    {
+      "id": "footer",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!footer",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Sơ đồ minh họa • dữ liệu giả định",
+      "font_size": 17,
+      "text_color": "#AAA2B8",
+      "bold": false
+    },
+    {
+      "id": "layer-interface",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!layer-interface",
+      "geometry": "rect",
+      "fill": "#24212C",
+      "stroke": "#54E7FF",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "interface-number",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!interface-number",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "01",
+      "font_size": 23,
+      "text_color": "#54E7FF",
+      "bold": true
+    },
+    {
+      "id": "interface-trace",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!interface-trace",
+      "geometry": "rect",
+      "fill": "#54E7FF",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "interface-node",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!interface-node",
+      "geometry": "ellipse",
+      "fill": "#54E7FF",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "interface-end",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!interface-end",
+      "geometry": "rect",
+      "fill": "#54E7FF",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "rail-interface-number",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!rail-interface-number",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "01",
+      "font_size": 22,
+      "text_color": "#54E7FF",
+      "bold": true
+    },
+    {
+      "id": "rail-interface-label",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!rail-interface-label",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Giao diện",
+      "font_size": 26,
+      "text_color": "#54E7FF",
+      "bold": true
+    },
+    {
+      "id": "rail-interface-role",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!rail-interface-role",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Xem bài • làm bài • theo dõi",
+      "font_size": 19,
+      "text_color": "#D4CCDF",
+      "bold": false
+    },
+    {
+      "id": "layer-learning-services",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!layer-learning-services",
+      "geometry": "rect",
+      "fill": "#24212C",
+      "stroke": "#BAFA64",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "learning-services-number",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!learning-services-number",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "02",
+      "font_size": 23,
+      "text_color": "#BAFA64",
+      "bold": true
+    },
+    {
+      "id": "learning-services-trace",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!learning-services-trace",
+      "geometry": "rect",
+      "fill": "#BAFA64",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "learning-services-node",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!learning-services-node",
+      "geometry": "ellipse",
+      "fill": "#BAFA64",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "learning-services-end",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!learning-services-end",
+      "geometry": "rect",
+      "fill": "#BAFA64",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "rail-learning-services-number",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!rail-learning-services-number",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "02",
+      "font_size": 22,
+      "text_color": "#BAFA64",
+      "bold": true
+    },
+    {
+      "id": "rail-learning-services-label",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!rail-learning-services-label",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Dịch vụ học tập",
+      "font_size": 26,
+      "text_color": "#BAFA64",
+      "bold": true
+    },
+    {
+      "id": "rail-learning-services-role",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!rail-learning-services-role",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Khóa học • kiểm tra • tiến độ",
+      "font_size": 19,
+      "text_color": "#D4CCDF",
+      "bold": false
+    },
+    {
+      "id": "layer-content-data",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!layer-content-data",
+      "geometry": "rect",
+      "fill": "#24212C",
+      "stroke": "#FFBC70",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "content-data-number",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!content-data-number",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "03",
+      "font_size": 23,
+      "text_color": "#FFBC70",
+      "bold": true
+    },
+    {
+      "id": "content-data-trace",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!content-data-trace",
+      "geometry": "rect",
+      "fill": "#FFBC70",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "content-data-node",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!content-data-node",
+      "geometry": "ellipse",
+      "fill": "#FFBC70",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "content-data-end",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!content-data-end",
+      "geometry": "rect",
+      "fill": "#FFBC70",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "rail-content-data-number",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!rail-content-data-number",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "03",
+      "font_size": 22,
+      "text_color": "#FFBC70",
+      "bold": true
+    },
+    {
+      "id": "rail-content-data-label",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!rail-content-data-label",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Nội dung & dữ liệu",
+      "font_size": 26,
+      "text_color": "#FFBC70",
+      "bold": true
+    },
+    {
+      "id": "rail-content-data-role",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!rail-content-data-role",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Video • tài liệu • kết quả",
+      "font_size": 19,
+      "text_color": "#D4CCDF",
+      "bold": false
+    },
+    {
+      "id": "layer-infrastructure",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!layer-infrastructure",
+      "geometry": "rect",
+      "fill": "#24212C",
+      "stroke": "#C59EFF",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "infrastructure-number",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!infrastructure-number",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "04",
+      "font_size": 23,
+      "text_color": "#C59EFF",
+      "bold": true
+    },
+    {
+      "id": "infrastructure-trace",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!infrastructure-trace",
+      "geometry": "rect",
+      "fill": "#C59EFF",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "infrastructure-node",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!infrastructure-node",
+      "geometry": "ellipse",
+      "fill": "#C59EFF",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "infrastructure-end",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!infrastructure-end",
+      "geometry": "rect",
+      "fill": "#C59EFF",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "rail-infrastructure-number",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!rail-infrastructure-number",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "04",
+      "font_size": 22,
+      "text_color": "#C59EFF",
+      "bold": true
+    },
+    {
+      "id": "rail-infrastructure-label",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!rail-infrastructure-label",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Hạ tầng",
+      "font_size": 26,
+      "text_color": "#C59EFF",
+      "bold": true
+    },
+    {
+      "id": "rail-infrastructure-role",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!rail-infrastructure-role",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Máy chủ • lưu trữ • bảo mật",
+      "font_size": 19,
+      "text_color": "#D4CCDF",
+      "bold": false
+    }
+  ],
+  "states": [
+    {
+      "id": "assembled",
+      "message": "01 / TỔNG THỂ. Giải thích kiến trúc một nền tảng học trực tuyến qua 4 lớp bằng hiệu ứng tách lớp rồi ghép lại, nhãn tiếng Việt ngắn và dễ đọc.",
+      "objects": {
+        "eyebrow": {
+          "x": 0.0703125,
+          "y": 0.03888888888888889,
+          "w": 0.859375,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "title": {
+          "x": 0.0703125,
+          "y": 0.09166666666666666,
+          "w": 0.859375,
+          "h": 0.09027777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "subtitle": {
+          "x": 0.0703125,
+          "y": 0.1875,
+          "w": 0.859375,
+          "h": 0.05277777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "divider": {
+          "x": 0.5671875,
+          "y": 0.28055555555555556,
+          "w": 0.0015625,
+          "h": 0.5638888888888889,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "scene": {
+          "x": 0.078125,
+          "y": 0.8708333333333333,
+          "w": 0.44921875,
+          "h": 0.05138888888888889,
+          "rotation_deg": 0,
+          "opacity": 1,
+          "text": "01 / TỔNG THỂ"
+        },
+        "footer": {
+          "x": 0.58984375,
+          "y": 0.8777777777777778,
+          "w": 0.359375,
+          "h": 0.041666666666666664,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "layer-interface": {
+          "x": 0.096875,
+          "y": 0.3888888888888889,
+          "w": 0.40625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "interface-number": {
+          "x": 0.1078125,
+          "y": 0.4027777777777778,
+          "w": 0.046875,
+          "h": 0.044444444444444446,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "interface-trace": {
+          "x": 0.1578125,
+          "y": 0.4236111111111111,
+          "w": 0.2421875,
+          "h": 0.002777777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "interface-node": {
+          "x": 0.3953125,
+          "y": 0.4111111111111111,
+          "w": 0.015625,
+          "h": 0.027777777777777776,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "interface-end": {
+          "x": 0.4390625,
+          "y": 0.4083333333333333,
+          "w": 0.04453125,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-interface-number": {
+          "x": 0.58671875,
+          "y": 0.3333333333333333,
+          "w": 0.0359375,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-interface-label": {
+          "x": 0.63203125,
+          "y": 0.32083333333333336,
+          "w": 0.3046875,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-interface-role": {
+          "x": 0.63203125,
+          "y": 0.36944444444444446,
+          "w": 0.3046875,
+          "h": 0.0375,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "layer-learning-services": {
+          "x": 0.10234375,
+          "y": 0.4666666666666667,
+          "w": 0.40625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "learning-services-number": {
+          "x": 0.11328125,
+          "y": 0.48055555555555557,
+          "w": 0.046875,
+          "h": 0.044444444444444446,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "learning-services-trace": {
+          "x": 0.16328125,
+          "y": 0.5013888888888889,
+          "w": 0.2421875,
+          "h": 0.002777777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "learning-services-node": {
+          "x": 0.40078125,
+          "y": 0.4888888888888889,
+          "w": 0.015625,
+          "h": 0.027777777777777776,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "learning-services-end": {
+          "x": 0.44453125,
+          "y": 0.4861111111111111,
+          "w": 0.04453125,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-learning-services-number": {
+          "x": 0.58671875,
+          "y": 0.45555555555555555,
+          "w": 0.0359375,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-learning-services-label": {
+          "x": 0.63203125,
+          "y": 0.44305555555555554,
+          "w": 0.3046875,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-learning-services-role": {
+          "x": 0.63203125,
+          "y": 0.49166666666666664,
+          "w": 0.3046875,
+          "h": 0.0375,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "layer-content-data": {
+          "x": 0.1078125,
+          "y": 0.5444444444444444,
+          "w": 0.40625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "content-data-number": {
+          "x": 0.11875,
+          "y": 0.5583333333333333,
+          "w": 0.046875,
+          "h": 0.044444444444444446,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "content-data-trace": {
+          "x": 0.16875,
+          "y": 0.5791666666666667,
+          "w": 0.2421875,
+          "h": 0.002777777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "content-data-node": {
+          "x": 0.40625,
+          "y": 0.5666666666666667,
+          "w": 0.015625,
+          "h": 0.027777777777777776,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "content-data-end": {
+          "x": 0.45,
+          "y": 0.5638888888888889,
+          "w": 0.04453125,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-content-data-number": {
+          "x": 0.58671875,
+          "y": 0.5777777777777777,
+          "w": 0.0359375,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-content-data-label": {
+          "x": 0.63203125,
+          "y": 0.5652777777777778,
+          "w": 0.3046875,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-content-data-role": {
+          "x": 0.63203125,
+          "y": 0.6138888888888889,
+          "w": 0.3046875,
+          "h": 0.0375,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "layer-infrastructure": {
+          "x": 0.11328125,
+          "y": 0.6222222222222222,
+          "w": 0.40625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "infrastructure-number": {
+          "x": 0.12421875,
+          "y": 0.6361111111111111,
+          "w": 0.046875,
+          "h": 0.044444444444444446,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "infrastructure-trace": {
+          "x": 0.17421875,
+          "y": 0.6569444444444444,
+          "w": 0.2421875,
+          "h": 0.002777777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "infrastructure-node": {
+          "x": 0.41171875,
+          "y": 0.6444444444444445,
+          "w": 0.015625,
+          "h": 0.027777777777777776,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "infrastructure-end": {
+          "x": 0.45546875,
+          "y": 0.6416666666666667,
+          "w": 0.04453125,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-infrastructure-number": {
+          "x": 0.58671875,
+          "y": 0.7,
+          "w": 0.0359375,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-infrastructure-label": {
+          "x": 0.63203125,
+          "y": 0.6875,
+          "w": 0.3046875,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-infrastructure-role": {
+          "x": 0.63203125,
+          "y": 0.7361111111111112,
+          "w": 0.3046875,
+          "h": 0.0375,
+          "rotation_deg": 0,
+          "opacity": 1
+        }
+      }
+    },
+    {
+      "id": "separated",
+      "message": "02 / TÁCH LỚP. Giải thích kiến trúc một nền tảng học trực tuyến qua 4 lớp bằng hiệu ứng tách lớp rồi ghép lại, nhãn tiếng Việt ngắn và dễ đọc.",
+      "objects": {
+        "eyebrow": {
+          "x": 0.0703125,
+          "y": 0.03888888888888889,
+          "w": 0.859375,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "title": {
+          "x": 0.0703125,
+          "y": 0.09166666666666666,
+          "w": 0.859375,
+          "h": 0.09027777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "subtitle": {
+          "x": 0.0703125,
+          "y": 0.1875,
+          "w": 0.859375,
+          "h": 0.05277777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "divider": {
+          "x": 0.5671875,
+          "y": 0.28055555555555556,
+          "w": 0.0015625,
+          "h": 0.5638888888888889,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "scene": {
+          "x": 0.078125,
+          "y": 0.8708333333333333,
+          "w": 0.44921875,
+          "h": 0.05138888888888889,
+          "rotation_deg": 0,
+          "opacity": 1,
+          "text": "02 / TÁCH LỚP"
+        },
+        "footer": {
+          "x": 0.58984375,
+          "y": 0.8777777777777778,
+          "w": 0.359375,
+          "h": 0.041666666666666664,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "layer-interface": {
+          "x": 0.096875,
+          "y": 0.32222222222222224,
+          "w": 0.40625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "interface-number": {
+          "x": 0.1078125,
+          "y": 0.33611111111111114,
+          "w": 0.046875,
+          "h": 0.044444444444444446,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "interface-trace": {
+          "x": 0.1578125,
+          "y": 0.35694444444444445,
+          "w": 0.2421875,
+          "h": 0.002777777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "interface-node": {
+          "x": 0.3953125,
+          "y": 0.34444444444444444,
+          "w": 0.015625,
+          "h": 0.027777777777777776,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "interface-end": {
+          "x": 0.43906249999999997,
+          "y": 0.3416666666666667,
+          "w": 0.04453125,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-interface-number": {
+          "x": 0.58671875,
+          "y": 0.3333333333333333,
+          "w": 0.0359375,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-interface-label": {
+          "x": 0.63203125,
+          "y": 0.32083333333333336,
+          "w": 0.3046875,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-interface-role": {
+          "x": 0.63203125,
+          "y": 0.36944444444444446,
+          "w": 0.3046875,
+          "h": 0.0375,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "layer-learning-services": {
+          "x": 0.10234375,
+          "y": 0.4444444444444444,
+          "w": 0.40625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "learning-services-number": {
+          "x": 0.11328125,
+          "y": 0.4583333333333333,
+          "w": 0.046875,
+          "h": 0.044444444444444446,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "learning-services-trace": {
+          "x": 0.16328125,
+          "y": 0.47916666666666663,
+          "w": 0.2421875,
+          "h": 0.002777777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "learning-services-node": {
+          "x": 0.40078125000000003,
+          "y": 0.4666666666666666,
+          "w": 0.015625,
+          "h": 0.027777777777777776,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "learning-services-end": {
+          "x": 0.44453125,
+          "y": 0.46388888888888885,
+          "w": 0.04453125,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-learning-services-number": {
+          "x": 0.58671875,
+          "y": 0.45555555555555555,
+          "w": 0.0359375,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-learning-services-label": {
+          "x": 0.63203125,
+          "y": 0.44305555555555554,
+          "w": 0.3046875,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-learning-services-role": {
+          "x": 0.63203125,
+          "y": 0.49166666666666664,
+          "w": 0.3046875,
+          "h": 0.0375,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "layer-content-data": {
+          "x": 0.1078125,
+          "y": 0.5666666666666667,
+          "w": 0.40625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "content-data-number": {
+          "x": 0.11875000000000001,
+          "y": 0.5805555555555555,
+          "w": 0.046875,
+          "h": 0.044444444444444446,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "content-data-trace": {
+          "x": 0.16875,
+          "y": 0.6013888888888889,
+          "w": 0.2421875,
+          "h": 0.002777777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "content-data-node": {
+          "x": 0.40625,
+          "y": 0.5888888888888889,
+          "w": 0.015625,
+          "h": 0.027777777777777776,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "content-data-end": {
+          "x": 0.44999999999999996,
+          "y": 0.5861111111111111,
+          "w": 0.04453125,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-content-data-number": {
+          "x": 0.58671875,
+          "y": 0.5777777777777777,
+          "w": 0.0359375,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-content-data-label": {
+          "x": 0.63203125,
+          "y": 0.5652777777777778,
+          "w": 0.3046875,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-content-data-role": {
+          "x": 0.63203125,
+          "y": 0.6138888888888889,
+          "w": 0.3046875,
+          "h": 0.0375,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "layer-infrastructure": {
+          "x": 0.11328125,
+          "y": 0.6888888888888889,
+          "w": 0.40625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "infrastructure-number": {
+          "x": 0.12421875,
+          "y": 0.7027777777777777,
+          "w": 0.046875,
+          "h": 0.044444444444444446,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "infrastructure-trace": {
+          "x": 0.17421875,
+          "y": 0.7236111111111111,
+          "w": 0.2421875,
+          "h": 0.002777777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "infrastructure-node": {
+          "x": 0.41171875,
+          "y": 0.7111111111111111,
+          "w": 0.015625,
+          "h": 0.027777777777777776,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "infrastructure-end": {
+          "x": 0.45546875,
+          "y": 0.7083333333333334,
+          "w": 0.04453125,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-infrastructure-number": {
+          "x": 0.58671875,
+          "y": 0.7,
+          "w": 0.0359375,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-infrastructure-label": {
+          "x": 0.63203125,
+          "y": 0.6875,
+          "w": 0.3046875,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-infrastructure-role": {
+          "x": 0.63203125,
+          "y": 0.7361111111111112,
+          "w": 0.3046875,
+          "h": 0.0375,
+          "rotation_deg": 0,
+          "opacity": 1
+        }
+      }
+    },
+    {
+      "id": "reassembled",
+      "message": "03 / GHÉP LẠI. Giải thích kiến trúc một nền tảng học trực tuyến qua 4 lớp bằng hiệu ứng tách lớp rồi ghép lại, nhãn tiếng Việt ngắn và dễ đọc.",
+      "objects": {
+        "eyebrow": {
+          "x": 0.0703125,
+          "y": 0.03888888888888889,
+          "w": 0.859375,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "title": {
+          "x": 0.0703125,
+          "y": 0.09166666666666666,
+          "w": 0.859375,
+          "h": 0.09027777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "subtitle": {
+          "x": 0.0703125,
+          "y": 0.1875,
+          "w": 0.859375,
+          "h": 0.05277777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "divider": {
+          "x": 0.5671875,
+          "y": 0.28055555555555556,
+          "w": 0.0015625,
+          "h": 0.5638888888888889,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "scene": {
+          "x": 0.078125,
+          "y": 0.8708333333333333,
+          "w": 0.44921875,
+          "h": 0.05138888888888889,
+          "rotation_deg": 0,
+          "opacity": 1,
+          "text": "03 / GHÉP LẠI"
+        },
+        "footer": {
+          "x": 0.58984375,
+          "y": 0.8777777777777778,
+          "w": 0.359375,
+          "h": 0.041666666666666664,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "layer-interface": {
+          "x": 0.096875,
+          "y": 0.3888888888888889,
+          "w": 0.40625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "interface-number": {
+          "x": 0.1078125,
+          "y": 0.4027777777777778,
+          "w": 0.046875,
+          "h": 0.044444444444444446,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "interface-trace": {
+          "x": 0.1578125,
+          "y": 0.4236111111111111,
+          "w": 0.2421875,
+          "h": 0.002777777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "interface-node": {
+          "x": 0.3953125,
+          "y": 0.4111111111111111,
+          "w": 0.015625,
+          "h": 0.027777777777777776,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "interface-end": {
+          "x": 0.4390625,
+          "y": 0.4083333333333333,
+          "w": 0.04453125,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-interface-number": {
+          "x": 0.58671875,
+          "y": 0.3333333333333333,
+          "w": 0.0359375,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-interface-label": {
+          "x": 0.63203125,
+          "y": 0.32083333333333336,
+          "w": 0.3046875,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-interface-role": {
+          "x": 0.63203125,
+          "y": 0.36944444444444446,
+          "w": 0.3046875,
+          "h": 0.0375,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "layer-learning-services": {
+          "x": 0.10234375,
+          "y": 0.4666666666666667,
+          "w": 0.40625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "learning-services-number": {
+          "x": 0.11328125,
+          "y": 0.48055555555555557,
+          "w": 0.046875,
+          "h": 0.044444444444444446,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "learning-services-trace": {
+          "x": 0.16328125,
+          "y": 0.5013888888888889,
+          "w": 0.2421875,
+          "h": 0.002777777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "learning-services-node": {
+          "x": 0.40078125,
+          "y": 0.4888888888888889,
+          "w": 0.015625,
+          "h": 0.027777777777777776,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "learning-services-end": {
+          "x": 0.44453125,
+          "y": 0.4861111111111111,
+          "w": 0.04453125,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-learning-services-number": {
+          "x": 0.58671875,
+          "y": 0.45555555555555555,
+          "w": 0.0359375,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-learning-services-label": {
+          "x": 0.63203125,
+          "y": 0.44305555555555554,
+          "w": 0.3046875,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-learning-services-role": {
+          "x": 0.63203125,
+          "y": 0.49166666666666664,
+          "w": 0.3046875,
+          "h": 0.0375,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "layer-content-data": {
+          "x": 0.1078125,
+          "y": 0.5444444444444444,
+          "w": 0.40625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "content-data-number": {
+          "x": 0.11875,
+          "y": 0.5583333333333333,
+          "w": 0.046875,
+          "h": 0.044444444444444446,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "content-data-trace": {
+          "x": 0.16875,
+          "y": 0.5791666666666667,
+          "w": 0.2421875,
+          "h": 0.002777777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "content-data-node": {
+          "x": 0.40625,
+          "y": 0.5666666666666667,
+          "w": 0.015625,
+          "h": 0.027777777777777776,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "content-data-end": {
+          "x": 0.45,
+          "y": 0.5638888888888889,
+          "w": 0.04453125,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-content-data-number": {
+          "x": 0.58671875,
+          "y": 0.5777777777777777,
+          "w": 0.0359375,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-content-data-label": {
+          "x": 0.63203125,
+          "y": 0.5652777777777778,
+          "w": 0.3046875,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-content-data-role": {
+          "x": 0.63203125,
+          "y": 0.6138888888888889,
+          "w": 0.3046875,
+          "h": 0.0375,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "layer-infrastructure": {
+          "x": 0.11328125,
+          "y": 0.6222222222222222,
+          "w": 0.40625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "infrastructure-number": {
+          "x": 0.12421875,
+          "y": 0.6361111111111111,
+          "w": 0.046875,
+          "h": 0.044444444444444446,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "infrastructure-trace": {
+          "x": 0.17421875,
+          "y": 0.6569444444444444,
+          "w": 0.2421875,
+          "h": 0.002777777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "infrastructure-node": {
+          "x": 0.41171875,
+          "y": 0.6444444444444445,
+          "w": 0.015625,
+          "h": 0.027777777777777776,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "infrastructure-end": {
+          "x": 0.45546875,
+          "y": 0.6416666666666667,
+          "w": 0.04453125,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-infrastructure-number": {
+          "x": 0.58671875,
+          "y": 0.7,
+          "w": 0.0359375,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-infrastructure-label": {
+          "x": 0.63203125,
+          "y": 0.6875,
+          "w": 0.3046875,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-infrastructure-role": {
+          "x": 0.63203125,
+          "y": 0.7361111111111112,
+          "w": 0.3046875,
+          "h": 0.0375,
+          "rotation_deg": 0,
+          "opacity": 1
+        }
+      }
+    }
+  ],
+  "transitions": [
+    {
+      "from": "assembled",
+      "to": "separated",
+      "kind": "morph",
+      "duration_ms": 1100,
+      "track": [
+        "eyebrow",
+        "title",
+        "subtitle",
+        "divider",
+        "scene",
+        "footer",
+        "layer-interface",
+        "interface-number",
+        "interface-trace",
+        "interface-node",
+        "interface-end",
+        "rail-interface-number",
+        "rail-interface-label",
+        "rail-interface-role",
+        "layer-learning-services",
+        "learning-services-number",
+        "learning-services-trace",
+        "learning-services-node",
+        "learning-services-end",
+        "rail-learning-services-number",
+        "rail-learning-services-label",
+        "rail-learning-services-role",
+        "layer-content-data",
+        "content-data-number",
+        "content-data-trace",
+        "content-data-node",
+        "content-data-end",
+        "rail-content-data-number",
+        "rail-content-data-label",
+        "rail-content-data-role",
+        "layer-infrastructure",
+        "infrastructure-number",
+        "infrastructure-trace",
+        "infrastructure-node",
+        "infrastructure-end",
+        "rail-infrastructure-number",
+        "rail-infrastructure-label",
+        "rail-infrastructure-role"
+      ]
+    },
+    {
+      "from": "separated",
+      "to": "reassembled",
+      "kind": "morph",
+      "duration_ms": 1100,
+      "track": [
+        "eyebrow",
+        "title",
+        "subtitle",
+        "divider",
+        "scene",
+        "footer",
+        "layer-interface",
+        "interface-number",
+        "interface-trace",
+        "interface-node",
+        "interface-end",
+        "rail-interface-number",
+        "rail-interface-label",
+        "rail-interface-role",
+        "layer-learning-services",
+        "learning-services-number",
+        "learning-services-trace",
+        "learning-services-node",
+        "learning-services-end",
+        "rail-learning-services-number",
+        "rail-learning-services-label",
+        "rail-learning-services-role",
+        "layer-content-data",
+        "content-data-number",
+        "content-data-trace",
+        "content-data-node",
+        "content-data-end",
+        "rail-content-data-number",
+        "rail-content-data-label",
+        "rail-content-data-role",
+        "layer-infrastructure",
+        "infrastructure-number",
+        "infrastructure-trace",
+        "infrastructure-node",
+        "infrastructure-end",
+        "rail-infrastructure-number",
+        "rail-infrastructure-label",
+        "rail-infrastructure-role"
+      ]
+    }
+  ],
+  "research_metadata": {
+    "recipe": "layer-separation-2d-v1",
+    "bindings": [
+      {
+        "parent": "layer-interface",
+        "child": "interface-number",
+        "offset_px": [
+          14,
+          10
+        ]
+      },
+      {
+        "parent": "layer-interface",
+        "child": "interface-trace",
+        "offset_px": [
+          78,
+          25
+        ]
+      },
+      {
+        "parent": "layer-interface",
+        "child": "interface-node",
+        "offset_px": [
+          382,
+          16
+        ]
+      },
+      {
+        "parent": "layer-interface",
+        "child": "interface-end",
+        "offset_px": [
+          438,
+          14
+        ]
+      },
+      {
+        "parent": "layer-learning-services",
+        "child": "learning-services-number",
+        "offset_px": [
+          14,
+          10
+        ]
+      },
+      {
+        "parent": "layer-learning-services",
+        "child": "learning-services-trace",
+        "offset_px": [
+          78,
+          25
+        ]
+      },
+      {
+        "parent": "layer-learning-services",
+        "child": "learning-services-node",
+        "offset_px": [
+          382,
+          16
+        ]
+      },
+      {
+        "parent": "layer-learning-services",
+        "child": "learning-services-end",
+        "offset_px": [
+          438,
+          14
+        ]
+      },
+      {
+        "parent": "layer-content-data",
+        "child": "content-data-number",
+        "offset_px": [
+          14,
+          10
+        ]
+      },
+      {
+        "parent": "layer-content-data",
+        "child": "content-data-trace",
+        "offset_px": [
+          78,
+          25
+        ]
+      },
+      {
+        "parent": "layer-content-data",
+        "child": "content-data-node",
+        "offset_px": [
+          382,
+          16
+        ]
+      },
+      {
+        "parent": "layer-content-data",
+        "child": "content-data-end",
+        "offset_px": [
+          438,
+          14
+        ]
+      },
+      {
+        "parent": "layer-infrastructure",
+        "child": "infrastructure-number",
+        "offset_px": [
+          14,
+          10
+        ]
+      },
+      {
+        "parent": "layer-infrastructure",
+        "child": "infrastructure-trace",
+        "offset_px": [
+          78,
+          25
+        ]
+      },
+      {
+        "parent": "layer-infrastructure",
+        "child": "infrastructure-node",
+        "offset_px": [
+          382,
+          16
+        ]
+      },
+      {
+        "parent": "layer-infrastructure",
+        "child": "infrastructure-end",
+        "offset_px": [
+          438,
+          14
+        ]
+      }
+    ],
+    "references": [
+      {
+        "url": "https://support.microsoft.com/en-us/powerpoint/morph-transition-tips-and-tricks",
+        "author": "Microsoft",
+        "source_access_date_reported_by_local_reference": "2026-10-04",
+        "local_reference_inspected_date": "2026-10-04",
+        "evidence_inspected": "Chỉ đọc tài liệu cục bộ recipes.md, plan-contract.md và layer-separation.md; không truy cập trang nguồn, không quan sát phát lại PowerPoint.",
+        "reuse_conditions": "Kế thừa nguyên tắc tên !! ổn định; không sao chép nội dung đa phương tiện hay mẫu nguồn."
+      },
+      {
+        "url": "https://www.presentation-process.com/layer-diagram.html",
+        "author": "Presentation Process",
+        "source_access_date_reported_by_local_reference": "2026-10-04",
+        "local_reference_inspected_date": "2026-10-04",
+        "evidence_inspected": "Chỉ đọc mô tả nguồn trong layer-separation.md; không truy cập bài gốc, không kiểm chứng hoạt ảnh nguồn.",
+        "reuse_conditions": "Chỉ kế thừa ý tưởng các lớp; bố cục 2D gốc của generator, không dùng tài sản ngoài hoặc sao chép hiệu ứng 3D."
+      }
+    ],
+    "ablation": false,
+    "layer_count": 4,
+    "native_playback_verified": false,
+    "assumptions": "Constant size, zero rotation, synchronous translation. Fixed explanation rail. No native group or 3D extrusion."
+  }
+}

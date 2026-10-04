@@ -6,7 +6,7 @@
 | Overview to detail | One element deserves attention | Keep a small overview anchor while scaling a selected native element | H001/E002 and H002 have structural/static evidence; native playback pending |
 | Cyclic focus, three modes | Modes take attention in turn | Three noncollinear slots with cyclic identity order; labels follow carriers | E003: label-box linear-path proxy improved from 2 overlap pairs to 0; structural/static checks pass; native playback pending |
 | Sample to population | Analysis scope expands | Keep sample footprint while revealing an aggregated larger field, with explicit units per mark | Proposed |
-| Layer separation | Parts and assembly are related | Persistent layers move apart along a controlled axis; annotate consistent identities | Proposed |
+| Layer separation | Parts and assembly are related | 3–5 native 2D layers; fixed explanation rail; child details follow carrier-local offsets; reassemble | T003 has two-topic structural/static evidence and a width-only readability repair; native playback and reference-video choreography pending. Read [layer-separation.md](layer-separation.md) |
 | Radial agenda | Topics share a center | Topics move around a fixed hub; maintain reading order and separate text from rotating carriers | Proposed |
 
 For a new composition, choose the spatial relation that explains the brief. Record which aspects are inherited from references and which are newly designed. Do not add rotation or movement only to inflate complexity.

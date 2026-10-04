@@ -1,0 +1,52 @@
+{
+  "rubric": "rubric.json",
+  "method": "nonblind parent static review; subjective 0–5; 15 full-size final images inspected",
+  "ablation": {
+    "brief_coverage": 2,
+    "static_readability": 2,
+    "creative_quality": 2,
+    "rationale": "Separated scene detaches details and numbers wrap.",
+    "native_motion": null,
+    "real_application_editing": null
+  },
+  "candidate_v1": {
+    "brief_coverage": 3,
+    "static_readability": 3,
+    "creative_quality": 3,
+    "rationale": "Layer relation is clear; identifiers wrap; flat repeated tiers remain serviceable.",
+    "native_motion": null,
+    "real_application_editing": null
+  },
+  "candidate_v2": {
+    "brief_coverage": 4,
+    "static_readability": 4,
+    "creative_quality": 3,
+    "rationale": "All identifiers and roles readable; content bound; composition remains a basic 2D schematic.",
+    "native_motion": null,
+    "real_application_editing": null
+  },
+  "transfer_v1": {
+    "brief_coverage": 3,
+    "static_readability": 3,
+    "creative_quality": 3,
+    "rationale": "Four semantic layers transfer; carrier numbers wrap.",
+    "native_motion": null,
+    "real_application_editing": null
+  },
+  "transfer_v2": {
+    "brief_coverage": 4,
+    "static_readability": 4,
+    "creative_quality": 3,
+    "rationale": "Identifiers fit; Vietnamese roles readable; same schematic visual language.",
+    "native_motion": null,
+    "real_application_editing": null
+  },
+  "visual_counts": {
+    "candidate_v1_wrapped_number_instances": 15,
+    "candidate_v2_wrapped_number_instances": 0,
+    "transfer_v1_wrapped_number_instances": 12,
+    "transfer_v2_wrapped_number_instances": 0,
+    "method": "human count, not automatic text-layout measurement"
+  },
+  "composite_percentage": null
+}

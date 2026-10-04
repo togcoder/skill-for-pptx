@@ -1,0 +1,288 @@
+{
+  "cases": {
+    "ablation": {
+      "plan_errors": [],
+      "assembly_closes": true,
+      "fixed_rail": true,
+      "min_adjacent_carrier_gap_px": 4.0,
+      "binding": {
+        "checked_child_states": 60,
+        "violation_count": 16,
+        "max_drift_px": 64.0,
+        "violations": [
+          {
+            "state": "separated",
+            "child": "cover-number",
+            "drift_px": 64.0
+          },
+          {
+            "state": "separated",
+            "child": "cover-trace",
+            "drift_px": 64.0
+          },
+          {
+            "state": "separated",
+            "child": "cover-node",
+            "drift_px": 64.0
+          },
+          {
+            "state": "separated",
+            "child": "cover-end",
+            "drift_px": 64.0
+          },
+          {
+            "state": "separated",
+            "child": "sense-number",
+            "drift_px": 32.0
+          },
+          {
+            "state": "separated",
+            "child": "sense-trace",
+            "drift_px": 32.0
+          },
+          {
+            "state": "separated",
+            "child": "sense-node",
+            "drift_px": 32.0
+          },
+          {
+            "state": "separated",
+            "child": "sense-end",
+            "drift_px": 32.0
+          },
+          {
+            "state": "separated",
+            "child": "power-number",
+            "drift_px": 32.0
+          },
+          {
+            "state": "separated",
+            "child": "power-trace",
+            "drift_px": 32.0
+          },
+          {
+            "state": "separated",
+            "child": "power-node",
+            "drift_px": 32.0
+          },
+          {
+            "state": "separated",
+            "child": "power-end",
+            "drift_px": 32.0
+          },
+          {
+            "state": "separated",
+            "child": "base-number",
+            "drift_px": 64.0
+          },
+          {
+            "state": "separated",
+            "child": "base-trace",
+            "drift_px": 64.0
+          },
+          {
+            "state": "separated",
+            "child": "base-node",
+            "drift_px": 64.0
+          },
+          {
+            "state": "separated",
+            "child": "base-end",
+            "drift_px": 64.0
+          }
+        ],
+        "scope": "Endpoint offsets plus synchronous linear translation implication, not native playback"
+      },
+      "package": {
+        "sha256": "12e676695a4a86c4fb2a5d24d7655b567ad24cc7307a1e5cf2a5e1379e9e4617",
+        "errors": [],
+        "slides": [
+          {
+            "slide": 1,
+            "native_objects": 46,
+            "textboxes": 25,
+            "morph_count": 0
+          },
+          {
+            "slide": 2,
+            "native_objects": 46,
+            "textboxes": 25,
+            "morph_count": 1
+          },
+          {
+            "slide": 3,
+            "native_objects": 46,
+            "textboxes": 25,
+            "morph_count": 1
+          }
+        ],
+        "passed": true,
+        "full_schema_validated": false,
+        "powerpoint_playback_verified": false
+      }
+    },
+    "candidate_v1": {
+      "plan_errors": [],
+      "assembly_closes": true,
+      "fixed_rail": true,
+      "min_adjacent_carrier_gap_px": 4.0,
+      "binding": {
+        "checked_child_states": 60,
+        "violation_count": 0,
+        "max_drift_px": 0.0,
+        "violations": [],
+        "scope": "Endpoint offsets plus synchronous linear translation implication, not native playback"
+      },
+      "package": {
+        "sha256": "3e2d5c2bceb4e57f72fee606de014c311c2d5e7743bb7375ea7f0afc4001a249",
+        "errors": [],
+        "slides": [
+          {
+            "slide": 1,
+            "native_objects": 46,
+            "textboxes": 25,
+            "morph_count": 0
+          },
+          {
+            "slide": 2,
+            "native_objects": 46,
+            "textboxes": 25,
+            "morph_count": 1
+          },
+          {
+            "slide": 3,
+            "native_objects": 46,
+            "textboxes": 25,
+            "morph_count": 1
+          }
+        ],
+        "passed": true,
+        "full_schema_validated": false,
+        "powerpoint_playback_verified": false
+      }
+    },
+    "candidate_v2": {
+      "plan_errors": [],
+      "assembly_closes": true,
+      "fixed_rail": true,
+      "min_adjacent_carrier_gap_px": 4.0,
+      "binding": {
+        "checked_child_states": 60,
+        "violation_count": 0,
+        "max_drift_px": 0.0,
+        "violations": [],
+        "scope": "Endpoint offsets plus synchronous linear translation implication, not native playback"
+      },
+      "package": {
+        "sha256": "5c0fa95586b8933c577171b6aaa7b5c661ba2597795eaa0da087b4a2500eba51",
+        "errors": [],
+        "slides": [
+          {
+            "slide": 1,
+            "native_objects": 46,
+            "textboxes": 25,
+            "morph_count": 0
+          },
+          {
+            "slide": 2,
+            "native_objects": 46,
+            "textboxes": 25,
+            "morph_count": 1
+          },
+          {
+            "slide": 3,
+            "native_objects": 46,
+            "textboxes": 25,
+            "morph_count": 1
+          }
+        ],
+        "passed": true,
+        "full_schema_validated": false,
+        "powerpoint_playback_verified": false
+      }
+    },
+    "transfer_v1": {
+      "plan_errors": [],
+      "assembly_closes": true,
+      "fixed_rail": true,
+      "min_adjacent_carrier_gap_px": 4.0,
+      "binding": {
+        "checked_child_states": 48,
+        "violation_count": 0,
+        "max_drift_px": 0.0,
+        "violations": [],
+        "scope": "Endpoint offsets plus synchronous linear translation implication, not native playback"
+      },
+      "package": {
+        "sha256": "a2a912df0d26875255f72cd13e0fd39c0d151d21ddec74d6b99615c669d90d60",
+        "errors": [],
+        "slides": [
+          {
+            "slide": 1,
+            "native_objects": 38,
+            "textboxes": 21,
+            "morph_count": 0
+          },
+          {
+            "slide": 2,
+            "native_objects": 38,
+            "textboxes": 21,
+            "morph_count": 1
+          },
+          {
+            "slide": 3,
+            "native_objects": 38,
+            "textboxes": 21,
+            "morph_count": 1
+          }
+        ],
+        "passed": true,
+        "full_schema_validated": false,
+        "powerpoint_playback_verified": false
+      }
+    },
+    "transfer_v2": {
+      "plan_errors": [],
+      "assembly_closes": true,
+      "fixed_rail": true,
+      "min_adjacent_carrier_gap_px": 4.0,
+      "binding": {
+        "checked_child_states": 48,
+        "violation_count": 0,
+        "max_drift_px": 0.0,
+        "violations": [],
+        "scope": "Endpoint offsets plus synchronous linear translation implication, not native playback"
+      },
+      "package": {
+        "sha256": "b00d258c38aec765277b2f217cadd5259825ece789ef89564f75b5fbac981790",
+        "errors": [],
+        "slides": [
+          {
+            "slide": 1,
+            "native_objects": 38,
+            "textboxes": 21,
+            "morph_count": 0
+          },
+          {
+            "slide": 2,
+            "native_objects": 38,
+            "textboxes": 21,
+            "morph_count": 1
+          },
+          {
+            "slide": 3,
+            "native_objects": 38,
+            "textboxes": 21,
+            "morph_count": 1
+          }
+        ],
+        "passed": true,
+        "full_schema_validated": false,
+        "powerpoint_playback_verified": false
+      }
+    }
+  },
+  "comparison_errors": [],
+  "native_playback_verified": false,
+  "passed": true
+}

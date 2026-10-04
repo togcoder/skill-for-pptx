@@ -1,0 +1,25 @@
+{
+  "version": "T003-layer-v1",
+  "frozen_before_build": true,
+  "objective": [
+    "three states, two Morph declarations at 1100 ms",
+    "expected number of persistent layers and labels",
+    "all planned objects native; unique consistent names; no pictures",
+    "assembly geometry equals reassembly geometry",
+    "carrier-local child offsets unchanged in candidate",
+    "fixed explanation rail geometry unchanged",
+    "plans valid; no off-canvas object; final package structurally checked"
+  ],
+  "comparison": {
+    "baseline": "deliberate ablation: children remain at initial coordinates",
+    "candidate": "child frames derived from carrier-local offsets",
+    "metric": "number of child/state offset violations and maximum drift in px",
+    "assumption": "constant size, zero rotation, synchronous linear translation; not native Morph playback"
+  },
+  "subjective_scale": "0 absent, 1 poor, 2 basic, 3 serviceable, 4 strong, 5 exceptional",
+  "subjective_fields": ["brief_coverage", "static_readability", "creative_quality"],
+  "native_motion": null,
+  "real_application_editing": null,
+  "composite_percentage": null,
+  "review_method": "nonblind static inspection; identify reviewer and any transfer-agent context"
+}

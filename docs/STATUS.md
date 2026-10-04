@@ -1,6 +1,16 @@
 # PPTX Motion Lab — checkpoint
 
-Cập nhật ngày 04/10/2026, giờ Việt Nam. Phiên bản nghiên cứu v0.4 (H003/E004, khoảng cách nhãn dài).
+Cập nhật ngày 04/10/2026, giờ Việt Nam. Phiên bản nguồn nghiên cứu v0.5 (thêm T003, công thức tách lớp 2D).
+
+## Kết quả mới nhất — T003
+
+Đọc `experiments/T003-20261004-codex-layer01/REPORT.md` trước khi tiếp tục. Nhánh `work/T003-codex-20261004`, PR #1 có generator 3–5 lớp, nguồn và rubric đã đóng băng, hai chủ đề (QUANTA 5 lớp; học trực tuyến 4 lớp), 5 PPTX giữ cả thất bại và 15 ảnh cuối đã xem. Native parity đạt trên cả 5 file; repo có 34 tests đạt. Backend cũ và các baseline E001–E004/H001–H003 giữ nguyên.
+
+Phép đo fixture ràng buộc: 16/60 child-state lệch → 0/60, max 64 → 0 px; đây là lỗi cố ý để thử quy tắc, không phải benchmark độc lập. Lỗi số thật được phát hiện bằng render: ô 42 px làm hai chữ số xuống dòng. Chỉ mở rộng thành 60 px, số lỗi quan sát QUANTA 15→0 và bài mới 12→0. Bài mới do agent ngữ cảnh riêng lập plan; parent xuất PPTX và sửa, không gọi là benchmark tự hành end-to-end. Bản nên dùng: `output/T003_layer_candidate_v2.pptx`, `output/T003_transfer_v2.pptx`.
+
+T003 mới đạt phần recipe 2D và transfer cấu trúc/ảnh tĩnh. Chỉ đọc tutorial nguồn, chưa xem choreography nguồn; không tái hiện 3D extrusion. Native playback, sửa thật trong PowerPoint, M1 vẫn pending; điểm motion/editing null. Điểm sáng tạo tĩnh 3/5 là chủ quan, không phải đạt mục tiêu chuyển động ấn tượng. Nguồn v0.5 chưa cài thành personal skill.
+
+Bước có giá trị tiếp: T001 phát exact-hash hai file v2; hoặc phần tiếp T003 xem animation nguồn thực rồi lập giả thuyết choreography mới; hoặc T002 xử lý carrier crossing cũ. Claim đầu tiên đã xong phạm vi nghiên cứu này; kiểm tra nhánh/PR mới nhất trước khi nhận phần tiếp, không lặp v1/v2.
 
 ## Trạng thái thực tế
 
@@ -27,7 +37,7 @@ Repo chính đã xác minh: `https://github.com/togcoder/skill-for-pptx`, privat
 13. H003 thử đề mới với ba nhãn tiếng Việt dài 360×96 px. Giữ rubric và chẩn đoán E003: 4/6 cặp nhãn có khoảng chồng theo mô hình. E004 chỉ đổi y của khối/nhãn, tăng khoảng cách hai tầng từ 200 lên 300 px, số cặp nhãn chồng về 0. Cả hai vẫn 6/6 cặp khối có khoảng chồng. File cuối có 3×8 đối tượng native, 5 textbox/slide và hai Morph 1.100 ms; kiểm tra và xem đủ 6 ảnh cuối.
 14. Bổ sung scripts/cyclic_label_clearance.py với ngưỡng H >= 3*d*h/(2*d-w) cho ba nhãn đều, ba vị trí đối xứng, nội suy đồng bộ tuyến tính; có miền áp dụng rõ. Bốn test mới đối chiếu chẩn đoán cũ, tổng 29 unit tests đạt. Đã cập nhật nguồn skill với bài học và giữ lỗi plan/preflight ban đầu.
 
-Tại thời điểm bàn giao chưa tạo claim nghiên cứu mới. Luôn kiểm tra nhánh và PR mở để biết công việc đang chạy. Nguồn skill bổ sung công thức cyclic focus và phân biệt số trạng thái với số chuyển cảnh. Read của H002/E003 mở ở tư thế lớn; không có đoạn phóng lớn riêng trên slide đầu.
+Tại mốc bàn giao v0.4 chưa có claim nghiên cứu mới; T003 sau đó được nhận tại PR #1 như mục mới nhất phía trên. Luôn kiểm tra nhánh và PR mở để biết công việc đang chạy. Nguồn skill bổ sung công thức cyclic focus và phân biệt số trạng thái với số chuyển cảnh. Read của H002/E003 mở ở tư thế lớn; không có đoạn phóng lớn riêng trên slide đầu.
 
 ## Bằng chứng cần đọc
 
