@@ -1,0 +1,8 @@
+Baseline normalizer exit: 1
+Traceback (most recent call last):
+  File "/workspace/scratch/6a8d071f3938/pptx-motion-lab/scripts/normalize_timeline_textboxes.py", line 128, in <module>
+    print(json.dumps(normalize(args.source,args.plan,args.destination),indent=2))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/6a8d071f3938/pptx-motion-lab/scripts/normalize_timeline_textboxes.py", line 85, in normalize
+    raise ValueError("Planned textbox has no native text body")
+ValueError: Planned textbox has no native text body

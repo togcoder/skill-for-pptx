@@ -1,0 +1,766 @@
+{
+  "slides": 1,
+  "packed_timing_groups": 1,
+  "receipts": [
+    {
+      "slide": 1,
+      "part": "ppt/slides/slide1.xml",
+      "total_duration_ms": 7100,
+      "behavior_count": 82,
+      "animated_objects": [
+        "label-1",
+        "label-10",
+        "label-11",
+        "label-12",
+        "label-2",
+        "label-3",
+        "label-4",
+        "label-5",
+        "label-6",
+        "label-7",
+        "label-8",
+        "label-9",
+        "node-1",
+        "node-10",
+        "node-11",
+        "node-12",
+        "node-2",
+        "node-3-layer-1",
+        "node-3-layer-2",
+        "node-3-layer-3",
+        "node-3-layer-4",
+        "node-4",
+        "node-5",
+        "node-6",
+        "node-7",
+        "node-8",
+        "node-9"
+      ],
+      "stage_receipts": [
+        {
+          "id": "burst",
+          "operation": "burst",
+          "delay_ms": 0,
+          "duration_ms": 1000,
+          "effects": [
+            {
+              "type": "motion_path",
+              "target": "node-1",
+              "spid": "32",
+              "behavior_id": 10
+            },
+            {
+              "type": "motion_path",
+              "target": "label-1",
+              "spid": "2",
+              "behavior_id": 11
+            },
+            {
+              "type": "motion_path",
+              "target": "node-2",
+              "spid": "3",
+              "behavior_id": 12
+            },
+            {
+              "type": "motion_path",
+              "target": "label-2",
+              "spid": "4",
+              "behavior_id": 13
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-1",
+              "spid": "5",
+              "behavior_id": 14
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-2",
+              "spid": "6",
+              "behavior_id": 15
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-3",
+              "spid": "7",
+              "behavior_id": 16
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-4",
+              "spid": "8",
+              "behavior_id": 17
+            },
+            {
+              "type": "motion_path",
+              "target": "label-3",
+              "spid": "9",
+              "behavior_id": 18
+            },
+            {
+              "type": "motion_path",
+              "target": "node-4",
+              "spid": "10",
+              "behavior_id": 19
+            },
+            {
+              "type": "motion_path",
+              "target": "label-4",
+              "spid": "11",
+              "behavior_id": 20
+            },
+            {
+              "type": "motion_path",
+              "target": "node-5",
+              "spid": "12",
+              "behavior_id": 21
+            },
+            {
+              "type": "motion_path",
+              "target": "label-5",
+              "spid": "13",
+              "behavior_id": 22
+            },
+            {
+              "type": "motion_path",
+              "target": "node-6",
+              "spid": "14",
+              "behavior_id": 23
+            },
+            {
+              "type": "motion_path",
+              "target": "label-6",
+              "spid": "15",
+              "behavior_id": 24
+            },
+            {
+              "type": "motion_path",
+              "target": "node-7",
+              "spid": "16",
+              "behavior_id": 25
+            },
+            {
+              "type": "motion_path",
+              "target": "label-7",
+              "spid": "17",
+              "behavior_id": 26
+            },
+            {
+              "type": "motion_path",
+              "target": "node-8",
+              "spid": "18",
+              "behavior_id": 27
+            },
+            {
+              "type": "motion_path",
+              "target": "label-8",
+              "spid": "19",
+              "behavior_id": 28
+            },
+            {
+              "type": "motion_path",
+              "target": "node-9",
+              "spid": "20",
+              "behavior_id": 29
+            },
+            {
+              "type": "motion_path",
+              "target": "label-9",
+              "spid": "21",
+              "behavior_id": 30
+            },
+            {
+              "type": "motion_path",
+              "target": "node-10",
+              "spid": "22",
+              "behavior_id": 31
+            },
+            {
+              "type": "motion_path",
+              "target": "label-10",
+              "spid": "23",
+              "behavior_id": 32
+            },
+            {
+              "type": "motion_path",
+              "target": "node-11",
+              "spid": "24",
+              "behavior_id": 33
+            },
+            {
+              "type": "motion_path",
+              "target": "label-11",
+              "spid": "25",
+              "behavior_id": 34
+            },
+            {
+              "type": "motion_path",
+              "target": "node-12",
+              "spid": "26",
+              "behavior_id": 35
+            },
+            {
+              "type": "motion_path",
+              "target": "label-12",
+              "spid": "27",
+              "behavior_id": 36
+            }
+          ]
+        },
+        {
+          "id": "orbit",
+          "operation": "orbit",
+          "delay_ms": 1000,
+          "duration_ms": 2100,
+          "effects": [
+            {
+              "type": "motion_path",
+              "target": "node-1",
+              "spid": "32",
+              "behavior_id": 37
+            },
+            {
+              "type": "motion_path",
+              "target": "label-1",
+              "spid": "2",
+              "behavior_id": 38
+            },
+            {
+              "type": "motion_path",
+              "target": "node-2",
+              "spid": "3",
+              "behavior_id": 39
+            },
+            {
+              "type": "motion_path",
+              "target": "label-2",
+              "spid": "4",
+              "behavior_id": 40
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-1",
+              "spid": "5",
+              "behavior_id": 41
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-2",
+              "spid": "6",
+              "behavior_id": 42
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-3",
+              "spid": "7",
+              "behavior_id": 43
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-4",
+              "spid": "8",
+              "behavior_id": 44
+            },
+            {
+              "type": "motion_path",
+              "target": "label-3",
+              "spid": "9",
+              "behavior_id": 45
+            },
+            {
+              "type": "motion_path",
+              "target": "node-4",
+              "spid": "10",
+              "behavior_id": 46
+            },
+            {
+              "type": "motion_path",
+              "target": "label-4",
+              "spid": "11",
+              "behavior_id": 47
+            },
+            {
+              "type": "motion_path",
+              "target": "node-5",
+              "spid": "12",
+              "behavior_id": 48
+            },
+            {
+              "type": "motion_path",
+              "target": "label-5",
+              "spid": "13",
+              "behavior_id": 49
+            },
+            {
+              "type": "motion_path",
+              "target": "node-6",
+              "spid": "14",
+              "behavior_id": 50
+            },
+            {
+              "type": "motion_path",
+              "target": "label-6",
+              "spid": "15",
+              "behavior_id": 51
+            },
+            {
+              "type": "motion_path",
+              "target": "node-7",
+              "spid": "16",
+              "behavior_id": 52
+            },
+            {
+              "type": "motion_path",
+              "target": "label-7",
+              "spid": "17",
+              "behavior_id": 53
+            },
+            {
+              "type": "motion_path",
+              "target": "node-8",
+              "spid": "18",
+              "behavior_id": 54
+            },
+            {
+              "type": "motion_path",
+              "target": "label-8",
+              "spid": "19",
+              "behavior_id": 55
+            },
+            {
+              "type": "motion_path",
+              "target": "node-9",
+              "spid": "20",
+              "behavior_id": 56
+            },
+            {
+              "type": "motion_path",
+              "target": "label-9",
+              "spid": "21",
+              "behavior_id": 57
+            },
+            {
+              "type": "motion_path",
+              "target": "node-10",
+              "spid": "22",
+              "behavior_id": 58
+            },
+            {
+              "type": "motion_path",
+              "target": "label-10",
+              "spid": "23",
+              "behavior_id": 59
+            },
+            {
+              "type": "motion_path",
+              "target": "node-11",
+              "spid": "24",
+              "behavior_id": 60
+            },
+            {
+              "type": "motion_path",
+              "target": "label-11",
+              "spid": "25",
+              "behavior_id": 61
+            },
+            {
+              "type": "motion_path",
+              "target": "node-12",
+              "spid": "26",
+              "behavior_id": 62
+            },
+            {
+              "type": "motion_path",
+              "target": "label-12",
+              "spid": "27",
+              "behavior_id": 63
+            }
+          ]
+        },
+        {
+          "id": "focus",
+          "operation": "focus",
+          "delay_ms": 3100,
+          "duration_ms": 1000,
+          "effects": [
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-1",
+              "spid": "5",
+              "behavior_id": 64
+            },
+            {
+              "type": "scale",
+              "target": "node-3-layer-1",
+              "spid": "5",
+              "behavior_id": 65
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-2",
+              "spid": "6",
+              "behavior_id": 66
+            },
+            {
+              "type": "scale",
+              "target": "node-3-layer-2",
+              "spid": "6",
+              "behavior_id": 67
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-3",
+              "spid": "7",
+              "behavior_id": 68
+            },
+            {
+              "type": "scale",
+              "target": "node-3-layer-3",
+              "spid": "7",
+              "behavior_id": 69
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-4",
+              "spid": "8",
+              "behavior_id": 70
+            },
+            {
+              "type": "scale",
+              "target": "node-3-layer-4",
+              "spid": "8",
+              "behavior_id": 71
+            },
+            {
+              "type": "motion_path",
+              "target": "label-3",
+              "spid": "9",
+              "behavior_id": 72
+            }
+          ]
+        },
+        {
+          "id": "split",
+          "operation": "split",
+          "delay_ms": 4100,
+          "duration_ms": 1000,
+          "effects": [
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-1",
+              "spid": "5",
+              "behavior_id": 73
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-2",
+              "spid": "6",
+              "behavior_id": 74
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-3",
+              "spid": "7",
+              "behavior_id": 75
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-4",
+              "spid": "8",
+              "behavior_id": 76
+            },
+            {
+              "type": "motion_path",
+              "target": "label-3",
+              "spid": "9",
+              "behavior_id": 77
+            }
+          ]
+        },
+        {
+          "id": "reassemble",
+          "operation": "reassemble",
+          "delay_ms": 5100,
+          "duration_ms": 1000,
+          "effects": [
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-1",
+              "spid": "5",
+              "behavior_id": 78
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-2",
+              "spid": "6",
+              "behavior_id": 79
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-3",
+              "spid": "7",
+              "behavior_id": 80
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-4",
+              "spid": "8",
+              "behavior_id": 81
+            },
+            {
+              "type": "motion_path",
+              "target": "label-3",
+              "spid": "9",
+              "behavior_id": 82
+            }
+          ]
+        },
+        {
+          "id": "restore",
+          "operation": "restore",
+          "delay_ms": 6100,
+          "duration_ms": 1000,
+          "effects": [
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-1",
+              "spid": "5",
+              "behavior_id": 83
+            },
+            {
+              "type": "scale",
+              "target": "node-3-layer-1",
+              "spid": "5",
+              "behavior_id": 84
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-2",
+              "spid": "6",
+              "behavior_id": 85
+            },
+            {
+              "type": "scale",
+              "target": "node-3-layer-2",
+              "spid": "6",
+              "behavior_id": 86
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-3",
+              "spid": "7",
+              "behavior_id": 87
+            },
+            {
+              "type": "scale",
+              "target": "node-3-layer-3",
+              "spid": "7",
+              "behavior_id": 88
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-4",
+              "spid": "8",
+              "behavior_id": 89
+            },
+            {
+              "type": "scale",
+              "target": "node-3-layer-4",
+              "spid": "8",
+              "behavior_id": 90
+            },
+            {
+              "type": "motion_path",
+              "target": "label-3",
+              "spid": "9",
+              "behavior_id": 91
+            }
+          ]
+        }
+      ],
+      "timing": {
+        "errors": [],
+        "ctn_ids": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18",
+          "19",
+          "20",
+          "21",
+          "22",
+          "23",
+          "24",
+          "25",
+          "26",
+          "27",
+          "28",
+          "29",
+          "30",
+          "31",
+          "32",
+          "33",
+          "34",
+          "35",
+          "36",
+          "37",
+          "38",
+          "39",
+          "40",
+          "41",
+          "42",
+          "43",
+          "44",
+          "45",
+          "46",
+          "47",
+          "48",
+          "49",
+          "50",
+          "51",
+          "52",
+          "53",
+          "54",
+          "55",
+          "56",
+          "57",
+          "58",
+          "59",
+          "60",
+          "61",
+          "62",
+          "63",
+          "64",
+          "65",
+          "66",
+          "67",
+          "68",
+          "69",
+          "70",
+          "71",
+          "72",
+          "73",
+          "74",
+          "75",
+          "76",
+          "77",
+          "78",
+          "79",
+          "80",
+          "81",
+          "82",
+          "83",
+          "84",
+          "85",
+          "86",
+          "87",
+          "88",
+          "89",
+          "90",
+          "91"
+        ],
+        "target_spids": [
+          "32",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18",
+          "19",
+          "20",
+          "21",
+          "22",
+          "23",
+          "24",
+          "25",
+          "26",
+          "27",
+          "32",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18",
+          "19",
+          "20",
+          "21",
+          "22",
+          "23",
+          "24",
+          "25",
+          "26",
+          "27",
+          "5",
+          "5",
+          "6",
+          "6",
+          "7",
+          "7",
+          "8",
+          "8",
+          "9",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "5",
+          "5",
+          "6",
+          "6",
+          "7",
+          "7",
+          "8",
+          "8",
+          "9"
+        ],
+        "motion_count": 74,
+        "scale_count": 8,
+        "rotate_count": 0,
+        "build_entries": 54
+      }
+    }
+  ],
+  "source_sha256": "ab5de4e898818edf640903083e7e460bc75e3035986d62ff5286d954aee7725b",
+  "sha256": "41c4fb7865ea587e0d426fccf4de2c82fc1db731147a92a4fba28926b0e52094",
+  "full_schema_validated": false,
+  "powerpoint_playback_verified": false
+}

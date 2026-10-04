@@ -1,0 +1,20 @@
+{
+  "pptx": "output/T006_packed_candidate.pptx",
+  "sha256": "41c4fb7865ea587e0d426fccf4de2c82fc1db731147a92a4fba28926b0e52094",
+  "application": null,
+  "version": null,
+  "os": null,
+  "repair_warning": "not_checked",
+  "actual_click_count": null,
+  "one_click_sequence_observed": null,
+  "stage_checkpoints_ms": [0, 1000, 3100, 4100, 5100, 6100, 7100],
+  "critical_observations": [
+    "Orbit starts at burst ring rather than jumping to original core",
+    "Focus node 3 arrives on right; labels stay upright",
+    "Four layers split then reassemble without reset",
+    "After completion objects retain intended restored ring pose",
+    "Animation Pane effects and source text remain editable"
+  ],
+  "evidence_files": [],
+  "playback_verified": false
+}

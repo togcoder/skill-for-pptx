@@ -1,0 +1,9 @@
+{
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "renderer": "artifact-tool 2.8.77",
+  "node": "24.19.0",
+  "base_commit": "0bd74645f554e73a238fba3a4dfac1b3b7f4f5dd",
+  "powerpoint_executable_on_path": false,
+  "native_playback_session_used": false
+}

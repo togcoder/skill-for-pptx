@@ -1,0 +1,113 @@
+{
+  "changed_textboxes": 15,
+  "changes": [
+    {
+      "slide": 1,
+      "name": "!!label-1",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!label-2",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!label-3",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!label-4",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!label-5",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!label-6",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!label-7",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!label-8",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!label-9",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!label-10",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!label-11",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!label-12",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!core-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!title",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!phase",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    }
+  ],
+  "source_sha256": "23e20e6064b9f6ad90f09cb66309a2b1fb55a69552d63d18d546cefa78b9fdfd",
+  "sha256": "ab5de4e898818edf640903083e7e460bc75e3035986d62ff5286d954aee7725b",
+  "powerpoint_playback_verified": false
+}
