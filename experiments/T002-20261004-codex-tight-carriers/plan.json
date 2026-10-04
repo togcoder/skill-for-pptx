@@ -1,0 +1,371 @@
+{
+  "version": "0.1",
+  "brief": "Tạo đúng 3 slide sơ đồ giới thiệu đề xuất thành phố đáng sống. Ba khối Không gian cộng đồng, Giao thông bền vững, Hạ tầng thích ứng lần lượt ở vị trí lớn phía trên giữa, hai khối còn lại ở hai bên phía dưới. Giữ đủ tên, chữ dễ đọc, màu nổi bật và các đối tượng native với Morph.",
+  "canvas": {
+    "width": 16,
+    "height": 9,
+    "units": "normalized"
+  },
+  "data_provenance": "synthetic",
+  "objects": [
+    {
+      "id": "community-block",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!community-block",
+      "geometry": "rect",
+      "fill": "#211F27",
+      "stroke": "#54E7FF",
+      "stroke_width": 3
+    },
+    {
+      "id": "transport-block",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!transport-block",
+      "geometry": "rect",
+      "fill": "#211F27",
+      "stroke": "#BAFA64",
+      "stroke_width": 3
+    },
+    {
+      "id": "infrastructure-block",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!infrastructure-block",
+      "geometry": "rect",
+      "fill": "#211F27",
+      "stroke": "#FF659D",
+      "stroke_width": 3
+    },
+    {
+      "id": "community-label",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!community-label",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Không gian\ncộng đồng",
+      "font_size": 36,
+      "text_color": "#54E7FF",
+      "bold": true
+    },
+    {
+      "id": "transport-label",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!transport-label",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Giao thông\nbền vững",
+      "font_size": 36,
+      "text_color": "#BAFA64",
+      "bold": true
+    },
+    {
+      "id": "infrastructure-label",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!infrastructure-label",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Hạ tầng\nthích ứng",
+      "font_size": 36,
+      "text_color": "#FF659D",
+      "bold": true
+    },
+    {
+      "id": "title",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!title",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Thành phố đáng sống",
+      "font_size": 50,
+      "text_color": "#FFFFFF",
+      "bold": true
+    },
+    {
+      "id": "footer",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!footer",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Đề xuất minh họa",
+      "font_size": 22,
+      "text_color": "#C1BACD",
+      "bold": false
+    }
+  ],
+  "states": [
+    {
+      "id": "community-focus",
+      "message": "Sơ đồ đề xuất minh họa, không phải dữ liệu hay cam kết thực tế.",
+      "objects": {
+        "title": {
+          "x": 0.0625,
+          "y": 0.041666666666666664,
+          "w": 0.875,
+          "h": 0.1111111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "footer": {
+          "x": 0.265625,
+          "y": 0.9222222222222223,
+          "w": 0.46875,
+          "h": 0.05,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "transport-block": {
+          "x": 0.0265625,
+          "y": 0.7055555555555556,
+          "w": 0.290625,
+          "h": 0.14444444444444443,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "transport-label": {
+          "x": 0.03125,
+          "y": 0.7111111111111111,
+          "w": 0.28125,
+          "h": 0.13333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "community-block": {
+          "x": 0.3421875,
+          "y": 0.2833333333333333,
+          "w": 0.315625,
+          "h": 0.15555555555555556,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "community-label": {
+          "x": 0.359375,
+          "y": 0.29444444444444445,
+          "w": 0.28125,
+          "h": 0.13333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "infrastructure-block": {
+          "x": 0.6828125,
+          "y": 0.7055555555555556,
+          "w": 0.290625,
+          "h": 0.14444444444444443,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "infrastructure-label": {
+          "x": 0.6875,
+          "y": 0.7111111111111111,
+          "w": 0.28125,
+          "h": 0.13333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        }
+      }
+    },
+    {
+      "id": "transport-focus",
+      "message": "Sơ đồ đề xuất minh họa, không phải dữ liệu hay cam kết thực tế.",
+      "objects": {
+        "title": {
+          "x": 0.0625,
+          "y": 0.041666666666666664,
+          "w": 0.875,
+          "h": 0.1111111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "footer": {
+          "x": 0.265625,
+          "y": 0.9222222222222223,
+          "w": 0.46875,
+          "h": 0.05,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "infrastructure-block": {
+          "x": 0.0265625,
+          "y": 0.7055555555555556,
+          "w": 0.290625,
+          "h": 0.14444444444444443,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "infrastructure-label": {
+          "x": 0.03125,
+          "y": 0.7111111111111111,
+          "w": 0.28125,
+          "h": 0.13333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "transport-block": {
+          "x": 0.3421875,
+          "y": 0.2833333333333333,
+          "w": 0.315625,
+          "h": 0.15555555555555556,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "transport-label": {
+          "x": 0.359375,
+          "y": 0.29444444444444445,
+          "w": 0.28125,
+          "h": 0.13333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "community-block": {
+          "x": 0.6828125,
+          "y": 0.7055555555555556,
+          "w": 0.290625,
+          "h": 0.14444444444444443,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "community-label": {
+          "x": 0.6875,
+          "y": 0.7111111111111111,
+          "w": 0.28125,
+          "h": 0.13333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        }
+      }
+    },
+    {
+      "id": "infrastructure-focus",
+      "message": "Sơ đồ đề xuất minh họa, không phải dữ liệu hay cam kết thực tế.",
+      "objects": {
+        "title": {
+          "x": 0.0625,
+          "y": 0.041666666666666664,
+          "w": 0.875,
+          "h": 0.1111111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "footer": {
+          "x": 0.265625,
+          "y": 0.9222222222222223,
+          "w": 0.46875,
+          "h": 0.05,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "community-block": {
+          "x": 0.0265625,
+          "y": 0.7055555555555556,
+          "w": 0.290625,
+          "h": 0.14444444444444443,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "community-label": {
+          "x": 0.03125,
+          "y": 0.7111111111111111,
+          "w": 0.28125,
+          "h": 0.13333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "infrastructure-block": {
+          "x": 0.3421875,
+          "y": 0.2833333333333333,
+          "w": 0.315625,
+          "h": 0.15555555555555556,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "infrastructure-label": {
+          "x": 0.359375,
+          "y": 0.29444444444444445,
+          "w": 0.28125,
+          "h": 0.13333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "transport-block": {
+          "x": 0.6828125,
+          "y": 0.7055555555555556,
+          "w": 0.290625,
+          "h": 0.14444444444444443,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "transport-label": {
+          "x": 0.6875,
+          "y": 0.7111111111111111,
+          "w": 0.28125,
+          "h": 0.13333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        }
+      }
+    }
+  ],
+  "transitions": [
+    {
+      "from": "community-focus",
+      "to": "transport-focus",
+      "kind": "morph",
+      "duration_ms": 1100,
+      "track": [
+        "community-block",
+        "transport-block",
+        "infrastructure-block",
+        "community-label",
+        "transport-label",
+        "infrastructure-label",
+        "title",
+        "footer"
+      ]
+    },
+    {
+      "from": "transport-focus",
+      "to": "infrastructure-focus",
+      "kind": "morph",
+      "duration_ms": 1100,
+      "track": [
+        "community-block",
+        "transport-block",
+        "infrastructure-block",
+        "community-label",
+        "transport-label",
+        "infrastructure-label",
+        "title",
+        "footer"
+      ]
+    }
+  ],
+  "research_metadata": {
+    "experiment": "T002-20261004-codex-tight-carriers",
+    "prior_recipe": "E003 cyclic focus",
+    "independent_agent": false,
+    "references": [],
+    "limitations": [
+      "Only block and label y positions changed. Tuned comparison, not an unseen holdout."
+    ],
+    "paired_baseline": "H003",
+    "baseline": "experiments/E004/plan.json",
+    "change": "Carrier frames only: focus 404x112 px, context 372x104 px, centered on unchanged labels.",
+    "native_playback_verified": false
+  }
+}

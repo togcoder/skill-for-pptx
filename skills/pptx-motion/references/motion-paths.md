@@ -70,3 +70,16 @@ within the requested slide count. Check carrier paths as a separate concern.
 This is an algebraic design aid, cross-checked with the frozen E003 interval
 diagnostic. It does not model PowerPoint easing, glyphs, stroke occlusion or
 native playback. Preserve that distinction in every result.
+
+## Tight carriers after label clearance
+
+When label paths pass but larger background carriers still intersect, measure
+the carriers separately before changing the route. First center a carrier with
+small, explicit padding around the unchanged label. Keep enough size contrast
+to communicate focus, then rerun both label and carrier diagnostics and review
+the static emphasis. T002 held E004's 360×96 px labels and positions fixed;
+changing only carrier frames from 480×200 / 400×150 to 404×112 / 372×104 px
+kept label overlaps at 0/6 and reduced carrier overlaps from 6/6 to 0/6 in the
+same proxy. Focus emphasis fell from subjective 4/5 to 3/5. Treat those sizes as
+one measured case, not defaults. Do not shrink below readable padding, clip
+required text or infer native playback from a clean box calculation.

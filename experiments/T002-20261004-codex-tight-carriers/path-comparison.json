@@ -1,0 +1,298 @@
+{
+  "scope": "plan-diff and continuous rectangle proxy; not native playback",
+  "errors": [],
+  "results": {
+    "E004": {
+      "labels": {
+        "assumption": "Synchronized linear interpolation of unrotated plan boxes at 1280x720; not native playback",
+        "selected_ids": [
+          "community-label",
+          "transport-label",
+          "infrastructure-label"
+        ],
+        "pairs": [
+          {
+            "transition": "community-focus -> transport-focus",
+            "objects": [
+              "community-label",
+              "transport-label"
+            ],
+            "positive_area_overlap_interval": null,
+            "midpoint_center_distance_px": 420.0
+          },
+          {
+            "transition": "community-focus -> transport-focus",
+            "objects": [
+              "community-label",
+              "infrastructure-label"
+            ],
+            "positive_area_overlap_interval": null,
+            "midpoint_center_distance_px": 258.0697580112788
+          },
+          {
+            "transition": "community-focus -> transport-focus",
+            "objects": [
+              "transport-label",
+              "infrastructure-label"
+            ],
+            "positive_area_overlap_interval": null,
+            "midpoint_center_distance_px": 258.0697580112788
+          },
+          {
+            "transition": "transport-focus -> infrastructure-focus",
+            "objects": [
+              "community-label",
+              "transport-label"
+            ],
+            "positive_area_overlap_interval": null,
+            "midpoint_center_distance_px": 258.0697580112788
+          },
+          {
+            "transition": "transport-focus -> infrastructure-focus",
+            "objects": [
+              "community-label",
+              "infrastructure-label"
+            ],
+            "positive_area_overlap_interval": null,
+            "midpoint_center_distance_px": 258.0697580112788
+          },
+          {
+            "transition": "transport-focus -> infrastructure-focus",
+            "objects": [
+              "transport-label",
+              "infrastructure-label"
+            ],
+            "positive_area_overlap_interval": null,
+            "midpoint_center_distance_px": 420.0
+          }
+        ],
+        "overlapping_pairs": 0,
+        "native_playback_verified": false,
+        "motion_quality_score": null
+      },
+      "carriers": {
+        "assumption": "Synchronized linear interpolation of unrotated plan boxes at 1280x720; not native playback",
+        "selected_ids": [
+          "community-block",
+          "transport-block",
+          "infrastructure-block"
+        ],
+        "pairs": [
+          {
+            "transition": "community-focus -> transport-focus",
+            "objects": [
+              "community-block",
+              "transport-block"
+            ],
+            "positive_area_overlap_interval": [
+              0.20833333333333343,
+              0.7916666666666666
+            ],
+            "midpoint_center_distance_px": 420.0
+          },
+          {
+            "transition": "community-focus -> transport-focus",
+            "objects": [
+              "community-block",
+              "infrastructure-block"
+            ],
+            "positive_area_overlap_interval": [
+              0.45454545454545475,
+              0.6615384615384615
+            ],
+            "midpoint_center_distance_px": 258.0697580112788
+          },
+          {
+            "transition": "community-focus -> transport-focus",
+            "objects": [
+              "transport-block",
+              "infrastructure-block"
+            ],
+            "positive_area_overlap_interval": [
+              0.3384615384615385,
+              0.5454545454545453
+            ],
+            "midpoint_center_distance_px": 258.0697580112788
+          },
+          {
+            "transition": "transport-focus -> infrastructure-focus",
+            "objects": [
+              "community-block",
+              "transport-block"
+            ],
+            "positive_area_overlap_interval": [
+              0.45454545454545475,
+              0.6615384615384615
+            ],
+            "midpoint_center_distance_px": 258.0697580112788
+          },
+          {
+            "transition": "transport-focus -> infrastructure-focus",
+            "objects": [
+              "community-block",
+              "infrastructure-block"
+            ],
+            "positive_area_overlap_interval": [
+              0.3384615384615385,
+              0.5454545454545453
+            ],
+            "midpoint_center_distance_px": 258.0697580112788
+          },
+          {
+            "transition": "transport-focus -> infrastructure-focus",
+            "objects": [
+              "transport-block",
+              "infrastructure-block"
+            ],
+            "positive_area_overlap_interval": [
+              0.20833333333333343,
+              0.7916666666666666
+            ],
+            "midpoint_center_distance_px": 420.0
+          }
+        ],
+        "overlapping_pairs": 6,
+        "native_playback_verified": false,
+        "motion_quality_score": null
+      }
+    },
+    "T002": {
+      "labels": {
+        "assumption": "Synchronized linear interpolation of unrotated plan boxes at 1280x720; not native playback",
+        "selected_ids": [
+          "community-label",
+          "transport-label",
+          "infrastructure-label"
+        ],
+        "pairs": [
+          {
+            "transition": "community-focus -> transport-focus",
+            "objects": [
+              "community-label",
+              "transport-label"
+            ],
+            "positive_area_overlap_interval": null,
+            "midpoint_center_distance_px": 420.0
+          },
+          {
+            "transition": "community-focus -> transport-focus",
+            "objects": [
+              "community-label",
+              "infrastructure-label"
+            ],
+            "positive_area_overlap_interval": null,
+            "midpoint_center_distance_px": 258.0697580112788
+          },
+          {
+            "transition": "community-focus -> transport-focus",
+            "objects": [
+              "transport-label",
+              "infrastructure-label"
+            ],
+            "positive_area_overlap_interval": null,
+            "midpoint_center_distance_px": 258.0697580112788
+          },
+          {
+            "transition": "transport-focus -> infrastructure-focus",
+            "objects": [
+              "community-label",
+              "transport-label"
+            ],
+            "positive_area_overlap_interval": null,
+            "midpoint_center_distance_px": 258.0697580112788
+          },
+          {
+            "transition": "transport-focus -> infrastructure-focus",
+            "objects": [
+              "community-label",
+              "infrastructure-label"
+            ],
+            "positive_area_overlap_interval": null,
+            "midpoint_center_distance_px": 258.0697580112788
+          },
+          {
+            "transition": "transport-focus -> infrastructure-focus",
+            "objects": [
+              "transport-label",
+              "infrastructure-label"
+            ],
+            "positive_area_overlap_interval": null,
+            "midpoint_center_distance_px": 420.0
+          }
+        ],
+        "overlapping_pairs": 0,
+        "native_playback_verified": false,
+        "motion_quality_score": null
+      },
+      "carriers": {
+        "assumption": "Synchronized linear interpolation of unrotated plan boxes at 1280x720; not native playback",
+        "selected_ids": [
+          "community-block",
+          "transport-block",
+          "infrastructure-block"
+        ],
+        "pairs": [
+          {
+            "transition": "community-focus -> transport-focus",
+            "objects": [
+              "community-block",
+              "transport-block"
+            ],
+            "positive_area_overlap_interval": null,
+            "midpoint_center_distance_px": 420.0
+          },
+          {
+            "transition": "community-focus -> transport-focus",
+            "objects": [
+              "community-block",
+              "infrastructure-block"
+            ],
+            "positive_area_overlap_interval": null,
+            "midpoint_center_distance_px": 258.0697580112788
+          },
+          {
+            "transition": "community-focus -> transport-focus",
+            "objects": [
+              "transport-block",
+              "infrastructure-block"
+            ],
+            "positive_area_overlap_interval": null,
+            "midpoint_center_distance_px": 258.0697580112788
+          },
+          {
+            "transition": "transport-focus -> infrastructure-focus",
+            "objects": [
+              "community-block",
+              "transport-block"
+            ],
+            "positive_area_overlap_interval": null,
+            "midpoint_center_distance_px": 258.0697580112788
+          },
+          {
+            "transition": "transport-focus -> infrastructure-focus",
+            "objects": [
+              "community-block",
+              "infrastructure-block"
+            ],
+            "positive_area_overlap_interval": null,
+            "midpoint_center_distance_px": 258.0697580112788
+          },
+          {
+            "transition": "transport-focus -> infrastructure-focus",
+            "objects": [
+              "transport-block",
+              "infrastructure-block"
+            ],
+            "positive_area_overlap_interval": null,
+            "midpoint_center_distance_px": 420.0
+          }
+        ],
+        "overlapping_pairs": 0,
+        "native_playback_verified": false,
+        "motion_quality_score": null
+      }
+    }
+  },
+  "passed": true,
+  "native_playback_verified": false
+}

@@ -1,6 +1,6 @@
 # T002 — Label and carrier paths
 
-Status: queued. Owner: unassigned. Check open claims/PRs before starting.
+Status: completed for the tight-carrier hypothesis in PR #2. See `experiments/T002-20261004-codex-tight-carriers/REPORT.md`. Native playback and any z-order/focus-emphasis follow-up remain open; use a new claim and hypothesis rather than retuning this candidate.
 
 Input: H003/E004, frozen H003 rubric, E003 continuous path diagnostic. Current
 label overlaps 4→0, carrier overlaps remain 6→6. Do not modify those baselines.

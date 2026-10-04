@@ -1,0 +1,25 @@
+{
+  "version": "T002-tight-carriers-v1",
+  "frozen_before_candidate": true,
+  "baseline": "experiments/E004/plan.json",
+  "objective": {
+    "slides": 3,
+    "objects_per_slide": 8,
+    "textboxes_per_slide": 5,
+    "labels_unchanged": true,
+    "allowed_change": "x/y/w/h of three *-block frames only",
+    "carrier_focus_px": [404, 112],
+    "carrier_context_px": [372, 104],
+    "morph_destination_slides": [2, 3],
+    "duration_ms": 1100,
+    "label_overlap_target": 0,
+    "carrier_overlap_target": 0,
+    "all_final_slides_inspected": true
+  },
+  "subjective_scale": "0 absent, 1 poor, 2 basic, 3 serviceable, 4 strong, 5 exceptional",
+  "subjective_fields": ["brief_coverage", "static_readability", "creative_quality", "focus_emphasis"],
+  "native_motion": null,
+  "real_application_editing": null,
+  "composite_percentage": null,
+  "review_method": "nonblind same researcher; full-size static renders; objective geometry measured separately"
+}

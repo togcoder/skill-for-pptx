@@ -1,0 +1,66 @@
+{
+  "file": "output/PPTX_Motion_Lab_T002.pptx",
+  "sha256": "c41f2289bfd662f2642ea611b119d8aeaf35678425cba4cf4b7ffe0640922186",
+  "scope": "package-inventory-v0.1",
+  "errors": [],
+  "slides": [
+    {
+      "index": 1,
+      "part": "ppt/slides/slide1.xml",
+      "forced_morph_names": [
+        "!!community-block",
+        "!!transport-block",
+        "!!infrastructure-block",
+        "!!community-label",
+        "!!transport-label",
+        "!!infrastructure-label",
+        "!!title",
+        "!!footer"
+      ],
+      "morph_elements": 0,
+      "morph_options": [],
+      "timing_elements": 0
+    },
+    {
+      "index": 2,
+      "part": "ppt/slides/slide2.xml",
+      "forced_morph_names": [
+        "!!community-block",
+        "!!transport-block",
+        "!!infrastructure-block",
+        "!!community-label",
+        "!!transport-label",
+        "!!infrastructure-label",
+        "!!title",
+        "!!footer"
+      ],
+      "morph_elements": 1,
+      "morph_options": [
+        "byObject"
+      ],
+      "timing_elements": 0
+    },
+    {
+      "index": 3,
+      "part": "ppt/slides/slide3.xml",
+      "forced_morph_names": [
+        "!!community-block",
+        "!!transport-block",
+        "!!infrastructure-block",
+        "!!community-label",
+        "!!transport-label",
+        "!!infrastructure-label",
+        "!!title",
+        "!!footer"
+      ],
+      "morph_elements": 1,
+      "morph_options": [
+        "byObject"
+      ],
+      "timing_elements": 0
+    }
+  ],
+  "playback_verified": false,
+  "full_schema_validated": false,
+  "note": "Inventory checks only. Open and play this exact file in PowerPoint before claiming compatibility or motion correctness."
+}
