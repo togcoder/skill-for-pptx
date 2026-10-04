@@ -3,6 +3,7 @@
 import argparse
 import json
 from pathlib import Path
+import math
 
 try:
     from .data_motion_recipes import chart_motion_recipe, number_counter_recipe
@@ -17,6 +18,7 @@ PROVENANCE={"none","derived-from-source","synthetic-nondata","user-provided"}
 CHART_BUILDS={"as-whole","series","category","series-elements","category-elements"}
 COUNTER_IMPLEMENTATIONS={"odometer-proxy","stepped-text"}
 COUNTER_OPERATIONS={"kpi-highlight","hero-metric","number-counter","metric-highlight"}
+GENERIC_OPERATIONS={"reveal","stagger-reveal","process-reveal","focus","emphasize","move","rotate"}
 
 
 def validate(plan,inventory):
@@ -28,8 +30,8 @@ def validate(plan,inventory):
     errors += [f"missing field: {k}" for k in sorted(required-plan.keys())]
     if errors:
         return errors
-    if plan["version"] not in ("0.1","0.2","0.3"):
-        errors.append("version must be 0.1, 0.2 or 0.3")
+    if plan["version"] not in ("0.1","0.2","0.3","0.4"):
+        errors.append("version must be 0.1, 0.2, 0.3 or 0.4")
     if plan["kind"]!="existing-deck-motion-director":
         errors.append("kind must be existing-deck-motion-director")
 
@@ -170,7 +172,7 @@ def validate(plan,inventory):
                 if missing:
                     errors.append(f"slide {idx}: beat {bid} unknown targets {missing}")
 
-            if plan["version"]=="0.3" and isinstance(targets,list):
+            if plan["version"] in ("0.3","0.4") and isinstance(targets,list):
                 source_shapes=[source_shape_by_token[t] for t in targets if t in source_shape_by_token]
                 chart_shapes=[shape for shape in source_shapes if shape.get("kind")=="chart"]
                 number_shapes=[
@@ -254,7 +256,41 @@ def validate(plan,inventory):
                     else:
                         errors.append(f"slide {idx}: beat {bid} unsupported data_motion kind {kind}")
 
-        if plan["version"] in ("0.2","0.3"):
+                if plan["version"]=="0.4" and not isinstance(data_motion,dict):
+                    operation=beat.get("operation")
+                    if operation in GENERIC_OPERATIONS:
+                        if chart_shapes:
+                            errors.append(
+                                f"slide {idx}: beat {bid} generic operation cannot target chart; use chart data_motion"
+                            )
+                        if operation in ("focus","emphasize","move","rotate") and len(targets)!=1:
+                            errors.append(
+                                f"slide {idx}: beat {bid} operation {operation} requires exactly one target"
+                            )
+                        params=beat.get("motion_parameters") or {}
+                        if not isinstance(params,dict):
+                            errors.append(f"slide {idx}: beat {bid} motion_parameters must be an object")
+                        elif operation=="move":
+                            points=params.get("points")
+                            if not isinstance(points,list) or len(points)<2:
+                                errors.append(f"slide {idx}: beat {bid} move requires motion_parameters.points")
+                            else:
+                                for point in points:
+                                    if not isinstance(point,dict) or set(point)!={"x","y"}:
+                                        errors.append(f"slide {idx}: beat {bid} invalid move point")
+                                        break
+                                    if any(
+                                        type(point[k]) not in (int,float) or not math.isfinite(point[k])
+                                        for k in ("x","y")
+                                    ):
+                                        errors.append(f"slide {idx}: beat {bid} nonfinite move point")
+                                        break
+                        elif operation=="rotate":
+                            value=params.get("by_deg")
+                            if type(value) not in (int,float) or not math.isfinite(value):
+                                errors.append(f"slide {idx}: beat {bid} rotate requires finite motion_parameters.by_deg")
+
+        if plan["version"] in ("0.2","0.3","0.4"):
             click_beats=slide.get("click_beats")
             if not isinstance(click_beats,list) or not click_beats:
                 errors.append(f"slide {idx}: click_beats must be nonempty for v0.2")
