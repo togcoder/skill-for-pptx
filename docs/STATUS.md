@@ -1,5 +1,31 @@
 # PPTX Motion Lab — checkpoint
 
+## T011 director click rhythm — 2026-10-05
+
+T010 established click groups in the timing writer. T011 moves that decision
+upstream into the AI Director.
+
+Canonical semantic hierarchy:
+
+`Deck Narrative -> Slide Objective -> Click Beat -> Motion Beat -> Effects`
+
+Director v0.2 requires each click beat to record audience purpose, stable state,
+pause type, and (after the first click) a narrative boundary reason. It rejects
+flat/ambiguous grouping, nested `on-click`, and incomplete beat partitions.
+
+Existing-deck patch v0.2 now preserves the same click grouping on a fresh
+unanimated source slide, so multi-click pacing no longer requires multiple
+slides.
+
+CI run 37234829380: **92/92 tests pass** + Python compile. A regression patches a
+real existing-deck fixture to two click groups and reads the groups back through
+the deck inspector.
+
+T009 no-script benchmark now explicitly penalizes whole-slide autoplay,
+one-click-per-motion overfragmentation and premature reveals.
+
+Report: `experiments/T011-20261005-director-click-rhythm/REPORT.md`.
+
 ## T010 presenter-paced click beats — 2026-10-05
 
 User corrected the packed-motion target: one physical slide may contain many
