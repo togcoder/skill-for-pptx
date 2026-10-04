@@ -34,7 +34,7 @@ không phải đích sản phẩm cuối.
 |---|---|
 | Nguồn skill | v0.7 nghiên cứu trong repo, chưa cài thành personal skill |
 | Backend | Morph baseline + T006 packed-timeline research path; artifact-tool 16:9 rect/ellipse/textbox; timing writer motion/scale/rotate, PowerPoint playback pending |
-| Kiểm tra tự động | 79 unit tests pass tại T006 full candidate; chưa phải schema OOXML đầy đủ |
+| Kiểm tra tự động | 86 unit tests pass trên T010 click-beat branch; py_compile pass; chưa phải schema OOXML đầy đủ |
 | E002 | Sửa 14 khai báo textbox; checker H001 giữ nguyên đạt 93/93; ảnh không đổi |
 | H002/E003 | Nhãn ORBIT chồng 2→0 theo mô hình tuyến tính |
 | H003/E004 | Nhãn Việt dài chồng 4→0; khối nền vẫn chồng 6→6 theo mô hình |
@@ -87,7 +87,7 @@ T006/T010 hiện có hai mode writer: v0.1 giữ one-click packed timing làm ba
 lịch sử; v0.2 tạo nhiều presenter click-beat trong cùng slide. `scripts/add_timeline.py`
 ghi motion, scale và rotate; `scripts/run_timeline_experiment.sh`
 nối validate → artifact-tool source → textbox normalize → timing → finalizer.
-Branch CI đã pass 55 tests + Python/Node/shell syntax. Đọc
+Historical T006 CI đã pass 55 tests; T010 click-beat hiện pass 86 tests + Python compile. Đọc
 `experiments/T006-20261004-native-timing/REPORT.md` trước khi sửa writer.
 PowerPoint exact-file playback vẫn chưa có, nên không gọi writer là verified.
 
