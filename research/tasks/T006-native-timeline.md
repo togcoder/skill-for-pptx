@@ -2,6 +2,13 @@
 
 Status: active implementation. Native planning compiler + restricted timing writer implemented; PowerPoint playback gate pending. Owner: current integrator/model. Check open PRs/claims before starting implementation work.
 
+Latest validation (2026-10-04 19:16 UTC): full one-slide candidate exists with
+frozen SHA in `experiments/T006-20261004-packed-validation/REPORT.md`.
+Opening-text pipeline abort repaired; 79 tests pass. Native-coordinate model
+flags later-stage path origins, and fill/trigger behavior remains unverified.
+Next: exact-hash playback plus a PowerPoint-authored two-stage path fixture.
+Do not repeat the same generation or declare T006 complete from static evidence.
+
 User priority: advanced effects from a short natural-language prompt that keep
 all requested actions and constraints **while packing as many motions as possible
 into one slide when they reuse the same resources**. Read

@@ -1,0 +1,11 @@
+{
+  "font": "Bitstream Charter",
+  "canvas": [
+    1280,
+    720
+  ],
+  "slides": 1,
+  "renderer": "artifact-tool-native-timeline",
+  "timeline_writer": "scripts/add_timeline.py",
+  "native_playback_verified": false
+}

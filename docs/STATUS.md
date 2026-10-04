@@ -2,7 +2,27 @@
 
 Cập nhật ngày 04/10/2026, giờ Việt Nam. Phiên bản nguồn nghiên cứu v0.7 (thêm T005 compound intent).
 
-## T007 autonomy + existing-motion continuation — latest
+## T006 full packed candidate — 2026-10-04 19:16 UTC / 05-10 Vietnam
+
+Built `output/T006_packed_candidate.pptx`: **1 slide, 31 native objects, 6 stages,
+82 encoded behaviors, 7,100 ms planned duration**. Exact SHA-256:
+`41c4fb7865ea587e0d426fccf4de2c82fc1db731147a92a4fba28926b0e52094`.
+
+Full pipeline initially failed because packing dropped state-local opening text.
+Preserving initial text fixes the abort; the exact final file passes finalization
+and its sole static render was viewed. **79 tests pass.** Failed raw artifact,
+plans, receipt, hashes and full report are in
+`experiments/T006-20261004-packed-validation/` (PR #11).
+
+Independent audit found **47 path-origin mismatches under the authored-layout
+coordinate model**, with maximum 543.766 px. This is a conditional geometry
+diagnostic, not observed playback. All 82 behaviors currently use fill=remove.
+Keep the evidence; do not promote native compatibility. Next: exact-file playback
+and a PowerPoint-authored two-stage path fixture to resolve origin/fill/trigger
+semantics. Do not rebuild this same candidate without a new hypothesis.
+T007/T008 autonomy work remains as below; source skill is still research v0.7.
+
+## T007 autonomy + existing-motion continuation
 
 The product target is now explicit at the stronger autonomy level requested by
 the user: **PPTX + optional high-level goal is enough input**. The model should
@@ -178,7 +198,7 @@ PPTX H001: `output/PPTX_Motion_Lab_H001.pptx`; dùng hash trong bằng chứng H
 
 ## Việc tiếp theo theo giá trị
 
-1. Hai đường ưu tiên song song: (a) hoàn tất exact-file playback cho T006 native writer; (b) T007 lấy một deck thật 3–10 slide, inventory → script/infer → motion-direct một slide bằng resource có sẵn, tối đa một helper component, không đổi slide count. Chạy full T005 candidate qua pipeline T006 mới để tạo `output/T006_packed_candidate.pptx` **1 slide**, freeze SHA-256 rồi phát exact file trong Microsoft PowerPoint. Không quay lại waypoint slides nếu playback lỗi; trước tiên thử hierarchy afterEffect/withEffect kiểu PowerPoint-authored trong cùng slide. T001/native exact-hash vẫn là cổng nghiệm thu; M1 pending.
+1. Hai đường ưu tiên: (a) dùng `output/T006_packed_candidate.pptx` đã freeze hash trong báo cáo packed-validation để kiểm playback PowerPoint và đối chiếu fixture hai chặng về origin/fill/trigger; (b) T007 lấy một deck thật 3–10 slide, inventory → script/infer → motion-direct một slide bằng resource có sẵn, tối đa một helper component, không đổi slide count. Không dựng lại candidate cũ nếu chưa có giả thuyết mới. Không quay lại waypoint slides nếu playback lỗi; sửa trong cùng slide và giữ baseline. T001/native exact-hash vẫn là cổng nghiệm thu; M1 pending.
 2. Nếu chưa có PowerPoint, nghiên cứu timing/path và chuẩn bị fixture/capture có kiểm tra cấu trúc. Không gọi mô phỏng là playback hoặc tăng số đối tượng là tăng chất lượng hiệu ứng. T002 đã xử lý carrier proxy cũ; không lặp khi thiếu giả thuyết mới.
 3. Chia phần việc theo task trong `research/tasks/`. Nhận claim/nhánh riêng trước khi làm để tránh trùng. Skill và renderer hiện vẫn phụ thuộc môi trường Work như `docs/ENVIRONMENT.md`.
 4. Chuẩn bị công cụ thu bằng chứng trên PowerPoint Windows khi phù hợp, không giả lập kết quả. Benchmark 18 lượt chưa thực hiện.

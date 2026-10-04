@@ -12,6 +12,8 @@ Mới nhất: [T005 compound choreography](experiments/T005-20261004-codex-chore
 
 ## Kết quả hiện có
 
+- T006 full candidate: đã có PPTX 1 slide/31 đối tượng/6 chặng; sửa lỗi mất chữ làm pipeline dừng; 79 tests đạt và ảnh mở đầu đã xem. Audit tọa độ còn chỉ ra rủi ro nối chặng, chưa có playback PowerPoint. [Báo cáo và file](experiments/T006-20261004-packed-validation/REPORT.md).
+
 - T002: giữ nguyên đường label sạch của E004 và siết carrier theo chữ. Proxy carrier giảm 6/6→0/6, nhưng focus emphasis tĩnh giảm 4/5→3/5. [Báo cáo](experiments/T002-20261004-codex-tight-carriers/REPORT.md). Native playback chưa kiểm chứng.
 - T003: công thức tách/ghép 3–5 lớp, hai chủ đề, 5 PPTX gồm bản lỗi và bản sửa; 15 ảnh cuối đã xem. Sửa số xuống dòng bằng thay đổi duy nhất chiều rộng textbox. Bộ kiểm tra hiện có 34 tests đạt. [Báo cáo và giới hạn](experiments/T003-20261004-codex-layer01/REPORT.md). Chưa có playback PowerPoint hoặc quan sát choreography nguồn.
 

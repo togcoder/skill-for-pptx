@@ -1,0 +1,255 @@
+{
+  "pptx_sha256": "41c4fb7865ea587e0d426fccf4de2c82fc1db731147a92a4fba28926b0e52094",
+  "slide_count": 1,
+  "structure_errors": [],
+  "slides": [
+    {
+      "part": "ppt/slides/slide1.xml",
+      "native_objects": 31,
+      "behavior_count": 82,
+      "duration_ms": 7100,
+      "click_groups": 1,
+      "remove_fill_behaviors": 82,
+      "stages": [
+        {
+          "id": "burst",
+          "delay_ms": 0,
+          "duration_ms": 1000,
+          "effect_count": 27,
+          "layout_origin_model_mismatches": []
+        },
+        {
+          "id": "orbit",
+          "delay_ms": 1000,
+          "duration_ms": 2100,
+          "effect_count": 27,
+          "layout_origin_model_mismatches": [
+            {
+              "target": "node-1",
+              "max_coordinate_error_px": 224.00032
+            },
+            {
+              "target": "label-1",
+              "max_coordinate_error_px": 224.00032
+            },
+            {
+              "target": "node-2",
+              "max_coordinate_error_px": 224.000553
+            },
+            {
+              "target": "label-2",
+              "max_coordinate_error_px": 224.000553
+            },
+            {
+              "target": "node-3-layer-1",
+              "max_coordinate_error_px": 224.000148
+            },
+            {
+              "target": "node-3-layer-2",
+              "max_coordinate_error_px": 224.000148
+            },
+            {
+              "target": "node-3-layer-3",
+              "max_coordinate_error_px": 224.000148
+            },
+            {
+              "target": "node-3-layer-4",
+              "max_coordinate_error_px": 224.000148
+            },
+            {
+              "target": "label-3",
+              "max_coordinate_error_px": 224.000148
+            },
+            {
+              "target": "node-4",
+              "max_coordinate_error_px": 224.00057
+            },
+            {
+              "target": "label-4",
+              "max_coordinate_error_px": 224.00057
+            },
+            {
+              "target": "node-5",
+              "max_coordinate_error_px": 224.000347
+            },
+            {
+              "target": "label-5",
+              "max_coordinate_error_px": 224.000347
+            },
+            {
+              "target": "node-6",
+              "max_coordinate_error_px": 224.000295
+            },
+            {
+              "target": "label-6",
+              "max_coordinate_error_px": 224.000295
+            },
+            {
+              "target": "node-7",
+              "max_coordinate_error_px": 224.00032
+            },
+            {
+              "target": "label-7",
+              "max_coordinate_error_px": 224.00032
+            },
+            {
+              "target": "node-8",
+              "max_coordinate_error_px": 224.000553
+            },
+            {
+              "target": "label-8",
+              "max_coordinate_error_px": 224.000553
+            },
+            {
+              "target": "node-9",
+              "max_coordinate_error_px": 224.000148
+            },
+            {
+              "target": "label-9",
+              "max_coordinate_error_px": 224.000148
+            },
+            {
+              "target": "node-10",
+              "max_coordinate_error_px": 224.00057
+            },
+            {
+              "target": "label-10",
+              "max_coordinate_error_px": 224.00057
+            },
+            {
+              "target": "node-11",
+              "max_coordinate_error_px": 224.000347
+            },
+            {
+              "target": "label-11",
+              "max_coordinate_error_px": 224.000347
+            },
+            {
+              "target": "node-12",
+              "max_coordinate_error_px": 224.000295
+            },
+            {
+              "target": "label-12",
+              "max_coordinate_error_px": 224.000295
+            }
+          ]
+        },
+        {
+          "id": "focus",
+          "delay_ms": 3100,
+          "duration_ms": 1000,
+          "effect_count": 9,
+          "layout_origin_model_mismatches": [
+            {
+              "target": "node-3-layer-1",
+              "max_coordinate_error_px": 224.0
+            },
+            {
+              "target": "node-3-layer-2",
+              "max_coordinate_error_px": 224.0
+            },
+            {
+              "target": "node-3-layer-3",
+              "max_coordinate_error_px": 224.0
+            },
+            {
+              "target": "node-3-layer-4",
+              "max_coordinate_error_px": 224.0
+            },
+            {
+              "target": "label-3",
+              "max_coordinate_error_px": 224.0
+            }
+          ]
+        },
+        {
+          "id": "split",
+          "delay_ms": 4100,
+          "duration_ms": 1000,
+          "effect_count": 5,
+          "layout_origin_model_mismatches": [
+            {
+              "target": "node-3-layer-1",
+              "max_coordinate_error_px": 522.796352
+            },
+            {
+              "target": "node-3-layer-2",
+              "max_coordinate_error_px": 520.311445
+            },
+            {
+              "target": "node-3-layer-3",
+              "max_coordinate_error_px": 520.311445
+            },
+            {
+              "target": "node-3-layer-4",
+              "max_coordinate_error_px": 522.796352
+            },
+            {
+              "target": "label-3",
+              "max_coordinate_error_px": 520.0
+            }
+          ]
+        },
+        {
+          "id": "reassemble",
+          "delay_ms": 5100,
+          "duration_ms": 1000,
+          "effect_count": 5,
+          "layout_origin_model_mismatches": [
+            {
+              "target": "node-3-layer-1",
+              "max_coordinate_error_px": 527.227655
+            },
+            {
+              "target": "node-3-layer-2",
+              "max_coordinate_error_px": 520.808035
+            },
+            {
+              "target": "node-3-layer-3",
+              "max_coordinate_error_px": 520.808035
+            },
+            {
+              "target": "node-3-layer-4",
+              "max_coordinate_error_px": 527.227655
+            },
+            {
+              "target": "label-3",
+              "max_coordinate_error_px": 543.765574
+            }
+          ]
+        },
+        {
+          "id": "restore",
+          "delay_ms": 6100,
+          "duration_ms": 1000,
+          "effect_count": 9,
+          "layout_origin_model_mismatches": [
+            {
+              "target": "node-3-layer-1",
+              "max_coordinate_error_px": 522.796327
+            },
+            {
+              "target": "node-3-layer-2",
+              "max_coordinate_error_px": 520.311445
+            },
+            {
+              "target": "node-3-layer-3",
+              "max_coordinate_error_px": 520.311448
+            },
+            {
+              "target": "node-3-layer-4",
+              "max_coordinate_error_px": 522.796337
+            },
+            {
+              "target": "label-3",
+              "max_coordinate_error_px": 520.0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "coordinate_model": "authored layout center + M/L coordinates; assumes no implicit accumulation",
+  "risk_interpretation": "Conditional geometry diagnostic. Does not establish actual PowerPoint motion or fill behavior.",
+  "powerpoint_playback_verified": false
+}

@@ -40,6 +40,21 @@ class TimelinePackingTests(unittest.TestCase):
         self.assertTrue(any(len(e["points"])==intent["orbit_segments"]+1 for e in paths))
         self.assertEqual(len(plan["slides"]),1)
 
+    def test_initial_text_overrides_survive_packing(self):
+        # Full-pipeline failure: phase has empty object text and state-only copy.
+        # Check resolved text for every object on both frozen regression inputs.
+        for path in (EXPERIMENT/"candidate.intent.json", EXPERIMENT/"transfer"/"intent.json"):
+            intent=self.load(path)
+            legacy=compile_intent(intent)
+            plan=compile_packed_timeline(intent)
+            source=legacy["states"][0]["objects"]
+            packed=plan["slides"][0]["initial_objects"]
+            for obj in legacy["objects"]:
+                oid=obj["id"]
+                self.assertEqual(packed[oid].get("text",obj.get("text")),
+                                 source[oid].get("text",obj.get("text")))
+            self.assertEqual(packed["phase"]["text"],"Lõi hệ thống")
+
     def test_focus_combines_motion_and_scale_on_same_resources(self):
         intent=self.load(EXPERIMENT/"candidate.intent.json")
         plan=compile_packed_timeline(intent)

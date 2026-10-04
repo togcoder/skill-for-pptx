@@ -20,6 +20,18 @@ def _geom(frame):
     return {k: frame[k] for k in GEOM_KEYS}
 
 
+def _initial_frame(frame):
+    """Keep authored opening text even when it is a state-local override.
+
+    Later phase-label changes remain outside this geometry-only backend.
+    Dropping the initial override can leave a text object with no text body.
+    """
+    result = _geom(frame)
+    if "text" in frame:
+        result["text"] = frame["text"]
+    return result
+
+
 def _center(frame):
     return {
         "x": frame["x"] + frame["w"] / 2,
@@ -247,7 +259,7 @@ def compile_packed_timeline(intent):
         "slides": [{
             "id": "radial-drilldown",
             "message": "Packed radial drill-down sequence",
-            "initial_objects": {oid: _geom(state_by_id["core"]["objects"][oid]) for oid in object_ids},
+            "initial_objects": {oid: _initial_frame(state_by_id["core"]["objects"][oid]) for oid in object_ids},
             "timeline": stages,
             "expected_final_objects": {oid: _geom(state_by_id["restore"]["objects"][oid]) for oid in object_ids},
         }],

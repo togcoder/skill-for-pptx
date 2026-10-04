@@ -1,0 +1,2670 @@
+{
+  "version": "0.1",
+  "kind": "native-timeline-plan",
+  "brief": "Bung một lõi thành 12 nút, xoay cả vòng, phóng nút 3, tách nó thành 4 lớp rồi ghép lại; chữ luôn đứng thẳng.",
+  "canvas": {
+    "width": 16,
+    "height": 9,
+    "units": "normalized"
+  },
+  "data_provenance": "synthetic",
+  "objects": [
+    {
+      "id": "node-1",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-1",
+      "geometry": "ellipse",
+      "fill": "#2B2A35",
+      "stroke": "#696674",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "label-1",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!label-1",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "01",
+      "font_size": 26,
+      "text_color": "#F6F2E8",
+      "bold": true
+    },
+    {
+      "id": "node-2",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-2",
+      "geometry": "ellipse",
+      "fill": "#2B2A35",
+      "stroke": "#696674",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "label-2",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!label-2",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "02",
+      "font_size": 26,
+      "text_color": "#F6F2E8",
+      "bold": true
+    },
+    {
+      "id": "node-3-layer-1",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-3-layer-1",
+      "geometry": "rect",
+      "fill": "#56C4AE",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "node-3-layer-2",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-3-layer-2",
+      "geometry": "rect",
+      "fill": "#409C9B",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "node-3-layer-3",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-3-layer-3",
+      "geometry": "rect",
+      "fill": "#307C8D",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "node-3-layer-4",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-3-layer-4",
+      "geometry": "rect",
+      "fill": "#245B79",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "label-3",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!label-3",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "03",
+      "font_size": 26,
+      "text_color": "#F6F2E8",
+      "bold": true
+    },
+    {
+      "id": "node-4",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-4",
+      "geometry": "ellipse",
+      "fill": "#2B2A35",
+      "stroke": "#696674",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "label-4",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!label-4",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "04",
+      "font_size": 26,
+      "text_color": "#F6F2E8",
+      "bold": true
+    },
+    {
+      "id": "node-5",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-5",
+      "geometry": "ellipse",
+      "fill": "#2B2A35",
+      "stroke": "#696674",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "label-5",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!label-5",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "05",
+      "font_size": 26,
+      "text_color": "#F6F2E8",
+      "bold": true
+    },
+    {
+      "id": "node-6",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-6",
+      "geometry": "ellipse",
+      "fill": "#2B2A35",
+      "stroke": "#696674",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "label-6",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!label-6",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "06",
+      "font_size": 26,
+      "text_color": "#F6F2E8",
+      "bold": true
+    },
+    {
+      "id": "node-7",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-7",
+      "geometry": "ellipse",
+      "fill": "#2B2A35",
+      "stroke": "#696674",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "label-7",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!label-7",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "07",
+      "font_size": 26,
+      "text_color": "#F6F2E8",
+      "bold": true
+    },
+    {
+      "id": "node-8",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-8",
+      "geometry": "ellipse",
+      "fill": "#2B2A35",
+      "stroke": "#696674",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "label-8",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!label-8",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "08",
+      "font_size": 26,
+      "text_color": "#F6F2E8",
+      "bold": true
+    },
+    {
+      "id": "node-9",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-9",
+      "geometry": "ellipse",
+      "fill": "#2B2A35",
+      "stroke": "#696674",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "label-9",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!label-9",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "09",
+      "font_size": 26,
+      "text_color": "#F6F2E8",
+      "bold": true
+    },
+    {
+      "id": "node-10",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-10",
+      "geometry": "ellipse",
+      "fill": "#2B2A35",
+      "stroke": "#696674",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "label-10",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!label-10",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "10",
+      "font_size": 26,
+      "text_color": "#F6F2E8",
+      "bold": true
+    },
+    {
+      "id": "node-11",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-11",
+      "geometry": "ellipse",
+      "fill": "#2B2A35",
+      "stroke": "#696674",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "label-11",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!label-11",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "11",
+      "font_size": 26,
+      "text_color": "#F6F2E8",
+      "bold": true
+    },
+    {
+      "id": "node-12",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!node-12",
+      "geometry": "ellipse",
+      "fill": "#2B2A35",
+      "stroke": "#696674",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "label-12",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!label-12",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "12",
+      "font_size": 26,
+      "text_color": "#F6F2E8",
+      "bold": true
+    },
+    {
+      "id": "core",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!core",
+      "geometry": "ellipse",
+      "fill": "#C37745",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "core-label",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!core-label",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "CORE",
+      "font_size": 25,
+      "text_color": "#F6F2E8",
+      "bold": true
+    },
+    {
+      "id": "title",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!title",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Cấu trúc một hệ thống",
+      "font_size": 44,
+      "text_color": "#F6F2E8",
+      "bold": true
+    },
+    {
+      "id": "phase",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!phase",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "",
+      "font_size": 28,
+      "text_color": "#F6F2E8",
+      "bold": true
+    }
+  ],
+  "slides": [
+    {
+      "id": "radial-drilldown",
+      "message": "Packed radial drill-down sequence",
+      "initial_objects": {
+        "node-1": {
+          "x": 0.30390625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-1": {
+          "x": 0.3046875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-2": {
+          "x": 0.30390625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-2": {
+          "x": 0.3046875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-1": {
+          "x": 0.30390625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.016666666666666666,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-2": {
+          "x": 0.30390625,
+          "y": 0.5486111111111112,
+          "w": 0.0484375,
+          "h": 0.016666666666666666,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-3": {
+          "x": 0.30390625,
+          "y": 0.5652777777777778,
+          "w": 0.0484375,
+          "h": 0.016666666666666666,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-4": {
+          "x": 0.30390625,
+          "y": 0.5819444444444445,
+          "w": 0.0484375,
+          "h": 0.016666666666666666,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-3": {
+          "x": 0.3046875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-4": {
+          "x": 0.30390625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-4": {
+          "x": 0.3046875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-5": {
+          "x": 0.30390625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-5": {
+          "x": 0.3046875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-6": {
+          "x": 0.30390625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-6": {
+          "x": 0.3046875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-7": {
+          "x": 0.30390625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-7": {
+          "x": 0.3046875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-8": {
+          "x": 0.30390625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-8": {
+          "x": 0.3046875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-9": {
+          "x": 0.30390625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-9": {
+          "x": 0.3046875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-10": {
+          "x": 0.30390625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-10": {
+          "x": 0.3046875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-11": {
+          "x": 0.30390625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-11": {
+          "x": 0.3046875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-12": {
+          "x": 0.30390625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-12": {
+          "x": 0.3046875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "core": {
+          "x": 0.27890625,
+          "y": 0.4777777777777778,
+          "w": 0.0984375,
+          "h": 0.175,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "core-label": {
+          "x": 0.284375,
+          "y": 0.5333333333333333,
+          "w": 0.0875,
+          "h": 0.06388888888888888,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "title": {
+          "x": 0.046875,
+          "y": 0.0375,
+          "w": 0.90625,
+          "h": 0.10277777777777777,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "phase": {
+          "x": 0.046875,
+          "y": 0.1375,
+          "w": 0.90625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1,
+          "text": "Lõi hệ thống"
+        }
+      },
+      "timeline": [
+        {
+          "id": "burst",
+          "operation": "burst",
+          "trigger": "on_click",
+          "duration_ms": 1000,
+          "effects": [
+            {
+              "type": "motion_path",
+              "target": "node-1",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.328125,
+                  "y": 0.25416666666666665
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "label-1",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.328125,
+                  "y": 0.25416666666666665
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-2",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.415625,
+                  "y": 0.29584765215595243
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "label-2",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.415625,
+                  "y": 0.29584765215595243
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-1",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.5402777777777777
+                },
+                {
+                  "x": 0.4796794456622768,
+                  "y": 0.38472222222222224
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-2",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.5569444444444445
+                },
+                {
+                  "x": 0.4796794456622768,
+                  "y": 0.4013888888888889
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-3",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.5736111111111111
+                },
+                {
+                  "x": 0.4796794456622768,
+                  "y": 0.41805555555555557
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-4",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.5902777777777778
+                },
+                {
+                  "x": 0.4796794456622768,
+                  "y": 0.43472222222222223
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "label-3",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.4796794456622768,
+                  "y": 0.4097222222222222
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-4",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.5031249999999999,
+                  "y": 0.5652777777777778
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "label-4",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.503125,
+                  "y": 0.5652777777777778
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-5",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.4796794456622768,
+                  "y": 0.7208333333333333
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "label-5",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.4796794456622768,
+                  "y": 0.7208333333333333
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-6",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.415625,
+                  "y": 0.8347079033996031
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "label-6",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.415625,
+                  "y": 0.8347079033996031
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-7",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.328125,
+                  "y": 0.8763888888888889
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "label-7",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.328125,
+                  "y": 0.8763888888888889
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-8",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.24062500000000006,
+                  "y": 0.8347079033996032
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "label-8",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.24062500000000003,
+                  "y": 0.8347079033996032
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-9",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.17657055433772323,
+                  "y": 0.7208333333333333
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "label-9",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.17657055433772323,
+                  "y": 0.7208333333333333
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-10",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.153125,
+                  "y": 0.5652777777777778
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "label-10",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.153125,
+                  "y": 0.5652777777777778
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-11",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.17657055433772326,
+                  "y": 0.4097222222222222
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "label-11",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.17657055433772323,
+                  "y": 0.4097222222222222
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-12",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.24062499999999992,
+                  "y": 0.2958476521559525
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "label-12",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.24062499999999992,
+                  "y": 0.2958476521559525
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "orbit",
+          "operation": "orbit",
+          "trigger": "after_previous",
+          "duration_ms": 2100,
+          "effects": [
+            {
+              "type": "motion_path",
+              "target": "node-1",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.25416666666666665
+                },
+                {
+                  "x": 0.3734183328929412,
+                  "y": 0.26476752071006765
+                },
+                {
+                  "x": 0.415625,
+                  "y": 0.29584765215595243
+                },
+                {
+                  "x": 0.45186868670764585,
+                  "y": 0.34528900140862967
+                },
+                {
+                  "x": 0.4796794456622768,
+                  "y": 0.4097222222222222
+                },
+                {
+                  "x": 0.4971620196005869,
+                  "y": 0.48475629707921575
+                },
+                {
+                  "x": 0.5031249999999999,
+                  "y": 0.5652777777777778
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "label-1",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.25416666666666665
+                },
+                {
+                  "x": 0.37341833289294113,
+                  "y": 0.26476752071006765
+                },
+                {
+                  "x": 0.415625,
+                  "y": 0.29584765215595243
+                },
+                {
+                  "x": 0.45186868670764585,
+                  "y": 0.3452890014086297
+                },
+                {
+                  "x": 0.4796794456622768,
+                  "y": 0.4097222222222222
+                },
+                {
+                  "x": 0.4971620196005869,
+                  "y": 0.48475629707921575
+                },
+                {
+                  "x": 0.503125,
+                  "y": 0.5652777777777778
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-2",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.415625,
+                  "y": 0.29584765215595243
+                },
+                {
+                  "x": 0.45186868670764585,
+                  "y": 0.34528900140862967
+                },
+                {
+                  "x": 0.4796794456622768,
+                  "y": 0.4097222222222222
+                },
+                {
+                  "x": 0.4971620196005869,
+                  "y": 0.48475629707921575
+                },
+                {
+                  "x": 0.5031249999999999,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.4971620196005869,
+                  "y": 0.6457992584763398
+                },
+                {
+                  "x": 0.4796794456622768,
+                  "y": 0.7208333333333333
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "label-2",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.415625,
+                  "y": 0.29584765215595243
+                },
+                {
+                  "x": 0.45186868670764585,
+                  "y": 0.3452890014086297
+                },
+                {
+                  "x": 0.4796794456622768,
+                  "y": 0.4097222222222222
+                },
+                {
+                  "x": 0.4971620196005869,
+                  "y": 0.48475629707921575
+                },
+                {
+                  "x": 0.503125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.4971620196005869,
+                  "y": 0.6457992584763398
+                },
+                {
+                  "x": 0.4796794456622768,
+                  "y": 0.7208333333333333
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-1",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.4796794456622768,
+                  "y": 0.38472222222222224
+                },
+                {
+                  "x": 0.4971620196005869,
+                  "y": 0.4597562970792158
+                },
+                {
+                  "x": 0.5031249999999999,
+                  "y": 0.5402777777777777
+                },
+                {
+                  "x": 0.4971620196005869,
+                  "y": 0.6207992584763398
+                },
+                {
+                  "x": 0.4796794456622768,
+                  "y": 0.6958333333333333
+                },
+                {
+                  "x": 0.45186868670764585,
+                  "y": 0.7602665541469258
+                },
+                {
+                  "x": 0.415625,
+                  "y": 0.8097079033996031
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-2",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.4796794456622768,
+                  "y": 0.4013888888888889
+                },
+                {
+                  "x": 0.4971620196005869,
+                  "y": 0.47642296374588244
+                },
+                {
+                  "x": 0.5031249999999999,
+                  "y": 0.5569444444444445
+                },
+                {
+                  "x": 0.4971620196005869,
+                  "y": 0.6374659251430065
+                },
+                {
+                  "x": 0.4796794456622768,
+                  "y": 0.7125
+                },
+                {
+                  "x": 0.45186868670764585,
+                  "y": 0.7769332208135924
+                },
+                {
+                  "x": 0.415625,
+                  "y": 0.8263745700662697
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-3",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.4796794456622768,
+                  "y": 0.41805555555555557
+                },
+                {
+                  "x": 0.4971620196005869,
+                  "y": 0.4930896304125491
+                },
+                {
+                  "x": 0.5031249999999999,
+                  "y": 0.5736111111111111
+                },
+                {
+                  "x": 0.4971620196005869,
+                  "y": 0.6541325918096731
+                },
+                {
+                  "x": 0.4796794456622768,
+                  "y": 0.7291666666666666
+                },
+                {
+                  "x": 0.45186868670764585,
+                  "y": 0.7935998874802591
+                },
+                {
+                  "x": 0.415625,
+                  "y": 0.8430412367329364
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-4",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.4796794456622768,
+                  "y": 0.43472222222222223
+                },
+                {
+                  "x": 0.4971620196005869,
+                  "y": 0.5097562970792157
+                },
+                {
+                  "x": 0.5031249999999999,
+                  "y": 0.5902777777777778
+                },
+                {
+                  "x": 0.4971620196005869,
+                  "y": 0.6707992584763398
+                },
+                {
+                  "x": 0.4796794456622768,
+                  "y": 0.7458333333333333
+                },
+                {
+                  "x": 0.45186868670764585,
+                  "y": 0.8102665541469257
+                },
+                {
+                  "x": 0.415625,
+                  "y": 0.859707903399603
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "label-3",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.4796794456622768,
+                  "y": 0.4097222222222222
+                },
+                {
+                  "x": 0.4971620196005869,
+                  "y": 0.48475629707921575
+                },
+                {
+                  "x": 0.503125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.4971620196005869,
+                  "y": 0.6457992584763398
+                },
+                {
+                  "x": 0.4796794456622768,
+                  "y": 0.7208333333333333
+                },
+                {
+                  "x": 0.45186868670764585,
+                  "y": 0.7852665541469258
+                },
+                {
+                  "x": 0.415625,
+                  "y": 0.8347079033996031
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-4",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.5031249999999999,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.4971620196005869,
+                  "y": 0.6457992584763398
+                },
+                {
+                  "x": 0.4796794456622768,
+                  "y": 0.7208333333333333
+                },
+                {
+                  "x": 0.45186868670764585,
+                  "y": 0.7852665541469258
+                },
+                {
+                  "x": 0.415625,
+                  "y": 0.8347079033996031
+                },
+                {
+                  "x": 0.3734183328929412,
+                  "y": 0.8657880348454878
+                },
+                {
+                  "x": 0.328125,
+                  "y": 0.8763888888888889
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "label-4",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.503125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.4971620196005869,
+                  "y": 0.6457992584763398
+                },
+                {
+                  "x": 0.4796794456622768,
+                  "y": 0.7208333333333333
+                },
+                {
+                  "x": 0.45186868670764585,
+                  "y": 0.7852665541469258
+                },
+                {
+                  "x": 0.415625,
+                  "y": 0.8347079033996031
+                },
+                {
+                  "x": 0.37341833289294113,
+                  "y": 0.8657880348454878
+                },
+                {
+                  "x": 0.328125,
+                  "y": 0.8763888888888889
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-5",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.4796794456622768,
+                  "y": 0.7208333333333333
+                },
+                {
+                  "x": 0.45186868670764585,
+                  "y": 0.7852665541469258
+                },
+                {
+                  "x": 0.415625,
+                  "y": 0.8347079033996031
+                },
+                {
+                  "x": 0.3734183328929412,
+                  "y": 0.8657880348454878
+                },
+                {
+                  "x": 0.328125,
+                  "y": 0.8763888888888889
+                },
+                {
+                  "x": 0.28283166710705887,
+                  "y": 0.8657880348454878
+                },
+                {
+                  "x": 0.24062500000000006,
+                  "y": 0.8347079033996032
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "label-5",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.4796794456622768,
+                  "y": 0.7208333333333333
+                },
+                {
+                  "x": 0.45186868670764585,
+                  "y": 0.7852665541469258
+                },
+                {
+                  "x": 0.415625,
+                  "y": 0.8347079033996031
+                },
+                {
+                  "x": 0.37341833289294113,
+                  "y": 0.8657880348454878
+                },
+                {
+                  "x": 0.328125,
+                  "y": 0.8763888888888889
+                },
+                {
+                  "x": 0.28283166710705887,
+                  "y": 0.8657880348454878
+                },
+                {
+                  "x": 0.24062500000000003,
+                  "y": 0.8347079033996032
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-6",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.415625,
+                  "y": 0.8347079033996031
+                },
+                {
+                  "x": 0.3734183328929412,
+                  "y": 0.8657880348454878
+                },
+                {
+                  "x": 0.328125,
+                  "y": 0.8763888888888889
+                },
+                {
+                  "x": 0.28283166710705887,
+                  "y": 0.8657880348454878
+                },
+                {
+                  "x": 0.24062500000000006,
+                  "y": 0.8347079033996032
+                },
+                {
+                  "x": 0.2043813132923542,
+                  "y": 0.7852665541469259
+                },
+                {
+                  "x": 0.17657055433772323,
+                  "y": 0.7208333333333333
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "label-6",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.415625,
+                  "y": 0.8347079033996031
+                },
+                {
+                  "x": 0.37341833289294113,
+                  "y": 0.8657880348454878
+                },
+                {
+                  "x": 0.328125,
+                  "y": 0.8763888888888889
+                },
+                {
+                  "x": 0.28283166710705887,
+                  "y": 0.8657880348454878
+                },
+                {
+                  "x": 0.24062500000000003,
+                  "y": 0.8347079033996032
+                },
+                {
+                  "x": 0.2043813132923542,
+                  "y": 0.7852665541469259
+                },
+                {
+                  "x": 0.17657055433772323,
+                  "y": 0.7208333333333333
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-7",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.8763888888888889
+                },
+                {
+                  "x": 0.28283166710705887,
+                  "y": 0.8657880348454878
+                },
+                {
+                  "x": 0.24062500000000006,
+                  "y": 0.8347079033996032
+                },
+                {
+                  "x": 0.2043813132923542,
+                  "y": 0.7852665541469259
+                },
+                {
+                  "x": 0.17657055433772323,
+                  "y": 0.7208333333333333
+                },
+                {
+                  "x": 0.15908798039941308,
+                  "y": 0.6457992584763399
+                },
+                {
+                  "x": 0.153125,
+                  "y": 0.5652777777777778
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "label-7",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.328125,
+                  "y": 0.8763888888888889
+                },
+                {
+                  "x": 0.28283166710705887,
+                  "y": 0.8657880348454878
+                },
+                {
+                  "x": 0.24062500000000003,
+                  "y": 0.8347079033996032
+                },
+                {
+                  "x": 0.2043813132923542,
+                  "y": 0.7852665541469259
+                },
+                {
+                  "x": 0.17657055433772323,
+                  "y": 0.7208333333333333
+                },
+                {
+                  "x": 0.15908798039941305,
+                  "y": 0.6457992584763399
+                },
+                {
+                  "x": 0.153125,
+                  "y": 0.5652777777777778
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-8",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.24062500000000006,
+                  "y": 0.8347079033996032
+                },
+                {
+                  "x": 0.2043813132923542,
+                  "y": 0.7852665541469259
+                },
+                {
+                  "x": 0.17657055433772323,
+                  "y": 0.7208333333333333
+                },
+                {
+                  "x": 0.15908798039941308,
+                  "y": 0.6457992584763399
+                },
+                {
+                  "x": 0.153125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.15908798039941308,
+                  "y": 0.48475629707921575
+                },
+                {
+                  "x": 0.17657055433772326,
+                  "y": 0.4097222222222222
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "label-8",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.24062500000000003,
+                  "y": 0.8347079033996032
+                },
+                {
+                  "x": 0.2043813132923542,
+                  "y": 0.7852665541469259
+                },
+                {
+                  "x": 0.17657055433772323,
+                  "y": 0.7208333333333333
+                },
+                {
+                  "x": 0.15908798039941305,
+                  "y": 0.6457992584763399
+                },
+                {
+                  "x": 0.153125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.15908798039941305,
+                  "y": 0.48475629707921575
+                },
+                {
+                  "x": 0.17657055433772323,
+                  "y": 0.4097222222222222
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-9",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.17657055433772323,
+                  "y": 0.7208333333333333
+                },
+                {
+                  "x": 0.15908798039941308,
+                  "y": 0.6457992584763399
+                },
+                {
+                  "x": 0.153125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.15908798039941308,
+                  "y": 0.48475629707921575
+                },
+                {
+                  "x": 0.17657055433772326,
+                  "y": 0.4097222222222222
+                },
+                {
+                  "x": 0.20438131329235418,
+                  "y": 0.34528900140862967
+                },
+                {
+                  "x": 0.24062499999999992,
+                  "y": 0.2958476521559525
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "label-9",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.17657055433772323,
+                  "y": 0.7208333333333333
+                },
+                {
+                  "x": 0.15908798039941305,
+                  "y": 0.6457992584763399
+                },
+                {
+                  "x": 0.153125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.15908798039941305,
+                  "y": 0.48475629707921575
+                },
+                {
+                  "x": 0.17657055433772323,
+                  "y": 0.4097222222222222
+                },
+                {
+                  "x": 0.20438131329235415,
+                  "y": 0.3452890014086297
+                },
+                {
+                  "x": 0.24062499999999992,
+                  "y": 0.2958476521559525
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-10",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.153125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.15908798039941308,
+                  "y": 0.48475629707921575
+                },
+                {
+                  "x": 0.17657055433772326,
+                  "y": 0.4097222222222222
+                },
+                {
+                  "x": 0.20438131329235418,
+                  "y": 0.34528900140862967
+                },
+                {
+                  "x": 0.24062499999999992,
+                  "y": 0.2958476521559525
+                },
+                {
+                  "x": 0.2828316671070589,
+                  "y": 0.26476752071006765
+                },
+                {
+                  "x": 0.32812499999999994,
+                  "y": 0.25416666666666665
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "label-10",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.153125,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.15908798039941305,
+                  "y": 0.48475629707921575
+                },
+                {
+                  "x": 0.17657055433772323,
+                  "y": 0.4097222222222222
+                },
+                {
+                  "x": 0.20438131329235415,
+                  "y": 0.3452890014086297
+                },
+                {
+                  "x": 0.24062499999999992,
+                  "y": 0.2958476521559525
+                },
+                {
+                  "x": 0.28283166710705887,
+                  "y": 0.26476752071006765
+                },
+                {
+                  "x": 0.32812499999999994,
+                  "y": 0.25416666666666665
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-11",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.17657055433772326,
+                  "y": 0.4097222222222222
+                },
+                {
+                  "x": 0.20438131329235418,
+                  "y": 0.34528900140862967
+                },
+                {
+                  "x": 0.24062499999999992,
+                  "y": 0.2958476521559525
+                },
+                {
+                  "x": 0.2828316671070589,
+                  "y": 0.26476752071006765
+                },
+                {
+                  "x": 0.32812499999999994,
+                  "y": 0.25416666666666665
+                },
+                {
+                  "x": 0.3734183328929411,
+                  "y": 0.2647675207100676
+                },
+                {
+                  "x": 0.415625,
+                  "y": 0.29584765215595243
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "label-11",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.17657055433772323,
+                  "y": 0.4097222222222222
+                },
+                {
+                  "x": 0.20438131329235415,
+                  "y": 0.3452890014086297
+                },
+                {
+                  "x": 0.24062499999999992,
+                  "y": 0.2958476521559525
+                },
+                {
+                  "x": 0.28283166710705887,
+                  "y": 0.26476752071006765
+                },
+                {
+                  "x": 0.32812499999999994,
+                  "y": 0.25416666666666665
+                },
+                {
+                  "x": 0.3734183328929411,
+                  "y": 0.2647675207100676
+                },
+                {
+                  "x": 0.415625,
+                  "y": 0.29584765215595243
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-12",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.24062499999999992,
+                  "y": 0.2958476521559525
+                },
+                {
+                  "x": 0.2828316671070589,
+                  "y": 0.26476752071006765
+                },
+                {
+                  "x": 0.32812499999999994,
+                  "y": 0.25416666666666665
+                },
+                {
+                  "x": 0.3734183328929411,
+                  "y": 0.2647675207100676
+                },
+                {
+                  "x": 0.415625,
+                  "y": 0.29584765215595243
+                },
+                {
+                  "x": 0.45186868670764574,
+                  "y": 0.3452890014086296
+                },
+                {
+                  "x": 0.47967944566227677,
+                  "y": 0.40972222222222204
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "label-12",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.24062499999999992,
+                  "y": 0.2958476521559525
+                },
+                {
+                  "x": 0.28283166710705887,
+                  "y": 0.26476752071006765
+                },
+                {
+                  "x": 0.32812499999999994,
+                  "y": 0.25416666666666665
+                },
+                {
+                  "x": 0.3734183328929411,
+                  "y": 0.2647675207100676
+                },
+                {
+                  "x": 0.415625,
+                  "y": 0.29584765215595243
+                },
+                {
+                  "x": 0.45186868670764574,
+                  "y": 0.3452890014086296
+                },
+                {
+                  "x": 0.4796794456622767,
+                  "y": 0.4097222222222221
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "focus",
+          "operation": "focus",
+          "trigger": "after_previous",
+          "duration_ms": 1000,
+          "effects": [
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-1",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.415625,
+                  "y": 0.8097079033996031
+                },
+                {
+                  "x": 0.734375,
+                  "y": 0.4652777777777778
+                }
+              ]
+            },
+            {
+              "type": "scale",
+              "target": "node-3-layer-1",
+              "from_w": 0.0484375,
+              "from_h": 0.016666666666666666,
+              "to_w": 0.19375,
+              "to_h": 0.06666666666666667
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-2",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.415625,
+                  "y": 0.8263745700662697
+                },
+                {
+                  "x": 0.734375,
+                  "y": 0.5319444444444444
+                }
+              ]
+            },
+            {
+              "type": "scale",
+              "target": "node-3-layer-2",
+              "from_w": 0.0484375,
+              "from_h": 0.016666666666666666,
+              "to_w": 0.19375,
+              "to_h": 0.06666666666666667
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-3",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.415625,
+                  "y": 0.8430412367329364
+                },
+                {
+                  "x": 0.734375,
+                  "y": 0.5986111111111111
+                }
+              ]
+            },
+            {
+              "type": "scale",
+              "target": "node-3-layer-3",
+              "from_w": 0.0484375,
+              "from_h": 0.016666666666666666,
+              "to_w": 0.19375,
+              "to_h": 0.06666666666666667
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-4",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.415625,
+                  "y": 0.859707903399603
+                },
+                {
+                  "x": 0.734375,
+                  "y": 0.6652777777777777
+                }
+              ]
+            },
+            {
+              "type": "scale",
+              "target": "node-3-layer-4",
+              "from_w": 0.0484375,
+              "from_h": 0.016666666666666666,
+              "to_w": 0.19375,
+              "to_h": 0.06666666666666667
+            },
+            {
+              "type": "motion_path",
+              "target": "label-3",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.415625,
+                  "y": 0.8347079033996031
+                },
+                {
+                  "x": 0.734375,
+                  "y": 0.5652777777777778
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "split",
+          "operation": "split",
+          "trigger": "after_previous",
+          "duration_ms": 1000,
+          "effects": [
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-1",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.734375,
+                  "y": 0.4652777777777778
+                },
+                {
+                  "x": 0.734375,
+                  "y": 0.41944444444444445
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-2",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.734375,
+                  "y": 0.5319444444444444
+                },
+                {
+                  "x": 0.734375,
+                  "y": 0.5166666666666667
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-3",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.734375,
+                  "y": 0.5986111111111111
+                },
+                {
+                  "x": 0.734375,
+                  "y": 0.6138888888888889
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-4",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.734375,
+                  "y": 0.6652777777777777
+                },
+                {
+                  "x": 0.734375,
+                  "y": 0.7111111111111111
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "label-3",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.734375,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.734375,
+                  "y": 0.34444444444444444
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "reassemble",
+          "operation": "reassemble",
+          "trigger": "after_previous",
+          "duration_ms": 1000,
+          "effects": [
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-1",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.734375,
+                  "y": 0.41944444444444445
+                },
+                {
+                  "x": 0.734375,
+                  "y": 0.4652777777777778
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-2",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.734375,
+                  "y": 0.5166666666666667
+                },
+                {
+                  "x": 0.734375,
+                  "y": 0.5319444444444444
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-3",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.734375,
+                  "y": 0.6138888888888889
+                },
+                {
+                  "x": 0.734375,
+                  "y": 0.5986111111111111
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-4",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.734375,
+                  "y": 0.7111111111111111
+                },
+                {
+                  "x": 0.734375,
+                  "y": 0.6652777777777777
+                }
+              ]
+            },
+            {
+              "type": "motion_path",
+              "target": "label-3",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.734375,
+                  "y": 0.34444444444444444
+                },
+                {
+                  "x": 0.734375,
+                  "y": 0.5652777777777778
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "restore",
+          "operation": "restore",
+          "trigger": "after_previous",
+          "duration_ms": 1000,
+          "effects": [
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-1",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.734375,
+                  "y": 0.4652777777777778
+                },
+                {
+                  "x": 0.415625,
+                  "y": 0.8097079033996031
+                }
+              ]
+            },
+            {
+              "type": "scale",
+              "target": "node-3-layer-1",
+              "from_w": 0.19375,
+              "from_h": 0.06666666666666667,
+              "to_w": 0.0484375,
+              "to_h": 0.016666666666666666
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-2",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.734375,
+                  "y": 0.5319444444444444
+                },
+                {
+                  "x": 0.415625,
+                  "y": 0.8263745700662697
+                }
+              ]
+            },
+            {
+              "type": "scale",
+              "target": "node-3-layer-2",
+              "from_w": 0.19375,
+              "from_h": 0.06666666666666667,
+              "to_w": 0.0484375,
+              "to_h": 0.016666666666666666
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-3",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.734375,
+                  "y": 0.5986111111111111
+                },
+                {
+                  "x": 0.415625,
+                  "y": 0.8430412367329364
+                }
+              ]
+            },
+            {
+              "type": "scale",
+              "target": "node-3-layer-3",
+              "from_w": 0.19375,
+              "from_h": 0.06666666666666667,
+              "to_w": 0.0484375,
+              "to_h": 0.016666666666666666
+            },
+            {
+              "type": "motion_path",
+              "target": "node-3-layer-4",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.734375,
+                  "y": 0.6652777777777777
+                },
+                {
+                  "x": 0.415625,
+                  "y": 0.859707903399603
+                }
+              ]
+            },
+            {
+              "type": "scale",
+              "target": "node-3-layer-4",
+              "from_w": 0.19375,
+              "from_h": 0.06666666666666667,
+              "to_w": 0.0484375,
+              "to_h": 0.016666666666666666
+            },
+            {
+              "type": "motion_path",
+              "target": "label-3",
+              "path_kind": "polyline",
+              "points": [
+                {
+                  "x": 0.734375,
+                  "y": 0.5652777777777778
+                },
+                {
+                  "x": 0.415625,
+                  "y": 0.8347079033996031
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_final_objects": {
+        "node-1": {
+          "x": 0.47890625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-1": {
+          "x": 0.4796875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-2": {
+          "x": 0.4554606956622768,
+          "y": 0.6875,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-2": {
+          "x": 0.4562419456622768,
+          "y": 0.6916666666666667,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-1": {
+          "x": 0.39140625,
+          "y": 0.8013745700662698,
+          "w": 0.0484375,
+          "h": 0.016666666666666666,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-2": {
+          "x": 0.39140625,
+          "y": 0.8180412367329364,
+          "w": 0.0484375,
+          "h": 0.016666666666666666,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-3": {
+          "x": 0.39140625,
+          "y": 0.8347079033996031,
+          "w": 0.0484375,
+          "h": 0.016666666666666666,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-3-layer-4": {
+          "x": 0.39140625,
+          "y": 0.8513745700662697,
+          "w": 0.0484375,
+          "h": 0.016666666666666666,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-3": {
+          "x": 0.3921875,
+          "y": 0.8055412367329364,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-4": {
+          "x": 0.30390625,
+          "y": 0.8430555555555556,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-4": {
+          "x": 0.3046875,
+          "y": 0.8472222222222222,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-5": {
+          "x": 0.21640625000000005,
+          "y": 0.8013745700662699,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-5": {
+          "x": 0.21718750000000003,
+          "y": 0.8055412367329365,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-6": {
+          "x": 0.15235180433772322,
+          "y": 0.6875,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-6": {
+          "x": 0.15313305433772323,
+          "y": 0.6916666666666667,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-7": {
+          "x": 0.12890625,
+          "y": 0.5319444444444444,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-7": {
+          "x": 0.1296875,
+          "y": 0.5361111111111111,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-8": {
+          "x": 0.15235180433772325,
+          "y": 0.3763888888888889,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-8": {
+          "x": 0.15313305433772323,
+          "y": 0.38055555555555554,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-9": {
+          "x": 0.2164062499999999,
+          "y": 0.26251431882261916,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-9": {
+          "x": 0.21718749999999992,
+          "y": 0.2666809854892858,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-10": {
+          "x": 0.30390624999999993,
+          "y": 0.22083333333333333,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-10": {
+          "x": 0.30468749999999994,
+          "y": 0.225,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-11": {
+          "x": 0.39140625,
+          "y": 0.2625143188226191,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-11": {
+          "x": 0.3921875,
+          "y": 0.26668098548928576,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "node-12": {
+          "x": 0.45546069566227676,
+          "y": 0.3763888888888887,
+          "w": 0.0484375,
+          "h": 0.06666666666666667,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "label-12": {
+          "x": 0.4562419456622767,
+          "y": 0.3805555555555554,
+          "w": 0.046875,
+          "h": 0.058333333333333334,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "core": {
+          "x": 0.27890625,
+          "y": 0.4777777777777778,
+          "w": 0.0984375,
+          "h": 0.175,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "core-label": {
+          "x": 0.284375,
+          "y": 0.5333333333333333,
+          "w": 0.0875,
+          "h": 0.06388888888888888,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "title": {
+          "x": 0.046875,
+          "y": 0.0375,
+          "w": 0.90625,
+          "h": 0.10277777777777777,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "phase": {
+          "x": 0.046875,
+          "y": 0.1375,
+          "w": 0.90625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        }
+      }
+    }
+  ],
+  "research_metadata": {
+    "source_recipe": "radial-drilldown",
+    "source_architecture": "legacy-state-per-slide-morph-baseline",
+    "dynamic_phase_text": "not yet compiled; geometry/motion packing only",
+    "motion_packing": {
+      "policy": "resource-local-native-timeline",
+      "semantic_scene_count": 1,
+      "legacy_state_count": 12,
+      "final_slide_count": 1,
+      "requested_motion_events": 6,
+      "packed_motion_events": 6,
+      "packing_ratio": 6,
+      "resource_set_changes": 0,
+      "native_playback_verified": false
+    }
+  }
+}
