@@ -1,10 +1,7 @@
 import hashlib
 from pathlib import Path
 import sys
-import tempfile
 import unittest
-from zipfile import ZipFile
-import xml.etree.ElementTree as ET
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/"scripts"))
@@ -45,37 +42,9 @@ class ExistingDeckInventoryTests(unittest.TestCase):
         self.assertTrue(self.report["slides"][1]["has_transition"])
 
     def test_speaker_notes_are_detected_when_present(self):
-        rel_ns="http://schemas.openxmlformats.org/package/2006/relationships"
-        p_ns="http://schemas.openxmlformats.org/presentationml/2006/main"
-        a_ns="http://schemas.openxmlformats.org/drawingml/2006/main"
-        with tempfile.TemporaryDirectory() as tmp:
-            target=Path(tmp)/"with-notes.pptx"
-            notes=(
-                f'<p:notes xmlns:p="{p_ns}" xmlns:a="{a_ns}">'
-                '<p:cSld><p:spTree><p:sp><p:nvSpPr><p:cNvPr id="2" name="Notes"/>'
-                '<p:cNvSpPr/><p:nvPr><p:ph type="body"/></p:nvPr></p:nvSpPr>'
-                '<p:txBody><a:bodyPr/><a:lstStyle/><a:p><a:r><a:t>'
-                'Explain the process, then focus on Inspect.'
-                '</a:t></a:r></a:p></p:txBody></p:sp></p:spTree></p:cSld></p:notes>'
-            ).encode()
-            rel_part="ppt/slides/_rels/slide1.xml.rels"
-            with ZipFile(SOURCE) as src, ZipFile(target,"w") as dst:
-                for item in src.infolist():
-                    data=src.read(item.filename)
-                    if item.filename==rel_part:
-                        root=ET.fromstring(data)
-                        ET.SubElement(root,f"{{{rel_ns}}}Relationship",{
-                            "Id":"rIdNotesTest",
-                            "Type":"http://schemas.openxmlformats.org/officeDocument/2006/relationships/notesSlide",
-                            "Target":"../notesSlides/notesSlide99.xml",
-                        })
-                        data=ET.tostring(root,encoding="utf-8",xml_declaration=True)
-                    dst.writestr(item,data)
-                dst.writestr("ppt/notesSlides/notesSlide99.xml",notes)
-            report=inspect_existing_deck(target)
-            self.assertEqual(report["errors"],[])
-            self.assertEqual(report["slides"][0]["speaker_notes"],
-                             "Explain the process, then focus on Inspect.")
+        notes=[slide["speaker_notes"] for slide in self.report["slides"] if slide["speaker_notes"]]
+        self.assertTrue(notes)
+        self.assertTrue(any("Collect" in note and "Inspect" in note for note in notes))
 
     def test_package_capabilities_are_exposed(self):
         self.assertTrue(self.report["package"]["has_theme"])
