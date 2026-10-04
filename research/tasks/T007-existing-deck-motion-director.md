@@ -106,3 +106,25 @@ Given a real existing 3–10 slide report with no animation:
 - one-motion/one-slide;
 - video-only fallback presented as native PPTX;
 - unsupported factual enrichment.
+
+
+## 2026-10-04 source-object patching checkpoint
+
+Implemented:
+
+- `scripts/patch_existing_timeline.py`
+- `skills/pptx-motion/references/existing-deck-timeline-patch.md`
+- design fingerprint in `scripts/inspect_existing_deck.py`
+- regressions in `tests/test_existing_deck_timeline_patch.py`
+
+Final temporary CI run `37214809106`: 73 tests pass.
+
+This removes the generated-deck `!!` naming requirement for animation targets.
+Real source objects are guarded by source slide index + native ID + native name
+and the exact source PPTX hash.
+
+Next: build the semantic bridge from validated director beats to this concrete
+patch plan. If a required helper component does not exist, synthesize it as a
+native editable object using the inventory design fingerprint, refresh the
+inventory/hash, then target it normally. Do not bypass this by rebuilding the
+whole slide.

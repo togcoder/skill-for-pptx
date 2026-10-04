@@ -122,6 +122,65 @@ def _normalize_geometry(geom,width,height):
     }
 
 
+def _color_token(parent):
+    if parent is None:
+        return None
+    srgb=parent.find(".//a:srgbClr",NS)
+    if srgb is not None and srgb.get("val"):
+        return "#"+srgb.get("val").upper()
+    scheme=parent.find(".//a:schemeClr",NS)
+    if scheme is not None and scheme.get("val"):
+        return "scheme:"+scheme.get("val")
+    return None
+
+
+def _style_inventory(node):
+    sppr=node.find("p:spPr",NS)
+    fill=_color_token(sppr.find("a:solidFill",NS) if sppr is not None else None)
+    line=None
+    geometry=None
+    if sppr is not None:
+        ln=sppr.find("a:ln",NS)
+        line=_color_token(ln.find("a:solidFill",NS) if ln is not None else None)
+        geom=sppr.find("a:prstGeom",NS)
+        geometry=geom.get("prst") if geom is not None else None
+
+    run_props=node.find(".//a:rPr",NS)
+    if run_props is None:
+        run_props=node.find(".//a:defRPr",NS)
+    font=None
+    font_size_pt=None
+    bold=None
+    text_color=None
+    if run_props is not None:
+        latin=run_props.find("a:latin",NS)
+        if latin is not None:
+            font=latin.get("typeface")
+        raw_size=run_props.get("sz")
+        if raw_size:
+            try:
+                font_size_pt=int(raw_size)/100
+            except ValueError:
+                pass
+        raw_bold=run_props.get("b")
+        if raw_bold is not None:
+            bold=raw_bold in ("1","true")
+        text_color=_color_token(run_props.find("a:solidFill",NS))
+    if font is None:
+        latin=node.find(".//a:latin",NS)
+        if latin is not None:
+            font=latin.get("typeface")
+    return {
+        "fill":fill,
+        "line":line,
+        "geometry_preset":geometry,
+        "font_family":font,
+        "font_size_pt":font_size_pt,
+        "bold":bold,
+        "text_color":text_color,
+    }
+
+
 def _graphic_kind(node):
     data=node.find(".//a:graphicData",NS)
     if data is None:
@@ -159,6 +218,7 @@ def _shape_inventory(root,width,height):
             "text":_text(node) or None,
             "geometry":_normalize_geometry(geom,width,height),
             "geometry_emu":geom,
+            "style":_style_inventory(node),
             "forced_semantic_name":props["name"] if (props["name"] or "").startswith("!!") else None,
         })
     return out
@@ -266,6 +326,20 @@ def inspect_existing_deck(path):
                     "layout_part":next((r["resolved_target"] for r in relationships if r["type"].endswith("/slideLayout")),None),
                 })
 
+            all_shapes=[shape for slide in report["slides"] for shape in slide["shapes"]]
+            def ranked(field):
+                counter=Counter(
+                    shape["style"].get(field) for shape in all_shapes
+                    if shape.get("style") and shape["style"].get(field) is not None
+                )
+                return [{"value":value,"count":count} for value,count in counter.most_common()]
+            report["design_profile"]={
+                "font_families":ranked("font_family"),
+                "fill_colors":ranked("fill"),
+                "line_colors":ranked("line"),
+                "text_colors":ranked("text_color"),
+                "geometry_presets":ranked("geometry_preset"),
+            }
             report["package"]={
                 "file_count":len(infos),
                 "has_theme":any(n.startswith("ppt/theme/") and n.endswith(".xml") for n in names),

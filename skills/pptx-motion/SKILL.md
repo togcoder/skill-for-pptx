@@ -20,8 +20,7 @@ When the user supplies an existing PPTX:
    `python3 scripts/validate_director_plan.py PLAN.json INVENTORY.json`.
 5. Preserve source slide count/order/content by default. Create helper components
    only for a justified narrative role and match the existing visual system.
-6. Convert approved slide beats to packed native timelines. Do not rebuild
-   existing resources merely because the generator path is easier.
+6. Convert approved slide beats to packed native timelines. For arbitrary source objects, read [existing-deck-timeline-patch.md](references/existing-deck-timeline-patch.md) and target the exact source slide-local ID + name. Do not rebuild or rename existing resources merely because the generator path is easier.
 
 ## Workflow for fresh motion experiments
 
@@ -55,6 +54,7 @@ Check native text content and formal textbox type separately. The pipeline norma
 
 - `scripts/inspect_existing_deck.py`: read-only PPTX intake inventory for T007
 - `scripts/validate_director_plan.py`: validates existing-deck motion-director plans
+- `scripts/patch_existing_timeline.py`: patches native timing onto exact existing source objects without requiring `!!` names
 - `scripts/render_plan.mjs`: restricted native scene renderer
 - `scripts/add_morph.py`: experimental transition insertion
 - `scripts/normalize_textboxes.py`: plan-scoped native textbox declaration
