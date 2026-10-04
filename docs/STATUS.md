@@ -2,6 +2,18 @@
 
 Cập nhật ngày 04/10/2026, giờ Việt Nam. Phiên bản nguồn nghiên cứu v0.7 (thêm T005 compound intent).
 
+## Chỉ thị mới — resource-local motion packing
+
+Người dùng yêu cầu đổi kiến trúc: không coi mỗi chuyển động/state là một slide.
+Khi các action dùng chung resource set và cùng semantic scene, ưu tiên gom tối đa
+vào một native slide timeline. Tài liệu chuẩn: `docs/MOTION_PACKING.md`.
+
+T005 12-state Morph giữ nguyên làm baseline lịch sử. Nó không còn là mẫu kiến
+trúc mục tiêu. T006 phải cố gắng tái hiện burst → orbit → focus → split →
+reassemble → restore trong 1 slide với nhiều track/timing/trigger native; nếu
+PowerPoint/backend buộc tách, ghi blocker và dùng số slide tối thiểu. Các model
+sau phải đọc rule này trước khi thiết kế choreography.
+
 ## Kết quả mới nhất — T005
 
 Ưu tiên mới của người dùng là hiệu ứng phức tạp từ một câu lệnh ngắn, giữ đúng ý định. PR #3 và `experiments/T005-20261004-codex-choreography/REPORT.md` có compiler intent nghiêm ngặt cho chuỗi bung nút, xoay vòng, phóng đối tượng, tách lớp, ghép lại và trở về. AI diễn giải prompt; compiler chỉ nhận dữ liệu có cấu trúc, không phải NLP tổng quát.
@@ -75,7 +87,7 @@ PPTX H001: `output/PPTX_Motion_Lab_H001.pptx`; dùng hash trong bằng chứng H
 
 ## Việc tiếp theo theo giá trị
 
-1. Ưu tiên yêu cầu nâng cao: T006 native timeline/path để phối hợp nhiều động tác mà không phải bấm từng waypoint; T001 playback PowerPoint exact-hash của T005 là cổng nghiệm thu còn thiếu. M1 vẫn pending.
+1. Ưu tiên cao nhất: T006 native timeline/path theo `docs/MOTION_PACKING.md` — nén nhiều động tác dùng chung resource vào cùng một slide thay vì waypoint slide. Candidate đầu tiên phải cố gắng nén T005 xuống 1 slide; nếu không, chứng minh blocker và số slide tối thiểu. T001 playback PowerPoint exact-hash vẫn là cổng nghiệm thu còn thiếu. M1 vẫn pending.
 2. Nếu chưa có PowerPoint, nghiên cứu timing/path và chuẩn bị fixture/capture có kiểm tra cấu trúc. Không gọi mô phỏng là playback hoặc tăng số đối tượng là tăng chất lượng hiệu ứng. T002 đã xử lý carrier proxy cũ; không lặp khi thiếu giả thuyết mới.
 3. Chia phần việc theo task trong `research/tasks/`. Nhận claim/nhánh riêng trước khi làm để tránh trùng. Skill và renderer hiện vẫn phụ thuộc môi trường Work như `docs/ENVIRONMENT.md`.
 4. Chuẩn bị công cụ thu bằng chứng trên PowerPoint Windows khi phù hợp, không giả lập kết quả. Benchmark 18 lượt chưa thực hiện.
