@@ -80,6 +80,68 @@ class DirectorPlanTests(unittest.TestCase):
     def test_valid_plan_is_grounded_in_inventory(self):
         self.assertEqual(validate(self.plan(),self.inventory),[])
 
+    def plan_v2(self):
+        plan=copy.deepcopy(self.plan())
+        plan["version"]="0.2"
+        for slide in plan["slides"]:
+            beat_ids=[beat["id"] for beat in slide["beats"]]
+            slide["click_beats"]=[{
+                "id":f"click-{slide['source_index']}-1",
+                "purpose":slide["objective"],
+                "motion_beats":beat_ids,
+                "stable_state":"The audience can hold and discuss the slide objective before continuing.",
+                "pause_after":"slide-complete",
+                "boundary_reason":"First click starts this slide's presenter-controlled reveal.",
+            }]
+        return plan
+
+    def test_valid_v2_plan_has_click_rhythm(self):
+        self.assertEqual(validate(self.plan_v2(),self.inventory),[])
+
+    def test_v2_requires_click_beat_partition(self):
+        bad=self.plan_v2()
+        bad["slides"][0]["click_beats"][0]["motion_beats"]=[]
+        self.assertTrue(any("motion_beats must be nonempty" in x for x in validate(bad,self.inventory)))
+
+    def test_v2_rejects_nested_on_click_inside_one_presenter_beat(self):
+        bad=self.plan_v2()
+        slide=bad["slides"][0]
+        second=copy.deepcopy(slide["beats"][0])
+        second["id"]="second-motion"
+        second["purpose"]="Second motion that should not open another click inside the same group."
+        second["timing_intent"]="on-click"
+        slide["beats"].append(second)
+        slide["click_beats"][0]["motion_beats"].append("second-motion")
+        self.assertTrue(any("nested on-click" in x for x in validate(bad,self.inventory)))
+
+    def test_v2_second_click_requires_boundary_reason(self):
+        bad=self.plan_v2()
+        slide=bad["slides"][0]
+        second=copy.deepcopy(slide["beats"][0])
+        second["id"]="second-motion"
+        second["purpose"]="Reveal a second narrative idea."
+        second["timing_intent"]="on-click"
+        slide["beats"].append(second)
+        slide["click_beats"]=[
+            {
+                "id":"click-1",
+                "purpose":"Reveal first idea.",
+                "motion_beats":["reveal-process"],
+                "stable_state":"First idea is visible and explainable.",
+                "pause_after":"presenter-explanation",
+                "boundary_reason":"First click opens the slide.",
+            },
+            {
+                "id":"click-2",
+                "purpose":"Reveal second idea.",
+                "motion_beats":["second-motion"],
+                "stable_state":"Second idea is now visible.",
+                "pause_after":"slide-complete",
+                "boundary_reason":"",
+            },
+        ]
+        self.assertTrue(any("requires boundary_reason" in x for x in validate(bad,self.inventory)))
+
     def test_source_hash_mismatch_fails(self):
         bad=self.plan();bad["source"]["pptx_sha256"]="0"*64
         self.assertIn("source.pptx_sha256 does not match inventory",validate(bad,self.inventory))

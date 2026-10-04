@@ -97,6 +97,17 @@ untargeted slide byte-identical và từ chối timing cũ chưa biết merge. I
 `design_profile` để làm cơ sở sinh component đúng font/palette/geometry.
 Đọc `experiments/T007-20261004-source-object-patcher/REPORT.md`.
 
+## Chỉ thị T011 — AI phải hiểu nhịp trước khi viết XML
+
+T010 đã sửa writer. T011 đưa cùng nguyên tắc lên tầng Director: **motion beat
+không đồng nghĩa click beat**. Director v0.2 phải nhóm các motion action thành
+presenter click-beats, ghi `stable_state`, `pause_after`, và từ click thứ hai
+ghi `boundary_reason`. Existing-deck patch v0.2 giữ nhiều click groups trên một
+slide mới chưa có timing. T008 vẫn chịu trách nhiệm merge an toàn với timing cũ.
+
+Model sau không được lấy danh sách motion rồi tự động map "mỗi motion = click"
+hoặc "mọi motion = một click". Nhịp click phải được quyết định từ narrative.
+
 ## Chặng mới nhất
 
 PR #3, `experiments/T005-20261004-codex-choreography/REPORT.md`: compound intent compiler `scripts/choreography.py`, hai PPTX và transfer agent. Lỗi oracle waypoint đã sửa và giữ test. Người dùng ưu tiên hiệu ứng phức tạp bám ý định, không chỉ tăng số khối. Nhận T006 native timeline/path tiếp theo nếu phù hợp môi trường, hoặc T001 exact-hash playback. Đây là một recipe hạn chế, chưa hiểu mọi prompt hay chứng minh motion ấn tượng. Không cài personal skill trong lượt nghiên cứu.
@@ -117,6 +128,7 @@ PR #1, `experiments/T003-20261004-codex-layer01/REPORT.md`: giữ cả thất b�
 | T008 | Existing Motion Continuation | Đọc timing có sẵn, preserve/extend/retime có chủ đích; không xóa timing để làm lại từ đầu |
 | T009 | Autonomous No-Script Benchmark | Chỉ PPTX + mục tiêu chung → tự dựng report script → gap → component → motion → exact-file playback |
 | T010 | Presenter-paced Click Beats | Slide → click beat → stage → effects; giữ 1 slide nhưng dừng đúng nhịp presenter, không dùng delay để giả thời gian nói |
+| T011 | Director Click Rhythm | Bắt AI Director tự nhóm motion beats thành presenter clicks có purpose/stable state/boundary reason, rồi giữ nhịp đó khi patch existing deck |
 
 Mỗi task có brief và acceptance criteria trong `research/tasks/T00x.md`.
 Danh sách này chưa giao việc cho model nào. Model có môi trường PowerPoint

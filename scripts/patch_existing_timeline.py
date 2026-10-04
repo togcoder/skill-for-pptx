@@ -54,8 +54,8 @@ def validate_patch_plan(plan):
     errors += [f"missing field: {k}" for k in sorted(required-plan.keys())]
     if errors:
         return errors
-    if plan["version"]!="0.1":
-        errors.append("version must be 0.1")
+    if plan["version"] not in ("0.1","0.2"):
+        errors.append("version must be 0.1 or 0.2")
     if plan["kind"]!="existing-deck-timeline-patch":
         errors.append("kind must be existing-deck-timeline-patch")
     sha=plan["source_sha256"]
@@ -82,6 +82,7 @@ def validate_patch_plan(plan):
             errors.append(f"slide {idx}: stages must be nonempty")
             continue
         stage_ids=set()
+        stage_order=[]
         for i,stage in enumerate(stages):
             if not isinstance(stage,dict):
                 errors.append(f"slide {idx}: stage must be an object")
@@ -93,9 +94,14 @@ def validate_patch_plan(plan):
                 errors.append(f"slide {idx}: duplicate stage id {sid}")
             else:
                 stage_ids.add(sid)
-            expected="on-click" if i==0 else "after-previous"
-            if stage.get("trigger")!=expected:
-                errors.append(f"slide {idx}: stage {sid} trigger must be {expected}")
+                stage_order.append(sid)
+            trigger=stage.get("trigger")
+            if trigger not in ("on-click","with-previous","after-previous"):
+                errors.append(f"slide {idx}: stage {sid} has unsupported trigger {trigger}")
+            if plan["version"]=="0.1":
+                expected="on-click" if i==0 else "after-previous"
+                if trigger!=expected:
+                    errors.append(f"slide {idx}: stage {sid} trigger must be {expected}")
             duration=stage.get("duration_ms")
             if type(duration) is not int or duration<=0:
                 errors.append(f"slide {idx}: stage {sid} duration_ms must be positive integer")
@@ -135,6 +141,43 @@ def validate_patch_plan(plan):
                         errors.append(f"slide {idx}: invalid rotate by_deg")
                 else:
                     errors.append(f"slide {idx}: unsupported effect type {kind}")
+
+        if plan["version"]=="0.2":
+            click_beats=slide.get("click_beats")
+            if not isinstance(click_beats,list) or not click_beats:
+                errors.append(f"slide {idx}: click_beats must be nonempty for v0.2")
+            else:
+                flattened=[]
+                beat_ids=set()
+                stage_by_id={stage.get("id"):stage for stage in stages if isinstance(stage,dict)}
+                for beat in click_beats:
+                    if not isinstance(beat,dict):
+                        errors.append(f"slide {idx}: click beat must be an object")
+                        continue
+                    bid=beat.get("id")
+                    if not isinstance(bid,str) or not bid:
+                        errors.append(f"slide {idx}: click beat id must be nonempty")
+                    elif bid in beat_ids:
+                        errors.append(f"slide {idx}: duplicate click beat id {bid}")
+                    else:
+                        beat_ids.add(bid)
+                    members=beat.get("stages")
+                    if not isinstance(members,list) or not members:
+                        errors.append(f"slide {idx}: click beat {bid} stages must be nonempty")
+                        continue
+                    flattened.extend(members)
+                    for member_index,member in enumerate(members):
+                        stage=stage_by_id.get(member)
+                        if stage is None:
+                            errors.append(f"slide {idx}: click beat {bid} unknown stage {member}")
+                            continue
+                        trigger=stage.get("trigger")
+                        if member_index==0 and trigger!="on-click":
+                            errors.append(f"slide {idx}: click beat {bid} must start with on-click")
+                        if member_index>0 and trigger=="on-click":
+                            errors.append(f"slide {idx}: click beat {bid} has nested on-click stage {member}")
+                if flattened!=stage_order:
+                    errors.append(f"slide {idx}: click_beats must partition stages in order exactly once")
     return errors
 
 
@@ -184,7 +227,7 @@ def _rotate_node(parent,effect,spid,behavior_id,duration_ms,delay_ms):
     return rotate
 
 
-def build_existing_timing(slide_patch,root):
+def _build_legacy_existing_timing(slide_patch,root):
     available=_shape_targets(root)
     stages=slide_patch["stages"]
     total_duration=sum(stage["duration_ms"] for stage in stages)
@@ -256,6 +299,140 @@ def build_existing_timing(slide_patch,root):
     }
 
 
+
+TRIGGER_NODE_TYPE={
+    "on-click":"clickEffect",
+    "with-previous":"withEffect",
+    "after-previous":"afterEffect",
+}
+
+
+def _build_click_beat_existing_timing(slide_patch,root):
+    available=_shape_targets(root)
+    stages=slide_patch["stages"]
+    stage_by_id={stage["id"]:stage for stage in stages}
+    click_beats=slide_patch["click_beats"]
+
+    timing=E.Element(_q("timing"))
+    tn_list=_sub(timing,"tnLst")
+    root_par=_sub(tn_list,"par")
+    root_ctn=_sub(root_par,"cTn",id=ROOT_CTN_ID,dur="indefinite",restart="never",nodeType="tmRoot")
+    root_children=_sub(root_ctn,"childTnLst")
+    sequence=_sub(root_children,"seq",concurrent="1",nextAc="seek")
+    seq_ctn=_sub(sequence,"cTn",id=MAIN_SEQ_ID,dur="indefinite",nodeType="mainSeq")
+    main_children=_sub(seq_ctn,"childTnLst")
+
+    next_id=3
+    animated={}
+    stage_build_pairs=set()
+    receipts=[]
+    behavior_count=0
+
+    for beat_index,beat in enumerate(click_beats,1):
+        outer_id=next_id; next_id+=1
+        inner_id=next_id; next_id+=1
+
+        outer=_sub(main_children,"par")
+        outer_ctn=_sub(outer,"cTn",id=outer_id,fill="hold")
+        outer_start=_sub(outer_ctn,"stCondLst")
+        _sub(outer_start,"cond",delay="indefinite")
+        outer_children=_sub(outer_ctn,"childTnLst")
+
+        inner=_sub(outer_children,"par")
+        inner_ctn=_sub(inner,"cTn",id=inner_id,fill="hold")
+        inner_start=_sub(inner_ctn,"stCondLst")
+        _sub(inner_start,"cond",delay="0")
+        beat_children=_sub(inner_ctn,"childTnLst")
+
+        stage_receipts=[]
+        for member_index,stage_id in enumerate(beat["stages"]):
+            stage=stage_by_id[stage_id]
+            node_type=TRIGGER_NODE_TYPE[stage["trigger"]]
+            group_id=next_id; next_id+=1
+            stage_par=_sub(beat_children,"par")
+            stage_ctn=_sub(
+                stage_par,"cTn",id=group_id,dur=stage["duration_ms"],
+                fill="hold",nodeType=node_type,grpId=group_id
+            )
+            start=_sub(stage_ctn,"stCondLst")
+            _sub(start,"cond",delay="0")
+            stage_children=_sub(stage_ctn,"childTnLst")
+
+            stage_targets=set()
+            effect_receipts=[]
+            for effect in stage["effects"]:
+                key=_target_key(effect["target"])
+                spid=available.get(key)
+                if spid is None:
+                    raise ValueError(
+                        f"source object not found on slide {slide_patch['source_index']}: "
+                        f"id={key[0]!r}, name={key[1]!r}"
+                    )
+                behavior_id=next_id; next_id+=1
+                kind=effect["type"]
+                if kind=="motion_path":
+                    _motion_node(stage_children,effect,spid,behavior_id,stage["duration_ms"],0)
+                elif kind=="scale":
+                    _scale_node(stage_children,effect,spid,behavior_id,stage["duration_ms"],0)
+                elif kind=="rotate":
+                    _rotate_node(stage_children,effect,spid,behavior_id,stage["duration_ms"],0)
+                else:
+                    raise ValueError(f"unsupported effect type: {kind}")
+                animated[key]=spid
+                stage_targets.add(spid)
+                behavior_count+=1
+                effect_receipts.append({
+                    "type":kind,
+                    "source_id":key[0],
+                    "source_name":key[1],
+                    "behavior_id":behavior_id,
+                })
+            for spid in stage_targets:
+                stage_build_pairs.add((spid,str(group_id)))
+            stage_receipts.append({
+                "id":stage_id,
+                "trigger":stage["trigger"],
+                "node_type":node_type,
+                "group_id":group_id,
+                "duration_ms":stage["duration_ms"],
+                "effects":effect_receipts,
+            })
+
+        receipts.append({
+            "index":beat_index,
+            "id":beat["id"],
+            "stages":stage_receipts,
+        })
+
+    previous=_sub(sequence,"prevCondLst")
+    cond=_sub(previous,"cond",evt="onPrev",delay="0")
+    _sub(_sub(cond,"tgtEl"),"sldTgt")
+    following=_sub(sequence,"nextCondLst")
+    cond=_sub(following,"cond",evt="onNext",delay="0")
+    _sub(_sub(cond,"tgtEl"),"sldTgt")
+
+    build=_sub(timing,"bldLst")
+    for key,spid in sorted(animated.items(),key=lambda item:(int(item[0][0]),item[0][1])):
+        _sub(build,"bldP",spid=spid,grpId="0",animBg="1")
+    for spid,group_id in sorted(stage_build_pairs,key=lambda item:(int(item[0]),int(item[1]))):
+        _sub(build,"bldP",spid=spid,grpId=group_id,animBg="1")
+
+    return timing,{
+        "writer_mode":"presenter-paced-click-beats",
+        "click_beat_count":len(click_beats),
+        "behavior_count":behavior_count,
+        "animated_objects":[{"source_id":k[0],"source_name":k[1]} for k in animated],
+        "click_beats":receipts,
+    }
+
+
+def build_existing_timing(slide_patch,root):
+    if slide_patch.get("click_beats"):
+        return _build_click_beat_existing_timing(slide_patch,root)
+    timing,receipt=_build_legacy_existing_timing(slide_patch,root)
+    return timing,{"writer_mode":"legacy-one-click-packed","click_beat_count":1,**receipt}
+
+
 def patch_existing(source,plan_path,destination):
     source,plan_path,destination=map(Path,(source,plan_path,destination))
     if destination.exists():
@@ -315,6 +492,7 @@ def patch_existing(source,plan_path,destination):
         "source_sha256":source_hash,
         "sha256":hashlib.sha256(destination.read_bytes()).hexdigest(),
         "patched_slides":[r["slide"] for r in receipts],
+        "click_beat_count":sum(r.get("click_beat_count",1) for r in receipts),
         "receipts":receipts,
         "powerpoint_playback_verified":False,
     }

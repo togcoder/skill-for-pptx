@@ -6,6 +6,7 @@ from pathlib import Path
 
 SCRIPT_SOURCES={"provided","speaker-notes","existing-timing","inferred","researched"}
 TIMING={"on-click","with-previous","after-previous"}
+PAUSE_AFTER={"presenter-explanation","await-next-reveal","slide-complete","none"}
 COMPONENT_KINDS={"shape","text","connector","derived-visual"}
 PROVENANCE={"none","derived-from-source","synthetic-nondata","user-provided"}
 
@@ -19,8 +20,8 @@ def validate(plan,inventory):
     errors += [f"missing field: {k}" for k in sorted(required-plan.keys())]
     if errors:
         return errors
-    if plan["version"]!="0.1":
-        errors.append("version must be 0.1")
+    if plan["version"] not in ("0.1","0.2"):
+        errors.append("version must be 0.1 or 0.2")
     if plan["kind"]!="existing-deck-motion-director":
         errors.append("kind must be existing-deck-motion-director")
 
@@ -158,6 +159,51 @@ def validate(plan,inventory):
                 missing=[target for target in targets if target not in allowed]
                 if missing:
                     errors.append(f"slide {idx}: beat {bid} unknown targets {missing}")
+
+        if plan["version"]=="0.2":
+            click_beats=slide.get("click_beats")
+            if not isinstance(click_beats,list) or not click_beats:
+                errors.append(f"slide {idx}: click_beats must be nonempty for v0.2")
+            else:
+                flattened=[]
+                click_ids=set()
+                beat_by_id={beat.get("id"):beat for beat in beats if isinstance(beat,dict)}
+                for click_index,click in enumerate(click_beats):
+                    if not isinstance(click,dict):
+                        errors.append(f"slide {idx}: click beat must be an object")
+                        continue
+                    cid=click.get("id")
+                    if not isinstance(cid,str) or not cid:
+                        errors.append(f"slide {idx}: click beat id must be nonempty")
+                    elif cid in click_ids:
+                        errors.append(f"slide {idx}: duplicate click beat id {cid}")
+                    else:
+                        click_ids.add(cid)
+                    for key in ("purpose","stable_state"):
+                        if not isinstance(click.get(key),str) or not click[key].strip():
+                            errors.append(f"slide {idx}: click beat {cid} missing {key}")
+                    if click.get("pause_after") not in PAUSE_AFTER:
+                        errors.append(f"slide {idx}: click beat {cid} has unsupported pause_after")
+                    reason=click.get("boundary_reason")
+                    if click_index>0 and (not isinstance(reason,str) or not reason.strip()):
+                        errors.append(f"slide {idx}: click beat {cid} requires boundary_reason")
+                    members=click.get("motion_beats")
+                    if not isinstance(members,list) or not members:
+                        errors.append(f"slide {idx}: click beat {cid} motion_beats must be nonempty")
+                        continue
+                    flattened.extend(members)
+                    for member_index,member in enumerate(members):
+                        beat=beat_by_id.get(member)
+                        if beat is None:
+                            errors.append(f"slide {idx}: click beat {cid} unknown motion beat {member}")
+                            continue
+                        intent=beat.get("timing_intent")
+                        if member_index==0 and intent!="on-click":
+                            errors.append(f"slide {idx}: click beat {cid} must start with on-click motion beat")
+                        if member_index>0 and intent=="on-click":
+                            errors.append(f"slide {idx}: click beat {cid} has nested on-click motion beat {member}")
+                if flattened!=[beat.get("id") for beat in beats if isinstance(beat,dict)]:
+                    errors.append(f"slide {idx}: click_beats must partition motion beats in order exactly once")
 
     if preservation.get("slide_count_policy")=="explicit-change":
         changes=plan.get("research_metadata",{}).get("slide_count_changes")

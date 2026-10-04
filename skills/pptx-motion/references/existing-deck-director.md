@@ -1,4 +1,4 @@
-# Existing-deck director contract v0.1
+# Existing-deck director contract v0.2
 
 Use this contract after `scripts/inspect_existing_deck.py` and before adding
 motion to an existing PPTX.
@@ -9,7 +9,7 @@ The director plan is a semantic plan. It does not contain raw PresentationML.
 
 Required fields:
 
-- `version`: `"0.1"`
+- `version`: `"0.2"` for click-rhythm plans; `"0.1"` remains accepted only for legacy flat-beat plans
 - `kind`: `"existing-deck-motion-director"`
 - `source`
 - `user_instruction`
@@ -74,10 +74,13 @@ Each entry has:
 - `source_index`: one-based source slide index;
 - `role`: semantic role in the report;
 - `objective`: what the audience should understand after the slide;
-- `beats`: ordered motion beats;
+- `beats`: ordered motion/action beats;
+- `click_beats`: presenter-controlled groups that partition the motion beats;
 - `components`: generated helper components, possibly empty.
 
 ### Motion beat
+
+A motion beat is an action, not necessarily a presenter click.
 
 Each beat requires:
 
@@ -93,6 +96,34 @@ A target must exist in the source slide inventory unless it names a component
 created on that slide.
 
 Do not use a beat whose only purpose is decorative motion.
+
+### Click beat
+
+For v0.2 every slide also requires `click_beats`. A click beat is the unit of
+presenter pacing and contains one or more motion-beat IDs.
+
+Each click beat requires:
+
+- `id`
+- `purpose`: the audience idea advanced by this click;
+- `motion_beats`: ordered IDs from the slide's `beats`;
+- `stable_state`: why the state after this click is meaningful to hold;
+- `pause_after`: one of `presenter-explanation`, `await-next-reveal`,
+  `slide-complete`, or `none`;
+- `boundary_reason`: required from the second click onward; explain why this
+  content must wait for a new presenter click instead of automatically following.
+
+Rules:
+
+- click beats partition every motion beat exactly once and preserve beat order;
+- the first motion beat inside each click beat must use `on-click`;
+- later motion beats in that click beat use `with-previous` or
+  `after-previous`;
+- a presenter speaking pause is a click boundary, not an animation delay;
+- if a state has no useful audience meaning, do not create a click merely because
+  authoring it is convenient.
+
+Use the stable-state test from `docs/CLICK_BEAT_CHOREOGRAPHY.md`.
 
 ### Generated component
 
