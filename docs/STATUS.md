@@ -1,5 +1,37 @@
 # PPTX Motion Lab — checkpoint
 
+## T010 presenter-paced click beats — 2026-10-05
+
+User corrected the packed-motion target: one physical slide may contain many
+motions **and many presenter clicks**. Packing and pacing are now separate.
+
+Canonical rule: `docs/CLICK_BEAT_CHOREOGRAPHY.md`.
+Task: `research/tasks/T010-click-beat-choreography.md`.
+
+Native timeline v0.2 now models:
+
+`Slide -> Click Beat -> Stage -> Effects`
+
+T005 benchmark remains **1 slide / 82 behaviors**, but is repartitioned from the
+legacy one-click chain into **4 click beats**:
+
+1. burst;
+2. orbit;
+3. focus -> split;
+4. reassemble -> restore.
+
+`scripts/add_timeline.py` keeps v0.1 one-click behavior for historical
+reproducibility and uses multiple `mainSeq` click groups for v0.2. The
+existing-deck inspector also exposes click-group structure so authored presenter
+rhythm can be preserved.
+
+CI evidence: run 37234235795 — **86/86 tests pass**, Python compile pass.
+Integration regression locks 4 clickEffect stages, 2 afterEffect stages and
+82 behaviors on one slide. Native PowerPoint playback is still pending, so this
+is structural evidence only.
+
+Report: `experiments/T010-20261005-click-beat-choreography/REPORT.md`.
+
 Cập nhật ngày 04/10/2026, giờ Việt Nam. Phiên bản nguồn nghiên cứu v0.7 (thêm T005 compound intent).
 
 ## T006 controlled motion semantics matrix — 2026-10-04 20:08 UTC
