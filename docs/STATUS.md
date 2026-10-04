@@ -18,7 +18,12 @@ Scaffold hiện có:
   relationships/timing/transition/notes/theme/media inventory;
 - `skills/pptx-motion/references/existing-deck-director.md`: director contract;
 - `scripts/validate_director_plan.py`: buộc script source, source grounding,
-  preserve slide count, target resource validity và justification cho component.
+  preserve slide count, target resource validity và justification cho component;
+- final branch CI run `37214340363`: **67/67 tests pass**, `py_compile` pass.
+
+Report: `experiments/T007-20261004-existing-deck-director/REPORT.md`. Phần còn
+pending: inference trên deck thật không có script, synthesis component theo design
+system, director-beat → T006 timeline adapter, và patch/playback exact-file.
 
 Default mới: preserve source slide count/order/content; resource cũ được reuse
 trước; same-resource motion phải pack trong slide; generated component chỉ lấp
