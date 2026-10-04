@@ -1,0 +1,16 @@
+{
+  "title": "QUANTA",
+  "subtitle": "Một cấu trúc · năm vai trò",
+  "brief": "Giới thiệu mô-đun QUANTA bằng hiệu ứng tách 5 lớp rồi ghép lại; nhìn rõ mỗi lớp làm gì.",
+  "layers": [
+    {"id":"cover","label":"Vỏ bảo vệ","role":"Che chắn các thành phần bên trong"},
+    {"id":"sense","label":"Cảm nhận","role":"Tiếp nhận tín hiệu từ môi trường"},
+    {"id":"control","label":"Điều khiển","role":"Diễn giải và phối hợp hoạt động"},
+    {"id":"power","label":"Cấp nguồn","role":"Phân phối năng lượng cho mô-đun"},
+    {"id":"base","label":"Đế kết nối","role":"Liên kết với hệ thống bên ngoài"}
+  ],
+  "references": [
+    {"url":"https://support.microsoft.com/en-us/powerpoint/morph-transition-tips-and-tricks","author":"Microsoft"},
+    {"url":"https://www.presentation-process.com/layer-diagram.html","author":"Presentation Process"}
+  ]
+}

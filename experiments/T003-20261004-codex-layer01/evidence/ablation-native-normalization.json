@@ -1,0 +1,533 @@
+{
+  "changed_textboxes": 75,
+  "changes": [
+    {
+      "slide": 1,
+      "name": "!!eyebrow",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!title",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!subtitle",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!scene",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!footer",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!cover-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!rail-cover-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!rail-cover-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!rail-cover-role",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!sense-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!rail-sense-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!rail-sense-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!rail-sense-role",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!control-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!rail-control-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!rail-control-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!rail-control-role",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!power-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!rail-power-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!rail-power-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!rail-power-role",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!base-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!rail-base-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!rail-base-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 1,
+      "name": "!!rail-base-role",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!eyebrow",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!title",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!subtitle",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!scene",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!footer",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!cover-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!rail-cover-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!rail-cover-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!rail-cover-role",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!sense-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!rail-sense-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!rail-sense-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!rail-sense-role",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!control-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!rail-control-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!rail-control-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!rail-control-role",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!power-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!rail-power-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!rail-power-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!rail-power-role",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!base-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!rail-base-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!rail-base-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 2,
+      "name": "!!rail-base-role",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!eyebrow",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!title",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!subtitle",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!scene",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!footer",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!cover-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!rail-cover-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!rail-cover-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!rail-cover-role",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!sense-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!rail-sense-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!rail-sense-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!rail-sense-role",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!control-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!rail-control-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!rail-control-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!rail-control-role",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!power-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!rail-power-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!rail-power-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!rail-power-role",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!base-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!rail-base-number",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!rail-base-label",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    },
+    {
+      "slide": 3,
+      "name": "!!rail-base-role",
+      "attribute": "txBox",
+      "before": null,
+      "after": "1"
+    }
+  ],
+  "source_sha256": "d049d3b770ca62152d58f775d21dce54acf86db69c3b4c1ba6810f7f9f825546",
+  "sha256": "2660b657179c1e9c0cc60bbca5ce6dcabd010d8a6c3e38ce7474236e76490a00",
+  "powerpoint_playback_verified": false
+}

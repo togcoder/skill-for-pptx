@@ -1,0 +1,1988 @@
+{
+  "version": "0.1",
+  "brief": "Giới thiệu mô-đun QUANTA bằng hiệu ứng tách 5 lớp rồi ghép lại; nhìn rõ mỗi lớp làm gì.",
+  "canvas": {
+    "width": 16,
+    "height": 9,
+    "units": "normalized"
+  },
+  "data_provenance": "synthetic",
+  "objects": [
+    {
+      "id": "eyebrow",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!eyebrow",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "PPTX MOTION LAB  /  LAYER STUDY",
+      "font_size": 16,
+      "text_color": "#AAA2B8",
+      "bold": false
+    },
+    {
+      "id": "title",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!title",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "QUANTA",
+      "font_size": 52,
+      "text_color": "#F7F4FA",
+      "bold": true
+    },
+    {
+      "id": "subtitle",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!subtitle",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Một cấu trúc · năm vai trò",
+      "font_size": 24,
+      "text_color": "#C9C1D4",
+      "bold": false
+    },
+    {
+      "id": "divider",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!divider",
+      "geometry": "rect",
+      "fill": "#393240",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "scene",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!scene",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "01 / TỔNG THỂ",
+      "font_size": 23,
+      "text_color": "#E9E3F0",
+      "bold": true
+    },
+    {
+      "id": "footer",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!footer",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Sơ đồ minh họa • dữ liệu giả định",
+      "font_size": 17,
+      "text_color": "#AAA2B8",
+      "bold": false
+    },
+    {
+      "id": "layer-cover",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!layer-cover",
+      "geometry": "rect",
+      "fill": "#24212C",
+      "stroke": "#54E7FF",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "cover-number",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!cover-number",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "01",
+      "font_size": 23,
+      "text_color": "#54E7FF",
+      "bold": true
+    },
+    {
+      "id": "cover-trace",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!cover-trace",
+      "geometry": "rect",
+      "fill": "#54E7FF",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "cover-node",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!cover-node",
+      "geometry": "ellipse",
+      "fill": "#54E7FF",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "cover-end",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!cover-end",
+      "geometry": "rect",
+      "fill": "#54E7FF",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "rail-cover-number",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!rail-cover-number",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "01",
+      "font_size": 22,
+      "text_color": "#54E7FF",
+      "bold": true
+    },
+    {
+      "id": "rail-cover-label",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!rail-cover-label",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Vỏ bảo vệ",
+      "font_size": 26,
+      "text_color": "#54E7FF",
+      "bold": true
+    },
+    {
+      "id": "rail-cover-role",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!rail-cover-role",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Che chắn các thành phần bên trong",
+      "font_size": 19,
+      "text_color": "#D4CCDF",
+      "bold": false
+    },
+    {
+      "id": "layer-sense",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!layer-sense",
+      "geometry": "rect",
+      "fill": "#24212C",
+      "stroke": "#BAFA64",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "sense-number",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!sense-number",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "02",
+      "font_size": 23,
+      "text_color": "#BAFA64",
+      "bold": true
+    },
+    {
+      "id": "sense-trace",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!sense-trace",
+      "geometry": "rect",
+      "fill": "#BAFA64",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "sense-node",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!sense-node",
+      "geometry": "ellipse",
+      "fill": "#BAFA64",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "sense-end",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!sense-end",
+      "geometry": "rect",
+      "fill": "#BAFA64",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "rail-sense-number",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!rail-sense-number",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "02",
+      "font_size": 22,
+      "text_color": "#BAFA64",
+      "bold": true
+    },
+    {
+      "id": "rail-sense-label",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!rail-sense-label",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Cảm nhận",
+      "font_size": 26,
+      "text_color": "#BAFA64",
+      "bold": true
+    },
+    {
+      "id": "rail-sense-role",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!rail-sense-role",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Tiếp nhận tín hiệu từ môi trường",
+      "font_size": 19,
+      "text_color": "#D4CCDF",
+      "bold": false
+    },
+    {
+      "id": "layer-control",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!layer-control",
+      "geometry": "rect",
+      "fill": "#24212C",
+      "stroke": "#FFBC70",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "control-number",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!control-number",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "03",
+      "font_size": 23,
+      "text_color": "#FFBC70",
+      "bold": true
+    },
+    {
+      "id": "control-trace",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!control-trace",
+      "geometry": "rect",
+      "fill": "#FFBC70",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "control-node",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!control-node",
+      "geometry": "ellipse",
+      "fill": "#FFBC70",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "control-end",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!control-end",
+      "geometry": "rect",
+      "fill": "#FFBC70",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "rail-control-number",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!rail-control-number",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "03",
+      "font_size": 22,
+      "text_color": "#FFBC70",
+      "bold": true
+    },
+    {
+      "id": "rail-control-label",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!rail-control-label",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Điều khiển",
+      "font_size": 26,
+      "text_color": "#FFBC70",
+      "bold": true
+    },
+    {
+      "id": "rail-control-role",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!rail-control-role",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Diễn giải và phối hợp hoạt động",
+      "font_size": 19,
+      "text_color": "#D4CCDF",
+      "bold": false
+    },
+    {
+      "id": "layer-power",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!layer-power",
+      "geometry": "rect",
+      "fill": "#24212C",
+      "stroke": "#C59EFF",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "power-number",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!power-number",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "04",
+      "font_size": 23,
+      "text_color": "#C59EFF",
+      "bold": true
+    },
+    {
+      "id": "power-trace",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!power-trace",
+      "geometry": "rect",
+      "fill": "#C59EFF",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "power-node",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!power-node",
+      "geometry": "ellipse",
+      "fill": "#C59EFF",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "power-end",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!power-end",
+      "geometry": "rect",
+      "fill": "#C59EFF",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "rail-power-number",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!rail-power-number",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "04",
+      "font_size": 22,
+      "text_color": "#C59EFF",
+      "bold": true
+    },
+    {
+      "id": "rail-power-label",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!rail-power-label",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Cấp nguồn",
+      "font_size": 26,
+      "text_color": "#C59EFF",
+      "bold": true
+    },
+    {
+      "id": "rail-power-role",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!rail-power-role",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Phân phối năng lượng cho mô-đun",
+      "font_size": 19,
+      "text_color": "#D4CCDF",
+      "bold": false
+    },
+    {
+      "id": "layer-base",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!layer-base",
+      "geometry": "rect",
+      "fill": "#24212C",
+      "stroke": "#FF7FA8",
+      "stroke_width": 1.5
+    },
+    {
+      "id": "base-number",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!base-number",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "05",
+      "font_size": 23,
+      "text_color": "#FF7FA8",
+      "bold": true
+    },
+    {
+      "id": "base-trace",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!base-trace",
+      "geometry": "rect",
+      "fill": "#FF7FA8",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "base-node",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!base-node",
+      "geometry": "ellipse",
+      "fill": "#FF7FA8",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "base-end",
+      "kind": "shape",
+      "persistent": true,
+      "morph_name": "!!base-end",
+      "geometry": "rect",
+      "fill": "#FF7FA8",
+      "stroke": "none",
+      "stroke_width": 0
+    },
+    {
+      "id": "rail-base-number",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!rail-base-number",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "05",
+      "font_size": 22,
+      "text_color": "#FF7FA8",
+      "bold": true
+    },
+    {
+      "id": "rail-base-label",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!rail-base-label",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Đế kết nối",
+      "font_size": 26,
+      "text_color": "#FF7FA8",
+      "bold": true
+    },
+    {
+      "id": "rail-base-role",
+      "kind": "text",
+      "persistent": true,
+      "morph_name": "!!rail-base-role",
+      "geometry": "textbox",
+      "fill": "none",
+      "stroke": "none",
+      "stroke_width": 0,
+      "text": "Liên kết với hệ thống bên ngoài",
+      "font_size": 19,
+      "text_color": "#D4CCDF",
+      "bold": false
+    }
+  ],
+  "states": [
+    {
+      "id": "assembled",
+      "message": "01 / TỔNG THỂ. Giới thiệu mô-đun QUANTA bằng hiệu ứng tách 5 lớp rồi ghép lại; nhìn rõ mỗi lớp làm gì.",
+      "objects": {
+        "eyebrow": {
+          "x": 0.0703125,
+          "y": 0.03888888888888889,
+          "w": 0.859375,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "title": {
+          "x": 0.0703125,
+          "y": 0.09166666666666666,
+          "w": 0.859375,
+          "h": 0.09027777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "subtitle": {
+          "x": 0.0703125,
+          "y": 0.1875,
+          "w": 0.859375,
+          "h": 0.05277777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "divider": {
+          "x": 0.5671875,
+          "y": 0.28055555555555556,
+          "w": 0.0015625,
+          "h": 0.5638888888888889,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "scene": {
+          "x": 0.078125,
+          "y": 0.8708333333333333,
+          "w": 0.44921875,
+          "h": 0.05138888888888889,
+          "rotation_deg": 0,
+          "opacity": 1,
+          "text": "01 / TỔNG THỂ"
+        },
+        "footer": {
+          "x": 0.58984375,
+          "y": 0.8777777777777778,
+          "w": 0.359375,
+          "h": 0.041666666666666664,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "layer-cover": {
+          "x": 0.096875,
+          "y": 0.35,
+          "w": 0.40625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "cover-number": {
+          "x": 0.1078125,
+          "y": 0.3638888888888889,
+          "w": 0.0328125,
+          "h": 0.044444444444444446,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "cover-trace": {
+          "x": 0.1578125,
+          "y": 0.38472222222222224,
+          "w": 0.2421875,
+          "h": 0.002777777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "cover-node": {
+          "x": 0.3953125,
+          "y": 0.37222222222222223,
+          "w": 0.015625,
+          "h": 0.027777777777777776,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "cover-end": {
+          "x": 0.4390625,
+          "y": 0.36944444444444446,
+          "w": 0.04453125,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-cover-number": {
+          "x": 0.58671875,
+          "y": 0.2722222222222222,
+          "w": 0.0359375,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-cover-label": {
+          "x": 0.63203125,
+          "y": 0.25972222222222224,
+          "w": 0.3046875,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-cover-role": {
+          "x": 0.63203125,
+          "y": 0.30833333333333335,
+          "w": 0.3046875,
+          "h": 0.0375,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "layer-sense": {
+          "x": 0.10234375,
+          "y": 0.42777777777777776,
+          "w": 0.40625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "sense-number": {
+          "x": 0.11328125,
+          "y": 0.44166666666666665,
+          "w": 0.0328125,
+          "h": 0.044444444444444446,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "sense-trace": {
+          "x": 0.16328125,
+          "y": 0.4625,
+          "w": 0.2421875,
+          "h": 0.002777777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "sense-node": {
+          "x": 0.40078125,
+          "y": 0.45,
+          "w": 0.015625,
+          "h": 0.027777777777777776,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "sense-end": {
+          "x": 0.44453125,
+          "y": 0.44722222222222224,
+          "w": 0.04453125,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-sense-number": {
+          "x": 0.58671875,
+          "y": 0.39444444444444443,
+          "w": 0.0359375,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-sense-label": {
+          "x": 0.63203125,
+          "y": 0.3819444444444444,
+          "w": 0.3046875,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-sense-role": {
+          "x": 0.63203125,
+          "y": 0.4305555555555556,
+          "w": 0.3046875,
+          "h": 0.0375,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "layer-control": {
+          "x": 0.1078125,
+          "y": 0.5055555555555555,
+          "w": 0.40625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "control-number": {
+          "x": 0.11875,
+          "y": 0.5194444444444445,
+          "w": 0.0328125,
+          "h": 0.044444444444444446,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "control-trace": {
+          "x": 0.16875,
+          "y": 0.5402777777777777,
+          "w": 0.2421875,
+          "h": 0.002777777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "control-node": {
+          "x": 0.40625,
+          "y": 0.5277777777777778,
+          "w": 0.015625,
+          "h": 0.027777777777777776,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "control-end": {
+          "x": 0.45,
+          "y": 0.525,
+          "w": 0.04453125,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-control-number": {
+          "x": 0.58671875,
+          "y": 0.5166666666666667,
+          "w": 0.0359375,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-control-label": {
+          "x": 0.63203125,
+          "y": 0.5041666666666667,
+          "w": 0.3046875,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-control-role": {
+          "x": 0.63203125,
+          "y": 0.5527777777777778,
+          "w": 0.3046875,
+          "h": 0.0375,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "layer-power": {
+          "x": 0.11328125,
+          "y": 0.5833333333333334,
+          "w": 0.40625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "power-number": {
+          "x": 0.12421875,
+          "y": 0.5972222222222222,
+          "w": 0.0328125,
+          "h": 0.044444444444444446,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "power-trace": {
+          "x": 0.17421875,
+          "y": 0.6180555555555556,
+          "w": 0.2421875,
+          "h": 0.002777777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "power-node": {
+          "x": 0.41171875,
+          "y": 0.6055555555555555,
+          "w": 0.015625,
+          "h": 0.027777777777777776,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "power-end": {
+          "x": 0.45546875,
+          "y": 0.6027777777777777,
+          "w": 0.04453125,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-power-number": {
+          "x": 0.58671875,
+          "y": 0.6388888888888888,
+          "w": 0.0359375,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-power-label": {
+          "x": 0.63203125,
+          "y": 0.6263888888888889,
+          "w": 0.3046875,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-power-role": {
+          "x": 0.63203125,
+          "y": 0.675,
+          "w": 0.3046875,
+          "h": 0.0375,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "layer-base": {
+          "x": 0.11875,
+          "y": 0.6611111111111111,
+          "w": 0.40625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "base-number": {
+          "x": 0.1296875,
+          "y": 0.675,
+          "w": 0.0328125,
+          "h": 0.044444444444444446,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "base-trace": {
+          "x": 0.1796875,
+          "y": 0.6958333333333333,
+          "w": 0.2421875,
+          "h": 0.002777777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "base-node": {
+          "x": 0.4171875,
+          "y": 0.6833333333333333,
+          "w": 0.015625,
+          "h": 0.027777777777777776,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "base-end": {
+          "x": 0.4609375,
+          "y": 0.6805555555555556,
+          "w": 0.04453125,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-base-number": {
+          "x": 0.58671875,
+          "y": 0.7611111111111111,
+          "w": 0.0359375,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-base-label": {
+          "x": 0.63203125,
+          "y": 0.7486111111111111,
+          "w": 0.3046875,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-base-role": {
+          "x": 0.63203125,
+          "y": 0.7972222222222223,
+          "w": 0.3046875,
+          "h": 0.0375,
+          "rotation_deg": 0,
+          "opacity": 1
+        }
+      }
+    },
+    {
+      "id": "separated",
+      "message": "02 / TÁCH LỚP. Giới thiệu mô-đun QUANTA bằng hiệu ứng tách 5 lớp rồi ghép lại; nhìn rõ mỗi lớp làm gì.",
+      "objects": {
+        "eyebrow": {
+          "x": 0.0703125,
+          "y": 0.03888888888888889,
+          "w": 0.859375,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "title": {
+          "x": 0.0703125,
+          "y": 0.09166666666666666,
+          "w": 0.859375,
+          "h": 0.09027777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "subtitle": {
+          "x": 0.0703125,
+          "y": 0.1875,
+          "w": 0.859375,
+          "h": 0.05277777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "divider": {
+          "x": 0.5671875,
+          "y": 0.28055555555555556,
+          "w": 0.0015625,
+          "h": 0.5638888888888889,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "scene": {
+          "x": 0.078125,
+          "y": 0.8708333333333333,
+          "w": 0.44921875,
+          "h": 0.05138888888888889,
+          "rotation_deg": 0,
+          "opacity": 1,
+          "text": "02 / TÁCH LỚP"
+        },
+        "footer": {
+          "x": 0.58984375,
+          "y": 0.8777777777777778,
+          "w": 0.359375,
+          "h": 0.041666666666666664,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "layer-cover": {
+          "x": 0.096875,
+          "y": 0.2611111111111111,
+          "w": 0.40625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "cover-number": {
+          "x": 0.1078125,
+          "y": 0.3638888888888889,
+          "w": 0.0328125,
+          "h": 0.044444444444444446,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "cover-trace": {
+          "x": 0.1578125,
+          "y": 0.38472222222222224,
+          "w": 0.2421875,
+          "h": 0.002777777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "cover-node": {
+          "x": 0.3953125,
+          "y": 0.37222222222222223,
+          "w": 0.015625,
+          "h": 0.027777777777777776,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "cover-end": {
+          "x": 0.4390625,
+          "y": 0.36944444444444446,
+          "w": 0.04453125,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-cover-number": {
+          "x": 0.58671875,
+          "y": 0.2722222222222222,
+          "w": 0.0359375,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-cover-label": {
+          "x": 0.63203125,
+          "y": 0.25972222222222224,
+          "w": 0.3046875,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-cover-role": {
+          "x": 0.63203125,
+          "y": 0.30833333333333335,
+          "w": 0.3046875,
+          "h": 0.0375,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "layer-sense": {
+          "x": 0.10234375,
+          "y": 0.38333333333333336,
+          "w": 0.40625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "sense-number": {
+          "x": 0.11328125,
+          "y": 0.44166666666666665,
+          "w": 0.0328125,
+          "h": 0.044444444444444446,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "sense-trace": {
+          "x": 0.16328125,
+          "y": 0.4625,
+          "w": 0.2421875,
+          "h": 0.002777777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "sense-node": {
+          "x": 0.40078125,
+          "y": 0.45,
+          "w": 0.015625,
+          "h": 0.027777777777777776,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "sense-end": {
+          "x": 0.44453125,
+          "y": 0.44722222222222224,
+          "w": 0.04453125,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-sense-number": {
+          "x": 0.58671875,
+          "y": 0.39444444444444443,
+          "w": 0.0359375,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-sense-label": {
+          "x": 0.63203125,
+          "y": 0.3819444444444444,
+          "w": 0.3046875,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-sense-role": {
+          "x": 0.63203125,
+          "y": 0.4305555555555556,
+          "w": 0.3046875,
+          "h": 0.0375,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "layer-control": {
+          "x": 0.1078125,
+          "y": 0.5055555555555555,
+          "w": 0.40625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "control-number": {
+          "x": 0.11875,
+          "y": 0.5194444444444445,
+          "w": 0.0328125,
+          "h": 0.044444444444444446,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "control-trace": {
+          "x": 0.16875,
+          "y": 0.5402777777777777,
+          "w": 0.2421875,
+          "h": 0.002777777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "control-node": {
+          "x": 0.40625,
+          "y": 0.5277777777777778,
+          "w": 0.015625,
+          "h": 0.027777777777777776,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "control-end": {
+          "x": 0.45,
+          "y": 0.525,
+          "w": 0.04453125,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-control-number": {
+          "x": 0.58671875,
+          "y": 0.5166666666666667,
+          "w": 0.0359375,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-control-label": {
+          "x": 0.63203125,
+          "y": 0.5041666666666667,
+          "w": 0.3046875,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-control-role": {
+          "x": 0.63203125,
+          "y": 0.5527777777777778,
+          "w": 0.3046875,
+          "h": 0.0375,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "layer-power": {
+          "x": 0.11328125,
+          "y": 0.6277777777777778,
+          "w": 0.40625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "power-number": {
+          "x": 0.12421875,
+          "y": 0.5972222222222222,
+          "w": 0.0328125,
+          "h": 0.044444444444444446,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "power-trace": {
+          "x": 0.17421875,
+          "y": 0.6180555555555556,
+          "w": 0.2421875,
+          "h": 0.002777777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "power-node": {
+          "x": 0.41171875,
+          "y": 0.6055555555555555,
+          "w": 0.015625,
+          "h": 0.027777777777777776,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "power-end": {
+          "x": 0.45546875,
+          "y": 0.6027777777777777,
+          "w": 0.04453125,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-power-number": {
+          "x": 0.58671875,
+          "y": 0.6388888888888888,
+          "w": 0.0359375,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-power-label": {
+          "x": 0.63203125,
+          "y": 0.6263888888888889,
+          "w": 0.3046875,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-power-role": {
+          "x": 0.63203125,
+          "y": 0.675,
+          "w": 0.3046875,
+          "h": 0.0375,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "layer-base": {
+          "x": 0.11875,
+          "y": 0.75,
+          "w": 0.40625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "base-number": {
+          "x": 0.1296875,
+          "y": 0.675,
+          "w": 0.0328125,
+          "h": 0.044444444444444446,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "base-trace": {
+          "x": 0.1796875,
+          "y": 0.6958333333333333,
+          "w": 0.2421875,
+          "h": 0.002777777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "base-node": {
+          "x": 0.4171875,
+          "y": 0.6833333333333333,
+          "w": 0.015625,
+          "h": 0.027777777777777776,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "base-end": {
+          "x": 0.4609375,
+          "y": 0.6805555555555556,
+          "w": 0.04453125,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-base-number": {
+          "x": 0.58671875,
+          "y": 0.7611111111111111,
+          "w": 0.0359375,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-base-label": {
+          "x": 0.63203125,
+          "y": 0.7486111111111111,
+          "w": 0.3046875,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-base-role": {
+          "x": 0.63203125,
+          "y": 0.7972222222222223,
+          "w": 0.3046875,
+          "h": 0.0375,
+          "rotation_deg": 0,
+          "opacity": 1
+        }
+      }
+    },
+    {
+      "id": "reassembled",
+      "message": "03 / GHÉP LẠI. Giới thiệu mô-đun QUANTA bằng hiệu ứng tách 5 lớp rồi ghép lại; nhìn rõ mỗi lớp làm gì.",
+      "objects": {
+        "eyebrow": {
+          "x": 0.0703125,
+          "y": 0.03888888888888889,
+          "w": 0.859375,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "title": {
+          "x": 0.0703125,
+          "y": 0.09166666666666666,
+          "w": 0.859375,
+          "h": 0.09027777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "subtitle": {
+          "x": 0.0703125,
+          "y": 0.1875,
+          "w": 0.859375,
+          "h": 0.05277777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "divider": {
+          "x": 0.5671875,
+          "y": 0.28055555555555556,
+          "w": 0.0015625,
+          "h": 0.5638888888888889,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "scene": {
+          "x": 0.078125,
+          "y": 0.8708333333333333,
+          "w": 0.44921875,
+          "h": 0.05138888888888889,
+          "rotation_deg": 0,
+          "opacity": 1,
+          "text": "03 / GHÉP LẠI"
+        },
+        "footer": {
+          "x": 0.58984375,
+          "y": 0.8777777777777778,
+          "w": 0.359375,
+          "h": 0.041666666666666664,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "layer-cover": {
+          "x": 0.096875,
+          "y": 0.35,
+          "w": 0.40625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "cover-number": {
+          "x": 0.1078125,
+          "y": 0.3638888888888889,
+          "w": 0.0328125,
+          "h": 0.044444444444444446,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "cover-trace": {
+          "x": 0.1578125,
+          "y": 0.38472222222222224,
+          "w": 0.2421875,
+          "h": 0.002777777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "cover-node": {
+          "x": 0.3953125,
+          "y": 0.37222222222222223,
+          "w": 0.015625,
+          "h": 0.027777777777777776,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "cover-end": {
+          "x": 0.4390625,
+          "y": 0.36944444444444446,
+          "w": 0.04453125,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-cover-number": {
+          "x": 0.58671875,
+          "y": 0.2722222222222222,
+          "w": 0.0359375,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-cover-label": {
+          "x": 0.63203125,
+          "y": 0.25972222222222224,
+          "w": 0.3046875,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-cover-role": {
+          "x": 0.63203125,
+          "y": 0.30833333333333335,
+          "w": 0.3046875,
+          "h": 0.0375,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "layer-sense": {
+          "x": 0.10234375,
+          "y": 0.42777777777777776,
+          "w": 0.40625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "sense-number": {
+          "x": 0.11328125,
+          "y": 0.44166666666666665,
+          "w": 0.0328125,
+          "h": 0.044444444444444446,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "sense-trace": {
+          "x": 0.16328125,
+          "y": 0.4625,
+          "w": 0.2421875,
+          "h": 0.002777777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "sense-node": {
+          "x": 0.40078125,
+          "y": 0.45,
+          "w": 0.015625,
+          "h": 0.027777777777777776,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "sense-end": {
+          "x": 0.44453125,
+          "y": 0.44722222222222224,
+          "w": 0.04453125,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-sense-number": {
+          "x": 0.58671875,
+          "y": 0.39444444444444443,
+          "w": 0.0359375,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-sense-label": {
+          "x": 0.63203125,
+          "y": 0.3819444444444444,
+          "w": 0.3046875,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-sense-role": {
+          "x": 0.63203125,
+          "y": 0.4305555555555556,
+          "w": 0.3046875,
+          "h": 0.0375,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "layer-control": {
+          "x": 0.1078125,
+          "y": 0.5055555555555555,
+          "w": 0.40625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "control-number": {
+          "x": 0.11875,
+          "y": 0.5194444444444445,
+          "w": 0.0328125,
+          "h": 0.044444444444444446,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "control-trace": {
+          "x": 0.16875,
+          "y": 0.5402777777777777,
+          "w": 0.2421875,
+          "h": 0.002777777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "control-node": {
+          "x": 0.40625,
+          "y": 0.5277777777777778,
+          "w": 0.015625,
+          "h": 0.027777777777777776,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "control-end": {
+          "x": 0.45,
+          "y": 0.525,
+          "w": 0.04453125,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-control-number": {
+          "x": 0.58671875,
+          "y": 0.5166666666666667,
+          "w": 0.0359375,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-control-label": {
+          "x": 0.63203125,
+          "y": 0.5041666666666667,
+          "w": 0.3046875,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-control-role": {
+          "x": 0.63203125,
+          "y": 0.5527777777777778,
+          "w": 0.3046875,
+          "h": 0.0375,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "layer-power": {
+          "x": 0.11328125,
+          "y": 0.5833333333333334,
+          "w": 0.40625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "power-number": {
+          "x": 0.12421875,
+          "y": 0.5972222222222222,
+          "w": 0.0328125,
+          "h": 0.044444444444444446,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "power-trace": {
+          "x": 0.17421875,
+          "y": 0.6180555555555556,
+          "w": 0.2421875,
+          "h": 0.002777777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "power-node": {
+          "x": 0.41171875,
+          "y": 0.6055555555555555,
+          "w": 0.015625,
+          "h": 0.027777777777777776,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "power-end": {
+          "x": 0.45546875,
+          "y": 0.6027777777777777,
+          "w": 0.04453125,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-power-number": {
+          "x": 0.58671875,
+          "y": 0.6388888888888888,
+          "w": 0.0359375,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-power-label": {
+          "x": 0.63203125,
+          "y": 0.6263888888888889,
+          "w": 0.3046875,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-power-role": {
+          "x": 0.63203125,
+          "y": 0.675,
+          "w": 0.3046875,
+          "h": 0.0375,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "layer-base": {
+          "x": 0.11875,
+          "y": 0.6611111111111111,
+          "w": 0.40625,
+          "h": 0.07222222222222222,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "base-number": {
+          "x": 0.1296875,
+          "y": 0.675,
+          "w": 0.0328125,
+          "h": 0.044444444444444446,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "base-trace": {
+          "x": 0.1796875,
+          "y": 0.6958333333333333,
+          "w": 0.2421875,
+          "h": 0.002777777777777778,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "base-node": {
+          "x": 0.4171875,
+          "y": 0.6833333333333333,
+          "w": 0.015625,
+          "h": 0.027777777777777776,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "base-end": {
+          "x": 0.4609375,
+          "y": 0.6805555555555556,
+          "w": 0.04453125,
+          "h": 0.03333333333333333,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-base-number": {
+          "x": 0.58671875,
+          "y": 0.7611111111111111,
+          "w": 0.0359375,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-base-label": {
+          "x": 0.63203125,
+          "y": 0.7486111111111111,
+          "w": 0.3046875,
+          "h": 0.04861111111111111,
+          "rotation_deg": 0,
+          "opacity": 1
+        },
+        "rail-base-role": {
+          "x": 0.63203125,
+          "y": 0.7972222222222223,
+          "w": 0.3046875,
+          "h": 0.0375,
+          "rotation_deg": 0,
+          "opacity": 1
+        }
+      }
+    }
+  ],
+  "transitions": [
+    {
+      "from": "assembled",
+      "to": "separated",
+      "kind": "morph",
+      "duration_ms": 1100,
+      "track": [
+        "eyebrow",
+        "title",
+        "subtitle",
+        "divider",
+        "scene",
+        "footer",
+        "layer-cover",
+        "cover-number",
+        "cover-trace",
+        "cover-node",
+        "cover-end",
+        "rail-cover-number",
+        "rail-cover-label",
+        "rail-cover-role",
+        "layer-sense",
+        "sense-number",
+        "sense-trace",
+        "sense-node",
+        "sense-end",
+        "rail-sense-number",
+        "rail-sense-label",
+        "rail-sense-role",
+        "layer-control",
+        "control-number",
+        "control-trace",
+        "control-node",
+        "control-end",
+        "rail-control-number",
+        "rail-control-label",
+        "rail-control-role",
+        "layer-power",
+        "power-number",
+        "power-trace",
+        "power-node",
+        "power-end",
+        "rail-power-number",
+        "rail-power-label",
+        "rail-power-role",
+        "layer-base",
+        "base-number",
+        "base-trace",
+        "base-node",
+        "base-end",
+        "rail-base-number",
+        "rail-base-label",
+        "rail-base-role"
+      ]
+    },
+    {
+      "from": "separated",
+      "to": "reassembled",
+      "kind": "morph",
+      "duration_ms": 1100,
+      "track": [
+        "eyebrow",
+        "title",
+        "subtitle",
+        "divider",
+        "scene",
+        "footer",
+        "layer-cover",
+        "cover-number",
+        "cover-trace",
+        "cover-node",
+        "cover-end",
+        "rail-cover-number",
+        "rail-cover-label",
+        "rail-cover-role",
+        "layer-sense",
+        "sense-number",
+        "sense-trace",
+        "sense-node",
+        "sense-end",
+        "rail-sense-number",
+        "rail-sense-label",
+        "rail-sense-role",
+        "layer-control",
+        "control-number",
+        "control-trace",
+        "control-node",
+        "control-end",
+        "rail-control-number",
+        "rail-control-label",
+        "rail-control-role",
+        "layer-power",
+        "power-number",
+        "power-trace",
+        "power-node",
+        "power-end",
+        "rail-power-number",
+        "rail-power-label",
+        "rail-power-role",
+        "layer-base",
+        "base-number",
+        "base-trace",
+        "base-node",
+        "base-end",
+        "rail-base-number",
+        "rail-base-label",
+        "rail-base-role"
+      ]
+    }
+  ],
+  "research_metadata": {
+    "recipe": "layer-separation-2d-v1",
+    "bindings": [
+      {
+        "parent": "layer-cover",
+        "child": "cover-number",
+        "offset_px": [
+          14,
+          10
+        ]
+      },
+      {
+        "parent": "layer-cover",
+        "child": "cover-trace",
+        "offset_px": [
+          78,
+          25
+        ]
+      },
+      {
+        "parent": "layer-cover",
+        "child": "cover-node",
+        "offset_px": [
+          382,
+          16
+        ]
+      },
+      {
+        "parent": "layer-cover",
+        "child": "cover-end",
+        "offset_px": [
+          438,
+          14
+        ]
+      },
+      {
+        "parent": "layer-sense",
+        "child": "sense-number",
+        "offset_px": [
+          14,
+          10
+        ]
+      },
+      {
+        "parent": "layer-sense",
+        "child": "sense-trace",
+        "offset_px": [
+          78,
+          25
+        ]
+      },
+      {
+        "parent": "layer-sense",
+        "child": "sense-node",
+        "offset_px": [
+          382,
+          16
+        ]
+      },
+      {
+        "parent": "layer-sense",
+        "child": "sense-end",
+        "offset_px": [
+          438,
+          14
+        ]
+      },
+      {
+        "parent": "layer-control",
+        "child": "control-number",
+        "offset_px": [
+          14,
+          10
+        ]
+      },
+      {
+        "parent": "layer-control",
+        "child": "control-trace",
+        "offset_px": [
+          78,
+          25
+        ]
+      },
+      {
+        "parent": "layer-control",
+        "child": "control-node",
+        "offset_px": [
+          382,
+          16
+        ]
+      },
+      {
+        "parent": "layer-control",
+        "child": "control-end",
+        "offset_px": [
+          438,
+          14
+        ]
+      },
+      {
+        "parent": "layer-power",
+        "child": "power-number",
+        "offset_px": [
+          14,
+          10
+        ]
+      },
+      {
+        "parent": "layer-power",
+        "child": "power-trace",
+        "offset_px": [
+          78,
+          25
+        ]
+      },
+      {
+        "parent": "layer-power",
+        "child": "power-node",
+        "offset_px": [
+          382,
+          16
+        ]
+      },
+      {
+        "parent": "layer-power",
+        "child": "power-end",
+        "offset_px": [
+          438,
+          14
+        ]
+      },
+      {
+        "parent": "layer-base",
+        "child": "base-number",
+        "offset_px": [
+          14,
+          10
+        ]
+      },
+      {
+        "parent": "layer-base",
+        "child": "base-trace",
+        "offset_px": [
+          78,
+          25
+        ]
+      },
+      {
+        "parent": "layer-base",
+        "child": "base-node",
+        "offset_px": [
+          382,
+          16
+        ]
+      },
+      {
+        "parent": "layer-base",
+        "child": "base-end",
+        "offset_px": [
+          438,
+          14
+        ]
+      }
+    ],
+    "references": [
+      {
+        "url": "https://support.microsoft.com/en-us/powerpoint/morph-transition-tips-and-tricks",
+        "author": "Microsoft"
+      },
+      {
+        "url": "https://www.presentation-process.com/layer-diagram.html",
+        "author": "Presentation Process"
+      }
+    ],
+    "ablation": true,
+    "layer_count": 5,
+    "native_playback_verified": false,
+    "assumptions": "Constant size, zero rotation, synchronous translation. Fixed explanation rail. No native group or 3D extrusion."
+  }
+}

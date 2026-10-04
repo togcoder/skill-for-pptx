@@ -1,0 +1,97 @@
+{
+  "ablation": {
+    "checked_child_states": 60,
+    "violation_count": 16,
+    "max_drift_px": 64.0,
+    "violations": [
+      {
+        "state": "separated",
+        "child": "cover-number",
+        "drift_px": 64.0
+      },
+      {
+        "state": "separated",
+        "child": "cover-trace",
+        "drift_px": 64.0
+      },
+      {
+        "state": "separated",
+        "child": "cover-node",
+        "drift_px": 64.0
+      },
+      {
+        "state": "separated",
+        "child": "cover-end",
+        "drift_px": 64.0
+      },
+      {
+        "state": "separated",
+        "child": "sense-number",
+        "drift_px": 32.0
+      },
+      {
+        "state": "separated",
+        "child": "sense-trace",
+        "drift_px": 32.0
+      },
+      {
+        "state": "separated",
+        "child": "sense-node",
+        "drift_px": 32.0
+      },
+      {
+        "state": "separated",
+        "child": "sense-end",
+        "drift_px": 32.0
+      },
+      {
+        "state": "separated",
+        "child": "power-number",
+        "drift_px": 32.0
+      },
+      {
+        "state": "separated",
+        "child": "power-trace",
+        "drift_px": 32.0
+      },
+      {
+        "state": "separated",
+        "child": "power-node",
+        "drift_px": 32.0
+      },
+      {
+        "state": "separated",
+        "child": "power-end",
+        "drift_px": 32.0
+      },
+      {
+        "state": "separated",
+        "child": "base-number",
+        "drift_px": 64.0
+      },
+      {
+        "state": "separated",
+        "child": "base-trace",
+        "drift_px": 64.0
+      },
+      {
+        "state": "separated",
+        "child": "base-node",
+        "drift_px": 64.0
+      },
+      {
+        "state": "separated",
+        "child": "base-end",
+        "drift_px": 64.0
+      }
+    ],
+    "scope": "Endpoint offsets plus synchronous linear translation implication, not native playback"
+  },
+  "candidate": {
+    "checked_child_states": 60,
+    "violation_count": 0,
+    "max_drift_px": 0.0,
+    "violations": [],
+    "scope": "Endpoint offsets plus synchronous linear translation implication, not native playback"
+  }
+}
