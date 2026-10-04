@@ -7,6 +7,7 @@ For parallel research, follow docs/COLLABORATION.md. Check remote branches and o
 - The product goal is a short natural-language instruction producing an editable PPTX with meaningful motion.
 - This repository is research. Distinguish proposed, implemented, structurally checked, and PowerPoint playback verified.
 - Preserve semantic object identity across states. Never equate slide-local numeric shape IDs with global identity.
+- Read `docs/MOTION_PACKING.md` before designing compound motion. A slide is a scene/execution container, not a motion frame. When consecutive actions reuse the same resources, pack the maximum feasible number into one native slide timeline. Do not create waypoint/state slides merely because they are easier to implement; every extra slide boundary needs an explicit technical or semantic reason.
 - Prefer native editable elements. Label raster, video, and manual fallbacks explicitly.
 - Never claim that XML checks, LibreOffice renders, or an HTML animation prove PowerPoint playback.
 - Record source URL, date, tested environment, command, output and limitations for experiments.

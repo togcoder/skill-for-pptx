@@ -18,3 +18,19 @@ Start from experiments/E001/baseline/plan.json for syntax, but construct a new c
 ## Export representation observed in H001 and corrected in E002
 
 The raw artifact-tool export used in H001 encoded planned textboxes as native p:sp rectangles with p:txBody, without cNvSpPr txBox=1. H001's strict check remains failed in its historical report. E002 corrects only these declarations using scripts/normalize_textboxes.py: match exact plan names and ordered slides, require an existing native text body and rect geometry, then set txBox=1 only for kind=text. A shape containing text stays a shape when planned as kind=shape. The pipeline runs this pass before adding Morph. E002 passes the unchanged H001 criteria with 14 declared textboxes, no other semantic package changes and identical endpoint pixels. This establishes the representation correction only; native playback and real-application editing remain unobserved.
+
+
+## Architecture boundary: Morph plan vs target timeline
+
+This v0.1 contract describes the current Morph-only baseline, where states map to
+slides. It must not be interpreted as a product rule that every motion state
+requires a slide.
+
+Before authoring a new compound-motion plan, read
+`../../../docs/MOTION_PACKING.md`. If consecutive actions reuse the same resource
+set, the target design is one slide with multiple native animation tracks. Use
+this state-per-slide contract only for legacy baselines, explicit Morph cases, or
+when a verified PowerPoint/backend limitation requires a slide boundary.
+
+Future timeline contracts must preserve the same semantic object identity while
+adding per-slide tracks/triggers/timing instead of manufacturing waypoint slides.

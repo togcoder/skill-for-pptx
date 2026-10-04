@@ -22,6 +22,13 @@ class ChoreographyTests(unittest.TestCase):
         self.assertTrue(checks.check(c,p)["passed"])
         self.assertEqual(len(p["states"]),12)
         self.assertEqual(len(p["objects"]),31)
+        packing=p["research_metadata"]["motion_packing"]
+        self.assertEqual(p["research_metadata"]["architecture_status"],"legacy-state-per-slide-morph-baseline")
+        self.assertEqual(packing["target_architecture"],"resource-local-native-timeline")
+        self.assertEqual(packing["semantic_scene_count"],1)
+        self.assertEqual(packing["requested_motion_events"],6)
+        self.assertEqual(packing["final_slide_count"],12)
+        self.assertEqual(packing["resource_set_changes"],0)
 
     def test_geometry_mutations_are_detected(self):
         c=self.config();p=compile_intent(c)

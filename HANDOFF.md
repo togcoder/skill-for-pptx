@@ -44,6 +44,19 @@ H001/H002 có agent dùng đề mới với ngữ cảnh hạn chế; H003 là �
 người nghiên cứu thực hiện, không phải holdout độc lập. E002/E003/E004 là các
 lượt sửa theo lỗi đã biết, không phải đề chưa từng thấy.
 
+## Chỉ thị kiến trúc mới — ưu tiên cao nhất
+
+Người dùng đã sửa hướng phát triển ngày 04/10/2026: **không dùng mặc định một
+chuyển động/state = một slide**. Đọc `docs/MOTION_PACKING.md`. Nếu nhiều chuyển
+động dùng chung semantic objects/assets và vẫn thuộc cùng một scene, phải gom
+tối đa số chuyển động khả thi vào **một slide timeline native**. Chỉ tách slide
+khi có lý do semantic hoặc giới hạn PowerPoint/backend được ghi rõ.
+
+T005 nhiều waypoint/slide hiện là baseline Morph lịch sử, không phải kiến trúc
+mục tiêu. T006 phải thử nén chuỗi burst → orbit → focus → split → reassemble →
+restore xuống 1 slide vì resource set đã tồn tại xuyên suốt. Nếu không đạt 1
+slide, phải chứng minh blocker và dùng số slide tối thiểu.
+
 ## Chặng mới nhất
 
 PR #3, `experiments/T005-20261004-codex-choreography/REPORT.md`: compound intent compiler `scripts/choreography.py`, hai PPTX và transfer agent. Lỗi oracle waypoint đã sửa và giữ test. Người dùng ưu tiên hiệu ứng phức tạp bám ý định, không chỉ tăng số khối. Nhận T006 native timeline/path tiếp theo nếu phù hợp môi trường, hoặc T001 exact-hash playback. Đây là một recipe hạn chế, chưa hiểu mọi prompt hay chứng minh motion ấn tượng. Không cài personal skill trong lượt nghiên cứu.
@@ -94,9 +107,12 @@ giản là đã đạt mục tiêu sáng tạo của sản phẩm.
 ## Prompt giao cho model khác
 
 > Tiếp tục PPTX Motion Lab tại https://github.com/togcoder/skill-for-pptx.
-> Đọc AGENTS.md, HANDOFF.md, docs/STATUS.md và skill nguồn. Kiểm tra task/nhánh/PR
+> Đọc AGENTS.md, HANDOFF.md, docs/STATUS.md, docs/MOTION_PACKING.md và skill nguồn. Kiểm tra task/nhánh/PR
 > đang chạy, nhận một task chưa có người làm phù hợp môi trường rồi tạo nhánh
-> riêng. Giữ baseline và rubric, làm một thay đổi có giả thuyết rõ, tạo bằng
+> riêng. HARD RULE: slide là scene/execution container, không phải motion frame;
+> khi các action dùng chung resource set, pack tối đa vào một native slide timeline
+> và không tạo waypoint/state slide chỉ vì dễ làm. Mọi slide boundary thêm mới phải
+> có lý do semantic/kỹ thuật. Giữ baseline và rubric, làm một thay đổi có giả thuyết rõ, tạo bằng
 > chứng, lưu cả thất bại. Phân biệt kiểm tra cấu trúc, ảnh tĩnh và playback
 > PowerPoint. Cập nhật báo cáo, nguồn skill nếu có cải thiện được chứng minh,
 > và mở PR kèm handoff cho lượt sau. Nếu hết quota, lưu checkpoint nếu còn làm
