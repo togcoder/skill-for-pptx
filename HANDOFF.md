@@ -97,7 +97,20 @@ untargeted slide byte-identical và từ chối timing cũ chưa biết merge. I
 `design_profile` để làm cơ sở sinh component đúng font/palette/geometry.
 Đọc `experiments/T007-20261004-source-object-patcher/REPORT.md`.
 
-## Chỉ thị T013 — chart recipe đã có writer cấu trúc
+## Chỉ thị T014 — counter phải kết thúc ở object nguồn
+
+Counter v0.4 không rewrite KPI source. Nó clone source shape làm proxy trung gian,
+animate các proxy trong cùng click beat, rồi reveal chính source shape ở cuối.
+Nếu source text đã đổi so với `preserve_final_text`, abort.
+
+Đừng đổi hướng sang tạo một textbox final mới chỉ vì dễ hơn; như vậy sẽ phá
+source preservation. Playback PowerPoint vẫn pending, đặc biệt visibility của
+entrance effect trước thời điểm chạy.
+
+Chặng có giá trị tiếp theo: adapter Director v0.3 → patch plan v0.4 để chart/KPI
+semantic decisions đi thẳng tới execution mà không cần model viết tay low-level
+effect JSON.
+
 
 Model sau không được quay lại animate chart như generic shape nếu v0.3 patch path
 phù hợp. Dùng `chart_entrance`, giữ exact source chart, và để writer fan-out
@@ -157,6 +170,7 @@ PR #1, `experiments/T003-20261004-codex-layer01/REPORT.md`: giữ cả thất b�
 | T011 | Director Click Rhythm | Bắt AI Director tự nhóm motion beats thành presenter clicks có purpose/stable state/boundary reason, rồi giữ nhịp đó khi patch existing deck |
 | T012 | Semantic Data Motion | Nhận diện chart subtype + hero KPI; chart dùng recipe riêng theo encoding, KPI highlight dùng count-up/down và giữ nguyên giá trị nguồn |
 | T013 | Native Chart Execution | chart_entrance v0.3 → a:chart sub-targets + bldGraphic/bldChart + density guard; 112 tests pass; PowerPoint playback pending |
+| T014 | KPI Counter Execution | number_counter v0.4 → source-style proxy stack + entrance/exit chain + untouched source final value; 120 tests pass; playback pending |
 
 Mỗi task có brief và acceptance criteria trong `research/tasks/T00x.md`.
 Danh sách này chưa giao việc cho model nào. Model có môi trường PowerPoint
