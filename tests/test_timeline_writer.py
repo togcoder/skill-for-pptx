@@ -1,4 +1,5 @@
 import copy
+import json
 import unittest
 from lxml import etree as E
 
@@ -8,6 +9,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/"scripts"))
 
 from add_timeline import build_timing, inspect_timing_root, _path_data
+from pack_timeline import compile_packed_timeline
 
 P="http://schemas.openxmlformats.org/presentationml/2006/main"
 NS={"p":P}
@@ -107,6 +109,24 @@ class TimelineWriterTests(unittest.TestCase):
         timing,_=build_timing(slide,objects,{"!!box":"2","!!dot":"3"})
         ids=[x.get("id") for x in timing.findall(".//p:cTn",NS) if x.get("id")]
         self.assertEqual(len(ids),len(set(ids)))
+
+    def test_t005_candidate_emits_four_presenter_click_beats(self):
+        intent=json.loads(
+            (ROOT/"experiments/T005-20261004-codex-choreography/candidate.intent.json")
+            .read_text(encoding="utf-8")
+        )
+        plan=compile_packed_timeline(intent)
+        slide=plan["slides"][0]
+        objects={obj["id"]:obj for obj in plan["objects"]}
+        mapping={obj["morph_name"]:str(i+2) for i,obj in enumerate(plan["objects"])}
+        timing,receipt=build_timing(slide,objects,mapping)
+        node_types=[n.get("nodeType") for n in timing.findall(".//p:cTn",NS)]
+        self.assertEqual(receipt["click_beat_count"],4)
+        self.assertEqual(receipt["behavior_count"],82)
+        self.assertEqual(node_types.count("clickEffect"),4)
+        self.assertEqual(node_types.count("afterEffect"),2)
+        main=timing.find(".//p:cTn[@nodeType='mainSeq']/p:childTnLst",NS)
+        self.assertEqual(len(main.findall("p:par",NS)),4)
 
     def test_forced_name_mismatch_is_rejected(self):
         slide,objects=self.plan()
