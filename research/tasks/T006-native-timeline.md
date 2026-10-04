@@ -1,7 +1,6 @@
 # T006 — Native timed paths, single-slide packing and choreography
 
-Status: active direction. Owner: current integrator/model. Check open PRs/claims before
-starting implementation work.
+Status: active implementation. Native planning compiler + restricted timing writer implemented; PowerPoint playback gate pending. Owner: current integrator/model. Check open PRs/claims before starting implementation work.
 
 User priority: advanced effects from a short natural-language prompt that keep
 all requested actions and constraints **while packing as many motions as possible
@@ -80,3 +79,27 @@ readability/editability merely to increase it.
 
 The guiding question for every slide boundary is: **what changed that requires a
 new slide rather than another track on the current slide?**
+
+
+## 2026-10-04 implementation checkpoint
+
+Implemented on the T006 native-timing writer branch:
+
+- `scripts/add_timeline.py`: restricted PresentationML timing writer for motion,
+  scale and rotate;
+- `scripts/validate_timeline.py`;
+- `scripts/normalize_timeline_textboxes.py`;
+- `scripts/render_timeline.mjs`;
+- `scripts/run_timeline_experiment.sh`;
+- `tests/test_timeline_writer.py`;
+- experiment report at
+  `experiments/T006-20261004-native-timing/REPORT.md`.
+
+Branch-only GitHub CI ran 55 tests successfully and passed Python compile,
+Node syntax and shell syntax checks. The temporary workflow was removed.
+
+The acceptance gate remains unchanged: do not mark T006 complete until the full
+one-slide candidate has a frozen hash and actual Microsoft PowerPoint playback
+evidence. If the packed-delay scheduling differs in PowerPoint, keep one slide
+and compare an authored-style afterEffect/withEffect timing hierarchy before
+introducing any slide boundary.

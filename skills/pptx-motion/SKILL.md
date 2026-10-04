@@ -16,9 +16,8 @@ Create a reviewable motion experiment from a short instruction. Read the project
    Count visible states separately from transitions: N slides provide N−1 between-slide transitions. The first pose is already visible. For swapping labels or cycling focus, read [motion-paths.md](references/motion-paths.md) and inspect intermediate-path risks before exporting.
    Size paths for the actual label boxes. For equal labels on a symmetric three-slot cycle, use the clearance helper in that reference. Check labels and carriers separately; clear label paths do not imply clear carrier paths.
    For parts that separate and reassemble, read [layer-separation.md](references/layer-separation.md). Derive attached detail positions from carrier-local offsets; the flat native objects are not PowerPoint groups.
-4. Check renderer capability before creating files. The current backend supports only 16:9, native `rect`, `ellipse`, and `textbox`, full opacity, and Morph transitions. It rejects unimplemented style fields. Do not silently drop unsupported effects, approximate them without disclosure, or mistake native chart cross-fade for geometric Morph.
-5. Validate the plan with `python3 scripts/validate_plan.py PLAN.json`. Invoke the host Presentations workflow for runtime setup and its operation marker, then run from project root:
-   `bash scripts/run_experiment.sh PLAN.json build/UNIQUE_RUN output/UNIQUE_NAME.pptx`
+4. Check renderer capability before creating files. The legacy renderer supports 16:9 native `rect`, `ellipse`, `textbox`, full opacity and Morph. T006 adds a separate packed-timeline research backend for `motion_path`, `scale`, and `rotate`; `visibility` is deliberately unsupported until a playback-safe representation is proven. Do not silently drop unsupported effects, approximate them without disclosure, or mistake structural timing XML for verified PowerPoint playback.
+5. For a Morph plan, validate with `python3 scripts/validate_plan.py PLAN.json` and run `bash scripts/run_experiment.sh PLAN.json build/UNIQUE_RUN output/UNIQUE_NAME.pptx`. For a packed timeline plan, validate with `python3 scripts/validate_timeline.py PLAN.json` and run `bash scripts/run_timeline_experiment.sh PLAN.json build/UNIQUE_RUN output/UNIQUE_NAME.pptx`. Invoke the host Presentations workflow for runtime setup and its operation marker before either path.
 6. Render the final PPTX with the host presentation renderer and inspect every slide. The builder's PNGs show scene states before final packaging, so they alone are insufficient.
 7. Inventory the final package with `python3 scripts/inspect_pptx.py FILE.pptx`. Compare names and duration against the plan. Read ordered slide relationships; never infer presentation order from filenames or numeric shape IDs.
    Reuse `inspect_pptx.inspect()` for ordered parts in custom checks instead of reimplementing relationship-path resolution.
@@ -43,7 +42,11 @@ Check native text content and formal textbox type separately. The pipeline norma
 - `scripts/normalize_textboxes.py`: plan-scoped native textbox declaration
 - `scripts/validate_plan.py`: plan validator
 - `scripts/inspect_pptx.py`: package inventory
-- `scripts/pack_timeline.py`: T006 one-slide timeline planning compiler; not yet a PPTX timing-XML backend
+- `scripts/pack_timeline.py`: T006 one-slide timeline planning compiler
+- `scripts/add_timeline.py`: restricted native timing XML writer for motion/scale/rotate; playback pending
+- `scripts/normalize_timeline_textboxes.py`: timeline-plan native textbox declaration
+- `scripts/render_timeline.mjs`: artifact-tool source renderer + timing pipeline
+- `scripts/run_timeline_experiment.sh`: one-command packed-timeline experiment runner
 - `docs/POWERPOINT_QA.md`: native playback acceptance
 - `experiments/E001/`: frozen brief, baseline, rubric and regressions
 

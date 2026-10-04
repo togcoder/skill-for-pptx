@@ -114,9 +114,27 @@ The first T006 target for radial drill-down is one semantic scene, one slide,
 six requested/packed operations, zero resource-set changes, and native playback
 unverified until exact-hash PowerPoint evidence exists.
 
+## Current writer v0.1
+
+`scripts/add_timeline.py` now maps this contract to a restricted PresentationML
+timing tree for `motion_path`, `scale`, and `rotate`. It uses one packed
+`clickEffect` group per semantic slide. Stage start times become cumulative
+behavior delays, so same-stage effects share a delay and later stages remain
+inside the same slide instead of becoming slide waypoints.
+
+The writer maps stable semantic `!!` names to local PowerPoint shape IDs,
+requires exact identity parity, emits unique timing-node IDs and build-list
+pairs, refuses pre-existing timing, and patches atomically. `visibility` is
+deliberately rejected in v0.1.
+
+This scheduling model is still experimental. Structural/package checks and
+LibreOffice loadability do not establish that PowerPoint will preserve every
+delay/trigger exactly. If playback differs, compare a PowerPoint-authored
+afterEffect/withEffect hierarchy before considering extra slides.
+
 ## Boundary
 
-This contract is a planner/intermediate representation. It does not itself prove
-that the generated PPTX has valid or faithful native animation. A later backend
-must map effects to PresentationML timing/behavior nodes, preserve target shape
-IDs, package safely, and pass exact-file PowerPoint playback QA.
+This contract and writer do not by themselves prove faithful native animation.
+The exact final PPTX must pass package checks and then be opened and played in a
+named Microsoft PowerPoint version against its frozen hash. Until that gate,
+`native_playback_verified` stays false.

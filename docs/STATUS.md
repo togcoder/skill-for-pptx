@@ -2,19 +2,27 @@
 
 Cập nhật ngày 04/10/2026, giờ Việt Nam. Phiên bản nguồn nghiên cứu v0.7 (thêm T005 compound intent).
 
-## T006 planning compiler — đang triển khai
+## T006 native timing writer — đã có backend cấu trúc, playback còn pending
 
-Đã thêm `skills/pptx-motion/references/native-timeline.md` và
-`scripts/pack_timeline.py`. Compiler mới tái sử dụng geometry oracle T005 nhưng
-không xuất waypoint thành slide: candidate 12 legacy states được mô hình hóa thành
-1 semantic slide với 6 timeline stages; orbit samples trở thành points của một
-motion-path plan. `tests/test_timeline_packing.py` khóa mục tiêu 12→1, 6 stage,
-transfer 1 slide và focus motion+scale trên cùng resource.
+T006 đã tiến từ planning sang writer native hạn chế. `scripts/pack_timeline.py`
+vẫn nén T005 candidate 12 legacy states thành 1 semantic slide/6 stage và
+transfer 10→1. `scripts/add_timeline.py` hiện ghi `p:timing` cho motion path,
+scale và rotate trên cùng slide: waypoint nằm trong path, các stage dùng delay
+tích lũy và các effect cùng stage chạy song song trong một packed click group.
 
-Đây mới là intermediate planning contract, chưa phải backend ghi `<p:timing>` vào
-PPTX và chưa có playback PowerPoint. Nguồn Microsoft xác nhận animation là
-slide-local/time-based, hỗ trợ nhiều effect trên một object và motion paths; claim
-được lưu tại `research/claims/T006-single-slide-native-timeline.md`.
+Đường dựng end-to-end mới:
+`validate_timeline.py -> render_timeline.mjs -> normalize_timeline_textboxes.py
+-> add_timeline.py -> host finalizer`, gọi bằng
+`scripts/run_timeline_experiment.sh`.
+
+Bằng chứng tự động: GitHub Actions branch-only run 37213501515 đạt
+`py_compile`, **55 unit tests**, `node --check` renderer và `bash -n` runner.
+Workflow tạm đã xóa sau kiểm tra. Prototype 1 slide/2 shape sau patch vẫn pass ZIP
+CRC, mở lại bằng python-pptx và LibreOffice export PDF. Đây là bằng chứng package,
+**không phải playback PowerPoint**.
+
+Report: `experiments/T006-20261004-native-timing/REPORT.md`.
+Native playback/editability exact-file vẫn pending; M1 chưa đạt.
 
 ## Chỉ thị mới — resource-local motion packing
 
@@ -101,7 +109,7 @@ PPTX H001: `output/PPTX_Motion_Lab_H001.pptx`; dùng hash trong bằng chứng H
 
 ## Việc tiếp theo theo giá trị
 
-1. Ưu tiên cao nhất: T006 native timeline/path theo `docs/MOTION_PACKING.md` — nén nhiều động tác dùng chung resource vào cùng một slide thay vì waypoint slide. Candidate đầu tiên phải cố gắng nén T005 xuống 1 slide; nếu không, chứng minh blocker và số slide tối thiểu. T001 playback PowerPoint exact-hash vẫn là cổng nghiệm thu còn thiếu. M1 vẫn pending.
+1. Ưu tiên cao nhất: chạy full T005 candidate qua pipeline T006 mới để tạo `output/T006_packed_candidate.pptx` **1 slide**, freeze SHA-256 rồi phát exact file trong Microsoft PowerPoint. Không quay lại waypoint slides nếu playback lỗi; trước tiên thử hierarchy afterEffect/withEffect kiểu PowerPoint-authored trong cùng slide. T001/native exact-hash vẫn là cổng nghiệm thu; M1 pending.
 2. Nếu chưa có PowerPoint, nghiên cứu timing/path và chuẩn bị fixture/capture có kiểm tra cấu trúc. Không gọi mô phỏng là playback hoặc tăng số đối tượng là tăng chất lượng hiệu ứng. T002 đã xử lý carrier proxy cũ; không lặp khi thiếu giả thuyết mới.
 3. Chia phần việc theo task trong `research/tasks/`. Nhận claim/nhánh riêng trước khi làm để tránh trùng. Skill và renderer hiện vẫn phụ thuộc môi trường Work như `docs/ENVIRONMENT.md`.
 4. Chuẩn bị công cụ thu bằng chứng trên PowerPoint Windows khi phù hợp, không giả lập kết quả. Benchmark 18 lượt chưa thực hiện.
