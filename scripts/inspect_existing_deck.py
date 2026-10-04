@@ -9,6 +9,7 @@ import argparse
 import hashlib
 import json
 import posixpath
+import re
 from collections import Counter
 from pathlib import Path
 import xml.etree.ElementTree as ET
@@ -195,6 +196,155 @@ def _graphic_kind(node):
     return "graphic"
 
 
+
+NUMBER_RE=re.compile(
+    r"^\s*(?P<prefix>(?:[$€£¥₫]|USD|EUR|GBP|JPY|VND)?\s*)"
+    r"(?P<number>[+-]?(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?)"
+    r"(?P<suffix>\s*(?:%|x|K|M|B|T|ms|s|h|d|pcs|ppm|dB|Hz|kHz|MHz|GHz|V|A|W|kW|MW|°C|℃|kg|g|mm|cm|m)?)\s*$",
+    re.IGNORECASE,
+)
+
+
+def _standalone_number_candidate(text):
+    """Return parsed KPI-like text when the whole text is essentially one number."""
+    if not isinstance(text,str) or not text.strip():
+        return None
+    match=NUMBER_RE.match(text)
+    if not match:
+        return None
+    raw_number=match.group("number")
+    try:
+        value=float(raw_number.replace(",",""))
+    except ValueError:
+        return None
+    return {
+        "raw":text.strip(),
+        "numeric_value":value,
+        "prefix":match.group("prefix").strip(),
+        "suffix":match.group("suffix").strip(),
+        "integer_like":value.is_integer() and "." not in raw_number,
+        "counter_candidate":True,
+    }
+
+
+def _graphic_ref(node):
+    chart=node.find(f".//{{{C}}}chart")
+    if chart is None:
+        return None
+    return chart.get(f"{{{R}}}id")
+
+
+CHART_TYPE_MAP={
+    "barChart":"bar-or-column",
+    "bar3DChart":"bar-or-column-3d",
+    "lineChart":"line",
+    "line3DChart":"line-3d",
+    "pieChart":"pie",
+    "pie3DChart":"pie-3d",
+    "doughnutChart":"doughnut",
+    "areaChart":"area",
+    "area3DChart":"area-3d",
+    "scatterChart":"scatter",
+    "bubbleChart":"bubble",
+    "radarChart":"radar",
+    "stockChart":"stock",
+    "surfaceChart":"surface",
+    "surface3DChart":"surface-3d",
+    "ofPieChart":"pie-of-pie",
+}
+
+
+def _cache_point_count(parent):
+    if parent is None:
+        return None
+    counts=[]
+    for cache_name in ("strCache","numCache","multiLvlStrCache"):
+        for cache in parent.findall(f".//{{{C}}}{cache_name}"):
+            points=cache.findall(f".//{{{C}}}pt")
+            counts.append(len(points))
+    return max(counts) if counts else None
+
+
+def _chart_summary(package,chart_part):
+    if not chart_part or chart_part not in package.namelist():
+        return None
+    root=_safe_xml(package.read(chart_part),chart_part)
+    plot=root.find(f".//{{{C}}}plotArea")
+    if plot is None:
+        return {
+            "part":chart_part,
+            "chart_types":[],
+            "primary_type":"unknown",
+            "series_count":0,
+            "category_count":None,
+            "point_count":None,
+        }
+
+    chart_nodes=[]
+    for child in list(plot):
+        local=_local_name(child.tag)
+        if local in CHART_TYPE_MAP:
+            chart_nodes.append((local,child))
+
+    types=[]
+    series_count=0
+    category_counts=[]
+    point_counts=[]
+    orientation=None
+    grouping=None
+    for local,node in chart_nodes:
+        mapped=CHART_TYPE_MAP[local]
+        if local=="barChart":
+            bar_dir=node.find(f"{{{C}}}barDir")
+            direction=bar_dir.get("val") if bar_dir is not None else None
+            mapped="column" if direction=="col" else "bar" if direction=="bar" else mapped
+            if direction:
+                orientation=direction
+            group=node.find(f"{{{C}}}grouping")
+            if group is not None:
+                grouping=group.get("val")
+        if mapped not in types:
+            types.append(mapped)
+        series=node.findall(f"{{{C}}}ser")
+        series_count+=len(series)
+        for ser in series:
+            cat=ser.find(f"{{{C}}}cat")
+            val=ser.find(f"{{{C}}}val")
+            count=_cache_point_count(cat)
+            if count is not None:
+                category_counts.append(count)
+            count=_cache_point_count(val)
+            if count is not None:
+                point_counts.append(count)
+
+    return {
+        "part":chart_part,
+        "chart_types":types,
+        "primary_type":types[0] if len(types)==1 else ("combo" if len(types)>1 else "unknown"),
+        "series_count":series_count,
+        "category_count":max(category_counts) if category_counts else None,
+        "point_count":max(point_counts) if point_counts else None,
+        "bar_direction":orientation,
+        "grouping":grouping,
+    }
+
+
+def _enrich_data_semantics(shapes,relationships,package):
+    by_rid={rel["id"]:rel for rel in relationships}
+    for shape in shapes:
+        text=shape.get("text")
+        shape["data_semantics"]={
+            "standalone_number":_standalone_number_candidate(text),
+        }
+        if shape.get("kind")!="chart":
+            continue
+        rid=shape.get("chart_relationship_id")
+        rel=by_rid.get(rid)
+        target=rel.get("resolved_target") if rel else None
+        shape["chart_summary"]=_chart_summary(package,target)
+    return shapes
+
+
 def _shape_inventory(root,width,height):
     tree=root.find("p:cSld/p:spTree",NS)
     if tree is None:
@@ -220,6 +370,7 @@ def _shape_inventory(root,width,height):
             "geometry_emu":geom,
             "style":_style_inventory(node),
             "forced_semantic_name":props["name"] if (props["name"] or "").startswith("!!") else None,
+            "chart_relationship_id":_graphic_ref(node) if kind=="chart" else None,
         })
     return out
 
@@ -541,6 +692,7 @@ def inspect_existing_deck(path):
                 root=_safe_xml(package.read(part),part)
                 relationships=_relationships(package,part)
                 shapes=_shape_inventory(root,width,height)
+                _enrich_data_semantics(shapes,relationships,package)
                 title=next((s["text"] for s in shapes if s["text"]),None)
                 report["slides"].append({
                     "index":index,

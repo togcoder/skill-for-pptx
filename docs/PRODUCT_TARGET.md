@@ -24,14 +24,17 @@ Given a PPTX, the AI should:
    to create a motion script;
 5. decide what should appear first, what should be emphasized, compared,
    decomposed, connected, revealed, or summarized;
-6. add native PowerPoint motion to the existing slide resources;
-7. create missing visual components only when the story cannot be expressed well
+6. interpret data-bearing resources semantically: chart subtype/encoding and
+   standalone hero metrics must receive type-appropriate data motion rather than
+   generic shape effects;
+7. add native PowerPoint motion to the existing slide resources;
+8. create missing visual components only when the story cannot be expressed well
    with the current resources;
-8. create those additions **inside the existing design language and layout
+9. create those additions **inside the existing design language and layout
    framework**, not as unrelated decorations;
-9. pack as many motions as feasible into the same slide when they reuse the same
+10. pack as many motions as feasible into the same slide when they reuse the same
    resources;
-10. preserve editability and verify the exact final PPTX in PowerPoint before
+11. preserve editability and verify the exact final PPTX in PowerPoint before
     claiming native playback.
 
 ## Script priority
@@ -145,6 +148,18 @@ For each slide:
 
 A useful stable explanatory state normally ends a click beat. An indivisible
 visual transformation normally stays inside one beat.
+
+Data-bearing objects receive an additional semantic pass:
+
+- charts: detect the chart subtype and choose a recipe that respects the visual
+  encoding (baseline magnitude, ordered trend, part-to-whole, observations, etc.);
+- standalone numeric KPI candidates: count only when the narrative marks the
+  number as a hero metric / result / target; preserve the exact source value and
+  formatting;
+- data motion never creates a click boundary by itself; it executes inside the
+  click beat chosen by the narrative Director.
+
+Canonical reference: `skills/pptx-motion/references/data-motion-recipes.md`.
 
 Across slides:
 

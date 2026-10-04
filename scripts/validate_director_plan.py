@@ -4,11 +4,19 @@ import argparse
 import json
 from pathlib import Path
 
+try:
+    from .data_motion_recipes import chart_motion_recipe, number_counter_recipe
+except ImportError:
+    from data_motion_recipes import chart_motion_recipe, number_counter_recipe
+
 SCRIPT_SOURCES={"provided","speaker-notes","existing-timing","inferred","researched"}
 TIMING={"on-click","with-previous","after-previous"}
 PAUSE_AFTER={"presenter-explanation","await-next-reveal","slide-complete","none"}
 COMPONENT_KINDS={"shape","text","connector","derived-visual"}
 PROVENANCE={"none","derived-from-source","synthetic-nondata","user-provided"}
+CHART_BUILDS={"as-whole","series","category","series-elements","category-elements"}
+COUNTER_IMPLEMENTATIONS={"odometer-proxy","stepped-text"}
+COUNTER_OPERATIONS={"kpi-highlight","hero-metric","number-counter","metric-highlight"}
 
 
 def validate(plan,inventory):
@@ -20,8 +28,8 @@ def validate(plan,inventory):
     errors += [f"missing field: {k}" for k in sorted(required-plan.keys())]
     if errors:
         return errors
-    if plan["version"] not in ("0.1","0.2"):
-        errors.append("version must be 0.1 or 0.2")
+    if plan["version"] not in ("0.1","0.2","0.3"):
+        errors.append("version must be 0.1, 0.2 or 0.3")
     if plan["kind"]!="existing-deck-motion-director":
         errors.append("kind must be existing-deck-motion-director")
 
@@ -120,10 +128,12 @@ def validate(plan,inventory):
                 errors.append(f"slide {idx}: component {cid} has decorative-only rationale")
 
         source_targets=set()
+        source_shape_by_token={}
         for shape in inv.get("shapes",[]):
             for value in (shape.get("name"),shape.get("forced_semantic_name"),shape.get("id")):
                 if isinstance(value,str) and value:
                     source_targets.add(value)
+                    source_shape_by_token[value]=shape
 
         beats=slide.get("beats")
         if not isinstance(beats,list) or not beats:
@@ -160,7 +170,91 @@ def validate(plan,inventory):
                 if missing:
                     errors.append(f"slide {idx}: beat {bid} unknown targets {missing}")
 
-        if plan["version"]=="0.2":
+            if plan["version"]=="0.3" and isinstance(targets,list):
+                source_shapes=[source_shape_by_token[t] for t in targets if t in source_shape_by_token]
+                chart_shapes=[shape for shape in source_shapes if shape.get("kind")=="chart"]
+                number_shapes=[
+                    shape for shape in source_shapes
+                    if (shape.get("data_semantics") or {}).get("standalone_number")
+                ]
+                data_motion=beat.get("data_motion")
+
+                if chart_shapes and not isinstance(data_motion,dict):
+                    errors.append(f"slide {idx}: beat {bid} targeting chart requires data_motion")
+                if beat.get("operation") in COUNTER_OPERATIONS and number_shapes and not isinstance(data_motion,dict):
+                    errors.append(f"slide {idx}: beat {bid} highlighted standalone number requires counter data_motion")
+
+                if isinstance(data_motion,dict):
+                    kind=data_motion.get("kind")
+                    rationale=data_motion.get("rationale")
+                    if not isinstance(rationale,str) or not rationale.strip():
+                        errors.append(f"slide {idx}: beat {bid} data_motion missing rationale")
+
+                    if kind=="chart":
+                        if len(chart_shapes)!=1:
+                            errors.append(f"slide {idx}: beat {bid} chart data_motion requires exactly one chart target")
+                        else:
+                            summary=chart_shapes[0].get("chart_summary")
+                            recommended=chart_motion_recipe(summary)
+                            inventory_type=(summary or {}).get("primary_type")
+                            if data_motion.get("chart_type")!=inventory_type:
+                                errors.append(f"slide {idx}: beat {bid} chart_type does not match inventory")
+                            build=data_motion.get("build")
+                            if build not in CHART_BUILDS:
+                                errors.append(f"slide {idx}: beat {bid} unsupported chart build {build}")
+                            if type(data_motion.get("animate_background")) is not bool:
+                                errors.append(f"slide {idx}: beat {bid} animate_background must be boolean")
+                            if recommended:
+                                recipe=data_motion.get("recipe")
+                                expected_recipe=recommended["recipe"]
+                                expected_build=recommended["preferred_build"]
+                                override=data_motion.get("override_reason")
+                                has_override=isinstance(override,str) and bool(override.strip())
+                                normalized_build={
+                                    "series-elements":"series-elements",
+                                    "category-elements":"category-elements",
+                                    "series":"series",
+                                    "category":"category",
+                                    "as-whole":"as-whole",
+                                }.get(build)
+                                if recipe!=expected_recipe and not has_override:
+                                    errors.append(
+                                        f"slide {idx}: beat {bid} chart recipe {recipe} differs from recommended {expected_recipe} without override_reason"
+                                    )
+                                if normalized_build!=expected_build and not has_override:
+                                    errors.append(
+                                        f"slide {idx}: beat {bid} chart build {build} differs from recommended {expected_build} without override_reason"
+                                    )
+                    elif kind=="number-counter":
+                        if len(number_shapes)!=1:
+                            errors.append(f"slide {idx}: beat {bid} number-counter requires exactly one standalone number target")
+                        else:
+                            semantics=(number_shapes[0].get("data_semantics") or {}).get("standalone_number")
+                            recommended=number_counter_recipe(semantics)
+                            if data_motion.get("implementation") not in COUNTER_IMPLEMENTATIONS:
+                                errors.append(f"slide {idx}: beat {bid} unsupported counter implementation")
+                            for key in ("from_value","to_value"):
+                                if type(data_motion.get(key)) not in (int,float):
+                                    errors.append(f"slide {idx}: beat {bid} counter {key} must be numeric")
+                            if type(data_motion.get("duration_ms")) is not int or data_motion.get("duration_ms",0)<=0:
+                                errors.append(f"slide {idx}: beat {bid} counter duration_ms must be positive integer")
+                            if type(data_motion.get("steps")) is not int or data_motion.get("steps",0)<2:
+                                errors.append(f"slide {idx}: beat {bid} counter steps must be integer >=2")
+                            if recommended:
+                                if abs(float(data_motion.get("to_value",0))-float(recommended["to_value"]))>1e-9:
+                                    errors.append(f"slide {idx}: beat {bid} counter to_value does not match source number")
+                                recipe=data_motion.get("recipe")
+                                if recipe!=recommended["recipe"] and not (
+                                    isinstance(data_motion.get("override_reason"),str)
+                                    and data_motion["override_reason"].strip()
+                                ):
+                                    errors.append(
+                                        f"slide {idx}: beat {bid} counter recipe {recipe} differs from source-direction recommendation"
+                                    )
+                    else:
+                        errors.append(f"slide {idx}: beat {bid} unsupported data_motion kind {kind}")
+
+        if plan["version"] in ("0.2","0.3"):
             click_beats=slide.get("click_beats")
             if not isinstance(click_beats,list) or not click_beats:
                 errors.append(f"slide {idx}: click_beats must be nonempty for v0.2")

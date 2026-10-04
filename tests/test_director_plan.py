@@ -7,6 +7,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/"scripts"))
 from inspect_existing_deck import inspect_existing_deck
 from validate_director_plan import validate
+from data_motion_recipes import chart_motion_recipe, number_counter_recipe
 
 SOURCE=ROOT/"output"/"PPTX_Motion_Lab_H001.pptx"
 
@@ -141,6 +142,149 @@ class DirectorPlanTests(unittest.TestCase):
             },
         ]
         self.assertTrue(any("requires boundary_reason" in x for x in validate(bad,self.inventory)))
+
+    def data_inventory(self):
+        inv=copy.deepcopy(self.inventory)
+        inv["slides"][0]["shapes"].extend([
+            {
+                "id":"900",
+                "name":"Trend Chart",
+                "forced_semantic_name":None,
+                "kind":"chart",
+                "text":None,
+                "chart_summary":{
+                    "primary_type":"line",
+                    "chart_types":["line"],
+                    "series_count":2,
+                    "category_count":4,
+                    "point_count":4,
+                },
+                "data_semantics":{"standalone_number":None},
+            },
+            {
+                "id":"901",
+                "name":"Hero KPI",
+                "forced_semantic_name":None,
+                "kind":"shape",
+                "text":"98.5%",
+                "chart_summary":None,
+                "data_semantics":{
+                    "standalone_number":{
+                        "raw":"98.5%",
+                        "numeric_value":98.5,
+                        "prefix":"",
+                        "suffix":"%",
+                        "integer_like":False,
+                        "counter_candidate":True,
+                    }
+                },
+            },
+        ])
+        return inv
+
+    def plan_v3_with_data_motion(self):
+        inv=self.data_inventory()
+        plan=copy.deepcopy(self.plan_v2())
+        plan["version"]="0.3"
+        plan["source"]["pptx_sha256"]=inv["source_sha256"]
+        chart_rec=chart_motion_recipe(inv["slides"][0]["shapes"][-2]["chart_summary"])
+        number_sem=inv["slides"][0]["shapes"][-1]["data_semantics"]["standalone_number"]
+        counter=number_counter_recipe(number_sem)
+        slide=plan["slides"][0]
+        slide["beats"].extend([
+            {
+                "id":"reveal-trend",
+                "purpose":"Reveal the existing trend chart according to its line-chart semantics.",
+                "operation":"chart-reveal",
+                "targets":["Trend Chart"],
+                "reuse_existing":True,
+                "same_slide":True,
+                "timing_intent":"on-click",
+                "data_motion":{
+                    "kind":"chart",
+                    "chart_type":"line",
+                    "recipe":chart_rec["recipe"],
+                    "build":chart_rec["preferred_build"],
+                    "animate_background":False,
+                    "rationale":chart_rec["reason"],
+                },
+            },
+            {
+                "id":"highlight-kpi",
+                "purpose":"Make the hero KPI numerically salient after the trend is understood.",
+                "operation":"kpi-highlight",
+                "targets":["Hero KPI"],
+                "reuse_existing":True,
+                "same_slide":True,
+                "timing_intent":"on-click",
+                "data_motion":{
+                    "kind":"number-counter",
+                    "recipe":counter["recipe"],
+                    "from_value":counter["from_value"],
+                    "to_value":counter["to_value"],
+                    "duration_ms":counter["duration_ms"],
+                    "steps":counter["steps"],
+                    "prefix":counter["prefix"],
+                    "suffix":counter["suffix"],
+                    "decimal_places":counter["decimal_places"],
+                    "implementation":counter["preferred_implementation"],
+                    "rationale":"This is the hero metric named by the slide objective and deserves numeric emphasis.",
+                },
+            },
+        ])
+        slide["click_beats"]=[
+            {
+                "id":"click-process",
+                "purpose":"Reveal the process overview.",
+                "motion_beats":["reveal-process"],
+                "stable_state":"The process is visible.",
+                "pause_after":"presenter-explanation",
+                "boundary_reason":"First reveal establishes context.",
+            },
+            {
+                "id":"click-trend",
+                "purpose":"Reveal the trend evidence.",
+                "motion_beats":["reveal-trend"],
+                "stable_state":"The trend is visible and can be discussed.",
+                "pause_after":"presenter-explanation",
+                "boundary_reason":"Trend evidence should wait until the process context has been explained.",
+            },
+            {
+                "id":"click-kpi",
+                "purpose":"Highlight the final KPI.",
+                "motion_beats":["highlight-kpi"],
+                "stable_state":"The final 98.5% KPI is visible.",
+                "pause_after":"slide-complete",
+                "boundary_reason":"The KPI should land after the trend has been understood.",
+            },
+        ]
+        return plan,inv
+
+    def test_valid_v3_data_motion_plan(self):
+        plan,inv=self.plan_v3_with_data_motion()
+        self.assertEqual(validate(plan,inv),[])
+
+    def test_v3_chart_target_requires_chart_data_motion(self):
+        plan,inv=self.plan_v3_with_data_motion()
+        del plan["slides"][0]["beats"][1]["data_motion"]
+        self.assertTrue(any("targeting chart requires data_motion" in x for x in validate(plan,inv)))
+
+    def test_v3_chart_wrong_recipe_needs_override_reason(self):
+        plan,inv=self.plan_v3_with_data_motion()
+        plan["slides"][0]["beats"][1]["data_motion"]["recipe"]="segment-sweep"
+        self.assertTrue(any("differs from recommended" in x for x in validate(plan,inv)))
+        plan["slides"][0]["beats"][1]["data_motion"]["override_reason"]="The script explicitly requests a nonstandard segment metaphor."
+        self.assertEqual(validate(plan,inv),[])
+
+    def test_v3_hero_number_requires_counter(self):
+        plan,inv=self.plan_v3_with_data_motion()
+        del plan["slides"][0]["beats"][2]["data_motion"]
+        self.assertTrue(any("highlighted standalone number requires counter" in x for x in validate(plan,inv)))
+
+    def test_v3_counter_cannot_change_source_value(self):
+        plan,inv=self.plan_v3_with_data_motion()
+        plan["slides"][0]["beats"][2]["data_motion"]["to_value"]=99.9
+        self.assertTrue(any("to_value does not match source number" in x for x in validate(plan,inv)))
 
     def test_source_hash_mismatch_fails(self):
         bad=self.plan();bad["source"]["pptx_sha256"]="0"*64

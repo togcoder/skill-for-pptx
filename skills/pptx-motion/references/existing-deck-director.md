@@ -1,4 +1,4 @@
-# Existing-deck director contract v0.2
+# Existing-deck director contract v0.3
 
 Use this contract after `scripts/inspect_existing_deck.py` and before adding
 motion to an existing PPTX.
@@ -9,7 +9,7 @@ The director plan is a semantic plan. It does not contain raw PresentationML.
 
 Required fields:
 
-- `version`: `"0.2"` for click-rhythm plans; `"0.1"` remains accepted only for legacy flat-beat plans
+- `version`: `"0.3"` for semantic data-motion plans; `"0.2"` remains the click-rhythm baseline and `"0.1"` the legacy flat-beat baseline
 - `kind`: `"existing-deck-motion-director"`
 - `source`
 - `user_instruction`
@@ -96,6 +96,48 @@ A target must exist in the source slide inventory unless it names a component
 created on that slide.
 
 Do not use a beat whose only purpose is decorative motion.
+
+### Data motion
+
+v0.3 treats charts and highlighted standalone KPI numbers as semantic resources,
+not generic shapes.
+
+A motion beat that targets a chart must contain `data_motion`:
+
+- `kind="chart"`;
+- `chart_type`: copied from the source inventory;
+- `recipe`: type-specific semantic recipe;
+- `build`: `as-whole`, `series`, `category`, `series-elements`, or
+  `category-elements`;
+- `animate_background`: boolean, default false unless the narrative needs axes /
+  grid / legend to enter too;
+- `rationale`: why this recipe fits the chart's meaning;
+- optional `override_reason` when intentionally departing from the type-specific
+  recommendation.
+
+Read [data-motion-recipes.md](data-motion-recipes.md) and use
+`scripts/data_motion_recipes.py`.
+
+A standalone numeric shape is only a **counter candidate**. Do not count page
+numbers, dates, table cells, axis labels, or every numeric label merely because
+they are numeric.
+
+When the Director chooses a standalone number as a hero metric / KPI highlight,
+its motion beat must contain `data_motion`:
+
+- `kind="number-counter"`;
+- `recipe="count-up"` or `"count-down"`;
+- `from_value`, `to_value`;
+- `duration_ms`, `steps`;
+- `prefix`, `suffix`, `decimal_places`;
+- `implementation`: `odometer-proxy` or `stepped-text`;
+- `rationale`: why this number deserves a counter instead of ordinary emphasis.
+
+The final visible text must remain exactly the source metric text unless the user
+explicitly requested a data/content change.
+
+Chart animation or number counting never creates its own click automatically.
+It belongs to the click beat chosen by the narrative Director.
 
 ### Click beat
 
