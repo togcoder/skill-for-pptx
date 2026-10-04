@@ -17,8 +17,10 @@ checklist before changing add_timeline.py.
 
 User priority: advanced effects from a short natural-language prompt that keep
 all requested actions and constraints **while packing as many motions as possible
-into one slide when they reuse the same resources**. Read
-`docs/MOTION_PACKING.md` before implementation.
+into one slide when they reuse the same resources**. Packing does not decide
+presenter pacing. Read `docs/MOTION_PACKING.md` and
+`docs/CLICK_BEAT_CHOREOGRAPHY.md` before implementation. T010 owns the
+presenter-paced click-beat layer.
 
 T005 proves restricted intent/geometry, but its state-per-slide Morph strategy
 is now a legacy baseline. It requires many clicks and over-expands slide count.
@@ -113,6 +115,9 @@ Node syntax and shell syntax checks. The temporary workflow was removed.
 
 The acceptance gate remains unchanged: do not mark T006 complete until the full
 one-slide candidate has a frozen hash and actual Microsoft PowerPoint playback
-evidence. If the packed-delay scheduling differs in PowerPoint, keep one slide
+evidence. The historical one-click packed candidate is now also a **negative
+pacing baseline**; do not use its one-click behavior as the target interaction
+model. T010 v0.2 preserves one physical slide while restoring presenter-controlled
+click beats. If the packed-delay scheduling differs in PowerPoint, keep one slide
 and compare an authored-style afterEffect/withEffect timing hierarchy before
 introducing any slide boundary.
