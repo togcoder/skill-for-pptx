@@ -26,14 +26,15 @@ rubric cố định và cập nhật skill từ bằng chứng.
 
 | Nội dung | Trạng thái |
 |---|---|
-| Nguồn skill | v0.6 nghiên cứu trong repo, chưa cài thành personal skill |
+| Nguồn skill | v0.7 nghiên cứu trong repo, chưa cài thành personal skill |
 | Backend | artifact-tool của ChatGPT Work, 16:9, rect/ellipse/textbox native, opacity=1, Morph byObject |
-| Kiểm tra tự động | 34 unit tests, chưa phải kiểm tra schema OOXML đầy đủ |
+| Kiểm tra tự động | 41 unit tests, chưa phải kiểm tra schema OOXML đầy đủ |
 | E002 | Sửa 14 khai báo textbox; checker H001 giữ nguyên đạt 93/93; ảnh không đổi |
 | H002/E003 | Nhãn ORBIT chồng 2→0 theo mô hình tuyến tính |
 | H003/E004 | Nhãn Việt dài chồng 4→0; khối nền vẫn chồng 6→6 theo mô hình |
 | T002 | Giữ label 0/6; siết carrier giảm 6/6→0/6, focus emphasis tĩnh 4→3; native pending |
 | T003 | Tách lớp 2D trên hai chủ đề; binding fixture 16→0; sửa wrap số trên 27 vị trí; choreography nguồn và native pending |
+| T005 | Intent nghiêm ngặt cho chuỗi 6 thao tác, 2 chủ đề/22 ảnh cuối; chord proxy 65,608→1,916 px; vẫn click-through, chưa native playback |
 | File và ảnh | PPTX tại `output/`, bằng chứng và ảnh cuối trong từng experiment |
 | PowerPoint playback | Chưa có; M1 chưa đạt, điểm native motion và editing để null |
 
@@ -45,6 +46,8 @@ lượt sửa theo lỗi đã biết, không phải đề chưa từng thấy.
 
 ## Chặng mới nhất
 
+PR #3, `experiments/T005-20261004-codex-choreography/REPORT.md`: compound intent compiler `scripts/choreography.py`, hai PPTX và transfer agent. Lỗi oracle waypoint đã sửa và giữ test. Người dùng ưu tiên hiệu ứng phức tạp bám ý định, không chỉ tăng số khối. Nhận T006 native timeline/path tiếp theo nếu phù hợp môi trường, hoặc T001 exact-hash playback. Đây là một recipe hạn chế, chưa hiểu mọi prompt hay chứng minh motion ấn tượng. Không cài personal skill trong lượt nghiên cứu.
+
 PR #1, `experiments/T003-20261004-codex-layer01/REPORT.md`: giữ cả thất bại và sửa, generator `scripts/layer_separation.py`, reference `layer-separation.md`. Đọc CHECKPOINT trong experiment và claim trước khi nhận việc. T003 chỉ hoàn tất phần recipe 2D; cần quan sát choreography nguồn và playback để kết luận hiệu ứng ấn tượng. Không dựng lại 5 file đã lưu nếu chưa có giả thuyết mới.
 
 ## Việc có giá trị nhất để nhận
@@ -55,6 +58,8 @@ PR #1, `experiments/T003-20261004-codex-layer01/REPORT.md`: giữ cả thất b�
 | T002 | Đường đi khối nền | Giữ baseline/rubric H003, đo cả nhãn và khối, không hy sinh khả năng đọc |
 | T003 | Công thức hiệu ứng mới | Nguồn sơ cấp, ý đồ rõ, hai chủ đề khác nhau, PPTX và đánh giá riêng từng lớp |
 | T004 | Khả năng chạy ngoài Work | Backend adapter tách biệt, cùng hợp đồng, parity tests; giữ backend cũ làm đối chứng |
+| T005 | Bám ý định compound prompt | Recipe đầu đã xong; giữ yêu cầu/giả định riêng, mở rộng chỉ với kiểm thử mới |
+| T006 | Native timeline/path nâng cao | Chuỗi tự chạy có trigger rõ, kiểm tra cấu trúc và playback PowerPoint thật |
 
 Mỗi task có brief và acceptance criteria trong `research/tasks/T00x.md`.
 Danh sách này chưa giao việc cho model nào. Model có môi trường PowerPoint

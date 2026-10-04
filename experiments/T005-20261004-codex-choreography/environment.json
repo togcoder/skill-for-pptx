@@ -1,0 +1,9 @@
+{
+  "python": "3.12.14",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "compiler": "scripts/choreography.py",
+  "renderer": "unchanged Work artifact-tool backend",
+  "font": "Bitstream Charter",
+  "baseline_remote": "f3745118ca2334156038680747a3893397259470",
+  "powerpoint_playback_verified": false
+}

@@ -1,0 +1,31 @@
+{
+  "version": "0.1",
+  "recipe": "radial-drilldown",
+  "prompt": "Tạo sơ đồ học tập từ một lõi bung thành 8 nút, xoay ngược kim đồng hồ 60 độ, phóng nút 6 thành 3 lớp rồi ghép lại, chữ giữ thẳng.",
+  "title": "Sơ đồ học tập",
+  "node_count": 8,
+  "focus_node": 6,
+  "layer_count": 3,
+  "orbit_degrees": 60,
+  "orbit_segments": 4,
+  "direction": "counterclockwise",
+  "keep_labels_upright": true,
+  "operations": ["burst", "orbit", "focus", "split", "reassemble", "restore"],
+  "requirements": [
+    "Chủ đề là sơ đồ học tập.",
+    "Bắt đầu từ một lõi rồi bung thành đúng 8 nút.",
+    "Sau khi bung, các nút xoay ngược kim đồng hồ đúng 60 độ quanh lõi.",
+    "Sau khi xoay, phóng nút số 6 rồi tách nút đó thành đúng 3 lớp.",
+    "Ghép 3 lớp của nút 6 lại sau khi tách.",
+    "Chữ luôn giữ thẳng, không xoay theo quỹ đạo."
+  ],
+  "assumptions": [
+    "Sơ đồ học tập dùng dữ liệu tổng hợp và nhãn số 01–08 vì người dùng chưa đặt tên các chủ đề hoặc lớp.",
+    "Hiểu ‘phóng nút 6 thành 3 lớp’ là phóng to nút 6 rồi tách 3 lớp, không phải thay một đối tượng bằng ba danh tính mới.",
+    "Dùng 4 đoạn quỹ đạo 15 độ; mỗi đoạn là một chuyển Morph riêng, cần bấm chuyển cảnh và không phải đường cong liên tục hay tự phát.",
+    "Dùng sơ đồ 2D native trên canvas 16:9, vòng tròn bán kính 224 px, phóng nút 6 lên 4 lần ở vùng chi tiết bên phải và tách lớp theo chiều dọc.",
+    "Sau khi ghép lại ở vùng chi tiết, thêm bước restore đưa nút 6 về đúng vị trí trên vòng đã xoay; đây là lựa chọn kết thúc của công thức, không phải yêu cầu rõ trong câu lệnh.",
+    "Dùng 10 trạng thái hiển thị và 9 chuyển cảnh; tư thế lõi đầu tiên đã hiển thị sẵn, không có hiệu ứng xuất hiện trước slide 1.",
+    "Nút 6 gồm 3 hình chữ nhật tiếp giáp từ đầu để giữ danh tính native xuyên suốt; các nút khác là ellipse, nhãn là textbox riêng và góc xoay của tất cả chữ bằng 0."
+  ]
+}

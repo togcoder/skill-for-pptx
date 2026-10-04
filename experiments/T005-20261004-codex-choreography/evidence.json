@@ -1,0 +1,271 @@
+{
+  "candidate": {
+    "intent_geometry": {
+      "checks": {
+        "semantic_node_count": true,
+        "operation_order": true,
+        "orbit_angle_direction": true,
+        "focus_identity_scale": true,
+        "layer_count_separation": true,
+        "exact_reassembly": true,
+        "upright_labels": true
+      },
+      "passed": true,
+      "check_count": 7,
+      "orbit_measured_degrees": [
+        90.00000000000001,
+        90.0,
+        89.99999999999999,
+        90.0,
+        90.0,
+        90.00000000000001,
+        90.0,
+        90.00000000000003,
+        89.99999999999999,
+        90.0,
+        90.00000000000001,
+        90.0
+      ],
+      "waypoint_max_error_px": 5.684341886080802e-14,
+      "orbit_linear_proxy": {
+        "max_radial_deviation_px": 1.9163510522665206,
+        "label_overlaps": 0,
+        "carrier_overlaps": 0,
+        "pair_transition_count": 396,
+        "assumption": "Synchronized linear interpolation of unrotated plan boxes at 1280x720; not native playback"
+      },
+      "binding_max_error_px": 1.1368683772161603e-13,
+      "scope": "7 semantic/geometry categories; package parity is category 8 and checked separately",
+      "powerpoint_playback_verified": false
+    },
+    "package": {
+      "sha256": "05ddf33c89725dbb66083f5130c549d59d9aa291893321a34cc68c6cf9e9cf58",
+      "errors": [],
+      "slides": [
+        {
+          "slide": 1,
+          "native_objects": 31,
+          "textboxes": 15,
+          "morph_count": 0
+        },
+        {
+          "slide": 2,
+          "native_objects": 31,
+          "textboxes": 15,
+          "morph_count": 1
+        },
+        {
+          "slide": 3,
+          "native_objects": 31,
+          "textboxes": 15,
+          "morph_count": 1
+        },
+        {
+          "slide": 4,
+          "native_objects": 31,
+          "textboxes": 15,
+          "morph_count": 1
+        },
+        {
+          "slide": 5,
+          "native_objects": 31,
+          "textboxes": 15,
+          "morph_count": 1
+        },
+        {
+          "slide": 6,
+          "native_objects": 31,
+          "textboxes": 15,
+          "morph_count": 1
+        },
+        {
+          "slide": 7,
+          "native_objects": 31,
+          "textboxes": 15,
+          "morph_count": 1
+        },
+        {
+          "slide": 8,
+          "native_objects": 31,
+          "textboxes": 15,
+          "morph_count": 1
+        },
+        {
+          "slide": 9,
+          "native_objects": 31,
+          "textboxes": 15,
+          "morph_count": 1
+        },
+        {
+          "slide": 10,
+          "native_objects": 31,
+          "textboxes": 15,
+          "morph_count": 1
+        },
+        {
+          "slide": 11,
+          "native_objects": 31,
+          "textboxes": 15,
+          "morph_count": 1
+        },
+        {
+          "slide": 12,
+          "native_objects": 31,
+          "textboxes": 15,
+          "morph_count": 1
+        }
+      ],
+      "passed": true,
+      "full_schema_validated": false,
+      "powerpoint_playback_verified": false
+    },
+    "plan_errors": [],
+    "compiler_reproduction": true
+  },
+  "transfer": {
+    "intent_geometry": {
+      "checks": {
+        "semantic_node_count": true,
+        "operation_order": true,
+        "orbit_angle_direction": true,
+        "focus_identity_scale": true,
+        "layer_count_separation": true,
+        "exact_reassembly": true,
+        "upright_labels": true
+      },
+      "passed": true,
+      "check_count": 7,
+      "orbit_measured_degrees": [
+        -60.00000000000001,
+        -60.00000000000002,
+        -60.00000000000001,
+        -59.99999999999999,
+        -60.000000000000014,
+        -60.000000000000014,
+        -60.00000000000003,
+        -60.000000000000014
+      ],
+      "waypoint_max_error_px": 5.684341886080802e-14,
+      "orbit_linear_proxy": {
+        "max_radial_deviation_px": 1.9163510522665206,
+        "label_overlaps": 0,
+        "carrier_overlaps": 0,
+        "pair_transition_count": 112,
+        "assumption": "Synchronized linear interpolation of unrotated plan boxes at 1280x720; not native playback"
+      },
+      "binding_max_error_px": 5.684341886080802e-14,
+      "scope": "7 semantic/geometry categories; package parity is category 8 and checked separately",
+      "powerpoint_playback_verified": false
+    },
+    "package": {
+      "sha256": "e87d37db4a76f51c56dac893bade9c2966960cbc6bfc869ebb5bceb3d8cb5e16",
+      "errors": [],
+      "slides": [
+        {
+          "slide": 1,
+          "native_objects": 22,
+          "textboxes": 11,
+          "morph_count": 0
+        },
+        {
+          "slide": 2,
+          "native_objects": 22,
+          "textboxes": 11,
+          "morph_count": 1
+        },
+        {
+          "slide": 3,
+          "native_objects": 22,
+          "textboxes": 11,
+          "morph_count": 1
+        },
+        {
+          "slide": 4,
+          "native_objects": 22,
+          "textboxes": 11,
+          "morph_count": 1
+        },
+        {
+          "slide": 5,
+          "native_objects": 22,
+          "textboxes": 11,
+          "morph_count": 1
+        },
+        {
+          "slide": 6,
+          "native_objects": 22,
+          "textboxes": 11,
+          "morph_count": 1
+        },
+        {
+          "slide": 7,
+          "native_objects": 22,
+          "textboxes": 11,
+          "morph_count": 1
+        },
+        {
+          "slide": 8,
+          "native_objects": 22,
+          "textboxes": 11,
+          "morph_count": 1
+        },
+        {
+          "slide": 9,
+          "native_objects": 22,
+          "textboxes": 11,
+          "morph_count": 1
+        },
+        {
+          "slide": 10,
+          "native_objects": 22,
+          "textboxes": 11,
+          "morph_count": 1
+        }
+      ],
+      "passed": true,
+      "full_schema_validated": false,
+      "powerpoint_playback_verified": false
+    },
+    "plan_errors": [],
+    "compiler_reproduction": true
+  },
+  "ablation": {
+    "checks": {
+      "semantic_node_count": true,
+      "operation_order": true,
+      "orbit_angle_direction": true,
+      "focus_identity_scale": true,
+      "layer_count_separation": true,
+      "exact_reassembly": true,
+      "upright_labels": true
+    },
+    "passed": true,
+    "check_count": 7,
+    "orbit_measured_degrees": [
+      90.0,
+      89.99999999999999,
+      89.99999999999999,
+      90.0,
+      89.99999999999999,
+      90.00000000000001,
+      90.0,
+      90.00000000000003,
+      89.99999999999997,
+      89.99999999999999,
+      90.00000000000001,
+      90.0
+    ],
+    "waypoint_max_error_px": 2.842170943040401e-14,
+    "orbit_linear_proxy": {
+      "max_radial_deviation_px": 65.60808101421335,
+      "label_overlaps": 0,
+      "carrier_overlaps": 0,
+      "pair_transition_count": 66,
+      "assumption": "Synchronized linear interpolation of unrotated plan boxes at 1280x720; not native playback"
+    },
+    "binding_max_error_px": 5.684341886080802e-14,
+    "scope": "7 semantic/geometry categories; package parity is category 8 and checked separately",
+    "powerpoint_playback_verified": false
+  },
+  "comparison_scope": "Same intent except orbit_segments 1 vs 6. Geometry-only negative control, no ablation PPTX export."
+}

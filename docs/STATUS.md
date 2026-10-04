@@ -1,6 +1,18 @@
 # PPTX Motion Lab — checkpoint
 
-Cập nhật ngày 04/10/2026, giờ Việt Nam. Phiên bản nguồn nghiên cứu v0.6 (thêm T002 tight carriers).
+Cập nhật ngày 04/10/2026, giờ Việt Nam. Phiên bản nguồn nghiên cứu v0.7 (thêm T005 compound intent).
+
+## Kết quả mới nhất — T005
+
+Ưu tiên mới của người dùng là hiệu ứng phức tạp từ một câu lệnh ngắn, giữ đúng ý định. PR #3 và `experiments/T005-20261004-codex-choreography/REPORT.md` có compiler intent nghiêm ngặt cho chuỗi bung nút, xoay vòng, phóng đối tượng, tách lớp, ghép lại và trở về. AI diễn giải prompt; compiler chỉ nhận dữ liệu có cấu trúc, không phải NLP tổng quát.
+
+Hai PPTX native: candidate 12 trạng thái/31 đối tượng, transfer 10 trạng thái/22 đối tượng. 7 nhóm kiểm tra geometry và package parity đều đạt trên mỗi file. Đã xem riêng đủ 22 ảnh cuối. 41 unit tests đạt. Đối chứng cố ý bỏ waypoint cho sai lệch bán kính tuyến tính 65,608 px; candidate còn 1,916 px. Không coi số này là độ mượt phát thực tế.
+
+Lỗi có ích: tổng góc xoay đúng vẫn có thể che waypoint sai; đã giữ test đột biến và sửa kiểm tra từng waypoint/ràng buộc nhãn. Agent mới tạo bài học tập 8 nút, ngược chiều 60°, nút 6, 3 lớp; parent xuất file. Agent đã đọc brief do AGENTS yêu cầu nên không gọi đây là kiểm thử mù hoàn toàn.
+
+Giới hạn quan trọng: vẫn là 2D Morph theo từng lần bấm, một recipe hạn chế, hình học còn đơn giản; chưa có bằng chứng hiệu ứng ấn tượng hoặc playback PowerPoint. Không phải skill hoàn chỉnh hiểu mọi ý tưởng phức tạp, chưa cài personal skill. Bước tiếp ưu tiên T006 native timeline/path và T001 playback exact-hash; giữ nguyên T005 làm đối chứng.
+
+File: `output/T005_compound_candidate.pptx` SHA-256 `05ddf33c89725dbb66083f5130c549d59d9aa291893321a34cc68c6cf9e9cf58`; `output/T005_compound_transfer.pptx` SHA-256 `e87d37db4a76f51c56dac893bade9c2966960cbc6bfc869ebb5bceb3d8cb5e16`.
 
 ## Kết quả mới nhất — T002
 
@@ -63,9 +75,9 @@ PPTX H001: `output/PPTX_Motion_Lab_H001.pptx`; dùng hash trong bằng chứng H
 
 ## Việc tiếp theo theo giá trị
 
-1. Phát thử H003/E004 và H002/E003 bằng PowerPoint khi có môi trường hợp lệ, ghi hash/phiên bản/video và tác động của khối nền giao nhau. M1 vẫn pending.
-2. Nếu chưa có PowerPoint, xử lý nguy cơ khối nền giao nhau của H003/E004 theo cùng brief và rubric, hoặc thử một công thức mới từ nguồn sơ cấp. Không gọi hết chồng nhãn là hết chồng toàn cảnh. Không dựng lại các bản này nếu không có giả thuyết mới.
-3. Chia phần việc theo T001–T004 trong `research/tasks/`. Nhận claim/nhánh riêng trước khi làm để tránh trùng. Skill và renderer hiện vẫn phụ thuộc môi trường Work như `docs/ENVIRONMENT.md`.
+1. Ưu tiên yêu cầu nâng cao: T006 native timeline/path để phối hợp nhiều động tác mà không phải bấm từng waypoint; T001 playback PowerPoint exact-hash của T005 là cổng nghiệm thu còn thiếu. M1 vẫn pending.
+2. Nếu chưa có PowerPoint, nghiên cứu timing/path và chuẩn bị fixture/capture có kiểm tra cấu trúc. Không gọi mô phỏng là playback hoặc tăng số đối tượng là tăng chất lượng hiệu ứng. T002 đã xử lý carrier proxy cũ; không lặp khi thiếu giả thuyết mới.
+3. Chia phần việc theo task trong `research/tasks/`. Nhận claim/nhánh riêng trước khi làm để tránh trùng. Skill và renderer hiện vẫn phụ thuộc môi trường Work như `docs/ENVIRONMENT.md`.
 4. Chuẩn bị công cụ thu bằng chứng trên PowerPoint Windows khi phù hợp, không giả lập kết quả. Benchmark 18 lượt chưa thực hiện.
 
 ## Khôi phục và lưu tiếp

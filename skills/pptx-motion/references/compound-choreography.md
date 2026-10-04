@@ -67,3 +67,7 @@ checks, package checks, static inspection and native playback separate. Inspect
 every final slide, including waypoint slides. Use a new topic and different
 parameters for a fresh-context transfer. A recipe transfer does not establish
 arbitrary prompt understanding.
+
+Check every intermediate waypoint, not just accumulated angle or final pose:
+deviations can cancel in a total-angle check. Verify carrier-label binding and
+split alignment as well. The T005 mutation regression demonstrates this failure.

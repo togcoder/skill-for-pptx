@@ -26,7 +26,8 @@ class ChoreographyTests(unittest.TestCase):
     def test_geometry_mutations_are_detected(self):
         c=self.config();p=compile_intent(c)
         for sid,oid,key,value in [("orbit-2","label-1","x",0.1),("focus","node-3-layer-1","w",0.1),
-                                   ("restore","label-4","x",0.2),("split","label-3","rotation_deg",15)]:
+                                   ("restore","label-4","x",0.2),("split","label-3","rotation_deg",15),
+                                   ("orbit-1","node-7","x",0.1),("split","node-3-layer-2","x",0.4)]:
             bad=copy.deepcopy(p);bad["states"][next(i for i,s in enumerate(bad["states"]) if s["id"]==sid)]["objects"][oid][key]=value
             self.assertFalse(checks.check(c,bad)["passed"])
 

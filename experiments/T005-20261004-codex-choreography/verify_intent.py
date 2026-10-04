@@ -54,10 +54,11 @@ def check(intent, plan):
     flags["focus_identity_scale"] = abs(after[2]/before[2]-4)<1e-8 and abs(after[3]/before[3]-4)<1e-8 and all(states["focus"][l] == last[l] for l in labels if l != f"label-{focus}")
     split = [box(states["split"][p]) for p in parts]
     actual_parts = {o["id"] for o in plan["objects"] if o["id"].startswith(f"node-{focus}-layer-")}
-    flags["layer_count_separation"] = actual_parts == set(parts) and all(b[1]-(a[1]+a[3])>0 for a,b in zip(split,split[1:]))
+    flags["layer_count_separation"] = actual_parts == set(parts) and all(b[1]-(a[1]+a[3])>0 for a,b in zip(split,split[1:])) and all(abs(b[0]-split[0][0])<1e-7 and abs(b[2]-split[0][2])<1e-7 for b in split)
     tracked = [o["id"] for o in plan["objects"] if o["id"] not in ("phase",)]
     flags["exact_reassembly"] = all(states["focus"][k]==states["reassemble"][k] and last[k]==states["restore"][k] for k in tracked)
-    flags["upright_labels"] = all(s[l]["rotation_deg"]==0 for s in states.values() for l in labels)
+    texts = [o["id"] for o in plan["objects"] if o["kind"]=="text"]
+    flags["upright_labels"] = all(s[l]["rotation_deg"]==0 for s in states.values() for l in texts)
     orbit_plan = dict(states=[s for s in plan["states"] if s["id"] in orbit])
     label_proxy = proxy.evaluate(orbit_plan, labels)
     # Collapse the selected node's contiguous layers into its carrier envelope.
@@ -80,6 +81,11 @@ def check(intent, plan):
             x,y,w,h=box(states[sid][p])
             expected_y=ly-count*h/2+j*h
             binding += [abs(x+w/2-lx),abs(y-expected_y)]
+        for i in range(1,n+1):
+            if i != focus:
+                binding.append(math.dist(center(states[sid][f"node-{i}"]),center(states[sid][f"label-{i}"])))
+    flags["orbit_angle_direction"] = flags["orbit_angle_direction"] and max(binding)<1e-7
+    flags["focus_identity_scale"] = flags["focus_identity_scale"] and max(binding)<1e-7
     return dict(checks=flags,passed=all(flags.values()),check_count=len(flags),
                 orbit_measured_degrees=measured_angles,
                 waypoint_max_error_px=max(waypoint_error),
