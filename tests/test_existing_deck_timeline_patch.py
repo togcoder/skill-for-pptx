@@ -85,7 +85,8 @@ class ExistingDeckTimelinePatchTests(unittest.TestCase):
                 data=src.read(item.filename)
                 if item.filename=="ppt/slides/slide1.xml":
                     root=E.fromstring(data)
-                    props=root.find(".//p:cNvPr",NS)
+                    props=root.find("p:cSld/p:spTree/p:sp/p:nvSpPr/p:cNvPr",NS)
+                    self.assertIsNotNone(props)
                     props.set("name","Plain Source Object")
                     data=E.tostring(root,encoding="UTF-8",xml_declaration=True,standalone=True)
                 dst.writestr(item,data)
