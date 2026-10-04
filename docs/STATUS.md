@@ -1,5 +1,27 @@
 # PPTX Motion Lab — checkpoint
 
+## T012 semantic data motion — 2026-10-05
+
+User added a new product requirement: charts need type-specific animation, and
+standalone hero metrics need dedicated number counting.
+
+Inventory now recognizes classic ChartML subtype/dimensions and standalone
+numeric candidates. `scripts/data_motion_recipes.py` maps chart semantics to
+distinct defaults (baseline-grow, series-trace, segment-sweep, point-build,
+etc.) and emits source-preserving KPI counter recipes.
+
+Director v0.3 requires chart-targeting beats to declare type-specific data motion.
+Hero KPI counter plans must preserve the exact source numeric value and format.
+Data motion remains subordinate to T010/T011 click-beat rhythm.
+
+CI run 37236839744: **103/103 tests pass** + Python compile.
+
+This is semantic/structural evidence only. Native chart build and counter
+playback remain pending.
+
+Reference: `skills/pptx-motion/references/data-motion-recipes.md`.
+Report: `experiments/T012-20261005-data-motion-recipes/REPORT.md`.
+
 ## T011 director click rhythm — 2026-10-05
 
 T010 established click groups in the timing writer. T011 moves that decision
