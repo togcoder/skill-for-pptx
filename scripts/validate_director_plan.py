@@ -4,7 +4,7 @@ import argparse
 import json
 from pathlib import Path
 
-SCRIPT_SOURCES={"provided","speaker-notes","inferred","researched"}
+SCRIPT_SOURCES={"provided","speaker-notes","existing-timing","inferred","researched"}
 TIMING={"on-click","with-previous","after-previous"}
 COMPONENT_KINDS={"shape","text","connector","derived-visual"}
 PROVENANCE={"none","derived-from-source","synthetic-nondata","user-provided"}
