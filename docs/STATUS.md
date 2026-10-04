@@ -1,5 +1,25 @@
 # PPTX Motion Lab — checkpoint
 
+## T014 KPI counter execution — 2026-10-05
+
+T012 hero-metric counters now have a structural v0.4 execution path.
+
+`number_counter` clones the exact source KPI textbox for intermediate values,
+preserves style/geometry, sequences proxy entrance/exit inside one presenter
+click beat, and reveals the untouched source textbox last.
+
+Counter interpolation preserves prefix/suffix/decimal/grouping and rejects
+source-text drift. The source final value is never rewritten.
+
+CI run 37238539416: **120/120 tests pass** + Python compile.
+
+Critical runtime gate remains: exact PowerPoint playback must prove that generated
+entrance effects hide source/proxy shapes until scheduled and that only one value
+is visible at a time.
+
+Task: `research/tasks/T014-kpi-counter-execution.md`.
+Report: `experiments/T014-20261005-kpi-counter-execution/REPORT.md`.
+
 ## T013 native chart execution — 2026-10-05
 
 T012 semantic chart recipes now have a structural native execution path.

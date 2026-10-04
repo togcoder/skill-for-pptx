@@ -1,4 +1,4 @@
-# Existing-deck native timeline patch contract v0.3
+# Existing-deck native timeline patch contract v0.4
 
 This contract is the low-level bridge between a semantic motion-director plan and
 an existing PPTX package.
@@ -21,7 +21,7 @@ identity.
 
 ## Root
 
-- `version`: `"0.3"` for presenter-paced chart-capable patches; `"0.2"` remains the click-beat baseline and `"0.1"` the legacy one-click baseline
+- `version`: `"0.4"` for chart + KPI-counter patches; `"0.3"` remains chart-capable, `"0.2"` click-beat, and `"0.1"` legacy one-click
 - `kind`: `"existing-deck-timeline-patch"`
 - `source_sha256`
 - `slides`
@@ -34,9 +34,9 @@ Each slide patch contains:
 
 - `source_index`: one-based slide index;
 - `stages`: ordered stage list;
-- `click_beats`: required in v0.2/v0.3 and partitions stage IDs into presenter clicks.
+- `click_beats`: required in v0.2+ and partitions stage IDs into presenter clicks.
 
-v0.1/v0.2/v0.3 currently patch only slides with **no existing `p:timing`**. T008 owns safe merge/continuation of pre-existing timing. Existing slide
+v0.1–v0.4 currently patch only slides with **no existing `p:timing`**. T008 owns safe merge/continuation of pre-existing timing. Existing slide
 transitions are preserved. Untargeted slide/package bytes must remain unchanged.
 
 ## Stage
@@ -120,6 +120,34 @@ If fan-out exceeds the configured limit, the writer degrades granularity instead
 of creating an unbounded number of animation behaviors. This is an execution
 safety rule, not permission to change the chart's data.
 
+### number_counter — v0.4
+
+Targets must be an existing top-level text shape.
+
+Required fields:
+
+- `type="number_counter"`
+- exact source `target`
+- `from_value`, `to_value`
+- `steps`: 2..30
+- `decimal_places`: 0..8
+- `prefix`, `suffix`
+- `preserve_final_text`: exact source textbox text
+- optional entrance/exit `filter`, default `fade`
+
+The writer clones the source textbox for intermediate values, preserving its
+shape geometry/style. Proxy IDs/names are new and unique. The original source
+textbox is never rewritten.
+
+Within one presenter click beat:
+
+1. proxy values enter/exit automatically;
+2. the untouched source textbox enters last;
+3. the final state therefore uses the user's original object/value.
+
+This is a synthesized stepped-text counter, not a claim of native PowerPoint
+numeric interpolation.
+
 ## Preservation
 
 The patcher must:
@@ -130,6 +158,8 @@ The patcher must:
 - reject invalid v0.2/v0.3 click-beat partitions or nested `on-click` stages;
 - reject `chart_entrance` against non-chart source objects;
 - record density-guard degradation for chart fan-out;
+- reject counter source-text drift before cloning;
+- preserve the original final KPI textbox and report all generated proxies;
 - reject target slides that already have timing;
 - preserve existing transitions;
 - alter only the targeted slide XML parts;

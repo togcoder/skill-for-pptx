@@ -30,6 +30,7 @@ try:
         VALID_FILTERS, chart_fanout, concrete_chart_filter,
         guard_chart_fanout, ooxml_build_token,
     )
+    from .counter_component import insert_counter_stack
 except ImportError:
     from inspect_pptx import inspect, P
     from add_timeline import (
@@ -41,6 +42,7 @@ except ImportError:
         VALID_FILTERS, chart_fanout, concrete_chart_filter,
         guard_chart_fanout, ooxml_build_token,
     )
+    from counter_component import insert_counter_stack
 
 NS={"p":P,"a":A,"c":C}
 
@@ -65,8 +67,8 @@ def validate_patch_plan(plan):
     errors += [f"missing field: {k}" for k in sorted(required-plan.keys())]
     if errors:
         return errors
-    if plan["version"] not in ("0.1","0.2","0.3"):
-        errors.append("version must be 0.1, 0.2 or 0.3")
+    if plan["version"] not in ("0.1","0.2","0.3","0.4"):
+        errors.append("version must be 0.1, 0.2, 0.3 or 0.4")
     if plan["kind"]!="existing-deck-timeline-patch":
         errors.append("kind must be existing-deck-timeline-patch")
     sha=plan["source_sha256"]
@@ -151,8 +153,8 @@ def validate_patch_plan(plan):
                     if type(value) not in (int,float) or not math.isfinite(value):
                         errors.append(f"slide {idx}: invalid rotate by_deg")
                 elif kind=="chart_entrance":
-                    if plan["version"]!="0.3":
-                        errors.append(f"slide {idx}: chart_entrance requires patch plan v0.3")
+                    if plan["version"] not in ("0.3","0.4"):
+                        errors.append(f"slide {idx}: chart_entrance requires patch plan v0.3+")
                     build=effect.get("build")
                     if build not in ("as-whole","series","category","series-elements","category-elements"):
                         errors.append(f"slide {idx}: unsupported chart build {build}")
@@ -173,13 +175,35 @@ def validate_patch_plan(plan):
                     chart_type=effect.get("chart_type")
                     if not isinstance(chart_type,str) or not chart_type:
                         errors.append(f"slide {idx}: chart_entrance chart_type must be nonempty")
+                elif kind=="number_counter":
+                    if plan["version"]!="0.4":
+                        errors.append(f"slide {idx}: number_counter requires patch plan v0.4")
+                    for key in ("from_value","to_value"):
+                        value=effect.get(key)
+                        if type(value) not in (int,float) or not math.isfinite(value):
+                            errors.append(f"slide {idx}: number_counter {key} must be finite numeric")
+                    steps=effect.get("steps")
+                    if type(steps) is not int or steps<2 or steps>30:
+                        errors.append(f"slide {idx}: number_counter steps must be integer 2..30")
+                    decimals=effect.get("decimal_places")
+                    if type(decimals) is not int or decimals<0 or decimals>8:
+                        errors.append(f"slide {idx}: number_counter decimal_places must be integer 0..8")
+                    for key in ("prefix","suffix"):
+                        if not isinstance(effect.get(key,""),str):
+                            errors.append(f"slide {idx}: number_counter {key} must be text")
+                    final_text=effect.get("preserve_final_text")
+                    if not isinstance(final_text,str) or not final_text:
+                        errors.append(f"slide {idx}: number_counter preserve_final_text must be nonempty")
+                    filt=effect.get("filter","fade")
+                    if filt not in VALID_FILTERS:
+                        errors.append(f"slide {idx}: unsupported counter filter {filt}")
                 else:
                     errors.append(f"slide {idx}: unsupported effect type {kind}")
 
-        if plan["version"] in ("0.2","0.3"):
+        if plan["version"] in ("0.2","0.3","0.4"):
             click_beats=slide.get("click_beats")
             if not isinstance(click_beats,list) or not click_beats:
-                errors.append(f"slide {idx}: click_beats must be nonempty for v0.2/v0.3")
+                errors.append(f"slide {idx}: click_beats must be nonempty for v0.2+")
             else:
                 flattened=[]
                 beat_ids=set()
@@ -261,6 +285,33 @@ def _chart_anim_effect_node(parent,spid,behavior_id,duration_ms,delay_ms,filter_
             bldStep=build_step,
         )
     return effect
+
+
+def _simple_anim_effect_node(parent,spid,behavior_id,duration_ms,delay_ms,transition,filter_name):
+    effect=_sub(parent,"animEffect",transition=transition,filter=filter_name)
+    behavior=_sub(effect,"cBhvr")
+    _behavior_ctn(behavior,behavior_id,duration_ms,delay_ms)
+    target=_sub(behavior,"tgtEl")
+    _sub(target,"spTgt",spid=spid)
+    return effect
+
+
+def _prepare_counter_components(slide_patch,root):
+    generated=[]
+    for stage in slide_patch.get("stages",[]):
+        for effect in stage.get("effects",[]):
+            if effect.get("type")!="number_counter":
+                continue
+            component=insert_counter_stack(root,effect)
+            effect["_counter_component"]=component
+            generated.append({
+                "stage_id":stage.get("id"),
+                "source_target":component["source_target"],
+                "source_text":component["source_text"],
+                "proxy_count":component["proxy_count"],
+                "proxies":component["proxies"],
+            })
+    return generated
 
 
 def _scale_node(parent,effect,spid,behavior_id,duration_ms,delay_ms):
@@ -376,6 +427,7 @@ TRIGGER_NODE_TYPE={
 
 
 def _build_click_beat_existing_timing(slide_patch,root):
+    generated_components=_prepare_counter_components(slide_patch,root)
     available=_shape_targets(root)
     chart_target_ids=_chart_target_ids(root)
     stages=slide_patch["stages"]
@@ -500,6 +552,59 @@ def _build_click_beat_existing_timing(slide_patch,root):
                         "fanout_degraded":guard["degraded"],
                         "fanout_reason":guard["reason"],
                     })
+                elif kind=="number_counter":
+                    component=effect.get("_counter_component")
+                    if not component:
+                        raise ValueError("counter component was not prepared")
+                    proxies=component["proxies"]
+                    filter_name=effect.get("filter","fade")
+                    # Each proxy enters, holds for one unit, then exits. The
+                    # untouched source value enters last and remains visible.
+                    unit=max(1,stage["duration_ms"]//(len(proxies)+1))
+                    behavior_ids=[]
+                    counter_spids=[]
+                    for proxy_index,proxy in enumerate(proxies):
+                        proxy_key=(proxy["source_id"],proxy["source_name"])
+                        proxy_spid=available.get(proxy_key)
+                        if proxy_spid is None:
+                            raise ValueError(f"generated counter proxy missing from shape tree: {proxy_key}")
+                        enter_id=next_id; next_id+=1
+                        exit_id=next_id; next_id+=1
+                        _simple_anim_effect_node(
+                            stage_children,proxy_spid,enter_id,max(1,unit//3),
+                            proxy_index*unit,"in",filter_name
+                        )
+                        _simple_anim_effect_node(
+                            stage_children,proxy_spid,exit_id,max(1,unit//3),
+                            proxy_index*unit+max(1,(2*unit)//3),"out",filter_name
+                        )
+                        behavior_ids.extend([enter_id,exit_id])
+                        behavior_count+=2
+                        counter_spids.append(proxy_spid)
+                        animated[proxy_key]=proxy_spid
+                        stage_targets.add(proxy_spid)
+
+                    final_enter_id=next_id; next_id+=1
+                    _simple_anim_effect_node(
+                        stage_children,spid,final_enter_id,max(1,unit//3),
+                        len(proxies)*unit,"in",filter_name
+                    )
+                    behavior_ids.append(final_enter_id)
+                    behavior_count+=1
+                    animated[key]=spid
+                    stage_targets.add(spid)
+                    effect_receipts.append({
+                        "type":kind,
+                        "source_id":key[0],
+                        "source_name":key[1],
+                        "source_text":component["source_text"],
+                        "proxy_count":len(proxies),
+                        "proxy_texts":[p["text"] for p in proxies],
+                        "proxy_spids":counter_spids,
+                        "behavior_ids":behavior_ids,
+                        "filter":filter_name,
+                        "final_behavior_id":final_enter_id,
+                    })
                 else:
                     behavior_id=next_id; next_id+=1
                     if kind=="motion_path":
@@ -572,6 +677,7 @@ def _build_click_beat_existing_timing(slide_patch,root):
             {"spid":spid,**record}
             for spid,record in sorted(chart_builds.items(),key=lambda item:int(item[0]))
         ],
+        "generated_components":generated_components,
         "animated_objects":[{"source_id":k[0],"source_name":k[1]} for k in animated],
         "click_beats":receipts,
     }
