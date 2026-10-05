@@ -1,0 +1,55 @@
+# Motion Director report
+
+- source sha256: `b9f4c97acf488ac9ba8211e6b7e69f16230c1facf444269c55ae82cc4138820d`
+- output sha256: `f72011cc9dae26fc19e61dfd0ff8caa0e12627309561767c6da231e0b5962261`
+- structural checks: PASS
+- PowerPoint playback: **not verified** (structural + simulated states only)
+
+## Slides
+### Slide 1
+unchanged — title slide kept static
+
+### Slide 2
+2 click group(s)
+- click 1: +Text 1, +Text 2
+- click 2: +Text 3, +Text 4
+
+### Slide 3
+2 click group(s)
+- click 1: +Text 1, +Text 2 ¶0 'Để có cái nhìn chính xác và toàn diện, t'
+- click 2: +Text 2 ¶2 'Xét về đời sống sinh hoạt, nước sạch duy'
+
+### Slide 4
+2 click group(s)
+- click 1: +Text 1 ¶0 'Đáng buồn thay, thực trạng hiện nay lại '
+- click 2: +Text 1 ¶2 'Nhìn về Việt Nam, một quốc gia có mạng l'
+
+### Slide 5
+2 click group(s)
+- click 1: +Text 1 ¶0 'Để tìm ra lối thoát cho cuộc khủng hoảng'
+- click 2: +Text 1 ¶2 'Tuy nhiên, nguyên nhân cốt lõi và đáng t'
+
+### Slide 6
+2 click group(s)
+- click 1: +Text 1 ¶0 'Hệ quả tất yếu từ sự thờ ơ của con người'
+- click 2: +Text 1 ¶2 'Tiếp theo là thiệt hại nặng nề về kinh t'
+
+### Slide 7
+2 click group(s)
+- click 1: +Text 1 ¶0 'Mặc dù hậu quả đã rõ ràng, trong xã hội '
+- click 2: +Text 1 ¶2 'Tuy nhiên, quan điểm ấy hoàn toàn sai lầ'
+
+### Slide 8
+2 click group(s)
+- click 1: +Text 1, +Text 2 ¶0 'Để giải quyết tận gốc cuộc khủng hoảng n'
+- click 2: +Text 2 ¶2 'Nâng cao hơn một cấp độ, gia đình cần áp'
+
+### Slide 9
+2 click group(s)
+- click 1: +Text 1, +Text 2 ¶0 'Tuy nhiên, nếu chỉ dừng lại ở phạm vi gi'
+- click 2: +Text 2 ¶2 'Về lâu dài, các cơ quan quản lý cần đầu '
+
+### Slide 10
+2 click group(s)
+- click 1: +Text 2, +Text 3
+- click 2: +Text 4, +Text 5

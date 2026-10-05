@@ -1,0 +1,650 @@
+{
+  "version": "0.5",
+  "kind": "existing-deck-motion-director",
+  "source": {
+    "pptx_sha256": "b9f4c97acf488ac9ba8211e6b7e69f16230c1facf444269c55ae82cc4138820d",
+    "inventory_version": "0.1",
+    "source_slide_count": 10
+  },
+  "user_instruction": "Làm bài thuyết trình này rõ ràng, mạch lạc và có chuyển động chuyên nghiệp.",
+  "script": {
+    "source": "inferred",
+    "summary": "Each slide reveals its content in reading order, one talking point per click; data before conclusions; existing animation preserved.",
+    "evidence": [
+      "slide titles and reading order",
+      "no speaker notes",
+      "no existing animation"
+    ],
+    "beats": [
+      "slide 1: BÀI VĂN NGHỊ LUẬN",
+      "slide 2: I. MỞ BÀI",
+      "slide 3: II. THÂN BÀI",
+      "slide 4: 2. Thực trạng thiếu nguồn nước sạch hiện nay",
+      "slide 5: 3. Nguyên nhân dẫn đến thực trạng",
+      "slide 6: 4. Hậu quả của việc thiếu nước sạch",
+      "slide 7: 5. Ý kiến trái chiều và Phản bác",
+      "slide 8: 6. Hệ thống giải pháp",
+      "slide 9: 6. Hệ thống giải pháp",
+      "slide 10: III. KẾT BÀI"
+    ]
+  },
+  "preservation": {
+    "preserve_text_by_default": true,
+    "preserve_media_by_default": true,
+    "preserve_theme_by_default": true,
+    "preserve_slide_order_by_default": true,
+    "slide_count_policy": "preserve"
+  },
+  "slides": [
+    {
+      "source_index": 2,
+      "role": "report slide",
+      "objective": "Audience follows slide 2 one idea at a time.",
+      "beats": [
+        {
+          "id": "block-1",
+          "purpose": "Reveal 'Cách 1: Đi từ quy luật sinh tồn' with its text.",
+          "operation": "stagger-reveal",
+          "targets": [
+            "Text 1",
+            "Text 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "block-3",
+          "purpose": "Reveal 'Cách 2: Đi từ hình ảnh tương phản' with its text.",
+          "operation": "stagger-reveal",
+          "targets": [
+            "Text 3",
+            "Text 4"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-2",
+          "purpose": "Present 'Cách 1: Đi từ quy luật sinh tồn'.",
+          "motion_beats": [
+            "block-1"
+          ],
+          "stable_state": "Label and text visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-4",
+          "purpose": "Present 'Cách 2: Đi từ hình ảnh tương phản'.",
+          "motion_beats": [
+            "block-3"
+          ],
+          "stable_state": "Label and text visible.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Each labelled alternative is a separate talking point."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 3,
+      "role": "report slide",
+      "objective": "Audience follows slide 3 one idea at a time.",
+      "beats": [
+        {
+          "id": "label-1",
+          "purpose": "Introduce '1. Giải thích khái niệm và vai trò của nước sạch'.",
+          "operation": "reveal",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "para-2",
+          "purpose": "Reveal paragraph 0 of '1. Giải thích khái niệm và vai trò của nước sạch'.",
+          "operation": "text-build",
+          "targets": [
+            "Text 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "after-previous",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            0
+          ]
+        },
+        {
+          "id": "para-4",
+          "purpose": "Reveal paragraph 2 of '1. Giải thích khái niệm và vai trò của nước sạch'.",
+          "operation": "text-build",
+          "targets": [
+            "Text 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            2
+          ]
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-3",
+          "purpose": "Present '1. Giải thích khái niệm và vai trò của nước sạch'.",
+          "motion_beats": [
+            "label-1",
+            "para-2"
+          ],
+          "stable_state": "Label and its first paragraph visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-5",
+          "purpose": "Advance to the next paragraph.",
+          "motion_beats": [
+            "para-4"
+          ],
+          "stable_state": "Next paragraph visible.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "The paragraph turns to a separate idea for the presenter to explain."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 4,
+      "role": "report slide",
+      "objective": "Audience follows slide 4 one idea at a time.",
+      "beats": [
+        {
+          "id": "point-1",
+          "purpose": "Reveal point: Đáng buồn thay, thực trạng hiện nay lại vẽ nên một bức tranh",
+          "operation": "text-build",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            0
+          ]
+        },
+        {
+          "id": "point-3",
+          "purpose": "Reveal point: Nhìn về Việt Nam, một quốc gia có mạng lưới sông ngòi dày đặ",
+          "operation": "text-build",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            2
+          ]
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-2",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-1"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-4",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-3"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 5,
+      "role": "report slide",
+      "objective": "Audience follows slide 5 one idea at a time.",
+      "beats": [
+        {
+          "id": "point-1",
+          "purpose": "Reveal point: Để tìm ra lối thoát cho cuộc khủng hoảng này, việc phân tích",
+          "operation": "text-build",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            0
+          ]
+        },
+        {
+          "id": "point-3",
+          "purpose": "Reveal point: Tuy nhiên, nguyên nhân cốt lõi và đáng trách nhất vẫn xuất p",
+          "operation": "text-build",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            2
+          ]
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-2",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-1"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-4",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-3"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 6,
+      "role": "report slide",
+      "objective": "Audience follows slide 6 one idea at a time.",
+      "beats": [
+        {
+          "id": "point-1",
+          "purpose": "Reveal point: Hệ quả tất yếu từ sự thờ ơ của con người là vô cùng khôn lườ",
+          "operation": "text-build",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            0
+          ]
+        },
+        {
+          "id": "point-3",
+          "purpose": "Reveal point: Tiếp theo là thiệt hại nặng nề về kinh tế - xã hội: đồng ruộ",
+          "operation": "text-build",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            2
+          ]
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-2",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-1"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-4",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-3"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 7,
+      "role": "report slide",
+      "objective": "Audience follows slide 7 one idea at a time.",
+      "beats": [
+        {
+          "id": "point-1",
+          "purpose": "Reveal point: Mặc dù hậu quả đã rõ ràng, trong xã hội vẫn tồn tại những ý ",
+          "operation": "text-build",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            0
+          ]
+        },
+        {
+          "id": "point-3",
+          "purpose": "Reveal point: Tuy nhiên, quan điểm ấy hoàn toàn sai lầm. Nước trên hành ti",
+          "operation": "text-build",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            2
+          ]
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-2",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-1"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-4",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-3"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 8,
+      "role": "report slide",
+      "objective": "Audience follows slide 8 one idea at a time.",
+      "beats": [
+        {
+          "id": "label-1",
+          "purpose": "Introduce 'Đối với cá nhân và gia đình'.",
+          "operation": "reveal",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "para-2",
+          "purpose": "Reveal paragraph 0 of 'Đối với cá nhân và gia đình'.",
+          "operation": "text-build",
+          "targets": [
+            "Text 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "after-previous",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            0
+          ]
+        },
+        {
+          "id": "para-4",
+          "purpose": "Reveal paragraph 2 of 'Đối với cá nhân và gia đình'.",
+          "operation": "text-build",
+          "targets": [
+            "Text 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            2
+          ]
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-3",
+          "purpose": "Present 'Đối với cá nhân và gia đình'.",
+          "motion_beats": [
+            "label-1",
+            "para-2"
+          ],
+          "stable_state": "Label and its first paragraph visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-5",
+          "purpose": "Advance to the next paragraph.",
+          "motion_beats": [
+            "para-4"
+          ],
+          "stable_state": "Next paragraph visible.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "The paragraph turns to a separate idea for the presenter to explain."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 9,
+      "role": "report slide",
+      "objective": "Audience follows slide 9 one idea at a time.",
+      "beats": [
+        {
+          "id": "label-1",
+          "purpose": "Introduce 'Đối với cộng đồng xã hội và cơ quan quản lý'.",
+          "operation": "reveal",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "para-2",
+          "purpose": "Reveal paragraph 0 of 'Đối với cộng đồng xã hội và cơ quan quản lý'.",
+          "operation": "text-build",
+          "targets": [
+            "Text 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "after-previous",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            0
+          ]
+        },
+        {
+          "id": "para-4",
+          "purpose": "Reveal paragraph 2 of 'Đối với cộng đồng xã hội và cơ quan quản lý'.",
+          "operation": "text-build",
+          "targets": [
+            "Text 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            2
+          ]
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-3",
+          "purpose": "Present 'Đối với cộng đồng xã hội và cơ quan quản lý'.",
+          "motion_beats": [
+            "label-1",
+            "para-2"
+          ],
+          "stable_state": "Label and its first paragraph visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-5",
+          "purpose": "Advance to the next paragraph.",
+          "motion_beats": [
+            "para-4"
+          ],
+          "stable_state": "Next paragraph visible.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "The paragraph turns to a separate idea for the presenter to explain."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 10,
+      "role": "report slide",
+      "objective": "Audience follows slide 10 one idea at a time.",
+      "beats": [
+        {
+          "id": "block-1",
+          "purpose": "Reveal 'Cách 1: Khẳng định và thôi thúc hành động' with its text.",
+          "operation": "stagger-reveal",
+          "targets": [
+            "Text 2",
+            "Text 3"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "block-3",
+          "purpose": "Reveal 'Cách 2: Mở rộng, gợi mở triết lý' with its text.",
+          "operation": "stagger-reveal",
+          "targets": [
+            "Text 4",
+            "Text 5"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-2",
+          "purpose": "Present 'Cách 1: Khẳng định và thôi thúc hành động'.",
+          "motion_beats": [
+            "block-1"
+          ],
+          "stable_state": "Label and text visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-4",
+          "purpose": "Present 'Cách 2: Mở rộng, gợi mở triết lý'.",
+          "motion_beats": [
+            "block-3"
+          ],
+          "stable_state": "Label and text visible.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Each labelled alternative is a separate talking point."
+        }
+      ],
+      "components": []
+    }
+  ],
+  "target_slide_count": 10,
+  "research_metadata": {
+    "sources": [],
+    "draft_notes": {
+      "1": "title slide kept static",
+      "2": "2 click(s), 2 motion beat(s)",
+      "3": "2 click(s), 3 motion beat(s)",
+      "4": "2 click(s), 2 motion beat(s)",
+      "5": "2 click(s), 2 motion beat(s)",
+      "6": "2 click(s), 2 motion beat(s)",
+      "7": "2 click(s), 2 motion beat(s)",
+      "8": "2 click(s), 3 motion beat(s)",
+      "9": "2 click(s), 3 motion beat(s)",
+      "10": "2 click(s), 2 motion beat(s)"
+    },
+    "style": "modern",
+    "drafted_by": "motion_director.py heuristic v0.1"
+  }
+}

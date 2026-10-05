@@ -58,6 +58,10 @@ prettier guess.
   by chart type; never a generic reveal. Counters (`--counters`) add hidden
   proxy text shapes, which clutter edit view and PDF export — use only for a
   true hero number and say so.
+- **Text-box decks.** Many decks have no placeholders. The topmost short text
+  is the title and stays static. A label ("Cách 1: …") reveals together with
+  the text block under it. Each separate paragraph of a dense body (claim, then
+  rebuttal) gets its own click. Never split a wrapped heading.
 - **Conclusions last.** Evidence (chart/process) first, then the takeaway on its
   own click.
 - **One motion language per deck.** Pick a style and stay consistent:

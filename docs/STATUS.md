@@ -1,5 +1,26 @@
 # PPTX Motion Lab — checkpoint
 
+## T022 T009 recompile + text-box deck direction — 2026-10-05
+
+Continued Codex's T009 arm C (PR #22, which its review held back from merging).
+The plan, unchanged, was recompiled through T019 on a timing-stripped
+reconstruction (0 inventory differences over 31 shapes). In LibreOffice's
+reading, the T009 candidate has 21 effects with 0 presets and all stages at
+0s; R1 has 21/21 presets, with staged reveals at 0s/0.32s. A paragraph-click
+variant (R2, 19 clicks) separates claims from rebuttals without content edits.
+
+The T019 autonomous draft failed on this text-box-only deck: 40 clicks
+(titles animated, wrapped titles split, labels separated). Implicit-title,
+title-zone and label-body pairing rules bring it to 18 clicks. That matches
+Codex's grouping on slides 2 and 10 and differs only by keeping slide 1 static.
+
+`scripts/render_identity.py` compares renders in RGB. A negative control shows
+the T009 RGBA `getbbox()` method misses real changes. R1, R2 and auto2 render
+10/10 identical. **176 tests pass.** Native playback is still pending: play the
+two PPTX files in `experiments/T022-20261005-claude-t009-recompile/output/`.
+
+Report: experiments/T022-20261005-claude-t009-recompile/REPORT.md.
+
 ## T019 canonical timing + one-command Motion Director — 2026-10-05
 
 Product path now exists end to end: `scripts/motion_director.py`

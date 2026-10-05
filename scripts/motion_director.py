@@ -284,10 +284,53 @@ def _reading_key(unit_objs):
     return (round(min(ys,default=1)/0.12),min(xs,default=1))
 
 
+def _is_heading(o):
+    """Short text such as a title, label or wrapped heading (T022)."""
+    text=o["text"] or ""
+    return bool(o["has_text_body"] and text and len(text)<=90 and len(o["paragraphs"])<=2)
+
+
+def _implicit_title(slide):
+    """Title of a slide built from plain text boxes (no title placeholder)."""
+    if any(o["placeholder"] and o["placeholder"]["type"] in TITLE_TYPES for o in slide["objects"]):
+        return None
+    cands=[o for o in slide["objects"] if o["geometry"] and _is_heading(o) and o["geometry"]["y"]<0.2]
+    return min(cands,key=lambda o:(o["geometry"]["y"],o["geometry"]["x"])) if cands else None
+
+
+def _is_text_title_slide(slide):
+    """First slide made only of heading-like text (no placeholders)."""
+    if slide["index"]!=1 or not slide["objects"]:
+        return False
+    texts=[o for o in slide["objects"] if o["text"]]
+    return bool(texts) and all(_is_heading(o) for o in texts) and not any(
+        o["kind"] in ("chart","table") for o in slide["objects"])
+
+
+def _label_body_pairs(objs,used):
+    """Pair a short label with the larger text block directly below it."""
+    pairs=[]
+    texts=[o for o in objs if o["geometry"] and o["text"] and o["id"] not in used]
+    for label in sorted(texts,key=lambda o:o["geometry"]["y"]):
+        if label["id"] in used or not _is_heading(label) or len(label["paragraphs"])>1:
+            continue
+        lg=label["geometry"]
+        below=[b for b in texts if b is not label and b["id"] not in used
+               and -0.02<=b["geometry"]["y"]-(lg["y"]+lg["h"])<0.05
+               and min(lg["x"]+lg["w"],b["geometry"]["x"]+b["geometry"]["w"])-max(lg["x"],b["geometry"]["x"])>0.3*lg["w"]
+               and (len(b["text"])>150 or b["geometry"]["h"]>=2*lg["h"])]
+        if below:
+            body=min(below,key=lambda b:b["geometry"]["y"])
+            pairs.append([label,body])
+            used.update([label["id"],body["id"]])
+    return pairs
+
+
 def _units(slide):
+    title=_implicit_title(slide)
     objs=[o for o in slide["objects"]
           if not (o["placeholder"] and o["placeholder"]["type"] in TITLE_TYPES|CHROME_TYPES)
-          and not o["already_animated"]]
+          and not o["already_animated"] and o is not title]
     with_geom=[o for o in objs if o["geometry"]]
     used=set()
     units=[]
@@ -329,6 +372,16 @@ def _units(slide):
             used.update([m["id"]]+[c["id"] for c in incoming])
         units.append({"kind":"process","objs":members,"steps":steps})
 
+    for pair in _label_body_pairs(objs,used):
+        units.append({"kind":"labeled","objs":pair})
+
+    # A short heading sitting directly under the title belongs to the title zone.
+    if title is not None:
+        tg=title["geometry"]
+        for o in with_geom:
+            if o["id"] not in used and _is_heading(o) and -0.02<=o["geometry"]["y"]-(tg["y"]+tg["h"])<0.06:
+                used.add(o["id"])
+
     for o in objs:
         if o["id"] in used:
             continue
@@ -343,7 +396,7 @@ def _units(slide):
             continue
         if o["has_text_body"] and not o["text"]:
             continue
-        if len(o["paragraphs"])>=2:
+        if len(o["paragraphs"])>=2 and not _is_heading(o):
             units.append({"kind":"bullets","objs":[o]})
         else:
             kind="picture" if o["kind"]=="picture" else ("text" if o["text"] else "shape")
@@ -351,6 +404,16 @@ def _units(slide):
         used.add(o["id"])
     units.sort(key=lambda u:_reading_key(u["objs"]))
     return units
+
+
+def _paragraph_groups(o):
+    groups=[]
+    for p in o["paragraphs"]:
+        if p["level"]>0 and groups:
+            groups[-1].append(p["index"])
+        else:
+            groups.append([p["index"]])
+    return groups
 
 
 def _beat(bid,purpose,operation,targets,timing,effect=None,duration=None,**extra):
@@ -378,7 +441,7 @@ def draft_slide(slide,style="modern",counters=False):
     if slide["existing_click_groups"]:
         return None,"existing native animation preserved as the slide's choreography"
     types={(o["placeholder"] or {}).get("type") for o in slide["objects"]}
-    if "ctrTitle" in types or ("subTitle" in types and len(slide["objects"])<=3):
+    if "ctrTitle" in types or ("subTitle" in types and len(slide["objects"])<=3) or _is_text_title_slide(slide):
         return None,"title slide kept static"
     units=_units(slide)
     if not units:
@@ -407,6 +470,35 @@ def draft_slide(slide,style="modern",counters=False):
             beats.append(b)
             clicks.append(_click(nid("click"),"Show the data.",[b["id"]],"Complete chart visible for discussion.",
                                  "presenter-explanation","Data is discussed before its interpretation." if clicks else "First reveal on this slide."))
+        elif kind=="labeled":
+            label,body=unit["objs"]
+            lp,ld=fx["text"]
+            groups=_paragraph_groups(body) if len(body["paragraphs"])>=2 else []
+            if groups and len(groups)<=6:
+                lb=_beat(nid("label"),f"Introduce '{_label(label)}'.","reveal",[label["token"]],"on-click",lp,ld)
+                beats.append(lb)
+                members=[lb["id"]]
+                bp,bd=fx["bullet"]
+                for gi,g in enumerate(groups):
+                    pb=_beat(nid("para"),f"Reveal paragraph {g[0]} of '{_label(label)}'.","text-build",[body["token"]],
+                             "after-previous" if gi==0 else "on-click",bp,bd,paragraphs=g)
+                    beats.append(pb)
+                    if gi==0:
+                        members.append(pb["id"])
+                        clicks.append(_click(nid("click"),f"Present '{_label(label)}'.",members,
+                                             "Label and its first paragraph visible.","presenter-explanation",
+                                             "New labelled section." if clicks else "First reveal on this slide."))
+                    else:
+                        clicks.append(_click(nid("click"),"Advance to the next paragraph.",[pb["id"]],
+                                             "Next paragraph visible.","presenter-explanation",
+                                             "The paragraph turns to a separate idea for the presenter to explain."))
+            else:
+                b=_beat(nid("block"),f"Reveal '{_label(label)}' with its text.","stagger-reveal",
+                        [label["token"],body["token"]],"on-click",fx["text"][0],fx["text"][1])
+                beats.append(b)
+                clicks.append(_click(nid("click"),f"Present '{_label(label)}'.",[b["id"]],"Label and text visible.",
+                                     "presenter-explanation",
+                                     "Each labelled alternative is a separate talking point." if clicks else "First reveal on this slide."))
         elif kind=="bullets":
             o=unit["objs"][0]
             groups=[]
