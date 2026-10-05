@@ -1,0 +1,1461 @@
+{
+  "version": "0.1",
+  "kind": "existing-deck-inventory",
+  "source_file": "Bai_van_nghi_luan_thieu_nguon_nuoc_sach_theo_mau.pptx",
+  "source_sha256": "6fe3cf608e520093a124f6b6eee8de7224a3cef9cd65048009b658f293d08465",
+  "errors": [],
+  "slide_size_emu": {
+    "width": 12192000,
+    "height": 6858000
+  },
+  "slides": [
+    {
+      "index": 1,
+      "part": "ppt/slides/slide1.xml",
+      "title_candidate": "BÀI VĂN NGHỊ LUẬN",
+      "text": "BÀI VĂN NGHỊ LUẬN\nTÌNH TRẠNG THIẾU NGUỒNNƯỚC SẠCH HIỆN NAY\nCHỦ ĐỀ : CON NGƯỜI TRONG MỐIQUAN HỆ VỚI THIÊN NHIÊN",
+      "speaker_notes": null,
+      "shape_count": 3,
+      "shapes": [
+        {
+          "z_index": 1,
+          "kind": "shape",
+          "id": "2",
+          "name": "Text 0",
+          "descr": null,
+          "text": "BÀI VĂN NGHỊ LUẬN",
+          "geometry": {
+            "x": 0.09,
+            "y": 0.12666666666666668,
+            "w": 0.8175,
+            "h": 0.07333333333333333,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 1097280,
+            "y_emu": 868680,
+            "cx_emu": 9966960,
+            "cy_emu": 502920,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Arial",
+            "font_size_pt": 27.0,
+            "bold": true,
+            "text_color": "#FF0000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        },
+        {
+          "z_index": 2,
+          "kind": "shape",
+          "id": "3",
+          "name": "Text 1",
+          "descr": null,
+          "text": "TÌNH TRẠNG THIẾU NGUỒNNƯỚC SẠCH HIỆN NAY",
+          "geometry": {
+            "x": 0.075,
+            "y": 0.2693333333333333,
+            "w": 0.8475,
+            "h": 0.11333333333333333,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 914400,
+            "y_emu": 1847088,
+            "cx_emu": 10332720,
+            "cy_emu": 777240,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Arial",
+            "font_size_pt": 27.0,
+            "bold": true,
+            "text_color": "#0070C0"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        },
+        {
+          "z_index": 3,
+          "kind": "shape",
+          "id": "4",
+          "name": "Text 2",
+          "descr": null,
+          "text": "CHỦ ĐỀ : CON NGƯỜI TRONG MỐIQUAN HỆ VỚI THIÊN NHIÊN",
+          "geometry": {
+            "x": 0.09,
+            "y": 0.44533333333333336,
+            "w": 0.8175,
+            "h": 0.096,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 1097280,
+            "y_emu": 3054096,
+            "cx_emu": 9966960,
+            "cy_emu": 658368,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Times New Roman",
+            "font_size_pt": 22.0,
+            "bold": true,
+            "text_color": "#FF0000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "rId1",
+          "kind": "slideLayout",
+          "target": "ppt/slideLayouts/slideLayout2.xml",
+          "external": false
+        },
+        {
+          "id": "rId2",
+          "kind": "notesSlide",
+          "target": "ppt/notesSlides/notesSlide1.xml",
+          "external": false
+        }
+      ],
+      "has_transition": false,
+      "has_timing": false,
+      "transition_summary": null,
+      "timing_summary": null,
+      "layout_part": "ppt/slideLayouts/slideLayout2.xml"
+    },
+    {
+      "index": 2,
+      "part": "ppt/slides/slide2.xml",
+      "title_candidate": "I. MỞ BÀI",
+      "text": "I. MỞ BÀI\nCách 1: Đi từ quy luật sinh tồn\nTự nhiên không cần con người, nhưng con người lại không thể tồn tại dù chỉ một ngày nếu thiếu đi tự nhiên. Thế nhưng, nghịch lý thay, sinh thể duy nhất được tạo hóa ưu ái ban cho trí tuệ lại đang là kẻ “tay đốt nhà” lớn nhất, vô tình phá hủy chính môi trường sống của mình. Trong số các cuộc khủng hoảng hiện nay, tình trạng thiếu nguồn nước sạch nghiêm trọng đang gióng lên hồi chuông báo động đỏ, đòi hỏi chúng ta phải thức tỉnh và hành động kịp thời trước khi quá muộn.\nCách 2: Đi từ hình ảnh tương phản\nNgười ta từng say sưa ngắm những dòng sông trong vắt, hiền hòa in bóng mây bay, để rồi hôm nay phải giật mình, lặng người trước những khúc sông nghẹt thở vì rác và dòng nước sặc mùi hóa chất. Thiên nhiên vẫn luôn chắt chiu từng giọt nước mát lành để nuôi dưỡng sự sống, nhưng con người lại đang làm tổn thương mẹ Trái Đất bằng những hành động vô tâm. Đã đến lúc chúng ta phải nhìn thẳng vào tình trạng khan hiếm và thiếu hụt nguồn nước sạch trong cuộc sống hiện nay.",
+      "speaker_notes": null,
+      "shape_count": 5,
+      "shapes": [
+        {
+          "z_index": 1,
+          "kind": "shape",
+          "id": "2",
+          "name": "Text 0",
+          "descr": null,
+          "text": "I. MỞ BÀI",
+          "geometry": {
+            "x": 0.0135,
+            "y": 0.024,
+            "w": 0.97125,
+            "h": 0.048,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 164592,
+            "y_emu": 164592,
+            "cx_emu": 11841480,
+            "cy_emu": 329184,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Times New Roman",
+            "font_size_pt": 20.0,
+            "bold": null,
+            "text_color": "#FF0000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        },
+        {
+          "z_index": 2,
+          "kind": "shape",
+          "id": "3",
+          "name": "Text 1",
+          "descr": null,
+          "text": "Cách 1: Đi từ quy luật sinh tồn",
+          "geometry": {
+            "x": 0.04125,
+            "y": 0.11333333333333333,
+            "w": 0.9,
+            "h": 0.037333333333333336,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 502920,
+            "y_emu": 777240,
+            "cx_emu": 10972800,
+            "cy_emu": 256032,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Times New Roman",
+            "font_size_pt": 16.0,
+            "bold": true,
+            "text_color": "#000000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        },
+        {
+          "z_index": 3,
+          "kind": "shape",
+          "id": "4",
+          "name": "Text 2",
+          "descr": null,
+          "text": "Tự nhiên không cần con người, nhưng con người lại không thể tồn tại dù chỉ một ngày nếu thiếu đi tự nhiên. Thế nhưng, nghịch lý thay, sinh thể duy nhất được tạo hóa ưu ái ban cho trí tuệ lại đang là kẻ “tay đốt nhà” lớn nhất, vô tình phá hủy chính môi trường sống của mình. Trong số các cuộc khủng hoảng hiện nay, tình trạng thiếu nguồn nước sạch nghiêm trọng đang gióng lên hồi chuông báo động đỏ, đòi hỏi chúng ta phải thức tỉnh và hành động kịp thời trước khi quá muộn.",
+          "geometry": {
+            "x": 0.05625,
+            "y": 0.16266666666666665,
+            "w": 0.885,
+            "h": 0.3,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 685800,
+            "y_emu": 1115568,
+            "cx_emu": 10789920,
+            "cy_emu": 2057400,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Times New Roman",
+            "font_size_pt": 16.8,
+            "bold": null,
+            "text_color": "#000000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        },
+        {
+          "z_index": 4,
+          "kind": "shape",
+          "id": "5",
+          "name": "Text 3",
+          "descr": null,
+          "text": "Cách 2: Đi từ hình ảnh tương phản",
+          "geometry": {
+            "x": 0.04125,
+            "y": 0.496,
+            "w": 0.9,
+            "h": 0.037333333333333336,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 502920,
+            "y_emu": 3401568,
+            "cx_emu": 10972800,
+            "cy_emu": 256032,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Times New Roman",
+            "font_size_pt": 16.0,
+            "bold": true,
+            "text_color": "#000000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        },
+        {
+          "z_index": 5,
+          "kind": "shape",
+          "id": "6",
+          "name": "Text 4",
+          "descr": null,
+          "text": "Người ta từng say sưa ngắm những dòng sông trong vắt, hiền hòa in bóng mây bay, để rồi hôm nay phải giật mình, lặng người trước những khúc sông nghẹt thở vì rác và dòng nước sặc mùi hóa chất. Thiên nhiên vẫn luôn chắt chiu từng giọt nước mát lành để nuôi dưỡng sự sống, nhưng con người lại đang làm tổn thương mẹ Trái Đất bằng những hành động vô tâm. Đã đến lúc chúng ta phải nhìn thẳng vào tình trạng khan hiếm và thiếu hụt nguồn nước sạch trong cuộc sống hiện nay.",
+          "geometry": {
+            "x": 0.05625,
+            "y": 0.544,
+            "w": 0.885,
+            "h": 0.32,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 685800,
+            "y_emu": 3730752,
+            "cx_emu": 10789920,
+            "cy_emu": 2194560,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Times New Roman",
+            "font_size_pt": 16.8,
+            "bold": null,
+            "text_color": "#000000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "rId1",
+          "kind": "slideLayout",
+          "target": "ppt/slideLayouts/slideLayout2.xml",
+          "external": false
+        },
+        {
+          "id": "rId2",
+          "kind": "notesSlide",
+          "target": "ppt/notesSlides/notesSlide2.xml",
+          "external": false
+        }
+      ],
+      "has_transition": false,
+      "has_timing": false,
+      "transition_summary": null,
+      "timing_summary": null,
+      "layout_part": "ppt/slideLayouts/slideLayout2.xml"
+    },
+    {
+      "index": 3,
+      "part": "ppt/slides/slide3.xml",
+      "title_candidate": "II. THÂN BÀI",
+      "text": "II. THÂN BÀI\n1. Giải thích khái niệm và vai trò của nước sạch\nĐể có cái nhìn chính xác và toàn diện, trước hết chúng ta cần làm rõ khái niệm cốt lõi: nước sạch là nguồn tài nguyên vô giá đã qua xử lý hoặc tồn tại tự nhiên, bảo đảm không chứa chất độc hại, kim loại nặng, vi sinh vật gây bệnh và đạt tiêu chuẩn an toàn cho sức khỏe con người.Xét về đời sống sinh hoạt, nước sạch duy trì những hoạt động cơ bản nhất như ăn uống, tắm rửa, giữ gìn vệ sinh dịch tễ và hỗ trợ cơ thể chuyển hóa, đào thải độc tố. Xét về sản xuất, nước là tư liệu cốt lõi trong nông nghiệp, công nghiệp, làm mát máy móc và chế biến. Tóm lại, nước sạch chính là mạch nguồn nuôi dưỡng toàn bộ nền kinh tế và văn minh nhân loại.",
+      "speaker_notes": null,
+      "shape_count": 3,
+      "shapes": [
+        {
+          "z_index": 1,
+          "kind": "shape",
+          "id": "2",
+          "name": "Text 0",
+          "descr": null,
+          "text": "II. THÂN BÀI",
+          "geometry": {
+            "x": 0.0135,
+            "y": 0.024,
+            "w": 0.97125,
+            "h": 0.048,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 164592,
+            "y_emu": 164592,
+            "cx_emu": 11841480,
+            "cy_emu": 329184,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Times New Roman",
+            "font_size_pt": 20.0,
+            "bold": null,
+            "text_color": "#FF0000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        },
+        {
+          "z_index": 2,
+          "kind": "shape",
+          "id": "3",
+          "name": "Text 1",
+          "descr": null,
+          "text": "1. Giải thích khái niệm và vai trò của nước sạch",
+          "geometry": {
+            "x": 0.0165,
+            "y": 0.07333333333333333,
+            "w": 0.96,
+            "h": 0.036,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 201168,
+            "y_emu": 502920,
+            "cx_emu": 11704320,
+            "cy_emu": 246888,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Times New Roman",
+            "font_size_pt": 13.0,
+            "bold": true,
+            "text_color": "#000000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        },
+        {
+          "z_index": 3,
+          "kind": "shape",
+          "id": "4",
+          "name": "Text 2",
+          "descr": null,
+          "text": "Để có cái nhìn chính xác và toàn diện, trước hết chúng ta cần làm rõ khái niệm cốt lõi: nước sạch là nguồn tài nguyên vô giá đã qua xử lý hoặc tồn tại tự nhiên, bảo đảm không chứa chất độc hại, kim loại nặng, vi sinh vật gây bệnh và đạt tiêu chuẩn an toàn cho sức khỏe con người.Xét về đời sống sinh hoạt, nước sạch duy trì những hoạt động cơ bản nhất như ăn uống, tắm rửa, giữ gìn vệ sinh dịch tễ và hỗ trợ cơ thể chuyển hóa, đào thải độc tố. Xét về sản xuất, nước là tư liệu cốt lõi trong nông nghiệp, công nghiệp, làm mát máy móc và chế biến. Tóm lại, nước sạch chính là mạch nguồn nuôi dưỡng toàn bộ nền kinh tế và văn minh nhân loại.",
+          "geometry": {
+            "x": 0.04875,
+            "y": 0.12666666666666668,
+            "w": 0.9075,
+            "h": 0.72,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 594360,
+            "y_emu": 868680,
+            "cx_emu": 11064240,
+            "cy_emu": 4937760,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Times New Roman",
+            "font_size_pt": 17.0,
+            "bold": null,
+            "text_color": "#000000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "rId1",
+          "kind": "slideLayout",
+          "target": "ppt/slideLayouts/slideLayout2.xml",
+          "external": false
+        },
+        {
+          "id": "rId2",
+          "kind": "notesSlide",
+          "target": "ppt/notesSlides/notesSlide3.xml",
+          "external": false
+        }
+      ],
+      "has_transition": false,
+      "has_timing": false,
+      "transition_summary": null,
+      "timing_summary": null,
+      "layout_part": "ppt/slideLayouts/slideLayout2.xml"
+    },
+    {
+      "index": 4,
+      "part": "ppt/slides/slide4.xml",
+      "title_candidate": "2. Thực trạng thiếu nguồn nước sạch hiện nay",
+      "text": "2. Thực trạng thiếu nguồn nước sạch hiện nay\nĐáng buồn thay, thực trạng hiện nay lại vẽ nên một bức tranh vô cùng ảm đạm khi tình trạng khan hiếm nước sạch đang diễn ra trên quy mô toàn cầu với mức độ ngày càng khốc liệt. Trên thế giới, nhiều quốc gia thuộc châu Phi và vùng Trung Đông nắng cháy đang chứng kiến cảnh hàng triệu người phải di chuyển xa chỉ để đổi lấy vài lít nước đục ngầu, mất vệ sinh.Nhìn về Việt Nam, một quốc gia có mạng lưới sông ngòi dày đặc, chúng ta vẫn không tránh khỏi vòng xoáy của cuộc khủng hoảng này. Đồng bằng sông Cửu Long phải chống chọi với hạn hán, xâm nhập mặn; nhiều hộ dân thiếu nước ngọt để đun nấu, tắm giặt. Ngay tại các đô thị như Hà Nội hay Thành phố Hồ Chí Minh, nguồn nước ngầm cũng suy giảm nghiêm trọng và đối mặt nguy cơ ô nhiễm.",
+      "speaker_notes": null,
+      "shape_count": 2,
+      "shapes": [
+        {
+          "z_index": 1,
+          "kind": "shape",
+          "id": "2",
+          "name": "Text 0",
+          "descr": null,
+          "text": "2. Thực trạng thiếu nguồn nước sạch hiện nay",
+          "geometry": {
+            "x": 0.0135,
+            "y": 0.024,
+            "w": 0.97125,
+            "h": 0.048,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 164592,
+            "y_emu": 164592,
+            "cx_emu": 11841480,
+            "cy_emu": 329184,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Times New Roman",
+            "font_size_pt": 20.0,
+            "bold": null,
+            "text_color": "#FF0000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        },
+        {
+          "z_index": 2,
+          "kind": "shape",
+          "id": "3",
+          "name": "Text 1",
+          "descr": null,
+          "text": "Đáng buồn thay, thực trạng hiện nay lại vẽ nên một bức tranh vô cùng ảm đạm khi tình trạng khan hiếm nước sạch đang diễn ra trên quy mô toàn cầu với mức độ ngày càng khốc liệt. Trên thế giới, nhiều quốc gia thuộc châu Phi và vùng Trung Đông nắng cháy đang chứng kiến cảnh hàng triệu người phải di chuyển xa chỉ để đổi lấy vài lít nước đục ngầu, mất vệ sinh.Nhìn về Việt Nam, một quốc gia có mạng lưới sông ngòi dày đặc, chúng ta vẫn không tránh khỏi vòng xoáy của cuộc khủng hoảng này. Đồng bằng sông Cửu Long phải chống chọi với hạn hán, xâm nhập mặn; nhiều hộ dân thiếu nước ngọt để đun nấu, tắm giặt. Ngay tại các đô thị như Hà Nội hay Thành phố Hồ Chí Minh, nguồn nước ngầm cũng suy giảm nghiêm trọng và đối mặt nguy cơ ô nhiễm.",
+          "geometry": {
+            "x": 0.04875,
+            "y": 0.12666666666666668,
+            "w": 0.9075,
+            "h": 0.7533333333333333,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 594360,
+            "y_emu": 868680,
+            "cx_emu": 11064240,
+            "cy_emu": 5166360,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Times New Roman",
+            "font_size_pt": 17.0,
+            "bold": null,
+            "text_color": "#000000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "rId1",
+          "kind": "slideLayout",
+          "target": "ppt/slideLayouts/slideLayout2.xml",
+          "external": false
+        },
+        {
+          "id": "rId2",
+          "kind": "notesSlide",
+          "target": "ppt/notesSlides/notesSlide4.xml",
+          "external": false
+        }
+      ],
+      "has_transition": false,
+      "has_timing": false,
+      "transition_summary": null,
+      "timing_summary": null,
+      "layout_part": "ppt/slideLayouts/slideLayout2.xml"
+    },
+    {
+      "index": 5,
+      "part": "ppt/slides/slide5.xml",
+      "title_candidate": "3. Nguyên nhân dẫn đến thực trạng",
+      "text": "3. Nguyên nhân dẫn đến thực trạng\nĐể tìm ra lối thoát cho cuộc khủng hoảng này, việc phân tích căn nguyên là điều tối quan trọng. Về mặt khách quan, biến đổi khí hậu toàn cầu làm đảo lộn chu kỳ mưa, gây ra các hiện tượng thời tiết cực đoan như El Nino, khiến hạn hán kéo dài triền miên ở nhiều vùng địa lý.Tuy nhiên, nguyên nhân cốt lõi và đáng trách nhất vẫn xuất phát từ ý thức của con người. Sự bùng nổ dân số và tốc độ đô thị hóa quá nhanh vượt quá khả năng tự làm sạch của tự nhiên. Hằng ngày, rác thải sinh hoạt, rác thải nhựa và nước thải công nghiệp chưa qua xử lý vẫn đổ vào sông hồ. Thêm vào đó, thói quen xả nước vô tội vạ của một bộ phận người dân đang đẩy nhanh tốc độ cạn kiệt của nguồn tài nguyên quý giá này.",
+      "speaker_notes": null,
+      "shape_count": 2,
+      "shapes": [
+        {
+          "z_index": 1,
+          "kind": "shape",
+          "id": "2",
+          "name": "Text 0",
+          "descr": null,
+          "text": "3. Nguyên nhân dẫn đến thực trạng",
+          "geometry": {
+            "x": 0.0135,
+            "y": 0.024,
+            "w": 0.97125,
+            "h": 0.048,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 164592,
+            "y_emu": 164592,
+            "cx_emu": 11841480,
+            "cy_emu": 329184,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Times New Roman",
+            "font_size_pt": 20.0,
+            "bold": null,
+            "text_color": "#FF0000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        },
+        {
+          "z_index": 2,
+          "kind": "shape",
+          "id": "3",
+          "name": "Text 1",
+          "descr": null,
+          "text": "Để tìm ra lối thoát cho cuộc khủng hoảng này, việc phân tích căn nguyên là điều tối quan trọng. Về mặt khách quan, biến đổi khí hậu toàn cầu làm đảo lộn chu kỳ mưa, gây ra các hiện tượng thời tiết cực đoan như El Nino, khiến hạn hán kéo dài triền miên ở nhiều vùng địa lý.Tuy nhiên, nguyên nhân cốt lõi và đáng trách nhất vẫn xuất phát từ ý thức của con người. Sự bùng nổ dân số và tốc độ đô thị hóa quá nhanh vượt quá khả năng tự làm sạch của tự nhiên. Hằng ngày, rác thải sinh hoạt, rác thải nhựa và nước thải công nghiệp chưa qua xử lý vẫn đổ vào sông hồ. Thêm vào đó, thói quen xả nước vô tội vạ của một bộ phận người dân đang đẩy nhanh tốc độ cạn kiệt của nguồn tài nguyên quý giá này.",
+          "geometry": {
+            "x": 0.04875,
+            "y": 0.12666666666666668,
+            "w": 0.9075,
+            "h": 0.7466666666666667,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 594360,
+            "y_emu": 868680,
+            "cx_emu": 11064240,
+            "cy_emu": 5120640,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Times New Roman",
+            "font_size_pt": 17.0,
+            "bold": null,
+            "text_color": "#000000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "rId1",
+          "kind": "slideLayout",
+          "target": "ppt/slideLayouts/slideLayout2.xml",
+          "external": false
+        },
+        {
+          "id": "rId2",
+          "kind": "notesSlide",
+          "target": "ppt/notesSlides/notesSlide5.xml",
+          "external": false
+        }
+      ],
+      "has_transition": false,
+      "has_timing": false,
+      "transition_summary": null,
+      "timing_summary": null,
+      "layout_part": "ppt/slideLayouts/slideLayout2.xml"
+    },
+    {
+      "index": 6,
+      "part": "ppt/slides/slide6.xml",
+      "title_candidate": "4. Hậu quả của việc thiếu nước sạch",
+      "text": "4. Hậu quả của việc thiếu nước sạch\nHệ quả tất yếu từ sự thờ ơ của con người là vô cùng khôn lường, tác động đến mọi mặt của đời sống. Trước hết, thiếu nước sạch hoặc sử dụng nước nhiễm độc là con đường ngắn nhất dẫn đến các bệnh đường tiêu hóa như tiêu chảy, tả, lỵ; các bệnh về da, mắt và nguy cơ mắc bệnh hiểm nghèo trong cộng đồng.Tiếp theo là thiệt hại nặng nề về kinh tế - xã hội: đồng ruộng nứt nẻ, cây trồng chết khô sẽ dẫn đến nguy cơ mất an ninh lương thực. Đáng sợ hơn, sự khan hiếm nước sạch có thể trở thành ngòi nổ cho các cuộc xung đột giữa những quốc gia có chung dòng sông biên giới, đe dọa hòa bình và ổn định chung.",
+      "speaker_notes": null,
+      "shape_count": 2,
+      "shapes": [
+        {
+          "z_index": 1,
+          "kind": "shape",
+          "id": "2",
+          "name": "Text 0",
+          "descr": null,
+          "text": "4. Hậu quả của việc thiếu nước sạch",
+          "geometry": {
+            "x": 0.0135,
+            "y": 0.024,
+            "w": 0.97125,
+            "h": 0.048,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 164592,
+            "y_emu": 164592,
+            "cx_emu": 11841480,
+            "cy_emu": 329184,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Times New Roman",
+            "font_size_pt": 20.0,
+            "bold": null,
+            "text_color": "#FF0000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        },
+        {
+          "z_index": 2,
+          "kind": "shape",
+          "id": "3",
+          "name": "Text 1",
+          "descr": null,
+          "text": "Hệ quả tất yếu từ sự thờ ơ của con người là vô cùng khôn lường, tác động đến mọi mặt của đời sống. Trước hết, thiếu nước sạch hoặc sử dụng nước nhiễm độc là con đường ngắn nhất dẫn đến các bệnh đường tiêu hóa như tiêu chảy, tả, lỵ; các bệnh về da, mắt và nguy cơ mắc bệnh hiểm nghèo trong cộng đồng.Tiếp theo là thiệt hại nặng nề về kinh tế - xã hội: đồng ruộng nứt nẻ, cây trồng chết khô sẽ dẫn đến nguy cơ mất an ninh lương thực. Đáng sợ hơn, sự khan hiếm nước sạch có thể trở thành ngòi nổ cho các cuộc xung đột giữa những quốc gia có chung dòng sông biên giới, đe dọa hòa bình và ổn định chung.",
+          "geometry": {
+            "x": 0.04875,
+            "y": 0.12666666666666668,
+            "w": 0.9075,
+            "h": 0.7333333333333333,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 594360,
+            "y_emu": 868680,
+            "cx_emu": 11064240,
+            "cy_emu": 5029200,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Times New Roman",
+            "font_size_pt": 17.0,
+            "bold": null,
+            "text_color": "#000000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "rId1",
+          "kind": "slideLayout",
+          "target": "ppt/slideLayouts/slideLayout2.xml",
+          "external": false
+        },
+        {
+          "id": "rId2",
+          "kind": "notesSlide",
+          "target": "ppt/notesSlides/notesSlide6.xml",
+          "external": false
+        }
+      ],
+      "has_transition": false,
+      "has_timing": false,
+      "transition_summary": null,
+      "timing_summary": null,
+      "layout_part": "ppt/slideLayouts/slideLayout2.xml"
+    },
+    {
+      "index": 7,
+      "part": "ppt/slides/slide7.xml",
+      "title_candidate": "5. Ý kiến trái chiều và Phản bác",
+      "text": "5. Ý kiến trái chiều và Phản bác\nMặc dù hậu quả đã rõ ràng, trong xã hội vẫn tồn tại những ý kiến bàng quan. Một bộ phận người dân cho rằng việc bảo vệ nguồn nước là trách nhiệm vĩ mô của các nhà lãnh đạo, các tập đoàn lớn hoặc tổ chức môi trường quốc tế, chứ một cá nhân nhỏ bé không thể làm thay đổi cục diện. Có người sống ở vùng dồi dào nước lại ngộ nhận rằng tài nguyên nước là vô tận nên vô tư phung phí.Tuy nhiên, quan điểm ấy hoàn toàn sai lầm. Nước trên hành tinh vận hành theo một chu trình tuần hoàn khép kín; sự ô nhiễm ở một nhánh sông nhỏ hôm nay có thể trở thành mầm bệnh trong ly nước sinh hoạt ngày mai. Không ai có thể đứng ngoài vòng sinh tồn. Mỗi hành động nhỏ của từng cá nhân, khi nhân lên bởi hàng triệu người, sẽ tạo nên sức mạnh quyết định.",
+      "speaker_notes": null,
+      "shape_count": 2,
+      "shapes": [
+        {
+          "z_index": 1,
+          "kind": "shape",
+          "id": "2",
+          "name": "Text 0",
+          "descr": null,
+          "text": "5. Ý kiến trái chiều và Phản bác",
+          "geometry": {
+            "x": 0.0135,
+            "y": 0.024,
+            "w": 0.97125,
+            "h": 0.048,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 164592,
+            "y_emu": 164592,
+            "cx_emu": 11841480,
+            "cy_emu": 329184,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Times New Roman",
+            "font_size_pt": 20.0,
+            "bold": null,
+            "text_color": "#FF0000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        },
+        {
+          "z_index": 2,
+          "kind": "shape",
+          "id": "3",
+          "name": "Text 1",
+          "descr": null,
+          "text": "Mặc dù hậu quả đã rõ ràng, trong xã hội vẫn tồn tại những ý kiến bàng quan. Một bộ phận người dân cho rằng việc bảo vệ nguồn nước là trách nhiệm vĩ mô của các nhà lãnh đạo, các tập đoàn lớn hoặc tổ chức môi trường quốc tế, chứ một cá nhân nhỏ bé không thể làm thay đổi cục diện. Có người sống ở vùng dồi dào nước lại ngộ nhận rằng tài nguyên nước là vô tận nên vô tư phung phí.Tuy nhiên, quan điểm ấy hoàn toàn sai lầm. Nước trên hành tinh vận hành theo một chu trình tuần hoàn khép kín; sự ô nhiễm ở một nhánh sông nhỏ hôm nay có thể trở thành mầm bệnh trong ly nước sinh hoạt ngày mai. Không ai có thể đứng ngoài vòng sinh tồn. Mỗi hành động nhỏ của từng cá nhân, khi nhân lên bởi hàng triệu người, sẽ tạo nên sức mạnh quyết định.",
+          "geometry": {
+            "x": 0.04875,
+            "y": 0.12666666666666668,
+            "w": 0.9075,
+            "h": 0.7533333333333333,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 594360,
+            "y_emu": 868680,
+            "cx_emu": 11064240,
+            "cy_emu": 5166360,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Times New Roman",
+            "font_size_pt": 17.0,
+            "bold": null,
+            "text_color": "#000000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "rId1",
+          "kind": "slideLayout",
+          "target": "ppt/slideLayouts/slideLayout2.xml",
+          "external": false
+        },
+        {
+          "id": "rId2",
+          "kind": "notesSlide",
+          "target": "ppt/notesSlides/notesSlide7.xml",
+          "external": false
+        }
+      ],
+      "has_transition": false,
+      "has_timing": false,
+      "transition_summary": null,
+      "timing_summary": null,
+      "layout_part": "ppt/slideLayouts/slideLayout2.xml"
+    },
+    {
+      "index": 8,
+      "part": "ppt/slides/slide8.xml",
+      "title_candidate": "6. Hệ thống giải pháp",
+      "text": "6. Hệ thống giải pháp\nĐối với cá nhân và gia đình\nĐể giải quyết tận gốc cuộc khủng hoảng nguồn nước ngọt, hành trình hành động phải được kích hoạt ngay từ mắt xích nhỏ nhất: ý thức và thói quen của mỗi cá nhân. Mỗi công dân cần tiết kiệm nước từ những việc nhỏ như vặn chặt vòi khi đánh răng, rửa mặt; giảm thời gian tắm vòi sen; phân loại rác tại nguồn và tuyệt đối không vứt rác nhựa bừa bãi. Học sinh, sinh viên có thể mang theo bình nước cá nhân thay vì dùng chai nhựa một lần.Nâng cao hơn một cấp độ, gia đình cần áp dụng mô hình tuần hoàn nước trong sinh hoạt. Các hộ gia đình nên kiểm tra, bảo trì đường ống để tránh rò rỉ; tái sử dụng “nước xám” như nước vo gạo, nước rửa rau hoặc nước giặt cuối để lau nhà, tưới cây, dội bồn cầu. Những việc làm ấy vừa tiết kiệm chi phí, vừa giảm áp lực lên hệ thống cấp nước.",
+      "speaker_notes": null,
+      "shape_count": 3,
+      "shapes": [
+        {
+          "z_index": 1,
+          "kind": "shape",
+          "id": "2",
+          "name": "Text 0",
+          "descr": null,
+          "text": "6. Hệ thống giải pháp",
+          "geometry": {
+            "x": 0.0135,
+            "y": 0.024,
+            "w": 0.97125,
+            "h": 0.048,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 164592,
+            "y_emu": 164592,
+            "cx_emu": 11841480,
+            "cy_emu": 329184,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Times New Roman",
+            "font_size_pt": 20.0,
+            "bold": null,
+            "text_color": "#FF0000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        },
+        {
+          "z_index": 2,
+          "kind": "shape",
+          "id": "3",
+          "name": "Text 1",
+          "descr": null,
+          "text": "Đối với cá nhân và gia đình",
+          "geometry": {
+            "x": 0.0165,
+            "y": 0.07333333333333333,
+            "w": 0.96,
+            "h": 0.036,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 201168,
+            "y_emu": 502920,
+            "cx_emu": 11704320,
+            "cy_emu": 246888,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Times New Roman",
+            "font_size_pt": 13.0,
+            "bold": true,
+            "text_color": "#000000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        },
+        {
+          "z_index": 3,
+          "kind": "shape",
+          "id": "4",
+          "name": "Text 2",
+          "descr": null,
+          "text": "Để giải quyết tận gốc cuộc khủng hoảng nguồn nước ngọt, hành trình hành động phải được kích hoạt ngay từ mắt xích nhỏ nhất: ý thức và thói quen của mỗi cá nhân. Mỗi công dân cần tiết kiệm nước từ những việc nhỏ như vặn chặt vòi khi đánh răng, rửa mặt; giảm thời gian tắm vòi sen; phân loại rác tại nguồn và tuyệt đối không vứt rác nhựa bừa bãi. Học sinh, sinh viên có thể mang theo bình nước cá nhân thay vì dùng chai nhựa một lần.Nâng cao hơn một cấp độ, gia đình cần áp dụng mô hình tuần hoàn nước trong sinh hoạt. Các hộ gia đình nên kiểm tra, bảo trì đường ống để tránh rò rỉ; tái sử dụng “nước xám” như nước vo gạo, nước rửa rau hoặc nước giặt cuối để lau nhà, tưới cây, dội bồn cầu. Những việc làm ấy vừa tiết kiệm chi phí, vừa giảm áp lực lên hệ thống cấp nước.",
+          "geometry": {
+            "x": 0.04875,
+            "y": 0.12666666666666668,
+            "w": 0.9075,
+            "h": 0.7533333333333333,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 594360,
+            "y_emu": 868680,
+            "cx_emu": 11064240,
+            "cy_emu": 5166360,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Times New Roman",
+            "font_size_pt": 16.8,
+            "bold": null,
+            "text_color": "#000000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "rId1",
+          "kind": "slideLayout",
+          "target": "ppt/slideLayouts/slideLayout2.xml",
+          "external": false
+        },
+        {
+          "id": "rId2",
+          "kind": "notesSlide",
+          "target": "ppt/notesSlides/notesSlide8.xml",
+          "external": false
+        }
+      ],
+      "has_transition": false,
+      "has_timing": false,
+      "transition_summary": null,
+      "timing_summary": null,
+      "layout_part": "ppt/slideLayouts/slideLayout2.xml"
+    },
+    {
+      "index": 9,
+      "part": "ppt/slides/slide9.xml",
+      "title_candidate": "6. Hệ thống giải pháp",
+      "text": "6. Hệ thống giải pháp\nĐối với cộng đồng xã hội và cơ quan quản lý\nTuy nhiên, nếu chỉ dừng lại ở phạm vi gia đình thì chưa đủ. Ở cấp độ cộng đồng, Nhà nước cần kiểm soát chặt chẽ nguồn thải công nghiệp, áp dụng chế tài nghiêm khắc đối với hành vi xả thải trái phép, đồng thời đầu tư công nghệ lọc nước biển và hệ thống tưới nhỏ giọt trong nông nghiệp. Các phong trào như “Ngày Chủ nhật xanh” cũng cần được duy trì để khơi thông cống rãnh, nạo vét kênh rạch và hồi sinh những dòng sông ô nhiễm.Về lâu dài, các cơ quan quản lý cần đầu tư giáo dục thế hệ trẻ, lồng ghép kiến thức bảo vệ nguồn nước vào chương trình học, cải tạo hệ thống cấp thoát nước trường học, lắp đặt bể thu gom nước mưa và khen thưởng những tập thể, cá nhân có đóng góp trong bảo vệ môi trường nước.",
+      "speaker_notes": null,
+      "shape_count": 3,
+      "shapes": [
+        {
+          "z_index": 1,
+          "kind": "shape",
+          "id": "2",
+          "name": "Text 0",
+          "descr": null,
+          "text": "6. Hệ thống giải pháp",
+          "geometry": {
+            "x": 0.0135,
+            "y": 0.024,
+            "w": 0.97125,
+            "h": 0.048,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 164592,
+            "y_emu": 164592,
+            "cx_emu": 11841480,
+            "cy_emu": 329184,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Times New Roman",
+            "font_size_pt": 20.0,
+            "bold": null,
+            "text_color": "#FF0000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        },
+        {
+          "z_index": 2,
+          "kind": "shape",
+          "id": "3",
+          "name": "Text 1",
+          "descr": null,
+          "text": "Đối với cộng đồng xã hội và cơ quan quản lý",
+          "geometry": {
+            "x": 0.0165,
+            "y": 0.07333333333333333,
+            "w": 0.96,
+            "h": 0.036,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 201168,
+            "y_emu": 502920,
+            "cx_emu": 11704320,
+            "cy_emu": 246888,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Times New Roman",
+            "font_size_pt": 13.0,
+            "bold": true,
+            "text_color": "#000000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        },
+        {
+          "z_index": 3,
+          "kind": "shape",
+          "id": "4",
+          "name": "Text 2",
+          "descr": null,
+          "text": "Tuy nhiên, nếu chỉ dừng lại ở phạm vi gia đình thì chưa đủ. Ở cấp độ cộng đồng, Nhà nước cần kiểm soát chặt chẽ nguồn thải công nghiệp, áp dụng chế tài nghiêm khắc đối với hành vi xả thải trái phép, đồng thời đầu tư công nghệ lọc nước biển và hệ thống tưới nhỏ giọt trong nông nghiệp. Các phong trào như “Ngày Chủ nhật xanh” cũng cần được duy trì để khơi thông cống rãnh, nạo vét kênh rạch và hồi sinh những dòng sông ô nhiễm.Về lâu dài, các cơ quan quản lý cần đầu tư giáo dục thế hệ trẻ, lồng ghép kiến thức bảo vệ nguồn nước vào chương trình học, cải tạo hệ thống cấp thoát nước trường học, lắp đặt bể thu gom nước mưa và khen thưởng những tập thể, cá nhân có đóng góp trong bảo vệ môi trường nước.",
+          "geometry": {
+            "x": 0.04875,
+            "y": 0.12666666666666668,
+            "w": 0.9075,
+            "h": 0.7533333333333333,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 594360,
+            "y_emu": 868680,
+            "cx_emu": 11064240,
+            "cy_emu": 5166360,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Times New Roman",
+            "font_size_pt": 16.8,
+            "bold": null,
+            "text_color": "#000000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "rId1",
+          "kind": "slideLayout",
+          "target": "ppt/slideLayouts/slideLayout2.xml",
+          "external": false
+        },
+        {
+          "id": "rId2",
+          "kind": "notesSlide",
+          "target": "ppt/notesSlides/notesSlide9.xml",
+          "external": false
+        }
+      ],
+      "has_transition": false,
+      "has_timing": false,
+      "transition_summary": null,
+      "timing_summary": null,
+      "layout_part": "ppt/slideLayouts/slideLayout2.xml"
+    },
+    {
+      "index": 10,
+      "part": "ppt/slides/slide10.xml",
+      "title_candidate": "III. KẾT BÀI",
+      "text": "III. KẾT BÀI\nCÁC CÁCH KẾT BÀI SÂU SẮC, LAN TỎA\nCách 1: Khẳng định và thôi thúc hành động\nTóm lại, nước sạch là món quà vô giá mà thiên nhiên ban tặng, nhưng nó không phải tài sản vô hạn để chúng ta hoang phí. Nhận thức đúng đắn và hành động kịp thời chính là chiếc chìa khóa duy nhất để cứu lấy tương lai. Hãy nhớ rằng: “Tiết kiệm nước là bảo vệ cuộc sống”. Hãy thay đổi ngay từ hôm nay, đừng để những giọt nước cuối cùng trên Trái Đất này chính là những giọt nước mắt muộn màng của nhân loại vì sự thờ ơ của chính mình.\nCách 2: Mở rộng, gợi mở triết lý\nNhìn lại lịch sử, mọi nền văn minh lớn của loài người đều được khai sinh và thịnh vượng bên cạnh những dòng sông xanh mát. Bảo vệ nguồn nước sạch hôm nay không chỉ là câu chuyện về sinh tồn vật chất, mà còn là bài học về trách nhiệm của thế hệ hôm nay đối với con cháu mai sau. Một hành động nhỏ giữ gìn sự trong lành cho dòng nước lúc này chính là đang gieo mầm xanh cho một ngày mai bền vững của toàn hành tinh.",
+      "speaker_notes": null,
+      "shape_count": 6,
+      "shapes": [
+        {
+          "z_index": 1,
+          "kind": "shape",
+          "id": "2",
+          "name": "Text 0",
+          "descr": null,
+          "text": "III. KẾT BÀI",
+          "geometry": {
+            "x": 0.0135,
+            "y": 0.024,
+            "w": 0.97125,
+            "h": 0.048,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 164592,
+            "y_emu": 164592,
+            "cx_emu": 11841480,
+            "cy_emu": 329184,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Times New Roman",
+            "font_size_pt": 20.0,
+            "bold": null,
+            "text_color": "#FF0000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        },
+        {
+          "z_index": 2,
+          "kind": "shape",
+          "id": "3",
+          "name": "Text 1",
+          "descr": null,
+          "text": "CÁC CÁCH KẾT BÀI SÂU SẮC, LAN TỎA",
+          "geometry": {
+            "x": 0.0165,
+            "y": 0.07333333333333333,
+            "w": 0.96,
+            "h": 0.036,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 201168,
+            "y_emu": 502920,
+            "cx_emu": 11704320,
+            "cy_emu": 246888,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Times New Roman",
+            "font_size_pt": 13.0,
+            "bold": true,
+            "text_color": "#000000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        },
+        {
+          "z_index": 3,
+          "kind": "shape",
+          "id": "4",
+          "name": "Text 2",
+          "descr": null,
+          "text": "Cách 1: Khẳng định và thôi thúc hành động",
+          "geometry": {
+            "x": 0.04125,
+            "y": 0.136,
+            "w": 0.9,
+            "h": 0.037333333333333336,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 502920,
+            "y_emu": 932688,
+            "cx_emu": 10972800,
+            "cy_emu": 256032,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Times New Roman",
+            "font_size_pt": 16.0,
+            "bold": true,
+            "text_color": "#000000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        },
+        {
+          "z_index": 4,
+          "kind": "shape",
+          "id": "5",
+          "name": "Text 3",
+          "descr": null,
+          "text": "Tóm lại, nước sạch là món quà vô giá mà thiên nhiên ban tặng, nhưng nó không phải tài sản vô hạn để chúng ta hoang phí. Nhận thức đúng đắn và hành động kịp thời chính là chiếc chìa khóa duy nhất để cứu lấy tương lai. Hãy nhớ rằng: “Tiết kiệm nước là bảo vệ cuộc sống”. Hãy thay đổi ngay từ hôm nay, đừng để những giọt nước cuối cùng trên Trái Đất này chính là những giọt nước mắt muộn màng của nhân loại vì sự thờ ơ của chính mình.",
+          "geometry": {
+            "x": 0.05625,
+            "y": 0.184,
+            "w": 0.885,
+            "h": 0.2866666666666667,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 685800,
+            "y_emu": 1261872,
+            "cx_emu": 10789920,
+            "cy_emu": 1965960,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Times New Roman",
+            "font_size_pt": 16.5,
+            "bold": null,
+            "text_color": "#000000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        },
+        {
+          "z_index": 5,
+          "kind": "shape",
+          "id": "6",
+          "name": "Text 4",
+          "descr": null,
+          "text": "Cách 2: Mở rộng, gợi mở triết lý",
+          "geometry": {
+            "x": 0.04125,
+            "y": 0.5093333333333333,
+            "w": 0.9,
+            "h": 0.037333333333333336,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 502920,
+            "y_emu": 3493008,
+            "cx_emu": 10972800,
+            "cy_emu": 256032,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Times New Roman",
+            "font_size_pt": 16.0,
+            "bold": true,
+            "text_color": "#000000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        },
+        {
+          "z_index": 6,
+          "kind": "shape",
+          "id": "7",
+          "name": "Text 5",
+          "descr": null,
+          "text": "Nhìn lại lịch sử, mọi nền văn minh lớn của loài người đều được khai sinh và thịnh vượng bên cạnh những dòng sông xanh mát. Bảo vệ nguồn nước sạch hôm nay không chỉ là câu chuyện về sinh tồn vật chất, mà còn là bài học về trách nhiệm của thế hệ hôm nay đối với con cháu mai sau. Một hành động nhỏ giữ gìn sự trong lành cho dòng nước lúc này chính là đang gieo mầm xanh cho một ngày mai bền vững của toàn hành tinh.",
+          "geometry": {
+            "x": 0.05625,
+            "y": 0.5573333333333333,
+            "w": 0.885,
+            "h": 0.3,
+            "rotation_deg": 0.0
+          },
+          "geometry_emu": {
+            "x_emu": 685800,
+            "y_emu": 3822192,
+            "cx_emu": 10789920,
+            "cy_emu": 2057400,
+            "rot": 0
+          },
+          "style": {
+            "fill": null,
+            "line": null,
+            "geometry_preset": "rect",
+            "font_family": "Times New Roman",
+            "font_size_pt": 16.5,
+            "bold": null,
+            "text_color": "#000000"
+          },
+          "forced_semantic_name": null,
+          "chart_relationship_id": null,
+          "data_semantics": {
+            "standalone_number": null
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "rId1",
+          "kind": "slideLayout",
+          "target": "ppt/slideLayouts/slideLayout2.xml",
+          "external": false
+        },
+        {
+          "id": "rId2",
+          "kind": "notesSlide",
+          "target": "ppt/notesSlides/notesSlide10.xml",
+          "external": false
+        }
+      ],
+      "has_transition": false,
+      "has_timing": false,
+      "transition_summary": null,
+      "timing_summary": null,
+      "layout_part": "ppt/slideLayouts/slideLayout2.xml"
+    }
+  ],
+  "package": {
+    "file_count": 77,
+    "has_theme": true,
+    "has_media": true,
+    "has_notes": true,
+    "has_charts": false,
+    "has_embedded_objects": true
+  },
+  "design_profile": {
+    "font_families": [
+      {
+        "value": "Times New Roman",
+        "count": 29
+      },
+      {
+        "value": "Arial",
+        "count": 2
+      }
+    ],
+    "fill_colors": [],
+    "line_colors": [],
+    "text_colors": [
+      {
+        "value": "#000000",
+        "count": 19
+      },
+      {
+        "value": "#FF0000",
+        "count": 11
+      },
+      {
+        "value": "#0070C0",
+        "count": 1
+      }
+    ],
+    "geometry_presets": [
+      {
+        "value": "rect",
+        "count": 31
+      }
+    ]
+  }
+}

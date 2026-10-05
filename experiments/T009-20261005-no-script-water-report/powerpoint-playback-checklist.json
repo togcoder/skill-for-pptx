@@ -1,0 +1,39 @@
+{
+  "artifact_sha256": "6e18e4f208784a8b379b2afecd627bb3ff4e2994f6802c1301bb28a793e51727",
+  "powerpoint_version": null,
+  "tested_at": null,
+  "native_playback_verified": false,
+  "checks": [
+    {
+      "id": "all-clicks",
+      "expected": "All 12 presenter click beats execute once in slide order without error.",
+      "observed": null
+    },
+    {
+      "id": "entrance-visibility",
+      "expected": "Every targeted object is hidden before its scheduled entrance and visible after its beat.",
+      "observed": null
+    },
+    {
+      "id": "automatic-stages",
+      "expected": "Staggered heading/body stages continue automatically within one presenter click.",
+      "observed": null
+    },
+    {
+      "id": "slide-2-boundary",
+      "expected": "Slide 2 pauses after opening option 1; option 2 appears only on the second click.",
+      "observed": null
+    },
+    {
+      "id": "slide-10-boundary",
+      "expected": "Slide 10 pauses after conclusion option 1; option 2 appears only on the second click.",
+      "observed": null
+    },
+    {
+      "id": "final-state",
+      "expected": "Every slide ends with all source content visible and unchanged.",
+      "observed": null
+    }
+  ],
+  "claim_boundary": "Manifest and checklist are handoff material only; leave playback false until the exact hash is run and captures are reviewed in Microsoft PowerPoint."
+}

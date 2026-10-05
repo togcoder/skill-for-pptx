@@ -1,0 +1,10 @@
+{
+  "date_utc": "2026-10-05",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "python": "3.12.14",
+  "powerpoint_available": false,
+  "powerpoint_playback_verified": false,
+  "host_renderer": "Presentations container render_presentation.mjs",
+  "final_sha256": "6e18e4f208784a8b379b2afecd627bb3ff4e2994f6802c1301bb28a793e51727",
+  "source_sha256": "6fe3cf608e520093a124f6b6eee8de7224a3cef9cd65048009b658f293d08465"
+}

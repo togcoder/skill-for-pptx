@@ -1,0 +1,859 @@
+{
+  "source_sha256": "6fe3cf608e520093a124f6b6eee8de7224a3cef9cd65048009b658f293d08465",
+  "sha256": "ca3c44510b7a557c9985d51a983a411f29c5d82a570c6ce72d1ae93f74523879",
+  "patched_slides": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "click_beat_count": 12,
+  "receipts": [
+    {
+      "slide": 1,
+      "part": "ppt/slides/slide1.xml",
+      "writer_mode": "presenter-paced-click-beats",
+      "click_beat_count": 1,
+      "behavior_count": 3,
+      "chart_builds": [],
+      "generated_components": [],
+      "animated_objects": [
+        {
+          "source_id": "2",
+          "source_name": "Text 0"
+        },
+        {
+          "source_id": "3",
+          "source_name": "Text 1"
+        },
+        {
+          "source_id": "4",
+          "source_name": "Text 2"
+        }
+      ],
+      "click_beats": [
+        {
+          "index": 1,
+          "id": "s1-c1",
+          "stages": [
+            {
+              "id": "motion-title-scope-1",
+              "trigger": "on-click",
+              "node_type": "clickEffect",
+              "group_id": 5,
+              "duration_ms": 320,
+              "effects": [
+                {
+                  "type": "shape_entrance",
+                  "source_id": "2",
+                  "source_name": "Text 0",
+                  "behavior_id": 6,
+                  "filter": "fade"
+                }
+              ]
+            },
+            {
+              "id": "motion-title-scope-2",
+              "trigger": "after-previous",
+              "node_type": "afterEffect",
+              "group_id": 7,
+              "duration_ms": 320,
+              "effects": [
+                {
+                  "type": "shape_entrance",
+                  "source_id": "3",
+                  "source_name": "Text 1",
+                  "behavior_id": 8,
+                  "filter": "fade"
+                }
+              ]
+            },
+            {
+              "id": "motion-title-scope-3",
+              "trigger": "after-previous",
+              "node_type": "afterEffect",
+              "group_id": 9,
+              "duration_ms": 320,
+              "effects": [
+                {
+                  "type": "shape_entrance",
+                  "source_id": "4",
+                  "source_name": "Text 2",
+                  "behavior_id": 10,
+                  "filter": "fade"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "timing": {
+        "errors": [],
+        "ctn_ids": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10"
+        ],
+        "target_spids": [
+          "2",
+          "3",
+          "4"
+        ],
+        "motion_count": 0,
+        "scale_count": 0,
+        "rotate_count": 0,
+        "build_entries": 6
+      }
+    },
+    {
+      "slide": 2,
+      "part": "ppt/slides/slide2.xml",
+      "writer_mode": "presenter-paced-click-beats",
+      "click_beat_count": 2,
+      "behavior_count": 4,
+      "chart_builds": [],
+      "generated_components": [],
+      "animated_objects": [
+        {
+          "source_id": "3",
+          "source_name": "Text 1"
+        },
+        {
+          "source_id": "4",
+          "source_name": "Text 2"
+        },
+        {
+          "source_id": "5",
+          "source_name": "Text 3"
+        },
+        {
+          "source_id": "6",
+          "source_name": "Text 4"
+        }
+      ],
+      "click_beats": [
+        {
+          "index": 1,
+          "id": "s2-c1",
+          "stages": [
+            {
+              "id": "motion-opening-survival-1",
+              "trigger": "on-click",
+              "node_type": "clickEffect",
+              "group_id": 5,
+              "duration_ms": 320,
+              "effects": [
+                {
+                  "type": "shape_entrance",
+                  "source_id": "3",
+                  "source_name": "Text 1",
+                  "behavior_id": 6,
+                  "filter": "fade"
+                }
+              ]
+            },
+            {
+              "id": "motion-opening-survival-2",
+              "trigger": "after-previous",
+              "node_type": "afterEffect",
+              "group_id": 7,
+              "duration_ms": 320,
+              "effects": [
+                {
+                  "type": "shape_entrance",
+                  "source_id": "4",
+                  "source_name": "Text 2",
+                  "behavior_id": 8,
+                  "filter": "fade"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "id": "s2-c2",
+          "stages": [
+            {
+              "id": "motion-opening-contrast-1",
+              "trigger": "on-click",
+              "node_type": "clickEffect",
+              "group_id": 11,
+              "duration_ms": 320,
+              "effects": [
+                {
+                  "type": "shape_entrance",
+                  "source_id": "5",
+                  "source_name": "Text 3",
+                  "behavior_id": 12,
+                  "filter": "fade"
+                }
+              ]
+            },
+            {
+              "id": "motion-opening-contrast-2",
+              "trigger": "after-previous",
+              "node_type": "afterEffect",
+              "group_id": 13,
+              "duration_ms": 320,
+              "effects": [
+                {
+                  "type": "shape_entrance",
+                  "source_id": "6",
+                  "source_name": "Text 4",
+                  "behavior_id": 14,
+                  "filter": "fade"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "timing": {
+        "errors": [],
+        "ctn_ids": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14"
+        ],
+        "target_spids": [
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "motion_count": 0,
+        "scale_count": 0,
+        "rotate_count": 0,
+        "build_entries": 8
+      }
+    },
+    {
+      "slide": 3,
+      "part": "ppt/slides/slide3.xml",
+      "writer_mode": "presenter-paced-click-beats",
+      "click_beat_count": 1,
+      "behavior_count": 2,
+      "chart_builds": [],
+      "generated_components": [],
+      "animated_objects": [
+        {
+          "source_id": "3",
+          "source_name": "Text 1"
+        },
+        {
+          "source_id": "4",
+          "source_name": "Text 2"
+        }
+      ],
+      "click_beats": [
+        {
+          "index": 1,
+          "id": "s3-c1",
+          "stages": [
+            {
+              "id": "motion-define-role-1",
+              "trigger": "on-click",
+              "node_type": "clickEffect",
+              "group_id": 5,
+              "duration_ms": 320,
+              "effects": [
+                {
+                  "type": "shape_entrance",
+                  "source_id": "3",
+                  "source_name": "Text 1",
+                  "behavior_id": 6,
+                  "filter": "fade"
+                }
+              ]
+            },
+            {
+              "id": "motion-define-role-2",
+              "trigger": "after-previous",
+              "node_type": "afterEffect",
+              "group_id": 7,
+              "duration_ms": 320,
+              "effects": [
+                {
+                  "type": "shape_entrance",
+                  "source_id": "4",
+                  "source_name": "Text 2",
+                  "behavior_id": 8,
+                  "filter": "fade"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "timing": {
+        "errors": [],
+        "ctn_ids": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8"
+        ],
+        "target_spids": [
+          "3",
+          "4"
+        ],
+        "motion_count": 0,
+        "scale_count": 0,
+        "rotate_count": 0,
+        "build_entries": 4
+      }
+    },
+    {
+      "slide": 4,
+      "part": "ppt/slides/slide4.xml",
+      "writer_mode": "presenter-paced-click-beats",
+      "click_beat_count": 1,
+      "behavior_count": 1,
+      "chart_builds": [],
+      "generated_components": [],
+      "animated_objects": [
+        {
+          "source_id": "3",
+          "source_name": "Text 1"
+        }
+      ],
+      "click_beats": [
+        {
+          "index": 1,
+          "id": "s4-c1",
+          "stages": [
+            {
+              "id": "motion-s4-body-1",
+              "trigger": "on-click",
+              "node_type": "clickEffect",
+              "group_id": 5,
+              "duration_ms": 320,
+              "effects": [
+                {
+                  "type": "shape_entrance",
+                  "source_id": "3",
+                  "source_name": "Text 1",
+                  "behavior_id": 6,
+                  "filter": "fade"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "timing": {
+        "errors": [],
+        "ctn_ids": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "target_spids": [
+          "3"
+        ],
+        "motion_count": 0,
+        "scale_count": 0,
+        "rotate_count": 0,
+        "build_entries": 2
+      }
+    },
+    {
+      "slide": 5,
+      "part": "ppt/slides/slide5.xml",
+      "writer_mode": "presenter-paced-click-beats",
+      "click_beat_count": 1,
+      "behavior_count": 1,
+      "chart_builds": [],
+      "generated_components": [],
+      "animated_objects": [
+        {
+          "source_id": "3",
+          "source_name": "Text 1"
+        }
+      ],
+      "click_beats": [
+        {
+          "index": 1,
+          "id": "s5-c1",
+          "stages": [
+            {
+              "id": "motion-s5-body-1",
+              "trigger": "on-click",
+              "node_type": "clickEffect",
+              "group_id": 5,
+              "duration_ms": 320,
+              "effects": [
+                {
+                  "type": "shape_entrance",
+                  "source_id": "3",
+                  "source_name": "Text 1",
+                  "behavior_id": 6,
+                  "filter": "fade"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "timing": {
+        "errors": [],
+        "ctn_ids": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "target_spids": [
+          "3"
+        ],
+        "motion_count": 0,
+        "scale_count": 0,
+        "rotate_count": 0,
+        "build_entries": 2
+      }
+    },
+    {
+      "slide": 6,
+      "part": "ppt/slides/slide6.xml",
+      "writer_mode": "presenter-paced-click-beats",
+      "click_beat_count": 1,
+      "behavior_count": 1,
+      "chart_builds": [],
+      "generated_components": [],
+      "animated_objects": [
+        {
+          "source_id": "3",
+          "source_name": "Text 1"
+        }
+      ],
+      "click_beats": [
+        {
+          "index": 1,
+          "id": "s6-c1",
+          "stages": [
+            {
+              "id": "motion-s6-body-1",
+              "trigger": "on-click",
+              "node_type": "clickEffect",
+              "group_id": 5,
+              "duration_ms": 320,
+              "effects": [
+                {
+                  "type": "shape_entrance",
+                  "source_id": "3",
+                  "source_name": "Text 1",
+                  "behavior_id": 6,
+                  "filter": "fade"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "timing": {
+        "errors": [],
+        "ctn_ids": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "target_spids": [
+          "3"
+        ],
+        "motion_count": 0,
+        "scale_count": 0,
+        "rotate_count": 0,
+        "build_entries": 2
+      }
+    },
+    {
+      "slide": 7,
+      "part": "ppt/slides/slide7.xml",
+      "writer_mode": "presenter-paced-click-beats",
+      "click_beat_count": 1,
+      "behavior_count": 1,
+      "chart_builds": [],
+      "generated_components": [],
+      "animated_objects": [
+        {
+          "source_id": "3",
+          "source_name": "Text 1"
+        }
+      ],
+      "click_beats": [
+        {
+          "index": 1,
+          "id": "s7-c1",
+          "stages": [
+            {
+              "id": "motion-s7-body-1",
+              "trigger": "on-click",
+              "node_type": "clickEffect",
+              "group_id": 5,
+              "duration_ms": 320,
+              "effects": [
+                {
+                  "type": "shape_entrance",
+                  "source_id": "3",
+                  "source_name": "Text 1",
+                  "behavior_id": 6,
+                  "filter": "fade"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "timing": {
+        "errors": [],
+        "ctn_ids": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "target_spids": [
+          "3"
+        ],
+        "motion_count": 0,
+        "scale_count": 0,
+        "rotate_count": 0,
+        "build_entries": 2
+      }
+    },
+    {
+      "slide": 8,
+      "part": "ppt/slides/slide8.xml",
+      "writer_mode": "presenter-paced-click-beats",
+      "click_beat_count": 1,
+      "behavior_count": 2,
+      "chart_builds": [],
+      "generated_components": [],
+      "animated_objects": [
+        {
+          "source_id": "3",
+          "source_name": "Text 1"
+        },
+        {
+          "source_id": "4",
+          "source_name": "Text 2"
+        }
+      ],
+      "click_beats": [
+        {
+          "index": 1,
+          "id": "s8-c1",
+          "stages": [
+            {
+              "id": "motion-s8-solution-1",
+              "trigger": "on-click",
+              "node_type": "clickEffect",
+              "group_id": 5,
+              "duration_ms": 320,
+              "effects": [
+                {
+                  "type": "shape_entrance",
+                  "source_id": "3",
+                  "source_name": "Text 1",
+                  "behavior_id": 6,
+                  "filter": "fade"
+                }
+              ]
+            },
+            {
+              "id": "motion-s8-solution-2",
+              "trigger": "after-previous",
+              "node_type": "afterEffect",
+              "group_id": 7,
+              "duration_ms": 320,
+              "effects": [
+                {
+                  "type": "shape_entrance",
+                  "source_id": "4",
+                  "source_name": "Text 2",
+                  "behavior_id": 8,
+                  "filter": "fade"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "timing": {
+        "errors": [],
+        "ctn_ids": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8"
+        ],
+        "target_spids": [
+          "3",
+          "4"
+        ],
+        "motion_count": 0,
+        "scale_count": 0,
+        "rotate_count": 0,
+        "build_entries": 4
+      }
+    },
+    {
+      "slide": 9,
+      "part": "ppt/slides/slide9.xml",
+      "writer_mode": "presenter-paced-click-beats",
+      "click_beat_count": 1,
+      "behavior_count": 2,
+      "chart_builds": [],
+      "generated_components": [],
+      "animated_objects": [
+        {
+          "source_id": "3",
+          "source_name": "Text 1"
+        },
+        {
+          "source_id": "4",
+          "source_name": "Text 2"
+        }
+      ],
+      "click_beats": [
+        {
+          "index": 1,
+          "id": "s9-c1",
+          "stages": [
+            {
+              "id": "motion-s9-solution-1",
+              "trigger": "on-click",
+              "node_type": "clickEffect",
+              "group_id": 5,
+              "duration_ms": 320,
+              "effects": [
+                {
+                  "type": "shape_entrance",
+                  "source_id": "3",
+                  "source_name": "Text 1",
+                  "behavior_id": 6,
+                  "filter": "fade"
+                }
+              ]
+            },
+            {
+              "id": "motion-s9-solution-2",
+              "trigger": "after-previous",
+              "node_type": "afterEffect",
+              "group_id": 7,
+              "duration_ms": 320,
+              "effects": [
+                {
+                  "type": "shape_entrance",
+                  "source_id": "4",
+                  "source_name": "Text 2",
+                  "behavior_id": 8,
+                  "filter": "fade"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "timing": {
+        "errors": [],
+        "ctn_ids": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8"
+        ],
+        "target_spids": [
+          "3",
+          "4"
+        ],
+        "motion_count": 0,
+        "scale_count": 0,
+        "rotate_count": 0,
+        "build_entries": 4
+      }
+    },
+    {
+      "slide": 10,
+      "part": "ppt/slides/slide10.xml",
+      "writer_mode": "presenter-paced-click-beats",
+      "click_beat_count": 2,
+      "behavior_count": 4,
+      "chart_builds": [],
+      "generated_components": [],
+      "animated_objects": [
+        {
+          "source_id": "4",
+          "source_name": "Text 2"
+        },
+        {
+          "source_id": "5",
+          "source_name": "Text 3"
+        },
+        {
+          "source_id": "6",
+          "source_name": "Text 4"
+        },
+        {
+          "source_id": "7",
+          "source_name": "Text 5"
+        }
+      ],
+      "click_beats": [
+        {
+          "index": 1,
+          "id": "s10-c1",
+          "stages": [
+            {
+              "id": "motion-ending-action-1",
+              "trigger": "on-click",
+              "node_type": "clickEffect",
+              "group_id": 5,
+              "duration_ms": 320,
+              "effects": [
+                {
+                  "type": "shape_entrance",
+                  "source_id": "4",
+                  "source_name": "Text 2",
+                  "behavior_id": 6,
+                  "filter": "fade"
+                }
+              ]
+            },
+            {
+              "id": "motion-ending-action-2",
+              "trigger": "after-previous",
+              "node_type": "afterEffect",
+              "group_id": 7,
+              "duration_ms": 320,
+              "effects": [
+                {
+                  "type": "shape_entrance",
+                  "source_id": "5",
+                  "source_name": "Text 3",
+                  "behavior_id": 8,
+                  "filter": "fade"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "id": "s10-c2",
+          "stages": [
+            {
+              "id": "motion-ending-reflection-1",
+              "trigger": "on-click",
+              "node_type": "clickEffect",
+              "group_id": 11,
+              "duration_ms": 320,
+              "effects": [
+                {
+                  "type": "shape_entrance",
+                  "source_id": "6",
+                  "source_name": "Text 4",
+                  "behavior_id": 12,
+                  "filter": "fade"
+                }
+              ]
+            },
+            {
+              "id": "motion-ending-reflection-2",
+              "trigger": "after-previous",
+              "node_type": "afterEffect",
+              "group_id": 13,
+              "duration_ms": 320,
+              "effects": [
+                {
+                  "type": "shape_entrance",
+                  "source_id": "7",
+                  "source_name": "Text 5",
+                  "behavior_id": 14,
+                  "filter": "fade"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "timing": {
+        "errors": [],
+        "ctn_ids": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14"
+        ],
+        "target_spids": [
+          "4",
+          "5",
+          "6",
+          "7"
+        ],
+        "motion_count": 0,
+        "scale_count": 0,
+        "rotate_count": 0,
+        "build_entries": 8
+      }
+    }
+  ],
+  "powerpoint_playback_verified": false
+}

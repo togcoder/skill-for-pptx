@@ -12,11 +12,20 @@ Create or augment a reviewable PowerPoint motion artifact. The preferred product
 When the user supplies an existing PPTX:
 
 1. Run `python3 scripts/inspect_existing_deck.py SOURCE.pptx --output INVENTORY.json`.
+   Run the host package-integrity check on the unedited source and retain its
+   findings as the baseline. Do not attribute inherited package defects to the
+   motion patch. When the only findings are stale content-type overrides for
+   absent ZIP parts, patch the original hash-bound source first, then repair the
+   patched candidate copy with
+   `python3 scripts/repair_stale_content_types.py INPUT.pptx OUTPUT.pptx --receipt RECEIPT.json`.
+   Keep the original source hash in the Director contract and document the
+   hygiene repair separately; never generalize this narrow repair to missing
+   relationships or real package parts.
 2. Read [existing-deck-director.md](references/existing-deck-director.md) and [data-motion-recipes.md](references/data-motion-recipes.md).
 3. Use an explicit script if supplied. Otherwise prefer speaker notes, then infer
    the report sequence from the deck. Research externally only when appropriate
    and clearly separate researched structure/facts from user data.
-4. Draft an `existing-deck-motion-director` v0.3 plan and validate it with
+4. Draft an `existing-deck-motion-director` v0.4 plan and validate it with
    `python3 scripts/validate_director_plan.py PLAN.json INVENTORY.json`. Separate
    motion beats from presenter click beats: every click beat must state the audience
    purpose, stable state and why a later click boundary is needed. If inventory
@@ -63,6 +72,7 @@ Check native text content and formal textbox type separately. The pipeline norma
 - `scripts/compile_data_motion_patch.py`: strict Director v0.3 chart/KPI → existing-deck patch v0.4 compiler
 - `scripts/compile_director_patch.py`: Director v0.4 generic+data → patch v0.5 compiler
 - `scripts/patch_existing_timeline.py`: patches native timing onto exact existing source objects without requiring `!!` names
+- `scripts/repair_stale_content_types.py`: narrow source-hygiene repair that removes only content-type overrides whose ZIP parts are absent
 - `scripts/render_plan.mjs`: restricted native scene renderer
 - `scripts/add_morph.py`: experimental transition insertion
 - `scripts/normalize_textboxes.py`: plan-scoped native textbox declaration

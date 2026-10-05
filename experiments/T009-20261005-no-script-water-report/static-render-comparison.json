@@ -1,0 +1,66 @@
+{
+  "slides": [
+    {
+      "slide": 1,
+      "source_sha256": "c3beeb506a6738cefe9cbe1339324876513c703ab48c5ab464cf85e670909d4e",
+      "output_sha256": "c3beeb506a6738cefe9cbe1339324876513c703ab48c5ab464cf85e670909d4e",
+      "pixel_identical": true
+    },
+    {
+      "slide": 2,
+      "source_sha256": "5dcabb6a0f884d2001803c797dc7e7c16629eba835271d5b5020a4b176ee8ccb",
+      "output_sha256": "5dcabb6a0f884d2001803c797dc7e7c16629eba835271d5b5020a4b176ee8ccb",
+      "pixel_identical": true
+    },
+    {
+      "slide": 3,
+      "source_sha256": "4827a8df9b18d54dddfd1c33b96960d6aa2a08d3d385374c74eac324b1633060",
+      "output_sha256": "4827a8df9b18d54dddfd1c33b96960d6aa2a08d3d385374c74eac324b1633060",
+      "pixel_identical": true
+    },
+    {
+      "slide": 4,
+      "source_sha256": "26cc3e2bf2ad41b45f7ed099de788152d73cd739ba2221a7333dd1af16011d9d",
+      "output_sha256": "26cc3e2bf2ad41b45f7ed099de788152d73cd739ba2221a7333dd1af16011d9d",
+      "pixel_identical": true
+    },
+    {
+      "slide": 5,
+      "source_sha256": "5a3a622978a88034938d814b6cb233ceb2d5d42635206efc3f3f20d65e6531f2",
+      "output_sha256": "5a3a622978a88034938d814b6cb233ceb2d5d42635206efc3f3f20d65e6531f2",
+      "pixel_identical": true
+    },
+    {
+      "slide": 6,
+      "source_sha256": "8e7817c70edd67e95da0ac2c2e1127c5905207ae2c8b055b3ff00b609dd8657d",
+      "output_sha256": "8e7817c70edd67e95da0ac2c2e1127c5905207ae2c8b055b3ff00b609dd8657d",
+      "pixel_identical": true
+    },
+    {
+      "slide": 7,
+      "source_sha256": "2cb9cfb7ceb54961c1a2022cd4d9ab51ab07726d5286fac047b043e026557a8d",
+      "output_sha256": "2cb9cfb7ceb54961c1a2022cd4d9ab51ab07726d5286fac047b043e026557a8d",
+      "pixel_identical": true
+    },
+    {
+      "slide": 8,
+      "source_sha256": "3d77145de567bef38367bbcffc39124bde6310542a66abee0bddb42cba5af2f2",
+      "output_sha256": "3d77145de567bef38367bbcffc39124bde6310542a66abee0bddb42cba5af2f2",
+      "pixel_identical": true
+    },
+    {
+      "slide": 9,
+      "source_sha256": "4aba8ba379a8f4217a422e74b349b11921aa2d16f9516026b6425003899b9fdc",
+      "output_sha256": "4aba8ba379a8f4217a422e74b349b11921aa2d16f9516026b6425003899b9fdc",
+      "pixel_identical": true
+    },
+    {
+      "slide": 10,
+      "source_sha256": "c88d8ea46150ea467d05df063b9745a9b498eaf8c6305df9c5c9c1a21587ace6",
+      "output_sha256": "c88d8ea46150ea467d05df063b9745a9b498eaf8c6305df9c5c9c1a21587ace6",
+      "pixel_identical": true
+    }
+  ],
+  "all_pixel_identical": true,
+  "claim_boundary": "Static rendering checks layout preservation only; it does not execute native PowerPoint animation."
+}

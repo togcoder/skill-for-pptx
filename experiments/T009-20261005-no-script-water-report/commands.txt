@@ -1,0 +1,9 @@
+# Core reproducible commands
+python3 scripts/inspect_existing_deck.py SOURCE.pptx --output source-inventory.json
+python3 scripts/validate_director_plan.py director-plan.json source-inventory.json
+python3 scripts/compile_director_patch.py director-plan.json source-inventory.json --output compiled-patch.json
+python3 scripts/patch_existing_timeline.py SOURCE.pptx compiled-patch.json build/candidate_raw.pptx
+python3 scripts/repair_stale_content_types.py build/candidate_raw.pptx build/candidate_repaired.pptx --receipt content-types-repair.json
+# Finalized with the host Presentations finalizer, then rendered and inspected slide-by-slide.
+python3 -m unittest discover -s tests -v
+python3 scripts/make_powerpoint_qa_manifest.py output/T009_no_script_water_report_final.pptx --output powerpoint-qa-manifest.json

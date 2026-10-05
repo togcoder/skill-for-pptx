@@ -1,0 +1,42 @@
+{
+  "benchmark_arm": "C-no-script",
+  "evaluator": "Codex/root; non-independent subjective ratings are labeled",
+  "input_instruction": "Làm bài thuyết trình này rõ ràng, mạch lạc và có chuyển động chuyên nghiệp.",
+  "measured": {
+    "source_slides": 10,
+    "output_slides": 10,
+    "source_shapes": 31,
+    "animated_existing_shapes": 21,
+    "generated_components": 0,
+    "presenter_click_beats": 12,
+    "native_motion_stages": 21,
+    "compiled_slides": 10,
+    "blocked_slides": 0,
+    "source_integrity_findings": 9,
+    "output_integrity_findings": 0,
+    "unexpected_changed_package_members": 0,
+    "text_geometry_preservation_issues": 0,
+    "static_slides_pixel_identical": 10,
+    "unit_tests_passed": 152
+  },
+  "subjective_1_to_5": {
+    "script_fidelity": null,
+    "narrative_coherence": 4,
+    "motion_meaningfulness": 3,
+    "click_boundary_quality": 4,
+    "stable_state_quality": 4,
+    "continuity_quality": 4,
+    "generated_component_design_fit": null
+  },
+  "other": {
+    "factual_data_preservation": "pass: source text and geometry unchanged on all 30 shapes",
+    "source_resource_reuse_rate_for_animated_targets": 1.0,
+    "unnecessary_component_count": 0,
+    "premature_reveal_count": "planned 0; native observation unavailable",
+    "same_slide_packing_efficiency": "21 stages grouped into 12 clicks on the original 10 slides",
+    "untouched_content_preservation": "pass structurally",
+    "editability": "source objects preserved structurally; not edited in PowerPoint",
+    "native_powerpoint_playback_correctness": null
+  },
+  "rating_rationale": "The inferred sequence follows explicit section titles and separates paired alternatives into meaningful clicks. Motion remains conservative because dense paragraphs are single source shapes; splitting them would alter content structure. Native playback is unobserved."
+}

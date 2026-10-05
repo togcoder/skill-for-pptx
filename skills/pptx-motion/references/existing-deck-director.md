@@ -3,6 +3,22 @@
 Use this contract after `scripts/inspect_existing_deck.py` and before adding
 motion to an existing PPTX.
 
+## Source package baseline
+
+Run the host package-integrity validator before editing and retain the source
+findings. A final candidate must not inherit a defect silently or misreport an
+inherited defect as a motion failure.
+
+If, and only if, the source findings are stale `[Content_Types].xml` overrides
+for ZIP members that do not exist, keep the original source for inventory and
+hash-bound patching, then repair the patched candidate copy with
+`scripts/repair_stale_content_types.py` before finalization. Record the original
+source hash, pre-repair candidate hash, repair receipt and repaired hash
+separately. The utility may change only
+`[Content_Types].xml`; it is not a repair for missing relationships, layouts,
+masters or media. Plan and preservation evidence remain grounded in the
+original source inventory.
+
 The director plan is a semantic plan. It does not contain raw PresentationML.
 
 ## Root
