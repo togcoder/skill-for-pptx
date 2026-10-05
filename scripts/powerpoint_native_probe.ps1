@@ -4,7 +4,7 @@ param(
     [Parameter(Mandatory=$true)][string]$Output,
     [switch]$RunSlideshow,
     [switch]$CaptureScreenshots,
-    [int]$ClickPauseMs = 700
+    [ValidateRange(0,60000)][int]$ClickPauseMs = 700
 )
 
 $ErrorActionPreference = "Stop"
@@ -105,6 +105,10 @@ $result = [ordered]@{
         slides = @()
     }
     errors = @()
+    observations = [ordered]@{
+        application_open_and_slide_count_match = $false
+        click_api_probe_completed = $false
+    }
     claim_boundary = [ordered]@{
         native_application_parse_verified = $false
         native_click_execution_verified = $false
@@ -224,7 +228,8 @@ try {
         Release-ComObjectSafe $slide
     }
 
-    $result.claim_boundary.native_application_parse_verified = (
+    # Raw observations remain provisional until verify_powerpoint_qa.py runs.
+    $result.observations.application_open_and_slide_count_match = (
         $result.powerpoint.presentation_opened -and
         ([int]$result.powerpoint.slide_count -eq [int]$manifestObj.slide_count)
     )
@@ -274,6 +279,8 @@ try {
                     before_index = $before
                     after_index = $after
                     index_matches = ($after -eq $click)
+                    wait_after_goto_ms = $ClickPauseMs
+                    animation_completion_verified = $false
                 }
                 if ($CaptureScreenshots) {
                     $capturePath = Join-Path $captureDir ("slide{0:D2}-click{1:D2}.png" -f $index,$click)
@@ -296,8 +303,8 @@ try {
                 if (-not $clickRow.index_matches) { $allIndicesMatch = $false }
             }
         }
-        $result.claim_boundary.native_click_execution_verified = (
-            $result.claim_boundary.native_application_parse_verified -and
+        $result.observations.click_api_probe_completed = (
+            $result.observations.application_open_and_slide_count_match -and
             $allClickCountsMatch -and
             $allIndicesMatch
         )
@@ -335,6 +342,6 @@ finally {
 }
 
 if ($result.errors.Count -gt 0) { exit 1 }
-if (-not $result.claim_boundary.native_application_parse_verified) { exit 3 }
-if ($RunSlideshow -and -not $result.claim_boundary.native_click_execution_verified) { exit 4 }
+if (-not $result.observations.application_open_and_slide_count_match) { exit 3 }
+if ($RunSlideshow -and -not $result.observations.click_api_probe_completed) { exit 4 }
 exit 0

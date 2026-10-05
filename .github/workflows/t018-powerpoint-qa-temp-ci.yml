@@ -1,10 +1,9 @@
 name: t018-powerpoint-qa-temp-ci
 on:
-  push:
-    branches:
-      - work/T018-powerpoint-native-qa-20261005
+  pull_request:
 jobs:
   tests:
+    if: github.head_ref == 'work/T018-qa-evidence-review-20261005'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

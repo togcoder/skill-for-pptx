@@ -63,6 +63,7 @@ class PowerPointQaHarnessTests(unittest.TestCase):
                 "exact_hash_match":True,
             },
             "powerpoint":{
+                "com_created":True,
                 "presentation_opened":True,
                 "slide_count":self.manifest["slide_count"],
                 "version":"16.0",
