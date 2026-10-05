@@ -34,7 +34,7 @@ không phải đích sản phẩm cuối.
 |---|---|
 | Nguồn skill | v0.7 nghiên cứu trong repo, chưa cài thành personal skill |
 | Backend | Morph baseline + T006 packed-timeline research path; artifact-tool 16:9 rect/ellipse/textbox; timing writer motion/scale/rotate, PowerPoint playback pending |
-| Kiểm tra tự động | 150 unit tests tại T018 QA review; Python compile và PowerShell syntax parse pass; chưa phải schema OOXML đầy đủ hoặc native playback |
+| Kiểm tra tự động | 152 unit tests tại T009 arm C; source skill validation pass; chưa phải native playback |
 | E002 | Sửa 14 khai báo textbox; checker H001 giữ nguyên đạt 93/93; ảnh không đổi |
 | H002/E003 | Nhãn ORBIT chồng 2→0 theo mô hình tuyến tính |
 | H003/E004 | Nhãn Việt dài chồng 4→0; khối nền vẫn chồng 6→6 theo mô hình |
@@ -45,6 +45,13 @@ không phải đích sản phẩm cuối.
 | T006 semantics matrix | 4 exact one-slide fixtures isolate local/anchored path × remove/hold fill; 83 tests, all static renders checked; native winner pending |
 | File và ảnh | PPTX tại `output/`, bằng chứng và ảnh cuối trong từng experiment |
 | PowerPoint playback | Chưa có; M1 chưa đạt, điểm native motion và editing để null |
+
+T009 arm C now provides the first frozen no-script run outside QCC: one short
+instruction, 10 original slides, 12 presenter clicks and 21 native stages. Read
+`experiments/T009-20261005-no-script-water-report/REPORT.md`. The input had nine
+stale content-type overrides; the exact repair is now a reusable guarded utility.
+Do not count static pixel identity as animation playback. Run the exact final
+hash in PowerPoint before accepting entrance visibility or click behavior.
 
 `E01`–`E04` trong đề cương là nhóm nghiên cứu dự kiến; `E001`–`E004` là mã
 thí nghiệm thực tế. Không nhầm E004 nhãn dài với benchmark E04 gồm 18 lượt.

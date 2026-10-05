@@ -1,6 +1,14 @@
 # T009 — Autonomous No-Script Existing-Deck Benchmark
 
-Status: queued. This is the north-star benchmark for the product destination.
+Status: in progress. Arm C first unseen-report run completed on 2026-10-05;
+arms A/B and exact-file PowerPoint playback remain pending. This is the
+north-star benchmark for the product destination.
+
+Checkpoint: `experiments/T009-20261005-no-script-water-report/REPORT.md`.
+The run used a 10-slide non-QCC report, produced 12 click beats / 21 stages,
+preserved all source text/geometry and generated no components. It also added a
+guarded repair for inherited stale content-type overrides. Do not repeat arm C
+on this deck without a new hypothesis; continue with A/B or native playback.
 
 ## User condition
 

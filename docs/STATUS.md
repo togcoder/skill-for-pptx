@@ -1,5 +1,30 @@
 # PPTX Motion Lab — checkpoint
 
+## T009 arm C no-script unseen report — 2026-10-05
+
+The first frozen T009 arm C run used a 10-slide Vietnamese report outside the
+QCC domain plus one high-level instruction. The Director inferred the full
+report sequence, compiled **12 presenter clicks / 21 native stages** on the
+original slides, reused 21 existing editable shapes and generated no helper
+components.
+
+The input exposed a new source-hygiene failure: nine stale content-type
+overrides named slide-master parts absent from the ZIP. The raw motion candidate
+inherited exactly those findings. `scripts/repair_stale_content_types.py`
+removes only absent-part overrides; final integrity findings went 9 → 0 while
+all 31 source shapes retained text and geometry. Only ten slide XML parts plus
+`[Content_Types].xml` changed. Ten final renders are pixel-identical to source
+and were individually reviewed.
+
+The source skill now requires a pre-edit integrity baseline and separates
+inherited defects from motion defects. **152 tests pass** and the source skill
+validates. PowerPoint playback remains unverified; exact final hash is
+`6e18e4f208784a8b379b2afecd627bb3ff4e2994f6802c1301bb28a793e51727`.
+
+Next: exact-file PowerPoint playback through 12 clicks, then T009 arms A/B on
+the same frozen deck. Report:
+`experiments/T009-20261005-no-script-water-report/REPORT.md`.
+
 ## T018 native QA evidence integrity — 2026-10-05
 
 Reviewed the unfinished T018 harness from a00ea03 on a separate branch (PR #21).

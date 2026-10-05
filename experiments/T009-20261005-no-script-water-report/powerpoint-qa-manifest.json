@@ -1,0 +1,350 @@
+{
+  "version": "0.1",
+  "kind": "powerpoint-native-qa-manifest",
+  "pptx_path_hint": "T009_no_script_water_report_final.pptx",
+  "pptx_sha256": "6e18e4f208784a8b379b2afecd627bb3ff4e2994f6802c1301bb28a793e51727",
+  "source_inventory_version": "0.1",
+  "slide_count": 10,
+  "animated_slide_count": 10,
+  "slides": [
+    {
+      "index": 1,
+      "title_candidate": "BÀI VĂN NGHỊ LUẬN",
+      "expected_click_count": 1,
+      "structural_effect_count": 3,
+      "expected_target_names": [
+        "Text 0",
+        "Text 1",
+        "Text 2"
+      ],
+      "expected_clicks": [
+        {
+          "index": 1,
+          "target_names": [
+            "Text 0",
+            "Text 1",
+            "Text 2"
+          ],
+          "effect_count": 3,
+          "effect_types": [
+            "animEffect",
+            "animEffect",
+            "animEffect"
+          ],
+          "start_node_types": [
+            "clickEffect",
+            "withEffect",
+            "afterEffect"
+          ]
+        }
+      ],
+      "has_transition": false
+    },
+    {
+      "index": 2,
+      "title_candidate": "I. MỞ BÀI",
+      "expected_click_count": 2,
+      "structural_effect_count": 4,
+      "expected_target_names": [
+        "Text 1",
+        "Text 2",
+        "Text 3",
+        "Text 4"
+      ],
+      "expected_clicks": [
+        {
+          "index": 1,
+          "target_names": [
+            "Text 1",
+            "Text 2"
+          ],
+          "effect_count": 2,
+          "effect_types": [
+            "animEffect",
+            "animEffect"
+          ],
+          "start_node_types": [
+            "clickEffect",
+            "withEffect",
+            "afterEffect"
+          ]
+        },
+        {
+          "index": 2,
+          "target_names": [
+            "Text 3",
+            "Text 4"
+          ],
+          "effect_count": 2,
+          "effect_types": [
+            "animEffect",
+            "animEffect"
+          ],
+          "start_node_types": [
+            "clickEffect",
+            "withEffect",
+            "afterEffect"
+          ]
+        }
+      ],
+      "has_transition": false
+    },
+    {
+      "index": 3,
+      "title_candidate": "II. THÂN BÀI",
+      "expected_click_count": 1,
+      "structural_effect_count": 2,
+      "expected_target_names": [
+        "Text 1",
+        "Text 2"
+      ],
+      "expected_clicks": [
+        {
+          "index": 1,
+          "target_names": [
+            "Text 1",
+            "Text 2"
+          ],
+          "effect_count": 2,
+          "effect_types": [
+            "animEffect",
+            "animEffect"
+          ],
+          "start_node_types": [
+            "clickEffect",
+            "withEffect",
+            "afterEffect"
+          ]
+        }
+      ],
+      "has_transition": false
+    },
+    {
+      "index": 4,
+      "title_candidate": "2. Thực trạng thiếu nguồn nước sạch hiện nay",
+      "expected_click_count": 1,
+      "structural_effect_count": 1,
+      "expected_target_names": [
+        "Text 1"
+      ],
+      "expected_clicks": [
+        {
+          "index": 1,
+          "target_names": [
+            "Text 1"
+          ],
+          "effect_count": 1,
+          "effect_types": [
+            "animEffect"
+          ],
+          "start_node_types": [
+            "clickEffect",
+            "withEffect"
+          ]
+        }
+      ],
+      "has_transition": false
+    },
+    {
+      "index": 5,
+      "title_candidate": "3. Nguyên nhân dẫn đến thực trạng",
+      "expected_click_count": 1,
+      "structural_effect_count": 1,
+      "expected_target_names": [
+        "Text 1"
+      ],
+      "expected_clicks": [
+        {
+          "index": 1,
+          "target_names": [
+            "Text 1"
+          ],
+          "effect_count": 1,
+          "effect_types": [
+            "animEffect"
+          ],
+          "start_node_types": [
+            "clickEffect",
+            "withEffect"
+          ]
+        }
+      ],
+      "has_transition": false
+    },
+    {
+      "index": 6,
+      "title_candidate": "4. Hậu quả của việc thiếu nước sạch",
+      "expected_click_count": 1,
+      "structural_effect_count": 1,
+      "expected_target_names": [
+        "Text 1"
+      ],
+      "expected_clicks": [
+        {
+          "index": 1,
+          "target_names": [
+            "Text 1"
+          ],
+          "effect_count": 1,
+          "effect_types": [
+            "animEffect"
+          ],
+          "start_node_types": [
+            "clickEffect",
+            "withEffect"
+          ]
+        }
+      ],
+      "has_transition": false
+    },
+    {
+      "index": 7,
+      "title_candidate": "5. Ý kiến trái chiều và Phản bác",
+      "expected_click_count": 1,
+      "structural_effect_count": 1,
+      "expected_target_names": [
+        "Text 1"
+      ],
+      "expected_clicks": [
+        {
+          "index": 1,
+          "target_names": [
+            "Text 1"
+          ],
+          "effect_count": 1,
+          "effect_types": [
+            "animEffect"
+          ],
+          "start_node_types": [
+            "clickEffect",
+            "withEffect"
+          ]
+        }
+      ],
+      "has_transition": false
+    },
+    {
+      "index": 8,
+      "title_candidate": "6. Hệ thống giải pháp",
+      "expected_click_count": 1,
+      "structural_effect_count": 2,
+      "expected_target_names": [
+        "Text 1",
+        "Text 2"
+      ],
+      "expected_clicks": [
+        {
+          "index": 1,
+          "target_names": [
+            "Text 1",
+            "Text 2"
+          ],
+          "effect_count": 2,
+          "effect_types": [
+            "animEffect",
+            "animEffect"
+          ],
+          "start_node_types": [
+            "clickEffect",
+            "withEffect",
+            "afterEffect"
+          ]
+        }
+      ],
+      "has_transition": false
+    },
+    {
+      "index": 9,
+      "title_candidate": "6. Hệ thống giải pháp",
+      "expected_click_count": 1,
+      "structural_effect_count": 2,
+      "expected_target_names": [
+        "Text 1",
+        "Text 2"
+      ],
+      "expected_clicks": [
+        {
+          "index": 1,
+          "target_names": [
+            "Text 1",
+            "Text 2"
+          ],
+          "effect_count": 2,
+          "effect_types": [
+            "animEffect",
+            "animEffect"
+          ],
+          "start_node_types": [
+            "clickEffect",
+            "withEffect",
+            "afterEffect"
+          ]
+        }
+      ],
+      "has_transition": false
+    },
+    {
+      "index": 10,
+      "title_candidate": "III. KẾT BÀI",
+      "expected_click_count": 2,
+      "structural_effect_count": 4,
+      "expected_target_names": [
+        "Text 2",
+        "Text 3",
+        "Text 4",
+        "Text 5"
+      ],
+      "expected_clicks": [
+        {
+          "index": 1,
+          "target_names": [
+            "Text 2",
+            "Text 3"
+          ],
+          "effect_count": 2,
+          "effect_types": [
+            "animEffect",
+            "animEffect"
+          ],
+          "start_node_types": [
+            "clickEffect",
+            "withEffect",
+            "afterEffect"
+          ]
+        },
+        {
+          "index": 2,
+          "target_names": [
+            "Text 4",
+            "Text 5"
+          ],
+          "effect_count": 2,
+          "effect_types": [
+            "animEffect",
+            "animEffect"
+          ],
+          "start_node_types": [
+            "clickEffect",
+            "withEffect",
+            "afterEffect"
+          ]
+        }
+      ],
+      "has_transition": false
+    }
+  ],
+  "acceptance": {
+    "require_exact_hash": true,
+    "require_powerpoint_open": true,
+    "require_slide_count_match": true,
+    "require_click_count_match": true,
+    "require_click_index_progression": true,
+    "require_expected_targets_in_main_sequence": true,
+    "visual_state_review_required": true
+  },
+  "claim_boundary": {
+    "native_application_parse_verified": false,
+    "native_click_execution_verified": false,
+    "visual_state_verified": false
+  }
+}

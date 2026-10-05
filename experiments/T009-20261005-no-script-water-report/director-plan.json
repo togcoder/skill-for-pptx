@@ -1,0 +1,412 @@
+{
+  "version": "0.4",
+  "kind": "existing-deck-motion-director",
+  "source": {
+    "pptx_sha256": "6fe3cf608e520093a124f6b6eee8de7224a3cef9cd65048009b658f293d08465",
+    "inventory_version": "0.1",
+    "source_slide_count": 10
+  },
+  "user_instruction": "Làm bài thuyết trình này rõ ràng, mạch lạc và có chuyển động chuyên nghiệp.",
+  "script": {
+    "source": "inferred",
+    "summary": "Introduce the clean-water topic, establish definition and urgency, explain causes and consequences, answer objections, then move from personal solutions to systemic action and two possible conclusions.",
+    "evidence": [
+      "Visible slide titles and their existing order.",
+      "Repeated section labels and paired option headings.",
+      "Source geometry groups headings above their supporting paragraphs.",
+      "No speaker notes, source timing or transitions were present."
+    ],
+    "beats": [
+      "topic",
+      "opening-options",
+      "definition-and-role",
+      "current-situation",
+      "causes",
+      "consequences",
+      "counterargument",
+      "individual-solutions",
+      "system-solutions",
+      "conclusion-options"
+    ]
+  },
+  "preservation": {
+    "preserve_text_by_default": true,
+    "preserve_media_by_default": true,
+    "preserve_theme_by_default": true,
+    "preserve_slide_order_by_default": true,
+    "slide_count_policy": "preserve"
+  },
+  "slides": [
+    {
+      "source_index": 1,
+      "role": "title and scope",
+      "objective": "Audience understands the topic and its environmental frame.",
+      "beats": [
+        {
+          "id": "title-scope",
+          "purpose": "Introduce the title and topic as one opening idea.",
+          "operation": "stagger-reveal",
+          "targets": [
+            "Text 0",
+            "Text 1",
+            "Text 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click"
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "s1-c1",
+          "purpose": "Open the report topic.",
+          "motion_beats": [
+            "title-scope"
+          ],
+          "stable_state": "The report title and environmental frame are visible.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "The first click opens the presentation."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 2,
+      "role": "two alternative openings",
+      "objective": "Audience can compare a survival-based opening with an image-based contrast.",
+      "beats": [
+        {
+          "id": "opening-survival",
+          "purpose": "Reveal the survival argument and its supporting paragraph.",
+          "operation": "stagger-reveal",
+          "targets": [
+            "Text 1",
+            "Text 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click"
+        },
+        {
+          "id": "opening-contrast",
+          "purpose": "Reveal the contrasting-image alternative after the first opening is understood.",
+          "operation": "stagger-reveal",
+          "targets": [
+            "Text 3",
+            "Text 4"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click"
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "s2-c1",
+          "purpose": "Present the survival-based opening.",
+          "motion_beats": [
+            "opening-survival"
+          ],
+          "stable_state": "The first opening option is visible for discussion.",
+          "pause_after": "await-next-reveal",
+          "boundary_reason": "The first option must be evaluated before the alternative appears."
+        },
+        {
+          "id": "s2-c2",
+          "purpose": "Present the contrasting-image opening.",
+          "motion_beats": [
+            "opening-contrast"
+          ],
+          "stable_state": "Both opening options are visible for comparison.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "The second option is a distinct choice and should wait for a new click."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 3,
+      "role": "definition and role",
+      "objective": "Audience understands what clean water means and why it matters.",
+      "beats": [
+        {
+          "id": "define-role",
+          "purpose": "Reveal the subsection heading, then its explanation.",
+          "operation": "stagger-reveal",
+          "targets": [
+            "Text 1",
+            "Text 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click"
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "s3-c1",
+          "purpose": "Introduce the definition and role of clean water.",
+          "motion_beats": [
+            "define-role"
+          ],
+          "stable_state": "The definition and role are visible together.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "The first click reveals the slide explanation."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 4,
+      "role": "current situation",
+      "objective": "Audience understands the scale and urgency of clean-water scarcity.",
+      "beats": [
+        {
+          "id": "s4-body",
+          "purpose": "Reveal the current-situation evidence.",
+          "operation": "reveal",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click"
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "s4-c1",
+          "purpose": "Reveal the current-situation evidence.",
+          "motion_beats": [
+            "s4-body"
+          ],
+          "stable_state": "Audience understands the scale and urgency of clean-water scarcity.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "The first click reveals the slide argument while the section title remains as orientation."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 5,
+      "role": "causes",
+      "objective": "Audience understands the human and environmental causes.",
+      "beats": [
+        {
+          "id": "s5-body",
+          "purpose": "Reveal the cause analysis.",
+          "operation": "reveal",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click"
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "s5-c1",
+          "purpose": "Reveal the cause analysis.",
+          "motion_beats": [
+            "s5-body"
+          ],
+          "stable_state": "Audience understands the human and environmental causes.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "The first click reveals the slide argument while the section title remains as orientation."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 6,
+      "role": "consequences",
+      "objective": "Audience understands the health, economic and social consequences.",
+      "beats": [
+        {
+          "id": "s6-body",
+          "purpose": "Reveal the consequence analysis.",
+          "operation": "reveal",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click"
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "s6-c1",
+          "purpose": "Reveal the consequence analysis.",
+          "motion_beats": [
+            "s6-body"
+          ],
+          "stable_state": "Audience understands the health, economic and social consequences.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "The first click reveals the slide argument while the section title remains as orientation."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 7,
+      "role": "counterargument and rebuttal",
+      "objective": "Audience understands the opposing view and why the report rejects it.",
+      "beats": [
+        {
+          "id": "s7-body",
+          "purpose": "Reveal the counterargument and rebuttal.",
+          "operation": "reveal",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click"
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "s7-c1",
+          "purpose": "Reveal the counterargument and rebuttal.",
+          "motion_beats": [
+            "s7-body"
+          ],
+          "stable_state": "Audience understands the opposing view and why the report rejects it.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "The first click reveals the slide argument while the section title remains as orientation."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 8,
+      "role": "individual and household solutions",
+      "objective": "Audience understands actions available to individuals and families.",
+      "beats": [
+        {
+          "id": "s8-solution",
+          "purpose": "Reveal the solution level and its supporting actions.",
+          "operation": "stagger-reveal",
+          "targets": [
+            "Text 1",
+            "Text 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click"
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "s8-c1",
+          "purpose": "Present this level of the solution.",
+          "motion_beats": [
+            "s8-solution"
+          ],
+          "stable_state": "Audience understands actions available to individuals and families.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "The first click reveals the solution level and its explanation as one idea."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 9,
+      "role": "community and policy solutions",
+      "objective": "Audience understands actions required from communities and public institutions.",
+      "beats": [
+        {
+          "id": "s9-solution",
+          "purpose": "Reveal the solution level and its supporting actions.",
+          "operation": "stagger-reveal",
+          "targets": [
+            "Text 1",
+            "Text 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click"
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "s9-c1",
+          "purpose": "Present this level of the solution.",
+          "motion_beats": [
+            "s9-solution"
+          ],
+          "stable_state": "Audience understands actions required from communities and public institutions.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "The first click reveals the solution level and its explanation as one idea."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 10,
+      "role": "two alternative conclusions",
+      "objective": "Audience can compare an action-oriented conclusion with a reflective conclusion.",
+      "beats": [
+        {
+          "id": "ending-action",
+          "purpose": "Reveal the action-oriented conclusion and supporting paragraph.",
+          "operation": "stagger-reveal",
+          "targets": [
+            "Text 2",
+            "Text 3"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click"
+        },
+        {
+          "id": "ending-reflection",
+          "purpose": "Reveal the reflective conclusion after the first ending is understood.",
+          "operation": "stagger-reveal",
+          "targets": [
+            "Text 4",
+            "Text 5"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click"
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "s10-c1",
+          "purpose": "Present the action-oriented conclusion.",
+          "motion_beats": [
+            "ending-action"
+          ],
+          "stable_state": "The first conclusion option is visible.",
+          "pause_after": "await-next-reveal",
+          "boundary_reason": "The first ending should be considered before the alternative."
+        },
+        {
+          "id": "s10-c2",
+          "purpose": "Present the reflective conclusion.",
+          "motion_beats": [
+            "ending-reflection"
+          ],
+          "stable_state": "Both conclusion options are visible for comparison.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "The second ending is a distinct choice and should wait for a new click."
+        }
+      ],
+      "components": []
+    }
+  ],
+  "target_slide_count": 10,
+  "research_metadata": {
+    "sources": [],
+    "benchmark_arm": "C-no-script",
+    "planner_context": [
+      "source deck bytes",
+      "high-level user instruction"
+    ],
+    "generated_components": 0
+  }
+}
