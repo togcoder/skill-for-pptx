@@ -1,0 +1,57 @@
+{
+  "tool": "LibreOffice PPTX import -> ODP",
+  "pptx": "h001_v05_writer.pptx",
+  "slides": [
+    {
+      "slide": 1,
+      "effects": [
+        {
+          "node_type": "on-click",
+          "preset_class": null,
+          "preset_id": null,
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 0
+        },
+        {
+          "node_type": "after-previous",
+          "preset_class": null,
+          "preset_id": null,
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 0
+        },
+        {
+          "node_type": "after-previous",
+          "preset_class": null,
+          "preset_id": null,
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 0
+        }
+      ]
+    },
+    {
+      "slide": 2,
+      "effects": [
+        {
+          "node_type": "on-click",
+          "preset_class": null,
+          "preset_id": null,
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 0
+        },
+        {
+          "node_type": "after-previous",
+          "preset_class": null,
+          "preset_id": null,
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 0
+        }
+      ]
+    }
+  ],
+  "powerpoint_playback_verified": false
+}

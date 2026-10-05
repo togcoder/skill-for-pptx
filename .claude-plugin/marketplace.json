@@ -1,0 +1,13 @@
+{
+  "name": "togcoder-pptx",
+  "owner": {
+    "name": "togcoder"
+  },
+  "plugins": [
+    {
+      "name": "pptx-motion",
+      "source": "./",
+      "description": "AI Motion Director for existing PowerPoint decks (research build; PowerPoint playback not yet verified)."
+    }
+  ]
+}

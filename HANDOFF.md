@@ -52,6 +52,20 @@ H001/H002 có agent dùng đề mới với ngữ cảnh hạn chế; H003 là �
 người nghiên cứu thực hiện, không phải holdout độc lập. E002/E003/E004 là các
 lượt sửa theo lỗi đã biết, không phải đề chưa từng thấy.
 
+## Chỉ thị T019 — dùng đường sản phẩm mới
+
+Đường chính cho deck có sẵn giờ là `python3 scripts/motion_director.py`
+(`inspect` → `draft` → sửa Director v0.5 → `apply --storyboard` → xem ảnh).
+Skill sản phẩm: `skills/pptx-motion-director/SKILL.md`; plugin Claude Code ở
+`.claude-plugin/` và lệnh `/animate-deck`.
+
+Writer `scripts/pptx_animator.py` ghi cây timing theo đúng dạng PowerPoint lưu
+(time block nối tiếp cho after-previous, `set style.visibility`, presetClass/ID,
+bldP đúng loại). Writer patch v0.2–v0.5 cũ có lỗi: các stage after-previous
+chạy đồng thời. Giữ nguyên để tái lập, **không xây tiếp trên nó**. Timing có sẵn
+được nối thêm, không còn bị từ chối. Cổng còn thiếu vẫn là phát thật trong
+PowerPoint: xem `experiments/T019-20261005-claude-motion-director/REPORT.md`.
+
 ## Chỉ thị kiến trúc mới — ưu tiên cao nhất
 
 Latest QA checkpoint: `experiments/T018-20261005-qa-evidence-review/REPORT.md`

@@ -19,6 +19,11 @@ CHART_BUILDS={"as-whole","series","category","series-elements","category-element
 COUNTER_IMPLEMENTATIONS={"odometer-proxy","stepped-text"}
 COUNTER_OPERATIONS={"kpi-highlight","hero-metric","number-counter","metric-highlight"}
 GENERIC_OPERATIONS={"reveal","stagger-reveal","process-reveal","focus","emphasize","move","rotate"}
+# Director v0.5 (T019): canonical PowerPoint presets, paragraph builds, exits,
+# dimming and an automatic first group.
+V05_OPERATIONS=GENERIC_OPERATIONS|{"text-build","exit","dim"}
+V05_EFFECTS={"appear","fade","float-in","zoom","wipe-up","wipe-down","wipe-left","wipe-right",
+             "disappear","fade-out","pulse","spin","dim","path"}
 
 
 def validate(plan,inventory):
@@ -30,8 +35,8 @@ def validate(plan,inventory):
     errors += [f"missing field: {k}" for k in sorted(required-plan.keys())]
     if errors:
         return errors
-    if plan["version"] not in ("0.1","0.2","0.3","0.4"):
-        errors.append("version must be 0.1, 0.2, 0.3 or 0.4")
+    if plan["version"] not in ("0.1","0.2","0.3","0.4","0.5"):
+        errors.append("version must be 0.1, 0.2, 0.3, 0.4 or 0.5")
     if plan["kind"]!="existing-deck-motion-director":
         errors.append("kind must be existing-deck-motion-director")
 
@@ -161,7 +166,10 @@ def validate(plan,inventory):
                 errors.append(f"slide {idx}: beat {bid} must stay on same slide in v0.1")
             if type(beat.get("reuse_existing")) is not bool:
                 errors.append(f"slide {idx}: beat {bid} reuse_existing must be boolean")
-            if beat.get("timing_intent") not in TIMING:
+            first_beat=beats and isinstance(beats[0],dict) and beat is beats[0]
+            if plan["version"]=="0.5" and first_beat and beat.get("timing_intent")=="on-slide-start":
+                pass
+            elif beat.get("timing_intent") not in TIMING:
                 errors.append(f"slide {idx}: beat {bid} has unsupported timing_intent")
             targets=beat.get("targets")
             if not isinstance(targets,list) or not targets:
@@ -172,7 +180,7 @@ def validate(plan,inventory):
                 if missing:
                     errors.append(f"slide {idx}: beat {bid} unknown targets {missing}")
 
-            if plan["version"] in ("0.3","0.4") and isinstance(targets,list):
+            if plan["version"] in ("0.3","0.4","0.5") and isinstance(targets,list):
                 source_shapes=[source_shape_by_token[t] for t in targets if t in source_shape_by_token]
                 chart_shapes=[shape for shape in source_shapes if shape.get("kind")=="chart"]
                 number_shapes=[
@@ -256,9 +264,28 @@ def validate(plan,inventory):
                     else:
                         errors.append(f"slide {idx}: beat {bid} unsupported data_motion kind {kind}")
 
-                if plan["version"]=="0.4" and not isinstance(data_motion,dict):
+                if plan["version"]=="0.5" and not isinstance(data_motion,dict):
                     operation=beat.get("operation")
-                    if operation in GENERIC_OPERATIONS:
+                    if operation not in V05_OPERATIONS:
+                        errors.append(f"slide {idx}: beat {bid} unsupported v0.5 operation {operation}")
+                    effect=beat.get("effect")
+                    if effect is not None and effect not in V05_EFFECTS:
+                        errors.append(f"slide {idx}: beat {bid} unsupported effect {effect}")
+                    duration=beat.get("duration_ms")
+                    if duration is not None and (type(duration) is not int or duration<0 or duration>10000):
+                        errors.append(f"slide {idx}: beat {bid} duration_ms must be integer 0..10000")
+                    if operation=="text-build":
+                        if len(targets)!=1:
+                            errors.append(f"slide {idx}: beat {bid} text-build requires exactly one target")
+                        paras=beat.get("paragraphs")
+                        if paras is not None and (
+                            not isinstance(paras,list) or not paras
+                            or any(type(p) is not int or p<0 for p in paras)
+                        ):
+                            errors.append(f"slide {idx}: beat {bid} paragraphs must be nonempty nonnegative integers")
+                if plan["version"] in ("0.4","0.5") and not isinstance(data_motion,dict):
+                    operation=beat.get("operation")
+                    if operation in GENERIC_OPERATIONS|(V05_OPERATIONS if plan["version"]=="0.5" else set()):
                         if chart_shapes:
                             errors.append(
                                 f"slide {idx}: beat {bid} generic operation cannot target chart; use chart data_motion"
@@ -290,7 +317,7 @@ def validate(plan,inventory):
                             if type(value) not in (int,float) or not math.isfinite(value):
                                 errors.append(f"slide {idx}: beat {bid} rotate requires finite motion_parameters.by_deg")
 
-        if plan["version"] in ("0.2","0.3","0.4"):
+        if plan["version"] in ("0.2","0.3","0.4","0.5"):
             click_beats=slide.get("click_beats")
             if not isinstance(click_beats,list) or not click_beats:
                 errors.append(f"slide {idx}: click_beats must be nonempty for v0.2")
@@ -328,7 +355,9 @@ def validate(plan,inventory):
                             errors.append(f"slide {idx}: click beat {cid} unknown motion beat {member}")
                             continue
                         intent=beat.get("timing_intent")
-                        if member_index==0 and intent!="on-click":
+                        auto_start=(plan["version"]=="0.5" and click_index==0 and member_index==0
+                                    and intent=="on-slide-start")
+                        if member_index==0 and intent!="on-click" and not auto_start:
                             errors.append(f"slide {idx}: click beat {cid} must start with on-click motion beat")
                         if member_index>0 and intent=="on-click":
                             errors.append(f"slide {idx}: click beat {cid} has nested on-click motion beat {member}")
