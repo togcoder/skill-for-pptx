@@ -66,6 +66,16 @@ chạy đồng thời. Giữ nguyên để tái lập, **không xây tiếp trê
 được nối thêm, không còn bị từ chối. Cổng còn thiếu vẫn là phát thật trong
 PowerPoint: xem `experiments/T019-20261005-claude-motion-director/REPORT.md`.
 
+**Việc tiếp theo cho model mới: `research/tasks/T020-motion-director-continuation.md`.**
+Prompt giao việc ngắn:
+
+> Tiếp tục PPTX Motion Lab tại https://github.com/togcoder/skill-for-pptx (main).
+> Đọc AGENTS.md, HANDOFF.md (mục T019), research/tasks/T020-motion-director-continuation.md
+> và experiments/T019-20261005-claude-motion-director/REPORT.md. Chạy test. Nếu có
+> Windows + PowerPoint thì làm mục A (phát thật file T019); nếu chỉ có Python thì làm
+> mục B (fixture mới, sửa heuristic Director có test hồi quy). Tạo nhánh và experiment
+> riêng, không ghi đè bằng chứng T019, cập nhật docs/STATUS.md, mở PR.
+
 ## Chỉ thị kiến trúc mới — ưu tiên cao nhất
 
 Latest QA checkpoint: `experiments/T018-20261005-qa-evidence-review/REPORT.md`

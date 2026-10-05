@@ -22,6 +22,7 @@ title and existing-animation slides untouched; preservation checks pass.
 `experiments/T019-20261005-claude-motion-director/report_deck_motion.pptx`.
 
 Report: experiments/T019-20261005-claude-motion-director/REPORT.md.
+Next task: research/tasks/T020-motion-director-continuation.md.
 
 ## T018 native QA evidence integrity — 2026-10-05
 
