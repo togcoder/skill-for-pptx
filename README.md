@@ -20,8 +20,10 @@ python3 scripts/motion_director.py auto deck.pptx -o deck_motion.pptx --storyboa
 ```
 
 Giữ nguyên slide, chữ, bố cục, animation có sẵn; thêm animation native theo nhịp
-click của người thuyết trình; xuất báo cáo và storyboard (cần LibreOffice Impress
-+ ImageMagick). Cài như plugin Claude Code: `/plugin marketplace add
+click của người thuyết trình — từ hiện từng ý đến chuyển động phức hợp (tụ lại, soi
+từng phần của vòng tròn, đổi chỗ, đi theo hành trình, zoom vào, Morph giữa slide với
+`--style cinematic` hoặc Director v0.6); xuất báo cáo, storyboard và GIF mô phỏng
+(`motion_director.py preview`, cần LibreOffice Impress + poppler + ImageMagick). Cài như plugin Claude Code: `/plugin marketplace add
 togcoder/skill-for-pptx` rồi `/plugin install pptx-motion@togcoder-pptx`, dùng
 `/animate-deck deck.pptx`. Trạng thái: kiểm tra cấu trúc + LibreOffice đọc đúng
 trình tự; **chưa phát thử trong PowerPoint**. [Báo cáo T019](experiments/T019-20261005-claude-motion-director/REPORT.md).

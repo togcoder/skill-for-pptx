@@ -17,13 +17,16 @@ concurrently); do not build on it.
 
 Read first: AGENTS.md, HANDOFF.md (T019 section), the T019 report,
 `skills/pptx-motion-director/SKILL.md`, `docs/CLICK_BEAT_CHOREOGRAPHY.md`.
-Run `python3 -m unittest discover -s tests -v` (176 pass at T022).
+Run `python3 -m unittest discover -s tests -v` (190 pass at T023).
 
 ## Work items — pick by environment, in priority order
 
 ### A. Native PowerPoint gate (needs Windows + PowerPoint) — highest value
 
-Also play the T009 deck candidates from T022:
+Also play the T023 compound-motion showcase
+`experiments/T023-20261005-claude-compound-motion/output/T023_showcase_directed.pptx`
+against `preview/slide-0N.png` (anchored chained paths, Grow compounding,
+Transparency restore, Morph glide), and the T009 deck candidates from T022:
 `experiments/T022-20261005-claude-t009-recompile/output/*.pptx`.
 
 1. Open `experiments/T019-20261005-claude-motion-director/report_deck_motion.pptx`

@@ -1,5 +1,30 @@
 # PPTX Motion Lab — checkpoint
 
+## T023 compound motion engine — 2026-10-05
+
+Existing decks can now receive compound choreography, not only builds.
+`scripts/motion_engine.py` compiles keyframe tracks and recipes (assemble,
+disperse, spotlight, release, cycle, swap, travel, zoom-focus, raw tracks) into
+native motion paths, Grow/Shrink, Spin, Transparency and entrance/exit effects
+with exact delays. Position, scale, rotation, opacity and visibility carry
+across clicks. Director v0.6 adds `choreography` beats and Morph `transitions`.
+
+The draft detects cycle/hub diagrams (assemble, then a spotlight tour, then
+release) and Morph continuity (a shared picture or text that moves). It keeps
+continuing objects static. `preview` renders a simulated GIF plus a key-state
+sheet of any slide (reading the timing XML back). `verify` rejects overlapping
+moves of one object and warns about new occlusion or off-slide states. Those
+warnings caught two real mistakes in the hand-directed showcase.
+
+LibreOffice recognises the new motion-path, grow-and-shrink, transparency and
+exit effects. Smoke test: `auto` on 27 repository decks passes, after fixing a
+crash on fully animated decks and 88 bogus re-entries on Morph-state decks.
+**190 tests pass.** Native playback is pending: play
+`experiments/T023-20261005-claude-compound-motion/output/T023_showcase_directed.pptx`
+against its preview sheets.
+
+Report: experiments/T023-20261005-claude-compound-motion/REPORT.md.
+
 ## T022 T009 recompile + text-box deck direction — 2026-10-05
 
 Continued Codex's T009 arm C (PR #22, which its review held back from merging).

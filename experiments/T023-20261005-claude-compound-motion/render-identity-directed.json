@@ -1,0 +1,58 @@
+{
+  "method": "LibreOffice PDF -> pdftoppm PNG, RGB difference",
+  "dpi": 50,
+  "source_pages": 8,
+  "output_pages": 8,
+  "identical_slides": 8,
+  "slides": [
+    {
+      "slide": 1,
+      "identical_rgb": true,
+      "changed_pixels": 0,
+      "bbox": null
+    },
+    {
+      "slide": 2,
+      "identical_rgb": true,
+      "changed_pixels": 0,
+      "bbox": null
+    },
+    {
+      "slide": 3,
+      "identical_rgb": true,
+      "changed_pixels": 0,
+      "bbox": null
+    },
+    {
+      "slide": 4,
+      "identical_rgb": true,
+      "changed_pixels": 0,
+      "bbox": null
+    },
+    {
+      "slide": 5,
+      "identical_rgb": true,
+      "changed_pixels": 0,
+      "bbox": null
+    },
+    {
+      "slide": 6,
+      "identical_rgb": true,
+      "changed_pixels": 0,
+      "bbox": null
+    },
+    {
+      "slide": 7,
+      "identical_rgb": true,
+      "changed_pixels": 0,
+      "bbox": null
+    },
+    {
+      "slide": 8,
+      "identical_rgb": true,
+      "changed_pixels": 0,
+      "bbox": null
+    }
+  ],
+  "powerpoint_playback_verified": false
+}

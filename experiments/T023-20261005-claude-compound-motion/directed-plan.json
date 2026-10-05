@@ -1,0 +1,832 @@
+{
+  "version": "0.6",
+  "kind": "existing-deck-motion-director",
+  "source": {
+    "pptx_sha256": "536575cc74cedb9682a978c669650a495cf23209c802beb6844701a760723522",
+    "inventory_version": "0.1",
+    "source_slide_count": 8
+  },
+  "user_instruction": "Make this operating-model deck feel cinematic but keep every slide and word.",
+  "script": {
+    "source": "speaker-notes",
+    "summary": "Each slide reveals its content in reading order, one talking point per click; data before conclusions; existing animation preserved.",
+    "evidence": [
+      "slide titles and reading order",
+      "speaker notes",
+      "no existing animation"
+    ],
+    "beats": [
+      "slide 1: Operating Model 2027",
+      "slide 2: The improvement cycle",
+      "slide 3: Partner ecosystem",
+      "slide 4: Priorities re-ranked for 2027",
+      "slide 5: Order journey",
+      "slide 6: Market quadrants",
+      "slide 7: Our roastery",
+      "slide 8: Our roastery"
+    ]
+  },
+  "preservation": {
+    "preserve_text_by_default": true,
+    "preserve_media_by_default": true,
+    "preserve_theme_by_default": true,
+    "preserve_slide_order_by_default": true,
+    "slide_count_policy": "preserve"
+  },
+  "slides": [
+    {
+      "source_index": 2,
+      "role": "report slide",
+      "objective": "Audience follows slide 2 one idea at a time.",
+      "beats": [
+        {
+          "id": "hub-1",
+          "purpose": "Establish the centre 'Customer value'.",
+          "operation": "reveal",
+          "targets": [
+            "Hub"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 500
+        },
+        {
+          "id": "assemble-2",
+          "purpose": "Elements assemble around the centre in cycle order.",
+          "operation": "choreography",
+          "targets": [
+            "Stage Plan",
+            "Stage Do",
+            "Stage Check",
+            "Stage Act"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "with-previous",
+          "recipe": "assemble",
+          "motion_parameters": {
+            "from": "center",
+            "stagger_ms": 140,
+            "duration_ms": 700
+          }
+        },
+        {
+          "id": "focus-4",
+          "purpose": "Walk the cycle: focus 'Plan'.",
+          "operation": "choreography",
+          "targets": [
+            "Stage Plan",
+            "Stage Do",
+            "Stage Check",
+            "Stage Act"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "spotlight",
+          "motion_parameters": {
+            "scale": 1.12,
+            "dim": 0.35,
+            "duration_ms": 500
+          }
+        },
+        {
+          "id": "focus-6",
+          "purpose": "Walk the cycle: focus 'Do'.",
+          "operation": "choreography",
+          "targets": [
+            "Stage Do",
+            "Stage Plan",
+            "Stage Check",
+            "Stage Act"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "spotlight",
+          "motion_parameters": {
+            "scale": 1.12,
+            "dim": 0.35,
+            "duration_ms": 500
+          }
+        },
+        {
+          "id": "focus-8",
+          "purpose": "Walk the cycle: focus 'Check'.",
+          "operation": "choreography",
+          "targets": [
+            "Stage Check",
+            "Stage Plan",
+            "Stage Do",
+            "Stage Act"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "spotlight",
+          "motion_parameters": {
+            "scale": 1.12,
+            "dim": 0.35,
+            "duration_ms": 500
+          }
+        },
+        {
+          "id": "focus-10",
+          "purpose": "Walk the cycle: focus 'Act'.",
+          "operation": "choreography",
+          "targets": [
+            "Stage Act",
+            "Stage Plan",
+            "Stage Do",
+            "Stage Check"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "spotlight",
+          "motion_parameters": {
+            "scale": 1.12,
+            "dim": 0.35,
+            "duration_ms": 500
+          }
+        },
+        {
+          "id": "release-12",
+          "purpose": "Return to the whole cycle.",
+          "operation": "choreography",
+          "targets": [
+            "Stage Plan",
+            "Stage Do",
+            "Stage Check",
+            "Stage Act"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "release",
+          "motion_parameters": {
+            "duration_ms": 500
+          }
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-3",
+          "purpose": "Show the whole cycle.",
+          "motion_beats": [
+            "hub-1",
+            "assemble-2"
+          ],
+          "stable_state": "All elements in place.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-5",
+          "purpose": "Discuss 'Plan'.",
+          "motion_beats": [
+            "focus-4"
+          ],
+          "stable_state": "'Plan' enlarged, the rest dimmed.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each stage of the cycle is explained on its own."
+        },
+        {
+          "id": "click-7",
+          "purpose": "Discuss 'Do'.",
+          "motion_beats": [
+            "focus-6"
+          ],
+          "stable_state": "'Do' enlarged, the rest dimmed.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each stage of the cycle is explained on its own."
+        },
+        {
+          "id": "click-9",
+          "purpose": "Discuss 'Check'.",
+          "motion_beats": [
+            "focus-8"
+          ],
+          "stable_state": "'Check' enlarged, the rest dimmed.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each stage of the cycle is explained on its own."
+        },
+        {
+          "id": "click-11",
+          "purpose": "Discuss 'Act'.",
+          "motion_beats": [
+            "focus-10"
+          ],
+          "stable_state": "'Act' enlarged, the rest dimmed.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each stage of the cycle is explained on its own."
+        },
+        {
+          "id": "click-13",
+          "purpose": "Back to the full cycle.",
+          "motion_beats": [
+            "release-12"
+          ],
+          "stable_state": "Full cycle restored.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "The tour ends by showing the system as a whole again."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 3,
+      "role": "report slide",
+      "objective": "Audience follows slide 3 one idea at a time.",
+      "beats": [
+        {
+          "id": "hub-1",
+          "purpose": "Establish the centre 'Northwind platform'.",
+          "operation": "reveal",
+          "targets": [
+            "Platform"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 500
+        },
+        {
+          "id": "assemble-2",
+          "purpose": "Elements assemble around the centre in cycle order.",
+          "operation": "choreography",
+          "targets": [
+            "Partner Growers",
+            "Partner Importers",
+            "Partner Cafés",
+            "Partner Grocers",
+            "Partner Couriers",
+            "Partner Recyclers"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "with-previous",
+          "recipe": "assemble",
+          "motion_parameters": {
+            "from": "center",
+            "stagger_ms": 140,
+            "duration_ms": 700
+          }
+        },
+        {
+          "id": "direct",
+          "purpose": "Direct channels (cafés, grocers) move closer to the platform.",
+          "operation": "choreography",
+          "targets": [
+            "Partner Cafés",
+            "Partner Grocers"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "tracks",
+          "tracks": [
+            {
+              "target": "Partner Cafés",
+              "keyframes": [
+                {
+                  "t": 0
+                },
+                {
+                  "t": 900,
+                  "dx": -0.03,
+                  "dy": -0.03,
+                  "scale": 1.15,
+                  "curve": 0.2
+                }
+              ]
+            },
+            {
+              "target": "Partner Grocers",
+              "keyframes": [
+                {
+                  "t": 150
+                },
+                {
+                  "t": 1050,
+                  "dx": 0.0,
+                  "dy": -0.035,
+                  "scale": 1.15,
+                  "curve": -0.2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-3",
+          "purpose": "Show the whole cycle.",
+          "motion_beats": [
+            "hub-1",
+            "assemble-2"
+          ],
+          "stable_state": "All elements in place.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "c-direct",
+          "purpose": "Show the shift to direct channels.",
+          "motion_beats": [
+            "direct"
+          ],
+          "stable_state": "Cafés and Grocers sit closer, enlarged.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "The 2027 change is explained after the ecosystem is understood."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 4,
+      "role": "report slide",
+      "objective": "Audience follows slide 4 one idea at a time.",
+      "beats": [
+        {
+          "id": "reveal-1",
+          "purpose": "Reveal 'Cost'.",
+          "operation": "reveal",
+          "targets": [
+            "Priority Cost"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "reveal-3",
+          "purpose": "Reveal 'Speed'.",
+          "operation": "reveal",
+          "targets": [
+            "Priority Speed"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "reveal-5",
+          "purpose": "Reveal 'Sustainability'.",
+          "operation": "reveal",
+          "targets": [
+            "Priority Sustainability"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "rerank",
+          "purpose": "Sustainability overtakes cost as the top priority.",
+          "operation": "choreography",
+          "targets": [
+            "Priority Sustainability",
+            "Priority Cost"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "swap",
+          "motion_parameters": {
+            "arc": 0.3,
+            "duration_ms": 1000
+          }
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-2",
+          "purpose": "Introduce 'Cost'.",
+          "motion_beats": [
+            "reveal-1"
+          ],
+          "stable_state": "Content visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-4",
+          "purpose": "Introduce 'Speed'.",
+          "motion_beats": [
+            "reveal-3"
+          ],
+          "stable_state": "Content visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "New idea for the presenter to introduce."
+        },
+        {
+          "id": "click-6",
+          "purpose": "Introduce 'Sustainability'.",
+          "motion_beats": [
+            "reveal-5"
+          ],
+          "stable_state": "Content visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "New idea for the presenter to introduce."
+        },
+        {
+          "id": "c-rerank",
+          "purpose": "Re-rank.",
+          "motion_beats": [
+            "rerank"
+          ],
+          "stable_state": "Sustainability on top, cost at the bottom.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "The re-ranking is the slide's message and must land after the old order is seen."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 5,
+      "role": "process",
+      "objective": "Audience follows one order through the journey.",
+      "beats": [
+        {
+          "id": "steps",
+          "purpose": "Show the four steps.",
+          "operation": "stagger-reveal",
+          "targets": [
+            "Step Order",
+            "Step Roast",
+            "Step Pack",
+            "Step Deliver"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "fade",
+          "duration_ms": 300
+        },
+        {
+          "id": "token-in",
+          "purpose": "Place the order token.",
+          "operation": "reveal",
+          "targets": [
+            "Order token"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "after-previous",
+          "effect": "zoom"
+        },
+        {
+          "id": "go-0",
+          "purpose": "The order reaches Order.",
+          "operation": "choreography",
+          "targets": [
+            "Order token",
+            "Step Order"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "travel",
+          "motion_parameters": {
+            "duration_ms": 700,
+            "arc": 0.35,
+            "offset_y": -0.12,
+            "dwell_ms": 0
+          }
+        },
+        {
+          "id": "go-1",
+          "purpose": "The order reaches Roast.",
+          "operation": "choreography",
+          "targets": [
+            "Order token",
+            "Step Roast"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "travel",
+          "motion_parameters": {
+            "duration_ms": 700,
+            "arc": 0.35,
+            "offset_y": -0.12,
+            "dwell_ms": 0
+          }
+        },
+        {
+          "id": "go-2",
+          "purpose": "The order reaches Pack.",
+          "operation": "choreography",
+          "targets": [
+            "Order token",
+            "Step Pack"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "travel",
+          "motion_parameters": {
+            "duration_ms": 700,
+            "arc": 0.35,
+            "offset_y": -0.12,
+            "dwell_ms": 0
+          }
+        },
+        {
+          "id": "go-3",
+          "purpose": "The order reaches Deliver.",
+          "operation": "choreography",
+          "targets": [
+            "Order token",
+            "Step Deliver"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "travel",
+          "motion_parameters": {
+            "duration_ms": 700,
+            "arc": 0.35,
+            "offset_y": -0.12,
+            "dwell_ms": 0
+          }
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "c-steps",
+          "purpose": "Show the journey.",
+          "motion_beats": [
+            "steps",
+            "token-in"
+          ],
+          "stable_state": "All steps and the token visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "c-go-0",
+          "purpose": "Discuss Order.",
+          "motion_beats": [
+            "go-0"
+          ],
+          "stable_state": "Token above Order.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each step is explained while the token waits there."
+        },
+        {
+          "id": "c-go-1",
+          "purpose": "Discuss Roast.",
+          "motion_beats": [
+            "go-1"
+          ],
+          "stable_state": "Token above Roast.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each step is explained while the token waits there."
+        },
+        {
+          "id": "c-go-2",
+          "purpose": "Discuss Pack.",
+          "motion_beats": [
+            "go-2"
+          ],
+          "stable_state": "Token above Pack.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each step is explained while the token waits there."
+        },
+        {
+          "id": "c-go-3",
+          "purpose": "Discuss Deliver.",
+          "motion_beats": [
+            "go-3"
+          ],
+          "stable_state": "Token above Deliver.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Each step is explained while the token waits there."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 6,
+      "role": "report slide",
+      "objective": "Audience follows slide 6 one idea at a time.",
+      "beats": [
+        {
+          "id": "assemble-1",
+          "purpose": "Elements assemble around the centre in cycle order.",
+          "operation": "choreography",
+          "targets": [
+            "Quadrant Defend",
+            "Quadrant Exit",
+            "Quadrant Explore",
+            "Quadrant Grow"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "assemble",
+          "motion_parameters": {
+            "from": "center",
+            "stagger_ms": 140,
+            "duration_ms": 700
+          }
+        },
+        {
+          "id": "zoom-grow",
+          "purpose": "Drill into the Grow quadrant.",
+          "operation": "choreography",
+          "targets": [
+            "Quadrant Grow",
+            "Quadrant Defend",
+            "Quadrant Explore",
+            "Quadrant Exit"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "zoom-focus",
+          "motion_parameters": {
+            "fill": 0.6,
+            "duration_ms": 900,
+            "y": 0.6
+          }
+        },
+        {
+          "id": "back",
+          "purpose": "Return to the full matrix.",
+          "operation": "choreography",
+          "targets": [
+            "Quadrant Grow",
+            "Quadrant Defend",
+            "Quadrant Explore",
+            "Quadrant Exit"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "release",
+          "motion_parameters": {
+            "duration_ms": 800
+          }
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-2",
+          "purpose": "Show the whole cycle.",
+          "motion_beats": [
+            "assemble-1"
+          ],
+          "stable_state": "All elements in place.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "c-zoom",
+          "purpose": "Focus on Grow.",
+          "motion_beats": [
+            "zoom-grow"
+          ],
+          "stable_state": "Grow fills the slide; other quadrants gone.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Drill-down follows the overview."
+        },
+        {
+          "id": "c-back",
+          "purpose": "Back to the matrix.",
+          "motion_beats": [
+            "back"
+          ],
+          "stable_state": "All four quadrants in place.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Return gives closure to the drill-down."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 8,
+      "role": "report slide",
+      "objective": "Audience follows slide 8 one idea at a time.",
+      "beats": [
+        {
+          "id": "point-1",
+          "purpose": "Reveal point: Capacity 1,200 t per year",
+          "operation": "text-build",
+          "targets": [
+            "Content Placeholder 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            0
+          ]
+        },
+        {
+          "id": "point-3",
+          "purpose": "Reveal point: Solar roof covers 40% of energy",
+          "operation": "text-build",
+          "targets": [
+            "Content Placeholder 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            1
+          ]
+        },
+        {
+          "id": "point-5",
+          "purpose": "Reveal point: Second site opens in 2027",
+          "operation": "text-build",
+          "targets": [
+            "Content Placeholder 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            2
+          ]
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-2",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-1"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-4",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-3"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        },
+        {
+          "id": "click-6",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-5"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        }
+      ],
+      "components": []
+    }
+  ],
+  "transitions": [
+    {
+      "slide": 8,
+      "kind": "morph",
+      "duration_ms": 1500,
+      "reason": "Continuity: 'Roastery photo' moves/resizes from the previous slide."
+    }
+  ],
+  "target_slide_count": 8,
+  "research_metadata": {
+    "sources": [],
+    "draft_notes": {
+      "1": "title slide kept static",
+      "2": "6 click(s), 7 motion beat(s)",
+      "3": "1 click(s), 2 motion beat(s)",
+      "4": "3 click(s), 3 motion beat(s)",
+      "5": "4 click(s), 4 motion beat(s)",
+      "6": "6 click(s), 6 motion beat(s)",
+      "7": "single picture is the slide's content; kept static",
+      "8": "3 click(s), 3 motion beat(s)"
+    },
+    "style": "cinematic",
+    "drafted_by": "motion_director.py heuristic, then edited by the AI director (T023 showcase)"
+  }
+}

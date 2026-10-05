@@ -1,0 +1,9 @@
+slide 1: title slide kept static
+slide 2: 6 click(s), 7 motion beat(s)
+slide 3: 1 click(s), 2 motion beat(s)
+slide 4: 3 click(s), 3 motion beat(s)
+slide 5: 4 click(s), 4 motion beat(s)
+slide 6: 6 click(s), 6 motion beat(s)
+slide 7: single picture is the slide's content; kept static
+slide 8: 3 click(s), 3 motion beat(s)
+wrote experiments/T023-20261005-claude-compound-motion/auto-cinematic-plan.json
