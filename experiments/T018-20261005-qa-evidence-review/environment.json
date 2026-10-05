@@ -1,0 +1,12 @@
+{
+  "date_utc": "2026-10-05",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "python": "3.12.14",
+  "native_powerpoint_available": false,
+  "powershell_local_available": false,
+  "powerpoint_playback_tested": false,
+  "new_pptx_delivered": false,
+  "base_main": "405c170a8512b02f2f98b73b50788e24d6760aac",
+  "inherited_harness": "a00ea0391259985257853f19f36af37a2929adb6",
+  "verification": "synthetic record cases and local unit suite; real-package tests create temporary fixtures only"
+}

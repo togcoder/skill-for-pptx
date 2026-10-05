@@ -34,7 +34,7 @@ không phải đích sản phẩm cuối.
 |---|---|
 | Nguồn skill | v0.7 nghiên cứu trong repo, chưa cài thành personal skill |
 | Backend | Morph baseline + T006 packed-timeline research path; artifact-tool 16:9 rect/ellipse/textbox; timing writer motion/scale/rotate, PowerPoint playback pending |
-| Kiểm tra tự động | 86 unit tests pass trên T010 click-beat branch; py_compile pass; chưa phải schema OOXML đầy đủ |
+| Kiểm tra tự động | 150 unit tests tại T018 QA review; Python compile và PowerShell syntax parse pass; chưa phải schema OOXML đầy đủ hoặc native playback |
 | E002 | Sửa 14 khai báo textbox; checker H001 giữ nguyên đạt 93/93; ảnh không đổi |
 | H002/E003 | Nhãn ORBIT chồng 2→0 theo mô hình tuyến tính |
 | H003/E004 | Nhãn Việt dài chồng 4→0; khối nền vẫn chồng 6→6 theo mô hình |
@@ -53,6 +53,13 @@ người nghiên cứu thực hiện, không phải holdout độc lập. E002/E
 lượt sửa theo lỗi đã biết, không phải đề chưa từng thấy.
 
 ## Chỉ thị kiến trúc mới — ưu tiên cao nhất
+
+Latest QA checkpoint: `experiments/T018-20261005-qa-evidence-review/REPORT.md`
+(PR #21). A 26-case synthetic evidence review repaired 18 false click passes.
+The complete suite now has 150 tests. Use `docs/POWERPOINT_NATIVE_HARNESS.md`
+for the existing Windows probe and exact-artifact manifest instead of building
+another harness. The original T018 branch is preserved. No native playback has
+occurred; click indices cannot certify final animation states or M1 acceptance.
 
 Latest exact-file checkpoint: `experiments/T006-20261004-packed-validation/REPORT.md`.
 The full candidate now exists. Start from its frozen hash and playback checklist,

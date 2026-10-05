@@ -1,0 +1,53 @@
+name: powerpoint-native-qa
+
+on:
+  workflow_dispatch:
+
+jobs:
+  native-powerpoint:
+    runs-on: [self-hosted, windows, powerpoint]
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python requirements
+        shell: powershell
+        run: python -m pip install lxml
+
+      - name: Build exact native-QA fixture and manifest
+        shell: powershell
+        run: |
+          New-Item -ItemType Directory -Force -Path build/native-qa | Out-Null
+          python scripts/build_powerpoint_qa_fixture.py `
+            --output build/native-qa/T018_fixture.pptx `
+            --manifest build/native-qa/T018_manifest.json
+
+      - name: Probe with Microsoft PowerPoint
+        shell: powershell
+        run: |
+          & scripts/powerpoint_native_probe.ps1 `
+            -Pptx build/native-qa/T018_fixture.pptx `
+            -Manifest build/native-qa/T018_manifest.json `
+            -Output build/native-qa/T018_native_evidence.json `
+            -RunSlideshow `
+            -CaptureScreenshots
+
+      - name: Verify native evidence
+        shell: powershell
+        run: |
+          python scripts/verify_powerpoint_qa.py `
+            build/native-qa/T018_manifest.json `
+            build/native-qa/T018_native_evidence.json `
+            --output build/native-qa/T018_verification.json
+
+      - name: Upload native QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: powerpoint-native-qa
+          path: build/native-qa/
+          if-no-files-found: warn

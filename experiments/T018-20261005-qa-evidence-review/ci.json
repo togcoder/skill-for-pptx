@@ -1,0 +1,17 @@
+{
+  "run_id": 37248823323,
+  "job_id": 111572042136,
+  "url": "https://github.com/togcoder/skill-for-pptx/actions/runs/37248823323",
+  "research_head": "e6bb3ac6b17ede15318ec9acbcdf0fd41fe05de6",
+  "conclusion": "success",
+  "checks": [
+    "Python compile",
+    "PowerShell syntax parse",
+    "150 unit tests"
+  ],
+  "native_powerpoint_run": false,
+  "test_excerpt": [
+    "2026-10-05T00:46:55.1129021Z Ran 150 tests in 1.112s",
+    "2026-10-05T00:46:55.1130208Z OK"
+  ]
+}
