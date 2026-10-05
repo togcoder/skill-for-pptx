@@ -8,9 +8,12 @@ Repo chính: [togcoder/skill-for-pptx](https://github.com/togcoder/skill-for-ppt
 
 **Bản nghiên cứu v0.7:** đã có đường dựng PPTX thử nghiệm, kiểm tra cấu trúc và ảnh tĩnh. Chưa xác nhận chuyển động trong PowerPoint. Nguồn skill trong repo chưa được cài vào tài khoản.
 
-Mới nhất: [T005 compound choreography](experiments/T005-20261004-codex-choreography/REPORT.md) biến intent từ prompt ngắn thành chuỗi bung nút, xoay, phóng, tách lớp và ghép lại. Hai PPTX/22 ảnh cuối đã kiểm tra, 41 tests đạt. Đây là một recipe 2D hạn chế, cần bấm từng Morph; chưa phải bộ tạo mọi hiệu ứng phức tạp. [T006](research/tasks/T006-native-timeline.md) ưu tiên timeline/path và playback thật tiếp theo.
+Mới nhất: [T018 QA review](experiments/T018-20261005-qa-evidence-review/REPORT.md) sửa bộ nghiệm thu và bàn giao công cụ chạy PowerPoint trên Windows. 26 hồ sơ giả lập cho 26 quyết định đúng; 150 tests đạt. T010–T017 đã có chia nhịp click, chart/KPI và generic motion trên deck có sẵn. Playback PowerPoint vẫn là cổng còn thiếu; chỉ số click và ảnh tĩnh chưa xác nhận hiệu ứng chạy đúng.
 
 ## Kết quả hiện có
+
+- [T017](experiments/T017-20261005-generic-report-motion/REPORT.md): một semantic beat có thể chứa nhiều stage tự động mà giữ nhịp click. [T016](experiments/T016-20261005-real-package-data-motion/REPORT.md): chart/KPI chạy qua package thật và kiểm tra bảo toàn nguồn. Đây là bằng chứng phần mềm, chưa có phát thử native.
+- [Hướng dẫn native QA](docs/POWERPOINT_NATIVE_HARNESS.md): manifest hash, COM probe, kiểm tra hồ sơ và việc còn phải quan sát trực tiếp.
 
 - T006 full candidate: đã có PPTX 1 slide/31 đối tượng/6 chặng; sửa lỗi mất chữ làm pipeline dừng; 79 tests đạt và ảnh mở đầu đã xem. Audit tọa độ còn chỉ ra rủi ro nối chặng, chưa có playback PowerPoint. [Báo cáo và file](experiments/T006-20261004-packed-validation/REPORT.md).
 - T006 semantics matrix: 4 file 1 slide cô lập hệ quy chiếu local/anchored và trạng thái remove/hold; 83 tests đạt, ảnh tĩnh giống nhau đúng thiết kế. Chưa có biến thể thắng nếu chưa phát thật trong PowerPoint. [Báo cáo và checklist](experiments/T006-20261004-motion-semantics-matrix/REPORT.md).

@@ -1,5 +1,23 @@
 # PPTX Motion Lab — checkpoint
 
+## T018 native QA evidence integrity — 2026-10-05
+
+Reviewed the unfinished T018 harness from a00ea03 on a separate branch (PR #21).
+Frozen synthetic evidence cases found 18 false click passes and one crash in
+26 cases. The corrected verifier gives 26/26 expected decisions, zero false
+passes and zero crashes. **150 tests pass**, plus Python compile and PowerShell
+syntax parse in GitHub Actions run 37248823323.
+
+Exact-artifact manifest, Windows COM probe, composite fixture builder and manual
+workflow are now documented in docs/POWERPOINT_NATIVE_HARNESS.md. No native
+workflow was dispatched and no new PPTX artifact was delivered in this study.
+Raw probe results are provisional; matching click indices do not prove animation
+completion. Native playback and visual-state claims remain false.
+
+Next: run the four frozen T006 hashes on an actual Windows PowerPoint desktop,
+then chart/KPI/focus capture. Do not repeat the matrix or expand effects to avoid
+the native gate. Report: experiments/T018-20261005-qa-evidence-review/REPORT.md.
+
 ## T017 generic report motion — 2026-10-05
 
 Generic existing-deck semantics now bridge to native timing for reveal, staggered
