@@ -1,0 +1,217 @@
+{
+  "evidence_kind": "synthetic-verifier-challenge",
+  "native_playback_tested": false,
+  "cases": [
+    {
+      "case": "positive-control",
+      "expected_parse": true,
+      "expected_click": true,
+      "actual_parse": true,
+      "actual_click": true,
+      "correct": true
+    },
+    {
+      "case": "parse-only",
+      "expected_parse": true,
+      "expected_click": false,
+      "actual_parse": true,
+      "actual_click": false,
+      "correct": true
+    },
+    {
+      "case": "empty-click-records",
+      "expected_parse": true,
+      "expected_click": false,
+      "actual_parse": true,
+      "actual_click": true,
+      "correct": false
+    },
+    {
+      "case": "truncated-last-click",
+      "expected_parse": true,
+      "expected_click": false,
+      "actual_parse": true,
+      "actual_click": true,
+      "correct": false
+    },
+    {
+      "case": "duplicated-click",
+      "expected_parse": true,
+      "expected_click": false,
+      "actual_parse": true,
+      "actual_click": true,
+      "correct": false
+    },
+    {
+      "case": "reordered-clicks",
+      "expected_parse": true,
+      "expected_click": false,
+      "actual_parse": true,
+      "actual_click": true,
+      "correct": false
+    },
+    {
+      "case": "broken-before-chain",
+      "expected_parse": true,
+      "expected_click": false,
+      "actual_parse": true,
+      "actual_click": true,
+      "correct": false
+    },
+    {
+      "case": "invalid-initial-index",
+      "expected_parse": true,
+      "expected_click": false,
+      "actual_parse": true,
+      "actual_click": true,
+      "correct": false
+    },
+    {
+      "case": "failed-slideshow",
+      "expected_parse": true,
+      "expected_click": false,
+      "actual_parse": true,
+      "actual_click": true,
+      "correct": false
+    },
+    {
+      "case": "missing-slideshow-success",
+      "expected_parse": true,
+      "expected_click": false,
+      "actual_parse": true,
+      "actual_click": true,
+      "correct": false
+    },
+    {
+      "case": "reported-probe-error",
+      "expected_parse": true,
+      "expected_click": false,
+      "actual_parse": true,
+      "actual_click": true,
+      "correct": false
+    },
+    {
+      "case": "missing-error-field",
+      "expected_parse": true,
+      "expected_click": false,
+      "actual_parse": true,
+      "actual_click": true,
+      "correct": false
+    },
+    {
+      "case": "duplicate-slideshow-slide",
+      "expected_parse": true,
+      "expected_click": false,
+      "actual_parse": true,
+      "actual_click": true,
+      "correct": false
+    },
+    {
+      "case": "missing-slideshow-slide",
+      "expected_parse": true,
+      "expected_click": false,
+      "actual_parse": true,
+      "actual_click": false,
+      "correct": true
+    },
+    {
+      "case": "wrong-click-count",
+      "expected_parse": true,
+      "expected_click": false,
+      "actual_parse": true,
+      "actual_click": false,
+      "correct": true
+    },
+    {
+      "case": "boolean-click-index",
+      "expected_parse": true,
+      "expected_click": false,
+      "actual_parse": true,
+      "actual_click": true,
+      "correct": false
+    },
+    {
+      "case": "contradictory-index-flag",
+      "expected_parse": true,
+      "expected_click": false,
+      "actual_parse": true,
+      "actual_click": false,
+      "correct": true
+    },
+    {
+      "case": "missing-application-version",
+      "expected_parse": false,
+      "expected_click": false,
+      "actual_parse": true,
+      "actual_click": true,
+      "correct": false
+    },
+    {
+      "case": "duplicate-native-slide",
+      "expected_parse": false,
+      "expected_click": false,
+      "actual_parse": true,
+      "actual_click": true,
+      "correct": false
+    },
+    {
+      "case": "missing-target",
+      "expected_parse": false,
+      "expected_click": false,
+      "actual_parse": false,
+      "actual_click": false,
+      "correct": true
+    },
+    {
+      "case": "wrong-hash",
+      "expected_parse": false,
+      "expected_click": false,
+      "actual_parse": false,
+      "actual_click": false,
+      "correct": true
+    },
+    {
+      "case": "empty-manifest-slides",
+      "expected_parse": false,
+      "expected_click": false,
+      "actual_parse": true,
+      "actual_click": true,
+      "correct": false
+    },
+    {
+      "case": "manifest-count-disagrees",
+      "expected_parse": false,
+      "expected_click": false,
+      "actual_parse": true,
+      "actual_click": true,
+      "correct": false
+    },
+    {
+      "case": "duplicate-manifest-slide",
+      "expected_parse": false,
+      "expected_click": false,
+      "actual_parse": true,
+      "actual_click": true,
+      "correct": false
+    },
+    {
+      "case": "manifest-click-list-incomplete",
+      "expected_parse": false,
+      "expected_click": false,
+      "actual_parse": true,
+      "actual_click": true,
+      "correct": false
+    },
+    {
+      "case": "malformed-click-list",
+      "expected_parse": true,
+      "expected_click": false,
+      "correct": false,
+      "error": "TypeError: 'NoneType' object is not iterable"
+    }
+  ],
+  "correct": 7,
+  "total": 26,
+  "false_click_passes": 18,
+  "crashes": 1
+}
