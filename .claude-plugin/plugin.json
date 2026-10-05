@@ -1,0 +1,10 @@
+{
+  "name": "pptx-motion",
+  "version": "0.8.0",
+  "description": "AI Motion Director for existing PowerPoint decks: inspect a .pptx, direct presenter-paced click beats, write PowerPoint-canonical native animation, verify preservation and render a click-state storyboard.",
+  "author": {
+    "name": "togcoder"
+  },
+  "repository": "https://github.com/togcoder/skill-for-pptx",
+  "keywords": ["powerpoint", "pptx", "animation", "presentation", "motion"]
+}

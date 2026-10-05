@@ -10,6 +10,22 @@ Repo chính: [togcoder/skill-for-pptx](https://github.com/togcoder/skill-for-ppt
 
 Mới nhất: [T018 QA review](experiments/T018-20261005-qa-evidence-review/REPORT.md) sửa bộ nghiệm thu và bàn giao công cụ chạy PowerPoint trên Windows. 26 hồ sơ giả lập cho 26 quyết định đúng; 150 tests đạt. T010–T017 đã có chia nhịp click, chart/KPI và generic motion trên deck có sẵn. Playback PowerPoint vẫn là cổng còn thiếu; chỉ số click và ảnh tĩnh chưa xác nhận hiệu ứng chạy đúng.
 
+## Dùng ngay: Motion Director cho deck có sẵn
+
+```bash
+pip install lxml
+python3 scripts/motion_director.py inspect deck.pptx                 # AI đọc deck
+python3 scripts/motion_director.py auto deck.pptx -o deck_motion.pptx --storyboard sb/
+# hoặc: draft -> chỉnh director.json -> apply (xem skills/pptx-motion-director/SKILL.md)
+```
+
+Giữ nguyên slide, chữ, bố cục, animation có sẵn; thêm animation native theo nhịp
+click của người thuyết trình; xuất báo cáo và storyboard (cần LibreOffice Impress
++ ImageMagick). Cài như plugin Claude Code: `/plugin marketplace add
+togcoder/skill-for-pptx` rồi `/plugin install pptx-motion@togcoder-pptx`, dùng
+`/animate-deck deck.pptx`. Trạng thái: kiểm tra cấu trúc + LibreOffice đọc đúng
+trình tự; **chưa phát thử trong PowerPoint**. [Báo cáo T019](experiments/T019-20261005-claude-motion-director/REPORT.md).
+
 ## Kết quả hiện có
 
 - [T017](experiments/T017-20261005-generic-report-motion/REPORT.md): một semantic beat có thể chứa nhiều stage tự động mà giữ nhịp click. [T016](experiments/T016-20261005-real-package-data-motion/REPORT.md): chart/KPI chạy qua package thật và kiểm tra bảo toàn nguồn. Đây là bằng chứng phần mềm, chưa có phát thử native.

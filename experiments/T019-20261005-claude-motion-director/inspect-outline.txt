@@ -1,0 +1,52 @@
+# report_deck.pptx  sha256=7366f1382edd…  slides=7
+
+## Slide 1
+notes: Welcome. Today: how Q3 went, what drove it, and what we do next.
+- id=2 "Title 1" shape ph:ctrTitle @(0.06,0.31 0.64x0.21) Q3 Operating Review
+- id=3 "Subtitle 2" shape ph:subTitle @(0.11,0.57 0.53x0.26) Northwind Roasters (synthetic data) · October 2026
+
+## Slide 2
+- id=2 "Title 1" shape ph:title @(0.04,0.04 0.68x0.17) Agenda
+- id=3 "Content Placeholder 2" shape ph:obj @(0.04,0.23 0.68x0.66) ¶0 Headline results | ¶1 Revenue by channel | ¶2 How we fixed fulfilment | ¶3 Priorities for Q4
+
+## Slide 3
+notes: Start with revenue: 4.2 million. Then margin held at 38 percent. Finally 1,250 new subscribers.
+- id=2 "Title 1" shape ph:title @(0.04,0.04 0.68x0.17) Q3 at a glance
+- id=3 "KPI Card 1" shape @(0.07,0.29 0.26x0.40) 
+- id=4 "KPI Value 1" shape number 44pt @(0.09,0.35 0.22x0.16) $4.2M
+- id=5 "KPI Label 1" shape 16pt @(0.09,0.52 0.22x0.11) Revenue, up from $3.1M
+- id=6 "KPI Card 2" shape @(0.37,0.29 0.26x0.40) 
+- id=7 "KPI Value 2" shape number 44pt @(0.39,0.35 0.22x0.16) 38%
+- id=8 "KPI Label 2" shape 16pt @(0.39,0.52 0.22x0.11) Gross margin
+- id=9 "KPI Card 3" shape @(0.67,0.29 0.26x0.40) 
+- id=10 "KPI Value 3" shape number 44pt @(0.69,0.35 0.22x0.16) 1,250
+- id=11 "KPI Label 3" shape 16pt @(0.69,0.52 0.22x0.11) New subscribers
+
+## Slide 4
+- id=2 "Title 1" shape ph:title @(0.04,0.04 0.68x0.17) Revenue by channel
+- id=3 "Channel Chart" chart chart:column 2s×4c @(0.06,0.23 0.59x0.67) 
+- id=4 "Takeaway Card" shape @(0.68,0.29 0.27x0.43) 
+- id=5 "Takeaway" shape 20pt @(0.70,0.33 0.23x0.35) Online overtook retail for the first time in Q3.
+
+## Slide 5
+notes: Walk the four steps in order, then land the result: lead time down to four days.
+- id=2 "Title 1" shape ph:title @(0.04,0.04 0.68x0.17) How we fixed fulfilment
+- id=3 "Step 1" shape 22pt @(0.06,0.40 0.18x0.19) Forecast
+- id=4 "Step 2" shape 22pt @(0.30,0.40 0.18x0.19) Roast
+- id=5 "Arrow 1" connector @(0.24,0.49 0.06x0.00) 
+- id=6 "Step 3" shape 22pt @(0.54,0.40 0.18x0.19) Pack
+- id=7 "Arrow 2" connector @(0.48,0.49 0.06x0.00) 
+- id=8 "Step 4" shape 22pt @(0.78,0.40 0.18x0.19) Ship
+- id=9 "Arrow 3" connector @(0.72,0.49 0.06x0.00) 
+- id=10 "Result" shape 20pt @(0.06,0.67 0.89x0.11) Lead time fell from 9 days to 4 days.
+- id=11 "Badge Group" group number @(0.87,0.05 0.08x0.13) -55%
+
+## Slide 6  [existing animation: 2 click group(s)]
+notes: Existing animation: each feedback point fades in on click.
+- id=2 "Title 1" shape ph:title @(0.04,0.04 0.68x0.17) Customer feedback
+- id=3 "Content Placeholder 2" shape ph:obj ANIMATED @(0.06,0.24 0.53x0.64) ¶0 Delivery speed is the top compliment | ¶1 Packaging waste is the top complaint
+- id=4 "Feedback Picture" picture @(0.63,0.25 0.32x0.42) 
+
+## Slide 7
+- id=2 "Title 1" shape ph:title @(0.04,0.04 0.68x0.17) Priorities for Q4
+- id=3 "Content Placeholder 2" shape ph:obj @(0.04,0.23 0.68x0.66) ¶0 Expand online subscriptions | ¶1 Cut packaging waste by 30% | ¶2 Open the second roastery

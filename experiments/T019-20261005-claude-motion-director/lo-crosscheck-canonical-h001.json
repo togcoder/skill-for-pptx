@@ -1,0 +1,49 @@
+{
+  "tool": "LibreOffice PPTX import -> ODP",
+  "pptx": "h001_canon.pptx",
+  "slides": [
+    {
+      "slide": 1,
+      "effects": [
+        {
+          "node_type": "on-click",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-fade-in",
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 1
+        },
+        {
+          "node_type": "after-previous",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-fade-in",
+          "effect_begin": "0s",
+          "block_begin": "0.32s",
+          "visibility_sets": 1
+        },
+        {
+          "node_type": "after-previous",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-fade-in",
+          "effect_begin": "0s",
+          "block_begin": "0.64s",
+          "visibility_sets": 1
+        }
+      ]
+    },
+    {
+      "slide": 2,
+      "effects": [
+        {
+          "node_type": "on-click",
+          "preset_class": "emphasis",
+          "preset_id": "ooo-emphasis-grow-and-shrink",
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 0
+        }
+      ]
+    }
+  ],
+  "powerpoint_playback_verified": false
+}

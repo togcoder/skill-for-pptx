@@ -7,6 +7,14 @@ description: Develop editable PowerPoint motion from short prompts using explici
 
 Create or augment a reviewable PowerPoint motion artifact. The preferred product path is to motion-direct an existing PPTX; generating a fresh motion experiment is a supporting path. Read `../../docs/PRODUCT_TARGET.md` and the project checkpoint before continuing. Treat this as research source; do not install the skill or publish a release as a side effect.
 
+## Product path (T019)
+
+For directing an existing deck, prefer `skills/pptx-motion-director/SKILL.md` and
+`scripts/motion_director.py`. Its writer (`scripts/pptx_animator.py`) uses the
+PowerPoint-canonical timing tree. The patch v0.2–v0.5 click-beat writer below
+runs `after-previous` stages concurrently and lacks entrance visibility; keep it
+only to reproduce T010–T017 evidence.
+
 ## Existing-deck entry path
 
 When the user supplies an existing PPTX:

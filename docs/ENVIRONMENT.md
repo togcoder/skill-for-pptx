@@ -33,3 +33,10 @@ Không cài lại dependency vào runtime Work do host quản lý. Khi dùng Wor
 Với PowerPoint, bắt đầu bằng một PPTX đã có trong `output/` để tránh thay đổi
 đầu vào trong khi đo. Ghi font thực tế và mọi lần thay thế. PNG tĩnh không cho
 biết chuyển tiếp chạy đúng. Theo `docs/POWERPOINT_QA.md`.
+
+## T019 Motion Director
+
+`scripts/motion_director.py` needs only Python 3 + lxml. Storyboard rendering and
+`scripts/lo_timing_crosscheck.py` additionally need LibreOffice **Impress**
+(`libreoffice-impress`; `libreoffice-core` alone cannot open PPTX) and
+ImageMagick `montage`. Regenerating the fixture needs python-pptx and Pillow.

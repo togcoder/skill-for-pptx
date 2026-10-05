@@ -1,5 +1,29 @@
 # PPTX Motion Lab — checkpoint
 
+## T019 canonical timing + one-command Motion Director — 2026-10-05
+
+Product path now exists end to end: `scripts/motion_director.py`
+`inspect → draft → apply → storyboard/verify`, packaged as skill
+`skills/pptx-motion-director/` and Claude Code plugin (`.claude-plugin/`,
+`/animate-deck`). Input can be only a PPTX + vague goal.
+
+Found and fixed a writer defect: patch v0.2–v0.5 put all stages of a click in
+one `p:par` at delay 0, so `after-previous` ran concurrently, and entrances had
+no `set style.visibility`. LibreOffice's importer reads the old H001 tree as
+three effects at 0s with no preset; the new `scripts/pptx_animator.py` tree as
+0s/0.32s/0.64s Float/Fade entrances. Existing timing is now extended (appended,
+original nodes byte-equal) instead of rejected.
+
+Synthetic real-world fixture `tests/fixtures/report_deck.pptx` (placeholders,
+bullets, KPI cards, chart, process, picture, group, notes, PowerPoint-authored
+animation): autonomous draft gives 4/3/2/5/3 clicks on slides 2/3/4/5/7, keeps
+title and existing-animation slides untouched; preservation checks pass.
+**167 tests pass.** PowerPoint playback still pending — play
+`experiments/T019-20261005-claude-motion-director/report_deck_motion.pptx`.
+
+Report: experiments/T019-20261005-claude-motion-director/REPORT.md.
+Next task: research/tasks/T020-motion-director-continuation.md.
+
 ## T018 native QA evidence integrity — 2026-10-05
 
 Reviewed the unfinished T018 harness from a00ea03 on a separate branch (PR #21).
