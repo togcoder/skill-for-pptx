@@ -17,11 +17,17 @@ concurrently); do not build on it.
 
 Read first: AGENTS.md, HANDOFF.md (T019 section), the T019 report,
 `skills/pptx-motion-director/SKILL.md`, `docs/CLICK_BEAT_CHOREOGRAPHY.md`.
-Run `python3 -m unittest discover -s tests -v` (167 pass at T019).
+Run `python3 -m unittest discover -s tests -v` (190 pass at T023).
 
 ## Work items — pick by environment, in priority order
 
 ### A. Native PowerPoint gate (needs Windows + PowerPoint) — highest value
+
+Also play the T023 compound-motion showcase
+`experiments/T023-20261005-claude-compound-motion/output/T023_showcase_directed.pptx`
+against `preview/slide-0N.png` (anchored chained paths, Grow compounding,
+Transparency restore, Morph glide), and the T009 deck candidates from T022:
+`experiments/T022-20261005-claude-t009-recompile/output/*.pptx`.
 
 1. Open `experiments/T019-20261005-claude-motion-director/report_deck_motion.pptx`
    (sha256 `b7f0e2f4…6ba11`) using `docs/POWERPOINT_NATIVE_HARNESS.md`.
@@ -34,6 +40,10 @@ Run `python3 -m unittest discover -s tests -v` (167 pass at T019).
 4. Only then set native playback verified, per effect that was observed.
 
 ### B. Director quality (Python only)
+
+Progress (T022): text-box-only decks fixed (implicit titles, label–body pairing,
+paragraph clicks) with `tests/fixtures/essay_outline_deck.pptx`. Still open:
+tables, SmartArt, image-heavy and two-column comparison decks, 4:3 decks.
 
 1. Build 3+ new synthetic fixtures unlike `tests/fixtures/report_deck.pptx`:
    table-heavy, image-heavy, two-column comparison, SmartArt/diagram, Vietnamese

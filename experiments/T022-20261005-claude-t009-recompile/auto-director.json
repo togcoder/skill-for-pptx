@@ -1,0 +1,1132 @@
+{
+  "version": "0.5",
+  "kind": "existing-deck-motion-director",
+  "source": {
+    "pptx_sha256": "b9f4c97acf488ac9ba8211e6b7e69f16230c1facf444269c55ae82cc4138820d",
+    "inventory_version": "0.1",
+    "source_slide_count": 10
+  },
+  "user_instruction": "Làm bài thuyết trình này rõ ràng, mạch lạc và có chuyển động chuyên nghiệp.",
+  "script": {
+    "source": "inferred",
+    "summary": "Each slide reveals its content in reading order, one talking point per click; data before conclusions; existing animation preserved.",
+    "evidence": [
+      "slide titles and reading order",
+      "no speaker notes",
+      "no existing animation"
+    ],
+    "beats": [
+      "slide 1: BÀI VĂN NGHỊ LUẬN",
+      "slide 2: I. MỞ BÀI",
+      "slide 3: II. THÂN BÀI",
+      "slide 4: 2. Thực trạng thiếu nguồn nước sạch hiện nay",
+      "slide 5: 3. Nguyên nhân dẫn đến thực trạng",
+      "slide 6: 4. Hậu quả của việc thiếu nước sạch",
+      "slide 7: 5. Ý kiến trái chiều và Phản bác",
+      "slide 8: 6. Hệ thống giải pháp",
+      "slide 9: 6. Hệ thống giải pháp",
+      "slide 10: III. KẾT BÀI"
+    ]
+  },
+  "preservation": {
+    "preserve_text_by_default": true,
+    "preserve_media_by_default": true,
+    "preserve_theme_by_default": true,
+    "preserve_slide_order_by_default": true,
+    "slide_count_policy": "preserve"
+  },
+  "slides": [
+    {
+      "source_index": 1,
+      "role": "report slide",
+      "objective": "Audience follows slide 1 one idea at a time.",
+      "beats": [
+        {
+          "id": "reveal-1",
+          "purpose": "Reveal 'BÀI VĂN NGHỊ LUẬN'.",
+          "operation": "reveal",
+          "targets": [
+            "Text 0"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "point-3",
+          "purpose": "Reveal point: TÌNH TRẠNG THIẾU NGUỒN",
+          "operation": "text-build",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            0
+          ]
+        },
+        {
+          "id": "point-5",
+          "purpose": "Reveal point: NƯỚC SẠCH HIỆN NAY",
+          "operation": "text-build",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            1
+          ]
+        },
+        {
+          "id": "point-7",
+          "purpose": "Reveal point: CHỦ ĐỀ : CON NGƯỜI TRONG MỐI",
+          "operation": "text-build",
+          "targets": [
+            "Text 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            0
+          ]
+        },
+        {
+          "id": "point-9",
+          "purpose": "Reveal point: QUAN HỆ VỚI THIÊN NHIÊN",
+          "operation": "text-build",
+          "targets": [
+            "Text 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            1
+          ]
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-2",
+          "purpose": "Introduce 'BÀI VĂN NGHỊ LUẬN'.",
+          "motion_beats": [
+            "reveal-1"
+          ],
+          "stable_state": "Content visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-4",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-3"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        },
+        {
+          "id": "click-6",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-5"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        },
+        {
+          "id": "click-8",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-7"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        },
+        {
+          "id": "click-10",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-9"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 2,
+      "role": "report slide",
+      "objective": "Audience follows slide 2 one idea at a time.",
+      "beats": [
+        {
+          "id": "reveal-1",
+          "purpose": "Reveal 'I. MỞ BÀI'.",
+          "operation": "reveal",
+          "targets": [
+            "Text 0"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "reveal-3",
+          "purpose": "Reveal 'Cách 1: Đi từ quy luật sinh tồn'.",
+          "operation": "reveal",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "reveal-5",
+          "purpose": "Reveal 'Tự nhiên không cần con người, nhưng con người lại không thể '.",
+          "operation": "reveal",
+          "targets": [
+            "Text 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "reveal-7",
+          "purpose": "Reveal 'Cách 2: Đi từ hình ảnh tương phản'.",
+          "operation": "reveal",
+          "targets": [
+            "Text 3"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "reveal-9",
+          "purpose": "Reveal 'Người ta từng say sưa ngắm những dòng sông trong vắt, hiền h'.",
+          "operation": "reveal",
+          "targets": [
+            "Text 4"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-2",
+          "purpose": "Introduce 'I. MỞ BÀI'.",
+          "motion_beats": [
+            "reveal-1"
+          ],
+          "stable_state": "Content visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-4",
+          "purpose": "Introduce 'Cách 1: Đi từ quy luật sinh tồn'.",
+          "motion_beats": [
+            "reveal-3"
+          ],
+          "stable_state": "Content visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "New idea for the presenter to introduce."
+        },
+        {
+          "id": "click-6",
+          "purpose": "Introduce 'Tự nhiên không cần con người, nhưng con người lại không thể '.",
+          "motion_beats": [
+            "reveal-5"
+          ],
+          "stable_state": "Content visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "New idea for the presenter to introduce."
+        },
+        {
+          "id": "click-8",
+          "purpose": "Introduce 'Cách 2: Đi từ hình ảnh tương phản'.",
+          "motion_beats": [
+            "reveal-7"
+          ],
+          "stable_state": "Content visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "New idea for the presenter to introduce."
+        },
+        {
+          "id": "click-10",
+          "purpose": "Introduce 'Người ta từng say sưa ngắm những dòng sông trong vắt, hiền h'.",
+          "motion_beats": [
+            "reveal-9"
+          ],
+          "stable_state": "Content visible.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "New idea for the presenter to introduce."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 3,
+      "role": "report slide",
+      "objective": "Audience follows slide 3 one idea at a time.",
+      "beats": [
+        {
+          "id": "reveal-1",
+          "purpose": "Reveal 'II. THÂN BÀI'.",
+          "operation": "reveal",
+          "targets": [
+            "Text 0"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "reveal-3",
+          "purpose": "Reveal '1. Giải thích khái niệm và vai trò của nước sạch'.",
+          "operation": "reveal",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "point-5",
+          "purpose": "Reveal point: Để có cái nhìn chính xác và toàn diện, trước hết chúng ta cầ",
+          "operation": "text-build",
+          "targets": [
+            "Text 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            0
+          ]
+        },
+        {
+          "id": "point-7",
+          "purpose": "Reveal point: Xét về đời sống sinh hoạt, nước sạch duy trì những hoạt động",
+          "operation": "text-build",
+          "targets": [
+            "Text 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            2
+          ]
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-2",
+          "purpose": "Introduce 'II. THÂN BÀI'.",
+          "motion_beats": [
+            "reveal-1"
+          ],
+          "stable_state": "Content visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-4",
+          "purpose": "Introduce '1. Giải thích khái niệm và vai trò của nước sạch'.",
+          "motion_beats": [
+            "reveal-3"
+          ],
+          "stable_state": "Content visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "New idea for the presenter to introduce."
+        },
+        {
+          "id": "click-6",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-5"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        },
+        {
+          "id": "click-8",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-7"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 4,
+      "role": "report slide",
+      "objective": "Audience follows slide 4 one idea at a time.",
+      "beats": [
+        {
+          "id": "reveal-1",
+          "purpose": "Reveal '2. Thực trạng thiếu nguồn nước sạch hiện nay'.",
+          "operation": "reveal",
+          "targets": [
+            "Text 0"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "point-3",
+          "purpose": "Reveal point: Đáng buồn thay, thực trạng hiện nay lại vẽ nên một bức tranh",
+          "operation": "text-build",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            0
+          ]
+        },
+        {
+          "id": "point-5",
+          "purpose": "Reveal point: Nhìn về Việt Nam, một quốc gia có mạng lưới sông ngòi dày đặ",
+          "operation": "text-build",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            2
+          ]
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-2",
+          "purpose": "Introduce '2. Thực trạng thiếu nguồn nước sạch hiện nay'.",
+          "motion_beats": [
+            "reveal-1"
+          ],
+          "stable_state": "Content visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-4",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-3"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        },
+        {
+          "id": "click-6",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-5"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 5,
+      "role": "report slide",
+      "objective": "Audience follows slide 5 one idea at a time.",
+      "beats": [
+        {
+          "id": "reveal-1",
+          "purpose": "Reveal '3. Nguyên nhân dẫn đến thực trạng'.",
+          "operation": "reveal",
+          "targets": [
+            "Text 0"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "point-3",
+          "purpose": "Reveal point: Để tìm ra lối thoát cho cuộc khủng hoảng này, việc phân tích",
+          "operation": "text-build",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            0
+          ]
+        },
+        {
+          "id": "point-5",
+          "purpose": "Reveal point: Tuy nhiên, nguyên nhân cốt lõi và đáng trách nhất vẫn xuất p",
+          "operation": "text-build",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            2
+          ]
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-2",
+          "purpose": "Introduce '3. Nguyên nhân dẫn đến thực trạng'.",
+          "motion_beats": [
+            "reveal-1"
+          ],
+          "stable_state": "Content visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-4",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-3"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        },
+        {
+          "id": "click-6",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-5"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 6,
+      "role": "report slide",
+      "objective": "Audience follows slide 6 one idea at a time.",
+      "beats": [
+        {
+          "id": "reveal-1",
+          "purpose": "Reveal '4. Hậu quả của việc thiếu nước sạch'.",
+          "operation": "reveal",
+          "targets": [
+            "Text 0"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "point-3",
+          "purpose": "Reveal point: Hệ quả tất yếu từ sự thờ ơ của con người là vô cùng khôn lườ",
+          "operation": "text-build",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            0
+          ]
+        },
+        {
+          "id": "point-5",
+          "purpose": "Reveal point: Tiếp theo là thiệt hại nặng nề về kinh tế - xã hội: đồng ruộ",
+          "operation": "text-build",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            2
+          ]
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-2",
+          "purpose": "Introduce '4. Hậu quả của việc thiếu nước sạch'.",
+          "motion_beats": [
+            "reveal-1"
+          ],
+          "stable_state": "Content visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-4",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-3"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        },
+        {
+          "id": "click-6",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-5"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 7,
+      "role": "report slide",
+      "objective": "Audience follows slide 7 one idea at a time.",
+      "beats": [
+        {
+          "id": "reveal-1",
+          "purpose": "Reveal '5. Ý kiến trái chiều và Phản bác'.",
+          "operation": "reveal",
+          "targets": [
+            "Text 0"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "point-3",
+          "purpose": "Reveal point: Mặc dù hậu quả đã rõ ràng, trong xã hội vẫn tồn tại những ý ",
+          "operation": "text-build",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            0
+          ]
+        },
+        {
+          "id": "point-5",
+          "purpose": "Reveal point: Tuy nhiên, quan điểm ấy hoàn toàn sai lầm. Nước trên hành ti",
+          "operation": "text-build",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            2
+          ]
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-2",
+          "purpose": "Introduce '5. Ý kiến trái chiều và Phản bác'.",
+          "motion_beats": [
+            "reveal-1"
+          ],
+          "stable_state": "Content visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-4",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-3"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        },
+        {
+          "id": "click-6",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-5"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 8,
+      "role": "report slide",
+      "objective": "Audience follows slide 8 one idea at a time.",
+      "beats": [
+        {
+          "id": "reveal-1",
+          "purpose": "Reveal '6. Hệ thống giải pháp'.",
+          "operation": "reveal",
+          "targets": [
+            "Text 0"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "reveal-3",
+          "purpose": "Reveal 'Đối với cá nhân và gia đình'.",
+          "operation": "reveal",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "point-5",
+          "purpose": "Reveal point: Để giải quyết tận gốc cuộc khủng hoảng nguồn nước ngọt, hành",
+          "operation": "text-build",
+          "targets": [
+            "Text 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            0
+          ]
+        },
+        {
+          "id": "point-7",
+          "purpose": "Reveal point: Nâng cao hơn một cấp độ, gia đình cần áp dụng mô hình tuần h",
+          "operation": "text-build",
+          "targets": [
+            "Text 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            2
+          ]
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-2",
+          "purpose": "Introduce '6. Hệ thống giải pháp'.",
+          "motion_beats": [
+            "reveal-1"
+          ],
+          "stable_state": "Content visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-4",
+          "purpose": "Introduce 'Đối với cá nhân và gia đình'.",
+          "motion_beats": [
+            "reveal-3"
+          ],
+          "stable_state": "Content visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "New idea for the presenter to introduce."
+        },
+        {
+          "id": "click-6",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-5"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        },
+        {
+          "id": "click-8",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-7"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 9,
+      "role": "report slide",
+      "objective": "Audience follows slide 9 one idea at a time.",
+      "beats": [
+        {
+          "id": "reveal-1",
+          "purpose": "Reveal '6. Hệ thống giải pháp'.",
+          "operation": "reveal",
+          "targets": [
+            "Text 0"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "reveal-3",
+          "purpose": "Reveal 'Đối với cộng đồng xã hội và cơ quan quản lý'.",
+          "operation": "reveal",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "point-5",
+          "purpose": "Reveal point: Tuy nhiên, nếu chỉ dừng lại ở phạm vi gia đình thì chưa đủ. ",
+          "operation": "text-build",
+          "targets": [
+            "Text 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            0
+          ]
+        },
+        {
+          "id": "point-7",
+          "purpose": "Reveal point: Về lâu dài, các cơ quan quản lý cần đầu tư giáo dục thế hệ t",
+          "operation": "text-build",
+          "targets": [
+            "Text 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            2
+          ]
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-2",
+          "purpose": "Introduce '6. Hệ thống giải pháp'.",
+          "motion_beats": [
+            "reveal-1"
+          ],
+          "stable_state": "Content visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-4",
+          "purpose": "Introduce 'Đối với cộng đồng xã hội và cơ quan quản lý'.",
+          "motion_beats": [
+            "reveal-3"
+          ],
+          "stable_state": "Content visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "New idea for the presenter to introduce."
+        },
+        {
+          "id": "click-6",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-5"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        },
+        {
+          "id": "click-8",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-7"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 10,
+      "role": "report slide",
+      "objective": "Audience follows slide 10 one idea at a time.",
+      "beats": [
+        {
+          "id": "reveal-1",
+          "purpose": "Reveal 'III. KẾT BÀI'.",
+          "operation": "reveal",
+          "targets": [
+            "Text 0"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "reveal-3",
+          "purpose": "Reveal 'CÁC CÁCH KẾT BÀI SÂU SẮC, LAN TỎA'.",
+          "operation": "reveal",
+          "targets": [
+            "Text 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "reveal-5",
+          "purpose": "Reveal 'Cách 1: Khẳng định và thôi thúc hành động'.",
+          "operation": "reveal",
+          "targets": [
+            "Text 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "reveal-7",
+          "purpose": "Reveal 'Tóm lại, nước sạch là món quà vô giá mà thiên nhiên ban tặng'.",
+          "operation": "reveal",
+          "targets": [
+            "Text 3"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "reveal-9",
+          "purpose": "Reveal 'Cách 2: Mở rộng, gợi mở triết lý'.",
+          "operation": "reveal",
+          "targets": [
+            "Text 4"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "reveal-11",
+          "purpose": "Reveal 'Nhìn lại lịch sử, mọi nền văn minh lớn của loài người đều đư'.",
+          "operation": "reveal",
+          "targets": [
+            "Text 5"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-2",
+          "purpose": "Introduce 'III. KẾT BÀI'.",
+          "motion_beats": [
+            "reveal-1"
+          ],
+          "stable_state": "Content visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-4",
+          "purpose": "Introduce 'CÁC CÁCH KẾT BÀI SÂU SẮC, LAN TỎA'.",
+          "motion_beats": [
+            "reveal-3"
+          ],
+          "stable_state": "Content visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "New idea for the presenter to introduce."
+        },
+        {
+          "id": "click-6",
+          "purpose": "Introduce 'Cách 1: Khẳng định và thôi thúc hành động'.",
+          "motion_beats": [
+            "reveal-5"
+          ],
+          "stable_state": "Content visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "New idea for the presenter to introduce."
+        },
+        {
+          "id": "click-8",
+          "purpose": "Introduce 'Tóm lại, nước sạch là món quà vô giá mà thiên nhiên ban tặng'.",
+          "motion_beats": [
+            "reveal-7"
+          ],
+          "stable_state": "Content visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "New idea for the presenter to introduce."
+        },
+        {
+          "id": "click-10",
+          "purpose": "Introduce 'Cách 2: Mở rộng, gợi mở triết lý'.",
+          "motion_beats": [
+            "reveal-9"
+          ],
+          "stable_state": "Content visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "New idea for the presenter to introduce."
+        },
+        {
+          "id": "click-12",
+          "purpose": "Introduce 'Nhìn lại lịch sử, mọi nền văn minh lớn của loài người đều đư'.",
+          "motion_beats": [
+            "reveal-11"
+          ],
+          "stable_state": "Content visible.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "New idea for the presenter to introduce."
+        }
+      ],
+      "components": []
+    }
+  ],
+  "target_slide_count": 10,
+  "research_metadata": {
+    "sources": [],
+    "draft_notes": {
+      "1": "5 click(s), 5 motion beat(s)",
+      "2": "5 click(s), 5 motion beat(s)",
+      "3": "4 click(s), 4 motion beat(s)",
+      "4": "3 click(s), 3 motion beat(s)",
+      "5": "3 click(s), 3 motion beat(s)",
+      "6": "3 click(s), 3 motion beat(s)",
+      "7": "3 click(s), 3 motion beat(s)",
+      "8": "4 click(s), 4 motion beat(s)",
+      "9": "4 click(s), 4 motion beat(s)",
+      "10": "6 click(s), 6 motion beat(s)"
+    },
+    "style": "modern",
+    "drafted_by": "motion_director.py heuristic v0.1"
+  }
+}

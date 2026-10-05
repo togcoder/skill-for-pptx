@@ -1,5 +1,51 @@
 # PPTX Motion Lab — checkpoint
 
+## T023 compound motion engine — 2026-10-05
+
+Existing decks can now receive compound choreography, not only builds.
+`scripts/motion_engine.py` compiles keyframe tracks and recipes (assemble,
+disperse, spotlight, release, cycle, swap, travel, zoom-focus, raw tracks) into
+native motion paths, Grow/Shrink, Spin, Transparency and entrance/exit effects
+with exact delays. Position, scale, rotation, opacity and visibility carry
+across clicks. Director v0.6 adds `choreography` beats and Morph `transitions`.
+
+The draft detects cycle/hub diagrams (assemble, then a spotlight tour, then
+release) and Morph continuity (a shared picture or text that moves). It keeps
+continuing objects static. `preview` renders a simulated GIF plus a key-state
+sheet of any slide (reading the timing XML back). `verify` rejects overlapping
+moves of one object and warns about new occlusion or off-slide states. Those
+warnings caught two real mistakes in the hand-directed showcase.
+
+LibreOffice recognises the new motion-path, grow-and-shrink, transparency and
+exit effects. Smoke test: `auto` on 27 repository decks passes, after fixing a
+crash on fully animated decks and 88 bogus re-entries on Morph-state decks.
+**190 tests pass.** Native playback is pending: play
+`experiments/T023-20261005-claude-compound-motion/output/T023_showcase_directed.pptx`
+against its preview sheets.
+
+Report: experiments/T023-20261005-claude-compound-motion/REPORT.md.
+
+## T022 T009 recompile + text-box deck direction — 2026-10-05
+
+Continued Codex's T009 arm C (PR #22, which its review held back from merging).
+The plan, unchanged, was recompiled through T019 on a timing-stripped
+reconstruction (0 inventory differences over 31 shapes). In LibreOffice's
+reading, the T009 candidate has 21 effects with 0 presets and all stages at
+0s; R1 has 21/21 presets, with staged reveals at 0s/0.32s. A paragraph-click
+variant (R2, 19 clicks) separates claims from rebuttals without content edits.
+
+The T019 autonomous draft failed on this text-box-only deck: 40 clicks
+(titles animated, wrapped titles split, labels separated). Implicit-title,
+title-zone and label-body pairing rules bring it to 18 clicks. That matches
+Codex's grouping on slides 2 and 10 and differs only by keeping slide 1 static.
+
+`scripts/render_identity.py` compares renders in RGB. A negative control shows
+the T009 RGBA `getbbox()` method misses real changes. R1, R2 and auto2 render
+10/10 identical. **176 tests pass.** Native playback is still pending: play the
+two PPTX files in `experiments/T022-20261005-claude-t009-recompile/output/`.
+
+Report: experiments/T022-20261005-claude-t009-recompile/REPORT.md.
+
 ## T019 canonical timing + one-command Motion Director — 2026-10-05
 
 Product path now exists end to end: `scripts/motion_director.py`

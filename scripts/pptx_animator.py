@@ -48,6 +48,7 @@ PRESETS={
     "disappear":("exit",1,0,0),
     "fade-out":("exit",10,0,400),
     "pulse":("emph",6,0,250),
+    "grow":("emph",6,0,600),
     "spin":("emph",8,0,800),
     "dim":("emph",9,0,400),
     "path":("path",0,0,800),
@@ -178,11 +179,35 @@ def _anim_prop(parent,ids,eff,attr,values,dur):
             sub(v,"fltVal",val=val)
 
 
+def _num(v):
+    return f"{round(v,6):g}"
+
+
 def _path_string(points):
     x0,y0=points[0]["x"],points[0]["y"]
     parts=["M 0 0"]
     for p in points[1:]:
-        parts.append(f"L {round(p['x']-x0,6):g} {round(p['y']-y0,6):g}")
+        parts.append(f"L {_num(p['x']-x0)} {_num(p['y']-y0)}")
+    return " ".join(parts)+" E"
+
+
+def anchored_path_string(segments):
+    """Path in slide fractions measured from the object's authored (layout)
+    position. ``segments`` = [{"x","y"} start, then {"x","y"[,"c1","c2"]} ...];
+    c1/c2 are cubic Bezier control points (also anchored offsets).
+
+    T023 hypothesis (T006 matrix "anchored-hold"): chained motion paths with
+    fill=hold are written as absolute offsets from the layout position, the way
+    PowerPoint's UI continues a second path from the end of the first.
+    """
+    first=segments[0]
+    parts=[f"M {_num(first['x'])} {_num(first['y'])}"]
+    for seg in segments[1:]:
+        if "c1" in seg:
+            c1,c2=seg["c1"],seg["c2"]
+            parts.append(f"C {_num(c1['x'])} {_num(c1['y'])} {_num(c2['x'])} {_num(c2['y'])} {_num(seg['x'])} {_num(seg['y'])}")
+        else:
+            parts.append(f"L {_num(seg['x'])} {_num(seg['y'])}")
     return " ".join(parts)+" E"
 
 
@@ -217,6 +242,11 @@ def _behaviours(parent,ids,eff):
         if preset=="fade-out":
             _anim_effect(parent,ids,eff,"out","fade",dur)
         _set_visibility(parent,ids,eff,"hidden",max(0,dur-1) if preset!="disappear" else 0)
+    elif preset=="grow":
+        ratio=eff["ratio"]
+        node=sub(parent,"animScale")
+        _bhvr(node,ids,eff,dur,fill="hold")
+        sub(node,"by",x=round(ratio*100000),y=round(ratio*100000))
     elif preset=="pulse":
         scale=eff.get("scale",1.08)
         node=sub(parent,"animScale")
@@ -226,17 +256,26 @@ def _behaviours(parent,ids,eff):
         node=sub(parent,"animRot",by=round(eff.get("by_deg",360)*60000))
         _bhvr(node,ids,eff,dur,fill="hold",attrs=("r",))
     elif preset=="dim":
+        # PowerPoint "Transparency" emphasis, held until the slide ends or a
+        # later dim on the same object sets another opacity (1 restores).
         opacity=eff.get("opacity",0.35)
+        s=sub(parent,"set")
+        _bhvr(s,ids,eff,"indefinite",fill="hold",attrs=("style.opacity",))
+        sub(sub(s,"to"),"strVal",val=f"{opacity:g}")
         node=sub(parent,"animEffect",filter="image",prLst=f"opacity: {opacity:g}")
         bhvr=sub(node,"cBhvr",rctx="IE")
         _ctn(bhvr,ids,"indefinite",fill="hold")
         _target(bhvr,eff["spid"],eff.get("paragraph"))
-        s=sub(parent,"set")
-        _bhvr(s,ids,eff,"indefinite",fill="hold",attrs=("style.opacity",))
-        sub(sub(s,"to"),"strVal",val=f"{opacity:g}")
     elif preset=="path":
-        node=sub(parent,"animMotion",origin="layout",path=_path_string(eff["points"]),
-                 pathEditMode="relative",rAng="0",ptsTypes="A"*len(eff["points"]))
+        if eff.get("anchored"):
+            path=anchored_path_string(eff["anchored"])
+            curved=any("c1" in seg for seg in eff["anchored"])
+            pts=None if curved else "A"*len(eff["anchored"])
+        else:
+            path=_path_string(eff["points"])
+            pts="A"*len(eff["points"])
+        node=sub(parent,"animMotion",origin="layout",path=path,
+                 pathEditMode="relative",rAng="0",ptsTypes=pts)
         _bhvr(node,ids,eff,dur,fill="hold",attrs=("ppt_x","ppt_y"))
         sub(node,"rCtr",x=0,y=0)
     else:
@@ -249,6 +288,9 @@ def _effect_par(parent,ids,eff,node_type,grp_id):
     extra={}
     if cls=="path":
         extra={"accel":"50000","decel":"50000"}
+    if "accel" in eff or "decel" in eff:
+        extra={"accel":str(round(eff.get("accel",0)*100000)),"decel":str(round(eff.get("decel",0)*100000))}
+        extra={k:v for k,v in extra.items() if v!="0"}
     ctn=sub(par,"cTn",id=next(ids),presetID=pid,presetClass=cls,presetSubtype=subtype,
             **extra,fill="hold",grpId=grp_id,nodeType=node_type)
     st=sub(ctn,"stCondLst")
@@ -274,9 +316,14 @@ def validate_effect(eff):
     if type(eff.get("delay_ms",0)) is not int or eff.get("delay_ms",0)<0:
         raise ValueError("delay_ms must be a nonnegative integer")
     if eff["preset"]=="path":
-        pts=eff.get("points")
+        pts=eff.get("anchored") or eff.get("points")
         if not isinstance(pts,list) or len(pts)<2:
             raise ValueError("path effect requires >=2 points")
+    if eff["preset"]=="grow" and not (isinstance(eff.get("ratio"),(int,float)) and eff["ratio"]>0):
+        raise ValueError("grow effect requires a positive ratio")
+    for key in ("accel","decel"):
+        if key in eff and not (0<=eff[key]<=1):
+            raise ValueError(f"{key} must be within 0..1")
 
 
 def plan_blocks(effects):
@@ -607,3 +654,38 @@ def apply_state_for_preview(root,state):
     if timing is not None:
         root.remove(timing)
     return root
+
+
+# ---------------------------------------------------------------------------
+# Slide transitions
+
+MC="http://schemas.openxmlformats.org/markup-compatibility/2006"
+P14="http://schemas.microsoft.com/office/powerpoint/2010/main"
+P159="http://schemas.microsoft.com/office/powerpoint/2015/09/main"
+
+
+def existing_transition(root):
+    return root.find(f"p:transition",NS) is not None or root.find(f"{{{MC}}}AlternateContent/{{{MC}}}Choice/p:transition",NS) is not None
+
+
+def add_morph_transition(root,duration_ms=1500):
+    """Insert a Morph (by object) transition with a Fade fallback, the way
+    PowerPoint 2019+/365 saves it. Refuses to replace an existing transition."""
+    if existing_transition(root):
+        raise ValueError("slide already has a transition")
+    alt=E.Element(E.QName(MC,"AlternateContent"),nsmap={"mc":MC})
+    choice=E.SubElement(alt,E.QName(MC,"Choice"),nsmap={"p159":P159},Requires="p159")
+    tr=E.SubElement(choice,q("transition"),{"spd":"slow",E.QName(P14,"dur"):str(int(duration_ms))},nsmap={"p14":P14})
+    E.SubElement(tr,E.QName(P159,"morph"),option="byObject")
+    fallback=E.SubElement(alt,E.QName(MC,"Fallback"))
+    fb=E.SubElement(fallback,q("transition"),spd="slow")
+    E.SubElement(fb,q("fade"))
+    # Schema order: cSld, clrMapOvr, transition, timing, extLst.
+    anchor=root.find("p:timing",NS)
+    if anchor is None:
+        anchor=root.find("p:extLst",NS)
+    if anchor is not None:
+        anchor.addprevious(alt)
+    else:
+        root.append(alt)
+    return alt

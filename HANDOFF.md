@@ -66,6 +66,16 @@ chạy đồng thời. Giữ nguyên để tái lập, **không xây tiếp trê
 được nối thêm, không còn bị từ chối. Cổng còn thiếu vẫn là phát thật trong
 PowerPoint: xem `experiments/T019-20261005-claude-motion-director/REPORT.md`.
 
+T022 (`experiments/T022-20261005-claude-t009-recompile/REPORT.md`) đã biên dịch lại
+T009 của Codex qua writer T019, thêm so ảnh RGB (`scripts/render_identity.py`) và sửa
+heuristic cho deck chỉ dùng textbox (tiêu đề ngầm, cặp nhãn–đoạn, click theo đoạn).
+
+T023 (`experiments/T023-20261005-claude-compound-motion/REPORT.md`) thêm engine chuyển
+động phức hợp cho deck có sẵn: keyframe nhiều track + công thức (assemble, spotlight,
+cycle, swap, travel, zoom-focus, release) → hiệu ứng PowerPoint gốc, Morph giữa slide,
+preview GIF mô phỏng và kiểm tra va chạm. Director v0.6. Codex T021 (PR #24) cùng chủ đề
+nhưng chưa có code lúc T023 bắt đầu — hai bên cần review/hợp nhất trước khi chồng thêm.
+
 **Việc tiếp theo cho model mới: `research/tasks/T020-motion-director-continuation.md`.**
 Prompt giao việc ngắn:
 
