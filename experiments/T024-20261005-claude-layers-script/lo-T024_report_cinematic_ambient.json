@@ -1,0 +1,469 @@
+{
+  "tool": "LibreOffice PPTX import -> ODP",
+  "pptx": "experiments/T024-20261005-claude-layers-script/output/T024_report_cinematic_ambient.pptx",
+  "slides": [
+    {
+      "slide": 2,
+      "effects": [
+        {
+          "node_type": "after-previous",
+          "preset_class": "motion-path",
+          "preset_id": "",
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 0
+        },
+        {
+          "node_type": "with-previous",
+          "preset_class": "motion-path",
+          "preset_id": "",
+          "effect_begin": "0.3s",
+          "block_begin": "0s",
+          "visibility_sets": 0
+        },
+        {
+          "node_type": "on-click",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-ascend",
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 1
+        },
+        {
+          "node_type": "on-click",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-ascend",
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 1
+        },
+        {
+          "node_type": "on-click",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-ascend",
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 1
+        },
+        {
+          "node_type": "on-click",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-ascend",
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 1
+        }
+      ]
+    },
+    {
+      "slide": 3,
+      "effects": [
+        {
+          "node_type": "after-previous",
+          "preset_class": "motion-path",
+          "preset_id": "",
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 0
+        },
+        {
+          "node_type": "with-previous",
+          "preset_class": "motion-path",
+          "preset_id": "",
+          "effect_begin": "0.3s",
+          "block_begin": "0s",
+          "visibility_sets": 0
+        },
+        {
+          "node_type": "on-click",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-fade-in-and-zoom",
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 1
+        },
+        {
+          "node_type": "with-previous",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-fade-in-and-zoom",
+          "effect_begin": "0.08s",
+          "block_begin": "0s",
+          "visibility_sets": 1
+        },
+        {
+          "node_type": "with-previous",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-fade-in-and-zoom",
+          "effect_begin": "0.16s",
+          "block_begin": "0s",
+          "visibility_sets": 1
+        },
+        {
+          "node_type": "on-click",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-fade-in-and-zoom",
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 1
+        },
+        {
+          "node_type": "with-previous",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-fade-in-and-zoom",
+          "effect_begin": "0.08s",
+          "block_begin": "0s",
+          "visibility_sets": 1
+        },
+        {
+          "node_type": "with-previous",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-fade-in-and-zoom",
+          "effect_begin": "0.16s",
+          "block_begin": "0s",
+          "visibility_sets": 1
+        },
+        {
+          "node_type": "on-click",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-fade-in-and-zoom",
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 1
+        },
+        {
+          "node_type": "with-previous",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-fade-in-and-zoom",
+          "effect_begin": "0.08s",
+          "block_begin": "0s",
+          "visibility_sets": 1
+        },
+        {
+          "node_type": "with-previous",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-fade-in-and-zoom",
+          "effect_begin": "0.16s",
+          "block_begin": "0s",
+          "visibility_sets": 1
+        }
+      ]
+    },
+    {
+      "slide": 4,
+      "effects": [
+        {
+          "node_type": "after-previous",
+          "preset_class": "motion-path",
+          "preset_id": "",
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 0
+        },
+        {
+          "node_type": "with-previous",
+          "preset_class": "motion-path",
+          "preset_id": "",
+          "effect_begin": "0.3s",
+          "block_begin": "0s",
+          "visibility_sets": 0
+        },
+        {
+          "node_type": "on-click",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-wipe",
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 1
+        },
+        {
+          "node_type": "after-previous",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-wipe",
+          "effect_begin": "0s",
+          "block_begin": "0.8s",
+          "visibility_sets": 1
+        },
+        {
+          "node_type": "on-click",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-fade-in-and-zoom",
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 1
+        },
+        {
+          "node_type": "with-previous",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-fade-in-and-zoom",
+          "effect_begin": "0.08s",
+          "block_begin": "0s",
+          "visibility_sets": 1
+        }
+      ]
+    },
+    {
+      "slide": 5,
+      "effects": [
+        {
+          "node_type": "after-previous",
+          "preset_class": "motion-path",
+          "preset_id": "",
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 0
+        },
+        {
+          "node_type": "with-previous",
+          "preset_class": "motion-path",
+          "preset_id": "",
+          "effect_begin": "0.3s",
+          "block_begin": "0s",
+          "visibility_sets": 0
+        },
+        {
+          "node_type": "on-click",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-fade-in-and-zoom",
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 1
+        },
+        {
+          "node_type": "with-previous",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-wipe",
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 1
+        },
+        {
+          "node_type": "with-previous",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-wipe",
+          "effect_begin": "0.08s",
+          "block_begin": "0s",
+          "visibility_sets": 1
+        },
+        {
+          "node_type": "after-previous",
+          "preset_class": "motion-path",
+          "preset_id": "",
+          "effect_begin": "0s",
+          "block_begin": "0.58s",
+          "visibility_sets": 0
+        },
+        {
+          "node_type": "with-previous",
+          "preset_class": "motion-path",
+          "preset_id": "",
+          "effect_begin": "0.52s",
+          "block_begin": "0.58s",
+          "visibility_sets": 0
+        },
+        {
+          "node_type": "with-previous",
+          "preset_class": "emphasis",
+          "preset_id": "ooo-emphasis-grow-and-shrink",
+          "effect_begin": "0.65s",
+          "block_begin": "0.58s",
+          "visibility_sets": 0
+        },
+        {
+          "node_type": "on-click",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-wipe",
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 1
+        },
+        {
+          "node_type": "after-previous",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-fade-in-and-zoom",
+          "effect_begin": "0s",
+          "block_begin": "0.3s",
+          "visibility_sets": 1
+        },
+        {
+          "node_type": "after-previous",
+          "preset_class": "motion-path",
+          "preset_id": "",
+          "effect_begin": "0s",
+          "block_begin": "0.7s",
+          "visibility_sets": 0
+        },
+        {
+          "node_type": "with-previous",
+          "preset_class": "motion-path",
+          "preset_id": "",
+          "effect_begin": "0.52s",
+          "block_begin": "0.7s",
+          "visibility_sets": 0
+        },
+        {
+          "node_type": "with-previous",
+          "preset_class": "emphasis",
+          "preset_id": "ooo-emphasis-grow-and-shrink",
+          "effect_begin": "0.65s",
+          "block_begin": "0.7s",
+          "visibility_sets": 0
+        },
+        {
+          "node_type": "on-click",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-wipe",
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 1
+        },
+        {
+          "node_type": "after-previous",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-fade-in-and-zoom",
+          "effect_begin": "0s",
+          "block_begin": "0.3s",
+          "visibility_sets": 1
+        },
+        {
+          "node_type": "after-previous",
+          "preset_class": "motion-path",
+          "preset_id": "",
+          "effect_begin": "0s",
+          "block_begin": "0.7s",
+          "visibility_sets": 0
+        },
+        {
+          "node_type": "with-previous",
+          "preset_class": "motion-path",
+          "preset_id": "",
+          "effect_begin": "0.52s",
+          "block_begin": "0.7s",
+          "visibility_sets": 0
+        },
+        {
+          "node_type": "with-previous",
+          "preset_class": "emphasis",
+          "preset_id": "ooo-emphasis-grow-and-shrink",
+          "effect_begin": "0.65s",
+          "block_begin": "0.7s",
+          "visibility_sets": 0
+        },
+        {
+          "node_type": "on-click",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-wipe",
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 1
+        },
+        {
+          "node_type": "after-previous",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-fade-in-and-zoom",
+          "effect_begin": "0s",
+          "block_begin": "0.3s",
+          "visibility_sets": 1
+        },
+        {
+          "node_type": "after-previous",
+          "preset_class": "motion-path",
+          "preset_id": "",
+          "effect_begin": "0s",
+          "block_begin": "0.7s",
+          "visibility_sets": 0
+        },
+        {
+          "node_type": "with-previous",
+          "preset_class": "motion-path",
+          "preset_id": "",
+          "effect_begin": "0.52s",
+          "block_begin": "0.7s",
+          "visibility_sets": 0
+        },
+        {
+          "node_type": "with-previous",
+          "preset_class": "emphasis",
+          "preset_id": "ooo-emphasis-grow-and-shrink",
+          "effect_begin": "0.65s",
+          "block_begin": "0.7s",
+          "visibility_sets": 0
+        },
+        {
+          "node_type": "on-click",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-ascend",
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 1
+        }
+      ]
+    },
+    {
+      "slide": 6,
+      "effects": [
+        {
+          "node_type": "on-click",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-fade-in",
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 1
+        },
+        {
+          "node_type": "on-click",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-fade-in",
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 1
+        }
+      ]
+    },
+    {
+      "slide": 7,
+      "effects": [
+        {
+          "node_type": "after-previous",
+          "preset_class": "motion-path",
+          "preset_id": "",
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 0
+        },
+        {
+          "node_type": "with-previous",
+          "preset_class": "motion-path",
+          "preset_id": "",
+          "effect_begin": "0.3s",
+          "block_begin": "0s",
+          "visibility_sets": 0
+        },
+        {
+          "node_type": "on-click",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-ascend",
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 1
+        },
+        {
+          "node_type": "on-click",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-ascend",
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 1
+        },
+        {
+          "node_type": "on-click",
+          "preset_class": "entrance",
+          "preset_id": "ooo-entrance-ascend",
+          "effect_begin": "0s",
+          "block_begin": "0s",
+          "visibility_sets": 1
+        }
+      ]
+    }
+  ],
+  "powerpoint_playback_verified": false
+}

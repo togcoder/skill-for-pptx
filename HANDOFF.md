@@ -76,6 +76,11 @@ cycle, swap, travel, zoom-focus, release) → hiệu ứng PowerPoint gốc, Mor
 preview GIF mô phỏng và kiểm tra va chạm. Director v0.6. Codex T021 (PR #24) cùng chủ đề
 nhưng chưa có code lúc T023 bắt đầu — hai bên cần review/hợp nhất trước khi chồng thêm.
 
+T024 (`experiments/T024-20261005-claude-layers-script/REPORT.md`) thêm lớp chuyển động
+phụ/nền (quầng sáng theo tiêu điểm, đường ray + token, vòng quỹ đạo quay chậm, nền trôi,
+vòng lặp native) và lớp kịch bản: kịch bản (có sẵn, diễn đạt lại, hoặc tự sinh đầy đủ)
+quyết định click nào, Director quyết định chuyển động gì; lời thoại vào speaker notes.
+
 **Việc tiếp theo cho model mới: `research/tasks/T020-motion-director-continuation.md`.**
 Prompt giao việc ngắn:
 

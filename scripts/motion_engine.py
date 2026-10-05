@@ -180,14 +180,36 @@ def apply_effect(state,eff,p,base):
         state["opacity"]=base["opacity"]+(target-base["opacity"])*min(1.0,p*4)
 
 
+def loop_progress(eff,elapsed):
+    """Progress of a looping effect; at rest (0) once it is over or at t=inf."""
+    loop=eff["loop"]
+    dur=max(1,eff["duration_ms"])
+    cycle=anim.loop_cycle(eff)
+    repeat=loop.get("repeat","indefinite")
+    if elapsed==float("inf") or (type(repeat) is int and elapsed>=repeat*cycle):
+        return 0.0 if loop.get("auto_reverse") or repeat in ("indefinite","until-next-click") else 1.0
+    phase=(elapsed%cycle)/dur
+    return 2-phase if phase>1 else phase
+
+
 def state_at(states,effects,t):
-    """States after running one click group's effects up to time t."""
+    """States after running one click group's effects up to time t.
+    Ambient loops are shown moving inside t and at rest at t=inf."""
     out={k:dict(v) for k,v in states.items()}
-    hidden_paras=set()
     for start,end,eff in sorted(schedule(effects),key=lambda x:x[0]):
         if t<start or eff["spid"] not in out:
             continue
         dur=max(1,end-start)
+        if eff.get("loop"):
+            p=loop_progress(eff,t-start)
+            st=out[eff["spid"]]
+            base=dict(st)
+            if eff["preset"]=="spin" and not eff["loop"].get("auto_reverse"):
+                base_eff=dict(eff)
+                apply_effect(st,base_eff,p,base)
+            else:
+                apply_effect(st,eff,p,base)
+            continue
         p=1.0 if t>=end else (t-start)/dur
         st=out[eff["spid"]]
         base=dict(st)
@@ -292,6 +314,23 @@ def compile_track(track,obj,objects_by_token,state,beat_id):
                     seg_start=pos_time if pos_time is not None else 0
                     if t<=seg_start:
                         raise ValueError(f"{obj['name']!r}: position keyframe at t={t} needs time to move (use jump)")
+                    vx,vy=target[0]-cur_pos[0],target[1]-cur_pos[1]
+                    span=t-seg_start
+                    if kf.get("anticipate"):
+                        # Secondary: a small wind-up against the direction of travel.
+                        a=float(kf["anticipate"])
+                        back=(cur_pos[0]-vx*a,cur_pos[1]-vy*a)
+                        lead=int(span*0.2)
+                        eff("path",seg_start,lead,anchored=[{"x":cur_pos[0],"y":cur_pos[1]},{"x":back[0],"y":back[1]}],
+                            accel=0.0,decel=0.6)
+                        cur_pos=back
+                        seg_start+=lead
+                        span-=lead
+                    final=target
+                    if kf.get("overshoot"):
+                        o=float(kf["overshoot"])
+                        target=(final[0]+vx*o,final[1]+vy*o)
+                    main=int(span*0.8) if kf.get("overshoot") else span
                     seg={"x":target[0],"y":target[1]}
                     if kf.get("curve"):
                         c1,c2=_arc_controls(cur_pos,target,kf["curve"])
@@ -299,8 +338,13 @@ def compile_track(track,obj,objects_by_token,state,beat_id):
                         seg["c2"]={"x":c2[0],"y":c2[1]}
                     elif "controls" in kf:
                         seg["c1"],seg["c2"]=kf["controls"]
-                    eff("path",seg_start,t-seg_start,anchored=[{"x":cur_pos[0],"y":cur_pos[1]},seg],
+                    eff("path",seg_start,main,anchored=[{"x":cur_pos[0],"y":cur_pos[1]},seg],
                         accel=ease[0],decel=ease[1])
+                    if kf.get("overshoot"):
+                        # Follow-through: settle back from the overshoot.
+                        eff("path",seg_start+main,span-main,anchored=[{"x":target[0],"y":target[1]},
+                                                                       {"x":final[0],"y":final[1]}],accel=0.3,decel=0.7)
+                        target=final
             cur_pos=target
             pos_time=t
         if "scale" in kf:
@@ -382,6 +426,19 @@ def recipe_tracks(recipe,objs,states,params=None):
                     tracks[-1]["keyframes"]+= [{"t":0,"dx":states[o["id"]]["dx"],"dy":states[o["id"]]["dy"],
                                                 "scale":states[o["id"]]["scale"]},
                                                {"t":d,"dx":0,"dy":0,"scale":1.0}]
+        halo=params.get("_halo_obj")
+        if halo is not None:
+            # Secondary layer: a soft halo glides behind the new focus.
+            aspect=float(params.get("_aspect",16/9))
+            fa,ha=authored(focus),authored(halo)
+            want=max(fa["w"]*aspect,fa["h"])*scale*float(params.get("halo_size",1.6))
+            have=max(ha["w"]*aspect,ha["h"])
+            hs=states[halo["id"]]
+            if hs["visible"]:
+                kfs=[{"t":0},{"t":d,"to":focus["name"],"scale":want/have,"curve":float(params.get("halo_curve",0.15))}]
+            else:
+                kfs=[{"t":0,"to":focus["name"],"jump":True,"scale":want/have,"visible":True,"enter":"fade","enter_ms":d}]
+            tracks.append({"target":halo,"keyframes":kfs})
     elif recipe=="release":
         for o in objs:
             s=states[o["id"]]
@@ -424,7 +481,8 @@ def recipe_tracks(recipe,objs,states,params=None):
             if recipe=="assemble":
                 tracks.append({"target":o,"keyframes":[
                     {"t":t0,"dx":off[0],"dy":off[1],"jump":True,"visible":True,"enter":params.get("enter","fade"),"enter_ms":min(d,500)},
-                    {"t":t0+d,"dx":0.0,"dy":0.0,"ease":"out"}]})
+                    {"t":t0+d,"dx":0.0,"dy":0.0,"ease":"out",
+                     **({"overshoot":float(params["overshoot"])} if params.get("overshoot") else {})}]})
             else:
                 tracks.append({"target":o,"keyframes":[
                     {"t":t0},
@@ -462,8 +520,9 @@ def recipe_tracks(recipe,objs,states,params=None):
         a,b=objs
         pa,pb=_pos(a,states),_pos(b,states)
         arc=float(params.get("arc",0.25))
-        tracks.append({"target":a,"keyframes":[{"t":0},{"t":d,"x":pb[0],"y":pb[1],"curve":arc}]})
-        tracks.append({"target":b,"keyframes":[{"t":0},{"t":d,"x":pa[0],"y":pa[1],"curve":arc}]})
+        extra={k:float(params[k]) for k in ("overshoot","anticipate") if params.get(k)}
+        tracks.append({"target":a,"keyframes":[{"t":0},{"t":d,"x":pb[0],"y":pb[1],"curve":arc,**extra}]})
+        tracks.append({"target":b,"keyframes":[{"t":0},{"t":d,"x":pa[0],"y":pa[1],"curve":arc,**extra}]})
     elif recipe=="travel":
         token,stops=objs[0],objs[1:]
         if not stops:
@@ -476,6 +535,9 @@ def recipe_tracks(recipe,objs,states,params=None):
             t+=d
             kf={"t":t,"x":sx+float(params.get("offset_x",0)),"y":sy+float(params.get("offset_y",0)),
                 "curve":float(params.get("arc",0.0))}
+            for key in ("overshoot","anticipate"):
+                if params.get(key):
+                    kf[key]=float(params[key])
             kfs.append(kf)
             t+=dwell
         tracks.append({"target":token,"keyframes":kfs})
@@ -497,11 +559,102 @@ def recipe_tracks(recipe,objs,states,params=None):
 
 
 RECIPES=("spotlight","release","assemble","disperse","cycle","swap","travel","zoom-focus")
+AMBIENT_RECIPES=("breathe","drift","spin-loop")
+SECONDARY_RECIPES=("ripple",)
+
+
+def ambient_effects(recipe,objs,states,beat_id,params):
+    """Looping background motion (breathe, drift, spin-loop) and the ripple
+    acknowledgement. Loops run until the slide ends (or next click)."""
+    params=params or {}
+    repeat=params.get("repeat","indefinite")
+    effects=[]
+    for i,o in enumerate(objs):
+        st=states[o["id"]]
+        delay=int(params.get("stagger_ms",300 if recipe!="ripple" else 120))*i
+        base={"spid":o["id"],"trigger":"with","delay_ms":delay,"beat":f"{beat_id}:{o['id']}:{recipe}"}
+        if recipe=="breathe":
+            effects.append({**base,"preset":"grow","duration_ms":int(params.get("period_ms",3200))//2,
+                            "ratio":float(params.get("scale",1.04)),"accel":0.5,"decel":0.5,
+                            "loop":{"repeat":repeat,"auto_reverse":True}})
+        elif recipe=="drift":
+            amp=float(params.get("amplitude",0.015))*(1+0.5*(i%3))
+            ang=float(params.get("angle_deg",-30))+i*70
+            dx,dy=amp*math.cos(math.radians(ang)),amp*math.sin(math.radians(ang))
+            effects.append({**base,"preset":"path","duration_ms":int(params.get("period_ms",9000))//2,
+                            "anchored":[{"x":st["dx"],"y":st["dy"]},{"x":st["dx"]+dx,"y":st["dy"]+dy}],
+                            "accel":0.5,"decel":0.5,"loop":{"repeat":repeat,"auto_reverse":True}})
+        elif recipe=="spin-loop":
+            effects.append({**base,"preset":"spin","duration_ms":int(params.get("period_ms",30000)),
+                            "by_deg":float(params.get("by_deg",360)),"loop":{"repeat":repeat}})
+        elif recipe=="ripple":
+            effects.append({**base,"preset":"pulse","duration_ms":int(params.get("pulse_ms",180)),
+                            "scale":float(params.get("scale",1.06))})
+        else:
+            raise ValueError(f"unknown ambient recipe {recipe!r}")
+    return effects
+
+
+def attach_followers(effects,attach,objects_by_token,states):
+    """Copy a leader's movement onto followers (e.g. a separate label) so they
+    stay together. Scaling the leader moves followers radially so their
+    relative placement scales with it."""
+    out=list(effects)
+    for leader_tok,followers in (attach or {}).items():
+        leader=objects_by_token.get(leader_tok)
+        if leader is None:
+            raise ValueError(f"attach: leader {leader_tok!r} not found")
+        lead=[e for e in effects if e["spid"]==leader["id"]]
+        for ftok in followers:
+            f=objects_by_token.get(ftok)
+            if f is None:
+                raise ValueError(f"attach: follower {ftok!r} not found")
+            ls,fs=states[leader["id"]],states[f["id"]]
+            off=(fs["dx"]-ls["dx"],fs["dy"]-ls["dy"])
+            la,fa=authored(leader),authored(f)
+            rel=((fa["cx"]+fs["dx"])-(la["cx"]+ls["dx"]),(fa["cy"]+fs["dy"])-(la["cy"]+ls["dy"]))
+            paths={(e["delay_ms"],e["duration_ms"]):e for e in lead if e["preset"]=="path"}
+            copies=[]
+            for e in lead:
+                if e["preset"]=="spin":
+                    continue
+                c=dict(e,spid=f["id"],beat=e["beat"]+f":follow{f['id']}")
+                if e["preset"]=="path":
+                    c["anchored"]=[dict(p,x=p["x"]+off[0],y=p["y"]+off[1],
+                                        **({"c1":{"x":p["c1"]["x"]+off[0],"y":p["c1"]["y"]+off[1]},
+                                            "c2":{"x":p["c2"]["x"]+off[0],"y":p["c2"]["y"]+off[1]}} if "c1" in p else {}))
+                                   for p in e["anchored"]]
+                if e["preset"] in ("grow","pulse"):
+                    ratio=e.get("ratio",e.get("scale",1.0))
+                    shift=(rel[0]*(ratio-1),rel[1]*(ratio-1))
+                    key=(e["delay_ms"],e["duration_ms"])
+                    if e["preset"]=="grow" and key in paths:
+                        paired=next(x for x in copies if x["preset"]=="path" and (x["delay_ms"],x["duration_ms"])==key)
+                        last=paired["anchored"][-1]
+                        last["x"]+=shift[0]
+                        last["y"]+=shift[1]
+                    elif e["preset"]=="grow" and (abs(shift[0])>1e-6 or abs(shift[1])>1e-6):
+                        start=(fs["dx"],fs["dy"])
+                        copies.append({"preset":"path","spid":f["id"],"trigger":"with","delay_ms":e["delay_ms"],
+                                       "duration_ms":e["duration_ms"],"beat":c["beat"]+":shift",
+                                       "anchored":[{"x":start[0],"y":start[1]},{"x":start[0]+shift[0],"y":start[1]+shift[1]}],
+                                       "accel":e.get("accel",0),"decel":e.get("decel",0)})
+                copies.append(c)
+            out.extend(copies)
+    out.sort(key=lambda e:e["delay_ms"])
+    return out
 
 
 def compile_choreography(recipe,objs,states,objects_by_token,beat_id,params=None,tracks=None):
     """Return effects (delays relative to the beat start) for a recipe or raw
     tracks. ``objs`` are resolved objects; raw ``tracks`` use {"target": obj}."""
+    params=params or {}
+    if recipe in AMBIENT_RECIPES+SECONDARY_RECIPES:
+        return ambient_effects(recipe,objs,states,beat_id,params)
+    if params.get("halo"):
+        params=dict(params,_halo_obj=objects_by_token.get(params["halo"]))
+        if params["_halo_obj"] is None:
+            raise ValueError(f"halo {params['halo']!r} not found")
     if recipe=="tracks":
         built=tracks
     else:
@@ -517,6 +670,8 @@ def compile_choreography(recipe,objs,states,objects_by_token,beat_id,params=None
     if not effects:
         raise ValueError(f"{recipe}: nothing changes from the current state")
     effects.sort(key=lambda e:e["delay_ms"])
+    if params.get("attach"):
+        effects=attach_followers(effects,params["attach"],objects_by_token,states)
     return effects
 
 
@@ -538,6 +693,8 @@ def conflicts(effects):
         if prop is None or prop=="opacity":
             continue
         key=(eff["spid"],prop)
+        if eff.get("loop"):
+            end=float("inf")
         for s,e in spans.get(key,[]):
             if start<e and s<end:
                 found.append(f"object {eff['spid']}: overlapping {prop} animations ({s}-{e} ms and {start}-{end} ms)")
@@ -717,4 +874,9 @@ def _effect_from_ctn(ctn):
         eff["duration_ms"]=400
     else:
         return None
+    rc=ctn.get("repeatCount")
+    if rc:
+        until_click=ctn.find("p:endCondLst/p:cond[@evt='onNext']",NS) is not None
+        repeat="until-next-click" if until_click else ("indefinite" if rc=="indefinite" else max(1,int(rc)//1000))
+        eff["loop"]={"repeat":repeat,"auto_reverse":ctn.get("autoRev")=="1"}
     return eff

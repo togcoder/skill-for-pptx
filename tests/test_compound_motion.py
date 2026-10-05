@@ -167,7 +167,9 @@ class DirectorCompoundTests(unittest.TestCase):
     def test_auto_draft_detects_cycle_and_walks_it(self):
         s2=self.by[2]
         recipes=[b.get("recipe") for b in s2["beats"]]
-        self.assertEqual(recipes,[None,"assemble","spotlight","spotlight","spotlight","spotlight","release"])
+        # T024 cinematic adds an orbit ring (secondary), its slow spin (ambient) and a halo exit.
+        self.assertEqual(recipes,[None,None,"assemble","spin-loop","spotlight","spotlight","spotlight","spotlight",
+                                  "release",None])
         order=[b["targets"][0] for b in s2["beats"] if b.get("recipe")=="spotlight"]
         self.assertEqual(order,["Stage Plan","Stage Do","Stage Check","Stage Act"])
         self.assertEqual(len(s2["click_beats"]),6)

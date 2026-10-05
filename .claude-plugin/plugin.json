@@ -1,7 +1,7 @@
 {
   "name": "pptx-motion",
-  "version": "0.9.0",
-  "description": "AI Motion Director for existing PowerPoint decks: inspect a .pptx, direct presenter-paced click beats and compound choreography (assemble, spotlight tours, swaps, journeys, zoom, Morph), write PowerPoint-canonical native animation, verify preservation and preview the motion.",
+  "version": "0.10.0",
+  "description": "AI Motion Director for existing PowerPoint decks: writes or follows the presentation script, directs presenter-paced clicks with layered motion (primary choreography, secondary halo/rail/token reactions, ambient loops), Morph continuity, native PowerPoint animation, verification and motion previews.",
   "author": {
     "name": "togcoder"
   },

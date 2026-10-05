@@ -1,5 +1,30 @@
 # PPTX Motion Lab — checkpoint
 
+## T024 motion layers + script layer — 2026-10-05
+
+Motion now has three layers. **Primary** is the meaning. **Secondary** covers
+a halo following each spotlight, a rail plus progress token under walked
+processes, an orbit ring behind cycles, ripple, overshoot/anticipate, and
+labels that follow their shapes (`attach`). **Ambient** covers native loops:
+breathe, drift and spin-loop, repeating indefinitely or until the next click.
+Helper shapes come from `scripts/motion_components.py` in the deck's accent and
+font. The draft reuses the deck's own token when one exists. Director v0.7 adds
+`layer` and `components[].generate`.
+
+Script layer (`scripts/motion_script.py`): the script says *when*, the
+director's choreography says *how*. It covers a provided script, notes, or a
+generated full script (`motion_script.py draft`). First mention reveals, a
+later mention focuses, a line that names nothing new releases a tour, and
+paraphrased cued lines take the next resource in order. Gaps are reported and
+`--fill-gaps` turns them into callouts. Every run writes `OUT.script.md`;
+`--write-notes` puts the narration in speaker notes. Verified on an English
+human-style script and a Vietnamese paraphrase.
+
+**205 tests pass.** Smoke test passes on all repository decks. Native playback
+is pending.
+
+Report: experiments/T024-20261005-claude-layers-script/REPORT.md.
+
 ## T023 compound motion engine — 2026-10-05
 
 Existing decks can now receive compound choreography, not only builds.

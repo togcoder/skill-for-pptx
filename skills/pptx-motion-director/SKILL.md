@@ -16,6 +16,15 @@ Scripts live in the repository root two levels above this file:
 
 ## Workflow
 
+0. **Script first.** Decide the story source: the user's script (file or
+   pasted text) > speaker notes > existing animation > your own script. If the
+   user gave a script, save it as Markdown with `## Slide N` headings and
+   `[click]` cues (Vietnamese `[nhấp]`/`[bấm]` and `>>` also work) and go to
+   step 4b. If not, write one: `python3 $ROOT/scripts/motion_script.py draft
+   DECK.pptx -o script.md --style cinematic` produces a complete click-by-click
+   script from the deck; **rewrite every line into natural speech** (keep the
+   cues and the words that name each resource so alignment still works), add
+   the points the story needs even if the slide lacks them.
 1. **Inspect** — `python3 $ROOT/scripts/motion_director.py inspect DECK.pptx`
    Read every slide: titles, bullets (¶ = paragraph index), charts, numbers,
    speaker notes, and objects already marked `ANIMATED`.
@@ -25,6 +34,15 @@ Scripts live in the repository root two levels above this file:
    where the value is: decide what the audience should see first, what waits for
    the presenter, and what lands as the conclusion.
 4. **Apply** — `python3 $ROOT/scripts/motion_director.py apply DECK.pptx director.json -o OUT.pptx --storyboard storyboard/`
+   4b. **Script-driven** — `python3 $ROOT/scripts/motion_director.py auto DECK.pptx -o OUT.pptx --script script.md --style cinematic [--fill-gaps] [--write-notes] --preview previews/`
+   The script decides WHEN (each `[click]` line), the director decides HOW
+   (cards, labels, rails, cycle tours, chart builds). First mention reveals a
+   resource, a later mention focuses it, a line that names nothing new can
+   release a tour, and paraphrased lines take the next resource in reading
+   order. `--fill-gaps` turns a cued line the slide cannot show into a callout
+   in the deck's style; numbers the slide lacks are reported as gaps.
+   `--write-notes` appends `[Motion script]` + `[Click n]` narration to the
+   speaker notes (Presenter View). Every run also writes `OUT.script.md`.
    It validates the plan, writes PowerPoint-canonical timing, re-reads the
    output and prints a per-click storyboard. Fix any reported problem.
 5. **Look** — open the `storyboard/slide-NN.png` contact sheets (one frame per
@@ -111,6 +129,31 @@ Checks that will stop or warn you: two moves/scales/spins of one object
 overlapping in time (blocking), an object ending off-slide or newly covering
 another at a stable state (warning). Read and fix warnings; they are usually
 real.
+
+## Motion layers (Director v0.7)
+
+Think in three layers, as a motion designer would:
+
+- **primary** — the meaning: reveals, builds, assemble, spotlight, travel, swap,
+  zoom-focus.
+- **secondary** — reactions that support it (`"layer":"secondary"`): a halo
+  that glides behind each spotlight (`motion_parameters.halo:"<component>"`),
+  a rail + progress token under a process, the orbit ring drawn behind a
+  cycle, `ripple` pulses through related items, `overshoot`/`anticipate` on
+  moves (keyframe keys or recipe params), `attach:{"Leader":["Label"]}` so a
+  separate label moves and scales with its shape.
+- **ambient** — background life (`"layer":"ambient"`, recipes `breathe`,
+  `drift`, `spin-loop`; `repeat` indefinite | until-next-click | 1..100):
+  the orbit ring turns slowly, backdrop shapes drift for depth. Ambient must be
+  slow and low-contrast; never loop a property another beat animates (blocked).
+
+Generated components (slide `components[].generate`): `halo`, `orbit-ring`,
+`track-line`, `backdrop` (behind everything, low opacity) and `token`,
+`callout`, `badge`, `highlight-frame`, `arrow` (on top). They use the deck's
+accent colour and font, are named `__gen_<kind>_<id>`, need a role and
+rationale, and are visible in edit view/PDF. Prefer an existing resource (the
+draft reuses a deck's own token) over generating one. `--style cinematic`
+proposes these layers automatically; `--ambient` adds drifting backdrops.
 
 ## Director plan (v0.5) essentials
 

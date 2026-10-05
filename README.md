@@ -23,7 +23,12 @@ Giữ nguyên slide, chữ, bố cục, animation có sẵn; thêm animation nat
 click của người thuyết trình — từ hiện từng ý đến chuyển động phức hợp (tụ lại, soi
 từng phần của vòng tròn, đổi chỗ, đi theo hành trình, zoom vào, Morph giữa slide với
 `--style cinematic` hoặc Director v0.6); xuất báo cáo, storyboard và GIF mô phỏng
-(`motion_director.py preview`, cần LibreOffice Impress + poppler + ImageMagick). Cài như plugin Claude Code: `/plugin marketplace add
+(`motion_director.py preview`, cần LibreOffice Impress + poppler + ImageMagick).
+Chuyển động 3 lớp (chính/phụ/nền, `--style cinematic`, `--ambient`) và lớp kịch bản:
+`auto --script script.md` cho kịch bản quyết định nhịp click (hỗ trợ `[click]`/`[nhấp]`,
+tiếng Việt, diễn đạt lại), `motion_script.py draft` tự viết kịch bản đầy đủ khi thiếu,
+`--fill-gaps` tạo chú thích cho ý không có trên slide, `--write-notes` ghi lời thoại vào
+speaker notes; luôn xuất `*.script.md`. Cài như plugin Claude Code: `/plugin marketplace add
 togcoder/skill-for-pptx` rồi `/plugin install pptx-motion@togcoder-pptx`, dùng
 `/animate-deck deck.pptx`. Trạng thái: kiểm tra cấu trúc + LibreOffice đọc đúng
 trình tự; **chưa phát thử trong PowerPoint**. [Báo cáo T019](experiments/T019-20261005-claude-motion-director/REPORT.md).

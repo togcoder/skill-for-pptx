@@ -26,10 +26,14 @@ V05_EFFECTS={"appear","fade","float-in","zoom","wipe-up","wipe-down","wipe-left"
              "disappear","fade-out","pulse","spin","dim","path"}
 
 
-CHOREOGRAPHY_RECIPES={"spotlight":(1,None),"release":(1,None),"assemble":(1,None),"disperse":(1,None),
+AMBIENT={"breathe","drift","spin-loop"}
+LAYERS={"primary","secondary","ambient"}
+GENERATED_KINDS={"halo","orbit-ring","track-line","backdrop","token","callout","badge","highlight-frame","arrow"}
+CHOREOGRAPHY_RECIPES={"breathe":(1,None),"drift":(1,None),"spin-loop":(1,None),"ripple":(1,None),
+                      "spotlight":(1,None),"release":(1,None),"assemble":(1,None),"disperse":(1,None),
                       "cycle":(3,None),"swap":(2,2),"travel":(2,None),"zoom-focus":(1,None),"tracks":(0,None)}
 KEYFRAME_KEYS={"t","x","y","dx","dy","to","curve","controls","jump","scale","rotate","opacity","opacity_ms",
-               "visible","enter","enter_ms","exit","exit_ms","ease"}
+               "visible","enter","enter_ms","exit","exit_ms","ease","overshoot","anticipate"}
 
 
 def _choreography_errors(beat,targets):
@@ -37,6 +41,15 @@ def _choreography_errors(beat,targets):
     recipe=beat.get("recipe")
     if recipe not in CHOREOGRAPHY_RECIPES:
         return [f"unknown choreography recipe {recipe!r}"]
+    layer=beat.get("layer")
+    if layer is not None and layer not in LAYERS:
+        errors.append(f"unknown layer {layer!r}")
+    if (layer=="ambient")!=(recipe in AMBIENT):
+        errors.append("ambient recipes (breathe, drift, spin-loop) belong to layer 'ambient' and only there")
+    params=beat.get("motion_parameters") or {}
+    if recipe in AMBIENT and params.get("repeat") not in (None,"indefinite","until-next-click") and not (
+            type(params.get("repeat")) is int and 1<=params["repeat"]<=100):
+        errors.append("ambient repeat must be indefinite, until-next-click or 1..100")
     low,high=CHOREOGRAPHY_RECIPES[recipe]
     n=len(targets) if isinstance(targets,list) else 0
     if n<low or (high is not None and n>high):
@@ -75,8 +88,8 @@ def _transition_errors(plan,inventory):
     transitions=plan.get("transitions")
     if transitions is None:
         return errors
-    if plan.get("version")!="0.6":
-        return ["transitions require Director v0.6"]
+    if plan.get("version") not in ("0.6","0.7"):
+        return ["transitions require Director v0.6+"]
     if not isinstance(transitions,list):
         return ["transitions must be a list"]
     count=len(inventory.get("slides",[]))
@@ -110,8 +123,8 @@ def validate(plan,inventory):
     errors += [f"missing field: {k}" for k in sorted(required-plan.keys())]
     if errors:
         return errors
-    if plan["version"] not in ("0.1","0.2","0.3","0.4","0.5","0.6"):
-        errors.append("version must be 0.1, 0.2, 0.3, 0.4, 0.5 or 0.6")
+    if plan["version"] not in ("0.1","0.2","0.3","0.4","0.5","0.6","0.7"):
+        errors.append("version must be 0.1 .. 0.7")
     if plan["kind"]!="existing-deck-motion-director":
         errors.append("kind must be existing-deck-motion-director")
 
@@ -162,7 +175,7 @@ def validate(plan,inventory):
     inv_slides={s["index"]:s for s in inventory.get("slides",[])}
     plans=plan["slides"]
     if not isinstance(plans,list) or not plans:
-        if plan.get("version")=="0.6" and isinstance(plans,list) and plan.get("transitions"):
+        if plan.get("version") in ("0.6","0.7") and isinstance(plans,list) and plan.get("transitions"):
             return errors+_transition_errors(plan,inventory)  # transitions-only plan
         errors.append("slides must be nonempty")
         return errors
@@ -207,6 +220,17 @@ def validate(plan,inventory):
             for key in ("role","rationale","style_basis"):
                 if not isinstance(comp.get(key),str) or not comp[key].strip():
                     errors.append(f"slide {idx}: component {cid} missing {key}")
+            gen=comp.get("generate")
+            if gen is not None:
+                if plan["version"]!="0.7":
+                    errors.append(f"slide {idx}: generated component {cid} requires Director v0.7")
+                elif not isinstance(gen,dict) or gen.get("kind") not in GENERATED_KINDS:
+                    errors.append(f"slide {idx}: component {cid} generate.kind must be one of {sorted(GENERATED_KINDS)}")
+                else:
+                    if not isinstance(gen.get("anchors",[]),list):
+                        errors.append(f"slide {idx}: component {cid} anchors must be a list")
+                    if gen["kind"] in ("callout","badge") and not str(gen.get("text","")).strip():
+                        errors.append(f"slide {idx}: component {cid} {gen['kind']} needs text")
             rationale=(comp.get("rationale") or "").lower()
             if rationale.strip() in ("make it beautiful","make it impressive","đẹp hơn","ấn tượng hơn"):
                 errors.append(f"slide {idx}: component {cid} has decorative-only rationale")
@@ -244,7 +268,7 @@ def validate(plan,inventory):
             if type(beat.get("reuse_existing")) is not bool:
                 errors.append(f"slide {idx}: beat {bid} reuse_existing must be boolean")
             first_beat=beats and isinstance(beats[0],dict) and beat is beats[0]
-            if plan["version"] in ("0.5","0.6") and first_beat and beat.get("timing_intent")=="on-slide-start":
+            if plan["version"] in ("0.5","0.6","0.7") and first_beat and beat.get("timing_intent")=="on-slide-start":
                 pass
             elif beat.get("timing_intent") not in TIMING:
                 errors.append(f"slide {idx}: beat {bid} has unsupported timing_intent")
@@ -257,7 +281,7 @@ def validate(plan,inventory):
                 if missing:
                     errors.append(f"slide {idx}: beat {bid} unknown targets {missing}")
 
-            if plan["version"] in ("0.3","0.4","0.5","0.6") and isinstance(targets,list):
+            if plan["version"] in ("0.3","0.4","0.5","0.6","0.7") and isinstance(targets,list):
                 source_shapes=[source_shape_by_token[t] for t in targets if t in source_shape_by_token]
                 chart_shapes=[shape for shape in source_shapes if shape.get("kind")=="chart"]
                 number_shapes=[
@@ -341,9 +365,9 @@ def validate(plan,inventory):
                     else:
                         errors.append(f"slide {idx}: beat {bid} unsupported data_motion kind {kind}")
 
-                if plan["version"]=="0.6" and beat.get("operation")=="choreography":
+                if plan["version"] in ("0.6","0.7") and beat.get("operation")=="choreography":
                     errors.extend(f"slide {idx}: beat {bid} {e}" for e in _choreography_errors(beat,targets))
-                elif plan["version"] in ("0.5","0.6") and not isinstance(data_motion,dict):
+                elif plan["version"] in ("0.5","0.6","0.7") and not isinstance(data_motion,dict):
                     operation=beat.get("operation")
                     if operation not in V05_OPERATIONS:
                         errors.append(f"slide {idx}: beat {bid} unsupported v0.5 operation {operation}")
@@ -362,9 +386,9 @@ def validate(plan,inventory):
                             or any(type(p) is not int or p<0 for p in paras)
                         ):
                             errors.append(f"slide {idx}: beat {bid} paragraphs must be nonempty nonnegative integers")
-                if plan["version"] in ("0.4","0.5","0.6") and not isinstance(data_motion,dict):
+                if plan["version"] in ("0.4","0.5","0.6","0.7") and not isinstance(data_motion,dict):
                     operation=beat.get("operation")
-                    if operation in GENERIC_OPERATIONS|(V05_OPERATIONS if plan["version"] in ("0.5","0.6") else set()):
+                    if operation in GENERIC_OPERATIONS|(V05_OPERATIONS if plan["version"] in ("0.5","0.6","0.7") else set()):
                         if chart_shapes:
                             errors.append(
                                 f"slide {idx}: beat {bid} generic operation cannot target chart; use chart data_motion"
@@ -396,7 +420,7 @@ def validate(plan,inventory):
                             if type(value) not in (int,float) or not math.isfinite(value):
                                 errors.append(f"slide {idx}: beat {bid} rotate requires finite motion_parameters.by_deg")
 
-        if plan["version"] in ("0.2","0.3","0.4","0.5","0.6"):
+        if plan["version"] in ("0.2","0.3","0.4","0.5","0.6","0.7"):
             click_beats=slide.get("click_beats")
             if not isinstance(click_beats,list) or not click_beats:
                 errors.append(f"slide {idx}: click_beats must be nonempty for v0.2")
@@ -418,6 +442,8 @@ def validate(plan,inventory):
                     for key in ("purpose","stable_state"):
                         if not isinstance(click.get(key),str) or not click[key].strip():
                             errors.append(f"slide {idx}: click beat {cid} missing {key}")
+                    if "narration" in click and not isinstance(click["narration"],str):
+                        errors.append(f"slide {idx}: click beat {cid} narration must be text")
                     if click.get("pause_after") not in PAUSE_AFTER:
                         errors.append(f"slide {idx}: click beat {cid} has unsupported pause_after")
                     reason=click.get("boundary_reason")
@@ -434,7 +460,7 @@ def validate(plan,inventory):
                             errors.append(f"slide {idx}: click beat {cid} unknown motion beat {member}")
                             continue
                         intent=beat.get("timing_intent")
-                        auto_start=(plan["version"] in ("0.5","0.6") and click_index==0 and member_index==0
+                        auto_start=(plan["version"] in ("0.5","0.6","0.7") and click_index==0 and member_index==0
                                     and intent=="on-slide-start")
                         if member_index==0 and intent!="on-click" and not auto_start:
                             errors.append(f"slide {idx}: click beat {cid} must start with on-click motion beat")

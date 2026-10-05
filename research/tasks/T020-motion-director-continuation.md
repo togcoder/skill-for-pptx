@@ -17,13 +17,15 @@ concurrently); do not build on it.
 
 Read first: AGENTS.md, HANDOFF.md (T019 section), the T019 report,
 `skills/pptx-motion-director/SKILL.md`, `docs/CLICK_BEAT_CHOREOGRAPHY.md`.
-Run `python3 -m unittest discover -s tests -v` (190 pass at T023).
+Run `python3 -m unittest discover -s tests -v` (205 pass at T024).
 
 ## Work items — pick by environment, in priority order
 
 ### A. Native PowerPoint gate (needs Windows + PowerPoint) — highest value
 
-Also play the T023 compound-motion showcase
+Also play the T024 scripted showcase
+`experiments/T024-20261005-claude-layers-script/output/T024_showcase_scripted.pptx`
+(loops, halo, overshoot, notes in Presenter View) and the T023 compound-motion showcase
 `experiments/T023-20261005-claude-compound-motion/output/T023_showcase_directed.pptx`
 against `preview/slide-0N.png` (anchored chained paths, Grow compounding,
 Transparency restore, Morph glide), and the T009 deck candidates from T022:

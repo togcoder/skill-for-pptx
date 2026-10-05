@@ -1,0 +1,51 @@
+# Motion Director report
+
+- source sha256: `7366f1382edd834d6cea1831d5ea4959232053ecc3bb55328fbf4eae5394b3d6`
+- output sha256: `2e8d4e4d9ec61e1700fa1ca0f2238f3d263d8f4373a175658dab975b6d13cbab`
+- structural checks: PASS
+- PowerPoint playback: **not verified** (structural + simulated states only)
+
+## Slides
+### Slide 1
+unchanged — title slide kept static
+
+### Slide 2
+5 click group(s); generated: __gen_backdrop_backdrop1, __gen_backdrop_backdrop2
+- auto 1: ~__gen_backdrop_backdrop1 (move), ~__gen_backdrop_backdrop2 (move)
+- click 2: +Content Placeholder 2 ¶0 'Headline results'
+- click 3: +Content Placeholder 2 ¶1 'Revenue by channel'
+- click 4: +Content Placeholder 2 ¶2 'How we fixed fulfilment'
+- click 5: +Content Placeholder 2 ¶3 'Priorities for Q4'
+
+### Slide 3
+4 click group(s); generated: __gen_backdrop_backdrop1, __gen_backdrop_backdrop2
+- auto 1: ~__gen_backdrop_backdrop1 (move), ~__gen_backdrop_backdrop2 (move)
+- click 2: +KPI Card 1, +KPI Value 1, +KPI Label 1
+- click 3: +KPI Card 2, +KPI Value 2, +KPI Label 2
+- click 4: +KPI Card 3, +KPI Value 3, +KPI Label 3
+
+### Slide 4
+3 click group(s); generated: __gen_backdrop_backdrop1, __gen_backdrop_backdrop2
+- auto 1: ~__gen_backdrop_backdrop1 (move), ~__gen_backdrop_backdrop2 (move)
+- click 2: +Channel Chart
+- click 3: +Takeaway Card, +Takeaway
+
+### Slide 5
+6 click group(s); generated: __gen_track-line_track, __gen_backdrop_backdrop1, __gen_backdrop_backdrop2, __gen_token_token
+- auto 1: ~__gen_backdrop_backdrop1 (move), ~__gen_backdrop_backdrop2 (move)
+- click 2: +Step 1, +__gen_track-line_track, +__gen_token_token, ~__gen_token_token (move), ~Step 1 (emphasis)
+- click 3: +Arrow 1, +Step 2, ~__gen_token_token (move), ~Step 2 (emphasis)
+- click 4: +Arrow 2, +Step 3, ~__gen_token_token (move), ~Step 3 (emphasis)
+- click 5: +Arrow 3, +Step 4, ~__gen_token_token (move), ~Step 4 (emphasis)
+- click 6: +Result
+
+### Slide 6
+unchanged — existing native animation preserved as the slide's choreography
+
+### Slide 7
+4 click group(s); generated: __gen_backdrop_backdrop1, __gen_backdrop_backdrop2
+- auto 1: ~__gen_backdrop_backdrop1 (move), ~__gen_backdrop_backdrop2 (move)
+- click 2: +Content Placeholder 2 ¶0 'Expand online subscriptions'
+- click 3: +Content Placeholder 2 ¶1 'Cut packaging waste by 30%'
+- click 4: +Content Placeholder 2 ¶2 'Open the second roastery'
+

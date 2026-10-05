@@ -211,9 +211,21 @@ def anchored_path_string(segments):
     return " ".join(parts)+" E"
 
 
+def loop_cycle(eff):
+    """Duration of one loop cycle (auto-reverse doubles it), or None."""
+    loop=eff.get("loop")
+    if not loop:
+        return None
+    return max(1,eff["duration_ms"])*(2 if loop.get("auto_reverse") else 1)
+
+
 def effective_duration(eff):
+    """Time the effect occupies for sequencing. A loop counts one cycle: later
+    'after previous' blocks do not wait for an endless ambient loop."""
     preset=eff["preset"]
     dur=eff["duration_ms"]
+    if eff.get("loop"):
+        return loop_cycle(eff)
     if preset=="pulse":
         return 2*dur
     if preset in ("appear","disappear"):
@@ -291,10 +303,21 @@ def _effect_par(parent,ids,eff,node_type,grp_id):
     if "accel" in eff or "decel" in eff:
         extra={"accel":str(round(eff.get("accel",0)*100000)),"decel":str(round(eff.get("decel",0)*100000))}
         extra={k:v for k,v in extra.items() if v!="0"}
+    loop=eff.get("loop") or {}
+    if loop:
+        repeat=loop.get("repeat","indefinite")
+        extra["repeatCount"]="indefinite" if repeat in ("indefinite","until-next-click") else str(int(repeat)*1000)
+        if loop.get("auto_reverse"):
+            extra["autoRev"]="1"
     ctn=sub(par,"cTn",id=next(ids),presetID=pid,presetClass=cls,presetSubtype=subtype,
             **extra,fill="hold",grpId=grp_id,nodeType=node_type)
     st=sub(ctn,"stCondLst")
     sub(st,"cond",delay=eff.get("delay_ms",0))
+    if loop.get("repeat")=="until-next-click":
+        # PowerPoint "Repeat: Until Next Click".
+        end=sub(ctn,"endCondLst")
+        cond=sub(end,"cond",evt="onNext",delay=0)
+        sub(sub(cond,"tgtEl"),"sldTgt")
     children=sub(ctn,"childTnLst")
     _behaviours(children,ids,eff)
     return ctn
@@ -324,6 +347,13 @@ def validate_effect(eff):
     for key in ("accel","decel"):
         if key in eff and not (0<=eff[key]<=1):
             raise ValueError(f"{key} must be within 0..1")
+    loop=eff.get("loop")
+    if loop is not None:
+        if eff["preset"] not in ("grow","spin","path","pulse"):
+            raise ValueError(f"preset {eff['preset']} cannot loop")
+        repeat=loop.get("repeat","indefinite")
+        if repeat not in ("indefinite","until-next-click") and not (type(repeat) is int and 1<=repeat<=100):
+            raise ValueError("loop.repeat must be indefinite, until-next-click or 1..100")
 
 
 def plan_blocks(effects):
