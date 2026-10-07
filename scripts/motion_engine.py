@@ -593,8 +593,9 @@ def layout_warnings(objects,states,label):
     vis=[o for o in objects if o.get("geometry") and states.get(o["id"],{}).get("visible")]
     for o in vis:
         b=bbox(o,states[o["id"]])
-        if o["geometry"]["w"]>=0.9 and o["geometry"]["h"]>=0.9:
-            continue  # full-bleed background: the slide edge crops it by design
+        a=bbox(o,fresh_state())
+        if a[0]<0.005 or a[1]<0.005 or a[2]>0.995 or a[3]>0.995:
+            continue  # authored at/past the edge (bleed, backdrop orb): the slide crops it by design
         if b[0]<-0.02 or b[1]<-0.02 or b[2]>1.02 or b[3]>1.02:
             warn.append(f"{label}: {o['name']!r} extends outside the slide")
     moved=[o for o in vis if any(abs(states[o["id"]][k]-v)>1e-6 for k,v in (("dx",0),("dy",0),("scale",1)))]
@@ -603,6 +604,8 @@ def layout_warnings(objects,states,label):
         for other in vis:
             if other is o:
                 continue
+            if not other.get("text") and objects.index(other)<objects.index(o):
+                continue  # passing over a text-free shape behind it (background decor) is fine
             bt=bbox(other,states[other["id"]])
             before=_overlap(bbox(o,fresh_state()),bbox(other,fresh_state()))
             now=_overlap(bo,bt)
