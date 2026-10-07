@@ -1,5 +1,15 @@
 # PPTX Motion Lab — checkpoint
 
+## T027 design + complex-motion knowledge — 2026-10-07
+
+- PowerPoint authored all 198 built-in effects. They are now writable as
+  `ppt:<name>` (verified 7/7 by native EffectType).
+- 11 Microsoft designer themes became Forge `office:<Name>` themes, AA in light and dark.
+- 797 licensed Zenodo10K decks were scanned XML-only over HTTP Range. 93% of
+  real effects are entrances, and complexity lives in object lifecycles.
+- New `dynamic` motion style. See `knowledge/README.md` and
+  experiments/T027-20261007-claude-design-motion-corpus/REPORT.md.
+
 ## T026 Forge online assets — 2026-10-07
 
 Forge now finds licensed photos (Openverse CC0/BY/BY-SA, or Pexels with a

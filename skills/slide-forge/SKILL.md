@@ -100,12 +100,19 @@ You do not need the user to supply assets. Forge can find licensed ones.
 - **Static slides:** write `[static]` in a slide's notes to keep the Director off it.
 - **Data:** never invent figures. With no data, use layouts that don't need it
   or label the data as illustrative, the way the examples do.
+- **Designer themes:** `office:<Name>` borrows a Microsoft designer theme's
+  palette, font pair and scale (Facet, Gallery, Integral, Ion, Ion Boardroom,
+  Office Theme, Organic, Retrospect, Slice, Wisp); `"theme_mode": "dark"` for
+  the dark variant. Many of those fonts lack Vietnamese glyphs; Forge stops
+  with `FONT_GLYPHS` and you override `fonts`.
 - **Theme:** `midnight`, `paper`, `forest` and `sunrise` pass WCAG AA for every
   text role. A custom theme object must keep `text`/`muted`/`accent` ≥ 4.5:1
   on `bg` and `surface`; QA enforces it.
 - **Motion styles:**
   - `modern` is the default.
   - `cinematic` uses bolder zooms and float-ins.
+  - `dynamic` uses PowerPoint's richer built-ins that complex real decks use
+    (Faded Zoom, Ascend, Rise Up, Expand, Grow & Turn); see `knowledge/README.md`.
   - `subtle` keeps pictures alive but leaves accents still.
   - `motion.morph` (default true) glides two background orbs between slides. Turn it off for very formal decks.
 

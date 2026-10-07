@@ -161,6 +161,36 @@ def motion_dna(root):
     return m,presets,len(effects)
 
 
+def phrases(root,namer=lambda k:k):
+    """Motion phrases of one slide: each object's lifecycle (ordered effect
+    names across the timeline) and each click group's shape (effects, how
+    many run together, whether staggered by delays)."""
+    timing=root.find("p:timing",NS)
+    main=timing.find(".//p:cTn[@nodeType='mainSeq']",NS) if timing is not None else None
+    if main is None:
+        return [],[]
+    life={}
+    groups=[]
+    for g in main.findall("p:childTnLst/p:par/p:cTn",NS):
+        effs=g.findall(".//p:cTn[@presetClass]",NS)
+        names=[]
+        delays=0
+        for c in effs:
+            name=namer(f"{c.get('presetClass')}:{c.get('presetID')}:{c.get('presetSubtype') or 0}")
+            names.append(name)
+            tgt=c.find(".//p:spTgt",NS)
+            if tgt is not None:
+                life.setdefault(tgt.get("spid"),[]).append(name)
+            cond=c.find("p:stCondLst/p:cond",NS)
+            delays+=cond is not None and (cond.get("delay") or "0").isdigit() and int(cond.get("delay"))>0
+        if effs:
+            groups.append({"n":len(effs),"kinds":sorted(set(names)),"staggered":delays>0,
+                           "with":sum(c.get("nodeType")=="withEffect" for c in effs),
+                           "after":sum(c.get("nodeType")=="afterEffect" for c in effs)})
+    chains=[tuple(v) for v in life.values() if len(v)>=2]
+    return chains,groups
+
+
 def slide_design(root,sw,sh):
     sizes=[int(r.get("sz"))/100 for r in root.iter(f"{{{A}}}rPr") if r.get("sz")]
     chars=sum(len(t.text or "") for t in root.iter(f"{{{A}}}t"))

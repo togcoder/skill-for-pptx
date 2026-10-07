@@ -148,3 +148,22 @@ class AssetTests(unittest.TestCase):
                 self.assertTrue(any(n.endswith(".svg") for n in z.namelist()))
                 self.assertIn(b"svgBlip",z.read("ppt/slides/slide2.xml"))
                 self.assertNotIn(b"p:timing",z.read("ppt/slides/slide4.xml"))  # [static] credits
+
+
+class OfficeKitTests(unittest.TestCase):
+    def test_every_office_kit_is_legible_in_both_modes(self):
+        kits=json.loads(sf.KITS_PATH.read_text(encoding="utf-8"))["themes"]
+        self.assertEqual(len(kits),11)
+        for k in kits:
+            for mode in ("light","dark"):
+                t,fonts,_=sf.office_theme(k["name"],mode)
+                for role in ("text","muted","accent","accent2"):
+                    for back in ("bg","surface"):
+                        self.assertGreaterEqual(forge_qa.contrast(t[role],t[back]),4.5,f"{k['name']} {mode} {role}/{back}")
+                self.assertTrue(fonts["head"] and fonts["body"])
+
+    def test_vietnamese_text_rejects_fonts_without_glyphs(self):
+        spec={"theme":"office:Ion","slides":[{"layout":"section","title":"Chuyển đổi số"}]}
+        self.assertIn("FONT_GLYPHS",{e["code"] for e in sf.validate_spec(spec)})
+        spec["fonts"]={"head":"Segoe UI Semibold","body":"Segoe UI"}
+        self.assertEqual(sf.validate_spec(spec),[])

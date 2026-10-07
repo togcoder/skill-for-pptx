@@ -52,6 +52,59 @@ THEMES={
     "sunrise":{"bg":"FFF7ED","surface":"FFFFFF","text":"431407","muted":"7C5A48","accent":"C2410C","accent2":"7C3AED"},
 }
 FONTS={"head":"Segoe UI Semibold","body":"Segoe UI"}
+KITS_PATH=Path(__file__).resolve().parents[1]/"knowledge"/"office_design_kits.json"
+# Fonts with complete Vietnamese coverage (Latin Extended Additional).
+VI_SAFE_FONTS={"segoe ui","segoe ui semibold","arial","calibri","calibri light","cambria","times new roman",
+               "tahoma","verdana","aptos","aptos display","georgia"}
+
+
+def _mix(a,b,t):
+    return "".join(f"{round(int(a[i:i+2],16)*(1-t)+int(b[i:i+2],16)*t):02X}" for i in (0,2,4))
+
+
+def _contrast(a,b):
+    def lum(h):
+        def ch(v):
+            v/=255
+            return v/12.92 if v<=0.03928 else ((v+0.055)/1.055)**2.4
+        r,g,b_=(int(h[i:i+2],16) for i in (0,2,4))
+        return 0.2126*ch(r)+0.7152*ch(g)+0.0722*ch(b_)
+    hi,lo=sorted((lum(a),lum(b)),reverse=True)
+    return (hi+0.05)/(lo+0.05)
+
+
+def _legible(color,bgs,toward):
+    """Nudge a colour toward ``toward`` until it reaches 4.5:1 on every bg."""
+    c=color
+    for step in range(1,21):
+        if all(_contrast(c,b)>=4.5 for b in bgs):
+            return c
+        c=_mix(color,toward,step/20)
+    return c
+
+
+def office_theme(name,mode="light"):
+    """Theme + fonts from a Microsoft Office designer theme (office_design_dna.py)."""
+    kits={k["name"].lower():k for k in json.loads(KITS_PATH.read_text(encoding="utf-8"))["themes"]}
+    kit=kits[name.lower()]
+    c=kit["colors"]
+    if mode=="dark":
+        bg,text=c.get("dk2") or c["dk1"],c.get("lt1") or "FFFFFF"
+        for step in range(1,11):  # mid-tone dk2 (Retrospect, Wisp): deepen until white text is 7:1
+            if _contrast(text,bg)>=7:
+                break
+            bg=_mix(c.get("dk2") or c["dk1"],"000000",step/10)
+    else:
+        bg,text=c.get("lt1") or "FFFFFF",c.get("dk2") or c["dk1"]
+    if _contrast(text,bg)<7:
+        text=c["dk1"] if mode!="dark" else "FFFFFF"
+    surface=_mix(bg,text,0.06)
+    theme={"bg":bg,"surface":surface,"text":text,
+           "muted":_legible(_mix(text,bg,0.35),[bg,surface],text),
+           "accent":_legible(c["accent1"],[bg,surface],text),
+           "accent2":_legible(c["accent2"],[bg,surface],text)}
+    fonts={"head":kit["fonts"]["majorFont"],"body":kit["fonts"]["minorFont"]}
+    return theme,fonts,kit
 LAYOUTS={
     "title":{"required":["title"],"optional":["subtitle","image","kicker"]},
     "section":{"required":["title"],"optional":["kicker"]},
@@ -79,10 +132,10 @@ LIMITS={"bullets":6,"kpis":4,"process":6,"cycle":6,"points":5}
 def schema():
     return {
         "version":VERSION,
-        "deck":{"title":"str (optional)","assets_cache":"dir for downloaded photos/icons (default ~/.cache/slide-forge)",
+        "deck":{"title":"str (optional)","theme_mode":"light|dark for office:* themes","assets_cache":"dir for downloaded photos/icons (default ~/.cache/slide-forge)",
                 "credits_slide":"bool, closing slide attributing licensed photos (default true)","theme":f"one of {sorted(THEMES)} or an object with the same color keys (hex)",
                 "fonts":{"head":"font family","body":"font family"},
-                "motion":{"style":"subtle|modern|bold|cinematic (default modern)","counters":"bool, count up KPI values (default true)",
+                "motion":{"style":"subtle|modern|bold|cinematic|dynamic (default modern; dynamic = PowerPoint's richer built-ins)","counters":"bool, count up KPI values (default true)",
                           "morph":"bool, background orbs glide between slides (default true)"},
                 "slides":"list of slide objects"},
         "slide":{"layout":{k:v for k,v in LAYOUTS.items()},"notes":"speaker notes; sequence words (first, then, finally) make process steps one click each"},
@@ -110,11 +163,21 @@ def validate_spec(spec):
         err("SPEC_SHAPE",None,"spec needs a nonempty slides list","see `slide_forge.py schema`")
         return errs
     theme=spec.get("theme","midnight")
-    if isinstance(theme,str) and theme not in THEMES:
-        err("THEME_UNKNOWN",None,f"theme {theme!r}",f"use one of {sorted(THEMES)}")
+    kits=[k["name"] for k in json.loads(KITS_PATH.read_text(encoding="utf-8"))["themes"]] if KITS_PATH.is_file() else []
+    if isinstance(theme,str) and theme not in THEMES and not (theme.lower().startswith("office:")
+                                                               and theme[7:].lower() in {k.lower() for k in kits}):
+        err("THEME_UNKNOWN",None,f"theme {theme!r}",f"use one of {sorted(THEMES)} or office:<{'|'.join(kits)}>")
+    text=json.dumps(spec,ensure_ascii=False)
+    if any(ch in text for ch in "ăâđêôơưạảấầẩẫậắằẳẵặẹẻẽếềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ"):
+        fonts={**FONTS,**(office_theme(theme[7:])[1] if isinstance(theme,str) and theme.lower().startswith("office:")
+                         and theme[7:].lower() in {k.lower() for k in kits} else {}),**(spec.get("fonts") or {})}
+        bad=sorted({f for f in fonts.values() if f.lower() not in VI_SAFE_FONTS})
+        if bad:
+            err("FONT_GLYPHS",None,f"Vietnamese text with fonts lacking full Vietnamese glyphs: {bad}",
+                "set \"fonts\": {\"head\": \"Segoe UI Semibold\", \"body\": \"Segoe UI\"} (or Arial/Calibri/Aptos)")
     style=(spec.get("motion") or {}).get("style","modern")
-    if style not in ("subtle","modern","bold","cinematic"):
-        err("MOTION_STYLE",None,f"style {style!r}","use subtle|modern|bold|cinematic")
+    if style not in ("subtle","modern","bold","cinematic","dynamic"):
+        err("MOTION_STYLE",None,f"style {style!r}","use subtle|modern|bold|cinematic|dynamic")
     for i,s in enumerate(spec["slides"],1):
         lay=s.get("layout") if isinstance(s,dict) else None
         if lay not in LAYOUTS:
@@ -163,7 +226,15 @@ _FONT_FILES={"segoe ui":["segoeui.ttf","DejaVuSans.ttf"],"segoe ui bold":["segoe
              "segoe ui semibold":["seguisb.ttf","segoeuib.ttf","DejaVuSans-Bold.ttf"],
              "segoe ui semibold bold":["segoeuib.ttf","DejaVuSans-Bold.ttf"],
              "arial":["arial.ttf","LiberationSans-Regular.ttf"],"arial bold":["arialbd.ttf","LiberationSans-Bold.ttf"],
-             "calibri":["calibri.ttf","Carlito-Regular.ttf"],"calibri bold":["calibrib.ttf","Carlito-Bold.ttf"]}
+             "calibri":["calibri.ttf","Carlito-Regular.ttf"],"calibri bold":["calibrib.ttf","Carlito-Bold.ttf"],
+             "calibri light":["calibril.ttf","Carlito-Regular.ttf"],"calibri light bold":["calibrib.ttf"],
+             "century gothic":["GOTHIC.TTF"],"century gothic bold":["GOTHICB.TTF"],
+             "trebuchet ms":["trebuc.ttf"],"trebuchet ms bold":["trebucbd.ttf"],
+             "gill sans mt":["GIL_____.TTF"],"gill sans mt bold":["GILB____.TTF"],
+             "garamond":["GARA.TTF"],"garamond bold":["GARABD.TTF"],
+             "tw cen mt":["TCM_____.TTF"],"tw cen mt bold":["TCB_____.TTF"],
+             "tw cen mt condensed":["TCCM____.TTF","TCM_____.TTF"],"tw cen mt condensed bold":["TCCB____.TTF","TCB_____.TTF"],
+             "georgia":["georgia.ttf"],"georgia bold":["georgiab.ttf"],"verdana":["verdana.ttf"],"verdana bold":["verdanab.ttf"]}
 SAFETY=1.06  # renderer kerning/hinting differs slightly from Pillow's metrics
 _FONT_DIRS=[Path("C:/Windows/Fonts"),Path("/usr/share/fonts"),Path("/Library/Fonts"),Path.home()/".fonts"]
 _font_cache={}
@@ -273,8 +344,12 @@ def generated_art(seed,theme,w=1600,h=1000):
 class Builder:
     def __init__(self,spec):
         t=spec.get("theme","midnight")
-        self.theme=dict(THEMES[t]) if isinstance(t,str) else {**THEMES["midnight"],**t}
-        self.fonts={**FONTS,**(spec.get("fonts") or {})}
+        kit_fonts={}
+        if isinstance(t,str) and t.lower().startswith("office:"):
+            self.theme,kit_fonts,_=office_theme(t.split(":",1)[1],spec.get("theme_mode","light"))
+        else:
+            self.theme=dict(THEMES[t]) if isinstance(t,str) else {**THEMES["midnight"],**t}
+        self.fonts={**FONTS,**kit_fonts,**(spec.get("fonts") or {})}
         self.motion={"style":"modern","counters":True,"morph":True,**(spec.get("motion") or {})}
         self.prs=Presentation()
         self.prs.slide_width=Inches(W)

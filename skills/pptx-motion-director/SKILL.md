@@ -145,7 +145,14 @@ clicks that partition the beats in order). Beat fields: `id`, `purpose`,
 | any + `data_motion` | chart build or KPI counter | see `references/data-motion-recipes.md` |
 
 Effects: `appear fade float-in zoom wipe-up wipe-down wipe-left wipe-right`
-(entrances), `fade-out disappear` (exits), `pulse spin dim` (emphasis), `path`.
+(entrances), `fade-out disappear` (exits), `pulse spin dim` (emphasis), `path`;
+plus **any PowerPoint built-in** as `ppt:<name>` — 198 effects harvested from
+PowerPoint itself (`knowledge/powerpoint_presets.json`): e.g. `ppt:faded-zoom`,
+`ppt:ascend`, `ppt:grow-and-turn`, `ppt:boomerang` (entrances), `ppt:fly-out`
+(exits), `ppt:teeter`, `ppt:grow-with-color`, `ppt:color-wave` (emphasis),
+`ppt:path-s-curve1`, `ppt:path-arc-left` (paths). `--style dynamic` uses them.
+Real complex decks get their richness from object lifecycles (enter → move →
+emphasise/dim → exit), not exotic presets (`knowledge/README.md`).
 
 Click beats need `purpose`, `stable_state`, `pause_after`, and from the second
 click on a `boundary_reason`. Full contract:

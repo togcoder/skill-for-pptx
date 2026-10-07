@@ -62,6 +62,11 @@ STYLES={
     "modern":{"text":("float-in",600),"bullet":("float-in",500),"card":("float-in",600),"step":("fade",400),
               "connector":("wipe-right",300),"picture":("fade",600),"callout":("float-in",600),"shape":("fade",450)},
     "cinematic":CINEMATIC,
+    # T027: PowerPoint-authored presets that real complex decks lean on
+    # (faded zoom, ascend, rise up, expand, grow & turn; knowledge/motion_phrases.json).
+    "dynamic":{"text":("ppt:rise-up",600),"bullet":("ppt:ascend",500),"card":("ppt:faded-zoom",500),
+               "step":("ppt:expand",450),"connector":("wipe-right",300),"picture":("ppt:faded-zoom",700),
+               "callout":("ppt:grow-and-turn",600),"shape":("ppt:faded-zoom",450)},
     "bold":{"text":("float-in",600),"bullet":("float-in",500),"card":("zoom",500),"step":("zoom",400),
             "connector":("wipe-right",300),"picture":("zoom",600),"callout":("zoom",500),"shape":("zoom",450)},
 }
