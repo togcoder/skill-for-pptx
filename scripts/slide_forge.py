@@ -10,6 +10,7 @@ failure is a coded error with a fix hint, and the loop is
     slide_forge.py schema                      # spec contract as JSON
     slide_forge.py build SPEC.json -o OUT.pptx # layout + art + motion + QA
     slide_forge.py qa OUT.pptx                 # QA only (any PPTX)
+    slide_forge.py render OUT.pptx -d DIR      # PowerPoint render -> MP4 + per-slide strips
 
 Layouts: title, section, statement, bullets, image, kpis, process, cycle,
 chart, comparison, quote, closing. Layout geometry is chosen so the Motion
@@ -152,8 +153,12 @@ def validate_spec(spec):
 # Text fitting
 
 
-_FONT_FILES={"segoe ui":["segoeui.ttf","DejaVuSans.ttf"],"segoe ui semibold":["seguisb.ttf","segoeuib.ttf","DejaVuSans-Bold.ttf"],
-             "arial":["arial.ttf","LiberationSans-Regular.ttf"],"calibri":["calibri.ttf","Carlito-Regular.ttf"]}
+_FONT_FILES={"segoe ui":["segoeui.ttf","DejaVuSans.ttf"],"segoe ui bold":["segoeuib.ttf","DejaVuSans-Bold.ttf"],
+             "segoe ui semibold":["seguisb.ttf","segoeuib.ttf","DejaVuSans-Bold.ttf"],
+             "segoe ui semibold bold":["segoeuib.ttf","DejaVuSans-Bold.ttf"],
+             "arial":["arial.ttf","LiberationSans-Regular.ttf"],"arial bold":["arialbd.ttf","LiberationSans-Bold.ttf"],
+             "calibri":["calibri.ttf","Carlito-Regular.ttf"],"calibri bold":["calibrib.ttf","Carlito-Bold.ttf"]}
+SAFETY=1.06  # renderer kerning/hinting differs slightly from Pillow's metrics
 _FONT_DIRS=[Path("C:/Windows/Fonts"),Path("/usr/share/fonts"),Path("/Library/Fonts"),Path.home()/".fonts"]
 _font_cache={}
 _path_cache={}
@@ -182,13 +187,17 @@ def _font(family,size_pt):
     return _font_cache[key]
 
 
-def text_lines(text,family,size_pt,width_in):
-    """Lines after word wrap. Measured with the real font file when present;
-    otherwise 0.55 em per character (ponytail: approximate, flags borderline)."""
-    font=_font(family,size_pt)
+def text_lines(text,family,size_pt,width_in,bold=False):
+    """Lines after word wrap, or inf when a single word is wider than the box
+    (PowerPoint would break it mid-word). Measured with the real font file
+    when present; otherwise 0.55 em per character (ponytail: approximate)."""
+    fam=family+" bold" if bold and (family.lower()+" bold") in _FONT_FILES else family
+    font=_font(fam,size_pt)
     width_px=width_in*72*4  # font loaded at 4 px per pt
     def w(s):
-        return font.getlength(s) if font else len(s)*size_pt*4*0.55
+        return (font.getlength(s) if font else len(s)*size_pt*4*(0.6 if bold else 0.55))*SAFETY
+    if any(w(word)>width_px for word in str(text).split()):
+        return math.inf
     lines=0
     for para in str(text).split("\n"):
         words=para.split() or [""]
@@ -205,11 +214,11 @@ def text_lines(text,family,size_pt,width_in):
     return lines
 
 
-def fit_size(paragraphs,family,size_pt,box_w,box_h,floor=12,spacing=1.18,gap_pt=6):
+def fit_size(paragraphs,family,size_pt,box_w,box_h,floor=12,spacing=1.18,gap_pt=6,bold=False):
     """Largest size <= size_pt whose wrapped text fits the box (inches)."""
     size=size_pt
     while True:
-        lines=sum(text_lines(p,family,size,box_w-0.2) for p in paragraphs)
+        lines=sum(text_lines(p,family,size,box_w-0.2,bold) for p in paragraphs)
         height=(lines*size*spacing+gap_pt*(len(paragraphs)-1))/72+0.15
         if height<=box_h or size<=floor:
             return size,height<=box_h
@@ -274,11 +283,11 @@ class Builder:
     # -- primitives ---------------------------------------------------------
 
     def text(self,slide,x,y,w,h,paragraphs,size,name,role="body",color="text",bold=False,align=None,
-             anchor=MSO_ANCHOR.TOP,floor=12,idx=None):
+             anchor=MSO_ANCHOR.TOP,floor=12,idx=None,gap=6):
         if isinstance(paragraphs,str):
             paragraphs=[paragraphs]
         family=self.fonts["head" if role=="head" else "body"]
-        fitted,ok=fit_size(paragraphs,family,size,w,h,floor)
+        fitted,ok=fit_size(paragraphs,family,size,w,h,floor,gap_pt=gap,bold=bold)
         if fitted<size:
             self.receipts.append({"code":"TEXT_SHRUNK","slide":idx,"object":name,"detail":f"{size}->{fitted} pt",
                                   "fix":"shorten the text if the smaller size hurts hierarchy"})
@@ -298,7 +307,7 @@ class Builder:
             if align is not None:
                 p.alignment=align
             if i:
-                p.space_before=Pt(6)
+                p.space_before=Pt(gap)
             for r in p.runs:
                 r.font.size=Pt(fitted)
                 r.font.bold=bold
@@ -346,21 +355,20 @@ class Builder:
         fill.fore_color.rgb=self.rgb("bg")
         if not self.motion["morph"]:
             return
-        # Two soft orbs with fixed names: Morph glides them between slides.
-        rnd=random.Random(idx)
-        for k,(key,r) in enumerate((("accent",3.2),("accent2",2.4))):
-            ang=2*math.pi*(idx/max(n,1))+k*math.pi
-            cx=W/2+(W/2+0.6)*math.cos(ang)*rnd.uniform(0.85,1.0)
-            cy=H/2+(H/2+0.4)*math.sin(ang)*rnd.uniform(0.85,1.0)
+        # Two soft orbs with fixed names sit on opposite corners and rotate a
+        # corner per slide, so Morph glides them around the frame, never over content.
+        corners=[(0,0),(W,0),(W,H),(0,H)]
+        for k,(key,r) in enumerate((("accent",2.0),("accent2",1.4))):
+            cx,cy=corners[(idx+2*k)%4]
             orb=self.rect(slide,cx-r,cy-r,2*r,2*r,key,f"!!orb-{k+1}",MSO_SHAPE.OVAL)
-            _alpha(orb,14)
+            _alpha(orb,12)
 
     def heading(self,slide,title,idx,kicker=None):
         y=0.45
         if kicker:
             self.text(slide,MARGIN,0.32,W-2*MARGIN,0.4,[kicker.upper()],13,"Kicker",color="accent",bold=True,idx=idx)
             y=0.62
-        self.text(slide,MARGIN,y,W-2*MARGIN,0.85,[title],32,"Title",role="head",bold=True,idx=idx)
+        self.text(slide,MARGIN,y,W-2*MARGIN,0.85,[title],36,"Title",role="head",bold=True,idx=idx)
         self.rect(slide,MARGIN+0.1,y+0.92,1.4,0.07,"accent","Title accent")
         return y+1.25
 
@@ -375,7 +383,7 @@ class Builder:
                   anchor=MSO_ANCHOR.BOTTOM,idx=idx)
         self.rect(slide,MARGIN+0.1,4.8,1.8,0.08,"accent","Title accent")
         if s.get("subtitle"):
-            self.text(slide,MARGIN,5.05,W/2-1.2,1.2,[s["subtitle"]],18,"Subtitle",color="muted",idx=idx)
+            self.text(slide,MARGIN,5.05,W/2-1.2,1.2,[s["subtitle"]],20,"Subtitle",color="muted",idx=idx)
 
     def l_section(self,slide,s,idx):
         if s.get("kicker"):
@@ -387,7 +395,7 @@ class Builder:
         if s.get("kicker"):
             self.text(slide,1.4,1.2,W-2.8,0.5,[s["kicker"].upper()],15,"Kicker",color="accent",bold=True,idx=idx)
         self.rect(slide,1.2,1.85,0.08,3.6,"accent","Statement bar")
-        self.text(slide,1.5,1.7,W-3.0,3.9,[s["text"]],36,"Statement",role="head",bold=True,
+        self.text(slide,1.5,1.7,W-3.0,3.9,[s["text"]],54,"Statement",role="head",bold=True,
                   anchor=MSO_ANCHOR.MIDDLE,idx=idx)
 
     def l_bullets(self,slide,s,idx):
@@ -396,7 +404,8 @@ class Builder:
         if s.get("image"):
             width=W*0.52-MARGIN
             self.picture(slide,s["image"],W*0.56,top,W*0.44-MARGIN,H-top-0.7,"Supporting picture",idx)
-        self.text(slide,MARGIN,top+0.1,width,H-top-0.8,["• "+b for b in s["bullets"]],22,"Points",idx=idx)
+        self.text(slide,MARGIN,top+0.1,width,H-top-0.8,["• "+b for b in s["bullets"]],28,"Points",
+                  anchor=MSO_ANCHOR.MIDDLE,gap=18,idx=idx)
 
     def l_image(self,slide,s,idx):
         if s.get("title"):
@@ -415,17 +424,20 @@ class Builder:
         n=len(items)
         gap=0.35
         cw=(W-2*MARGIN-gap*(n-1))/n
-        ch=2.6
-        y=top+0.4
+        ch=3.0
+        y=top+(H-top-0.5-ch-(1.1 if s.get("takeaway") else 0))/2
+        # One size for every value so the row reads as a set.
+        vsize=min(fit_size([it["value"]],self.fonts["head"],64,cw-0.4,1.2,floor=24,bold=True)[0] for it in items)
         for i,it in enumerate(items):
             x=MARGIN+i*(cw+gap)
             self.rect(slide,x,y,cw,ch,"surface",f"KPI card {i+1}",MSO_SHAPE.ROUNDED_RECTANGLE)
-            self.text(slide,x+0.2,y+0.3,cw-0.4,1.2,[it["value"]],54,f"KPI value {i+1}",role="head",color="accent",
+            self.text(slide,x+0.2,y+0.3,cw-0.4,1.2,[it["value"]],vsize,f"KPI value {i+1}",role="head",color="accent",
                       bold=True,align=PP_ALIGN.CENTER,idx=idx)
-            self.text(slide,x+0.2,y+1.55,cw-0.4,0.9,[it["label"]],16,f"KPI label {i+1}",color="muted",
+            self.text(slide,x+0.2,y+1.75,cw-0.4,1.0,[it["label"]],20,f"KPI label {i+1}",color="muted",
                       align=PP_ALIGN.CENTER,idx=idx)
         if s.get("takeaway"):
-            self.text(slide,MARGIN,y+ch+0.4,W-2*MARGIN,0.9,[s["takeaway"]],20,"Takeaway",bold=True,idx=idx)
+            self.text(slide,MARGIN,y+ch+0.35,W-2*MARGIN,0.8,[s["takeaway"]],24,"Takeaway",bold=True,
+                      align=PP_ALIGN.CENTER,idx=idx)
 
     def l_process(self,slide,s,idx):
         top=self.heading(slide,s["title"],idx)
@@ -433,15 +445,15 @@ class Builder:
         n=len(steps)
         gap=0.55
         bw=(W-2*MARGIN-gap*(n-1))/n
-        bh=1.7
-        y=top+0.9
+        bh=2.2
+        y=top+(H-top-0.5-bh-(1.2 if s.get("takeaway") else 0))/2
         for i,st in enumerate(steps):
             x=MARGIN+i*(bw+gap)
             box=self.rect(slide,x,y,bw,bh,"surface" if i<n-1 else "accent",f"Step {i+1}",MSO_SHAPE.ROUNDED_RECTANGLE)
             tf=box.text_frame
             tf.word_wrap=True
             fam=self.fonts["head"]
-            size,_=fit_size([st],fam,18,bw-0.2,bh-0.2)
+            size,_=fit_size([st],fam,24,bw-0.2,bh-0.2,bold=True)
             tf.text=st
             for p in tf.paragraphs:
                 p.alignment=PP_ALIGN.CENTER
@@ -458,23 +470,24 @@ class Builder:
                 c.line.width=Pt(2.5)
                 _arrow(c)
         if s.get("takeaway"):
-            self.text(slide,MARGIN,y+bh+0.6,W-2*MARGIN,0.9,[s["takeaway"]],20,"Takeaway",bold=True,idx=idx)
+            self.text(slide,MARGIN,y+bh+0.5,W-2*MARGIN,0.8,[s["takeaway"]],24,"Takeaway",bold=True,
+                      align=PP_ALIGN.CENTER,idx=idx)
 
     def l_cycle(self,slide,s,idx):
         top=self.heading(slide,s["title"],idx)
         items=s["items"]
         n=len(items)
         cx,cy=W/2,(top+H-0.3)/2
-        r=min(2.0,(H-top-0.5)/2-0.75)
-        d=1.55
+        r=min(2.3,(H-top-0.4)/2-0.85)
+        d=1.65
         if s.get("center"):
-            hub=self.rect(slide,cx-1.0,cy-1.0,2.0,2.0,"accent","Hub",MSO_SHAPE.OVAL)
-            _shape_text(self,hub,s["center"],16,"bg")
+            hub=self.rect(slide,cx-0.85,cy-0.85,1.7,1.7,"accent","Hub",MSO_SHAPE.OVAL)
+            _shape_text(self,hub,s["center"],20,"bg")
         for i,it in enumerate(items):
             ang=-math.pi/2+2*math.pi*i/n
-            x,y=cx+r*1.35*math.cos(ang),cy+r*math.sin(ang)
+            x,y=cx+r*1.2*math.cos(ang),cy+r*math.sin(ang)  # near-circular: the Director detects cycles by radius spread
             node=self.rect(slide,x-d/2,y-d/2,d,d,"surface","Stage "+str(i+1),MSO_SHAPE.OVAL,line="accent")
-            _shape_text(self,node,it,14,"text")
+            _shape_text(self,node,it,18,"text")
 
     def l_chart(self,slide,s,idx):
         top=self.heading(slide,s["title"],idx)
@@ -487,7 +500,7 @@ class Builder:
         gf=slide.shapes.add_chart(CHART_TYPES[c["type"]],Inches(MARGIN),Inches(top+0.1),Inches(cw),Inches(H-top-0.6),data)
         gf.name="Chart"
         ch=gf.chart
-        ch.font.size=Pt(13)
+        ch.font.size=Pt(18)
         ch.font.name=self.fonts["body"]
         ch.font.color.rgb=self.rgb("muted")
         ch.has_legend=len(c["series"])>1 or c["type"] in ("pie","doughnut")
@@ -516,7 +529,7 @@ class Builder:
         if s.get("takeaway"):
             x=W*0.62+0.3
             self.rect(slide,x,top+0.6,0.07,2.6,"accent","Takeaway bar")
-            self.text(slide,x+0.25,top+0.5,W-x-0.25-MARGIN,2.9,[s["takeaway"]],24,"Takeaway",role="head",
+            self.text(slide,x+0.25,top+0.5,W-x-0.25-MARGIN,2.9,[s["takeaway"]],30,"Takeaway",role="head",
                       bold=True,anchor=MSO_ANCHOR.MIDDLE,idx=idx)
 
     def l_comparison(self,slide,s,idx):
@@ -527,24 +540,24 @@ class Builder:
         for i,side in enumerate(("left","right")):
             x=MARGIN+i*(cw+gap)
             self.rect(slide,x,top+0.1,cw,chh,"surface",f"{side.title()} card",MSO_SHAPE.ROUNDED_RECTANGLE)
-            self.text(slide,x+0.35,top+0.35,cw-0.7,0.7,[s[side]["heading"]],24,f"{side.title()} heading",role="head",
+            self.text(slide,x+0.35,top+0.4,cw-0.7,0.8,[s[side]["heading"]],30,f"{side.title()} heading",role="head",
                       color="accent" if i==0 else "accent2",bold=True,idx=idx)
-            self.text(slide,x+0.35,top+1.15,cw-0.7,chh-1.3,["• "+p for p in s[side].get("points",[])],18,
-                      f"{side.title()} points",idx=idx)
+            self.text(slide,x+0.35,top+1.35,cw-0.7,chh-1.5,["• "+p for p in s[side].get("points",[])],24,
+                      f"{side.title()} points",gap=14,idx=idx)
 
     def l_quote(self,slide,s,idx):
         self.text(slide,1.3,0.4,1.8,2.1,["\u201c"],110,"Quote mark",role="head",color="accent",bold=True,idx=idx)
-        self.text(slide,1.6,2.25,W-3.2,2.95,[s["quote"]],32,"Quote",role="head",anchor=MSO_ANCHOR.MIDDLE,idx=idx)
+        self.text(slide,1.6,2.25,W-3.2,2.95,[s["quote"]],40,"Quote",role="head",anchor=MSO_ANCHOR.MIDDLE,idx=idx)
         if s.get("author"):
             self.rect(slide,1.7,5.45,0.9,0.05,"accent","Author rule")
-            self.text(slide,2.75,5.2,W-4.4,0.6,[s["author"]],18,"Author",color="muted",idx=idx)
+            self.text(slide,2.75,5.2,W-4.4,0.6,[s["author"]],20,"Author",color="muted",idx=idx)
 
     def l_closing(self,slide,s,idx):
         self.text(slide,MARGIN,2.4,W-2*MARGIN,1.6,[s["title"]],48,"Title",role="head",bold=True,
                   align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.BOTTOM,idx=idx)
         self.rect(slide,W/2-1.0,4.15,2.0,0.08,"accent","Closing accent")
         if s.get("subtitle"):
-            self.text(slide,MARGIN+1,4.45,W-2*MARGIN-2,1.2,[s["subtitle"]],20,"Subtitle",color="muted",
+            self.text(slide,MARGIN+1,4.45,W-2*MARGIN-2,1.2,[s["subtitle"]],24,"Subtitle",color="muted",
                       align=PP_ALIGN.CENTER,idx=idx)
 
     def build(self,spec,out):
@@ -573,8 +586,10 @@ def _shape_text(b,shape,text,size,color):
     tf=shape.text_frame
     tf.word_wrap=True
     fam=b.fonts["head"]
-    w=shape.width/914400-0.2
-    fitted,_=fit_size([text],fam,size,w,shape.height/914400-0.2,floor=10)
+    # An ellipse lays text out in its inscribed rectangle (~0.707 of each side).
+    k=0.707 if shape.auto_shape_type==MSO_SHAPE.OVAL else 1.0
+    w=shape.width/914400*k-0.2
+    fitted,_=fit_size([text],fam,size,w+0.2,shape.height/914400*k-0.2,floor=10,bold=True)
     tf.text=text
     for p in tf.paragraphs:
         p.alignment=PP_ALIGN.CENTER
@@ -621,6 +636,36 @@ def build(spec,out,work=None):
     return verdict
 
 
+def render(pptx,outdir,seconds=8):
+    """Render with desktop PowerPoint (Windows): MP4 via CreateVideo, the main
+    sequence as PowerPoint parsed it, and one 6-frame strip per slide for the
+    agent to look at. Returns paths; raises if PowerPoint/ffmpeg is missing."""
+    import shutil
+    import subprocess
+    outdir=Path(outdir)
+    outdir.mkdir(parents=True,exist_ok=True)
+    if not (shutil.which("powershell") and shutil.which("ffmpeg")):
+        raise RuntimeError("render needs Windows PowerShell + desktop PowerPoint + ffmpeg")
+    ps1=Path(__file__).with_name("powerpoint_render.ps1")
+    subprocess.run(["powershell","-NoProfile","-ExecutionPolicy","Bypass","-File",str(ps1),"-Pptx",str(pptx),
+                    "-OutDir",str(outdir),"-SecondsPerSlide",str(seconds)],check=True,capture_output=True)
+    video=outdir/"native_render.mp4"
+    n=len(Presentation(str(pptx)).slides)
+    dur=float(subprocess.run(["ffprobe","-v","error","-show_entries","format=duration","-of","csv=p=0",str(video)],
+                             check=True,capture_output=True,text=True).stdout)
+    per=dur/n
+    sheets=[]
+    for i in range(n):
+        sheet=outdir/f"slide-{i+1:02d}.png"
+        subprocess.run(["ffmpeg","-v","error","-y","-ss",f"{i*per:.3f}","-t",f"{per:.3f}","-i",str(video),
+                        "-vf",f"fps={6/per:.4f},scale=480:-1,tile=6x1","-frames:v","1",str(sheet)],check=True)
+        sheets.append(str(sheet))
+    seq=json.loads((outdir/"native_sequence.json").read_text(encoding="utf-8-sig"))
+    return {"ok":True,"stage":"render","powerpoint":f"{seq['powerpoint_version']} build {seq['build']}",
+            "video":str(video),"sheets":sheets,"sequence":str(outdir/"native_sequence.json"),
+            "note":"CreateVideo auto-advances clicks; it is PowerPoint's renderer, not an interactive slideshow"}
+
+
 def main(argv=None):
     ap=argparse.ArgumentParser(description=__doc__,formatter_class=argparse.RawDescriptionHelpFormatter)
     sub=ap.add_subparsers(dest="cmd",required=True)
@@ -630,11 +675,17 @@ def main(argv=None):
     b.add_argument("-o","--output",type=Path,required=True)
     q=sub.add_parser("qa")
     q.add_argument("pptx",type=Path)
+    r=sub.add_parser("render")
+    r.add_argument("pptx",type=Path)
+    r.add_argument("-d","--dir",type=Path,required=True)
+    r.add_argument("--seconds",type=int,default=8)
     a=ap.parse_args(argv)
     if a.cmd=="schema":
         result=schema()
     elif a.cmd=="build":
         result=build(json.loads(a.spec.read_text(encoding="utf-8")),a.output)
+    elif a.cmd=="render":
+        result=render(a.pptx,a.dir,a.seconds)
     else:
         import forge_qa
         result=forge_qa.qa(a.pptx)

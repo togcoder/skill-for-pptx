@@ -34,7 +34,7 @@ recipe set gave a still picture motion after its entrance.
 - `tests/test_picture_motion.py`: 12 tests. Full suite: **202 pass, 3 skipped**
   (`PYTHONUTF8=1 python -m unittest discover -s tests` on Windows; without
   UTF-8 mode, 11 older tests fail to read fixtures — pre-existing).
-- Native: `native_probe.ps1` opened `picture_deck_motion.pptx` in **PowerPoint
+- Native: `native_probe.ps1` (now `scripts/powerpoint_render.ps1`) opened `picture_deck_motion.pptx` in **PowerPoint
   16.0 build 17932** (Windows 11), read the main sequence through the object
   model (`native/native_sequence.json`) and rendered an MP4 with
   `Presentation.CreateVideo` (9 s per slide, 720p).

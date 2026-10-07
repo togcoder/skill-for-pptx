@@ -116,13 +116,20 @@ def qa(path,theme=None):
             if sizes and min(sizes)<12 and not name.startswith("Counter"):
                 find("TYPE_TOO_SMALL",idx,name,f"{min(sizes):g} pt","keep body text >= 12 pt",error=False)
             # Overflow re-check with the same metric the builder uses.
-            if sizes and sh.shape_type in (17,1):
+            if sizes:
                 family=next((r.font.name for r in runs if r.font.name),"Segoe UI")
+                bold=any(r.font.bold for r in runs)
                 paras=[p.text for p in sh.text_frame.paragraphs if p.text.strip()]
-                lines=sum(text_lines(t,family,max(sizes),sh.width/EMU_IN-0.2) for t in paras)
+                inset=(sh.text_frame.margin_left+sh.text_frame.margin_right)/EMU_IN
+                oval=sh.shape_type==1 and sh.auto_shape_type==9  # MSO_SHAPE.OVAL: inscribed text rectangle
+                k=0.707 if oval else 1.0
+                lines=sum(text_lines(t,family,max(sizes),sh.width/EMU_IN*k-inset,bold) for t in paras)
                 need=(lines*max(sizes)*1.18+6*(len(paras)-1))/72+0.1
-                have=sh.height/EMU_IN
-                if need>have*1.08:
+                have=sh.height/EMU_IN*k
+                if lines==float("inf"):
+                    find("WORD_BREAK",idx,name,"a word is wider than its box; PowerPoint breaks it mid-word",
+                         "shorten the word, widen the box or lower the size")
+                elif need>have*1.08:
                     find("TEXT_OVERFLOW",idx,name,f"needs ~{need:.2f} in, box {have:.2f} in","shorten or enlarge the box")
             # Contrast against the smallest filled shape underneath, else the slide.
             colors={r.font.color.rgb for r in runs if r.font.color and r.font.color.type is not None and r.font.color.rgb}
