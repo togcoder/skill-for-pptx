@@ -79,13 +79,17 @@ LIMITS={"bullets":6,"kpis":4,"process":6,"cycle":6,"points":5}
 def schema():
     return {
         "version":VERSION,
-        "deck":{"title":"str (optional)","theme":f"one of {sorted(THEMES)} or an object with the same color keys (hex)",
+        "deck":{"title":"str (optional)","assets_cache":"dir for downloaded photos/icons (default ~/.cache/slide-forge)",
+                "credits_slide":"bool, closing slide attributing licensed photos (default true)","theme":f"one of {sorted(THEMES)} or an object with the same color keys (hex)",
                 "fonts":{"head":"font family","body":"font family"},
                 "motion":{"style":"subtle|modern|bold|cinematic (default modern)","counters":"bool, count up KPI values (default true)",
                           "morph":"bool, background orbs glide between slides (default true)"},
                 "slides":"list of slide objects"},
         "slide":{"layout":{k:v for k,v in LAYOUTS.items()},"notes":"speaker notes; sequence words (first, then, finally) make process steps one click each"},
-        "fields":{"image":"path to a picture, or {\"generate\":\"seed words\"} for on-theme abstract art (labelled generated)",
+        "fields":{"image":"path, or {\"search\":\"english keywords\", \"pick\":n?, \"orientation\"?} for a licensed online photo "
+                          "(Openverse CC0/BY/BY-SA, or Pexels with PEXELS_API_KEY; preview with `forge_assets.py photos`), "
+                          "or {\"generate\":\"seed words\"} for on-theme abstract art (labelled generated)",
+                  "icon":"Iconify name like \"lucide:coffee\" or plain keywords; on kpis items and comparison left/right",
                   "bullets":f"list[str] <= {LIMITS['bullets']}",
                   "items (kpis)":f"list[{{value:str, label:str}}] <= {LIMITS['kpis']}",
                   "steps":f"list[str] 3..{LIMITS['process']}",
@@ -145,7 +149,9 @@ def validate_spec(spec):
                     err("TOO_DENSE",i,f"{side} has too many points",f"keep <= {LIMITS['points']}")
         img=s.get("image")
         if isinstance(img,str) and not Path(img).is_file():
-            err("IMAGE_MISSING",i,f"no file {img!r}","fix the path or use {\"generate\":\"...\"}")
+            err("IMAGE_MISSING",i,f"no file {img!r}","fix the path, or use {\"search\":\"...\"} / {\"generate\":\"...\"}")
+        if isinstance(img,dict) and not (img.get("search") or img.get("generate")):
+            err("IMAGE_REF",i,"image object needs search or generate","{\"search\": \"words\", \"pick\": n?}")
     return errs
 
 
@@ -276,6 +282,9 @@ class Builder:
         self.blank=self.prs.slide_layouts[6]
         self.receipts=[]  # TEXT_SHRUNK etc.
         self.generated=[]
+        self.credits=[]
+        self.icons=[]
+        self.cache=Path(spec.get("assets_cache") or Path.home()/".cache"/"slide-forge")
 
     def rgb(self,key):
         return RGBColor.from_string(self.theme.get(key,key))
@@ -332,7 +341,13 @@ class Builder:
 
     def picture(self,slide,img,x,y,w,h,name,idx):
         """Place a picture cropped to fill the box (no distortion)."""
-        if isinstance(img,dict):
+        if isinstance(img,dict) and "search" in img:
+            import forge_assets
+            src,cand=forge_assets.resolve_photo(img,self.cache,w/h)
+            src=str(src)
+            self.credits.append({"slide":idx,"object":name,**{k:cand[k] for k in
+                                 ("id","attribution","license","license_url","landing","source")}})
+        elif isinstance(img,dict):
             src=generated_art(img.get("generate","")+str(idx),self.theme)
             self.generated.append({"slide":idx,"object":name,"seed":img.get("generate","")})
         else:
@@ -347,6 +362,28 @@ class Builder:
         else:
             c=(1-ratio/box)/2
             pic.crop_top=pic.crop_bottom=c
+        return pic
+
+    def icon(self,slide,ref,x,y,size,name,color="accent"):
+        """Vector icon (Iconify, open-source sets) as an SVG picture: PowerPoint
+        2016+ draws the SVG; older readers get a transparent PNG fallback."""
+        import forge_assets
+        from pptx.opc.constants import RELATIONSHIP_TYPE as RT
+        from pptx.opc.package import Part
+        svg_path,resolved=forge_assets.fetch_icon(ref,self.theme.get(color,color),self.cache)
+        buf=io.BytesIO()
+        Image.new("RGBA",(256,256),(0,0,0,0)).save(buf,format="PNG")
+        buf.seek(0)
+        pic=slide.shapes.add_picture(buf,Inches(x),Inches(y),Inches(size),Inches(size))
+        pic.name=name
+        pkg=slide.part.package
+        part=Part(pkg.next_partname("/ppt/media/image%d.svg"),"image/svg+xml",pkg,svg_path.read_bytes())
+        rid=slide.part.relate_to(part,RT.IMAGE)
+        blip=pic._element.find(".//"+qn("a:blip"))
+        ext=E.SubElement(E.SubElement(blip,qn("a:extLst")),qn("a:ext"),uri="{96DAC541-7B7A-43D3-8B79-37D633B846F1}")
+        E.SubElement(ext,"{http://schemas.microsoft.com/office/drawing/2016/SVG/main}svgBlip",
+                     {qn("r:embed"):rid},nsmap={"asvg":"http://schemas.microsoft.com/office/drawing/2016/SVG/main"})
+        self.icons.append({"object":name,"icon":resolved})
         return pic
 
     def background(self,slide,idx,n):
@@ -424,16 +461,21 @@ class Builder:
         n=len(items)
         gap=0.35
         cw=(W-2*MARGIN-gap*(n-1))/n
-        ch=3.0
+        ch=3.0+(0.55 if any(t.get("icon") for t in items) else 0)
         y=top+(H-top-0.5-ch-(1.1 if s.get("takeaway") else 0))/2
         # One size for every value so the row reads as a set.
         vsize=min(fit_size([it["value"]],self.fonts["head"],64,cw-0.4,1.2,floor=24,bold=True)[0] for it in items)
         for i,it in enumerate(items):
             x=MARGIN+i*(cw+gap)
             self.rect(slide,x,y,cw,ch,"surface",f"KPI card {i+1}",MSO_SHAPE.ROUNDED_RECTANGLE)
-            self.text(slide,x+0.2,y+0.3,cw-0.4,1.2,[it["value"]],vsize,f"KPI value {i+1}",role="head",color="accent",
+            dy=0
+            if any(t.get("icon") for t in items):
+                dy=0.35
+                if it.get("icon"):
+                    self.icon(slide,it["icon"],x+cw/2-0.3,y+0.22,0.6,f"KPI icon {i+1}")
+            self.text(slide,x+0.2,y+0.3+dy*1.6,cw-0.4,1.2,[it["value"]],vsize,f"KPI value {i+1}",role="head",color="accent",
                       bold=True,align=PP_ALIGN.CENTER,idx=idx)
-            self.text(slide,x+0.2,y+1.75,cw-0.4,1.0,[it["label"]],20,f"KPI label {i+1}",color="muted",
+            self.text(slide,x+0.2,y+1.75+dy*1.6,cw-0.4,1.0-dy*0.6,[it["label"]],20,f"KPI label {i+1}",color="muted",
                       align=PP_ALIGN.CENTER,idx=idx)
         if s.get("takeaway"):
             self.text(slide,MARGIN,y+ch+0.35,W-2*MARGIN,0.8,[s["takeaway"]],24,"Takeaway",bold=True,
@@ -540,7 +582,12 @@ class Builder:
         for i,side in enumerate(("left","right")):
             x=MARGIN+i*(cw+gap)
             self.rect(slide,x,top+0.1,cw,chh,"surface",f"{side.title()} card",MSO_SHAPE.ROUNDED_RECTANGLE)
-            self.text(slide,x+0.35,top+0.4,cw-0.7,0.8,[s[side]["heading"]],30,f"{side.title()} heading",role="head",
+            hx=0
+            if s[side].get("icon"):
+                self.icon(slide,s[side]["icon"],x+0.35,top+0.48,0.62,f"{side.title()} icon",
+                          "accent" if i==0 else "accent2")
+                hx=0.8
+            self.text(slide,x+0.35+hx,top+0.4,cw-0.7-hx,0.8,[s[side]["heading"]],30,f"{side.title()} heading",role="head",
                       color="accent" if i==0 else "accent2",bold=True,idx=idx)
             self.text(slide,x+0.35,top+1.35,cw-0.7,chh-1.5,["• "+p for p in s[side].get("points",[])],24,
                       f"{side.title()} points",gap=14,idx=idx)
@@ -566,8 +613,18 @@ class Builder:
             slide=self.prs.slides.add_slide(self.blank)
             self.background(slide,idx,n)
             getattr(self,"l_"+s["layout"])(slide,s,idx)
-            if s.get("notes"):
-                slide.notes_slide.notes_text_frame.text=s["notes"]
+            notes=[s["notes"]] if s.get("notes") else []
+            notes+=[f"Image: {c['attribution']} ({c['landing']})" for c in self.credits if c["slide"]==idx]
+            if notes:
+                slide.notes_slide.notes_text_frame.text="\n".join(notes)
+        if self.credits and spec.get("credits_slide",True):
+            # Licensed photos are attributed on a closing credits slide (TASL).
+            slide=self.prs.slides.add_slide(self.blank)
+            self.background(slide,n+1,n+1)
+            top=self.heading(slide,"Image credits",n+1)
+            lines=[f"Slide {c['slide']}: {c['attribution']}" for c in self.credits]
+            self.text(slide,MARGIN,top+0.1,W-2*MARGIN,H-top-0.6,lines,16,"Credits",color="muted",floor=12,idx=n+1)
+            slide.notes_slide.notes_text_frame.text="[static] Attribution for licensed images."
         self.prs.save(out)
 
 
@@ -630,6 +687,8 @@ def build(spec,out,work=None):
                           for w in report["warnings"]]
     verdict["ok"]=not verdict["errors"]
     verdict["generated_art"]=b.generated
+    verdict["image_credits"]=b.credits
+    verdict["icons"]=b.icons
     verdict["static_pptx"]=str(static)
     verdict["output"]=str(out)
     verdict["director_notes"]=plan["research_metadata"]["draft_notes"]

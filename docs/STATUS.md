@@ -1,5 +1,14 @@
 # PPTX Motion Lab — checkpoint
 
+## T026 Forge online assets — 2026-10-07
+
+Forge now finds licensed photos (Openverse CC0/BY/BY-SA, or Pexels with a
+key) and open-source icons (Iconify: Lucide/Tabler/Phosphor) by itself.
+Contact sheets let the agent pick photos by eye. Icons are inserted as native
+SVG. Attribution goes on an automatic credits slide, in the notes and in the
+verdict. Example deck rendered by PowerPoint 16.0.
+Report: experiments/T026-20261007-claude-forge-assets/REPORT.md.
+
 ## T025 Slide Forge — agent-facing deck compiler — 2026-10-07
 
 New product path for *new* decks: `scripts/slide_forge.py` (schema → build →

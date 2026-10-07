@@ -552,6 +552,8 @@ def draft_slide(slide,style="modern",counters=False,continuing=(),outgoing=()):
     next slide by Morph, so they must end where they were authored (no Ken Burns)."""
     if slide["existing_click_groups"]:
         return None,"existing native animation preserved as the slide's choreography"
+    if "[static]" in (slide["notes"] or ""):
+        return None,"speaker notes ask for a static slide"
     n=[0]
 
     def nid(prefix):

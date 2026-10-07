@@ -40,6 +40,33 @@ place coordinates or pick animation effects by hand.
    CreateVideo" is true only after step 5. Interactive click playback is not
    verified.
 
+## Finding pictures and icons online
+
+You do not need the user to supply assets. Forge can find licensed ones.
+
+- **Photos:**
+  1. Run `python3 $ROOT/scripts/forge_assets.py photos "english keywords" -d CACHE --orientation landscape|portrait|square`.
+     Match the orientation to the box: the `title` hero and the `bullets`
+     picture are portrait or square; `image` is landscape.
+  2. **Open the contact sheet it prints and choose**, then reference your
+     choice in the spec as `{"search": "same words", "pick": N, "orientation": "..."}`.
+  3. Pick photos that match the deck's mood and palette. Avoid visible brand
+     logos, identifiable faces in private settings, text-heavy signs and
+     cluttered scenes. Search again with other words before settling.
+  4. Without `pick`, Forge takes the most relevant candidate whose shape fits the box.
+- **Source and licence:** Openverse (CC0, CC BY, CC BY-SA; commercial use and
+  modification allowed; illustrations filtered out). If the environment has
+  `PEXELS_API_KEY`, Forge searches Pexels instead (usually prettier stock
+  photos; the user registers for a free key, you never do).
+- **Attribution is automatic:** a closing "Image credits" slide, a line in each
+  slide's notes and `image_credits` in the verdict. Keep the credits slide
+  (`credits_slide: false` only when the user handles attribution elsewhere).
+- **Icons:** `"icon": "lucide:truck"` on `kpis` items and `comparison` sides.
+  Find names with `forge_assets.py icons "keywords"` (Lucide, Tabler, Phosphor;
+  MIT/ISC). Icons are SVG, tinted to the theme, and revealed with their card.
+- Set `"assets_cache"` in the spec to keep downloads next to the project.
+  Searches are cached, so `pick` stays stable between builds.
+
 ## Choosing layouts
 
 | Content | Layout | Motion you get |
@@ -67,9 +94,10 @@ place coordinates or pick animation effects by hand.
   "đầu tiên…, sau đó…, cuối cùng…") makes a process advance one step per
   click.
 - **Pictures:**
-  - Use real files the user supplied or you are allowed to use.
+  - Prefer the user's files, then licensed photos via `search`.
   - `{"generate": "..."}` makes abstract on-theme art, never a stand-in for a
     factual photo. Say it is generated.
+- **Static slides:** write `[static]` in a slide's notes to keep the Director off it.
 - **Data:** never invent figures. With no data, use layouts that don't need it
   or label the data as illustrative, the way the examples do.
 - **Theme:** `midnight`, `paper`, `forest` and `sunrise` pass WCAG AA for every

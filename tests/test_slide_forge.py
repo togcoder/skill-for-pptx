@@ -109,3 +109,42 @@ class QaTests(unittest.TestCase):
 
 if __name__=="__main__":
     unittest.main()
+
+
+class AssetTests(unittest.TestCase):
+    """Offline: the cache is pre-seeded the way a real search leaves it."""
+
+    def test_search_photo_icon_and_credits(self):
+        import forge_assets as fa
+        from PIL import Image
+        from zipfile import ZipFile
+        with tempfile.TemporaryDirectory() as td:
+            cache=Path(td)/"cache"
+            cache.mkdir()
+            cand={"id":"ov-test","thumb":"x","url":"x","width":1600,"height":1000,"license":"by",
+                  "license_url":"https://creativecommons.org/licenses/by/4.0/","attribution":"“Beans” by Ana, CC BY 4.0",
+                  "landing":"https://example.org/beans","source":"wikimedia"}
+            for orient in ("landscape","portrait"):
+                (cache/f"search-openverse-{fa._key('beans',12,orient)}.json").write_text(json.dumps([cand]),encoding="utf-8")
+            Image.new("RGB",(1600,1000),(120,80,40)).save(cache/"ov-test.jpg")
+            for color in ("38BDF8","F472B6"):
+                (cache/f"icon-lucide-star-{color}.svg").write_text(
+                    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#'+color+'"/></svg>')
+            spec={"assets_cache":str(cache),"motion":{"morph":False},"slides":[
+                {"layout":"title","title":"Beans","image":{"search":"beans"}},
+                {"layout":"kpis","title":"Numbers","items":[{"value":"12%","label":"growth","icon":"lucide:star"}]},
+                {"layout":"comparison","title":"A vs B","left":{"heading":"A","points":["x"],"icon":"lucide:star"},
+                 "right":{"heading":"B","points":["y"],"icon":"lucide:star"}}]}
+            out=Path(td)/"deck.pptx"
+            v=sf.build(spec,out)
+            self.assertTrue(v["ok"],v["errors"])
+            self.assertEqual([c["attribution"] for c in v["image_credits"]],["“Beans” by Ana, CC BY 4.0"])
+            self.assertEqual(len(v["icons"]),3)
+            prs=Presentation(str(out))
+            self.assertEqual(len(prs.slides),4)  # + credits slide
+            self.assertIn("Beans",prs.slides[3].shapes[-1].text_frame.text)
+            self.assertIn("Image: “Beans”",prs.slides[0].notes_slide.notes_text_frame.text)
+            with ZipFile(out) as z:
+                self.assertTrue(any(n.endswith(".svg") for n in z.namelist()))
+                self.assertIn(b"svgBlip",z.read("ppt/slides/slide2.xml"))
+                self.assertNotIn(b"p:timing",z.read("ppt/slides/slide4.xml"))  # [static] credits
