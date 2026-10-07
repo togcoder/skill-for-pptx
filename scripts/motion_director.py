@@ -447,8 +447,8 @@ def _units(slide,continuing=()):
                 continue
         if o["kind"]=="group" and area<0.03:
             continue
-        if o["kind"]=="picture" and area<0.08:
-            continue
+        if o["kind"]=="picture" and (area<0.08 or area>=0.5):
+            continue  # icons stay put; a backdrop picture moves in the slide intro instead
         if o["has_text_body"] and not o["text"]:
             continue
         if len(o["paragraphs"])>=2 and not _is_heading(o):
@@ -491,28 +491,96 @@ def _label(o):
     return (o["text"] or o["name"] or o["id"]).split("\n")[0][:60]
 
 
-def draft_slide(slide,style="modern",counters=False,continuing=()):
-    """Return (slide plan or None, note)."""
+MAX_DECOR=8
+
+
+def _free(o,continuing):
+    return (o["geometry"] and not o["already_animated"] and o["id"] not in continuing
+            and not (o["placeholder"] and o["placeholder"]["type"] in CHROME_TYPES))
+
+
+def _owned(units):
+    ids={o["id"] for u in units for o in u["objs"]}
+    ids.update(c["id"] for u in units for st in u.get("steps",()) for c in st["connectors"])
+    return ids
+
+
+def _decor(slide,units,continuing=()):
+    """Small text-free accents (bars, lines) that no content unit owns.
+    Drawn in at slide start they give the slide a motion-graphic intro."""
+    used=_owned(units)
+    def line_like(o,aspect=slide.get("aspect",16/9)):
+        w,h=o["geometry"]["w"]*aspect,o["geometry"]["h"]
+        return o["kind"]=="connector" or max(w,h)>=4*max(min(w,h),1e-6)
+    out=[o for o in slide["objects"] if o["id"] not in used and _free(o,continuing)
+         and o["kind"] in ("shape","connector") and not o["text"] and _area(o)<0.05 and line_like(o)]
+    # ponytail: a busy pattern (> MAX_DECOR pieces) stays static; cluster it into one group if needed.
+    return out if len(out)<=MAX_DECOR else []
+
+
+def _hero_pictures(slide,units,continuing=()):
+    """Large pictures that are visible from the start and keep moving (Ken Burns)."""
+    used=_owned(units)
+    return [o for o in slide["objects"] if o["id"] not in used and _free(o,continuing)
+            and o["kind"]=="picture" and _area(o)>=0.08]
+
+
+def _intro(slide,decor,heroes,nid,aspect=16/9):
+    """One automatic click: accents draw in along their long axis while hero
+    pictures start a slow push-in. Returns (beats, click) or ([], None)."""
+    beats=[]
+    for direction in ("wipe-right","wipe-down"):
+        parts=[o for o in decor if ("wipe-right" if o["geometry"]["w"]*aspect>=o["geometry"]["h"] else "wipe-down")==direction]
+        if parts:
+            beats.append(_beat(nid("accent"),"Accent shapes draw in as the slide opens.","stagger-reveal",
+                               [o["token"] for o in parts],"with-previous",direction,250))
+    if heroes:
+        beats.append(_beat(nid("kenburns"),"Keep the picture alive with a slow push-in while the slide is discussed.",
+                           "choreography",[o["token"] for o in heroes],"with-previous",
+                           recipe="ken-burns",motion_parameters={"duration_ms":7000,"scale":1.06}))
+    if not beats:
+        return [],None
+    beats[0]["timing_intent"]="on-slide-start"
+    click=_click(nid("click"),"Slide opens with its motion-graphic intro.",[b["id"] for b in beats],
+                 "Accents drawn; pictures drifting.","presenter-explanation","First reveal on this slide.")
+    return beats,click
+
+
+def draft_slide(slide,style="modern",counters=False,continuing=(),outgoing=()):
+    """Return (slide plan or None, note). ``outgoing`` objects carry into the
+    next slide by Morph, so they must end where they were authored (no Ken Burns)."""
     if slide["existing_click_groups"]:
         return None,"existing native animation preserved as the slide's choreography"
-    types={(o["placeholder"] or {}).get("type") for o in slide["objects"]}
-    if "ctrTitle" in types or ("subTitle" in types and len(slide["objects"])<=3) or _is_text_title_slide(slide):
-        return None,"title slide kept static"
-    units=_units(slide,continuing)
-    if not units:
-        return None,"no content beyond the title"+(" (continuing objects arrive by Morph)" if continuing else "")
-    if len(units)==1 and units[0]["kind"]=="picture":
-        return None,"single picture is the slide's content; kept static"
-    fx=STYLES[style]
-    notes=slide["notes"] or ""
-    sequenced=bool(SEQUENCE_CUES.search(notes))
-    beats=[]
-    clicks=[]
     n=[0]
 
     def nid(prefix):
         n[0]+=1
         return f"{prefix}-{n[0]}"
+
+    aspect=slide.get("aspect",16/9)
+    types={(o["placeholder"] or {}).get("type") for o in slide["objects"]}
+    if "ctrTitle" in types or ("subTitle" in types and len(slide["objects"])<=3) or _is_text_title_slide(slide):
+        beats,click=_intro(slide,_decor(slide,[],continuing) if style!="subtle" else [],
+                           _hero_pictures(slide,[],set(continuing)|set(outgoing)),nid,aspect)
+        if not click:
+            return None,"title slide kept static"
+        click["pause_after"]="slide-complete"
+        return ({"source_index":slide["index"],"role":"title slide",
+                 "objective":"Title stays still; accents and picture give the opening life.",
+                 "beats":beats,"click_beats":[click],"components":[]},
+                "title text static; automatic motion-graphic intro")
+    units=_units(slide,continuing)
+    if len(units)==1 and units[0]["kind"]=="picture":
+        units=[]  # the picture is the slide: visible from the start, kept alive by Ken Burns
+    beats,intro=_intro(slide,_decor(slide,units,continuing) if style!="subtle" else [],
+                       _hero_pictures(slide,units,set(continuing)|set(outgoing)),nid,aspect)
+    if not units and not intro:
+        return None,("no content beyond the title"+(" (continuing objects arrive by Morph)" if continuing else "")
+                     +(" (objects carry on to the next slide by Morph)" if outgoing else ""))
+    fx=STYLES[style]
+    notes=slide["notes"] or ""
+    sequenced=bool(SEQUENCE_CUES.search(notes))
+    clicks=[intro] if intro else []
 
     prev_kind=None
     for unit in units:
@@ -663,9 +731,15 @@ def draft_slide(slide,style="modern",counters=False,continuing=()):
             preset,dur=fx[role]
             b=_beat(nid("reveal"),f"Reveal '{_label(o)}'.","reveal",[o["token"]],"on-click",preset,dur)
             beats.append(b)
+            members=[b["id"]]
+            if kind=="picture" and o["id"] not in outgoing:
+                kb=_beat(nid("kenburns"),f"Keep '{_label(o)}' alive with a slow push-in.","choreography",[o["token"]],
+                         "after-previous",recipe="ken-burns",motion_parameters={"duration_ms":6000,"scale":1.05})
+                beats.append(kb)
+                members.append(kb["id"])
             reason=("The conclusion lands after the evidence has been discussed." if role=="callout"
                     else "New idea for the presenter to introduce.")
-            clicks.append(_click(nid("click"),f"Introduce '{_label(o)}'.",[b["id"]],"Content visible.","presenter-explanation",
+            clicks.append(_click(nid("click"),f"Introduce '{_label(o)}'.",members,"Content visible.","presenter-explanation",
                                  reason if clicks else "First reveal on this slide."))
         prev_kind=kind
 
@@ -738,15 +812,17 @@ def draft(model,goal="",style="modern",counters=False,morph=True):
     notes={}
     transitions=detect_morph_pairs(model) if morph else []
     continuing={t["slide"]:set(t["continuing_ids"]) for t in transitions}
+    slides_by={s["index"]:s for s in model["slides"]}
+    outgoing={t["slide"]-1:set(shared_objects(slides_by[t["slide"]],slides_by[t["slide"]-1])[0]) for t in transitions}
     for t in transitions:
         t.pop("continuing_ids")
-    slides_by={s["index"]:s for s in model["slides"]}
     for s in model["slides"]:
         if s.get("morph_in") and s["index"]>1:
             # An existing Morph carries shared objects in; re-entering them would break continuity.
             continuing.setdefault(s["index"],set()).update(shared_objects(slides_by[s["index"]-1],s)[0])
+            outgoing.setdefault(s["index"]-1,set()).update(shared_objects(s,slides_by[s["index"]-1])[0])
     for s in model["slides"]:
-        plan,note=draft_slide(s,style,counters,continuing.get(s["index"],()))
+        plan,note=draft_slide(s,style,counters,continuing.get(s["index"],()),outgoing.get(s["index"],()))
         notes[s["index"]]=note
         if plan:
             slides.append(plan)
@@ -934,13 +1010,23 @@ def compile_slide(plan_slide,slide_model,style="modern",prior_groups=()):
         for g in prior_groups:
             states=me.advance(states,g)
         clicks=[]
+        looping={}
         for ci,click in enumerate(plan_slide["click_beats"]):
             effects=[]
             for mid in click["motion_beats"]:
                 beat=beats[mid]
                 current=me.advance(states,effects) if effects else states
                 effects.extend(_beat_effects(beat,slide_model,style,current))
-            issues=me.conflicts(effects)
+            issues=[]
+            for e in effects:
+                key=(e["spid"],me.PROP_OF.get(e["preset"]))
+                if key in looping and e.get("paragraph") is None:
+                    issues.append(f"object {e['spid']} is still looping from click {looping[key]}; "
+                                  f"it cannot also {e['preset']} on a later click")
+            for e in effects:
+                if e.get("repeat")=="indefinite":
+                    looping[(e["spid"],me.PROP_OF.get(e["preset"]))]=click["id"]
+            issues+=me.conflicts(effects)
             if issues:
                 raise ValueError(f"slide {slide_model['index']} click {click['id']}: "+"; ".join(issues))
             start="auto" if ci==0 and beats[click["motion_beats"][0]]["timing_intent"]=="on-slide-start" else "click"

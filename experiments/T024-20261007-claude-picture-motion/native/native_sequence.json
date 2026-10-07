@@ -1,0 +1,143 @@
+﻿{
+    "powerpoint_version":  "16.0",
+    "build":  "17932",
+    "pptx":  "C:\\Users\\COMPUTER\\Desktop\\làm chung với ai\\skill-for-pptx\\experiments\\T024-20261007-claude-picture-motion\\picture_deck_motion.pptx",
+    "slides":  [
+                   {
+                       "index":  1,
+                       "effects":  [
+                                       {
+                                           "shape":  "Accent bar",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  3,
+                                           "delay_s":  0,
+                                           "duration_s":  0.25,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "Backdrop",
+                                           "effect_type":  0,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  7,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "Backdrop",
+                                           "effect_type":  59,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  7,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       }
+                                   ]
+                   },
+                   {
+                       "index":  2,
+                       "effects":  [
+                                       {
+                                           "shape":  "Heading underline",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  3,
+                                           "delay_s":  0,
+                                           "duration_s":  0.25,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "Heading underline",
+                                           "effect_type":  0,
+                                           "exit":  0,
+                                           "trigger":  3,
+                                           "delay_s":  0,
+                                           "duration_s":  1.2000000476837158,
+                                           "repeat_count":  -2147483648,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  -1
+                                       },
+                                       {
+                                           "shape":  "Body",
+                                           "effect_type":  39,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.60000002384185791,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "Roastery photo",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.60000002384185791,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "Roastery photo",
+                                           "effect_type":  0,
+                                           "exit":  0,
+                                           "trigger":  3,
+                                           "delay_s":  0,
+                                           "duration_s":  6,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "Roastery photo",
+                                           "effect_type":  59,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  6,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       }
+                                   ]
+                   },
+                   {
+                       "index":  3,
+                       "effects":  [
+                                       {
+                                           "shape":  "Harvest photo",
+                                           "effect_type":  0,
+                                           "exit":  0,
+                                           "trigger":  3,
+                                           "delay_s":  0,
+                                           "duration_s":  7,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "Harvest photo",
+                                           "effect_type":  59,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  7,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       }
+                                   ]
+                   }
+               ]
+}
