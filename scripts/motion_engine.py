@@ -164,6 +164,11 @@ def apply_effect(state,eff,p,base):
         if p>=1 or preset=="disappear":
             state["visible"]=False
             state["alpha"]=1.0
+    elif cls=="path" and preset in anim.LIBRARY:
+        # PowerPoint preset paths are relative to where the object is now.
+        pts,_=path_polyline({"anchored":parse_path(anim.LIBRARY[preset]["template"].find(".//p:animMotion",anim.NS).get("path"))})
+        x,y=_along(pts,q)
+        state["dx"],state["dy"]=base["dx"]+x,base["dy"]+y
     elif preset=="path":
         pts,anchored=path_polyline(eff)
         x,y=_along(pts,q)
@@ -552,6 +557,10 @@ def compile_choreography(recipe,objs,states,objects_by_token,beat_id,params=None
 
 
 PROP_OF={"path":"pos","grow":"scale","pulse":"scale","zoom":"scale","spin":"rot","dim":"opacity"}
+for _name,_lib in anim.LIBRARY.items():
+    _tags={b["tag"] for b in _lib["behaviours"]}
+    PROP_OF[_name]=("pos" if "animMotion" in _tags else "scale" if "animScale" in _tags
+                    else "rot" if "animRot" in _tags else None) if _lib["presetClass"] in ("path","emph") else None
 
 
 def conflicts(effects):

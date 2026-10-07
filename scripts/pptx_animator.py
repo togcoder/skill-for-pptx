@@ -23,7 +23,10 @@ the slide's main sequence with fresh cTn ids and build-group ids.
 
 Structural correctness is not PowerPoint playback evidence.
 """
+import copy
 import itertools
+from pathlib import Path
+import json
 
 from lxml import etree as E
 
@@ -53,6 +56,19 @@ PRESETS={
     "dim":("emph",9,0,400),
     "path":("path",0,0,800),
 }
+# T027: every built-in PowerPoint effect, harvested from PowerPoint itself
+# (knowledge/powerpoint_presets.json). Addressed as "ppt:<name>", e.g.
+# "ppt:boomerang", "ppt:path-s-curve1", "ppt:grow-with-color", "ppt:fly-out".
+LIBRARY_PATH=Path(__file__).resolve().parents[1]/"knowledge"/"powerpoint_presets.json"
+LIBRARY={}
+if LIBRARY_PATH.is_file():
+    for _p in json.loads(LIBRARY_PATH.read_text(encoding="utf-8"))["presets"]:
+        _tpl=E.fromstring(_p["xml"])
+        _span=max((int(c.get("dur"))+sum(int(d.get("delay")) for d in c.iterfind(f"{{{P}}}stCondLst/{{{P}}}cond")
+                                          if (d.get("delay") or "").isdigit())
+                   for c in _tpl.iter(f"{{{P}}}cTn") if (c.get("dur") or "").isdigit()),default=1)
+        LIBRARY["ppt:"+_p["name"]]={**_p,"span_ms":_span,"template":_tpl}
+        PRESETS["ppt:"+_p["name"]]=(_p["presetClass"],_p["presetID"],_p["presetSubtype"],_p["default_ms"] or _span)
 ENTRANCES={k for k,v in PRESETS.items() if v[0]=="entr"}
 EXITS={k for k,v in PRESETS.items() if v[0]=="exit"}
 FILTER_TO_PRESET={
@@ -211,11 +227,18 @@ def anchored_path_string(segments):
     return " ".join(parts)+" E"
 
 
+def _ppt_scale(eff):
+    lib=LIBRARY[eff["preset"]]
+    return eff["duration_ms"]/lib["span_ms"] if lib["span_ms"] else 1.0
+
+
 def effective_duration(eff):
     """One pass of the effect. A looping effect (``repeat``) is scheduled as a
     single cycle; it keeps playing until the slide ends."""
     preset=eff["preset"]
     dur=eff["duration_ms"]
+    if preset in LIBRARY:
+        return max(1,dur)*(2 if eff.get("auto_reverse") else 1)
     if preset=="pulse" or eff.get("auto_reverse"):
         return 2*dur
     if preset in ("appear","disappear"):
@@ -223,9 +246,33 @@ def effective_duration(eff):
     return dur
 
 
+def _library_behaviours(parent,ids,eff):
+    """Instantiate a PowerPoint-authored preset: retarget, renumber and scale
+    every inner timing so the whole effect spans ``duration_ms``."""
+    k=_ppt_scale(eff)
+    tpl=copy.deepcopy(LIBRARY[eff["preset"]]["template"])
+    for c in tpl.iter(q("cTn")):
+        c.set("id",str(next(ids)))
+        if (c.get("dur") or "").isdigit() and int(c.get("dur"))>1:
+            c.set("dur",str(max(1,round(int(c.get("dur"))*k))))
+        for d in c.iterfind(f"{{{P}}}stCondLst/{{{P}}}cond"):
+            if (d.get("delay") or "").isdigit():
+                d.set("delay",str(round(int(d.get("delay"))*k)))
+    for t in tpl.iter(q("spTgt")):
+        t.set("spid",eff["spid"])
+        if eff.get("paragraph") is not None:
+            tx=sub(t,"txEl")
+            sub(tx,"pRg",st=eff["paragraph"],end=eff["paragraph"])
+    for child in list(tpl):
+        parent.append(child)
+
+
 def _behaviours(parent,ids,eff):
     preset=eff["preset"]
     dur=max(1,eff["duration_ms"])
+    if preset in LIBRARY:
+        _library_behaviours(parent,ids,eff)
+        return
     if preset in ENTRANCES:
         _set_visibility(parent,ids,eff,"visible",0)
         if preset=="appear":
