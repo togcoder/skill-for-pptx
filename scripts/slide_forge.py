@@ -47,9 +47,9 @@ W,H=13.333,7.5
 MARGIN=0.7
 THEMES={
     "midnight":{"bg":"0F172A","surface":"1E293B","text":"F8FAFC","muted":"94A3B8","accent":"38BDF8","accent2":"F472B6"},
-    "paper":{"bg":"FAF7F2","surface":"FFFFFF","text":"1F2A44","muted":"5B6472","accent":"E06C4F","accent2":"0F9D8A"},
+    "paper":{"bg":"FAF7F2","surface":"FFFFFF","text":"1F2A44","muted":"5B6472","accent":"B4532F","accent2":"0F766E"},
     "forest":{"bg":"0B1F17","surface":"13342A","text":"ECFDF5","muted":"A7B5AE","accent":"34D399","accent2":"FBBF24"},
-    "sunrise":{"bg":"FFF7ED","surface":"FFFFFF","text":"431407","muted":"7C5A48","accent":"EA580C","accent2":"7C3AED"},
+    "sunrise":{"bg":"FFF7ED","surface":"FFFFFF","text":"431407","muted":"7C5A48","accent":"C2410C","accent2":"7C3AED"},
 }
 FONTS={"head":"Segoe UI Semibold","body":"Segoe UI"}
 LAYOUTS={

@@ -67,7 +67,8 @@ STYLES={
 }
 # Director v0.4 plans keep the T017 recipe look (Fade 320 ms, Wipe connectors).
 LEGACY_V04_STYLE={k:(("wipe-right",320) if k=="connector" else ("fade",320)) for k in STYLES["subtle"]}
-SEQUENCE_CUES=re.compile(r"\b(then|next|finally|first|second|third|walk|step|in order|after that|lastly)\b",re.I)
+SEQUENCE_CUES=re.compile(r"\b(then|next|finally|first|second|third|walk|step|in order|after that|lastly"
+                         r"|đầu tiên|sau đó|tiếp theo|cuối cùng|lần lượt|từng bước|bước)\b",re.I)
 TITLE_TYPES={"title","ctrTitle"}
 CHROME_TYPES={"dt","ftr","sldNum","hdr"}
 

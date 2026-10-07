@@ -1,5 +1,16 @@
 # PPTX Motion Lab — checkpoint
 
+## T025 Slide Forge — agent-facing deck compiler — 2026-10-07
+
+New product path for *new* decks: `scripts/slide_forge.py` (schema → build →
+qa → render). An agent writes a semantic spec with 12 layouts. Forge handles
+layout, measured type, art, Director motion (KPI count-up, chart builds,
+process, cycle tour, Ken Burns, accent draw-ins, Morph orbs) and coded QA.
+Two example decks (EN and VI) pass QA and were rendered by PowerPoint 16.0.
+The renders found wrap and mid-word-break defects that QA now catches.
+Skill: `skills/slide-forge/SKILL.md`; command `/forge-deck`.
+Report: experiments/T025-20261007-claude-slide-forge/REPORT.md.
+
 ## T024 picture motion + motion-graphic intro — 2026-10-07
 
 Prompt-made decks animated only their text: the draft heuristic skipped small
