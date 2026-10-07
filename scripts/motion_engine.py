@@ -142,6 +142,9 @@ def apply_effect(state,eff,p,base):
         if cls=="entr" and eff.get("chart") is not None:
             state["visible"]=True
         return
+    if eff.get("auto_reverse") and preset in ("path","grow","spin"):
+        # Out and back within the scheduled span; a loop simulates one cycle.
+        p=1-abs(2*p-1)
     q=_ease(p,eff)
     if cls=="entr":
         state["visible"]=True
@@ -491,12 +494,32 @@ def recipe_tracks(recipe,objs,states,params=None):
         for o in others:
             if states[o["id"]]["visible"]:
                 tracks.append({"target":o,"keyframes":[{"t":0,"visible":False,"exit":"fade-out","exit_ms":min(d,400)}]})
+    elif recipe=="ken-burns":
+        # Slow push-in with a gentle drift: a still picture keeps living while
+        # the presenter talks. Neighbouring pictures drift in opposite directions.
+        d=int(params.get("duration_ms",6000))
+        scale=float(params.get("scale",1.06))
+        drift=float(params.get("drift",0.015))
+        for i,o in enumerate(objs):
+            s=states[o["id"]]
+            sign=-1 if i%2 else 1
+            tracks.append({"target":o,"keyframes":[{"t":0},{"t":d,"scale":s["scale"]*scale,
+                                                           "dx":s["dx"]+sign*drift,"dy":s["dy"]-0.6*drift,"ease":"linear"}]})
+    elif recipe=="float":
+        # Idle motion graphic: objects bob gently until the slide ends.
+        amp=float(params.get("amplitude",0.012))
+        half=int(params.get("period_ms",2600))//2
+        stagger=int(params.get("stagger_ms",350))
+        for i,o in enumerate(objs):
+            s=states[o["id"]]
+            tracks.append({"target":o,"loop":{"preset":"path","delay_ms":i*stagger,"duration_ms":half,
+                                              "anchored":[{"x":s["dx"],"y":s["dy"]},{"x":s["dx"],"y":s["dy"]-amp}]}})
     else:
         raise ValueError(f"unknown recipe {recipe!r}")
     return tracks
 
 
-RECIPES=("spotlight","release","assemble","disperse","cycle","swap","travel","zoom-focus")
+RECIPES=("spotlight","release","assemble","disperse","cycle","swap","travel","zoom-focus","ken-burns","float")
 
 
 def compile_choreography(recipe,objs,states,objects_by_token,beat_id,params=None,tracks=None):
@@ -512,6 +535,10 @@ def compile_choreography(recipe,objs,states,objects_by_token,beat_id,params=None
         if "pulse_at" in track:
             effects.append({"preset":"pulse","spid":obj["id"],"trigger":"with","delay_ms":int(track["pulse_at"]),
                             "duration_ms":200,"scale":1.08,"beat":f"{beat_id}:{obj['id']}:pulse"})
+            continue
+        if "loop" in track:
+            effects.append({**track["loop"],"spid":obj["id"],"trigger":"with","repeat":"indefinite",
+                            "auto_reverse":True,"accel":0.5,"decel":0.5,"beat":f"{beat_id}:{obj['id']}:loop"})
             continue
         effects.extend(compile_track(track,obj,objects_by_token,states[obj["id"]],beat_id))
     if not effects:
@@ -537,6 +564,8 @@ def conflicts(effects):
         prop=PROP_OF.get(eff["preset"])
         if prop is None or prop=="opacity":
             continue
+        if eff.get("repeat")=="indefinite":
+            end=math.inf
         key=(eff["spid"],prop)
         for s,e in spans.get(key,[]):
             if start<e and s<end:
@@ -564,6 +593,9 @@ def layout_warnings(objects,states,label):
     vis=[o for o in objects if o.get("geometry") and states.get(o["id"],{}).get("visible")]
     for o in vis:
         b=bbox(o,states[o["id"]])
+        a=bbox(o,fresh_state())
+        if a[0]<0.005 or a[1]<0.005 or a[2]>0.995 or a[3]>0.995:
+            continue  # authored at/past the edge (bleed, backdrop orb): the slide crops it by design
         if b[0]<-0.02 or b[1]<-0.02 or b[2]>1.02 or b[3]>1.02:
             warn.append(f"{label}: {o['name']!r} extends outside the slide")
     moved=[o for o in vis if any(abs(states[o["id"]][k]-v)>1e-6 for k,v in (("dx",0),("dy",0),("scale",1)))]
@@ -572,6 +604,8 @@ def layout_warnings(objects,states,label):
         for other in vis:
             if other is o:
                 continue
+            if not other.get("text") and objects.index(other)<objects.index(o):
+                continue  # passing over a text-free shape behind it (background decor) is fine
             bt=bbox(other,states[other["id"]])
             before=_overlap(bbox(o,fresh_state()),bbox(other,fresh_state()))
             now=_overlap(bo,bt)
@@ -670,6 +704,11 @@ def _effect_from_ctn(ctn):
     if tgt is None:
         return None
     eff={"spid":tgt.get("spid")}
+    rep=ctn.get("repeatCount")
+    if rep:
+        eff["repeat"]="indefinite" if rep=="indefinite" else max(1,int(rep)//1000)
+    if ctn.get("autoRev")=="1":
+        eff["auto_reverse"]=True
     pr=tgt.find("p:txEl/p:pRg",NS)
     if pr is not None:
         eff["paragraph"]=int(pr.get("st"))

@@ -27,7 +27,7 @@ V05_EFFECTS={"appear","fade","float-in","zoom","wipe-up","wipe-down","wipe-left"
 
 
 CHOREOGRAPHY_RECIPES={"spotlight":(1,None),"release":(1,None),"assemble":(1,None),"disperse":(1,None),
-                      "cycle":(3,None),"swap":(2,2),"travel":(2,None),"zoom-focus":(1,None),"tracks":(0,None)}
+                      "cycle":(3,None),"swap":(2,2),"travel":(2,None),"zoom-focus":(1,None),"ken-burns":(1,None),"float":(1,None),"tracks":(0,None)}
 KEYFRAME_KEYS={"t","x","y","dx","dy","to","curve","controls","jump","scale","rotate","opacity","opacity_ms",
                "visible","enter","enter_ms","exit","exit_ms","ease"}
 

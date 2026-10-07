@@ -56,8 +56,17 @@ prettier guess.
   chart). Use `with-previous` for things that belong together and
   `after-previous` for automatic continuation. Never fake speaking time with
   delays. Keep it humane: usually ≤ 6 clicks per slide.
-- **Don't animate everything.** Titles, footers, logos, decoration and small
-  badges stay static. A title slide usually stays static.
+- **Don't animate everything — but never leave a picture frozen.** Title
+  text, footers, logos and small badges stay static. Every large picture keeps
+  living: a backdrop or a picture that *is* the slide gets `ken-burns` on slide
+  start; a content picture is revealed on its click and continues with
+  `ken-burns` (after-previous). Thin accent bars/lines draw in automatically at
+  slide start (wipe along their long axis) — that intro is the motion-graphic
+  layer, even on a title slide. Skip both only for a picture that carries on to
+  the next slide by Morph (it must end where it was authored).
+- **Idle motion is a seasoning.** `float` loops until the slide ends; use it
+  for at most one or two accents/icons per slide, as the last beat of a click,
+  and never on an object a later click moves.
 - **Data has meaning.** Charts use `data_motion` builds (series/category) chosen
   by chart type; never a generic reveal. Counters (`--counters`) add hidden
   proxy text shapes, which clutter edit view and PDF export — use only for a
@@ -69,7 +78,8 @@ prettier guess.
 - **Conclusions last.** Evidence (chart/process) first, then the takeaway on its
   own click.
 - **One motion language per deck.** Pick a style and stay consistent:
-  `subtle` (fade), `modern` (float-in, wipe connectors), `bold` (zoom).
+  `subtle` (fade; pictures still get Ken Burns, accents stay still), `modern`
+(float-in, wipe connectors, accent intro), `bold` (zoom).
 
 ## Compound motion (Director v0.6)
 
@@ -94,6 +104,8 @@ where earlier ones left off; `release` returns everything to the authored layout
 | `swap` | a, b | exchange places on opposite arcs (`arc` 0.25) — re-ranking, before/after |
 | `travel` | token, stop… | token moves to each stop (`arc`, `offset_y`, `dwell_ms`), stops pulse; one beat per click walks a journey |
 | `zoom-focus` | focus, others… | focus moves to (`x`,`y`, default 0.5) and grows to `fill` of the slide; others exit. Follow with `release` |
+| `ken-burns` | pictures | slow push-in + drift while the slide is discussed: `scale` 1.06, `drift` 0.015, `duration_ms` 6000–7000; neighbours drift opposite ways |
+| `float` | accents/icons | idle bob until the slide ends (Repeat: Until End of Slide + Auto-reverse): `amplitude` 0.012, `period_ms` 2600, `stagger_ms` 350 |
 | `tracks` | objects | full control: `"tracks":[{"target":"Name","keyframes":[{"t":0},{"t":800,"dx":0.1,"dy":-0.05,"scale":1.2,"rotate":15,"curve":0.2,"ease":"smooth"}]}]` |
 
 Keyframe keys: `t` (ms from beat start); position `x`/`y` (slide fractions of
@@ -108,7 +120,8 @@ Morph (Fade fallback) where a shared object (same picture, same text or same
 `draft` proposes these automatically and detects cycle/hub diagrams.
 
 Checks that will stop or warn you: two moves/scales/spins of one object
-overlapping in time (blocking), an object ending off-slide or newly covering
+overlapping in time (blocking), a later click moving an object that is still
+looping, an after-previous effect queued behind a loop (blocking), an object ending off-slide or newly covering
 another at a stable state (warning). Read and fix warnings; they are usually
 real.
 
@@ -142,8 +155,9 @@ click on a `boundary_reason`. Full contract:
 
 The writer reproduces the timing structure PowerPoint saves for its built-in
 effects and an independent importer (LibreOffice) reads the sequencing,
-motion paths, Grow/Shrink, Transparency and exits as intended, but nothing
-here has played in PowerPoint. Chained paths assume PowerPoint's
+motion paths, Grow/Shrink, Transparency and exits as intended. T024 adds a
+PowerPoint `CreateVideo` render of Ken Burns and `float` loops; interactive
+click playback is still unverified. Chained paths assume PowerPoint's
 layout-anchored path semantics (T006 hypothesis); GIF previews simulate that
 assumption. Storyboard frames are
 static renders of simulated stable states (chart builds show as whole charts).

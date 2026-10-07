@@ -212,9 +212,11 @@ def anchored_path_string(segments):
 
 
 def effective_duration(eff):
+    """One pass of the effect. A looping effect (``repeat``) is scheduled as a
+    single cycle; it keeps playing until the slide ends."""
     preset=eff["preset"]
     dur=eff["duration_ms"]
-    if preset=="pulse":
+    if preset=="pulse" or eff.get("auto_reverse"):
         return 2*dur
     if preset in ("appear","disappear"):
         return 1
@@ -291,6 +293,12 @@ def _effect_par(parent,ids,eff,node_type,grp_id):
     if "accel" in eff or "decel" in eff:
         extra={"accel":str(round(eff.get("accel",0)*100000)),"decel":str(round(eff.get("decel",0)*100000))}
         extra={k:v for k,v in extra.items() if v!="0"}
+    if eff.get("repeat") is not None:
+        # PowerPoint "Repeat: Until End of Slide" / "n times" and "Auto-reverse"
+        # are timing options on the preset cTn.
+        extra["repeatCount"]="indefinite" if eff["repeat"]=="indefinite" else str(eff["repeat"]*1000)
+    if eff.get("auto_reverse"):
+        extra["autoRev"]="1"
     ctn=sub(par,"cTn",id=next(ids),presetID=pid,presetClass=cls,presetSubtype=subtype,
             **extra,fill="hold",grpId=grp_id,nodeType=node_type)
     st=sub(ctn,"stCondLst")
@@ -324,6 +332,16 @@ def validate_effect(eff):
     for key in ("accel","decel"):
         if key in eff and not (0<=eff[key]<=1):
             raise ValueError(f"{key} must be within 0..1")
+    rep=eff.get("repeat")
+    if rep is not None:
+        if eff["preset"] not in ("path","grow","spin"):
+            raise ValueError("repeat is supported for path, grow and spin only")
+        if rep!="indefinite" and not (type(rep) is int and rep>=1):
+            raise ValueError("repeat must be 'indefinite' or a positive integer")
+        if rep=="indefinite" and not eff.get("auto_reverse") and not (
+                eff["preset"]=="spin" and eff.get("by_deg",360)%360==0):
+            # A loop that does not return to its start would jump every cycle.
+            raise ValueError("an indefinite loop needs auto_reverse (or a whole-turn spin)")
 
 
 def plan_blocks(effects):
@@ -409,8 +427,13 @@ def apply_timeline(root,clicks,mode="extend"):
             raise ValueError(f"click {click.get('id')} has no effects")
         if click.get("start","click") not in ("click","auto"):
             raise ValueError("click start must be click or auto")
+        looping=False
         for eff in click["effects"]:
             validate_effect(eff)
+            if looping and eff["trigger"]=="after":
+                raise ValueError(f"click {click.get('id')}: an after-previous effect cannot follow a loop "
+                                 "that repeats until the end of the slide")
+            looping=looping or eff.get("repeat")=="indefinite"
             node=objects.get(eff["spid"])
             if node is None:
                 raise ValueError(f"spid {eff['spid']} is not a top-level object on this slide")

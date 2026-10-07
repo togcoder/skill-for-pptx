@@ -1,5 +1,31 @@
 # PPTX Motion Lab — checkpoint
 
+## T025 Slide Forge — agent-facing deck compiler — 2026-10-07
+
+New product path for *new* decks: `scripts/slide_forge.py` (schema → build →
+qa → render). An agent writes a semantic spec with 12 layouts. Forge handles
+layout, measured type, art, Director motion (KPI count-up, chart builds,
+process, cycle tour, Ken Burns, accent draw-ins, Morph orbs) and coded QA.
+Two example decks (EN and VI) pass QA and were rendered by PowerPoint 16.0.
+The renders found wrap and mid-word-break defects that QA now catches.
+Skill: `skills/slide-forge/SKILL.md`; command `/forge-deck`.
+Report: experiments/T025-20261007-claude-slide-forge/REPORT.md.
+
+## T024 picture motion + motion-graphic intro — 2026-10-07
+
+Prompt-made decks animated only their text: the draft heuristic skipped small
+pictures, kept single-picture and title slides static, and gave other pictures
+a one-off entrance. Now large pictures get `ken-burns` (slow Grow/Shrink +
+drift; on slide start for backdrops and picture-only slides, after the reveal
+for content pictures), thin accent bars/lines draw in at slide start, and a new
+`float` recipe loops until the slide ends (`repeatCount`/`autoRev` support in
+the writer, reader and simulator). Morph-carried pictures stay still.
+**202 tests pass.** First native evidence in this repo: PowerPoint 16.0 parsed
+the effects and its own `CreateVideo` render shows the picture push-in and the
+loop (pixel-measured). Interactive click playback is still pending.
+
+Report: experiments/T024-20261007-claude-picture-motion/REPORT.md.
+
 ## T023 compound motion engine — 2026-10-05
 
 Existing decks can now receive compound choreography, not only builds.
