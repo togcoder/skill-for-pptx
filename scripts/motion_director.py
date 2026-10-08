@@ -45,6 +45,7 @@ from generic_motion_recipes import focus_scale  # noqa: E402
 from counter_component import insert_counter_stack  # noqa: E402
 import pptx_animator as anim  # noqa: E402
 import motion_engine as me  # noqa: E402
+import motion_components as mc  # noqa: E402
 
 P=anim.P
 A=anim.A
@@ -62,12 +63,18 @@ STYLES={
     "modern":{"text":("float-in",600),"bullet":("float-in",500),"card":("float-in",600),"step":("fade",400),
               "connector":("wipe-right",300),"picture":("fade",600),"callout":("float-in",600),"shape":("fade",450)},
     "cinematic":CINEMATIC,
+    # T027: PowerPoint-authored presets that real complex decks lean on
+    # (faded zoom, ascend, rise up, expand, grow & turn; knowledge/motion_phrases.json).
+    "dynamic":{"text":("ppt:rise-up",600),"bullet":("ppt:ascend",500),"card":("ppt:faded-zoom",500),
+               "step":("ppt:expand",450),"connector":("wipe-right",300),"picture":("ppt:faded-zoom",700),
+               "callout":("ppt:grow-and-turn",600),"shape":("ppt:faded-zoom",450)},
     "bold":{"text":("float-in",600),"bullet":("float-in",500),"card":("zoom",500),"step":("zoom",400),
             "connector":("wipe-right",300),"picture":("zoom",600),"callout":("zoom",500),"shape":("zoom",450)},
 }
 # Director v0.4 plans keep the T017 recipe look (Fade 320 ms, Wipe connectors).
 LEGACY_V04_STYLE={k:(("wipe-right",320) if k=="connector" else ("fade",320)) for k in STYLES["subtle"]}
-SEQUENCE_CUES=re.compile(r"\b(then|next|finally|first|second|third|walk|step|in order|after that|lastly)\b",re.I)
+SEQUENCE_CUES=re.compile(r"\b(then|next|finally|first|second|third|walk|step|in order|after that|lastly"
+                         r"|đầu tiên|sau đó|tiếp theo|cuối cùng|lần lượt|từng bước|bước)\b",re.I)
 TITLE_TYPES={"title","ctrTitle"}
 CHROME_TYPES={"dt","ftr","sldNum","hdr"}
 
@@ -216,6 +223,7 @@ def deck_model(path):
                     "max_font_pt":_max_font_pt(node),
                     "filled":_has_fill(node),
                     "has_text_body":node.find("p:txBody",NS) is not None,
+                    "text_anchor":(node.find("p:txBody/a:bodyPr",NS).get("anchor") if node.find("p:txBody/a:bodyPr",NS) is not None else None),
                     "chart_summary":sh.get("chart_summary"),
                     "standalone_number":number,
                     "already_animated":spid in animated,
@@ -230,6 +238,8 @@ def deck_model(path):
                 "notes":s.get("speaker_notes"),
                 "has_transition":s["has_transition"] or anim.existing_transition(root),
                 "morph_in":root.find(f".//{{{anim.P159}}}morph") is not None,
+                # Camera/scene slides inserted by morph_studio stay static.
+                "scene":(root.find("p:cSld",NS).get("name") or "").startswith("__scene:"),
                 "existing_click_groups":len(groups),
                 "existing_animated_ids":sorted(animated,key=int),
                 "objects":objs,
@@ -314,7 +324,7 @@ def _is_text_title_slide(slide):
     if slide["index"]!=1 or not slide["objects"]:
         return False
     texts=[o for o in slide["objects"] if o["text"]]
-    return bool(texts) and all(_is_heading(o) for o in texts) and not any(
+    return bool(texts) and len(texts)<=4 and all(_is_heading(o) for o in texts) and not any(
         o["kind"] in ("chart","table") for o in slide["objects"])
 
 
@@ -369,15 +379,22 @@ def _radial_group(objs,used,aspect=16/9):
         order=sorted(members,key=lambda m:(math.atan2(_center(m)[1]-cy,_center(m)[0]*aspect-cx)+math.pi/2)%(2*math.pi))
         hub=next((o for o in others if o["id"] not in used and o["text"]
                   and math.dist((_center(o)[0]*aspect,_center(o)[1]),(cx,cy))<0.08),None)
-        return order,hub
+        xs={round(_center(m)[0]/0.04) for m in members}
+        ys={round(_center(m)[1]/0.04) for m in members}
+        grid=len(xs)>=2 and len(ys)>=2 and len(xs)*len(ys)==len(members)
+        return order,hub,grid
     return None
 
 
 def _units(slide,continuing=()):
     title=_implicit_title(slide)
+    def on_slide(o):
+        g=o["geometry"]
+        return not g or (g["x"]+g["w"]>0.001 and g["x"]<0.999 and g["y"]+g["h"]>0.001 and g["y"]<0.999)
     objs=[o for o in slide["objects"]
           if not (o["placeholder"] and o["placeholder"]["type"] in TITLE_TYPES|CHROME_TYPES)
-          and not o["already_animated"] and o is not title and o["id"] not in continuing]
+          and not o["already_animated"] and o is not title and o["id"] not in continuing and on_slide(o)
+          and not (o["name"] or "").startswith(("__gen_","__counter_"))]  # generated helpers are not content
     with_geom=[o for o in objs if o["geometry"]]
     used=set()
     units=[]
@@ -389,8 +406,8 @@ def _units(slide,continuing=()):
 
     radial=_radial_group(with_geom,used,slide.get("aspect",16/9))
     if radial:
-        members,hub=radial
-        units.append({"kind":"cycle","objs":([hub] if hub else [])+members,"members":members,"hub":hub})
+        members,hub,grid=radial
+        units.append({"kind":"cycle","objs":([hub] if hub else [])+members,"members":members,"hub":hub,"grid":grid})
         used.update(o["id"] for o in members)
         if hub:
             used.add(hub["id"])
@@ -447,8 +464,8 @@ def _units(slide,continuing=()):
                 continue
         if o["kind"]=="group" and area<0.03:
             continue
-        if o["kind"]=="picture" and area<0.08:
-            continue
+        if o["kind"]=="picture" and (area<0.08 or area>=0.5):
+            continue  # icons stay put; a backdrop picture moves in the slide intro instead
         if o["has_text_body"] and not o["text"]:
             continue
         if len(o["paragraphs"])>=2 and not _is_heading(o):
@@ -491,28 +508,110 @@ def _label(o):
     return (o["text"] or o["name"] or o["id"]).split("\n")[0][:60]
 
 
-def draft_slide(slide,style="modern",counters=False,continuing=()):
-    """Return (slide plan or None, note)."""
+def _component(cid,kind,role,rationale,**generate):
+    return {"id":cid,"role":role,"rationale":rationale,"native_kind":"shape" if kind!="arrow" else "connector",
+            "style_basis":"deck accent colour and font; low opacity behind source objects" if kind in mc.BACKGROUND
+                          else "deck accent colour and font",
+            "data_provenance":"none" if kind not in ("callout","badge") else "derived-from-source",
+            "generate":{"kind":kind,**generate}}
+
+
+MAX_DECOR=8
+
+
+def _free(o,continuing):
+    return (o["geometry"] and not o["already_animated"] and o["id"] not in continuing
+            and not (o["placeholder"] and o["placeholder"]["type"] in CHROME_TYPES))
+
+
+def _owned(units):
+    ids={o["id"] for u in units for o in u["objs"]}
+    ids.update(c["id"] for u in units for st in u.get("steps",()) for c in st["connectors"])
+    return ids
+
+
+def _decor(slide,units,continuing=()):
+    """Small text-free accents (bars, lines) that no content unit owns.
+    Drawn in at slide start they give the slide a motion-graphic intro."""
+    used=_owned(units)
+    def line_like(o,aspect=slide.get("aspect",16/9)):
+        w,h=o["geometry"]["w"]*aspect,o["geometry"]["h"]
+        return o["kind"]=="connector" or max(w,h)>=4*max(min(w,h),1e-6)
+    out=[o for o in slide["objects"] if o["id"] not in used and _free(o,continuing)
+         and o["kind"] in ("shape","connector") and not o["text"] and _area(o)<0.05 and line_like(o)]
+    # ponytail: a busy pattern (> MAX_DECOR pieces) stays static; cluster it into one group if needed.
+    return out if len(out)<=MAX_DECOR else []
+
+
+def _hero_pictures(slide,units,continuing=()):
+    """Large pictures that are visible from the start and keep moving (Ken Burns)."""
+    used=_owned(units)
+    return [o for o in slide["objects"] if o["id"] not in used and _free(o,continuing)
+            and o["kind"]=="picture" and _area(o)>=0.08]
+
+
+def _intro(slide,decor,heroes,nid,aspect=16/9):
+    """One automatic click: accents draw in along their long axis while hero
+    pictures start a slow push-in. Returns (beats, click) or ([], None)."""
+    beats=[]
+    for direction in ("wipe-right","wipe-down"):
+        parts=[o for o in decor if ("wipe-right" if o["geometry"]["w"]*aspect>=o["geometry"]["h"] else "wipe-down")==direction]
+        if parts:
+            beats.append(_beat(nid("accent"),"Accent shapes draw in as the slide opens.","stagger-reveal",
+                               [o["token"] for o in parts],"with-previous",direction,250))
+    if heroes:
+        beats.append(_beat(nid("kenburns"),"Keep the picture alive with a slow push-in while the slide is discussed.",
+                           "choreography",[o["token"] for o in heroes],"with-previous",
+                           recipe="ken-burns",motion_parameters={"duration_ms":7000,"scale":1.06}))
+    if not beats:
+        return [],None
+    beats[0]["timing_intent"]="on-slide-start"
+    click=_click(nid("click"),"Slide opens with its motion-graphic intro.",[b["id"] for b in beats],
+                 "Accents drawn; pictures drifting.","presenter-explanation","First reveal on this slide.")
+    return beats,click
+
+
+def draft_slide(slide,style="modern",counters=False,continuing=(),outgoing=(),ambient=False):
+    """Return (slide plan or None, note). ``outgoing`` objects carry into the
+    next slide by Morph, so they must end where they were authored (no Ken Burns)."""
     if slide["existing_click_groups"]:
         return None,"existing native animation preserved as the slide's choreography"
-    types={(o["placeholder"] or {}).get("type") for o in slide["objects"]}
-    if "ctrTitle" in types or ("subTitle" in types and len(slide["objects"])<=3) or _is_text_title_slide(slide):
-        return None,"title slide kept static"
-    units=_units(slide,continuing)
-    if not units:
-        return None,"no content beyond the title"+(" (continuing objects arrive by Morph)" if continuing else "")
-    if len(units)==1 and units[0]["kind"]=="picture":
-        return None,"single picture is the slide's content; kept static"
-    fx=STYLES[style]
-    notes=slide["notes"] or ""
-    sequenced=bool(SEQUENCE_CUES.search(notes))
-    beats=[]
-    clicks=[]
+    if slide.get("scene"):
+        return None,"Morph scene slide (camera state) kept static"
+    if "[static]" in (slide["notes"] or ""):
+        return None,"speaker notes ask for a static slide"
     n=[0]
 
     def nid(prefix):
         n[0]+=1
         return f"{prefix}-{n[0]}"
+
+    aspect=slide.get("aspect",16/9)
+    types={(o["placeholder"] or {}).get("type") for o in slide["objects"]}
+    if "ctrTitle" in types or ("subTitle" in types and len(slide["objects"])<=3) or _is_text_title_slide(slide):
+        beats,click=_intro(slide,_decor(slide,[],continuing) if style!="subtle" else [],
+                           _hero_pictures(slide,[],set(continuing)|set(outgoing)),nid,aspect)
+        if not click:
+            return None,"title slide kept static"
+        click["pause_after"]="slide-complete"
+        return ({"source_index":slide["index"],"role":"title slide",
+                 "objective":"Title stays still; accents and picture give the opening life.",
+                 "beats":beats,"click_beats":[click],"components":[]},
+                "title text static; automatic motion-graphic intro")
+    units=_units(slide,continuing)
+    if len(units)==1 and units[0]["kind"]=="picture":
+        units=[]  # the picture is the slide: visible from the start, kept alive by Ken Burns
+    beats,intro=_intro(slide,_decor(slide,units,continuing) if style!="subtle" else [],
+                       _hero_pictures(slide,units,set(continuing)|set(outgoing)),nid,aspect)
+    if not units and not intro:
+        return None,("no content beyond the title"+(" (continuing objects arrive by Morph)" if continuing else "")
+                     +(" (objects carry on to the next slide by Morph)" if outgoing else ""))
+    fx=STYLES[style]
+    cinematic=style=="cinematic"
+    components=[]
+    notes=slide["notes"] or ""
+    sequenced=bool(SEQUENCE_CUES.search(notes))
+    clicks=[intro] if intro else []
 
     prev_kind=None
     for unit in units:
@@ -529,24 +628,45 @@ def draft_slide(slide,style="modern",counters=False,continuing=()):
                                  "presenter-explanation","Data is discussed before its interpretation." if clicks else "First reveal on this slide."))
         elif kind=="cycle":
             members,hub=unit["members"],unit["hub"]
+            loop=not unit.get("grid")  # a 2x2 matrix is a set of cells, not a loop
             ids=[]
             if hub:
                 hb=_beat(nid("hub"),f"Establish the centre '{_label(hub)}'.","reveal",[hub["token"]],"on-click",
                          fx["card"][0],fx["card"][1])
                 beats.append(hb)
                 ids.append(hb["id"])
+            if cinematic and loop:
+                components.append(_component("orbit","orbit-ring","shows the loop the stages form",
+                                             "Secondary/ambient layer: the slowly turning ring tells the audience this is a repeating cycle.",
+                                             anchors=[m["token"] for m in members]))
+                rb=_beat(nid("ring"),"Draw the loop behind the stages.","reveal",["orbit"],
+                         "with-previous" if hub else "on-click","fade",800,layer="secondary")
+                beats.append(rb)
+                ids.append(rb["id"])
             ab=_beat(nid("assemble"),"Elements assemble around the centre in cycle order.","choreography",
-                     [m["token"] for m in members],"with-previous" if hub else "on-click",
-                     recipe="assemble",motion_parameters={"from":"center","stagger_ms":140,"duration_ms":700})
+                     [m["token"] for m in members],"with-previous" if (hub or (cinematic and loop)) else "on-click",
+                     recipe="assemble",motion_parameters={"from":"center","stagger_ms":140,"duration_ms":700,
+                                                          **({"overshoot":0.08} if cinematic else {})})
             beats.append(ab)
             ids.append(ab["id"])
+            tour=len(members)<=5 and style!="subtle"
+            if cinematic and loop:
+                sp=_beat(nid("turn"),"The ring keeps turning slowly while the cycle is discussed.","choreography",["orbit"],
+                         "with-previous",recipe="spin-loop",layer="ambient",motion_parameters={"period_ms":40000})
+                beats.append(sp)
+                ids.append(sp["id"])
+            if cinematic and tour:
+                components.append(_component("halo","halo","guides attention to the stage being discussed",
+                                             "Secondary layer: a soft glow follows the spotlight so the eye knows where to look.",
+                                             anchors=[members[0]["token"]]))
             clicks.append(_click(nid("click"),"Show the whole cycle.",ids,"All elements in place.",
                                  "presenter-explanation","The cycle is introduced as one system." if clicks else "First reveal on this slide."))
-            if len(members)<=5 and style!="subtle":
+            if tour:
                 for m in members:
                     others=[x["token"] for x in members if x is not m]
                     sb=_beat(nid("focus"),f"Walk the cycle: focus '{_label(m)}'.","choreography",[m["token"]]+others,
-                             "on-click",recipe="spotlight",motion_parameters={"scale":1.12,"dim":0.35,"duration_ms":500})
+                             "on-click",recipe="spotlight",motion_parameters={"scale":1.12,"dim":0.35,"duration_ms":500,
+                                                                             **({"halo":"halo"} if cinematic else {})})
                     beats.append(sb)
                     clicks.append(_click(nid("click"),f"Discuss '{_label(m)}'.",[sb["id"]],
                                          f"'{_label(m)}' enlarged, the rest dimmed.","presenter-explanation",
@@ -554,7 +674,13 @@ def draft_slide(slide,style="modern",counters=False,continuing=()):
                 rb=_beat(nid("release"),"Return to the whole cycle.","choreography",[m["token"] for m in members],
                          "on-click",recipe="release",motion_parameters={"duration_ms":500})
                 beats.append(rb)
-                clicks.append(_click(nid("click"),"Back to the full cycle.",[rb["id"]],"Full cycle restored.",
+                members_ids=[rb["id"]]
+                if cinematic:
+                    hx=_beat(nid("halo-out"),"The glow fades when the whole cycle is back.","exit",["halo"],
+                             "with-previous","fade-out",400,layer="secondary")
+                    beats.append(hx)
+                    members_ids.append(hx["id"])
+                clicks.append(_click(nid("click"),"Back to the full cycle.",members_ids,"Full cycle restored.",
                                      "slide-complete","The tour ends by showing the system as a whole again."))
         elif kind=="labeled":
             label,body=unit["objs"]
@@ -564,6 +690,15 @@ def draft_slide(slide,style="modern",counters=False,continuing=()):
                 lb=_beat(nid("label"),f"Introduce '{_label(label)}'.","reveal",[label["token"]],"on-click",lp,ld)
                 beats.append(lb)
                 members=[lb["id"]]
+                if cinematic:
+                    cid=f"rule{len(components)+1}"
+                    components.append(_component(cid,"underline","underlines the section label",
+                                                 "Secondary layer: a rule draws under the label as the section opens.",
+                                                 anchors=[label["token"]]))
+                    ub=_beat(nid("draw"),"Draw the rule under the label.","reveal",[cid],"with-previous","wipe-right",500,
+                             layer="secondary")
+                    beats.append(ub)
+                    members.append(ub["id"])
                 bp,bd=fx["bullet"]
                 for gi,g in enumerate(groups):
                     pb=_beat(nid("para"),f"Reveal paragraph {g[0]} of '{_label(label)}'.","text-build",[body["token"]],
@@ -582,7 +717,17 @@ def draft_slide(slide,style="modern",counters=False,continuing=()):
                 b=_beat(nid("block"),f"Reveal '{_label(label)}' with its text.","stagger-reveal",
                         [label["token"],body["token"]],"on-click",fx["text"][0],fx["text"][1])
                 beats.append(b)
-                clicks.append(_click(nid("click"),f"Present '{_label(label)}'.",[b["id"]],"Label and text visible.",
+                ids_=[b["id"]]
+                if cinematic:
+                    cid=f"rule{len(components)+1}"
+                    components.append(_component(cid,"underline","underlines the section label",
+                                                 "Secondary layer: a rule draws under the label as the section opens.",
+                                                 anchors=[label["token"]]))
+                    ub=_beat(nid("draw"),"Draw the rule under the label.","reveal",[cid],"with-previous","wipe-right",500,
+                             layer="secondary")
+                    beats.append(ub)
+                    ids_.append(ub["id"])
+                clicks.append(_click(nid("click"),f"Present '{_label(label)}'.",ids_,"Label and text visible.",
                                      "presenter-explanation",
                                      "Each labelled alternative is a separate talking point." if clicks else "First reveal on this slide."))
         elif kind=="bullets":
@@ -634,6 +779,48 @@ def draft_slide(slide,style="modern",counters=False,continuing=()):
             preset,dur=fx["step"]
             cpreset,cdur=fx["connector"]
             ids=[]
+            journey=cinematic and sequenced and len(unit["steps"])>=3
+            token_tok="token"
+            existing_token=None
+            if journey:
+                first=unit["steps"][0]["step"]
+                below=first["geometry"]["h"]/2+0.06
+                # Prefer the deck's own marker: a small unlabeled shape left of the first step.
+                fy=_center(first)[1]
+                existing_token=next((o for o in slide["objects"] if o["kind"]=="shape" and not o["text"] and o["geometry"]
+                                     and _area(o)<0.012 and abs(_center(o)[1]-fy)<0.12
+                                     and _center(o)[0]<first["geometry"]["x"]+0.01),None)
+            if journey and not existing_token:
+                # The rail goes where the band is free: under the steps, else above.
+                steps_=[st["step"] for st in unit["steps"]]
+                x0=min(o["geometry"]["x"] for o in steps_)
+                x1=max(o["geometry"]["x"]+o["geometry"]["w"] for o in steps_)
+                cy=_center(first)[1]
+                half=first["geometry"]["h"]/2
+                others=[o for o in slide["objects"] if o["geometry"] and o not in steps_
+                        and o["kind"]!="connector" and not (o["placeholder"] and o["placeholder"]["type"] in TITLE_TYPES)]
+                def free(y):
+                    band=(x0,y-0.035,x1,y+0.035)
+                    return 0.04<y<0.96 and not any(
+                        min(band[2],o["geometry"]["x"]+o["geometry"]["w"])>max(band[0],o["geometry"]["x"]) and
+                        min(band[3],o["geometry"]["y"]+o["geometry"]["h"])>max(band[1],o["geometry"]["y"]) for o in others)
+                if free(cy+half+0.06):
+                    below=half+0.06
+                elif free(cy-half-0.06):
+                    below=-(half+0.06)
+                else:
+                    journey=False
+            if existing_token:
+                token_tok=existing_token["token"]
+                below=-(first["geometry"]["h"]/2+0.05)
+            elif journey:
+                anchors=[unit["steps"][0]["step"]["token"],unit["steps"][-1]["step"]["token"]]
+                components.append(_component("track","track-line","the rail the work travels along",
+                                             "Secondary layer: makes the sequence a single path the token can follow.",
+                                             anchors=anchors,offset_y=below))
+                components.append(_component("token","token","marks where the process is right now",
+                                             "Narrative resource the deck lacks: a progress marker that travels step by step with the speaker.",
+                                             anchors=[first["token"]],offset_y=below,size=0.045))
             for si,step in enumerate(unit["steps"]):
                 targets=[c["token"] for c in step["connectors"]]
                 step_beats=[]
@@ -648,6 +835,18 @@ def draft_slide(slide,style="modern",counters=False,continuing=()):
                     sb["timing_intent"]="on-click"
                 beats.append(sb)
                 step_beats.append(sb["id"])
+                if journey:
+                    if si==0 and not existing_token:
+                        tb=_beat(nid("rail"),"Lay the rail and place the progress marker.","reveal",["track","token"],
+                                 "with-previous","wipe-right",500,layer="secondary")
+                        beats.append(tb)
+                        step_beats.append(tb["id"])
+                    gb=_beat(nid("go"),f"The marker travels to '{_label(step['step'])}'.","choreography",
+                             [token_tok,step["step"]["token"]],"after-previous",recipe="travel",layer="secondary",
+                             motion_parameters={"duration_ms":650,"arc":0.3,"offset_y":below,"dwell_ms":0,
+                                                "overshoot":0.06,"pulse_stops":True})
+                    beats.append(gb)
+                    step_beats.append(gb["id"])
                 if sequenced:
                     clicks.append(_click(nid("click"),f"Walk to step '{_label(step['step'])}'.",step_beats,
                                          "Steps so far visible.","presenter-explanation",
@@ -663,11 +862,41 @@ def draft_slide(slide,style="modern",counters=False,continuing=()):
             preset,dur=fx[role]
             b=_beat(nid("reveal"),f"Reveal '{_label(o)}'.","reveal",[o["token"]],"on-click",preset,dur)
             beats.append(b)
+            ids=[b["id"]]
+            if kind=="picture" and o["id"] not in outgoing:
+                kb=_beat(nid("kenburns"),f"Keep '{_label(o)}' alive with a slow push-in.","choreography",[o["token"]],
+                         "after-previous",recipe="ken-burns",motion_parameters={"duration_ms":6000,"scale":1.05})
+                beats.append(kb)
+                ids.append(kb["id"])
+            if cinematic and role=="callout" and o["text"] and len(o["text"])<=90:
+                # Secondary: a marker sweeps behind the conclusion once it is there.
+                cid=f"marker{len(components)+1}"
+                components.append(_component(cid,"highlight","marks the conclusion",
+                                             "Secondary layer: a highlighter sweep makes the takeaway the thing to remember.",
+                                             anchors=[o["token"]]))
+                hb=_beat(nid("sweep"),"Highlighter sweeps behind the takeaway.","reveal",[cid],"after-previous",
+                         "wipe-right",450,layer="secondary")
+                beats.append(hb)
+                ids.append(hb["id"])
             reason=("The conclusion lands after the evidence has been discussed." if role=="callout"
                     else "New idea for the presenter to introduce.")
-            clicks.append(_click(nid("click"),f"Introduce '{_label(o)}'.",[b["id"]],"Content visible.","presenter-explanation",
+            clicks.append(_click(nid("click"),f"Introduce '{_label(o)}'.",ids,"Content visible.","presenter-explanation",
                                  reason if clicks else "First reveal on this slide."))
         prev_kind=kind
+
+    if ambient and clicks:
+        for i in range(2):
+            components.append(_component(f"backdrop{i+1}","backdrop","ambient background depth",
+                                         "Ambient layer requested by the user: soft shapes drift slowly behind the content.",
+                                         index=i))
+        ab=_beat(nid("ambient"),"Background shapes drift slowly for depth while the slide is shown.","choreography",
+                 ["backdrop1","backdrop2"],"on-slide-start",recipe="drift",layer="ambient",
+                 motion_parameters={"amplitude":0.02,"period_ms":10000})
+        beats.insert(0,ab)
+        clicks.insert(0,_click(nid("click"),"Ambient background starts with the slide.",[ab["id"]],
+                               "Background moving gently; content still waiting for the presenter.","none",
+                               "Ambient motion starts automatically and never needs a click."))
+        clicks[1]["boundary_reason"]=clicks[1]["boundary_reason"] or "First content reveal waits for the presenter."
 
     # Keep click rhythm humane: merge tail clicks beyond the cap.
     cap=8
@@ -685,7 +914,7 @@ def draft_slide(slide,style="modern",counters=False,continuing=()):
     clicks[-1]["pause_after"]="slide-complete"
     plan={"source_index":slide["index"],"role":"report slide",
           "objective":f"Audience follows slide {slide['index']} one idea at a time.",
-          "beats":beats,"click_beats":clicks,"components":[]}
+          "beats":beats,"click_beats":clicks,"components":components}
     return plan,f"{len(clicks)} click(s), {len(beats)} motion beat(s)"
 
 
@@ -731,22 +960,24 @@ def detect_morph_pairs(model):
     return out
 
 
-def draft(model,goal="",style="modern",counters=False,morph=True):
+def draft(model,goal="",style="modern",counters=False,morph=True,ambient=False):
     if style not in STYLES:
         raise ValueError(f"style must be one of {sorted(STYLES)}")
     slides=[]
     notes={}
     transitions=detect_morph_pairs(model) if morph else []
     continuing={t["slide"]:set(t["continuing_ids"]) for t in transitions}
+    slides_by={s["index"]:s for s in model["slides"]}
+    outgoing={t["slide"]-1:set(shared_objects(slides_by[t["slide"]],slides_by[t["slide"]-1])[0]) for t in transitions}
     for t in transitions:
         t.pop("continuing_ids")
-    slides_by={s["index"]:s for s in model["slides"]}
     for s in model["slides"]:
         if s.get("morph_in") and s["index"]>1:
             # An existing Morph carries shared objects in; re-entering them would break continuity.
             continuing.setdefault(s["index"],set()).update(shared_objects(slides_by[s["index"]-1],s)[0])
+            outgoing.setdefault(s["index"]-1,set()).update(shared_objects(s,slides_by[s["index"]-1])[0])
     for s in model["slides"]:
-        plan,note=draft_slide(s,style,counters,continuing.get(s["index"],()))
+        plan,note=draft_slide(s,style,counters,continuing.get(s["index"],()),outgoing.get(s["index"],()),ambient)
         notes[s["index"]]=note
         if plan:
             slides.append(plan)
@@ -754,7 +985,7 @@ def draft(model,goal="",style="modern",counters=False,morph=True):
     has_existing=any(s["existing_click_groups"] for s in model["slides"])
     inv=model["inventory"]
     return {
-        "version":"0.6",
+        "version":"0.7",
         "kind":"existing-deck-motion-director",
         "source":{"pptx_sha256":model["sha256"],"inventory_version":inv["version"],
                   "source_slide_count":len(model["slides"])},
@@ -806,8 +1037,9 @@ def _beat_effects(beat,slide_model,style="modern",states=None):
         if beat["recipe"]=="tracks":
             tracks=[{"target":_resolve(slide_model,tr["target"]),"keyframes":tr["keyframes"]}
                     for tr in beat["tracks"]]
-        effects=me.compile_choreography(beat["recipe"],objs,states,by_token,beat["id"],
-                                        beat.get("motion_parameters") or {},tracks)
+        params=dict(beat.get("motion_parameters") or {})
+        params["_aspect"]=slide_model.get("aspect",16/9)
+        effects=me.compile_choreography(beat["recipe"],objs,states,by_token,beat["id"],params,tracks)
         effects[0]["trigger"]=first_trigger
         for e in effects[1:]:
             e["trigger"]="with"
@@ -834,6 +1066,11 @@ def _beat_effects(beat,slide_model,style="modern",states=None):
     role_default={"text-build":"bullet","reveal":"text","stagger-reveal":"text","process-reveal":"step"}.get(op,"text")
     preset=beat.get("effect")
     duration=beat.get("duration_ms")
+    by=beat.get("by")
+    if preset=="type-on":
+        # Typewriter: Appear, animated by letter with a short fixed gap.
+        preset,by=("appear","letter")
+        duration=0 if duration is None else duration
     if op in ("reveal","stagger-reveal","process-reveal"):
         for i,o in enumerate(objs):
             role="connector" if o["kind"]=="connector" else role_default
@@ -884,6 +1121,17 @@ def _beat_effects(beat,slide_model,style="modern",states=None):
                         "duration_ms":mp.get("duration_ms",duration or 800)})
     else:
         raise ValueError(f"beat {beat['id']}: unsupported operation {op!r}")
+    if by in ("word","letter"):
+        gap=beat.get("gap_ms",35 if by=="letter" else None)
+        for e in effects:
+            if anim.PRESETS.get(e["preset"],("",))[0]!="entr":
+                continue
+            o=next((x for x in objs if x["id"]==e["spid"]),None)
+            text=o["text"] or "" if o else ""
+            if e.get("paragraph") is not None and o:
+                text=next((p["text"] for p in o["paragraphs"] if p["index"]==e["paragraph"]),text)
+            units=max(1,len(text.split()) if by=="word" else len(text.replace(" ","").replace("\n","")))
+            e["iterate"]={"by":by,"units":units,**({"gap_ms":gap} if gap else {"pct":0.12})}
     for e in effects:
         e["beat"]=beat["id"]
     return effects
@@ -905,6 +1153,13 @@ def _first_visibility(plan_slide,slide_model):
                 kind,touched="enter",ids
             elif op=="choreography" and b.get("recipe")=="assemble":
                 kind,touched="enter",ids
+            elif op=="choreography" and b.get("recipe")=="rise":
+                touched=ids+([_resolve(slide_model,b["motion_parameters"]["mask"])["id"]]
+                             if (b.get("motion_parameters") or {}).get("mask") else [])
+                kind="enter"
+            elif op=="choreography" and b.get("recipe")=="spotlight" and (b.get("motion_parameters") or {}).get("halo"):
+                first.setdefault(_resolve(slide_model,b["motion_parameters"]["halo"])["id"],"enter")
+                continue
             elif op=="choreography" and b.get("recipe")=="tracks":
                 for tr in b.get("tracks",[]):
                     vis=next((k["visible"] for k in sorted(tr["keyframes"],key=lambda k:k["t"]) if "visible" in k),None)
@@ -934,6 +1189,7 @@ def compile_slide(plan_slide,slide_model,style="modern",prior_groups=()):
         for g in prior_groups:
             states=me.advance(states,g)
         clicks=[]
+        looping={}
         for ci,click in enumerate(plan_slide["click_beats"]):
             effects=[]
             for mid in click["motion_beats"]:
@@ -941,6 +1197,13 @@ def compile_slide(plan_slide,slide_model,style="modern",prior_groups=()):
                 current=me.advance(states,effects) if effects else states
                 effects.extend(_beat_effects(beat,slide_model,style,current))
             issues=me.conflicts(effects)
+            for e in effects:
+                prop=me.PROP_OF.get(e["preset"])
+                key=(e["spid"],prop)
+                if prop and key in looping and looping[key]!=click["id"] and e.get("paragraph") is None:
+                    issues.append(f"object {e['spid']}: {prop} is already looping since click {looping[key]}")
+                if e.get("loop") and prop:
+                    looping.setdefault(key,click["id"])
             if issues:
                 raise ValueError(f"slide {slide_model['index']} click {click['id']}: "+"; ".join(issues))
             start="auto" if ci==0 and beats[click["motion_beats"][0]]["timing_intent"]=="on-slide-start" else "click"
@@ -1015,8 +1278,8 @@ def apply(source,plan,destination,force=False,style=None):
     if destination.resolve()==source.resolve():
         raise ValueError("output must differ from source")
     model=deck_model(source)
-    if plan.get("version") not in ("0.4","0.5","0.6"):
-        raise ValueError("apply requires Director v0.4, v0.5 or v0.6")
+    if plan.get("version") not in ("0.4","0.5","0.6","0.7"):
+        raise ValueError("apply requires Director v0.4 .. v0.7")
     errors=validate_director(plan,model["inventory"])
     if errors:
         raise ValueError("Invalid director plan:\n  - "+"\n  - ".join(errors))
@@ -1031,12 +1294,30 @@ def apply(source,plan,destination,force=False,style=None):
             if policy=="replace" and not (ps.get("replace_reason") or "").strip():
                 raise ValueError(f"slide {sm['index']}: replacing existing timing requires replace_reason")
             root=E.fromstring(z.read(sm["part"]),PARSER)
+            specs=[dict(c["generate"],id=c["id"],role=c.get("role")) for c in ps.get("components",[]) if c.get("generate")]
+            for spec in specs:
+                if spec["kind"]=="mask" and not spec.get("color"):
+                    anchor=_resolve(sm,spec["anchors"][0])
+                    color=mc.container_fill(root,anchor,sm["objects"]) or mc.slide_background(z,sm["part"])
+                    clip=mc.container_box(anchor,sm["objects"])
+                    if clip and color not in (None,"NONSOLID"):
+                        spec["clip"]=list(clip)
+                    if color in (None,"NONSOLID"):
+                        raise ValueError(f"slide {sm['index']}: rise mask needs a solid colour behind {anchor['name']!r}")
+                    spec["color"]=color
+            generated=[]
+            if specs:
+                size=model["slide_size_emu"]
+                generated=mc.insert(root,sm,specs,mc.deck_style(model),size["width"],size["height"])
+                sm=dict(sm,objects=sm["objects"]+generated)
             prior=[] if policy=="replace" else me.effects_from_slide(root)[0]
             clicks=compile_slide(ps,sm,style,prior)
             counters=_expand_counters(root,clicks)
             receipt=anim.apply_timeline(root,clicks,mode="replace" if policy=="replace" else "extend")
             receipt["slide"]=sm["index"]
             receipt["counters"]=counters
+            receipt["generated_components"]=[{"id":g["generated"]["component_id"],"kind":g["generated"]["kind"],
+                                              "name":g["name"],"role":g["generated"]["role"]} for g in generated]
             updates[sm["part"]]=E.tostring(root,xml_declaration=True,encoding="UTF-8",standalone=True)
             receipts.append(receipt)
         for tr in plan.get("transitions") or []:
@@ -1051,15 +1332,30 @@ def apply(source,plan,destination,force=False,style=None):
     _write_package(source,destination,updates)
     report=verify(source,destination)
     report["receipts"]=receipts
+    report["script"]=script_digest(plan)
     return report
+
+
+def script_digest(plan):
+    """Presenter script (narration per click) carried by the plan, if any."""
+    out=[]
+    for s in plan.get("slides",[]):
+        clicks=[{"id":c["id"],"narration":c.get("narration",""),"purpose":c.get("purpose","")} for c in s["click_beats"]]
+        if s.get("intro_narration") or any(c["narration"] for c in clicks):
+            out.append({"slide":s["source_index"],"intro":s.get("intro_narration",""),"clicks":clicks})
+    return out
 
 
 # ---------------------------------------------------------------------------
 # Verify
 
 
-def verify(source,output):
-    """Preservation + timing checks. Returns a report dict with `ok`."""
+NOTES_PARTS=("ppt/notesSlides/","[Content_Types].xml","ppt/slides/_rels/")
+
+
+def verify(source,output,allow_notes=False):
+    """Preservation + timing checks. Returns a report dict with `ok`.
+    allow_notes: speaker-notes parts may change or be added (--write-notes)."""
     problems=[]
     warnings=[]
     src,out=deck_model(source),deck_model(output)
@@ -1067,9 +1363,10 @@ def verify(source,output):
         problems.append("slide count changed")
     with ZipFile(source) as a, ZipFile(output) as b:
         an,bn=set(a.namelist()),set(b.namelist())
-        if an!=bn:
-            problems.append(f"package parts changed: +{sorted(bn-an)} -{sorted(an-bn)}")
-        changed=sorted(n for n in an&bn if a.read(n)!=b.read(n))
+        plus=sorted(n for n in bn-an if not (allow_notes and n.startswith(NOTES_PARTS)))
+        if plus or an-bn:
+            problems.append(f"package parts changed: +{plus} -{sorted(an-bn)}")
+        changed=sorted(n for n in an&bn if a.read(n)!=b.read(n) and not (allow_notes and n.startswith(NOTES_PARTS)))
         slide_parts={s["part"] for s in src["slides"]}
         if any(n not in slide_parts for n in changed):
             problems.append(f"non-slide parts changed: {[n for n in changed if n not in slide_parts]}")
@@ -1085,8 +1382,10 @@ def verify(source,output):
                 if p["text"]!=o["text"] or p["geometry"]!=o["geometry"]:
                     problems.append(f"slide {s_src['index']}: object {o['name']!r} text/geometry changed")
             added=[o for o in s_out["objects"] if o["id"] not in {x["id"] for x in s_src["objects"]}]
-            if any(not o["name"].startswith("__counter_") for o in added):
-                problems.append(f"slide {s_src['index']}: unexpected new objects {[o['name'] for o in added]}")
+            unexpected=[o["name"] for o in added if not o["name"].startswith(("__counter_",mc.GEN_PREFIX))]
+            if unexpected:
+                problems.append(f"slide {s_src['index']}: unexpected new objects {unexpected}")
+            entry["generated"]=[o["name"] for o in added if o["name"].startswith(mc.GEN_PREFIX)]
             if entry["changed"]:
                 root=_xml(b,s_out["part"])
                 entry["transition"]="morph" if root.find(f".//{{{anim.P159}}}morph") is not None else None
@@ -1108,7 +1407,7 @@ def verify(source,output):
                         problems.append(f"slide {s_src['index']}: build list targets missing spid {bld.get('spid')}")
                 states,groups=anim.simulate_states(root)
                 final=states[-1]
-                proxies={o["id"] for o in added}
+                proxies={o["id"] for o in added if o["name"].startswith("__counter_")}
                 visible_end={o["id"] for o in s_out["objects"]}-final["hidden_objects"]
                 lost=[o["name"] for o in s_src["objects"] if o["id"] not in visible_end]
                 if lost:
@@ -1128,7 +1427,8 @@ def verify(source,output):
                     problems.extend(f"slide {s_src['index']} click {gi}: {c}" for c in me.conflicts(g))
                     mstates=me.advance(mstates,g)
                     warnings.extend(me.layout_warnings(
-                        [o for o in s_out["objects"] if not o["name"].startswith("__counter_")],
+                        [o for o in s_out["objects"] if not o["name"].startswith("__counter_")
+                         and not any(o["name"].startswith(f"{mc.GEN_PREFIX}{k}_") for k in mc.BACKGROUND)],
                         mstates,f"slide {s_src['index']} after click {gi}"))
                 entry["storyboard"]=_storyboard_text(s_out,states,groups)
             slides.append(entry)
@@ -1250,8 +1550,29 @@ def markdown_report(report,plan=None):
         extra=f" (existing groups kept: {s['existing_click_groups']})" if s.get("existing_click_groups") else ""
         if s.get("transition"):
             extra+=f"; enters with {s['transition'].capitalize()} transition"
+        if s.get("generated"):
+            extra+=f"; generated: {', '.join(s['generated'])}"
         lines+=[head,f"{s['click_groups']} click group(s){extra}"]+[f"- {l}" for l in s["storyboard"]]+[""]
     return "\n".join(lines)
+
+
+def _with_narration(model,plan,ms):
+    """Copy of a plan whose clicks all carry narration (drafted when missing)."""
+    plan=json.loads(json.dumps(plan))
+    text=ms.script_from_plan(model,plan)
+    sections=ms.match_sections(ms.parse_script(text),model)
+    for ps in plan["slides"]:
+        sec=sections.get(ps["source_index"])
+        if not sec:
+            continue
+        if not ps.get("intro_narration"):
+            ps["intro_narration"]=sec["intro"]
+        beats={b["id"]:b for b in ps["beats"]}
+        real=[c for c in ps["click_beats"] if beats[c["motion_beats"][0]]["timing_intent"]!="on-slide-start"]
+        for c,seg in zip(real,sec["segments"]):
+            if not c.get("narration"):
+                c["narration"]=seg["text"]
+    return plan
 
 
 def _load(path):
@@ -1275,6 +1596,7 @@ def main(argv=None):
     a.add_argument("--style",default="modern",choices=sorted(STYLES))
     a.add_argument("--counters",action="store_true",help="use stepped-text KPI counters (adds proxy shapes)")
     a.add_argument("--no-morph",action="store_true",help="do not add Morph transitions")
+    a.add_argument("--ambient",action="store_true",help="add generated backdrop shapes with slow ambient drift")
     for name in ("apply","auto"):
         a=sp.add_parser(name)
         a.add_argument("deck")
@@ -1288,7 +1610,12 @@ def main(argv=None):
             a.add_argument("--style",default="modern",choices=sorted(STYLES))
             a.add_argument("--counters",action="store_true")
             a.add_argument("--no-morph",action="store_true",help="do not add Morph transitions")
+            a.add_argument("--ambient",action="store_true",help="add generated backdrop shapes with slow ambient drift")
         a.add_argument("--storyboard",help="also render storyboard PNGs into this directory")
+        a.add_argument("--write-notes",action="store_true",help="append the motion script to speaker notes")
+        if name=="auto":
+            a.add_argument("--script",help="presentation script (Markdown/plain text with [click] cues) to follow")
+            a.add_argument("--fill-gaps",action="store_true",help="generate callouts for script lines the slide cannot show")
         a.add_argument("--preview",help="also render simulated motion GIFs for changed slides into this directory")
     a=sp.add_parser("storyboard")
     a.add_argument("deck")
@@ -1313,7 +1640,7 @@ def main(argv=None):
         return 0
     if args.cmd=="draft":
         model=deck_model(args.deck)
-        plan=draft(model,args.goal,args.style,args.counters,morph=not args.no_morph)
+        plan=draft(model,args.goal,args.style,args.counters,morph=not args.no_morph,ambient=args.ambient)
         errors=validate_director(plan,model["inventory"])
         if errors:
             raise SystemExit("draft failed validation:\n"+"\n".join(errors))
@@ -1323,9 +1650,13 @@ def main(argv=None):
         print(f"wrote {args.output}")
         return 0
     if args.cmd in ("apply","auto"):
-        if args.cmd=="auto":
-            model=deck_model(args.deck)
-            plan=draft(model,args.goal,args.style,args.counters,morph=not args.no_morph)
+        import motion_script as ms
+        model=deck_model(args.deck)
+        if args.cmd=="auto" and args.script:
+            plan,_=ms.plan_from_script(model,Path(args.script).read_text(encoding="utf-8"),args.goal,args.style,args.fill_gaps)
+            _dump(plan,str(Path(args.output).with_suffix(".director.json")))
+        elif args.cmd=="auto":
+            plan=draft(model,args.goal,args.style,args.counters,morph=not args.no_morph,ambient=args.ambient)
             _dump(plan,str(Path(args.output).with_suffix(".director.json")))
         else:
             plan=_load(args.plan)
@@ -1335,6 +1666,14 @@ def main(argv=None):
             print("Nothing to add: every slide is static by design or keeps its existing choreography. No file written.")
             return 0
         report=apply(args.deck,plan,args.output,force=args.force)
+        # Every output gets a complete presenter script (narration per click).
+        script_md=ms.presenter_script_md(model,_with_narration(model,plan,ms),
+                                         {int(k):v for k,v in (plan.get("research_metadata") or {}).get("script_alignment",{}).items()})
+        Path(args.output).with_suffix(".script.md").write_text(script_md,encoding="utf-8")
+        if args.write_notes:
+            notes=ms.write_notes(args.output,_with_narration(model,plan,ms),args.output)
+            report=verify(args.deck,args.output,allow_notes=True)
+            print("notes:",notes)
         md=markdown_report(report,plan)
         rp=args.report or str(Path(args.output).with_suffix(".report.md"))
         Path(rp).write_text(md+"\n",encoding="utf-8")

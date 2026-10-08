@@ -1,0 +1,333 @@
+{
+ "decks": 60,
+ "click_groups": 3655,
+ "effects_per_click": {
+  "mean": 1.94,
+  "share_multi": 0.271
+ },
+ "staggered_share": 0.018,
+ "object_lifecycles": [
+  [
+   "appear > appear-out",
+   44
+  ],
+  [
+   "fade > fade-out",
+   33
+  ],
+  [
+   "wipe > fly-out",
+   26
+  ],
+  [
+   "appear > appear",
+   16
+  ],
+  [
+   "appear > path-down",
+   16
+  ],
+  [
+   "custom-path > spin",
+   15
+  ],
+  [
+   "wipe > wipe > wipe > wipe",
+   15
+  ],
+  [
+   "appear > appear > appear > appear",
+   14
+  ],
+  [
+   "blinds > blinds-out",
+   14
+  ],
+  [
+   "wipe > wipe > wipe > wipe > wipe",
+   13
+  ],
+  [
+   "appear > appear > appear",
+   12
+  ],
+  [
+   "appear > appear > appear > appear > appear > appear > appear > appear",
+   12
+  ],
+  [
+   "fade > appear-out",
+   11
+  ],
+  [
+   "wipe > wipe > wipe > wipe > wipe > wipe",
+   10
+  ],
+  [
+   "wipe > wipe",
+   10
+  ],
+  [
+   "fade > transparency",
+   9
+  ],
+  [
+   "appear > appear > appear > appear > appear > appear > appear > appear > appear",
+   9
+  ],
+  [
+   "transparency > fade-out",
+   8
+  ],
+  [
+   "appear > appear > appear > appear > appear > appear",
+   8
+  ],
+  [
+   "appear > appear > appear > appear > appear",
+   7
+  ],
+  [
+   "appear > appear > appear > appear > appear > appear > appear",
+   7
+  ],
+  [
+   "wipe > wipe > wipe",
+   7
+  ],
+  [
+   "appear > fade-out",
+   6
+  ],
+  [
+   "fade > flash-bulb",
+   6
+  ],
+  [
+   "path-diagonal-down-right > zoom-out",
+   6
+  ],
+  [
+   "fade > fade",
+   4
+  ],
+  [
+   "fade > flash-bulb > transparency",
+   4
+  ],
+  [
+   "custom-path > zoom-out",
+   4
+  ],
+  [
+   "wipe > path-down",
+   4
+  ],
+  [
+   "appear-out > custom-path > fade",
+   3
+  ],
+  [
+   "fade > flash-bulb > custom-path > grow-and-turn-out",
+   3
+  ],
+  [
+   "appear > flash-bulb > fade-out",
+   3
+  ],
+  [
+   "fade > fade > fade",
+   3
+  ],
+  [
+   "flicker > flash-bulb",
+   3
+  ],
+  [
+   "appear > appear > appear > appear > appear > appear > appear > appear > appear > appear",
+   3
+  ],
+  [
+   "fly > fly > fly > fly > fly > fly > fly",
+   3
+  ],
+  [
+   "fade > fade-out > transparency",
+   2
+  ],
+  [
+   "appear > transparency",
+   2
+  ],
+  [
+   "fade > flash-bulb > fade-out",
+   2
+  ],
+  [
+   "faded-zoom > appear-out",
+   2
+  ]
+ ],
+ "click_group_shapes": [
+  [
+   "appear",
+   950
+  ],
+  [
+   "faded-zoom",
+   797
+  ],
+  [
+   "wipe",
+   785
+  ],
+  [
+   "fade",
+   369
+  ],
+  [
+   "fly",
+   153
+  ],
+  [
+   "dissolve",
+   69
+  ],
+  [
+   "zoom",
+   46
+  ],
+  [
+   "ascend",
+   46
+  ],
+  [
+   "fade + wipe",
+   33
+  ],
+  [
+   "appear + appear-out",
+   25
+  ],
+  [
+   "appear-out",
+   16
+  ],
+  [
+   "rise-up",
+   13
+  ],
+  [
+   "fade-out",
+   12
+  ],
+  [
+   "mediacall:1:0",
+   12
+  ],
+  [
+   "expand",
+   12
+  ],
+  [
+   "fade + strips + wipe",
+   11
+  ],
+  [
+   "fade + fade-out",
+   10
+  ],
+  [
+   "checkerboard",
+   10
+  ],
+  [
+   "wheel",
+   10
+  ],
+  [
+   "blinds",
+   9
+  ],
+  [
+   "circle",
+   9
+  ],
+  [
+   "ease-in",
+   9
+  ],
+  [
+   "dissolve + wipe",
+   8
+  ],
+  [
+   "appear + fade",
+   7
+  ],
+  [
+   "appear + blinds",
+   7
+  ],
+  [
+   "appear [staggered]",
+   6
+  ],
+  [
+   "descend",
+   6
+  ],
+  [
+   "blinds + blinds-out",
+   5
+  ],
+  [
+   "appear + wipe",
+   5
+  ],
+  [
+   "stretch-out",
+   5
+  ],
+  [
+   "fly-out",
+   5
+  ],
+  [
+   "fly [staggered]",
+   5
+  ],
+  [
+   "transparency",
+   4
+  ],
+  [
+   "appear + transparency",
+   4
+  ],
+  [
+   "appear-out + mediacall:1:0",
+   4
+  ],
+  [
+   "bounce",
+   4
+  ],
+  [
+   "peek",
+   4
+  ],
+  [
+   "fade + fade-out + wipe",
+   3
+  ],
+  [
+   "flash-bulb + flicker",
+   3
+  ],
+  [
+   "dissolve + expand + wipe",
+   3
+  ]
+ ]
+}

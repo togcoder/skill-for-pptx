@@ -1,0 +1,149 @@
+{
+ "title": "Northwind Roasters — Q3 review (synthetic data, real licensed photos)",
+ "theme": "midnight",
+ "motion": {
+  "style": "modern",
+  "counters": true,
+  "morph": true
+ },
+ "slides": [
+  {
+   "layout": "title",
+   "kicker": "Quarterly review",
+   "title": "Coffee that travels well",
+   "subtitle": "Northwind Roasters · Q3 2026 · synthetic data",
+   "image": {
+    "search": "coffee roastery",
+    "pick": 2
+   }
+  },
+  {
+   "layout": "statement",
+   "kicker": "The headline",
+   "text": "We doubled direct orders while cutting delivery time by a third."
+  },
+  {
+   "layout": "kpis",
+   "title": "Q3 in numbers",
+   "items": [
+    {
+     "value": "48%",
+     "label": "growth in direct orders",
+     "icon": "lucide:trending-up"
+    },
+    {
+     "value": "1,200 t",
+     "label": "roasted this quarter",
+     "icon": "lucide:flame"
+    },
+    {
+     "value": "2.1 days",
+     "label": "average delivery",
+     "icon": "lucide:truck"
+    }
+   ],
+   "takeaway": "Growth came from subscriptions, not discounts."
+  },
+  {
+   "layout": "chart",
+   "title": "Direct orders by month",
+   "chart": {
+    "type": "column",
+    "categories": [
+     "Jul",
+     "Aug",
+     "Sep"
+    ],
+    "series": [
+     {
+      "name": "2025",
+      "values": [
+       310,
+       335,
+       350
+      ]
+     },
+     {
+      "name": "2026",
+      "values": [
+       420,
+       515,
+       640
+      ]
+     }
+    ]
+   },
+   "takeaway": "September alone beat last year's best quarter."
+  },
+  {
+   "layout": "process",
+   "title": "How an order travels",
+   "steps": [
+    "Order",
+    "Roast",
+    "Pack",
+    "Ship",
+    "Brew"
+   ],
+   "notes": "First the order lands, then we roast, then pack, then ship, and finally the customer brews."
+  },
+  {
+   "layout": "bullets",
+   "title": "Why customers stay",
+   "bullets": [
+    "Roasted within 48 hours of every order",
+    "Flexible subscriptions, pause any time",
+    "Solar roof covers 40% of our energy"
+   ],
+   "image": {
+    "search": "latte art cup",
+    "orientation": "square"
+   }
+  },
+  {
+   "layout": "cycle",
+   "title": "Our improvement loop",
+   "center": "Customer",
+   "items": [
+    "Listen",
+    "Roast",
+    "Deliver",
+    "Measure"
+   ],
+   "notes": "Introduce the loop, then walk each stage."
+  },
+  {
+   "layout": "comparison",
+   "title": "Subscriptions vs one-off orders",
+   "left": {
+    "heading": "Subscriptions",
+    "points": [
+     "Predictable roasting volume",
+     "Higher lifetime value",
+     "Lower acquisition cost"
+    ],
+    "icon": "lucide:repeat"
+   },
+   "right": {
+    "heading": "One-off orders",
+    "points": [
+     "Seasonal spikes",
+     "Discount-driven",
+     "Harder to forecast"
+    ],
+    "icon": "lucide:shopping-bag"
+   }
+  },
+  {
+   "layout": "quote",
+   "quote": "The coffee arrives faster than my old café could brew it.",
+   "author": "Subscriber since 2024 (synthetic)"
+  },
+  {
+   "layout": "closing",
+   "title": "Next: a second roastery in 2027",
+   "subtitle": "Questions and discussion"
+  }
+ ],
+ "assets_cache": "build/forge-cache"
+}

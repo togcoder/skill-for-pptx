@@ -10,6 +10,21 @@ Repo chính: [togcoder/skill-for-pptx](https://github.com/togcoder/skill-for-ppt
 
 Mới nhất: [T018 QA review](experiments/T018-20261005-qa-evidence-review/REPORT.md) sửa bộ nghiệm thu và bàn giao công cụ chạy PowerPoint trên Windows. 26 hồ sơ giả lập cho 26 quyết định đúng; 150 tests đạt. T010–T017 đã có chia nhịp click, chart/KPI và generic motion trên deck có sẵn. Playback PowerPoint vẫn là cổng còn thiếu; chỉ số click và ảnh tĩnh chưa xác nhận hiệu ứng chạy đúng.
 
+## Dùng ngay: Slide Forge — AI tự dựng deck hoàn chỉnh
+
+```bash
+pip install python-pptx lxml Pillow
+python3 scripts/slide_forge.py schema                                   # hợp đồng spec cho AI
+python3 scripts/slide_forge.py build examples/forge/coffee_report.json -o deck.pptx   # dựng + chuyển động + QA (JSON)
+python3 scripts/slide_forge.py render deck.pptx -d render/              # Windows + PowerPoint: video + ảnh từng slide
+```
+
+AI viết spec ngữ nghĩa (title, statement, bullets, image, kpis, chart, process,
+cycle, comparison, quote, closing). Forge lo bố cục, cỡ chữ đo thật, ảnh/art,
+chuyển động native (đếm số KPI, chart build, process từng bước, cycle spotlight,
+Ken Burns, accent, Morph) và trả QA có mã lỗi + cách sửa. Skill:
+`skills/slide-forge/SKILL.md`, lệnh `/forge-deck`. [Báo cáo T025](experiments/T025-20261007-claude-slide-forge/REPORT.md).
+
 ## Dùng ngay: Motion Director cho deck có sẵn
 
 ```bash
@@ -23,7 +38,17 @@ Giữ nguyên slide, chữ, bố cục, animation có sẵn; thêm animation nat
 click của người thuyết trình — từ hiện từng ý đến chuyển động phức hợp (tụ lại, soi
 từng phần của vòng tròn, đổi chỗ, đi theo hành trình, zoom vào, Morph giữa slide với
 `--style cinematic` hoặc Director v0.6); xuất báo cáo, storyboard và GIF mô phỏng
-(`motion_director.py preview`, cần LibreOffice Impress + poppler + ImageMagick). Cài như plugin Claude Code: `/plugin marketplace add
+(`motion_director.py preview`, cần LibreOffice Impress + poppler + ImageMagick).
+Chuyển động 3 lớp (chính/phụ/nền, `--style cinematic`, `--ambient`) và lớp kịch bản:
+`auto --script script.md` cho kịch bản quyết định nhịp click (hỗ trợ `[click]`/`[nhấp]`,
+tiếng Việt, diễn đạt lại), `motion_script.py draft` tự viết kịch bản đầy đủ khi thiếu,
+`--fill-gaps` tạo chú thích cho ý không có trên slide, `--write-notes` ghi lời thoại vào
+speaker notes; luôn xuất `*.script.md`. Hoàn thiện kiểu chuyên nghiệp (T028):
+`morph_studio.py propose/apply/preview` thêm Morph giữa slide — ghép cặp bằng tên `!!`,
+tiêu đề trượt, vật thể bay vào/ra từ ngoài slide, camera zoom vào/ra, thẻ nở thành panel,
+cuộn ngang — cùng mẹo chữ (đánh máy, hiện từng từ, chữ trồi lên từ một đường kẻ, bút dạ
+quang, gạch chân); danh mục 50 kỹ thuật ở
+`skills/pptx-motion-director/references/pro-techniques.md`. Cài như plugin Claude Code: `/plugin marketplace add
 togcoder/skill-for-pptx` rồi `/plugin install pptx-motion@togcoder-pptx`, dùng
 `/animate-deck deck.pptx`. Trạng thái: kiểm tra cấu trúc + LibreOffice đọc đúng
 trình tự; **chưa phát thử trong PowerPoint**. [Báo cáo T019](experiments/T019-20261005-claude-motion-director/REPORT.md).

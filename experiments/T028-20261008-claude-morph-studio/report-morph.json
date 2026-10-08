@@ -1,0 +1,58 @@
+{
+  "kind": "morph-scenes",
+  "version": "0.1",
+  "source_sha256": "5871bb5c3fe59a5fe88f49f073738eefa877da5eee7c38f168e64c4086de8383",
+  "continuity": [
+    {
+      "to_slide": 2,
+      "option": "byObject",
+      "stage": true,
+      "reason": "Title 1 → Title 1 (title to title)"
+    },
+    {
+      "to_slide": 3,
+      "option": "byObject",
+      "stage": true,
+      "reason": "Title 1 → Title 1 (title to title)"
+    },
+    {
+      "to_slide": 4,
+      "option": "byObject",
+      "stage": true,
+      "reason": "Title 1 → Title 1 (title to title)"
+    },
+    {
+      "to_slide": 5,
+      "option": "byObject",
+      "stage": true,
+      "reason": "Title 1 → Title 1 (title to title)"
+    },
+    {
+      "to_slide": 6,
+      "option": "byObject",
+      "stage": true,
+      "reason": "Title 1 → Title 1 (title to title)"
+    },
+    {
+      "to_slide": 7,
+      "option": "byObject",
+      "stage": true,
+      "reason": "Title 1 → Title 1 (title to title)"
+    }
+  ],
+  "scenes": [
+    {
+      "slide": 3,
+      "technique": "card-expand",
+      "card": "KPI Card 1",
+      "panel": [
+        0.06,
+        0.22,
+        0.88,
+        0.68
+      ],
+      "reason": "Revenue is the headline: once the three KPIs have landed, its card opens into a full panel so the presenter can dwell on it before the channel breakdown."
+    }
+  ],
+  "suggestions": []
+}

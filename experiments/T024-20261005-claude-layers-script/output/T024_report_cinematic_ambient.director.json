@@ -1,0 +1,974 @@
+{
+  "version": "0.7",
+  "kind": "existing-deck-motion-director",
+  "source": {
+    "pptx_sha256": "7366f1382edd834d6cea1831d5ea4959232053ecc3bb55328fbf4eae5394b3d6",
+    "inventory_version": "0.1",
+    "source_slide_count": 7
+  },
+  "user_instruction": "Add presenter-paced native motion to the existing deck.",
+  "script": {
+    "source": "speaker-notes",
+    "summary": "Each slide reveals its content in reading order, one talking point per click; data before conclusions; existing animation preserved.",
+    "evidence": [
+      "slide titles and reading order",
+      "speaker notes",
+      "existing native animation"
+    ],
+    "beats": [
+      "slide 1: Q3 Operating Review",
+      "slide 2: Agenda",
+      "slide 3: Q3 at a glance",
+      "slide 4: Revenue by channel",
+      "slide 5: How we fixed fulfilment",
+      "slide 6: Customer feedback",
+      "slide 7: Priorities for Q4"
+    ]
+  },
+  "preservation": {
+    "preserve_text_by_default": true,
+    "preserve_media_by_default": true,
+    "preserve_theme_by_default": true,
+    "preserve_slide_order_by_default": true,
+    "slide_count_policy": "preserve"
+  },
+  "slides": [
+    {
+      "source_index": 2,
+      "role": "report slide",
+      "objective": "Audience follows slide 2 one idea at a time.",
+      "beats": [
+        {
+          "id": "ambient-9",
+          "purpose": "Background shapes drift slowly for depth while the slide is shown.",
+          "operation": "choreography",
+          "targets": [
+            "backdrop1",
+            "backdrop2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-slide-start",
+          "recipe": "drift",
+          "layer": "ambient",
+          "motion_parameters": {
+            "amplitude": 0.02,
+            "period_ms": 10000
+          }
+        },
+        {
+          "id": "point-1",
+          "purpose": "Reveal point: Headline results",
+          "operation": "text-build",
+          "targets": [
+            "Content Placeholder 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            0
+          ]
+        },
+        {
+          "id": "point-3",
+          "purpose": "Reveal point: Revenue by channel",
+          "operation": "text-build",
+          "targets": [
+            "Content Placeholder 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            1
+          ]
+        },
+        {
+          "id": "point-5",
+          "purpose": "Reveal point: How we fixed fulfilment",
+          "operation": "text-build",
+          "targets": [
+            "Content Placeholder 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            2
+          ]
+        },
+        {
+          "id": "point-7",
+          "purpose": "Reveal point: Priorities for Q4",
+          "operation": "text-build",
+          "targets": [
+            "Content Placeholder 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            3
+          ]
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-10",
+          "purpose": "Ambient background starts with the slide.",
+          "motion_beats": [
+            "ambient-9"
+          ],
+          "stable_state": "Background moving gently; content still waiting for the presenter.",
+          "pause_after": "none",
+          "boundary_reason": "Ambient motion starts automatically and never needs a click."
+        },
+        {
+          "id": "click-2",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-1"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-4",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-3"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        },
+        {
+          "id": "click-6",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-5"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        },
+        {
+          "id": "click-8",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-7"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        }
+      ],
+      "components": [
+        {
+          "id": "backdrop1",
+          "role": "ambient background depth",
+          "rationale": "Ambient layer requested by the user: soft shapes drift slowly behind the content.",
+          "native_kind": "shape",
+          "style_basis": "deck accent colour and font; low opacity behind source objects",
+          "data_provenance": "none",
+          "generate": {
+            "kind": "backdrop",
+            "index": 0
+          }
+        },
+        {
+          "id": "backdrop2",
+          "role": "ambient background depth",
+          "rationale": "Ambient layer requested by the user: soft shapes drift slowly behind the content.",
+          "native_kind": "shape",
+          "style_basis": "deck accent colour and font; low opacity behind source objects",
+          "data_provenance": "none",
+          "generate": {
+            "kind": "backdrop",
+            "index": 1
+          }
+        }
+      ]
+    },
+    {
+      "source_index": 3,
+      "role": "report slide",
+      "objective": "Audience follows slide 3 one idea at a time.",
+      "beats": [
+        {
+          "id": "ambient-7",
+          "purpose": "Background shapes drift slowly for depth while the slide is shown.",
+          "operation": "choreography",
+          "targets": [
+            "backdrop1",
+            "backdrop2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-slide-start",
+          "recipe": "drift",
+          "layer": "ambient",
+          "motion_parameters": {
+            "amplitude": 0.02,
+            "period_ms": 10000
+          }
+        },
+        {
+          "id": "card-1",
+          "purpose": "Reveal the card '$4.2M' as one unit.",
+          "operation": "reveal",
+          "targets": [
+            "KPI Card 1",
+            "KPI Value 1",
+            "KPI Label 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 500
+        },
+        {
+          "id": "card-3",
+          "purpose": "Reveal the card '38%' as one unit.",
+          "operation": "reveal",
+          "targets": [
+            "KPI Card 2",
+            "KPI Value 2",
+            "KPI Label 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 500
+        },
+        {
+          "id": "card-5",
+          "purpose": "Reveal the card '1,250' as one unit.",
+          "operation": "reveal",
+          "targets": [
+            "KPI Card 3",
+            "KPI Value 3",
+            "KPI Label 3"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 500
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-8",
+          "purpose": "Ambient background starts with the slide.",
+          "motion_beats": [
+            "ambient-7"
+          ],
+          "stable_state": "Background moving gently; content still waiting for the presenter.",
+          "pause_after": "none",
+          "boundary_reason": "Ambient motion starts automatically and never needs a click."
+        },
+        {
+          "id": "click-2",
+          "purpose": "Present $4.2M.",
+          "motion_beats": [
+            "card-1"
+          ],
+          "stable_state": "Card fully visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-4",
+          "purpose": "Present 38%.",
+          "motion_beats": [
+            "card-3"
+          ],
+          "stable_state": "Card fully visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each card is a separate talking point."
+        },
+        {
+          "id": "click-6",
+          "purpose": "Present 1,250.",
+          "motion_beats": [
+            "card-5"
+          ],
+          "stable_state": "Card fully visible.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Each card is a separate talking point."
+        }
+      ],
+      "components": [
+        {
+          "id": "backdrop1",
+          "role": "ambient background depth",
+          "rationale": "Ambient layer requested by the user: soft shapes drift slowly behind the content.",
+          "native_kind": "shape",
+          "style_basis": "deck accent colour and font; low opacity behind source objects",
+          "data_provenance": "none",
+          "generate": {
+            "kind": "backdrop",
+            "index": 0
+          }
+        },
+        {
+          "id": "backdrop2",
+          "role": "ambient background depth",
+          "rationale": "Ambient layer requested by the user: soft shapes drift slowly behind the content.",
+          "native_kind": "shape",
+          "style_basis": "deck accent colour and font; low opacity behind source objects",
+          "data_provenance": "none",
+          "generate": {
+            "kind": "backdrop",
+            "index": 1
+          }
+        }
+      ]
+    },
+    {
+      "source_index": 4,
+      "role": "report slide",
+      "objective": "Audience follows slide 4 one idea at a time.",
+      "beats": [
+        {
+          "id": "ambient-5",
+          "purpose": "Background shapes drift slowly for depth while the slide is shown.",
+          "operation": "choreography",
+          "targets": [
+            "backdrop1",
+            "backdrop2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-slide-start",
+          "recipe": "drift",
+          "layer": "ambient",
+          "motion_parameters": {
+            "amplitude": 0.02,
+            "period_ms": 10000
+          }
+        },
+        {
+          "id": "chart-1",
+          "purpose": "Build the chart data in its reading order so each series lands as the presenter explains it.",
+          "operation": "chart-build",
+          "targets": [
+            "Channel Chart"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "data_motion": {
+            "kind": "chart",
+            "chart_type": "column",
+            "recipe": "baseline-grow",
+            "build": "series",
+            "animate_background": false,
+            "rationale": "Columns encode magnitude from a baseline; grow/reveal from that baseline preserves the reading direction."
+          }
+        },
+        {
+          "id": "card-3",
+          "purpose": "Reveal the card 'Online overtook retail for the first time in Q3.' as one unit.",
+          "operation": "reveal",
+          "targets": [
+            "Takeaway Card",
+            "Takeaway"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 500
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-6",
+          "purpose": "Ambient background starts with the slide.",
+          "motion_beats": [
+            "ambient-5"
+          ],
+          "stable_state": "Background moving gently; content still waiting for the presenter.",
+          "pause_after": "none",
+          "boundary_reason": "Ambient motion starts automatically and never needs a click."
+        },
+        {
+          "id": "click-2",
+          "purpose": "Show the data.",
+          "motion_beats": [
+            "chart-1"
+          ],
+          "stable_state": "Complete chart visible for discussion.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-4",
+          "purpose": "Present Online overtook retail for the first time in Q3..",
+          "motion_beats": [
+            "card-3"
+          ],
+          "stable_state": "Card fully visible.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Each card is a separate talking point."
+        }
+      ],
+      "components": [
+        {
+          "id": "backdrop1",
+          "role": "ambient background depth",
+          "rationale": "Ambient layer requested by the user: soft shapes drift slowly behind the content.",
+          "native_kind": "shape",
+          "style_basis": "deck accent colour and font; low opacity behind source objects",
+          "data_provenance": "none",
+          "generate": {
+            "kind": "backdrop",
+            "index": 0
+          }
+        },
+        {
+          "id": "backdrop2",
+          "role": "ambient background depth",
+          "rationale": "Ambient layer requested by the user: soft shapes drift slowly behind the content.",
+          "native_kind": "shape",
+          "style_basis": "deck accent colour and font; low opacity behind source objects",
+          "data_provenance": "none",
+          "generate": {
+            "kind": "backdrop",
+            "index": 1
+          }
+        }
+      ]
+    },
+    {
+      "source_index": 5,
+      "role": "report slide",
+      "objective": "Audience follows slide 5 one idea at a time.",
+      "beats": [
+        {
+          "id": "ambient-19",
+          "purpose": "Background shapes drift slowly for depth while the slide is shown.",
+          "operation": "choreography",
+          "targets": [
+            "backdrop1",
+            "backdrop2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-slide-start",
+          "recipe": "drift",
+          "layer": "ambient",
+          "motion_parameters": {
+            "amplitude": 0.02,
+            "period_ms": 10000
+          }
+        },
+        {
+          "id": "step-1",
+          "purpose": "Reveal step 'Forecast'.",
+          "operation": "reveal",
+          "targets": [
+            "Step 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 400
+        },
+        {
+          "id": "rail-2",
+          "purpose": "Lay the rail and place the progress marker.",
+          "operation": "reveal",
+          "targets": [
+            "track",
+            "token"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "with-previous",
+          "effect": "wipe-right",
+          "duration_ms": 500,
+          "layer": "secondary"
+        },
+        {
+          "id": "go-3",
+          "purpose": "The marker travels to 'Forecast'.",
+          "operation": "choreography",
+          "targets": [
+            "token",
+            "Step 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "after-previous",
+          "recipe": "travel",
+          "layer": "secondary",
+          "motion_parameters": {
+            "duration_ms": 650,
+            "arc": 0.3,
+            "offset_y": 0.15333333333333332,
+            "dwell_ms": 0,
+            "overshoot": 0.06,
+            "pulse_stops": true
+          }
+        },
+        {
+          "id": "link-5",
+          "purpose": "Draw the connector that leads into the next step.",
+          "operation": "stagger-reveal",
+          "targets": [
+            "Arrow 1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "wipe-right",
+          "duration_ms": 300
+        },
+        {
+          "id": "step-6",
+          "purpose": "Reveal step 'Roast'.",
+          "operation": "reveal",
+          "targets": [
+            "Step 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "after-previous",
+          "effect": "zoom",
+          "duration_ms": 400
+        },
+        {
+          "id": "go-7",
+          "purpose": "The marker travels to 'Roast'.",
+          "operation": "choreography",
+          "targets": [
+            "token",
+            "Step 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "after-previous",
+          "recipe": "travel",
+          "layer": "secondary",
+          "motion_parameters": {
+            "duration_ms": 650,
+            "arc": 0.3,
+            "offset_y": 0.15333333333333332,
+            "dwell_ms": 0,
+            "overshoot": 0.06,
+            "pulse_stops": true
+          }
+        },
+        {
+          "id": "link-9",
+          "purpose": "Draw the connector that leads into the next step.",
+          "operation": "stagger-reveal",
+          "targets": [
+            "Arrow 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "wipe-right",
+          "duration_ms": 300
+        },
+        {
+          "id": "step-10",
+          "purpose": "Reveal step 'Pack'.",
+          "operation": "reveal",
+          "targets": [
+            "Step 3"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "after-previous",
+          "effect": "zoom",
+          "duration_ms": 400
+        },
+        {
+          "id": "go-11",
+          "purpose": "The marker travels to 'Pack'.",
+          "operation": "choreography",
+          "targets": [
+            "token",
+            "Step 3"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "after-previous",
+          "recipe": "travel",
+          "layer": "secondary",
+          "motion_parameters": {
+            "duration_ms": 650,
+            "arc": 0.3,
+            "offset_y": 0.15333333333333332,
+            "dwell_ms": 0,
+            "overshoot": 0.06,
+            "pulse_stops": true
+          }
+        },
+        {
+          "id": "link-13",
+          "purpose": "Draw the connector that leads into the next step.",
+          "operation": "stagger-reveal",
+          "targets": [
+            "Arrow 3"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "wipe-right",
+          "duration_ms": 300
+        },
+        {
+          "id": "step-14",
+          "purpose": "Reveal step 'Ship'.",
+          "operation": "reveal",
+          "targets": [
+            "Step 4"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "after-previous",
+          "effect": "zoom",
+          "duration_ms": 400
+        },
+        {
+          "id": "go-15",
+          "purpose": "The marker travels to 'Ship'.",
+          "operation": "choreography",
+          "targets": [
+            "token",
+            "Step 4"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "after-previous",
+          "recipe": "travel",
+          "layer": "secondary",
+          "motion_parameters": {
+            "duration_ms": 650,
+            "arc": 0.3,
+            "offset_y": 0.15333333333333332,
+            "dwell_ms": 0,
+            "overshoot": 0.06,
+            "pulse_stops": true
+          }
+        },
+        {
+          "id": "reveal-17",
+          "purpose": "Reveal 'Lead time fell from 9 days to 4 days.'.",
+          "operation": "reveal",
+          "targets": [
+            "Result"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-20",
+          "purpose": "Ambient background starts with the slide.",
+          "motion_beats": [
+            "ambient-19"
+          ],
+          "stable_state": "Background moving gently; content still waiting for the presenter.",
+          "pause_after": "none",
+          "boundary_reason": "Ambient motion starts automatically and never needs a click."
+        },
+        {
+          "id": "click-4",
+          "purpose": "Walk to step 'Forecast'.",
+          "motion_beats": [
+            "step-1",
+            "rail-2",
+            "go-3"
+          ],
+          "stable_state": "Steps so far visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-8",
+          "purpose": "Walk to step 'Roast'.",
+          "motion_beats": [
+            "link-5",
+            "step-6",
+            "go-7"
+          ],
+          "stable_state": "Steps so far visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Speaker notes walk the steps one at a time."
+        },
+        {
+          "id": "click-12",
+          "purpose": "Walk to step 'Pack'.",
+          "motion_beats": [
+            "link-9",
+            "step-10",
+            "go-11"
+          ],
+          "stable_state": "Steps so far visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Speaker notes walk the steps one at a time."
+        },
+        {
+          "id": "click-16",
+          "purpose": "Walk to step 'Ship'.",
+          "motion_beats": [
+            "link-13",
+            "step-14",
+            "go-15"
+          ],
+          "stable_state": "Steps so far visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Speaker notes walk the steps one at a time."
+        },
+        {
+          "id": "click-18",
+          "purpose": "Introduce 'Lead time fell from 9 days to 4 days.'.",
+          "motion_beats": [
+            "reveal-17"
+          ],
+          "stable_state": "Content visible.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "The conclusion lands after the evidence has been discussed."
+        }
+      ],
+      "components": [
+        {
+          "id": "track",
+          "role": "the rail the work travels along",
+          "rationale": "Secondary layer: makes the sequence a single path the token can follow.",
+          "native_kind": "shape",
+          "style_basis": "deck accent colour and font; low opacity behind source objects",
+          "data_provenance": "none",
+          "generate": {
+            "kind": "track-line",
+            "anchors": [
+              "Step 1",
+              "Step 4"
+            ],
+            "offset_y": 0.15333333333333332
+          }
+        },
+        {
+          "id": "token",
+          "role": "marks where the process is right now",
+          "rationale": "Narrative resource the deck lacks: a progress marker that travels step by step with the speaker.",
+          "native_kind": "shape",
+          "style_basis": "deck accent colour and font",
+          "data_provenance": "none",
+          "generate": {
+            "kind": "token",
+            "anchors": [
+              "Step 1"
+            ],
+            "offset_y": 0.15333333333333332,
+            "size": 0.045
+          }
+        },
+        {
+          "id": "backdrop1",
+          "role": "ambient background depth",
+          "rationale": "Ambient layer requested by the user: soft shapes drift slowly behind the content.",
+          "native_kind": "shape",
+          "style_basis": "deck accent colour and font; low opacity behind source objects",
+          "data_provenance": "none",
+          "generate": {
+            "kind": "backdrop",
+            "index": 0
+          }
+        },
+        {
+          "id": "backdrop2",
+          "role": "ambient background depth",
+          "rationale": "Ambient layer requested by the user: soft shapes drift slowly behind the content.",
+          "native_kind": "shape",
+          "style_basis": "deck accent colour and font; low opacity behind source objects",
+          "data_provenance": "none",
+          "generate": {
+            "kind": "backdrop",
+            "index": 1
+          }
+        }
+      ]
+    },
+    {
+      "source_index": 7,
+      "role": "report slide",
+      "objective": "Audience follows slide 7 one idea at a time.",
+      "beats": [
+        {
+          "id": "ambient-7",
+          "purpose": "Background shapes drift slowly for depth while the slide is shown.",
+          "operation": "choreography",
+          "targets": [
+            "backdrop1",
+            "backdrop2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-slide-start",
+          "recipe": "drift",
+          "layer": "ambient",
+          "motion_parameters": {
+            "amplitude": 0.02,
+            "period_ms": 10000
+          }
+        },
+        {
+          "id": "point-1",
+          "purpose": "Reveal point: Expand online subscriptions",
+          "operation": "text-build",
+          "targets": [
+            "Content Placeholder 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            0
+          ]
+        },
+        {
+          "id": "point-3",
+          "purpose": "Reveal point: Cut packaging waste by 30%",
+          "operation": "text-build",
+          "targets": [
+            "Content Placeholder 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            1
+          ]
+        },
+        {
+          "id": "point-5",
+          "purpose": "Reveal point: Open the second roastery",
+          "operation": "text-build",
+          "targets": [
+            "Content Placeholder 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            2
+          ]
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-8",
+          "purpose": "Ambient background starts with the slide.",
+          "motion_beats": [
+            "ambient-7"
+          ],
+          "stable_state": "Background moving gently; content still waiting for the presenter.",
+          "pause_after": "none",
+          "boundary_reason": "Ambient motion starts automatically and never needs a click."
+        },
+        {
+          "id": "click-2",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-1"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-4",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-3"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        },
+        {
+          "id": "click-6",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-5"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        }
+      ],
+      "components": [
+        {
+          "id": "backdrop1",
+          "role": "ambient background depth",
+          "rationale": "Ambient layer requested by the user: soft shapes drift slowly behind the content.",
+          "native_kind": "shape",
+          "style_basis": "deck accent colour and font; low opacity behind source objects",
+          "data_provenance": "none",
+          "generate": {
+            "kind": "backdrop",
+            "index": 0
+          }
+        },
+        {
+          "id": "backdrop2",
+          "role": "ambient background depth",
+          "rationale": "Ambient layer requested by the user: soft shapes drift slowly behind the content.",
+          "native_kind": "shape",
+          "style_basis": "deck accent colour and font; low opacity behind source objects",
+          "data_provenance": "none",
+          "generate": {
+            "kind": "backdrop",
+            "index": 1
+          }
+        }
+      ]
+    }
+  ],
+  "target_slide_count": 7,
+  "research_metadata": {
+    "sources": [],
+    "draft_notes": {
+      "1": "title slide kept static",
+      "2": "5 click(s), 5 motion beat(s)",
+      "3": "4 click(s), 4 motion beat(s)",
+      "4": "3 click(s), 3 motion beat(s)",
+      "5": "6 click(s), 14 motion beat(s)",
+      "6": "existing native animation preserved as the slide's choreography",
+      "7": "4 click(s), 4 motion beat(s)"
+    },
+    "style": "cinematic",
+    "drafted_by": "motion_director.py heuristic v0.1"
+  }
+}

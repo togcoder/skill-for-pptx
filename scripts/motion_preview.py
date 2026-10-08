@@ -99,6 +99,16 @@ def frame_root(root,objects,states,hidden_paras,W,H):
         alpha=st["opacity"]*st.get("alpha",1.0)
         if alpha<0.999:
             _fade(node,alpha)
+        frac=st.get("text_frac",1.0)
+        if frac<0.999:
+            # Typewriter preview: keep the first share of characters.
+            ts=list(node.iter(f"{{{A}}}t"))
+            total=sum(len(t.text or "") for t in ts)
+            keep=int(total*frac)
+            for t in ts:
+                n=len(t.text or "")
+                t.text=(t.text or "")[:max(0,keep)]
+                keep-=n
     if hidden_paras:
         anim.apply_state_for_preview(r,{"hidden_objects":set(),"hidden_paragraphs":hidden_paras})
     timing=r.find("p:timing",NS)
@@ -126,14 +136,17 @@ def _hidden_paragraphs(groups,upto_group,t):
     return hidden
 
 
-def sample_frames(root,objects,fps=8,hold_ms=700):
+def sample_frames(root,objects,fps=8,hold_ms=700,loop_window_ms=2500):
     """[(label, states, hidden_paragraphs, delay_ms)] covering every click group."""
     groups,autos=me.effects_from_slide(root)
     states=me.initial_states(objects,groups)
     frames=[("start",states,_hidden_paragraphs(groups,-1,0),hold_ms)]
     step=1000/fps
     for gi,g in enumerate(groups):
-        dur=me.group_duration(g)
+        # Ambient loops are sampled for a short window only (the GIF stays small);
+        # one-shot motion is always sampled to its end.
+        ends=[end if not e.get("loop") else start+min(end-start,loop_window_ms) for start,end,e in me.schedule(g)]
+        dur=max(ends,default=0)
         t=step
         while t<dur:
             frames.append((f"{'auto' if autos[gi] else 'click'} {gi+1} · {t/1000:.1f}s",
