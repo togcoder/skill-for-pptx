@@ -142,15 +142,19 @@ def layout(spec,anchors,slide,aspect):
         box[3]=min(box[3],1.0)
         return (box[0],box[1],box[2]-box[0],max(0.005,box[3]-box[1]))
     if kind=="highlight":
-        # Marker over the first text line only, as wide as the words.
-        x0,y0,x1,y1=_bbox(anchors)
+        # Marker behind the visible text, where the lines really sit (vertical
+        # anchor aware; T030: a centred, wrapped takeaway got its marker above
+        # the words). One line: as wide as the words. Wrapped: the whole block.
         a=anchors[0]
+        x0,y0,x1,y1=me.text_block(a,aspect) or _bbox(anchors)
         size=(a.get("max_font_pt") or 18)
         line=(a.get("text") or "").split("\n")[0]
-        est=min(x1-x0,len(line)*size*0.56/72/13.333*(16/9)/aspect+0.02)
-        lh=min(y1-y0,size*1.35/72/7.5)
+        lh=size*1.35/72/7.5
         pad=float(spec.get("padding",0.004))
-        return (x0+0.004,y0+0.01-pad,est,lh+2*pad)
+        if y1-y0>1.6*lh:
+            return (x0+0.004,y0-pad,x1-x0-0.008,y1-y0+2*pad)
+        est=min(x1-x0,len(line)*size*0.56/72/13.333*(16/9)/aspect+0.02)
+        return (x0+0.004,y0-pad,est,min(y1-y0,lh)+2*pad)
     if kind=="underline":
         x0,y0,x1,y1=_bbox(anchors)
         a=anchors[0]

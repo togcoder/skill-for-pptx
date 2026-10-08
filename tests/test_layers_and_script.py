@@ -299,3 +299,26 @@ class ScriptTests(unittest.TestCase):
 
 if __name__=="__main__":
     unittest.main()
+
+
+class HighlightPlacementTests(unittest.TestCase):
+    """T030: PowerPoint render showed the marker above a centred, wrapped takeaway."""
+
+    def test_marker_sits_on_centred_wrapped_text(self):
+        import motion_components as mc
+        takeaway={"geometry":{"x":0.66,"y":0.29,"w":0.29,"h":0.39},"text_anchor":"ctr","max_font_pt":30,
+                  "text":"Kênh trực tuyến tăng gấp 2,5 lần trong sáu tháng.",
+                  "paragraphs":[{"text":"Kênh trực tuyến tăng gấp 2,5 lần trong sáu tháng."}]}
+        x,y,w,h=mc.layout({"kind":"highlight"},[takeaway],{"objects":[takeaway]},16/9)
+        g=takeaway["geometry"]
+        self.assertGreater(y,g["y"]+0.05)           # not glued to the box top
+        self.assertLess(abs((y+h/2)-(g["y"]+g["h"]/2)),0.03)  # centred like the text
+        self.assertGreater(h,0.1)                    # covers the wrapped lines
+
+    def test_single_top_line_marker_unchanged_in_spirit(self):
+        import motion_components as mc
+        label={"geometry":{"x":0.1,"y":0.2,"w":0.6,"h":0.2},"text_anchor":"t","max_font_pt":24,
+               "text":"Short takeaway","paragraphs":[{"text":"Short takeaway"}]}
+        x,y,w,h=mc.layout({"kind":"highlight"},[label],{"objects":[label]},16/9)
+        self.assertLess(y,0.22)
+        self.assertLess(w,0.3)

@@ -167,3 +167,28 @@ class OfficeKitTests(unittest.TestCase):
         self.assertIn("FONT_GLYPHS",{e["code"] for e in sf.validate_spec(spec)})
         spec["fonts"]={"head":"Segoe UI Semibold","body":"Segoe UI"}
         self.assertEqual(sf.validate_spec(spec),[])
+
+
+class BrandPaletteTests(unittest.TestCase):
+    def test_any_brand_colour_yields_an_aa_theme_in_both_modes(self):
+        import random
+        import brand_palette as bp
+        rnd=random.Random(30)
+        seeds=["#FFD100","#00A651","#0057B8","#DA251D","#7C3AED","#FFFFFF","#000000"]+[
+            "#%06X"%rnd.randrange(0x1000000) for _ in range(40)]
+        for seed in seeds:
+            for mode in ("light","dark"):
+                t=bp.brand_theme(seed,mode)
+                for role in ("text","muted","accent","accent2"):
+                    for back in ("bg","surface"):
+                        self.assertGreaterEqual(forge_qa.contrast(t[role],t[back]),4.5,f"{seed} {mode} {role}/{back}")
+
+    def test_legible_brand_colour_is_kept_exactly(self):
+        import brand_palette as bp
+        self.assertEqual(bp.brand_theme("#0057B8")["accent"],"0057B8")
+
+    def test_seed_theme_validates_and_rejects_bad_hex(self):
+        ok={"theme":{"seed":"#DA251D","mode":"dark"},"slides":[{"layout":"section","title":"Brand"}]}
+        self.assertEqual(sf.validate_spec(ok),[])
+        bad={"theme":{"seed":"red"},"slides":[{"layout":"section","title":"Brand"}]}
+        self.assertIn("THEME_SEED",{e["code"] for e in sf.validate_spec(bad)})
