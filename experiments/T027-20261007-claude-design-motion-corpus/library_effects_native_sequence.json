@@ -1,0 +1,101 @@
+﻿{
+    "powerpoint_version":  "16.0",
+    "build":  "17932",
+    "pptx":  "C:\\Users\\COMPUTER\\Desktop\\làm chung với ai\\skill-for-pptx\\build\\t027\\library_effects.pptx",
+    "slides":  [
+                   {
+                       "index":  1,
+                       "effects":  [
+
+                                   ]
+                   },
+                   {
+                       "index":  2,
+                       "effects":  [
+                                       {
+                                           "shape":  "Heading",
+                                           "effect_type":  25,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  1,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "Heading",
+                                           "effect_type":  33,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  2,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "Heading",
+                                           "effect_type":  144,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  2,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "Heading",
+                                           "effect_type":  77,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "Heading",
+                                           "effect_type":  69,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  2,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "Heading",
+                                           "effect_type":  80,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  1,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "Heading",
+                                           "effect_type":  2,
+                                           "exit":  -1,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       }
+                                   ]
+                   },
+                   {
+                       "index":  3,
+                       "effects":  [
+
+                                   ]
+                   }
+               ]
+}

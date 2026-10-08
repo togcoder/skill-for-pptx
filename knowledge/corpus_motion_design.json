@@ -1,0 +1,704 @@
+{
+ "source": "Zenodo10K sample (licensed pptx, Hugging Face Forceless/Zenodo10K), XML-only DNA",
+ "decks_scanned": 797,
+ "errors": 3,
+ "animated_share": 0.432,
+ "animated_slide_share": 0.196,
+ "effects_per_animated_deck": {
+  "p25": 6,
+  "p50": 20,
+  "p75": 51,
+  "p90": 141
+ },
+ "max_effects_on_one_slide": {
+  "p25": 3,
+  "p50": 7,
+  "p75": 13,
+  "p90": 24
+ },
+ "vocabulary_per_animated_deck": {
+  "p25": 1,
+  "p50": 2,
+  "p75": 4,
+  "p90": 6
+ },
+ "class_share": {
+  "entr": 0.929,
+  "exit": 0.027,
+  "emph": 0.012,
+  "path": 0.008
+ },
+ "trigger_share": {
+  "clickEffect": 0.627,
+  "withEffect": 0.309,
+  "afterEffect": 0.064
+ },
+ "top_effects": [
+  [
+   "appear",
+   5894
+  ],
+  [
+   "faded-zoom",
+   2810
+  ],
+  [
+   "wipe",
+   1911
+  ],
+  [
+   "fade",
+   1812
+  ],
+  [
+   "fly",
+   507
+  ],
+  [
+   "ascend",
+   399
+  ],
+  [
+   "dissolve",
+   259
+  ],
+  [
+   "mediacall:1:0",
+   236
+  ],
+  [
+   "appear-out",
+   152
+  ],
+  [
+   "mediacall:2:0",
+   149
+  ],
+  [
+   "fade-out",
+   136
+  ],
+  [
+   "zoom",
+   112
+  ],
+  [
+   "blinds",
+   79
+  ],
+  [
+   "custom-path",
+   69
+  ],
+  [
+   "spin",
+   49
+  ],
+  [
+   "box",
+   44
+  ],
+  [
+   "expand",
+   44
+  ],
+  [
+   "transparency",
+   43
+  ],
+  [
+   "strips",
+   42
+  ],
+  [
+   "flash-bulb",
+   36
+  ],
+  [
+   "split",
+   35
+  ],
+  [
+   "fly-out",
+   33
+  ],
+  [
+   "rise-up",
+   33
+  ],
+  [
+   "blinds-out",
+   31
+  ],
+  [
+   "random-bars",
+   30
+  ],
+  [
+   "path-down",
+   24
+  ],
+  [
+   "checkerboard",
+   23
+  ],
+  [
+   "grow-shrink",
+   18
+  ],
+  [
+   "descend",
+   18
+  ],
+  [
+   "bounce",
+   14
+  ]
+ ],
+ "feature_deck_counts": {
+  "custom_path": 12,
+  "repeat": 4,
+  "auto_reverse": 2,
+  "interactive_sequences": 55,
+  "text_build": 123,
+  "chart_or_diagram_build": 6,
+  "transition:morph": 11,
+  "any_transition": 206
+ },
+ "transitions": [
+  [
+   "none",
+   1354
+  ],
+  [
+   "fade",
+   848
+  ],
+  [
+   "morph",
+   95
+  ],
+  [
+   "wipe",
+   92
+  ],
+  [
+   "split",
+   62
+  ],
+  [
+   "push",
+   59
+  ],
+  [
+   "prstTrans",
+   27
+  ],
+  [
+   "random",
+   22
+  ],
+  [
+   "cut",
+   15
+  ],
+  [
+   "dissolve",
+   12
+  ],
+  [
+   "circle",
+   10
+  ],
+  [
+   "prism",
+   10
+  ],
+  [
+   "pull",
+   8
+  ],
+  [
+   "ripple",
+   3
+  ],
+  [
+   "reveal",
+   3
+  ]
+ ],
+ "design": {
+  "type_levels": {
+   "p25": 6,
+   "p50": 9,
+   "p75": 13,
+   "p90": 17
+  },
+  "max_pt": {
+   "p25": 35.0,
+   "p50": 44.0,
+   "p75": 60.0,
+   "p90": 83.0
+  },
+  "median_pt": {
+   "p25": 14.0,
+   "p50": 18.0,
+   "p75": 24.0,
+   "p90": 30.0
+  },
+  "chars_per_slide": {
+   "p25": 183.1,
+   "p50": 270.5,
+   "p75": 402.7,
+   "p90": 636.1
+  },
+  "shapes_per_slide": {
+   "p25": 4.6,
+   "p50": 7,
+   "p75": 12.8,
+   "p90": 23
+  },
+  "picture_coverage": {
+   "p25": 0.138,
+   "p50": 0.252,
+   "p75": 0.389,
+   "p90": 0.533
+  },
+  "fonts": [
+   [
+    "Calibri",
+    553
+   ],
+   [
+    "Arial",
+    514
+   ],
+   [
+    "Calibri Light",
+    251
+   ],
+   [
+    "Verdana",
+    22
+   ],
+   [
+    "Century Gothic",
+    20
+   ],
+   [
+    "Trebuchet MS",
+    19
+   ],
+   [
+    "Corbel",
+    14
+   ],
+   [
+    "Franklin Gothic Book",
+    11
+   ],
+   [
+    "Gill Sans MT",
+    11
+   ],
+   [
+    "Open Sans",
+    11
+   ],
+   [
+    "Georgia",
+    9
+   ],
+   [
+    "Aptos Display",
+    7
+   ],
+   [
+    "Aptos",
+    7
+   ],
+   [
+    "Helvetica",
+    7
+   ],
+   [
+    "Franklin Gothic Medium",
+    7
+   ]
+  ]
+ },
+ "most_complex": [
+  {
+   "path": "pptx/cc-by-4.0/2022/d733e6bee1b015f0d454f12c686dba76-Satellite_ECCS_2012_presentation_Machicao.pptx",
+   "licence": "cc-by-4.0",
+   "slides": 18,
+   "effects": 208,
+   "vocabulary": 3,
+   "complexity": 210.8,
+   "top": [
+    "appear",
+    "custom-path",
+    "fade-out"
+   ]
+  },
+  {
+   "path": "pptx/cc-by-4.0/2022/00e75741ea95ae7892cd8f336de51045-Martin Black presentation FINAL (public).pptx",
+   "licence": "cc-by-4.0",
+   "slides": 51,
+   "effects": 72,
+   "vocabulary": 6,
+   "complexity": 171.6,
+   "top": [
+    "custom-path",
+    "spin",
+    "fade",
+    "appear",
+    "appear-out",
+    "fade-out"
+   ]
+  },
+  {
+   "path": "pptx/cc-by-4.0/2020/42eb67e7f502376c0a141104bd987f1f-Fabian Landman - RIVM protocol.pptx",
+   "licence": "cc-by-4.0",
+   "slides": 33,
+   "effects": 361,
+   "vocabulary": 16,
+   "complexity": 166.9,
+   "top": [
+    "fade",
+    "fade-out",
+    "appear",
+    "transparency",
+    "appear-out",
+    "flash-bulb"
+   ]
+  },
+  {
+   "path": "pptx/cc-by-4.0/2019/3310a5b24c8693cfcdcebb2074632b25-GdR_ISIS_Day_EPIC_18_09_2019.pptx",
+   "licence": "cc-by-4.0",
+   "slides": 33,
+   "effects": 234,
+   "vocabulary": 10,
+   "complexity": 113.7,
+   "top": [
+    "appear",
+    "blinds",
+    "blinds-out",
+    "wipe",
+    "fade",
+    "fly"
+   ]
+  },
+  {
+   "path": "pptx/cc-by-4.0/2020/dadac683129b18f6ed9d834941615011-Multiple Myeloma-associated amyloidosis.pptx",
+   "licence": "cc-by-4.0",
+   "slides": 18,
+   "effects": 105,
+   "vocabulary": 18,
+   "complexity": 109.2,
+   "top": [
+    "wipe",
+    "fly-out",
+    "appear",
+    "zoom-out",
+    "wipe",
+    "path-diagonal-down-right"
+   ]
+  },
+  {
+   "path": "pptx/cc-by-4.0/2021/a8e35eb9ca6f24896f8d2bb95417ebf3-module 2.2 OS in solid Earth sciences_the EPOS research infrastructure experience_Cocco.pptx",
+   "licence": "cc-by-4.0",
+   "slides": 47,
+   "effects": 210,
+   "vocabulary": 16,
+   "complexity": 102.0,
+   "top": [
+    "dissolve",
+    "faded-zoom",
+    "appear",
+    "fly",
+    "checkerboard",
+    "fly"
+   ]
+  },
+  {
+   "path": "pptx/cc-by-4.0/2022/6222d31cba4544a09775aec6561777e2-2022_RMS_ML_meeting.pptx",
+   "licence": "cc-by-4.0",
+   "slides": 19,
+   "effects": 176,
+   "vocabulary": 1,
+   "complexity": 99.6,
+   "top": [
+    "appear"
+   ]
+  },
+  {
+   "path": "pptx/cc-by-4.0/2022/0d50611733e15ef5f8b99d5c9fb3aca4-Jake_Johnson_experiences_in_actinium_2021.pptx",
+   "licence": "cc-by-4.0",
+   "slides": 65,
+   "effects": 263,
+   "vocabulary": 9,
+   "complexity": 99.5,
+   "top": [
+    "appear",
+    "fade",
+    "path-down",
+    "fade-out",
+    "wipe",
+    "transparency"
+   ]
+  },
+  {
+   "path": "pptx/cc-by-4.0/2023/90440a20c57028ab778c7710dd276b9f-PaperID10Navigating.pptx",
+   "licence": "cc-by-4.0",
+   "slides": 14,
+   "effects": 96,
+   "vocabulary": 6,
+   "complexity": 96.6,
+   "top": [
+    "zoom",
+    "rise-up",
+    "faded-zoom",
+    "strips",
+    "checkerboard",
+    "custom-path"
+   ]
+  },
+  {
+   "path": "pptx/cc-by-4.0/2022/fcbeba3c62715a35e04b3d7360cf05fa-KGC-Törmä-2022-03-24.pptx",
+   "licence": "cc-by-4.0",
+   "slides": 12,
+   "effects": 215,
+   "vocabulary": 4,
+   "complexity": 92.5,
+   "top": [
+    "wipe",
+    "appear",
+    "wipe",
+    "wipe"
+   ]
+  },
+  {
+   "path": "pptx/cc-by-4.0/2022/8a5572fd571a2b636d2e31486f6a1f19-Zucker_EAAT_statistics.pptx",
+   "licence": "cc-by-4.0",
+   "slides": 52,
+   "effects": 304,
+   "vocabulary": 8,
+   "complexity": 89.0,
+   "top": [
+    "wipe",
+    "appear",
+    "fade",
+    "wheel",
+    "wipe",
+    "wipe"
+   ]
+  },
+  {
+   "path": "pptx/cc-by-4.0/2024/357a87c0b453bf4c70a73796ff987299-PEP feedback- SSLN report _final_20240809.pptx",
+   "licence": "cc-by-4.0",
+   "slides": 43,
+   "effects": 121,
+   "vocabulary": 20,
+   "complexity": 87.4,
+   "top": [
+    "appear-out",
+    "appear",
+    "mediacall:1:0",
+    "mediacall:2:0",
+    "ascend",
+    "grow-shrink"
+   ]
+  },
+  {
+   "path": "pptx/cc-by-4.0/2024/3ae817e207dafeaa48de49f423135a91-ReERUA_Module4_Gender-Inequality-in-the-context-of-Politics_Part2_presentation.pptx",
+   "licence": "cc-by-4.0",
+   "slides": 39,
+   "effects": 141,
+   "vocabulary": 19,
+   "complexity": 77.1,
+   "top": [
+    "expand",
+    "strips",
+    "dissolve",
+    "fly",
+    "fly",
+    "wipe"
+   ]
+  },
+  {
+   "path": "pptx/cc-by-sa-4.0/2024/d6a45c0a7c609e9b6886ddbfc8eba58f-Slides-Blutzuckermonitoring.pptx",
+   "licence": "cc-by-sa-4.0",
+   "slides": 29,
+   "effects": 136,
+   "vocabulary": 10,
+   "complexity": 73.6,
+   "top": [
+    "fade",
+    "wipe",
+    "wipe",
+    "fade-out",
+    "appear",
+    "descend"
+   ]
+  },
+  {
+   "path": "pptx/cc-by-4.0/2020/7b9682d5d6fc77c7d94b13d0d5a87def-5 Bahan Tayang Sidang.pptx",
+   "licence": "cc-by-4.0",
+   "slides": 32,
+   "effects": 222,
+   "vocabulary": 7,
+   "complexity": 70.5,
+   "top": [
+    "fade",
+    "wipe",
+    "wipe",
+    "wipe",
+    "path-left",
+    "wipe"
+   ]
+  },
+  {
+   "path": "pptx/cc-by-4.0/2020/f8cea487a34886c98214f9f07aa006df-PPT_Rafika Bayu Kusumandari.pptx",
+   "licence": "cc-by-4.0",
+   "slides": 17,
+   "effects": 78,
+   "vocabulary": 14,
+   "complexity": 66.5,
+   "top": [
+    "fade",
+    "wipe",
+    "strips",
+    "faded-zoom",
+    "wipe",
+    "spin"
+   ]
+  },
+  {
+   "path": "pptx/cc-by-4.0/2022/811676431f92453d5d9fe8e411b09cfa-presentation-public-defense1-220403194858.pptx",
+   "licence": "cc-by-4.0",
+   "slides": 106,
+   "effects": 198,
+   "vocabulary": 2,
+   "complexity": 65.8,
+   "top": [
+    "fade",
+    "appear"
+   ]
+  },
+  {
+   "path": "pptx/cc-by-4.0/2024/17a5d8ece95c2541a0745aa0912d5640-HUNTINGTON'S DISEASE.pptx",
+   "licence": "cc-by-4.0",
+   "slides": 20,
+   "effects": 64,
+   "vocabulary": 16,
+   "complexity": 65.6,
+   "top": [
+    "fade",
+    "faded-zoom",
+    "appear",
+    "mediacall:1:0",
+    "appear-out",
+    "ascend"
+   ]
+  },
+  {
+   "path": "pptx/cc-by-4.0/2024/fccfd4eef99e31c74d5fa8131b1febcb-DataWeek_Sharing+Licensing.pptx",
+   "licence": "cc-by-4.0",
+   "slides": 117,
+   "effects": 155,
+   "vocabulary": 1,
+   "complexity": 65.5,
+   "top": [
+    "appear"
+   ]
+  },
+  {
+   "path": "pptx/cc-by-4.0/2024/a91d6e024bb880e762f547f0396ac97f-230420_Presentation-8th_SVS_2023.pptx",
+   "licence": "cc-by-4.0",
+   "slides": 13,
+   "effects": 132,
+   "vocabulary": 1,
+   "complexity": 63.7,
+   "top": [
+    "appear"
+   ]
+  },
+  {
+   "path": "pptx/cc-by-4.0/2021/57de804d3ac0543bdbb0b884b8560e1e-Re-Imagining_Regulatory_Obligation_Management.pptx",
+   "licence": "cc-by-4.0",
+   "slides": 13,
+   "effects": 125,
+   "vocabulary": 3,
+   "complexity": 62.5,
+   "top": [
+    "appear",
+    "wipe",
+    "wipe"
+   ]
+  },
+  {
+   "path": "pptx/cc-by-4.0/2019/af93feac0c16d212791fc9ef1c47f4ff-Grange_ASTRON_OSC.pptx",
+   "licence": "cc-by-4.0",
+   "slides": 11,
+   "effects": 59,
+   "vocabulary": 11,
+   "complexity": 61.1,
+   "top": [
+    "appear",
+    "checkerboard-out",
+    "checkerboard",
+    "custom-path",
+    "grow-shrink",
+    "transparency"
+   ]
+  },
+  {
+   "path": "pptx/cc-by-4.0/2023/e791f60a12edee5ff251beee39e98558-Stretching_Numerique_Windows_2023.pptx",
+   "licence": "cc-by-4.0",
+   "slides": 43,
+   "effects": 24,
+   "vocabulary": 5,
+   "complexity": 55.4,
+   "top": [
+    "fade",
+    "fly",
+    "ascend",
+    "wipe",
+    "wipe"
+   ]
+  },
+  {
+   "path": "pptx/cc-by-4.0/2023/c0458499d45524534c6216c3c6291b2b-Luyben -20230531_NTE-Bratislava-KL-1.pptx",
+   "licence": "cc-by-4.0",
+   "slides": 37,
+   "effects": 154,
+   "vocabulary": 11,
+   "complexity": 54.4,
+   "top": [
+    "appear",
+    "fly",
+    "split-out",
+    "bounce",
+    "fly",
+    "zoom"
+   ]
+  },
+  {
+   "path": "pptx/cc-by-4.0/2019/70b543739568c3965ce84b83acc2d6de-NTAQC2017_8.pptx",
+   "licence": "cc-by-4.0",
+   "slides": 50,
+   "effects": 29,
+   "vocabulary": 6,
+   "complexity": 51.5,
+   "top": [
+    "appear",
+    "appear-out",
+    "custom-path",
+    "blinds-out",
+    "blinds",
+    "checkerboard"
+   ]
+  }
+ ]
+}

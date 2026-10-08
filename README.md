@@ -10,6 +10,21 @@ Repo chính: [togcoder/skill-for-pptx](https://github.com/togcoder/skill-for-ppt
 
 Mới nhất: [T018 QA review](experiments/T018-20261005-qa-evidence-review/REPORT.md) sửa bộ nghiệm thu và bàn giao công cụ chạy PowerPoint trên Windows. 26 hồ sơ giả lập cho 26 quyết định đúng; 150 tests đạt. T010–T017 đã có chia nhịp click, chart/KPI và generic motion trên deck có sẵn. Playback PowerPoint vẫn là cổng còn thiếu; chỉ số click và ảnh tĩnh chưa xác nhận hiệu ứng chạy đúng.
 
+## Dùng ngay: Slide Forge — AI tự dựng deck hoàn chỉnh
+
+```bash
+pip install python-pptx lxml Pillow
+python3 scripts/slide_forge.py schema                                   # hợp đồng spec cho AI
+python3 scripts/slide_forge.py build examples/forge/coffee_report.json -o deck.pptx   # dựng + chuyển động + QA (JSON)
+python3 scripts/slide_forge.py render deck.pptx -d render/              # Windows + PowerPoint: video + ảnh từng slide
+```
+
+AI viết spec ngữ nghĩa (title, statement, bullets, image, kpis, chart, process,
+cycle, comparison, quote, closing). Forge lo bố cục, cỡ chữ đo thật, ảnh/art,
+chuyển động native (đếm số KPI, chart build, process từng bước, cycle spotlight,
+Ken Burns, accent, Morph) và trả QA có mã lỗi + cách sửa. Skill:
+`skills/slide-forge/SKILL.md`, lệnh `/forge-deck`. [Báo cáo T025](experiments/T025-20261007-claude-slide-forge/REPORT.md).
+
 ## Dùng ngay: Motion Director cho deck có sẵn
 
 ```bash

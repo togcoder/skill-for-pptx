@@ -23,7 +23,10 @@ the slide's main sequence with fresh cTn ids and build-group ids.
 
 Structural correctness is not PowerPoint playback evidence.
 """
+import copy
 import itertools
+from pathlib import Path
+import json
 
 from lxml import etree as E
 
@@ -53,6 +56,19 @@ PRESETS={
     "dim":("emph",9,0,400),
     "path":("path",0,0,800),
 }
+# T027: every built-in PowerPoint effect, harvested from PowerPoint itself
+# (knowledge/powerpoint_presets.json). Addressed as "ppt:<name>", e.g.
+# "ppt:boomerang", "ppt:path-s-curve1", "ppt:grow-with-color", "ppt:fly-out".
+LIBRARY_PATH=Path(__file__).resolve().parents[1]/"knowledge"/"powerpoint_presets.json"
+LIBRARY={}
+if LIBRARY_PATH.is_file():
+    for _p in json.loads(LIBRARY_PATH.read_text(encoding="utf-8"))["presets"]:
+        _tpl=E.fromstring(_p["xml"])
+        _span=max((int(c.get("dur"))+sum(int(d.get("delay")) for d in c.iterfind(f"{{{P}}}stCondLst/{{{P}}}cond")
+                                          if (d.get("delay") or "").isdigit())
+                   for c in _tpl.iter(f"{{{P}}}cTn") if (c.get("dur") or "").isdigit()),default=1)
+        LIBRARY["ppt:"+_p["name"]]={**_p,"span_ms":_span,"template":_tpl}
+        PRESETS["ppt:"+_p["name"]]=(_p["presetClass"],_p["presetID"],_p["presetSubtype"],_p["default_ms"] or _span)
 ENTRANCES={k for k,v in PRESETS.items() if v[0]=="entr"}
 EXITS={k for k,v in PRESETS.items() if v[0]=="exit"}
 FILTER_TO_PRESET={
@@ -219,6 +235,11 @@ def loop_cycle(eff):
     return max(1,eff["duration_ms"])*(2 if loop.get("auto_reverse") else 1)
 
 
+def _ppt_scale(eff):
+    lib=LIBRARY[eff["preset"]]
+    return eff["duration_ms"]/lib["span_ms"] if lib["span_ms"] else 1.0
+
+
 def effective_duration(eff):
     """Time the effect occupies for sequencing. A loop counts one cycle: later
     'after previous' blocks do not wait for an endless ambient loop."""
@@ -232,6 +253,8 @@ def effective_duration(eff):
         base=1 if preset in ("appear","disappear") else dur
         gap=it["gap_ms"] if "gap_ms" in it else int(dur*it.get("pct",0.1))
         return base+max(0,it.get("units",1)-1)*gap
+    if preset in LIBRARY:
+        return max(1,dur)
     if preset=="pulse":
         return 2*dur
     if preset in ("appear","disappear"):
@@ -239,9 +262,33 @@ def effective_duration(eff):
     return dur
 
 
+def _library_behaviours(parent,ids,eff):
+    """Instantiate a PowerPoint-authored preset: retarget, renumber and scale
+    every inner timing so the whole effect spans ``duration_ms``."""
+    k=_ppt_scale(eff)
+    tpl=copy.deepcopy(LIBRARY[eff["preset"]]["template"])
+    for c in tpl.iter(q("cTn")):
+        c.set("id",str(next(ids)))
+        if (c.get("dur") or "").isdigit() and int(c.get("dur"))>1:
+            c.set("dur",str(max(1,round(int(c.get("dur"))*k))))
+        for d in c.iterfind(f"{{{P}}}stCondLst/{{{P}}}cond"):
+            if (d.get("delay") or "").isdigit():
+                d.set("delay",str(round(int(d.get("delay"))*k)))
+    for t in tpl.iter(q("spTgt")):
+        t.set("spid",eff["spid"])
+        if eff.get("paragraph") is not None:
+            tx=sub(t,"txEl")
+            sub(tx,"pRg",st=eff["paragraph"],end=eff["paragraph"])
+    for child in list(tpl):
+        parent.append(child)
+
+
 def _behaviours(parent,ids,eff):
     preset=eff["preset"]
     dur=max(1,eff["duration_ms"])
+    if preset in LIBRARY:
+        _library_behaviours(parent,ids,eff)
+        return
     if preset in ENTRANCES:
         _set_visibility(parent,ids,eff,"visible",0)
         if preset=="appear":
@@ -372,6 +419,9 @@ def validate_effect(eff):
         repeat=loop.get("repeat","indefinite")
         if repeat not in ("indefinite","until-next-click") and not (type(repeat) is int and 1<=repeat<=100):
             raise ValueError("loop.repeat must be indefinite, until-next-click or 1..100")
+        if eff["preset"] in ("path","grow") and repeat in ("indefinite","until-next-click") and not loop.get("auto_reverse"):
+            # An endless move/scale that never returns would snap back every cycle (T024 picture).
+            raise ValueError(f"an endless {eff['preset']} loop needs auto_reverse")
 
 
 def plan_blocks(effects):

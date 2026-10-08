@@ -193,6 +193,11 @@ def apply_effect(state,eff,p,base):
         if p>=1 or preset=="disappear":
             state["visible"]=False
             state["alpha"]=1.0
+    elif cls=="path" and preset in anim.LIBRARY:
+        # PowerPoint preset paths are relative to where the object is now.
+        pts,_=path_polyline({"anchored":parse_path(anim.LIBRARY[preset]["template"].find(".//p:animMotion",anim.NS).get("path"))})
+        x,y=_along(pts,q)
+        state["dx"],state["dy"]=base["dx"]+x,base["dy"]+y
     elif preset=="path":
         pts,anchored=path_polyline(eff)
         x,y=_along(pts,q)
@@ -611,12 +616,23 @@ def recipe_tracks(recipe,objs,states,params=None):
         for o in others:
             if states[o["id"]]["visible"]:
                 tracks.append({"target":o,"keyframes":[{"t":0,"visible":False,"exit":"fade-out","exit_ms":min(d,400)}]})
+    elif recipe=="ken-burns":
+        # Slow push-in with a gentle drift: a still picture keeps living while
+        # the presenter talks. Neighbouring pictures drift in opposite directions.
+        d=int(params.get("duration_ms",6000))
+        scale=float(params.get("scale",1.06))
+        drift=float(params.get("drift",0.015))
+        for i,o in enumerate(objs):
+            s=states[o["id"]]
+            sign=-1 if i%2 else 1
+            tracks.append({"target":o,"keyframes":[{"t":0},{"t":d,"scale":s["scale"]*scale,
+                                                           "dx":s["dx"]+sign*drift,"dy":s["dy"]-0.6*drift,"ease":"linear"}]})
     else:
         raise ValueError(f"unknown recipe {recipe!r}")
     return tracks
 
 
-RECIPES=("spotlight","release","assemble","disperse","cycle","swap","travel","zoom-focus","rise")
+RECIPES=("spotlight","release","assemble","disperse","cycle","swap","travel","zoom-focus","rise","ken-burns")
 AMBIENT_RECIPES=("breathe","drift","spin-loop")
 SECONDARY_RECIPES=("ripple",)
 
@@ -707,6 +723,8 @@ def compile_choreography(recipe,objs,states,objects_by_token,beat_id,params=None
     """Return effects (delays relative to the beat start) for a recipe or raw
     tracks. ``objs`` are resolved objects; raw ``tracks`` use {"target": obj}."""
     params=params or {}
+    if recipe=="float":  # T024 name for a vertical idle bob: drift straight up
+        recipe,params="drift",{"angle_deg":-90,"amplitude":0.012,"period_ms":2600,**(params or {})}
     if recipe in AMBIENT_RECIPES+SECONDARY_RECIPES:
         return ambient_effects(recipe,objs,states,beat_id,params)
     if params.get("halo"):
@@ -754,6 +772,10 @@ def compile_choreography(recipe,objs,states,objects_by_token,beat_id,params=None
 
 
 PROP_OF={"path":"pos","grow":"scale","pulse":"scale","zoom":"scale","spin":"rot","dim":"opacity"}
+for _name,_lib in anim.LIBRARY.items():
+    _tags={b["tag"] for b in _lib["behaviours"]}
+    PROP_OF[_name]=("pos" if "animMotion" in _tags else "scale" if "animScale" in _tags
+                    else "rot" if "animRot" in _tags else None) if _lib["presetClass"] in ("path","emph") else None
 
 
 def conflicts(effects):
@@ -795,6 +817,9 @@ def layout_warnings(objects,states,label):
     vis=[o for o in objects if o.get("geometry") and states.get(o["id"],{}).get("visible")]
     for o in vis:
         b=bbox(o,states[o["id"]])
+        a=bbox(o,fresh_state())
+        if a[0]<0.005 or a[1]<0.005 or a[2]>0.995 or a[3]>0.995:
+            continue  # authored at/past the edge (bleed, backdrop orb): the slide crops it by design
         if b[0]<-0.02 or b[1]<-0.02 or b[2]>1.02 or b[3]>1.02:
             warn.append(f"{label}: {o['name']!r} extends outside the slide")
     moved=[o for o in vis if any(abs(states[o["id"]][k]-v)>1e-6 for k,v in (("dx",0),("dy",0),("scale",1)))]
@@ -803,6 +828,8 @@ def layout_warnings(objects,states,label):
         for other in vis:
             if other is o:
                 continue
+            if not other.get("text") and objects.index(other)<objects.index(o):
+                continue  # passing over a text-free shape behind it (background decor) is fine
             bt=bbox(other,states[other["id"]])
             before=_overlap(bbox(o,fresh_state()),bbox(other,fresh_state()))
             now=_overlap(bo,bt)

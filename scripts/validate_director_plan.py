@@ -26,6 +26,14 @@ V05_EFFECTS={"appear","fade","float-in","zoom","wipe-up","wipe-down","wipe-left"
              "disappear","fade-out","pulse","spin","dim","path"}
 
 
+def _library_effect(name):
+    """Any PowerPoint-authored preset from knowledge/powerpoint_presets.json ("ppt:<name>")."""
+    if not str(name).startswith("ppt:"):
+        return False
+    lib=Path(__file__).resolve().parents[1]/"knowledge"/"powerpoint_presets.json"
+    return lib.is_file() and name[4:] in {p["name"] for p in json.loads(lib.read_text(encoding="utf-8"))["presets"]}
+
+
 AMBIENT={"breathe","drift","spin-loop"}
 LAYERS={"primary","secondary","ambient"}
 GENERATED_KINDS={"halo","orbit-ring","track-line","backdrop","token","callout","badge","highlight-frame","arrow",
@@ -33,7 +41,7 @@ GENERATED_KINDS={"halo","orbit-ring","track-line","backdrop","token","callout","
 CHOREOGRAPHY_RECIPES={"breathe":(1,None),"drift":(1,None),"spin-loop":(1,None),"ripple":(1,None),
                       "spotlight":(1,None),"release":(1,None),"assemble":(1,None),"disperse":(1,None),
                       "cycle":(3,None),"swap":(2,2),"travel":(2,None),"zoom-focus":(1,None),"tracks":(0,None),
-                      "rise":(1,1)}
+                      "rise":(1,1),"ken-burns":(1,None),"float":(1,None)}
 KEYFRAME_KEYS={"t","x","y","dx","dy","to","curve","controls","jump","scale","rotate","opacity","opacity_ms",
                "visible","enter","enter_ms","exit","exit_ms","ease","overshoot","anticipate"}
 
@@ -374,7 +382,7 @@ def validate(plan,inventory):
                     if operation not in V05_OPERATIONS:
                         errors.append(f"slide {idx}: beat {bid} unsupported v0.5 operation {operation}")
                     effect=beat.get("effect")
-                    if effect is not None and effect not in V05_EFFECTS:
+                    if effect is not None and effect not in V05_EFFECTS and not _library_effect(effect):
                         errors.append(f"slide {idx}: beat {bid} unsupported effect {effect}")
                     duration=beat.get("duration_ms")
                     if duration is not None and (type(duration) is not int or duration<0 or duration>10000):
