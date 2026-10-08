@@ -226,6 +226,12 @@ def effective_duration(eff):
     dur=eff["duration_ms"]
     if eff.get("loop"):
         return loop_cycle(eff)
+    it=eff.get("iterate")
+    if it:
+        # Text animated by word/letter: the last unit starts (units-1) gaps later.
+        base=1 if preset in ("appear","disappear") else dur
+        gap=it["gap_ms"] if "gap_ms" in it else int(dur*it.get("pct",0.1))
+        return base+max(0,it.get("units",1)-1)*gap
     if preset=="pulse":
         return 2*dur
     if preset in ("appear","disappear"):
@@ -318,6 +324,15 @@ def _effect_par(parent,ids,eff,node_type,grp_id):
         end=sub(ctn,"endCondLst")
         cond=sub(end,"cond",evt="onNext",delay=0)
         sub(sub(cond,"tgtEl"),"sldTgt")
+    it=eff.get("iterate")
+    if it:
+        # Animate text by word ("wd") or letter ("lt"), PowerPoint's
+        # "Animate text" option; schema order puts iterate before childTnLst.
+        node=sub(ctn,"iterate",type={"word":"wd","letter":"lt"}[it["by"]])
+        if "gap_ms" in it:
+            sub(node,"tmAbs",val=int(it["gap_ms"]))
+        else:
+            sub(node,"tmPct",val=int(it.get("pct",0.1)*100000))
     children=sub(ctn,"childTnLst")
     _behaviours(children,ids,eff)
     return ctn
@@ -347,6 +362,9 @@ def validate_effect(eff):
     for key in ("accel","decel"):
         if key in eff and not (0<=eff[key]<=1):
             raise ValueError(f"{key} must be within 0..1")
+    it=eff.get("iterate")
+    if it is not None and (it.get("by") not in ("word","letter") or type(it.get("units",1)) is not int):
+        raise ValueError("iterate needs by=word|letter and an integer unit count")
     loop=eff.get("loop")
     if loop is not None:
         if eff["preset"] not in ("grow","spin","path","pulse"):

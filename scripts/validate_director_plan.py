@@ -22,16 +22,18 @@ GENERIC_OPERATIONS={"reveal","stagger-reveal","process-reveal","focus","emphasiz
 # Director v0.5 (T019): canonical PowerPoint presets, paragraph builds, exits,
 # dimming and an automatic first group.
 V05_OPERATIONS=GENERIC_OPERATIONS|{"text-build","exit","dim"}
-V05_EFFECTS={"appear","fade","float-in","zoom","wipe-up","wipe-down","wipe-left","wipe-right",
+V05_EFFECTS={"appear","fade","float-in","zoom","wipe-up","wipe-down","wipe-left","wipe-right","type-on",
              "disappear","fade-out","pulse","spin","dim","path"}
 
 
 AMBIENT={"breathe","drift","spin-loop"}
 LAYERS={"primary","secondary","ambient"}
-GENERATED_KINDS={"halo","orbit-ring","track-line","backdrop","token","callout","badge","highlight-frame","arrow"}
+GENERATED_KINDS={"halo","orbit-ring","track-line","backdrop","token","callout","badge","highlight-frame","arrow",
+                 "mask","highlight","underline"}
 CHOREOGRAPHY_RECIPES={"breathe":(1,None),"drift":(1,None),"spin-loop":(1,None),"ripple":(1,None),
                       "spotlight":(1,None),"release":(1,None),"assemble":(1,None),"disperse":(1,None),
-                      "cycle":(3,None),"swap":(2,2),"travel":(2,None),"zoom-focus":(1,None),"tracks":(0,None)}
+                      "cycle":(3,None),"swap":(2,2),"travel":(2,None),"zoom-focus":(1,None),"tracks":(0,None),
+                      "rise":(1,1)}
 KEYFRAME_KEYS={"t","x","y","dx","dy","to","curve","controls","jump","scale","rotate","opacity","opacity_ms",
                "visible","enter","enter_ms","exit","exit_ms","ease","overshoot","anticipate"}
 

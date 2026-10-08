@@ -81,6 +81,18 @@ phụ/nền (quầng sáng theo tiêu điểm, đường ray + token, vòng qu�
 vòng lặp native) và lớp kịch bản: kịch bản (có sẵn, diễn đạt lại, hoặc tự sinh đầy đủ)
 quyết định click nào, Director quyết định chuyển động gì; lời thoại vào speaker notes.
 
+T028 (`experiments/T028-20261008-claude-morph-studio/REPORT.md`) thêm `scripts/morph_studio.py`:
+Morph giữa slide ở mức "video hướng dẫn" — ghép cặp `!!` dọc cả chuỗi slide, dàn vật thể
+ngoài slide để bay vào/ra (thẻ đi cùng nội dung của nó), cảnh camera zoom vào/ra, thẻ nở
+thành panel, cuộn ngang; kiểm tra slide gốc không đổi và báo slide "chưa về bố cục gốc"
+trước Morph. Thêm mẹo chữ (type-on, từng từ, rise từ đường kẻ có mặt nạ, bút dạ quang,
+gạch chân) và danh mục 50 kỹ thuật cho AI. T024 + T028 nằm trên nhánh
+`claude/blissful-pasteur-gmll59`, **chưa gộp vào main**. Có các nhánh Claude song song
+chưa gộp: `work/T024-claude-picture-motion-graphics` (trùng mã T024 với nhánh này),
+`work/T026-claude-forge-assets`, `work/T027-claude-design-motion-corpus` (198 preset
+PowerPoint, có vòng render bằng PowerPoint thật) — cần một lượt tích hợp có review, đổi
+mã trùng trước khi gộp.
+
 **Việc tiếp theo cho model mới: `research/tasks/T020-motion-director-continuation.md`.**
 Prompt giao việc ngắn:
 

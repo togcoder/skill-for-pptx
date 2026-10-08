@@ -377,14 +377,17 @@ def plan_from_script(model,script_text,goal="",style="modern",fill_gaps=False,th
                 free=[x for x in free if x[0]!=bi]
         dropped+= [b["click"]["purpose"] for _,b,_ in free]
         # Release goes to the first later line that names nothing new (e.g.
-        # "and the cycle starts again"); otherwise the focus simply holds.
+        # "and the cycle starts again"). With no such line the slide still
+        # ends on the whole picture: an unscripted closing click settles it,
+        # so nothing snaps back when the next slide (or Morph) takes over.
         focus_segs=[i for i,lst in placed.items() for _,_,x in lst if _bundle_keys(x,s)[0]=="focus"]
+        settle=None
         if release_bundle and focus_segs:
             later=[i for i in range(max(focus_segs)+1,len(sec["segments"])) if i not in placed]
             if later:
                 placed[later[0]]=[(0,release_bundle[0],release_bundle[1])]
             else:
-                dropped.append(release_bundle[1]["click"]["purpose"])
+                settle=release_bundle[1]
         elif release_bundle:
             dropped.append(release_bundle[1]["click"]["purpose"])
         beats=[]
@@ -437,6 +440,11 @@ def plan_from_script(model,script_text,goal="",style="modern",fill_gaps=False,th
                                     "The script places a click here." if seg["cue"] else
                                     ("The script moves to a new resource here." if real else "First reveal on this slide.")))
             clicks[-1]["narration"]=seg["text"]
+        if settle:
+            beats.extend(settle["beats"])
+            clicks.append(dict(settle["click"],narration=""))
+            gaps.append({"segment":len(sec["segments"]),"kind":"settle-click-without-line",
+                         "text":f"{settle['click']['purpose']} (add a closing line here, or keep it silent)"})
         used={t for b in beats for t in b["targets"]}|{(b.get("motion_parameters") or {}).get("halo") for b in beats}
         components=[c for c in components if c["id"] in used]
         placed_keys={k for lst in placed.values() for _,_,b in lst for k in _bundle_keys(b,s)[1]}

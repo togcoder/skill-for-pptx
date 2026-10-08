@@ -130,6 +130,32 @@ overlapping in time (blocking), an object ending off-slide or newly covering
 another at a stable state (warning). Read and fix warnings; they are usually
 real.
 
+## Morph Studio (cross-slide, professional finish)
+
+After the in-slide pass, give the deck its between-slide craft:
+
+```bash
+python3 $ROOT/scripts/morph_studio.py propose OUT.pptx -o morph.json   # continuity + suggestions
+# edit morph.json: accept suggestions into "scenes" (each needs a reason)
+python3 $ROOT/scripts/morph_studio.py apply OUT.pptx morph.json -o FINAL.pptx
+python3 $ROOT/scripts/morph_studio.py preview FINAL.pptx --slide N -o mN.gif --sheet mN.png
+```
+
+`continuity` pairs objects across slides with `!!` names (titles glide, the
+same picture/text travels, `pairs` forces two different shapes to morph), sets
+Morph (`byObject`/`byWord`/`byChar`) and stages new/leaving objects off-slide
+so they fly. Scenes add slides: `camera-zoom` (push into a part, pull back),
+`card-expand` (a card grows into a panel), `pan` (carousel). Read
+`references/pro-techniques.md` — 50 techniques with when/how — before choosing.
+Morph preview is a simulation (LibreOffice cannot play Morph).
+
+Settle before Morph: Morph starts from each slide's authored layout, not from
+where its animation left objects. `apply` lists `unsettled` slides (objects
+ending moved, scaled, turned or dimmed); end such slides on the full picture
+(the script layer adds a release click when a script stops mid-tour) or accept
+the snap knowingly. Scene slides start from the source's end state; objects
+inside a staged card leave or arrive with it as one piece.
+
 ## Motion layers (Director v0.7)
 
 Think in three layers, as a motion designer would:

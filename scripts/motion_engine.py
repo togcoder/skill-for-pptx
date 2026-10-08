@@ -45,8 +45,34 @@ def authored(obj):
     return {"cx":g["x"]+g["w"]/2,"cy":g["y"]+g["h"]/2,"w":g["w"],"h":g["h"]}
 
 
+def text_block(obj,aspect=16/9):
+    """Estimated box (x0,y0,x1,y1) of the visible text lines inside a text
+    shape, as slide fractions. Assumes a 7.5 in slide height, default insets
+    and an average glyph width; returns the shape box when the vertical
+    anchor is unknown (placeholders inherit it)."""
+    g=obj.get("geometry")
+    if not g:
+        return None
+    full=(g["x"],g["y"],g["x"]+g["w"],g["y"]+g["h"])
+    if obj.get("filled"):
+        return full  # a filled shape is seen as a whole box
+    anchor=obj.get("text_anchor") or (None if obj.get("placeholder") else "t")
+    paras=[p.get("text","") for p in (obj.get("paragraphs") or [])] or (obj.get("text") or "").split("\n")
+    if anchor not in ("t","ctr","b") or not any(paras):
+        return full
+    size=float(obj.get("max_font_pt") or 18)
+    hp,wp=540.0,540.0*aspect
+    width=max(size,g["w"]*wp-14.4)
+    lines=sum(max(1,math.ceil(len(t)*size*0.55/width)) for t in paras)
+    block=min(g["h"],(lines*size*1.2)/hp)
+    inset=3.6/hp
+    y0={"t":g["y"]+inset,"ctr":g["y"]+(g["h"]-block)/2,"b":g["y"]+g["h"]-inset-block}[anchor]
+    y0=max(g["y"],min(y0,g["y"]+g["h"]-block))
+    return (g["x"],y0,g["x"]+g["w"],y0+block)
+
+
 def fresh_state(visible=True):
-    return {"dx":0.0,"dy":0.0,"scale":1.0,"rot":0.0,"opacity":1.0,"visible":visible,"alpha":1.0}
+    return {"dx":0.0,"dy":0.0,"scale":1.0,"rot":0.0,"opacity":1.0,"visible":visible,"alpha":1.0,"text_frac":1.0}
 
 
 def initial_states(objects,effect_groups):
@@ -143,6 +169,12 @@ def apply_effect(state,eff,p,base):
             state["visible"]=True
         return
     q=_ease(p,eff)
+    if cls=="entr" and eff.get("iterate"):
+        # Typewriter / word-by-word: units arrive one after another.
+        state["visible"]=True
+        state["alpha"]=1.0
+        state["text_frac"]=1.0 if p>=1 else max(0.0,p)
+        return
     if cls=="entr":
         state["visible"]=True
         state["alpha"]=1.0 if preset in ("appear",) else min(1.0,p if p>0 else 0.0)
@@ -544,6 +576,32 @@ def recipe_tracks(recipe,objs,states,params=None):
         if params.get("pulse_stops",True):
             for i,stop in enumerate(stops):
                 tracks.append({"target":stop,"pulse_at":(i+1)*d+i*dwell})
+    elif recipe=="rise":
+        # Text rises out of an invisible line: it starts under a mask painted
+        # in the colour behind it and slides up past the mask's top edge.
+        text=objs[0]
+        mask=params.get("_mask_obj")
+        a=authored(text)
+        dist=float(params.get("distance",a["h"]*1.1+0.01))
+        enter="appear"
+        if mask is not None:
+            # The mask's top edge is the line: the text starts with its first
+            # line just below it and rises into place.
+            tb=text_block(text,float(params.get("_aspect",16/9)))
+            m=mask["geometry"]
+            if "distance" not in params:
+                dist=max(0.01,m["y"]-tb[1]+0.004)
+            if m["h"]<(tb[3]-tb[1])+0.004:
+                # Clipped to its container: rise as far as the mask reaches
+                # and fade in, so nothing ever shows below the line.
+                dist,enter=max(0.01,min(dist,m["h"]*0.95)),"fade"
+        tracks.append({"target":text,"keyframes":[
+            {"t":0,"dy":dist,"jump":True,"visible":True,"enter":enter,"enter_ms":int(d*0.8)},
+            {"t":d,"dy":0.0,"ease":"out"}]})
+        if mask is not None:
+            tracks.append({"target":mask,"keyframes":[
+                {"t":0,"visible":True,"enter":"appear"},
+                {"t":d+60,"visible":False,"exit":"disappear","exit_ms":0}]})
     elif recipe=="zoom-focus":
         focus,others=objs[0],objs[1:]
         fill=float(params.get("fill",0.6))
@@ -558,7 +616,7 @@ def recipe_tracks(recipe,objs,states,params=None):
     return tracks
 
 
-RECIPES=("spotlight","release","assemble","disperse","cycle","swap","travel","zoom-focus")
+RECIPES=("spotlight","release","assemble","disperse","cycle","swap","travel","zoom-focus","rise")
 AMBIENT_RECIPES=("breathe","drift","spin-loop")
 SECONDARY_RECIPES=("ripple",)
 
@@ -655,6 +713,22 @@ def compile_choreography(recipe,objs,states,objects_by_token,beat_id,params=None
         params=dict(params,_halo_obj=objects_by_token.get(params["halo"]))
         if params["_halo_obj"] is None:
             raise ValueError(f"halo {params['halo']!r} not found")
+    if params.get("mask"):
+        params=dict(params,_mask_obj=objects_by_token.get(params["mask"]))
+        if params["_mask_obj"] is None:
+            raise ValueError(f"mask {params['mask']!r} not found")
+        m=bbox(params["_mask_obj"],fresh_state())
+        for o in objects_by_token.values():
+            if o is params["_mask_obj"] or o is objs[0] or not o.get("geometry") or not states.get(o["id"],{}).get("visible"):
+                continue
+            if (o.get("name") or "").startswith("__gen_"):
+                continue
+            ob=bbox(o,states[o["id"]])
+            area=(ob[2]-ob[0])*(ob[3]-ob[1]) or 1
+            if o.get("filled") and ob[0]<=m[0] and ob[1]<=m[1] and ob[2]>=m[2] and ob[3]>=m[3]:
+                continue  # the container the mask is painted to match
+            if _overlap(m,ob)>0.05*area:
+                raise ValueError(f"rise mask would briefly cover {o['name']!r}; use another reveal or move the text")
     if recipe=="tracks":
         built=tracks
     else:
@@ -804,6 +878,8 @@ def effects_from_slide(root):
         effects.sort(key=lambda e:e["delay_ms"])
         for i,e in enumerate(effects):
             e["trigger"]="click" if i==0 else "with"
+            if e.get("iterate"):
+                e["iterate"]["units"]=text_units(root,e["spid"],e["iterate"]["by"],e.get("paragraph"))
         groups.append(effects)
     return groups,autos
 
@@ -874,9 +950,31 @@ def _effect_from_ctn(ctn):
         eff["duration_ms"]=400
     else:
         return None
+    it=ctn.find("p:iterate",NS)
+    if it is not None:
+        gap=it.find("p:tmAbs",NS)
+        pct=it.find("p:tmPct",NS)
+        eff["iterate"]={"by":"letter" if it.get("type")=="lt" else "word","units":1}
+        if gap is not None:
+            eff["iterate"]["gap_ms"]=int(gap.get("val"))
+        elif pct is not None:
+            eff["iterate"]["pct"]=int(pct.get("val"))/100000
     rc=ctn.get("repeatCount")
     if rc:
         until_click=ctn.find("p:endCondLst/p:cond[@evt='onNext']",NS) is not None
         repeat="until-next-click" if until_click else ("indefinite" if rc=="indefinite" else max(1,int(rc)//1000))
         eff["loop"]={"repeat":repeat,"auto_reverse":ctn.get("autoRev")=="1"}
     return eff
+
+
+
+def text_units(root,spid,by,paragraph=None):
+    """Number of letters (non-space) or words a by-word/letter effect animates."""
+    node=anim.top_level_objects(root).get(spid)
+    if node is None:
+        return 1
+    paras=node.findall("p:txBody/a:p",anim.NS)
+    if paragraph is not None:
+        paras=paras[paragraph:paragraph+1]
+    text=" ".join("".join(t.text or "" for t in p.iter(f"{{{anim.A}}}t")) for p in paras)
+    return max(1,len(text.split()) if by=="word" else len(text.replace(" ","")))

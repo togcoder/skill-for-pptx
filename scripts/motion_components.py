@@ -17,6 +17,8 @@ import math
 
 from lxml import etree as E
 
+import motion_engine as me
+
 P="http://schemas.openxmlformats.org/presentationml/2006/main"
 A="http://schemas.openxmlformats.org/drawingml/2006/main"
 NS={"p":P,"a":A}
@@ -24,7 +26,10 @@ GEN_PREFIX="__gen_"
 
 BACKGROUND={"halo","orbit-ring","track-line","backdrop"}
 FOREGROUND={"token","callout","badge","highlight-frame","arrow"}
-KINDS=BACKGROUND|FOREGROUND
+# Placed right next to their anchor in z-order (T028 text tricks).
+BEHIND_ANCHOR={"highlight"}
+ABOVE_ANCHOR={"mask","underline"}
+KINDS=BACKGROUND|FOREGROUND|BEHIND_ANCHOR|ABOVE_ANCHOR
 
 
 def _q(ns,tag):
@@ -51,7 +56,12 @@ def deck_style(model):
     texts=[_hex(t["value"]) for t in prof.get("text_colors",[])]
     dark=next((t for t in texts if t and sum(int(t[i:i+2],16) for i in (0,2,4))<300),None) or "1F2A44"
     fonts=[f["value"] for f in prof.get("font_families",[]) if f.get("value")]
-    return {"accent":accent,"second":second,"text":dark,"font":fonts[0] if fonts else None}
+    def vivid(h):
+        r,g,b=(int(h[i:i+2],16)/255 for i in (0,2,4))
+        mx,mn=max(r,g,b),min(r,g,b)
+        return (mx-mn)*mx
+    bright=max([f for f in fills[:6] if not _neutral(f)] or [accent],key=vivid)
+    return {"accent":accent,"second":second,"bright":bright,"text":dark,"font":fonts[0] if fonts else None}
 
 
 def _center(o):
@@ -116,6 +126,39 @@ def layout(spec,anchors,slide,aspect):
         return (x0-pad/aspect*1.0,y0-pad,x1-x0+2*pad/aspect,y1-y0+2*pad)
     if kind=="arrow":
         return None  # computed from endpoints in insert()
+    if kind=="mask":
+        # Covers the strip just under the text so it can rise out of a line.
+        x0,y0,x1,y1=_bbox(anchors)
+        if len(anchors)==1:
+            # Under the last text line, not under a taller text box.
+            x0,y0,x1,y1=me.text_block(anchors[0],aspect)
+            y1+=0.004
+        pad=float(spec.get("padding",0.01))
+        h=(y1-y0)*1.15+pad
+        box=[x0-pad/aspect,y1,x1+pad/aspect,y1+h]
+        clip=spec.get("clip")  # the container it is painted to match
+        if clip:
+            box=[max(box[0],clip[0]),box[1],min(box[2],clip[0]+clip[2]),min(box[3],clip[1]+clip[3])]
+        box[3]=min(box[3],1.0)
+        return (box[0],box[1],box[2]-box[0],max(0.005,box[3]-box[1]))
+    if kind=="highlight":
+        # Marker over the first text line only, as wide as the words.
+        x0,y0,x1,y1=_bbox(anchors)
+        a=anchors[0]
+        size=(a.get("max_font_pt") or 18)
+        line=(a.get("text") or "").split("\n")[0]
+        est=min(x1-x0,len(line)*size*0.56/72/13.333*(16/9)/aspect+0.02)
+        lh=min(y1-y0,size*1.35/72/7.5)
+        pad=float(spec.get("padding",0.004))
+        return (x0+0.004,y0+0.01-pad,est,lh+2*pad)
+    if kind=="underline":
+        x0,y0,x1,y1=_bbox(anchors)
+        a=anchors[0]
+        text=a.get("text") or ""
+        size=(a.get("max_font_pt") or 18)
+        est=min(x1-x0,len(text.split("\n")[0])*size*0.55/72/13.333+0.01)
+        h=float(spec.get("thickness",0.007))
+        return (x0+0.006,y1-h*0.2,max(0.03,est),h)
     if kind=="callout":
         text=spec.get("text","")
         size=float(spec.get("font_size",16))
@@ -188,6 +231,11 @@ def insert(root,slide,specs,style,W,H):
     """Insert components into a slide root. Returns object dicts shaped like
     motion_director.deck_model objects so plans can target them by id."""
     tree=root.find("p:cSld/p:spTree",NS)
+    nodes_by_id={}
+    for node in tree:
+        props=node.find("./*/p:cNvPr",NS)
+        if props is not None:
+            nodes_by_id[props.get("id")]=node
     by_token={}
     for o in slide["objects"]:
         for key in (o["name"],o["id"],o.get("token")):
@@ -209,7 +257,8 @@ def insert(root,slide,specs,style,W,H):
             anchors.append(by_token[t])
         if any(not a.get("geometry") for a in anchors):
             raise ValueError(f"component {spec['id']}: anchor has no geometry")
-        need={"halo":1,"orbit-ring":3,"track-line":2,"token":1,"badge":1,"highlight-frame":1,"arrow":2}.get(kind,0)
+        need={"halo":1,"orbit-ring":3,"track-line":2,"token":1,"badge":1,"highlight-frame":1,"arrow":2,
+              "mask":1,"highlight":1,"underline":1}.get(kind,0)
         if len(anchors)<need:
             raise ValueError(f"component {spec['id']}: {kind} needs {need} anchor(s)")
         name=f"{GEN_PREFIX}{kind}_{spec['id']}"
@@ -250,7 +299,8 @@ def insert(root,slide,specs,style,W,H):
         else:
             geom=layout(spec,anchors,slide,aspect)
             prst={"halo":"ellipse","orbit-ring":"ellipse","track-line":"roundRect","backdrop":"ellipse",
-                  "token":"ellipse","badge":"ellipse","highlight-frame":"roundRect","callout":"roundRect"}[kind]
+                  "token":"ellipse","badge":"ellipse","highlight-frame":"roundRect","callout":"roundRect",
+                  "mask":"rect","highlight":"rect","underline":"rect"}[kind]
             sp,sppr=_shape(nid,name,descr,geom,W,H,prst)
             if kind=="halo":
                 grad=E.SubElement(sppr,_q(A,"gradFill"),rotWithShape="1")
@@ -275,6 +325,18 @@ def insert(root,slide,specs,style,W,H):
                 E.SubElement(E.SubElement(sppr,_q(A,"ln")),_q(A,"noFill"))
                 if kind=="badge":
                     _txbody(sp,str(spec.get("text","1")),style,float(spec.get("font_size",14)),"FFFFFF")
+            elif kind=="mask":
+                color=_hex(spec.get("color"))
+                if not color:
+                    raise ValueError(f"component {spec['id']}: mask needs the colour behind the text")
+                _solid(sppr,color)
+                E.SubElement(E.SubElement(sppr,_q(A,"ln")),_q(A,"noFill"))
+            elif kind=="highlight":
+                _solid(sppr,_hex(spec.get("color")) or style.get("bright",accent),float(spec.get("opacity",0.25)))
+                E.SubElement(E.SubElement(sppr,_q(A,"ln")),_q(A,"noFill"))
+            elif kind=="underline":
+                _solid(sppr,accent)
+                E.SubElement(E.SubElement(sppr,_q(A,"ln")),_q(A,"noFill"))
             elif kind=="callout":
                 _solid(sppr,"FFFFFF",0.92)
                 ln=E.SubElement(sppr,_q(A,"ln"),w="19050")
@@ -284,6 +346,10 @@ def insert(root,slide,specs,style,W,H):
         if kind in BACKGROUND:
             tree.insert(back_index,sp)
             back_index+=1
+        elif kind in BEHIND_ANCHOR:
+            nodes_by_id[anchors[0]["id"]].addprevious(sp)
+        elif kind in ABOVE_ANCHOR:
+            nodes_by_id[anchors[0]["id"]].addnext(sp)
         else:
             tree.append(sp)
         text=spec.get("text") if kind in ("callout","badge") else None
@@ -300,3 +366,102 @@ def insert(root,slide,specs,style,W,H):
         by_token[name]=created[-1]
         nid+=1
     return created
+
+
+
+def _theme_color(z,master_part,name):
+    rels=master_part.rsplit("/",1)
+    rel_name=f"{rels[0]}/_rels/{rels[1]}.rels"
+    if rel_name not in z.namelist():
+        return None
+    for r in E.fromstring(z.read(rel_name)):
+        if r.get("Type","").endswith("/theme"):
+            theme=E.fromstring(z.read("ppt/"+r.get("Target").replace("../","")))
+            node=theme.find(f".//{{{A}}}clrScheme/{{{A}}}{name}")
+            if node is None:
+                return None
+            c=node.find(f"{{{A}}}srgbClr")
+            if c is not None:
+                return c.get("val")
+            c=node.find(f"{{{A}}}sysClr")
+            return c.get("lastClr") if c is not None else None
+    return None
+
+
+def slide_background(z,slide_part):
+    """Solid background colour behind a slide (slide → layout → master), or
+    None when it is a picture or gradient (a mask would show)."""
+    chain=[slide_part]
+    def rel_target(part,suffix):
+        base,name=part.rsplit("/",1)
+        rel=f"{base}/_rels/{name}.rels"
+        if rel not in z.namelist():
+            return None
+        for r in E.fromstring(z.read(rel)):
+            if r.get("Type","").endswith(suffix):
+                t=r.get("Target")
+                stack=base.split("/")
+                for seg in t.split("/"):
+                    if seg=="..":
+                        stack.pop()
+                    elif seg!=".":
+                        stack.append(seg)
+                return "/".join(stack)
+        return None
+    layout=rel_target(slide_part,"/slideLayout")
+    master=rel_target(layout,"/slideMaster") if layout else None
+    chain+=[p for p in (layout,master) if p]
+    for part in chain:
+        root=E.fromstring(z.read(part))
+        bg=root.find("p:cSld/p:bg",NS)
+        if bg is None:
+            continue
+        fill=bg.find("p:bgPr/a:solidFill",NS)
+        ref=bg.find("p:bgRef",NS)
+        node=fill if fill is not None else ref
+        if node is None:
+            return None
+        c=node.find("a:srgbClr",NS)
+        if c is not None:
+            return c.get("val")
+        c=node.find("a:schemeClr",NS)
+        if c is not None and master:
+            name={"bg1":"lt1","bg2":"lt2","tx1":"dk1","tx2":"dk2"}.get(c.get("val"),c.get("val"))
+            return _theme_color(z,master,name)
+        return None
+    return "FFFFFF"
+
+
+def container_box(anchor,objects):
+    """Geometry (x,y,w,h) of the smallest filled shape containing the anchor."""
+    cx,cy=_center(anchor)
+    best=None
+    for o in objects:
+        g=o.get("geometry")
+        if o is anchor or not g or not o.get("filled"):
+            continue
+        if g["x"]<=cx<=g["x"]+g["w"] and g["y"]<=cy<=g["y"]+g["h"]:
+            if best is None or g["w"]*g["h"]<best[2]*best[3]:
+                best=(g["x"],g["y"],g["w"],g["h"])
+    return best
+
+
+def container_fill(root,anchor,objects):
+    """Solid fill of the smallest filled shape that contains the anchor."""
+    cx,cy=_center(anchor)
+    best=None
+    for o in objects:
+        g=o.get("geometry")
+        if o is anchor or not g or not o.get("filled"):
+            continue
+        if g["x"]<=cx<=g["x"]+g["w"] and g["y"]<=cy<=g["y"]+g["h"]:
+            if best is None or g["w"]*g["h"]<best[0]:
+                best=(g["w"]*g["h"],o)
+    if best is None:
+        return None
+    for node in root.iter(_q(P,"sp")):
+        props=node.find("./p:nvSpPr/p:cNvPr",NS)
+        if props is not None and props.get("id")==best[1]["id"]:
+            c=node.find("p:spPr/a:solidFill/a:srgbClr",NS)
+            return c.get("val") if c is not None else "NONSOLID"
+    return None

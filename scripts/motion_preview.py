@@ -99,6 +99,16 @@ def frame_root(root,objects,states,hidden_paras,W,H):
         alpha=st["opacity"]*st.get("alpha",1.0)
         if alpha<0.999:
             _fade(node,alpha)
+        frac=st.get("text_frac",1.0)
+        if frac<0.999:
+            # Typewriter preview: keep the first share of characters.
+            ts=list(node.iter(f"{{{A}}}t"))
+            total=sum(len(t.text or "") for t in ts)
+            keep=int(total*frac)
+            for t in ts:
+                n=len(t.text or "")
+                t.text=(t.text or "")[:max(0,keep)]
+                keep-=n
     if hidden_paras:
         anim.apply_state_for_preview(r,{"hidden_objects":set(),"hidden_paragraphs":hidden_paras})
     timing=r.find("p:timing",NS)

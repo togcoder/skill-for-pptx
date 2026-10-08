@@ -1,7 +1,7 @@
 {
   "name": "pptx-motion",
-  "version": "0.10.0",
-  "description": "AI Motion Director for existing PowerPoint decks: writes or follows the presentation script, directs presenter-paced clicks with layered motion (primary choreography, secondary halo/rail/token reactions, ambient loops), Morph continuity, native PowerPoint animation, verification and motion previews.",
+  "version": "0.11.0",
+  "description": "AI Motion Director for existing PowerPoint decks: writes or follows the presentation script, directs presenter-paced clicks with layered motion (primary choreography, secondary halo/rail/token reactions, ambient loops), pro text tricks (typewriter, rise from a line, highlighter), Morph Studio (forced !! pairing, fly-in staging, camera push-in, card expand, carousel), native PowerPoint animation, verification and motion previews.",
   "author": {
     "name": "togcoder"
   },

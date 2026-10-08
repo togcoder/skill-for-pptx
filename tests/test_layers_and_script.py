@@ -160,13 +160,17 @@ class ComponentTests(unittest.TestCase):
         report_model=md.deck_model(REPORT)
         rp=md.draft(report_model,style="cinematic")
         s5=next(s for s in rp["slides"] if s["source_index"]==5)
-        self.assertEqual({c["id"] for c in s5["components"]},{"track","token"})
+        # T028: the takeaway also gets a highlighter sweep; the rail moves above
+        # the steps because the band below is taken by the result line.
+        self.assertEqual({c["id"] for c in s5["components"]},{"track","token","marker3"})
+        track=next(c for c in s5["components"] if c["id"]=="track")
+        self.assertLess(track["generate"]["offset_y"],0)
         with tempfile.TemporaryDirectory() as td:
             report=md.apply(REPORT,rp,Path(td)/"o.pptx")
         self.assertTrue(report["ok"],report["problems"])
         self.assertEqual(report["warnings"],[])
         s5r=next(s for s in report["slides"] if s["slide"]==5)
-        self.assertEqual(sorted(s5r["generated"]),["__gen_token_token","__gen_track-line_track"])
+        self.assertEqual(sorted(s5r["generated"]),["__gen_highlight_marker3","__gen_token_token","__gen_track-line_track"])
 
     def test_loop_guard_blocks_later_motion_on_looping_property(self):
         plan=md.draft(self.model,style="cinematic")
@@ -228,8 +232,14 @@ class ScriptTests(unittest.TestCase):
         self.assertEqual([g["values"] for g in gaps if g["kind"]=="number-not-on-slide"],[["85"]])
         s6=next(s for s in plan["slides"] if s["source_index"]==6)
         b6={b["id"]:b for b in s6["beats"]}
-        last=[b6[m] for m in s6["click_beats"][-1]["motion_beats"]]
+        last=[b6[m] for m in s6["click_beats"][-2]["motion_beats"]]
         self.assertEqual(next(b for b in last if b.get("recipe")=="spotlight")["targets"][0],"Quadrant Explore")
+        # The script ends mid-tour: an unscripted closing click settles the
+        # slide (release + halo out) so nothing snaps back at the next slide.
+        settle=[b6[m] for m in s6["click_beats"][-1]["motion_beats"]]
+        self.assertEqual({b.get("recipe") or b["operation"] for b in settle},{"release","exit"})
+        self.assertEqual(s6["click_beats"][-1]["narration"],"")
+        self.assertIn("settle-click-without-line",[g["kind"] for g in report[6]["gaps"]])
 
     def test_vietnamese_paraphrase_and_gap_callout(self):
         model=md.deck_model(ESSAY)

@@ -17,12 +17,17 @@ concurrently); do not build on it.
 
 Read first: AGENTS.md, HANDOFF.md (T019 section), the T019 report,
 `skills/pptx-motion-director/SKILL.md`, `docs/CLICK_BEAT_CHOREOGRAPHY.md`.
-Run `python3 -m unittest discover -s tests -v` (205 pass at T024).
+Run `python3 -m unittest discover -s tests -v` (219 pass at T028).
 
 ## Work items — pick by environment, in priority order
 
 ### A. Native PowerPoint gate (needs Windows + PowerPoint) — highest value
 
+First play the T028 Morph Studio outputs
+`experiments/T028-20261008-claude-morph-studio/output/T028_report_pro.pptx` and
+`T028_showcase_pro.pptx` against `preview/*` (`!!` pairing along a chain, z-order of
+leaving objects, whether Morph starts from the authored layout, card-expand,
+camera push-in/pull-back, rise mask colour, type-on iterate timing).
 Also play the T024 scripted showcase
 `experiments/T024-20261005-claude-layers-script/output/T024_showcase_scripted.pptx`
 (loops, halo, overshoot, notes in Presenter View) and the T023 compound-motion showcase

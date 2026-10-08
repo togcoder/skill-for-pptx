@@ -1,5 +1,38 @@
 # PPTX Motion Lab — checkpoint
 
+## T028 Morph Studio + professional text tricks — 2026-10-08
+
+Goal: the polish seen in motion-design tutorials. `scripts/morph_studio.py`
+adds cross-slide Morph to a directed deck. **Continuity** pairs titles,
+identical pictures and text, and existing names via `!!`, and renames along
+the whole chain. It stages new and leaving objects off-slide so they fly;
+contained objects travel with their card. **Scenes** each need a reason and
+start from the source's end state: `camera-zoom` (push-in and pull-back, type
+scaled like a lens), `card-expand` (over its neighbours, even margins) and
+`pan`. `verify_scenes` keeps originals intact (only `!!` renames and
+off-slide copies). The `unsettled` check lists slides whose animation ends
+away from the authored layout before a Morph. The script layer adds a closing
+release click when a script stops mid-tour.
+
+Text tricks: `type-on` and `by: word/letter` (`p:iterate`), `rise` from an
+invisible line (the mask sits under the last estimated text line, in the
+container or background colour, and is refused if it would cover anything),
+`highlight` and `underline` sweeps (added by cinematic). The catalog
+`skills/pptx-motion-director/references/pro-techniques.md` lists 50
+techniques with when and how.
+
+Evidence: report deck (7→8 slides) and showcase deck (8→10 slides) with
+simulated previews. LibreOffice reads every Morph slide's fallback as Fade.
+Five defects were found by looking at the previews and fixed with tests.
+Smoke test: 34/34 repository decks pass
+propose → apply with every suggestion accepted. **219 tests pass.** PowerPoint playback is pending; the native gate is in
+T020 §A.
+
+Report: experiments/T028-20261008-claude-morph-studio/REPORT.md. Branch
+`claude/blissful-pasteur-gmll59` (T024 + T028) is not merged. The parallel
+branches T024-picture/T026/T027 are also unmerged and need integration (ID
+collision on T024).
+
 ## T024 motion layers + script layer — 2026-10-05
 
 Motion now has three layers. **Primary** is the meaning. **Secondary** covers

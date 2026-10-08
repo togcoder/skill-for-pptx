@@ -28,7 +28,12 @@ Chuyển động 3 lớp (chính/phụ/nền, `--style cinematic`, `--ambient`) 
 `auto --script script.md` cho kịch bản quyết định nhịp click (hỗ trợ `[click]`/`[nhấp]`,
 tiếng Việt, diễn đạt lại), `motion_script.py draft` tự viết kịch bản đầy đủ khi thiếu,
 `--fill-gaps` tạo chú thích cho ý không có trên slide, `--write-notes` ghi lời thoại vào
-speaker notes; luôn xuất `*.script.md`. Cài như plugin Claude Code: `/plugin marketplace add
+speaker notes; luôn xuất `*.script.md`. Hoàn thiện kiểu chuyên nghiệp (T028):
+`morph_studio.py propose/apply/preview` thêm Morph giữa slide — ghép cặp bằng tên `!!`,
+tiêu đề trượt, vật thể bay vào/ra từ ngoài slide, camera zoom vào/ra, thẻ nở thành panel,
+cuộn ngang — cùng mẹo chữ (đánh máy, hiện từng từ, chữ trồi lên từ một đường kẻ, bút dạ
+quang, gạch chân); danh mục 50 kỹ thuật ở
+`skills/pptx-motion-director/references/pro-techniques.md`. Cài như plugin Claude Code: `/plugin marketplace add
 togcoder/skill-for-pptx` rồi `/plugin install pptx-motion@togcoder-pptx`, dùng
 `/animate-deck deck.pptx`. Trạng thái: kiểm tra cấu trúc + LibreOffice đọc đúng
 trình tự; **chưa phát thử trong PowerPoint**. [Báo cáo T019](experiments/T019-20261005-claude-motion-director/REPORT.md).
