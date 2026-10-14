@@ -1,0 +1,47 @@
+[
+  {
+    "slide": 1,
+    "frames": 43,
+    "click_groups": 2,
+    "gif": "/tmp/skill-for-pptx/experiments/T024-20261014-gemini-complex-motion-rigging/preview/slide-01.gif",
+    "sheet": "/tmp/skill-for-pptx/experiments/T024-20261014-gemini-complex-motion-rigging/preview/slide-01.png",
+    "simulated": true,
+    "powerpoint_playback_verified": false
+  },
+  {
+    "slide": 2,
+    "frames": 31,
+    "click_groups": 5,
+    "gif": "/tmp/skill-for-pptx/experiments/T024-20261014-gemini-complex-motion-rigging/preview/slide-02.gif",
+    "sheet": "/tmp/skill-for-pptx/experiments/T024-20261014-gemini-complex-motion-rigging/preview/slide-02.png",
+    "simulated": true,
+    "powerpoint_playback_verified": false
+  },
+  {
+    "slide": 3,
+    "frames": 32,
+    "click_groups": 4,
+    "gif": "/tmp/skill-for-pptx/experiments/T024-20261014-gemini-complex-motion-rigging/preview/slide-03.gif",
+    "sheet": "/tmp/skill-for-pptx/experiments/T024-20261014-gemini-complex-motion-rigging/preview/slide-03.png",
+    "simulated": true,
+    "powerpoint_playback_verified": false
+  },
+  {
+    "slide": 4,
+    "frames": 14,
+    "click_groups": 2,
+    "gif": "/tmp/skill-for-pptx/experiments/T024-20261014-gemini-complex-motion-rigging/preview/slide-04.gif",
+    "sheet": "/tmp/skill-for-pptx/experiments/T024-20261014-gemini-complex-motion-rigging/preview/slide-04.png",
+    "simulated": true,
+    "powerpoint_playback_verified": false
+  },
+  {
+    "slide": 5,
+    "frames": 21,
+    "click_groups": 2,
+    "gif": "/tmp/skill-for-pptx/experiments/T024-20261014-gemini-complex-motion-rigging/preview/slide-05.gif",
+    "sheet": "/tmp/skill-for-pptx/experiments/T024-20261014-gemini-complex-motion-rigging/preview/slide-05.png",
+    "simulated": true,
+    "powerpoint_playback_verified": false
+  }
+]

@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Simulated motion preview: animated GIF + key-state contact sheet (T023).
+"""Simulated motion preview: animated GIF + key-state contact sheet (T023 / T024).
 
 Reads a slide's timing back from the PPTX (any deck, not only ours), samples
 the motion with motion_engine's semantics, writes one frame slide per sample
-into a temporary deck (moved/scaled/rotated/faded copies of the real slide),
-renders it once with LibreOffice and assembles a GIF with ImageMagick.
+into a temporary deck (moved/scaled/rotated/faded/recolored copies of the real
+slide), renders it once with LibreOffice and assembles a GIF and contact sheet
+using ImageMagick when present or Pillow (pure Python) as a built-in fallback.
 
 This is a SIMULATION of the authored intent under the engine's stated
 semantics. It is useful for catching wrong order, collisions and off-slide
@@ -12,6 +13,7 @@ motion. It is not PowerPoint playback.
 """
 import argparse
 import copy
+import math
 from pathlib import Path
 import shutil
 import subprocess
@@ -20,6 +22,12 @@ import tempfile
 from zipfile import ZipFile, ZIP_DEFLATED
 
 from lxml import etree as E
+
+try:
+    from PIL import Image, ImageDraw
+    HAS_PIL=True
+except ImportError:
+    HAS_PIL=False
 
 sys.path.insert(0,str(Path(__file__).resolve().parent))
 import pptx_animator as anim  # noqa: E402
@@ -54,6 +62,18 @@ def _ensure_xfrm(node,obj,W,H):
     E.SubElement(x,E.QName(A,"ext"),cx=str(int(g["w"]*W)),cy=str(int(g["h"]*H)))
     sppr.insert(0,x)
     return x
+
+
+def _recolor(node,hex_color):
+    sppr=node.find("p:spPr",NS)
+    if sppr is None:
+        return
+    sf=sppr.find("a:solidFill",NS)
+    if sf is None:
+        return
+    for ch in list(sf):
+        sf.remove(ch)
+    E.SubElement(sf,E.QName(A,"srgbClr"),val=hex_color.lstrip("#").upper())
 
 
 def _fade(node,alpha):
@@ -96,6 +116,8 @@ def frame_root(root,objects,states,hidden_paras,W,H):
                 ext.set("cy",str(max(1,ncy)))
                 if abs(st["rot"])>1e-6:
                     x.set("rot",str(int(int(x.get("rot","0"))+st["rot"]*60000)))
+        if st.get("color"):
+            _recolor(node,st["color"])
         alpha=st["opacity"]*st.get("alpha",1.0)
         if alpha<0.999:
             _fade(node,alpha)
@@ -196,11 +218,81 @@ def build_frames_deck(source,slide_part,roots,out):
                 dst.writestr(name,data)
 
 
+def build_contact_sheet(labeled_pngs,out_path,max_cols=4,thumb_size=None):
+    """Assemble [(label, png_path), ...] into a contact-sheet PNG using ImageMagick
+    montage if present, or Pillow as a pure-Python fallback."""
+    out_path=Path(out_path)
+    out_path.parent.mkdir(parents=True,exist_ok=True)
+    if shutil.which("montage"):
+        mcmd=["montage"]
+        for label,png in labeled_pngs:
+            mcmd+=["-label",str(label),str(png)]
+        geom=f"{thumb_size[0]}x{thumb_size[1]}+6+6" if thumb_size else "+6+6"
+        mcmd+=["-tile",f"{min(max_cols,len(labeled_pngs))}x","-geometry",geom,"-pointsize","13",str(out_path)]
+        subprocess.run(mcmd,check=True,timeout=300)
+        return str(out_path)
+    if not HAS_PIL:
+        shutil.copy(str(labeled_pngs[-1][1]),str(out_path))
+        return str(out_path)
+    opened=[Image.open(str(p)).convert("RGB") for _,p in labeled_pngs]
+    if thumb_size:
+        tw,th=thumb_size
+        opened=[im.resize((tw,th),Image.Resampling.LANCZOS) for im in opened]
+    else:
+        tw,th=opened[0].size
+    cols=min(max_cols,max(1,len(opened)))
+    rows=int(math.ceil(len(opened)/cols))
+    pad=12
+    label_h=24
+    sheet_w=cols*(tw+pad)+pad
+    sheet_h=rows*(th+label_h+pad)+pad
+    canvas=Image.new("RGB",(sheet_w,sheet_h),(255,255,255))
+    draw=ImageDraw.Draw(canvas)
+    for idx,((label,_),im) in enumerate(zip(labeled_pngs,opened)):
+        r,c=divmod(idx,cols)
+        x=pad+c*(tw+pad)
+        y=pad+r*(th+label_h+pad)
+        canvas.paste(im,(x,y))
+        draw.rectangle([x,y,x+tw-1,y+th-1],outline=(210,214,220))
+        draw.text((x+6,y+th+4),str(label),fill=(60,64,67))
+    canvas.save(str(out_path),format="PNG")
+    return str(out_path)
+
+
+def _assemble_gif_pillow(frames,pngs,out_gif):
+    pil_frames=[]
+    durations=[]
+    for (label,_,_,delay),png in zip(frames,pngs):
+        im=Image.open(str(png)).convert("RGB")
+        draw=ImageDraw.Draw(im)
+        txt=f"{label} (simulated)"
+        w,h=im.size
+        tw=len(txt)*7+12
+        draw.rectangle([w-tw-6,h-22,w-4,h-4],fill=(245,245,245))
+        draw.text((w-tw,h-19),txt,fill=(90,90,90))
+        pil_frames.append(im.quantize(colors=256))
+        durations.append(max(20,int(delay)))
+    out_gif=Path(out_gif)
+    out_gif.parent.mkdir(parents=True,exist_ok=True)
+    pil_frames[0].save(
+        str(out_gif),
+        save_all=True,
+        append_images=pil_frames[1:],
+        duration=durations,
+        loop=0,
+        optimize=False,
+    )
+
+
 def render_slide_motion(pptx,slide_index,out_gif,fps=8,width=640,sheet=None):
     """Render a simulated GIF (and optional key-state sheet) for one slide."""
-    for tool in ("soffice","pdftoppm","convert"):
-        if not shutil.which(tool):
-            raise RuntimeError(f"{tool} is required for motion preview")
+    soffice=shutil.which("soffice") or shutil.which("libreoffice")
+    if not soffice:
+        raise RuntimeError("soffice (LibreOffice) is required for motion preview")
+    if not shutil.which("pdftoppm"):
+        raise RuntimeError("pdftoppm is required for motion preview")
+    if not shutil.which("convert") and not HAS_PIL:
+        raise RuntimeError("convert (ImageMagick) or Pillow is required for motion preview")
     import motion_director as md
     model=md.deck_model(pptx)
     slide=model["slides"][slide_index-1]
@@ -213,28 +305,27 @@ def render_slide_motion(pptx,slide_index,out_gif,fps=8,width=640,sheet=None):
         td=Path(td)
         deck=td/"frames.pptx"
         build_frames_deck(pptx,slide["part"],roots,deck)
-        subprocess.run([shutil.which("soffice"),"--headless","--convert-to","pdf","--outdir",str(td),str(deck)],
+        subprocess.run([soffice,"--headless","--convert-to","pdf","--outdir",str(td),str(deck)],
                        check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,timeout=900)
         subprocess.run(["pdftoppm","-r","40","-scale-to-x",str(width),"-scale-to-y","-1","-png",
                         str(td/"frames.pdf"),str(td/"f")],check=True,timeout=900)
         pngs=sorted(td.glob("f-*.png"))
         if len(pngs)!=len(frames):
             raise RuntimeError(f"rendered {len(pngs)} frames, expected {len(frames)}")
-        cmd=["convert","-loop","0"]
-        for (label,_,_,delay),png in zip(frames,pngs):
-            cmd+=["-delay",str(max(2,delay//10)),"(",str(png),"-gravity","southeast","-fill","#666",
-                  "-pointsize","13","-annotate","+8+6",f"{label} (simulated)",")"]
         out_gif=Path(out_gif)
         out_gif.parent.mkdir(parents=True,exist_ok=True)
-        cmd.append(str(out_gif))
-        subprocess.run(cmd,check=True,timeout=900)
+        if shutil.which("convert"):
+            cmd=["convert","-loop","0"]
+            for (label,_,_,delay),png in zip(frames,pngs):
+                cmd+=["-delay",str(max(2,delay//10)),"(",str(png),"-gravity","southeast","-fill","#666",
+                      "-pointsize","13","-annotate","+8+6",f"{label} (simulated)",")"]
+            cmd.append(str(out_gif))
+            subprocess.run(cmd,check=True,timeout=900)
+        else:
+            _assemble_gif_pillow(frames,pngs,out_gif)
         if sheet:
             keys=[(label,png) for (label,_,_,_),png in zip(frames,pngs) if label=="start" or label.endswith("end")]
-            mcmd=["montage"]
-            for label,png in keys:
-                mcmd+=["-label",label,str(png)]
-            mcmd+=["-tile",f"{min(4,len(keys))}x","-geometry","+6+6","-pointsize","13",str(sheet)]
-            subprocess.run(mcmd,check=True,timeout=300)
+            build_contact_sheet(keys,sheet,max_cols=4)
     return {"slide":slide_index,"frames":len(frames),"click_groups":len(groups),"gif":str(out_gif),
             "sheet":str(sheet) if sheet else None,"simulated":True,"powerpoint_playback_verified":False}
 

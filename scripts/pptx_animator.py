@@ -1,25 +1,22 @@
 #!/usr/bin/env python3
 """PowerPoint-canonical animation timing writer, reader and state simulator.
 
-T019. This module writes the timing tree in the same shape PowerPoint itself
-saves for its built-in effects:
+T019 / T023 / T024. This module writes the timing tree in the same shape
+PowerPoint itself saves for its built-in effects:
 
     tmRoot > mainSeq > click group (delay=indefinite)
                      > time block (delay = end of previous block)
                      > effect par (presetClass/presetID/nodeType)
                      > behaviours (set visibility + animEffect/anim/...)
 
-Two defects of the earlier research writers are fixed here:
-
-* "after-previous" effects start in a *new* time block whose delay is the end
-  of the previous block.  Siblings with delay=0 inside one ``p:par`` run
-  concurrently, so the old structure played staged reveals all at once.
-* Entrance effects start with ``p:set style.visibility=visible`` and exits end
-  with ``hidden``; PowerPoint derives the initial hidden state of an entrance
-  target from that behaviour.
-
-Existing timing is extended, never replaced: new click groups are appended to
-the slide's main sequence with fresh cTn ids and build-group ids.
+T024 extensions:
+* Multi-segment cubic Bezier / line motion paths in a single ``p:animMotion``
+* Native Color emphasis (``p:animClr``) and Teeter emphasis (``p:animRot``)
+* Repeat (``repeatCount``), auto-reverse (``autoRev``), and ``p14:bounceEnd``
+* Interactive trigger sequences (``nodeType="interactiveSeq"`` on click of a
+  specific shape ``trigger_spid``)
+* Detection and optional stripping of empty layout placeholders before Morph
+  (preventing the unfilled-placeholder Morph failure mode).
 
 Structural correctness is not PowerPoint playback evidence.
 """
@@ -27,13 +24,17 @@ import copy
 import itertools
 from pathlib import Path
 import json
+import re
 
 from lxml import etree as E
 
 P="http://schemas.openxmlformats.org/presentationml/2006/main"
 A="http://schemas.openxmlformats.org/drawingml/2006/main"
 C="http://schemas.openxmlformats.org/drawingml/2006/chart"
-NS={"p":P,"a":A,"c":C}
+MC="http://schemas.openxmlformats.org/markup-compatibility/2006"
+P14="http://schemas.microsoft.com/office/powerpoint/2010/main"
+P159="http://schemas.microsoft.com/office/powerpoint/2015/09/main"
+NS={"p":P,"a":A,"c":C,"mc":MC,"p14":P14,"p159":P159}
 
 # name -> (presetClass, presetID, presetSubtype, default duration ms)
 PRESETS={
@@ -54,6 +55,8 @@ PRESETS={
     "grow":("emph",6,0,600),
     "spin":("emph",8,0,800),
     "dim":("emph",9,0,400),
+    "color":("emph",1,2,500),  # PowerPoint "Change Fill Color" (Argon wrote 7 = Change Line Color)
+    "teeter":("emph",32,0,1000),  # PowerPoint "Teeter" (Argon wrote 14 = Blast)
     "path":("path",0,0,800),
 }
 # T027: every built-in PowerPoint effect, harvested from PowerPoint itself
@@ -83,6 +86,7 @@ FILTER_TO_PRESET={
 }
 PRESET_FILTER={v:k for k,v in FILTER_TO_PRESET.items()}
 TRIGGERS={"click","with","after"}
+HEX_COLOR_RE=re.compile(r"^#?[0-9A-Fa-f]{6}$")
 
 
 def q(tag):
@@ -91,6 +95,12 @@ def q(tag):
 
 def sub(parent,tag,**attrs):
     return E.SubElement(parent,q(tag),{k:str(v) for k,v in attrs.items() if v is not None})
+
+
+def norm_hex(c):
+    if not isinstance(c,str) or not HEX_COLOR_RE.match(c.strip()):
+        raise ValueError(f"color must be a 6-digit hex RGB string, got {c!r}")
+    return c.strip().lstrip("#").upper()
 
 
 # ---------------------------------------------------------------------------
@@ -159,6 +169,18 @@ def _target(parent,spid,paragraph=None,chart=None):
     return tgt
 
 
+def _repeat_attrs(eff,default_auto_rev=False):
+    extra={}
+    rep=eff.get("repeat")
+    if rep=="indefinite":
+        extra["repeatCount"]="indefinite"
+    elif isinstance(rep,(int,float)) and rep>1:
+        extra["repeatCount"]=str(int(round(rep*1000)))
+    if eff.get("auto_reverse") or default_auto_rev:
+        extra["autoRev"]="1"
+    return extra
+
+
 def _bhvr(parent,ids,eff,dur,delay=None,fill=None,attrs=(),**ctn_extra):
     bhvr=sub(parent,"cBhvr")
     _ctn(bhvr,ids,dur,delay=delay,fill=fill,**ctn_extra)
@@ -182,9 +204,9 @@ def _anim_effect(parent,ids,eff,transition,filt,dur):
     _bhvr(node,ids,eff,dur)
 
 
-def _anim_prop(parent,ids,eff,attr,values,dur):
+def _anim_prop(parent,ids,eff,attr,values,dur,**ctn_extra):
     node=sub(parent,"anim",calcmode="lin",valueType="num")
-    _bhvr(node,ids,eff,dur,fill="hold",attrs=(attr,))
+    _bhvr(node,ids,eff,dur,fill="hold",attrs=(attr,),**ctn_extra)
     lst=sub(node,"tavLst")
     for tm,val in values:
         tav=sub(lst,"tav",tm=tm)
@@ -212,9 +234,10 @@ def anchored_path_string(segments):
     position. ``segments`` = [{"x","y"} start, then {"x","y"[,"c1","c2"]} ...];
     c1/c2 are cubic Bezier control points (also anchored offsets).
 
-    T023 hypothesis (T006 matrix "anchored-hold"): chained motion paths with
+    T023/T024 hypothesis (T006 matrix "anchored-hold"): chained motion paths with
     fill=hold are written as absolute offsets from the layout position, the way
-    PowerPoint's UI continues a second path from the end of the first.
+    PowerPoint's UI continues a second path from the end of the first. Supports
+    multi-segment poly-Bezier paths in a single animMotion element.
     """
     first=segments[0]
     parts=[f"M {_num(first['x'])} {_num(first['y'])}"]
@@ -259,7 +282,13 @@ def effective_duration(eff):
         return 2*dur
     if preset in ("appear","disappear"):
         return 1
-    return dur
+    mult=1
+    if preset=="pulse" or eff.get("auto_reverse"):
+        mult*=2
+    rep=eff.get("repeat")
+    if isinstance(rep,(int,float)) and rep>1:
+        mult*=rep
+    return int(round(dur*mult))
 
 
 def _library_behaviours(parent,ids,eff):
@@ -286,9 +315,14 @@ def _library_behaviours(parent,ids,eff):
 def _behaviours(parent,ids,eff):
     preset=eff["preset"]
     dur=max(1,eff["duration_ms"])
+    if preset=="teeter" and "ppt:teeter" in LIBRARY:
+        # T032: Argon's teeter wrote presetID 14 (Blast); use PowerPoint's own Teeter (32).
+        _library_behaviours(parent,ids,{**eff,"preset":"ppt:teeter"})
+        return
     if preset in LIBRARY:
         _library_behaviours(parent,ids,eff)
         return
+    rep_extra=_repeat_attrs(eff)
     if preset in ENTRANCES:
         _set_visibility(parent,ids,eff,"visible",0)
         if preset=="appear":
@@ -310,16 +344,27 @@ def _behaviours(parent,ids,eff):
     elif preset=="grow":
         ratio=eff["ratio"]
         node=sub(parent,"animScale")
-        _bhvr(node,ids,eff,dur,fill="hold")
+        _bhvr(node,ids,eff,dur,fill="hold",**rep_extra)
         sub(node,"by",x=round(ratio*100000),y=round(ratio*100000))
     elif preset=="pulse":
         scale=eff.get("scale",1.08)
         node=sub(parent,"animScale")
-        _bhvr(node,ids,eff,dur,fill="hold",autoRev="1")
+        _bhvr(node,ids,eff,dur,fill="hold",**_repeat_attrs(eff,default_auto_rev=True))
         sub(node,"by",x=round(scale*100000),y=round(scale*100000))
     elif preset=="spin":
         node=sub(parent,"animRot",by=round(eff.get("by_deg",360)*60000))
-        _bhvr(node,ids,eff,dur,fill="hold",attrs=("r",))
+        _bhvr(node,ids,eff,dur,fill="hold",attrs=("r",),**rep_extra)
+    elif preset=="teeter":
+        deg=eff.get("by_deg",2.0)
+        node=sub(parent,"animRot",by=round(deg*60000))
+        teeter_extra={"autoRev":"1","repeatCount":str(int(round(eff.get("repeat",2)*1000)))}
+        _bhvr(node,ids,eff,max(1,dur//2),fill="hold",attrs=("r",),**teeter_extra)
+    elif preset=="color":
+        hx=norm_hex(eff.get("color","#E06C4F"))
+        node=sub(parent,"animClr",clrSpc="rgb")
+        _bhvr(node,ids,eff,dur,fill="hold",attrs=("fillcolor",),**rep_extra)
+        to=sub(node,"to")
+        E.SubElement(to,E.QName(A,"srgbClr"),val=hx)
     elif preset=="dim":
         # PowerPoint "Transparency" emphasis, held until the slide ends or a
         # later dim on the same object sets another opacity (1 restores).
@@ -341,7 +386,7 @@ def _behaviours(parent,ids,eff):
             pts="A"*len(eff["points"])
         node=sub(parent,"animMotion",origin="layout",path=path,
                  pathEditMode="relative",rAng="0",ptsTypes=pts)
-        _bhvr(node,ids,eff,dur,fill="hold",attrs=("ppt_x","ppt_y"))
+        _bhvr(node,ids,eff,dur,fill="hold",attrs=("ppt_x","ppt_y"),**rep_extra)
         sub(node,"rCtr",x=0,y=0)
     else:
         raise ValueError(f"unsupported preset {preset}")
@@ -364,6 +409,8 @@ def _effect_par(parent,ids,eff,node_type,grp_id):
             extra["autoRev"]="1"
     ctn=sub(par,"cTn",id=next(ids),presetID=pid,presetClass=cls,presetSubtype=subtype,
             **extra,fill="hold",grpId=grp_id,nodeType=node_type)
+    if eff.get("bounce_end"):
+        ctn.set(E.QName(P14,"bounceEnd"),str(round(float(eff["bounce_end"])*100000)))
     st=sub(ctn,"stCondLst")
     sub(st,"cond",delay=eff.get("delay_ms",0))
     if loop.get("repeat")=="until-next-click":
@@ -406,7 +453,9 @@ def validate_effect(eff):
             raise ValueError("path effect requires >=2 points")
     if eff["preset"]=="grow" and not (isinstance(eff.get("ratio"),(int,float)) and eff["ratio"]>0):
         raise ValueError("grow effect requires a positive ratio")
-    for key in ("accel","decel"):
+    if eff["preset"]=="color":
+        norm_hex(eff.get("color",""))
+    for key in ("accel","decel","bounce_end"):
         if key in eff and not (0<=eff[key]<=1):
             raise ValueError(f"{key} must be within 0..1")
     it=eff.get("iterate")
@@ -474,6 +523,32 @@ def _main_sequence(timing,ids):
     return children,True
 
 
+def _interactive_sequence(timing,ids,trigger_spid):
+    """Find or create a shape-triggered interactiveSeq for ``trigger_spid``."""
+    root_ctn=timing.find("p:tnLst/p:par/p:cTn",NS)
+    root_children=root_ctn.find("p:childTnLst",NS)
+    if root_children is None:
+        root_children=sub(root_ctn,"childTnLst")
+    for seq in root_children.findall("p:seq",NS):
+        ctn=seq.find("p:cTn[@nodeType='interactiveSeq']",NS)
+        if ctn is None:
+            continue
+        tgt=seq.find("p:nextCondLst/p:cond/p:tgtEl/p:spTgt",NS)
+        if tgt is not None and tgt.get("spid")==str(trigger_spid):
+            children=ctn.find("p:childTnLst",NS)
+            if children is None:
+                children=sub(ctn,"childTnLst")
+            return children
+    seq=sub(root_children,"seq",concurrent="1",nextAc="seek")
+    ctn=sub(seq,"cTn",id=next(ids),dur="indefinite",restart="whenNotActive",
+            fill="hold",evtFilter="cancelBubble",nodeType="interactiveSeq")
+    children=sub(ctn,"childTnLst")
+    nxt=sub(seq,"nextCondLst")
+    cond=sub(nxt,"cond",evt="onClick",delay=0)
+    sub(sub(cond,"tgtEl"),"spTgt",spid=trigger_spid)
+    return children
+
+
 def _existing_grp_ids(timing):
     result={}
     for ctn in timing.iter(q("cTn")):
@@ -492,9 +567,10 @@ def _existing_grp_ids(timing):
 def apply_timeline(root,clicks,mode="extend"):
     """Write click groups onto a slide root (lxml element) in canonical form.
 
-    clicks: [{"id":..., "start":"click"|"auto", "effects":[effect, ...]}]
+    clicks: [{"id":..., "start":"click"|"auto", "trigger_spid"?:spid, "effects":[effect, ...]}]
     effect: {"preset","spid","trigger","duration_ms","delay_ms"?, "paragraph"?,
-             "chart"?, "scale"?, "by_deg"?, "points"?, "opacity"?, "beat"?}
+             "chart"?, "scale"?, "by_deg"?, "points"?, "opacity"?, "color"?,
+             "repeat"?, "auto_reverse"?, "bounce_end"?, "beat"?}
     mode: "extend" appends after existing main-sequence clicks; "replace"
           discards existing timing (caller must have an explicit reason).
     Returns a receipt.
@@ -507,6 +583,12 @@ def apply_timeline(root,clicks,mode="extend"):
             raise ValueError(f"click {click.get('id')} has no effects")
         if click.get("start","click") not in ("click","auto"):
             raise ValueError("click start must be click or auto")
+        trig_spid=click.get("trigger_spid")
+        if trig_spid is not None:
+            if click.get("start","click")=="auto":
+                raise ValueError("interactive trigger_spid click cannot start automatically")
+            if str(trig_spid) not in objects:
+                raise ValueError(f"trigger_spid {trig_spid} is not a top-level object on this slide")
         for eff in click["effects"]:
             validate_effect(eff)
             node=objects.get(eff["spid"])
@@ -535,25 +617,34 @@ def apply_timeline(root,clicks,mode="extend"):
             root.append(timing)
     id_iter=itertools.count(_max_ctn_id(timing)+1)
 
-    main_children,created_main=_main_sequence(timing,id_iter)
-    existing_clicks=len(main_children.findall("p:par",NS))
+    has_ordinary=any(c.get("trigger_spid") is None for c in clicks)
+    main_children,created_main=_main_sequence(timing,id_iter) if has_ordinary else (None,False)
+    existing_clicks=len(main_children.findall("p:par",NS)) if main_children is not None else 0
     used_grp=_existing_grp_ids(timing)
     next_grp={}
     grp_for={}
     builds={}
     receipts=[]
+    ordinary_ci=0
 
     for ci,click in enumerate(clicks):
+        trig_spid=click.get("trigger_spid")
         auto=click.get("start","click")=="auto"
-        outer=sub(main_children,"par")
+        seq_children=_interactive_sequence(timing,id_iter,str(trig_spid)) if trig_spid is not None else main_children
+        outer=sub(seq_children,"par")
         octn=sub(outer,"cTn",id=next(id_iter),fill="hold")
         st=sub(octn,"stCondLst")
         sub(st,"cond",delay="indefinite")
-        if auto:
-            if existing_clicks+ci!=0:
+        if trig_spid is not None:
+            cond=sub(st,"cond",evt="onBegin",delay=0)
+            sub(cond,"tn",val=seq_children.getparent().get("id"))
+        elif auto:
+            if existing_clicks+ordinary_ci!=0:
                 raise ValueError("only the first main-sequence group can start automatically")
             cond=sub(st,"cond",evt="onBegin",delay=0)
             sub(cond,"tn",val=2)
+        if trig_spid is None:
+            ordinary_ci+=1
         ochildren=sub(octn,"childTnLst")
         blocks,end=plan_blocks(click["effects"])
         block_receipts=[]
@@ -583,10 +674,13 @@ def apply_timeline(root,clicks,mode="extend"):
                     build["chart"]=eff.get("chart_build","series")
                     build["chart_bg"]=eff.get("chart_background",False)
             block_receipts.append({"begin_ms":begin,"effects":[
-                {k:v for k,v in e.items() if k in ("preset","spid","paragraph","chart","trigger","duration_ms","delay_ms")}
+                {k:v for k,v in e.items() if k in ("preset","spid","paragraph","chart","trigger","duration_ms","delay_ms","color","repeat","auto_reverse","bounce_end")}
                 for e in effs]})
-        receipts.append({"id":click.get("id"),"start":"auto" if auto else "click",
-                         "duration_ms":end,"blocks":block_receipts})
+        rec_item={"id":click.get("id"),"start":"auto" if auto else "click",
+                  "duration_ms":end,"blocks":block_receipts}
+        if trig_spid is not None:
+            rec_item["trigger_spid"]=str(trig_spid)
+        receipts.append(rec_item)
 
     bld=timing.find("p:bldLst",NS)
     if bld is None:
@@ -613,7 +707,8 @@ def apply_timeline(root,clicks,mode="extend"):
         "had_existing_timing":existing,
         "replaced_existing_timing":replaced,
         "existing_click_groups":0 if replaced else existing_clicks,
-        "appended_click_groups":len(clicks),
+        "appended_click_groups":ordinary_ci,
+        "interactive_click_groups":len(clicks)-ordinary_ci,
         "created_main_sequence":created_main,
         "clicks":receipts,
     }
@@ -631,19 +726,14 @@ def _first_target(ctn):
     return tgt.get("spid"),(int(pr.get("st")) if pr is not None else None)
 
 
-def read_main_sequence(root):
-    """Parse the main sequence into click groups of effect records.
-
-    Works for PowerPoint-authored timing and for this writer's output.
-    """
-    main=root.find(".//p:timing//p:cTn[@nodeType='mainSeq']",NS)
-    if main is None:
-        return []
+def _read_sequence_groups(seq_ctn,trigger_spid=None):
     groups=[]
-    for gpar in main.findall("p:childTnLst/p:par",NS):
+    if seq_ctn is None:
+        return groups
+    for gpar in seq_ctn.findall("p:childTnLst/p:par",NS):
         gctn=gpar.find("p:cTn",NS)
         conds=gctn.findall("p:stCondLst/p:cond",NS)
-        auto=any(c.get("evt")=="onBegin" for c in conds) or not any(c.get("delay")=="indefinite" for c in conds)
+        auto=(trigger_spid is None) and (any(c.get("evt")=="onBegin" for c in conds) or not any(c.get("delay")=="indefinite" for c in conds))
         effects=[]
         for ctn in gctn.iter(q("cTn")):
             cls=ctn.get("presetClass")
@@ -669,8 +759,33 @@ def read_main_sequence(root):
                         vis="visible" if tr.get("transition")=="in" else "hidden"
             effects.append({"spid":spid,"paragraph":para,"class":cls,"preset_id":ctn.get("presetID"),
                             "node_type":ctn.get("nodeType"),"visibility":vis})
-        groups.append({"auto":auto,"effects":effects})
+        item={"auto":auto,"effects":effects}
+        if trigger_spid is not None:
+            item["trigger_spid"]=trigger_spid
+        groups.append(item)
     return groups
+
+
+def read_main_sequence(root):
+    """Parse the main sequence into click groups of effect records.
+
+    Works for PowerPoint-authored timing and for this writer's output.
+    """
+    main=root.find(".//p:timing//p:cTn[@nodeType='mainSeq']",NS)
+    return _read_sequence_groups(main)
+
+
+def read_interactive_sequences(root):
+    """Parse shape-triggered interactive sequences into click group records."""
+    out=[]
+    for seq in root.findall(".//p:timing//p:seq",NS):
+        ctn=seq.find("p:cTn[@nodeType='interactiveSeq']",NS)
+        if ctn is None:
+            continue
+        tgt=seq.find("p:nextCondLst/p:cond/p:tgtEl/p:spTgt",NS)
+        spid=tgt.get("spid") if tgt is not None else None
+        out.extend(_read_sequence_groups(ctn,trigger_spid=spid))
+    return out
 
 
 def simulate_states(root):
@@ -695,7 +810,6 @@ def simulate_states(root):
     def snap(label):
         states.append({"label":label,"hidden_objects":set(hidden_obj),"hidden_paragraphs":set(hidden_par)})
     snap("start")
-    # Auto groups at the start play before the first click.
     for i,g in enumerate(groups,1):
         for e in g["effects"]:
             if e["visibility"] is None:
@@ -742,7 +856,6 @@ def apply_state_for_preview(root,state):
                 if E.QName(fill).localname in ("solidFill","gradFill","noFill","pattFill"):
                     rpr.remove(fill)
             fill=E.Element(E.QName(A,"noFill"))
-            # noFill must precede most rPr children (ln is first).
             ln=rpr.find("a:ln",NS)
             if ln is not None:
                 ln.addnext(fill)
@@ -755,22 +868,52 @@ def apply_state_for_preview(root,state):
 
 
 # ---------------------------------------------------------------------------
-# Slide transitions
+# Slide transitions & Morph placeholder sanitizer
 
-MC="http://schemas.openxmlformats.org/markup-compatibility/2006"
-P14="http://schemas.microsoft.com/office/powerpoint/2010/main"
-P159="http://schemas.microsoft.com/office/powerpoint/2015/09/main"
+
+def empty_placeholders(root):
+    """Return [(spid, name, ph_type)] for unfilled placeholder shapes on a slide.
+
+    Per python-pptx issue #942, unfilled layout placeholders left on a slide
+    can prevent PowerPoint from running the Morph transition.
+    """
+    out=[]
+    for spid,node in top_level_objects(root).items():
+        if node.tag!=q("sp"):
+            continue
+        ph=node.find("./p:nvSpPr/p:nvPr/p:ph",NS)
+        if ph is None:
+            continue
+        if text_paragraphs(node):
+            continue
+        sppr=node.find("p:spPr",NS)
+        has_visual=(sppr is not None and any(sppr.find(f"a:{t}",NS) is not None
+                    for t in ("solidFill","gradFill","pattFill","blipFill")))
+        if has_visual:
+            continue
+        cNvPr=node.find("./p:nvSpPr/p:cNvPr",NS)
+        name=cNvPr.get("name","") if cNvPr is not None else ""
+        out.append((spid,name,ph.get("type","obj")))
+    return out
 
 
 def existing_transition(root):
-    return root.find(f"p:transition",NS) is not None or root.find(f"{{{MC}}}AlternateContent/{{{MC}}}Choice/p:transition",NS) is not None
+    return root.find("p:transition",NS) is not None or root.find(f"{{{MC}}}AlternateContent/{{{MC}}}Choice/p:transition",NS) is not None
 
 
-def add_morph_transition(root,duration_ms=1500):
+def add_morph_transition(root,duration_ms=1500,strip_empty_placeholders=False):
     """Insert a Morph (by object) transition with a Fade fallback, the way
-    PowerPoint 2019+/365 saves it. Refuses to replace an existing transition."""
+    PowerPoint 2019+/365 saves it. Refuses to replace an existing transition.
+    Optionally strips empty placeholder shapes that would block Morph."""
     if existing_transition(root):
         raise ValueError("slide already has a transition")
+    if strip_empty_placeholders:
+        tree=root.find("p:cSld/p:spTree",NS)
+        objs=top_level_objects(root)
+        for spid,_,_ in empty_placeholders(root):
+            node=objs.get(spid)
+            if node is not None and tree is not None and node.getparent() is tree:
+                tree.remove(node)
     alt=E.Element(E.QName(MC,"AlternateContent"),nsmap={"mc":MC})
     choice=E.SubElement(alt,E.QName(MC,"Choice"),nsmap={"p159":P159},Requires="p159")
     tr=E.SubElement(choice,q("transition"),{"spd":"slow",E.QName(P14,"dur"):str(int(duration_ms))},nsmap={"p14":P14})

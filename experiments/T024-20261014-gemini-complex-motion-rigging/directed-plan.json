@@ -1,0 +1,774 @@
+{
+  "version": "0.6",
+  "kind": "existing-deck-motion-director",
+  "source": {
+    "pptx_sha256": "6199128bb1712c0fad2d0d5de34d200bb73f8856f3695820be754d8e811ac81d",
+    "inventory_version": "0.1",
+    "source_slide_count": 5
+  },
+  "user_instruction": "Create an ultra-detailed, high-difficulty 5-slide architectural animation deck demonstrating every advanced T024 capability.",
+  "script": {
+    "source": "speaker-notes",
+    "summary": "Slide 1 auto-assembles a 22-shape silicon wafer constellation on slide start and orbits 360 deg on click 1. Slide 2 runs a 3D perspective elliptical carousel across five 6-part pods with 30ms follow-through inertia. Slide 3 explodes a 5-layer hardware stack, streams a 4-packet concurrent cascade swarm with node color flashes, and curves an audit probe around a thermal obstacle. Slides 4->5 morph 18 cluster topology objects into a 6-row swimlane dashboard with series chart builds, wave ripples, KPI counter, and dual interactiveSeq triggers.",
+    "evidence": [
+      "slide titles and multi-part geometry",
+      "speaker notes",
+      "!! Morph pairs",
+      "chart and standalone number semantics"
+    ],
+    "beats": [
+      "slide 1: on-slide-start wafer constellation assembly + 360 orbit & counter-spin",
+      "slide 2: 5x6-part pod assembly with follow-through + two 3D elliptical orbit steps + crimson spotlight + release",
+      "slide 3: 5-layer isometric stack explosion + 4-packet braided cascade-flow + auto-arc obstacle bypass + release",
+      "slide 4: 6-cluster mesh assembly + curved arc swap between US-East and EU-Central",
+      "slide 5: 18-object Morph into swimlanes + chart build & bar wave + KPI counter + 2 interactiveSeq triggers"
+    ]
+  },
+  "preservation": {
+    "preserve_text_by_default": true,
+    "preserve_media_by_default": true,
+    "preserve_theme_by_default": true,
+    "preserve_slide_order_by_default": true,
+    "slide_count_policy": "preserve"
+  },
+  "transitions": [
+    {
+      "slide": 5,
+      "kind": "morph",
+      "duration_ms": 1600,
+      "reason": "Continuity: 18 '!!cluster-*', '!!bar-*', and '!!lat-*' objects morph from the 2x3 spatial mesh on Slide 4 into the 6-row horizontal swimlane table on Slide 5."
+    }
+  ],
+  "slides": [
+    {
+      "source_index": 1,
+      "role": "animated hero cover",
+      "objective": "Assemble the silicon wafer constellation automatically on slide open, then orbit all 6 multi-part neural tiles on click 1.",
+      "beats": [
+        {
+          "id": "s1-auto-die",
+          "purpose": "Zoom in the central NPU-X9 wafer die and outer ring automatically when the slide opens.",
+          "operation": "reveal",
+          "targets": [
+            "Wafer Outer Ring",
+            "Wafer Core Die",
+            "Wafer Core Title",
+            "Wafer Core Sub"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-slide-start",
+          "effect": "zoom",
+          "duration_ms": 500
+        },
+        {
+          "id": "s1-auto-tiles",
+          "purpose": "Radially assemble all 6 multi-part Neural Engine tiles (24 rigged shapes) from the wafer core with 35ms follow-through inertia and bounce.",
+          "operation": "choreography",
+          "targets": [
+            "Core Tile C1",
+            "Core Tile C2",
+            "Core Tile C3",
+            "Core Tile C4",
+            "Core Tile C5",
+            "Core Tile C6"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "with-previous",
+          "recipe": "assemble",
+          "motion_parameters": {
+            "from": "center",
+            "stagger_ms": 90,
+            "duration_ms": 650,
+            "bounce_end": 0.35,
+            "follow_through_ms": 35
+          }
+        },
+        {
+          "id": "s1-auto-kpis",
+          "purpose": "Reveal the 3 composite telemetry KPI cards along the bottom rail.",
+          "operation": "stagger-reveal",
+          "targets": [
+            "Card BW",
+            "Card BW Bar",
+            "Card BW Val",
+            "Card BW Sub",
+            "Card E",
+            "Card E Bar",
+            "Card E Val",
+            "Card E Sub",
+            "Card SLA",
+            "Card SLA Bar",
+            "Card SLA Val",
+            "Card SLA Sub"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "after-previous",
+          "effect": "float-in",
+          "duration_ms": 350
+        },
+        {
+          "id": "s1-orbit-constellation",
+          "purpose": "Revolve all 6 multi-part Neural Engine tiles (24 rigged shapes) 360 degrees around Wafer Core Die.",
+          "operation": "choreography",
+          "targets": [
+            "Wafer Core Die",
+            "Core Tile C1",
+            "Core Tile C2",
+            "Core Tile C3",
+            "Core Tile C4",
+            "Core Tile C5",
+            "Core Tile C6"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "orbit",
+          "motion_parameters": {
+            "around_first": true,
+            "angle_deg": 360,
+            "duration_ms": 1500
+          }
+        },
+        {
+          "id": "s1-counter-spin-ring",
+          "purpose": "Counter-spin the outer wafer ring -180 degrees while the neural tiles orbit clockwise.",
+          "operation": "rotate",
+          "targets": [
+            "Wafer Outer Ring"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "with-previous",
+          "motion_parameters": {
+            "by_deg": -180,
+            "duration_ms": 1500
+          }
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "c1-auto",
+          "purpose": "Auto-assemble wafer constellation and telemetry cards on slide open.",
+          "motion_beats": [
+            "s1-auto-die",
+            "s1-auto-tiles",
+            "s1-auto-kpis"
+          ],
+          "stable_state": "Full cover layout assembled.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Plays automatically on slide start."
+        },
+        {
+          "id": "c1-orbit",
+          "purpose": "Orbit the 6 neural engine tiles 360 degrees while counter-spinning the outer ring.",
+          "motion_beats": [
+            "s1-orbit-constellation",
+            "s1-counter-spin-ring"
+          ],
+          "stable_state": "Constellation completes full 360-degree orbital cycle.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Demonstrate live synchronous orbital motion on the cover."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 2,
+      "role": "3D perspective elliptical carousel",
+      "objective": "Walk 5 composite 6-part subsystem pods (30 rigged shapes) through 3D elliptical depth rotations, crimson spotlighting, and restoration.",
+      "beats": [
+        {
+          "id": "s2-hub",
+          "purpose": "Reveal the central Policy Kernel hub.",
+          "operation": "reveal",
+          "targets": [
+            "Kernel Hub",
+            "Kernel Badge",
+            "Kernel Title",
+            "Kernel Sub"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 450
+        },
+        {
+          "id": "s2-assemble-pods",
+          "purpose": "Assemble all 5 6-part subsystem pods (30 rigged shapes) outward from the kernel with 30ms secondary follow-through inertia and elastic bounce.",
+          "operation": "choreography",
+          "targets": [
+            "Pod Telemetry",
+            "Pod WorldModel",
+            "Pod RiskSolver",
+            "Pod Shaper",
+            "Pod SelfHeal"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "with-previous",
+          "recipe": "assemble",
+          "motion_parameters": {
+            "from": "center",
+            "stagger_ms": 110,
+            "duration_ms": 650,
+            "bounce_end": 0.35,
+            "follow_through_ms": 30
+          }
+        },
+        {
+          "id": "s2-orbit3d-step1",
+          "purpose": "Rotate all 5 composite pods 1 station clockwise along the tilted 3D ellipse (foreground pods enlarge to 1.20x, background pods shrink to 0.80x and dim).",
+          "operation": "choreography",
+          "targets": [
+            "Kernel Hub",
+            "Pod Telemetry",
+            "Pod WorldModel",
+            "Pod RiskSolver",
+            "Pod Shaper",
+            "Pod SelfHeal"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "orbit-3d",
+          "motion_parameters": {
+            "around_first": true,
+            "steps": 1,
+            "depth_scale": 0.2,
+            "depth_dim": 0.48,
+            "duration_ms": 950
+          }
+        },
+        {
+          "id": "s2-orbit3d-step2",
+          "purpose": "Rotate all 5 composite pods a second station along the tilted 3D ellipse.",
+          "operation": "choreography",
+          "targets": [
+            "Kernel Hub",
+            "Pod Telemetry",
+            "Pod WorldModel",
+            "Pod RiskSolver",
+            "Pod Shaper",
+            "Pod SelfHeal"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "orbit-3d",
+          "motion_parameters": {
+            "around_first": true,
+            "steps": 1,
+            "depth_scale": 0.2,
+            "depth_dim": 0.48,
+            "duration_ms": 950
+          }
+        },
+        {
+          "id": "s2-spotlight-solver",
+          "purpose": "Spotlight Pod RiskSolver (enlarging all 6 of its rigged components and shifting its chassis color to crimson) while dimming the other 4 pods.",
+          "operation": "choreography",
+          "targets": [
+            "Pod RiskSolver",
+            "Pod Telemetry",
+            "Pod WorldModel",
+            "Pod Shaper",
+            "Pod SelfHeal"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "spotlight",
+          "motion_parameters": {
+            "scale": 1.18,
+            "dim": 0.32,
+            "color": "#E11D48",
+            "duration_ms": 550
+          }
+        },
+        {
+          "id": "s2-release-all",
+          "purpose": "Restore all 5 composite pods (30 shapes) to their authored ring positions, 1.0x scale, and 100% opacity.",
+          "operation": "choreography",
+          "targets": [
+            "Pod Telemetry",
+            "Pod WorldModel",
+            "Pod RiskSolver",
+            "Pod Shaper",
+            "Pod SelfHeal"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "release",
+          "motion_parameters": {
+            "duration_ms": 600
+          }
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "c2-1",
+          "purpose": "Introduce the Policy Kernel and assemble the 5 composite pods with follow-through inertia.",
+          "motion_beats": [
+            "s2-hub",
+            "s2-assemble-pods"
+          ],
+          "stable_state": "Kernel and 5 pods (34 shapes) assembled.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "c2-2",
+          "purpose": "Advance the 3D elliptical carousel by 1 step.",
+          "motion_beats": [
+            "s2-orbit3d-step1"
+          ],
+          "stable_state": "Pods rotated 1 step with 3D perspective depth scaling.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Inspect the first orbital transition."
+        },
+        {
+          "id": "c2-3",
+          "purpose": "Advance the 3D elliptical carousel by a 2nd step.",
+          "motion_beats": [
+            "s2-orbit3d-step2"
+          ],
+          "stable_state": "Pods rotated 2 steps in 3D perspective depth.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Bring the solver/shaper pods into foreground focus."
+        },
+        {
+          "id": "c2-4",
+          "purpose": "Spotlight Pod RiskSolver with crimson color shift.",
+          "motion_beats": [
+            "s2-spotlight-solver"
+          ],
+          "stable_state": "Pod RiskSolver enlarged and highlighted; others dimmed.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Deep-dive into the counterfactual solver."
+        },
+        {
+          "id": "c2-5",
+          "purpose": "Restore the full 5-pod ring.",
+          "motion_beats": [
+            "s2-release-all"
+          ],
+          "stable_state": "All 30 pod shapes restored to authored geometry.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Close the loop."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 3,
+      "role": "exploded 5-layer stack & 4-packet concurrent swarm",
+      "objective": "Explode the 5-layer silicon stack (30 rigged shapes), stream 4 concurrent data packets through Relays R1-R4 with arrival color flashes, and arc Audit Probe around Thermal Obstacle.",
+      "beats": [
+        {
+          "id": "s3-explode-stack",
+          "purpose": "Explode all 5 architectural strata (30 rigged shapes) along an isometric axis with staggered bounce and follow-through.",
+          "operation": "choreography",
+          "targets": [
+            "Layer L1",
+            "Layer L2",
+            "Layer L3",
+            "Layer L4",
+            "Layer L5"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "explode-layers",
+          "motion_parameters": {
+            "axis": "iso",
+            "spread": 0.14,
+            "stagger_ms": 80,
+            "duration_ms": 650,
+            "bounce_end": 0.3,
+            "follow_through_ms": 25
+          }
+        },
+        {
+          "id": "s3-swarm-cascade",
+          "purpose": "Launch 4 concurrent data packets (PKT-1..PKT-4) in a braided swarm through Relays R1->R2->R3->R4, flashing each relay cyan upon arrival.",
+          "operation": "choreography",
+          "targets": [
+            "Swarm PKT-1",
+            "Swarm PKT-2",
+            "Swarm PKT-3",
+            "Swarm PKT-4",
+            "Relay R1",
+            "Relay R2",
+            "Relay R3",
+            "Relay R4"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "cascade-flow",
+          "motion_parameters": {
+            "token_count": 4,
+            "stagger_ms": 110,
+            "hop_ms": 380,
+            "arc": 0.16,
+            "offset_y": -0.072,
+            "token_spread_x": 0.036,
+            "stage_color": "#06B6D4"
+          }
+        },
+        {
+          "id": "s3-obstacle-bypass",
+          "purpose": "Route Audit Probe to Telemetry Sink; auto_avoid automatically curves the path over Thermal Obstacle.",
+          "operation": "choreography",
+          "targets": [
+            "Audit Probe",
+            "Telemetry Sink"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "travel",
+          "motion_parameters": {
+            "arc": 0.0,
+            "offset_y": -0.11,
+            "auto_avoid": true,
+            "duration_ms": 850
+          }
+        },
+        {
+          "id": "s3-obstacle-teeter",
+          "purpose": "Rock Thermal Obstacle with a teeter emphasis as Audit Probe arcs past it.",
+          "operation": "emphasize",
+          "targets": [
+            "Thermal Obstacle"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "with-previous",
+          "effect": "teeter",
+          "duration_ms": 600,
+          "motion_parameters": {
+            "by_deg": 4.0
+          }
+        },
+        {
+          "id": "s3-release-stack",
+          "purpose": "Re-collapse the 5 exploded layers and return all packets/probes to their authored positions.",
+          "operation": "choreography",
+          "targets": [
+            "Layer L1",
+            "Layer L2",
+            "Layer L3",
+            "Layer L4",
+            "Layer L5",
+            "Swarm PKT-1",
+            "Swarm PKT-2",
+            "Swarm PKT-3",
+            "Swarm PKT-4",
+            "Audit Probe"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "release",
+          "motion_parameters": {
+            "duration_ms": 600
+          }
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "c3-1",
+          "purpose": "Explode the 5-layer hardware stack.",
+          "motion_beats": [
+            "s3-explode-stack"
+          ],
+          "stable_state": "5 layers (30 shapes) separated along isometric diagonal.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "c3-2",
+          "purpose": "Stream 4 concurrent packets through the 4 relay stages.",
+          "motion_beats": [
+            "s3-swarm-cascade"
+          ],
+          "stable_state": "All 4 packets complete 4-hop cascade; relays pulsed and flashed cyan.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Demonstrate multi-token concurrent swarm flow."
+        },
+        {
+          "id": "c3-3",
+          "purpose": "Bypass Thermal Obstacle via auto-arc trajectory solver.",
+          "motion_beats": [
+            "s3-obstacle-bypass",
+            "s3-obstacle-teeter"
+          ],
+          "stable_state": "Audit Probe lands above Telemetry Sink with zero mid-flight collision.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Show obstacle-avoiding routing."
+        },
+        {
+          "id": "c3-4",
+          "purpose": "Re-compress stack and reset tokens.",
+          "motion_beats": [
+            "s3-release-stack"
+          ],
+          "stable_state": "All 45 shapes restored to authored layout.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Conclude exploded view."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 4,
+      "role": "spatial cluster topology before Morph",
+      "objective": "Assemble the 6 regional clusters (24 rigged shapes) and swap US-East with EU-Central on curved arcs before morphing into Slide 5.",
+      "beats": [
+        {
+          "id": "s4-assemble-mesh",
+          "purpose": "Assemble all 6 regional cluster pods (with their rigged !!bar-* and !!lat-* children) outward from the Anycast Core.",
+          "operation": "choreography",
+          "targets": [
+            "!!cluster-1",
+            "!!cluster-2",
+            "!!cluster-3",
+            "!!cluster-4",
+            "!!cluster-5",
+            "!!cluster-6"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "assemble",
+          "motion_parameters": {
+            "from": "slide-center",
+            "stagger_ms": 90,
+            "duration_ms": 650,
+            "bounce_end": 0.3,
+            "follow_through_ms": 25
+          }
+        },
+        {
+          "id": "s4-swap-clusters",
+          "purpose": "Swap !!cluster-2 (US-East) and !!cluster-3 (EU-Central) along opposite arcs during failover re-ranking.",
+          "operation": "choreography",
+          "targets": [
+            "!!cluster-2",
+            "!!cluster-3"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "swap",
+          "motion_parameters": {
+            "arc": 0.25,
+            "duration_ms": 750
+          }
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "c4-1",
+          "purpose": "Assemble the 6 regional cluster pods.",
+          "motion_beats": [
+            "s4-assemble-mesh"
+          ],
+          "stable_state": "All 6 regional clusters visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "c4-2",
+          "purpose": "Swap US-East and EU-Central priority positions.",
+          "motion_beats": [
+            "s4-swap-clusters"
+          ],
+          "stable_state": "US-East and EU-Central exchanged; ready for cross-slide Morph.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Prepare failover order before morphing to swimlanes."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 5,
+      "role": "morphed swimlane console, chart build, wave & dual interactiveSeq",
+      "objective": "Let the 18 !! objects glide in via Morph, build the multi-series chart while rippling the swimlane bars, count up the hero SLA metric, and wire two interactive trigger buttons.",
+      "beats": [
+        {
+          "id": "s5-chart-build",
+          "purpose": "Build the multi-series Telemetry Chart series by series.",
+          "operation": "chart-build",
+          "targets": [
+            "Telemetry Chart"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "data_motion": {
+            "kind": "chart",
+            "chart_type": "column",
+            "recipe": "baseline-grow",
+            "build": "series",
+            "animate_background": false,
+            "rationale": "Compare Optical Mesh throughput growth against tail latency reduction series by series."
+          }
+        },
+        {
+          "id": "s5-swimlane-wave",
+          "purpose": "Propagate a synchronized wave ripple across the 6 morphed swimlane load bars as the chart builds.",
+          "operation": "choreography",
+          "targets": [
+            "!!bar-1",
+            "!!bar-2",
+            "!!bar-3",
+            "!!bar-4",
+            "!!bar-5",
+            "!!bar-6"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "with-previous",
+          "recipe": "wave",
+          "motion_parameters": {
+            "stagger_ms": 90,
+            "amplitude": 0.025,
+            "scale": 1.08,
+            "duration_ms": 500
+          }
+        },
+        {
+          "id": "s5-sla-card-reveal",
+          "purpose": "Reveal the Hero SLA Card frame and labels.",
+          "operation": "reveal",
+          "targets": [
+            "Hero SLA Card",
+            "Hero SLA Label",
+            "Hero SLA Foot",
+            "Btn Failover",
+            "Btn Quota"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 450
+        },
+        {
+          "id": "s5-sla-counter",
+          "purpose": "Reveal and pulse the 99.9% Hero SLA Number with emerald color emphasis.",
+          "operation": "reveal",
+          "targets": [
+            "Hero SLA Number"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "with-previous",
+          "effect": "zoom",
+          "duration_ms": 500
+        },
+        {
+          "id": "s5-sla-pulse",
+          "purpose": "Pulse Hero SLA Number after it lands.",
+          "operation": "focus",
+          "targets": [
+            "Hero SLA Number"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "after-previous",
+          "effect": "pulse",
+          "duration_ms": 350
+        },
+        {
+          "id": "s5-trig-failover",
+          "purpose": "Pop open Panel Failover when presenter clicks Btn Failover.",
+          "operation": "reveal",
+          "targets": [
+            "Panel Failover"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 450
+        },
+        {
+          "id": "s5-trig-quota",
+          "purpose": "Pop open Panel Quota when presenter clicks Btn Quota.",
+          "operation": "reveal",
+          "targets": [
+            "Panel Quota"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 450
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "c5-1",
+          "purpose": "Build the multi-series telemetry chart and ripple the 6 morphed swimlane bars.",
+          "motion_beats": [
+            "s5-chart-build",
+            "s5-swimlane-wave"
+          ],
+          "stable_state": "Chart series built and swimlane bars rippled.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal after the Morph transition."
+        },
+        {
+          "id": "c5-2",
+          "purpose": "Reveal the Hero SLA Card with stepped-text counter and interactive buttons.",
+          "motion_beats": [
+            "s5-sla-card-reveal",
+            "s5-sla-counter",
+            "s5-sla-pulse"
+          ],
+          "stable_state": "Hero SLA counted up to 99.9%; interactive buttons ready.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Land the headline SLA metric."
+        },
+        {
+          "id": "c5-trig-1",
+          "purpose": "Interactive drill-down on EU Failover.",
+          "trigger_shape": "Btn Failover",
+          "motion_beats": [
+            "s5-trig-failover"
+          ],
+          "stable_state": "Panel Failover visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Triggered by clicking Btn Failover."
+        },
+        {
+          "id": "c5-trig-2",
+          "purpose": "Interactive drill-down on Tensor Quota.",
+          "trigger_shape": "Btn Quota",
+          "motion_beats": [
+            "s5-trig-quota"
+          ],
+          "stable_state": "Panel Quota visible.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Triggered by clicking Btn Quota."
+        }
+      ],
+      "components": []
+    }
+  ],
+  "target_slide_count": 5,
+  "research_metadata": {
+    "sources": [],
+    "draft_notes": {},
+    "style": "cinematic",
+    "drafted_by": "T024 high-complexity showcase"
+  }
+}

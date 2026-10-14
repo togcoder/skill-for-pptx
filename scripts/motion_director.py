@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""AI Motion Director for existing PowerPoint decks — one entry point (T019).
+"""AI Motion Director for existing PowerPoint decks — one entry point (T019 / T023 / T024).
 
     inspect     compact, AI-readable outline of a deck (objects, text, notes,
                 existing animation) + JSON model
-    draft       autonomous Director v0.5 plan from deck evidence
+    draft       autonomous Director v0.6 plan from deck evidence
     apply       validate a Director plan and write canonical native timing
     auto        draft + apply in one step
     storyboard  static render of every simulated click state (LibreOffice)
@@ -348,10 +348,16 @@ def _label_body_pairs(objs,used):
 
 
 def _radial_group(objs,used,aspect=16/9):
-    """Self-contained shapes of similar size arranged around a common centre
-    (cycle / hub-and-spoke diagrams). Returns (members in clockwise order from
-    the top, hub or None) or None."""
-    shapes=[o for o in objs if o["geometry"] and o["kind"]=="shape" and o["id"] not in used and o["text"]]
+    """Shapes of similar size arranged around a common centre (cycle /
+    hub-and-spoke diagrams). With T024 virtual rigging, separate text labels
+    sitting inside carrier shapes are automatically carried as followers rather
+    than disqualifying the radial group. Returns (members in clockwise order
+    from the top, hub or None, follower_ids) or None."""
+    rigs=me.detect_virtual_rigs(objs)
+    follower_ids={f["id"] for fs in rigs.values() for f in fs}
+    shapes=[o for o in objs if o["geometry"] and o["kind"]=="shape"
+            and o["id"] not in used and o["id"] not in follower_ids
+            and (o["text"] or o["id"] in rigs)]
     buckets={}
     for o in shapes:
         g=o["geometry"]
@@ -359,7 +365,6 @@ def _radial_group(objs,used,aspect=16/9):
     for members in sorted(buckets.values(),key=len,reverse=True):
         if not 3<=len(members)<=8:
             continue
-        # Measure in true slide proportions so circles stay circles.
         pts=[(_center(m)[0]*aspect,_center(m)[1]) for m in members]
         cx=sum(p[0] for p in pts)/len(pts)
         cy=sum(p[1] for p in pts)/len(pts)
@@ -373,16 +378,15 @@ def _radial_group(objs,used,aspect=16/9):
         gaps=[b-a for a,b in zip(angles,angles[1:])]+[angles[0]+2*math.pi-angles[-1]]
         if max(gaps)>math.pi:
             continue
-        others=[o for o in objs if o not in members and o["geometry"]]
-        if any(_contains(m,o) and _area(o)<_area(m) for m in members for o in others):
-            continue  # labels are separate objects; tracks would tear them apart
+        others=[o for o in objs if o not in members and o["geometry"] and o["id"] not in follower_ids]
         order=sorted(members,key=lambda m:(math.atan2(_center(m)[1]-cy,_center(m)[0]*aspect-cx)+math.pi/2)%(2*math.pi))
-        hub=next((o for o in others if o["id"] not in used and o["text"]
+        hub=next((o for o in others if o["id"] not in used and (o["text"] or o["id"] in rigs)
                   and math.dist((_center(o)[0]*aspect,_center(o)[1]),(cx,cy))<0.08),None)
         xs={round(_center(m)[0]/0.04) for m in members}
         ys={round(_center(m)[1]/0.04) for m in members}
         grid=len(xs)>=2 and len(ys)>=2 and len(xs)*len(ys)==len(members)
-        return order,hub,grid
+        f_used={f["id"] for m in order+([hub] if hub else []) for f in rigs.get(m["id"],[])}
+        return order,hub,grid,f_used
     return None
 
 
@@ -406,9 +410,10 @@ def _units(slide,continuing=()):
 
     radial=_radial_group(with_geom,used,slide.get("aspect",16/9))
     if radial:
-        members,hub,grid=radial
+        members,hub,grid,f_used=radial
         units.append({"kind":"cycle","objs":([hub] if hub else [])+members,"members":members,"hub":hub,"grid":grid})
         used.update(o["id"] for o in members)
+        used.update(f_used)
         if hub:
             used.add(hub["id"])
 
@@ -459,7 +464,6 @@ def _units(slide,continuing=()):
             continue
         area=_area(o)
         if o["kind"] in ("picture","media","group","connector","shape") and not o["has_text_body"] and o["kind"]!="picture":
-            # Decorative or unlabeled shapes stay static unless large.
             if area<0.05:
                 continue
         if o["kind"]=="group" and area<0.03:
@@ -973,7 +977,6 @@ def draft(model,goal="",style="modern",counters=False,morph=True,ambient=False):
         t.pop("continuing_ids")
     for s in model["slides"]:
         if s.get("morph_in") and s["index"]>1:
-            # An existing Morph carries shared objects in; re-entering them would break continuity.
             continuing.setdefault(s["index"],set()).update(shared_objects(slides_by[s["index"]-1],s)[0])
             outgoing.setdefault(s["index"]-1,set()).update(shared_objects(s,slides_by[s["index"]-1])[0])
     for s in model["slides"]:
@@ -1010,7 +1013,7 @@ def draft(model,goal="",style="modern",counters=False,morph=True,ambient=False):
 
 
 # ---------------------------------------------------------------------------
-# Compile Director v0.4/v0.5 -> canonical click groups
+# Compile Director v0.4/v0.5/v0.6 -> canonical click groups
 
 
 def _resolve(slide_model,token):
@@ -1035,8 +1038,13 @@ def _beat_effects(beat,slide_model,style="modern",states=None):
                 by_token.setdefault(key,o)
         tracks=None
         if beat["recipe"]=="tracks":
-            tracks=[{"target":_resolve(slide_model,tr["target"]),"keyframes":tr["keyframes"]}
-                    for tr in beat["tracks"]]
+            tracks=[]
+            for tr in beat["tracks"]:
+                item={"target":_resolve(slide_model,tr["target"]),"keyframes":tr["keyframes"]}
+                for mod in ("poly_path","repeat","auto_reverse","bounce_end"):
+                    if mod in tr:
+                        item[mod]=tr[mod]
+                tracks.append(item)
         params=dict(beat.get("motion_parameters") or {})
         params["_aspect"]=slide_model.get("aspect",16/9)
         effects=me.compile_choreography(beat["recipe"],objs,states,by_token,beat["id"],params,tracks)
@@ -1099,9 +1107,16 @@ def _beat_effects(beat,slide_model,style="modern",states=None):
                             "delay_ms":0 if trig!="with" else 150,"duration_ms":duration if duration is not None else d})
     elif op in ("focus","emphasize"):
         o=objs[0]
-        effects.append({"preset":preset or "pulse","spid":o["id"],"trigger":first_trigger,
-                        "duration_ms":duration if duration is not None else 250,
-                        "scale":focus_scale(o)})
+        mp=beat.get("motion_parameters") or {}
+        pr=preset or "pulse"
+        eff={"preset":pr,"spid":o["id"],"trigger":first_trigger,
+             "duration_ms":duration if duration is not None else 250,
+             "scale":focus_scale(o)}
+        if pr=="color":
+            eff["color"]=mp.get("color","#E06C4F")
+        elif pr=="teeter" and "by_deg" in mp:
+            eff["by_deg"]=mp["by_deg"]
+        effects.append(eff)
     elif op=="exit":
         for i,o in enumerate(objs):
             effects.append({"preset":preset or "fade-out","spid":o["id"],"trigger":first_trigger if i==0 else "with",
@@ -1143,16 +1158,22 @@ ENTERING_OPS={"reveal","stagger-reveal","process-reveal"}
 def _first_visibility(plan_slide,slide_model):
     """spid -> "enter" | "exit" for the first beat that changes visibility."""
     beats={b["id"]:b for b in plan_slide["beats"]}
+    rigs=me.detect_virtual_rigs(slide_model["objects"])
     first={}
     for click in plan_slide["click_beats"]:
         for mid in click["motion_beats"]:
             b=beats[mid]
             op=b["operation"]
             ids=[_resolve(slide_model,t)["id"] for t in b["targets"]]
+            rigging=(b.get("motion_parameters") or {}).get("rigging",True)
             if isinstance(b.get("data_motion"),dict) or op in ENTERING_OPS:
                 kind,touched="enter",ids
             elif op=="choreography" and b.get("recipe")=="assemble":
-                kind,touched="enter",ids
+                touched=list(ids)
+                if rigging:
+                    for cid in ids:
+                        touched.extend(f["id"] for f in rigs.get(cid,[]) if f["id"] not in touched)
+                kind="enter"
             elif op=="choreography" and b.get("recipe")=="rise":
                 touched=ids+([_resolve(slide_model,b["motion_parameters"]["mask"])["id"]]
                              if (b.get("motion_parameters") or {}).get("mask") else [])
@@ -1164,10 +1185,19 @@ def _first_visibility(plan_slide,slide_model):
                 for tr in b.get("tracks",[]):
                     vis=next((k["visible"] for k in sorted(tr["keyframes"],key=lambda k:k["t"]) if "visible" in k),None)
                     if vis is not None:
-                        first.setdefault(_resolve(slide_model,tr["target"])["id"],"enter" if vis else "exit")
+                        cid=_resolve(slide_model,tr["target"])["id"]
+                        first.setdefault(cid,"enter" if vis else "exit")
+                        if rigging:
+                            for f in rigs.get(cid,[]):
+                                first.setdefault(f["id"],"enter" if vis else "exit")
                 continue
             elif op=="exit" or (op=="choreography" and b.get("recipe") in ("disperse","zoom-focus")):
-                kind,touched="exit",ids if op!="choreography" or b["recipe"]=="disperse" else ids[1:]
+                base_ids=ids if op!="choreography" or b["recipe"]=="disperse" else ids[1:]
+                touched=list(base_ids)
+                if op=="choreography" and rigging:
+                    for cid in base_ids:
+                        touched.extend(f["id"] for f in rigs.get(cid,[]) if f["id"] not in touched)
+                kind="exit"
             else:
                 continue
             for spid in touched:
@@ -1207,8 +1237,12 @@ def compile_slide(plan_slide,slide_model,style="modern",prior_groups=()):
             if issues:
                 raise ValueError(f"slide {slide_model['index']} click {click['id']}: "+"; ".join(issues))
             start="auto" if ci==0 and beats[click["motion_beats"][0]]["timing_intent"]=="on-slide-start" else "click"
-            clicks.append({"id":click["id"],"start":start,"effects":effects})
-            states=me.advance(states,effects)
+            c_item={"id":click["id"],"start":start,"effects":effects}
+            if click.get("trigger_shape"):
+                c_item["trigger_spid"]=_resolve(slide_model,click["trigger_shape"])["id"]
+            clicks.append(c_item)
+            if not click.get("trigger_shape"):
+                states=me.advance(states,effects)
         return clicks
 
     initial=me.initial_states(objects,list(prior_groups))
@@ -1382,13 +1416,17 @@ def verify(source,output,allow_notes=False):
                 if p["text"]!=o["text"] or p["geometry"]!=o["geometry"]:
                     problems.append(f"slide {s_src['index']}: object {o['name']!r} text/geometry changed")
             added=[o for o in s_out["objects"] if o["id"] not in {x["id"] for x in s_src["objects"]}]
-            unexpected=[o["name"] for o in added if not o["name"].startswith(("__counter_",mc.GEN_PREFIX))]
+            unexpected=[o["name"] for o in added if not o["name"].startswith(("__counter_",mc.GEN_PREFIX,"!!"))]
             if unexpected:
                 problems.append(f"slide {s_src['index']}: unexpected new objects {unexpected}")
             entry["generated"]=[o["name"] for o in added if o["name"].startswith(mc.GEN_PREFIX)]
             if entry["changed"]:
                 root=_xml(b,s_out["part"])
                 entry["transition"]="morph" if root.find(f".//{{{anim.P159}}}morph") is not None else None
+                if entry["transition"]=="morph":
+                    empty_phs=anim.empty_placeholders(root)
+                    if empty_phs:
+                        entry["empty_placeholders"]=[n or spid for spid,n,_ in empty_phs]
                 timing=root.find("p:timing",NS)
                 if timing is None:
                     entry["click_groups"]=0
@@ -1406,10 +1444,13 @@ def verify(source,output,allow_notes=False):
                     if bld.get("spid") not in present:
                         problems.append(f"slide {s_src['index']}: build list targets missing spid {bld.get('spid')}")
                 states,groups=anim.simulate_states(root)
+                inter=anim.read_interactive_sequences(root)
+                if inter:
+                    entry["interactive_groups"]=len(inter)
                 final=states[-1]
                 proxies={o["id"] for o in added if o["name"].startswith("__counter_")}
                 visible_end={o["id"] for o in s_out["objects"]}-final["hidden_objects"]
-                lost=[o["name"] for o in s_src["objects"] if o["id"] not in visible_end]
+                lost=[o["name"] for o in s_out["objects"] if o["id"] in {x["id"] for x in s_src["objects"]} and o["id"] not in visible_end]
                 if lost:
                     warnings.append(f"slide {s_src['index']}: hidden at end of slide: {lost}")
                 if final["hidden_paragraphs"]:
@@ -1423,13 +1464,18 @@ def verify(source,output,allow_notes=False):
                 entry["existing_click_groups"]=s_src["existing_click_groups"]
                 mgroups,_=me.effects_from_slide(root)
                 mstates=me.initial_states(s_out["objects"],mgroups)
+                non_counter=[o for o in s_out["objects"] if not o["name"].startswith(("__counter_", "!!"))]
+                trans_w=[]
                 for gi,g in enumerate(mgroups,1):
                     problems.extend(f"slide {s_src['index']} click {gi}: {c}" for c in me.conflicts(g))
+                    trans_w.extend(me.transient_warnings(non_counter,mstates,g,f"slide {s_src['index']} click {gi}"))
                     mstates=me.advance(mstates,g)
                     warnings.extend(me.layout_warnings(
-                        [o for o in s_out["objects"] if not o["name"].startswith("__counter_")
-                         and not any(o["name"].startswith(f"{mc.GEN_PREFIX}{k}_") for k in mc.BACKGROUND)],
+                        [o for o in non_counter
+                         if not any(o["name"].startswith(f"{mc.GEN_PREFIX}{k}_") for k in mc.BACKGROUND)],
                         mstates,f"slide {s_src['index']} after click {gi}"))
+                if trans_w:
+                    entry["transient_warnings"]=trans_w
                 entry["storyboard"]=_storyboard_text(s_out,states,groups)
             slides.append(entry)
     return {"ok":not problems,"problems":problems,"warnings":warnings,
@@ -1468,6 +1514,7 @@ def storyboard(pptx,outdir,slides=None,dpi=60):
     soffice=shutil.which("soffice") or shutil.which("libreoffice")
     if not soffice:
         raise RuntimeError("LibreOffice (soffice) is required for storyboard rendering")
+    from motion_preview import build_contact_sheet
     pptx=Path(pptx)
     outdir=Path(outdir)
     outdir.mkdir(parents=True,exist_ok=True)
@@ -1510,18 +1557,11 @@ def storyboard(pptx,outdir,slides=None,dpi=60):
                     continue
                 png=td/"png"/(f.stem+".png")
                 if png.exists():
-                    imgs.append(("-label",f"slide {idx} · {label}",str(png)))
+                    imgs.append((f"slide {idx} · {label}",str(png)))
             if not imgs:
                 continue
             out=outdir/f"slide-{idx:02d}.png"
-            cmd=["montage"]
-            for lab,txt,path in imgs:
-                cmd+=[lab,txt,path]
-            cmd+=["-tile",f"{min(4,len(imgs))}x","-geometry","480x270+6+6","-pointsize","14",str(out)]
-            if shutil.which("montage"):
-                subprocess.run(cmd,check=True,timeout=120)
-            else:
-                shutil.copy(imgs[-1][2],out)
+            build_contact_sheet(imgs,out,max_cols=4,thumb_size=(480,270))
             sheets.append(str(out))
     return sheets
 
@@ -1548,6 +1588,8 @@ def markdown_report(report,plan=None):
             lines+=[head,f"unchanged — {notes.get(str(s['slide']),'no motion planned')}",""]
             continue
         extra=f" (existing groups kept: {s['existing_click_groups']})" if s.get("existing_click_groups") else ""
+        if s.get("interactive_groups"):
+            extra+=f" (+{s['interactive_groups']} interactive trigger group(s))"
         if s.get("transition"):
             extra+=f"; enters with {s['transition'].capitalize()} transition"
         if s.get("generated"):
@@ -1589,7 +1631,7 @@ def main(argv=None):
     a=sp.add_parser("inspect",help="print an AI-readable outline")
     a.add_argument("deck")
     a.add_argument("--json",help="also write the deck model JSON here")
-    a=sp.add_parser("draft",help="autonomous Director v0.5 plan")
+    a=sp.add_parser("draft",help="autonomous Director v0.6 plan")
     a.add_argument("deck")
     a.add_argument("-o","--output",required=True)
     a.add_argument("--goal",default="")
@@ -1674,10 +1716,10 @@ def main(argv=None):
             notes=ms.write_notes(args.output,_with_narration(model,plan,ms),args.output)
             report=verify(args.deck,args.output,allow_notes=True)
             print("notes:",notes)
-        md=markdown_report(report,plan)
+        md_text=markdown_report(report,plan)
         rp=args.report or str(Path(args.output).with_suffix(".report.md"))
-        Path(rp).write_text(md+"\n",encoding="utf-8")
-        print(md)
+        Path(rp).write_text(md_text+"\n",encoding="utf-8")
+        print(md_text)
         if args.storyboard:
             for sheet in storyboard(args.output,args.storyboard,
                                     [s["slide"] for s in report["slides"] if s["changed"]]):

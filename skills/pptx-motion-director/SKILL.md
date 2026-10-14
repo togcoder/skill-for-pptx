@@ -124,7 +124,11 @@ where earlier ones left off; `release` returns everything to the authored layout
 | `zoom-focus` | focus, others… | focus moves to (`x`,`y`, default 0.5) and grows to `fill` of the slide; others exit. Follow with `release` |
 | `ken-burns` | pictures | slow push-in + drift while the slide is discussed: `scale` 1.06, `drift` 0.015, `duration_ms` 6000–7000; neighbours drift opposite ways |
 | `float` | accents/icons | idle bob until the slide ends (Repeat: Until End of Slide + Auto-reverse): `amplitude` 0.012, `period_ms` 2600, `stagger_ms` 350 |
+| `orbit` | [hub,] satellites… | revolve satellites around hub (`around_first: true`) or centroid by `angle_deg` (default 360) in one poly-Bezier path |
+| `wave` | objects in order | staggered vertical hop (`amplitude`) + scale ripple (`scale`, `stagger_ms`) across a sequence |
 | `tracks` | objects | full control: `"tracks":[{"target":"Name","keyframes":[{"t":0},{"t":800,"dx":0.1,"dy":-0.05,"scale":1.2,"rotate":15,"curve":0.2,"ease":"smooth"}]}]` |
+
+Virtual rigging (T024) automatically carries separate floating text labels sitting inside a shape along with that shape (`"rigging": false` in `motion_parameters` disables it). Passing `"auto_avoid": true` in `motion_parameters` automatically curves straight paths around mid-flight obstacles. Click beats may set `"trigger_shape": "Button Name"` to emit a native `p:interactiveSeq` (On Click of Shape).
 
 Keyframe keys: `t` (ms from beat start); position `x`/`y` (slide fractions of
 the object's centre), `dx`/`dy` (offset from its authored place) or `to`
@@ -239,3 +243,13 @@ assumption. Storyboard frames are
 static renders of simulated stable states (chart builds show as whole charts).
 Never describe XML checks, storyboards or LibreOffice output as PowerPoint
 playback. Native verification: `$ROOT/docs/POWERPOINT_NATIVE_HARNESS.md`.
+
+### High-Complexity Multi-Part Choreography (`T024` v2)
+- **Transitive Virtual Rigging & Secondary Inertia**: `compile_scene(..., virtual_rigging=True)` binds multi-part composite widgets (card chassis + header strip + geometric icon + title + spec text + badge pill) without `<p:grpSp>` flattening. Set `"follow_through_ms": 20` on any recipe step so child sub-shapes trail the parent chassis by `(child_idx + 1) * follow_through_ms` for physical overlapping action.
+- **`orbit-3d`**: 3D perspective elliptical carousel (`radius_x`, `radius_y`, `tilt_deg`, `depth_scale`, `depth_dim`, `steps`) that revolves rigged pods around a tilted ellipse while scaling and dimming back-plane pods.
+- **`explode-layers`**: Separates stacked multi-part architectural strata along `"y"`, `"x"`, or `"iso"` (isometric diagonal) axes (`spread_x`, `spread_y`, `bounce_end`, `reassemble`, `follow_through_ms`).
+- **`cascade-flow`**: Launches `token_count` concurrent tokens staggered by `stagger_ms` along alternating cubic Bézier arcs through an ordered chain of stage nodes (`tokens`, `stages`, `hop_ms`, `arc_height`, `token_spread_x`, `stage_pulse_scale`, `stage_flash_color`), triggering synchronized scale pulses and `<p:animClr>` flashes on each stage at the exact millisecond each token lands.
+
+
+## Pro Cross-Slide Morph Playbook (`pre_stage` & `post_stage`)
+Use `transition.pre_stage` (`off-left`, `off-right`, `portal-seed`, `telescopic-stack`) and `transition.post_stage` (`off-left`, `off-bottom`, `corner-badge`) in the director plan to automatically inject `!!` Morph twins across slides via `stage_cross_slide_morph_twins`. See `skills/pptx-motion/references/cross-slide-morph-and-pacing.md`.
