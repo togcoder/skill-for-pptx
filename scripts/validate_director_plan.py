@@ -19,17 +19,19 @@ CHART_BUILDS={"as-whole","series","category","series-elements","category-element
 COUNTER_IMPLEMENTATIONS={"odometer-proxy","stepped-text"}
 COUNTER_OPERATIONS={"kpi-highlight","hero-metric","number-counter","metric-highlight"}
 GENERIC_OPERATIONS={"reveal","stagger-reveal","process-reveal","focus","emphasize","move","rotate"}
-# Director v0.5 (T019): canonical PowerPoint presets, paragraph builds, exits,
-# dimming and an automatic first group.
+# Director v0.5 / v0.6: canonical PowerPoint presets, paragraph builds, exits,
+# dimming, color/teeter emphasis, and an automatic first group.
 V05_OPERATIONS=GENERIC_OPERATIONS|{"text-build","exit","dim"}
 V05_EFFECTS={"appear","fade","float-in","zoom","wipe-up","wipe-down","wipe-left","wipe-right",
-             "disappear","fade-out","pulse","spin","dim","path"}
+             "disappear","fade-out","pulse","spin","dim","color","teeter","path"}
 
 
 CHOREOGRAPHY_RECIPES={"spotlight":(1,None),"release":(1,None),"assemble":(1,None),"disperse":(1,None),
-                      "cycle":(3,None),"swap":(2,2),"travel":(2,None),"zoom-focus":(1,None),"tracks":(0,None)}
-KEYFRAME_KEYS={"t","x","y","dx","dy","to","curve","controls","jump","scale","rotate","opacity","opacity_ms",
-               "visible","enter","enter_ms","exit","exit_ms","ease"}
+                      "cycle":(3,None),"swap":(2,2),"travel":(2,None),"zoom-focus":(1,None),
+                      "orbit":(2,None),"orbit-3d":(3,None),"wave":(2,None),"explode-layers":(2,None),"cascade-flow":(3,None),"tracks":(0,None)}
+KEYFRAME_KEYS={"t","x","y","dx","dy","to","curve","controls","jump","via","scale","rotate","opacity","opacity_ms",
+               "color","color_ms","visible","enter","enter_ms","exit","exit_ms","ease",
+               "repeat","auto_reverse","bounce_end"}
 
 
 def _choreography_errors(beat,targets):
@@ -423,6 +425,9 @@ def validate(plan,inventory):
                     reason=click.get("boundary_reason")
                     if click_index>0 and (not isinstance(reason,str) or not reason.strip()):
                         errors.append(f"slide {idx}: click beat {cid} requires boundary_reason")
+                    tshape=click.get("trigger_shape")
+                    if tshape is not None and tshape not in (source_targets|component_ids):
+                        errors.append(f"slide {idx}: click beat {cid} unknown trigger_shape {tshape!r}")
                     members=click.get("motion_beats")
                     if not isinstance(members,list) or not members:
                         errors.append(f"slide {idx}: click beat {cid} motion_beats must be nonempty")
@@ -435,7 +440,7 @@ def validate(plan,inventory):
                             continue
                         intent=beat.get("timing_intent")
                         auto_start=(plan["version"] in ("0.5","0.6") and click_index==0 and member_index==0
-                                    and intent=="on-slide-start")
+                                    and intent=="on-slide-start" and tshape is None)
                         if member_index==0 and intent!="on-click" and not auto_start:
                             errors.append(f"slide {idx}: click beat {cid} must start with on-click motion beat")
                         if member_index>0 and intent=="on-click":

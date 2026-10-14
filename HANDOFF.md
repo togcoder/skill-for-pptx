@@ -1,3 +1,15 @@
+# Handoff Log
+
+## Latest Entry — `T024` (`work/T024-gemini-20261014`, 2026-10-14)
+- **Agent**: `gemini`
+- **Summary**: Completed deep open-source PPTX motion research (`slides-deck` virtual rigging, `Presenton` / `PPTAgent`, `manim-pptx`, `mslides` Morph placeholder bug) and upgraded the animation engine (`scripts/motion_engine.py`, `scripts/pptx_animator.py`, `scripts/motion_director.py`, `scripts/validate_director_plan.py`, `scripts/motion_preview.py`, `scripts/check_environment.py`) to support complex multi-part assemblies and physics-inspired choreography:
+  - Transitive multi-part virtual rigging (`detect_virtual_rigs(..., transitive=True)`) with secondary follow-through inertia (`follow_through_ms` in `expand_rig_tracks`).
+  - New high-complexity choreography recipes: `orbit-3d` (3D perspective elliptical carousel with depth scaling/dimming), `explode-layers` (vertical/isometric multi-strata architectural stack disassembly & reassembly), `cascade-flow` (multi-packet staggered cubic-Bézier swarm with synchronized per-hop node `pulse` + `p:animClr` color flashes), `orbit`, and `wave`.
+  - Single-element multi-segment `<p:animMotion>` (`poly_path` / `via`), 50ms transient bounding-box collision sweeps (`transient_warnings`), and automatic quadratic Bézier obstacle avoidance (`resolve_trajectory_collisions` / `auto_avoid: true`).
+  - Native OOXML `<p:animClr>`, `<p:animRot>` (`teeter`), `repeatCount`, `autoRev`, `p14:bounceEnd`, `<p:interactiveSeq>` shape-click triggers, `empty_placeholders()` Morph sanitizer, and pure-Python `Pillow` storyboard/GIF preview fallback.
+  - Built and verified the 5-slide, **178-native-shape** architectural showcase in `experiments/T024-20261014-gemini-complex-motion-rigging/` (`T024_complex_motion_directed.pptx`, SHA-256 `f6ee7775369601885f26c82d7ab8d6de05903b767551fc342dde65665c9a4cb9`, 5/5 pixel-identical static render, 199/199 unit tests passing with 0 skipped).
+- **PowerPoint Playback Verified**: `false` (awaiting human desktop PowerPoint review).
+
 # Handoff — PPTX Motion Lab
 
 Repo chính: https://github.com/togcoder/skill-for-pptx (private).
@@ -75,6 +87,8 @@ T023 (`experiments/T023-20261005-claude-compound-motion/REPORT.md`) thêm engine
 cycle, swap, travel, zoom-focus, release) → hiệu ứng PowerPoint gốc, Morph giữa slide,
 preview GIF mô phỏng và kiểm tra va chạm. Director v0.6. Codex T021 (PR #24) cùng chủ đề
 nhưng chưa có code lúc T023 bắt đầu — hai bên cần review/hợp nhất trước khi chồng thêm.
+
+T024 (`experiments/T024-20261014-gemini-complex-motion-rigging/REPORT.md`) nâng cấp engine chuyển động phức hợp sau rà soát mã nguồn mở (`docs/SOURCES.md`): thêm **Virtual Rigging** (tự động khóa và di chuyển đồng bộ các nhãn chữ rời nằm trên hình khối mà không sửa `<p:grpSp>`), **Poly-Segment Motion Paths** (`poly_path` / `via` gộp nhiều chặng cong vào một `p:animMotion`), **Mid-Flight Collision Auto-Arc** (`transient_warnings` + `auto_avoid` tự động bẻ cong đường đi tránh vật cản giữa chừng), hai công thức mới (`orbit` xoay 360° quanh tâm, `wave` gợn sóng chuỗi), nhánh tương tác `p:interactiveSeq` (`trigger_shape`), hiệu ứng `color` (`p:animClr`), `teeter`, `repeat`, `auto_reverse`, `bounce_end` (`p14:bounceEnd`), kiểm tra placeholder rỗng cho Morph, sửa `PermissionError` trong `check_environment.py`, và bổ sung Pillow fallback cho GIF/storyboard. Toàn bộ **198/198 unit tests đạt (0 skipped)**.
 
 **Việc tiếp theo cho model mới: `research/tasks/T020-motion-director-continuation.md`.**
 Prompt giao việc ngắn:

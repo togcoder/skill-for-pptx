@@ -1,4 +1,5 @@
 import copy
+import importlib.util
 import json
 import shutil
 import sys
@@ -20,7 +21,8 @@ from validate_director_plan import validate as validate_director
 FIXTURE=ROOT/"tests"/"fixtures"/"report_deck.pptx"
 H001=ROOT/"output"/"PPTX_Motion_Lab_H001.pptx"
 NS=anim.NS
-HAS_SOFFICE=bool(shutil.which("soffice")) and bool(shutil.which("montage"))
+HAS_SOFFICE=(bool(shutil.which("soffice") or shutil.which("libreoffice"))
+             and (bool(shutil.which("montage")) or importlib.util.find_spec("PIL") is not None))
 
 
 def slide_root(path,part):
@@ -239,7 +241,7 @@ class DirectorPipelineTests(unittest.TestCase):
         errors=validate_director(plan,self.model["inventory"])
         self.assertTrue(any("unsupported effect" in e for e in errors))
 
-    @unittest.skipUnless(HAS_SOFFICE,"LibreOffice Impress + ImageMagick not installed")
+    @unittest.skipUnless(HAS_SOFFICE,"LibreOffice Impress + Pillow/ImageMagick not installed")
     def test_storyboard_and_libreoffice_crosscheck(self):
         from lo_timing_crosscheck import crosscheck
         sheets=md.storyboard(self.out,self.td/"sb",[4])

@@ -7,23 +7,41 @@ from pathlib import Path
 import shutil
 import sys
 
+
+def _safe_is_file(p):
+    try:
+        return bool(p and Path(p).is_file())
+    except (PermissionError, OSError):
+        return False
+
+
+def _safe_is_dir(p):
+    try:
+        return bool(p and Path(p).is_dir())
+    except (PermissionError, OSError):
+        return False
+
+
 host = Path('/root/.codex/skills/builtins/presentations')
 node = os.environ.get('CODEX_PRIMARY_RUNTIME_NODE')
 modules = os.environ.get('CODEX_PRIMARY_RUNTIME_NODE_MODULES')
 runtime_python = os.environ.get('CODEX_PRIMARY_RUNTIME_PYTHON')
 runtime_root = os.environ.get('CODEX_PRIMARY_RUNTIME_ROOT')
 checks = {
-    'runtime_node_exists': bool(node and Path(node).is_file()),
-    'runtime_python_exists': bool(runtime_python and Path(runtime_python).is_file()),
-    'artifact_tool_package_exists': bool(modules and (Path(modules)/'@oai/artifact-tool/package.json').is_file()),
-    'runtime_override_dir_exists': bool(runtime_root and (Path(runtime_root)/'dependencies/bin/override').is_dir()),
-    'host_finalizer_exists': (host/'container_tools/artifact_tool_utils.mjs').is_file(),
-    'host_renderer_exists': (host/'container_tools/render_presentation.mjs').is_file(),
+    'runtime_node_exists': _safe_is_file(node),
+    'runtime_python_exists': _safe_is_file(runtime_python),
+    'artifact_tool_package_exists': _safe_is_file(Path(modules)/'@oai/artifact-tool/package.json') if modules else False,
+    'runtime_override_dir_exists': _safe_is_dir(Path(runtime_root)/'dependencies/bin/override') if runtime_root else False,
+    'host_finalizer_exists': _safe_is_file(host/'container_tools/artifact_tool_utils.mjs'),
+    'host_renderer_exists': _safe_is_file(host/'container_tools/render_presentation.mjs'),
 }
 print(json.dumps({
     'python_version': sys.version.split()[0], 'platform': sys.platform,
     'plan_and_geometry_checks_available': True,
     'lxml_available': importlib.util.find_spec('lxml') is not None,
+    'pillow_available': importlib.util.find_spec('PIL') is not None,
+    'libreoffice_available': bool(shutil.which('soffice') or shutil.which('libreoffice')),
+    'pdftoppm_available': shutil.which('pdftoppm') is not None,
     'work_builder_prerequisites_present': all(checks.values()),
     'work_builder_checks': checks,
     'powerpoint_executable_on_path': shutil.which('POWERPNT.EXE') is not None,
