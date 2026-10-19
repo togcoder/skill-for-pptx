@@ -25,7 +25,11 @@ place coordinates or pick animation effects by hand.
 4. **Repair.** For each entry in `errors`, apply its `fix` to the spec, never to
    the PPTX, and rebuild. Read `warnings`: `TEXT_SHRUNK` means the copy is long
    for the layout. Tighten the words instead of accepting tiny type. Stop when
-   `ok` is true.
+   `ok` is true. Then read `critique`: the same design system the generators
+   use (`knowledge/design_system.json`) graded on the output, with scores and
+   warnings (rule, measured, expected, fix). It is advisory, so it does not
+   change `ok`. Fix what the spec controls: density (DEN-WORDS) and type sizes
+   (TYP-SIZES).
 5. **Look.** If PowerPoint is available, run
    `python3 $ROOT/scripts/slide_forge.py render deck.pptx -d render/` and read
    every `render/slide-NN.png` strip (6 frames across the slide's motion).
@@ -133,6 +137,16 @@ You do not need the user to supply assets. Forge can find licensed ones.
 | `MOTION_WARNING` | warning | a stable state looks off (occlusion/off-slide): check the render |
 
 `forge_qa.py` also works on any PPTX: `slide_forge.py qa deck.pptx`.
+
+Contrast uses the shared WCAG function and threshold from the design system:
+4.5:1, or 3:1 for text ≥ 18 pt or ≥ 14 pt bold. Since T034 this replaces the
+earlier 24 pt cut-off. For a fuller verdict, including frame metrics from a
+PowerPoint render, run
+`python3 $ROOT/scripts/design_critic.py deck.pptx --render render/ --md critique.md`
+(see `docs/DESIGN_SYSTEM.md`).
+
+Known open findings (T034): Forge decks use 13–15 type sizes (band 3–6). A
+process token parked before Morph orbs triggers MOT-SETTLE.
 
 ## Existing decks
 

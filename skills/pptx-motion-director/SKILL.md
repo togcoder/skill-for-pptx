@@ -1,6 +1,6 @@
 ---
 name: pptx-motion-director
-description: Add presenter-paced native PowerPoint animation — from simple builds to compound choreography (objects moving, assembling, cycling, swapping, zooming, Morph between slides) — to an existing .pptx deck while preserving its slides, text, layout and existing animation. Use when the user gives a PowerPoint file and wants it animated, "brought to life", made cinematic, builds/reveals added, bullets to appear one by one, a diagram walked through, charts or KPIs animated, or a motion pass for presenting — even if they give only the file and a vague goal.
+description: Add presenter-paced native PowerPoint animation — from simple builds to compound choreography (objects moving, assembling, cycling, swapping, zooming), motion layers (halo, rail, token, highlighter, rise-from-a-line) and professional cross-slide Morph (!! pairing, fly-ins, camera push-in, card expand) — to an existing .pptx deck while preserving its slides, text, layout and existing animation, then grade it against the shared design system. Use when the user gives a PowerPoint file and wants it animated, "brought to life", made cinematic or professional, builds/reveals added, bullets to appear one by one, a diagram walked through, charts or KPIs animated, Morph transitions, or a motion pass for presenting — even if they give only the file and a vague goal.
 ---
 
 # PPTX Motion Director
@@ -8,248 +8,270 @@ description: Add presenter-paced native PowerPoint animation — from simple bui
 You are the motion director. The user may give only a deck and a vague goal; do
 not ask them to specify each animation. Read the deck, decide the story and the
 click rhythm yourself, and deliver an editable PPTX with native PowerPoint
-animation plus a short report.
+animation, a report, and an honest status.
 
-Scripts live in the repository root two levels above this file:
-`ROOT=<this skill dir>/../..`. Requirement: Python 3 with `lxml`
-(`pip install lxml`). Optional for visual QA: LibreOffice Impress + ImageMagick.
+Scripts live two levels above this file: `ROOT=<this skill dir>/../..`.
+
+- **Required:** Python 3 + `lxml`.
+- **Optional:**
+  - LibreOffice Impress + poppler, for storyboards, previews and frame metrics;
+  - `python-pptx` and Pillow.
 
 ## Workflow
 
-0. **Script first.** Decide the story source: the user's script (file or
-   pasted text) > speaker notes > existing animation > your own script. If the
-   user gave a script, save it as Markdown with `## Slide N` headings and
-   `[click]` cues (Vietnamese `[nhấp]`/`[bấm]` and `>>` also work) and go to
-   step 4b. If not, write one: `python3 $ROOT/scripts/motion_script.py draft
-   DECK.pptx -o script.md --style cinematic` produces a complete click-by-click
-   script from the deck; **rewrite every line into natural speech** (keep the
-   cues and the words that name each resource so alignment still works), add
-   the points the story needs even if the slide lacks them.
-1. **Inspect** — `python3 $ROOT/scripts/motion_director.py inspect DECK.pptx`
-   Read every slide: titles, bullets (¶ = paragraph index), charts, numbers,
-   speaker notes, and objects already marked `ANIMATED`.
-2. **Draft** — `python3 $ROOT/scripts/motion_director.py draft DECK.pptx -o director.json [--style subtle|modern|bold|cinematic] [--goal "..."] [--no-morph]`
-   The heuristic draft is a starting point, not the answer.
-3. **Direct** — edit `director.json` with your judgement (rules below). This is
-   where the value is: decide what the audience should see first, what waits for
-   the presenter, and what lands as the conclusion.
-4. **Apply** — `python3 $ROOT/scripts/motion_director.py apply DECK.pptx director.json -o OUT.pptx --storyboard storyboard/`
-   4b. **Script-driven** — `python3 $ROOT/scripts/motion_director.py auto DECK.pptx -o OUT.pptx --script script.md --style cinematic [--fill-gaps] [--write-notes] --preview previews/`
-   The script decides WHEN (each `[click]` line), the director decides HOW
-   (cards, labels, rails, cycle tours, chart builds). First mention reveals a
-   resource, a later mention focuses it, a line that names nothing new can
-   release a tour, and paraphrased lines take the next resource in reading
-   order. `--fill-gaps` turns a cued line the slide cannot show into a callout
-   in the deck's style; numbers the slide lacks are reported as gaps.
-   `--write-notes` appends `[Motion script]` + `[Click n]` narration to the
-   speaker notes (Presenter View). Every run also writes `OUT.script.md`.
-   It validates the plan, writes PowerPoint-canonical timing, re-reads the
-   output and prints a per-click storyboard. Fix any reported problem.
-5. **Look** — open the `storyboard/slide-NN.png` contact sheets (one frame per
-   stable click state). For any slide with movement, render the motion:
-   `python3 $ROOT/scripts/motion_director.py preview OUT.pptx --slide N -o sN.gif --sheet sN.png`
-   (or `apply ... --preview previews/`). Read the sheet PNG; it shows every
-   click's end state, and the GIF shows the motion between them. Check order,
-   collisions mid-move, empty starts and off-slide travel. Iterate.
-6. **Deliver** — the PPTX, the `.report.md`, and an honest status line:
-   "structurally checked and simulated; not yet played in PowerPoint".
+0. **Script first.** Take the story from the strongest source available:
+   1. the user's script (a file or pasted text);
+   2. speaker notes;
+   3. existing animation;
+   4. your own script.
 
-One-shot path when the user wants speed over craft:
-`python3 $ROOT/scripts/motion_director.py auto DECK.pptx -o OUT.pptx --storyboard storyboard/`
+   A given script is saved as Markdown with `## Slide N` headings and
+   `[click]` cues (`[nhấp]`, `[bấm]` and `>>` also work); then go to step 4b.
+   Without one, run `python3 $ROOT/scripts/motion_script.py draft DECK.pptx -o script.md --style cinematic`.
+   Then **rewrite every line into natural speech**: keep the cues and the
+   words that name each resource, and add the points the story needs.
+1. **Inspect.** Run `python3 $ROOT/scripts/motion_director.py inspect DECK.pptx`.
+   Read titles, bullets (¶ = paragraph index), charts, numbers, notes, and
+   objects already `ANIMATED`.
+2. **Draft.** Run `python3 $ROOT/scripts/motion_director.py draft DECK.pptx -o director.json --style subtle|modern|bold|dynamic|cinematic [--goal "…"] [--no-morph] [--ambient]`.
+   The draft is a starting point, not the answer.
+3. **Direct.** Edit `director.json` with your judgement (rules below): what
+   the audience sees first, what waits for the presenter, what lands as the
+   conclusion.
+4. **Apply.** Run `python3 $ROOT/scripts/motion_director.py apply DECK.pptx director.json -o OUT.pptx --storyboard storyboard/ --preview previews/`.
+
+   4b. **Script-driven.** Run `… auto DECK.pptx -o OUT.pptx --script script.md --style cinematic [--fill-gaps] [--write-notes] --preview previews/`.
+   The script decides *when* (each `[click]` line) and the director decides
+   *how*:
+   - A first mention reveals a resource; a later mention focuses it.
+   - A line that names nothing new releases a tour.
+   - If the script ends during a tour, a closing release click is added.
+   - Paraphrased lines take the next resource in reading order.
+   - `--fill-gaps` turns a line the slide cannot show into a callout in the
+     deck's style.
+   - `--write-notes` writes the narration into the speaker notes.
+5. **Look.** Open the storyboard sheets, plus the GIF and sheet from
+   `… preview OUT.pptx --slide N -o sN.gif --sheet sN.png`. Check order,
+   collisions mid-move, empty starts and off-slide travel.
+6. **Critique.** Every `apply` or `auto` report ends with a *Design critique*:
+   source vs output scores against `knowledge/design_system.json`, plus open
+   warnings in the form rule → measured → expected → fix. Fix the warnings
+   that belong to motion (durations, easing, stagger, movers, clicks,
+   helper contrast, settle). Report the warnings that belong to the source
+   deck (its own text contrast or density) without editing the source unless
+   asked. Run on any deck with
+   `python3 $ROOT/scripts/motion_director.py critique OUT.pptx --md critique.md [--render lo]`.
+7. **Morph** (optional, the professional finish): see *Morph Studio* below.
+8. **Deliver** the PPTX, the `.report.md`, `.script.md` and `.critique.json`,
+   and the evidence rung reached, e.g. "structurally checked and simulated;
+   not yet played in PowerPoint" (`$ROOT/docs/VERIFICATION.md`).
+
+One-shot path when speed beats craft:
+`… auto DECK.pptx -o OUT.pptx --style cinematic --storyboard storyboard/`.
+
+## The design system (beauty = technique)
+
+`$ROOT/knowledge/design_system.json` holds the numbers the generators use and
+the critic checks:
+
+| Area | Values |
+|---|---|
+| Durations | entrance 250–700 ms; exit 200–500; emphasis 250–600; moves 400–1200 scaled with distance; Morph 1.0–1.6 s; ambient loop cycles ≥ 6 s; letter gap 20–60 ms |
+| Easing | Moves slow in and out (Carbon-fitted accel/decel) |
+| Stagger | 60–150 ms, only to show order |
+| Rhythm | ≤ 4 independent movers per click; ≤ 6 clicks per slide; 3–10 effect kinds per deck |
+| Contrast | WCAG text 4.5:1 (large text 3:1); helpers ≥ 3:1 |
+
+Do not hard-code other numbers. When you deviate on purpose, say why in the
+beat's `purpose`. Details: `$ROOT/docs/DESIGN_SYSTEM.md`.
 
 ## Direction rules
 
-Source of the story, strongest first: the user's explicit script > speaker
-notes > the deck's existing animation > visible structure (titles, order,
-diagrams) > your inferred narrative. Never override a stronger source with a
-prettier guess.
+The story source ranks: explicit script > speaker notes > existing animation >
+visible structure > inferred narrative. Never override a stronger source with
+a prettier guess.
 
 - **Preserve by default.** Slide count, order, text, geometry, theme and media
-  stay as they are. Existing animation is extended (new clicks are appended
-  after it); replace only with `"existing_timing":"replace"` plus a
-  `"replace_reason"` grounded in the user's request.
-- **A click is a presenter pause.** Start a new click beat when the audience
-  should hold a meaningful state while the presenter talks (each bullet, each
-  KPI card, each process step the notes walk through, the takeaway after a
-  chart). Use `with-previous` for things that belong together and
-  `after-previous` for automatic continuation. Never fake speaking time with
-  delays. Keep it humane: usually ≤ 6 clicks per slide.
-- **Don't animate everything — but never leave a picture frozen.** Title
-  text, footers, logos and small badges stay static. Every large picture keeps
-  living: a backdrop or a picture that *is* the slide gets `ken-burns` on slide
-  start; a content picture is revealed on its click and continues with
-  `ken-burns` (after-previous). Thin accent bars/lines draw in automatically at
-  slide start (wipe along their long axis) — that intro is the motion-graphic
-  layer, even on a title slide. Skip both only for a picture that carries on to
-  the next slide by Morph (it must end where it was authored).
-- **Idle motion is a seasoning.** `float` loops until the slide ends; use it
-  for at most one or two accents/icons per slide, as the last beat of a click,
+  stay. Existing animation is extended; replace it only with
+  `"existing_timing":"replace"` and a `"replace_reason"` from the user's
+  request.
+- **A click is a presenter pause.** Start a new click when the audience should
+  hold a meaningful state while the presenter talks. Use `with-previous` for
+  things that belong together and `after-previous` for automatic
+  continuation. Never fake speaking time with delays.
+- **Don't animate everything, but never leave a picture frozen.**
+  - Titles, footers, logos and badges stay still.
+  - Large pictures get `ken-burns`.
+  - Thin accent bars draw in at slide start.
+  - A picture that continues by Morph stays where it was authored.
+- **Idle motion is seasoning.** Use `float` on at most one or two accents,
   and never on an object a later click moves.
-- **Data has meaning.** Charts use `data_motion` builds (series/category) chosen
-  by chart type; never a generic reveal. Counters (`--counters`) add hidden
-  proxy text shapes, which clutter edit view and PDF export — use only for a
-  true hero number and say so.
-- **Text-box decks.** Many decks have no placeholders. The topmost short text
-  is the title and stays static. A label ("Cách 1: …") reveals together with
-  the text block under it. Each separate paragraph of a dense body (claim, then
-  rebuttal) gets its own click. Never split a wrapped heading.
-- **Conclusions last.** Evidence (chart/process) first, then the takeaway on its
-  own click.
-- **One motion language per deck.** Pick a style and stay consistent:
-  `subtle` (fade; pictures still get Ken Burns, accents stay still), `modern`
-(float-in, wipe connectors, accent intro), `bold` (zoom).
+- **Data has meaning.** Charts use `data_motion` builds (series or category)
+  chosen by chart type. Counters (`--counters`) add proxy shapes; use them
+  only for a hero number, and say so.
+- **Text-box decks.** The topmost short text is the title. A label reveals
+  together with the block under it. Separate paragraphs (claim, rebuttal)
+  get separate clicks.
+- **Conclusions last.** Evidence first, then the takeaway on its own click.
+  Secondary accents (highlighter, underline, rise) are for that click.
+- **One motion language per deck.**
+  - `subtle`: fade.
+  - `modern`: float-in, wipe.
+  - `bold`: zoom.
+  - `dynamic`: PowerPoint presets real complex decks use.
+  - `cinematic`: compound motion plus layers.
 
-## Compound motion (Director v0.6)
+## Plan essentials (Director v0.7)
 
-Use when the slide's structure *means* something that motion can show: a cycle
-turns, an ecosystem assembles around its hub, a ranking changes, an order
-travels through a process, a quadrant is drilled into, a picture carries on to
-the next slide. Motion must explain, not decorate; if you cannot say what the
-movement means, use a reveal.
+Each slide has `beats` (motion actions) and `click_beats` (presenter clicks
+that partition the beats in order).
 
-Beat: `"operation":"choreography"`, `"recipe"`, `"targets"` (names from
-inspect), optional `"motion_parameters"`. State (position, scale, rotation,
-transparency, visibility) carries across clicks, so later beats continue from
-where earlier ones left off; `release` returns everything to the authored layout.
+**Beat fields:**
+- `id`, `purpose`, `operation`;
+- `targets` (names or ids from inspect);
+- `timing_intent`: `on-click`, `with-previous` or `after-previous`; the first
+  beat may be `on-slide-start`;
+- optional: `effect`, `duration_ms`, `layer` (`primary`, `secondary`,
+  `ambient`), `trigger_shape`.
+
+**Click beat fields:** `purpose`, `stable_state`, `pause_after`; from the
+second click on, also `boundary_reason`. Optional `narration`.
+
+| operation | use |
+|---|---|
+| `reveal` / `stagger-reveal` / `process-reveal` | appear together / one after another in one click |
+| `text-build` | bullets by paragraph (`paragraphs: [0]`) |
+| `focus` / `emphasize` | pulse (`effect: pulse`) |
+| `dim` | fade others after discussing them |
+| `exit` | remove (`fade-out`) |
+| `move` / `rotate` | explicit points / degrees only; never guess geometry |
+| `choreography` | compound recipes (below) |
+| any + `data_motion` | chart build or KPI counter (`$ROOT/skills/pptx-motion/references/data-motion-recipes.md`) |
+
+**Effects:**
+- entrances: `appear`, `fade`, `float-in`, `zoom`, `wipe-*`, `type-on`
+  (typewriter);
+- exits: `fade-out`, `disappear`;
+- emphasis: `pulse`, `spin`, `dim`;
+- motion: `path`;
+- `by: "word" | "letter"` on any entrance;
+- any PowerPoint built-in as `ppt:<name>` (198 harvested presets, e.g.
+  `ppt:faded-zoom`, `ppt:ascend`, `ppt:teeter`, `ppt:path-s-curve1`).
+
+Real complex decks get their richness from object lifecycles (enter → move →
+dim → exit), not from exotic presets.
+
+The full v0.4 contract and its history are in
+`$ROOT/skills/pptx-motion/references/existing-deck-director.md`. v0.5–v0.7
+add choreography, transitions, layers, components and narration; the
+validator (`validate_director_plan.py`) is the authority.
+
+## Compound recipes (`"operation":"choreography"`)
+
+Motion must explain, not decorate. If you cannot say what a movement means,
+use a reveal. State (position, scale, rotation, opacity, visibility) carries
+across clicks; `release` returns to the authored layout.
 
 | recipe | targets | meaning / params |
 |---|---|---|
-| `assemble` | parts | parts fly in to their places, staggered. `from`: center (of the parts) · slide-center · below/above/left/right · outward; `stagger_ms`, `duration_ms` |
-| `disperse` | parts | the reverse: parts leave outward and fade |
-| `spotlight` | focus, others… | focus grows (`scale` 1.15), others dim (`dim` 0.35); `toward_center` 0..1. Chain one per click to walk a diagram |
-| `release` | objects | restore authored position/size/rotation/opacity; re-enter hidden ones |
-| `cycle` | ≥3 in order | every object moves to the next one's place along the circle; `steps`, `direction` forward/back |
-| `swap` | a, b | exchange places on opposite arcs (`arc` 0.25) — re-ranking, before/after |
-| `travel` | token, stop… | token moves to each stop (`arc`, `offset_y`, `dwell_ms`), stops pulse; one beat per click walks a journey |
-| `zoom-focus` | focus, others… | focus moves to (`x`,`y`, default 0.5) and grows to `fill` of the slide; others exit. Follow with `release` |
-| `ken-burns` | pictures | slow push-in + drift while the slide is discussed: `scale` 1.06, `drift` 0.015, `duration_ms` 6000–7000; neighbours drift opposite ways |
-| `float` | accents/icons | idle bob until the slide ends (Repeat: Until End of Slide + Auto-reverse): `amplitude` 0.012, `period_ms` 2600, `stagger_ms` 350 |
-| `orbit` | [hub,] satellites… | revolve satellites around hub (`around_first: true`) or centroid by `angle_deg` (default 360) in one poly-Bezier path |
-| `wave` | objects in order | staggered vertical hop (`amplitude`) + scale ripple (`scale`, `stagger_ms`) across a sequence |
-| `tracks` | objects | full control: `"tracks":[{"target":"Name","keyframes":[{"t":0},{"t":800,"dx":0.1,"dy":-0.05,"scale":1.2,"rotate":15,"curve":0.2,"ease":"smooth"}]}]` |
+| `assemble` / `disperse` | parts | Parts fly in to their places and arrive decelerating (`from`, `stagger_ms`, `overshoot` ≤ 0.08), or leave outward |
+| `spotlight` / `release` | focus, others… | Focus grows, others dim (`scale`, `dim`, `halo`); one per click walks a diagram. `release` restores |
+| `cycle` | ≥ 3 in order | Each moves to the next one's place (`steps`, `direction`) |
+| `swap` | a, b | Exchange places on opposite arcs (re-ranking) |
+| `travel` | token, stop… | Token moves to each stop; hop time scales with distance unless `duration_ms` is given. Stops pulse |
+| `zoom-focus` | focus, others… | Focus moves and grows to `fill`, others exit; then `release` |
+| `rise` | text | Text rises out of an invisible line; needs a `mask` component; refused if the mask would cover anything |
+| `ken-burns` / `float` | pictures / accents | Slow push-in and drift / idle bob until slide end |
+| `orbit`, `orbit-3d`, `wave`, `explode-layers`, `cascade-flow` | various | Revolve, 3D carousel, ripple, strata separation, token swarm (T024c). These are busy: check MOT-MOVERS |
+| `breathe`, `drift`, `spin-loop`, `ripple` | ambient | `layer: "ambient"`, cycles ≥ 6 s |
+| `tracks` | objects | Full keyframe control (below) |
 
-Virtual rigging (T024) automatically carries separate floating text labels sitting inside a shape along with that shape (`"rigging": false` in `motion_parameters` disables it). Passing `"auto_avoid": true` in `motion_parameters` automatically curves straight paths around mid-flight obstacles. Click beats may set `"trigger_shape": "Button Name"` to emit a native `p:interactiveSeq` (On Click of Shape).
+**Keyframe keys:**
+- `t` (ms);
+- position: `x`/`y`, `dx`/`dy` or `to`;
+- `curve`, `jump`, `scale`, `rotate`, `opacity`, `visible` with
+  `enter`/`exit`;
+- `ease`: `standard` (default), `enter`, `exit`, `expressive`, `linear`,
+  `smooth`, `in`, `out`;
+- `overshoot` ≤ 0.08, `anticipate` ≤ 0.05.
 
-Keyframe keys: `t` (ms from beat start); position `x`/`y` (slide fractions of
-the object's centre), `dx`/`dy` (offset from its authored place) or `to`
-(another object's name); `curve` (bulge, + = left of travel), `jump`; `scale`
-and `rotate` absolute vs authored; `opacity` 0..1; `visible` with
-`enter`/`exit` preset; `ease` linear|smooth|in|out.
+**Recipe options:**
+- Virtual rigging carries labels sitting inside a shape (`"rigging": false`
+  disables it).
+- `"auto_avoid": true` curves paths around obstacles.
+- `attach: {"Leader": ["Label"]}` makes a label follow its shape.
+- A click beat with `trigger_shape` becomes a shape-click trigger
+  (`interactiveSeq`; not verified natively).
 
-Deck-level `"transitions":[{"slide":8,"kind":"morph","reason":"…"}]` adds a
-Morph (Fade fallback) where a shared object (same picture, same text or same
-`!!` name) moves between slides; do not also animate that object's entrance.
-`draft` proposes these automatically and detects cycle/hub diagrams.
+**Blocking checks:**
+- two overlapping moves of one object;
+- a later click moving an object that is still looping;
+- an after-previous effect queued behind a loop.
 
-Checks that will stop or warn you: two moves/scales/spins of one object
-overlapping in time (blocking), a later click moving an object that is still
-looping, an after-previous effect queued behind a loop (blocking), an object ending off-slide or newly covering
-another at a stable state (warning). Read and fix warnings; they are usually
-real.
+Warnings flag objects ending off-slide or newly covered. Read them; they are
+usually real.
+
+## Motion layers and generated components
+
+- **Primary** is the meaning.
+- **Secondary** reacts to it:
+  - a `halo` follows each spotlight;
+  - a `track-line` plus `token` runs under a walked process;
+  - an `orbit-ring` sits behind a cycle;
+  - `ripple`, `highlight` (a marker behind the conclusion, with opacity
+    sized so the text keeps its contrast), `underline`, and a `mask` for
+    `rise`.
+- **Ambient** is slow background life.
+
+Components (`components[].generate`) are named `__gen_<kind>_<id>`. They need
+a role and rationale, and use the deck's font plus a deck colour that reaches
+3:1 against the slide. Prefer an existing resource (the deck's own token) over
+generating one. `--style cinematic` proposes these layers; `--ambient` adds
+drifting backdrops.
 
 ## Morph Studio (cross-slide, professional finish)
 
-After the in-slide pass, give the deck its between-slide craft:
-
 ```bash
-python3 $ROOT/scripts/morph_studio.py propose OUT.pptx -o morph.json   # continuity + suggestions
-# edit morph.json: accept suggestions into "scenes" (each needs a reason)
+python3 $ROOT/scripts/morph_studio.py propose OUT.pptx -o morph.json      # continuity + ≤ 1 scene idea per slide
+# accept suggestions into "scenes" (each needs a reason); add "pairs" to force two shapes to morph
 python3 $ROOT/scripts/morph_studio.py apply OUT.pptx morph.json -o FINAL.pptx
 python3 $ROOT/scripts/morph_studio.py preview FINAL.pptx --slide N -o mN.gif --sheet mN.png
 ```
 
-`continuity` pairs objects across slides with `!!` names (titles glide, the
-same picture/text travels, `pairs` forces two different shapes to morph), sets
-Morph (`byObject`/`byWord`/`byChar`) and stages new/leaving objects off-slide
-so they fly. Scenes add slides: `camera-zoom` (push into a part, pull back),
-`card-expand` (a card grows into a panel), `pan` (carousel). Read
-`references/pro-techniques.md` — 50 techniques with when/how — before choosing.
-Morph preview is a simulation (LibreOffice cannot play Morph).
+**Continuity:**
+- pairs objects across slides with `!!` names, renaming whole chains;
+- titles glide; the same picture or text travels;
+- sets Morph to `byObject`, `byWord` or `byChar`;
+- stages new and leaving objects off-slide so they fly, with cards moving as
+  one piece.
 
-Settle before Morph: Morph starts from each slide's authored layout, not from
-where its animation left objects. `apply` lists `unsettled` slides (objects
-ending moved, scaled, turned or dimmed); end such slides on the full picture
-(the script layer adds a release click when a script stops mid-tour) or accept
-the snap knowingly. Scene slides start from the source's end state; objects
-inside a staged card leave or arrive with it as one piece.
+**Scenes** add slides, each starting from the source's end state:
+- `camera-zoom`: push in, pull back;
+- `card-expand`: a card grows into a panel over its neighbours;
+- `pan`: carousel.
 
-## Motion layers (Director v0.7)
+Read `references/pro-techniques.md` (50 techniques) before choosing.
 
-Think in three layers, as a motion designer would:
+**Settle before Morph.** Morph starts from each slide's authored layout, not
+from where animation left it. `apply` reports `unsettled` slides; end them on
+the full picture, or accept the snap knowingly. The Morph preview is
+simulated.
 
-- **primary** — the meaning: reveals, builds, assemble, spotlight, travel, swap,
-  zoom-focus.
-- **secondary** — reactions that support it (`"layer":"secondary"`): a halo
-  that glides behind each spotlight (`motion_parameters.halo:"<component>"`),
-  a rail + progress token under a process, the orbit ring drawn behind a
-  cycle, `ripple` pulses through related items, `overshoot`/`anticipate` on
-  moves (keyframe keys or recipe params), `attach:{"Leader":["Label"]}` so a
-  separate label moves and scales with its shape.
-- **ambient** — background life (`"layer":"ambient"`, recipes `breathe`,
-  `drift`, `spin-loop`; `repeat` indefinite | until-next-click | 1..100):
-  the orbit ring turns slowly, backdrop shapes drift for depth. Ambient must be
-  slow and low-contrast; never loop a property another beat animates (blocked).
-
-Generated components (slide `components[].generate`): `halo`, `orbit-ring`,
-`track-line`, `backdrop` (behind everything, low opacity) and `token`,
-`callout`, `badge`, `highlight-frame`, `arrow` (on top). They use the deck's
-accent colour and font, are named `__gen_<kind>_<id>`, need a role and
-rationale, and are visible in edit view/PDF. Prefer an existing resource (the
-draft reuses a deck's own token) over generating one. `--style cinematic`
-proposes these layers automatically; `--ambient` adds drifting backdrops.
-
-## Director plan (v0.5) essentials
-
-Each slide entry has `beats` (motion actions) and `click_beats` (presenter
-clicks that partition the beats in order). Beat fields: `id`, `purpose`,
-`operation`, `targets` (object names or ids from inspect), `timing_intent`
-(`on-click` | `with-previous` | `after-previous`; the very first beat may be
-`on-slide-start` to play automatically), optional `effect`, `duration_ms`.
-
-| operation | use | notes |
-|---|---|---|
-| `reveal` | objects appear together | e.g. card + its texts |
-| `stagger-reveal` / `process-reveal` | objects appear one after another in one click | target order = order |
-| `text-build` | bullets by paragraph | `paragraphs: [0]`; sub-levels follow their parent |
-| `focus` / `emphasize` | pulse one object | `effect: pulse` |
-| `dim` | fade others to 35% after discussing them | `motion_parameters.opacity` |
-| `exit` | remove an object | `effect: fade-out` |
-| `move` / `rotate` | explicit path points / degrees only | never guess geometry |
-| any + `data_motion` | chart build or KPI counter | see `references/data-motion-recipes.md` |
-
-Effects: `appear fade float-in zoom wipe-up wipe-down wipe-left wipe-right`
-(entrances), `fade-out disappear` (exits), `pulse spin dim` (emphasis), `path`;
-plus **any PowerPoint built-in** as `ppt:<name>` — 198 effects harvested from
-PowerPoint itself (`knowledge/powerpoint_presets.json`): e.g. `ppt:faded-zoom`,
-`ppt:ascend`, `ppt:grow-and-turn`, `ppt:boomerang` (entrances), `ppt:fly-out`
-(exits), `ppt:teeter`, `ppt:grow-with-color`, `ppt:color-wave` (emphasis),
-`ppt:path-s-curve1`, `ppt:path-arc-left` (paths). `--style dynamic` uses them.
-Real complex decks get their richness from object lifecycles (enter → move →
-emphasise/dim → exit), not exotic presets (`knowledge/README.md`).
-
-Click beats need `purpose`, `stable_state`, `pause_after`, and from the second
-click on a `boundary_reason`. Full contract:
-`$ROOT/skills/pptx-motion/references/existing-deck-director.md`.
+Experimental modules from T033 (`morph_playbook.py`, `cognitive_pacing.py`,
+`interactive_triggers.py`) are **not** part of this workflow. Director plans
+have no `pre_stage`/`post_stage` keys.
 
 ## Evidence boundaries
 
-The writer reproduces the timing structure PowerPoint saves for its built-in
-effects and an independent importer (LibreOffice) reads the sequencing,
-motion paths, Grow/Shrink, Transparency and exits as intended. T024 adds a
-PowerPoint `CreateVideo` render of Ken Burns and `float` loops; interactive
-click playback is still unverified. Chained paths assume PowerPoint's
-layout-anchored path semantics (T006 hypothesis); GIF previews simulate that
-assumption. Storyboard frames are
-static renders of simulated stable states (chart builds show as whole charts).
-Never describe XML checks, storyboards or LibreOffice output as PowerPoint
-playback. Native verification: `$ROOT/docs/POWERPOINT_NATIVE_HARNESS.md`.
+Name the rung reached (`$ROOT/docs/VERIFICATION.md`). The writer reproduces
+the timing structure PowerPoint saves.
 
-### High-Complexity Multi-Part Choreography (`T024` v2)
-- **Transitive Virtual Rigging & Secondary Inertia**: `compile_scene(..., virtual_rigging=True)` binds multi-part composite widgets (card chassis + header strip + geometric icon + title + spec text + badge pill) without `<p:grpSp>` flattening. Set `"follow_through_ms": 20` on any recipe step so child sub-shapes trail the parent chassis by `(child_idx + 1) * follow_through_ms` for physical overlapping action.
-- **`orbit-3d`**: 3D perspective elliptical carousel (`radius_x`, `radius_y`, `tilt_deg`, `depth_scale`, `depth_dim`, `steps`) that revolves rigged pods around a tilted ellipse while scaling and dimming back-plane pods.
-- **`explode-layers`**: Separates stacked multi-part architectural strata along `"y"`, `"x"`, or `"iso"` (isometric diagonal) axes (`spread_x`, `spread_y`, `bounce_end`, `reassemble`, `follow_through_ms`).
-- **`cascade-flow`**: Launches `token_count` concurrent tokens staggered by `stagger_ms` along alternating cubic Bézier arcs through an ordered chain of stage nodes (`tokens`, `stages`, `hop_ms`, `arc_height`, `token_spread_x`, `stage_pulse_scale`, `stage_flash_color`), triggering synchronized scale pulses and `<p:animClr>` flashes on each stage at the exact millisecond each token lands.
+| What | Rung reached |
+|---|---|
+| Sequencing, paths, Grow/Shrink, Transparency, exits | LibreOffice reads them as intended |
+| Many effects | PowerPoint 16.0 parsed them, and CreateVideo rendered Ken Burns, loops and Forge decks |
+| Interactive click playback, Presenter View, shape triggers, Morph Studio `!!` chains and scenes | Not observed (Forge `!!orb` Morph was rendered, T025) |
 
-
-## Pro Cross-Slide Morph Playbook (`pre_stage` & `post_stage`)
-Use `transition.pre_stage` (`off-left`, `off-right`, `portal-seed`, `telescopic-stack`) and `transition.post_stage` (`off-left`, `off-bottom`, `corner-badge`) in the director plan to automatically inject `!!` Morph twins across slides via `stage_cross_slide_morph_twins`. See `skills/pptx-motion/references/cross-slide-morph-and-pacing.md`.
+GIFs and storyboards are simulations. Critic scores are measurements, not
+playback. Never describe XML checks, previews, LibreOffice output or scores as
+PowerPoint playback.

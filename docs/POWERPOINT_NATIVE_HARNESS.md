@@ -1,7 +1,11 @@
 # Native PowerPoint QA harness
 
-Status: automated record checks tested. PowerPoint COM playback has not been run
-in this project environment. This harness does not close the M1 playback gate.
+Status (T034): this click-by-click harness (rung 6 in `docs/VERIFICATION.md`)
+has record checks tested but has **not** yet been run against PowerPoint.
+Separately, desktop sessions used COM through `scripts/powerpoint_render.ps1`.
+That script parses the MainSequence and renders with CreateVideo (rungs 4–5),
+and was used in T024b, T025, T027, T029 and T032. Interactive playback remains
+the open gate.
 
 ## Entry points
 
@@ -56,7 +60,7 @@ workflow was dispatched during the evidence-integrity study.
 | Native parse verified | Recorded exact hash, named PowerPoint version, slide count and expected MainSequence targets pass checks |
 | Native click index progression verified | Every expected click was recorded once, in order, with consistent before/after indices and a successful error-free probe |
 | Animation completion verified | Always false here; click index does not establish completion |
-| Visual state / playback verified | Always false here; requires actual capture review and the full POWERPOINT_QA checklist |
+| Visual state / playback verified | Always false here; requires actual capture review and the checklist in docs/VERIFICATION.md |
 
 `native_click_execution_verified` is a retained compatibility alias for the
 click-index claim, not a claim that effects reached the correct final geometry.

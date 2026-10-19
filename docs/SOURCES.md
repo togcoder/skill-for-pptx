@@ -1,4 +1,64 @@
-# Nguồn kỹ thuật
+# Sources — index
+
+Each task records its sources in its own REPORT. This page indexes them by
+topic. The access date is in brackets; "summary only" means the primary text
+was unreachable from the sandbox and a search or abstract summary was used.
+Nothing listed here is redistributed. Derived numbers only; licences are noted.
+
+## Slide aesthetics and evaluation (T031, T034)
+
+| Source | Used for |
+|---|---|
+| Yang et al., *SlidesGen-Bench*, arXiv 2601.09487 (2026); [github.com/YunqiaoYang/SlidesGen-Bench](https://github.com/YunqiaoYang/SlidesGen-Bench) [2026-10-19] | Computed aesthetics: hue harmony, Hasler–Süsstrunk colourfulness, WCAG text contrast, clutter/rhythm. Spearman 0.71 with humans vs 0.53–0.57 for LLM judges. Basis for computed critique |
+| Inui, Oh, Kuan, *Seeing Like a Designer Without One*, arXiv 2508.19289 (2025) [2026-10-19, summary only] | Seven design metrics (whitespace, colourfulness, edge density, contrast, text density, harmony, balance). Pearson up to 0.83 with humans |
+| Zheng et al., *PPTAgent / PPTEval*, EMNLP 2025, arXiv 2501.03936 [2026-10-19] | LLM judge on Content/Design/Coherence. T031 borrowed its dimensions; its design score is holistic |
+| *DesignLab: Designing Slides Through Iterative Detection and Correction*, arXiv 2507.17202 (2025) [2026-10-19, summary only] | The detect-and-correct loop shape |
+| Yang et al., *DeepSlide*, arXiv 2605.15202 (2026); [github.com/PUITAR/DeepSlide](https://github.com/PUITAR/DeepSlide) [2026-10-19] | Delivery-first preparation (time budget, speech, attention aids); no motion metrics |
+| W3C [WCAG 2.2](https://www.w3.org/TR/WCAG22/) SC 1.4.3, 1.4.11 | Text and non-text contrast thresholds; large text = 18 pt or 14 pt bold |
+
+## Motion perception and learning (T034)
+
+| Source | Used for |
+|---|---|
+| Dragicevic, Bezerianos, Javed, Elmqvist, Fekete, *Temporal Distortion for Animated Transitions*, CHI 2011, doi:10.1145/1978942.1979233 [summary only] | Slow-in/slow-out has the best tracking predictability (MOT-EASING) |
+| Chevalier, Dragicevic, Franconeri, *The Not-so-Staggering Effect of Staggered Animated Transitions on Visual Tracking*, IEEE TVCG 20(12) 2014 [abstract] | Staggering does not help tracking; keep it short and meaningful (MOT-STAGGER) |
+| Heer, Robertson, *Animated Transitions in Statistical Data Graphics*, IEEE TVCG 13(6) 2007 [summary only] | Animated transitions improve perception; stage complex ones |
+| Tversky, Morrison, Bétrancourt, *Animation: can it facilitate?*, IJHCS 57 (2002) | Congruence and apprehension principles |
+| Pylyshyn & Storm 1988 (FINST); Alvarez & Franconeri 2007, J. Vision 7(13) [summaries] | ≈4 tracked objects, variable with speed and spacing (MOT-MOVERS) |
+| Mayer, multimedia learning: segmenting, signaling, coherence; signaling meta-analysis (2020, 29 studies, d = .38) [summaries] | One idea per click, cues, no decorative motion |
+
+## Design systems and tokens (T029, T030, T034)
+
+| Source | Used for |
+|---|---|
+| [IBM Carbon motion](https://carbondesignsystem.com/elements/motion/overview/) (`@carbon/motion`, Apache-2.0) | Easing curves and durations fitted to accel/decel |
+| [Material Design 3 easing and duration](https://m3.material.io/styles/motion/easing-and-duration) (`@material/web`, Apache-2.0); Material 3 Expressive springs [community packages, values disagree] | Durations, emphasized curves, low-bounce spatial motion |
+| Ottosson, OKLab/OKLCH; Adobe Leonardo (contrast-targeted palettes) | `brand_palette.py` |
+| Microsoft Office designer themes (local install, derived metrics only) | Type scale, palettes, fonts (`knowledge/office_design_kits.json`) |
+
+## Corpora and PowerPoint itself (T027)
+
+| Source | Used for |
+|---|---|
+| [Zenodo10K](https://huggingface.co/datasets/Forceless/Zenodo10K) (PPTAgent; 93% CC BY 4.0) | 797 decks, XML-only: what real decks animate (`knowledge/corpus_motion_design.json`) |
+| PowerPoint 16.0, every `MsoAnimEffect` authored by COM | 198 canonical preset templates (`knowledge/powerpoint_presets.json`) |
+| Openverse (CC0/BY/BY-SA), Pexels (key), Iconify (Lucide/Tabler/Phosphor) | Forge assets with attribution (T026) |
+
+## OOXML, Morph and PowerPoint automation
+
+See the per-task tables below:
+
+- Microsoft Morph tips and XML, slide transition extensions, `Sequence.AddEffect`
+  and `CreateVideo`, Open XML SDK animation (E001, T024c);
+- GetClickIndex and GotoClick (T018).
+
+Open-source comparisons, with no code copied: ppt-master, baoyu-design,
+manim-slides, pptx-automizer, python-pptx issues (T024c).
+
+---
+
+# Per-task source history (verbatim)
+
 
 Tra cứu ngày 2026-10-03. Các kết luận về hiệu quả của kiến trúc trong repo là giả thuyết nghiên cứu, chưa phải kết quả thực nghiệm.
 

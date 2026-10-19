@@ -240,6 +240,11 @@ visual states. Playback claims require the exact output in Microsoft PowerPoint.
 ### CRITIQUE
 Ask whether every movement reveals meaning, whether the deck still feels like
 the original deck, and whether unnecessary generated components were introduced.
+Measure what can be measured: `scripts/design_critic.py` grades durations,
+easing, stagger, movers per click, clicks, contrast, type scale, density and
+settle-before-Morph against `knowledge/design_system.json`. These are the same
+numbers the generators use (docs/DESIGN_SYSTEM.md). The critic answers "is it
+well made?"; the questions above still answer "does it mean something?".
 
 ### REPAIR
 Fix failed conditions without discarding the user's deck or inflating slide
@@ -264,3 +269,15 @@ and the AI can, with little or no animation-specific instruction:
 
 That is the destination. Individual recipes, Morph experiments, path writers and
 QCC examples are implementation steps toward it, not the product itself.
+
+## Entry modes (status at T034)
+
+1. **Existing deck** (the destination above): `motion_director.py` and
+   `morph_studio.py`.
+2. **New deck**: `slide_forge.py` compiles a semantic spec into a designed,
+   motion-directed deck, then hands it to the same director. It serves users
+   who do not have a deck yet. It also tests the director on well-structured
+   input. It does not replace the existing-deck goal.
+
+Both modes share the design system and the critic, so "beautiful" means the same
+measured thing whichever way a deck was made.

@@ -1,38 +1,86 @@
-# Kiến trúc đề xuất
+# Architecture (after T034)
 
-```mermaid
-flowchart TD
-    A["Câu lệnh và tài nguyên"] --> B["AI lập kế hoạch cảnh"]
-    R["Công thức hiệu ứng"] --> B
-    B --> C["Kế hoạch có cấu trúc"]
-    C --> D["Kiểm tra danh tính và hình học"]
-    D --> E["Bộ thực thi PPTX"]
-    E --> F["Kiểm tra cấu trúc và bố cục"]
-    F --> G["Trình chiếu trong PowerPoint"]
-    G --> H{"Đạt yêu cầu?"}
-    H -->|Có| I["PPTX và bằng chứng"]
-    H -->|Chưa| B
+Python 3 + lxml throughout. Optional tools:
+
+- python-pptx and Pillow for Forge and the fixtures;
+- LibreOffice Impress, poppler and ImageMagick for renders and previews;
+- Windows with PowerPoint for native renders.
+
+The scripts sit in `scripts/`, data in `knowledge/`, and the skills in
+`skills/` wrap the CLIs for agents.
+
+```
+                     knowledge/design_system.json  ◄── design_system.py (loader)
+                     (tokens, rules, sources)           motion_tokens.py (easing fits)
+                              │ read by everyone below
+ ┌──────────────── existing deck ────────────────┐   ┌──────── new deck ────────┐
+ │ motion_director.py  inspect → deck_model      │   │ slide_forge.py           │
+ │   draft (heuristics, styles, cinematic)       │   │  spec → layout, type,    │
+ │   motion_script.py  (script ↔ plan, notes)    │   │  themes (office kits,    │
+ │   validate_director_plan.py (contract v0.7)   │   │  brand_palette), assets  │
+ │   compile: motion_engine.py (recipes,         │   │  (forge_assets) → static │
+ │     keyframes, layers, rigging) +             │   │  deck → motion_director  │
+ │     motion_components.py (generated helpers)  │   │  → forge_qa              │
+ │   write: pptx_animator.py (canonical timing,  │   └──────────┬───────────────┘
+ │     presets incl. ppt:<198>, Morph)           │              │
+ │   verify (preservation, overlaps, occlusion)  │              │
+ └──────────────┬────────────────────────────────┘              │
+                ▼                                               │
+ morph_studio.py  propose → continuity (!! chains, staging),    │
+                  scenes (camera-zoom, card-expand, pan) →      │
+                  verify_scenes, settle_report                  │
+                ▼                                               ▼
+           design_critic.py  ── grades every output against the design system
+                │                (motion_director report, Forge verdict, Morph report)
+                ▼
+   previews: motion_preview.py (simulated GIF/sheets), morph_studio preview,
+   lo_timing_crosscheck.py (LibreOffice), powerpoint_render.ps1 (PowerPoint)
 ```
 
-## Trách nhiệm từng phần
+## Modules
 
-Skill chọn quy trình, phân rã ý đồ và đọc công thức cần dùng. Kế hoạch mô tả trạng thái và điều kiện chuyển tiếp. Bộ thực thi dựng đối tượng và gán hiệu ứng. Bộ kiểm tra phát hiện lỗi có thể xác định tự động. PowerPoint và người xem kiểm chứng chuyển động thực tế.
-
-Định danh ngữ nghĩa như `sample-window` tồn tại xuyên cảnh. `!!sample-window` là tên ghép Morph theo quy ước được nghiên cứu. Numeric shape ID chỉ có ý nghĩa trong slide, không dùng làm danh tính toàn cục.
-
-`duration_ms` trong hợp đồng là thời lượng chuyển tiếp mong muốn. Nó không cam kết mọi backend hỗ trợ đường cong easing riêng. Nghiên cứu easing phải ghi rõ backend hỗ trợ gì và đâu là gần đúng bằng trạng thái trung gian.
-
-## Bộ thực thi cần đánh giá
-
-| Lựa chọn | Vai trò dự kiến | Điều cần chứng minh |
+| Module | Role | Since |
 |---|---|---|
-| PowerPoint desktop + tự động hóa | Tạo, đọc timeline, trình chiếu và xuất video | Máy có PowerPoint, phiên bản, API khả dụng, thao tác không bị dialog chặn |
-| Thư viện tạo PPTX + bước chỉnh OOXML | Tạo bố cục đa nền tảng, bổ sung chuyển tiếp | Mẫu chuẩn, quan hệ, namespace, mở lại PowerPoint và không mất hiệu ứng |
-| Video nhúng | Các hiệu ứng cần render ngoài | Đồng bộ, codec, dung lượng; nội dung video không chỉnh từng đối tượng được |
+| `motion_director.py` | Product entry for existing decks. Commands: `inspect`, `draft`, `apply`, `auto`, `preview`, `storyboard`, `verify` and `critique`. Holds the deck model and the draft heuristics | T019, T022–T024, T028, T034 |
+| `motion_script.py` | Parses scripts (`[click]`/`[nhấp]`), aligns them to resources, retimes the draft, drafts a full script, writes speaker notes | T024a |
+| `validate_director_plan.py` | Director plan contract v0.7, including design-system limits | T019–T034 |
+| `motion_engine.py` | Keyframe tracks and recipes compiled to effects: assemble, spotlight, cycle, swap, travel, zoom-focus, rise, ken-burns, orbit(-3d), wave, explode-layers, cascade-flow, ambient. Also rigging, state simulation and the XML reader | T023, T024a–c, T028, T034 |
+| `motion_components.py` | Generated helpers (halo, ring, rail, token, mask, highlight, underline, callout and others) in deck colours that reach WCAG contrast | T024a, T028, T034 |
+| `pptx_animator.py` | Writer, reader and simulator for PowerPoint-canonical timing. Covers presets plus the `ppt:` library, loops, iterate, triggers and Morph transitions | T019+ |
+| `motion_preview.py` | Simulated GIFs and key-state sheets (LibreOffice render of simulated states) | T023 |
+| `morph_studio.py` | Cross-slide Morph: continuity, staging, scenes, verification, settle report, simulated Morph preview | T028 |
+| `slide_forge.py`, `forge_qa.py`, `forge_assets.py` | New-deck compiler, coded QA, licensed photos and icons | T025–T026 |
+| `design_system.py`, `knowledge/design_system.json` | The shared tokens and rules | T034 |
+| `design_critic.py` | Measured verdict on beauty and technique (JSON and Markdown); `forge_critique.py` is a compatibility alias | T034 (T031) |
+| `motion_tokens.py`, `brand_palette.py` | Easing fitted to accel/decel; OKLCH theme from one colour | T029, T030 |
+| `deck_dna.py`, `corpus_scan.py`, `knowledge_build.py`, `phrase_scan.py`, `extract_presets.py`, `office_design_dna.py` | Build the knowledge base (`knowledge/README.md`) | T027 |
+| `lo_timing_crosscheck.py`, `render_identity.py`, `powerpoint_render.ps1`, `powerpoint_native_probe.ps1`, `verify_powerpoint_qa.py` | Verification ladder rungs 3–6 (`docs/VERIFICATION.md`) | T018–T025 |
+| `data_motion_recipes.py`, `chart_native_timing.py`, `counter_component.py` | Chart builds and KPI counters | T012–T016 |
 
-Chưa chọn nhà cung cấp hoặc thư viện làm mặc định. PptxGenJS có thể là ứng viên tạo bố cục; không coi có API tạo PPTX đồng nghĩa có API animation.
+## Experimental and frozen
 
-## Chất lượng sáng tạo
+- **Experimental, quarantined in T034:** `morph_playbook.py`,
+  `cognitive_pacing.py` and `interactive_triggers.py`. No product path
+  imports them, and a test enforces this.
+- **Frozen research paths:**
+  - the E001 Work-runtime builder: `run_experiment.sh`, `render_plan.mjs`,
+    `validate_plan.py`;
+  - the T006 packed-timeline writer: `pack_timeline.py`, `add_timeline.py`,
+    `validate_timeline.py`;
+  - the v0.2–v0.5 patch writers: `patch_existing_timeline.py`,
+    `compile_director_patch.py`.
 
-Mỗi công thức phải nêu mục đích: bộc lộ quy mô, giữ đường theo dõi, tiết lộ quan hệ, hướng sự chú ý hoặc dẫn vào chi tiết. Mức độ độc đáo được đánh giá ở cách phối hợp và thích ứng với nội dung. Không có cam kết tự động đạt chất lượng nghệ thuật với mọi câu lệnh.
+  They are kept so earlier experiments can be reproduced. The patch writers
+  are known to be defective, because after-previous steps run concurrently.
+  Do not build on any of these paths.
 
+## Contracts
+
+- **Director plan v0.7:** layers, generated components and narration. The
+  essentials are in `skills/pptx-motion-director/SKILL.md`. The full v0.4
+  contract is in `skills/pptx-motion/references/existing-deck-director.md`
+  (historical); later versions are additive.
+- **Morph plan** (`kind: "morph-scenes"`): continuity and scenes; see
+  `morph_studio.py propose`.
+- **Forge spec:** `slide_forge.py schema`.
+- **Design system:** `knowledge/design_system.json` (version 1.0.0).

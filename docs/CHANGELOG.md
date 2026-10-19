@@ -1,4 +1,64 @@
-# PPTX Motion Lab — checkpoint
+# Changelog — research log, newest first
+
+This is the chronological record each task wrote when it finished. It used to
+be `docs/STATUS.md`; since T034 the current state lives in
+[STATUS.md](STATUS.md), and this file is append-only history. The entries are
+kept verbatim: older ones mention test counts, versions and "next steps" that
+were true at the time. Task IDs and their branches are listed in
+[research/tasks/INDEX.md](../research/tasks/INDEX.md).
+
+## T034 design system + documentation standardised — 2026-10-19
+
+Beauty and technique now share one source,
+`knowledge/design_system.json` (see `docs/DESIGN_SYSTEM.md`):
+
+- **Shared numbers.** Duration bands per role, easing roles fitted to
+  PowerPoint, stagger, overshoot, rhythm limits, WCAG contrast, type scale,
+  density and layout, with 18 rules and their evidence.
+- **Generators read it.** Arrivals ease in, and the assemble regression from
+  the Argon merge is undone. Overshoot is clamped. Travel time scales with
+  distance. The default path easing is no longer 50/50. The simulator uses
+  PowerPoint's accel/decel curve. Helpers take a deck colour that reaches
+  3:1 against the background. The highlighter tint keeps text contrast. One
+  contrast function, with WCAG large text at 18 pt.
+- **Checkers grade against it.** These are the validator, `forge_qa` and the
+  new `scripts/design_critic.py`. The critic resolves inherited sizes and
+  colours, alpha tints and gesture segments, measures settled frames
+  (LibreOffice or PowerPoint) and checks the schema. `forge_critique.py`
+  (T031) now delegates to it.
+- **Wiring.** Director reports, Forge verdicts and Morph Studio reports
+  include the critique.
+- **Evidence.** In a before/after run (36 director runs, one critic),
+  generator-controlled warnings fell from 14 to 6. The invisible helpers on
+  brand themes (1.14:1) became 5.33:1. LibreOffice frame metrics match
+  PowerPoint's (background share: median difference 0.022, Spearman 0.99).
+- **Quarantine.** The T033 modules are labelled experimental and kept out of
+  product paths.
+- **Documentation.** Documents were reorganised: STATUS (current state),
+  CHANGELOG (this log), VERIFICATION, DESIGN_SYSTEM, ARCHITECTURE and the
+  task registry. Superseded documents moved to `docs/archive/`.
+
+289 tests pass. Report:
+experiments/T034-20261019-claude-design-system/REPORT.md.
+
+## T033 Argon second drop: morph twins, triggers, pacing — 2026-10-16
+
+The owner integrated three Argon answers:
+
+- `morph_playbook.py`: `!!` twin staging, extract_objects, homotopy;
+- `interactive_triggers.py`;
+- `cognitive_pacing.py`.
+
+No report was written at the time. The T034 audit found that none of them is
+wired into a product path, and that each one writes schema-invalid or wrong
+XML on real decks. All three are quarantined as experimental. Report
+(written in T034): experiments/T033-20261016-argon-research/REPORT.md.
+
+## T031 measurable critique (WIP) — 2026-10-08
+
+`scripts/forge_critique.py` scored PPTEval-style dimensions (content, design,
+coherence) plus motion from measurements. It was a single WIP commit with no
+tests or wiring and no report. T034 folded its checks into `design_critic.py`.
 
 ## T032 Argon (Gemini) research drop evaluated and integrated — 2026-10-15
 
