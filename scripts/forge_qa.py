@@ -13,6 +13,7 @@ from pathlib import Path
 from pptx import Presentation
 
 sys.path.insert(0,str(Path(__file__).resolve().parent))
+import design_system as _ds  # noqa: E402
 import pptx_animator as anim  # noqa: E402
 from slide_forge import text_lines  # noqa: E402
 
@@ -20,17 +21,9 @@ NS=anim.NS
 EMU_IN=914400
 
 
-def _lum(hexcol):
-    def ch(v):
-        v/=255
-        return v/12.92 if v<=0.03928 else ((v+0.055)/1.055)**2.4
-    r,g,b=(int(hexcol[i:i+2],16) for i in (0,2,4))
-    return 0.2126*ch(r)+0.7152*ch(g)+0.0722*ch(b)
-
-
 def contrast(a,b):
-    la,lb=sorted((_lum(a),_lum(b)),reverse=True)
-    return (la+0.05)/(lb+0.05)
+    """WCAG contrast ratio (shared with the design system, T034)."""
+    return _ds.contrast(a,b)
 
 
 def _box(sh,sw,shh):
@@ -139,7 +132,9 @@ def qa(path,theme=None):
             back=own or back
             for c in colors:
                 ratio=contrast(str(c),back)
-                need=3.0 if (sizes and max(sizes)>=24) else 4.5
+                # WCAG 2.2 large text (>= 18 pt, or 14 pt bold), via the design
+                # system; the smallest run decides (was: largest run >= 24 pt).
+                need=_ds.text_contrast_needed(min(sizes) if sizes else None,all(r.font.bold for r in runs) if runs else False)
                 if ratio<need:
                     find("LOW_CONTRAST",idx,name,f"{c} on {back}: {ratio:.2f} < {need}","use the theme text color")
         for i,(a,ba) in enumerate(texts):

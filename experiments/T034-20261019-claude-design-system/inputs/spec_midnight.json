@@ -1,0 +1,57 @@
+{
+ "title": "Design system probe",
+ "motion": {
+  "style": "cinematic"
+ },
+ "slides": [
+  {
+   "layout": "section",
+   "title": "Quarterly review"
+  },
+  {
+   "layout": "kpis",
+   "title": "Three numbers",
+   "items": [
+    {
+     "value": "48%",
+     "label": "retention"
+    },
+    {
+     "value": "1,200",
+     "label": "new members"
+    },
+    {
+     "value": "2.1 d",
+     "label": "lead time"
+    }
+   ]
+  },
+  {
+   "layout": "cycle",
+   "title": "How we improve",
+   "items": [
+    "Plan",
+    "Build",
+    "Measure",
+    "Learn"
+   ]
+  },
+  {
+   "layout": "process",
+   "title": "From order to door",
+   "steps": [
+    "Order",
+    "Roast",
+    "Pack",
+    "Deliver"
+   ],
+   "notes": "First the order, then roasting, then packing, finally delivery."
+  },
+  {
+   "layout": "statement",
+   "title": "Takeaway",
+   "text": "Delivery speed is what members praise most."
+  }
+ ],
+ "theme": "midnight"
+}

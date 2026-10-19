@@ -1,0 +1,101 @@
+{
+  "name": "PPTX Motion Lab design system",
+  "version": "1.0.0",
+  "updated": "2026-10-19",
+  "about": "One source of truth for what looks good and how it is built. Generators (motion_engine, motion_director, motion_components, morph_studio, slide_forge) read these values; validators and scripts/design_critic.py check decks against the same values. A band is [good_min, good_max]; a limit is [hard_min, hard_max]: outside the band is a note, outside the limit is a warning. Easing curves live in scripts/motion_tokens.py (fitted from Carbon/Material); this file names the roles. Sources are listed at the end and in docs/DESIGN_SYSTEM.md.",
+  "motion": {
+    "easing_roles": {
+      "move": "standard",
+      "enter": "enter",
+      "exit": "exit",
+      "emphasis": "standard",
+      "hero": "expressive",
+      "ambient": "linear"
+    },
+    "duration_ms": {
+      "enter":       {"band": [250, 700],  "limit": [150, 1000], "default": 500},
+      "exit":        {"band": [200, 500],  "limit": [120, 900],  "default": 350},
+      "emphasis":    {"band": [250, 600],  "limit": [150, 1200], "default": 450},
+      "move":        {"band": [400, 1200], "limit": [250, 2000], "default": 700},
+      "morph":       {"band": [1000, 1600],"limit": [500, 3000], "default": 1400},
+      "ambient_cycle": {"band": [6000, 60000], "limit": [3000, 120000], "default": 12000},
+      "letter_gap":  {"band": [20, 60],    "limit": [10, 120],   "default": 35},
+      "word_gap":    {"band": [60, 200],   "limit": [30, 400],   "default": 100},
+      "stagger":     {"band": [60, 150],   "limit": [0, 400],    "default": 120}
+    },
+    "travel": {"min_ms": 400, "max_ms": 1200, "per_slide_width_ms": 900},
+    "overshoot_max": 0.08,
+    "anticipate_max": 0.05,
+    "rhythm": {
+      "clicks_per_slide":   {"band": [0, 6],  "limit": [0, 8]},
+      "movers_per_click":   {"band": [0, 4],  "limit": [0, 8]},
+      "effects_per_click":  {"band": [0, 8],  "limit": [0, 14]},
+      "effect_kinds_per_deck": {"band": [3, 10], "limit": [2, 14]},
+      "static_slide_share_max": 0.3
+    }
+  },
+  "type": {
+    "sizes_per_deck":  {"band": [3, 6], "limit": [2, 9]},
+    "body_min_pt":     {"band": [18, 40], "limit": [12, 60]},
+    "title_to_body":   {"band": [1.5, 2.6], "limit": [1.2, 4.0]},
+    "families_per_deck": {"band": [1, 2], "limit": [1, 3]}
+  },
+  "color": {
+    "text_contrast": 4.5,
+    "large_text_contrast": 3.0,
+    "large_text_pt": 18,
+    "large_bold_text_pt": 14,
+    "graphic_contrast": 3.0
+  },
+  "density": {
+    "words_per_slide": {"band": [0, 45], "limit": [0, 80]},
+    "words_per_bullet": {"band": [0, 12], "limit": [0, 20]}
+  },
+  "layout": {
+    "safe_margin": 0.03,
+    "frame_background_share": {"band": [0.6, 0.95], "limit": [0.45, 0.985]},
+    "balance_offset": {"band": [0.0, 0.15], "limit": [0.0, 0.22]},
+    "colourfulness": {"band": [15, 80], "limit": [5, 110]}
+  },
+  "rules": [
+    {"id": "MOT-DURATION", "domain": "motion", "statement": "Every effect lasts what its role allows: entrances 250-700 ms, exits 200-500, emphasis 250-600, moves 400-1200 scaled with distance, Morph 1.0-1.6 s.", "evidence": ["carbon", "md3", "heer2007", "tversky2002"], "generators": ["motion_director.STYLES", "motion_engine recipes", "morph_studio"], "checker": "design_critic: MOT-DURATION"},
+    {"id": "MOT-EASING", "domain": "motion", "statement": "Moves slow in and slow out (role easing); nothing important moves at constant speed.", "evidence": ["dragicevic2011", "carbon"], "generators": ["motion_tokens.ROLES via motion_engine.EASE", "pptx_animator default path easing"], "checker": "design_critic: MOT-LINEAR"},
+    {"id": "MOT-STAGGER", "domain": "motion", "statement": "Stagger only to show order, 60-150 ms between items; common fate (moving together) beats a long cascade for tracking.", "evidence": ["chevalier2014", "corpus"], "generators": ["motion_engine assemble/reveal/cascade"], "checker": "design_critic: MOT-STAGGER"},
+    {"id": "MOT-MOVERS", "domain": "motion", "statement": "At most about four independent things move at once in a click; objects moving together count as one.", "evidence": ["mot1988", "mot2007"], "generators": ["motion_director cinematic draft"], "checker": "design_critic: MOT-MOVERS"},
+    {"id": "MOT-CLICKS", "domain": "rhythm", "statement": "One idea per click, at most six clicks per slide.", "evidence": ["mayer-segmenting"], "generators": ["motion_director draft", "motion_script"], "checker": "design_critic: MOT-CLICKS"},
+    {"id": "MOT-VOCAB", "domain": "rhythm", "statement": "One motion language per deck: 3-10 effect kinds, lifecycles over exotic presets.", "evidence": ["corpus"], "generators": ["motion_director styles"], "checker": "design_critic: MOT-MONOTONE / MOT-CHAOTIC"},
+    {"id": "MOT-STATIC", "domain": "rhythm", "statement": "Structure (process, data, pictures) moves; at most 30% of content slides stay still.", "evidence": ["corpus", "mayer-signaling"], "generators": ["motion_director draft"], "checker": "design_critic: MOT-STATIC"},
+    {"id": "MOT-AMBIENT", "domain": "motion", "statement": "Ambient loops are slow (cycle >= 6 s) and never on the object being discussed.", "evidence": ["mayer-coherence"], "generators": ["motion_engine ambient recipes"], "checker": "design_critic: MOT-AMBIENT-FAST; motion_engine.conflicts"},
+    {"id": "MOT-TITLE", "domain": "motion", "statement": "Titles stay still inside a slide; they move only by Morph.", "evidence": ["pro-techniques#45"], "generators": ["motion_director (titles never targeted)"], "checker": "design_critic: MOT-TITLE"},
+    {"id": "MOT-SETTLE", "domain": "morph", "statement": "A slide that leaves by Morph ends on its authored layout, or objects snap back when the transition starts.", "evidence": ["T028"], "generators": ["motion_script settle click"], "checker": "morph_studio.settle_report; design_critic: MOT-SETTLE"},
+    {"id": "MOT-OVERSHOOT", "domain": "motion", "statement": "Overshoot <= 0.08, anticipation <= 0.05 of the move.", "evidence": ["md3-expressive"], "generators": ["motion_engine keyframes (clamped)"], "checker": "validate_director_plan"},
+    {"id": "COL-TEXT", "domain": "colour", "statement": "Text contrast >= 4.5:1, large text (>= 18 pt, or 14 pt bold) >= 3:1.", "evidence": ["wcag22"], "generators": ["brand_palette", "slide_forge themes"], "checker": "forge_qa LOW_CONTRAST; design_critic: COL-TEXT"},
+    {"id": "COL-GRAPHIC", "domain": "colour", "statement": "Generated motion helpers (halo, ring, rail, token, marker, underline) reach >= 3:1 against what is behind them (marker: a tint behind text, exempt).", "evidence": ["wcag22"], "generators": ["motion_components.deck_style"], "checker": "design_critic: COL-GRAPHIC"},
+    {"id": "TYP-SCALE", "domain": "type", "statement": "A deck uses 3-6 text sizes, title about 1.5-2.6x body, body >= 18 pt (never below 12).", "evidence": ["office-themes", "corpus"], "generators": ["slide_forge type scale"], "checker": "forge_qa TYPE_TOO_SMALL; design_critic: TYP-SIZES / TYP-SMALL"},
+    {"id": "TYP-FAMILIES", "domain": "type", "statement": "One or two type families per deck.", "evidence": ["office-themes"], "generators": ["slide_forge themes"], "checker": "design_critic: TYP-FAMILIES"},
+    {"id": "DEN-WORDS", "domain": "density", "statement": "A slide carries a claim and its evidence: <= 45 words is good, > 80 is a wall of text.", "evidence": ["office-themes", "corpus", "mayer-coherence"], "generators": ["slide_forge spec limits"], "checker": "design_critic: DEN-WORDS"},
+    {"id": "LAY-FRAME", "domain": "layout", "statement": "The settled frame keeps 60-95% background and its visual weight near the centre.", "evidence": ["inui2025", "slidesgen2026"], "generators": ["slide_forge layouts"], "checker": "design_critic --render: LAY-DENSITY / LAY-BALANCE"},
+    {"id": "LAY-SAFE", "domain": "layout", "statement": "Content sits inside the slide with a 3% safe margin; off-slide objects only as Morph staging.", "evidence": ["office-themes"], "generators": ["slide_forge", "morph_studio staging"], "checker": "forge_qa OFF_SLIDE; design_critic: LAY-SAFE"}
+  ],
+  "sources": {
+    "carbon": "IBM Carbon motion tokens, @carbon/motion, Apache-2.0, https://carbondesignsystem.com/elements/motion/overview/",
+    "md3": "Material Design 3 easing and duration tokens, @material/web, Apache-2.0, https://m3.material.io/styles/motion/easing-and-duration",
+    "md3-expressive": "Material 3 Expressive motion (springs: spatial vs effects; low bounce for spatial motion), 2025",
+    "wcag22": "W3C WCAG 2.2, SC 1.4.3 Contrast (Minimum) and 1.4.11 Non-text Contrast, https://www.w3.org/TR/WCAG22/",
+    "dragicevic2011": "Dragicevic, Bezerianos, Javed, Elmqvist, Fekete. Temporal Distortion for Animated Transitions. CHI 2011. doi:10.1145/1978942.1979233",
+    "chevalier2014": "Chevalier, Dragicevic, Franconeri. The Not-so-Staggering Effect of Staggered Animated Transitions on Visual Tracking. IEEE TVCG 20(12), 2014",
+    "heer2007": "Heer, Robertson. Animated Transitions in Statistical Data Graphics. IEEE TVCG 13(6), 2007. doi:10.1109/TVCG.2007.70539",
+    "tversky2002": "Tversky, Morrison, Betrancourt. Animation: can it facilitate? IJHCS 57, 2002",
+    "mot1988": "Pylyshyn, Storm. Tracking multiple independent targets. Spatial Vision 3, 1988 (FINST, about four objects)",
+    "mot2007": "Alvarez, Franconeri. How many objects can you track? Journal of Vision 7(13), 2007 (capacity varies with speed and spacing)",
+    "mayer-segmenting": "Mayer, Multimedia Learning: segmenting principle (review effect size d about 0.70)",
+    "mayer-signaling": "Signaling principle meta-analysis, 29 studies, d = 0.38 (2020); review d about 0.46",
+    "mayer-coherence": "Mayer, coherence principle: remove extraneous material (review d about 0.70)",
+    "slidesgen2026": "Yang et al. SlidesGen-Bench, arXiv 2601.09487, 2026: computational aesthetics (harmony, colourfulness, WCAG contrast, clutter/rhythm), Spearman 0.71 with humans vs 0.53-0.57 for LLM judges",
+    "inui2025": "Inui, Oh, Kuan. Seeing Like a Designer Without One, arXiv 2508.19289, 2025: whitespace, colourfulness, edge density, contrast, text density, harmony, balance; Pearson up to 0.83 with humans",
+    "office-themes": "knowledge/office_design_kits.json (Microsoft designer themes, derived metrics only)",
+    "corpus": "knowledge/corpus_motion_design.json (797 licensed Zenodo10K decks)",
+    "pro-techniques#45": "skills/pptx-motion-director/references/pro-techniques.md, craft rule 45",
+    "T028": "experiments/T028-20261008-claude-morph-studio/REPORT.md"
+  }
+}
