@@ -1,0 +1,770 @@
+{
+  "version": "0.7",
+  "kind": "existing-deck-motion-director",
+  "source": {
+    "pptx_sha256": "536575cc74cedb9682a978c669650a495cf23209c802beb6844701a760723522",
+    "inventory_version": "0.1",
+    "source_slide_count": 8
+  },
+  "user_instruction": "Follow the provided presentation script.",
+  "script": {
+    "source": "provided",
+    "summary": "Clicks follow the provided script; the director's choreography supplies how each resource moves; narration is kept per click.",
+    "evidence": [
+      "provided script",
+      "slide text alignment"
+    ],
+    "beats": [
+      "slide 1: scripted",
+      "slide 2: scripted",
+      "slide 3: no script section; slide left static",
+      "slide 4: no script section; slide left static",
+      "slide 5: scripted",
+      "slide 6: scripted",
+      "slide 7: no script section; slide left static",
+      "slide 8: no script section; slide left static"
+    ]
+  },
+  "preservation": {
+    "preserve_text_by_default": true,
+    "preserve_media_by_default": true,
+    "preserve_theme_by_default": true,
+    "preserve_slide_order_by_default": true,
+    "slide_count_policy": "preserve"
+  },
+  "slides": [
+    {
+      "source_index": 2,
+      "role": "scripted slide",
+      "objective": "Follow the script for slide 2.",
+      "beats": [
+        {
+          "id": "hub-1",
+          "purpose": "Establish the centre 'Customer value'.",
+          "operation": "reveal",
+          "targets": [
+            "Hub"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 500
+        },
+        {
+          "id": "ring-2",
+          "purpose": "Draw the loop behind the stages.",
+          "operation": "reveal",
+          "targets": [
+            "orbit"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "with-previous",
+          "effect": "fade",
+          "duration_ms": 800,
+          "layer": "secondary"
+        },
+        {
+          "id": "assemble-3",
+          "purpose": "Elements assemble around the centre in cycle order.",
+          "operation": "choreography",
+          "targets": [
+            "Stage Plan",
+            "Stage Do",
+            "Stage Check",
+            "Stage Act"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "with-previous",
+          "recipe": "assemble",
+          "motion_parameters": {
+            "from": "center",
+            "stagger_ms": 140,
+            "duration_ms": 700,
+            "overshoot": 0.08
+          }
+        },
+        {
+          "id": "turn-4",
+          "purpose": "The ring keeps turning slowly while the cycle is discussed.",
+          "operation": "choreography",
+          "targets": [
+            "orbit"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "with-previous",
+          "recipe": "spin-loop",
+          "layer": "ambient",
+          "motion_parameters": {
+            "period_ms": 40000
+          }
+        },
+        {
+          "id": "focus-6",
+          "purpose": "Walk the cycle: focus 'Plan'.",
+          "operation": "choreography",
+          "targets": [
+            "Stage Plan",
+            "Stage Do",
+            "Stage Check",
+            "Stage Act"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "spotlight",
+          "motion_parameters": {
+            "scale": 1.12,
+            "dim": 0.35,
+            "duration_ms": 500,
+            "halo": "halo"
+          }
+        },
+        {
+          "id": "focus-8",
+          "purpose": "Walk the cycle: focus 'Do'.",
+          "operation": "choreography",
+          "targets": [
+            "Stage Do",
+            "Stage Plan",
+            "Stage Check",
+            "Stage Act"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "spotlight",
+          "motion_parameters": {
+            "scale": 1.12,
+            "dim": 0.35,
+            "duration_ms": 500,
+            "halo": "halo"
+          }
+        },
+        {
+          "id": "focus-10",
+          "purpose": "Walk the cycle: focus 'Check'.",
+          "operation": "choreography",
+          "targets": [
+            "Stage Check",
+            "Stage Plan",
+            "Stage Do",
+            "Stage Act"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "spotlight",
+          "motion_parameters": {
+            "scale": 1.12,
+            "dim": 0.35,
+            "duration_ms": 500,
+            "halo": "halo"
+          }
+        },
+        {
+          "id": "focus-12",
+          "purpose": "Walk the cycle: focus 'Act'.",
+          "operation": "choreography",
+          "targets": [
+            "Stage Act",
+            "Stage Plan",
+            "Stage Do",
+            "Stage Check"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "spotlight",
+          "motion_parameters": {
+            "scale": 1.12,
+            "dim": 0.35,
+            "duration_ms": 500,
+            "halo": "halo"
+          }
+        },
+        {
+          "id": "release-14",
+          "purpose": "Return to the whole cycle.",
+          "operation": "choreography",
+          "targets": [
+            "Stage Plan",
+            "Stage Do",
+            "Stage Check",
+            "Stage Act"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "release",
+          "motion_parameters": {
+            "duration_ms": 500
+          }
+        },
+        {
+          "id": "halo-out-15",
+          "purpose": "The glow fades when the whole cycle is back.",
+          "operation": "exit",
+          "targets": [
+            "halo"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "with-previous",
+          "effect": "fade-out",
+          "duration_ms": 400,
+          "layer": "secondary"
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "say-1",
+          "purpose": "Our improvement cycle has four stages around customer value: plan, do, check and",
+          "motion_beats": [
+            "hub-1",
+            "ring-2",
+            "assemble-3",
+            "turn-4"
+          ],
+          "stable_state": "What the presenter is talking about is on screen.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "The script places a click here.",
+          "narration": "Our improvement cycle has four stages around customer value: plan, do, check and act."
+        },
+        {
+          "id": "say-2",
+          "purpose": "Everything starts with Plan: we set two targets per team each quarter.",
+          "motion_beats": [
+            "focus-6"
+          ],
+          "stable_state": "What the presenter is talking about is on screen.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "The script places a click here.",
+          "narration": "Everything starts with Plan: we set two targets per team each quarter."
+        },
+        {
+          "id": "say-3",
+          "purpose": "Do means we run small pilots instead of big launches.",
+          "motion_beats": [
+            "focus-8"
+          ],
+          "stable_state": "What the presenter is talking about is on screen.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "The script places a click here.",
+          "narration": "Do means we run small pilots instead of big launches."
+        },
+        {
+          "id": "say-4",
+          "purpose": "Check compares the pilots with the targets — last year 85% of pilots hit them.",
+          "motion_beats": [
+            "focus-10"
+          ],
+          "stable_state": "What the presenter is talking about is on screen.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "The script places a click here.",
+          "narration": "Check compares the pilots with the targets — last year 85% of pilots hit them."
+        },
+        {
+          "id": "say-5",
+          "purpose": "Act turns the winners into the new standard.",
+          "motion_beats": [
+            "focus-12"
+          ],
+          "stable_state": "What the presenter is talking about is on screen.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "The script places a click here.",
+          "narration": "Act turns the winners into the new standard."
+        },
+        {
+          "id": "say-6",
+          "purpose": "And then the cycle starts again.",
+          "motion_beats": [
+            "release-14",
+            "halo-out-15"
+          ],
+          "stable_state": "What the presenter is talking about is on screen.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "The script places a click here.",
+          "narration": "And then the cycle starts again."
+        }
+      ],
+      "components": [
+        {
+          "id": "orbit",
+          "role": "shows the loop the stages form",
+          "rationale": "Secondary/ambient layer: the slowly turning ring tells the audience this is a repeating cycle.",
+          "native_kind": "shape",
+          "style_basis": "deck accent colour and font; low opacity behind source objects",
+          "data_provenance": "none",
+          "generate": {
+            "kind": "orbit-ring",
+            "anchors": [
+              "Stage Plan",
+              "Stage Do",
+              "Stage Check",
+              "Stage Act"
+            ]
+          }
+        },
+        {
+          "id": "halo",
+          "role": "guides attention to the stage being discussed",
+          "rationale": "Secondary layer: a soft glow follows the spotlight so the eye knows where to look.",
+          "native_kind": "shape",
+          "style_basis": "deck accent colour and font; low opacity behind source objects",
+          "data_provenance": "none",
+          "generate": {
+            "kind": "halo",
+            "anchors": [
+              "Stage Plan"
+            ]
+          }
+        }
+      ],
+      "intro_narration": "This is how we improve every quarter."
+    },
+    {
+      "source_index": 5,
+      "role": "scripted slide",
+      "objective": "Follow the script for slide 5.",
+      "beats": [
+        {
+          "id": "step-1",
+          "purpose": "Reveal step 'Order'.",
+          "operation": "reveal",
+          "targets": [
+            "Step Order"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 400
+        },
+        {
+          "id": "go-2",
+          "purpose": "The marker travels to 'Order'.",
+          "operation": "choreography",
+          "targets": [
+            "Order token",
+            "Step Order"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "after-previous",
+          "recipe": "travel",
+          "layer": "secondary",
+          "motion_parameters": {
+            "duration_ms": 650,
+            "arc": 0.3,
+            "offset_y": -0.13666666666666666,
+            "dwell_ms": 0,
+            "overshoot": 0.06,
+            "pulse_stops": true
+          }
+        },
+        {
+          "id": "step-4",
+          "purpose": "Reveal step 'Roast'.",
+          "operation": "reveal",
+          "targets": [
+            "Step Roast"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 400
+        },
+        {
+          "id": "go-5",
+          "purpose": "The marker travels to 'Roast'.",
+          "operation": "choreography",
+          "targets": [
+            "Order token",
+            "Step Roast"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "after-previous",
+          "recipe": "travel",
+          "layer": "secondary",
+          "motion_parameters": {
+            "duration_ms": 650,
+            "arc": 0.3,
+            "offset_y": -0.13666666666666666,
+            "dwell_ms": 0,
+            "overshoot": 0.06,
+            "pulse_stops": true
+          }
+        },
+        {
+          "id": "step-7",
+          "purpose": "Reveal step 'Pack'.",
+          "operation": "reveal",
+          "targets": [
+            "Step Pack"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 400
+        },
+        {
+          "id": "go-8",
+          "purpose": "The marker travels to 'Pack'.",
+          "operation": "choreography",
+          "targets": [
+            "Order token",
+            "Step Pack"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "after-previous",
+          "recipe": "travel",
+          "layer": "secondary",
+          "motion_parameters": {
+            "duration_ms": 650,
+            "arc": 0.3,
+            "offset_y": -0.13666666666666666,
+            "dwell_ms": 0,
+            "overshoot": 0.06,
+            "pulse_stops": true
+          }
+        },
+        {
+          "id": "step-10",
+          "purpose": "Reveal step 'Deliver'.",
+          "operation": "reveal",
+          "targets": [
+            "Step Deliver"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "after-previous",
+          "effect": "zoom",
+          "duration_ms": 400
+        },
+        {
+          "id": "go-11",
+          "purpose": "The marker travels to 'Deliver'.",
+          "operation": "choreography",
+          "targets": [
+            "Order token",
+            "Step Deliver"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "after-previous",
+          "recipe": "travel",
+          "layer": "secondary",
+          "motion_parameters": {
+            "duration_ms": 650,
+            "arc": 0.3,
+            "offset_y": -0.13666666666666666,
+            "dwell_ms": 0,
+            "overshoot": 0.06,
+            "pulse_stops": true
+          }
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "say-1",
+          "purpose": "Every order enters through the Order step.",
+          "motion_beats": [
+            "step-1",
+            "go-2"
+          ],
+          "stable_state": "What the presenter is talking about is on screen.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "The script places a click here.",
+          "narration": "Every order enters through the Order step."
+        },
+        {
+          "id": "say-2",
+          "purpose": "We roast within 24 hours.",
+          "motion_beats": [
+            "step-4",
+            "go-5"
+          ],
+          "stable_state": "What the presenter is talking about is on screen.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "The script places a click here.",
+          "narration": "We roast within 24 hours."
+        },
+        {
+          "id": "say-3",
+          "purpose": "Pack and deliver happen the same day.",
+          "motion_beats": [
+            "step-7",
+            "go-8",
+            "step-10",
+            "go-11"
+          ],
+          "stable_state": "What the presenter is talking about is on screen.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "The script places a click here.",
+          "narration": "Pack and deliver happen the same day."
+        }
+      ],
+      "components": [],
+      "intro_narration": ""
+    },
+    {
+      "source_index": 6,
+      "role": "scripted slide",
+      "objective": "Follow the script for slide 6.",
+      "beats": [
+        {
+          "id": "assemble-1",
+          "purpose": "Elements assemble around the centre in cycle order.",
+          "operation": "choreography",
+          "targets": [
+            "Quadrant Defend",
+            "Quadrant Exit",
+            "Quadrant Explore",
+            "Quadrant Grow"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "assemble",
+          "motion_parameters": {
+            "from": "center",
+            "stagger_ms": 140,
+            "duration_ms": 700,
+            "overshoot": 0.08
+          }
+        },
+        {
+          "id": "focus-3",
+          "purpose": "Walk the cycle: focus 'Defend'.",
+          "operation": "choreography",
+          "targets": [
+            "Quadrant Defend",
+            "Quadrant Exit",
+            "Quadrant Explore",
+            "Quadrant Grow"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "spotlight",
+          "motion_parameters": {
+            "scale": 1.12,
+            "dim": 0.35,
+            "duration_ms": 500,
+            "halo": "halo"
+          }
+        },
+        {
+          "id": "focus-7",
+          "purpose": "Walk the cycle: focus 'Explore'.",
+          "operation": "choreography",
+          "targets": [
+            "Quadrant Explore",
+            "Quadrant Defend",
+            "Quadrant Exit",
+            "Quadrant Grow"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "spotlight",
+          "motion_parameters": {
+            "scale": 1.12,
+            "dim": 0.35,
+            "duration_ms": 500,
+            "halo": "halo"
+          }
+        },
+        {
+          "id": "release-11",
+          "purpose": "Return to the whole cycle.",
+          "operation": "choreography",
+          "targets": [
+            "Quadrant Defend",
+            "Quadrant Exit",
+            "Quadrant Explore",
+            "Quadrant Grow"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "recipe": "release",
+          "motion_parameters": {
+            "duration_ms": 500
+          }
+        },
+        {
+          "id": "halo-out-12",
+          "purpose": "The glow fades when the whole cycle is back.",
+          "operation": "exit",
+          "targets": [
+            "halo"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "with-previous",
+          "effect": "fade-out",
+          "duration_ms": 400,
+          "layer": "secondary"
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "say-1",
+          "purpose": "Grow is where premium cafés are.",
+          "motion_beats": [
+            "assemble-1"
+          ],
+          "stable_state": "What the presenter is talking about is on screen.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "The script places a click here.",
+          "narration": "Grow is where premium cafés are."
+        },
+        {
+          "id": "say-2",
+          "purpose": "Defend covers grocery retail.",
+          "motion_beats": [
+            "focus-3"
+          ],
+          "stable_state": "What the presenter is talking about is on screen.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "The script places a click here.",
+          "narration": "Defend covers grocery retail."
+        },
+        {
+          "id": "say-3",
+          "purpose": "Explore is subscriptions, and Exit means wholesale bulk.",
+          "motion_beats": [
+            "focus-7"
+          ],
+          "stable_state": "What the presenter is talking about is on screen.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "The script places a click here.",
+          "narration": "Explore is subscriptions, and Exit means wholesale bulk."
+        },
+        {
+          "id": "click-13",
+          "purpose": "Back to the full cycle.",
+          "motion_beats": [
+            "release-11",
+            "halo-out-12"
+          ],
+          "stable_state": "Full cycle restored.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "The tour ends by showing the system as a whole again.",
+          "narration": ""
+        }
+      ],
+      "components": [
+        {
+          "id": "halo",
+          "role": "guides attention to the stage being discussed",
+          "rationale": "Secondary layer: a soft glow follows the spotlight so the eye knows where to look.",
+          "native_kind": "shape",
+          "style_basis": "deck accent colour and font; low opacity behind source objects",
+          "data_provenance": "none",
+          "generate": {
+            "kind": "halo",
+            "anchors": [
+              "Quadrant Defend"
+            ]
+          }
+        }
+      ],
+      "intro_narration": "We sort markets into four quadrants."
+    }
+  ],
+  "target_slide_count": 8,
+  "research_metadata": {
+    "sources": [],
+    "style": "cinematic",
+    "script_alignment": {
+      "1": {
+        "status": "scripted",
+        "clicks": 0,
+        "unmentioned_static": [
+          "Northwind Roasters (synthetic data)"
+        ],
+        "gaps": [],
+        "dropped_draft_bundles": []
+      },
+      "2": {
+        "status": "scripted",
+        "clicks": 6,
+        "unmentioned_static": [],
+        "gaps": [
+          {
+            "segment": 3,
+            "kind": "number-not-on-slide",
+            "values": [
+              "85"
+            ],
+            "text": "Check compares the pilots with the targets — last year 85% of pilots hit them."
+          }
+        ],
+        "dropped_draft_bundles": []
+      },
+      "3": {
+        "status": "no script section; slide left static"
+      },
+      "4": {
+        "status": "no script section; slide left static"
+      },
+      "5": {
+        "status": "scripted",
+        "clicks": 3,
+        "unmentioned_static": [],
+        "gaps": [
+          {
+            "segment": 1,
+            "kind": "number-not-on-slide",
+            "values": [
+              "24"
+            ],
+            "text": "We roast within 24 hours."
+          }
+        ],
+        "dropped_draft_bundles": []
+      },
+      "6": {
+        "status": "scripted",
+        "clicks": 4,
+        "unmentioned_static": [],
+        "gaps": [
+          {
+            "segment": 3,
+            "kind": "settle-click-without-line",
+            "text": "Back to the full cycle. (add a closing line here, or keep it silent)"
+          }
+        ],
+        "dropped_draft_bundles": [
+          "Discuss 'Exit'.",
+          "Discuss 'Grow'."
+        ]
+      },
+      "7": {
+        "status": "no script section; slide left static"
+      },
+      "8": {
+        "status": "no script section; slide left static"
+      }
+    },
+    "drafted_by": "motion_script.py: draft choreography retimed by script"
+  },
+  "transitions": [
+    {
+      "slide": 8,
+      "kind": "morph",
+      "duration_ms": 1500,
+      "reason": "Continuity: 'Roastery photo' moves/resizes from the previous slide."
+    }
+  ]
+}

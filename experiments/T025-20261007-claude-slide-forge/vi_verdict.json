@@ -1,0 +1,43 @@
+{
+ "ok": true,
+ "stage": "qa",
+ "errors": [],
+ "warnings": [
+  {
+   "code": "TEXT_SHRUNK",
+   "slide": 1,
+   "object": "Title",
+   "detail": "46->41 pt",
+   "fix": "shorten the text if the smaller size hurts hierarchy"
+  }
+ ],
+ "metrics": {
+  "slides": 9,
+  "effects": 96,
+  "morph_transitions": 8,
+  "pictures": 1,
+  "pictures_moving": 1,
+  "slides_with_motion": 9,
+  "motion_coverage": 1.0
+ },
+ "generated_art": [
+  {
+   "slide": 1,
+   "object": "Hero picture",
+   "seed": "cửa hàng hiện đại"
+  }
+ ],
+ "static_pptx": "build\\forge\\vi.static.pptx",
+ "output": "build\\forge\\vi.pptx",
+ "director_notes": {
+  "1": "title text static; automatic motion-graphic intro",
+  "2": "2 click(s), 2 motion beat(s)",
+  "3": "5 click(s), 8 motion beat(s)",
+  "4": "3 click(s), 4 motion beat(s)",
+  "5": "6 click(s), 9 motion beat(s)",
+  "6": "3 click(s), 3 motion beat(s)",
+  "7": "4 click(s), 4 motion beat(s)",
+  "8": "3 click(s), 3 motion beat(s)",
+  "9": "3 click(s), 3 motion beat(s)"
+ }
+}

@@ -8,3 +8,4 @@ local-media/
 .env.*
 !*.example
 
+*.mp4

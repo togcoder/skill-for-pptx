@@ -1,0 +1,243 @@
+{
+ "version": "0.6",
+ "kind": "existing-deck-motion-director",
+ "source": {
+  "pptx_sha256": "6af01c3100516027e492ef14271be6f8577080f0764706ffbd8286756613c427",
+  "inventory_version": "0.1",
+  "source_slide_count": 3
+ },
+ "user_instruction": "Bring the pictures and accents to life",
+ "script": {
+  "source": "inferred",
+  "summary": "Each slide reveals its content in reading order, one talking point per click; data before conclusions; existing animation preserved.",
+  "evidence": [
+   "slide titles and reading order",
+   "no speaker notes",
+   "no existing animation"
+  ],
+  "beats": [
+   "slide 1: Coffee that travels well",
+   "slide 2: Why our roastery",
+   "slide 3: "
+  ]
+ },
+ "preservation": {
+  "preserve_text_by_default": true,
+  "preserve_media_by_default": true,
+  "preserve_theme_by_default": true,
+  "preserve_slide_order_by_default": true,
+  "slide_count_policy": "preserve"
+ },
+ "slides": [
+  {
+   "source_index": 1,
+   "role": "title slide",
+   "objective": "Title stays still; accents and picture give the opening life.",
+   "beats": [
+    {
+     "id": "accent-1",
+     "purpose": "Accent shapes draw in as the slide opens.",
+     "operation": "stagger-reveal",
+     "targets": [
+      "Accent bar"
+     ],
+     "reuse_existing": true,
+     "same_slide": true,
+     "timing_intent": "on-slide-start",
+     "effect": "wipe-right",
+     "duration_ms": 250
+    },
+    {
+     "id": "kenburns-2",
+     "purpose": "Keep the picture alive with a slow push-in while the slide is discussed.",
+     "operation": "choreography",
+     "targets": [
+      "Backdrop"
+     ],
+     "reuse_existing": true,
+     "same_slide": true,
+     "timing_intent": "with-previous",
+     "recipe": "ken-burns",
+     "motion_parameters": {
+      "duration_ms": 7000,
+      "scale": 1.06
+     }
+    }
+   ],
+   "click_beats": [
+    {
+     "id": "click-3",
+     "purpose": "Slide opens with its motion-graphic intro.",
+     "motion_beats": [
+      "accent-1",
+      "kenburns-2"
+     ],
+     "stable_state": "Accents drawn; pictures drifting.",
+     "pause_after": "slide-complete",
+     "boundary_reason": "First reveal on this slide."
+    }
+   ],
+   "components": []
+  },
+  {
+   "source_index": 2,
+   "role": "report slide",
+   "objective": "Audience follows slide 2 one idea at a time.",
+   "beats": [
+    {
+     "id": "accent-1",
+     "purpose": "Accent shapes draw in as the slide opens.",
+     "operation": "stagger-reveal",
+     "targets": [
+      "Heading underline"
+     ],
+     "reuse_existing": true,
+     "same_slide": true,
+     "timing_intent": "on-slide-start",
+     "effect": "wipe-right",
+     "duration_ms": 250
+    },
+    {
+     "id": "float-x",
+     "purpose": "Underline keeps a gentle idle motion while the slide is discussed.",
+     "operation": "choreography",
+     "recipe": "float",
+     "targets": [
+      "Heading underline"
+     ],
+     "reuse_existing": true,
+     "same_slide": true,
+     "timing_intent": "after-previous",
+     "motion_parameters": {
+      "amplitude": 0.01,
+      "period_ms": 2400
+     }
+    },
+    {
+     "id": "reveal-3",
+     "purpose": "Reveal 'Roasted within 48 hours of every order.'.",
+     "operation": "reveal",
+     "targets": [
+      "Body"
+     ],
+     "reuse_existing": true,
+     "same_slide": true,
+     "timing_intent": "on-click",
+     "effect": "float-in",
+     "duration_ms": 600
+    },
+    {
+     "id": "reveal-5",
+     "purpose": "Reveal 'Roastery photo'.",
+     "operation": "reveal",
+     "targets": [
+      "Roastery photo"
+     ],
+     "reuse_existing": true,
+     "same_slide": true,
+     "timing_intent": "on-click",
+     "effect": "fade",
+     "duration_ms": 600
+    },
+    {
+     "id": "kenburns-6",
+     "purpose": "Keep 'Roastery photo' alive with a slow push-in.",
+     "operation": "choreography",
+     "targets": [
+      "Roastery photo"
+     ],
+     "reuse_existing": true,
+     "same_slide": true,
+     "timing_intent": "after-previous",
+     "recipe": "ken-burns",
+     "motion_parameters": {
+      "duration_ms": 6000,
+      "scale": 1.05
+     }
+    }
+   ],
+   "click_beats": [
+    {
+     "id": "click-2",
+     "purpose": "Slide opens with its motion-graphic intro.",
+     "motion_beats": [
+      "accent-1",
+      "float-x"
+     ],
+     "stable_state": "Accents drawn; pictures drifting.",
+     "pause_after": "presenter-explanation",
+     "boundary_reason": "First reveal on this slide."
+    },
+    {
+     "id": "click-4",
+     "purpose": "Introduce 'Roasted within 48 hours of every order.'.",
+     "motion_beats": [
+      "reveal-3"
+     ],
+     "stable_state": "Content visible.",
+     "pause_after": "presenter-explanation",
+     "boundary_reason": "New idea for the presenter to introduce."
+    },
+    {
+     "id": "click-7",
+     "purpose": "Introduce 'Roastery photo'.",
+     "motion_beats": [
+      "reveal-5",
+      "kenburns-6"
+     ],
+     "stable_state": "Content visible.",
+     "pause_after": "slide-complete",
+     "boundary_reason": "New idea for the presenter to introduce."
+    }
+   ],
+   "components": []
+  },
+  {
+   "source_index": 3,
+   "role": "report slide",
+   "objective": "Audience follows slide 3 one idea at a time.",
+   "beats": [
+    {
+     "id": "kenburns-1",
+     "purpose": "Keep the picture alive with a slow push-in while the slide is discussed.",
+     "operation": "choreography",
+     "targets": [
+      "Harvest photo"
+     ],
+     "reuse_existing": true,
+     "same_slide": true,
+     "timing_intent": "on-slide-start",
+     "recipe": "ken-burns",
+     "motion_parameters": {
+      "duration_ms": 7000,
+      "scale": 1.06
+     }
+    }
+   ],
+   "click_beats": [
+    {
+     "id": "click-2",
+     "purpose": "Slide opens with its motion-graphic intro.",
+     "motion_beats": [
+      "kenburns-1"
+     ],
+     "stable_state": "Accents drawn; pictures drifting.",
+     "pause_after": "slide-complete",
+     "boundary_reason": "First reveal on this slide."
+    }
+   ],
+   "components": []
+  }
+ ],
+ "target_slide_count": 3,
+ "research_metadata": {
+  "sources": [],
+  "draft_notes": {
+   "1": "title text static; automatic motion-graphic intro",
+   "2": "3 click(s), 4 motion beat(s)",
+   "3": "1 click(s), 1 motion beat(s)"
+  },
+  "style": "modern",
+  "drafted_by": "motion_director.py heuristic v0.1"
+ }
+}

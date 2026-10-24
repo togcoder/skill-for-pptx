@@ -7,7 +7,7 @@
     {
       "name": "pptx-motion",
       "source": "./",
-      "description": "AI Motion Director for existing PowerPoint decks (research build; PowerPoint playback not yet verified)."
+      "description": "Slide Forge (new decks) + Motion Director (existing decks): native, editable, motion-directed PowerPoint for AI agents."
     }
   ]
 }

@@ -1,0 +1,353 @@
+{
+  "ok": true,
+  "problems": [],
+  "source_slides": 8,
+  "output_slides": 10,
+  "scene_slides": 2,
+  "powerpoint_playback_verified": false,
+  "unsettled": [
+    {
+      "slide": 5,
+      "objects": [
+        {
+          "object": "Order token",
+          "ends": [
+            "moved"
+          ]
+        }
+      ],
+      "fix": "end the slide on its full picture (a release click), or accept the snap"
+    }
+  ],
+  "receipt": [
+    {
+      "technique": "camera-zoom",
+      "source": "ppt/slides/slide6.xml",
+      "focus": "Quadrant Grow",
+      "scale": 2.667,
+      "added_slides": [
+        "ppt/slides/slide9.xml",
+        "ppt/slides/slide10.xml"
+      ],
+      "reason": "After the four options are toured, the camera pushes into Grow (the recommended option) and pulls back before the closing slide."
+    },
+    {
+      "technique": "continuity",
+      "to": "ppt/slides/slide2.xml",
+      "option": "byObject",
+      "pairs": [
+        {
+          "from": "Title 1",
+          "to": "Title 1",
+          "why": "title to title"
+        }
+      ],
+      "renamed": [
+        {
+          "slide_part": "ppt/slides/slide1.xml",
+          "id": "2",
+          "from": "Title 1",
+          "to": "!!m2-1-operating-model-2027"
+        },
+        {
+          "slide_part": "ppt/slides/slide2.xml",
+          "id": "2",
+          "from": "Title 1",
+          "to": "!!m2-1-operating-model-2027"
+        }
+      ],
+      "staged": []
+    },
+    {
+      "technique": "continuity",
+      "to": "ppt/slides/slide3.xml",
+      "option": "byObject",
+      "pairs": [
+        {
+          "from": "!!m2-1-operating-model-2027",
+          "to": "Title 1",
+          "why": "title to title"
+        }
+      ],
+      "renamed": [
+        {
+          "slide_part": "ppt/slides/slide3.xml",
+          "id": "2",
+          "from": "Title 1",
+          "to": "!!m2-1-operating-model-2027"
+        }
+      ],
+      "staged": [
+        {
+          "name": "!!in3-3",
+          "on": "ppt/slides/slide2.xml",
+          "side": "bottom",
+          "source": "Platform"
+        },
+        {
+          "name": "!!in3-4",
+          "on": "ppt/slides/slide2.xml",
+          "side": "top",
+          "source": "Partner Growers"
+        },
+        {
+          "name": "!!in3-5",
+          "on": "ppt/slides/slide2.xml",
+          "side": "right",
+          "source": "Partner Importers"
+        },
+        {
+          "name": "!!in3-6",
+          "on": "ppt/slides/slide2.xml",
+          "side": "bottom",
+          "source": "Partner Cafés"
+        },
+        {
+          "name": "!!in3-7",
+          "on": "ppt/slides/slide2.xml",
+          "side": "bottom",
+          "source": "Partner Grocers"
+        },
+        {
+          "name": "!!in3-8",
+          "on": "ppt/slides/slide2.xml",
+          "side": "bottom",
+          "source": "Partner Couriers"
+        },
+        {
+          "name": "!!in3-9",
+          "on": "ppt/slides/slide2.xml",
+          "side": "left",
+          "source": "Partner Recyclers"
+        }
+      ]
+    },
+    {
+      "technique": "continuity",
+      "to": "ppt/slides/slide4.xml",
+      "option": "byObject",
+      "pairs": [
+        {
+          "from": "!!m2-1-operating-model-2027",
+          "to": "Title 1",
+          "why": "title to title"
+        }
+      ],
+      "renamed": [
+        {
+          "slide_part": "ppt/slides/slide4.xml",
+          "id": "2",
+          "from": "Title 1",
+          "to": "!!m2-1-operating-model-2027"
+        }
+      ],
+      "staged": [
+        {
+          "name": "!!in4-3",
+          "on": "ppt/slides/slide3.xml",
+          "side": "top",
+          "source": "Priority Cost"
+        },
+        {
+          "name": "!!in4-4",
+          "on": "ppt/slides/slide3.xml",
+          "side": "bottom",
+          "source": "Priority Speed"
+        },
+        {
+          "name": "!!in4-5",
+          "on": "ppt/slides/slide3.xml",
+          "side": "bottom",
+          "source": "Priority Sustainability"
+        },
+        {
+          "name": "!!in3-3",
+          "on": "ppt/slides/slide4.xml",
+          "side": "bottom",
+          "source": "!!in3-3"
+        },
+        {
+          "name": "!!in3-4",
+          "on": "ppt/slides/slide4.xml",
+          "side": "top",
+          "source": "!!in3-4"
+        },
+        {
+          "name": "!!in3-5",
+          "on": "ppt/slides/slide4.xml",
+          "side": "right",
+          "source": "!!in3-5"
+        },
+        {
+          "name": "!!in3-6",
+          "on": "ppt/slides/slide4.xml",
+          "side": "bottom",
+          "source": "!!in3-6"
+        },
+        {
+          "name": "!!in3-7",
+          "on": "ppt/slides/slide4.xml",
+          "side": "bottom",
+          "source": "!!in3-7"
+        },
+        {
+          "name": "!!in3-8",
+          "on": "ppt/slides/slide4.xml",
+          "side": "bottom",
+          "source": "!!in3-8"
+        },
+        {
+          "name": "!!in3-9",
+          "on": "ppt/slides/slide4.xml",
+          "side": "left",
+          "source": "!!in3-9"
+        }
+      ]
+    },
+    {
+      "technique": "continuity",
+      "to": "ppt/slides/slide5.xml",
+      "option": "byObject",
+      "pairs": [
+        {
+          "from": "!!m2-1-operating-model-2027",
+          "to": "Title 1",
+          "why": "title to title"
+        }
+      ],
+      "renamed": [
+        {
+          "slide_part": "ppt/slides/slide5.xml",
+          "id": "2",
+          "from": "Title 1",
+          "to": "!!m2-1-operating-model-2027"
+        }
+      ],
+      "staged": [
+        {
+          "name": "!!in4-3",
+          "on": "ppt/slides/slide5.xml",
+          "side": "top",
+          "source": "!!in4-3"
+        },
+        {
+          "name": "!!in4-4",
+          "on": "ppt/slides/slide5.xml",
+          "side": "bottom",
+          "source": "!!in4-4"
+        },
+        {
+          "name": "!!in4-5",
+          "on": "ppt/slides/slide5.xml",
+          "side": "bottom",
+          "source": "!!in4-5"
+        }
+      ]
+    },
+    {
+      "technique": "continuity",
+      "to": "ppt/slides/slide6.xml",
+      "option": "byObject",
+      "pairs": [
+        {
+          "from": "!!m2-1-operating-model-2027",
+          "to": "!!cam6-2",
+          "why": "title to title"
+        }
+      ],
+      "renamed": [
+        {
+          "slide_part": "ppt/slides/slide5.xml",
+          "id": "2",
+          "from": "!!m2-1-operating-model-2027",
+          "to": "!!cam6-2"
+        }
+      ],
+      "staged": []
+    },
+    {
+      "technique": "continuity",
+      "to": "ppt/slides/slide7.xml",
+      "option": "byObject",
+      "pairs": [
+        {
+          "from": "!!cam6-2",
+          "to": "Title 1",
+          "why": "title to title"
+        }
+      ],
+      "renamed": [
+        {
+          "slide_part": "ppt/slides/slide7.xml",
+          "id": "2",
+          "from": "Title 1",
+          "to": "!!cam6-2"
+        }
+      ],
+      "staged": [
+        {
+          "name": "!!in9-3",
+          "on": "ppt/slides/slide10.xml",
+          "side": "left",
+          "source": "Roastery photo"
+        },
+        {
+          "name": "!!cam6-3",
+          "on": "ppt/slides/slide7.xml",
+          "side": "left",
+          "source": "!!cam6-3"
+        },
+        {
+          "name": "!!cam6-4",
+          "on": "ppt/slides/slide7.xml",
+          "side": "right",
+          "source": "!!cam6-4"
+        },
+        {
+          "name": "!!cam6-5",
+          "on": "ppt/slides/slide7.xml",
+          "side": "bottom",
+          "source": "!!cam6-5"
+        },
+        {
+          "name": "!!cam6-6",
+          "on": "ppt/slides/slide7.xml",
+          "side": "bottom",
+          "source": "!!cam6-6"
+        }
+      ]
+    },
+    {
+      "technique": "continuity",
+      "to": "ppt/slides/slide8.xml",
+      "option": "byObject",
+      "pairs": [
+        {
+          "from": "!!cam6-2",
+          "to": "Title 1",
+          "why": "same text"
+        },
+        {
+          "from": "!!in9-3",
+          "to": "Roastery photo",
+          "why": "same picture"
+        }
+      ],
+      "renamed": [
+        {
+          "slide_part": "ppt/slides/slide8.xml",
+          "id": "2",
+          "from": "Title 1",
+          "to": "!!cam6-2"
+        },
+        {
+          "slide_part": "ppt/slides/slide8.xml",
+          "id": "4",
+          "from": "Roastery photo",
+          "to": "!!in9-3"
+        }
+      ],
+      "staged": []
+    }
+  ]
+}

@@ -1,0 +1,203 @@
+{
+  "ok": true,
+  "problems": [],
+  "source_slides": 7,
+  "output_slides": 8,
+  "scene_slides": 1,
+  "powerpoint_playback_verified": false,
+  "receipt": [
+    {
+      "technique": "card-expand",
+      "source": "ppt/slides/slide3.xml",
+      "card": "KPI Card 1",
+      "added_slides": [
+        "ppt/slides/slide8.xml"
+      ],
+      "reason": "Revenue is the headline: once the three KPIs have landed, its card opens into a full panel so the presenter can dwell on it before the channel breakdown."
+    },
+    {
+      "technique": "continuity",
+      "to": "ppt/slides/slide2.xml",
+      "option": "byObject",
+      "pairs": [
+        {
+          "from": "Title 1",
+          "to": "Title 1",
+          "why": "title to title"
+        }
+      ],
+      "renamed": [
+        {
+          "slide_part": "ppt/slides/slide1.xml",
+          "id": "2",
+          "from": "Title 1",
+          "to": "!!m2-1-q3-operating-review"
+        },
+        {
+          "slide_part": "ppt/slides/slide2.xml",
+          "id": "2",
+          "from": "Title 1",
+          "to": "!!m2-1-q3-operating-review"
+        }
+      ],
+      "staged": []
+    },
+    {
+      "technique": "continuity",
+      "to": "ppt/slides/slide3.xml",
+      "option": "byObject",
+      "pairs": [
+        {
+          "from": "!!m2-1-q3-operating-review",
+          "to": "Title 1",
+          "why": "title to title"
+        }
+      ],
+      "renamed": [
+        {
+          "slide_part": "ppt/slides/slide3.xml",
+          "id": "2",
+          "from": "Title 1",
+          "to": "!!m2-1-q3-operating-review"
+        }
+      ],
+      "staged": []
+    },
+    {
+      "technique": "continuity",
+      "to": "ppt/slides/slide4.xml",
+      "option": "byObject",
+      "pairs": [
+        {
+          "from": "Title 1",
+          "to": "Title 1",
+          "why": "title to title"
+        }
+      ],
+      "renamed": [
+        {
+          "slide_part": "ppt/slides/slide8.xml",
+          "id": "2",
+          "from": "Title 1",
+          "to": "!!m5-1-q3-at-a-glance"
+        },
+        {
+          "slide_part": "ppt/slides/slide4.xml",
+          "id": "2",
+          "from": "Title 1",
+          "to": "!!m5-1-q3-at-a-glance"
+        }
+      ],
+      "staged": [
+        {
+          "name": "!!card3-3",
+          "on": "ppt/slides/slide4.xml",
+          "side": "bottom",
+          "source": "!!card3-3"
+        },
+        {
+          "name": "!!card3-4",
+          "on": "ppt/slides/slide4.xml",
+          "side": "bottom",
+          "source": "!!card3-4"
+        },
+        {
+          "name": "!!card3-5",
+          "on": "ppt/slides/slide4.xml",
+          "side": "bottom",
+          "source": "!!card3-5"
+        }
+      ]
+    },
+    {
+      "technique": "continuity",
+      "to": "ppt/slides/slide5.xml",
+      "option": "byObject",
+      "pairs": [
+        {
+          "from": "!!m5-1-q3-at-a-glance",
+          "to": "Title 1",
+          "why": "title to title"
+        }
+      ],
+      "renamed": [
+        {
+          "slide_part": "ppt/slides/slide5.xml",
+          "id": "2",
+          "from": "Title 1",
+          "to": "!!m5-1-q3-at-a-glance"
+        }
+      ],
+      "staged": [
+        {
+          "name": "!!in6-11",
+          "on": "ppt/slides/slide4.xml",
+          "side": "right",
+          "source": "Badge Group"
+        }
+      ]
+    },
+    {
+      "technique": "continuity",
+      "to": "ppt/slides/slide6.xml",
+      "option": "byObject",
+      "pairs": [
+        {
+          "from": "!!m5-1-q3-at-a-glance",
+          "to": "Title 1",
+          "why": "title to title"
+        }
+      ],
+      "renamed": [
+        {
+          "slide_part": "ppt/slides/slide6.xml",
+          "id": "2",
+          "from": "Title 1",
+          "to": "!!m5-1-q3-at-a-glance"
+        }
+      ],
+      "staged": [
+        {
+          "name": "!!in7-4",
+          "on": "ppt/slides/slide5.xml",
+          "side": "right",
+          "source": "Feedback Picture"
+        },
+        {
+          "name": "!!in6-11",
+          "on": "ppt/slides/slide6.xml",
+          "side": "right",
+          "source": "!!in6-11"
+        }
+      ]
+    },
+    {
+      "technique": "continuity",
+      "to": "ppt/slides/slide7.xml",
+      "option": "byObject",
+      "pairs": [
+        {
+          "from": "!!m5-1-q3-at-a-glance",
+          "to": "Title 1",
+          "why": "title to title"
+        }
+      ],
+      "renamed": [
+        {
+          "slide_part": "ppt/slides/slide7.xml",
+          "id": "2",
+          "from": "Title 1",
+          "to": "!!m5-1-q3-at-a-glance"
+        }
+      ],
+      "staged": [
+        {
+          "name": "!!in7-4",
+          "on": "ppt/slides/slide7.xml",
+          "side": "right",
+          "source": "!!in7-4"
+        }
+      ]
+    }
+  ]
+}

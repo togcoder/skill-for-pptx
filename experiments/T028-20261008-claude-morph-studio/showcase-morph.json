@@ -1,0 +1,76 @@
+{
+  "kind": "morph-scenes",
+  "version": "0.1",
+  "source_sha256": "08b97719ed199f4d6f8aa158cb4e4339b4c3c22777eda1c41da8576934a4c8f3",
+  "continuity": [
+    {
+      "to_slide": 2,
+      "option": "byObject",
+      "stage": true,
+      "reason": "Title 1 → Title 1 (title to title)"
+    },
+    {
+      "to_slide": 3,
+      "option": "byObject",
+      "stage": true,
+      "reason": "Title 1 → Title 1 (title to title)"
+    },
+    {
+      "to_slide": 4,
+      "option": "byObject",
+      "stage": true,
+      "reason": "Title 1 → Title 1 (title to title)"
+    },
+    {
+      "to_slide": 5,
+      "option": "byObject",
+      "stage": true,
+      "reason": "Title 1 → Title 1 (title to title)"
+    },
+    {
+      "to_slide": 6,
+      "option": "byObject",
+      "stage": true,
+      "reason": "Title 1 → Title 1 (title to title)"
+    },
+    {
+      "to_slide": 7,
+      "option": "byObject",
+      "stage": true,
+      "reason": "Title 1 → Title 1 (title to title)"
+    },
+    {
+      "to_slide": 8,
+      "option": "byObject",
+      "stage": true,
+      "reason": "Title 1 → Title 1 (same text); Roastery photo → Roastery photo (same picture)"
+    }
+  ],
+  "scenes": [
+    {
+      "slide": 6,
+      "technique": "camera-zoom",
+      "focus": "Quadrant Grow",
+      "reason": "After the four options are toured, the camera pushes into Grow (the recommended option) and pulls back before the closing slide."
+    }
+  ],
+  "suggestions": [
+    {
+      "slide": 5,
+      "technique": "pan",
+      "items": [
+        "Step Order",
+        "Step Roast",
+        "Step Pack",
+        "Step Deliver"
+      ],
+      "why": "a long row can scroll like a carousel"
+    },
+    {
+      "slide": 6,
+      "technique": "camera-zoom",
+      "focus": "Quadrant Defend",
+      "why": "a matrix cell can be explored with a camera push-in and pull-back"
+    }
+  ]
+}

@@ -45,8 +45,34 @@ def authored(obj):
     return {"cx":g["x"]+g["w"]/2,"cy":g["y"]+g["h"]/2,"w":g["w"],"h":g["h"]}
 
 
+def text_block(obj,aspect=16/9):
+    """Estimated box (x0,y0,x1,y1) of the visible text lines inside a text
+    shape, as slide fractions. Assumes a 7.5 in slide height, default insets
+    and an average glyph width; returns the shape box when the vertical
+    anchor is unknown (placeholders inherit it)."""
+    g=obj.get("geometry")
+    if not g:
+        return None
+    full=(g["x"],g["y"],g["x"]+g["w"],g["y"]+g["h"])
+    if obj.get("filled"):
+        return full  # a filled shape is seen as a whole box
+    anchor=obj.get("text_anchor") or (None if obj.get("placeholder") else "t")
+    paras=[p.get("text","") for p in (obj.get("paragraphs") or [])] or (obj.get("text") or "").split("\n")
+    if anchor not in ("t","ctr","b") or not any(paras):
+        return full
+    size=float(obj.get("max_font_pt") or 18)
+    hp,wp=540.0,540.0*aspect
+    width=max(size,g["w"]*wp-14.4)
+    lines=sum(max(1,math.ceil(len(t)*size*0.55/width)) for t in paras)
+    block=min(g["h"],(lines*size*1.2)/hp)
+    inset=3.6/hp
+    y0={"t":g["y"]+inset,"ctr":g["y"]+(g["h"]-block)/2,"b":g["y"]+g["h"]-inset-block}[anchor]
+    y0=max(g["y"],min(y0,g["y"]+g["h"]-block))
+    return (g["x"],y0,g["x"]+g["w"],y0+block)
+
+
 def fresh_state(visible=True):
-    return {"dx":0.0,"dy":0.0,"scale":1.0,"rot":0.0,"opacity":1.0,"visible":visible,"alpha":1.0}
+    return {"dx":0.0,"dy":0.0,"scale":1.0,"rot":0.0,"opacity":1.0,"visible":visible,"alpha":1.0,"text_frac":1.0}
 
 
 def initial_states(objects,effect_groups):
@@ -143,6 +169,12 @@ def apply_effect(state,eff,p,base):
             state["visible"]=True
         return
     q=_ease(p,eff)
+    if cls=="entr" and eff.get("iterate"):
+        # Typewriter / word-by-word: units arrive one after another.
+        state["visible"]=True
+        state["alpha"]=1.0
+        state["text_frac"]=1.0 if p>=1 else max(0.0,p)
+        return
     if cls=="entr":
         state["visible"]=True
         state["alpha"]=1.0 if preset in ("appear",) else min(1.0,p if p>0 else 0.0)
@@ -161,6 +193,11 @@ def apply_effect(state,eff,p,base):
         if p>=1 or preset=="disappear":
             state["visible"]=False
             state["alpha"]=1.0
+    elif cls=="path" and preset in anim.LIBRARY:
+        # PowerPoint preset paths are relative to where the object is now.
+        pts,_=path_polyline({"anchored":parse_path(anim.LIBRARY[preset]["template"].find(".//p:animMotion",anim.NS).get("path"))})
+        x,y=_along(pts,q)
+        state["dx"],state["dy"]=base["dx"]+x,base["dy"]+y
     elif preset=="path":
         pts,anchored=path_polyline(eff)
         x,y=_along(pts,q)
@@ -180,14 +217,36 @@ def apply_effect(state,eff,p,base):
         state["opacity"]=base["opacity"]+(target-base["opacity"])*min(1.0,p*4)
 
 
+def loop_progress(eff,elapsed):
+    """Progress of a looping effect; at rest (0) once it is over or at t=inf."""
+    loop=eff["loop"]
+    dur=max(1,eff["duration_ms"])
+    cycle=anim.loop_cycle(eff)
+    repeat=loop.get("repeat","indefinite")
+    if elapsed==float("inf") or (type(repeat) is int and elapsed>=repeat*cycle):
+        return 0.0 if loop.get("auto_reverse") or repeat in ("indefinite","until-next-click") else 1.0
+    phase=(elapsed%cycle)/dur
+    return 2-phase if phase>1 else phase
+
+
 def state_at(states,effects,t):
-    """States after running one click group's effects up to time t."""
+    """States after running one click group's effects up to time t.
+    Ambient loops are shown moving inside t and at rest at t=inf."""
     out={k:dict(v) for k,v in states.items()}
-    hidden_paras=set()
     for start,end,eff in sorted(schedule(effects),key=lambda x:x[0]):
         if t<start or eff["spid"] not in out:
             continue
         dur=max(1,end-start)
+        if eff.get("loop"):
+            p=loop_progress(eff,t-start)
+            st=out[eff["spid"]]
+            base=dict(st)
+            if eff["preset"]=="spin" and not eff["loop"].get("auto_reverse"):
+                base_eff=dict(eff)
+                apply_effect(st,base_eff,p,base)
+            else:
+                apply_effect(st,eff,p,base)
+            continue
         p=1.0 if t>=end else (t-start)/dur
         st=out[eff["spid"]]
         base=dict(st)
@@ -292,6 +351,23 @@ def compile_track(track,obj,objects_by_token,state,beat_id):
                     seg_start=pos_time if pos_time is not None else 0
                     if t<=seg_start:
                         raise ValueError(f"{obj['name']!r}: position keyframe at t={t} needs time to move (use jump)")
+                    vx,vy=target[0]-cur_pos[0],target[1]-cur_pos[1]
+                    span=t-seg_start
+                    if kf.get("anticipate"):
+                        # Secondary: a small wind-up against the direction of travel.
+                        a=float(kf["anticipate"])
+                        back=(cur_pos[0]-vx*a,cur_pos[1]-vy*a)
+                        lead=int(span*0.2)
+                        eff("path",seg_start,lead,anchored=[{"x":cur_pos[0],"y":cur_pos[1]},{"x":back[0],"y":back[1]}],
+                            accel=0.0,decel=0.6)
+                        cur_pos=back
+                        seg_start+=lead
+                        span-=lead
+                    final=target
+                    if kf.get("overshoot"):
+                        o=float(kf["overshoot"])
+                        target=(final[0]+vx*o,final[1]+vy*o)
+                    main=int(span*0.8) if kf.get("overshoot") else span
                     seg={"x":target[0],"y":target[1]}
                     if kf.get("curve"):
                         c1,c2=_arc_controls(cur_pos,target,kf["curve"])
@@ -299,8 +375,13 @@ def compile_track(track,obj,objects_by_token,state,beat_id):
                         seg["c2"]={"x":c2[0],"y":c2[1]}
                     elif "controls" in kf:
                         seg["c1"],seg["c2"]=kf["controls"]
-                    eff("path",seg_start,t-seg_start,anchored=[{"x":cur_pos[0],"y":cur_pos[1]},seg],
+                    eff("path",seg_start,main,anchored=[{"x":cur_pos[0],"y":cur_pos[1]},seg],
                         accel=ease[0],decel=ease[1])
+                    if kf.get("overshoot"):
+                        # Follow-through: settle back from the overshoot.
+                        eff("path",seg_start+main,span-main,anchored=[{"x":target[0],"y":target[1]},
+                                                                       {"x":final[0],"y":final[1]}],accel=0.3,decel=0.7)
+                        target=final
             cur_pos=target
             pos_time=t
         if "scale" in kf:
@@ -382,6 +463,19 @@ def recipe_tracks(recipe,objs,states,params=None):
                     tracks[-1]["keyframes"]+= [{"t":0,"dx":states[o["id"]]["dx"],"dy":states[o["id"]]["dy"],
                                                 "scale":states[o["id"]]["scale"]},
                                                {"t":d,"dx":0,"dy":0,"scale":1.0}]
+        halo=params.get("_halo_obj")
+        if halo is not None:
+            # Secondary layer: a soft halo glides behind the new focus.
+            aspect=float(params.get("_aspect",16/9))
+            fa,ha=authored(focus),authored(halo)
+            want=max(fa["w"]*aspect,fa["h"])*scale*float(params.get("halo_size",1.6))
+            have=max(ha["w"]*aspect,ha["h"])
+            hs=states[halo["id"]]
+            if hs["visible"]:
+                kfs=[{"t":0},{"t":d,"to":focus["name"],"scale":want/have,"curve":float(params.get("halo_curve",0.15))}]
+            else:
+                kfs=[{"t":0,"to":focus["name"],"jump":True,"scale":want/have,"visible":True,"enter":"fade","enter_ms":d}]
+            tracks.append({"target":halo,"keyframes":kfs})
     elif recipe=="release":
         for o in objs:
             s=states[o["id"]]
@@ -424,7 +518,8 @@ def recipe_tracks(recipe,objs,states,params=None):
             if recipe=="assemble":
                 tracks.append({"target":o,"keyframes":[
                     {"t":t0,"dx":off[0],"dy":off[1],"jump":True,"visible":True,"enter":params.get("enter","fade"),"enter_ms":min(d,500)},
-                    {"t":t0+d,"dx":0.0,"dy":0.0,"ease":"out"}]})
+                    {"t":t0+d,"dx":0.0,"dy":0.0,"ease":"out",
+                     **({"overshoot":float(params["overshoot"])} if params.get("overshoot") else {})}]})
             else:
                 tracks.append({"target":o,"keyframes":[
                     {"t":t0},
@@ -462,8 +557,9 @@ def recipe_tracks(recipe,objs,states,params=None):
         a,b=objs
         pa,pb=_pos(a,states),_pos(b,states)
         arc=float(params.get("arc",0.25))
-        tracks.append({"target":a,"keyframes":[{"t":0},{"t":d,"x":pb[0],"y":pb[1],"curve":arc}]})
-        tracks.append({"target":b,"keyframes":[{"t":0},{"t":d,"x":pa[0],"y":pa[1],"curve":arc}]})
+        extra={k:float(params[k]) for k in ("overshoot","anticipate") if params.get(k)}
+        tracks.append({"target":a,"keyframes":[{"t":0},{"t":d,"x":pb[0],"y":pb[1],"curve":arc,**extra}]})
+        tracks.append({"target":b,"keyframes":[{"t":0},{"t":d,"x":pa[0],"y":pa[1],"curve":arc,**extra}]})
     elif recipe=="travel":
         token,stops=objs[0],objs[1:]
         if not stops:
@@ -476,12 +572,41 @@ def recipe_tracks(recipe,objs,states,params=None):
             t+=d
             kf={"t":t,"x":sx+float(params.get("offset_x",0)),"y":sy+float(params.get("offset_y",0)),
                 "curve":float(params.get("arc",0.0))}
+            for key in ("overshoot","anticipate"):
+                if params.get(key):
+                    kf[key]=float(params[key])
             kfs.append(kf)
             t+=dwell
         tracks.append({"target":token,"keyframes":kfs})
         if params.get("pulse_stops",True):
             for i,stop in enumerate(stops):
                 tracks.append({"target":stop,"pulse_at":(i+1)*d+i*dwell})
+    elif recipe=="rise":
+        # Text rises out of an invisible line: it starts under a mask painted
+        # in the colour behind it and slides up past the mask's top edge.
+        text=objs[0]
+        mask=params.get("_mask_obj")
+        a=authored(text)
+        dist=float(params.get("distance",a["h"]*1.1+0.01))
+        enter="appear"
+        if mask is not None:
+            # The mask's top edge is the line: the text starts with its first
+            # line just below it and rises into place.
+            tb=text_block(text,float(params.get("_aspect",16/9)))
+            m=mask["geometry"]
+            if "distance" not in params:
+                dist=max(0.01,m["y"]-tb[1]+0.004)
+            if m["h"]<(tb[3]-tb[1])+0.004:
+                # Clipped to its container: rise as far as the mask reaches
+                # and fade in, so nothing ever shows below the line.
+                dist,enter=max(0.01,min(dist,m["h"]*0.95)),"fade"
+        tracks.append({"target":text,"keyframes":[
+            {"t":0,"dy":dist,"jump":True,"visible":True,"enter":enter,"enter_ms":int(d*0.8)},
+            {"t":d,"dy":0.0,"ease":"out"}]})
+        if mask is not None:
+            tracks.append({"target":mask,"keyframes":[
+                {"t":0,"visible":True,"enter":"appear"},
+                {"t":d+60,"visible":False,"exit":"disappear","exit_ms":0}]})
     elif recipe=="zoom-focus":
         focus,others=objs[0],objs[1:]
         fill=float(params.get("fill",0.6))
@@ -491,17 +616,137 @@ def recipe_tracks(recipe,objs,states,params=None):
         for o in others:
             if states[o["id"]]["visible"]:
                 tracks.append({"target":o,"keyframes":[{"t":0,"visible":False,"exit":"fade-out","exit_ms":min(d,400)}]})
+    elif recipe=="ken-burns":
+        # Slow push-in with a gentle drift: a still picture keeps living while
+        # the presenter talks. Neighbouring pictures drift in opposite directions.
+        d=int(params.get("duration_ms",6000))
+        scale=float(params.get("scale",1.06))
+        drift=float(params.get("drift",0.015))
+        for i,o in enumerate(objs):
+            s=states[o["id"]]
+            sign=-1 if i%2 else 1
+            tracks.append({"target":o,"keyframes":[{"t":0},{"t":d,"scale":s["scale"]*scale,
+                                                           "dx":s["dx"]+sign*drift,"dy":s["dy"]-0.6*drift,"ease":"linear"}]})
     else:
         raise ValueError(f"unknown recipe {recipe!r}")
     return tracks
 
 
-RECIPES=("spotlight","release","assemble","disperse","cycle","swap","travel","zoom-focus")
+RECIPES=("spotlight","release","assemble","disperse","cycle","swap","travel","zoom-focus","rise","ken-burns")
+AMBIENT_RECIPES=("breathe","drift","spin-loop")
+SECONDARY_RECIPES=("ripple",)
+
+
+def ambient_effects(recipe,objs,states,beat_id,params):
+    """Looping background motion (breathe, drift, spin-loop) and the ripple
+    acknowledgement. Loops run until the slide ends (or next click)."""
+    params=params or {}
+    repeat=params.get("repeat","indefinite")
+    effects=[]
+    for i,o in enumerate(objs):
+        st=states[o["id"]]
+        delay=int(params.get("stagger_ms",300 if recipe!="ripple" else 120))*i
+        base={"spid":o["id"],"trigger":"with","delay_ms":delay,"beat":f"{beat_id}:{o['id']}:{recipe}"}
+        if recipe=="breathe":
+            effects.append({**base,"preset":"grow","duration_ms":int(params.get("period_ms",3200))//2,
+                            "ratio":float(params.get("scale",1.04)),"accel":0.5,"decel":0.5,
+                            "loop":{"repeat":repeat,"auto_reverse":True}})
+        elif recipe=="drift":
+            amp=float(params.get("amplitude",0.015))*(1+0.5*(i%3))
+            ang=float(params.get("angle_deg",-30))+i*70
+            dx,dy=amp*math.cos(math.radians(ang)),amp*math.sin(math.radians(ang))
+            effects.append({**base,"preset":"path","duration_ms":int(params.get("period_ms",9000))//2,
+                            "anchored":[{"x":st["dx"],"y":st["dy"]},{"x":st["dx"]+dx,"y":st["dy"]+dy}],
+                            "accel":0.5,"decel":0.5,"loop":{"repeat":repeat,"auto_reverse":True}})
+        elif recipe=="spin-loop":
+            effects.append({**base,"preset":"spin","duration_ms":int(params.get("period_ms",30000)),
+                            "by_deg":float(params.get("by_deg",360)),"loop":{"repeat":repeat}})
+        elif recipe=="ripple":
+            effects.append({**base,"preset":"pulse","duration_ms":int(params.get("pulse_ms",180)),
+                            "scale":float(params.get("scale",1.06))})
+        else:
+            raise ValueError(f"unknown ambient recipe {recipe!r}")
+    return effects
+
+
+def attach_followers(effects,attach,objects_by_token,states):
+    """Copy a leader's movement onto followers (e.g. a separate label) so they
+    stay together. Scaling the leader moves followers radially so their
+    relative placement scales with it."""
+    out=list(effects)
+    for leader_tok,followers in (attach or {}).items():
+        leader=objects_by_token.get(leader_tok)
+        if leader is None:
+            raise ValueError(f"attach: leader {leader_tok!r} not found")
+        lead=[e for e in effects if e["spid"]==leader["id"]]
+        for ftok in followers:
+            f=objects_by_token.get(ftok)
+            if f is None:
+                raise ValueError(f"attach: follower {ftok!r} not found")
+            ls,fs=states[leader["id"]],states[f["id"]]
+            off=(fs["dx"]-ls["dx"],fs["dy"]-ls["dy"])
+            la,fa=authored(leader),authored(f)
+            rel=((fa["cx"]+fs["dx"])-(la["cx"]+ls["dx"]),(fa["cy"]+fs["dy"])-(la["cy"]+ls["dy"]))
+            paths={(e["delay_ms"],e["duration_ms"]):e for e in lead if e["preset"]=="path"}
+            copies=[]
+            for e in lead:
+                if e["preset"]=="spin":
+                    continue
+                c=dict(e,spid=f["id"],beat=e["beat"]+f":follow{f['id']}")
+                if e["preset"]=="path":
+                    c["anchored"]=[dict(p,x=p["x"]+off[0],y=p["y"]+off[1],
+                                        **({"c1":{"x":p["c1"]["x"]+off[0],"y":p["c1"]["y"]+off[1]},
+                                            "c2":{"x":p["c2"]["x"]+off[0],"y":p["c2"]["y"]+off[1]}} if "c1" in p else {}))
+                                   for p in e["anchored"]]
+                if e["preset"] in ("grow","pulse"):
+                    ratio=e.get("ratio",e.get("scale",1.0))
+                    shift=(rel[0]*(ratio-1),rel[1]*(ratio-1))
+                    key=(e["delay_ms"],e["duration_ms"])
+                    if e["preset"]=="grow" and key in paths:
+                        paired=next(x for x in copies if x["preset"]=="path" and (x["delay_ms"],x["duration_ms"])==key)
+                        last=paired["anchored"][-1]
+                        last["x"]+=shift[0]
+                        last["y"]+=shift[1]
+                    elif e["preset"]=="grow" and (abs(shift[0])>1e-6 or abs(shift[1])>1e-6):
+                        start=(fs["dx"],fs["dy"])
+                        copies.append({"preset":"path","spid":f["id"],"trigger":"with","delay_ms":e["delay_ms"],
+                                       "duration_ms":e["duration_ms"],"beat":c["beat"]+":shift",
+                                       "anchored":[{"x":start[0],"y":start[1]},{"x":start[0]+shift[0],"y":start[1]+shift[1]}],
+                                       "accel":e.get("accel",0),"decel":e.get("decel",0)})
+                copies.append(c)
+            out.extend(copies)
+    out.sort(key=lambda e:e["delay_ms"])
+    return out
 
 
 def compile_choreography(recipe,objs,states,objects_by_token,beat_id,params=None,tracks=None):
     """Return effects (delays relative to the beat start) for a recipe or raw
     tracks. ``objs`` are resolved objects; raw ``tracks`` use {"target": obj}."""
+    params=params or {}
+    if recipe=="float":  # T024 name for a vertical idle bob: drift straight up
+        recipe,params="drift",{"angle_deg":-90,"amplitude":0.012,"period_ms":2600,**(params or {})}
+    if recipe in AMBIENT_RECIPES+SECONDARY_RECIPES:
+        return ambient_effects(recipe,objs,states,beat_id,params)
+    if params.get("halo"):
+        params=dict(params,_halo_obj=objects_by_token.get(params["halo"]))
+        if params["_halo_obj"] is None:
+            raise ValueError(f"halo {params['halo']!r} not found")
+    if params.get("mask"):
+        params=dict(params,_mask_obj=objects_by_token.get(params["mask"]))
+        if params["_mask_obj"] is None:
+            raise ValueError(f"mask {params['mask']!r} not found")
+        m=bbox(params["_mask_obj"],fresh_state())
+        for o in objects_by_token.values():
+            if o is params["_mask_obj"] or o is objs[0] or not o.get("geometry") or not states.get(o["id"],{}).get("visible"):
+                continue
+            if (o.get("name") or "").startswith("__gen_"):
+                continue
+            ob=bbox(o,states[o["id"]])
+            area=(ob[2]-ob[0])*(ob[3]-ob[1]) or 1
+            if o.get("filled") and ob[0]<=m[0] and ob[1]<=m[1] and ob[2]>=m[2] and ob[3]>=m[3]:
+                continue  # the container the mask is painted to match
+            if _overlap(m,ob)>0.05*area:
+                raise ValueError(f"rise mask would briefly cover {o['name']!r}; use another reveal or move the text")
     if recipe=="tracks":
         built=tracks
     else:
@@ -517,6 +762,8 @@ def compile_choreography(recipe,objs,states,objects_by_token,beat_id,params=None
     if not effects:
         raise ValueError(f"{recipe}: nothing changes from the current state")
     effects.sort(key=lambda e:e["delay_ms"])
+    if params.get("attach"):
+        effects=attach_followers(effects,params["attach"],objects_by_token,states)
     return effects
 
 
@@ -525,6 +772,10 @@ def compile_choreography(recipe,objs,states,objects_by_token,beat_id,params=None
 
 
 PROP_OF={"path":"pos","grow":"scale","pulse":"scale","zoom":"scale","spin":"rot","dim":"opacity"}
+for _name,_lib in anim.LIBRARY.items():
+    _tags={b["tag"] for b in _lib["behaviours"]}
+    PROP_OF[_name]=("pos" if "animMotion" in _tags else "scale" if "animScale" in _tags
+                    else "rot" if "animRot" in _tags else None) if _lib["presetClass"] in ("path","emph") else None
 
 
 def conflicts(effects):
@@ -538,6 +789,8 @@ def conflicts(effects):
         if prop is None or prop=="opacity":
             continue
         key=(eff["spid"],prop)
+        if eff.get("loop"):
+            end=float("inf")
         for s,e in spans.get(key,[]):
             if start<e and s<end:
                 found.append(f"object {eff['spid']}: overlapping {prop} animations ({s}-{e} ms and {start}-{end} ms)")
@@ -564,6 +817,9 @@ def layout_warnings(objects,states,label):
     vis=[o for o in objects if o.get("geometry") and states.get(o["id"],{}).get("visible")]
     for o in vis:
         b=bbox(o,states[o["id"]])
+        a=bbox(o,fresh_state())
+        if a[0]<0.005 or a[1]<0.005 or a[2]>0.995 or a[3]>0.995:
+            continue  # authored at/past the edge (bleed, backdrop orb): the slide crops it by design
         if b[0]<-0.02 or b[1]<-0.02 or b[2]>1.02 or b[3]>1.02:
             warn.append(f"{label}: {o['name']!r} extends outside the slide")
     moved=[o for o in vis if any(abs(states[o["id"]][k]-v)>1e-6 for k,v in (("dx",0),("dy",0),("scale",1)))]
@@ -572,6 +828,8 @@ def layout_warnings(objects,states,label):
         for other in vis:
             if other is o:
                 continue
+            if not other.get("text") and objects.index(other)<objects.index(o):
+                continue  # passing over a text-free shape behind it (background decor) is fine
             bt=bbox(other,states[other["id"]])
             before=_overlap(bbox(o,fresh_state()),bbox(other,fresh_state()))
             now=_overlap(bo,bt)
@@ -647,6 +905,8 @@ def effects_from_slide(root):
         effects.sort(key=lambda e:e["delay_ms"])
         for i,e in enumerate(effects):
             e["trigger"]="click" if i==0 else "with"
+            if e.get("iterate"):
+                e["iterate"]["units"]=text_units(root,e["spid"],e["iterate"]["by"],e.get("paragraph"))
         groups.append(effects)
     return groups,autos
 
@@ -717,4 +977,31 @@ def _effect_from_ctn(ctn):
         eff["duration_ms"]=400
     else:
         return None
+    it=ctn.find("p:iterate",NS)
+    if it is not None:
+        gap=it.find("p:tmAbs",NS)
+        pct=it.find("p:tmPct",NS)
+        eff["iterate"]={"by":"letter" if it.get("type")=="lt" else "word","units":1}
+        if gap is not None:
+            eff["iterate"]["gap_ms"]=int(gap.get("val"))
+        elif pct is not None:
+            eff["iterate"]["pct"]=int(pct.get("val"))/100000
+    rc=ctn.get("repeatCount")
+    if rc:
+        until_click=ctn.find("p:endCondLst/p:cond[@evt='onNext']",NS) is not None
+        repeat="until-next-click" if until_click else ("indefinite" if rc=="indefinite" else max(1,int(rc)//1000))
+        eff["loop"]={"repeat":repeat,"auto_reverse":ctn.get("autoRev")=="1"}
     return eff
+
+
+
+def text_units(root,spid,by,paragraph=None):
+    """Number of letters (non-space) or words a by-word/letter effect animates."""
+    node=anim.top_level_objects(root).get(spid)
+    if node is None:
+        return 1
+    paras=node.findall("p:txBody/a:p",anim.NS)
+    if paragraph is not None:
+        paras=paras[paragraph:paragraph+1]
+    text=" ".join("".join(t.text or "" for t in p.iter(f"{{{anim.A}}}t")) for p in paras)
+    return max(1,len(text.split()) if by=="word" else len(text.replace(" ","")))

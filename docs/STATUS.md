@@ -1,5 +1,120 @@
 # PPTX Motion Lab — checkpoint
 
+## Integration 2026-10-08 — both lines merged
+
+Two sessions worked in parallel, and both used the ID **T024**. Experiment
+folders keep their names:
+
+- `T024-20261005-claude-layers-script` (cloud): motion layers and the script layer.
+- `T024-20261007-claude-picture-motion` (desktop): Ken Burns and the accent intro.
+
+Use T029+ for new work. Loops are unified on the cloud representation
+`loop: {repeat, auto_reverse}`. The desktop `float` recipe is now an alias of
+`drift` straight up. Recipes `ken-burns`, `ppt:<name>` effects, Slide Forge,
+assets and the knowledge base sit next to Morph Studio, the script layer and
+layers. Natively verified so far: PowerPoint CreateVideo renders (T024
+picture, T025, T027) and EffectType recognition of library presets. The
+cloud work (T024 layers, T028) has simulated previews only.
+
+## T028 Morph Studio + professional text tricks — 2026-10-08
+
+Goal: the polish seen in motion-design tutorials. `scripts/morph_studio.py`
+adds cross-slide Morph to a directed deck. **Continuity** pairs titles,
+identical pictures and text, and existing names via `!!`, and renames along
+the whole chain. It stages new and leaving objects off-slide so they fly;
+contained objects travel with their card. **Scenes** each need a reason and
+start from the source's end state: `camera-zoom` (push-in and pull-back, type
+scaled like a lens), `card-expand` (over its neighbours, even margins) and
+`pan`. `verify_scenes` keeps originals intact (only `!!` renames and
+off-slide copies). The `unsettled` check lists slides whose animation ends
+away from the authored layout before a Morph. The script layer adds a closing
+release click when a script stops mid-tour.
+
+Text tricks: `type-on` and `by: word/letter` (`p:iterate`), `rise` from an
+invisible line (the mask sits under the last estimated text line, in the
+container or background colour, and is refused if it would cover anything),
+`highlight` and `underline` sweeps (added by cinematic). The catalog
+`skills/pptx-motion-director/references/pro-techniques.md` lists 50
+techniques with when and how.
+
+Evidence: report deck (7→8 slides) and showcase deck (8→10 slides) with
+simulated previews. LibreOffice reads every Morph slide's fallback as Fade.
+Five defects were found by looking at the previews and fixed with tests.
+Smoke test: 34/34 repository decks pass
+propose → apply with every suggestion accepted. **219 tests pass.** PowerPoint playback is pending; the native gate is in
+T020 §A.
+
+Report: experiments/T028-20261008-claude-morph-studio/REPORT.md.
+
+## T027 design + complex-motion knowledge — 2026-10-07
+
+- PowerPoint authored all 198 built-in effects. They are now writable as
+  `ppt:<name>` (verified 7/7 by native EffectType).
+- 11 Microsoft designer themes became Forge `office:<Name>` themes, AA in light and dark.
+- 797 licensed Zenodo10K decks were scanned XML-only over HTTP Range. 93% of
+  real effects are entrances, and complexity lives in object lifecycles.
+- New `dynamic` motion style. See `knowledge/README.md` and
+  experiments/T027-20261007-claude-design-motion-corpus/REPORT.md.
+
+## T026 Forge online assets — 2026-10-07
+
+Forge now finds licensed photos (Openverse CC0/BY/BY-SA, or Pexels with a
+key) and open-source icons (Iconify: Lucide/Tabler/Phosphor) by itself.
+Contact sheets let the agent pick photos by eye. Icons are inserted as native
+SVG. Attribution goes on an automatic credits slide, in the notes and in the
+verdict. Example deck rendered by PowerPoint 16.0.
+Report: experiments/T026-20261007-claude-forge-assets/REPORT.md.
+
+## T025 Slide Forge — agent-facing deck compiler — 2026-10-07
+
+New product path for *new* decks: `scripts/slide_forge.py` (schema → build →
+qa → render). An agent writes a semantic spec with 12 layouts. Forge handles
+layout, measured type, art, Director motion (KPI count-up, chart builds,
+process, cycle tour, Ken Burns, accent draw-ins, Morph orbs) and coded QA.
+Two example decks (EN and VI) pass QA and were rendered by PowerPoint 16.0.
+The renders found wrap and mid-word-break defects that QA now catches.
+Skill: `skills/slide-forge/SKILL.md`; command `/forge-deck`.
+Report: experiments/T025-20261007-claude-slide-forge/REPORT.md.
+
+## T024 picture motion + motion-graphic intro — 2026-10-07
+
+Prompt-made decks animated only their text: the draft heuristic skipped small
+pictures, kept single-picture and title slides static, and gave other pictures
+a one-off entrance. Now large pictures get `ken-burns` (slow Grow/Shrink +
+drift; on slide start for backdrops and picture-only slides, after the reveal
+for content pictures), thin accent bars/lines draw in at slide start, and a new
+`float` recipe loops until the slide ends (`repeatCount`/`autoRev` support in
+the writer, reader and simulator). Morph-carried pictures stay still.
+**202 tests pass.** First native evidence in this repo: PowerPoint 16.0 parsed
+the effects and its own `CreateVideo` render shows the picture push-in and the
+loop (pixel-measured). Interactive click playback is still pending.
+
+Report: experiments/T024-20261007-claude-picture-motion/REPORT.md.
+## T024 motion layers + script layer — 2026-10-05
+
+Motion now has three layers. **Primary** is the meaning. **Secondary** covers
+a halo following each spotlight, a rail plus progress token under walked
+processes, an orbit ring behind cycles, ripple, overshoot/anticipate, and
+labels that follow their shapes (`attach`). **Ambient** covers native loops:
+breathe, drift and spin-loop, repeating indefinitely or until the next click.
+Helper shapes come from `scripts/motion_components.py` in the deck's accent and
+font. The draft reuses the deck's own token when one exists. Director v0.7 adds
+`layer` and `components[].generate`.
+
+Script layer (`scripts/motion_script.py`): the script says *when*, the
+director's choreography says *how*. It covers a provided script, notes, or a
+generated full script (`motion_script.py draft`). First mention reveals, a
+later mention focuses, a line that names nothing new releases a tour, and
+paraphrased cued lines take the next resource in order. Gaps are reported and
+`--fill-gaps` turns them into callouts. Every run writes `OUT.script.md`;
+`--write-notes` puts the narration in speaker notes. Verified on an English
+human-style script and a Vietnamese paraphrase.
+
+**205 tests pass.** Smoke test passes on all repository decks. Native playback
+is pending.
+
+Report: experiments/T024-20261005-claude-layers-script/REPORT.md.
+
 ## T023 compound motion engine — 2026-10-05
 
 Existing decks can now receive compound choreography, not only builds.

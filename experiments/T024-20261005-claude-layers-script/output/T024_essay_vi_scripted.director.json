@@ -1,0 +1,334 @@
+{
+  "version": "0.7",
+  "kind": "existing-deck-motion-director",
+  "source": {
+    "pptx_sha256": "f9babfe7fd840d52a55acbde4dc7a4b6e3ffbca2d7e3ccb45add9e49147e5097",
+    "inventory_version": "0.1",
+    "source_slide_count": 5
+  },
+  "user_instruction": "Follow the provided presentation script.",
+  "script": {
+    "source": "provided",
+    "summary": "Clicks follow the provided script; the director's choreography supplies how each resource moves; narration is kept per click.",
+    "evidence": [
+      "provided script",
+      "slide text alignment"
+    ],
+    "beats": [
+      "slide 1: no script section; slide left static",
+      "slide 2: scripted",
+      "slide 3: scripted",
+      "slide 4: scripted",
+      "slide 5: no script section; slide left static"
+    ]
+  },
+  "preservation": {
+    "preserve_text_by_default": true,
+    "preserve_media_by_default": true,
+    "preserve_theme_by_default": true,
+    "preserve_slide_order_by_default": true,
+    "slide_count_policy": "preserve"
+  },
+  "slides": [
+    {
+      "source_index": 2,
+      "role": "scripted slide",
+      "objective": "Follow the script for slide 2.",
+      "beats": [
+        {
+          "id": "block-1",
+          "purpose": "Reveal 'Cách 1: Đi từ trải nghiệm đời thường' with its text.",
+          "operation": "stagger-reveal",
+          "targets": [
+            "TextBox 2",
+            "TextBox 3"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "block-3",
+          "purpose": "Reveal 'Cách 2: Đi từ số liệu' with its text.",
+          "operation": "stagger-reveal",
+          "targets": [
+            "TextBox 4",
+            "TextBox 5"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "say-1",
+          "purpose": "Cách thứ nhất là đi từ trải nghiệm đời thường: cây xanh đô thị tạo bóng mát và đ",
+          "motion_beats": [
+            "block-1"
+          ],
+          "stable_state": "What the presenter is talking about is on screen.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "The script places a click here.",
+          "narration": "Cách thứ nhất là đi từ trải nghiệm đời thường: cây xanh đô thị tạo bóng mát và điều hòa vi khí hậu."
+        },
+        {
+          "id": "say-2",
+          "purpose": "Cách thứ hai đi từ số liệu: nhiều tuyến phố mới chặt bỏ cây cũ, đảo nhiệt xuất h",
+          "motion_beats": [
+            "block-3"
+          ],
+          "stable_state": "What the presenter is talking about is on screen.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "The script places a click here.",
+          "narration": "Cách thứ hai đi từ số liệu: nhiều tuyến phố mới chặt bỏ cây cũ, đảo nhiệt xuất hiện dày hơn."
+        }
+      ],
+      "components": [],
+      "intro_narration": "Có hai cách mở bài cho đề này."
+    },
+    {
+      "source_index": 3,
+      "role": "scripted slide",
+      "objective": "Follow the script for slide 3.",
+      "beats": [
+        {
+          "id": "label-1",
+          "purpose": "Introduce '1. Vai trò của cây xanh'.",
+          "operation": "reveal",
+          "targets": [
+            "TextBox 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "para-2",
+          "purpose": "Reveal paragraph 0 of '1. Vai trò của cây xanh'.",
+          "operation": "text-build",
+          "targets": [
+            "TextBox 3"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "after-previous",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            0
+          ]
+        },
+        {
+          "id": "para-4",
+          "purpose": "Reveal paragraph 2 of '1. Vai trò của cây xanh'.",
+          "operation": "text-build",
+          "targets": [
+            "TextBox 3"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            2
+          ]
+        },
+        {
+          "id": "gap-3",
+          "purpose": "Show the generated callout for this script line.",
+          "operation": "reveal",
+          "targets": [
+            "callout3"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "say-1",
+          "purpose": "Trước hết là vai trò của cây xanh: giảm bụi mịn và giữ nước mưa.",
+          "motion_beats": [
+            "label-1",
+            "para-2"
+          ],
+          "stable_state": "What the presenter is talking about is on screen.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "The script places a click here.",
+          "narration": "Trước hết là vai trò của cây xanh: giảm bụi mịn và giữ nước mưa."
+        },
+        {
+          "id": "say-2",
+          "purpose": "Tuy nhiên, khi chặt bỏ cây cũ mà không trồng bù, chi phí làm mát của cư dân tăng",
+          "motion_beats": [
+            "para-4"
+          ],
+          "stable_state": "What the presenter is talking about is on screen.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "The script places a click here.",
+          "narration": "Tuy nhiên, khi chặt bỏ cây cũ mà không trồng bù, chi phí làm mát của cư dân tăng lên rõ rệt."
+        },
+        {
+          "id": "say-3",
+          "purpose": "Theo khảo sát, nhiệt độ mặt đường có thể giảm tới 5 độ.",
+          "motion_beats": [
+            "gap-3"
+          ],
+          "stable_state": "What the presenter is talking about is on screen.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "The script places a click here.",
+          "narration": "Theo khảo sát, nhiệt độ mặt đường có thể giảm tới 5 độ."
+        }
+      ],
+      "components": [
+        {
+          "id": "callout3",
+          "role": "states what the script says at this click",
+          "rationale": "Resource gap: the script needs this point on screen but the slide has no object for it.",
+          "native_kind": "shape",
+          "style_basis": "deck accent colour and font",
+          "data_provenance": "user-provided",
+          "generate": {
+            "kind": "callout",
+            "anchors": [],
+            "text": "Theo khảo sát, nhiệt độ mặt đường có thể giảm tới 5 độ"
+          }
+        }
+      ],
+      "intro_narration": ""
+    },
+    {
+      "source_index": 4,
+      "role": "scripted slide",
+      "objective": "Follow the script for slide 4.",
+      "beats": [
+        {
+          "id": "point-1",
+          "purpose": "Reveal point: Tuy nhiên, nhiều tuyến phố mới mở rộng lại chặt bỏ cây cũ mà",
+          "operation": "text-build",
+          "targets": [
+            "TextBox 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            0
+          ]
+        },
+        {
+          "id": "point-3",
+          "purpose": "Reveal point: Cây xanh đô thị không chỉ tạo bóng mát mà còn điều hòa vi kh",
+          "operation": "text-build",
+          "targets": [
+            "TextBox 2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            2
+          ]
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "say-1",
+          "purpose": "Có người cho rằng mở rộng đường quan trọng hơn, vì vậy chặt bỏ cây cũ là chấp nh",
+          "motion_beats": [
+            "point-1"
+          ],
+          "stable_state": "What the presenter is talking about is on screen.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "The script places a click here.",
+          "narration": "Có người cho rằng mở rộng đường quan trọng hơn, vì vậy chặt bỏ cây cũ là chấp nhận được."
+        },
+        {
+          "id": "say-2",
+          "purpose": "Nhưng mỗi hàng cây trưởng thành hạ nhiệt độ mặt đường vài độ vào buổi trưa.",
+          "motion_beats": [
+            "point-3"
+          ],
+          "stable_state": "What the presenter is talking about is on screen.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "The script places a click here.",
+          "narration": "Nhưng mỗi hàng cây trưởng thành hạ nhiệt độ mặt đường vài độ vào buổi trưa."
+        }
+      ],
+      "components": [],
+      "intro_narration": ""
+    }
+  ],
+  "target_slide_count": 5,
+  "research_metadata": {
+    "sources": [],
+    "style": "cinematic",
+    "script_alignment": {
+      "1": {
+        "status": "no script section; slide left static"
+      },
+      "2": {
+        "status": "scripted",
+        "clicks": 2,
+        "unmentioned_static": [],
+        "gaps": [],
+        "dropped_draft_bundles": []
+      },
+      "3": {
+        "status": "scripted",
+        "clicks": 3,
+        "unmentioned_static": [],
+        "gaps": [
+          {
+            "segment": 2,
+            "kind": "number-not-on-slide",
+            "values": [
+              "5"
+            ],
+            "text": "Theo khảo sát, nhiệt độ mặt đường có thể giảm tới 5 độ."
+          },
+          {
+            "segment": 2,
+            "kind": "filled-with-callout",
+            "component": "callout3",
+            "text": "Theo khảo sát, nhiệt độ mặt đường có thể giảm tới 5 độ."
+          }
+        ],
+        "dropped_draft_bundles": []
+      },
+      "4": {
+        "status": "scripted",
+        "clicks": 2,
+        "unmentioned_static": [],
+        "gaps": [
+          {
+            "segment": 0,
+            "kind": "placed-by-order",
+            "bundle": "Advance to the next point.",
+            "text": "Có người cho rằng mở rộng đường quan trọng hơn, vì vậy chặt bỏ cây cũ là chấp nhận được."
+          }
+        ],
+        "dropped_draft_bundles": []
+      },
+      "5": {
+        "status": "no script section; slide left static"
+      }
+    },
+    "drafted_by": "motion_script.py: draft choreography retimed by script"
+  }
+}
