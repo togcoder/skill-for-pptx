@@ -1,0 +1,1002 @@
+{
+  "version": "0.6",
+  "kind": "existing-deck-motion-director",
+  "source": {
+    "pptx_sha256": "6199128bb1712c0fad2d0d5de34d200bb73f8856f3695820be754d8e811ac81d",
+    "inventory_version": "0.1",
+    "source_slide_count": 5
+  },
+  "user_instruction": "Add presenter-paced native motion to the existing deck.",
+  "script": {
+    "source": "speaker-notes",
+    "summary": "Each slide reveals its content in reading order, one talking point per click; data before conclusions; existing animation preserved.",
+    "evidence": [
+      "slide titles and reading order",
+      "speaker notes",
+      "no existing animation"
+    ],
+    "beats": [
+      "slide 1: AUTONOMOUS SILICON & FABRIC \u00b7 2027",
+      "slide 2: 3D PERSPECTIVE ELLIPTICAL CAROUSEL \u00b7 TRANSITIVE VIRTUAL RIGG",
+      "slide 3: EXPLODED STRATA \u00b7 CONCURRENT SWARM \u00b7 AUTO-ARC OBSTACLE SOLVE",
+      "slide 4: SPATIAL TOPOLOGY MESH \u00b7 DETERMINISTIC !! MORPH PAIRING (SLID",
+      "slide 5: MORPHED SWIMLANE CONSOLE \u00b7 NATIVE CHART BUILD \u00b7 DUAL INTERAC"
+    ]
+  },
+  "preservation": {
+    "preserve_text_by_default": true,
+    "preserve_media_by_default": true,
+    "preserve_theme_by_default": true,
+    "preserve_slide_order_by_default": true,
+    "slide_count_policy": "preserve"
+  },
+  "slides": [
+    {
+      "source_index": 1,
+      "role": "report slide",
+      "objective": "Audience follows slide 1 one idea at a time.",
+      "beats": [
+        {
+          "id": "hub-1",
+          "purpose": "Establish the centre 'Wafer Core Die'.",
+          "operation": "reveal",
+          "targets": [
+            "Wafer Core Die"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 500
+        },
+        {
+          "id": "assemble-2",
+          "purpose": "Elements assemble around the centre in cycle order.",
+          "operation": "choreography",
+          "targets": [
+            "Core Tile C2",
+            "Core Tile C3",
+            "Core Tile C4",
+            "Core Tile C5",
+            "Core Tile C6",
+            "Core Tile C1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "with-previous",
+          "recipe": "assemble",
+          "motion_parameters": {
+            "from": "center",
+            "stagger_ms": 140,
+            "duration_ms": 700
+          }
+        },
+        {
+          "id": "point-4",
+          "purpose": "Reveal point: Multi-layer compound choreography: transitive virtual riggin",
+          "operation": "text-build",
+          "targets": [
+            "Cover Subtitle"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            0
+          ]
+        },
+        {
+          "id": "point-6",
+          "purpose": "Reveal point: 3D perspective orbits, exploded strata, and interactive OOXM",
+          "operation": "text-build",
+          "targets": [
+            "Cover Subtitle"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            1
+          ]
+        },
+        {
+          "id": "card-8",
+          "purpose": "Reveal the card 'Co-Packaged Optical Ring' as one unit.",
+          "operation": "reveal",
+          "targets": [
+            "Card BW",
+            "Card BW Bar",
+            "Card BW Val",
+            "Card BW Sub"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 500
+        },
+        {
+          "id": "card-10",
+          "purpose": "Reveal the card 'Photonic Waveguide Bus' as one unit.",
+          "operation": "reveal",
+          "targets": [
+            "Card E",
+            "Card E Bar",
+            "Card E Val",
+            "Card E Sub"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 500
+        },
+        {
+          "id": "card-12",
+          "purpose": "Reveal the card 'Zero-Drop Failover Mesh' as one unit.",
+          "operation": "reveal",
+          "targets": [
+            "Card SLA",
+            "Card SLA Bar",
+            "Card SLA Val",
+            "Card SLA Sub"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 500
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-3",
+          "purpose": "Show the whole cycle.",
+          "motion_beats": [
+            "hub-1",
+            "assemble-2"
+          ],
+          "stable_state": "All elements in place.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-5",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-4"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        },
+        {
+          "id": "click-7",
+          "purpose": "Advance to the next point.",
+          "motion_beats": [
+            "point-6"
+          ],
+          "stable_state": "Points so far are visible while the presenter speaks to the newest one.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each point gets its own spoken explanation."
+        },
+        {
+          "id": "click-9",
+          "purpose": "Present Co-Packaged Optical Ring.",
+          "motion_beats": [
+            "card-8"
+          ],
+          "stable_state": "Card fully visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each card is a separate talking point."
+        },
+        {
+          "id": "click-11",
+          "purpose": "Present Photonic Waveguide Bus.",
+          "motion_beats": [
+            "card-10"
+          ],
+          "stable_state": "Card fully visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each card is a separate talking point."
+        },
+        {
+          "id": "click-13",
+          "purpose": "Present Zero-Drop Failover Mesh.",
+          "motion_beats": [
+            "card-12"
+          ],
+          "stable_state": "Card fully visible.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Each card is a separate talking point."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 2,
+      "role": "report slide",
+      "objective": "Audience follows slide 2 one idea at a time.",
+      "beats": [
+        {
+          "id": "card-1",
+          "purpose": "Reveal the card '4.8M msg/s' as one unit.",
+          "operation": "reveal",
+          "targets": [
+            "Pod Telemetry",
+            "Pod Telemetry Hdr",
+            "Pod Telemetry Title",
+            "Pod Telemetry Icon",
+            "Pod Telemetry Spec",
+            "Pod Telemetry Pill"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 500
+        },
+        {
+          "id": "card-3",
+          "purpose": "Reveal the card '99.999%' as one unit.",
+          "operation": "reveal",
+          "targets": [
+            "Pod SelfHeal",
+            "Pod SelfHeal Hdr",
+            "Pod SelfHeal Title",
+            "Pod SelfHeal Icon",
+            "Pod SelfHeal Spec",
+            "Pod SelfHeal Pill"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 500
+        },
+        {
+          "id": "card-5",
+          "purpose": "Reveal the card '120k nodes' as one unit.",
+          "operation": "reveal",
+          "targets": [
+            "Pod WorldModel",
+            "Pod WorldModel Hdr",
+            "Pod WorldModel Title",
+            "Pod WorldModel Icon",
+            "Pod WorldModel Spec",
+            "Pod WorldModel Pill"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 500
+        },
+        {
+          "id": "card-7",
+          "purpose": "Reveal the card 'Global State Loop' as one unit.",
+          "operation": "reveal",
+          "targets": [
+            "Kernel Hub",
+            "Kernel Badge",
+            "Kernel Title",
+            "Kernel Sub"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 500
+        },
+        {
+          "id": "card-9",
+          "purpose": "Reveal the card 'Zero Drop' as one unit.",
+          "operation": "reveal",
+          "targets": [
+            "Pod Shaper",
+            "Pod Shaper Hdr",
+            "Pod Shaper Title",
+            "Pod Shaper Icon",
+            "Pod Shaper Spec",
+            "Pod Shaper Pill"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 500
+        },
+        {
+          "id": "card-11",
+          "purpose": "Reveal the card '0.4 ms p99' as one unit.",
+          "operation": "reveal",
+          "targets": [
+            "Pod RiskSolver",
+            "Pod RiskSolver Hdr",
+            "Pod RiskSolver Title",
+            "Pod RiskSolver Icon",
+            "Pod RiskSolver Spec",
+            "Pod RiskSolver Pill"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 500
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-2",
+          "purpose": "Present 4.8M msg/s.",
+          "motion_beats": [
+            "card-1"
+          ],
+          "stable_state": "Card fully visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-4",
+          "purpose": "Present 99.999%.",
+          "motion_beats": [
+            "card-3"
+          ],
+          "stable_state": "Card fully visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each card is a separate talking point."
+        },
+        {
+          "id": "click-6",
+          "purpose": "Present 120k nodes.",
+          "motion_beats": [
+            "card-5"
+          ],
+          "stable_state": "Card fully visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each card is a separate talking point."
+        },
+        {
+          "id": "click-8",
+          "purpose": "Present Global State Loop.",
+          "motion_beats": [
+            "card-7"
+          ],
+          "stable_state": "Card fully visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each card is a separate talking point."
+        },
+        {
+          "id": "click-10",
+          "purpose": "Present Zero Drop.",
+          "motion_beats": [
+            "card-9"
+          ],
+          "stable_state": "Card fully visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each card is a separate talking point."
+        },
+        {
+          "id": "click-12",
+          "purpose": "Present 0.4 ms p99.",
+          "motion_beats": [
+            "card-11"
+          ],
+          "stable_state": "Card fully visible.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Each card is a separate talking point."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 3,
+      "role": "report slide",
+      "objective": "Audience follows slide 3 one idea at a time.",
+      "beats": [
+        {
+          "id": "step-1",
+          "purpose": "Reveal step 'P1'.",
+          "operation": "reveal",
+          "targets": [
+            "Swarm PKT-1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 400
+        },
+        {
+          "id": "step-3",
+          "purpose": "Reveal step 'P2'.",
+          "operation": "reveal",
+          "targets": [
+            "Swarm PKT-2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 400
+        },
+        {
+          "id": "step-5",
+          "purpose": "Reveal step 'P3'.",
+          "operation": "reveal",
+          "targets": [
+            "Swarm PKT-3"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 400
+        },
+        {
+          "id": "step-7",
+          "purpose": "Reveal step 'P4'.",
+          "operation": "reveal",
+          "targets": [
+            "Swarm PKT-4"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 400
+        },
+        {
+          "id": "reveal-9",
+          "purpose": "Reveal 'PHY Ingress'.",
+          "operation": "reveal",
+          "targets": [
+            "Relay R1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "card-11",
+          "purpose": "Reveal the card '800G Co-Packaged Silicon Photonics' as one unit.",
+          "operation": "reveal",
+          "targets": [
+            "Layer L1",
+            "Layer L1 Title",
+            "Layer L1 Tag",
+            "Layer L1 TileA",
+            "Layer L1 TileB",
+            "Layer L1 Sub"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 500
+        },
+        {
+          "id": "card-13",
+          "purpose": "Reveal the card 'Non-Blocking 3D Mesh Switch' as one unit.",
+          "operation": "reveal",
+          "targets": [
+            "Layer L2",
+            "Layer L2 Title",
+            "Layer L2 Tag",
+            "Layer L2 TileA",
+            "Layer L2 TileB",
+            "Layer L2 Sub"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 500
+        },
+        {
+          "id": "reveal-15",
+          "purpose": "Reveal 'HBM Crossbar'.",
+          "operation": "reveal",
+          "targets": [
+            "Relay R2"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "reveal-17",
+          "purpose": "Reveal 'Thermal'.",
+          "operation": "reveal",
+          "targets": [
+            "Thermal Obstacle"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "after-previous",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "card-19",
+          "purpose": "Reveal the card 'FP8 / INT4 Sparse Matrix Units' as one unit.",
+          "operation": "reveal",
+          "targets": [
+            "Layer L3",
+            "Layer L3 Title",
+            "Layer L3 Tag",
+            "Layer L3 TileA",
+            "Layer L3 TileB",
+            "Layer L3 Sub"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "after-previous",
+          "effect": "zoom",
+          "duration_ms": 500
+        },
+        {
+          "id": "reveal-21",
+          "purpose": "Reveal 'PRB'.",
+          "operation": "reveal",
+          "targets": [
+            "Audit Probe"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "after-previous",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "reveal-23",
+          "purpose": "Reveal 'Audit Sink'.",
+          "operation": "reveal",
+          "targets": [
+            "Telemetry Sink"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "after-previous",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "card-25",
+          "purpose": "Reveal the card 'Inline Cryptographic Attestation' as one unit.",
+          "operation": "reveal",
+          "targets": [
+            "Layer L4",
+            "Layer L4 Title",
+            "Layer L4 Tag",
+            "Layer L4 TileA",
+            "Layer L4 TileB",
+            "Layer L4 Sub"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "after-previous",
+          "effect": "zoom",
+          "duration_ms": 500
+        },
+        {
+          "id": "reveal-27",
+          "purpose": "Reveal 'Tensor Queue'.",
+          "operation": "reveal",
+          "targets": [
+            "Relay R3"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "after-previous",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "card-29",
+          "purpose": "Reveal the card 'Multi-Draft Verification Engine' as one unit.",
+          "operation": "reveal",
+          "targets": [
+            "Layer L5",
+            "Layer L5 Title",
+            "Layer L5 Tag",
+            "Layer L5 TileA",
+            "Layer L5 TileB",
+            "Layer L5 Sub"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "after-previous",
+          "effect": "zoom",
+          "duration_ms": 500
+        },
+        {
+          "id": "reveal-31",
+          "purpose": "Reveal 'Token Egress'.",
+          "operation": "reveal",
+          "targets": [
+            "Relay R4"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "after-previous",
+          "effect": "float-in",
+          "duration_ms": 600
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-2",
+          "purpose": "Walk to step 'P1'.",
+          "motion_beats": [
+            "step-1"
+          ],
+          "stable_state": "Steps so far visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-4",
+          "purpose": "Walk to step 'P2'.",
+          "motion_beats": [
+            "step-3"
+          ],
+          "stable_state": "Steps so far visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Speaker notes walk the steps one at a time."
+        },
+        {
+          "id": "click-6",
+          "purpose": "Walk to step 'P3'.",
+          "motion_beats": [
+            "step-5"
+          ],
+          "stable_state": "Steps so far visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Speaker notes walk the steps one at a time."
+        },
+        {
+          "id": "click-8",
+          "purpose": "Walk to step 'P4'.",
+          "motion_beats": [
+            "step-7"
+          ],
+          "stable_state": "Steps so far visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Speaker notes walk the steps one at a time."
+        },
+        {
+          "id": "click-10",
+          "purpose": "Introduce 'PHY Ingress'.",
+          "motion_beats": [
+            "reveal-9"
+          ],
+          "stable_state": "Content visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "The conclusion lands after the evidence has been discussed."
+        },
+        {
+          "id": "click-12",
+          "purpose": "Present 800G Co-Packaged Silicon Photonics.",
+          "motion_beats": [
+            "card-11"
+          ],
+          "stable_state": "Card fully visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each card is a separate talking point."
+        },
+        {
+          "id": "click-14",
+          "purpose": "Present Non-Blocking 3D Mesh Switch.",
+          "motion_beats": [
+            "card-13"
+          ],
+          "stable_state": "Card fully visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each card is a separate talking point."
+        },
+        {
+          "id": "click-16",
+          "purpose": "Introduce 'HBM Crossbar'.",
+          "motion_beats": [
+            "reveal-15",
+            "reveal-17",
+            "card-19",
+            "reveal-21",
+            "reveal-23",
+            "card-25",
+            "reveal-27",
+            "card-29",
+            "reveal-31"
+          ],
+          "stable_state": "Content visible.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "The conclusion lands after the evidence has been discussed. Remaining reveals merged to keep at most 8 clicks."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 4,
+      "role": "report slide",
+      "objective": "Audience follows slide 4 one idea at a time.",
+      "beats": [
+        {
+          "id": "hub-1",
+          "purpose": "Establish the centre 'Anycast Mesh'.",
+          "operation": "reveal",
+          "targets": [
+            "Anycast Core"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 500
+        },
+        {
+          "id": "assemble-2",
+          "purpose": "Elements assemble around the centre in cycle order.",
+          "operation": "choreography",
+          "targets": [
+            "!!cluster-4",
+            "!!cluster-5",
+            "!!cluster-6",
+            "!!cluster-3",
+            "!!cluster-2",
+            "!!cluster-1"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "with-previous",
+          "recipe": "assemble",
+          "motion_parameters": {
+            "from": "center",
+            "stagger_ms": 140,
+            "duration_ms": 700
+          }
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-3",
+          "purpose": "Show the whole cycle.",
+          "motion_beats": [
+            "hub-1",
+            "assemble-2"
+          ],
+          "stable_state": "All elements in place.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "First reveal on this slide."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 5,
+      "role": "report slide",
+      "objective": "Audience follows slide 5 one idea at a time.",
+      "beats": [
+        {
+          "id": "chart-1",
+          "purpose": "Build the chart data in its reading order so each series lands as the presenter explains it.",
+          "operation": "chart-build",
+          "targets": [
+            "Telemetry Chart"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "data_motion": {
+            "kind": "chart",
+            "chart_type": "column",
+            "recipe": "baseline-grow",
+            "build": "series",
+            "animate_background": false,
+            "rationale": "Columns encode magnitude from a baseline; grow/reveal from that baseline preserves the reading direction."
+          }
+        },
+        {
+          "id": "card-3",
+          "purpose": "Reveal the card '99.9%' as one unit.",
+          "operation": "reveal",
+          "targets": [
+            "Hero SLA Card",
+            "Hero SLA Label",
+            "Hero SLA Number",
+            "Hero SLA Foot"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "duration_ms": 500
+        },
+        {
+          "id": "label-5",
+          "purpose": "Introduce 'Click: Inspect EU Failover'.",
+          "operation": "reveal",
+          "targets": [
+            "Btn Failover"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "para-6",
+          "purpose": "Reveal paragraph 0 of 'Click: Inspect EU Failover'.",
+          "operation": "text-build",
+          "targets": [
+            "Panel Failover"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "after-previous",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            0
+          ]
+        },
+        {
+          "id": "para-8",
+          "purpose": "Reveal paragraph 1 of 'Click: Inspect EU Failover'.",
+          "operation": "text-build",
+          "targets": [
+            "Panel Failover"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            1
+          ]
+        },
+        {
+          "id": "label-10",
+          "purpose": "Introduce 'Click: Inspect Tensor Quota'.",
+          "operation": "reveal",
+          "targets": [
+            "Btn Quota"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 600
+        },
+        {
+          "id": "para-11",
+          "purpose": "Reveal paragraph 0 of 'Click: Inspect Tensor Quota'.",
+          "operation": "text-build",
+          "targets": [
+            "Panel Quota"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "after-previous",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            0
+          ]
+        },
+        {
+          "id": "para-13",
+          "purpose": "Reveal paragraph 1 of 'Click: Inspect Tensor Quota'.",
+          "operation": "text-build",
+          "targets": [
+            "Panel Quota"
+          ],
+          "reuse_existing": true,
+          "same_slide": true,
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "duration_ms": 500,
+          "paragraphs": [
+            1
+          ]
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-2",
+          "purpose": "Show the data.",
+          "motion_beats": [
+            "chart-1"
+          ],
+          "stable_state": "Complete chart visible for discussion.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "First reveal on this slide."
+        },
+        {
+          "id": "click-4",
+          "purpose": "Present 99.9%.",
+          "motion_beats": [
+            "card-3"
+          ],
+          "stable_state": "Card fully visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "Each card is a separate talking point."
+        },
+        {
+          "id": "click-7",
+          "purpose": "Present 'Click: Inspect EU Failover'.",
+          "motion_beats": [
+            "label-5",
+            "para-6"
+          ],
+          "stable_state": "Label and its first paragraph visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "New labelled section."
+        },
+        {
+          "id": "click-9",
+          "purpose": "Advance to the next paragraph.",
+          "motion_beats": [
+            "para-8"
+          ],
+          "stable_state": "Next paragraph visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "The paragraph turns to a separate idea for the presenter to explain."
+        },
+        {
+          "id": "click-12",
+          "purpose": "Present 'Click: Inspect Tensor Quota'.",
+          "motion_beats": [
+            "label-10",
+            "para-11"
+          ],
+          "stable_state": "Label and its first paragraph visible.",
+          "pause_after": "presenter-explanation",
+          "boundary_reason": "New labelled section."
+        },
+        {
+          "id": "click-14",
+          "purpose": "Advance to the next paragraph.",
+          "motion_beats": [
+            "para-13"
+          ],
+          "stable_state": "Next paragraph visible.",
+          "pause_after": "slide-complete",
+          "boundary_reason": "The paragraph turns to a separate idea for the presenter to explain."
+        }
+      ],
+      "components": []
+    }
+  ],
+  "transitions": [
+    {
+      "slide": 5,
+      "kind": "morph",
+      "duration_ms": 1500,
+      "reason": "Continuity: '!!cluster-1', '!!bar-1', '!!lat-1', '!!cluster-2' moves/resizes from the previous slide."
+    }
+  ],
+  "target_slide_count": 5,
+  "research_metadata": {
+    "sources": [],
+    "draft_notes": {
+      "1": "6 click(s), 7 motion beat(s)",
+      "2": "6 click(s), 6 motion beat(s)",
+      "3": "8 click(s), 16 motion beat(s)",
+      "4": "1 click(s), 2 motion beat(s)",
+      "5": "6 click(s), 8 motion beat(s)"
+    },
+    "style": "cinematic",
+    "drafted_by": "motion_director.py heuristic v0.1"
+  }
+}

@@ -1,4 +1,5 @@
 import copy
+import importlib.util
 import json
 import math
 import shutil
@@ -21,7 +22,9 @@ from validate_director_plan import validate as validate_director
 SHOWCASE=ROOT/"tests"/"fixtures"/"motion_showcase_deck.pptx"
 DIRECTED=ROOT/"tests"/"fixtures"/"motion_showcase_director.json"
 NS=anim.NS
-HAS_PREVIEW=all(shutil.which(t) for t in ("soffice","pdftoppm","convert","montage"))
+HAS_PREVIEW=(bool(shutil.which("soffice") or shutil.which("libreoffice"))
+             and bool(shutil.which("pdftoppm"))
+             and (bool(shutil.which("convert")) or importlib.util.find_spec("PIL") is not None))
 
 
 def slide_root(path,part):
@@ -218,12 +221,13 @@ class DirectorCompoundTests(unittest.TestCase):
                 md.apply(SHOWCASE,plan,Path(td)/"x.pptx")
         self.assertIn("overlapping pos",str(cm.exception))
 
-    @unittest.skipUnless(HAS_PREVIEW,"LibreOffice Impress, poppler and ImageMagick required")
+    @unittest.skipUnless(HAS_PREVIEW,"LibreOffice Impress, poppler and Pillow/ImageMagick required")
     def test_preview_renders_every_sample(self):
         from motion_preview import render_slide_motion
         with tempfile.TemporaryDirectory() as td:
             r=render_slide_motion(self.out,4,Path(td)/"s4.gif",fps=4,sheet=Path(td)/"s4.png")
             self.assertTrue(Path(r["gif"]).exists())
+            self.assertTrue(Path(r["sheet"]).exists())
             self.assertGreater(r["frames"],r["click_groups"])
 
 

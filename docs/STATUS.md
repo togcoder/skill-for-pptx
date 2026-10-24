@@ -1,5 +1,28 @@
 # PPTX Motion Lab — checkpoint
 
+## T032 Argon (Gemini) research drop evaluated and integrated — 2026-10-15
+
+Argon worked offline on the old main and reused ID T024. Its drop is preserved
+verbatim on `import/argon-t024-20261014` and merged here. **Adopted:**
+
+- virtual rigging with follow-through;
+- the orbit, orbit-3d, wave, explode-layers and cascade-flow recipes;
+- poly-segment paths;
+- auto-arc collision avoidance;
+- bounceEnd;
+- shape-click triggers;
+- two engine bug fixes;
+- the Pillow-only preview fallback.
+
+**Corrected:** `color` (wrote Change Line Color, now Change Fill Color) and
+`teeter` (wrote Blast, now PowerPoint's Teeter). Its loop keys are normalised
+into `loop:{}`.
+
+**Quarantined:** the import-breaking "PHASE 2-4" block, now in
+`scripts/morph_playbook.py`, experimental. 265 tests pass, 48/48 decks apply,
+and PowerPoint 16.0 renders the 3D carousel and the cascade.
+Report: experiments/T032-20261015-claude-argon-integration/REPORT.md.
+
 ## T030 brand palette from one colour + highlight fix — 2026-10-08
 
 `scripts/brand_palette.py` builds a whole Forge theme from one brand colour
@@ -139,6 +162,19 @@ human-style script and a Vietnamese paraphrase.
 is pending.
 
 Report: experiments/T024-20261005-claude-layers-script/REPORT.md.
+## Argon (Gemini) "T024" virtual rigging, poly-segment paths, auto-arc collision solver & interactiveSeq — 2026-10-14
+
+Resolved the three compound-motion limitations identified in T023 and incorporated architectural lessons from an open-source review (`hugohe3/ppt-master`, `JimLiu/baoyu-design`, `scanny/python-pptx#942`, and the Open XML SDK SMIL specification):
+
+1. **Group-aware virtual rigging (`detect_virtual_rigs`, `expand_rig_tracks` in `scripts/motion_engine.py`)**: shapes with separate floating text labels or badges sitting inside them now automatically carry those followers along in geometric lockstep (position, scale, rotation, opacity, visibility) without mutating `<p:spTree>`. `scripts/motion_director.py` (`_radial_group`) now detects and animates cycle/hub diagrams with separate text labels instead of rejecting them.
+2. **Mid-flight trajectory collision detection & auto-arc avoidance (`transient_warnings`, `resolve_trajectory_collisions`)**: samples intermediate instants `(0.2, 0.35, 0.5, 0.65, 0.8)` of each click group to flag mid-motion collisions/occlusions, and automatically bends straight trajectories into obstacle-clearing cubic Bezier arcs when `auto_avoid=True`.
+3. **Poly-segment motion paths (`poly_path=True`, `via=True`) & new recipes (`orbit`, `wave`)**: compiles multi-waypoint curves and 360-degree 4-quadrant orbits into a single `<p:animMotion>` element (`M ... C ... C ... E`), eliminating multi-stage path handoff seams.
+4. **Canonical writer extensions (`scripts/pptx_animator.py`)**: added native `color` (`p:animClr`), `teeter` (`p:animRot`), `repeat` (`repeatCount`), `auto_reverse` (`autoRev`), `bounce_end` (`p14:bounceEnd`), shape-triggered `interactiveSeq` (`trigger_shape` / `trigger_spid`), and `empty_placeholders()` inspection/stripping for Morph transitions.
+5. **Cross-platform resilience (`scripts/check_environment.py`, `scripts/motion_preview.py`)**: fixed `PermissionError` when probing `/root/.codex/...` as a non-root user and added a pure-Python `Pillow` fallback for animated GIFs and storyboard contact sheets when ImageMagick (`convert`/`montage`) is absent.
+
+**198/198 tests pass (0 skipped).** `render_identity.py` confirms 4/4 slides RGB-identical on the T024 showcase; `lo_timing_crosscheck.py` confirms LibreOffice imports all new effects cleanly. Native PowerPoint playback remains pending: play `experiments/T024-20261014-gemini-complex-motion-rigging/output/T024_complex_motion_directed.pptx` against `preview/slide-0N.png`.
+
+Report: `experiments/T024-20261014-gemini-complex-motion-rigging/REPORT.md`.
 
 ## T023 compound motion engine — 2026-10-05
 
