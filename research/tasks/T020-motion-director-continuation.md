@@ -1,6 +1,6 @@
 # T020 — Continue the Motion Director (handoff from T019)
 
-Status: queued. Not claimed. Built on T019 (merged to main).
+Status: open, not claimed (registry: `research/tasks/INDEX.md`). It builds on T019. Since T034 the work happens on the research tip (see HANDOFF.md), not `main`. Item A is the native gate in `docs/VERIFICATION.md`; also play the T034 dark-brand decks (`experiments/T034-…/REPORT.md`).
 
 ## Where things stand
 
@@ -17,7 +17,7 @@ concurrently); do not build on it.
 
 Read first: AGENTS.md, HANDOFF.md (T019 section), the T019 report,
 `skills/pptx-motion-director/SKILL.md`, `docs/CLICK_BEAT_CHOREOGRAPHY.md`.
-Run `python3 -m unittest discover -s tests -v` (219 pass at T028).
+Run `python3 -m unittest discover -s tests -v` (289 pass at T034).
 
 ## Work items — pick by environment, in priority order
 

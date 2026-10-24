@@ -7,7 +7,7 @@
     {
       "name": "pptx-motion",
       "source": "./",
-      "description": "Slide Forge (new decks) + Motion Director (existing decks): native, editable, motion-directed PowerPoint for AI agents."
+      "description": "Motion Director (existing decks) + Morph Studio + Slide Forge (new decks), graded by one design system: native, editable, motion-directed PowerPoint for AI agents."
     }
   ]
 }

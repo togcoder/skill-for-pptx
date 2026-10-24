@@ -3,7 +3,7 @@
 Status: queued. Owner: unassigned. Check open claims/PRs before starting.
 
 Input: exact H003/E004 decks first; then H002/E003 if useful. Read their reports
-and docs/POWERPOINT_QA.md. Requires an authorized PowerPoint desktop environment.
+and docs/VERIFICATION.md (the old docs/POWERPOINT_QA.md is archived). Requires an authorized PowerPoint desktop environment.
 
 Deliver: SHA-256, app/build/OS/font, repair warnings, video or screen recording,
 transition-by-transition observations of labels and carriers, a real edit test,

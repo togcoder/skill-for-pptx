@@ -28,6 +28,11 @@ import re
 
 from lxml import etree as E
 
+try:
+    from . import design_system as _ds
+except ImportError:
+    import design_system as _ds
+
 P="http://schemas.openxmlformats.org/presentationml/2006/main"
 A="http://schemas.openxmlformats.org/drawingml/2006/main"
 C="http://schemas.openxmlformats.org/drawingml/2006/chart"
@@ -397,7 +402,10 @@ def _effect_par(parent,ids,eff,node_type,grp_id):
     par=sub(parent,"par")
     extra={}
     if cls=="path":
-        extra={"accel":"50000","decel":"50000"}
+        # Unspecified moves take the design system's "move" easing (Carbon
+        # standard, fitted to accel/decel in motion_tokens), not 50/50.
+        a,d=_ds.easing("move")
+        extra={k:str(round(v*100000)) for k,v in (("accel",a),("decel",d)) if v}
     if "accel" in eff or "decel" in eff:
         extra={"accel":str(round(eff.get("accel",0)*100000)),"decel":str(round(eff.get("decel",0)*100000))}
         extra={k:v for k,v in extra.items() if v!="0"}

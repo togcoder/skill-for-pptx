@@ -808,6 +808,12 @@ def apply_plan(source,plan,output):
     pkg.save(output)
     report=verify_scenes(source,output)
     report["unsettled"]=settle_report(output)
+    try:  # T034: design-system critique of the finished deck (advisory)
+        import design_critic
+        crit=design_critic.critique(output)
+        report["critique"]={"scores":crit["scores"],"warnings":crit["issues_by_code"]}
+    except Exception as ex:
+        report["critique"]={"error":str(ex)}
     report["receipt"]=receipt
     return report
 

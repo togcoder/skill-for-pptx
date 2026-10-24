@@ -1,0 +1,779 @@
+{
+ "arms": {
+  "fixture:essay_outline_deck / modern": {
+   "base": {
+    "scores": {
+     "design": 3.81,
+     "motion": 5.0,
+     "rhythm": 5.0,
+     "coherence": 3.67,
+     "overall": 4.37
+    },
+    "warnings": 5,
+    "generator_warnings": 1,
+    "by_code": {
+     "DEN-WORDS": 4,
+     "MOT-VOCAB": 1
+    }
+   },
+   "t034": {
+    "scores": {
+     "design": 3.81,
+     "motion": 5.0,
+     "rhythm": 5.0,
+     "coherence": 3.67,
+     "overall": 4.37
+    },
+    "warnings": 5,
+    "generator_warnings": 1,
+    "by_code": {
+     "DEN-WORDS": 4,
+     "MOT-VOCAB": 1
+    }
+   }
+  },
+  "fixture:essay_outline_deck / cinematic": {
+   "base": {
+    "scores": {
+     "design": 3.83,
+     "motion": 5.0,
+     "rhythm": 5.0,
+     "coherence": 4.33,
+     "overall": 4.54
+    },
+    "warnings": 4,
+    "generator_warnings": 0,
+    "by_code": {
+     "DEN-WORDS": 4
+    }
+   },
+   "t034": {
+    "scores": {
+     "design": 3.83,
+     "motion": 5.0,
+     "rhythm": 5.0,
+     "coherence": 4.33,
+     "overall": 4.54
+    },
+    "warnings": 4,
+    "generator_warnings": 0,
+    "by_code": {
+     "DEN-WORDS": 4
+    }
+   }
+  },
+  "fixture:motion_showcase_deck / modern": {
+   "base": {
+    "scores": {
+     "design": 4.5,
+     "motion": 5.0,
+     "rhythm": 4.92,
+     "coherence": 4.33,
+     "overall": 4.69
+    },
+    "warnings": 0,
+    "generator_warnings": 0,
+    "by_code": {}
+   },
+   "t034": {
+    "scores": {
+     "design": 4.5,
+     "motion": 5.0,
+     "rhythm": 4.92,
+     "coherence": 4.33,
+     "overall": 4.69
+    },
+    "warnings": 0,
+    "generator_warnings": 0,
+    "by_code": {}
+   }
+  },
+  "fixture:motion_showcase_deck / cinematic": {
+   "base": {
+    "scores": {
+     "design": 4.5,
+     "motion": 4.96,
+     "rhythm": 4.94,
+     "coherence": 4.33,
+     "overall": 4.68
+    },
+    "warnings": 0,
+    "generator_warnings": 0,
+    "by_code": {}
+   },
+   "t034": {
+    "scores": {
+     "design": 4.5,
+     "motion": 5.0,
+     "rhythm": 4.94,
+     "coherence": 4.33,
+     "overall": 4.69
+    },
+    "warnings": 0,
+    "generator_warnings": 0,
+    "by_code": {}
+   }
+  },
+  "fixture:picture_deck / modern": {
+   "base": {
+    "scores": {
+     "design": 5.0,
+     "motion": 5.0,
+     "rhythm": 5.0,
+     "coherence": 5.0,
+     "overall": 5.0
+    },
+    "warnings": 0,
+    "generator_warnings": 0,
+    "by_code": {}
+   },
+   "t034": {
+    "scores": {
+     "design": 5.0,
+     "motion": 5.0,
+     "rhythm": 5.0,
+     "coherence": 5.0,
+     "overall": 5.0
+    },
+    "warnings": 0,
+    "generator_warnings": 0,
+    "by_code": {}
+   }
+  },
+  "fixture:picture_deck / cinematic": {
+   "base": {
+    "scores": {
+     "design": 5.0,
+     "motion": 5.0,
+     "rhythm": 5.0,
+     "coherence": 5.0,
+     "overall": 5.0
+    },
+    "warnings": 0,
+    "generator_warnings": 0,
+    "by_code": {}
+   },
+   "t034": {
+    "scores": {
+     "design": 5.0,
+     "motion": 5.0,
+     "rhythm": 5.0,
+     "coherence": 5.0,
+     "overall": 5.0
+    },
+    "warnings": 0,
+    "generator_warnings": 0,
+    "by_code": {}
+   }
+  },
+  "fixture:report_deck / modern": {
+   "base": {
+    "scores": {
+     "design": 4.38,
+     "motion": 4.88,
+     "rhythm": 5.0,
+     "coherence": 5.0,
+     "overall": 4.81
+    },
+    "warnings": 3,
+    "generator_warnings": 0,
+    "by_code": {
+     "COL-TEXT": 3
+    }
+   },
+   "t034": {
+    "scores": {
+     "design": 4.38,
+     "motion": 5.0,
+     "rhythm": 5.0,
+     "coherence": 5.0,
+     "overall": 4.84
+    },
+    "warnings": 3,
+    "generator_warnings": 0,
+    "by_code": {
+     "COL-TEXT": 3
+    }
+   }
+  },
+  "fixture:report_deck / cinematic": {
+   "base": {
+    "scores": {
+     "design": 4.35,
+     "motion": 4.91,
+     "rhythm": 5.0,
+     "coherence": 5.0,
+     "overall": 4.81
+    },
+    "warnings": 4,
+    "generator_warnings": 0,
+    "by_code": {
+     "COL-TEXT": 4
+    }
+   },
+   "t034": {
+    "scores": {
+     "design": 4.38,
+     "motion": 5.0,
+     "rhythm": 5.0,
+     "coherence": 5.0,
+     "overall": 4.84
+    },
+    "warnings": 3,
+    "generator_warnings": 0,
+    "by_code": {
+     "COL-TEXT": 3
+    }
+   }
+  },
+  "forge:midnight / modern": {
+   "base": {
+    "scores": {
+     "design": 5.0,
+     "motion": 5.0,
+     "rhythm": 5.0,
+     "coherence": 4.33,
+     "overall": 4.83
+    },
+    "warnings": 0,
+    "generator_warnings": 0,
+    "by_code": {}
+   },
+   "t034": {
+    "scores": {
+     "design": 5.0,
+     "motion": 5.0,
+     "rhythm": 5.0,
+     "coherence": 4.33,
+     "overall": 4.83
+    },
+    "warnings": 0,
+    "generator_warnings": 0,
+    "by_code": {}
+   }
+  },
+  "forge:midnight / cinematic": {
+   "base": {
+    "scores": {
+     "design": 5.0,
+     "motion": 4.97,
+     "rhythm": 4.92,
+     "coherence": 4.33,
+     "overall": 4.8
+    },
+    "warnings": 1,
+    "generator_warnings": 1,
+    "by_code": {
+     "MOT-SETTLE": 1
+    }
+   },
+   "t034": {
+    "scores": {
+     "design": 5.0,
+     "motion": 5.0,
+     "rhythm": 4.92,
+     "coherence": 4.33,
+     "overall": 4.81
+    },
+    "warnings": 1,
+    "generator_warnings": 1,
+    "by_code": {
+     "MOT-SETTLE": 1
+    }
+   }
+  },
+  "forge:office_facet / modern": {
+   "base": {
+    "scores": {
+     "design": 5.0,
+     "motion": 5.0,
+     "rhythm": 5.0,
+     "coherence": 4.33,
+     "overall": 4.83
+    },
+    "warnings": 0,
+    "generator_warnings": 0,
+    "by_code": {}
+   },
+   "t034": {
+    "scores": {
+     "design": 5.0,
+     "motion": 5.0,
+     "rhythm": 5.0,
+     "coherence": 4.33,
+     "overall": 4.83
+    },
+    "warnings": 0,
+    "generator_warnings": 0,
+    "by_code": {}
+   }
+  },
+  "forge:office_facet / cinematic": {
+   "base": {
+    "scores": {
+     "design": 5.0,
+     "motion": 4.97,
+     "rhythm": 4.92,
+     "coherence": 4.33,
+     "overall": 4.8
+    },
+    "warnings": 1,
+    "generator_warnings": 1,
+    "by_code": {
+     "MOT-SETTLE": 1
+    }
+   },
+   "t034": {
+    "scores": {
+     "design": 5.0,
+     "motion": 5.0,
+     "rhythm": 4.92,
+     "coherence": 4.33,
+     "overall": 4.81
+    },
+    "warnings": 1,
+    "generator_warnings": 1,
+    "by_code": {
+     "MOT-SETTLE": 1
+    }
+   }
+  },
+  "forge:paper / modern": {
+   "base": {
+    "scores": {
+     "design": 5.0,
+     "motion": 5.0,
+     "rhythm": 5.0,
+     "coherence": 4.33,
+     "overall": 4.83
+    },
+    "warnings": 0,
+    "generator_warnings": 0,
+    "by_code": {}
+   },
+   "t034": {
+    "scores": {
+     "design": 5.0,
+     "motion": 5.0,
+     "rhythm": 5.0,
+     "coherence": 4.33,
+     "overall": 4.83
+    },
+    "warnings": 0,
+    "generator_warnings": 0,
+    "by_code": {}
+   }
+  },
+  "forge:paper / cinematic": {
+   "base": {
+    "scores": {
+     "design": 5.0,
+     "motion": 4.97,
+     "rhythm": 4.92,
+     "coherence": 4.33,
+     "overall": 4.8
+    },
+    "warnings": 1,
+    "generator_warnings": 1,
+    "by_code": {
+     "MOT-SETTLE": 1
+    }
+   },
+   "t034": {
+    "scores": {
+     "design": 5.0,
+     "motion": 5.0,
+     "rhythm": 4.92,
+     "coherence": 4.33,
+     "overall": 4.81
+    },
+    "warnings": 1,
+    "generator_warnings": 1,
+    "by_code": {
+     "MOT-SETTLE": 1
+    }
+   }
+  },
+  "forge:seed_amber_light / modern": {
+   "base": {
+    "scores": {
+     "design": 5.0,
+     "motion": 5.0,
+     "rhythm": 5.0,
+     "coherence": 4.33,
+     "overall": 4.83
+    },
+    "warnings": 0,
+    "generator_warnings": 0,
+    "by_code": {}
+   },
+   "t034": {
+    "scores": {
+     "design": 5.0,
+     "motion": 5.0,
+     "rhythm": 5.0,
+     "coherence": 4.33,
+     "overall": 4.83
+    },
+    "warnings": 0,
+    "generator_warnings": 0,
+    "by_code": {}
+   }
+  },
+  "forge:seed_amber_light / cinematic": {
+   "base": {
+    "scores": {
+     "design": 4.83,
+     "motion": 4.97,
+     "rhythm": 4.92,
+     "coherence": 4.33,
+     "overall": 4.76
+    },
+    "warnings": 5,
+    "generator_warnings": 5,
+    "by_code": {
+     "COL-GRAPHIC": 4,
+     "MOT-SETTLE": 1
+    }
+   },
+   "t034": {
+    "scores": {
+     "design": 5.0,
+     "motion": 5.0,
+     "rhythm": 4.92,
+     "coherence": 4.33,
+     "overall": 4.81
+    },
+    "warnings": 1,
+    "generator_warnings": 1,
+    "by_code": {
+     "MOT-SETTLE": 1
+    }
+   }
+  },
+  "forge:seed_red_dark / modern": {
+   "base": {
+    "scores": {
+     "design": 5.0,
+     "motion": 5.0,
+     "rhythm": 5.0,
+     "coherence": 4.33,
+     "overall": 4.83
+    },
+    "warnings": 0,
+    "generator_warnings": 0,
+    "by_code": {}
+   },
+   "t034": {
+    "scores": {
+     "design": 5.0,
+     "motion": 5.0,
+     "rhythm": 5.0,
+     "coherence": 4.33,
+     "overall": 4.83
+    },
+    "warnings": 0,
+    "generator_warnings": 0,
+    "by_code": {}
+   }
+  },
+  "forge:seed_red_dark / cinematic": {
+   "base": {
+    "scores": {
+     "design": 4.83,
+     "motion": 4.97,
+     "rhythm": 4.92,
+     "coherence": 4.33,
+     "overall": 4.76
+    },
+    "warnings": 5,
+    "generator_warnings": 5,
+    "by_code": {
+     "COL-GRAPHIC": 4,
+     "MOT-SETTLE": 1
+    }
+   },
+   "t034": {
+    "scores": {
+     "design": 5.0,
+     "motion": 5.0,
+     "rhythm": 4.92,
+     "coherence": 4.33,
+     "overall": 4.81
+    },
+    "warnings": 1,
+    "generator_warnings": 1,
+    "by_code": {
+     "MOT-SETTLE": 1
+    }
+   }
+  }
+ },
+ "landscape": {
+  "fixture: report (raw)": {
+   "scores": {
+    "design": 4.38,
+    "motion": 5.0,
+    "rhythm": 3.0,
+    "coherence": 3.67,
+    "overall": 4.01
+   },
+   "warnings": 5,
+   "generator_warnings": 2,
+   "by_code": {
+    "COL-TEXT": 3,
+    "MOT-STATIC": 1,
+    "MOT-VOCAB": 1
+   }
+  },
+  "fixture: showcase (raw)": {
+   "scores": {
+    "design": 4.5,
+    "rhythm": 1.0,
+    "coherence": 4.0,
+    "overall": 3.17
+   },
+   "warnings": 1,
+   "generator_warnings": 1,
+   "by_code": {
+    "MOT-STATIC": 1
+   }
+  },
+  "T019 director output": {
+   "scores": {
+    "design": 4.38,
+    "motion": 4.88,
+    "rhythm": 5.0,
+    "coherence": 5.0,
+    "overall": 4.81
+   },
+   "warnings": 3,
+   "generator_warnings": 0,
+   "by_code": {
+    "COL-TEXT": 3
+   }
+  },
+  "T022 Codex T009 candidate": {
+   "scores": {
+    "design": 3.75,
+    "motion": 4.91,
+    "rhythm": 5.0,
+    "coherence": 3.67,
+    "overall": 4.33
+   },
+   "warnings": 10,
+   "generator_warnings": 1,
+   "by_code": {
+    "DEN-WORDS": 9,
+    "MOT-VOCAB": 1
+   }
+  },
+  "T024 Argon complex showcase": {
+   "scores": {
+    "design": 2.71,
+    "motion": 4.76,
+    "rhythm": 3.75,
+    "coherence": 3.67,
+    "overall": 3.72
+   },
+   "warnings": 64,
+   "generator_warnings": 21,
+   "by_code": {
+    "COL-TEXT": 38,
+    "MOT-DURATION": 1,
+    "MOT-EFFECTS": 10,
+    "MOT-MOVERS": 9,
+    "DEN-WORDS": 2,
+    "MOT-SETTLE": 1,
+    "TYP-SIZES": 1,
+    "TYP-SMALL": 2
+   }
+  },
+  "T025 Forge coffee (EN)": {
+   "scores": {
+    "design": 5.0,
+    "motion": 4.95,
+    "rhythm": 4.91,
+    "coherence": 3.67,
+    "overall": 4.63
+   },
+   "warnings": 3,
+   "generator_warnings": 2,
+   "by_code": {
+    "MOT-SETTLE": 2,
+    "TYP-SIZES": 1
+   }
+  },
+  "T025 Forge chuyển đổi số (VI)": {
+   "scores": {
+    "design": 5.0,
+    "motion": 4.93,
+    "rhythm": 4.96,
+    "coherence": 3.67,
+    "overall": 4.64
+   },
+   "warnings": 2,
+   "generator_warnings": 1,
+   "by_code": {
+    "MOT-SETTLE": 1,
+    "TYP-SIZES": 1
+   }
+  },
+  "T028 report pro": {
+   "scores": {
+    "design": 4.32,
+    "motion": 4.92,
+    "rhythm": 4.95,
+    "coherence": 5.0,
+    "overall": 4.8
+   },
+   "warnings": 6,
+   "generator_warnings": 1,
+   "by_code": {
+    "COL-TEXT": 5,
+    "MOT-SETTLE": 1
+   }
+  },
+  "T028 showcase pro": {
+   "scores": {
+    "design": 5.0,
+    "motion": 4.97,
+    "rhythm": 4.9,
+    "coherence": 4.33,
+    "overall": 4.8
+   },
+   "warnings": 1,
+   "generator_warnings": 1,
+   "by_code": {
+    "MOT-SETTLE": 1
+   }
+  }
+ },
+ "render_calibration": {
+  "deck": "experiments/T025-20261007-claude-slide-forge/coffee_report.pptx",
+  "powerpoint": [
+   {
+    "background_share": 0.514,
+    "balance_offset": 0.205,
+    "colourfulness": 35.0,
+    "slide": 1
+   },
+   {
+    "background_share": 0.91,
+    "balance_offset": 0.105,
+    "colourfulness": 17.6,
+    "slide": 2
+   },
+   {
+    "background_share": 0.926,
+    "balance_offset": 0.047,
+    "colourfulness": 24.7,
+    "slide": 3
+   },
+   {
+    "background_share": 0.847,
+    "balance_offset": 0.096,
+    "colourfulness": 52.5,
+    "slide": 4
+   },
+   {
+    "background_share": 0.924,
+    "balance_offset": 0.125,
+    "colourfulness": 35.9,
+    "slide": 5
+   },
+   {
+    "background_share": 0.655,
+    "balance_offset": 0.166,
+    "colourfulness": 30.3,
+    "slide": 6
+   },
+   {
+    "background_share": 0.935,
+    "balance_offset": 0.087,
+    "colourfulness": 33.1,
+    "slide": 7
+   },
+   {
+    "background_share": 0.91,
+    "balance_offset": 0.177,
+    "colourfulness": 18.3,
+    "slide": 8
+   },
+   {
+    "background_share": 0.946,
+    "balance_offset": 0.108,
+    "colourfulness": 14.9,
+    "slide": 9
+   },
+   {
+    "background_share": 0.958,
+    "balance_offset": 0.004,
+    "colourfulness": 15.4,
+    "slide": 10
+   }
+  ],
+  "libreoffice": [
+   {
+    "background_share": 0.514,
+    "balance_offset": 0.195,
+    "colourfulness": 35.5,
+    "slide": 1
+   },
+   {
+    "background_share": 0.876,
+    "balance_offset": 0.117,
+    "colourfulness": 18.1,
+    "slide": 2
+   },
+   {
+    "background_share": 0.89,
+    "balance_offset": 0.062,
+    "colourfulness": 35.5,
+    "slide": 3
+   },
+   {
+    "background_share": 0.812,
+    "balance_offset": 0.097,
+    "colourfulness": 53.5,
+    "slide": 4
+   },
+   {
+    "background_share": 0.91,
+    "balance_offset": 0.127,
+    "colourfulness": 41.8,
+    "slide": 5
+   },
+   {
+    "background_share": 0.654,
+    "balance_offset": 0.138,
+    "colourfulness": 29.5,
+    "slide": 6
+   },
+   {
+    "background_share": 0.913,
+    "balance_offset": 0.062,
+    "colourfulness": 33.0,
+    "slide": 7
+   },
+   {
+    "background_share": 0.88,
+    "balance_offset": 0.1,
+    "colourfulness": 21.7,
+    "slide": 8
+   },
+   {
+    "background_share": 0.933,
+    "balance_offset": 0.119,
+    "colourfulness": 16.3,
+    "slide": 9
+   },
+   {
+    "background_share": 0.935,
+    "balance_offset": 0.03,
+    "colourfulness": 15.3,
+    "slide": 10
+   }
+  ]
+ }
+}

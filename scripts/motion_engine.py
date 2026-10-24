@@ -191,12 +191,13 @@ def _ease(p,eff):
     rep=eff.get("repeat")
     if isinstance(rep,(int,float)) and rep>1 and p<1.0:
         p=(p*rep)%1.0
-    a=eff.get("accel",0.5 if eff["preset"]=="path" else 0)
-    d=eff.get("decel",0.5 if eff["preset"]=="path" else 0)
-    if a or d:
-        q=p*p*(3-2*p)
-    else:
-        q=p
+    # PowerPoint's own progress curve for accel/decel (T034: was smoothstep,
+    # so previews ignored the easing tokens). Unspecified moves use the
+    # writer's default, the design system's "move" role.
+    da,dd=_ds.easing("move") if eff["preset"]=="path" else (0.0,0.0)
+    a=eff.get("accel",da)
+    d=eff.get("decel",dd)
+    q=_mt.ppt_progress(p,a,d) if (a or d) else p
     if eff.get("bounce_end") and q>0.75:
         b=float(eff["bounce_end"])
         u=(q-0.75)/0.25
@@ -390,6 +391,11 @@ try:
 except ImportError:
     import motion_tokens as _mt
 EASE.update({role:_mt.ease(role) for role in _mt.ROLES})
+# T034: bands (durations, overshoot, stagger) come from the shared design system.
+try:
+    from . import design_system as _ds
+except ImportError:
+    import design_system as _ds
 
 
 def compile_track(track,obj,objects_by_token,state,beat_id):
@@ -486,7 +492,7 @@ def compile_track(track,obj,objects_by_token,state,beat_id):
                     span=t-seg_start
                     if kf.get("anticipate"):
                         # Secondary: a small wind-up against the direction of travel.
-                        a=float(kf["anticipate"])
+                        a=min(float(kf["anticipate"]),_ds.load()["motion"]["anticipate_max"])
                         back=(cur_pos[0]-vx*a,cur_pos[1]-vy*a)
                         lead=int(span*0.2)
                         eff("path",seg_start,lead,anchored=[{"x":cur_pos[0],"y":cur_pos[1]},{"x":back[0],"y":back[1]}],
@@ -496,7 +502,7 @@ def compile_track(track,obj,objects_by_token,state,beat_id):
                         span-=lead
                     final=target
                     if kf.get("overshoot"):
-                        o=float(kf["overshoot"])
+                        o=min(float(kf["overshoot"]),_ds.load()["motion"]["overshoot_max"])
                         target=(final[0]+vx*o,final[1]+vy*o)
                     main=int(span*0.8) if kf.get("overshoot") else span
                     seg={"x":target[0],"y":target[1]}
@@ -698,7 +704,7 @@ def recipe_tracks(recipe,objs,states,params=None):
     objs: resolved target objects in order; states: current object states.
     """
     params=params or {}
-    d=int(params.get("duration_ms",700))
+    d=int(params.get("duration_ms",_ds.default_ms("move")))
     tracks=[]
     if recipe=="spotlight":
         focus,others=objs[0],objs[1:]
@@ -772,7 +778,12 @@ def recipe_tracks(recipe,objs,states,params=None):
                 raise ValueError(f"unknown assemble origin {origin!r}")
             t0=i*stagger
             if recipe=="assemble":
-                end_kf={"t":t0+d,"dx":0.0,"dy":0.0,"ease":"out"}
+                # Arrivals decelerate (design system "enter" role, T029). The
+                # Argon merge had reverted this to the legacy "out" curve and
+                # dropped overshoot; restored in T034.
+                end_kf={"t":t0+d,"dx":0.0,"dy":0.0,"ease":"enter"}
+                if params.get("overshoot"):
+                    end_kf["overshoot"]=float(params["overshoot"])
                 if params.get("bounce_end"):
                     end_kf["bounce_end"]=float(params["bounce_end"])
                 tracks.append({"target":o,"keyframes":[
@@ -898,7 +909,7 @@ def recipe_tracks(recipe,objs,states,params=None):
             else:
                 dx,dy=delta*0.42,delta
             t0=i*stagger
-            end_kf={"t":t0+d,"dx":s0["dx"]+dx,"dy":s0["dy"]+dy,"ease":"out"}
+            end_kf={"t":t0+d,"dx":s0["dx"]+dx,"dy":s0["dy"]+dy,"ease":"standard"}
             if bounce>0:
                 end_kf["bounce_end"]=bounce
             if abs(scale-1.0)>1e-6:
@@ -968,9 +979,16 @@ def recipe_tracks(recipe,objs,states,params=None):
         poly=bool(params.get("poly_path",False))
         kfs=[{"t":0}]
         t=0
+        arrivals=[]
+        px,py=_pos(token,states)
         for si,stop in enumerate(stops):
             sx,sy=_pos(stop,states)
-            t+=d
+            # Without an explicit duration each hop takes design-system travel
+            # time for its length (MOT-DURATION: longer journeys take longer).
+            hop=d if "duration_ms" in params else _ds.travel_ms(math.hypot(sx-px,sy-py))
+            px,py=sx,sy
+            t+=hop
+            arrivals.append(t)
             kf={"t":t,"x":sx+float(params.get("offset_x",0)),"y":sy+float(params.get("offset_y",0)),
                 "curve":float(params.get("arc",0.0))}
             for key in ("overshoot","anticipate"):
@@ -985,8 +1003,8 @@ def recipe_tracks(recipe,objs,states,params=None):
             tr["poly_path"]=True
         tracks.append(tr)
         if params.get("pulse_stops",True):
-            for i,stop in enumerate(stops):
-                tracks.append({"target":stop,"pulse_at":(i+1)*d+i*dwell})
+            for stop,at in zip(stops,arrivals):
+                tracks.append({"target":stop,"pulse_at":at})
     elif recipe=="rise":
         # Text rises out of an invisible line: it starts under a mask painted
         # in the colour behind it and slides up past the mask's top edge.
@@ -1471,8 +1489,8 @@ def _effect_from_ctn(ctn):
         if len(eff["anchored"])<2:
             return None
         for key in ("accel","decel"):
-            if ctn.get(key):
-                eff[key]=int(ctn.get(key))/100000
+            # An absent attribute plays as 0 (constant speed) in PowerPoint.
+            eff[key]=int(ctn.get(key))/100000 if (ctn.get(key) or "").isdigit() else 0.0
         _read_modifiers(ctn,motion.find("p:cBhvr/p:cTn",NS),eff)
     elif scale is not None:
         by=scale.find("p:by",NS)
