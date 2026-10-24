@@ -26,6 +26,7 @@ import io
 import json
 import math
 import random
+import re
 import sys
 from pathlib import Path
 
@@ -132,8 +133,9 @@ LIMITS={"bullets":6,"kpis":4,"process":6,"cycle":6,"points":5}
 def schema():
     return {
         "version":VERSION,
-        "deck":{"title":"str (optional)","theme_mode":"light|dark for office:* themes","assets_cache":"dir for downloaded photos/icons (default ~/.cache/slide-forge)",
-                "credits_slide":"bool, closing slide attributing licensed photos (default true)","theme":f"one of {sorted(THEMES)} or an object with the same color keys (hex)",
+        "deck":{"title":"str (optional)","theme_mode":"light|dark for office:* and seed themes","assets_cache":"dir for downloaded photos/icons (default ~/.cache/slide-forge)",
+                "credits_slide":"bool, closing slide attributing licensed photos (default true)","theme":f"one of {sorted(THEMES)}, office:<Name>, {{\"seed\": \"#brandhex\", \"mode\"?: \"dark\", \"harmony\"?: 150}} "
+                         "(OKLCH palette from one brand colour, AA guaranteed) or an object with the same color keys (hex)",
                 "fonts":{"head":"font family","body":"font family"},
                 "motion":{"style":"subtle|modern|bold|cinematic|dynamic (default modern; dynamic = PowerPoint's richer built-ins)","counters":"bool, count up KPI values (default true)",
                           "morph":"bool, background orbs glide between slides (default true)"},
@@ -167,6 +169,8 @@ def validate_spec(spec):
     if isinstance(theme,str) and theme not in THEMES and not (theme.lower().startswith("office:")
                                                                and theme[7:].lower() in {k.lower() for k in kits}):
         err("THEME_UNKNOWN",None,f"theme {theme!r}",f"use one of {sorted(THEMES)} or office:<{'|'.join(kits)}>")
+    if isinstance(theme,dict) and "seed" in theme and not re.fullmatch(r"#?[0-9A-Fa-f]{6}",str(theme["seed"])):
+        err("THEME_SEED",None,f"seed {theme['seed']!r}","give the brand colour as #RRGGBB")
     text=json.dumps(spec,ensure_ascii=False)
     if any(ch in text for ch in "ăâđêôơưạảấầẩẫậắằẳẵặẹẻẽếềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ"):
         fonts={**FONTS,**(office_theme(theme[7:])[1] if isinstance(theme,str) and theme.lower().startswith("office:")
@@ -347,6 +351,10 @@ class Builder:
         kit_fonts={}
         if isinstance(t,str) and t.lower().startswith("office:"):
             self.theme,kit_fonts,_=office_theme(t.split(":",1)[1],spec.get("theme_mode","light"))
+        elif isinstance(t,dict) and t.get("seed"):
+            import brand_palette
+            self.theme=brand_palette.brand_theme(t["seed"],t.get("mode",spec.get("theme_mode","light")),
+                                                 t.get("harmony",150))
         else:
             self.theme=dict(THEMES[t]) if isinstance(t,str) else {**THEMES["midnight"],**t}
         self.fonts={**FONTS,**kit_fonts,**(spec.get("fonts") or {})}
@@ -470,7 +478,8 @@ class Builder:
         # Two soft orbs with fixed names sit on opposite corners and rotate a
         # corner per slide, so Morph glides them around the frame, never over content.
         corners=[(0,0),(W,0),(W,H),(0,H)]
-        for k,(key,r) in enumerate((("accent",2.0),("accent2",1.4))):
+        brand="seed" if "seed" in self.theme else "accent"  # decoration may wear the raw brand colour
+        for k,(key,r) in enumerate(((brand,2.0),("accent2",1.4))):
             cx,cy=corners[(idx+2*k)%4]
             orb=self.rect(slide,cx-r,cy-r,2*r,2*r,key,f"!!orb-{k+1}",MSO_SHAPE.OVAL)
             _alpha(orb,12)

@@ -1,5 +1,19 @@
 # PPTX Motion Lab — checkpoint
 
+## T030 brand palette from one colour + highlight fix — 2026-10-08
+
+`scripts/brand_palette.py` builds a whole Forge theme from one brand colour
+(`"theme": {"seed": "#DA251D", "mode": "light|dark", "harmony": 150}`). It
+works in OKLCH (Ottosson) and picks colours by contrast target, the way Adobe
+Leonardo does. The brand hue is kept, and its lightness moves only as far as
+WCAG AA requires; the raw colour still paints the decoration. A test holds 47
+seeds × 2 modes to AA on bg and surface.
+
+The PowerPoint render of a Vietnamese brand deck showed the T028 highlight
+marker above a centred, wrapped takeaway. The marker now uses the
+anchor-aware `text_block` and covers wrapped blocks; a regression test was
+added and the re-render was checked. 256 tests pass.
+
 ## T029 motion tokens — 2026-10-08
 
 Carbon and Material 3 easing curves (Apache-2.0) are fitted to PowerPoint's

@@ -105,6 +105,10 @@ You do not need the user to supply assets. Forge can find licensed ones.
   Office Theme, Organic, Retrospect, Slice, Wisp); `"theme_mode": "dark"` for
   the dark variant. Many of those fonts lack Vietnamese glyphs; Forge stops
   with `FONT_GLYPHS` and you override `fonts`.
+- **Brand colour:** `"theme": {"seed": "#RRGGBB", "mode": "light|dark"}` builds
+  an AA-legible theme around the user's brand colour (OKLCH; the hue is kept,
+  and lightness is adjusted only for text roles). `harmony` sets the second
+  accent's hue offset: 150 is a split complement (default), 30 is analogous.
 - **Theme:** `midnight`, `paper`, `forest` and `sunrise` pass WCAG AA for every
   text role. A custom theme object must keep `text`/`muted`/`accent` ≥ 4.5:1
   on `bg` and `surface`; QA enforces it.
