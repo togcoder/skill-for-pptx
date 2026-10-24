@@ -7,8 +7,10 @@ import math
 
 try:
     from .data_motion_recipes import chart_motion_recipe, number_counter_recipe
+    from . import design_system as _ds
 except ImportError:
     from data_motion_recipes import chart_motion_recipe, number_counter_recipe
+    import design_system as _ds
 
 SCRIPT_SOURCES={"provided","speaker-notes","existing-timing","inferred","researched"}
 TIMING={"on-click","with-previous","after-previous"}
@@ -69,6 +71,21 @@ def _choreography_errors(beat,targets):
     params=beat.get("motion_parameters",{})
     if not isinstance(params,dict):
         errors.append("motion_parameters must be an object")
+        params={}
+    # Design system limits (knowledge/design_system.json, T034): the author is
+    # told here; the engine also clamps.
+    ds=_ds.load()["motion"]
+    keyframes=[kf for tr in (beat.get("tracks") or []) if isinstance(tr,dict)
+               for kf in (tr.get("keyframes") or []) if isinstance(kf,dict)]
+    for key,limit in (("overshoot",ds["overshoot_max"]),("anticipate",ds["anticipate_max"])):
+        for src in [params]+keyframes:
+            v=src.get(key)
+            if v is not None and (type(v) not in (int,float) or not 0<=v<=limit):
+                errors.append(f"{key} must be 0..{limit} (design system MOT-OVERSHOOT)")
+                break
+    lo,hi=ds["duration_ms"]["stagger"]["limit"]
+    if params.get("stagger_ms") is not None and (type(params["stagger_ms"]) not in (int,float) or not lo<=params["stagger_ms"]<=hi):
+        errors.append(f"stagger_ms must be {lo}..{hi} (design system MOT-STAGGER)")
     if recipe=="tracks":
         tracks=beat.get("tracks")
         if not isinstance(tracks,list) or not tracks:

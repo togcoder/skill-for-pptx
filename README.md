@@ -1,108 +1,130 @@
 # PPTX Motion Lab
 
-Nghiên cứu biến một câu lệnh ngắn thành PowerPoint có chuyển động có chủ đích và chỉnh sửa được.
+Nghiên cứu xây dựng **AI Motion Director cho PowerPoint**: nhận một deck (hoặc
+một spec) cùng mục tiêu chung, rồi tự viết kịch bản, chia nhịp click và tạo
+chuyển động native, chỉnh sửa được, đẹp và đúng kỹ thuật.
 
-Repo chính: [togcoder/skill-for-pptx](https://github.com/togcoder/skill-for-pptx).
+- Model mới bắt đầu tại **[HANDOFF.md](HANDOFF.md)**. Trạng thái hiện tại ở
+  [docs/STATUS.md](docs/STATUS.md).
+- Đầu nghiên cứu mới nhất nằm trên nhánh `claude/blissful-pasteur-gmll59`
+  (T034). `main` đang chậm hơn: mới dừng ở T023.
 
-**Model mới bắt đầu tại [HANDOFF.md](HANDOFF.md)**. Quy trình cộng tác và các task song song nằm ở [docs/COLLABORATION.md](docs/COLLABORATION.md).
+## Ba đường sản phẩm
 
-**Bản nghiên cứu v0.7:** đã có đường dựng PPTX thử nghiệm, kiểm tra cấu trúc và ảnh tĩnh. Chưa xác nhận chuyển động trong PowerPoint. Nguồn skill trong repo chưa được cài vào tài khoản.
-
-Mới nhất: [T018 QA review](experiments/T018-20261005-qa-evidence-review/REPORT.md) sửa bộ nghiệm thu và bàn giao công cụ chạy PowerPoint trên Windows. 26 hồ sơ giả lập cho 26 quyết định đúng; 150 tests đạt. T010–T017 đã có chia nhịp click, chart/KPI và generic motion trên deck có sẵn. Playback PowerPoint vẫn là cổng còn thiếu; chỉ số click và ảnh tĩnh chưa xác nhận hiệu ứng chạy đúng.
-
-## Dùng ngay: Slide Forge — AI tự dựng deck hoàn chỉnh
-
-```bash
-pip install python-pptx lxml Pillow
-python3 scripts/slide_forge.py schema                                   # hợp đồng spec cho AI
-python3 scripts/slide_forge.py build examples/forge/coffee_report.json -o deck.pptx   # dựng + chuyển động + QA (JSON)
-python3 scripts/slide_forge.py render deck.pptx -d render/              # Windows + PowerPoint: video + ảnh từng slide
-```
-
-AI viết spec ngữ nghĩa (title, statement, bullets, image, kpis, chart, process,
-cycle, comparison, quote, closing). Forge lo bố cục, cỡ chữ đo thật, ảnh/art,
-chuyển động native (đếm số KPI, chart build, process từng bước, cycle spotlight,
-Ken Burns, accent, Morph) và trả QA có mã lỗi + cách sửa. Skill:
-`skills/slide-forge/SKILL.md`, lệnh `/forge-deck`. [Báo cáo T025](experiments/T025-20261007-claude-slide-forge/REPORT.md).
-
-## Dùng ngay: Motion Director cho deck có sẵn
+### 1. Motion Director cho deck có sẵn
 
 ```bash
-pip install lxml
-python3 scripts/motion_director.py inspect deck.pptx                 # AI đọc deck
-python3 scripts/motion_director.py auto deck.pptx -o deck_motion.pptx --storyboard sb/
-# hoặc: draft -> chỉnh director.json -> apply (xem skills/pptx-motion-director/SKILL.md)
+pip install lxml python-pptx Pillow
+python3 scripts/motion_director.py inspect deck.pptx                       # AI đọc deck
+python3 scripts/motion_director.py auto deck.pptx -o out.pptx --style cinematic \
+        --script script.md --write-notes --preview previews/                # kịch bản → click → chuyển động
+python3 scripts/motion_director.py critique out.pptx --md critique.md      # chấm đẹp + kỹ thuật
 ```
 
-Giữ nguyên slide, chữ, bố cục, animation có sẵn; thêm animation native theo nhịp
-click của người thuyết trình — từ hiện từng ý đến chuyển động phức hợp (tụ lại, soi
-từng phần của vòng tròn, đổi chỗ, đi theo hành trình, zoom vào, Morph giữa slide với
-`--style cinematic` hoặc Director v0.6); xuất báo cáo, storyboard và GIF mô phỏng
-(`motion_director.py preview`, cần LibreOffice Impress + poppler + ImageMagick).
-Chuyển động 3 lớp (chính/phụ/nền, `--style cinematic`, `--ambient`) và lớp kịch bản:
-`auto --script script.md` cho kịch bản quyết định nhịp click (hỗ trợ `[click]`/`[nhấp]`,
-tiếng Việt, diễn đạt lại), `motion_script.py draft` tự viết kịch bản đầy đủ khi thiếu,
-`--fill-gaps` tạo chú thích cho ý không có trên slide, `--write-notes` ghi lời thoại vào
-speaker notes; luôn xuất `*.script.md`. Hoàn thiện kiểu chuyên nghiệp (T028):
-`morph_studio.py propose/apply/preview` thêm Morph giữa slide — ghép cặp bằng tên `!!`,
-tiêu đề trượt, vật thể bay vào/ra từ ngoài slide, camera zoom vào/ra, thẻ nở thành panel,
-cuộn ngang — cùng mẹo chữ (đánh máy, hiện từng từ, chữ trồi lên từ một đường kẻ, bút dạ
-quang, gạch chân); danh mục 50 kỹ thuật ở
-`skills/pptx-motion-director/references/pro-techniques.md`. Cài như plugin Claude Code: `/plugin marketplace add
-togcoder/skill-for-pptx` rồi `/plugin install pptx-motion@togcoder-pptx`, dùng
-`/animate-deck deck.pptx`. Trạng thái: kiểm tra cấu trúc + LibreOffice đọc đúng
-trình tự; **chưa phát thử trong PowerPoint**. [Báo cáo T019](experiments/T019-20261005-claude-motion-director/REPORT.md).
+Director giữ nguyên số slide, thứ tự, chữ, bố cục và animation có sẵn. Thứ tự
+nguồn kịch bản: kịch bản người dùng > speaker notes > animation có sẵn > tự
+suy luận, và thiếu thì tự viết đầy đủ (`motion_script.py draft`).
 
-## Kết quả hiện có
+Chuyển động có 3 lớp:
 
-- [T017](experiments/T017-20261005-generic-report-motion/REPORT.md): một semantic beat có thể chứa nhiều stage tự động mà giữ nhịp click. [T016](experiments/T016-20261005-real-package-data-motion/REPORT.md): chart/KPI chạy qua package thật và kiểm tra bảo toàn nguồn. Đây là bằng chứng phần mềm, chưa có phát thử native.
-- [Hướng dẫn native QA](docs/POWERPOINT_NATIVE_HARNESS.md): manifest hash, COM probe, kiểm tra hồ sơ và việc còn phải quan sát trực tiếp.
+- **Chính:** hiện dần, build biểu đồ, tụ lại, soi từng phần, đổi chỗ, hành
+  trình, zoom.
+- **Phụ:** quầng sáng đi theo tiêu điểm, đường ray và token, bút dạ quang, gạch
+  chân, chữ trồi lên từ một đường kẻ.
+- **Nền:** vòng quỹ đạo quay chậm, Ken Burns, nền trôi.
 
-- T006 full candidate: đã có PPTX 1 slide/31 đối tượng/6 chặng; sửa lỗi mất chữ làm pipeline dừng; 79 tests đạt và ảnh mở đầu đã xem. Audit tọa độ còn chỉ ra rủi ro nối chặng, chưa có playback PowerPoint. [Báo cáo và file](experiments/T006-20261004-packed-validation/REPORT.md).
-- T006 semantics matrix: 4 file 1 slide cô lập hệ quy chiếu local/anchored và trạng thái remove/hold; 83 tests đạt, ảnh tĩnh giống nhau đúng thiết kế. Chưa có biến thể thắng nếu chưa phát thật trong PowerPoint. [Báo cáo và checklist](experiments/T006-20261004-motion-semantics-matrix/REPORT.md).
+Skill: [`skills/pptx-motion-director`](skills/pptx-motion-director/SKILL.md),
+lệnh `/animate-deck`.
 
-- T002: giữ nguyên đường label sạch của E004 và siết carrier theo chữ. Proxy carrier giảm 6/6→0/6, nhưng focus emphasis tĩnh giảm 4/5→3/5. [Báo cáo](experiments/T002-20261004-codex-tight-carriers/REPORT.md). Native playback chưa kiểm chứng.
-- T003: công thức tách/ghép 3–5 lớp, hai chủ đề, 5 PPTX gồm bản lỗi và bản sửa; 15 ảnh cuối đã xem. Sửa số xuống dòng bằng thay đổi duy nhất chiều rộng textbox. Bộ kiểm tra hiện có 34 tests đạt. [Báo cáo và giới hạn](experiments/T003-20261004-codex-layer01/REPORT.md). Chưa có playback PowerPoint hoặc quan sát choreography nguồn.
-
-- E001: ba cảnh “tụ cụm, mở rộng, xếp hàng” với Imagine, Make, Share, Evolve. Mỗi slide có 13 đối tượng native.
-- Backend giới hạn: canvas 16:9; rect, ellipse, textbox; opacity=1; Morph theo đối tượng.
-- E002: sửa khai báo textbox theo kế hoạch; tiêu chí H001 giữ nguyên đạt 93/93, so với 14 lỗi trước sửa. 25 unit tests tại E002 đạt; ảnh cuối không đổi. Đây là cải thiện biểu diễn native, không phải điểm chuyển động.
-- H002: đề độc lập ORBIT ba chế độ. E003: đổi sang chu kỳ qua ba vị trí tam giác, giảm 2 cặp nhãn chồng trong mô hình đường đi tuyến tính xuống 0; kiểm tra cấu trúc và ảnh cuối đạt. Cả hai chưa có playback PowerPoint.
-- H003/E004: thử nhãn tiếng Việt dài, giữ nguyên nội dung và tăng khoảng cách dọc. Số cặp nhãn có khoảng chồng theo mô hình giảm 4→0, nhưng khối nền vẫn 6→6. Thêm công cụ tính khoảng cách theo kích thước nhãn và bốn test đối chiếu; tổng tại mốc E004 là 29 tests. [Bằng chứng và giới hạn](experiments/E004/REPORT.md).
-- Bộ chèn Morph đọc thứ tự slide từ quan hệ của presentation, kiểm tra định danh và số slide, từ chối file đã có animation, ghi đầu ra hoàn tất mà không ghi đè.
-- Bộ bài lỗi cấu trúc E001: bản cũ đạt 1/7, bản mới đạt 7/7. Đây là 7 trường hợp nhắm vào lỗi đã biết, không phải tỷ lệ thành công chung hoặc điểm chuyển động.
-- Đọc [checkpoint](docs/STATUS.md) và [báo cáo mới nhất](experiments/T003-20261004-codex-layer01/REPORT.md) để biết giới hạn và việc tiếp theo.
-
-## Dùng nguồn nghiên cứu
-
-[Skill thử nghiệm](skills/pptx-motion/SKILL.md) phối hợp ý đồ, kế hoạch cảnh, công thức và bằng chứng. Nó tham chiếu các script ở gốc repo, chưa phải gói cài độc lập.
+### 2. Morph Studio: Morph giữa slide kiểu chuyên nghiệp
 
 ```bash
-python3 scripts/validate_plan.py experiments/E001/baseline/plan.json
-python3 -m unittest discover -s tests -v
-bash scripts/run_experiment.sh experiments/E001/baseline/plan.json build/new-run output/new-demo.pptx
-python3 scripts/inspect_pptx.py output/new-demo.pptx
+python3 scripts/morph_studio.py propose out.pptx -o morph.json
+python3 scripts/morph_studio.py apply out.pptx morph.json -o final.pptx
 ```
 
-Đường dựng dùng Node, Python và artifact-tool của runtime ChatGPT Work; đặt các biến CODEX_PRIMARY_RUNTIME_* theo môi trường được cấp. Python kiểm tra kế hoạch chỉ dùng thư viện chuẩn; bộ chèn Morph cần lxml đã có trong runtime. Script dựng phải dùng thư mục build và tên đầu ra mới. Theo skill Presentations của host để đánh dấu thao tác, render file cuối và kiểm tra bằng mắt.
+Công cụ ghép cặp bằng tên `!!` dọc theo cả chuỗi slide và tạo các kiểu Morph:
 
-## Hướng nghiên cứu
+- tiêu đề trượt;
+- vật thể bay vào/ra từ ngoài slide;
+- camera zoom vào rồi lùi ra;
+- thẻ nở thành panel;
+- cuộn ngang.
 
-- [Đề cương](docs/RESEARCH_PLAN.md): giả thuyết, E01–E04 và cổng nghiệm thu.
-- [Kiến trúc](docs/ARCHITECTURE.md): kế hoạch trạng thái, bộ thực thi, kiểm chứng.
-- [Công thức](skills/pptx-motion/references/recipes.md): trạng thái bằng chứng của từng hiệu ứng.
-- [Hợp đồng kế hoạch](skills/pptx-motion/references/plan-contract.md): trường hỗ trợ và đơn vị.
-- [Quy trình PowerPoint](docs/POWERPOINT_QA.md): nghiệm thu phát chuyển động.
-- [Nguồn](docs/SOURCES.md): tác giả, URL và giới hạn sử dụng.
+Danh mục 50 kỹ thuật:
+[`pro-techniques.md`](skills/pptx-motion-director/references/pro-techniques.md).
 
-Mục tiêu là skill áp dụng được nhiều chủ đề. QCC là một bài thử, không phải toàn bộ sản phẩm. Dùng dữ liệu tổng hợp cho các demo. Không đưa video người dùng hoặc tệp mẫu bên ngoài vào gói phân phối. Repo riêng tư; chưa chọn giấy phép phát hành.
+### 3. Slide Forge: dựng deck mới
 
-## Cộng tác và chạy ở môi trường khác
+```bash
+python3 scripts/slide_forge.py schema
+python3 scripts/slide_forge.py build examples/forge/coffee_report.json -o deck.pptx   # dựng + chuyển động + QA + critique
+```
 
-- [HANDOFF.md](HANDOFF.md): trạng thái, thứ tự đọc, prompt giao cho model khác.
-- [Môi trường](docs/ENVIRONMENT.md): phần nào chạy bằng Python, phần nào cần Work hoặc PowerPoint.
-- [Tasks](research/tasks/): playback, đường đi khối nền, hiệu ứng mới và backend đa môi trường.
-- [Mẫu báo cáo](templates/EXPERIMENT_REPORT.md): đầu vào, bằng chứng, quyết định và bước tiếp.
-- [Lịch sử nhập dự án](docs/GITHUB_HANDOFF.md): giữ commit khởi tạo của chủ repo và archive lịch sử trước GitHub.
+AI viết một spec ngữ nghĩa với 12 layout, rồi Forge tự lo:
 
-Nguồn skill tham chiếu repo, chưa phải gói personal skill cài độc lập. M1 vẫn chờ playback PowerPoint.
+- bố cục và cỡ chữ đo thật;
+- theme Office, hoặc theme sinh từ một màu thương hiệu;
+- ảnh và icon có giấy phép;
+- chuyển động native.
+
+Skill: [`skills/slide-forge`](skills/slide-forge/SKILL.md), lệnh `/forge-deck`.
+
+## Thống nhất cái đẹp và kỹ thuật (T034)
+
+[`knowledge/design_system.json`](knowledge/design_system.json) là nguồn duy
+nhất cho các con số "đẹp": thời lượng theo vai trò, easing đã khớp vào
+PowerPoint, độ trễ so le, số click mỗi slide, số vật thể chuyển động cùng lúc,
+độ tương phản WCAG, thang cỡ chữ và mật độ chữ.
+
+Bộ sinh (engine, writer, Director, components, Forge) **đọc** các con số này.
+Bộ kiểm (validator, QA, `design_critic.py`) **chấm** đúng theo chúng. Mỗi phát
+hiện ghi rõ luật, giá trị đo, ngưỡng và công cụ sửa.
+
+Căn cứ gồm design token của IBM Carbon và Material 3, WCAG 2.2, nghiên cứu cảm
+nhận chuyển động (slow-in/slow-out, so le, giới hạn theo dõi khoảng 4 vật thể),
+nguyên lý học đa phương tiện, và các benchmark thẩm mỹ slide mới nhất
+(SlidesGen-Bench 2026). Chi tiết ở [docs/DESIGN_SYSTEM.md](docs/DESIGN_SYSTEM.md).
+
+## Mức bằng chứng
+
+Mọi tuyên bố đều ghi rõ đạt bậc nào theo
+[docs/VERIFICATION.md](docs/VERIFICATION.md): cấu trúc → mô phỏng → LibreOffice
+→ PowerPoint đọc → PowerPoint render (CreateVideo) → trình chiếu tương tác.
+
+Một phần hệ thống đã được PowerPoint 16.0 đọc và render. **Chưa có deck nào được
+trình chiếu tương tác bằng click trong PowerPoint.** Ảnh GIF và storyboard là mô
+phỏng.
+
+## Cài như plugin Claude Code
+
+```text
+/plugin marketplace add togcoder/skill-for-pptx
+/plugin install pptx-motion@togcoder-pptx
+/animate-deck deck.pptx      hoặc      /forge-deck spec.json
+```
+
+Repo đang private nên trình cài cần quyền truy cập GitHub.
+
+## Tài liệu
+
+| Tài liệu | Nội dung |
+|---|---|
+| [AGENTS.md](AGENTS.md) | Quy tắc cho mọi agent |
+| [HANDOFF.md](HANDOFF.md) | Bắt đầu nhanh, việc tiếp theo, prompt giao việc |
+| [docs/STATUS.md](docs/STATUS.md) | Trạng thái hiện tại, ma trận năng lực × bằng chứng |
+| [docs/PRODUCT_TARGET.md](docs/PRODUCT_TARGET.md) | Đích sản phẩm và hợp đồng tự chủ |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Sơ đồ module và luồng dữ liệu |
+| [docs/DESIGN_SYSTEM.md](docs/DESIGN_SYSTEM.md) | Hệ thiết kế: token, luật, bằng chứng, critic |
+| [docs/VERIFICATION.md](docs/VERIFICATION.md) | Thang bằng chứng và quy trình kiểm chứng native |
+| [docs/CLICK_BEAT_CHOREOGRAPHY.md](docs/CLICK_BEAT_CHOREOGRAPHY.md), [docs/MOTION_PACKING.md](docs/MOTION_PACKING.md) | Chính sách nhịp click và đóng gói chuyển động |
+| [docs/ENVIRONMENT.md](docs/ENVIRONMENT.md) | Phần nào chạy ở đâu |
+| [docs/COLLABORATION.md](docs/COLLABORATION.md), [research/tasks/INDEX.md](research/tasks/INDEX.md) | Cộng tác, sổ đăng ký mã task |
+| [docs/SOURCES.md](docs/SOURCES.md), [knowledge/README.md](knowledge/README.md) | Nguồn và dữ liệu tri thức |
+| [docs/CHANGELOG.md](docs/CHANGELOG.md) | Nhật ký nghiên cứu theo task |
+| [docs/archive/](docs/archive/) | Tài liệu đã thay thế, giữ để tái lập |
+
+Các thí nghiệm cũ (E001–T018, đường dựng ChatGPT Work, writer patch v0.2–v0.5)
+được đóng băng để tái lập; xem [docs/CHANGELOG.md](docs/CHANGELOG.md). Demo dùng
+dữ liệu tổng hợp. Tài sản tham khảo bên ngoài chỉ giữ cục bộ. Repo riêng tư,
+chưa chọn giấy phép phát hành.

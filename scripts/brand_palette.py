@@ -55,11 +55,9 @@ def oklch_to_hex(L,C,H):
 
 
 def contrast(a,b):
-    def lum(h):
-        r,g,b_=(_lin(int(h[i:i+2],16)/255) for i in (0,2,4))
-        return 0.2126*r+0.7152*g+0.0722*b_
-    hi,lo=sorted((lum(a),lum(b)),reverse=True)
-    return (hi+0.05)/(lo+0.05)
+    """WCAG contrast ratio (shared with the design system, T034)."""
+    import design_system
+    return design_system.contrast(a,b)
 
 
 def _to_contrast(L,C,H,backs,target,toward_dark):

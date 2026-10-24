@@ -1,5 +1,16 @@
 # -*- coding: utf-8 -*-
 """
+EXPERIMENTAL — quarantined by T034 (experiments/T033-20261016-argon-research/REPORT.md).
+Not used by any product path. The canonical cross-slide Morph is
+scripts/morph_studio.py (continuity, rename_chain, _stage_copy, scenes,
+verify_scenes); the canonical object model is motion_director.deck_model.
+Audit findings: the standard-library parser breaks on lxml input, placeholder
+shapes are skipped, renaming only the source slide breaks existing Morph
+pairs, post-stage clones cascade, picture relationships are not remapped, a
+second solidFill and a misplaced alphaModFix make XML schema-invalid, and no
+Morph transition is written. Ideas worth porting after a PowerPoint render:
+portal-seed / telescopic-stack / corner-badge staging modes.
+
 PPTX Motion Lab — Cross-Slide Morph Playbook (Milestone T033)
 Module: scripts/morph_playbook.py
 

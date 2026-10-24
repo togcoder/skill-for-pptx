@@ -1,5 +1,14 @@
 # -*- coding: utf-8 -*-
 """
+EXPERIMENTAL — quarantined by T034 (experiments/T033-20261016-argon-research/REPORT.md).
+Not used by any product path. The canonical trigger writer is
+pptx_animator.apply_timeline(trigger_spid=...) / read_interactive_sequences.
+This module writes attributes outside ISO 29500 (customAction, customPreset,
+customDur), invalid p:from/p:by children on scale/rotate, wrong preset IDs
+(teeter as Blast), accepts missing trigger shapes and deletes the user's
+hyperlinks. Worth checking against a PowerPoint-saved trigger: whether the
+interactiveSeq should carry an onClick start condition.
+
 PPTX Motion Lab — Semantic Interactive Click Triggers (Milestone T033 - Problem 2)
 Module: scripts/interactive_triggers.py
 

@@ -64,14 +64,9 @@ def _mix(a,b,t):
 
 
 def _contrast(a,b):
-    def lum(h):
-        def ch(v):
-            v/=255
-            return v/12.92 if v<=0.03928 else ((v+0.055)/1.055)**2.4
-        r,g,b_=(int(h[i:i+2],16) for i in (0,2,4))
-        return 0.2126*ch(r)+0.7152*ch(g)+0.0722*ch(b_)
-    hi,lo=sorted((lum(a),lum(b)),reverse=True)
-    return (hi+0.05)/(lo+0.05)
+    """WCAG contrast ratio (shared with the design system, T034)."""
+    import design_system
+    return design_system.contrast(a,b)
 
 
 def _legible(color,bgs,toward):
@@ -776,6 +771,16 @@ def build(spec,out,work=None):
     verdict["static_pptx"]=str(static)
     verdict["output"]=str(out)
     verdict["director_notes"]=plan["research_metadata"]["draft_notes"]
+    # T034: the same design system the generators read, graded on the output
+    # (advisory: QA errors decide ok; the critique says what to polish).
+    try:
+        import design_critic
+        crit=design_critic.critique(out)
+        verdict["critique"]={"design_system":crit["design_system"],"scores":crit["scores"],
+                             "warnings":[{k:i[k] for k in ("code","slide","object","measured","expected","fix")}
+                                         for i in crit["issues"] if i["severity"]=="warn"]}
+    except Exception as ex:
+        verdict["critique"]={"error":str(ex)}
     return verdict
 
 

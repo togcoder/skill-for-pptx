@@ -1,9 +1,17 @@
 ---
 name: pptx-motion
-description: Develop editable PowerPoint motion from short prompts using explicit scene states, stable object identity and evidence gates. Use for requests to prototype Morph, motion recipes, motion plans, or research and improve a PPTX motion generator. This repository contains an experimental source skill, with structural and static checks only until PowerPoint playback is supplied.
+description: LEGACY research skill of PPTX Motion Lab (E001–T018 lab workflow, frozen). Use only when asked to reproduce or extend those early experiments (scene-state Morph prototypes, the v0.2–v0.5 patch writers). For animating a deck use pptx-motion-director; for building a new deck use slide-forge.
 ---
 
-# PPTX Motion
+# PPTX Motion (legacy lab skill)
+
+> **Legacy, since T034.** The product skills are `pptx-motion-director`
+> (existing decks, Morph Studio) and `slide-forge` (new decks). They share
+> `knowledge/design_system.json` and the `design_critic`. This skill is kept so
+> the E001–T018 experiments can be reproduced. Its `references/` folder still
+> holds contracts that the director links to (`existing-deck-director.md`,
+> `data-motion-recipes.md`). `references/cross-slide-morph-and-pacing.md`
+> documents the experimental T033 modules and is not wired into the director.
 
 Create or augment a reviewable PowerPoint motion artifact. The preferred product path is to motion-direct an existing PPTX; generating a fresh motion experiment is a supporting path. Read `../../docs/PRODUCT_TARGET.md` and the project checkpoint before continuing. Treat this as research source; do not install the skill or publish a release as a side effect.
 
@@ -51,11 +59,11 @@ When the user supplies an existing PPTX:
    Reuse `inspect_pptx.inspect()` for ordered parts in custom checks instead of reimplementing relationship-path resolution.
 8. Score with [evaluation.md](references/evaluation.md), keeping unobserved properties null. Only set native playback verified after opening and playing the exact deck in a named PowerPoint version with captured evidence.
 9. When a failure occurs, preserve the baseline, reproduce the failure and derive one reusable rule. Rerun the same input after changing the rule or implementation, then use a different prompt to check transfer.
-10. Update `docs/STATUS.md` and the experiment evidence. Save research source and results through the user's authorized project route. Skill installation remains a separate operation.
+10. Add a `docs/CHANGELOG.md` entry, rewrite `docs/STATUS.md`, and keep the experiment evidence. Save research source and results through the user's authorized project route. Skill installation remains a separate operation.
 
 ## Package safeguards learned in E001
 
-Require equal plan and deck slide counts and exact planned `!!` names per slide before patching. Reject a deck with existing transitions or timing. Do not reuse a partially written failed output: preflight all slides, then publish a completed file without overwriting an existing destination. Reject noninteger duration rather than silently truncating it.
+Require equal plan and deck slide counts and exact planned `!!` names per slide before patching. The E001 Morph inserter rejected a deck with existing transitions or timing. That was a limit of the prototype, not policy: the product director preserves and extends existing timing (AGENTS.md). Do not reuse a partially written failed output: preflight all slides, then publish a completed file without overwriting an existing destination. Reject noninteger duration rather than silently truncating it.
 
 ## Evidence boundaries
 
@@ -81,7 +89,7 @@ Check native text content and formal textbox type separately. The pipeline norma
 - `scripts/normalize_timeline_textboxes.py`: timeline-plan native textbox declaration
 - `scripts/render_timeline.mjs`: artifact-tool source renderer + timing pipeline
 - `scripts/run_timeline_experiment.sh`: one-command packed-timeline experiment runner
-- `docs/POWERPOINT_QA.md`: native playback acceptance
+- `docs/VERIFICATION.md`: evidence ladder and native playback acceptance
 - `experiments/E001/`: frozen brief, baseline, rubric and regressions
 
 Resolve these paths relative to the repository root (two parents above this skill directory). The source is not a self-contained installed package.

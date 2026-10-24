@@ -17,6 +17,8 @@ import math
 
 from lxml import etree as E
 
+import brand_palette as _bp
+import design_system as _ds
 import motion_engine as me
 
 P="http://schemas.openxmlformats.org/presentationml/2006/main"
@@ -46,21 +48,44 @@ def _neutral(hexv):
     return max(r,g,b)-min(r,g,b)<24
 
 
-def deck_style(model):
-    """Accent colour, a dark text colour and the main font from the deck."""
+def _reach(color,background,need):
+    """``color`` with its OKLCH lightness moved (hue kept) until it reaches
+    ``need`` contrast against ``background``."""
+    if _ds.contrast(color,background)>=need:
+        return color
+    L,C,H=_bp.hex_to_oklch(color)
+    return _bp._to_contrast(L,C,H,[background],need,_ds.luminance(background)>0.18)
+
+
+def deck_style(model,background=None):
+    """Accent colour, a dark text colour and the main font from the deck.
+
+    Helpers must be seen (design system COL-GRAPHIC, WCAG 1.4.11): with a
+    solid ``background`` the accent is the most-used deck colour that reaches
+    3:1 against it, else the most-used one moved in lightness until it does.
+    (T034: the most-used fill is often the card surface, which made halos,
+    rings, rails and tokens invisible on dark and brand themes.)"""
     prof=model["inventory"].get("design_profile",{})
     fills=[_hex(f["value"]) for f in prof.get("fill_colors",[])]
     fills=[f for f in fills if f]
-    accent=next((f for f in fills if not _neutral(f)),None) or "0F9D8A"
-    second=next((f for f in fills if f!=accent and not _neutral(f)),None) or accent
-    texts=[_hex(t["value"]) for t in prof.get("text_colors",[])]
-    dark=next((t for t in texts if t and sum(int(t[i:i+2],16) for i in (0,2,4))<300),None) or "1F2A44"
-    fonts=[f["value"] for f in prof.get("font_families",[]) if f.get("value")]
+    ranked=[f for f in fills if not _neutral(f)]
     def vivid(h):
         r,g,b=(int(h[i:i+2],16)/255 for i in (0,2,4))
         mx,mn=max(r,g,b),min(r,g,b)
         return (mx-mn)*mx
-    bright=max([f for f in fills[:6] if not _neutral(f)] or [accent],key=vivid)
+    texts=[_hex(t["value"]) for t in prof.get("text_colors",[])]
+    dark=next((t for t in texts if t and sum(int(t[i:i+2],16) for i in (0,2,4))<300),None) or "1F2A44"
+    fonts=[f["value"] for f in prof.get("font_families",[]) if f.get("value")]
+    if background and background!="NONSOLID":
+        need=_ds.graphic_contrast_needed()
+        seen=[f for f in ranked if _ds.contrast(f,background)>=need]
+        accent=seen[0] if seen else _reach(max(ranked[:3],key=vivid) if ranked else "0F9D8A",background,need)
+        second=next((f for f in seen if f!=accent),None) or accent
+        bright=max([f for f in seen[:6]] or [accent],key=vivid)
+    else:
+        accent=ranked[0] if ranked else "0F9D8A"
+        second=next((f for f in ranked if f!=accent),None) or accent
+        bright=max(ranked[:6] or [accent],key=vivid)
     return {"accent":accent,"second":second,"bright":bright,"text":dark,"font":fonts[0] if fonts else None}
 
 
@@ -390,6 +415,64 @@ def _theme_color(z,master_part,name):
             c=node.find(f"{{{A}}}sysClr")
             return c.get("lastClr") if c is not None else None
     return None
+
+
+def _master_of(z,slide_part):
+    def rel_target(part,suffix):
+        base,name=part.rsplit("/",1)
+        rel=f"{base}/_rels/{name}.rels"
+        if rel not in z.namelist():
+            return None
+        for r in E.fromstring(z.read(rel)):
+            if r.get("Type","").endswith(suffix):
+                t=r.get("Target")
+                stack=[] if t.startswith("/") else base.split("/")
+                for seg in t.split("/"):
+                    if seg=="..":
+                        stack.pop()
+                    elif seg and seg!=".":
+                        stack.append(seg)
+                return "/".join(stack)
+        return None
+    layout=rel_target(slide_part,"/slideLayout")
+    return rel_target(layout,"/slideMaster") if layout else None
+
+
+def text_color(z,slide_part,node):
+    """Explicit colour of the first coloured text run of ``node`` (srgbClr,
+    or schemeClr through the theme); None when the text inherits it."""
+    for rpr in node.iter(_q(A,"rPr")):
+        fill=rpr.find("a:solidFill",NS)
+        if fill is None:
+            continue
+        c=fill.find("a:srgbClr",NS)
+        if c is not None:
+            return c.get("val").upper()
+        c=fill.find("a:schemeClr",NS)
+        if c is not None:
+            master=_master_of(z,slide_part)
+            name={"bg1":"lt1","bg2":"lt2","tx1":"dk1","tx2":"dk2"}.get(c.get("val"),c.get("val"))
+            return _theme_color(z,master,name) if master else None
+    return None
+
+
+def marker_tint(candidates,text,back,need,start=0.25,floor=0.08):
+    """(colour, opacity) for a highlighter behind ``text`` on ``back``: the
+    first candidate colour, at the highest opacity <= ``start``, at which the
+    text keeps ``need`` contrast on the tint (design system COL-TEXT; T034:
+    a teal marker under teal text had dropped it from 3.4 to 2.5:1)."""
+    def blend(c,a):
+        return "".join(f"{round(int(c[i:i+2],16)*a+int(back[i:i+2],16)*(1-a)):02X}" for i in (0,2,4))
+    best=None
+    for c in candidates:
+        a=start
+        while a>=floor-1e-9:
+            if _ds.contrast(text,blend(c,a))>=need:
+                if best is None or a>best[1]:
+                    best=(c,round(a,2))
+                break
+            a-=0.01
+    return best or (candidates[0],floor)
 
 
 def slide_background(z,slide_part):

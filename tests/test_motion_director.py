@@ -249,7 +249,9 @@ class DirectorPipelineTests(unittest.TestCase):
         result=crosscheck(self.out)
         slide4=next(s for s in result["slides"] if s["slide"]==4)
         begins=[e["block_begin"] for e in slide4["effects"]]
-        self.assertEqual(begins[:2],["0s","0.8s"])
+        # The second series begins when the first ends (step = design-system
+        # enter band max, 700 ms since T034; was 800 ms).
+        self.assertEqual(begins[:2],["0s","0.7s"])
         self.assertTrue(all(e["preset_class"]=="entrance" for e in slide4["effects"]))
 
 

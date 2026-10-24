@@ -1,3 +1,11 @@
+> **EXPERIMENTAL (T033, quarantined in T034).** This describes
+> `scripts/morph_playbook.py` and `scripts/cognitive_pacing.py`. No product path
+> uses them, and director plans do **not** accept `pre_stage`/`post_stage`. The
+> T034 audit found schema-invalid output and broken Morph chains; see
+> `experiments/T033-20261016-argon-research/REPORT.md`. For cross-slide Morph,
+> use `scripts/morph_studio.py`. For motion budget, use rule MOT-MOVERS in
+> `knowledge/design_system.json`.
+
 # Cross-Slide Morph Choreography, Pre-Staging Playbook & Pacing Architecture
 
 ## 1. Why Passive Auto-Morph Fails (Red-Team Diagnostics)

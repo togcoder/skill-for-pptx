@@ -1,5 +1,15 @@
 # -*- coding: utf-8 -*-
 """
+EXPERIMENTAL — quarantined by T034 (experiments/T033-20261016-argon-research/REPORT.md).
+Not used by any product path; do not run apply_cinematic_pacing on real decks.
+It writes a `customDur` attribute outside ISO 29500 (schema check fails),
+overwrites existing durations/easing (breaks the preserve-timing rule) without
+moving visibility sets, counts "simultaneous" motion across the whole slide
+instead of per click, and its constants are unsourced. The research-backed
+part (about four tracked objects, Pylyshyn & Storm 1988; capacity varies,
+Alvarez & Franconeri 2007) lives in knowledge/design_system.json as rule
+MOT-MOVERS and is measured per click by scripts/design_critic.py.
+
 PPTX Motion Lab — Cognitive Motion Budget & Cinematic Pacing (Milestone T033 - Problem 3)
 Module: scripts/cognitive_pacing.py
 

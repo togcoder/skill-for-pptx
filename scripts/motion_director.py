@@ -46,6 +46,7 @@ from counter_component import insert_counter_stack  # noqa: E402
 import pptx_animator as anim  # noqa: E402
 import motion_engine as me  # noqa: E402
 import motion_components as mc  # noqa: E402
+import design_system as ds  # noqa: E402
 
 P=anim.P
 A=anim.A
@@ -644,7 +645,7 @@ def draft_slide(slide,style="modern",counters=False,continuing=(),outgoing=(),am
                                              "Secondary/ambient layer: the slowly turning ring tells the audience this is a repeating cycle.",
                                              anchors=[m["token"] for m in members]))
                 rb=_beat(nid("ring"),"Draw the loop behind the stages.","reveal",["orbit"],
-                         "with-previous" if hub else "on-click","fade",800,layer="secondary")
+                         "with-previous" if hub else "on-click","fade",ds.duration("enter")["band"][1],layer="secondary")
                 beats.append(rb)
                 ids.append(rb["id"])
             ab=_beat(nid("assemble"),"Elements assemble around the centre in cycle order.","choreography",
@@ -847,7 +848,7 @@ def draft_slide(slide,style="modern",counters=False,continuing=(),outgoing=(),am
                         step_beats.append(tb["id"])
                     gb=_beat(nid("go"),f"The marker travels to '{_label(step['step'])}'.","choreography",
                              [token_tok,step["step"]["token"]],"after-previous",recipe="travel",layer="secondary",
-                             motion_parameters={"duration_ms":650,"arc":0.3,"offset_y":below,"dwell_ms":0,
+                             motion_parameters={"arc":0.3,"offset_y":below,"dwell_ms":0,
                                                 "overshoot":0.06,"pulse_stops":True})
                     beats.append(gb)
                     step_beats.append(gb["id"])
@@ -1060,7 +1061,7 @@ def _beat_effects(beat,slide_model,style="modern",states=None):
         build=guard["effective_build"]
         steps=chart_fanout(build,cs.get("series_count") or 1,cs.get("category_count")) or [None]
         preset=anim.FILTER_TO_PRESET.get(beat.get("effect_filter") or concrete_chart_filter(dm["chart_type"]),"fade")
-        unit=max(300,min(800,2400//len(steps)))
+        unit=ds.clamp(2400//len(steps),"enter")  # a chart step is an entrance (design system band)
         for i,step in enumerate(steps):
             effects.append({"preset":preset,"spid":o["id"],"trigger":first_trigger if i==0 else "after",
                             "duration_ms":unit,"chart":step,"chart_build":{"as-whole":"as-whole","series":"series","category":"category",
@@ -1339,10 +1340,25 @@ def apply(source,plan,destination,force=False,style=None):
                     if color in (None,"NONSOLID"):
                         raise ValueError(f"slide {sm['index']}: rise mask needs a solid colour behind {anchor['name']!r}")
                     spec["color"]=color
+            if specs:
+                bg_=mc.slide_background(z,sm["part"])
+                style_=mc.deck_style(model,background=bg_)
+                nodes_=anim.top_level_objects(root)
+                for spec in specs:
+                    if spec["kind"]=="highlight" and not spec.get("color") and spec.get("anchors"):
+                        anchor=_resolve(sm,spec["anchors"][0])
+                        node=nodes_.get(anchor["id"])
+                        text=mc.text_color(z,sm["part"],node) if node is not None else None
+                        back=mc.container_fill(root,anchor,sm["objects"]) or bg_
+                        if text and back and back!="NONSOLID":
+                            bold=node.find(".//a:rPr[@b='1']",NS) is not None
+                            need=ds.text_contrast_needed(anchor.get("max_font_pt"),bold)
+                            spec["color"],spec["opacity"]=mc.marker_tint(
+                                [style_["bright"],style_["second"],style_["accent"]],text,back,need)
             generated=[]
             if specs:
                 size=model["slide_size_emu"]
-                generated=mc.insert(root,sm,specs,mc.deck_style(model),size["width"],size["height"])
+                generated=mc.insert(root,sm,specs,style_,size["width"],size["height"])
                 sm=dict(sm,objects=sm["objects"]+generated)
             prior=[] if policy=="replace" else me.effects_from_slide(root)[0]
             clicks=compile_slide(ps,sm,style,prior)
@@ -1598,6 +1614,35 @@ def markdown_report(report,plan=None):
     return "\n".join(lines)
 
 
+def critique_section(source,output):
+    """Design-system critique of source and output (T034): what the motion
+    pass changed in measurable beauty/technique terms, plus open warnings."""
+    import design_critic
+    try:
+        before=design_critic.critique(source)
+        after=design_critic.critique(output)
+    except Exception as ex:  # the critique must never block a delivered deck
+        return f"## Design critique\n\ncritique failed: {ex}"
+    Path(output).with_suffix(".critique.json").write_text(json.dumps(after,indent=1,ensure_ascii=False,default=list)+"\n",
+                                                          encoding="utf-8")
+    dims=[d for d in ("design","motion","rhythm","coherence","overall") if d in after["scores"]]
+    lines=[f"## Design critique (design system {after['design_system']})","",
+           "| | "+" | ".join(dims)+" |","|---|"+"---|"*len(dims),
+           "| source | "+" | ".join(str(before["scores"].get(d,"–")) for d in dims)+" |",
+           "| output | "+" | ".join(str(after["scores"].get(d,"–")) for d in dims)+" |",""]
+    warns=[i for i in after["issues"] if i["severity"]=="warn"]
+    if warns:
+        lines.append("Open warnings (rule → fix):")
+        for i in warns[:20]:
+            where=f"slide {i['slide']}" if i["slide"] else "deck"
+            lines.append(f"- {i['code']} {where} {i['object'] or ''}: {i['measured']} (expected {i['expected']}) → {i['fix']}")
+    else:
+        lines.append("No warnings.")
+    lines.append("")
+    lines.append("Scores summarise computed checks (docs/DESIGN_SYSTEM.md); they are not a human rating.")
+    return "\n".join(lines)
+
+
 def _with_narration(model,plan,ms):
     """Copy of a plan whose clicks all carry narration (drafted when missing)."""
     plan=json.loads(json.dumps(plan))
@@ -1659,6 +1704,12 @@ def main(argv=None):
             a.add_argument("--script",help="presentation script (Markdown/plain text with [click] cues) to follow")
             a.add_argument("--fill-gaps",action="store_true",help="generate callouts for script lines the slide cannot show")
         a.add_argument("--preview",help="also render simulated motion GIFs for changed slides into this directory")
+        a.add_argument("--no-critique",action="store_true",help="skip the design-system critique of source and output")
+    a=sp.add_parser("critique",help="design-system critique (beauty + technique) of a deck")
+    a.add_argument("deck")
+    a.add_argument("--render",help="'lo' (LibreOffice) or a directory of slide-NN.png for frame metrics")
+    a.add_argument("--xsd",help="ISO 29500 pml.xsd for a schema check")
+    a.add_argument("--md",help="also write a Markdown report here")
     a=sp.add_parser("storyboard")
     a.add_argument("deck")
     a.add_argument("-o","--output",required=True)
@@ -1717,6 +1768,8 @@ def main(argv=None):
             report=verify(args.deck,args.output,allow_notes=True)
             print("notes:",notes)
         md_text=markdown_report(report,plan)
+        if not args.no_critique:
+            md_text+="\n\n"+critique_section(args.deck,args.output)
         rp=args.report or str(Path(args.output).with_suffix(".report.md"))
         Path(rp).write_text(md_text+"\n",encoding="utf-8")
         print(md_text)
@@ -1732,6 +1785,13 @@ def main(argv=None):
                     r=render_slide_motion(args.output,s["slide"],out,sheet=out.with_suffix(".png"))
                     print("preview:",r["gif"])
         return 0 if report["ok"] else 1
+    if args.cmd=="critique":
+        import design_critic
+        v=design_critic.critique(args.deck,args.render,args.xsd)
+        print(json.dumps(v,indent=1,ensure_ascii=False,default=list))
+        if args.md:
+            Path(args.md).write_text(design_critic.markdown(v)+"\n",encoding="utf-8")
+        return 0
     if args.cmd=="storyboard":
         slides=[int(x) for x in args.slides.split(",")] if args.slides else None
         for sheet in storyboard(args.deck,args.output,slides):
