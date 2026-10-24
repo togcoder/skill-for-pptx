@@ -1,5 +1,16 @@
 # PPTX Motion Lab — checkpoint
 
+## T029 motion tokens — 2026-10-08
+
+Carbon and Material 3 easing curves (Apache-2.0) are fitted to PowerPoint's
+accel/decel. Carbon fits within 1.5–8%; Material's emphasized curves are
+18–44% off with one behaviour.
+
+The keyframe default moves from the symmetric 0.5/0.5 to Carbon standard
+(0.15/0.70). Assemble and rise now enter with a deceleration, and disperse
+exits with an acceleration. PowerPoint 16.0 parsed all 122 effects of a
+cinematic showcase deck. 251 tests pass. See `knowledge/README.md`.
+
 ## Integration 2026-10-08 — both lines merged
 
 Two sessions worked in parallel, and both used the ID **T024**. Experiment

@@ -79,6 +79,26 @@ words, more space.
   - `office:<Name>` themes (light/dark) carry designer palettes, fonts and scale.
   - Vietnamese text is checked against fonts without full Vietnamese glyphs (`FONT_GLYPHS`).
 
+## Motion tokens (T029)
+
+`scripts/motion_tokens.py` translates open design-system easing into
+PowerPoint. PowerPoint has only accel/decel fractions, so each curve is
+fitted by its worst-case progress error:
+
+- [IBM Carbon](https://carbondesignsystem.com/elements/motion/overview/) (`@carbon/motion`, Apache-2.0) fits within 1.5–8%.
+- Material 3 emphasized curves (`@material/web` tokens, Apache-2.0) only fit within 18–44%.
+
+Engine roles therefore use Carbon:
+
+| Role | accel / decel | Used for |
+|---|---|---|
+| `standard` | 0.15 / 0.70 | the new keyframe default |
+| `enter` | 0 / 0.90 | assemble, rise |
+| `exit` | 0.35 / 0 | disperse |
+| `expressive` | | |
+
+`travel_ms(distance)` lengthens longer journeys (Material/Carbon guidance).
+
 ## Regenerate
 
 ```bash

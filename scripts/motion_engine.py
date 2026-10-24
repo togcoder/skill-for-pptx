@@ -291,6 +291,12 @@ def _arc_controls(p0,p1,curve):
 
 
 EASE={"linear":(0,0),"smooth":(0.5,0.5),"in":(0.6,0),"out":(0,0.6)}
+# T029: design-system easing roles fitted to PowerPoint accel/decel (motion_tokens.py).
+try:
+    from . import motion_tokens as _mt
+except ImportError:
+    import motion_tokens as _mt
+EASE.update({role:_mt.ease(role) for role in _mt.ROLES})
 
 
 def compile_track(track,obj,objects_by_token,state,beat_id):
@@ -330,7 +336,7 @@ def compile_track(track,obj,objects_by_token,state,beat_id):
     cur_opacity=state["opacity"]
     for kf in kfs:
         t=kf["t"]
-        ease=EASE.get(kf.get("ease","smooth"))
+        ease=EASE.get(kf.get("ease","standard"))  # T029: Carbon standard instead of symmetric
         if ease is None:
             raise ValueError(f"unknown ease {kf.get('ease')!r}")
         entering=kf.get("visible") is True and not visible
@@ -518,12 +524,12 @@ def recipe_tracks(recipe,objs,states,params=None):
             if recipe=="assemble":
                 tracks.append({"target":o,"keyframes":[
                     {"t":t0,"dx":off[0],"dy":off[1],"jump":True,"visible":True,"enter":params.get("enter","fade"),"enter_ms":min(d,500)},
-                    {"t":t0+d,"dx":0.0,"dy":0.0,"ease":"out",
+                    {"t":t0+d,"dx":0.0,"dy":0.0,"ease":"enter",
                      **({"overshoot":float(params["overshoot"])} if params.get("overshoot") else {})}]})
             else:
                 tracks.append({"target":o,"keyframes":[
                     {"t":t0},
-                    {"t":t0+d,"dx":off[0],"dy":off[1],"ease":"in"},
+                    {"t":t0+d,"dx":off[0],"dy":off[1],"ease":"exit"},
                     {"t":t0+d,"visible":False,"exit":params.get("exit","fade-out"),"exit_ms":min(d,400)}]})
                 # exit starts slightly before the move ends
                 tracks[-1]["keyframes"][2]["t"]=max(t0,t0+d-min(d,400))
@@ -602,7 +608,7 @@ def recipe_tracks(recipe,objs,states,params=None):
                 dist,enter=max(0.01,min(dist,m["h"]*0.95)),"fade"
         tracks.append({"target":text,"keyframes":[
             {"t":0,"dy":dist,"jump":True,"visible":True,"enter":enter,"enter_ms":int(d*0.8)},
-            {"t":d,"dy":0.0,"ease":"out"}]})
+            {"t":d,"dy":0.0,"ease":"enter"}]})
         if mask is not None:
             tracks.append({"target":mask,"keyframes":[
                 {"t":0,"visible":True,"enter":"appear"},
