@@ -7,6 +7,18 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T037 Multi-Craft Native Bridges & Intent-Empathy Decoder — 2026-11-01
+
+- **Multi-Craft Bridges.** Built `scripts/wordcraft_bridge.py`, `scripts/gridcraft_bridge.py`,
+  and `scripts/vectorcraft_bridge.py`. Connects natively to `wordcraft-cli.exe`, `gridcraft-cli.exe`,
+  and `vectorcraft-cli.exe` in `D:\artcraft`. Provides headless document/sheet/vector inspection,
+  page rendering, formula evaluation, and cross-format conversion.
+- **Intent & Empathy Decoder Engine (`scripts/intent_decoder.py`).** Implemented Protocol 00:
+  parses raw prompts into 5-dimensional `IntentBrief` documents matching `schemas/intent_brief.schema.json`
+  (Audience Persona, Cognitive Budget, Viewing Context, Canonical System, Craft Routing).
+- **Tests.** Added `tests/test_craft_bridges.py` and `tests/test_intent_decoder.py`. Test suite
+  expanded from 296 to **302 tests, all passing (0 failures, 4 skipped)** in 8.69s.
+
 ## T036 Universal ArtCraft Hub, Multi-Agent Protocols & Intent Schemas — 2026-11-01
 
 - **Argon Architecture Consultation.** Consulted Gemini 4 Argon (`gemini-argon`) on multi-agent
