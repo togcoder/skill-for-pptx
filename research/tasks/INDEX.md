@@ -1,7 +1,7 @@
 # Task registry
 
 This file is the one place to take a task ID. Before starting, add a row with
-status `claimed`, using the next free ID (**T037**). Push the row before you do
+status `claimed`, using the next free ID (**T038**). Push the row before you do
 expensive work. IDs are never reused. T024 was taken three times in parallel,
 so those rows carry a suffix. The experiment folders keep the names they were
 created with.
@@ -61,4 +61,5 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T034 | Design system (beauty ↔ technique) + documentation standardised | Claude (cloud) | `claude/blissful-pasteur-gmll59` | tip | `experiments/T034-20261019-claude-design-system/REPORT.md` |
 | T035 | DeckCraft native bridge & Skill-for-Design evolution | Antigravity | `work/T035-deckcraft-bridge` | tip | `experiments/T035-20261031-deckcraft-bridge/REPORT.md` |
 | T036 | Skill-for-Design Foundation: Universal ArtCraft Hub, Multi-Agent Protocols & Intent Schemas | Antigravity + Argon | `work/T036-skill-for-design-core` | tip | `experiments/T036-20261101-skill-for-design-core/REPORT.md` |
-| T037 | *next free ID* | | | | |
+| T037 | Multi-Craft Bridges (WordCraft, GridCraft, VectorCraft) & Intent Decoder | Antigravity | \work/T037-multi-craft-bridges\ | claimed | \experiments/T037-20261101-multi-craft-bridges/REPORT.md\ |
+| T038 | *next free ID* | | | | |
