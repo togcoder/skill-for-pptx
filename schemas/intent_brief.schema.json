@@ -1,0 +1,124 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "IntentBrief",
+  "description": "5-dimensional user intent and empathy specification for AI design agents.",
+  "type": "object",
+  "required": [
+    "intent_id",
+    "raw_user_prompt",
+    "audience_persona",
+    "cognitive_budget",
+    "viewing_context",
+    "canonical_system",
+    "craft_routing"
+  ],
+  "properties": {
+    "intent_id": {
+      "type": "string",
+      "description": "Unique identifier for this design intent brief (e.g. INT-20261101-001)"
+    },
+    "raw_user_prompt": {
+      "type": "string",
+      "description": "The exact user instruction as typed"
+    },
+    "audience_persona": {
+      "type": "object",
+      "required": ["archetype", "primary_need", "emotional_tone"],
+      "properties": {
+        "archetype": {
+          "type": "string",
+          "enum": ["executive_c_level", "technical_engineer", "general_public", "educational_student", "commercial_client"]
+        },
+        "primary_need": {
+          "type": "string",
+          "description": "What decision or action does the audience need to take?"
+        },
+        "emotional_tone": {
+          "type": "string",
+          "enum": ["authoritative_minimal", "urgent_analytical", "inspiring_human", "objective_scientific", "premium_editorial"]
+        }
+      }
+    },
+    "cognitive_budget": {
+      "type": "object",
+      "required": ["max_visual_groups", "max_words_per_view", "eye_tracking_pattern", "target_seconds_to_comprehend"],
+      "properties": {
+        "max_visual_groups": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5,
+          "description": "Miller's Law limit: max distinct chunks per viewport/slide"
+        },
+        "max_words_per_view": {
+          "type": "integer",
+          "minimum": 5,
+          "maximum": 120
+        },
+        "eye_tracking_pattern": {
+          "type": "string",
+          "enum": ["z_pattern", "f_pattern", "radial_center", "bento_grid"]
+        },
+        "target_seconds_to_comprehend": {
+          "type": "number",
+          "maximum": 10.0
+        }
+      }
+    },
+    "viewing_context": {
+      "type": "object",
+      "required": ["medium", "resolution", "safe_min_font_pt", "lighting"],
+      "properties": {
+        "medium": {
+          "type": "string",
+          "enum": ["projector_bright_room", "laptop_desktop_screen", "mobile_handheld", "print_a4_cmyk"]
+        },
+        "resolution": {
+          "type": "string",
+          "example": "1920x1080"
+        },
+        "safe_min_font_pt": {
+          "type": "number",
+          "minimum": 8
+        },
+        "lighting": {
+          "type": "string",
+          "enum": ["bright_ambient", "dark_ambient", "variable"]
+        }
+      }
+    },
+    "canonical_system": {
+      "type": "object",
+      "required": ["design_language", "base_grid_unit_px", "modular_scale_ratio"],
+      "properties": {
+        "design_language": {
+          "type": "string",
+          "enum": ["swiss_grid", "dieter_rams_minimal", "edward_tufte_data", "ibm_carbon_2x", "material3_dynamic"]
+        },
+        "base_grid_unit_px": {
+          "type": "integer",
+          "enum": [4, 8, 12, 16]
+        },
+        "modular_scale_ratio": {
+          "type": "number",
+          "enum": [1.2, 1.25, 1.333, 1.414, 1.618]
+        }
+      }
+    },
+    "craft_routing": {
+      "type": "object",
+      "required": ["primary_craft", "supporting_crafts"],
+      "properties": {
+        "primary_craft": {
+          "type": "string",
+          "enum": ["deckcraft", "wordcraft", "gridcraft", "vectorcraft", "designcraft", "figcraft", "photocraft", "lightcraft", "filmcraft", "soundcraft", "pdfcraft", "cadcraft", "solidcraft"]
+        },
+        "supporting_crafts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

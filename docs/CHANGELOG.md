@@ -7,6 +7,25 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T036 Universal ArtCraft Hub, Multi-Agent Protocols & Intent Schemas — 2026-11-01
+
+- **Argon Architecture Consultation.** Consulted Gemini 4 Argon (`gemini-argon`) on multi-agent
+  governance, identifying 4 architectural traps: unbounded mesh chat (solved by DAG contracts),
+  LLM python bias (solved by 3-tier capability escalation gate), blind code review (solved by
+  render-before-review), and lack of empathy (solved by 5-dimensional intent briefs).
+- **Universal ArtCraft Discovery & Hub.** Built `scripts/sync_artcraft_capabilities.py` and
+  `scripts/artcraft_hub.py`. Automatically catalogs all 13 tools in `D:\artcraft`, generates
+  `registry/artcraft_capabilities.json` (hash `21eaaf51d6891acf`) and `registry/capability_gaps_backlog.md`.
+- **Human Intent & Empathy Schema.** Created `schemas/intent_brief.schema.json` modeling 5 dimensions:
+  Audience Persona, Cognitive Budget (Miller/Hick, Z/F pattern), Viewing Context, Canonical System
+  (Swiss Grid, Dieter Rams, Tufte, IBM Carbon, Material 3), and Craft Routing.
+- **Cross-Delegation & Critique Contracts.** Created `schemas/handoff_contract.schema.json`
+  (enforcing max 2 iteration loops) and `schemas/critique_report.schema.json` (100-point dual-layer audit).
+- **Foundation Protocols.** Established `protocols/00_intent_empathy_decoder.md`, `01_capability_first_gate.md`,
+  `02_cross_delegation_dag.md`, and `03_redteam_critique_rubric.md`.
+- **Validation & Tests.** Created `scripts/validate_handoff.py` and `tests/test_artcraft_hub.py`.
+  Test suite expanded from 292 to **296 tests, all passing (0 failures, 4 skipped)** in 8.64s.
+
 ## T035 DeckCraft native bridge + Skill-for-Design evolution — 2026-10-31
 
 - **Native rendering bridge (`scripts/deckcraft_bridge.py`).** Discovers `deckcraft-cli.exe`

@@ -60,5 +60,5 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T033 | Argon second drop: morph twins, triggers, pacing | owner + Argon | `work/T033-argon-morph-staging` | experimental (quarantined in T034) | `experiments/T033-20261016-argon-research/REPORT.md` |
 | T034 | Design system (beauty ↔ technique) + documentation standardised | Claude (cloud) | `claude/blissful-pasteur-gmll59` | tip | `experiments/T034-20261019-claude-design-system/REPORT.md` |
 | T035 | DeckCraft native bridge & Skill-for-Design evolution | Antigravity | `work/T035-deckcraft-bridge` | tip | `experiments/T035-20261031-deckcraft-bridge/REPORT.md` |
-| T036 | Skill-for-Design Foundation: Universal ArtCraft Hub, Multi-Agent Protocols & Intent Schemas | Antigravity + Argon | \work/T036-skill-for-design-core\ | claimed | \experiments/T036-20261101-skill-for-design-core/REPORT.md\ |
+| T036 | Skill-for-Design Foundation: Universal ArtCraft Hub, Multi-Agent Protocols & Intent Schemas | Antigravity + Argon | `work/T036-skill-for-design-core` | tip | `experiments/T036-20261101-skill-for-design-core/REPORT.md` |
 | T037 | *next free ID* | | | | |
