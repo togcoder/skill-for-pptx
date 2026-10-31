@@ -444,6 +444,16 @@ def frame_metrics(img,light=False):
     return {"background_share":round(share,3),"balance_offset":round(bal,3),"colourfulness":round(colourful,1)}
 
 
+def render_deckcraft(pptx,out_dir):
+    try:
+        from scripts.deckcraft_bridge import render_slides, is_available
+    except ImportError:
+        from deckcraft_bridge import render_slides, is_available
+    if not is_available():
+        raise RuntimeError("DeckCraft CLI is not available on this system.")
+    return render_slides(pptx, out_dir, scale=2)
+
+
 def render_lo(pptx,out_dir):
     soffice=shutil.which("soffice") or shutil.which("libreoffice")
     if not soffice or not shutil.which("pdftoppm"):
@@ -714,6 +724,8 @@ def critique(path,render=None,xsd=None):
         with tempfile.TemporaryDirectory() as td:
             if str(render)=="lo":
                 images=render_lo(path,td)
+            elif str(render) in ("deckcraft", "dc"):
+                images=render_deckcraft(path,td)
             else:
                 images=sorted(Path(render).glob("slide-*.png"))
             for i,img in enumerate(_frames(images,aspect),1):
@@ -784,7 +796,7 @@ def markdown(v):
 def main():
     ap=argparse.ArgumentParser(description=__doc__,formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("pptx",type=Path)
-    ap.add_argument("--render",help="'lo' to render with LibreOffice, or a directory of slide-NN.png")
+    ap.add_argument("--render",help="'deckcraft'/'dc' (native ArtCraft), 'lo' (LibreOffice), or a directory of slide-NN.png")
     ap.add_argument("--xsd",type=Path,default=os.environ.get("PPTX_PML_XSD"))
     ap.add_argument("--md",type=Path)
     ap.add_argument("-o","--output",type=Path)

@@ -7,6 +7,20 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T035 DeckCraft native bridge + Skill-for-Design evolution — 2026-10-31
+
+- **Native rendering bridge (`scripts/deckcraft_bridge.py`).** Discovers `deckcraft-cli.exe`
+  from the ArtCraft suite (`D:\artcraft\DeckCraft`). Headlessly renders slides to Full HD
+  (1920x1080) PNGs in < 1s, inspects presentation JSON, and converts formats without
+  requiring Microsoft Office or LibreOffice.
+- **Critic integration.** `scripts/design_critic.py` now supports `--render deckcraft` (or `--render dc`),
+  enabling instantaneous offline visual metrics extraction (background share, balance offset,
+  colourfulness). Tested on `report_deck_motion.pptx` in 2.1s with 100% success.
+- **Tests.** Added `tests/test_deckcraft_bridge.py`. Test suite expanded from 289 to 292 tests,
+  all passing (0 failures, 4 skipped).
+- **Skill-for-Design roadmap.** Established the architectural blueprint to evolve `skill-for-pptx`
+  into the comprehensive Skill for Design suite with PPTX as pioneer.
+
 ## T034 design system + documentation standardised — 2026-10-19
 
 Beauty and technique now share one source,
