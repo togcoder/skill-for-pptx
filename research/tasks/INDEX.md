@@ -1,7 +1,7 @@
 # Task registry
 
 This file is the one place to take a task ID. Before starting, add a row with
-status `claimed`, using the next free ID (**T035**). Push the row before you do
+status `claimed`, using the next free ID (**T036**). Push the row before you do
 expensive work. IDs are never reused. T024 was taken three times in parallel,
 so those rows carry a suffix. The experiment folders keep the names they were
 created with.
@@ -59,4 +59,5 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T032 | Evaluate + integrate Argon's T024c | Claude (desktop) | `work/T032-claude-argon-integration` | tip | `experiments/T032-20261015-claude-argon-integration/REPORT.md` |
 | T033 | Argon second drop: morph twins, triggers, pacing | owner + Argon | `work/T033-argon-morph-staging` | experimental (quarantined in T034) | `experiments/T033-20261016-argon-research/REPORT.md` |
 | T034 | Design system (beauty ↔ technique) + documentation standardised | Claude (cloud) | `claude/blissful-pasteur-gmll59` | tip | `experiments/T034-20261019-claude-design-system/REPORT.md` |
-| T035 | *next free ID* | | | | |
+| T035 | DeckCraft native bridge & Skill-for-Design evolution | Antigravity | \work/T035-deckcraft-bridge\ | claimed | \experiments/T035-20261031-deckcraft-bridge/REPORT.md\ |
+| T036 | *next free ID* | | | | |
