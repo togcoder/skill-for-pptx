@@ -1,7 +1,7 @@
 # Task registry
 
 This file is the one place to take a task ID. Before starting, add a row with
-status `claimed`, using the next free ID (**T038**). Push the row before you do
+status `claimed`, using the next free ID (**T040**). Push the row before you do
 expensive work. IDs are never reused. T024 was taken three times in parallel,
 so those rows carry a suffix. The experiment folders keep the names they were
 created with.
@@ -63,4 +63,5 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T036 | Skill-for-Design Foundation: Universal ArtCraft Hub, Multi-Agent Protocols & Intent Schemas | Antigravity + Argon | `work/T036-skill-for-design-core` | tip | `experiments/T036-20261101-skill-for-design-core/REPORT.md` |
 | T037 | Multi-Craft Bridges (WordCraft, GridCraft, VectorCraft) & Intent Decoder | Antigravity | `work/T037-multi-craft-bridges` | tip | `experiments/T037-20261101-multi-craft-bridges/REPORT.md` |
 | T038 | PPTX Design Canon Tokens, Asymmetric & Bento Grids, Optical Balance & Critic Rules | Antigravity + Argon | `work/T038-pptx-design-canon-tokens` | claimed | `experiments/T038-20261101-pptx-design-canon-tokens/REPORT.md` |
-| T039 | *next free ID* | | | | |
+| T039 | DocumentCraft & SheetCraft: professional Word canon and full Excel chart control (native + OOXML) | OpenCode (DeepSeek V4.1 Flash) | `work/T039-opencode-office-canon` | claimed | `experiments/T039-20261101-opencode-office-canon/REPORT.md` |
+| T040 | *next free ID* | | | | |
