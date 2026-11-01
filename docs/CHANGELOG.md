@@ -34,7 +34,7 @@ were true at the time. Task IDs and their branches are listed in
   pages.
 - **Tests.** `tests/test_docx_profiles.py` (7 tests); full suite 411 tests OK
   (8 skipped).
-- **Status.** EXPERIMENTAL; review requested.
+- **Status.** EXPERIMENTAL; review accepted by Argon (approve T052, round 2); awaiting owner merge.
 - Report: `experiments/T052-20261102-opencode-scientific-report/REPORT.md`.
 
 ## T048 [xlsx] Workbook UX: hidden data, VBA input, tab colour, merges — 2026-11-01

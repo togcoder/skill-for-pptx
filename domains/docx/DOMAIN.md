@@ -91,7 +91,7 @@ The T039 report is `experiments/T039-20261101-opencode-office-canon/REPORT.md`.
   (`hust-datn-2017`, `vnu-uet-kl-2024`, `iso-7144-thesis`,
   `annual-report-gri`), a 34-page HUST scientific report (48 pages total) and a
   35-page VNU-UET build of the same content (45 pages total). Both pass their
-  conformance check (23/23 and 24/24); **review requested**.
+  conformance check (23/23 and 24/24); **review accepted (Argon); awaiting owner merge**.
 - **T047 [docx] standards report**: a 25-page annual/ESG report with a declared
   ISO/GRI standards profile, a control matrix, ISO 7144 front-matter order,
   ISO 2145 numbering, 5 OMML equations, 38 tables, GRI index, VectorCraft

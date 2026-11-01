@@ -199,7 +199,7 @@ hence 23 vs 22 total tables.
 | Content is substantive | 1 | 59 headings (max H3), 23/22 tables, 7 figures, 9 equations, 12 references, 13 citation fields, 1,055/1,032 paragraphs |
 | Cross-asset pipeline works | 1 + 4 | SVG → VectorCraft → Pillow for architecture/window; Chart Forge → Excel → PNG for 5 charts; sources/alt text in DOCX |
 | Audit is clean | 1 | HUST and VNU: `ok: true`, 0 errors, 0 warnings (profile-aware margin floor); 204 fields, 88 bookmarks, `vi-VN` |
-| Tests cover the profile layer | 1 | `tests/test_docx_profiles.py` (4 tests); full suite 411 tests OK, 8 skipped |
+| Tests cover the profile layer | 1 | `tests/test_docx_profiles.py` (7 tests); full suite 411 tests OK, 8 skipped |
 
 **Hashes:** see `artifacts/SHA256SUMS.txt`.
 
@@ -261,6 +261,17 @@ Preview: `preview/hust/page-01.png` (cover), `page-06.png` (TOC),
 
 ## Review response
 
+Argon review 2026-11-02 (chat `0:cf4bb6173adaaa34`), verdict **revise** in
+round 1 and **approve T052** in round 2. Full record:
+`research/reviews/T052-argon-20261102.md`.
+
 | Finding | Response (fixed / disputed / deferred → task) |
 |---|---|
-| — | Pending review. No findings yet. |
+| B1: front-matter checker omitted `task`/`preface` | **Fixed.** Title map includes both, scan stops at the first body chapter, actual order prints only wanted keys; HUST shows `NHIỆM VỤ → …`. |
+| B2: reference position never measured | **Fixed.** `references-position` check; HUST before appendix, VNU after, both pass. |
+| B3: equation numbering only looked at field names | **Fixed.** Visible `(chapter.local)` parsed, `STYLEREF "Heading 1" \s` + `SEQ ... \s 1` checked, reset per chapter, fail on mismatch; negative test. |
+| M1: caption totals mixed body/appendix | **Fixed.** Body 19 tables + 7 figures = 26 captions; appendix 2 tables; counts printed separately. |
+| M2: `body_pages` skipped/warn-only | **Fixed.** `document_forge` passes Word's count; CLI warns if absent; below-minimum is `fail`; range prints `≤50` / `35–50`. |
+| M3: typography checks incomplete | **Fixed.** Space-after, alignment, heading sizes, caption size and `Chapter Unnumbered` style checked. |
+| M4: `_deep_merge` shared/None | **Fixed.** `copy.deepcopy`, skip `None`. |
+| m1: architecture labels small | **Improved.** Labels enlarged; still dense at 150 mm, disclosed. |
