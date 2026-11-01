@@ -42,8 +42,11 @@ word_field_kit.py                    word_field_kit.audit_docx
 | `scripts/word_field_kit.py` | Fields, TOC, SEQ captions, REF/PAGEREF, STYLEREF, bookmarks, numbering, audit |
 | `scripts/document_forge.py` | Build DOCX from a spec; refresh with Word/WordCraft; render |
 | `scripts/document_audit.py` | Standalone structural audit |
+| `scripts/word_math.py` | LaTeX subset → OMML equations (T045) |
+| `examples/docx/annual_report_spec.json` | Rich-report fixture: cover hero, side-by-side, equations, merged table, image cells (T045) |
 | `skills/document-craft/` | Workflow, standards note, Word property matrix, layout recipes |
 | `tests/test_document_craft.py` | Structural build/audit tests |
+| `tests/test_document_advanced.py` | OMML, side-by-side, rich tables, malformed-grid/alt negative tests |
 
 ## What the generator guarantees
 
@@ -71,6 +74,27 @@ word_field_kit.py                    word_field_kit.audit_docx
   `convert --update-fields` is the fallback. `w:updateFields` is set when the
   file is delivered without a native refresh.
 
+## Advanced report blocks (T045)
+
+- **Side-by-side media/text** (`figure_text`): a borderless two-cell table,
+  image on the left or right, text column beside it, caption below. Inline
+  images; alt text; no floating anchors.
+- **Native equations** (`equation`): LaTeX subset → OMML (`m:oMath`), optional
+  right-aligned `SEQ Equation` number. Supported: fractions, powers,
+  subscripts, roots, sums/integrals, parentheses, accents, Greek letters and
+  common operators. Unsupported commands raise a clear error, not a broken
+  equation.
+- **Merged-header tables** (`table.advanced`): multiple header rows
+  (`tblHeader`), `colspan`/`rowspan`, explicit merges, row heights, cell
+  margins, per-cell alignment/vertical alignment, fills and image cells.
+- **Callouts** (`callout`): a shaded single-cell panel with a left accent rule.
+- **KPI list** (`key_values`): a borderless label/value table; values bold.
+- **Cover hero** (`cover.hero_image`): a full-text-width inline image above the
+  title; the title remains a paragraph for accessibility and metadata.
+- **Cross-craft asset**: the T045 cover/icon SVG is rasterised with VectorCraft;
+  the receiving DOCX test is the acceptance gate. The generator still works
+  with a plain PNG if VectorCraft is absent.
+
 ## Rules → generator → checker
 
 | Rule | Generator | Checker |
@@ -92,6 +116,26 @@ word_field_kit.py                    word_field_kit.audit_docx
 | DOC-METADATA | core properties | title/author |
 | DOC-FIELDS-UPDATED | Word/WordCraft refresh | dirty fields warning |
 | DOC-APPENDIX | appendix list + `A.` prefix + reset | heading/caption check |
+| DOC-EQUATION | `word_math.omml_from_latex`; `SEQ Equation` number | OMML present; equations count |
+| DOC-SIDE-BY-SIDE | borderless 2-cell table, image width ≤ 60% | table/image width; caption below |
+| DOC-TABLE-MERGE | header rows + `gridSpan`/`vMerge` | merge ranges; no header warning on layout tables |
+| DOC-CELL-IMAGE | inline image in a table cell, alt text | `wp:docPr@descr`; row height |
+| DOC-COVER-HERO | inline hero image, alt text, title still a paragraph | image width/alt; cover title |
+
+## T045 evidence
+
+- 11-page annual-report fixture: cover hero, KPI strip, callout, side-by-side
+  figure/text, 2 OMML equations, merged-header table with icon cells, appendix.
+- Word opened the exact DOCX, refreshed fields and exported PDF; pages 1, 6, 7,
+  8 and 11 inspected.
+- Audit: `ok: true`, 20 fields, 15 bookmarks, 6 tables, 6 drawings, 3 sections,
+  2 equations (1 numbered), 5 merged cells, 5 images in cells; table-grid,
+  vMerge-origin, image-width and alt-text checks; language `vi-VN`; no
+  errors/warnings.
+- Cross-craft: VectorCraft rasterised the SVG cover/icons; the DOCX render is
+  the acceptance gate. The cross-craft rule is in `AGENTS.md` and
+  `lab/standards/RESEARCH.md`.
+- Report: `experiments/T045-20261101-opencode-advanced-docx/REPORT.md`.
 
 ## Using it
 
@@ -124,6 +168,19 @@ results and sets `w:updateFields`.
   font licences. Test Vietnamese/CJK glyphs in the final PDF.
 - **Standards status.** The knowledge file records status at 2026-11-01. ISO
   5966 is withdrawn; ISO 7144/2145/7200/690 are current. Verify before citing.
+- **Equation coverage.** The LaTeX parser covers the report subset, not
+  matrices, `cases`, aligned environments or chemistry. Unsupported input
+  raises an error; use WordCraft's equation command or a MathML→OMML path for
+  those.
+- **Merged-cell accessibility.** `gridSpan`/`vMerge` can change the header
+  association for a screen reader; test the tag tree, not only the visual table.
+- **Image-cell row heights.** A picture in a cell does not always expand the row
+  automatically; the spec's `row_heights_mm` is the explicit control.
+- **Cover art.** The hero is an inline image inside the text column, not a
+  full-bleed print cover. Record the VectorCraft/other-tool version, command and
+  asset licence; the synthetic art is CC0-style, not a customer brand.
+- **Cross-craft acceptance.** A VectorCraft asset is accepted only after the
+  DOCX render/audit; a tool transfer is not canonical by itself.
 
 ## Next
 

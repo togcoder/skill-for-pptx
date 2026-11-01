@@ -75,7 +75,8 @@ Legend:
 | Bibliography | References → Bibliography | `references.bibliography={"title":"…"}` | `BIBLIOGRAPHY` field + `customXml` | reference list | entries |
 | Citation style | References → Style | `references.citationStyle={"style":"ISO 690 (author-date)"}` | `b:Sources` style | document text | one style |
 | Footnote / endnote | References → Insert Footnote | `references.footnote={"text":"…"}`, `references.noteOptions` | `w:footnoteReference`, `footnotes.xml` | raw XML | numbering |
-| Equation | Insert → Equation | `insert.equation={"latex":"…"}` | `m:oMath` | raw XML | display |
+| Equation | Insert → Equation | `insert.equation={"latex":"…"}` | `m:oMath` / `m:oMathPara` | `word_math.omml_from_latex` | OMML present |
+| Equation number | References → Insert Caption (Equation) | `equation.number={"value":true}` | `SEQ Equation` field | `add_field` | number field |
 | Index | References → Insert Index | `references.index`, `references.updateIndex` | `INDEX` field | audit | entries |
 
 ## Tables
@@ -92,7 +93,8 @@ Legend:
 | Don't split row | Row → Allow row to break | `table.properties={"allowBreak":false}` | `w:cantSplit` | `trPr` | rows |
 | Cell alignment | Table Layout → Align | `table.cellAlign={"value":"center"}` | `w:tcPr/w:vAlign`, `w:jc` | `cell.vertical_alignment` | numeric right |
 | Cell margins | Table Properties → Cell Margins | `table.cellMargins={"top":2,"left":2,"bottom":2,"right":2}` | `w:tblCellMar` | raw XML | 1.5–3 mm |
-| Merge / split | Table Layout → Merge/Split | `table.merge`, `table.split` | `w:gridSpan`, `w:vMerge` | `cell.merge` | accessibility |
+| Merge / split | Table Layout → Merge/Split | `table.merge`, `table.split` | `w:gridSpan`, `w:vMerge` | `cell.merge`; T045 `merges`/`header_rows` | accessibility |
+| Image in cell | Insert → Pictures inside a cell | `insert.picture` at the caret | `w:drawing` in `w:tc` | `cell.paragraphs[0].add_run().add_picture` | alt text, row height |
 | Table caption/alt | Table Properties → Alt Text | `table.altText={"text":"…","title":"…"}` | `w:tblCaption`, `w:tblDescription` | raw XML | present |
 | Sort table | Table Layout → Sort | `table.sort={"column":1,"header":true}` | table data | manual | numeric order |
 
@@ -109,6 +111,8 @@ Legend:
 | Border / style | Picture Format → Picture Styles | `picture.style={"style":"simpleFrame"}`, `picture.border` | `a:ln`, `p:style` | raw XML | contrast |
 | Compress | Picture Format → Compress | `picture.compress={"maxPixels":…}` | image part | — | DPI |
 | Logo on cover | Insert → Pictures | `insert.picture` | `wp:inline` | `add_picture` | alt text |
+| Cover hero band | Insert → Pictures | `insert.picture` | `wp:inline` | `cover.hero_image` | alt text / width |
+| Side-by-side media | Insert → Table (borderless) | `insert.table` + `insert.picture` | `w:tbl` + `w:drawing` in cell | `figure_text` | caption below |
 
 ## Review, protection and output
 

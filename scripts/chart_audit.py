@@ -442,8 +442,11 @@ def _series_info(ser, *, ax_ids: list[str] | None = None) -> dict:
                         except (TypeError, ValueError):
                             pass
     color = None
+    hidden = False
     sp = ser.find(q(C, "spPr"))
     if sp is not None:
+        no_fill = sp.find(q(A, "noFill"))
+        hidden = no_fill is not None
         clr = sp.find(f".//{q(A, 'srgbClr')}")
         if clr is not None:
             color = clr.get("val")
@@ -460,7 +463,7 @@ def _series_info(ser, *, ax_ids: list[str] | None = None) -> dict:
         if clr is not None:
             point_colors.append(clr.get("val"))
     return {"name": name, "values": values, "values_ref": ref, "color": color,
-            "marker": marker_type, "has_labels": labels is not None,
+            "hidden": hidden, "marker": marker_type, "has_labels": labels is not None,
             "point_colors": point_colors, "ax_ids": ax_ids or []}
 
 
@@ -518,9 +521,20 @@ def _chart_info(root) -> dict:
         overlap = overlap or _val(g, "overlap")
         hole = hole or _val(g, "holeSize")
         rotation = rotation or _val(g, "firstSliceAng")
+    visible_axes = [ax for ax in axes if ax["kind"] in {"catAx", "valAx", "dateAx"}]
+    network = (chart_type == "scatterChart" and bool(visible_axes) and
+               all(ax["delete"] in {"1", "true"} for ax in visible_axes))
+    date_formatted = any(
+        ax.get("num_fmt") and re.search(r"(yy|mmm|dd)", str(ax["num_fmt"]))
+        for ax in axes
+    )
+    gantt = (chart_type == "barChart" and
+             any(s.get("hidden") for s in series) and date_formatted)
     return {
         "type": chart_type,
         "types": types,
+        "network": network,
+        "gantt": gantt,
         "title": title,
         "series": series,
         "axes": axes,
@@ -665,7 +679,12 @@ def audit_workbook(path: str | Path, system: dict | None = None) -> dict:
                         warnings.append(f"chart {index}: pie/doughnut slices share a colour; apply a categorical palette")
             if len(info["series"]) > max_series:
                 warnings.append(f"chart {index}: {len(info['series'])} series (> {max_series}); use small multiples or highlight one series")
-            if info["series"] and len(info["series"]) > 1 and not info["legend"]:
+            visible_series = [s for s in info["series"] if not s.get("hidden")]
+            gantt = ("barChart" in info.get("types", []) and
+                     len(visible_series) <= 3 and
+                     any(not s.get("color") for s in visible_series))
+            if (visible_series and len(visible_series) > 1 and not info["legend"]
+                    and not info.get("network") and not gantt):
                 warnings.append(f"chart {index}: multiple series but no legend")
             if info["legend"] and info["legend"].get("overlay") in {"1", "true"} and len(info["series"]) > 4:
                 warnings.append(f"chart {index}: overlay legend covers the plot with {len(info['series'])} series")
@@ -692,7 +711,8 @@ def audit_workbook(path: str | Path, system: dict | None = None) -> dict:
                         errors.append(f"chart {index}: logarithmic axis base must be > 1")
                     if ax["min"] is not None and _float(ax["min"], 0) <= 0:
                         errors.append(f"chart {index}: logarithmic axis minimum must be > 0")
-                if "barChart" in info.get("types", []) and ax["min"] is not None:
+                if ("barChart" in info.get("types", []) and ax["min"] is not None
+                        and not info.get("gantt")):
                     if _float(ax["min"], 0) > 0:
                         warnings.append(f"chart {index}: value axis starts at {ax['min']}, truncating bar length; start at zero")
                 if ax["max"] is not None and ax["pos"] in {"l", "r"} and info["series"]:
@@ -716,8 +736,15 @@ def audit_workbook(path: str | Path, system: dict | None = None) -> dict:
                     warnings.append(f"chart {index}: {w / points:.2f} cm per category (< {min_category:.2f}); rotate labels or reduce categories")
 
             # Colour: contrast and pairwise distinctness.
-            colors = [_hex(s.get("color")) for s in info["series"] if s.get("color")]
+            colors = [_hex(s.get("color")) for s in info["series"]
+                      if s.get("color") and not s.get("hidden")]
             colors = [c for c in colors if c]
+            if info.get("network"):
+                colors = []  # edges are one visual layer, not a categorical palette
+            elif gantt:
+                colors = [_hex(s.get("color")) for s in info["series"]
+                          if s.get("color") and not s.get("hidden")]
+                colors = [c for c in colors if c]
             for color in colors:
                 if _contrast(color, (255, 255, 255)) < contrast_graphic:
                     warnings.append(f"chart {index}: series colour #{''.join(f'{v:02X}' for v in color)} is below {contrast_graphic:.1f}:1 against white")

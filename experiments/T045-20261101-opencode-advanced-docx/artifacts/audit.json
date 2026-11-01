@@ -1,0 +1,200 @@
+﻿{
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "fields were refreshed before delivery; w:updateFields is no longer needed"
+  ],
+  "stats": {
+    "fields": 20,
+    "field_commands": {
+      "TOC": 3,
+      "PAGEREF": 9,
+      "SEQ": 4,
+      "PAGE": 2,
+      "STYLEREF": 1,
+      "SECTIONPAGES": 1
+    },
+    "bookmarks": 15,
+    "headings": 6,
+    "max_heading_level": 1,
+    "tables": 6,
+    "figures": 6,
+    "sections": 3,
+    "paragraphs": 119,
+    "equations": 2,
+    "display_equations": 0,
+    "equation_numbers": 1,
+    "images_in_cells": 5,
+    "merged_cells": 5,
+    "languages": [
+      "vi-VN"
+    ],
+    "text_width_twips": 8788,
+    "section_text_widths": [
+      8788
+    ]
+  },
+  "fields": [
+    {
+      "part": "word/document.xml",
+      "command": "TOC",
+      "instr": "TOC \\o \"1-3\" \\h \\z \\u",
+      "result": "1 Tá»•ng quan2 Káº¿t quáº£ vĂ  phÆ°Æ¡ng phĂ¡p3 Báº£ng dá»¯ liá»‡u phá»©c há»£p4 Káº¿t luáº­n5 TĂ i liá»‡u tham kháº£oPhá»¥ lá»¥c A Dá»¯ liá»‡u nguá»“n",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244428909 \\h",
+      "result": "1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244428910 \\h",
+      "result": "2",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244428911 \\h",
+      "result": "3",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244428912 \\h",
+      "result": "4",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244428913 \\h",
+      "result": "5",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244428914 \\h",
+      "result": "6",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "TOC",
+      "instr": "TOC \\h \\z \\c \"Figure\"",
+      "result": "HĂ¬nh 1 â€” Báº£n sáº¯c hĂ¬nh áº£nh cá»§a bĂ¡o cĂ¡o.",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244428915 \\h",
+      "result": "2",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "TOC",
+      "instr": "TOC \\h \\z \\c \"Table\"",
+      "result": "Báº£ng 1 â€” Chá»‰ sá»‘ theo Ä‘Æ¡n vá»‹Báº£ng A.1 â€” Dá»¯ liá»‡u nguá»“n theo quĂ½",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244428916 \\h",
+      "result": "3",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244428917 \\h",
+      "result": "6",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Figure \\* ARABIC",
+      "result": "1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Equation \\* ARABIC",
+      "result": "1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Table \\* ARABIC",
+      "result": "1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Table \\* ARABIC \\r 1",
+      "result": "1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/footer2.xml",
+      "command": "PAGE",
+      "instr": "PAGE \\* MERGEFORMAT",
+      "result": "i",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/header3.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\* MERGEFORMAT",
+      "result": "Dá»¯ liá»‡u nguá»“n",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/footer3.xml",
+      "command": "PAGE",
+      "instr": "PAGE \\* MERGEFORMAT",
+      "result": "1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/footer3.xml",
+      "command": "SECTIONPAGES",
+      "instr": "SECTIONPAGES \\* MERGEFORMAT",
+      "result": "6",
+      "complete": true,
+      "dirty": false
+    }
+  ]
+}
