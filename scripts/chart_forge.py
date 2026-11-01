@@ -474,7 +474,7 @@ def main() -> None:
     if args.cmd == "build":
         report = build_chart(args.spec, args.output)
         if args.render:
-            report["rendered"] = _render_gridcraft(args.output, args.render)
+            report["rendered"] = _render_any(args.output, args.render)
         print(json.dumps(report, indent=2, ensure_ascii=False))
         if args.report:
             args.report.parent.mkdir(parents=True, exist_ok=True)
@@ -484,18 +484,69 @@ def main() -> None:
         print(json.dumps(inspect_chart(args.xlsx), indent=2, ensure_ascii=False))
 
 
+def _render_any(xlsx: Path, out_dir: Path) -> list[str]:
+    """Prefer native Excel chart export (rung 4–5), then GridCraft (rung 3)."""
+    paths = _render_excel(xlsx, out_dir)
+    if paths:
+        return paths
+    return _render_gridcraft(xlsx, out_dir)
+
+
+def _render_excel(xlsx: Path, out_dir: Path) -> list[str]:
+    """Export every ChartObject with Excel's own renderer."""
+    try:
+        import win32com.client as win32
+    except Exception:
+        return []
+    # Excel's Export resolves a relative path against its own working dir, not
+    # the shell's; resolve before handing it over.
+    out_dir = Path(out_dir).resolve()
+    out_dir.mkdir(parents=True, exist_ok=True)
+    excel = None
+    wb = None
+    try:
+        excel = win32.DispatchEx("Excel.Application")
+        excel.Visible = False
+        excel.DisplayAlerts = False
+        wb = excel.Workbooks.Open(str(xlsx.resolve()), False, True)
+        paths = []
+        for si in range(1, wb.Worksheets.Count + 1):
+            sheet = wb.Worksheets(si)
+            count = sheet.ChartObjects().Count
+            for i in range(1, count + 1):
+                target = out_dir / f"chart-{si}-{i}.png"
+                sheet.ChartObjects(i).Chart.Export(str(target), "PNG")
+                paths.append(str(target))
+        return paths
+    except Exception:
+        return []
+    finally:
+        if wb is not None:
+            try:
+                wb.Close(False)
+            except Exception:
+                pass
+        if excel is not None:
+            try:
+                excel.Quit()
+            except Exception:
+                pass
+
+
 def _render_gridcraft(xlsx: Path, out_dir: Path) -> list[str]:
     """Render workbook to PDF via GridCraft, then PDF pages to PNG."""
-    import subprocess
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
-    cli = Path(r"D:\artcraft\GridCraft\gridcraft-cli.exe")
-    if not cli.is_file():
-        return []
-    pdf = out_dir / "workbook.pdf"
-    res = subprocess.run([str(cli), "convert", str(xlsx), str(pdf)],
-                         capture_output=True, text=True, encoding="utf-8", errors="replace", check=False)
-    if res.returncode != 0 or not pdf.is_file():
+    try:
+        try:
+            from .gridcraft_bridge import find_gridcraft_cli, convert_sheet
+        except ImportError:
+            from gridcraft_bridge import find_gridcraft_cli, convert_sheet
+        if not find_gridcraft_cli():
+            return []
+        pdf = out_dir / "workbook.pdf"
+        convert_sheet(xlsx, pdf)
+    except Exception:
         return []
     try:
         import fitz

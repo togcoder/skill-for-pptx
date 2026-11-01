@@ -72,7 +72,7 @@ one in a generator.
 | 1 | schema / structural audit | `chart_audit.py`: 3 workbooks, combo/doughnut/scatter, no errors/warnings |
 | 2 | library (xlsxwriter) | `chart_forge.py` builds; `chart_audit.py` re-reads the package in tests |
 | 3 | GridCraft PDF render | Rendered; **font limitation**: Vietnamese diacritics clipped in the PDF |
-| 4–5 | Excel COM open / chart export | Excel opened the exact workbooks and `Chart.Export` produced the PNGs; text and axes correct |
+| 4–5 | Excel COM open / chart export | Excel opened the exact workbooks and `Chart.Export` produced the PNGs (now automated by `chart_forge --render` when Excel is available); text and axes correct |
 | 6 | human works with the file | Not run |
 
 The T041 report is
@@ -91,6 +91,15 @@ The T041 report is
   recipes, not claimed as generated.
 - Known limitation: the audit is structural, not a label-collision measurement.
   A render is still required.
+- Known limitation: a one-cell anchor fixes the size but the top-left still
+  depends on the from-cell; inserting rows/columns before the chart moves it.
+- Known limitation: xlsxwriter may omit `c:numCache`; the audit falls back to
+  worksheet values, but a reader without a calculation engine may show blank
+  until Excel saves the file.
+- Architecture boundary: `gridcraft_bridge` is the adapter to the external CLI
+  (`info`/`eval`/`convert`); `chart_forge`/`chart_patch`/`chart_audit` are the
+  native OOXML builder/patch/auditor. The canonical-module decision is still
+  open (MERGE.md).
 
 ## Open questions
 

@@ -147,6 +147,97 @@ class ChartForgeTests(unittest.TestCase):
             self.assertGreaterEqual(xml.count("<c:dPt>"), 5)
             self.assertIn('val="55"', xml)
 
+    @unittest.skipUnless(HAVE_XLSXWRITER, "xlsxwriter is not installed")
+    def test_patch_reaches_second_series_of_combo(self):
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            out = tmp / "combo.xlsx"
+            build_chart(_combo_spec(tmp), out)
+            patched = tmp / "patched.xlsx"
+            patch_workbook(out, {"charts": [{"index": 1, "series": [{}, {"color": "#C00000", "line_width": 3.0}]}]}, patched)
+            with zipfile.ZipFile(patched) as zf:
+                xml = zf.read("xl/charts/chart1.xml").decode("utf-8")
+            self.assertIn("C00000", xml)
+            # The second series lives in the lineChart group, not the bar group.
+            self.assertIn("lineChart", xml)
+            self.assertIn('w="38100"', xml)
+
+    @unittest.skipUnless(HAVE_XLSXWRITER, "xlsxwriter is not installed")
+    def test_manual_layout_child_order(self):
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            out = tmp / "combo.xlsx"
+            build_chart(_combo_spec(tmp), out)
+            patched = tmp / "patched.xlsx"
+            patch_workbook(out, {"charts": [{"index": 1,
+                                             "plot_layout": {"x": 0.1, "y": 0.1, "w": 0.7, "h": 0.6}}]}, patched)
+            with zipfile.ZipFile(patched) as zf:
+                xml = zf.read("xl/charts/chart1.xml").decode("utf-8")
+            manual = xml[xml.index("<c:manualLayout>"):xml.index("</c:manualLayout>")]
+            self.assertLess(manual.index("<c:xMode"), manual.index("<c:x "))
+            self.assertLess(manual.index("<c:wMode"), manual.index("<c:w "))
+            self.assertLess(manual.index("<c:x "), manual.index("<c:y "))
+
+    @unittest.skipUnless(HAVE_XLSXWRITER, "xlsxwriter is not installed")
+    def test_axis_max_is_checked_per_axis_group(self):
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            spec = {
+                "meta": {"title": "Two scales", "sheet": "Data"},
+                "data": {"headers": ["X", "Left", "Right"], "rows": [["A", 120, 230], ["B", 150, 240]]},
+                "chart": {
+                    "type": "combo", "title": "Two scales",
+                    "position": {"cell": "E2", "width_cm": 16, "height_cm": 9},
+                    "axes": {"y": {"min": 0, "max": 200}, "y2": {"min": 0, "max": 260}},
+                    "series": [
+                        {"name": "Left", "column": 1, "type": "column", "color": "#1F4E79"},
+                        {"name": "Right", "column": 2, "type": "line", "axis": "secondary", "color": "#C55A11"},
+                    ],
+                },
+                "post": {"anchor": "one_cell"},
+            }
+            path = tmp / "two.json"
+            path.write_text(json.dumps(spec, ensure_ascii=False), encoding="utf-8")
+            out = tmp / "two.xlsx"
+            report = build_chart(path, out)
+            self.assertTrue(report["ok"], report["audit"])
+            audit = audit_workbook(out)
+            self.assertFalse(any("axis maximum 200" in w for w in audit["warnings"]), audit["warnings"])
+
+    @unittest.skipUnless(HAVE_XLSXWRITER, "xlsxwriter is not installed")
+    def test_chart_outside_print_area_is_warned(self):
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            path = tmp / "outside.xlsx"
+            wb = xlsxwriter.Workbook(str(path))
+            ws = wb.add_worksheet("Data")
+            ws.write_row(0, 0, ["A", "B"])
+            ws.write_row(1, 0, ["x", 1])
+            ws.write_row(2, 0, ["y", 2])
+            ws.print_area("A1:B2")
+            chart = wb.add_chart({"type": "column"})
+            chart.add_series({"categories": "=Data!$A$2:$A$3", "values": "=Data!$B$2:$B$3"})
+            ws.insert_chart("Z50", chart)
+            wb.close()
+            audit = audit_workbook(path)
+            self.assertTrue(any("outside the print area" in w for w in audit["warnings"]), audit["warnings"])
+
+    @unittest.skipUnless(HAVE_XLSXWRITER, "xlsxwriter is not installed")
+    def test_stale_cache_is_warned(self):
+        try:
+            import openpyxl
+        except Exception:
+            self.skipTest("openpyxl is not installed")
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            out = tmp / "combo.xlsx"
+            build_chart(_combo_spec(tmp), out)
+            wb = openpyxl.load_workbook(out)
+            wb["Data"]["B2"] = 999
+            wb.save(out)
+            audit = audit_workbook(out)
+            self.assertTrue(any("cache differs" in w for w in audit["warnings"]), audit["warnings"])
+
     def test_document_spec_schema_is_valid_json(self):
         root = Path(__file__).resolve().parents[1]
         schema = json.loads((root / "domains" / "xlsx" / "schemas" / "chart_spec.schema.json").read_text(encoding="utf-8"))

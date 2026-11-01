@@ -1,11 +1,13 @@
-# T041 [xlsx] — SheetCraft: full Excel chart control
+# T041 [xlsx] — SheetCraft: controlled standard DrawingML charts and OOXML patch
 
 ## Frame
 
 - **Question:** can a semantic chart spec plus a small OOXML patch layer produce
-  an Excel chart whose geometry, axes, labels, legend, palette and print layout
-  survive editing — including combo/secondary-axis, doughnut and scatter charts
-  that commonly come out stretched, flat, colourless or broken?
+  a controlled Excel chart (standard DrawingML types: column/bar, line, area,
+  pie/doughnut, scatter, bubble, radar, stock, combo) whose geometry, axes,
+  labels, legend, palette and print layout survive editing — including
+  combo/secondary-axis, doughnut and scatter charts that commonly come out
+  stretched, flat, colourless or broken?
 - **Hypothesis:** yes, if the chart is created with an explicit type/series/axis
   spec, converted to a one-cell anchor with a fixed extent, audited against
   geometry/axis/cache/contrast rules, and rendered in Excel.
@@ -47,8 +49,8 @@ python scripts/chart_audit.py "$e/artifacts/chart-combo.xlsx"    --md "$e/artifa
 python scripts/chart_audit.py "$e/artifacts/chart-doughnut.xlsx" --md "$e/artifacts/chart-doughnut-audit.md"
 python scripts/chart_audit.py "$e/artifacts/chart-scatter.xlsx"  --md "$e/artifacts/chart-scatter-audit.md"
 
-# Native Excel chart export (pywin32)
-# Excel.Workbooks.Open(...).Worksheets(1).ChartObjects(1).Chart.Export(png, "PNG")
+# `--render` now tries native Excel Chart.Export first (rung 4–5) and falls
+# back to GridCraft → PDF → PNG (rung 3).
 
 # GridCraft render (rung 3)
 gridcraft-cli convert "$e/artifacts/chart-combo.xlsx" "$e/preview/workbook.pdf"
@@ -70,15 +72,15 @@ doughnut, and an 8-point cost/satisfaction scatter. The spec schema is
 | Charts print | 1 | `definedName _xlnm.Print_Area` includes the chart; landscape/fit set |
 | Alt text is present | 1 | `xdr:cNvPr@descr` on each chart frame |
 | The patch layer controls existing charts | 1 | `chart_patch.py apply` on `proto.xlsx` changed title/legend/axes/bar/labels and converted the anchor; audit then clean |
-| Tests cover build/patch/audit and the small-chart failure | 1 | `tests/test_sheet_craft.py`: 5 tests (combo, patch, small chart, doughnut palette, schema) |
+| Tests cover build/patch/audit and the failure modes | 1 | `tests/test_sheet_craft.py`: 10 tests (combo, patch second series, per-axis max, print-area rejection, stale cache, manualLayout order, small chart, doughnut palette, schema, audit) |
 
 **Hashes:** see `artifacts/SHA256SUMS.txt`.
 
 | File | SHA-256 |
 |---|---|
-| `chart-combo.xlsx` | `c164f30c7ae987e5464a412943502ef8473c422a1196f1d7e0122399624935d7` |
-| `chart-doughnut.xlsx` | `95a9fa49d9786e07b3859a9094ea56f6ee235dbe60f83690630399409dae5bee` |
-| `chart-scatter.xlsx` | `bbbfd26f7c249e3596e8f260a3eb2a28c94359f373af8c43c5b4757ec0d6d08e` |
+| `chart-combo.xlsx` | `2e36cc6cd561cfc49c9b1f63f5c21988a702f30746e36a91f5396b3335ccd53f` |
+| `chart-doughnut.xlsx` | `2a005a133eaed3d86bcf1c2d54d7c4c642fb890a26c49329828be8073188b826` |
+| `chart-scatter.xlsx` | `70811a053b22d04b5618684530b8a5c40f841f868cdbffc33189dcf32a18b61f` |
 
 Rendered evidence: `preview/chart-combo.png`, `chart-doughnut.png`,
 `chart-scatter.png` (Excel `Chart.Export`). GridCraft PDF was also produced, but
@@ -104,10 +106,20 @@ its font dropped Vietnamese diacritics; it is not the primary visual evidence.
 6. **Theme colours are not resolved.** Only explicit `srgbClr` values are
    contrast-checked; theme colours would need a theme-map resolver.
 7. **No LibreOffice Calc (rung 3) and no human workbook edit (rung 6).** Excel
-   COM export is rung 4–5 for our files, not a human session.
+   COM export is rung 4–5 for our files, not a human session. `--render` can
+   now produce that export automatically when Excel is available.
 8. **Excel repair is not detected.** The audit cannot prove Excel will not offer
    to repair the package; the exact files were opened/exported by Excel, but a
    save round-trip was not diffed.
+9. **One-cell anchor position still depends on the from-cell.** The size is
+   fixed, but inserting/deleting rows or columns before the chart moves the
+   anchor. The next step is a drawing anchor that is independent of the cell
+   grid, or a rebuild after structural edits.
+10. **xlsxwriter may omit `c:numCache`.** The audit falls back to worksheet
+    values, but a third-party reader without a calculation engine may show an
+    empty chart until Excel saves it. A full formula-result cache is future work.
+11. **Label collision is a heuristic.** The audit measures counts, font sizes
+    and geometry, not rendered glyph boxes; a visual check is still required.
 
 ## Next
 
@@ -124,6 +136,15 @@ its font dropped Vietnamese diacritics; it is not the primary visual evidence.
 
 ## Review response
 
+Review: `research/reviews/T041-argon-20261101.md` (Argon, 2026-11-01; code/report
+review only, no repo/test run). Verdict `revise`; responses below are fixes in
+this branch, not a new review round.
+
 | Finding | Response (fixed / disputed / deferred → task) |
 |---|---|
-| — | Pending review. No findings yet. |
+| R4 combo series/axis blind spots | **Fixed:** `chart_info`/`patch_chart_xml` flatten `c:ser` across every chart group and attach `ax_ids`; `chart_audit` checks `axis maximum` only against series on that axis. Tests: patch second series of a combo; two different y/y2 scales. |
+| R5 XML order in manualLayout and a:ln | **Fixed:** `plot_layout` and trendline label emit `layoutTarget, xMode, yMode, wMode, hMode, x, y, w, h`; `_solid_fill` inserts before `prstDash`/join/end-cap. |
+| R6 print-area and cache checks were stubs | **Fixed:** chart rect is compared with the print-area rect; cache is compared point-by-point; when `numCache` is absent the audit uses worksheet values. Tests: chart outside print area; stale cache after editing a cell. |
+| R7 rung 4–5 manual / “full control” overclaim | **Fixed/clarified:** `--render` now tries Excel `Chart.Export` first, then GridCraft; title/scope narrowed to standard DrawingML chart types, with ChartEx listed as recipes. |
+| R8 hard-coded ArtCraft path / overlap | **Fixed:** `chart_forge._render_gridcraft` uses `gridcraft_bridge.find_gridcraft_cli/convert_sheet`, no `D:\artcraft` literal. Domain card defines bridge = adapter, forge/patch/audit = native builder. |
+| R9 limitations incomplete | **Fixed:** limitations 9–11 added (anchor from-cell dependency, missing numCache, heuristic label collision). |

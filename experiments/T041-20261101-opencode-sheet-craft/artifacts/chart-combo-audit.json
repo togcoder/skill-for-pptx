@@ -40,7 +40,11 @@
           "color": "1F4E79",
           "marker": null,
           "has_labels": false,
-          "point_colors": []
+          "point_colors": [],
+          "ax_ids": [
+            "50010001",
+            "50010002"
+          ]
         },
         {
           "name": "Má»¥c tiĂªu",
@@ -59,12 +63,17 @@
           "color": "C55A11",
           "marker": "",
           "has_labels": true,
-          "point_colors": []
+          "point_colors": [],
+          "ax_ids": [
+            "60010001",
+            "60010002"
+          ]
         }
       ],
       "axes": [
         {
           "kind": "catAx",
+          "ax_id": "50010001",
           "pos": "b",
           "min": null,
           "max": null,
@@ -76,6 +85,7 @@
         },
         {
           "kind": "catAx",
+          "ax_id": "60010001",
           "pos": "b",
           "min": null,
           "max": null,
@@ -87,6 +97,7 @@
         },
         {
           "kind": "valAx",
+          "ax_id": "50010002",
           "pos": "l",
           "min": "0.0",
           "max": "240.0",
@@ -98,6 +109,7 @@
         },
         {
           "kind": "valAx",
+          "ax_id": "60010002",
           "pos": "r",
           "min": "0.0",
           "max": "240.0",
@@ -154,7 +166,13 @@
       "aspect": 1.793,
       "anchor_kind": "oneCellAnchor",
       "alt": "Chá»‰ sá»‘ thá»±c táº¿ so vá»›i má»¥c tiĂªu",
-      "inside_print_area": true
+      "inside_print_area": true,
+      "print_area_cm": [
+        0.0,
+        0.0,
+        30.22,
+        11.64
+      ]
     }
   ]
 }

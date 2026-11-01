@@ -3,8 +3,9 @@
 Status: EXPERIMENTAL — T041 [xlsx], review requested (2026-11-01). Evidence
 reached: structural (rung 1), GridCraft PDF render (rung 3) and Microsoft Excel
 chart export (rung 4–5 for the exact files in
-`experiments/T041-20261101-opencode-sheet-craft/artifacts/`). No LibreOffice
-Calc rung 3, no human rating; the audit is not a beauty score.
+`experiments/T041-20261101-opencode-sheet-craft/artifacts/`; `--render` prefers
+Excel and falls back to GridCraft). No LibreOffice Calc, no human rating; the
+audit is not a beauty score.
 
 ## Why
 
@@ -75,7 +76,7 @@ chart_patch.py  (existing XLSX)      (geometry, axes, cache, contrast)
 | CHART-LEGEND | position/overlay | overlay off >4 series |
 | CHART-COLOR-CONTRAST | palette | WCAG 3:1 vs white |
 | CHART-COLOR-DISTINCT | palette | RGB 40 / deuteranopia 25 |
-| CHART-DATA-CACHE | xlsxwriter cache; recalc | first cache point vs sheet |
+| CHART-DATA-CACHE | xlsxwriter cache; recalc | all cached points vs sheet |
 | CHART-PIE | `points` palette | ≤7 slices, positive, >0, ≥3 colours |
 | CHART-3D | 2-D types only | 3D warning |
 | CHART-TITLE | `chart.title` | ≤90 chars |
@@ -122,7 +123,9 @@ $wb.Close($false); $excel.Quit()
   rendered them correctly. Record which engine produced the image.
 - **Theme colours** are not resolved to RGB; only explicit `srgbClr` values are
   contrast-checked.
-- **Cache check** compares the first point, not every formula result.
+- **Cache check** compares every cached point; it does not recalculate
+  formulas. If xlsxwriter omitted `c:numCache`, the audit uses worksheet values
+  and notes the absence.
 - **Raw chart types** (waterfall/treemap/histogram/box/funnel) need an Excel
   open/save test; the audit's type parser recognizes them, but the generator
   does not yet build them from a spec.

@@ -99,8 +99,9 @@ Set `print_area` to include the chart; set landscape/fit; check the anchor's
 
 ### Cache says 10, sheet says 12
 `c:numCache` is a snapshot. Rebuild the chart or run Excel `CalculateFull` and
-save. The audit compares the first cache point with the worksheet; a mismatch
-means the chart is lying.
+save. The audit compares every cached point with the worksheet; a mismatch
+means the chart is lying. If xlsxwriter omitted the cache, the audit reads the
+worksheet values and notes the absence instead of skipping the data checks.
 
 ## False positives and limits
 
@@ -112,8 +113,9 @@ means the chart is lying.
   explicit `srgbClr` values are contrast-checked.
 - **Collision:** label/legend overlap is estimated from counts and sizes, not
   measured glyph boxes. A render is still required.
-- **Data cache:** only the first point is compared; a full comparison would
-  need to resolve formulas.
+- **Data cache:** every cached point is compared, but the audit does not
+  recalculate formulas; if the cache is absent it falls back to the cached
+  worksheet values.
 - **GridCraft render:** its PDF font may drop Vietnamese diacritics (observed:
   “Thực tế” → “Thc t”). Use Excel `Chart.Export` on Windows for the native
   check; record which renderer produced the image.

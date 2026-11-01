@@ -38,12 +38,17 @@
           "color": null,
           "marker": "",
           "has_labels": false,
-          "point_colors": []
+          "point_colors": [],
+          "ax_ids": [
+            "50010001",
+            "50010002"
+          ]
         }
       ],
       "axes": [
         {
           "kind": "valAx",
+          "ax_id": "50010001",
           "pos": "b",
           "min": "0.0",
           "max": "70.0",
@@ -55,6 +60,7 @@
         },
         {
           "kind": "valAx",
+          "ax_id": "50010002",
           "pos": "l",
           "min": "60.0",
           "max": "100.0",
@@ -105,7 +111,13 @@
       "aspect": 1.722,
       "anchor_kind": "oneCellAnchor",
       "alt": "TÆ°Æ¡ng quan chi phĂ­ vĂ  má»©c Ä‘á»™ hĂ i lĂ²ng",
-      "inside_print_area": true
+      "inside_print_area": true,
+      "print_area_cm": [
+        0.0,
+        0.0,
+        29.85,
+        11.64
+      ]
     }
   ]
 }

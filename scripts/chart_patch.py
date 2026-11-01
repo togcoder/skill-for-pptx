@@ -165,9 +165,18 @@ def _remove(parent, tag: str):
 def _solid_fill(parent, color: str):
     for old in parent.findall(a("solidFill")):
         parent.remove(old)
-    fill = etree.SubElement(parent, a("solidFill"))
+    fill = etree.Element(a("solidFill"))
     clr = etree.SubElement(fill, a("srgbClr"))
     clr.set("val", color.replace("#", "").upper())
+    # In a:ln, the fill must precede prstDash/join/end-cap children.  Appending
+    # after an existing dash makes Excel ignore the colour or offer a repair.
+    if parent.tag == a("ln"):
+        later = {"prstDash", "round", "bevel", "miter", "headEnd", "tailEnd", "extLst"}
+        for child in list(parent):
+            if _local(child) in later:
+                child.addprevious(fill)
+                return fill
+    parent.append(fill)
     return fill
 
 
@@ -421,20 +430,24 @@ def _set_series_style(series, options: dict, *, chart_type: str = ""):
             if layout is None:
                 layout = etree.Element(c("layout"))
                 lbl.insert(0, layout)
+            _remove(layout, "manualLayout")
             manual = etree.SubElement(layout, c("manualLayout"))
             box = options["trendline_label_layout"]
-            etree.SubElement(manual, c("xMode")).set("val", "edge")
-            etree.SubElement(manual, c("yMode")).set("val", "edge")
+            for key in ("x", "y", "w", "h"):
+                if box.get(key) is not None:
+                    etree.SubElement(manual, c(f"{key}Mode")).set("val", "edge")
             for key in ("x", "y", "w", "h"):
                 if box.get(key) is not None:
                     etree.SubElement(manual, c(key)).set("val", str(box[key]))
 
 
+def _chart_groups(plot):
+    return [child for child in plot if _local(child) in CHART_TYPES] if plot is not None else []
+
+
 def _find_chart_group(plot):
-    for child in plot:
-        if _local(child) in CHART_TYPES:
-            return child
-    return None
+    groups = _chart_groups(plot)
+    return groups[0] if groups else None
 
 
 def _find_axis(root, kind: str, position: str | None = None):
@@ -449,12 +462,14 @@ def _find_axis(root, kind: str, position: str | None = None):
 
 def chart_info(root) -> dict:
     plot = root.find(f".//{c('plotArea')}")
-    group = _find_chart_group(plot) if plot is not None else None
+    groups = _chart_groups(plot)
+    primary = groups[0] if groups else None
     title = ""
     if root.find(f".//{c('title')}") is not None:
         title = "".join(t.text or "" for t in root.find(f".//{c('title')}").iter(a("t")))
     series = []
-    if group is not None:
+    for group in groups:
+        ax_ids = [ax.get("val") for ax in group.findall(c("axId")) if ax.get("val") is not None]
         for ser in group.findall(c("ser")):
             name = ""
             tx = ser.find(c("tx"))
@@ -469,9 +484,11 @@ def chart_info(root) -> dict:
                 numref = val.find(c("numRef"))
                 if numref is not None and numref.find(c("f")) is not None:
                     ref = numref.find(c("f")).text or ""
-            series.append({"name": name, "values_ref": ref})
+            series.append({"name": name, "values_ref": ref,
+                           "group": _local(group), "ax_ids": ax_ids})
     return {
-        "type": _local(group) if group is not None else None,
+        "type": _local(primary) if len(groups) == 1 else ("combo:" + "+".join(_local(g) for g in groups) if groups else None),
+        "types": [_local(g) for g in groups],
         "title": title,
         "series": series,
         "axes": [_local(ax) for ax in root.iter() if _local(ax) in {"catAx", "valAx", "dateAx", "serAx"}],
@@ -580,32 +597,49 @@ def patch_chart_xml(root, patch: dict) -> dict:
             _remove(layout, "manualLayout")
             manual = etree.SubElement(layout, c("manualLayout"))
             target = etree.SubElement(manual, c("layoutTarget")); target.set("val", "inner")
-            for key, tag in [("x", "x"), ("y", "y"), ("w", "w"), ("h", "h")]:
+            # CT_ManualLayout is a strict sequence: layoutTarget, xMode, yMode,
+            # wMode, hMode, x, y, w, h.  Do not interleave mode and value.
+            for key in ("x", "y", "w", "h"):
                 if patch["plot_layout"].get(key) is not None:
                     mode = etree.SubElement(manual, c(f"{key}Mode")); mode.set("val", "edge")
-                    val = etree.SubElement(manual, c(tag)); val.set("val", str(patch["plot_layout"][key]))
+            for key in ("x", "y", "w", "h"):
+                if patch["plot_layout"].get(key) is not None:
+                    val = etree.SubElement(manual, c(key)); val.set("val", str(patch["plot_layout"][key]))
             changed.append("plot_layout")
-        group = _find_chart_group(plot)
-        if group is not None:
+        groups = _chart_groups(plot)
+        if groups:
             if patch.get("bar"):
-                if patch["bar"].get("gap") is not None:
-                    _set_val(group, "gapWidth", patch["bar"]["gap"], _local(group))
-                if patch["bar"].get("overlap") is not None:
-                    _set_val(group, "overlap", patch["bar"]["overlap"], _local(group))
+                for group in groups:
+                    if _local(group) not in {"barChart", "bar3DChart"}:
+                        continue
+                    if patch["bar"].get("gap") is not None:
+                        _set_val(group, "gapWidth", patch["bar"]["gap"], _local(group))
+                    if patch["bar"].get("overlap") is not None:
+                        _set_val(group, "overlap", patch["bar"]["overlap"], _local(group))
                 changed.append("bar")
-            if patch.get("doughnut_hole") is not None and _local(group) == "doughnutChart":
-                _set_val(group, "holeSize", patch["doughnut_hole"], "doughnutChart")
-                changed.append("doughnut_hole")
-            if patch.get("pie_rotation") is not None and _local(group) in {"pieChart", "doughnutChart"}:
-                _set_val(group, "firstSliceAng", patch["pie_rotation"], _local(group))
-                changed.append("pie_rotation")
+            for group in groups:
+                kind = _local(group)
+                if patch.get("doughnut_hole") is not None and kind == "doughnutChart":
+                    _set_val(group, "holeSize", patch["doughnut_hole"], "doughnutChart")
+                    changed.append("doughnut_hole")
+                if patch.get("pie_rotation") is not None and kind in {"pieChart", "doughnutChart"}:
+                    _set_val(group, "firstSliceAng", patch["pie_rotation"], kind)
+                    changed.append("pie_rotation")
+                if patch.get("data_labels") is not None:
+                    _set_dlbls(group, patch["data_labels"], order_key=kind)
             if patch.get("data_labels") is not None:
-                _set_dlbls(group, patch["data_labels"], order_key=_local(group))
                 changed.append("data_labels")
+            # Flatten series across chart groups so series[1] of a combo
+            # reaches the line series in the second group, not a missing index
+            # in the bar group.
+            series_refs = []
+            for group in groups:
+                for ser in group.findall(c("ser")):
+                    series_refs.append((group, ser))
             for i, ser_patch in enumerate(patch.get("series") or []):
-                series = group.findall(c("ser"))
-                if i < len(series):
-                    _set_series_style(series[i], ser_patch, chart_type=_local(group))
+                if i < len(series_refs):
+                    group, ser = series_refs[i]
+                    _set_series_style(ser, ser_patch, chart_type=_local(group))
                     changed.append(f"series[{i}]")
 
         axes = patch.get("axes") or {}

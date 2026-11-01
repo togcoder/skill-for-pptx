@@ -258,7 +258,9 @@ def _anchor_rect(anchor, col_widths: dict[int, float], row_heights: dict[int, fl
         row = int(node.findtext(q(XDR, "row")) or 0)
         coff = float(node.findtext(q(XDR, "colOff")) or 0) / EMU_PER_PX
         roff = float(node.findtext(q(XDR, "rowOff")) or 0) / EMU_PER_PX
-        x = sum(_col_px(col_widths.get(i, 8.43)) for i in range(1, col + 1)) + coff
+        # xdr:col and xdr:row are 0-based.  Sum the columns before `col`, and
+        # the rows 1..row (row heights are keyed by the 1-based row number).
+        x = sum(_col_px(col_widths.get(i, 8.43)) for i in range(col)) + coff
         y = sum(_row_px(row_heights.get(i, 15)) for i in range(1, row + 1)) + roff
         return x, y
 
@@ -342,6 +344,59 @@ def _col_index(letters: str) -> int:
     return n - 1
 
 
+def _col_number(letters: str) -> int:
+    n = 0
+    for ch in letters:
+        n = n * 26 + ord(ch.upper()) - 64
+    return n - 1
+
+
+def _cell_rc(ref: str) -> tuple[int, int] | None:
+    m = re.match(r"([A-Z]+)(\d+)$", ref.replace("$", ""))
+    if not m:
+        return None
+    return _col_number(m.group(1)), int(m.group(2))
+
+
+def _range_values(cells: dict, start: str, end: str) -> list:
+    a, b = _cell_rc(start), _cell_rc(end)
+    if not a or not b:
+        return []
+    c1, r1 = a
+    c2, r2 = b
+    values = []
+    if c1 == c2:
+        for r in range(r1, r2 + 1):
+            values.append(_cell_value(cells, f"{_col_letters(c1)}{r}"))
+    elif r1 == r2:
+        for c in range(c1, c2 + 1):
+            values.append(_cell_value(cells, f"{_col_letters(c)}{r1}"))
+    else:
+        for r in range(r1, r2 + 1):
+            for c in range(c1, c2 + 1):
+                values.append(_cell_value(cells, f"{_col_letters(c)}{r}"))
+    return values
+
+
+def _col_letters(index: int) -> str:
+    out = ""
+    n = index + 1
+    while n:
+        n, rem = divmod(n - 1, 26)
+        out = chr(65 + rem) + out
+    return out
+
+
+def _cell_rect_cm(sheet_root, c1: int, r1: int, c2: int, r2: int):
+    widths = _col_widths(sheet_root)
+    heights = _row_heights(sheet_root)
+    x0 = sum(_col_px(widths.get(i, 8.43)) for i in range(c1)) / PX_PER_CM
+    x1 = sum(_col_px(widths.get(i, 8.43)) for i in range(c2 + 1)) / PX_PER_CM
+    y0 = sum(_row_px(heights.get(r, 15)) for r in range(1, r1)) / PX_PER_CM
+    y1 = sum(_row_px(heights.get(r, 15)) for r in range(1, r2 + 1)) / PX_PER_CM
+    return x0, y0, x1, y1
+
+
 def _range_cells(ref: str) -> tuple[str, str] | None:
     ref = ref.split("!")[-1].replace("$", "")
     m = re.match(r"([A-Z]+)(\d+)(?::([A-Z]+)(\d+))?$", ref)
@@ -365,7 +420,7 @@ def _cell_value(cells: dict, ref: str):
 # Chart parsing
 # ---------------------------------------------------------------------------
 
-def _series_info(ser) -> dict:
+def _series_info(ser, *, ax_ids: list[str] | None = None) -> dict:
     name = ""
     tx = ser.find(q(C, "tx"))
     if tx is not None:
@@ -406,7 +461,7 @@ def _series_info(ser) -> dict:
             point_colors.append(clr.get("val"))
     return {"name": name, "values": values, "values_ref": ref, "color": color,
             "marker": marker_type, "has_labels": labels is not None,
-            "point_colors": point_colors}
+            "point_colors": point_colors, "ax_ids": ax_ids or []}
 
 
 def _chart_info(root) -> dict:
@@ -423,13 +478,16 @@ def _chart_info(root) -> dict:
         title = _text(title_el)
     series = []
     for g in groups:
-        series.extend(_series_info(s) for s in g.findall(q(C, "ser")))
+        ax_ids = [ax.get("val") for ax in g.findall(q(C, "axId")) if ax.get("val") is not None]
+        series.extend(_series_info(s, ax_ids=ax_ids) for s in g.findall(q(C, "ser")))
     axes = []
     for tag in ("catAx", "valAx", "dateAx", "serAx"):
         for ax in root.iter(q(C, tag)):
             scaling = ax.find(q(C, "scaling"))
             axes.append({
                 "kind": tag,
+                "ax_id": (ax.find(q(C, "axId")).get("val")
+                          if ax.find(q(C, "axId")) is not None else None),
                 "pos": _val(ax, "axPos"),
                 "min": _val(scaling, "min") if scaling is not None else None,
                 "max": _val(scaling, "max") if scaling is not None else None,
@@ -540,6 +598,19 @@ def audit_workbook(path: str | Path, system: dict | None = None) -> dict:
             sheet, anchor = chart_anchor.get(name, ("", None))
             info["sheet"] = sheet
             info["anchor"] = anchor
+            cells = {}
+            if sheet and sheet in sheets:
+                cells = _sheet_cells(zf, sheets[sheet])
+                # xlsxwriter writes c:f but may omit c:numCache until Excel
+                # saves the file.  Fall back to the worksheet values so the
+                # slice/density/axis checks are not silently skipped.
+                for s in info["series"]:
+                    if not s.get("values") and s.get("values_ref"):
+                        rng = _range_cells(s["values_ref"])
+                        if rng:
+                            fetched = _range_values(cells, *rng)
+                            s["values"] = [v for v in fetched if isinstance(v, (int, float))]
+                            s["values_from_sheet"] = True
             if anchor:
                 x, y, w, h = anchor["rect_cm"]
                 info["rect_cm"] = [round(v, 2) for v in (x, y, w, h)]
@@ -563,10 +634,15 @@ def audit_workbook(path: str | Path, system: dict | None = None) -> dict:
                 # print area
                 if sheet and sheet in print_areas:
                     c1, r1, c2, r2 = print_areas[sheet]
-                    # approximating print area in cm from cell coordinates is
-                    # done by the drawing anchor helper; a direct cell-range
-                    # test is enough for the common case.
-                    info["inside_print_area"] = True
+                    sheet_root = _read(zf, sheets[sheet]) if sheet in sheets else None
+                    if sheet_root is not None:
+                        px0, py0, px1, py1 = _cell_rect_cm(sheet_root, c1, r1, c2, r2)
+                        inside = (x >= px0 - 0.2 and y >= py0 - 0.2 and
+                                  x + w <= px1 + 0.2 and y + h <= py1 + 0.2)
+                        info["inside_print_area"] = inside
+                        info["print_area_cm"] = [round(v, 2) for v in (px0, py0, px1, py1)]
+                        if not inside:
+                            warnings.append(f"chart {index}: chart frame is outside the print area")
                 elif sheet:
                     notes.append(f"chart {index}: sheet {sheet!r} has no print area; chart may not print")
                 if not info["alt"]:
@@ -620,7 +696,10 @@ def audit_workbook(path: str | Path, system: dict | None = None) -> dict:
                     if _float(ax["min"], 0) > 0:
                         warnings.append(f"chart {index}: value axis starts at {ax['min']}, truncating bar length; start at zero")
                 if ax["max"] is not None and ax["pos"] in {"l", "r"} and info["series"]:
-                    data_max = max((max(s.get("values") or [0]) for s in info["series"]), default=0)
+                    axis_id = ax.get("ax_id")
+                    axis_series = [s for s in info["series"]
+                                   if not axis_id or not s.get("ax_ids") or axis_id in s.get("ax_ids", [])]
+                    data_max = max((max(s.get("values") or [0]) for s in axis_series), default=0)
                     if data_max > _float(ax["max"], data_max) + 1e-9:
                         warnings.append(f"chart {index}: axis maximum {ax['max']} cuts data at {data_max:g}")
             if len(val_axes) > 1:
@@ -648,9 +727,10 @@ def audit_workbook(path: str | Path, system: dict | None = None) -> dict:
                             _distance(_deuteranopia(colors[i]), _deuteranopia(colors[j])) < min_deut):
                         warnings.append(f"chart {index}: series colours {i + 1} and {j + 1} are hard to distinguish (also for deuteranopia)")
 
-            # Data cache vs worksheet.
+            # Data cache vs worksheet.  Compare every cached point; if the
+            # cache was absent, the values came from the sheet and there is
+            # nothing to compare (note it instead).
             if sheet and sheet in sheets:
-                cells = _sheet_cells(zf, sheets[sheet])
                 for si, s in enumerate(info["series"], start=1):
                     ref = s.get("values_ref")
                     if not ref:
@@ -658,12 +738,24 @@ def audit_workbook(path: str | Path, system: dict | None = None) -> dict:
                     rng = _range_cells(ref)
                     if not rng:
                         continue
+                    if s.get("values_from_sheet"):
+                        notes.append(f"chart {index}: series {si} has no numCache; worksheet values were used")
+                        continue
+                    if not s.get("values"):
+                        continue
                     start, end = rng
-                    # Compare only the first and last cache point.
-                    if s.get("values") and start in cells:
-                        actual = _cell_value(cells, start)
-                        if isinstance(actual, float) and abs(actual - s["values"][0]) > 1e-6:
-                            warnings.append(f"chart {index}: series {si} cache starts at {s['values'][0]:g} but cell {start} is {actual:g}; refresh the chart")
+                    sheet_values = _range_values(cells, start, end)
+                    cache = s["values"]
+                    mismatches = []
+                    for pos, (a, b) in enumerate(zip(cache, sheet_values)):
+                        if isinstance(a, (int, float)) and isinstance(b, (int, float)) and abs(a - b) > 1e-6:
+                            mismatches.append(pos)
+                    if len(cache) != len(sheet_values):
+                        mismatches.append(-1)
+                    if mismatches:
+                        warnings.append(
+                            f"chart {index}: series {si} cache differs from worksheet at "
+                            f"{len(mismatches)} point(s); refresh the chart")
             charts.append(info)
     result = {
         "ok": not errors,
