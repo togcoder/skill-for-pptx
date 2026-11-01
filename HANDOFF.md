@@ -36,7 +36,7 @@ PowerPoint chỉ là domain lâu đời nhất.
 | Domain | Trạng thái |
 |---|---|
 | pptx | Trưởng thành: Director, Morph Studio, Forge, hệ thiết kế và critic. T035 và T038 **chưa được phản biện**; còn 1 test lỗi của T038 (WORD_BREAK ở "Logo Watermark", phụ thuộc font). |
-| docx | T039 DocumentCraft on `main`; T042 advanced report (side-by-side media, OMML equations, merged-header/image-cell tables, callout/KPI, VectorCraft cover asset) on `work/T042-opencode-advanced-docx`, audit sạch 11 trang Word PDF; **review requested**. Chưa có PDF/UA, PDF/A, LibreOffice rung 3, human rung 6. |
+| docx | T039 DocumentCraft on `main`; T042 advanced report (side-by-side media, OMML equations, merged-header/image-cell tables, callout/KPI, VectorCraft cover asset) on `work/T042-opencode-advanced-docx`, audit sạch 11 trang Word PDF (thêm equations/merged cells/table-grid/image/alt, `vi-VN`); Argon **approve T042** (round 2), chờ owner merge. Chưa có PDF/UA, PDF/A, LibreOffice rung 3, human rung 6. |
 | xlsx | T041 SheetCraft on `main`: `chart_forge.py`, `chart_patch.py`, `chart_audit.py`, dữ liệu `domains/xlsx/data/spreadsheet_system.json`, skill `sheet-craft`. Combo/doughnut/scatter audit sạch, Excel export đúng; Argon R4–R6/R8 đã sửa. T043 advanced workbook (Gantt, ảnh trong bảng, dashboard, pivot/formula) đang mở. Waterfall/treemap/histogram/box/funnel còn là recipe OOXML, chưa sinh. |
 | svg | Mới có bridge thử nghiệm T037; chưa phản biện. |
 | cross | Protocol 00–03, schema, registry ArtCraft, intent decoder (T036–T037); chưa phản biện, chưa thành chuẩn chung (cần 2 domain chấp nhận). |

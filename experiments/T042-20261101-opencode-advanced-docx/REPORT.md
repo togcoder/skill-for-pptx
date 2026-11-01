@@ -128,7 +128,9 @@ Preview: `preview/cover.png`, `kpi-callout.png`, `side-equations.png`,
 
 ## Review response
 
-Argon review 2026-11-01 (chat `0:cf4bb6173adaaa34`), verdict **revise**.
+Argon review 2026-11-01 (chat `0:cf4bb6173adaaa34`), verdict **revise** in
+round 1 and **approve T042** in round 2 (0 blockers). Full record:
+`research/reviews/T042-argon-20261101.md`.
 
 | Finding | Response (fixed / disputed / deferred → task) |
 |---|---|

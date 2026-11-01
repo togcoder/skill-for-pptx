@@ -24,9 +24,14 @@ were true at the time. Task IDs and their branches are listed in
   (`convert --scale 1`), then accepted by the DOCX audit/render. The
   cross-craft rule was added to `AGENTS.md` and `lab/standards/RESEARCH.md`.
 - **Evidence.** 11-page Word PDF inspected; audit clean (20 fields, 15
-  bookmarks, 6 tables, 6 drawings); `tests/test_document_advanced.py` + T039
-  tests; full suite 334 tests OK with `PYTHONUTF8=1`.
-- **Status.** EXPERIMENTAL; review requested.
+  bookmarks, 6 tables, 6 drawings, 2 equations/1 numbered, 5 merged cells,
+  5 images in cells, language `vi-VN`; table-grid/vMerge/image-width/alt
+  checks); `tests/test_document_advanced.py` (5 tests) + T039 tests; full suite
+  337 tests OK with `PYTHONUTF8=1`.
+- **Review fixes (Argon).** Advanced OOXML audit counters/checks, docDefaults
+  language, negative tests for unsupported LaTeX and malformed tables; Argon
+  **approve T042** (round 2).
+- **Status.** EXPERIMENTAL; review accepted; awaiting owner merge.
 - Report: `experiments/T042-20261101-opencode-advanced-docx/REPORT.md`.
 
 ## T041 [xlsx] SheetCraft — controlled standard DrawingML charts — 2026-11-01
