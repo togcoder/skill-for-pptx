@@ -74,12 +74,12 @@ Forge; T048 adds the UX layer.
 |---|---|---|
 | Data sheets are hidden, not just far away | 1 + 4 | `workbook.xml`: Data/Model/Team/Gantt/Relations `hidden`, Pivot/Lookups `veryHidden`; Excel `Visible` values `0`/`2`; only Dashboard/Input `-1`; `firstSheet=5` (Dashboard) and `activeTab=8` (Input) |
 | Input is the active sheet | 1 + 4 | `activeTab="8"`, `firstSheet="5"`; Excel opens on Input |
-| Input is a real form, not a grid | 1 + 5 | 18 merged ranges, 8 data validations, title/section fills, auto ID `T025`; 1-page landscape PDF |
+| Input is a real form, not a grid | 1 + 5 | 19 merged ranges on Input (36 total across visible sheets), 8 data validations, title/section fills, auto ID `T025`; 1-page landscape PDF |
 | Tab colours are set | 1 + 4 | `<tabColor rgb="FF1F4E79">` Dashboard, `FFC55A11` Input; Excel `Tab.Color` 7949855 / 1137349 |
 | Sheets are protected | 1 + 4 | `<sheetProtection` on Input/Dashboard; Excel `ProtectContents = True`; input cells unlocked |
 | Buttons point to the macro in the `.xlsm` | 1 + 4 | VML has `AddRecord`/`ClearForm`/`RefreshDashboard`; xlsm OnAction = `DashboardTools.AddRecord`; 3 buttons |
 | VBA module exists | 4 | `.xlsm` `VBProject` has `DashboardTools`; code contains `AddRecord`, `ClearForm`, `SetStatus`, `WorksheetExists` |
-| Dashboard still works with data hidden | 4 + 5 | Excel opens XLSM, Dashboard 1 page; 24 tasks, 3.49 tỷ cost, 5.3 tỷ benefit, 6 risks |
+| Dashboard still works with data hidden | 4 + 5 | Excel opens XLSM, Dashboard 1 page; 24 tasks, 3.49 tỷ cost, 5.3 tỷ benefit, 6 risks; Model!C2:C5 cache = 780/882/984/846 |
 | Audit is clean | 1 | `build-report.json`: `ok: true`, 0 errors/warnings/notes; 3 charts, 9 sheets |
 | Tests cover the UX contract | 1 | `tests/test_sheet_craft_ux.py` (2 tests); full suite 387 tests OK |
 
