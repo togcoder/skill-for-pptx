@@ -1,0 +1,1672 @@
+﻿{
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "fields were refreshed before delivery; w:updateFields is no longer needed"
+  ],
+  "stats": {
+    "fields": 204,
+    "field_commands": {
+      "TOC": 1,
+      "PAGEREF": 88,
+      "REF": 41,
+      "STYLEREF": 35,
+      "SEQ": 37,
+      "PAGE": 2
+    },
+    "bookmarks": 88,
+    "headings": 59,
+    "max_heading_level": 3,
+    "tables": 22,
+    "figures": 7,
+    "sections": 3,
+    "paragraphs": 1032,
+    "equations": 9,
+    "display_equations": 9,
+    "equation_numbers": 9,
+    "images_in_cells": 0,
+    "merged_cells": 0,
+    "languages": [
+      "vi-VN"
+    ],
+    "text_width_twips": 9071,
+    "section_text_widths": [
+      9071
+    ]
+  },
+  "fields": [
+    {
+      "part": "word/document.xml",
+      "command": "TOC",
+      "instr": "TOC \\o \"1-3\" \\h \\z \\u",
+      "result": "Má»Ÿ Ä‘áº§u1 Tá»•ng quan vĂ  cĂ´ng trĂ¬nh liĂªn quan1.1 IoT vĂ  dá»¯ liá»‡u cáº£m biáº¿n1.2 BĂ i toĂ¡n phĂ¡t hiá»‡n báº¥t thÆ°á»ng1.2.1 PhĂ¢n loáº¡i the",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449938 \\h",
+      "result": "1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449939 \\h",
+      "result": "4",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449940 \\h",
+      "result": "4",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449941 \\h",
+      "result": "4",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449942 \\h",
+      "result": "5",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449943 \\h",
+      "result": "5",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449944 \\h",
+      "result": "5",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449945 \\h",
+      "result": "6",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449946 \\h",
+      "result": "6",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449947 \\h",
+      "result": "6",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449948 \\h",
+      "result": "7",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449949 \\h",
+      "result": "8",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449950 \\h",
+      "result": "8",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449951 \\h",
+      "result": "8",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449952 \\h",
+      "result": "8",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449953 \\h",
+      "result": "9",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449954 \\h",
+      "result": "9",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449955 \\h",
+      "result": "10",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449956 \\h",
+      "result": "10",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449957 \\h",
+      "result": "11",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449958 \\h",
+      "result": "11",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449959 \\h",
+      "result": "11",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449960 \\h",
+      "result": "12",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449961 \\h",
+      "result": "13",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449962 \\h",
+      "result": "13",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449963 \\h",
+      "result": "14",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449964 \\h",
+      "result": "14",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449965 \\h",
+      "result": "15",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449966 \\h",
+      "result": "16",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449967 \\h",
+      "result": "16",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449968 \\h",
+      "result": "17",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449969 \\h",
+      "result": "17",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449970 \\h",
+      "result": "18",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449971 \\h",
+      "result": "19",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449972 \\h",
+      "result": "19",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449973 \\h",
+      "result": "19",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449974 \\h",
+      "result": "20",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449975 \\h",
+      "result": "20",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449976 \\h",
+      "result": "20",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449977 \\h",
+      "result": "21",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449978 \\h",
+      "result": "23",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449979 \\h",
+      "result": "23",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449980 \\h",
+      "result": "24",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449981 \\h",
+      "result": "25",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449982 \\h",
+      "result": "26",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449983 \\h",
+      "result": "27",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449984 \\h",
+      "result": "27",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449985 \\h",
+      "result": "28",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449986 \\h",
+      "result": "29",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449987 \\h",
+      "result": "30",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449988 \\h",
+      "result": "30",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449989 \\h",
+      "result": "30",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449990 \\h",
+      "result": "31",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449991 \\h",
+      "result": "31",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449992 \\h",
+      "result": "31",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449993 \\h",
+      "result": "32",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449994 \\h",
+      "result": "33",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449995 \\h",
+      "result": "34",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449996 \\h",
+      "result": "35",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244449997 \\h",
+      "result": "36",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF tbl-1 \\h",
+      "result": "Báº£ng 1.1.",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF tbl-1 \\h",
+      "result": "5",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF tbl-2 \\h",
+      "result": "Báº£ng 1.2.",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF tbl-2 \\h",
+      "result": "7",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF tbl-3 \\h",
+      "result": "Báº£ng 2.1.",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF tbl-3 \\h",
+      "result": "12",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF tbl-4 \\h",
+      "result": "Báº£ng 2.2.",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF tbl-4 \\h",
+      "result": "12",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF tbl-5 \\h",
+      "result": "Báº£ng 2.3.",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF tbl-5 \\h",
+      "result": "13",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF tbl-6 \\h",
+      "result": "Báº£ng 3.1.",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF tbl-6 \\h",
+      "result": "15",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF tbl-7 \\h",
+      "result": "Báº£ng 3.2.",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF tbl-7 \\h",
+      "result": "18",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF tbl-8 \\h",
+      "result": "Báº£ng 3.3.",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF tbl-8 \\h",
+      "result": "19",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF tbl-9 \\h",
+      "result": "Báº£ng 4.1.",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF tbl-9 \\h",
+      "result": "20",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF tbl-10 \\h",
+      "result": "Báº£ng 4.2.",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF tbl-10 \\h",
+      "result": "21",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF tbl-11 \\h",
+      "result": "Báº£ng 4.3.",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF tbl-11 \\h",
+      "result": "21",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF tbl-12 \\h",
+      "result": "Báº£ng 4.4.",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF tbl-12 \\h",
+      "result": "23",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF tbl-13 \\h",
+      "result": "Báº£ng 4.5.",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF tbl-13 \\h",
+      "result": "24",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF tbl-14 \\h",
+      "result": "Báº£ng 4.6.",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF tbl-14 \\h",
+      "result": "25",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF tbl-15 \\h",
+      "result": "Báº£ng 4.7.",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF tbl-15 \\h",
+      "result": "26",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF tbl-16 \\h",
+      "result": "Báº£ng 4.8.",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF tbl-16 \\h",
+      "result": "26",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF tbl-17 \\h",
+      "result": "Báº£ng 4.9.",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF tbl-17 \\h",
+      "result": "27",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF tbl-18 \\h",
+      "result": "Báº£ng 4.10.",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF tbl-18 \\h",
+      "result": "27",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF tbl-19 \\h",
+      "result": "Báº£ng 5.1.",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF tbl-19 \\h",
+      "result": "30",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF tbl-20 \\h",
+      "result": "Báº£ng A.1.",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF tbl-20 \\h",
+      "result": "34",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF tbl-21 \\h",
+      "result": "Báº£ng B.1.",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF tbl-21 \\h",
+      "result": "35",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF fig-1 \\h",
+      "result": "HĂ¬nh 3.1.",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF fig-1 \\h",
+      "result": "14",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF fig-2 \\h",
+      "result": "HĂ¬nh 3.2.",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF fig-2 \\h",
+      "result": "15",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF fig-3 \\h",
+      "result": "HĂ¬nh 4.1.",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF fig-3 \\h",
+      "result": "22",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF fig-4 \\h",
+      "result": "HĂ¬nh 4.2.",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF fig-4 \\h",
+      "result": "22",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF fig-5 \\h",
+      "result": "HĂ¬nh 4.3.",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF fig-5 \\h",
+      "result": "23",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF fig-6 \\h",
+      "result": "HĂ¬nh 4.4.",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF fig-6 \\h",
+      "result": "24",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF fig-7 \\h",
+      "result": "HĂ¬nh 4.5.",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF fig-7 \\h",
+      "result": "25",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF ref-chandola2009-label \\h",
+      "result": "[1]",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Table \\* ARABIC \\s 1",
+      "result": "1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF ref-malhotra2015-label \\h",
+      "result": "[2]",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF ref-malhotra2015-label \\h",
+      "result": "[2]",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF ref-hundman2018-label \\h",
+      "result": "[3]",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF ref-su2019-label \\h",
+      "result": "[4]",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF ref-audibert2020-label \\h",
+      "result": "[5]",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF ref-banbury2021-label \\h",
+      "result": "[6]",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF ref-goyal2020-label \\h",
+      "result": "[12]",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Table \\* ARABIC \\s 1",
+      "result": "2",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "2",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Equation \\* ARABIC \\s 1",
+      "result": "1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "2",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Equation \\* ARABIC \\s 1",
+      "result": "2",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF ref-ioffe2015-label \\h",
+      "result": "[11]",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF ref-hochreiter1997-label \\h",
+      "result": "[7]",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "2",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Equation \\* ARABIC \\s 1",
+      "result": "3",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "2",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Equation \\* ARABIC \\s 1",
+      "result": "4",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF ref-vaswani2017-label \\h",
+      "result": "[8]",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "2",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Equation \\* ARABIC \\s 1",
+      "result": "5",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF ref-jacob2018-label \\h",
+      "result": "[9]",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "2",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Table \\* ARABIC \\s 1",
+      "result": "1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "2",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Table \\* ARABIC \\s 1",
+      "result": "2",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "2",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Table \\* ARABIC \\s 1",
+      "result": "3",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "3",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Figure \\* ARABIC \\s 1",
+      "result": "1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "3",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Table \\* ARABIC \\s 1",
+      "result": "1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "3",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Figure \\* ARABIC \\s 1",
+      "result": "2",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "3",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Equation \\* ARABIC \\s 1",
+      "result": "1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "3",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Equation \\* ARABIC \\s 1",
+      "result": "2",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "3",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Equation \\* ARABIC \\s 1",
+      "result": "3",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "3",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Equation \\* ARABIC \\s 1",
+      "result": "4",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF ref-kingma2015-label \\h",
+      "result": "[10]",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "3",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Table \\* ARABIC \\s 1",
+      "result": "2",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "3",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Table \\* ARABIC \\s 1",
+      "result": "3",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "4",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Table \\* ARABIC \\s 1",
+      "result": "1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "4",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Table \\* ARABIC \\s 1",
+      "result": "2",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "4",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Table \\* ARABIC \\s 1",
+      "result": "3",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "4",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Figure \\* ARABIC \\s 1",
+      "result": "1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "4",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Figure \\* ARABIC \\s 1",
+      "result": "2",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "4",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Table \\* ARABIC \\s 1",
+      "result": "4",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "4",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Figure \\* ARABIC \\s 1",
+      "result": "3",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "4",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Table \\* ARABIC \\s 1",
+      "result": "5",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "4",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Figure \\* ARABIC \\s 1",
+      "result": "4",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "4",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Table \\* ARABIC \\s 1",
+      "result": "6",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "4",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Figure \\* ARABIC \\s 1",
+      "result": "5",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "4",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Table \\* ARABIC \\s 1",
+      "result": "7",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "4",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Table \\* ARABIC \\s 1",
+      "result": "8",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "4",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Table \\* ARABIC \\s 1",
+      "result": "9",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "4",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Table \\* ARABIC \\s 1",
+      "result": "10",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\s",
+      "result": "5",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Table \\* ARABIC \\s 1",
+      "result": "1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Table \\* ARABIC \\r 1",
+      "result": "1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Table \\* ARABIC \\r 1",
+      "result": "1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/footer2.xml",
+      "command": "PAGE",
+      "instr": "PAGE \\* MERGEFORMAT",
+      "result": "i",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/footer3.xml",
+      "command": "PAGE",
+      "instr": "PAGE \\* MERGEFORMAT",
+      "result": "1",
+      "complete": true,
+      "dirty": false
+    }
+  ]
+}

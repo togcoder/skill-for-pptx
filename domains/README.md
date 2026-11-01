@@ -20,7 +20,7 @@ the contract for agents working in that domain.
 
 | `pptx` | PowerPoint (OOXML presentation) | [pptx/DOMAIN.md](pptx/DOMAIN.md) | Mature: T001â€“T038, T043, 350+ tests | `motion_director.py`, `morph_studio.py`, `slide_forge.py`, `theme_engine.py`, `design_critic.py` |
 
-| `docx` | Word (OOXML document) | [docx/DOMAIN.md](docx/DOMAIN.md) | T039/T045 on main; T047 standards-controlled annual/ESG report (review requested) | `word_field_kit.py`, `document_forge.py`, `word_math.py`, `document_audit.py` |
+| `docx` | Word (OOXML document) | [docx/DOMAIN.md](docx/DOMAIN.md) | T039/T045/T047 on main; T052 standard profiles + HUST/VNU scientific report (review requested) | `word_field_kit.py`, `document_forge.py`, `word_math.py`, `document_audit.py`, `docx_profiles.py` |
 
 | `xlsx` | Excel (OOXML workbook, charts) | [xlsx/DOMAIN.md](xlsx/DOMAIN.md) | T041/T046 on main; T048 workbook UX (hidden data, Input form, VBA, tab colour; review requested) | `chart_forge.py`, `chart_patch.py`, `chart_audit.py`, `sheet_forge.py`, `vba_forge.py`, `gridcraft_bridge.py` |
 

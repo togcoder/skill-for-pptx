@@ -83,6 +83,42 @@ is the acceptance gate. Record the source tool/version/command and the asset
 licence. If VectorCraft is absent, use a plain PNG; the document path must still
 work.
 
+## Ask for the standard, then control it (T052)
+
+A Word report is not "a document"; it is a thesis, a đồ án, a scientific report,
+an annual report. The presentation rules are part of the deliverable.
+
+1. **Ask which standard, and which edition.** "Đồ án đại học" is not enough:
+   HUST 2017 and VNU-UET differ in margins, line spacing, page limits and
+   reference position. If the user has no template, choose a named profile,
+   state its source and scope, and let them correct it.
+2. **Load the profile, do not retype it.**
+   ```powershell
+   python scripts/document_forge.py build spec.json -o report.docx `
+     --profile hust-datn-2017 --update word `
+     --conformance artifacts/conformance-hust.md
+   ```
+   Profiles live in `domains/docx/data/standard_profiles.json`; `--profiles`
+   points at another file. `python scripts/docx_profiles.py list` shows them.
+3. **The spec wins.** Profile → spec deep merge; explicit page/typography values
+   override the profile. Do not hand-copy profile values into the spec.
+4. **Measure the produced file.** `check_docx()` reads margins, fonts, spacing,
+   captions, front matter, page numbers, references and page count. A clean
+   build report is not a conformance report.
+5. **Chapter-based captions.** For HUST/VNU, `numbering.captions = "chapter"`
+   uses `STYLEREF "Heading 1" \s` + `SEQ ... \s 1`. `Mở đầu` uses the standalone
+   `Chapter Unnumbered` style; a Heading 1 derivative shifts every chapter.
+6. **State the limits.** HUST 2017 is a faculty regulation; VNU-UET is one
+   programme PDF. A profile is a source, not a certificate. `body_pages`
+   excludes end matter but includes tables/figures; VNU excludes tables/figures,
+   so the check is lenient.
+7. **Show the user the evidence.** Print a small table: control, expected,
+   measured, status. That is the difference between "I followed a standard" and
+   "I measured the file against a standard".
+
+**Do not promise a page count you did not measure in Word.** Word and
+LibreOffice paginate differently; profile page limits need a Word/PDF count.
+
 ## Standards-controlled report (T047)
 
 Use this when the user says “a real report”, “a standard”, “show me what you
