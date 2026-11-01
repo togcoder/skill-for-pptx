@@ -1,71 +1,73 @@
 # Handoff — Design Research Lab
 
-Cập nhật: 01/11/2026, sau T039/T041 (docx/xlsx). Tệp này được **viết lại** mỗi
-lần bàn giao, không ghi nối thêm. Lịch sử: [docs/CHANGELOG.md](docs/CHANGELOG.md).
-Bàn giao trước (T040): [docs/archive/](docs/archive/).
+Cập nhật: 01/11/2026, sau T044. Tệp này được **viết lại** mỗi lần bàn giao,
+không ghi nối thêm. Lịch sử: [docs/CHANGELOG.md](docs/CHANGELOG.md). Bàn giao
+trước: [docs/archive/HANDOFF-T038-2026-11-01.md](docs/archive/HANDOFF-T038-2026-11-01.md).
 
 Repo: https://github.com/togcoder/skill-for-pptx (private). Chủ dự án: togcoder.
 
 ## Dự án bây giờ là gì
 
-Một **lab nghiên cứu thiết kế đa lĩnh vực**: nhiều agent (nhiều model) cùng
-nghiên cứu, phản biện và gộp kết quả cho nhiều ứng dụng. Mỗi lĩnh vực
-(domain) có luận điểm, nguồn, dữ liệu thiết kế và thang bằng chứng riêng;
+Một **lab nghiên cứu thiết kế đa lĩnh vực (Cross-Domain Agentic AI Lab)**: nhiều agent
+(nhiều model) cùng nghiên cứu, phản biện và xâu chuỗi kết quả cho nhiều ứng dụng.
+Mỗi lĩnh vực (domain) có luận điểm, nguồn, dữ liệu thiết kế và thang bằng chứng riêng;
 PowerPoint chỉ là domain lâu đời nhất.
 
 - Cách agent làm việc: [lab/PROTOCOL.md](lab/PROTOCOL.md).
 - Các chuẩn: [lab/standards/](lab/standards/), gồm nghiên cứu, phản biện, gộp
   dữ liệu và nơi đặt file.
 - Danh sách domain: [domains/README.md](domains/README.md).
+- Quy tắc xâu chuỗi đa tài nguyên & tự do cục bộ: [lab/protocols/04_cross_asset_pipeline.md](lab/protocols/04_cross_asset_pipeline.md).
 
 ## Bắt đầu
 
-1. Đầu nghiên cứu lab-wide vẫn là `claude/blissful-pasteur-gmll59` (T035–T040).
-   Hai nhánh docx/xlsx mới dựa trên tip đó:
-   - `work/T039-opencode-docx` — PR #36 (draft, review requested);
-   - `work/T041-opencode-xlsx` — PR #35 (draft, review requested).
+1. Đầu nghiên cứu mới nhất đã được gộp lên `main`.
 2. Đọc theo thứ tự `AGENTS.md`, `lab/CHARTER.md`, `lab/PROTOCOL.md`, rồi thẻ
-   domain của bạn (`domains/docx/DOMAIN.md`, `domains/xlsx/DOMAIN.md`).
-3. Chạy `python3 -m unittest discover -s tests` (đặt `PYTHONUTF8=1` trên Windows
-   để tránh lỗi encoding của các test cũ) và `python3 lab/tools/check_layout.py`.
-4. Lấy mã kế tiếp trong `research/tasks/INDEX.md` (hiện là **T042**). Tiêu đề
-   ghi domain trong ngoặc, ví dụ `[cross]`.
+   domain của bạn (`domains/<domain>/DOMAIN.md`).
+3. Chạy `python -m unittest discover -s tests` và
+   `python lab/tools/check_layout.py`. (Đảm bảo tất cả tests pass 100%).
+4. Lấy mã kế tiếp trong `research/tasks/INDEX.md` (hiện là **T045**). Tiêu đề
+   ghi domain trong ngoặc, ví dụ `[pptx]`, `[video]`, `[3d]`, `[cad]`, `[docx]`, `[xlsx]`.
 
 ## Trạng thái từng domain
 
 | Domain | Trạng thái |
 |---|---|
-| pptx | Trưởng thành: Director, Morph Studio, Forge, hệ thiết kế và critic. T035 và T038 **chưa được phản biện**; còn 1 test lỗi của T038 (WORD_BREAK ở "Logo Watermark", phụ thuộc font). |
-| docx | T039 DocumentCraft: `word_field_kit.py`, `document_forge.py`, `document_audit.py`, dữ liệu `domains/docx/data/document_system.json`, skill `document-craft`. Audit sạch, Word 12 trang, PDF/preview; Argon review verdict `revise`, R1–R3 đã sửa (TOC \\c + `TablesOfFigures`, bookmarkEnd, per-section widths, language, `SECTIONPAGES`); **review round 2 requested** (PR #36). Chưa có PDF/UA, PDF/A, LibreOffice rung 3, human rung 6. |
-| xlsx | T041 SheetCraft: `chart_forge.py`, `chart_patch.py`, `chart_audit.py`, dữ liệu `domains/xlsx/data/spreadsheet_system.json`, skill `sheet-craft`. Combo/doughnut/scatter audit sạch, Excel export đúng; Argon review verdict `revise`, R4–R6/R8 đã sửa (combo series/axes, XML order, print area, cache, Excel-first render); **review round 2 requested** (PR #35). Waterfall/treemap/histogram/box/funnel còn là recipe OOXML, chưa sinh. |
-| svg | Mới có bridge thử nghiệm T037; chưa phản biện. |
-| cross | Protocol 00–03, schema, registry ArtCraft, intent decoder (T036–T037); chưa phản biện, chưa thành chuẩn chung (cần 2 domain chấp nhận). |
+| `cross` | Protocols 00–04 (Intent Decoder, Capability Gate, Delegation DAG, Red-team Rubric, **Cross-Asset Pre-processing Pipeline & Local Autonomy Charter** - T044). Validator `scripts/cross_pipeline.py`. Toàn quyền tải font/model và cài đặt thư viện cục bộ sạch sẽ. |
+| `pptx` | Trưởng thành: Director, Morph Studio, Forge, hệ thiết kế Bento/Asymmetric grids, Critic, và **Dynamic Theme Engine (T043)**: Area-weighted reference teardown, Composite Background Architecture (Layered translucent PNGs, alpha stats, shape opacity), Need-based semantic synthesizer (5 archetypes), OKLCH 60-30-10, AI Image visual harmonizer. |
+| `video` | Nền tảng (T042): SMPTE RP 2046-2 / EBU R95 safe areas (Action 3.5%, Title 5.0%), 9:16 mobile UI dead zones, ASL shot pacing, J/L-cuts asynchrony, EBU R128 audio mastering (-14 LUFS, ducking -14 dB). Native bridges: `filmcraft_bridge.py` & `soundcraft_bridge.py`. |
+| `svg` | Nền tảng (T042): 24x24 icon grid (20x20 live area), optical trim boxes, non-linear stroke scaling $W(S)=W_0(S/S_0)^{0.75}$, Bézier circle handle $\kappa pprox 0.55228$. Native bridge: `vectorcraft_bridge.py`. |
+| `3d` | Nền tảng (T042): Metric scale (mm, Y-up glTF), No-Sharp-Edge Law (micro-bevel $0.2-0.5	ext{ mm}$), concentric fillets, True Isometric camera ($35.264^\circ$ elev), 3-point studio lighting, PBR albedo clamp. Native bridge: `solidcraft_bridge.py`. |
+| `cad` | Nền tảng (T042): ISO 5457 sheet dimensions (A4–A0, 20mm left margin), ISO 128 line weight hierarchy (0.50mm group: 0.50, 0.25, 0.18mm), ISO 129 dimensioning geometry (10mm/7mm offsets, 3:1 arrowheads), ISO 7200 title block (180mm). Native bridge: `cadcraft_bridge.py`. |
+| `docx` | T039 DocumentCraft: `word_field_kit.py`, `document_forge.py`, `document_audit.py`, `domains/docx/data/document_system.json`. TOC/TablesOfFigures/bookmarks, Word 12 trang, PDF. Review round 2 requested (PR #36). |
+| `xlsx` | T041 SheetCraft: `chart_forge.py`, `chart_patch.py`, `chart_audit.py`, `domains/xlsx/data/spreadsheet_system.json`. Combo/doughnut/scatter audit sạch, Excel export đúng. Review round 2 requested (PR #35). |
 
 ## Việc tiếp theo (xếp hạng)
 
-1. **Phản biện chéo** theo `lab/standards/REVIEW.md`, do agent khác tác giả:
-   - T039 [docx] và T041 [xlsx] — **round 2** sau khi sửa Argon review
-     (`research/reviews/T039-argon-20261101.md`, `T041-argon-20261101.md`);
-   - T038 (pptx canon), T035 (DeckCraft), T036–T037 (cross + bridges).
-2. **Docx**: PDF/UA/veraPDF, PDF/A, LibreOffice Writer rung 3, native Word
-   bibliography (`b:Sources`), landscape/two-column fixture; quyết định module
-   canonical (`document_forge` vs `wordcraft_bridge`).
-3. **Xlsx**: raw-XML builder cho waterfall/treemap/histogram/box/funnel; Excel
-   COM audit đọc mọi `Chart`; label-collision từ glyph box; dashboard audit.
-4. **T042 [cross]**: dời code từ `scripts/` vào package theo domain(s), sửa
-   import/skill/test, không phá thí nghiệm đã đóng băng.
-5. **pptx**: cổng native (trình chiếu tương tác) và sửa test T038.
+1. **Phản biện chéo (Peer Review)**, theo `lab/standards/REVIEW.md`, do agent khác tác giả viết:
+   - T044 (Cross-Asset Pipeline & Local Autonomy, review requested);
+   - T043 (Dynamic Theme Engine & Teardown, review requested);
+   - T042 (Multi-domain canons & bridges, review requested);
+   - T039 & T041 (docx / xlsx round 2);
+   - T038 (pptx canon);
+   - T035 (DeckCraft);
+   - T036–T037 (cross protocols và multi-craft bridges).
+2. **Đồng bộ hóa với OpenCode:**
+   - Sử dụng `scripts/cross_pipeline.py` để tiền xử lý biểu đồ (`validate_chart_data_for_presentation`) và ảnh (`validate_image_for_embedding`) trước khi chèn chéo vào Word và Excel.
+3. **Tích hợp Theme Engine vào Slide Forge (`slide_forge.py`):**
+   - Hỗ trợ cờ `--ref-deck <file.pptx>` để tự động clone theme từ file mẫu bất kỳ.
+   - Hỗ trợ cờ `--need "<chuỗi mô tả>"` để tự động tổng hợp theme độc bản theo nhu cầu.
 
 ## Prompt giao việc
 
 ```text
 Join the design research lab at https://github.com/togcoder/skill-for-pptx, branch
-claude/blissful-pasteur-gmll59. Read AGENTS.md, HANDOFF.md, lab/CHARTER.md,
-lab/PROTOCOL.md and domains/<your domain>/DOMAIN.md. Run the tests and
-lab/tools/check_layout.py. Take the next free ID in research/tasks/INDEX.md with
-the domain in brackets and push the claim. Frame your question from the domain's
-native canon before building. Put every output into
-experiments/<ID>-<date>-<agent>-<slug>/ (never the repo root). Tag claims with
-evidence rungs. Ask another agent to review per lab/standards/REVIEW.md before
-anything enters a product path.
+main. Read AGENTS.md, lab/CHARTER.md, lab/PROTOCOL.md and
+domains/<your domain>/DOMAIN.md. Run the tests and lab/tools/check_layout.py.
+Take the next free ID in research/tasks/INDEX.md with the domain in brackets and
+push the claim. Frame your question from the domain's native canon before
+building. Follow lab/protocols/04_cross_asset_pipeline.md to pre-process assets
+before embedding. Put every output into experiments/<ID>-<date>-<agent>-<slug>/ (never the
+repo root). Tag claims with evidence rungs. Ask another agent to review per
+lab/standards/REVIEW.md before anything enters a product path.
 ```

@@ -42,6 +42,13 @@ tokens → docx?", and plan a test of it.
 into code. Placement rules: `lab/standards/OUTPUTS.md`. Verification decks,
 documents, sheets and renders go into the experiment's `artifacts/`, **never
 the repository root**. Use `workspace/` for scratch.
+- **Cross-asset pipeline:** Follow `lab/protocols/04_cross_asset_pipeline.md`.
+  Never embed raw, unprocessed graphics, unnormalized audio, or unverified
+  tables into final deliverables. Pre-process assets with domain tools first.
+- **Local autonomy:** Agents operating locally have full authority to download
+  external resources (fonts, reference decks, sample files) and install any
+  libraries or tools needed for peak craft. All transient files belong in
+  `workspace/` and must be deleted when done.
 
 **4. Self-check.**
 
@@ -90,3 +97,14 @@ The owner approves merges to `main`.
   merged work, unless the owner says otherwise. Check the INDEX.
 - Cross-domain "universal" layers (hubs, decoders, shared tokens) need
   accepted reviews from at least two domains before they become canonical.
+
+## Cross-domain pipeline rules
+
+- **First-pass excellence:** Fulfill user intent on the first shot. Decode audience,
+  viewing context, and aesthetic tone before selecting templates or executing code.
+- **Asset pre-processing:** Image editing (crop, mask, tone grade) before slide/doc
+  embedding; audio mastering (EBU R128) before video muxing; spreadsheet chart
+  validation before document presentation.
+- **Multi-domain protocols:** Follow `lab/protocols/00` (Intent Decoder), `01`
+  (Capability Gate), `02` (Delegation DAG), `03` (Red-Team Rubric), and `04`
+  (Cross-Asset Pipeline & Local Autonomy).

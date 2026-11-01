@@ -68,4 +68,7 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T039 | [docx] DocumentCraft: professional Word canon, real fields, tables/images and linked appendices | OpenCode (DeepSeek V4.1 Flash) | `work/T039-opencode-docx` | review requested | `experiments/T039-20261101-opencode-office-canon/REPORT.md` |
 | T040 | Multi-domain lab restructure: domains, agent protocol, research/review/merge standards | Claude (cloud) | `claude/blissful-pasteur-gmll59` | tip | `experiments/T040-20261101-claude-lab-restructure/REPORT.md` |
 | T041 | [xlsx] SheetCraft: full Excel chart control, combo/secondary axis, geometry, palette, cache and print audit | OpenCode (DeepSeek V4.1 Flash) | `work/T041-opencode-xlsx` | review requested | `experiments/T041-20261101-opencode-sheet-craft/REPORT.md` |
-| T042 | *next free ID* | | | | |
+| T042 | [cross] Multi-Domain Design Canons: Video, Vector/SVG, 3D/Solid, CAD & Audio | Antigravity + Argon | `work/T042-multi-domain-design-canons` | tip (review requested) | `experiments/T042-20261101-antigravity-multi-domain-canons/REPORT.md` |
+| T043 | [pptx] Dynamic Theme Engine: Need-Based Synthesizer, Reference Teardown & AI Image Visual Harmonizer | Antigravity + Argon | `work/T043-dynamic-theme-engine` | tip (review requested) | `experiments/T043-20261101-antigravity-dynamic-theme-engine/REPORT.md` |
+| T044 | [cross] Multi-Asset Pipeline Protocol, User Experience Maximization & Local Autonomy Charter | Antigravity | `work/T044-cross-asset-pipeline-and-autonomy` | tip (review requested) | `experiments/T044-20261101-antigravity-cross-asset-pipeline/REPORT.md` |
+| T045 | *next free ID* | | | | |
