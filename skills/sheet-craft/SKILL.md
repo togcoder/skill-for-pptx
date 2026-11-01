@@ -139,6 +139,37 @@ A workbook that users open is not the same as a workbook that users edit.
 10. **Print.** A form control is not printed by default; export Input and
     Dashboard separately and inspect 1 page each.
 
+## UserForm + dashboard composition (T050)
+
+When the user says "I don't want to type into a sheet" or "many charts crowded
+together", do two separate jobs.
+
+**Data entry = a real UserForm.**
+- `VBComponents.Add(3)`, `Designer.Controls.Add("Forms.ComboBox.1")`, etc.
+  A worksheet range is not a UserForm; say which one you built.
+- Fields: workstream, owner, start, days, cost, benefit, status, priority.
+  Use `ComboBox` for lists, `TextBox` for numbers/dates, three buttons
+  (Lưu/Xóa/Hủy), a status label, and `UserForm_Initialize` for defaults.
+- `btnSave_Click` validates (required lists, ISO date, 1–365 days, numeric),
+  writes the next `T###` to the hidden Data sheet, clears and refreshes.
+- Keep a `FormTools` module for `ShowEntryForm`, `FilterRisk`, `FilterAll`.
+- After `SaveAs(.xlsm)`, verify `FmlaMacro` is `[0]!FormTools.*`, not the
+  source `.xlsx`.
+- **Do not call `Show` in an automated test under a blocked macro policy**; it
+  hangs COM. Inspect the form's 22 controls/code and label the preview as a
+  layout mock, not runtime.
+
+**Dashboard = one grid, one reading order.**
+- A:L (12 columns); KPI cards 3 columns; charts 7/5; no eyeballing.
+- Title → KPI → trend/composition → comparison/status → source.
+- Native charts only: line (trend), column (composition), bar (comparison),
+  doughnut (status). Title, legend if multi-series, light gridlines, data
+  labels only where useful.
+- A4 landscape, one page, `A1:L39`, fit 1×1; export and inspect.
+- Hidden Data/Trend/Model; only Dashboard visible. Hidden ≠ secure.
+- Buttons are not printed by default; a print-first dashboard needs text
+  buttons or `PrintObject=True`.
+
 ## The non-negotiables
 
 - **Zero baseline** for bar/column. A truncated axis is a lie unless the chart

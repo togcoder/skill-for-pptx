@@ -63,6 +63,11 @@ try:
 except ImportError:
     from word_math import omml_from_latex, omml_para
 
+try:
+    from .docx_profiles import apply_profile, check_docx, get_profile, to_markdown
+except ImportError:
+    from docx_profiles import apply_profile, check_docx, get_profile, to_markdown
+
 try:  # package import (tests) or script import (CLI)
     from .word_field_kit import (
         add_appendix_numbering, add_bookmark_start, add_bookmark_end,
@@ -98,6 +103,10 @@ DEFAULTS: dict[str, Any] = {
         "language": "vi-VN",
         "classification": "",
         "keywords": [],
+        "student_id": "",
+        "field": "",
+        "supervisor": "",
+        "co_supervisor": "",
     },
     "page": {
         "size": "A4",
@@ -126,23 +135,38 @@ DEFAULTS: dict[str, Any] = {
         "color_accent": "1F4E79",
         "color_rule": "BFBFBF",
     },
+    "paragraph": {"alignment": "left", "first_line_indent_mm": 0},
+    "numbering": {"heading_max_depth": 4, "captions": "sequential",
+                  "equations": "sequential", "appendix": "letter"},
+    "captions": {"table_position": "above", "figure_position": "below",
+                 "separator": " — ", "number_suffix": "",
+                 "label_figure": "Hình", "label_table": "Bảng"},
     "cover": {"enabled": True, "logo": "", "logo_alt": ""},
     "front_matter": {
         "toc": {"enabled": True, "levels": 3, "title": ""},
         "list_of_figures": {"enabled": False, "title": "", "mode": "toc_switch"},
         "list_of_tables": {"enabled": False, "title": "", "mode": "toc_switch"},
         "abstract": {"enabled": False, "title": "", "text": "", "keywords": []},
+        "declaration": {"enabled": False, "title": "", "text": "", "signature": ""},
+        "acknowledgements": {"enabled": False, "title": "", "text": ""},
+        "task": {"enabled": False, "title": "", "rows": [], "note": ""},
+        "abbreviations": {"enabled": False, "title": "", "rows": []},
+        "order": "toc_first",
     },
     "headers_footers": {
         "enabled": True,
+        "style": "report",
         "odd_even": False,
         "document_id_in_header": True,
         "chapter_in_header": True,
         "classification_in_footer": True,
         "page_numbers": True,
+        "page_number_format": "page",
+        "page_number_align": "split",
+        "page_total": True,
     },
     "sections": [],
-    "references": {"enabled": False, "title": "", "items": []},
+    "references": {"enabled": False, "title": "", "items": [], "position": "after_appendix"},
     "appendix": [],
 }
 
@@ -236,6 +260,9 @@ def _setup_styles(doc, spec: dict) -> None:
     pf.space_after = Pt(typo["space_after_pt"])
     pf.space_before = Pt(0)
     pf.widow_control = True
+    para = spec.get("paragraph", {})
+    pf.alignment = _align(para.get("alignment", "left"))
+    pf.first_line_indent = Mm(float(para.get("first_line_indent_mm", 0)))
     # python-docx exposes widow_control through pPr; setting it twice is harmless.
     ppr = normal.element.get_or_add_pPr()
     wc = ppr.find(qn("w:widowControl"))
@@ -262,6 +289,8 @@ def _setup_styles(doc, spec: dict) -> None:
     caption.paragraph_format.space_after = Pt(8)
     caption.paragraph_format.line_spacing = 1.0
     caption.paragraph_format.keep_together = True
+    caption.paragraph_format.first_line_indent = Mm(0)
+    caption.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
     for name, size in [("Header", typo["header_pt"]), ("Footer", typo["header_pt"])]:
         style = doc.styles[name]
@@ -274,6 +303,7 @@ def _setup_styles(doc, spec: dict) -> None:
     table_text.paragraph_format.space_before = Pt(0)
     table_text.paragraph_format.space_after = Pt(0)
     table_text.paragraph_format.line_spacing = 1.0
+    table_text.paragraph_format.first_line_indent = Mm(0)
 
     equation = _style(doc, "Equation")
     _set_style_font(equation, "Cambria Math", typo["body_pt"], color=typo["color_text"], east_asia=ea)
@@ -281,6 +311,16 @@ def _setup_styles(doc, spec: dict) -> None:
     equation.paragraph_format.space_after = Pt(6)
     equation.paragraph_format.line_spacing = 1.0
     equation.paragraph_format.keep_together = True
+    equation.paragraph_format.first_line_indent = Mm(0)
+
+    for list_style in ("List Bullet", "List Number"):
+        try:
+            style = doc.styles[list_style]
+        except KeyError:
+            continue
+        style.paragraph_format.first_line_indent = Mm(0)
+        style.paragraph_format.left_indent = Mm(12)
+        style.paragraph_format.space_after = Pt(max(2, typo["space_after_pt"] - 2))
 
     toc_heading = _style(doc, "TOC Heading")
     # The built-in TOC Heading is based on Heading 1, so it inherits the
@@ -291,6 +331,7 @@ def _setup_styles(doc, spec: dict) -> None:
     toc_heading.paragraph_format.space_before = Pt(0)
     toc_heading.paragraph_format.space_after = Pt(12)
     toc_heading.paragraph_format.keep_with_next = True
+    toc_heading.paragraph_format.first_line_indent = Mm(0)
     ppr = toc_heading.element.get_or_add_pPr()
     numpr = ppr.find(qn("w:numPr"))
     if numpr is not None:
@@ -307,6 +348,7 @@ def _setup_styles(doc, spec: dict) -> None:
     front_heading.paragraph_format.space_before = Pt(0)
     front_heading.paragraph_format.space_after = Pt(12)
     front_heading.paragraph_format.keep_with_next = True
+    front_heading.paragraph_format.first_line_indent = Mm(0)
     ppr = front_heading.element.get_or_add_pPr()
     lvl = ppr.find(qn("w:outlineLvl"))
     if lvl is None:
@@ -314,7 +356,29 @@ def _setup_styles(doc, spec: dict) -> None:
         ppr.append(lvl)
     lvl.set(qn("w:val"), "9")
 
-    # The stock Title style carries a bottom border and a decorative colour;
+    # Unnumbered chapter heading: same look and outline level as Heading 1,
+    # but a separate style so STYLEREF 1 (and the Heading 1 list counter) does
+    # not see it.  TOC \o "1-3" still includes it via outlineLvl=0.
+    chapter_unnumbered = _style(doc, "Chapter Unnumbered")
+    # Do NOT base it on Heading 1: Word treats a based-on style as Heading 1
+    # for STYLEREF and increments the chapter counter.  A standalone style with
+    # outlineLvl=0 keeps the TOC entry but stays out of the Heading 1 sequence.
+    _set_style_font(chapter_unnumbered, heading, typo["heading_sizes_pt"][0],
+                    bold=True, color=typo["color_accent"], east_asia=ea)
+    chapter_unnumbered.paragraph_format.page_break_before = True
+    chapter_unnumbered.paragraph_format.space_before = Pt(18)
+    chapter_unnumbered.paragraph_format.space_after = Pt(8)
+    chapter_unnumbered.paragraph_format.keep_with_next = True
+    chapter_unnumbered.paragraph_format.line_spacing = 1.0
+    cppr = chapter_unnumbered.element.get_or_add_pPr()
+    numpr = cppr.find(qn("w:numPr"))
+    if numpr is not None:
+        cppr.remove(numpr)
+    clvl = cppr.find(qn("w:outlineLvl"))
+    if clvl is None:
+        clvl = OxmlElement("w:outlineLvl")
+        cppr.append(clvl)
+    clvl.set(qn("w:val"), "0")
     # the cover draws its own single rule, so remove the inherited border.
     title_style = doc.styles["Title"]
     ppr = title_style.element.get_or_add_pPr()
@@ -437,6 +501,10 @@ def _write_header(section, spec: dict, width_mm: float, *, even: bool = False,
     p.paragraph_format.line_spacing = 1.0
     if not hf.get("enabled", True):
         return
+    if hf.get("style") == "thesis":
+        # University templates put no running header on the body; the cover
+        # and front matter are cleared by the caller.
+        return
     meta = spec["meta"]
     if hf.get("document_id_in_header", True):
         p.add_run(meta.get("document_id") or meta.get("title", ""))
@@ -463,6 +531,16 @@ def _write_footer(section, spec: dict, width_mm: float, *, even: bool = False,
     p.paragraph_format.space_after = Pt(0)
     p.paragraph_format.line_spacing = 1.0
     if not hf.get("enabled", True):
+        return
+    if hf.get("style") == "thesis":
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        if hf.get("page_numbers", True):
+            if hf.get("page_number_format", "number") == "page":
+                p.add_run(f"{labels['page']} ")
+            add_page_number(p, "PAGE", result="i" if roman else "1")
+        for run in p.runs:
+            run.font.size = Pt(spec["typography"]["header_pt"])
+            run.font.color.rgb = RGBColor.from_string(spec["typography"]["color_text"])
         return
     if hf.get("classification_in_footer", True) and spec["meta"].get("classification"):
         p.add_run(spec["meta"]["classification"])
@@ -589,7 +667,7 @@ def _add_callout(doc, block: dict, spec: dict, section) -> None:
     table._tbl.tblPr.append(desc)
 
 
-def _add_equation(doc, block: dict, section, owner) -> None:
+def _add_equation(doc, block: dict, section, owner, spec: dict | None = None) -> None:
     """Insert a native OMML equation, centred, with an optional right number."""
     latex = block.get("latex") or block.get("text")
     if not latex:
@@ -602,7 +680,12 @@ def _add_equation(doc, block: dict, section, owner) -> None:
     p._p.append(omml_para(latex))
     if block.get("number", True):
         p.add_run("\t(")
-        add_field(p, r"SEQ Equation \* ARABIC", "1")
+        if spec and (spec.get("numbering") or {}).get("equations") == "chapter":
+            add_field(p, r'STYLEREF "Heading 1" \s', "1")
+            p.add_run(".")
+            add_field(p, r"SEQ Equation \* ARABIC \s 1", "1")
+        else:
+            add_field(p, r"SEQ Equation \* ARABIC", "1")
         p.add_run(")")
     if block.get("caption"):
         cap = doc.add_paragraph(style="Caption")
@@ -631,15 +714,19 @@ def _add_blocks(doc, blocks: list[dict], spec: dict, section, owner, counters: d
         previous_kind = kind
         if kind in {"paragraph", "text"}:
             p = doc.add_paragraph()
-            p.alignment = _align(block.get("align", "left"))
+            p.alignment = _align(block.get("align", (spec.get("paragraph") or {}).get("alignment", "left")))
             _add_text(p, block.get("text", ""), spec, appendix=appendix)
         elif kind in {"bullets", "bullet"}:
             for item in block.get("items", []):
                 p = doc.add_paragraph(style="List Bullet")
+                p.paragraph_format.left_indent = Mm(12)
+                p.paragraph_format.first_line_indent = Mm(0)
                 _add_text(p, item, spec, appendix=appendix)
         elif kind in {"numbered", "number"}:
             for item in block.get("items", []):
                 p = doc.add_paragraph(style="List Number")
+                p.paragraph_format.left_indent = Mm(12)
+                p.paragraph_format.first_line_indent = Mm(0)
                 _add_text(p, item, spec, appendix=appendix)
         elif kind == "heading":
             level = int(block.get("level", heading_level_start))
@@ -647,12 +734,24 @@ def _add_blocks(doc, blocks: list[dict], spec: dict, section, owner, counters: d
             if appendix and appendix_num_id is not None:
                 apply_numbering(p, appendix_num_id, level - 1)
             p.paragraph_format.keep_with_next = True
+        elif kind == "subheading":
+            # A bold run-in heading that does not touch the Heading 1/2 list
+            # counters.  Used before the first numbered chapter.
+            p = doc.add_paragraph()
+            p.paragraph_format.first_line_indent = Mm(0)
+            p.paragraph_format.space_before = Pt(10)
+            p.paragraph_format.space_after = Pt(4)
+            p.paragraph_format.keep_with_next = True
+            run = p.add_run(block.get("text", ""))
+            run.bold = True
+            run.font.size = Pt(spec["typography"]["body_pt"] + 1)
+            run.font.color.rgb = RGBColor.from_string(spec["typography"]["color_accent"])
         elif kind == "figure":
             _add_figure(doc, block, spec, section, owner, counters, appendix=appendix)
         elif kind == "figure_text":
             _add_figure_text(doc, block, spec, section, owner, counters, appendix=appendix)
         elif kind == "equation":
-            _add_equation(doc, block, section, owner)
+            _add_equation(doc, block, section, owner, spec)
         elif kind == "callout":
             _add_callout(doc, block, spec, section)
         elif kind == "table":
@@ -696,41 +795,66 @@ def _strip_number(text: str) -> str:
 def _number_blocks(spec: dict) -> dict:
     """Assign stable figure/table numbers before the front matter is written.
 
-    The list of figures/tables needs stable numbers and bookmarks before the
-    front matter is written; the default list is a ``TOC \\c`` field, with a
-    REF/PAGEREF fallback.  Numbering order is the reading order: body sections
-    first, then appendices.
+    Profiles may declare ``numbering.captions = "chapter"`` (HUST/VNU), in
+    which case the visible number is ``chapter.local`` and resets per chapter.
+    Bookmarks always use the global sequence (``fig-12``), because a dot is not
+    valid in a Word bookmark name.
     """
-    counters = {"figure": 0, "table": 0}
+    chapter_mode = (spec.get("numbering") or {}).get("captions") == "chapter"
+    global_counters = {"figure": 0, "table": 0}
+    chapter = 0
+    chapter_figures = 0
+    chapter_tables = 0
+    appendix_figures: dict[str, int] = {}
     appendix_tables: dict[str, int] = {}
     figures: list[dict] = []
     tables: list[dict] = []
 
     def walk(blocks, letter: str | None = None) -> None:
+        nonlocal chapter_figures, chapter_tables
         for block in blocks or []:
             if not isinstance(block, dict):
                 continue
             kind = block.get("type")
             if kind in {"figure", "figure_text"}:
-                counters["figure"] += 1
-                block["_number"] = counters["figure"]
+                global_counters["figure"] += 1
+                seq = global_counters["figure"]
+                block["_seq"] = seq
                 block["_appendix_letter"] = letter
+                if letter:
+                    appendix_figures[letter] = appendix_figures.get(letter, 0) + 1
+                    number = appendix_figures[letter]
+                elif chapter_mode:
+                    chapter_figures += 1
+                    number = f"{chapter}.{chapter_figures}"
+                else:
+                    number = seq
+                block["_number"] = number
                 figures.append({
-                    "number": counters["figure"],
-                    "bookmark": f"fig-{counters['figure']}",
+                    "number": number,
+                    "bookmark": f"fig-{seq}",
                     "appendix_letter": letter,
+                    "appendix_number": appendix_figures.get(letter),
                     "caption": block.get("caption", ""),
                 })
             elif kind == "table" and block.get("caption"):
-                counters["table"] += 1
-                block["_number"] = counters["table"]
+                global_counters["table"] += 1
+                seq = global_counters["table"]
+                block["_seq"] = seq
                 block["_appendix_letter"] = letter
                 if letter:
                     appendix_tables[letter] = appendix_tables.get(letter, 0) + 1
-                    block["_appendix_number"] = appendix_tables[letter]
+                    number = appendix_tables[letter]
+                    block["_appendix_number"] = number
+                elif chapter_mode:
+                    chapter_tables += 1
+                    number = f"{chapter}.{chapter_tables}"
+                else:
+                    number = seq
+                block["_number"] = number
                 tables.append({
-                    "number": counters["table"],
-                    "bookmark": f"tbl-{counters['table']}",
+                    "number": number,
+                    "bookmark": f"tbl-{seq}",
                     "appendix_letter": letter,
                     "appendix_number": block.get("_appendix_number"),
                     "caption": block.get("caption", ""),
@@ -740,6 +864,10 @@ def _number_blocks(spec: dict) -> dict:
             walk(block.get("blocks"), letter)
 
     for section in spec.get("sections", []):
+        if int(section.get("level", 1)) == 1 and section.get("numbered", True):
+            chapter += 1
+            chapter_figures = 0
+            chapter_tables = 0
         walk(section.get("blocks"))
     for i, app in enumerate(spec.get("appendix", [])):
         letter = app.get("letter") or chr(65 + i)
@@ -763,6 +891,47 @@ def _looks_numeric(value: Any) -> bool:
 # ---------------------------------------------------------------------------
 # Figures and tables
 # ---------------------------------------------------------------------------
+
+def _add_numbered_caption(paragraph, spec: dict, *, label: str, display_label: str,
+                          caption: str, number, seq, owner,
+                          number_bookmark: str, caption_bookmark: str,
+                          appendix: bool = False, reset: bool = False,
+                          display_prefix: str = "") -> tuple[int | None, int | None]:
+    """Write a caption that is either sequential or ``chapter.local``.
+
+    For a chapter profile the number is a live pair: ``STYLEREF 1 \\s`` for the
+    chapter and ``SEQ ... \\s 1`` for the local counter.  Word updates both, so
+    inserting a new chapter does not require retyping captions.
+    """
+    cfg = spec.get("captions") or {}
+    numbering = spec.get("numbering") or {}
+    separator = cfg.get("separator", " — ")
+    suffix = cfg.get("number_suffix", "")
+    if numbering.get("captions") == "chapter" and not appendix:
+        chapter, _, local = str(number).partition(".")
+        if not local:
+            chapter, local = "1", str(number)
+        caption_id = add_bookmark_start(paragraph, caption_bookmark, owner)
+        paragraph.add_run(f"{display_label} ")
+        number_id = add_bookmark_start(paragraph, number_bookmark, owner)
+        add_field(paragraph, r'STYLEREF "Heading 1" \s', result=chapter, dirty=True)
+        paragraph.add_run(".")
+        add_field(paragraph, rf"SEQ {label} \* ARABIC \s 1", result=local, dirty=True)
+        if suffix:
+            paragraph.add_run(suffix)
+        add_bookmark_end(paragraph, number_id, owner)
+        add_bookmark_end(paragraph, caption_id, owner)
+        paragraph.add_run(separator)
+        paragraph.add_run(caption)
+        return number_id, caption_id
+    return add_seq_caption(
+        paragraph, label, caption,
+        number_bookmark=number_bookmark, caption_bookmark=caption_bookmark,
+        bookmark_owner=owner, display_label=display_label,
+        display_prefix=display_prefix,
+        reset=reset, separator=separator, number_suffix=suffix,
+    )
+
 
 def _add_figure(doc, fig: dict, spec: dict, section, owner, counters: dict, *, appendix: bool = False) -> None:
     path = Path(fig["path"])
@@ -820,12 +989,14 @@ def _add_figure(doc, fig: dict, spec: dict, section, owner, counters: dict, *, a
     cap = doc.add_paragraph(style="Caption")
     cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
     cap.paragraph_format.keep_together = True
-    number_bookmark = f"fig-{n}-num"
-    caption_bookmark = f"fig-{n}"
-    add_seq_caption(cap, "Figure", fig.get("caption", ""),
-                    number_bookmark=number_bookmark, caption_bookmark=caption_bookmark,
-                    bookmark_owner=owner, display_label=labels["figure"],
-                    display_prefix=prefix, reset=reset)
+    seq = fig.get("_seq", n)
+    number_bookmark = f"fig-{seq}-num"
+    caption_bookmark = f"fig-{seq}"
+    _add_numbered_caption(cap, spec, label="Figure", display_label=labels["figure"],
+                          caption=fig.get("caption", ""), number=n, seq=seq,
+                          owner=owner, number_bookmark=number_bookmark,
+                          caption_bookmark=caption_bookmark, appendix=bool(letter),
+                          reset=reset, display_prefix=prefix)
     if fig.get("source"):
         sp = doc.add_paragraph()
         sp.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -934,9 +1105,12 @@ def _add_figure_text(doc, block: dict, spec: dict, section, owner, counters: dic
         cap = doc.add_paragraph(style="Caption")
         cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
         cap.paragraph_format.keep_together = True
-        add_seq_caption(cap, "Figure", caption, number_bookmark=f"fig-{n}-num",
-                        caption_bookmark=f"fig-{n}", bookmark_owner=owner,
-                        display_label=labels["figure"], display_prefix=prefix, reset=reset)
+        seq = block.get("_seq", n)
+        _add_numbered_caption(cap, spec, label="Figure", display_label=labels["figure"],
+                              caption=caption, number=n, seq=seq, owner=owner,
+                              number_bookmark=f"fig-{seq}-num",
+                              caption_bookmark=f"fig-{seq}", appendix=bool(letter),
+                              reset=reset, display_prefix=prefix)
     capnode = OxmlElement("w:tblCaption")
     capnode.set(qn("w:val"), f"{labels['figure']} {prefix}{n} — {caption}")
     table._tbl.tblPr.append(capnode)
@@ -1147,9 +1321,12 @@ def _add_rich_table(doc, table_spec: dict, spec: dict, section, owner, counters:
         cap.paragraph_format.keep_with_next = True
         cap.paragraph_format.space_before = Pt(8)
         cap.paragraph_format.space_after = Pt(2)
-        add_seq_caption(cap, "Table", caption, number_bookmark=f"tbl-{n}-num",
-                        caption_bookmark=f"tbl-{n}", bookmark_owner=owner,
-                        display_label=labels["table"], display_prefix=prefix, reset=reset)
+        seq = table_spec.get("_seq", n)
+        _add_numbered_caption(cap, spec, label="Table", display_label=labels["table"],
+                              caption=caption, number=n, seq=seq, owner=owner,
+                              number_bookmark=f"tbl-{seq}-num",
+                              caption_bookmark=f"tbl-{seq}", appendix=bool(letter),
+                              reset=reset, display_prefix=prefix)
 
     table = doc.add_table(rows=len(header_defs) + len(rows), cols=ncols)
     table.alignment = WD_TABLE_ALIGNMENT.CENTER
@@ -1292,10 +1469,12 @@ def _add_table(doc, table_spec: dict, spec: dict, section, owner, counters: dict
         cap.paragraph_format.keep_with_next = True
         cap.paragraph_format.space_before = Pt(8)
         cap.paragraph_format.space_after = Pt(2)
-        add_seq_caption(cap, "Table", caption,
-                        number_bookmark=f"tbl-{n}-num", caption_bookmark=f"tbl-{n}",
-                        bookmark_owner=owner, display_label=labels["table"],
-                        display_prefix=prefix, reset=reset)
+        seq = table_spec.get("_seq", n)
+        _add_numbered_caption(cap, spec, label="Table", display_label=labels["table"],
+                              caption=caption, number=n, seq=seq, owner=owner,
+                              number_bookmark=f"tbl-{seq}-num",
+                              caption_bookmark=f"tbl-{seq}", appendix=bool(letter),
+                              reset=reset, display_prefix=prefix)
 
     has_header = bool(table_spec.get("header", True))
     table = doc.add_table(rows=(1 if has_header else 0) + len(rows), cols=ncols)
@@ -1398,11 +1577,77 @@ def _add_table(doc, table_spec: dict, spec: dict, section, owner, counters: dict
 # Cover, front matter, body, appendix, references
 # ---------------------------------------------------------------------------
 
+def _add_thesis_cover(doc, spec: dict, section) -> None:
+    """Vietnamese university cover: university block, degree, title, people."""
+    meta = spec["meta"]
+    cover = spec["cover"]
+    typo = spec["typography"]
+    labels = _labels(spec)
+    width = _text_width_mm(section)
+
+    def centered(text: str, size: float, *, bold: bool = True, space_after: float = 4,
+                 color: str | None = None, uppercase: bool = False) -> None:
+        p = doc.add_paragraph()
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p.paragraph_format.first_line_indent = Mm(0)
+        p.paragraph_format.space_before = Pt(0)
+        p.paragraph_format.space_after = Pt(space_after)
+        p.paragraph_format.line_spacing = 1.0
+        run = p.add_run(text.upper() if uppercase else text)
+        run.font.name = typo["body_font"]
+        run.font.size = Pt(size)
+        run.bold = bold
+        run.font.color.rgb = RGBColor.from_string(color or typo["color_text"])
+
+    logo = cover.get("logo")
+    if logo:
+        p = doc.add_paragraph()
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p.paragraph_format.space_after = Pt(8)
+        run = p.add_run()
+        path = Path(logo)
+        if not path.is_absolute():
+            path = Path(cover.get("_base_dir", ".")) / path
+        run.add_picture(str(path), width=Mm(float(cover.get("logo_width_mm", 30))))
+        inline = doc.inline_shapes[-1]
+        inline._inline.docPr.set("descr", cover.get("logo_alt", "Logo"))
+        inline._inline.docPr.set("title", cover.get("logo_alt", "Logo"))
+
+    for line in cover.get("university_lines") or []:
+        centered(line, 12, bold=True, space_after=2, uppercase=True)
+    doc.add_paragraph()
+    centered(cover.get("degree", "ĐỒ ÁN TỐT NGHIỆP"), 16, bold=True, space_after=18, uppercase=True)
+    centered(meta.get("title", ""), 20, bold=True, space_after=10, uppercase=True)
+    if meta.get("subtitle"):
+        centered(meta["subtitle"], 13, bold=False, space_after=10)
+    field_label = cover.get("field_label", "Ngành")
+    if meta.get("field"):
+        centered(f"{field_label}: {meta['field']}", 14, bold=True, space_after=4)
+    doc.add_paragraph()
+    supervisor_label = cover.get("supervisor_label", "Giáo viên hướng dẫn")
+    if meta.get("supervisor"):
+        centered(f"{supervisor_label}: {meta['supervisor']}", 14, bold=True, space_after=4)
+    if meta.get("co_supervisor"):
+        centered(f"{cover.get('co_supervisor_label', 'Cán bộ đồng hướng dẫn')}: {meta['co_supervisor']}",
+                 14, bold=True, space_after=4)
+    student_label = cover.get("student_label", "Sinh viên thực hiện")
+    if meta.get("author"):
+        centered(f"{student_label}: {meta['author']}", 14, bold=True, space_after=4)
+    if meta.get("student_id"):
+        centered(f"Mã số sinh viên: {meta['student_id']}", 13, bold=False, space_after=4)
+    for _ in range(3):
+        doc.add_paragraph()
+    centered(cover.get("location_year", ""), 12, bold=True, space_after=0, uppercase=True)
+
+
 def _add_cover(doc, spec: dict, section) -> None:
     meta = spec["meta"]
     cover = spec["cover"]
     typo = spec["typography"]
     labels = _labels(spec)
+    if cover.get("layout") == "thesis":
+        _add_thesis_cover(doc, spec, section)
+        return
     hero = cover.get("hero_image")
     if hero:
         path = Path(hero)
@@ -1503,9 +1748,71 @@ def _add_field_list(doc, entries: list[dict], spec: dict, section, *, kind: str,
         placeholder = f"{labels[kind]} {prefix}{entry['number']}"
         add_cross_reference(para, entry["bookmark"], kind="text", result=placeholder)
         if entry.get("caption"):
-            para.add_run(f" — {entry['caption']}")
+            sep = (spec.get("captions") or {}).get("separator", " — ")
+            para.add_run(f"{sep}{entry['caption']}")
         para.add_run("\t")
         add_cross_reference(para, entry["bookmark"], kind="page", result="1")
+
+
+def _fm_heading(doc, title: str) -> None:
+    p = doc.add_paragraph(style="Front Matter Heading")
+    p.add_run(title)
+    p.paragraph_format.page_break_before = False
+
+
+def _fm_text(doc, text: str, spec: dict) -> None:
+    for para in (text or "").split("\n\n"):
+        if para.strip():
+            body = doc.add_paragraph()
+            _add_text(body, para.strip(), spec)
+
+
+def _fm_table(doc, section, rows: list[list], *, widths_mm: tuple[float, float] = (42, 108),
+              header: list[str] | None = None) -> None:
+    """Small two-column front-matter table (task, abbreviations)."""
+    def value_of(value) -> str:
+        if isinstance(value, dict):
+            return str(value.get("text", ""))
+        return str(value)
+
+    nrows = (1 if header else 0) + len(rows)
+    table = doc.add_table(rows=nrows, cols=2)
+    table.alignment = WD_TABLE_ALIGNMENT.CENTER
+    table.autofit = False
+    table.allow_autofit = False
+    total = sum(widths_mm)
+    _set_tbl_layout(table, _mm_twips(total), first_row=bool(header))
+    _set_table_borders(table, kind="booktabs")
+    for i, gc in enumerate(table._tbl.tblGrid.findall(qn("w:gridCol"))):
+        gc.set(qn("w:w"), str(_mm_twips(widths_mm[i])))
+    for row in table.rows:
+        for i, cell in enumerate(row.cells):
+            cell.width = Mm(widths_mm[i])
+    # Front-matter tables are short; marking the first row as a header keeps
+    # the audit and page-splitting behaviour predictable.
+    trpr = table.rows[0]._tr.get_or_add_trPr()
+    trpr.append(OxmlElement("w:tblHeader"))
+    index = 0
+    if header:
+        for i, value in enumerate(header):
+            cell = table.rows[0].cells[i]
+            p = cell.paragraphs[0]
+            run = p.add_run(value_of(value))
+            run.bold = True
+        index = 1
+    for r, row in enumerate(rows):
+        for c, value in enumerate(row[:2]):
+            cell = table.rows[index + r].cells[c]
+            p = cell.paragraphs[0]
+            run = p.add_run(value_of(value))
+            if c == 0 or (isinstance(value, dict) and value.get("bold")):
+                run.bold = True
+    # Keep the table text at the profile's table size.
+    for row in table.rows:
+        for cell in row.cells:
+            for p in cell.paragraphs:
+                p.paragraph_format.first_line_indent = Mm(0)
+                p.paragraph_format.space_after = Pt(0)
 
 
 def _add_front_matter(doc, spec: dict, section, owner, manifest: dict) -> None:
@@ -1517,48 +1824,43 @@ def _add_front_matter(doc, spec: dict, section, owner, manifest: dict) -> None:
         toc = fm.get("toc", {})
         if not toc.get("enabled", True):
             return
-        p = doc.add_paragraph(style="TOC Heading")
-        p.add_run(toc.get("title") or labels["toc"])
+        _fm_heading(doc, toc.get("title") or labels["toc"])
         tp = doc.add_paragraph()
+        tp.paragraph_format.first_line_indent = Mm(0)
         add_toc(tp, levels=int(toc.get("levels", 3)))
         doc.add_page_break()
 
+    def add_list(key: str, kind: str, label_key: str) -> None:
+        cfg = fm.get(key, {})
+        entries = manifest.get("figures" if kind == "figure" else "tables", [])
+        if not cfg.get("enabled") or not entries:
+            return
+        if cfg.get("mode", "toc_switch") == "ref_pageref":
+            _add_field_list(doc, entries, spec, section, kind=kind,
+                            title=cfg.get("title") or labels[label_key])
+        else:
+            _fm_heading(doc, cfg.get("title") or labels[label_key])
+            tp = doc.add_paragraph()
+            add_toc_of(tp, "Figure" if kind == "figure" else "Table")
+        if cfg.get("page_break_after", True):
+            doc.add_page_break()
+
     def add_lists_page():
-        for key, kind, label_key, entries in [
-            ("list_of_figures", "figure", "figures", manifest.get("figures", [])),
-            ("list_of_tables", "table", "tables", manifest.get("tables", [])),
-        ]:
-            cfg = fm.get(key, {})
-            if not cfg.get("enabled"):
-                continue
-            if not entries:
-                continue
-            if cfg.get("mode", "toc_switch") == "ref_pageref":
-                _add_field_list(doc, entries, spec, section, kind=kind,
-                                title=cfg.get("title") or labels[label_key])
-            else:
-                p = doc.add_paragraph(style="TOC Heading")
-                p.add_run(cfg.get("title") or labels[label_key])
-                tp = doc.add_paragraph()
-                add_toc_of(tp, "Figure" if kind == "figure" else "Table")
-            if cfg.get("page_break_after", True):
-                doc.add_page_break()
+        add_list("list_of_figures", "figure", "figures")
+        add_list("list_of_tables", "table", "tables")
 
     def add_abstract_page():
         abstract = fm.get("abstract", {})
         if not (abstract.get("enabled") or abstract.get("text")):
             return
-        p = doc.add_paragraph(style="Front Matter Heading")
-        p.add_run(abstract.get("title") or labels["abstract"])
-        p.paragraph_format.page_break_before = False
-        for para in (abstract.get("text") or "").split("\n\n"):
-            if para.strip():
-                body = doc.add_paragraph()
-                _add_text(body, para.strip(), spec)
+        _fm_heading(doc, abstract.get("title") or labels["abstract"])
+        _fm_text(doc, abstract.get("text") or "", spec)
         if abstract.get("keywords"):
             p = doc.add_paragraph()
+            p.paragraph_format.first_line_indent = Mm(0)
             run = p.add_run(f"{labels['keywords']}: ")
             run.bold = True
+            run.italic = True
             p.add_run(", ".join(abstract["keywords"]))
         doc.add_page_break()
 
@@ -1566,27 +1868,90 @@ def _add_front_matter(doc, spec: dict, section, owner, manifest: dict) -> None:
         preface = fm.get("preface", {})
         if not (preface.get("enabled") or preface.get("blocks") or preface.get("text")):
             return
-        p = doc.add_paragraph(style="Front Matter Heading")
-        p.add_run(preface.get("title") or "Lời nói đầu")
-        for para in (preface.get("text") or "").split("\n\n"):
-            if para.strip():
-                body = doc.add_paragraph()
-                _add_text(body, para.strip(), spec)
+        _fm_heading(doc, preface.get("title") or "Lời nói đầu")
+        _fm_text(doc, preface.get("text") or "", spec)
         _add_blocks(doc, preface.get("blocks", []), spec, section, owner, counters,
                     heading_level_start=2)
         doc.add_page_break()
 
-    order = str(fm.get("order") or "toc_first").lower()
-    if order == "iso7144":
-        add_abstract_page()
-        add_preface_page()
-        add_toc_page()
-        add_lists_page()
-    else:
-        add_toc_page()
-        add_lists_page()
-        add_abstract_page()
-        add_preface_page()
+    def add_declaration_page():
+        cfg = fm.get("declaration", {})
+        if not cfg.get("enabled"):
+            return
+        _fm_heading(doc, cfg.get("title") or "LỜI CAM ĐOAN")
+        _fm_text(doc, cfg.get("text") or "", spec)
+        signature = cfg.get("signature") or ""
+        if signature:
+            doc.add_paragraph()
+            for line in signature.split("\n"):
+                p = doc.add_paragraph()
+                p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+                p.paragraph_format.first_line_indent = Mm(0)
+                p.paragraph_format.space_after = Pt(2)
+                run = p.add_run(line)
+                if line.strip().lower().startswith(("sinh viên", "tác giả")):
+                    run.bold = True
+        doc.add_page_break()
+
+    def add_acknowledgements_page():
+        cfg = fm.get("acknowledgements", {})
+        if not (cfg.get("enabled") or cfg.get("text")):
+            return
+        _fm_heading(doc, cfg.get("title") or "LỜI CẢM ƠN")
+        _fm_text(doc, cfg.get("text") or "", spec)
+        doc.add_page_break()
+
+    def add_task_page():
+        cfg = fm.get("task", {})
+        if not cfg.get("enabled"):
+            return
+        _fm_heading(doc, cfg.get("title") or "NHIỆM VỤ THIẾT KẾ TỐT NGHIỆP")
+        rows = cfg.get("rows") or []
+        if rows:
+            _fm_table(doc, section, rows, widths_mm=(40, 110))
+        if cfg.get("note"):
+            p = doc.add_paragraph()
+            p.paragraph_format.first_line_indent = Mm(0)
+            _add_text(p, cfg["note"], spec)
+        doc.add_page_break()
+
+    def add_abbreviations_page():
+        cfg = fm.get("abbreviations", {})
+        if not cfg.get("enabled") or not cfg.get("rows"):
+            return
+        _fm_heading(doc, cfg.get("title") or "DANH MỤC KÝ HIỆU VÀ CHỮ VIẾT TẮT")
+        _fm_table(doc, section, cfg["rows"], widths_mm=(38, 112),
+                  header=cfg.get("header") or ["Ký hiệu", "Diễn giải"])
+        doc.add_page_break()
+
+    order = fm.get("order") or "toc_first"
+    if isinstance(order, str):
+        presets = {
+            "iso7144": ["abstract", "preface", "toc", "list_of_figures", "list_of_tables"],
+            "toc_first": ["toc", "list_of_figures", "list_of_tables", "abstract", "preface"],
+            "thesis": ["task", "declaration", "acknowledgements", "abstract", "toc",
+                       "abbreviations", "list_of_tables", "list_of_figures"],
+            "hust": ["task", "declaration", "acknowledgements", "abstract", "toc",
+                     "abbreviations", "list_of_tables", "list_of_figures"],
+            "vnu": ["declaration", "abstract", "toc", "abbreviations",
+                    "list_of_tables", "list_of_figures"],
+        }
+        order = presets.get(order.lower(), presets["toc_first"])
+    actions = {
+        "task": add_task_page,
+        "declaration": add_declaration_page,
+        "acknowledgements": add_acknowledgements_page,
+        "abstract": add_abstract_page,
+        "preface": add_preface_page,
+        "toc": add_toc_page,
+        "abbreviations": add_abbreviations_page,
+        "list_of_figures": lambda: add_list("list_of_figures", "figure", "figures"),
+        "list_of_tables": lambda: add_list("list_of_tables", "table", "tables"),
+    }
+    for key in order:
+        action = actions.get(str(key).lower())
+        if action:
+            action()
 
 
 def _add_references(doc, spec: dict, owner) -> None:
@@ -1665,11 +2030,70 @@ def _resolve_paths(spec: dict, base_dir: Path) -> None:
         spec["cover"]["_base_dir"] = str(base_dir)
 
 
+def _word_page_stats(docx_path: Path) -> tuple[int | None, int | None]:
+    """Return (body_pages, total_pages) from Word, or (None, None).
+
+    ``body_pages`` stops at the first end-matter heading (references or
+    appendix), because university rules usually exclude those from the body
+    limit.  The TOC entries with the same text are ignored by requiring the
+    paragraph to start at or after the body section.
+    """
+    try:
+        import win32com.client as win32
+    except Exception:
+        return None, None
+    word = doc = None
+    try:
+        word = win32.DispatchEx("Word.Application")
+        word.Visible = False
+        word.DisplayAlerts = 0
+        doc = word.Documents.Open(str(docx_path.resolve()), False, True, False)
+        total = int(doc.ComputeStatistics(2))  # wdStatisticPages
+        if doc.Sections.Count >= 3:
+            body_range = doc.Sections(3).Range
+            body_start_char = int(body_range.Start)
+            body_start = int(doc.Range(body_start_char, body_start_char).Information(3))
+        else:
+            body_start_char = 0
+            body_start = 1
+        end_page = total + 1
+        for para in doc.Paragraphs:
+            rng = para.Range
+            if int(rng.Start) < body_start_char:
+                continue
+            text = (rng.Text or "").strip().upper()
+            if text.startswith("TÀI LIỆU THAM KHẢO") or text.startswith("PHỤ LỤC"):
+                page = int(rng.Information(3))
+                if body_start <= page < end_page:
+                    end_page = page
+        body_pages = max(1, end_page - body_start) if end_page <= total else total - body_start + 1
+        return body_pages, total
+    except Exception:
+        return None, None
+    finally:
+        if doc is not None:
+            try:
+                doc.Close(0)
+            except Exception:
+                pass
+        if word is not None:
+            try:
+                word.Quit()
+            except Exception:
+                pass
+
+
 def build_document(spec_path: str | Path, out_path: str | Path, *,
                    system: dict | None = None, update: str = "none",
-                   render_dir: str | Path | None = None) -> dict:
+                   render_dir: str | Path | None = None,
+                   profile: str | dict | None = None,
+                   profile_path: str | Path | None = None) -> dict:
     spec_path = Path(spec_path)
     raw = json.loads(spec_path.read_text(encoding="utf-8"))
+    profile_record = None
+    if profile:
+        profile_record = profile if isinstance(profile, dict) else get_profile(profile, profile_path)
+        raw = apply_profile(raw, profile_record)
     spec = _deep_merge(DEFAULTS, raw)
     _resolve_paths(spec, spec_path.parent)
     if not spec["meta"].get("title"):
@@ -1727,13 +2151,22 @@ def build_document(spec_path: str | Path, out_path: str | Path, *,
         heading = section_spec.get("heading") or section_spec.get("title")
         level = int(section_spec.get("level", 1))
         if heading:
-            p = doc.add_heading(_strip_number(heading), level)
-            p.paragraph_format.page_break_before = bool(section_spec.get("page_break_before", i > 0))
+            if section_spec.get("numbered", True) is False:
+                p = doc.add_paragraph(style="Chapter Unnumbered")
+                p.add_run(_strip_number(heading))
+                p.paragraph_format.page_break_before = bool(section_spec.get("page_break_before", i > 0))
+            else:
+                p = doc.add_heading(_strip_number(heading), level)
+                p.paragraph_format.page_break_before = bool(section_spec.get("page_break_before", i > 0))
             add_bookmark_to_paragraph(p, f"sec-{i + 1}", doc)
         _add_blocks(doc, section_spec.get("blocks", []), spec, body_section, doc, counters)
 
-    _add_appendix(doc, spec, body_section, doc, counters)
-    _add_references(doc, spec, doc)
+    if (spec.get("references") or {}).get("position") == "before_appendix":
+        _add_references(doc, spec, doc)
+        _add_appendix(doc, spec, body_section, doc, counters)
+    else:
+        _add_appendix(doc, spec, body_section, doc, counters)
+        _add_references(doc, spec, doc)
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -1759,13 +2192,32 @@ def build_document(spec_path: str | Path, out_path: str | Path, *,
         "updated_by": updated_by,
         "spec": str(spec_path),
     }
-    audit = audit_docx(out_path, system=system)
+    audit_system = system
+    if profile_record is not None:
+        if audit_system is None:
+            audit_system = json.loads(DEFAULT_SYSTEM_PATH.read_text(encoding="utf-8"))
+        else:
+            audit_system = copy.deepcopy(audit_system)
+        margins = (profile_record.get("page") or {}).get("margins_mm") or {}
+        if margins:
+            audit_system.setdefault("page", {})["margin_min_mm"] = max(
+                5.0, min(float(v) for v in margins.values()) - 0.6)
+    audit = audit_docx(out_path, system=audit_system)
     report["audit"] = audit.as_dict()
     report["ok"] = audit.ok
     if updated_by:
-        audit2 = audit_docx(out_path, system=system)
+        audit2 = audit_docx(out_path, system=audit_system)
         report["audit_after_update"] = audit2.as_dict()
         report["ok"] = audit2.ok
+    if profile_record is not None:
+        body_pages = total_pages = None
+        if updated_by == "word":
+            body_pages, total_pages = _word_page_stats(out_path)
+        conf = check_docx(out_path, profile_record, body_pages=body_pages,
+                          total_pages=total_pages)
+        report["profile"] = spec.get("_profile")
+        report["conformance"] = conf
+        report["ok"] = bool(report["ok"] and conf["ok"])
     if render_dir:
         report["rendered"] = _render_document(out_path, Path(render_dir))
     return report
@@ -1969,6 +2421,11 @@ def main() -> None:
     p.add_argument("--update", choices=["none", "auto", "wordcraft", "word"], default="none")
     p.add_argument("--render", type=Path, default=None)
     p.add_argument("--report", type=Path, default=None)
+    p.add_argument("--profile", default=None,
+                   help="Named standard profile (see domains/docx/data/standard_profiles.json)")
+    p.add_argument("--profiles", type=Path, default=None, help="Alternative profile file")
+    p.add_argument("--conformance", type=Path, default=None,
+                   help="Write the conformance report as Markdown")
     p.add_argument("--no-audit", action="store_true")
 
     p = sub.add_parser("audit", help="Structural audit of a DOCX")
@@ -1980,10 +2437,14 @@ def main() -> None:
 
     args = parser.parse_args()
     if args.cmd == "build":
-        report = build_document(args.spec, args.output, update=args.update, render_dir=args.render)
+        report = build_document(args.spec, args.output, update=args.update, render_dir=args.render,
+                                profile=args.profile, profile_path=args.profiles)
         data = report if not args.no_audit else {k: v for k, v in report.items() if k != "audit"}
         text = json.dumps(data, indent=2, ensure_ascii=False)
         print(text)
+        if args.conformance and report.get("conformance"):
+            args.conformance.parent.mkdir(parents=True, exist_ok=True)
+            args.conformance.write_text(to_markdown(report["conformance"]), encoding="utf-8")
         if args.report:
             args.report.parent.mkdir(parents=True, exist_ok=True)
             args.report.write_text(text, encoding="utf-8")

@@ -1,0 +1,101 @@
+{
+  "meta": {
+    "title": "Ablation",
+    "sheet": "Data",
+    "author": "T052",
+    "company": "DocumentCraft"
+  },
+  "data": {
+    "headers": [
+      "Biến thể",
+      "F1"
+    ],
+    "rows": [
+      [
+        "AE",
+        0.78
+      ],
+      [
+        "CNN-AE",
+        0.82
+      ],
+      [
+        "CNN-LSTM-AE",
+        0.85
+      ],
+      [
+        "+Attention",
+        0.87
+      ],
+      [
+        "+Mahalanobis",
+        0.885
+      ],
+      [
+        "Đầy đủ + QAT",
+        0.89
+      ]
+    ],
+    "widths": {
+      "A:A": 20,
+      "B:B": 10
+    }
+  },
+  "chart": {
+    "type": "column",
+    "title": "Đóng góp của từng thành phần",
+    "style": 10,
+    "palette": [
+      "#2E75B6"
+    ],
+    "position": {
+      "cell": "E2",
+      "width_cm": 14.8,
+      "height_cm": 8.0
+    },
+    "categories_column": 0,
+    "axes": {
+      "x": {
+        "title": "",
+        "label_size": 8.5,
+        "label_rotation": -25
+      },
+      "y": {
+        "title": "F1",
+        "min": 0.7,
+        "max": 0.92,
+        "major_unit": 0.04,
+        "number_format": "0.00",
+        "gridlines": true,
+        "label_size": 9
+      }
+    },
+    "legend": {
+      "position": "none",
+      "size": 9
+    },
+    "series": [
+      {
+        "name": "F1",
+        "column": 1,
+        "color": "#2E75B6",
+        "gap": 45,
+        "data_labels": {
+          "show": true,
+          "position": "outside_end",
+          "size": 8.5,
+          "number_format": "0.000"
+        }
+      }
+    ]
+  },
+  "post": {
+    "anchor": "one_cell",
+    "plot_layout": {
+      "x": 0.1,
+      "y": 0.16,
+      "w": 0.78,
+      "h": 0.58
+    }
+  }
+}

@@ -23,8 +23,55 @@ were true at the time. Task IDs and their branches are listed in
 - **Tests.** `tests/test_photo_vector.py` (18 tests); full suite 422 tests OK
   (8 skipped).
 - **Status.** EXPERIMENTAL; review accepted by Argon (approve T051, round 2);
-  awaiting owner merge.
+  merged to `main` (PR #49).
 - Report: `experiments/T051-20261102-opencode-photo-vector/REPORT.md`.
+## T052 [docx] Configurable standard profiles + Vietnamese scientific report — 2026-11-02
+
+- **Profile layer.** `domains/docx/data/standard_profiles.json` adds four
+  sourced profiles: `hust-datn-2017`, `vnu-uet-kl-2024`, `iso-7144-thesis` and
+  `annual-report-gri`, with page, typography, numbering, caption position,
+  front-matter order, reference position and page limits.
+- **Merge.** `scripts/docx_profiles.py` merges profile defaults under the spec
+  (explicit spec wins) and `document_forge --profile` applies them. The same
+  content spec builds a HUST report (34 body pages, 48 total) and a VNU-UET
+  report (35 body pages, 45 total).
+- **Conformance.** `check_docx()` measures A4, margins, body/table font, size,
+  line spacing, first-line indent, heading depth/numbering, chapter captions
+  and position, page number, front-matter order, references/citations, abstract
+  length, body pages and equations. Both builds pass (23/23 and 24/24).
+- **Chapter numbering.** `STYLEREF "Heading 1" \s` + `SEQ ... \s 1` for
+  figures, tables and equations; `Chapter Unnumbered` standalone style for
+  `Mở đầu` so it does not shift the Heading 1 counter.
+- **Report content.** 59 headings (max H3), 23/22 tables, 7 figures, 9 native
+  equations, 12 references, 13 citation fields, thesis cover, declaration,
+  task, abstract, abbreviations, lists, appendices.
+- **Cross-asset.** SVG architecture/window diagrams via VectorCraft; training,
+  PR, F1, ablation and latency charts via Chart Forge (SheetCraft).
+- **Audit.** Both builds: 0 errors, 0 warnings with profile-aware margin floor;
+  204 fields, 88 bookmarks, `vi-VN`; Word refreshed fields and exported 48/45
+  pages.
+- **Tests.** `tests/test_docx_profiles.py` (7 tests); full suite 411 tests OK
+  (8 skipped).
+- **Status.** EXPERIMENTAL; review accepted by Argon (approve T052, round 2); merged to main (306f5f2).
+- Report: `experiments/T052-20261102-opencode-scientific-report/REPORT.md`.
+
+## T050 [xlsx] VBA UserForm + composed dashboard — 2026-11-02
+
+- **UserForm.** `scripts/userform_forge.py` injects a real `frmEntry` (22
+  controls: 8 labels, 4 combo boxes, 4 text boxes, 3 buttons, title/hint/status)
+  and a `FormTools` module into an `.xlsm`; `btnSave_Click` validates and appends
+  to the hidden Data sheet.
+- **Dashboard.** `scripts/dashboard_forge.py` composes a 12-column A4 landscape
+  dashboard: 4 KPI cards, 4 native charts (line/column/bar/doughnut), hidden
+  Data/Trend/Model, 3 filter/form buttons, one-page print area.
+- **Evidence.** Excel opened the exact XLSM: 4 sheets (3 hidden), 4 charts,
+  3 buttons, 22 form controls; Dashboard exported as **1 page**; form code has
+  `btnSave_Click`/`ClearForm`/`nextId`. Macro execution remains blocked by host
+  policy; the form was not shown end-to-end.
+- **Tests.** `tests/test_dashboard_userform.py` (3 tests); full suite 407 tests
+  OK (8 skipped).
+- **Status.** EXPERIMENTAL; review accepted by Argon (approve T050, round 2); merged to main (90695a9).
+- Report: `experiments/T050-20261102-opencode-userform-dashboard/REPORT.md`.
 
 ## T048 [xlsx] Workbook UX: hidden data, VBA input, tab colour, merges — 2026-11-01
 

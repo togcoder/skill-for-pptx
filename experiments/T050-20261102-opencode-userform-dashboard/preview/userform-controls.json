@@ -1,0 +1,214 @@
+{
+  "ok": true,
+  "components": [
+    "ThisWorkbook",
+    "Sheet1",
+    "Sheet2",
+    "Sheet3",
+    "Sheet4",
+    "DashboardTools",
+    "frmEntry",
+    "FormTools"
+  ],
+  "controls": [
+    {
+      "name": "lblTitle",
+      "type": "CDispatch",
+      "caption": "NHẬP CÔNG VIỆC",
+      "left": 20,
+      "top": 12,
+      "width": 390,
+      "height": 30
+    },
+    {
+      "name": "lblHint",
+      "type": "CDispatch",
+      "caption": "Biểu mẫu ghi vào sheet Data (ẩn).",
+      "left": 22,
+      "top": 40,
+      "width": 390,
+      "height": 16
+    },
+    {
+      "name": "lbl0",
+      "type": "CDispatch",
+      "caption": "Workstream",
+      "left": 22,
+      "top": 60,
+      "width": 90,
+      "height": 20
+    },
+    {
+      "name": "cboWorkstream",
+      "type": "CDispatch",
+      "caption": "",
+      "left": 116,
+      "top": 58,
+      "width": 104,
+      "height": 22
+    },
+    {
+      "name": "lbl1",
+      "type": "CDispatch",
+      "caption": "Owner",
+      "left": 230,
+      "top": 60,
+      "width": 90,
+      "height": 20
+    },
+    {
+      "name": "cboOwner",
+      "type": "CDispatch",
+      "caption": "",
+      "left": 324,
+      "top": 58,
+      "width": 96,
+      "height": 22
+    },
+    {
+      "name": "lbl2",
+      "type": "CDispatch",
+      "caption": "Ngày bắt đầu",
+      "left": 22,
+      "top": 100,
+      "width": 90,
+      "height": 20
+    },
+    {
+      "name": "txtStart",
+      "type": "CDispatch",
+      "caption": "",
+      "left": 116,
+      "top": 98,
+      "width": 104,
+      "height": 22
+    },
+    {
+      "name": "lbl3",
+      "type": "CDispatch",
+      "caption": "Số ngày",
+      "left": 230,
+      "top": 100,
+      "width": 90,
+      "height": 20
+    },
+    {
+      "name": "txtDays",
+      "type": "CDispatch",
+      "caption": "",
+      "left": 324,
+      "top": 98,
+      "width": 96,
+      "height": 22
+    },
+    {
+      "name": "lbl4",
+      "type": "CDispatch",
+      "caption": "Chi phí (triệu)",
+      "left": 22,
+      "top": 140,
+      "width": 90,
+      "height": 20
+    },
+    {
+      "name": "txtCost",
+      "type": "CDispatch",
+      "caption": "",
+      "left": 116,
+      "top": 138,
+      "width": 104,
+      "height": 22
+    },
+    {
+      "name": "lbl5",
+      "type": "CDispatch",
+      "caption": "Lợi ích (triệu)",
+      "left": 230,
+      "top": 140,
+      "width": 90,
+      "height": 20
+    },
+    {
+      "name": "txtBenefit",
+      "type": "CDispatch",
+      "caption": "",
+      "left": 324,
+      "top": 138,
+      "width": 96,
+      "height": 22
+    },
+    {
+      "name": "lbl6",
+      "type": "CDispatch",
+      "caption": "Trạng thái",
+      "left": 22,
+      "top": 180,
+      "width": 90,
+      "height": 20
+    },
+    {
+      "name": "cboStatus",
+      "type": "CDispatch",
+      "caption": "",
+      "left": 116,
+      "top": 178,
+      "width": 104,
+      "height": 22
+    },
+    {
+      "name": "lbl7",
+      "type": "CDispatch",
+      "caption": "Ưu tiên",
+      "left": 230,
+      "top": 180,
+      "width": 90,
+      "height": 20
+    },
+    {
+      "name": "cboPriority",
+      "type": "CDispatch",
+      "caption": "",
+      "left": 324,
+      "top": 178,
+      "width": 96,
+      "height": 22
+    },
+    {
+      "name": "btnSave",
+      "type": "CDispatch",
+      "caption": "Lưu",
+      "left": 130,
+      "top": 220,
+      "width": 90,
+      "height": 30
+    },
+    {
+      "name": "btnClear",
+      "type": "CDispatch",
+      "caption": "Xóa",
+      "left": 230,
+      "top": 220,
+      "width": 90,
+      "height": 30
+    },
+    {
+      "name": "btnCancel",
+      "type": "CDispatch",
+      "caption": "Hủy",
+      "left": 330,
+      "top": 220,
+      "width": 72,
+      "height": 30
+    },
+    {
+      "name": "lblStatus",
+      "type": "CDispatch",
+      "caption": "Sẵn sàng.",
+      "left": 22,
+      "top": 265,
+      "width": 380,
+      "height": 40
+    }
+  ],
+  "form_code_has_save": true
+}
