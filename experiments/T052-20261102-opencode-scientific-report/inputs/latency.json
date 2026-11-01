@@ -1,0 +1,97 @@
+{
+  "meta": {
+    "title": "Độ trễ suy luận",
+    "sheet": "Data",
+    "author": "T052",
+    "company": "DocumentCraft"
+  },
+  "data": {
+    "headers": [
+      "Mô hình",
+      "Độ trễ (ms)"
+    ],
+    "rows": [
+      [
+        "TinyAE (12K)",
+        9.2
+      ],
+      [
+        "CNN-AE (28K)",
+        12.4
+      ],
+      [
+        "LSTM-AE (41K)",
+        15.1
+      ],
+      [
+        "Đề xuất float32 (36K)",
+        18.4
+      ],
+      [
+        "Đề xuất int8 (36K)",
+        11.7
+      ]
+    ],
+    "widths": {
+      "A:A": 24,
+      "B:B": 14
+    }
+  },
+  "chart": {
+    "type": "column",
+    "title": "Độ trễ suy luận trên STM32H747",
+    "style": 10,
+    "palette": [
+      "#C55A11"
+    ],
+    "position": {
+      "cell": "E2",
+      "width_cm": 14.8,
+      "height_cm": 8.0
+    },
+    "categories_column": 0,
+    "axes": {
+      "x": {
+        "title": "",
+        "label_size": 8.5,
+        "label_rotation": -22
+      },
+      "y": {
+        "title": "Latency (ms)",
+        "min": 0,
+        "max": 22,
+        "major_unit": 4,
+        "number_format": "0.0",
+        "gridlines": true,
+        "label_size": 9
+      }
+    },
+    "legend": {
+      "position": "none",
+      "size": 9
+    },
+    "series": [
+      {
+        "name": "Độ trễ",
+        "column": 1,
+        "color": "#C55A11",
+        "gap": 50,
+        "data_labels": {
+          "show": true,
+          "position": "outside_end",
+          "size": 8.5,
+          "number_format": "0.0"
+        }
+      }
+    ]
+  },
+  "post": {
+    "anchor": "one_cell",
+    "plot_layout": {
+      "x": 0.1,
+      "y": 0.16,
+      "w": 0.78,
+      "h": 0.58
+    }
+  }
+}

@@ -156,7 +156,8 @@ def add_seq_caption(paragraph, label: str, caption: str, *, chapter_level: int |
                     number_bookmark: str | None = None,
                     caption_bookmark: str | None = None,
                     bookmark_owner=None, display_label: str | None = None,
-                    display_prefix: str = "", reset: bool = False) -> tuple[int | None, int | None]:
+                    display_prefix: str = "", reset: bool = False,
+                    separator: str = " — ", number_suffix: str = "") -> tuple[int | None, int | None]:
     r"""Write ``Figure <SEQ> — caption`` and bookmark the number and the caption.
 
     ``label`` is the SEQ identifier (``Figure``/``Table``, also used by
@@ -185,18 +186,22 @@ def add_seq_caption(paragraph, label: str, caption: str, *, chapter_level: int |
         if display_prefix:
             paragraph.add_run(display_prefix)
         add_field(paragraph, instr, result="1", dirty=True)
+        if number_suffix:
+            paragraph.add_run(number_suffix)
         if number_bookmark:
             add_bookmark_end(paragraph, number_id, owner)
         if caption_bookmark:
             add_bookmark_end(paragraph, caption_id, owner)
-        paragraph.add_run(" — ")
+        paragraph.add_run(separator)
         paragraph.add_run(caption)
     else:
         paragraph.add_run(f"{display_label or label} ")
         if display_prefix:
             paragraph.add_run(display_prefix)
         add_field(paragraph, instr, result="1", dirty=True)
-        paragraph.add_run(f" — {caption}")
+        if number_suffix:
+            paragraph.add_run(number_suffix)
+        paragraph.add_run(f"{separator}{caption}")
     return number_id, caption_id
 
 

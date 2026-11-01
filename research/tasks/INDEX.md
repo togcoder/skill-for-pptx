@@ -3,7 +3,7 @@
 Since T040: every new title starts with its domain in brackets: `[pptx]`, `[docx]`, `[xlsx]`, `[svg]` or `[cross]` (see `domains/README.md`). Lifecycle: `lab/PROTOCOL.md`. A row may carry `review requested` / `reviewed: <verdict>`.
 
 This file is the one place to take a task ID. Before starting, add a row with
-status `claimed`, using the next free ID (**T051**). Push the row before you do
+status `claimed`, using the next free ID (**T053**). Push the row before you do
 expensive work. IDs are never reused. T024 was taken three times in parallel,
 so those rows carry a suffix. The experiment folders keep the names they were
 created with.
@@ -79,4 +79,5 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T048b | [pptx] Non-Linear Slide Navigation: Interactive Branching, Return Paths, Kiosk Mode & Mini-Game State Machine | Antigravity | `work/T048-interactive-slide-branching` | main | `experiments/T048-20261101-antigravity-slide-branching/REPORT.md` |
 | T049 | [pptx] 1-Slide Native Interactive Mini-Games: Mystery Chests & Quiz Battle | Antigravity | `work/T049-advanced-presentation-interactivity` | main | `experiments/T049-20261101-antigravity-advanced-interactivity/REPORT.md` |
 | T050 | [xlsx] VBA UserForm data entry + composed dashboard (grid, chart selection, interaction, visual quality) | OpenCode (DeepSeek V4.1 Flash) | `work/T050-opencode-userform-dashboard` | review accepted (Argon); awaiting owner merge | `experiments/T050-20261102-opencode-userform-dashboard/REPORT.md` |
-| T051 | *next free ID* | | | | |
+| T052 | [docx] Configurable standard profiles + Vietnamese university scientific report (declaration, chapters, equations, references) | OpenCode (DeepSeek V4.1 Flash) | `work/T052-opencode-scientific-report` | main | `experiments/T052-20261102-opencode-scientific-report/REPORT.md` |
+| T053 | *next free ID* | | | | |

@@ -80,7 +80,7 @@ PowerPoint chá»‰ lĂ  domain lĂ¢u Ä‘á»i nháº¥t.
 
 | `cad` | Ná»n táº£ng (T042): ISO 5457 sheet dimensions (A4â€“A0, 20mm left margin), ISO 128 line weight hierarchy (0.50mm group: 0.50, 0.25, 0.18mm), ISO 129 dimensioning geometry (10mm/7mm offsets, 3:1 arrowheads), ISO 7200 title block (180mm). Native bridge: `cadcraft_bridge.py`. |
 
-| `docx` | T039/T045 on `main` or approved; **T047** standards-controlled annual/ESG report (ISO 7144/2145/690/80000/8601, WCAG 2.2, GRI 1/2/3/305; control matrix; 25 pages, 37 tables, 5 equations, GRI index) `work/T047-opencode-standards-report`, audit sạch, Word PDF 25 trang; Argon **approve T047** (round 2), chờ owner merge. Chưa có PDF/UA, PDF/A, LibreOffice rung 3, human rung 6. |
+| `docx` | T039/T045/T047 on `main`; **T052** configurable standard profiles (HUST 2017, VNU-UET, ISO 7144, annual/GRI) + Vietnamese scientific report: `hust-datn-2017` 34 body pages/48 total, `vnu-uet-kl-2024` 35 body/45 total, conformance 23/23 and 24/24, Word PDFs inspected; Argon **approve T052** (round 2), chờ owner merge. Chưa có PDF/UA, PDF/A, LibreOffice rung 3, human rung 6. |
 
 | `xlsx` | T041/T046/T048 on `main`; **T050** VBA UserForm (22 controls, `frmEntry` + `FormTools`) + 12-column dashboard (4 native charts, 4 KPI, 3 buttons, 1-page A4), macro execution blocked by host policy `work/T050-opencode-userform-dashboard`, audit clean; Argon **approve T050** (round 2), chờ owner merge. Waterfall/treemap/histogram/box/funnel vẫn là recipe OOXML. |
 
