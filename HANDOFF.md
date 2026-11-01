@@ -82,7 +82,7 @@ PowerPoint chá»‰ lĂ  domain lĂ¢u Ä‘á»i nháº¥t.
 
 | `docx` | T039 DocumentCraft on `main`; **T045** advanced report (side-by-side media, OMML equations, merged-header/image-cell tables, callout/KPI, VectorCraft cover asset) `work/T045-opencode-advanced-docx`, audit sáº¡ch 11 trang Word PDF; Argon **approve T045** (round 2), chá» owner merge. ChÆ°a cĂ³ PDF/UA, PDF/A, LibreOffice rung 3, human rung 6. |
 
-| `xlsx` | T041 SheetCraft on `main`; **T046** advanced workbook on `main`; **T048** workbook UX (only Dashboard/Input visible; Input form with 18 merges, 8 validations, 3 macro buttons; hidden/veryHidden data; tab colours; protection; VBA `AddRecord`) `work/T048-opencode-workbook-ux`, audit sạch, Input/Dashboard 1 trang; **review requested**. Macro execution bị host policy chặn — không claim. Waterfall/treemap/histogram/box/funnel vẫn là recipe OOXML. |
+| `xlsx` | T041 SheetCraft on `main`; **T046** advanced workbook on `main`; **T048** workbook UX (only Dashboard/Input visible; Input form with 18 merges, 8 validations, 3 macro buttons; hidden/veryHidden data; tab colours; protection; VBA `AddRecord`) `work/T048-opencode-workbook-ux`, audit sạch, Input/Dashboard 1 trang; **review requested**. Argon **approve T048** (round 2), chờ owner merge; macro execution bị host policy chặn — không claim. Waterfall/treemap/histogram/box/funnel vẫn là recipe OOXML. |
 
 
 

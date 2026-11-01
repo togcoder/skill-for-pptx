@@ -136,7 +136,7 @@ Preview: `preview/input-page-1.png`, `preview/dashboard-page-1.png`.
 
 ## Review response
 
-Argon review 2026-11-01 (chat `0:cf4bb6173adaaa34`), verdict **revise**.
+Argon review 2026-11-01 (chat `0:cf4bb6173adaaa34`), verdict **revise** in round 1 and **approve T048** in round 2. Full record: `research/reviews/T048-argon-20261101.md`.
 
 | Finding | Response (fixed / disputed / deferred → task) |
 |---|---|

@@ -23,7 +23,7 @@ were true at the time. Task IDs and their branches are listed in
   `.xlsm`. Macro execution blocked by host policy — not claimed.
 - **Limits.** Hidden ≠ secure; merged cells layout-only; no UserForm/audit
   log/undo; form validation is type/list only.
-- **Status.** EXPERIMENTAL; review requested.
+- **Status.** EXPERIMENTAL; review accepted by Argon (approve T048, round 2); awaiting owner merge.
 - Report: `experiments/T048-20261101-opencode-workbook-ux/REPORT.md`.
 
 ## T046 [xlsx] Advanced workbook and dashboard â€” 2026-11-01
