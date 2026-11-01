@@ -19,6 +19,7 @@ PHOTO = HERE / 'quickmill.jpg'
 ART = EXP / 'artifacts'
 PREVIEW = EXP / 'preview'
 VECTORCRAFT = Path(r'D:\artcraft\VectorCraft\vectorcraft-cli.exe')
+ART_REL = ART.relative_to(ROOT)
 LEVELS = ('silhouette', 'form', 'catalogue', 'full')
 TITLES = {
     'silhouette': 'Silhouette only',
@@ -50,8 +51,8 @@ def main() -> None:
     PREVIEW.mkdir(parents=True, exist_ok=True)
     metrics = {}
     for level in LEVELS:
-        svg = ART / f'{level}.svg'
-        png = ART / f'{level}.png'
+        svg = ART_REL / f'{level}.svg'
+        png = ART_REL / f'{level}.png'
         result = build_illustration(
             PHOTO, svg, level=level, colors=5, width_mm=120,
             title=f'Quick Mill Omre — {level}',
@@ -62,8 +63,8 @@ def main() -> None:
         metrics[level] = result
     # The line style is the recommended print deliverable: it keeps the form
     # hierarchy and drops the flat fills that obscure it.
-    line_svg = ART / 'line.svg'
-    line_png = ART / 'line.png'
+    line_svg = ART_REL / 'line.svg'
+    line_png = ART_REL / 'line.png'
     line = build_illustration(
         PHOTO, line_svg, level='catalogue', colors=5, width_mm=120, style='line',
         title='Quick Mill Omre — line',
@@ -72,6 +73,17 @@ def main() -> None:
     render(line_svg, line_png)
     line['render'] = str(line_png)
     metrics['line'] = line
+    # Same full budget without fills, so the line-vs-full comparison is fair.
+    full_line_svg = ART_REL / 'full-line.svg'
+    full_line_png = ART_REL / 'full-line.png'
+    full_line = build_illustration(
+        PHOTO, full_line_svg, level='full', colors=5, width_mm=120, style='line',
+        title='Quick Mill Omre — full line trace',
+        source='Wikimedia Commons: File:Quick Mill Omre Espresso Machine.jpg',
+        license='CC0')
+    render(full_line_svg, full_line_png)
+    full_line['render'] = str(full_line_png)
+    metrics['full-line'] = full_line
     (ART / 'line.json').write_text(
         json.dumps(line, ensure_ascii=False, indent=2), encoding='utf-8')
     (ART / 'levels.json').write_text(

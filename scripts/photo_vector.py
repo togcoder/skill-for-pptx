@@ -197,6 +197,11 @@ def _cv():
         raise SystemExit(
             "OpenCV is required for photo_vector: pip install opencv-python-headless numpy"
         ) from exc
+    # GrabCut and k-means use OpenCV's RNG.  Without a seed two builds of the
+    # same photo choose different palettes and slightly different masks; the
+    # five-budget study must be reproducible.
+    cv2.setRNGSeed(0)
+    cv2.setNumThreads(1)
     return cv2, np
 
 
@@ -252,8 +257,14 @@ def _trim_ground_shadow(bgr, mask, cv2, np):
     product is left alone.
     """
     gray = cv2.cvtColor(bgr, cv2.COLOR_BGR2GRAY)
-    dark = (mask > 0) & (gray < 72)
     h, w = mask.shape[:2]
+    ys_all, xs_all = np.where(mask > 0)
+    if len(ys_all) == 0:
+        return mask
+    y0, y1 = int(ys_all.min()), int(ys_all.max())
+    scan_from = int(y0 + 0.80 * (y1 - y0))
+    dark = (mask > 0) & (gray < 72)
+    dark[:scan_from, :] = False
     columns = []
     for x in range(w):
         ys = np.where(dark[:, x])[0]
@@ -385,7 +396,7 @@ def _merge_small(labels, np, min_area: int, rounds: int = 3):
     return labels
 
 
-def quantize_regions(bgr, mask, *, colors: int = 6, min_ratio: float = 0.004,
+def quantize_regions(bgr, mask, *, colors: int = 5, min_ratio: float = 0.004,
                      chroma: float = 0.9) -> Regions:
     """Flat colour regions in Lab, small regions merged, palette slightly calmed."""
     cv2, np = _cv()
@@ -468,6 +479,34 @@ def _auto_canny(gray, mask, np, cv2) -> tuple[int, int]:
     return lower, upper
 
 
+def _retraced_half(pts: list[Point]) -> list[Point] | None:
+    """Return the forward half of a Canny contour that walks out and back.
+
+    ``cv2.findContours`` traces a 1 px Canny ridge as a closed polygon: it goes
+    from one end to the other and returns along the other side of the same
+    ridge.  The endpoints look "closed", the enclosed area is ~0, and the path
+    length is doubled.  Split at the farthest point and keep one half when the
+    two halves nearly coincide; a true ring (opposite arcs far apart) is left
+    closed.
+    """
+    n = len(pts)
+    if n < 6:
+        return None
+    k = max(range(n), key=lambda i: _dist(pts[0], pts[i]))
+    if k < 3 or n - k < 3:
+        return None
+    forward, backward = pts[:k + 1], pts[k:]
+    fs = forward[:: max(1, len(forward) // 20)]
+    bs = backward[:: max(1, len(backward) // 20)]
+    if not fs or not bs:
+        return None
+    near = sum(min(_dist(p, q) for q in bs) for p in fs) / len(fs)
+    balanced = abs(len(forward) - len(backward)) <= 0.40 * max(len(forward), len(backward))
+    if near <= 5.0 and balanced:
+        return forward if len(forward) >= len(backward) else list(reversed(backward))
+    return None
+
+
 def edge_candidates(bgr, mask, *, erode: int = 3) -> tuple[list[Edge], tuple[int, int]]:
     """Canny contours inside the object, with geometric and gradient features."""
     cv2, np = _cv()
@@ -483,24 +522,40 @@ def edge_candidates(bgr, mask, *, erode: int = 3) -> tuple[list[Edge], tuple[int
     edges = cv2.bitwise_and(edges, inner)
     contours, _ = cv2.findContours(edges, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
     h, w = gray.shape[:2]
-    diagonal = math.hypot(w, h)
     out: list[Edge] = []
     for contour in contours:
         pts = [(float(p[0][0]), float(p[0][1])) for p in contour]
         if len(pts) < 4:
             continue
-        length = float(cv2.arcLength(contour, False))
+        opened = _retraced_half(pts)
+        if opened is not None:
+            pts = opened
+            closed = False
+            length = _polyline_length(pts, closed=False)
+            box = _bbox(pts)
+            area = 0.0
+            chord = _dist(pts[0], pts[-1])
+            straightness = chord / length if length else 0.0
+        else:
+            length = _polyline_length(pts, closed=True)
+            if length < 6.0:
+                continue
+            box = _bbox(pts)
+            area = _closed_area(pts)
+            closed = (_dist(pts[0], pts[-1]) <= 3.0 and length > 20
+                      and min(box[2] - box[0], box[3] - box[1]) >= 4.0
+                      and area >= 20.0)
+            if not closed:
+                area = 0.0
+                length = _polyline_length(pts, closed=False)
+            chord = _dist(pts[0], pts[-1])
+            straightness = chord / length if length else 0.0
+            if closed:
+                straightness = min(1.0, 4.0 * math.pi * area / (length * length)) * 0.5
         if length < 6.0:
             continue
-        box = _bbox(pts)
-        closed = (_dist(pts[0], pts[-1]) <= 3.0 and length > 20
-                  and min(box[2] - box[0], box[3] - box[1]) >= 4.0)
-        area = _closed_area(pts) if closed else 0.0
-        chord = _dist(pts[0], pts[-1])
-        straightness = chord / length if length else 0.0
-        if closed:
-            straightness = min(1.0, 4.0 * math.pi * area / (length * length)) * 0.5
-        sample = np.array([[int(round(x)), int(round(y))] for x, y in pts[:: max(1, len(pts) // 24)]])
+        sample = np.array([[int(round(x)), int(round(y))]
+                           for x, y in pts[:: max(1, len(pts) // 24)]])
         sample[:, 0] = np.clip(sample[:, 0], 0, w - 1)
         sample[:, 1] = np.clip(sample[:, 1], 0, h - 1)
         mean_grad = float(mag[sample[:, 1], sample[:, 0]].mean())
@@ -589,6 +644,7 @@ def classify_edges(edges: list[Edge], segment: Segment, level: str,
     diagonal = max(1.0, math.hypot(segment.w, segment.h))
     mm_per_px = width_mm / max(1.0, float(segment.w))
     min_detail_px = 1.5 / mm_per_px
+    min_control_px = 3.0 / mm_per_px
     long_px = 0.055 * diagonal
     cap = BUDGETS[level]
 
@@ -608,12 +664,15 @@ def classify_edges(edges: list[Edge], segment: Segment, level: str,
 
     scored = sorted(edges, key=lambda e: e.score, reverse=True)
 
+    def bbox_diag(edge: Edge) -> float:
+        return math.hypot(edge.bbox[2] - edge.bbox[0], edge.bbox[3] - edge.bbox[1])
+
     # 1. Form: long or a meaningful closed loop, and coherent after RDP.
     form_cap = int(cap["form"])
     for edge in scored:
         long = edge.length >= long_px
         loop = (edge.closed and 80.0 <= edge.area <= 0.06 * segment.w * segment.h
-                and edge.length >= 18.0)
+                and edge.length >= 18.0 and bbox_diag(edge) >= min_control_px)
         if not (long or loop):
             edge.role = "candidate"
             edge.reason = "short: below the form length floor"
@@ -636,9 +695,6 @@ def classify_edges(edges: list[Edge], segment: Segment, level: str,
     # closed controls by their bounding-box size instead.
     detail_cap = int(cap["detail"] if detail_max_strokes is None else detail_max_strokes)
 
-    def bbox_diag(edge: Edge) -> float:
-        return math.hypot(edge.bbox[2] - edge.bbox[0], edge.bbox[3] - edge.bbox[1])
-
     def detail_score(edge: Edge) -> float:
         size = bbox_diag(edge)
         size_factor = min(1.0, max(0.0, (size - 12.0) / 38.0))
@@ -659,7 +715,7 @@ def classify_edges(edges: list[Edge], segment: Segment, level: str,
         visible = feature_px >= max(8.0, min_detail_px)
         strong = edge.mean_grad >= 26.0
         coherent = edge.closed or edge.smoothness >= 0.55
-        if edge.closed and bbox_diag(edge) < 14.0:
+        if edge.closed and bbox_diag(edge) < max(8.0, min_control_px):
             edge.role = "removed"
             edge.reason = "below the 3 mm control floor"
             continue
@@ -686,10 +742,6 @@ def classify_edges(edges: list[Edge], segment: Segment, level: str,
         edge.reason = "closed control loop" if edge.closed else "short structural detail"
         detail_cap -= 1
 
-    for edge in scored:
-        if edge.role == "candidate":
-            edge.role = "removed"
-            edge.reason = "short: below the detail score"
     return scored
 
 
@@ -703,32 +755,37 @@ def simplify_edges(edges: list[Edge], *, form_eps: float = 1.1,
         elif edge.role == "detail":
             edge.simplified = rdp(edge.points, detail_eps)
             edge.path = polyline_to_path(edge.simplified, closed=edge.closed,
-                                         smooth=False)
+                                         smooth=edge.closed,
+                                         corner_deg=102 if edge.closed else 105)
 
 
-def region_paths(regions: Regions, region: int, *, eps: float = 1.2) -> list[str]:
-    """Outer contour only, as a closed even-odd path.
+def region_components(regions: Regions, *, eps: float = 1.2) -> list[tuple[float, str, str]]:
+    """Return ``(component_area, colour, path)`` sorted large → small.
 
-    Colour regions are painted large-area first and small-area last.  A hole in
-    a large region is therefore covered by the smaller region that sits in it;
-    drawing it as a hole would instead expose whatever was painted earlier.
-    This also removes brand lettering, dust and screw slots without a separate
-    text detector.  True through-holes (paper showing through the object) are
-    out of scope for this mask-filled pipeline and are disclosed in the report.
+    Sorting by the *connected component* area, not the global label area, is
+    what makes overpainting safe: a small island of a large label is still
+    painted after a big island of a smaller label.  The dominant label (index
+    1) is skipped because the silhouette fill already uses that colour.
     """
     cv2, np = _cv()
-    mask = np.where(regions.labels == region, 255, 0).astype(np.uint8)
-    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
-    paths: list[str] = []
-    for contour in contours:
-        if cv2.contourArea(contour) < 24:
+    out: list[tuple[float, str, str]] = []
+    for index, colour in enumerate(regions.palette, start=1):
+        if index == 1:
             continue
-        pts = [(float(p[0][0]), float(p[0][1])) for p in contour]
-        simplified = rdp(pts, eps)
-        if len(simplified) >= 3:
-            paths.append(polyline_to_path(simplified, closed=True, smooth=True,
-                                          corner_deg=100))
-    return paths
+        mask = np.where(regions.labels == index, 255, 0).astype(np.uint8)
+        contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+        for contour in contours:
+            area = float(cv2.contourArea(contour))
+            if area < 24:
+                continue
+            pts = [(float(p[0][0]), float(p[0][1])) for p in contour]
+            simplified = rdp(pts, eps)
+            if len(simplified) >= 3:
+                d = polyline_to_path(simplified, closed=True, smooth=True,
+                                     corner_deg=100)
+                out.append((area, colour, d))
+    out.sort(key=lambda item: item[0], reverse=True)
+    return out
 
 
 def silhouette_path(mask, *, eps: float = 1.2) -> tuple[str, list[Point]]:
@@ -795,12 +852,11 @@ def build_svg(*, width: int, height: int, mask, regions: Regions, edges: list[Ed
     colour_nodes = 0
     if level != "silhouette" and style == "colour":
         parts.append('<g id="colour" data-role="colour" stroke="none">')
-        for index, colour in enumerate(regions.palette, start=1):
-            for d in region_paths(regions, index):
-                parts.append(f'<path d="{d}" fill="{colour}" fill-rule="evenodd" '
-                             f'stroke="{colour}" stroke-width="0.45"/>')
-                colour_paths += 1
-                colour_nodes += d.count("C") + d.count("L") + 1
+        for _area, colour, d in region_components(regions):
+            parts.append(f'<path d="{d}" fill="{colour}" fill-rule="evenodd" '
+                         f'stroke="{colour}" stroke-width="0.45"/>')
+            colour_paths += 1
+            colour_nodes += d.count("C") + d.count("L") + 1
         parts.append("</g>")
     parts.append(
         f'<g id="form" data-role="form" fill="none" stroke="{INK}" '
@@ -891,11 +947,9 @@ def edge_metrics(bgr, mask, edges: list[Edge], sil_pts: Sequence[Point]) -> dict
     kept = np.zeros((h, w), np.uint8)
     for edge in edges:
         if edge.role in {"form", "detail"}:
-            pts = np.array([[int(round(x)), int(round(y))] for x, y in edge.points], np.int32)
+            points = edge.simplified or edge.points
+            pts = np.array([[int(round(x)), int(round(y))] for x, y in points], np.int32)
             cv2.polylines(kept, [pts], False, 255, 1)
-    # The silhouette is drawn too; include it in the ink budget.
-    poly = np.array([[int(round(x)), int(round(y))] for x, y in sil_pts], np.int32)
-    cv2.polylines(kept, [poly], True, 255, 1)
 
     def coverage(reference):
         ref_count = cv2.countNonZero(reference)
@@ -933,7 +987,7 @@ def _load(path: str | Path):
     return image
 
 
-def analyse_photo(photo: str | Path, *, colors: int = 6, max_side: int = 1200) -> dict:
+def analyse_photo(photo: str | Path, *, colors: int = 5, max_side: int = 1200) -> dict:
     """Return the segmentation, palette, edge inventory and auto thresholds."""
     cv2, _ = _cv()
     bgr = _load(photo)
@@ -949,7 +1003,7 @@ def analyse_photo(photo: str | Path, *, colors: int = 6, max_side: int = 1200) -
 
 
 def build_illustration(photo: str | Path, out_svg: str | Path, *, level: str = "catalogue",
-                       colors: int = 6, width_mm: float = 120.0, title: str = "",
+                       colors: int = 5, width_mm: float = 120.0, title: str = "",
                        source: str = "", license: str = "", ground: bool = True,
                        style: str = "colour", max_side: int = 1200) -> dict:
     """Build one SVG and return measured fidelity/complexity."""
@@ -1000,7 +1054,8 @@ def build_illustration(photo: str | Path, out_svg: str | Path, *, level: str = "
         "reasons": _reason_counts(edges),
         "stats": stats,
         "fidelity": {
-            "silhouette_iou": round(silhouette_iou(segment.mask, _silhouette_points(segment.mask)), 4),
+            # Agreement between the raw GrabCut mask and the delivered mask.
+            # It is not ground truth: the difference is the trimmed shadow.
             "grabcut_iou": round(silhouette_iou(
                 segment.raw_mask, _silhouette_points(segment.mask)), 4) if segment.raw_mask is not None else None,
             "colour_delta_e76": (round(colour_error(bgr, segment.mask, regions), 2)
@@ -1044,7 +1099,7 @@ def main() -> None:
     p.add_argument("photo", type=Path)
     p.add_argument("-o", "--output", type=Path, required=True)
     p.add_argument("--level", choices=LEVELS, default="catalogue")
-    p.add_argument("--colors", type=int, default=6)
+    p.add_argument("--colors", type=int, default=5)
     p.add_argument("--width-mm", type=float, default=120.0)
     p.add_argument("--style", choices=("colour", "line"), default="colour")
     p.add_argument("--title", default="")
@@ -1054,7 +1109,7 @@ def main() -> None:
     p.add_argument("--json", type=Path, default=None)
     p = sub.add_parser("analyze", help="Edge inventory without writing SVG")
     p.add_argument("photo", type=Path)
-    p.add_argument("--colors", type=int, default=6)
+    p.add_argument("--colors", type=int, default=5)
     p.add_argument("--json", type=Path, default=None)
     args = parser.parse_args()
     if args.cmd == "build":

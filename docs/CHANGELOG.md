@@ -15,12 +15,12 @@ were true at the time. Task IDs and their branches are listed in
 - **Policy.** Form: length ≥ 5.5% of the object diagonal and turning ≤ 0.55°/px.
   Detail: short + strong, closed controls ≥ 3 mm and circularity ≥ 0.28; 1.5 mm
   scale floor. The full trace is kept as the strawman.
-- **Result.** Line style: 34 form + 16 detail, 1,567 nodes, 0 fills, GrabCut IoU
-  0.968, VectorCraft 0 warnings. Colour style: 26 fills, ΔE76 9.84. Full trace:
-  141 + 49, 5,034 nodes, visibly scribbled.
-- **Evidence.** Four budget SVGs + line SVG, VectorCraft renders, photo-vs-vector,
-  layer stack, budget sheet, `levels.json`/`line.json`; 14 new tests.
-- **Tests.** `tests/test_photo_vector.py` (14 tests); full suite 418 tests OK
+- **Result.** Line style: 34 form + 16 detail, 1,437 nodes, 0 fills, GrabCut IoU
+  0.959, VectorCraft 0 warnings. Colour style: 15 fills, ΔE76 10.56. Full-line strawman:
+  58 + 133, 2,268 (colour 3,178) nodes, visibly scribbled.
+- **Evidence.** Four budget SVGs + line + full-line, VectorCraft renders, photo-vs-vector,
+  layer stack, budget sheet, `levels.json`/`line.json`; 18 new tests.
+- **Tests.** `tests/test_photo_vector.py` (18 tests); full suite 422 tests OK
   (8 skipped).
 - **Status.** EXPERIMENTAL; review requested.
 - Report: `experiments/T051-20261102-opencode-photo-vector/REPORT.md`.
@@ -275,7 +275,7 @@ experiments/T040-20261101-claude-lab-restructure/REPORT.md.
 - **Programmatic Helpers (`scripts/design_system.py`).** Added `chrome()`, `optical_icon_compensation()`, `bento_grid_layout()`, `asymmetric_golden_layout()`, `duarte_break_positions()`, `modular_scale()`, and `background_layers()`.
 - **Slide Forge Compilation (`scripts/slide_forge.py`).** Added `asymmetric`, `bento`, and `duarte_break` layout compilers, automatic deck chrome injection, and optical icon balancing.
 - **Design Critic Rules (`scripts/design_critic.py`).** Implemented and registered `CHROME-SAFE`, `OPT-ICON`, `LAY-BENTO`, and `DUA-BREAK` rules; returns detailed `evaluations` audit log.
-- **Tests.** Added `tests/test_pptx_design_canon.py` (12 unit tests). Total project test suite expanded to **314 tests, 100% passing (0 failures, 4 skipped)** in 14.90s.
+- **Tests.** Added `tests/test_pptx_design_canon.py` (12 unit tests). Total project test suite expanded to **318 tests, 100% passing (0 failures, 4 skipped)** in 14.90s.
 
 ## T037 Multi-Craft Native Bridges & Intent-Empathy Decoder â€” 2026-11-01
 

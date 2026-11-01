@@ -177,6 +177,75 @@ class EndToEndTests(unittest.TestCase):
             self.assertIsNone(result['fidelity']['colour_delta_e76'])
             self.assertGreater(result['counts']['form'], 0)
 
+
+    def test_edge_candidates_distinguishes_open_and_closed(self):
+        from scripts.photo_vector import edge_candidates
+
+        image = np.full((400, 400, 3), 255, np.uint8)
+        cv2.line(image, (60, 60), (200, 200), (0, 0, 0), 3)
+        cv2.circle(image, (300, 120), 25, (0, 0, 0), 3)
+        mask = np.full((400, 400), 255, np.uint8)
+        edges, _ = edge_candidates(image, mask)
+        diagonal = [e for e in edges
+                    if 50 <= e.bbox[0] <= 70 and 50 <= e.bbox[1] <= 70
+                    and e.bbox[2] <= 230 and e.bbox[3] <= 230]
+        circle = [e for e in edges
+                  if 270 <= e.bbox[0] <= 290 and 90 <= e.bbox[1] <= 110
+                  and e.bbox[2] >= 320]
+        self.assertTrue(diagonal)
+        self.assertTrue(any(not e.closed for e in diagonal))
+        self.assertLess(max(e.length for e in diagonal), 270)  # not doubled
+        self.assertTrue(circle)
+        self.assertTrue(any(e.closed for e in circle))
+
+    def test_analysis_is_deterministic(self):
+        from scripts.photo_vector import analyse_photo
+
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            photo = tmp / 'product.png'
+            self._photo(photo)
+            first = analyse_photo(photo, colors=4)
+            second = analyse_photo(photo, colors=4)
+            self.assertEqual(first['canny'], second['canny'])
+            self.assertEqual(first['regions'].palette, second['regions'].palette)
+            self.assertEqual(len(first['edges']), len(second['edges']))
+            self.assertEqual((first['segment'].x, first['segment'].y,
+                              first['segment'].w, first['segment'].h),
+                             (second['segment'].x, second['segment'].y,
+                              second['segment'].w, second['segment'].h))
+
+    def test_control_floor_scales_with_width(self):
+        from scripts.photo_vector import classify_edges
+
+        segment = Segment(mask=None, x=0, y=0, w=600, h=800, coverage=0.4)
+        edge = _edge([(10, 10), (20, 10), (20, 20), (10, 20)],
+                     closed=True, area=78.0, grad=300)
+        classify_edges([edge], segment, 'catalogue', width_mm=120,
+                       detail_max_strokes=5)
+        self.assertEqual(edge.role, 'removed')
+        edge = _edge([(10, 10), (20, 10), (20, 20), (10, 20)],
+                     closed=True, area=78.0, grad=300)
+        classify_edges([edge], segment, 'catalogue', width_mm=400,
+                       detail_max_strokes=5)
+        self.assertEqual(edge.role, 'detail')
+
+    def test_line_and_colour_share_geometry(self):
+        from scripts.photo_vector import build_illustration
+
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            photo = tmp / 'product.png'
+            self._photo(photo)
+            colour = build_illustration(photo, tmp / 'colour.svg',
+                                        level='catalogue', colors=4)
+            line = build_illustration(photo, tmp / 'line.svg',
+                                      level='catalogue', colors=4, style='line')
+            self.assertEqual(colour['counts'], line['counts'])
+            self.assertEqual(colour['bbox'], line['bbox'])
+            self.assertEqual(colour['canny'], line['canny'])
+            self.assertEqual(colour['edges']['ink_ratio'], line['edges']['ink_ratio'])
+
     def test_svg_parses_and_has_accessibility_text(self):
         from scripts.photo_vector import build_illustration
 

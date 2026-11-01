@@ -46,8 +46,8 @@ removes the fourth:
 
 The **scale test** is the discipline: a detail shorter than 1.5 mm at the final
 width is removed even when it is real. The **full trace** is kept as a strawman:
-on the T051 photo it produces 141 form + 49 detail and 5,034 nodes, versus 34 +
-16 and 1,567 nodes for the line drawing.
+on the T051 photo it produces 58 form + 133 detail and 2,268 nodes (3,178 in colour), versus 34 +
+16 and 1,437 nodes for the line drawing.
 
 ## Evidence ladder
 | Rung | Tool | Meaning |
@@ -63,8 +63,8 @@ on the T051 photo it produces 141 form + 49 detail and 5,034 nodes, versus 34 +
 - Non-linear stroke scaling and Bézier geometry formulas implemented in `scripts/multi_domain_canons.py`.
 - Native bridge available via `scripts/vectorcraft_bridge.py` connecting to `D:\artcraft\VectorCraft\vectorcraft-cli.exe`.
 - **T051 photo-to-vector**: a CC0 espresso-machine photo → layered SVG. Line
-  style: 34 form + 16 detail, 1,567 nodes, GrabCut IoU 0.968, 0 VectorCraft
-  warnings; colour style: 5 tones, ΔE76 9.84. Full trace (141 + 49, 5,034
+  style: 34 form + 16 detail, 1,437 nodes, GrabCut IoU 0.959, 0 VectorCraft
+  warnings; colour style: 5 tones, ΔE76 10.56. Full trace (58 + 133, 2,268 (colour 3,178)
   nodes) is the strawman. **Review requested.**
 - Known limitation: the pipeline is not semantic (a human must curate logos and
   controls); the ground-shadow trim assumes a dark contact line; true
