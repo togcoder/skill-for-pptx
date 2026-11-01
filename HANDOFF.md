@@ -28,16 +28,16 @@ PowerPoint chỉ là domain lâu đời nhất.
    domain của bạn (`domains/docx/DOMAIN.md`, `domains/xlsx/DOMAIN.md`).
 3. Chạy `python3 -m unittest discover -s tests` (đặt `PYTHONUTF8=1` trên Windows
    để tránh lỗi encoding của các test cũ) và `python3 lab/tools/check_layout.py`.
-4. Lấy mã kế tiếp trong `research/tasks/INDEX.md` (hiện là **T042**). Tiêu đề
-   ghi domain trong ngoặc, ví dụ `[cross]`.
+4. Lấy mã kế tiếp trong `research/tasks/INDEX.md` (hiện là **T043**). Tiêu đề
+   ghi domain trong ngoặc, ví dụ `[xlsx]`.
 
 ## Trạng thái từng domain
 
 | Domain | Trạng thái |
 |---|---|
 | pptx | Trưởng thành: Director, Morph Studio, Forge, hệ thiết kế và critic. T035 và T038 **chưa được phản biện**; còn 1 test lỗi của T038 (WORD_BREAK ở "Logo Watermark", phụ thuộc font). |
-| docx | T039 DocumentCraft: `word_field_kit.py`, `document_forge.py`, `document_audit.py`, dữ liệu `domains/docx/data/document_system.json`, skill `document-craft`. Audit sạch, Word 12 trang, PDF/preview; Argon review verdict `revise`, R1–R3 đã sửa (TOC \\c + `TablesOfFigures`, bookmarkEnd, per-section widths, language, `SECTIONPAGES`); **review round 2 requested** (PR #36). Chưa có PDF/UA, PDF/A, LibreOffice rung 3, human rung 6. |
-| xlsx | T041 SheetCraft: `chart_forge.py`, `chart_patch.py`, `chart_audit.py`, dữ liệu `domains/xlsx/data/spreadsheet_system.json`, skill `sheet-craft`. Combo/doughnut/scatter audit sạch, Excel export đúng; Argon review verdict `revise`, R4–R6/R8 đã sửa (combo series/axes, XML order, print area, cache, Excel-first render); **review round 2 requested** (PR #35). Waterfall/treemap/histogram/box/funnel còn là recipe OOXML, chưa sinh. |
+| docx | T039 DocumentCraft on `main`; T042 advanced report (side-by-side media, OMML equations, merged-header/image-cell tables, callout/KPI, VectorCraft cover asset) on `work/T042-opencode-advanced-docx`, audit sạch 11 trang Word PDF; **review requested**. Chưa có PDF/UA, PDF/A, LibreOffice rung 3, human rung 6. |
+| xlsx | T041 SheetCraft on `main`: `chart_forge.py`, `chart_patch.py`, `chart_audit.py`, dữ liệu `domains/xlsx/data/spreadsheet_system.json`, skill `sheet-craft`. Combo/doughnut/scatter audit sạch, Excel export đúng; Argon R4–R6/R8 đã sửa. T043 advanced workbook (Gantt, ảnh trong bảng, dashboard, pivot/formula) đang mở. Waterfall/treemap/histogram/box/funnel còn là recipe OOXML, chưa sinh. |
 | svg | Mới có bridge thử nghiệm T037; chưa phản biện. |
 | cross | Protocol 00–03, schema, registry ArtCraft, intent decoder (T036–T037); chưa phản biện, chưa thành chuẩn chung (cần 2 domain chấp nhận). |
 
@@ -52,7 +52,7 @@ PowerPoint chỉ là domain lâu đời nhất.
    canonical (`document_forge` vs `wordcraft_bridge`).
 3. **Xlsx**: raw-XML builder cho waterfall/treemap/histogram/box/funnel; Excel
    COM audit đọc mọi `Chart`; label-collision từ glyph box; dashboard audit.
-4. **T042 [cross]**: dời code từ `scripts/` vào package theo domain(s), sửa
+4. **T044 [cross]**: dời code từ `scripts/` vào package theo domain(s), sửa
    import/skill/test, không phá thí nghiệm đã đóng băng.
 5. **pptx**: cổng native (trình chiếu tương tác) và sửa test T038.
 

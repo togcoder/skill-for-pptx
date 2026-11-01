@@ -29,6 +29,12 @@ Fetch remote branches and read open claims first.
   and canon. Write every idea transferred from another domain into the
   REPORT, with its test. Shared "universal" layers become canonical only
   after accepted reviews in two domains.
+- **Cross-craft assets.** When another ArtCraft tool owns the asset (VectorCraft
+  for SVG, PhotoCraft for raster, WordCraft for equations/fields, GridCraft for
+  pivots/formulas, DeckCraft for slides), use it, record tool/version/command
+  and licence, and test the asset in the receiving domain. Feed a missing
+  property back as a task in the source domain; a transfer is not canonical by
+  itself (`lab/standards/RESEARCH.md`).
 - **Placement.**
   - Every output goes into your task's `experiments/<ID>-<date>-<agent>-<slug>/`:
     `artifacts/`, `preview/`, `inputs/`.

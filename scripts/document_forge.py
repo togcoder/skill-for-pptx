@@ -49,7 +49,7 @@ try:
     from docx import Document
     from docx.enum.section import WD_SECTION
     from docx.enum.style import WD_STYLE_TYPE
-    from docx.enum.table import WD_CELL_VERTICAL_ALIGNMENT, WD_TABLE_ALIGNMENT
+    from docx.enum.table import WD_CELL_VERTICAL_ALIGNMENT, WD_ROW_HEIGHT_RULE, WD_TABLE_ALIGNMENT
     from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_TAB_ALIGNMENT, WD_TAB_LEADER
     from docx.image.image import Image as DocxImage
     from docx.oxml import OxmlElement
@@ -57,6 +57,11 @@ try:
     from docx.shared import Mm, Pt, RGBColor, Twips
 except ImportError as exc:  # pragma: no cover
     raise SystemExit("python-docx is required: pip install python-docx") from exc
+
+try:
+    from .word_math import omml_from_latex
+except ImportError:
+    from word_math import omml_from_latex
 
 try:  # package import (tests) or script import (CLI)
     from .word_field_kit import (
@@ -269,6 +274,13 @@ def _setup_styles(doc, spec: dict) -> None:
     table_text.paragraph_format.space_before = Pt(0)
     table_text.paragraph_format.space_after = Pt(0)
     table_text.paragraph_format.line_spacing = 1.0
+
+    equation = _style(doc, "Equation")
+    _set_style_font(equation, "Cambria Math", typo["body_pt"], color=typo["color_text"], east_asia=ea)
+    equation.paragraph_format.space_before = Pt(6)
+    equation.paragraph_format.space_after = Pt(6)
+    equation.paragraph_format.line_spacing = 1.0
+    equation.paragraph_format.keep_together = True
 
     toc_heading = _style(doc, "TOC Heading")
     # The built-in TOC Heading is based on Heading 1, so it inherits the
@@ -520,15 +532,90 @@ def _add_text(paragraph, text: str, spec: dict, *, appendix: bool = False) -> No
         paragraph.add_run(text[pos:])
 
 
+def _add_callout(doc, block: dict, spec: dict, section) -> None:
+    """Single-cell shaded panel with a left accent rule."""
+    typo = spec["typography"]
+    width = _text_width_mm(section)
+    table = doc.add_table(rows=1, cols=1)
+    table.alignment = WD_TABLE_ALIGNMENT.CENTER
+    table.autofit = False
+    table.allow_autofit = False
+    _set_tbl_layout(table, _mm_twips(width), first_row=False)
+    _set_table_borders(table, kind="none")
+    cellmar = table._tbl.tblPr.find(qn("w:tblCellMar"))
+    if cellmar is not None:
+        for edge in cellmar:
+            edge.set(qn("w:w"), str(_mm_twips(3)))
+    cell = table.cell(0, 0)
+    _shade(cell, block.get("fill", "EAF1F8"))
+    tcpr = cell._tc.get_or_add_tcPr()
+    borders = OxmlElement("w:tcBorders")
+    left = OxmlElement("w:left")
+    left.set(qn("w:val"), "single"); left.set(qn("w:sz"), "24")
+    left.set(qn("w:space"), "0"); left.set(qn("w:color"), block.get("accent", typo["color_accent"]))
+    borders.append(left)
+    tcpr.insert_element_before(borders, "w:shd", "w:noWrap", "w:tcMar", "w:textDirection",
+                               "w:tcFitText", "w:vAlign", "w:hideMark")
+    p = cell.paragraphs[0]
+    p.style = doc.styles["Table Text"]
+    p.paragraph_format.space_before = Pt(2)
+    p.paragraph_format.space_after = Pt(2)
+    if block.get("title"):
+        run = p.add_run(block["title"])
+        run.bold = True
+        run.font.size = Pt(typo["body_pt"])
+        run.font.color.rgb = RGBColor.from_string(typo["color_accent"])
+        p = cell.add_paragraph()
+        p.style = doc.styles["Table Text"]
+    _add_text(p, block.get("text", ""), spec)
+    capnode = OxmlElement("w:tblCaption")
+    capnode.set(qn("w:val"), block.get("title", "Callout"))
+    table._tbl.tblPr.append(capnode)
+    desc = OxmlElement("w:tblDescription")
+    desc.set(qn("w:val"), block.get("text", block.get("title", "Callout")))
+    table._tbl.tblPr.append(desc)
+
+
+def _add_equation(doc, block: dict, section, owner) -> None:
+    """Insert a native OMML equation, centred, with an optional right number."""
+    latex = block.get("latex") or block.get("text")
+    if not latex:
+        raise ValueError("equation needs 'latex' or 'text'")
+    width_mm = _text_width_mm(section)
+    p = doc.add_paragraph(style="Equation")
+    p.paragraph_format.tab_stops.add_tab_stop(Mm(width_mm / 2), WD_TAB_ALIGNMENT.CENTER)
+    p.paragraph_format.tab_stops.add_tab_stop(Mm(width_mm), WD_TAB_ALIGNMENT.RIGHT)
+    p.add_run("\t")
+    p._p.append(omml_from_latex(latex))
+    if block.get("number", True):
+        p.add_run("\t(")
+        add_field(p, r"SEQ Equation \* ARABIC", "1")
+        p.add_run(")")
+    if block.get("caption"):
+        cap = doc.add_paragraph(style="Caption")
+        cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        cap.paragraph_format.keep_together = True
+        cap.add_run(block["caption"])
+
+
 def _add_blocks(doc, blocks: list[dict], spec: dict, section, owner, counters: dict,
                 *, appendix: bool = False, appendix_num_id: int | None = None,
                 heading_level_start: int = 2) -> None:
     labels = _labels(spec)
     width_mm = _text_width_mm(section)
+    previous_kind = None
+    table_kinds = {"table", "key_values", "callout", "figure_text"}
     for block in blocks or []:
         if isinstance(block, str):
             block = {"type": "paragraph", "text": block}
         kind = block.get("type", "paragraph")
+        # Two adjacent tables (e.g. a KPI panel followed by a callout) can be
+        # merged by Word.  Insert a small separator paragraph between them.
+        if kind in table_kinds and previous_kind in table_kinds:
+            spacer = doc.add_paragraph()
+            spacer.paragraph_format.space_before = Pt(0)
+            spacer.paragraph_format.space_after = Pt(4)
+        previous_kind = kind
         if kind in {"paragraph", "text"}:
             p = doc.add_paragraph()
             p.alignment = _align(block.get("align", "left"))
@@ -549,6 +636,12 @@ def _add_blocks(doc, blocks: list[dict], spec: dict, section, owner, counters: d
             p.paragraph_format.keep_with_next = True
         elif kind == "figure":
             _add_figure(doc, block, spec, section, owner, counters, appendix=appendix)
+        elif kind == "figure_text":
+            _add_figure_text(doc, block, spec, section, owner, counters, appendix=appendix)
+        elif kind == "equation":
+            _add_equation(doc, block, section, owner)
+        elif kind == "callout":
+            _add_callout(doc, block, spec, section)
         elif kind == "table":
             _add_table(doc, block, spec, section, owner, counters, appendix=appendix)
         elif kind == "quote":
@@ -565,10 +658,15 @@ def _add_blocks(doc, blocks: list[dict], spec: dict, section, owner, counters: d
         elif kind == "spacer":
             doc.add_paragraph()
         elif kind == "key_values":
-            rows = [[item.get("label", ""), item.get("value", "")] for item in block.get("items", [])]
-            _add_table(doc, {"columns": [{"header": "", "width_mm": 45}, {"header": "", "width_mm": width_mm - 45}],
-                             "rows": rows, "caption": block.get("caption", ""), "header": False,
-                             "borders": "none"}, spec, section, owner, counters, appendix=appendix)
+            rows = [[{"text": item.get("label", ""), "align": "left"},
+                     {"text": item.get("value", ""), "align": "left", "bold": True}]
+                    for item in block.get("items", [])]
+            _add_table(doc, {"advanced": True, "columns": [
+                {"header": "", "width_mm": 55, "align": "left"},
+                {"header": "", "width_mm": width_mm - 55, "align": "left"},
+            ], "rows": rows, "caption": block.get("caption", ""), "header": False,
+                "borders": "none", "cell_margins_mm": 1.5},
+                spec, section, owner, counters, appendix=appendix)
         else:
             raise ValueError(f"unknown block type: {kind!r}")
 
@@ -600,7 +698,7 @@ def _number_blocks(spec: dict) -> dict:
             if not isinstance(block, dict):
                 continue
             kind = block.get("type")
-            if kind == "figure":
+            if kind in {"figure", "figure_text"}:
                 counters["figure"] += 1
                 block["_number"] = counters["figure"]
                 block["_appendix_letter"] = letter
@@ -726,6 +824,122 @@ def _add_figure(doc, fig: dict, spec: dict, section, owner, counters: dict, *, a
     fig["_effective_dpi"] = dpi
 
 
+def _zero_cell_margins(table) -> None:
+    cellmar = table._tbl.tblPr.find(qn("w:tblCellMar"))
+    if cellmar is None:
+        return
+    for edge in cellmar:
+        edge.set(qn("w:w"), "0")
+
+
+def _add_figure_text(doc, block: dict, spec: dict, section, owner, counters: dict,
+                     *, appendix: bool = False) -> None:
+    """Place a figure beside a text column inside a borderless two-cell table."""
+    path = Path(block["path"])
+    if not path.is_absolute():
+        path = Path(block.get("_base_dir", ".")) / path
+    if not path.is_file():
+        raise FileNotFoundError(f"figure not found: {path}")
+    typo = spec["typography"]
+    labels = _labels(spec)
+    logo_left = block.get("image_side", "left") != "right"
+    width_mm = _text_width_mm(section)
+    image_w = min(float(block.get("image_width_mm", width_mm * 0.46)), width_mm * 0.60)
+    text_w = width_mm - image_w
+    caption = block.get("caption", "")
+
+    table = doc.add_table(rows=1, cols=2)
+    table.alignment = WD_TABLE_ALIGNMENT.CENTER
+    table.autofit = False
+    table.allow_autofit = False
+    twips = [_mm_twips(image_w), _mm_twips(text_w)]
+    _set_tbl_layout(table, sum(twips), first_row=False)
+    _zero_cell_margins(table)
+    _set_table_borders(table, kind="none")
+    for i, gc in enumerate(table._tbl.tblGrid.findall(qn("w:gridCol"))):
+        gc.set(qn("w:w"), str(twips[i]))
+    for i, cell in enumerate(table.rows[0].cells):
+        cell.width = Twips(twips[i])
+    trpr = table.rows[0]._tr.get_or_add_trPr()
+    trpr.append(OxmlElement("w:cantSplit"))
+
+    image_cell = table.rows[0].cells[0 if logo_left else 1]
+    text_cell = table.rows[0].cells[1 if logo_left else 0]
+    image_cell.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
+    text_cell.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
+
+    img_p = image_cell.paragraphs[0]
+    img_p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    img_p.paragraph_format.space_before = Pt(2)
+    img_p.paragraph_format.space_after = Pt(2)
+    run = img_p.add_run()
+    try:
+        from docx.image.image import Image as DocxImage
+        img = DocxImage.from_file(str(path))
+        aspect = img.px_height / img.px_width if img.px_width else 0.6
+    except Exception:
+        aspect = 0.6
+    picture_w = max(20.0, image_w - 4)
+    if picture_w * aspect > float(block.get("max_height_mm", 85)):
+        picture_w = float(block.get("max_height_mm", 85)) / aspect
+    run.add_picture(str(path), width=Mm(picture_w))
+    inline = doc.inline_shapes[-1]
+    alt = block.get("alt", "")
+    inline._inline.docPr.set("descr", alt)
+    inline._inline.docPr.set("title", block.get("title", alt[:200]))
+
+    text_p = text_cell.paragraphs[0]
+    text_p.paragraph_format.space_before = Pt(2)
+    text_p.paragraph_format.space_after = Pt(4)
+    if block.get("heading"):
+        run = text_p.add_run(block["heading"])
+        run.bold = True
+        run.font.size = Pt(typo["body_pt"] + 1)
+        run.font.color.rgb = RGBColor.from_string(typo["color_accent"])
+        text_p = None
+    paragraphs = (block.get("text") or "").split("\n\n")
+    for i, para in enumerate(paragraphs):
+        target = text_p if (i == 0 and text_p is not None) else text_cell.add_paragraph()
+        target.paragraph_format.space_after = Pt(4)
+        _add_text(target, para.strip(), spec, appendix=appendix)
+    for item in block.get("bullets", []) or []:
+        bp = text_cell.add_paragraph(style="List Bullet")
+        _add_text(bp, item, spec, appendix=appendix)
+
+    n = block.get("_number")
+    if n is None:
+        counters["Figure"] = counters.get("Figure", 0) + 1
+        n = counters["Figure"]
+    letter = block.get("_appendix_letter")
+    prefix = f"{letter}." if letter else ""
+    reset = False
+    if letter:
+        started = counters.setdefault("_appendix_figures", set())
+        reset = letter not in started
+        started.add(letter)
+    if caption:
+        cap = doc.add_paragraph(style="Caption")
+        cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        cap.paragraph_format.keep_together = True
+        add_seq_caption(cap, "Figure", caption, number_bookmark=f"fig-{n}-num",
+                        caption_bookmark=f"fig-{n}", bookmark_owner=owner,
+                        display_label=labels["figure"], display_prefix=prefix, reset=reset)
+    capnode = OxmlElement("w:tblCaption")
+    capnode.set(qn("w:val"), f"{labels['figure']} {prefix}{n} — {caption}")
+    table._tbl.tblPr.append(capnode)
+    desc = OxmlElement("w:tblDescription")
+    desc.set(qn("w:val"), block.get("alt", caption))
+    table._tbl.tblPr.append(desc)
+    if block.get("source"):
+        sp = doc.add_paragraph()
+        sp.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        run = sp.add_run(f"{labels['source']}: {block['source']}")
+        run.italic = True
+        run.font.size = Pt(typo["caption_pt"] - 0.5)
+        run.font.color.rgb = RGBColor.from_string(typo["color_muted"])
+        sp.paragraph_format.space_after = Pt(8)
+
+
 def _set_table_borders(table, *, color: str = "BFBFBF", header_color: str = "7F7F7F",
                        kind: str = "booktabs") -> None:
     tblpr = table._tbl.tblPr
@@ -805,7 +1019,229 @@ def _set_tbl_layout(table, total_twips: int, *, first_row: bool = True) -> None:
     look.set(qn("w:noVBand"), "1")
 
 
+def _cell_cfg(value) -> dict:
+    return value if isinstance(value, dict) else {"text": value}
+
+
+def _shade(cell, fill: str) -> None:
+    if not fill:
+        return
+    tcpr = cell._tc.get_or_add_tcPr()
+    for old in tcpr.findall(qn("w:shd")):
+        tcpr.remove(old)
+    shd = OxmlElement("w:shd")
+    shd.set(qn("w:val"), "clear")
+    shd.set(qn("w:color"), "auto")
+    shd.set(qn("w:fill"), fill)
+    tcpr.append(shd)
+
+
+def _write_cell(cell, value, spec: dict, doc, *, default_align: str = "left",
+                header: bool = False, appendix: bool = False) -> None:
+    cfg = _cell_cfg(value)
+    typo = spec["typography"]
+    cell.vertical_alignment = {
+        "top": WD_CELL_VERTICAL_ALIGNMENT.TOP,
+        "middle": WD_CELL_VERTICAL_ALIGNMENT.CENTER,
+        "center": WD_CELL_VERTICAL_ALIGNMENT.CENTER,
+        "bottom": WD_CELL_VERTICAL_ALIGNMENT.BOTTOM,
+    }.get(cfg.get("valign", "top"), WD_CELL_VERTICAL_ALIGNMENT.TOP)
+    if cfg.get("fill"):
+        _shade(cell, cfg["fill"])
+    p = cell.paragraphs[0]
+    p.style = doc.styles["Table Text"]
+    p.alignment = _align(cfg.get("align", default_align))
+    p.paragraph_format.space_before = Pt(0)
+    p.paragraph_format.space_after = Pt(0)
+    if cfg.get("image"):
+        path = Path(cfg["image"])
+        if not path.is_absolute():
+            path = Path(cfg.get("_base_dir", ".")) / path
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        width = float(cfg.get("width_mm", 14))
+        run = p.add_run()
+        run.add_picture(str(path), width=Mm(width))
+        inline = doc.inline_shapes[-1]
+        inline._inline.docPr.set("descr", cfg.get("alt", ""))
+        inline._inline.docPr.set("title", cfg.get("alt", "")[:200])
+        return
+    text = cfg.get("text", "")
+    if text is None:
+        text = ""
+    text = str(text)
+    parts = text.split("\n")
+    if cfg.get("bold", header):
+        run = p.add_run(parts[0])
+        run.bold = True
+    else:
+        _add_text(p, parts[0], spec, appendix=appendix)
+    for extra in parts[1:]:
+        p.add_run().add_break()
+        _add_text(p, extra, spec, appendix=appendix)
+    if cfg.get("bold"):
+        for run in p.runs:
+            run.bold = True
+
+
+def _add_rich_table(doc, table_spec: dict, spec: dict, section, owner, counters: dict,
+                    *, appendix: bool = False) -> None:
+    typo = spec["typography"]
+    labels = _labels(spec)
+    columns = table_spec.get("columns") or []
+    rows = table_spec.get("rows") or []
+    if not columns and not table_spec.get("header_rows"):
+        raise ValueError("table needs columns or header_rows")
+    header_rows_spec = table_spec.get("header_rows")
+    if isinstance(header_rows_spec, int):
+        header_defs = [[{"text": c.get("header", ""), "align": c.get("align", "left")} for c in columns]]
+        for _ in range(max(0, header_rows_spec - 1)):
+            header_defs.append([{"text": ""} for _ in columns])
+    elif isinstance(header_rows_spec, list):
+        header_defs = header_rows_spec
+    elif table_spec.get("header", True):
+        header_defs = [[{"text": c.get("header", ""), "align": c.get("align", "left")} for c in columns]]
+    else:
+        header_defs = []
+    ncols = max([len(columns)] + [len(r) for r in header_defs] + [1])
+    widths = [float(c.get("width_mm", 0) or 0) for c in columns]
+    if len(widths) < ncols:
+        widths.extend([0.0] * (ncols - len(widths)))
+    width_mm = _text_width_mm(section)
+    if sum(widths) <= 0:
+        widths = [width_mm / ncols] * ncols
+    elif sum(widths) > width_mm:
+        widths = [w * width_mm / sum(widths) for w in widths]
+    widths = [max(12.0, w) for w in widths]
+    if sum(widths) > width_mm:
+        widths = [w * width_mm / sum(widths) for w in widths]
+    twips = [_mm_twips(w) for w in widths]
+    total = sum(twips)
+    caption = table_spec.get("caption", "")
+
+    n = table_spec.get("_number")
+    if caption and n is None:
+        counters["Table"] = counters.get("Table", 0) + 1
+        n = counters["Table"]
+    letter = table_spec.get("_appendix_letter")
+    prefix = f"{letter}." if letter else ""
+    reset = False
+    if caption:
+        if letter:
+            started = counters.setdefault("_appendix_tables", set())
+            reset = letter not in started
+            started.add(letter)
+        cap = doc.add_paragraph(style="Caption")
+        cap.paragraph_format.keep_with_next = True
+        cap.paragraph_format.space_before = Pt(8)
+        cap.paragraph_format.space_after = Pt(2)
+        add_seq_caption(cap, "Table", caption, number_bookmark=f"tbl-{n}-num",
+                        caption_bookmark=f"tbl-{n}", bookmark_owner=owner,
+                        display_label=labels["table"], display_prefix=prefix, reset=reset)
+
+    table = doc.add_table(rows=len(header_defs) + len(rows), cols=ncols)
+    table.alignment = WD_TABLE_ALIGNMENT.CENTER
+    table.autofit = False
+    table.allow_autofit = False
+    tblpr = table._tbl.tblPr
+    _set_tbl_layout(table, total, first_row=bool(header_defs))
+    _set_table_borders(table, kind=table_spec.get("borders", "booktabs"), color=typo["color_rule"])
+    if table_spec.get("cell_margins_mm") is not None:
+        margin = _mm_twips(float(table_spec["cell_margins_mm"]))
+        cellmar = tblpr.find(qn("w:tblCellMar"))
+        if cellmar is not None:
+            for edge in cellmar:
+                edge.set(qn("w:w"), str(margin))
+    if caption:
+        capnode = OxmlElement("w:tblCaption")
+        capnode.set(qn("w:val"), f"{labels['table']} {prefix}{table_spec.get('_appendix_number') or n} — {caption}")
+        tblpr.append(capnode)
+    desc = OxmlElement("w:tblDescription")
+    desc.set(qn("w:val"), table_spec.get("alt", caption or f"{labels['table']} {n or ''}".strip()))
+    tblpr.append(desc)
+
+    for i, gc in enumerate(table._tbl.tblGrid.findall(qn("w:gridCol"))):
+        if i < len(twips):
+            gc.set(qn("w:w"), str(twips[i]))
+    for row in table.rows:
+        for i, cell in enumerate(row.cells):
+            if i < len(twips):
+                cell.width = Twips(twips[i])
+
+    top_content: dict[tuple[int, int], dict] = {}
+    merges = list(table_spec.get("merges", []) or [])
+    covered: set[tuple[int, int]] = set()
+    for r, header in enumerate(header_defs):
+        trpr = table.rows[r]._tr.get_or_add_trPr()
+        trpr.append(OxmlElement("w:tblHeader"))
+        trpr.append(OxmlElement("w:cantSplit"))
+        c = 0
+        for value in header:
+            while (r, c) in covered and c < ncols:
+                c += 1
+            if c >= ncols:
+                break
+            cfg = _cell_cfg(value)
+            cs = max(1, int(cfg.get("colspan", 1)))
+            rs = max(1, int(cfg.get("rowspan", 1)))
+            if cs > 1 or rs > 1:
+                merges.append({"row": r, "col": c, "rowspan": rs, "colspan": cs, "text": cfg})
+                for rr in range(r, min(len(table.rows), r + rs)):
+                    for cc in range(c, min(ncols, c + cs)):
+                        if (rr, cc) != (r, c):
+                            covered.add((rr, cc))
+            top_content[(r, c)] = cfg
+            _write_cell(table.cell(r, c), cfg, spec, doc, default_align="left",
+                        header=True, appendix=appendix)
+            c += cs
+    for ri, row_values in enumerate(rows, start=len(header_defs)):
+        trpr = table.rows[ri]._tr.get_or_add_trPr()
+        trpr.append(OxmlElement("w:cantSplit"))
+        for ci, value in enumerate(row_values):
+            if ci >= ncols:
+                break
+            cfg = _cell_cfg(value)
+            top_content[(ri, ci)] = cfg
+            default = "right" if _looks_numeric(cfg.get("text", "")) else "left"
+            if columns and ci < len(columns) and columns[ci].get("align"):
+                default = columns[ci]["align"]
+            _write_cell(table.cell(ri, ci), cfg, spec, doc, default_align=default,
+                        appendix=appendix)
+
+    for merge in merges:
+        r = int(merge.get("row", 0)); c = int(merge.get("col", 0))
+        rs = max(1, int(merge.get("rowspan", 1))); cs = max(1, int(merge.get("colspan", 1)))
+        if r + rs > len(table.rows) or c + cs > ncols:
+            continue
+        top = table.cell(r, c)
+        bottom = table.cell(r + rs - 1, c + cs - 1)
+        if top._tc is bottom._tc:
+            continue
+        merged = top.merge(bottom)
+        for p in merged.paragraphs[1:]:
+            p._element.getparent().remove(p._element)
+        merged.text = ""
+        cfg = merge.get("text") or top_content.get((r, c)) or {"text": ""}
+        _write_cell(merged, cfg, spec, doc, default_align=cfg.get("align", "left"),
+                    header=r < len(header_defs), appendix=appendix)
+
+    heights = table_spec.get("row_heights_mm") or []
+    for i, row in enumerate(table.rows):
+        if i < len(heights):
+            row.height = Mm(float(heights[i]))
+            row.height_rule = WD_ROW_HEIGHT_RULE.AT_LEAST
+    if table_spec.get("source"):
+        sp = doc.add_paragraph()
+        run = sp.add_run(f"{labels['source']}: {table_spec['source']}")
+        run.italic = True
+        run.font.size = Pt(typo["caption_pt"] - 0.5)
+        run.font.color.rgb = RGBColor.from_string(typo["color_muted"])
+        sp.paragraph_format.space_after = Pt(8)
+
+
 def _add_table(doc, table_spec: dict, spec: dict, section, owner, counters: dict, *, appendix: bool = False) -> None:
+    if table_spec.get("advanced") or any(
+            key in table_spec for key in ("merges", "header_rows", "row_heights_mm", "cell_margins_mm")):
+        return _add_rich_table(doc, table_spec, spec, section, owner, counters, appendix=appendix)
     typo = spec["typography"]
     labels = _labels(spec)
     columns = table_spec.get("columns") or []
@@ -954,6 +1390,20 @@ def _add_cover(doc, spec: dict, section) -> None:
     cover = spec["cover"]
     typo = spec["typography"]
     labels = _labels(spec)
+    hero = cover.get("hero_image")
+    if hero:
+        path = Path(hero)
+        if not path.is_absolute():
+            path = Path(cover.get("_base_dir", ".")) / path
+        p = doc.add_paragraph()
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p.paragraph_format.space_before = Pt(0)
+        p.paragraph_format.space_after = Pt(14)
+        run = p.add_run()
+        run.add_picture(str(path), width=Mm(_text_width_mm(section)))
+        inline = doc.inline_shapes[-1]
+        inline._inline.docPr.set("descr", cover.get("hero_alt", ""))
+        inline._inline.docPr.set("title", cover.get("hero_alt", "")[:200])
     logo = cover.get("logo")
     if logo:
         p = doc.add_paragraph()
@@ -966,8 +1416,9 @@ def _add_cover(doc, spec: dict, section) -> None:
         inline = doc.inline_shapes[-1]
         inline._inline.docPr.set("descr", cover.get("logo_alt", "Logo"))
         inline._inline.docPr.set("title", cover.get("logo_alt", "Logo"))
-    for _ in range(2):
-        doc.add_paragraph()
+    if not hero:
+        for _ in range(2):
+            doc.add_paragraph()
     p = doc.add_paragraph(style="Title")
     p.paragraph_format.space_before = Pt(24)
     p.paragraph_format.space_after = Pt(6)

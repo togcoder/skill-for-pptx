@@ -109,6 +109,67 @@ Nguồn: source, year.
 - `tblCaption` and `tblDescription` set for accessibility.
 - Wide table: landscape section, not 7 pt font.
 
+## 6b. Side-by-side figure and text
+
+Use a borderless two-cell table when the image and the explanation must be read
+together:
+
+```text
+┌──────────────┬─────────────────────────────┐
+│   picture    │ Heading                    │
+│   (≤60% w)   │ Paragraphs / bullets       │
+└──────────────┴─────────────────────────────┘
+        Hình 1 — Caption
+        Nguồn: …
+```
+
+- Widths sum to the text column; no borders; cell margins 0–2 mm.
+- Image is inline, centred, alt-texted; text cell is vertically centred.
+- The caption sits below the table, not inside a cell.
+- Do not use this for every figure; it is for a figure that carries an argument.
+
+## 6c. Equations
+
+```json
+{"type": "equation", "latex": "g_t = \\frac{Y_t - Y_{t-1}}{Y_{t-1}} \\times 100"}
+```
+
+- Native `m:oMath`, not a picture or plain text.
+- Numbered with `SEQ Equation`; the number is right-aligned by a tab stop.
+- Supported subset: fractions, powers, subscripts, roots, sums/integrals,
+  parentheses, accents, Greek letters and common operators.
+- Unsupported LaTeX raises an error; rewrite it or use WordCraft's equation
+  command. A matrix/cases/aligned environment is not silently mangled.
+- Add a caption when the equation needs a symbol legend, not just a number.
+
+## 6d. Merged-header table with image cells
+
+```text
+┌──────────┬──────────────┬──────────────┐
+│ Đơn vị   │ Điểm thành phần │ Tác động   │  rowspan/colspan
+│          │ Dữ liệu │ Năng lực │          │
+├──────────┼─────────┼──────────┼──────────┤
+│ [icon]   │ 81      │ 74       │ 68       │  image cell
+└──────────┴─────────┴──────────┴──────────┘
+```
+
+- `header_rows` defines each header row; `colspan`/`rowspan` create merges.
+- Mark every header row `tblHeader`; set `row_heights_mm` when image cells must
+  not collapse.
+- Image cells: 10–16 mm icons, alt text, centred; the row height must include
+  the image plus padding.
+- Cells can set `align`, `valign`, `bold`, `fill`; numbers still right-align.
+- Merged cells can break screen-reader header association; test the tag tree.
+
+## 6e. Cover hero and cross-craft assets
+
+- A 155 × 55–65 mm hero image above the title makes a report feel authored.
+- The hero is inline and alt-texted; the title remains a paragraph, not pixels.
+- For the T042 fixture, the hero SVG is rasterised with VectorCraft; the DOCX
+  render is the acceptance gate.
+- Record the asset source/tool/version and licence. Synthetic art is fine for a
+  demo; a customer brand needs permission.
+
 ## 7. Header and footer
 
 ```text

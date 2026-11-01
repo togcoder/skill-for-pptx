@@ -7,6 +7,28 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T042 [docx] Advanced report craft — side-by-side media, equations, rich tables — 2026-11-01
+
+- **Native equations.** `scripts/word_math.py` parses a strict LaTeX subset into
+  OMML (`m:oMath`): fractions, scripts, roots, sums/integrals, delimiters,
+  accents, Greek letters and common operators. Unsupported constructs raise an
+  explicit error. Equation numbering uses `SEQ Equation`.
+- **Side-by-side media.** `figure_text` emits a borderless two-cell table with
+  an inline picture and a text column, caption below; no floating anchors.
+- **Rich tables.** `table.advanced` supports multiple header rows, `colspan`/
+  `rowspan`, explicit merges, per-cell alignment/vertical alignment, fills,
+  row heights, cell margins and image cells.
+- **Callouts / KPI strip / cover hero.** Shaded single-cell callouts, a
+  borderless label/value strip, and a full-text-width inline cover image.
+- **Cross-craft.** Cover and icons are SVG rasterised by VectorCraft
+  (`convert --scale 1`), then accepted by the DOCX audit/render. The
+  cross-craft rule was added to `AGENTS.md` and `lab/standards/RESEARCH.md`.
+- **Evidence.** 11-page Word PDF inspected; audit clean (20 fields, 15
+  bookmarks, 6 tables, 6 drawings); `tests/test_document_advanced.py` + T039
+  tests; full suite 334 tests OK with `PYTHONUTF8=1`.
+- **Status.** EXPERIMENTAL; review requested.
+- Report: `experiments/T042-20261101-opencode-advanced-docx/REPORT.md`.
+
 ## T041 [xlsx] SheetCraft — controlled standard DrawingML charts — 2026-11-01
 
 - **Chart Forge.** `scripts/chart_forge.py` builds a workbook/chart from

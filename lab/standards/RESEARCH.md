@@ -42,6 +42,23 @@ Give the URL or DOI and the access date. Mark "summary only" when the primary
 text was unreachable. Note the licence for anything stored. Derived numbers
 only; reference media stays local.
 
+## Cross-craft assets
+
+When a domain needs an asset that another ArtCraft tool owns, use that native
+tool instead of re-implementing it:
+
+- **VectorCraft** for SVG/vector export, **PhotoCraft** for raster, **FigCraft**
+  for UI, **DeckCraft** for slides, **WordCraft** for Word equations/fields,
+  **GridCraft** for spreadsheet formulas/pivots.
+- Record the source tool, version, exact command, input/output hashes and the
+  asset licence in the REPORT.
+- The **receiving domain must test the asset in its native model** (DOCX render,
+  XLSX calculation, PPTX playback). A transfer is not canonical just because the
+  source tool produced it.
+- If the receiving domain needs a property the source tool lacks, open a task in
+  the source domain. This feedback loop is part of the research, not an
+  exception.
+
 ## Code
 
 - Code from outside agents or imported drops starts as `EXPERIMENTAL`. It

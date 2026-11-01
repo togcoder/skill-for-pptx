@@ -64,6 +64,25 @@ Scripts live two levels above this file: `ROOT=<this skill dir>/../..`.
    a short change report naming the evidence rung (see
    `$ROOT/docs/VERIFICATION.md`).
 
+## Rich-report blocks (T042)
+
+A real report is not only body paragraphs. The spec supports:
+
+| Block | Use | Key rules |
+|---|---|---|
+| `figure_text` | One image beside a text column | Borderless 2-cell table; image ≤60% width; caption below; alt text; inline image |
+| `equation` | Native Word math | LaTeX subset → OMML; `SEQ Equation` number right-aligned; unsupported command raises an error |
+| `table` + `advanced` | Multi-row header, merged cells, image cells, per-cell alignment | `header_rows`, `colspan`/`rowspan`, `merges`, `row_heights_mm`, `cell_margins_mm`; header repeats |
+| `callout` | A single message/insight | Shaded panel, left accent rule, readable contrast |
+| `key_values` | KPI strip | Borderless label/value rows; values bold; no fake table header |
+| `cover.hero_image` | Brand/cover band | Inline image, alt text, title remains a paragraph for metadata/accessibility |
+
+**Cover assets are a cross-craft opportunity.** The T042 fixture writes a cover
+SVG, rasterises it with VectorCraft, then embeds the PNG. The DOCX render/audit
+is the acceptance gate. Record the source tool/version/command and the asset
+licence. If VectorCraft is absent, use a plain PNG; the document path must still
+work.
+
 ## One rule per failure mode
 
 | Symptom | Real cause | Fix |
@@ -153,6 +172,11 @@ them. Say so.
 # Build from a semantic spec (schema: domains/docx/schemas/document_spec.schema.json)
 python3 $ROOT/scripts/document_forge.py build report.json -o report.docx \
   --update word --render preview/ --report build.json
+
+# Rich report: cover hero, side-by-side, equations, merged table, image cells
+python3 $ROOT/scripts/document_forge.py build \
+  $ROOT/examples/docx/annual_report_spec.json -o annual.docx \
+  --update word --render preview/
 
 # Audit an existing DOCX (no build)
 python3 $ROOT/scripts/document_audit.py report.docx --md audit.md

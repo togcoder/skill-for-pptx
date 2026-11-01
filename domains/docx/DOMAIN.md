@@ -16,6 +16,8 @@ Documents are read, not presented. The canon is Word's own model:
 - `SEQ` captions, bookmarked numbers, `REF`/`PAGEREF` cross-references;
 - fixed table grids with a repeating header row;
 - inline pictures with alt text, not drifting floating anchors;
+- native OMML equations, side-by-side media/text, merged-header tables and
+  image cells for a report that is more than body paragraphs;
 - document language and title metadata for accessibility.
 
 A DOCX is structurally valid when the fields are balanced, the bookmarks
@@ -49,6 +51,7 @@ to `docx` yet.
 | `scripts/word_field_kit.py` | Experimental (T039): fields, TOC, SEQ captions, REF/PAGEREF, STYLEREF, bookmarks, numbering, structural audit | `tests/test_document_craft.py` |
 | `scripts/document_forge.py` | Experimental (T039): build a DOCX from `domains/docx/schemas/document_spec.schema.json`; refresh via Word/WordCraft; render | `tests/test_document_craft.py` |
 | `scripts/document_audit.py` | Experimental (T039): standalone audit entry point | `tests/test_document_craft.py` |
+| `scripts/word_math.py` | Experimental (T042): LaTeX subset → OMML equations; strict errors for unsupported commands | `tests/test_document_advanced.py` |
 
 No docx module is a product path until `research/reviews/` contains an accepted
 review. The modules carry `Status: EXPERIMENTAL` in their headers.
@@ -58,9 +61,9 @@ review. The modules carry `Status: EXPERIMENTAL` in their headers.
 | Item | Path | Status |
 |---|---|---|
 | Design/standards data | `domains/docx/data/document_system.json` | T039; provenance recorded; unreviewed |
-| Spec schema | `domains/docx/schemas/document_spec.schema.json` | T039; unreviewed |
-| Skill | `skills/document-craft/` | T039; experimental |
-| Example spec | `examples/docx/report_spec.json` | T039; synthetic |
+| Spec schema | `domains/docx/schemas/document_spec.schema.json` | T039/T042; unreviewed |
+| Skill | `skills/document-craft/` | T039/T042; experimental |
+| Example specs | `examples/docx/report_spec.json`, `annual_report_spec.json` | T039/T042; synthetic, CC0-style assets |
 
 The data file contains page/type/figure/table/field/accessibility tokens,
 standard statuses and `sources`. Every threshold used by the audit reads a token;
@@ -70,7 +73,9 @@ do not hard-code a new one in a generator.
 
 | Rung | Tool | T039 evidence |
 |---|---|---|
-| 1 | schema / structural audit | `document_audit.py`: 29 fields, 22 bookmarks, 3 sections, 3 tables, 2 figures; no errors/warnings |
+| 1 | schema / structural audit | T039: 29 fields, 22 bookmarks, 3 sections, 3 tables, 2 figures; T042: 20 fields, OMML equations, side-by-side/media, merged tables, image cells; no errors/warnings |
+| 2 | layout engine (WordCraft) | T042 render: side-by-side, equations, rich table and callouts visible; WordCraft keeps the same font limitation as T039 |
+| 4–5 | Word COM open / PDF export | T042: Word refreshed the exact DOCX, exported an 11-page PDF; pages inspected (cover, side-by-side, equations, rich table, appendix) |
 | 2 | layout engine (WordCraft) | WordCraft render; TOC updated, but page numbers were physical and a `TOC \\c` caption list repeated the first number |
 | 3 | independent reader | Not run (LibreOffice Writer not installed on this host) |
 | 4–5 | Word COM open / PDF export | Word opened the exact DOCX, refreshed fields, exported a 12-page PDF; pages inspected |
@@ -80,9 +85,11 @@ The T039 report is `experiments/T039-20261101-opencode-office-canon/REPORT.md`.
 
 ## State (2026-11-01)
 
+- **T042 [docx] advanced report**: native OMML equations, side-by-side
+  figure/text, merged-header tables, image cells, callouts, cover hero and a
+  synthetic annual-report fixture; **review requested**.
 - **T039 [docx]**: DocumentCraft prototypes + audit + standards/data + skill;
-  report written; tests pass; **review requested**. Not merged into a product
-  path.
+  merged to `main` after owner approval, with the Argon review fixes applied.
 - Evidence reached: rung 1 structural and rung 4/5 Word parse/render. No rung 6
   human edit/print; no PDF/UA or PDF/A validation.
 - Known limitation: Word and WordCraft paginate differently (12 vs 13 pages on
@@ -106,3 +113,11 @@ The T039 report is `experiments/T039-20261101-opencode-office-canon/REPORT.md`.
    customers who require Word's source manager.
 5. Landscape tables and two-column sections on a 30+ page fixture.
 6. Font embedding and Vietnamese/CJK glyph coverage checks.
+7. Equation coverage: matrix/aligned environments, cases, and a MathML/OMML
+   fallback for formulas outside the LaTeX subset.
+8. Table accessibility: merged cells can change the header association; test
+   with a screen reader/PDF tag tree.
+9. Cross-craft asset provenance: record the VectorCraft version/command and the
+   licence for every generated cover/icon in the report.
+10. Cover art: full-bleed/print-safe variants; the current hero is an inline
+    image inside the text column.

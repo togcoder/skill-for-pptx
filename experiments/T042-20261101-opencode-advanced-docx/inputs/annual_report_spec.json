@@ -1,0 +1,324 @@
+{
+  "meta": {
+    "title": "Báo cáo thường niên 2026",
+    "subtitle": "Chuyển đổi số và năng lực dữ liệu",
+    "author": "Nhóm Nghiên cứu và Chuyển đổi số",
+    "organization": "Văn phòng Chương trình",
+    "document_id": "DX-2026-001",
+    "version": "1.0",
+    "date": "2026-11-01",
+    "language": "vi-VN",
+    "classification": "Nội bộ",
+    "keywords": [
+      "dữ liệu",
+      "chuyển đổi số",
+      "thường niên"
+    ]
+  },
+  "cover": {
+    "enabled": true,
+    "hero_image": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T039\\experiments\\T042-20261101-opencode-advanced-docx\\inputs\\cover.png",
+    "hero_alt": "Dải màu xanh navy với vòng tròn cam và tiêu đề báo cáo thường niên.",
+    "hero_height_mm": 62
+  },
+  "front_matter": {
+    "toc": {
+      "enabled": true,
+      "levels": 3,
+      "title": "Mục lục"
+    },
+    "list_of_figures": {
+      "enabled": true,
+      "title": "Danh mục hình"
+    },
+    "list_of_tables": {
+      "enabled": true,
+      "title": "Danh mục bảng"
+    },
+    "abstract": {
+      "enabled": true,
+      "title": "Tóm tắt điều hành",
+      "text": "Báo cáo tổng hợp kết quả chuyển đổi số năm 2026, tập trung vào chất lượng dữ liệu, năng lực phân tích và các quyết định dựa trên dữ liệu.\n\nBáo cáo sử dụng dữ liệu tổng hợp cho mục đích trình diễn kỹ thuật; không đại diện cho một tổ chức cụ thể.",
+      "keywords": [
+        "dữ liệu",
+        "KPI",
+        "quản trị"
+      ]
+    }
+  },
+  "sections": [
+    {
+      "heading": "Tổng quan",
+      "level": 1,
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Năm 2026 đánh dấu bước chuyển từ thử nghiệm sang vận hành có đo lường. Báo cáo này trình bày kết quả theo ba trục: dữ liệu, năng lực và tác động."
+        },
+        {
+          "type": "key_values",
+          "items": [
+            {
+              "label": "Chỉ số tổng hợp",
+              "value": "77/100"
+            },
+            {
+              "label": "Tăng trưởng",
+              "value": "+11,6%"
+            },
+            {
+              "label": "Đơn vị tham gia",
+              "value": "24"
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "Thông điệp chính",
+          "text": "Dữ liệu tốt không phải là dữ liệu nhiều; đó là dữ liệu được định nghĩa, kiểm soát và dùng đúng chỗ.",
+          "fill": "EAF1F8"
+        }
+      ]
+    },
+    {
+      "heading": "Kết quả và phương pháp",
+      "level": 1,
+      "blocks": [
+        {
+          "type": "figure_text",
+          "path": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T039\\experiments\\T042-20261101-opencode-advanced-docx\\inputs\\cover.png",
+          "alt": "Dải màu thương hiệu của báo cáo.",
+          "caption": "Bản sắc hình ảnh của báo cáo.",
+          "heading": "Hình ảnh và dữ liệu",
+          "text": "Mỗi hình được đặt cạnh phần diễn giải để người đọc không phải rời mắt khỏi lập luận.\n\nẢnh bìa được tạo bằng SVG và VectorCraft, sau đó nhúng vào DOCX ở chế độ inline để không bị trôi khi sửa nội dung.",
+          "image_side": "left",
+          "image_width_mm": 70,
+          "source": "Nhóm thiết kế"
+        },
+        {
+          "type": "paragraph",
+          "text": "Tốc độ tăng trưởng được mô tả bằng công thức:"
+        },
+        {
+          "type": "equation",
+          "latex": "g_t = \\frac{Y_t - Y_{t-1}}{Y_{t-1}} \\times 100",
+          "caption": "Tốc độ tăng trưởng theo năm."
+        },
+        {
+          "type": "paragraph",
+          "text": "Chỉ số tổng hợp dùng trung bình có trọng số:"
+        },
+        {
+          "type": "equation",
+          "latex": "S = \\sum_{i=1}^{n} w_i x_i, \\quad \\sum_{i=1}^{n} w_i = 1",
+          "number": false
+        }
+      ]
+    },
+    {
+      "heading": "Bảng dữ liệu phức hợp",
+      "level": 1,
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Bảng dưới đây minh hoạ header nhiều tầng, gộp ô, ảnh trong ô và căn chỉnh theo từng cột."
+        },
+        {
+          "type": "table",
+          "advanced": true,
+          "caption": "Chỉ số theo đơn vị",
+          "alt": "Bảng có header hai tầng, ảnh biểu tượng ở cột đầu và các chỉ số căn phải.",
+          "columns": [
+            {
+              "header": "Đơn vị",
+              "width_mm": 42,
+              "align": "left"
+            },
+            {
+              "header": "Dữ liệu",
+              "width_mm": 36,
+              "align": "right"
+            },
+            {
+              "header": "Năng lực",
+              "width_mm": 36,
+              "align": "right"
+            },
+            {
+              "header": "Tác động",
+              "width_mm": 36,
+              "align": "right"
+            }
+          ],
+          "header_rows": [
+            [
+              {
+                "text": "Đơn vị",
+                "rowspan": 2,
+                "align": "left"
+              },
+              {
+                "text": "Điểm thành phần",
+                "colspan": 2,
+                "align": "center"
+              },
+              {
+                "text": "Tác động",
+                "rowspan": 2,
+                "align": "center"
+              }
+            ],
+            [
+              {
+                "text": "Dữ liệu",
+                "align": "right"
+              },
+              {
+                "text": "Năng lực",
+                "align": "right"
+              }
+            ]
+          ],
+          "rows": [
+            [
+              {
+                "image": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T039\\experiments\\T042-20261101-opencode-advanced-docx\\inputs\\icon-1.png",
+                "width_mm": 12,
+                "alt": "Biểu tượng đơn vị A"
+              },
+              "81",
+              "74",
+              "68"
+            ],
+            [
+              {
+                "image": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T039\\experiments\\T042-20261101-opencode-advanced-docx\\inputs\\icon-2.png",
+                "width_mm": 12,
+                "alt": "Biểu tượng đơn vị B"
+              },
+              "76",
+              "79",
+              "72"
+            ],
+            [
+              {
+                "image": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T039\\experiments\\T042-20261101-opencode-advanced-docx\\inputs\\icon-3.png",
+                "width_mm": 12,
+                "alt": "Biểu tượng đơn vị C"
+              },
+              "70",
+              "83",
+              "77"
+            ],
+            [
+              {
+                "image": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T039\\experiments\\T042-20261101-opencode-advanced-docx\\inputs\\icon-4.png",
+                "width_mm": 12,
+                "alt": "Biểu tượng đơn vị D"
+              },
+              "68",
+              "88",
+              "81"
+            ]
+          ],
+          "row_heights_mm": [
+            9,
+            8,
+            14,
+            14,
+            14,
+            14
+          ],
+          "cell_margins_mm": 1.8,
+          "zebra": true,
+          "source": "Dữ liệu tổng hợp cho mục đích trình diễn."
+        }
+      ]
+    },
+    {
+      "heading": "Kết luận",
+      "level": 1,
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Ba ưu tiên tiếp theo là chuẩn hoá dữ liệu chủ, tự động hoá kiểm tra chất lượng và đào tạo năng lực kể chuyện dữ liệu."
+        },
+        {
+          "type": "callout",
+          "title": "Kiến nghị",
+          "text": "Đo lường hàng quý, công bố minh bạch và giữ một nguồn dữ liệu chuẩn cho mọi báo cáo điều hành.",
+          "fill": "FFF2E5"
+        }
+      ]
+    }
+  ],
+  "references": {
+    "enabled": true,
+    "items": [
+      {
+        "key": "iso690",
+        "label": "[1]",
+        "text": "ISO. 2021. ISO 690:2021 Information and documentation — Guidelines for bibliographic references and citations to information resources."
+      },
+      {
+        "key": "wcag",
+        "label": "[2]",
+        "text": "W3C. 2023. Web Content Accessibility Guidelines (WCAG) 2.2. W3C Recommendation."
+      }
+    ]
+  },
+  "appendix": [
+    {
+      "letter": "A",
+      "title": "Dữ liệu nguồn",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Bảng nguồn được giữ tách khỏi phần diễn giải để thuận tiện đối chiếu."
+        },
+        {
+          "type": "table",
+          "caption": "Dữ liệu nguồn theo quý",
+          "columns": [
+            {
+              "header": "Quý",
+              "width_mm": 30
+            },
+            {
+              "header": "Giá trị",
+              "width_mm": 30,
+              "align": "right"
+            },
+            {
+              "header": "Ghi chú",
+              "width_mm": 95
+            }
+          ],
+          "rows": [
+            [
+              "Q1",
+              "70",
+              "Khởi động"
+            ],
+            [
+              "Q2",
+              "74",
+              "Ổn định"
+            ],
+            [
+              "Q3",
+              "77",
+              "Tăng tốc"
+            ],
+            [
+              "Q4",
+              "81",
+              "Kiểm chứng"
+            ]
+          ],
+          "source": "Dữ liệu tổng hợp."
+        }
+      ]
+    }
+  ]
+}
