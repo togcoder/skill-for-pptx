@@ -65,7 +65,8 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T036 | Skill-for-Design Foundation: Universal ArtCraft Hub, Multi-Agent Protocols & Intent Schemas | Antigravity + Argon | `work/T036-skill-for-design-core` | tip | `experiments/T036-20261101-skill-for-design-core/REPORT.md` |
 | T037 | Multi-Craft Bridges (WordCraft, GridCraft, VectorCraft) & Intent Decoder | Antigravity | `work/T037-multi-craft-bridges` | tip | `experiments/T037-20261101-multi-craft-bridges/REPORT.md` |
 | T038 | PPTX Design Canon Tokens, Asymmetric & Bento Grids, Optical Balance & Critic Rules | Antigravity + Argon | `work/T038-pptx-design-canon-tokens` | tip | `experiments/T038-20261101-pptx-design-canon-tokens/REPORT.md` |
-| T039 | [docx] DocumentCraft: professional Word canon, real fields, tables/images and linked appendices | OpenCode (DeepSeek V4.1 Flash) | `work/T039-opencode-docx` | review requested | `experiments/T039-20261101-opencode-office-canon/REPORT.md` |
+| T039 | [docx] DocumentCraft: professional Word canon, real fields, tables/images and linked appendices | OpenCode (DeepSeek V4.1 Flash) | `work/T039-opencode-docx` | main (owner-approved; review round 2 deferred) | `experiments/T039-20261101-opencode-office-canon/REPORT.md` |
 | T040 | Multi-domain lab restructure: domains, agent protocol, research/review/merge standards | Claude (cloud) | `claude/blissful-pasteur-gmll59` | tip | `experiments/T040-20261101-claude-lab-restructure/REPORT.md` |
-| T041 | [xlsx] SheetCraft: full Excel chart control, combo/secondary axis, geometry, palette, cache and print audit | OpenCode (DeepSeek V4.1 Flash) | `work/T041-opencode-xlsx` | review requested | `experiments/T041-20261101-opencode-sheet-craft/REPORT.md` |
-| T042 | *next free ID* | | | | |
+| T041 | [xlsx] SheetCraft: full Excel chart control, combo/secondary axis, geometry, palette, cache and print audit | OpenCode (DeepSeek V4.1 Flash) | `work/T041-opencode-xlsx` | main (owner-approved; review round 2 deferred) | `experiments/T041-20261101-opencode-sheet-craft/REPORT.md` |
+| T042 | [docx] Advanced report craft: side-by-side media, equations, merged-header tables, image cells and cover assets | OpenCode (DeepSeek V4.1 Flash) | `work/T042-opencode-advanced-docx` | claimed | `experiments/T042-20261101-opencode-advanced-docx/REPORT.md` |
+| T043 | *next free ID* | | | | |
