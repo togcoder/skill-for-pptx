@@ -22,7 +22,7 @@ the contract for agents working in that domain.
 
 | `docx` | Word (OOXML document) | [docx/DOMAIN.md](docx/DOMAIN.md) | T039/T045 on main; T047 standards-controlled annual/ESG report (review requested) | `word_field_kit.py`, `document_forge.py`, `word_math.py`, `document_audit.py` |
 
-| `xlsx` | Excel (OOXML workbook, charts) | [xlsx/DOMAIN.md](xlsx/DOMAIN.md) | T041/T046 on main; T048 workbook UX (hidden data, Input form, VBA, tab colour; review requested) | `chart_forge.py`, `chart_patch.py`, `chart_audit.py`, `sheet_forge.py`, `vba_forge.py`, `gridcraft_bridge.py` |
+| `xlsx` | Excel (OOXML workbook, charts) | [xlsx/DOMAIN.md](xlsx/DOMAIN.md) | T041/T046/T048 on main; T050 UserForm + composed dashboard (review requested) | `chart_forge.py`, `chart_patch.py`, `chart_audit.py`, `sheet_forge.py`, `vba_forge.py`, `dashboard_forge.py`, `userform_forge.py`, `gridcraft_bridge.py` |
 
 | `svg` | Vector graphics (SVG, print, icon grids) | [svg/DOMAIN.md](svg/DOMAIN.md) | Foundational: T042 canon tokens, stroke scaling, BĂ©zier math | `multi_domain_canons.py`, `vectorcraft_bridge.py` |
 

@@ -61,6 +61,8 @@ No pptx→xlsx transfer is accepted yet.
 | `scripts/chart_audit.py` | Experimental (T041): geometry/axes/cache/contrast audit | `tests/test_sheet_craft.py` |
 | `scripts/sheet_forge.py` | Experimental (T046/T048): designed workbook/dashboard from a spec — tables, formulas, image table, Gantt, matrix, pivot, print, hidden sheets, input form | `tests/test_sheet_craft_advanced.py`, `tests/test_sheet_craft_ux.py` |
 | `scripts/vba_forge.py` | Experimental (T046/T048): write a `.bas` module; optional Excel COM injection into `.xlsm`; normalize form-button macros | `tests/test_sheet_craft_advanced.py`, `tests/test_sheet_craft_ux.py` |
+| `scripts/dashboard_forge.py` | Experimental (T050): 12-column dashboard composition from a spec; 4 native charts, KPI strip, hidden data, one-page print | `tests/test_dashboard_userform.py` |
+| `scripts/userform_forge.py` | Experimental (T050): inject a real VBA UserForm (22 controls) + `FormTools` module; inspect controls/code | `tests/test_dashboard_userform.py` |
 
 No xlsx module is a product path until `research/reviews/` contains an accepted
 review. The modules carry `Status: EXPERIMENTAL` in their headers.
@@ -71,7 +73,7 @@ review. The modules carry `Status: EXPERIMENTAL` in their headers.
 |---|---|---|
 | Chart/design data | `domains/xlsx/data/spreadsheet_system.json` | T041; provenance recorded; unreviewed |
 | Spec schema | `domains/xlsx/schemas/chart_spec.schema.json` | T041; unreviewed |
-| Skill | `skills/sheet-craft/` | T041/T046/T048; experimental |
+| Skill | `skills/sheet-craft/` | T041/T046/T048/T050; experimental |
 | Example specs | `examples/xlsx/chart_*_spec.json`, `programme_dashboard_spec.json` | T041/T046; synthetic |
 
 The data file contains chart selection, geometry/type/colour tokens, rules and
@@ -82,18 +84,22 @@ one in a generator.
 
 | Rung | Tool | T041/T046 evidence |
 |---|---|---|
-| 1 | schema / structural audit | T041: 3 workbooks, combo/doughnut/scatter, no errors/warnings. T046: dashboard workbook audit clean; 3 bar charts, 7 sheets. T048: 9 sheets, 5 hidden + 2 veryHidden, 18 merges, 8 validations, 2 protections, 3 buttons |
+| 1 | schema / structural audit | T041: 3 workbooks, combo/doughnut/scatter, no errors/warnings. T046: dashboard workbook audit clean; 3 bar charts, 7 sheets. T048: 9 sheets, 5 hidden + 2 veryHidden, 18 merges, 8 validations, 2 protections, 3 buttons. T050: 4 charts, 4 sheets, 3 hidden, 3 buttons, 22 form controls |
 | 2 | library (xlsxwriter) | `chart_forge.py`/`sheet_forge.py` build; audits re-read the package in tests |
 | 3 | GridCraft PDF render | T041 rendered; font limitation: Vietnamese diacritics clipped in the PDF. T046 pivot via GridCraft |
-| 4–5 | Excel COM open / chart export | T041 charts exported. T046/T048: Excel opened the exact XLSX/XLSM, read pivot/formulas/buttons/validation; T048 exported Input and Dashboard (1 page each); macro execution blocked by host policy |
+| 4–5 | Excel COM open / chart export | T041 charts exported. T046/T048: Excel opened the exact XLSX/XLSM, read pivot/formulas/buttons/validation; T048 exported Input and Dashboard (1 page each); macro execution blocked by host policy. T050: Excel opened the XLSM, read 4 charts, 3 buttons, 22 form controls, exported Dashboard (1 page); form not shown because macro policy blocks modal execution |
 | 6 | human works with the file | Not run |
 
 The T041 report is
 `experiments/T041-20261101-opencode-sheet-craft/REPORT.md`; the T046 report is
 `experiments/T046-20261101-opencode-advanced-xlsx/REPORT.md`.
 
-## State (2026-11-01)
+## State (2026-11-02)
 
+- **T050 [xlsx] VBA UserForm + composed dashboard**: a 4-sheet workbook
+  (Data/Trend/Model hidden, Dashboard visible), 4 native charts, 4 KPI cards,
+  12-column grid, one A4 landscape page; real `frmEntry` UserForm with 22
+  controls and `FormTools` module; 3 filter/form buttons; **review requested**.
 - **T048 [xlsx] workbook UX**: a 9-sheet workbook with only Dashboard/Input
   visible; Data/Model/Team/Gantt/Relations hidden, Pivot/Lookups veryHidden;
   Input form with 18 merges, 8 validations, 3 macro buttons and sheet
@@ -152,6 +158,11 @@ The T041 report is
   source contract are verified. Buttons are not printed by default.
 - T048 limitation: the form validates types/lists, not duplicate IDs, owner
   capacity or date overlap; no UserForm, audit log or undo.
+- T050 limitation: the form was not shown end-to-end; host macro policy blocks
+  modal execution. The preview is a layout mock from the real 22 controls, not a
+  runtime screenshot. Hidden ≠ secure; no audit log/undo; static chart ranges.
+- T050 limitation: the dashboard has bottom whitespace and no slicers; filters
+  are VBA buttons, not native slicers.
 
 ## Open questions
 

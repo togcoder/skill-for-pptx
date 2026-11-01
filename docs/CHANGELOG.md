@@ -7,6 +7,24 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T050 [xlsx] VBA UserForm + composed dashboard — 2026-11-02
+
+- **UserForm.** `scripts/userform_forge.py` injects a real `frmEntry` (22
+  controls: 8 labels, 4 combo boxes, 4 text boxes, 3 buttons, title/hint/status)
+  and a `FormTools` module into an `.xlsm`; `btnSave_Click` validates and appends
+  to the hidden Data sheet.
+- **Dashboard.** `scripts/dashboard_forge.py` composes a 12-column A4 landscape
+  dashboard: 4 KPI cards, 4 native charts (line/column/bar/doughnut), hidden
+  Data/Trend/Model, 3 filter/form buttons, one-page print area.
+- **Evidence.** Excel opened the exact XLSM: 4 sheets (3 hidden), 4 charts,
+  3 buttons, 22 form controls; Dashboard exported as **1 page**; form code has
+  `btnSave_Click`/`ClearForm`/`nextId`. Macro execution remains blocked by host
+  policy; the form was not shown end-to-end.
+- **Tests.** `tests/test_dashboard_userform.py` (3 tests); full suite 407 tests
+  OK (8 skipped).
+- **Status.** EXPERIMENTAL; review requested.
+- Report: `experiments/T050-20261102-opencode-userform-dashboard/REPORT.md`.
+
 ## T048 [xlsx] Workbook UX: hidden data, VBA input, tab colour, merges — 2026-11-01
 
 - **UX layer.** `sheet_forge` accepts a `ux` block: per-sheet `hidden` /

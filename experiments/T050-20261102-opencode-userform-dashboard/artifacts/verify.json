@@ -1,0 +1,46 @@
+{
+  "file": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T039\\experiments\\T050-20261102-opencode-userform-dashboard\\artifacts\\dashboard.xlsm",
+  "sheets": [
+    [
+      "Data",
+      0
+    ],
+    [
+      "Trend",
+      0
+    ],
+    [
+      "Model",
+      0
+    ],
+    [
+      "Dashboard",
+      -1
+    ]
+  ],
+  "dashboard": {
+    "print_area": "$A$1:$L$39",
+    "charts": 4,
+    "buttons": [
+      [
+        "Nhập liệu",
+        "dashboard.xlsm!FormTools.ShowEntryForm"
+      ],
+      [
+        "Rủi ro",
+        "dashboard.xlsm!FormTools.FilterRisk"
+      ],
+      [
+        "Tất cả",
+        "dashboard.xlsm!FormTools.FilterAll"
+      ]
+    ]
+  },
+  "form": {
+    "controls": 22,
+    "has_save": true,
+    "has_add": true,
+    "has_clear": true
+  },
+  "macro_run": "not attempted: host policy blocks macro execution; the modal form would hang COM"
+}
