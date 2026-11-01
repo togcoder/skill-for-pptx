@@ -27,7 +27,7 @@ were true at the time. Task IDs and their branches are listed in
   numbers, dropped `descr`, Vietnamese PDF font clipping). No PDF/UA, PDF/A or
   human edit/print yet.
 - **Tests.** `tests/test_document_craft.py` (4 tests) covers fields/bookmarks,
-  broken targets, table width and optional WordCraft refresh. Full suite: 313
+  broken targets, table width and optional WordCraft refresh. Full suite: 320
   tests OK with `PYTHONUTF8=1`.
 - **Status.** EXPERIMENTAL; review requested. One task = one domain; the
   spreadsheet half is T041 [xlsx].
