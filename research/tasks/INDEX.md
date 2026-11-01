@@ -3,7 +3,7 @@
 Since T040: every new title starts with its domain in brackets: `[pptx]`, `[docx]`, `[xlsx]`, `[svg]` or `[cross]` (see `domains/README.md`). Lifecycle: `lab/PROTOCOL.md`. A row may carry `review requested` / `reviewed: <verdict>`.
 
 This file is the one place to take a task ID. Before starting, add a row with
-status `claimed`, using the next free ID (**T047**). Push the row before you do
+status `claimed`, using the next free ID (**T049**). Push the row before you do
 expensive work. IDs are never reused. T024 was taken three times in parallel,
 so those rows carry a suffix. The experiment folders keep the names they were
 created with.
@@ -72,5 +72,7 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T043 | [pptx] Dynamic Theme Engine: Need-Based Synthesizer, Reference Teardown & AI Image Visual Harmonizer | Antigravity + Argon | `work/T043-dynamic-theme-engine` | tip (review requested) | `experiments/T043-20261101-antigravity-dynamic-theme-engine/REPORT.md` |
 | T044 | [cross] Multi-Asset Pipeline Protocol, User Experience Maximization & Local Autonomy Charter | Antigravity | `work/T044-cross-asset-pipeline-and-autonomy` | tip (review requested) | `experiments/T044-20261101-antigravity-cross-asset-pipeline/REPORT.md` |
 | T045 | [docx] Advanced report craft: side-by-side media, OMML equations, merged-header tables, image cells and cover assets | OpenCode (DeepSeek V4.1 Flash) | `work/T045-opencode-advanced-docx` | review accepted (Argon); awaiting owner merge | `experiments/T045-20261101-opencode-advanced-docx/REPORT.md` |
-| T046 | [xlsx] Advanced workbook: image tables, Gantt, relationship matrix, cross-sheet formulas, pivot, VBA and dashboard design | OpenCode (DeepSeek V4.1 Flash) | `work/T046-opencode-advanced-xlsx` | review accepted (Argon); awaiting owner merge | `experiments/T046-20261101-opencode-advanced-xlsx/REPORT.md` |
-| T047 | *next free ID* | | | | |
+| T046 | [xlsx] Advanced workbook: image tables, Gantt, relationship matrix, cross-sheet formulas, pivot, VBA and dashboard design | OpenCode (DeepSeek V4.1 Flash) | `work/T046-opencode-advanced-xlsx` | main (owner-approved; PR #42) | `experiments/T046-20261101-opencode-advanced-xlsx/REPORT.md` |
+| T047 | [docx] Standards-controlled annual/ESG report: ISO 7144/2145/690/80000 + GRI content, conformance sheet and richer narrative | OpenCode (DeepSeek V4.1 Flash) | `work/T047-opencode-standards-report` | claimed | `experiments/T047-20261101-opencode-standards-report/REPORT.md` |
+| T048 | [xlsx] Workbook UX: hidden data sheets, VBA data-entry form, tab colour, merged-cell rules and sheet protection | OpenCode (DeepSeek V4.1 Flash) | `work/T048-opencode-workbook-ux` | claimed | `experiments/T048-20261101-opencode-workbook-ux/REPORT.md` |
+| T049 | *next free ID* | | | | |
