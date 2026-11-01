@@ -7,6 +7,32 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T043 [xlsx] Advanced workbook and dashboard — 2026-11-01
+
+- **Sheet Forge.** `scripts/sheet_forge.py` composes a 7-sheet programme
+  workbook from a semantic spec: typed data table, cross-sheet model
+  (`SUMIFS`/`COUNTIFS`/`AVERAGEIF`/`INDEX`+`MATCH`, named ranges), image table,
+  native Gantt, relationship matrix, PivotTable and a designed dashboard.
+- **Image table.** Pictures are inserted in cells with alt text and a fixed row
+  height; the `Team` sheet prints A1:D7 on one page.
+- **Gantt.** Stacked bar, hidden start series, date axis, reversed categories;
+  inserted on the Gantt sheet and on the dashboard.
+- **Relationship view.** Matrix heatmap with a 3-colour scale; the node-link
+  scatter was tested and rejected (Excel/Graph did not render all series
+  consistently) and is recorded as a negative result.
+- **Pivot.** Native PivotTable built by GridCraft `insert.pivotTable`; Excel
+  reads `PivotTable1` over `Data!R1C1:R61C11`.
+- **VBA.** `scripts/vba_forge.py` writes a `DashboardTools` `.bas` and injects
+  it into an `.xlsm` only when Excel trusts the VBA project object model.
+- **Dashboard.** 4 KPI cards, 2 fixed one-cell-anchored charts, matrix, one
+  source note; Excel export is one page. Audit clean (3 charts, 0 errors/0
+  warnings).
+- **Evidence.** Excel opened the exact XLSX/XLSM, recalculated formulas, read
+  the pivot and exported 5 sheets; `tests/test_sheet_craft_advanced.py`;
+  full suite 336 tests OK with `PYTHONUTF8=1`.
+- **Status.** EXPERIMENTAL; review requested.
+- Report: `experiments/T043-20261101-opencode-advanced-xlsx/REPORT.md`.
+
 ## T041 [xlsx] SheetCraft — controlled standard DrawingML charts — 2026-11-01
 
 - **Chart Forge.** `scripts/chart_forge.py` builds a workbook/chart from

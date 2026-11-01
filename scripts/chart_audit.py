@@ -518,9 +518,13 @@ def _chart_info(root) -> dict:
         overlap = overlap or _val(g, "overlap")
         hole = hole or _val(g, "holeSize")
         rotation = rotation or _val(g, "firstSliceAng")
+    visible_axes = [ax for ax in axes if ax["kind"] in {"catAx", "valAx", "dateAx"}]
+    network = (chart_type == "scatterChart" and bool(visible_axes) and
+               all(ax["delete"] in {"1", "true"} for ax in visible_axes))
     return {
         "type": chart_type,
         "types": types,
+        "network": network,
         "title": title,
         "series": series,
         "axes": axes,
@@ -665,7 +669,10 @@ def audit_workbook(path: str | Path, system: dict | None = None) -> dict:
                         warnings.append(f"chart {index}: pie/doughnut slices share a colour; apply a categorical palette")
             if len(info["series"]) > max_series:
                 warnings.append(f"chart {index}: {len(info['series'])} series (> {max_series}); use small multiples or highlight one series")
-            if info["series"] and len(info["series"]) > 1 and not info["legend"]:
+            gantt = ("barChart" in info.get("types", []) and
+                     len(info["series"]) <= 3 and any(not s.get("color") for s in info["series"]))
+            if (info["series"] and len(info["series"]) > 1 and not info["legend"]
+                    and not info.get("network") and not gantt):
                 warnings.append(f"chart {index}: multiple series but no legend")
             if info["legend"] and info["legend"].get("overlay") in {"1", "true"} and len(info["series"]) > 4:
                 warnings.append(f"chart {index}: overlay legend covers the plot with {len(info['series'])} series")
@@ -718,6 +725,11 @@ def audit_workbook(path: str | Path, system: dict | None = None) -> dict:
             # Colour: contrast and pairwise distinctness.
             colors = [_hex(s.get("color")) for s in info["series"] if s.get("color")]
             colors = [c for c in colors if c]
+            if info.get("network"):
+                colors = []  # edges are one visual layer, not a categorical palette
+            elif gantt:
+                colors = [_hex(s.get("color")) for s in info["series"] if s.get("color")]
+                colors = [c for c in colors if c]
             for color in colors:
                 if _contrast(color, (255, 255, 255)) < contrast_graphic:
                     warnings.append(f"chart {index}: series colour #{''.join(f'{v:02X}' for v in color)} is below {contrast_graphic:.1f}:1 against white")

@@ -1,8 +1,9 @@
 # Handoff — Design Research Lab
 
-Cập nhật: 01/11/2026, sau T039/T041 (docx/xlsx). Tệp này được **viết lại** mỗi
-lần bàn giao, không ghi nối thêm. Lịch sử: [docs/CHANGELOG.md](docs/CHANGELOG.md).
-Bàn giao trước (T040): [docs/archive/](docs/archive/).
+Cập nhật: 01/11/2026, sau T039/T041 vào `main` và T042/T043 mở. Tệp này được
+**viết lại** mỗi lần bàn giao, không ghi nối thêm. Lịch sử:
+[docs/CHANGELOG.md](docs/CHANGELOG.md). Bàn giao trước:
+[docs/archive/](docs/archive/).
 
 Repo: https://github.com/togcoder/skill-for-pptx (private). Chủ dự án: togcoder.
 
@@ -15,20 +16,22 @@ PowerPoint chỉ là domain lâu đời nhất.
 
 - Cách agent làm việc: [lab/PROTOCOL.md](lab/PROTOCOL.md).
 - Các chuẩn: [lab/standards/](lab/standards/), gồm nghiên cứu, phản biện, gộp
-  dữ liệu và nơi đặt file.
+  dữ liệu, nơi đặt file và **cross-craft asset** (dùng tool ArtCraft sở hữu
+  asset, ghi tool/version/command/licence, test ở domain nhận).
 - Danh sách domain: [domains/README.md](domains/README.md).
 
 ## Bắt đầu
 
-1. Đầu nghiên cứu lab-wide vẫn là `claude/blissful-pasteur-gmll59` (T035–T040).
-   Hai nhánh docx/xlsx mới dựa trên tip đó:
-   - `work/T039-opencode-docx` — PR #36 (draft, review requested);
-   - `work/T041-opencode-xlsx` — PR #35 (draft, review requested).
-2. Đọc theo thứ tự `AGENTS.md`, `lab/CHARTER.md`, `lab/PROTOCOL.md`, rồi thẻ
+1. `main` hiện là `db58b3d`: T035–T041 đã vào `main`; T039 [docx] và T041 [xlsx]
+   đã qua review Argon (R1–R8) và được chủ dự án duyệt.
+2. Hai nhánh mới dựa trên `main`:
+   - `work/T042-opencode-advanced-docx` — PR #38 (docx nâng cao, review requested);
+   - `work/T043-opencode-advanced-xlsx` — T043 (xlsx nâng cao/dashboard, review requested).
+3. Đọc theo thứ tự `AGENTS.md`, `lab/CHARTER.md`, `lab/PROTOCOL.md`, rồi thẻ
    domain của bạn (`domains/docx/DOMAIN.md`, `domains/xlsx/DOMAIN.md`).
-3. Chạy `python3 -m unittest discover -s tests` (đặt `PYTHONUTF8=1` trên Windows
+4. Chạy `python3 -m unittest discover -s tests` (đặt `PYTHONUTF8=1` trên Windows
    để tránh lỗi encoding của các test cũ) và `python3 lab/tools/check_layout.py`.
-4. Lấy mã kế tiếp trong `research/tasks/INDEX.md` (hiện là **T042**). Tiêu đề
+5. Lấy mã kế tiếp trong `research/tasks/INDEX.md` (hiện là **T044**). Tiêu đề
    ghi domain trong ngoặc, ví dụ `[cross]`.
 
 ## Trạng thái từng domain
@@ -36,23 +39,22 @@ PowerPoint chỉ là domain lâu đời nhất.
 | Domain | Trạng thái |
 |---|---|
 | pptx | Trưởng thành: Director, Morph Studio, Forge, hệ thiết kế và critic. T035 và T038 **chưa được phản biện**; còn 1 test lỗi của T038 (WORD_BREAK ở "Logo Watermark", phụ thuộc font). |
-| docx | T039 DocumentCraft: `word_field_kit.py`, `document_forge.py`, `document_audit.py`, dữ liệu `domains/docx/data/document_system.json`, skill `document-craft`. Audit sạch, Word 12 trang, PDF/preview; Argon review verdict `revise`, R1–R3 đã sửa (TOC \\c + `TablesOfFigures`, bookmarkEnd, per-section widths, language, `SECTIONPAGES`); **review round 2 requested** (PR #36). Chưa có PDF/UA, PDF/A, LibreOffice rung 3, human rung 6. |
-| xlsx | T041 SheetCraft: `chart_forge.py`, `chart_patch.py`, `chart_audit.py`, dữ liệu `domains/xlsx/data/spreadsheet_system.json`, skill `sheet-craft`. Combo/doughnut/scatter audit sạch, Excel export đúng; Argon review verdict `revise`, R4–R6/R8 đã sửa (combo series/axes, XML order, print area, cache, Excel-first render); **review round 2 requested** (PR #35). Waterfall/treemap/histogram/box/funnel còn là recipe OOXML, chưa sinh. |
+| docx | T039 DocumentCraft đã vào `main` (`document_forge.py`, `word_field_kit.py`, `document_audit.py`, dữ liệu, skill). T042 nâng cao: ảnh cạnh chữ, công thức OMML, bìa, bảng header nhiều tầng/gộp ô/ảnh trong ô, callout/KPI; Word PDF 11 trang, audit sạch; **review requested** (PR #38). Chưa có PDF/UA, PDF/A, LibreOffice rung 3, human rung 6. |
+| xlsx | T041 SheetCraft đã vào `main` (`chart_forge.py`, `chart_patch.py`, `chart_audit.py`, dữ liệu, skill). T043 nâng cao: 7 sheet (Data/Pivot/Model/Team/Gantt/Relations/Dashboard), công thức chéo, named range, ảnh trong bảng, Gantt native, ma trận quan hệ, pivot GridCraft, VBA `.bas`/`.xlsm`, dashboard 1 trang; audit sạch; **review requested**. Node-link scatter bị loại (negative result). Waterfall/treemap/histogram/box/funnel vẫn là recipe OOXML. |
 | svg | Mới có bridge thử nghiệm T037; chưa phản biện. |
-| cross | Protocol 00–03, schema, registry ArtCraft, intent decoder (T036–T037); chưa phản biện, chưa thành chuẩn chung (cần 2 domain chấp nhận). |
+| cross | Protocol 00–03, schema, registry ArtCraft, intent decoder (T036–T037); chưa phản biện, chưa thành chuẩn chung (cần 2 domain chấp nhận). Quy tắc cross-craft đã ghi ở `AGENTS.md` + `lab/standards/RESEARCH.md` (T042). |
 
 ## Việc tiếp theo (xếp hạng)
 
 1. **Phản biện chéo** theo `lab/standards/REVIEW.md`, do agent khác tác giả:
-   - T039 [docx] và T041 [xlsx] — **round 2** sau khi sửa Argon review
-     (`research/reviews/T039-argon-20261101.md`, `T041-argon-20261101.md`);
+   - T042 [docx] và T043 [xlsx] — round 1 (report + audit + render);
    - T038 (pptx canon), T035 (DeckCraft), T036–T037 (cross + bridges).
-2. **Docx**: PDF/UA/veraPDF, PDF/A, LibreOffice Writer rung 3, native Word
-   bibliography (`b:Sources`), landscape/two-column fixture; quyết định module
-   canonical (`document_forge` vs `wordcraft_bridge`).
-3. **Xlsx**: raw-XML builder cho waterfall/treemap/histogram/box/funnel; Excel
-   COM audit đọc mọi `Chart`; label-collision từ glyph box; dashboard audit.
-4. **T042 [cross]**: dời code từ `scripts/` vào package theo domain(s), sửa
+2. **Docx**: PDF/UA/veraPDF, PDF/A, LibreOffice Writer rung 3, matrix/cases
+   equations, landscape/two-column fixture, quyết định module canonical.
+3. **Xlsx**: dashboard audit (label collision, alignment, pages), static pivot
+   fallback, native node-link proof or close the matrix scope, VBA trust
+   preflight, LibreOffice Calc rung 3.
+4. **T044 [cross]**: dời code từ `scripts/` vào package theo domain(s), sửa
    import/skill/test, không phá thí nghiệm đã đóng băng.
 5. **pptx**: cổng native (trình chiếu tương tác) và sửa test T038.
 
@@ -60,12 +62,13 @@ PowerPoint chỉ là domain lâu đời nhất.
 
 ```text
 Join the design research lab at https://github.com/togcoder/skill-for-pptx, branch
-claude/blissful-pasteur-gmll59. Read AGENTS.md, HANDOFF.md, lab/CHARTER.md,
-lab/PROTOCOL.md and domains/<your domain>/DOMAIN.md. Run the tests and
-lab/tools/check_layout.py. Take the next free ID in research/tasks/INDEX.md with
-the domain in brackets and push the claim. Frame your question from the domain's
-native canon before building. Put every output into
-experiments/<ID>-<date>-<agent>-<slug>/ (never the repo root). Tag claims with
-evidence rungs. Ask another agent to review per lab/standards/REVIEW.md before
-anything enters a product path.
+main. Read AGENTS.md, HANDOFF.md, lab/CHARTER.md, lab/PROTOCOL.md and
+domains/<your domain>/DOMAIN.md. Run the tests and lab/tools/check_layout.py.
+Take the next free ID in research/tasks/INDEX.md with the domain in brackets and
+push the claim. Frame your question from the domain's native canon before
+building. Put every output into experiments/<ID>-<date>-<agent>-<slug>/ (never
+the repo root). Tag claims with evidence rungs. Ask another agent to review per
+lab/standards/REVIEW.md before anything enters a product path. When another
+ArtCraft tool owns an asset, use it, record tool/version/command/licence, and
+test the asset in your domain.
 ```

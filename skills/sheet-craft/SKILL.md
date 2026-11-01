@@ -5,9 +5,9 @@ description: Build, repair and audit Excel workbooks and charts — formulas, ta
 
 # Sheet Craft
 
-> **Status: EXPERIMENTAL — T041 [xlsx], review requested.** This skill is not a
-> canonical product path until an independent review accepts it. Use it, test
-> it, and report failures; do not cite it as lab canon yet.
+> **Status: EXPERIMENTAL — T041/T043 [xlsx], review requested.** This skill is
+> not a canonical product path until an independent review accepts it. Use it,
+> test it, and report failures; do not cite it as lab canon yet.
 
 You are the spreadsheet engineer. A chart is a controlled object, not a picture
 that happens to sit on a sheet. The chart frame has a fixed size and anchor; the
@@ -33,11 +33,14 @@ Scripts live two levels above this file: `ROOT=<this skill dir>/../..`.
 2. **Prepare the data.** One header row, one observation per row, numeric
    columns typed as numbers, units in the header, no merged cells in the data
    range. Decide how blanks/zeros are handled.
-3. **Write the spec.** Use `domains/xlsx/schemas/chart_spec.schema.json`. Geometry, axes,
-   labels, series and accessibility are fields in the spec, so the chart can be
-   replayed and audited.
+3. **Write the spec.** Use `domains/xlsx/schemas/chart_spec.schema.json` for a
+   chart-only workbook. For a multi-sheet dashboard, `sheet_forge.py` takes a
+   workbook spec with `data`, `tasks`, `team`, `nodes`/`edges`, `kpis` and pivot
+   fields; see `examples/xlsx/programme_dashboard_spec.json`.
 4. **Build.**
-   - Preferred: `python3 $ROOT/scripts/chart_forge.py build spec.json -o out.xlsx`.
+   - Dashboard/workbook: `python3 $ROOT/scripts/sheet_forge.py build spec.json -o out.xlsx`
+     (add `--vba`, `--no-pivot`, `--render preview/`).
+   - Chart only: `python3 $ROOT/scripts/chart_forge.py build spec.json -o out.xlsx`.
    - Existing workbook: `python3 $ROOT/scripts/chart_patch.py apply in.xlsx patch.json -o out.xlsx`.
    - Native: the GridCraft commands in `references/chart-properties.md`.
 5. **Audit.** `python3 $ROOT/scripts/chart_audit.py out.xlsx --md audit.md`.
@@ -64,6 +67,48 @@ Scripts live two levels above this file: `ROOT=<this skill dir>/../..`.
 | Flow / bridge | Waterfall | Pie |
 | Hierarchy | Treemap, sunburst | 3-D pie |
 | KPI vs target | Bullet, bar with target line | Gauge (low data-ink) |
+
+## Workbook layers and dashboard design (T043)
+
+A workbook that will be used, not just opened, has seven layers. Build them in
+order; each one has a native object and an evidence check.
+
+| Layer | Do | Native / check |
+|---|---|---|
+| Data | One typed table; freeze header; filter; percent format on progress | `table`, `numFmt` |
+| Model | `SUMIFS`/`COUNTIFS`/`AVERAGEIF`/`INDEX`+`MATCH` across sheets; named ranges | Excel recalculates; values match |
+| Image table | Picture in the cell, row height ≥ image + padding, alt text | `xdr:pic`, `docPr@descr` |
+| Gantt | Stacked bar; start series invisible; date axis; reversed categories | `barChart` + `dateAx` |
+| Relations | Pairwise matrix with a 3-colour scale | `conditionalFormatting` |
+| Summary | Native PivotTable (GridCraft) or formula summary | pivot source/rows/values |
+| Dashboard | ≤4 KPI cards, 2–3 charts, one palette, fixed anchors, print area | `mergeCell`, `oneCellAnchor` |
+
+**Dashboard composition rules.**
+
+1. **One question per zone.** KPI strip answers “are we on track”; Gantt answers
+   “when”; relationship matrix answers “what depends on what”; comparison chart
+   answers “where is the money/benefit”.
+2. **A large dataset is not a dashboard.** 60 rows belong on `Data`; the
+   dashboard shows 4 KPIs and 2–3 views. Do not paste every chart.
+3. **Fixed anchors.** Convert each dashboard chart to a one-cell anchor with an
+   explicit size. A two-cell anchor stretches when a column width changes.
+4. **Shared palette.** One accent per series family; reuse the chart palette.
+   Do not colour KPI cards and charts from different palettes.
+5. **KPI cards** have label, value and delta; the delta colour means
+   good/bad, not decoration. Keep card widths equal and aligned to the chart
+   grid.
+6. **Print is a layout.** Set the print area, landscape, fit-to-page and
+   margins per sheet. Inspect the exported PDF page count; a 60-row sheet may
+   legitimately take 2 pages.
+7. **Relationship view.** Prefer a matrix heatmap. A one-series-per-edge
+   scatter is not reliable in Excel/Graph (T043 negative result); keep edge
+   data for provenance, do not ship a broken node-link.
+8. **VBA.** Write the `.bas` module with `Option Explicit`; inject only when
+   Excel trust access is on. Otherwise ship the `.xlsx` plus the `.bas` and say
+   so. Never claim a macro is embedded when it is not.
+9. **Images in cells** need alt text, a fixed row height and a width that fits
+   the column. A picture that overflows the cell is not “an image table”.
+10. **One source note** on the dashboard, one document id, one update date.
 
 ## The non-negotiables
 
@@ -135,6 +180,10 @@ does not prove the chart is readable.
 ## Commands
 
 ```bash
+# Designed dashboard/workbook from a semantic spec
+python3 $ROOT/scripts/sheet_forge.py build spec.json -o dashboard.xlsx \
+  --render preview/ --vba
+
 # Build a chart from a semantic spec
 python3 $ROOT/scripts/chart_forge.py build spec.json -o chart.xlsx \
   --render preview/ --report build.json
@@ -165,3 +214,8 @@ gridcraft-cli convert book.xlsx book.pdf
 - Alt text set; a data table or direct labels provide the non-visual fallback.
 - Rendered in GridCraft and/or Excel and inspected; the report says which.
 - Audit has no errors; warnings are fixed or explained.
+- Workbook: cross-sheet formulas recalculate in Excel; named ranges evaluate;
+  images sit inside their cells with alt text; the pivot source/rows/values are
+  correct; the dashboard prints on the intended pages.
+- VBA: if requested, the `.bas` is present and either injected (`.xlsm` opens
+  with the module) or explicitly labelled not injected.
