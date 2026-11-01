@@ -356,6 +356,19 @@ def _setup_styles(doc, spec: dict) -> None:
         lang.set(qn("w:val"), language)
         lang.set(qn("w:eastAsia"), language)
 
+    # The template's docDefaults still say en-US even when every named style is
+    # overridden; Word falls back to it for runs without an explicit style.
+    doc_defaults = doc.styles.element.find(qn("w:docDefaults"))
+    if doc_defaults is not None:
+        rpr_default = doc_defaults.find(f"{qn('w:rPrDefault')}/{qn('w:rPr')}")
+        if rpr_default is not None:
+            lang = rpr_default.find(qn("w:lang"))
+            if lang is None:
+                lang = OxmlElement("w:lang")
+                rpr_default.append(lang)
+            lang.set(qn("w:val"), language)
+            lang.set(qn("w:eastAsia"), language)
+
 
 def _setup_page(section, spec: dict) -> None:
     page = spec["page"]

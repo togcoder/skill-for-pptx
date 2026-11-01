@@ -73,9 +73,10 @@ do not hard-code a new one in a generator.
 
 | Rung | Tool | T039 evidence |
 |---|---|---|
-| 1 | schema / structural audit | T039: 29 fields, 22 bookmarks, 3 sections, 3 tables, 2 figures; T042: 20 fields, OMML equations, side-by-side/media, merged tables, image cells; no errors/warnings |
+| 1 | schema / structural audit | T039: 29 fields, 22 bookmarks, 3 sections, 3 tables, 2 figures; T042: 20 fields, 2 equations (1 `SEQ Equation`), 5 merged cells, 5 images in cells, table-grid/vMerge/image-width/alt checks, language `vi-VN`; no errors/warnings |
 | 2 | layout engine (WordCraft) | T042 render: side-by-side, equations, rich table and callouts visible; WordCraft keeps the same font limitation as T039 |
-| 4–5 | Word COM open / PDF export | T042: Word refreshed the exact DOCX, exported an 11-page PDF; pages inspected (cover, side-by-side, equations, rich table, appendix) |
+| 4 | Word COM open / field update | T042: Word opened the exact DOCX, refreshed fields and saved; the resulting document still audits clean |
+| 5 | Word PDF export / page inspection | T042: 11-page PDF; cover, KPI/callout, side-by-side/equations, rich table and appendix inspected as images |
 | 2 | layout engine (WordCraft) | WordCraft render; TOC updated, but page numbers were physical and a `TOC \\c` caption list repeated the first number |
 | 3 | independent reader | Not run (LibreOffice Writer not installed on this host) |
 | 4–5 | Word COM open / PDF export | Word opened the exact DOCX, refreshed fields, exported a 12-page PDF; pages inspected |

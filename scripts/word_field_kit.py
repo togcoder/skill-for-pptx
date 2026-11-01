@@ -774,6 +774,8 @@ def audit_docx(path: str | Path, *, system: dict | None = None) -> AuditReport:
             element_width = child_width.get(id(t.get("_element"))) or text_width_twips
             if total and element_width and total > element_width + width_tolerance:
                 report.warnings.append(f"table {i} grid {total} twips exceeds its text width {element_width} twips")
+            for problem in _table_grid_problems(t.get("_element")):
+                report.errors.append(f"table {i} grid: {problem}")
             if (table_header_required and t.get("rows", 0) > 1 and
                     t.get("has_header_look", True) and not t.get("header_repeat")):
                 report.warnings.append(f"table {i} has no repeating header row")
@@ -787,6 +789,10 @@ def audit_docx(path: str | Path, *, system: dict | None = None) -> AuditReport:
                 width_twips = d["width_emu"] / 635
                 if width_twips > element_width + width_tolerance:
                     report.warnings.append(f"figure {i} is wider than its text column")
+                cell_width = _cell_width_twips(d["_element"])
+                if cell_width and width_twips > cell_width + 113:  # ~2 mm padding
+                    report.errors.append(
+                        f"figure {i} overflows its table cell ({width_twips:.0f} vs {cell_width} twips)")
             if alt_required and not d.get("descr") and not d.get("decorative"):
                 report.warnings.append(f"figure {i} has no alt text")
             if d.get("dpi") is not None and d["dpi"] < dpi_min:
@@ -805,8 +811,34 @@ def audit_docx(path: str | Path, *, system: dict | None = None) -> AuditReport:
                 if l is not None:
                     lang = l.get(qn("w:val"))
                     break
+        if not lang and styles is not None:
+            for l in styles.iter(qn("w:lang")):
+                lang = l.get(qn("w:val"))
+                if lang:
+                    break
+        languages = {l.get(qn("w:val")) for l in document.iter(qn("w:lang")) if l.get(qn("w:val"))}
+        if styles is not None:
+            languages |= {l.get(qn("w:val")) for l in styles.iter(qn("w:lang")) if l.get(qn("w:val"))}
         if not lang:
             report.notes.append("no explicit run language (w:lang); proofing/accessibility may guess")
+
+        # Office Math: a real equation must have a base expression, and a
+        # fraction/n-ary must have its required children.  The T042 builder
+        # emits OMML; this catches a silently empty or one-sided construct.
+        math_ns = "http://schemas.openxmlformats.org/officeDocument/2006/math"
+        equations = list(document.iter(f"{{{math_ns}}}oMath"))
+        display_equations = list(document.iter(f"{{{math_ns}}}oMathPara"))
+        for i, eq in enumerate(equations, start=1):
+            if len(eq) == 0:
+                report.errors.append(f"equation {i} has no content")
+            for frac in eq.iter(f"{{{math_ns}}}f"):
+                if frac.find(f"{{{math_ns}}}num") is None or frac.find(f"{{{math_ns}}}den") is None:
+                    report.errors.append(f"equation {i}: fraction is missing num/den")
+            for nary in eq.iter(f"{{{math_ns}}}nary"):
+                if nary.find(f"{{{math_ns}}}e") is None:
+                    report.errors.append(f"equation {i}: n-ary operator has no body")
+        equation_numbers = sum(1 for f in fields
+                               if f.command == "SEQ" and "Equation" in f.instr)
 
         report.stats = {
             "fields": len(fields),
@@ -818,6 +850,13 @@ def audit_docx(path: str | Path, *, system: dict | None = None) -> AuditReport:
             "figures": len(drawings),
             "sections": len(sections),
             "paragraphs": len(paragraphs),
+            "equations": len(equations),
+            "display_equations": len(display_equations),
+            "equation_numbers": equation_numbers,
+            "images_in_cells": sum(1 for d in drawings if _cell_width_twips(d["_element"])),
+            "merged_cells": sum(len(t["_element"].findall(f".//{qn('w:gridSpan')}")) +
+                                len(t["_element"].findall(f".//{qn('w:vMerge')}")) for t in tables),
+            "languages": sorted(languages),
             "text_width_twips": text_width_twips,
             "section_text_widths": sorted(set(section_widths)),
         }
@@ -901,6 +940,66 @@ def _table_info(tbl) -> dict:
     return {"rows": len(rows), "cols": len(grid), "grid_twips": grid,
             "fixed_layout": fixed, "header_repeat": header, "caption": caption,
             "has_header_look": first_row_look, "_element": tbl}
+
+
+def _table_grid_problems(tbl) -> list[str]:
+    """Check that every row's effective columns match the table grid.
+
+    ``gridSpan`` and ``vMerge`` change the visual grid; a row that adds up to a
+    different column count than ``w:tblGrid`` is what Word reports as a damaged
+    table, and what breaks header association for a screen reader.
+    """
+    grid = tbl.findall(f"{qn('w:tblGrid')}/{qn('w:gridCol')}")
+    ncols = len(grid)
+    problems = []
+    active_merge: dict[int, bool] = {}
+    for r, tr in enumerate(tbl.findall(qn("w:tr")), start=1):
+        col = 0
+        for tc in tr.findall(qn("w:tc")):
+            tcpr = tc.find(qn("w:tcPr"))
+            span = 1
+            vmerge = None
+            if tcpr is not None:
+                gs = tcpr.find(qn("w:gridSpan"))
+                if gs is not None and gs.get(qn("w:val")):
+                    try:
+                        span = max(1, int(gs.get(qn("w:val"))))
+                    except ValueError:
+                        problems.append(f"row {r}: invalid gridSpan")
+                vm = tcpr.find(qn("w:vMerge"))
+                if vm is not None:
+                    vmerge = vm.get(qn("w:val")) or "continue"
+            for c in range(col, col + span):
+                if vmerge == "restart":
+                    active_merge[c] = True
+                elif vmerge == "continue":
+                    if not active_merge.get(c):
+                        problems.append(f"row {r}, col {c + 1}: vMerge has no restart cell above")
+                else:
+                    active_merge[c] = False
+            col += span
+        if col != ncols:
+            problems.append(f"row {r}: {col} effective columns vs {ncols} in tblGrid")
+    return problems
+
+
+def _cell_width_twips(drawing) -> int | None:
+    """Return the enclosing table cell width in twips, if the drawing is in one."""
+    node = drawing.getparent()
+    while node is not None and node.tag != qn("w:tc"):
+        node = node.getparent()
+    if node is None:
+        return None
+    tcpr = node.find(qn("w:tcPr"))
+    if tcpr is None:
+        return None
+    tcw = tcpr.find(qn("w:tcW"))
+    if tcw is None or not tcw.get(qn("w:w")):
+        return None
+    try:
+        return int(tcw.get(qn("w:w")))
+    except ValueError:
+        return None
 
 
 def _body_section_widths(body) -> list[int | None]:

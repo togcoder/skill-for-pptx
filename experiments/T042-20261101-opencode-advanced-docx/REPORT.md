@@ -68,22 +68,22 @@ third-party media is redistributed.
 
 | Claim | Rung | Evidence |
 |---|---|---|
-| Advanced blocks are native OOXML | 1 | `audit.json`: `ok: true`, no errors/warnings; 20 fields, 15 bookmarks, 6 tables, 6 drawings, 3 sections |
-| Equations are real OMML | 1 + 5 | `word_math.omml_from_latex`; `m:oMath`, `m:f`, `m:sSup`, `m:nary`; Word PDF page 7 shows the fraction, growth equation and weighted sum |
-| Side-by-side image/text is a real table, not a screenshot | 1 + 5 | borderless 2-cell `w:tbl`, inline `w:drawing`, caption `Hình 1 — …`; Word PDF page 7 |
-| Rich table has multi-row header, merges and image cells | 1 + 5 | `header_rows`, `gridSpan`, `vMerge`, `w:drawing` in `w:tc`, `rowHeights`; Word PDF page 8 |
-| Callouts and KPI strip are editable | 1 + 5 | `w:tbl` with shading/left border; `key_values` borderless table; Word PDF page 6 |
-| Cover hero is a designed asset, title still a paragraph | 1 + 5 | inline hero image + `wp:docPr@descr`; title remains `Title` style; Word PDF page 1 |
-| Cross-craft asset is accepted in DOCX | 1 + 5 | VectorCraft converted `cover.svg`/`icon-*.svg`; DOCX audit/render is the acceptance gate |
+| Advanced blocks are native OOXML | 1 | `audit.json`: `ok: true`, no errors/warnings; 20 fields, 15 bookmarks, 6 tables, 6 drawings, 3 sections, 2 equations, 5 merged cells, 5 images in cells, language `vi-VN` |
+| Equations are real OMML | 1 + 4 | `word_math.omml_from_latex`; `m:oMath`, `m:f`, `m:sSup`, `m:nary`; audit counts 2 equations / 1 `SEQ Equation`; Word PDF page 7 shows the growth fraction and the weighted sum |
+| Side-by-side image/text is a real table, not a screenshot | 1 + 4 | borderless 2-cell `w:tbl`, inline `w:drawing`, caption `Hình 1 — …`; Word PDF page 7 |
+| Rich table has multi-row header, merges and image cells | 1 + 4 | `header_rows`, `gridSpan`, `vMerge`, `w:drawing` in `w:tc`, row heights; audit checks row/column counts; Word PDF page 8 |
+| Callouts and KPI strip are editable | 1 + 4 | `w:tbl` with shading/left border; `key_values` borderless table; Word PDF page 6 |
+| Cover hero is a designed asset, title still a paragraph | 1 + 4 | inline hero image + `wp:docPr@descr`; title remains `Title` style; Word PDF page 1 |
+| Cross-craft asset is accepted in DOCX | 1 + 4 | VectorCraft converted `cover.svg`/`icon-*.svg`; DOCX audit/render is the acceptance gate |
 | Existing T039 guarantees still hold | 1 | TOC 3, `SEQ` 4, `STYLEREF`/`SECTIONPAGES`; no broken reference; T039 tests still pass |
-| Tests cover the new blocks | 1 | `tests/test_document_advanced.py` (2 tests) + `test_document_craft.py` (6); full suite 334 tests OK |
+| Tests cover the new blocks and negative paths | 1 | `tests/test_document_advanced.py` (5 tests) + `test_document_craft.py` (6); full suite 337 tests OK |
 
 **Hashes:** see `artifacts/SHA256SUMS.txt`.
 
 | File | SHA-256 |
 |---|---|
-| `annual-report.docx` | `853de7729e03a5df5bef735f80ba48c9e1e99a29f0776063adba588b7a2085df` |
-| `annual-report.pdf` | `c75deb1925d53be20a338e932e16cc82474c7661c5ce01bb7d29d5f04b895132` |
+| `annual-report.docx` | `118f7bb5a9fd7ab0412b9ea46d51869fa5881c5386968ff22c7ed86b2c022c62` |
+| `annual-report.pdf` | `98b8e802555650622fa0b21c4b6797465bc1e65e8891205b7c914ae11e4ced55` |
 
 Preview: `preview/cover.png`, `kpi-callout.png`, `side-equations.png`,
 `rich-table.png`, `appendix.png`.
@@ -93,12 +93,15 @@ Preview: `preview/cover.png`, `kpi-callout.png`, `side-equations.png`,
 1. **LaTeX coverage is a subset.** Fractions, scripts, roots, nary operators,
    delimiters, accents, Greek letters and common operators work. Matrices,
    `cases`, aligned environments and chemistry are not supported; the parser
-   raises a clear error instead of emitting a broken equation.
-2. **Merged cells can hurt screen-reader header association.** The visual table
-   is correct; a PDF/UA tag-tree/screen-reader test is still needed. `tblHeader`
-   marks the header rows, but `gridSpan`/`vMerge` need an accessibility review.
+   raises a clear `ValueError` instead of emitting a broken equation, and the
+   negative test covers that path.
+2. **Merged cells can hurt screen-reader header association.** The audit now
+   checks that every row's effective `gridSpan` matches `tblGrid` and that a
+   `vMerge` continuation has a restart cell above it; a PDF/UA tag-tree/screen-
+   reader test is still needed. `tblHeader` marks the header rows.
 3. **Image cells do not always auto-expand rows.** `row_heights_mm` is explicit;
-   a future version should calculate the row height from image height + padding.
+   the audit now checks that an image width does not exceed its `tcW` (plus
+   ~2 mm), but row-height calculation from image height is still manual.
 4. **The cover hero is inside the text column, not full-bleed.** It is an inline
    image with alt text; a print cover with bleed/trim is a different layout.
 5. **Cross-craft assets are synthetic.** The SVG/PNG carries no customer brand;
@@ -107,8 +110,12 @@ Preview: `preview/cover.png`, `kpi-callout.png`, `side-equations.png`,
    Word's PDF, inspected as images.
 7. **The table is a single-page fixture.** Header repetition across pages and
    landscape tables are not tested here; they remain a T039 limitation.
-8. **Equation numbering is per document, not per appendix.** If appendices need
-   `(A.1)`, a separate `SEQ Equation` reset is needed.
+8. **Equation numbering is per document, not per appendix.** The second
+   (weighted-sum) equation is intentionally unnumbered; only the growth equation
+   carries `SEQ Equation`. If appendices need `(A.1)`, a separate reset is needed.
+9. **Language is style-level.** `docDefaults` and every named style now say
+   `vi-VN`; an inline run created by a third-party editor could still carry its
+   own language.
 
 ## Next
 
@@ -121,6 +128,13 @@ Preview: `preview/cover.png`, `kpi-callout.png`, `side-equations.png`,
 
 ## Review response
 
+Argon review 2026-11-01 (chat `0:cf4bb6173adaaa34`), verdict **revise**.
+
 | Finding | Response (fixed / disputed / deferred → task) |
 |---|---|
-| — | Pending review. No findings yet. |
+| B1: rung 1 over-claimed; `audit.json` did not count `m:oMath`, `gridSpan`/`vMerge`, `w:tblHeader`, `w:trHeight` or `wp:docPr@descr` | **Fixed.** `audit_docx` now reports `equations`, `equation_numbers`, `merged_cells`, `images_in_cells`, `languages`, and validates each table's effective row columns vs `tblGrid`, `vMerge` origin, image-width vs `tcW`, empty equation parts, and alt text. Evidence rungs changed to 1 + 4, with Excel/Word COM called out. |
+| M1: table-repair / accessibility risk for merged and layout tables; missing `w:lang` | **Fixed.** Grid integrity and orphan `vMerge` are errors now; all named styles and `docDefaults` are set to `vi-VN`; `audit.json` reports only `vi-VN`. PDF/UA tag-tree remains deferred. |
+| M2: image may overflow its cell; `w:trHeight` may be exact | **Fixed for the width check** (audit errors if image width > `tcW` + 2 mm). Row height remains `atLeast` (`row_heights_mm`), not exact. |
+| M3: equation count inconsistent (2 equations vs 1 `SEQ Equation`) | **Fixed/clarified.** The second (weighted-sum) equation is intentionally unnumbered; the report and audit now say 2 equations, 1 `SEQ Equation`. |
+| m1: only 2 tests; no negative tests; lab-rule change bundled | **Fixed.** `tests/test_document_advanced.py` now has 5 tests: unsupported LaTeX raises, broken grid/missing alt is caught, audit stats, plus the two OOXML tests. The cross-craft rule is a one-paragraph addition, reviewed in this PR. |
+| Note: `images_in_cells` counted the side-by-side layout figure too | **Disputed as a defect, clarified in the test.** The count is literal (any `w:drawing` inside `w:tc`); the test now expects 2 (side figure + table icon). |

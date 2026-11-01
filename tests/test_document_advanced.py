@@ -10,6 +10,7 @@ import zipfile
 
 from scripts.document_forge import build_document
 from scripts.word_math import omml_from_latex
+from scripts.word_field_kit import audit_docx
 
 try:
     from PIL import Image
@@ -57,7 +58,49 @@ def _spec(tmp: Path) -> Path:
     return path
 
 
+def _tamper(src: Path, dst: Path, transform) -> Path:
+    """Rewrite word/document.xml in a copy of the package."""
+    with zipfile.ZipFile(src) as zin, zipfile.ZipFile(dst, "w", zipfile.ZIP_DEFLATED) as zout:
+        for item in zin.infolist():
+            data = zin.read(item.filename)
+            if item.filename == "word/document.xml":
+                data = transform(data.decode("utf-8")).encode("utf-8")
+            zout.writestr(item, data)
+    return dst
+
+
 class AdvancedDocumentTests(unittest.TestCase):
+    def test_unsupported_latex_raises(self):
+        with self.assertRaises(ValueError):
+            omml_from_latex(r"\begin{matrix} a & b \end{matrix}")
+
+    def test_audit_catches_broken_grid_and_missing_alt(self):
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            out = tmp / "advanced.docx"
+            self.assertTrue(build_document(_spec(tmp), out, update="none")["ok"])
+            bad = _tamper(
+                out, tmp / "bad.docx",
+                lambda xml: xml.replace('<w:gridSpan w:val="2"/>', "")
+                               .replace('descr="Icon alt"', ""))
+            report = audit_docx(bad)
+            self.assertFalse(report.ok)
+            self.assertTrue(any("grid" in e for e in report.errors), report.errors)
+            self.assertTrue(any("alt text" in w for w in report.warnings), report.warnings)
+
+    def test_audit_stats_include_advanced_blocks(self):
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            out = tmp / "advanced.docx"
+            self.assertTrue(build_document(_spec(tmp), out, update="none")["ok"])
+            report = audit_docx(out)
+            self.assertTrue(report.ok, report.errors)
+            self.assertEqual(report.stats["equations"], 1)
+            self.assertEqual(report.stats["equation_numbers"], 1)
+            self.assertGreaterEqual(report.stats["merged_cells"], 2)
+            self.assertEqual(report.stats["images_in_cells"], 2)  # side figure + table icon
+            self.assertIn("en-US", report.stats["languages"])
+
     def test_omml_parser(self):
         f = omml_from_latex(r"\frac{a}{b}")
         self.assertEqual(f[0].tag.split("}")[-1], "f")

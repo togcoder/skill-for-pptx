@@ -46,6 +46,7 @@ word_field_kit.py                    word_field_kit.audit_docx
 | `examples/docx/annual_report_spec.json` | Rich-report fixture: cover hero, side-by-side, equations, merged table, image cells (T042) |
 | `skills/document-craft/` | Workflow, standards note, Word property matrix, layout recipes |
 | `tests/test_document_craft.py` | Structural build/audit tests |
+| `tests/test_document_advanced.py` | OMML, side-by-side, rich tables, malformed-grid/alt negative tests |
 
 ## What the generator guarantees
 
@@ -127,8 +128,10 @@ word_field_kit.py                    word_field_kit.audit_docx
   figure/text, 2 OMML equations, merged-header table with icon cells, appendix.
 - Word opened the exact DOCX, refreshed fields and exported PDF; pages 1, 6, 7,
   8 and 11 inspected.
-- Audit: `ok: true`, 20 fields, 15 bookmarks, 6 tables, 6 drawings, 3 sections;
-  no errors/warnings.
+- Audit: `ok: true`, 20 fields, 15 bookmarks, 6 tables, 6 drawings, 3 sections,
+  2 equations (1 numbered), 5 merged cells, 5 images in cells; table-grid,
+  vMerge-origin, image-width and alt-text checks; language `vi-VN`; no
+  errors/warnings.
 - Cross-craft: VectorCraft rasterised the SVG cover/icons; the DOCX render is
   the acceptance gate. The cross-craft rule is in `AGENTS.md` and
   `lab/standards/RESEARCH.md`.

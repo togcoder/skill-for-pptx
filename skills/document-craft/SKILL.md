@@ -157,8 +157,9 @@ Do not hard-code a new threshold in a script; add a token with a source.
   Linux/macOS. Neither computes a TOC as reliably as Word; test the exact
   output.
 - Audit with `word_field_kit.audit_docx` / `document_audit.py`: balanced
-  fields, bookmark targets, TOC levels, table widths, image DPI/alt text,
-  section page numbering and language.
+  fields, bookmark targets, TOC levels, table grid vs `gridSpan`/`vMerge`,
+  image width vs cell width, image DPI/alt text, OMML fractions/n-ary bodies,
+  equation counts, section page numbering and language.
 - Render with Word → PDF → PNG (`--render`) or LibreOffice → PDF. Record which
   engine produced the pixels.
 

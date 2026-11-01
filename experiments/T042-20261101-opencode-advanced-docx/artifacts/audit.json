@@ -3,8 +3,7 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "fields were refreshed before delivery; w:updateFields is no longer needed",
-    "no explicit run language (w:lang); proofing/accessibility may guess"
+    "fields were refreshed before delivery; w:updateFields is no longer needed"
   ],
   "stats": {
     "fields": 20,
@@ -23,6 +22,14 @@
     "figures": 6,
     "sections": 3,
     "paragraphs": 119,
+    "equations": 2,
+    "display_equations": 0,
+    "equation_numbers": 1,
+    "images_in_cells": 5,
+    "merged_cells": 5,
+    "languages": [
+      "vi-VN"
+    ],
     "text_width_twips": 8788,
     "section_text_widths": [
       8788
@@ -40,7 +47,7 @@
     {
       "part": "word/document.xml",
       "command": "PAGEREF",
-      "instr": "PAGEREF _Toc244424313 \\h",
+      "instr": "PAGEREF _Toc244428909 \\h",
       "result": "1",
       "complete": true,
       "dirty": false
@@ -48,7 +55,7 @@
     {
       "part": "word/document.xml",
       "command": "PAGEREF",
-      "instr": "PAGEREF _Toc244424314 \\h",
+      "instr": "PAGEREF _Toc244428910 \\h",
       "result": "2",
       "complete": true,
       "dirty": false
@@ -56,7 +63,7 @@
     {
       "part": "word/document.xml",
       "command": "PAGEREF",
-      "instr": "PAGEREF _Toc244424315 \\h",
+      "instr": "PAGEREF _Toc244428911 \\h",
       "result": "3",
       "complete": true,
       "dirty": false
@@ -64,7 +71,7 @@
     {
       "part": "word/document.xml",
       "command": "PAGEREF",
-      "instr": "PAGEREF _Toc244424316 \\h",
+      "instr": "PAGEREF _Toc244428912 \\h",
       "result": "4",
       "complete": true,
       "dirty": false
@@ -72,7 +79,7 @@
     {
       "part": "word/document.xml",
       "command": "PAGEREF",
-      "instr": "PAGEREF _Toc244424317 \\h",
+      "instr": "PAGEREF _Toc244428913 \\h",
       "result": "5",
       "complete": true,
       "dirty": false
@@ -80,7 +87,7 @@
     {
       "part": "word/document.xml",
       "command": "PAGEREF",
-      "instr": "PAGEREF _Toc244424318 \\h",
+      "instr": "PAGEREF _Toc244428914 \\h",
       "result": "6",
       "complete": true,
       "dirty": false
@@ -96,7 +103,7 @@
     {
       "part": "word/document.xml",
       "command": "PAGEREF",
-      "instr": "PAGEREF _Toc244424319 \\h",
+      "instr": "PAGEREF _Toc244428915 \\h",
       "result": "2",
       "complete": true,
       "dirty": false
@@ -112,7 +119,7 @@
     {
       "part": "word/document.xml",
       "command": "PAGEREF",
-      "instr": "PAGEREF _Toc244424320 \\h",
+      "instr": "PAGEREF _Toc244428916 \\h",
       "result": "3",
       "complete": true,
       "dirty": false
@@ -120,7 +127,7 @@
     {
       "part": "word/document.xml",
       "command": "PAGEREF",
-      "instr": "PAGEREF _Toc244424321 \\h",
+      "instr": "PAGEREF _Toc244428917 \\h",
       "result": "6",
       "complete": true,
       "dirty": false
