@@ -15,21 +15,31 @@ were true at the time. Task IDs and their branches are listed in
   native Gantt, relationship matrix, PivotTable and a designed dashboard.
 - **Image table.** Pictures are inserted in cells with alt text and a fixed row
   height; the `Team` sheet prints A1:D7 on one page.
-- **Gantt.** Stacked bar, hidden start series, date axis, reversed categories;
-  inserted on the Gantt sheet and on the dashboard.
+- **Gantt.** Stacked bar, transparent start series (`<a:noFill/>`), date-formatted
+  value axis with explicit serial min/max (bar charts have no date category
+  axis), reversed categories; inserted on the Gantt sheet and on the dashboard.
 - **Relationship view.** Matrix heatmap with a 3-colour scale; the node-link
-  scatter was tested and rejected (Excel/Graph did not render all series
-  consistently) and is recorded as a negative result.
+  scatter was tested and rejected (one series per edge does not scale, and the
+  experimental build did not render every series consistently) and is recorded
+  as a negative result.
 - **Pivot.** Native PivotTable built by GridCraft `insert.pivotTable`; Excel
-  reads `PivotTable1` over `Data!R1C1:R61C11`.
-- **VBA.** `scripts/vba_forge.py` writes a `DashboardTools` `.bas` and injects
-  it into an `.xlsm` only when Excel trusts the VBA project object model.
-- **Dashboard.** 4 KPI cards, 2 fixed one-cell-anchored charts, matrix, one
-  source note; Excel export is one page. Audit clean (3 charts, 0 errors/0
-  warnings).
+  reads `PivotTable1` over `Data!R1C1:R61C11`. Without GridCraft a `SUMIF`/
+  `COUNTIF` summary is written to the `Pivot` sheet in the first pass.
+- **VBA.** `scripts/vba_forge.py` writes a `DashboardTools` `.bas` (with a
+  worksheet guard) and injects it into an `.xlsm` only when Excel trusts the
+  VBA project object model.
+- **Dashboard.** 4 formula-driven KPI cards, 2 fixed one-cell-anchored charts,
+  matrix, one source note; print area 29.21 × 20.39 cm (≈93% A4), Excel
+  export one page.
+  Audit clean (3 charts, 0 errors/0 warnings/0 notes).
 - **Evidence.** Excel opened the exact XLSX/XLSM, recalculated formulas, read
-  the pivot and exported 5 sheets; `tests/test_sheet_craft_advanced.py`;
-  full suite 336 tests OK with `PYTHONUTF8=1`.
+  the pivot and exported 5 sheets; `tests/test_sheet_craft_advanced.py` (5
+  tests); full suite 337 tests OK with `PYTHONUTF8=1`.
+- **Review fixes (Argon).** Gantt `Start` transparency + value-axis min/max/date
+  format; re-apply axes after GridCraft's pivot round-trip; KPI formulas; pivot
+  fallback on the Pivot sheet; VBA worksheet guard; dashboard/Gantt print areas
+  reduced to ~95% A4; hidden-series/`gantt` audit detection; negative-result
+  reasoning corrected.
 - **Status.** EXPERIMENTAL; review requested.
 - Report: `experiments/T043-20261101-opencode-advanced-xlsx/REPORT.md`.
 

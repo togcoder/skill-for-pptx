@@ -140,6 +140,9 @@ class SheetForgeAdvancedTests(unittest.TestCase):
             dashboard = members[files["Dashboard"]]
             self.assertIn(b"mergeCell", dashboard)
             self.assertIn(b"COUNTA(Data!", dashboard)
+            book = members["xl/workbook.xml"].decode("utf-8")
+            self.assertIn("Dashboard!$A$1:$N$39", book)
+            self.assertIn("Gantt!$A$1:$L$27", book)
             drawing = _sheet_drawing_index(members)["Dashboard"]
             xml = members[f"xl/drawings/drawing{drawing}.xml"].decode("utf-8")
             self.assertEqual(xml.count("<xdr:oneCellAnchor>"), 2)

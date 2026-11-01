@@ -1,10 +1,10 @@
 {
   "ok": true,
-  "output": "experiments\\T043-20261101-opencode-advanced-xlsx\\artifacts\\programme-dashboard.xlsx",
-  "bytes": 37416,
+  "output": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T039\\experiments\\T043-20261101-opencode-advanced-xlsx\\artifacts\\programme-dashboard.xlsx",
+  "bytes": 37736,
   "pivot": true,
   "vba": {
-    "bas": "experiments\\T043-20261101-opencode-advanced-xlsx\\artifacts\\programme-dashboard.bas",
+    "bas": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T039\\experiments\\T043-20261101-opencode-advanced-xlsx\\artifacts\\programme-dashboard.bas",
     "injected": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T039\\experiments\\T043-20261101-opencode-advanced-xlsx\\artifacts\\programme-dashboard.xlsm"
   },
   "audit": {
@@ -38,6 +38,7 @@
           "barChart"
         ],
         "network": false,
+        "gantt": true,
         "title": "Lịch trình chương trình",
         "series": [
           {
@@ -56,6 +57,7 @@
             ],
             "values_ref": "Gantt!$B$2:$B$11",
             "color": null,
+            "hidden": true,
             "marker": null,
             "has_labels": false,
             "point_colors": [],
@@ -80,6 +82,7 @@
             ],
             "values_ref": "Gantt!$C$2:$C$11",
             "color": "1F4E79",
+            "hidden": false,
             "marker": null,
             "has_labels": false,
             "point_colors": [],
@@ -106,10 +109,10 @@
             "kind": "valAx",
             "ax_id": "2",
             "pos": "b",
-            "min": null,
-            "max": null,
+            "min": "46020",
+            "max": "46212",
             "log": null,
-            "num_fmt": "General",
+            "num_fmt": "mmm-yy",
             "title": "",
             "gridlines": true,
             "delete": "0"
@@ -130,32 +133,32 @@
         "anchor": {
           "kind": "chart",
           "rect_cm": [
-            16.430625000000003,
-            0.635,
+            0.10583333333333335,
+            6.508750000000001,
             18.0,
-            8.5
+            7.0
           ],
           "anchor": "oneCellAnchor",
           "chart_part": "xl/charts/chart1.xml",
           "alt": "Gantt chart"
         },
         "rect_cm": [
-          16.43,
-          0.64,
+          0.11,
+          6.51,
           18.0,
-          8.5
+          7.0
         ],
         "width_cm": 18.0,
-        "height_cm": 8.5,
-        "aspect": 2.118,
+        "height_cm": 7.0,
+        "aspect": 2.571,
         "anchor_kind": "oneCellAnchor",
         "alt": "Gantt chart",
         "inside_print_area": true,
         "print_area_cm": [
           0.0,
           0.0,
-          40.4,
-          10.58
+          28.55,
+          14.29
         ]
       },
       {
@@ -164,6 +167,7 @@
           "barChart"
         ],
         "network": false,
+        "gantt": true,
         "title": "Lịch trình chương trình",
         "series": [
           {
@@ -182,6 +186,7 @@
             ],
             "values_ref": "Gantt!$B$2:$B$11",
             "color": null,
+            "hidden": true,
             "marker": null,
             "has_labels": false,
             "point_colors": [],
@@ -206,6 +211,7 @@
             ],
             "values_ref": "Gantt!$C$2:$C$11",
             "color": "1F4E79",
+            "hidden": false,
             "marker": null,
             "has_labels": false,
             "point_colors": [],
@@ -232,10 +238,10 @@
             "kind": "valAx",
             "ax_id": "2",
             "pos": "b",
-            "min": null,
-            "max": null,
+            "min": "46020",
+            "max": "46212",
             "log": null,
-            "num_fmt": "General",
+            "num_fmt": "mmm-yy",
             "title": "",
             "gridlines": true,
             "delete": "0"
@@ -257,9 +263,9 @@
           "kind": "chart",
           "rect_cm": [
             0.10583333333333335,
-            5.679722222222223,
+            5.150555555555556,
             18.0,
-            8.5
+            7.0
           ],
           "anchor": "oneCellAnchor",
           "chart_part": "xl/charts/chart2.xml",
@@ -267,13 +273,13 @@
         },
         "rect_cm": [
           0.11,
-          5.68,
+          5.15,
           18.0,
-          8.5
+          7.0
         ],
         "width_cm": 18.0,
-        "height_cm": 8.5,
-        "aspect": 2.118,
+        "height_cm": 7.0,
+        "aspect": 2.571,
         "anchor_kind": "oneCellAnchor",
         "alt": "Gantt chart",
         "inside_print_area": true,
@@ -281,7 +287,7 @@
           0.0,
           0.0,
           29.21,
-          26.21
+          20.39
         ]
       },
       {
@@ -290,6 +296,7 @@
           "barChart"
         ],
         "network": false,
+        "gantt": false,
         "title": "Chi phí và lợi ích theo nhóm",
         "series": [
           {
@@ -302,6 +309,7 @@
             ],
             "values_ref": "Model!$C$2:$C$5",
             "color": "2E75B6",
+            "hidden": false,
             "marker": null,
             "has_labels": false,
             "point_colors": [],
@@ -320,6 +328,7 @@
             ],
             "values_ref": "Model!$D$2:$D$5",
             "color": "548235",
+            "hidden": false,
             "marker": null,
             "has_labels": false,
             "point_colors": [],
@@ -349,7 +358,7 @@
             "min": null,
             "max": null,
             "log": null,
-            "num_fmt": "General",
+            "num_fmt": "#,##0",
             "title": "",
             "gridlines": true,
             "delete": "0"
@@ -374,9 +383,9 @@
           "kind": "chart",
           "rect_cm": [
             14.499166666666667,
-            15.204722222222223,
+            13.088055555555558,
             13.2,
-            7.4
+            6.6
           ],
           "anchor": "oneCellAnchor",
           "chart_part": "xl/charts/chart3.xml",
@@ -384,13 +393,13 @@
         },
         "rect_cm": [
           14.5,
-          15.2,
+          13.09,
           13.2,
-          7.4
+          6.6
         ],
         "width_cm": 13.2,
-        "height_cm": 7.4,
-        "aspect": 1.784,
+        "height_cm": 6.6,
+        "aspect": 2.0,
         "anchor_kind": "oneCellAnchor",
         "alt": "Cost and benefit chart",
         "inside_print_area": true,
@@ -398,7 +407,7 @@
           0.0,
           0.0,
           29.21,
-          26.21
+          20.39
         ]
       }
     ]

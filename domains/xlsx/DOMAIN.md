@@ -96,8 +96,10 @@ The T041 report is
 
 - **T043 [xlsx] advanced workbook**: a 7-sheet programme dashboard (Data,
   Pivot, Model, Team, Gantt, Relations, Dashboard) with cross-sheet formulas,
-  named ranges, an image table, a native Gantt, a relationship matrix, two
-  fixed-anchor dashboard charts and a VBA module; **review requested**.
+  named ranges, an image table, a native Gantt (transparent start, date-formatted
+  value axis), a relationship matrix, formula-driven KPI cards, two fixed-anchor
+  dashboard charts, a GridCraft pivot with a formula fallback and a VBA module;
+  **review requested**.
 - **T041 [xlsx]**: Chart Forge, chart patch, chart audit, spreadsheet data, skill
   and report; merged to `main` after owner approval, with the Argon review fixes
   applied.
@@ -134,6 +136,10 @@ The T041 report is
 - T043 limitation: VBA injection needs Excel + "Trust access to the VBA project
   object model". The `.bas` is always written; injection produced a `.xlsm` on
   this host. Never claim a macro is embedded when the gate is closed.
+- T043 review fix: GridCraft's pivot round-trip dropped chart axis scaling and
+  number formats. `sheet_forge` re-applies the Gantt value axis and cost-axis
+  number format after the pivot; the audit checks `mmm-yy`, explicit min/max and
+  the transparent `Start` series.
 
 ## Open questions
 

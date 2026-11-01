@@ -291,18 +291,18 @@ def _add_dashboard(wb, spec: dict, charts: dict, fmt_header, fmt_text):
             "bg_color": fill, "font_size": 9,
             "font_color": "#548235" if kpi.get("positive", True) else "#C00000"}))
     ws.insert_chart("A11", charts["gantt"], {"x_offset": 4, "y_offset": 4})
-    ws.insert_chart("H25", charts["cost"], {"x_offset": 4, "y_offset": 4})
+    ws.insert_chart("H26", charts["cost"], {"x_offset": 4, "y_offset": 4})
     # Relationship matrix (native conditional-format heatmap).
     nodes = spec["nodes"]
     edges = spec["edges"]
-    ws.merge_range("A27:G27", "Ma trận quan hệ công việc", wb.add_format({
+    ws.merge_range("A28:G28", "Ma trận quan hệ công việc", wb.add_format({
         "bold": True, "font_size": 12, "font_color": "#1F4E79"}))
-    ws.write(27, 0, "Từ \\ Đến", wb.add_format({"bold": True, "font_size": 8,
+    ws.write(28, 0, "Từ \\ Đến", wb.add_format({"bold": True, "font_size": 8,
                                                 "bg_color": "#1F4E79", "font_color": "#FFFFFF"}))
     for c, node in enumerate(nodes, start=1):
-        ws.write(27, c, node["name"], wb.add_format({"bold": True, "font_size": 8,
+        ws.write(28, c, node["name"], wb.add_format({"bold": True, "font_size": 8,
                                                      "bg_color": "#1F4E79", "font_color": "#FFFFFF"}))
-    for r, a in enumerate(nodes, start=28):
+    for r, a in enumerate(nodes, start=29):
         ws.write(r, 0, a["name"], wb.add_format({"font_size": 8, "bold": True}))
         for c, b in enumerate(nodes, start=1):
             value = 0
@@ -311,13 +311,13 @@ def _add_dashboard(wb, spec: dict, charts: dict, fmt_header, fmt_text):
                     value = edge.get("weight", 1)
             ws.write_number(r, c, value, wb.add_format({"font_size": 8, "num_format": "0",
                                                         "border": 1, "border_color": "#FFFFFF"}))
-    ws.conditional_format(28, 1, 28 + len(nodes) - 1, len(nodes), {
+    ws.conditional_format(29, 1, 29 + len(nodes) - 1, len(nodes), {
         "type": "3_color_scale", "min_color": "#EAF1F8",
         "mid_color": "#9DC3E6", "max_color": "#1F4E79",
     })
-    ws.merge_range("A37:N37", "Nguồn: dữ liệu tổng hợp cho mục đích trình diễn.", wb.add_format({
+    ws.merge_range("A38:N38", "Nguồn: dữ liệu tổng hợp cho mục đích trình diễn.", wb.add_format({
         "font_size": 8, "italic": True, "font_color": "#7F7F7F"}))
-    ws.print_area("A1:N38")
+    ws.print_area("A1:N39")
     ws.set_landscape()
     ws.fit_to_pages(1, 1)
     ws.set_margins(0.3, 0.3, 0.4, 0.4)
