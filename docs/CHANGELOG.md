@@ -7,6 +7,64 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T041 [xlsx] SheetCraft — controlled standard DrawingML charts — 2026-11-01
+
+- **Chart Forge.** `scripts/chart_forge.py` builds a workbook/chart from
+  `domains/xlsx/schemas/chart_spec.schema.json`: column/bar, line, area, pie,
+  doughnut, scatter, bubble, radar, stock and combo; axes, labels, legend,
+  markers, trendlines, number formats and print area.
+- **Chart patch.** `scripts/chart_patch.py` edits existing chart OOXML:
+  title/legend/axes/bar gap/data labels/series style/manual plot layout and
+  converts `xdr:twoCellAnchor` to a fixed `xdr:oneCellAnchor`.
+- **Chart audit.** `scripts/chart_audit.py` measures geometry, zero baseline,
+  log scaling, category density, labels, legend, contrast/deuteranopia, pie
+  slices, 3-D, fonts, series count, print area, alt text and the chart cache.
+- **Evidence.** Three synthetic fixtures (combo secondary axis, doughnut,
+  scatter + trendline) pass the audit with no errors/warnings; Excel opened the
+  exact files and exported the charts; GridCraft PDF rendered them but dropped
+  Vietnamese diacritics. Waterfall/treemap/histogram/box/funnel remain raw-OOXML
+  recipes, not generated.
+- **Review fixes (Argon).** Combo series/axis mapping, manualLayout/`a:ln` child
+  order, print-area geometry, full cache comparison with worksheet fallback,
+  Excel-first `--render`, and `gridcraft_bridge` use instead of a hard-coded
+  `D:\artcraft` path.
+- **Tests.** `tests/test_sheet_craft.py` (10 tests) covers build/audit, combo
+  second-series patch, per-axis max, print-area rejection, stale cache,
+  manualLayout order, small chart, doughnut palette and schema. Full suite:
+  326 tests OK with `PYTHONUTF8=1`.
+- **Status.** EXPERIMENTAL; review requested. One task = one domain; the
+  document half is T039 [docx].
+- Report: `experiments/T041-20261101-opencode-sheet-craft/REPORT.md`.
+
+## T039 [docx] DocumentCraft — professional Word canon and real fields — 2026-11-01
+
+- **Standards research.** Mapped the binding hierarchy (law/contract/template →
+  ISO 7144/2145/690/7200/8601/80000 → institutional rules), marked ISO 5966 as
+  withdrawn, and recorded the sources/statuses in
+  `domains/docx/data/document_system.json`.
+- **Document Forge.** `scripts/document_forge.py` builds a DOCX from
+  `domains/docx/schemas/document_spec.schema.json`: cover, unnumbered front
+  matter, linked multilevel headings, `TOC` field, standard `TOC \c` lists of
+  figures/tables updated through `TablesOfFigures`, `SEQ` captions,
+  `STYLEREF`/`SECTIONPAGES` headers/footers, inline images with alt text, fixed
+  table grids with repeating headers, references and appendix A/A.1.
+- **Word field kit.** `scripts/word_field_kit.py` writes/audits fields,
+  bookmarks and captions; `scripts/document_audit.py` is the standalone audit.
+- **Evidence.** Structural audit clean (29 fields, 22 bookmarks, 3 tables, 2
+  figures, no errors/warnings); Word refreshed the exact file (including
+  `TablesOfFigures`) and exported a 12-page PDF; pages inspected. WordCraft was
+  a fallback (physical TOC page numbers, dropped `descr`, Vietnamese PDF font
+  clipping). No PDF/UA, PDF/A or human edit/print yet.
+- **Tests.** `tests/test_document_craft.py` (6 tests) covers fields/bookmarks,
+  broken targets, broken bookmarkEnd, table width, en-US language and optional
+  WordCraft refresh. Full suite: 322 tests OK with `PYTHONUTF8=1`.
+- **Review fixes (Argon).** Standard `TOC \c` lists updated via
+  `TablesOfFigures`; bookmarkEnd balance and per-section width checks; spec
+  language instead of hard-coded `vi-VN`; `SECTIONPAGES` for the restarted body.
+- **Status.** EXPERIMENTAL; review requested. One task = one domain; the
+  spreadsheet half is T041 [xlsx].
+- Report: `experiments/T039-20261101-opencode-office-canon/REPORT.md`.
+
 ## T040 multi-domain lab restructure — 2026-11-01
 
 The repository is now organised as a multi-domain design lab:
