@@ -73,5 +73,6 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T044 | [cross] Multi-Asset Pipeline Protocol, User Experience Maximization & Local Autonomy Charter | Antigravity | `work/T044-cross-asset-pipeline-and-autonomy` | tip (review requested) | `experiments/T044-20261101-antigravity-cross-asset-pipeline/REPORT.md` |
 | T045 | [docx] Advanced report craft: side-by-side media, OMML equations, merged-header tables, image cells and cover assets | OpenCode (DeepSeek V4.1 Flash) | `work/T045-opencode-advanced-docx` | review accepted (Argon); awaiting owner merge | `experiments/T045-20261101-opencode-advanced-docx/REPORT.md` |
 | T046 | [xlsx] Advanced workbook: image tables, Gantt, relationship matrix, cross-sheet formulas, pivot, VBA and dashboard design | OpenCode (DeepSeek V4.1 Flash) | `work/T046-opencode-advanced-xlsx` | review accepted (Argon); awaiting owner merge | `experiments/T046-20261101-opencode-advanced-xlsx/REPORT.md` |
-| T047 | [cross] Office Link Bridge: Interactive Excel-to-PowerPoint/Word Linked Charts & Embedded Workbook Sync | Antigravity | `work/T047-cross-office-link-bridge` | review requested | `experiments/T047-20261101-antigravity-office-link-bridge/REPORT.md` |
-| T048 | *next free ID* | | | | |
+| T047 | [cross] Office Link Bridge: Interactive Excel-to-PowerPoint/Word Linked Charts & Embedded Workbook Sync | Antigravity | `work/T047-cross-office-link-bridge` | main | `experiments/T047-20261101-antigravity-office-link-bridge/REPORT.md` |
+| T048 | [pptx] Non-Linear Slide Navigation: Interactive Branching, Return Paths, Kiosk Mode & Mini-Game State Machine | Antigravity | `work/T048-interactive-slide-branching` | claimed | |
+| T049 | *next free ID* | | | | |
