@@ -1,8 +1,8 @@
 # Handoff — Design Research Lab
 
-Cập nhật: 01/11/2026, sau T040. Tệp này được **viết lại** mỗi lần bàn giao,
+Cập nhật: 01/11/2026, sau T042. Tệp này được **viết lại** mỗi lần bàn giao,
 không ghi nối thêm. Lịch sử: [docs/CHANGELOG.md](docs/CHANGELOG.md). Bàn giao
-trước (T038): [docs/archive/HANDOFF-T038-2026-11-01.md](docs/archive/HANDOFF-T038-2026-11-01.md).
+trước: [docs/archive/HANDOFF-T038-2026-11-01.md](docs/archive/HANDOFF-T038-2026-11-01.md).
 
 Repo: https://github.com/togcoder/skill-for-pptx (private). Chủ dự án: togcoder.
 
@@ -20,42 +20,45 @@ PowerPoint chỉ là domain lâu đời nhất.
 
 ## Bắt đầu
 
-1. Đầu nghiên cứu mới nhất nằm trên nhánh `claude/blissful-pasteur-gmll59`
-   (đã gộp T035–T040). `main` vẫn chậm hơn.
+1. Đầu nghiên cứu mới nhất nằm trên nhánh `work/T042-multi-domain-design-canons`
+   (hoặc `claude/blissful-pasteur-gmll59` sau khi gộp).
 2. Đọc theo thứ tự `AGENTS.md`, `lab/CHARTER.md`, `lab/PROTOCOL.md`, rồi thẻ
-   domain của bạn.
-3. Chạy `python3 -m unittest discover -s tests` và
-   `python3 lab/tools/check_layout.py`.
-4. Lấy mã kế tiếp trong `research/tasks/INDEX.md` (hiện là **T041**). Tiêu đề
-   ghi domain trong ngoặc, ví dụ `[xlsx]`.
+   domain của bạn (`domains/<domain>/DOMAIN.md`).
+3. Chạy `python -m unittest discover -s tests` và
+   `python lab/tools/check_layout.py`. (Đảm bảo 340 tests pass 100%).
+4. Lấy mã kế tiếp trong `research/tasks/INDEX.md` (hiện là **T043**). Tiêu đề
+   ghi domain trong ngoặc, ví dụ `[video]`, `[cad]`, `[3d]`.
 
 ## Trạng thái từng domain
 
 | Domain | Trạng thái |
 |---|---|
-| pptx | Trưởng thành: Director, Morph Studio, Forge, hệ thiết kế và critic. T035 và T038 **chưa được phản biện**. Còn 1 test lỗi của T038 (WORD_BREAK ở "Logo Watermark", phụ thuộc font). |
-| docx, xlsx, svg | Mới có một bridge thử nghiệm mỗi domain (T037), đều chưa được phản biện. T039 (OpenCode) đã nhận docx + xlsx. |
-| cross | Có protocol 00–03, schema, registry ArtCraft và intent decoder (T036–T037). Chưa được phản biện; chưa được làm chuẩn chung (cần 2 domain chấp nhận). |
+| `pptx` | Trưởng thành: Director, Morph Studio, Forge, hệ thiết kế, Bento/Asymmetric grids, và Critic (T038: 314 tests pass). |
+| `video` | Nền tảng (T042): SMPTE RP 2046-2 / EBU R95 safe areas (Action 3.5%, Title 5.0%), 9:16 mobile UI dead zones, ASL shot pacing, J/L-cuts asynchrony, EBU R128 audio mastering (-14 LUFS, ducking -14 dB). Native bridges: `filmcraft_bridge.py` & `soundcraft_bridge.py`. |
+| `svg` | Nền tảng (T042): 24x24 icon grid (20x20 live area), optical trim boxes, non-linear stroke scaling $W(S)=W_0(S/S_0)^{0.75}$, Bézier circle handle $\kappa \approx 0.55228$. Native bridge: `vectorcraft_bridge.py`. |
+| `3d` | Nền tảng (T042): Metric scale (mm, Y-up glTF), No-Sharp-Edge Law (micro-bevel $0.2-0.5\text{ mm}$), concentric fillets, True Isometric camera ($35.264^\circ$ elev), 3-point studio lighting, PBR albedo clamp. Native bridge: `solidcraft_bridge.py`. |
+| `cad` | Nền tảng (T042): ISO 5457 sheet dimensions (A4–A0, 20mm left margin), ISO 128 line weight hierarchy (0.50mm group: 0.50, 0.25, 0.18mm), ISO 129 dimensioning geometry (10mm/7mm offsets, 3:1 arrowheads), ISO 7200 title block (180mm). Native bridge: `cadcraft_bridge.py`. |
+| `docx`, `xlsx` | T039 (Word canon) + T041 (SheetCraft chart forge). |
+| `cross` | Protocols 00–03, intent decoder, capability registry, multi-domain canon evaluators (`multi_domain_canons.py`), và native CLI discovery cho cả 13 tools ArtCraft (`D:\artcraft`). |
 
 ## Việc tiếp theo (xếp hạng)
 
-1. **Phản biện chéo**, theo `lab/standards/REVIEW.md`, do agent khác tác giả
+1. **Phản biện chéo (Peer Review)**, theo `lab/standards/REVIEW.md`, do agent khác tác giả
    viết:
+   - T042 (multi-domain canons & bridges, review requested);
    - T038 (pptx canon);
    - T035 (DeckCraft);
-   - T036–T037 (lớp cross và các bridge).
-2. **T039 docx/xlsx**: viết luận điểm riêng của domain trong thẻ domain trước
-   khi viết code.
-3. **T041 (cross)**: dời code từ `scripts/` vào thư mục theo domain, sửa
-   import, skill và test, không phá các thí nghiệm đã đóng băng.
-4. **pptx**: cổng native (trình chiếu tương tác trong PowerPoint) và sửa test
-   lỗi của T038.
+   - T036–T037 (cross protocols và multi-craft bridges).
+2. **Triển khai chuyên sâu từng domain:**
+   - `video`: T043 - Trình biên soạn kịch bản timeline cho FilmCraft + sidechain ducking tự động với SoundCraft.
+   - `3d`: T044 - Tạo hình khối CSG tham số hóa với SolidCraft có kiểm định micro-bevel bắt buộc.
+   - `cad`: T045 - Trình xuất bản vẽ kỹ thuật cơ khí đa hình chiếu chuẩn ISO 128 với CADCraft.
 
 ## Prompt giao việc
 
 ```text
 Join the design research lab at https://github.com/togcoder/skill-for-pptx, branch
-claude/blissful-pasteur-gmll59. Read AGENTS.md, lab/CHARTER.md, lab/PROTOCOL.md and
+work/T042-multi-domain-design-canons. Read AGENTS.md, lab/CHARTER.md, lab/PROTOCOL.md and
 domains/<your domain>/DOMAIN.md. Run the tests and lab/tools/check_layout.py.
 Take the next free ID in research/tasks/INDEX.md with the domain in brackets and
 push the claim. Frame your question from the domain's native canon before

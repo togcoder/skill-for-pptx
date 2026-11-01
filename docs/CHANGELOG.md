@@ -7,6 +7,27 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T042 Multi-Domain Design Canons: Video, Vector/SVG, 3D/Solid, CAD & Audio — 2026-11-01
+
+- **Argon Multi-Domain Consultation.** Partnered with Gemini 4 Argon (\gemini-argon\) to establish mathematical formulas, geometric tokens, and handoff contracts across all specialized ArtCraft domains (\D:\\artcraft\).
+- **5 Formal Domain Canons (\knowledge/\):**
+  - \knowledge/video_canon.json\: SMPTE RP 2046-2 / EBU R95 safe areas (Action Safe 3.5%, Title Safe 5.0%), 9:16 vertical dead zones (top 220px, bottom 440px, right action rail), ASL shot duration, J-cut (12-24 frames lead) and L-cut (15-30 frames trail) asynchrony, and EBU R128 audio mastering (-14.0 LUFS, True Peak <= -1.0 dBTP, sidechain ducking -14 dB).
+  - \knowledge/vector_canon.json\: W3C SVG 2.0, 24x24 icon grid (20x20 live area), optical trim boxes (Circle d=20, Square 18x18, Landscape 20x16, Portrait 16x20), non-linear stroke scaling formula W(S) = W0 * (S/S0)^0.75, and Bezier 90-degree circle handle ratio kappa ~ 0.55228.
+  - \knowledge/3d_solid_canon.json\: Metric scale (1 unit = 1.0 mm, Y-up glTF), No-Sharp-Edge Law (micro-bevel R = 0.005 * min(W,H,D) bounded in [0.2, 0.5] mm), concentric fillets, True Isometric camera (45-deg azimuth, elevation arctan(1/sqrt(2)) ~ 35.264-deg), 3-point studio lighting (Key 1.0, Fill 2:1/4:1, Rim 1.0), and PBR material albedo clamp with strict prohibition on ambiguous metalness M in [0.2, 0.8].
+  - \knowledge/cad_iso_canon.json\: ISO 5457 sheet dimensions (A4 to A0) with 20.0mm left margin, ISO 128 line weight hierarchy (0.50mm group: 0.50, 0.25, 0.18mm), ISO 129 dimensioning geometry (10mm 1st tier, 7mm 2nd tier, 1.0mm origin offset, 2.0mm overshoot, 3:1 closed filled arrows), and ISO 7200 title block (180.0mm width).
+  - \knowledge/sound_canon.json\: SoundCraft mastering targets (EBU R128, ITU BS.1770-4, 48kHz 24-bit PCM, stem dynamic ranges, auto-ducking attack/hold/release envelopes).
+- **Multi-Domain Evaluator & Calculators (\scripts/multi_domain_canons.py\).** Implemented pure Python token accessors, geometric calculators, and pre-flight validation rules for all 5 domains.
+- **4 Native ArtCraft Bridges (\scripts/\):**
+  - \scripts/filmcraft_bridge.py\: Headless runner for \FilmCraft\\filmcraft-cli.exe\ (probe, render frame, export, inspect).
+  - \scripts/solidcraft_bridge.py\: Headless runner for \SolidCraft\\solidcraft-cli.exe\ (eval, snapshot, render, icon export).
+  - \scripts/cadcraft_bridge.py\: Headless runner for \CADCraft\\cadcraft-cli.exe\ (info, convert DXF/DWG/SVG/PNG/PDF, sample generator).
+  - \scripts/soundcraft_bridge.py\: Headless runner for \SoundCraft\\soundcraft-cli.exe\ (info, convert, normalize, resample).
+- **Domain Cards Registered (\domains/\):** Created \domains/video/DOMAIN.md\, \domains/3d/DOMAIN.md\, \domains/cad/DOMAIN.md\; updated \domains/svg/DOMAIN.md\ and \domains/README.md\.
+- **Verification Evidence Artifacts (\experiments/T042-20261101-antigravity-multi-domain-canons/artifacts/\):**
+  - \cad_sample_bracket.svg\ (99 KB) & \cad_sample_bracket.png\ (115 KB) via \cadcraft-cli.exe sample\.
+  - \solidcraft_icon.png\ (21 KB) via \solidcraft-cli.exe icon\.
+- **Tests.** Added \	ests/test_multi_domain_canons.py\ (24 unit tests). All **340 tests pass 100% (skipped=4)**; \lab/tools/check_layout.py\ reports \layout OK\.
+
 ## T040 multi-domain lab restructure — 2026-11-01
 
 The repository is now organised as a multi-domain design lab:

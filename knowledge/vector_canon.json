@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "domain": "vector",
+  "version": "1.0.0",
+  "description": "Design canons, optical grids, stroke scaling formulas, and Bézier curvature rules for Vector/SVG (VectorCraft & FigCraft)",
+  "standards": [
+    "W3C SVG 1.1 / 2.0",
+    "Material Design Icon Grid",
+    "Apple Human Interface Guidelines (Squircle G2)"
+  ],
+  "icon_grid_24": {
+    "viewbox": "0 0 24 24",
+    "base_size": 24,
+    "live_area": {
+      "x_min": 2,
+      "y_min": 2,
+      "x_max": 22,
+      "y_max": 22,
+      "width": 20,
+      "height": 20,
+      "padding": 2
+    },
+    "optical_trim_boxes": {
+      "circle": {
+        "shape": "circle",
+        "diameter": 20,
+        "radius": 10,
+        "center": [12, 12]
+      },
+      "square": {
+        "shape": "rect",
+        "x": 3,
+        "y": 3,
+        "width": 18,
+        "height": 18,
+        "corner_radius": 2
+      },
+      "landscape_rect": {
+        "shape": "rect",
+        "x": 2,
+        "y": 4,
+        "width": 20,
+        "height": 16,
+        "corner_radius": 2
+      },
+      "portrait_rect": {
+        "shape": "rect",
+        "x": 4,
+        "y": 2,
+        "width": 16,
+        "height": 20,
+        "corner_radius": 2
+      }
+    }
+  },
+  "illustration_grid": {
+    "standard_4_3": "0 0 800 600",
+    "standard_16_9": "0 0 1200 675",
+    "node_quantization_step": 0.5
+  },
+  "stroke_scaling": {
+    "formula": "W(S) = W_0 * (S / S_0)^0.75",
+    "base_size_s0": 24.0,
+    "base_stroke_w0": 2.0,
+    "scaling_exponent": 0.75,
+    "canonical_table": {
+      "16": 1.5,
+      "24": 2.0,
+      "32": 2.5,
+      "48": 3.25
+    },
+    "illustration_hierarchy": {
+      "primary_stroke": 2.0,
+      "secondary_stroke_ratio": 0.6,
+      "secondary_stroke": 1.2
+    },
+    "style_attributes": {
+      "stroke_linecap": "round",
+      "stroke_linejoin": "round"
+    }
+  },
+  "bezier_geometry": {
+    "extrema_rule": "Anchor points must be located at local extrema (tangent dx/dt=0 or dy/dt=0) with horizontal or vertical handles",
+    "circle_arc_handle_ratio_kappa": {
+      "formula": "4/3 * (sqrt(2) - 1)",
+      "approximate_value": 0.5522847498307935,
+      "description": "Ratio of control handle length to radius for a 90-degree circular arc approximation"
+    },
+    "apple_squircle_g2": {
+      "curvature_continuity": "G2",
+      "offset_factor": 1.2,
+      "handle_ratio": 0.62,
+      "description": "Continuous curvature transition avoiding specular highlights pinching at linear-arc seams"
+    }
+  }
+}

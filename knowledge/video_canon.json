@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "domain": "video",
+  "version": "1.0.0",
+  "description": "Design canons, safe zones, pacing, and audio mastering contracts for video production (FilmCraft & SoundCraft)",
+  "standards": [
+    "SMPTE RP 2046-2",
+    "EBU R95",
+    "EBU R128",
+    "ITU-R BS.1770-4"
+  ],
+  "canvas": {
+    "landscape_16_9": {
+      "width": 1920,
+      "height": 1080,
+      "aspect_ratio": "16:9",
+      "default_framerate": 30.0,
+      "framerates": [24.0, 25.0, 30.0, 60.0],
+      "action_safe": {
+        "margin_percent": 3.5,
+        "x_min": 67,
+        "x_max": 1853,
+        "y_min": 38,
+        "y_max": 1042,
+        "width": 1786,
+        "height": 1004
+      },
+      "title_safe": {
+        "margin_percent": 5.0,
+        "x_min": 96,
+        "x_max": 1824,
+        "y_min": 54,
+        "y_max": 1026,
+        "width": 1728,
+        "height": 972
+      },
+      "lower_third_zone": {
+        "x": 96,
+        "y_range": [780, 940],
+        "max_width": 720,
+        "max_height": 120
+      }
+    },
+    "vertical_9_16": {
+      "width": 1080,
+      "height": 1920,
+      "aspect_ratio": "9:16",
+      "target_platforms": ["YouTube Shorts", "TikTok", "Instagram Reels"],
+      "dead_zones": {
+        "top_ui_header": {
+          "y_range": [0, 220],
+          "description": "Platform status bar, search icon, tab switcher"
+        },
+        "bottom_caption_audio": {
+          "y_range": [1480, 1920],
+          "description": "Account name, description, captions, audio marquee, progress scrubber"
+        },
+        "right_action_rail": {
+          "x_range": [880, 1080],
+          "y_range": [960, 1600],
+          "description": "Like, comment, share, bookmark, remix buttons"
+        }
+      },
+      "safe_content_box": {
+        "x_min": 60,
+        "x_max": 860,
+        "y_min": 240,
+        "y_max": 1460,
+        "width": 800,
+        "height": 1220
+      }
+    }
+  },
+  "pacing": {
+    "asl_seconds": {
+      "promo_intro": {
+        "min": 1.2,
+        "max": 2.5,
+        "max_static_hold": 3.0
+      },
+      "technical_explainer": {
+        "min": 3.5,
+        "max": 6.0,
+        "ken_burns_trigger_seconds": 4.0,
+        "ken_burns_zoom_ratio": 1.06
+      }
+    },
+    "audio_visual_asynchrony": {
+      "j_cut": {
+        "description": "Audio of incoming scene begins before picture cut",
+        "lead_frames_range": [12, 24],
+        "lead_seconds_range": [0.4, 0.8]
+      },
+      "l_cut": {
+        "description": "Audio of outgoing scene sustains after picture cut",
+        "trail_frames_range": [15, 30],
+        "trail_seconds_range": [0.5, 1.0]
+      },
+      "hard_straight_cut_dialogue_allowed": false
+    },
+    "motion_easing": {
+      "enter": "cubic-bezier(0.16, 1.0, 0.3, 1.0)",
+      "exit": "cubic-bezier(0.7, 0.0, 0.84, 0.0)",
+      "morph_pan": "cubic-bezier(0.65, 0.0, 0.35, 1.0)",
+      "linear_allowed_for_ui": false
+    }
+  },
+  "audio_mastering": {
+    "standard": "EBU R128 / ITU-R BS.1770-4",
+    "integrated_lufs": {
+      "digital_web": -14.0,
+      "auditorium_broadcast": -16.0,
+      "tolerance_lu": 1.0
+    },
+    "true_peak_max_dbtp": -1.0,
+    "stems_dbfs": {
+      "voiceover": {
+        "range_dbfs": [-12.0, -6.0],
+        "nominal_rms_lufs": -16.0
+      },
+      "sfx": {
+        "range_dbfs": [-18.0, -12.0]
+      },
+      "bgm_dry": {
+        "range_dbfs": [-18.0, -16.0]
+      }
+    },
+    "sidechain_ducking": {
+      "delta_gain_db_range": [-15.0, -12.0],
+      "bgm_ducked_level_dbfs_range": [-30.0, -28.0],
+      "lookahead_ms": 150,
+      "attack_ms": 250,
+      "attack_curve": "s-curve",
+      "pause_hold_threshold_ms": 600,
+      "release_ms_range": [600, 800]
+    }
+  }
+}

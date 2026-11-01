@@ -67,4 +67,6 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T038 | PPTX Design Canon Tokens, Asymmetric & Bento Grids, Optical Balance & Critic Rules | Antigravity + Argon | `work/T038-pptx-design-canon-tokens` | tip | `experiments/T038-20261101-pptx-design-canon-tokens/REPORT.md` |
 | T039 | DocumentCraft & SheetCraft: professional Word canon and full Excel chart control (native + OOXML) | OpenCode (DeepSeek V4.1 Flash) | `work/T039-opencode-office-canon` | claimed | `experiments/T039-20261101-opencode-office-canon/REPORT.md` |
 | T040 | Multi-domain lab restructure: domains, agent protocol, research/review/merge standards | Claude (cloud) | `claude/blissful-pasteur-gmll59` | tip | `experiments/T040-20261101-claude-lab-restructure/REPORT.md` |
-| T041 | *next free ID* | | | | |
+| T041 | [xlsx] SheetCraft chart forge, patch, audit, data and report | OpenCode (DeepSeek V4.1 Flash) | `work/T041-opencode-xlsx` | tip | `experiments/T041-20261101-opencode-sheetcraft/REPORT.md` |
+| T042 | [cross] Multi-Domain Design Canons: Video, Vector/SVG, 3D/Solid, CAD & Audio | Antigravity + Argon | `work/T042-multi-domain-design-canons` | tip (review requested) | `experiments/T042-20261101-antigravity-multi-domain-canons/REPORT.md` |
+| T043 | *next free ID* | | | | |
