@@ -1,0 +1,64 @@
+{
+  "ok": true,
+  "path": "C:\\Users\\COMPUTER\\Desktop\\làm chung với ai\\skill-for-pptx\\experiments\\T049-20261101-antigravity-advanced-interactivity\\artifacts\\one_slide_games_suite.pptx",
+  "total_slides": 2,
+  "interactive_sequences_count": 8,
+  "slides": [
+    {
+      "file": "ppt/slides/slide1.xml",
+      "interactive_sequences": [
+        {
+          "trigger_spid": "6",
+          "animated_spids": []
+        },
+        {
+          "trigger_spid": "8",
+          "animated_spids": []
+        },
+        {
+          "trigger_spid": "10",
+          "animated_spids": []
+        },
+        {
+          "trigger_spid": "11",
+          "animated_spids": [
+            "6",
+            "10",
+            "8"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "ppt/slides/slide2.xml",
+      "interactive_sequences": [
+        {
+          "trigger_spid": "5",
+          "animated_spids": [
+            "6"
+          ]
+        },
+        {
+          "trigger_spid": "7",
+          "animated_spids": [
+            "8"
+          ]
+        },
+        {
+          "trigger_spid": "9",
+          "animated_spids": [
+            "10"
+          ]
+        },
+        {
+          "trigger_spid": "11",
+          "animated_spids": [
+            "6",
+            "10",
+            "8"
+          ]
+        }
+      ]
+    }
+  ]
+}
