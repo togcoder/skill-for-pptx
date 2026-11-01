@@ -25,8 +25,10 @@ import datetime as dt
 import json
 import math
 from pathlib import Path
+import re
 import subprocess
 import sys
+import zipfile
 import tempfile
 from typing import Any
 
@@ -98,19 +100,29 @@ def _add_table_sheet(wb, name: str, spec: dict, fmt_header, fmt_text, fmt_num):
 
 def _add_formula_sheet(wb, spec: dict, fmt_header, fmt_text, fmt_num):
     ws = wb.add_worksheet("Model")
+    last = int(spec.get("data_last_row", 61))
+    rows = spec.get("data", {}).get("rows") or []
     ws.write_row(0, 0, ["Workstream", "Tasks", "Cost", "Benefit", "Avg progress"], fmt_header)
     for r, workstream in enumerate(spec["workstreams"], start=1):
+        subset = [row for row in rows if len(row) > 7 and row[1] == workstream]
+        count = len(subset)
+        cost = sum(float(row[7]) for row in subset)
+        benefit = sum(float(row[8]) for row in subset)
+        avg = (sum(float(row[6]) for row in subset) / count) if count else 0
         ws.write_string(r, 0, workstream, fmt_text)
-        ws.write_formula(r, 1, f'=COUNTIF(Data!$B$2:$B${spec["data_last_row"]},A{r + 1})', fmt_num, 0)
-        ws.write_formula(r, 2, f'=SUMIF(Data!$B$2:$B${spec["data_last_row"]},A{r + 1},Data!$H$2:$H${spec["data_last_row"]})', fmt_num, 0)
-        ws.write_formula(r, 3, f'=SUMIF(Data!$B$2:$B${spec["data_last_row"]},A{r + 1},Data!$I$2:$I${spec["data_last_row"]})', fmt_num, 0)
-        ws.write_formula(r, 4, f'=IFERROR(AVERAGEIF(Data!$B$2:$B${spec["data_last_row"]},A{r + 1},Data!$G$2:$G${spec["data_last_row"]}),0)', fmt_num, 0)
-    ws.write_formula(7, 0, "=COUNTA(Data!$A$2:$A$61)", fmt_num, 0)
-    ws.write_formula(8, 0, "=INDEX(Data!$C$2:$C$61,MATCH(MAX(Data!$H$2:$H$61),Data!$H$2:$H$61,0))", fmt_text, "")
+        ws.write_formula(r, 1, f'=COUNTIF(Data!$B$2:$B${last},A{r + 1})', fmt_num, count)
+        ws.write_formula(r, 2, f'=SUMIF(Data!$B$2:$B${last},A{r + 1},Data!$H$2:$H${last})', fmt_num, cost)
+        ws.write_formula(r, 3, f'=SUMIF(Data!$B$2:$B${last},A{r + 1},Data!$I$2:$I${last})', fmt_num, benefit)
+        ws.write_formula(r, 4, f'=IFERROR(AVERAGEIF(Data!$B$2:$B${last},A{r + 1},Data!$G$2:$G${last}),0)',
+                         fmt_num, avg)
+    ws.write_formula(7, 0, f"=COUNTA(Data!$A$2:$A${last})", fmt_num, len(rows))
+    top = max(rows, key=lambda row: float(row[7])) if rows else ["", "", ""]
+    ws.write_formula(8, 0, f"=INDEX(Data!$C$2:$C${last},MATCH(MAX(Data!$H$2:$H${last}),Data!$H$2:$H${last},0))",
+                     fmt_text, str(top[2]) if len(top) > 2 else "")
     ws.set_column("A:A", 18); ws.set_column("B:E", 14)
-    wb.define_name("TaskCount", "=COUNTA(Data!$A$2:$A$61)")
-    wb.define_name("TotalCost", "=SUM(Data!$H$2:$H$61)")
-    wb.define_name("TotalBenefit", "=SUM(Data!$I$2:$I$61)")
+    wb.define_name("TaskCount", f"=COUNTA(Data!$A$2:$A${last})")
+    wb.define_name("TotalCost", f"=SUM(Data!$H$2:$H${last})")
+    wb.define_name("TotalBenefit", f"=SUM(Data!$I$2:$I${last})")
     ws.print_area("A1:E10")
     ws.set_landscape()
     ws.fit_to_pages(1, 1)
@@ -500,7 +512,6 @@ def _add_input_sheet(wb, spec: dict, fmt_header, fmt_text):
     ws.fit_to_pages(1, 1)
     ws.set_margins(0.4, 0.4, 0.5, 0.5)
     ws.activate()
-    ws.set_first_sheet()
     ws.set_tab_color("#C55A11")
     return ws
 
@@ -520,6 +531,88 @@ def _apply_ux(wb, spec: dict) -> None:
         if cfg.get("protect"):
             ws.protect("", {"select_locked_cells": True, "select_unlocked_cells": True})
 
+
+
+
+
+def _normalize_workbook_view(path: str | Path) -> bool:
+    """Make Dashboard the first visible tab while Input stays active.
+
+    XlsxWriter's ``set_first_sheet`` counts differently from OOXML; rewriting
+    ``firstSheet`` to the Dashboard index avoids an out-of-range/blank tab bar.
+    """
+    path = Path(path)
+    if not path.is_file():
+        return False
+    with zipfile.ZipFile(path) as zin:
+        members = {name: zin.read(name) for name in zin.namelist()}
+    if "xl/workbook.xml" not in members:
+        return False
+    text = members["xl/workbook.xml"].decode("utf-8")
+    names = re.findall(r'<sheet name="([^"]+)"', text)
+    if "Dashboard" not in names:
+        return False
+    index = names.index("Dashboard")
+    new = re.sub(r'firstSheet="\d+"', f'firstSheet="{index}"', text)
+    if new == text:
+        return False
+    members["xl/workbook.xml"] = new.encode("utf-8")
+    tmp = path.with_suffix(".view.xlsx")
+    with zipfile.ZipFile(tmp, "w", zipfile.ZIP_DEFLATED) as zout:
+        for name, blob in members.items():
+            zout.writestr(name, blob)
+    tmp.replace(path)
+    return True
+
+
+def _ux_stats(path: str | Path) -> dict:
+    """Rung-1 summary of the workbook UX layer, read back from the package."""
+    path = Path(path)
+    out = {"hidden": [], "very_hidden": [], "protected": [], "tab_colors": {},
+           "merged_ranges": 0, "validations": 0, "buttons": [],
+           "active_tab": None, "first_sheet": None, "sheets": 0}
+    if not path.is_file():
+        return out
+    with zipfile.ZipFile(path) as zf:
+        wb = zf.read("xl/workbook.xml").decode("utf-8")
+        active = re.search(r'activeTab="(\d+)"', wb)
+        first = re.search(r'firstSheet="(\d+)"', wb)
+        out["active_tab"] = int(active.group(1)) if active else None
+        out["first_sheet"] = int(first.group(1)) if first else None
+        rels = zf.read("xl/_rels/workbook.xml.rels").decode("utf-8")
+        targets = dict(re.findall(r'Id="([^"]+)"[^>]*Target="([^"]+)"', rels))
+        for tag in re.findall(r'<sheet [^>]+/>', wb):
+            name = re.search(r'name="([^"]+)"', tag)
+            rid = re.search(r'r:id="([^"]+)"', tag)
+            state = re.search(r'state="([^"]+)"', tag)
+            if not name or not rid:
+                continue
+            out["sheets"] += 1
+            name, rid = name.group(1), rid.group(1)
+            if state:
+                if state.group(1) == "hidden":
+                    out["hidden"].append(name)
+                elif state.group(1) == "veryHidden":
+                    out["very_hidden"].append(name)
+            target = targets.get(rid)
+            if not target:
+                continue
+            part = "xl/" + target.lstrip("/").replace("xl/", "", 1)
+            if part not in zf.namelist():
+                continue
+            xml = zf.read(part).decode("utf-8")
+            out["merged_ranges"] += xml.count("<mergeCell ")
+            out["validations"] += xml.count("<dataValidation ")
+            if "<sheetProtection" in xml:
+                out["protected"].append(name)
+            color = re.search(r'<tabColor rgb="([0-9A-Fa-f]+)"', xml)
+            if color:
+                out["tab_colors"][name] = color.group(1)
+        for name in zf.namelist():
+            if name.startswith("xl/drawings/") and name.endswith(".vml"):
+                vml = zf.read(name).decode("utf-8", errors="replace")
+                out["buttons"].extend(re.findall(r"<x:FmlaMacro>([^<]+)</x:FmlaMacro>", vml))
+    return out
 
 
 def build_dashboard(spec_path: str | Path, out_path: str | Path, *, pivot: bool = True,
@@ -555,7 +648,11 @@ def build_dashboard(spec_path: str | Path, out_path: str | Path, *, pivot: bool 
         _filter_summary(wb, spec, fmt_header, fmt_text, fmt_num)
     if (spec.get("ux") or {}).get("input_form"):
         _add_lookups_sheet(wb, spec, fmt_header, fmt_text)
-        _add_input_sheet(wb, spec, fmt_header, fmt_text)
+        input_ws = _add_input_sheet(wb, spec, fmt_header, fmt_text)
+        dashboard = wb.get_worksheet_by_name("Dashboard")
+        if dashboard is not None:
+            dashboard.set_first_sheet()
+        input_ws.activate()
     _apply_ux(wb, spec)
     wb.close()
 
@@ -590,6 +687,8 @@ def build_dashboard(spec_path: str | Path, out_path: str | Path, *, pivot: bool 
             }}],
         }, out_path)
 
+    _normalize_workbook_view(out_path)
+
     vba_info = None
     if vba:
         try:
@@ -604,7 +703,8 @@ def build_dashboard(spec_path: str | Path, out_path: str | Path, *, pivot: bool 
         vba_info = {"bas": str(bas), "injected": injected}
     audit = audit_workbook(out_path)
     return {"ok": audit["ok"], "output": str(out_path), "bytes": out_path.stat().st_size,
-            "pivot": pivot_ok, "vba": vba_info, "audit": audit}
+            "pivot": pivot_ok, "vba": vba_info, "audit": audit,
+            "ux": _ux_stats(out_path) if (spec.get("ux") or {}) else None}
 
 
 def _render_excel(xlsx: Path, out_dir: Path) -> list[str]:

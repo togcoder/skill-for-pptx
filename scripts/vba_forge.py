@@ -18,8 +18,12 @@ MODULE = r'''Attribute VB_Name = "DashboardTools"
 Option Explicit
 
 Private Sub SetStatus(ByVal text As String)
+    Dim ws As Worksheet
     On Error Resume Next
-    ThisWorkbook.Worksheets("Input").Range("B20").Value = text
+    Set ws = ThisWorkbook.Worksheets("Input")
+    ws.Unprotect Password:=""
+    ws.Range("B20").Value = text
+    ws.Protect Password:="", UserInterfaceOnly:=True
 End Sub
 
 Public Sub RefreshDashboard()

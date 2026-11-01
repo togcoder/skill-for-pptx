@@ -8,7 +8,7 @@ import unittest
 import zipfile
 
 from scripts.sheet_forge import build_dashboard
-from scripts.vba_forge import MODULE, write_dashboard_module
+from scripts.vba_forge import MODULE
 
 
 def _spec(tmp: Path) -> Path:
@@ -56,33 +56,39 @@ class WorkbookUxTests(unittest.TestCase):
             out = tmp / "ux.xlsx"
             report = build_dashboard(_spec(tmp), out, pivot=False)
             self.assertTrue(report["ok"], report["audit"])
+            ux = report["ux"]
+            self.assertEqual(ux["hidden"], ["Data"])
+            self.assertEqual(ux["very_hidden"], ["Pivot", "Lookups"])
+            self.assertEqual(ux["active_tab"], 8)
+            self.assertEqual(ux["first_sheet"], 5)
+            self.assertIn("Input", ux["protected"])
+            self.assertIn("Dashboard", ux["protected"])
+            self.assertEqual(ux["validations"], 8)
+            self.assertGreaterEqual(ux["merged_ranges"], 18)
+            self.assertEqual(len(ux["buttons"]), 3)
+            self.assertTrue(all("DashboardTools." in b for b in ux["buttons"]))
             with zipfile.ZipFile(out) as zf:
-                book = zf.read("xl/workbook.xml").decode("utf-8")
-                self.assertIn('state="hidden"', book)
-                self.assertIn('state="veryHidden"', book)
-                self.assertIn('activeTab="8"', book)  # Input is the ninth sheet
                 input_xml = zf.read("xl/worksheets/sheet9.xml").decode("utf-8")
-                self.assertIn("<mergeCell", input_xml)
-                self.assertGreaterEqual(input_xml.count("<dataValidation "), 6)
                 self.assertIn("<sheetProtection", input_xml)
                 self.assertIn('rgb="FFC55A11"', input_xml)
-                dashboard = zf.read("xl/worksheets/sheet6.xml").decode("utf-8")
-                self.assertIn('rgb="FF1F4E79"', dashboard)
-                self.assertIn("<sheetProtection", dashboard)
-                vml = zf.read("xl/drawings/vmlDrawing1.vml").decode("utf-8")
-                for macro in ("AddRecord", "ClearForm", "RefreshDashboard"):
-                    self.assertIn(macro, vml)
-                self.assertIn("DashboardTools.", vml)
+                self.assertIn("<mergeCell", input_xml)
+                self.assertGreaterEqual(input_xml.count("<dataValidation "), 6)
+                book = zf.read("xl/workbook.xml").decode("utf-8")
+                self.assertIn('firstSheet="5"', book)
+                self.assertIn('activeTab="8"', book)
+                model = zf.read("xl/worksheets/sheet2.xml").decode("utf-8")
+                self.assertIn("$A$12", model)  # data_last_row, not hard-coded 61
 
-    def test_vba_module_has_the_data_entry_contract(self):
+    def test_vba_contract_and_form_addresses(self):
         text = MODULE
         for token in ("Public Sub AddRecord()", "Public Sub ClearForm()",
                       "Public Sub RefreshDashboard()", "Private Sub SetStatus",
-                      "WorksheetExists", "Option Explicit"):
+                      "WorksheetExists", "Option Explicit", "Unprotect",
+                      "wsData.Cells(nextRow, 1).Value = nextId",
+                      "CDate(startDate) + CLng(days) - 1", 'Range("B20")'):
             self.assertIn(token, text)
-        self.assertIn("wsData.Cells(nextRow, 1).Value = nextId", text)
-        self.assertIn("CDate(startDate) + CLng(days) - 1", text)
-        self.assertIn("Range(\"B20\")", text)
+        for cell in ('"C6"', '"F6"', '"C7"', '"F7"', '"C8"', '"F8"', '"C9"', '"F9"'):
+            self.assertIn(cell, text)
 
 
 if __name__ == "__main__":

@@ -735,6 +735,13 @@ def audit_workbook(path: str | Path, system: dict | None = None) -> dict:
                 if points and w / points < min_category:
                     warnings.append(f"chart {index}: {w / points:.2f} cm per category (< {min_category:.2f}); rotate labels or reduce categories")
 
+            for s in info["series"]:
+                values = s.get("values") or []
+                if (len(values) >= 3 and not s.get("hidden")
+                        and all(abs(float(v)) < 1e-9 for v in values)):
+                    warnings.append(
+                        f"chart {index}: series {s.get('name') or '(unnamed)'} cache is all zero; "
+                        "formula cache may be stale")
             # Colour: contrast and pairwise distinctness.
             colors = [_hex(s.get("color")) for s in info["series"]
                       if s.get("color") and not s.get("hidden")]

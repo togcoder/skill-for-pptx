@@ -1,7 +1,7 @@
 {
   "ok": true,
   "output": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T039\\experiments\\T048-20261101-opencode-workbook-ux\\artifacts\\workbook-ux.xlsx",
-  "bytes": 31873,
+  "bytes": 31985,
   "pivot": false,
   "vba": {
     "bas": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T039\\experiments\\T048-20261101-opencode-workbook-ux\\artifacts\\workbook-ux.bas",
@@ -298,10 +298,10 @@
           {
             "name": "Cost",
             "values": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
+              780.0,
+              882.0,
+              984.0,
+              846.0
             ],
             "values_ref": "Model!$C$2:$C$5",
             "color": "2E75B6",
@@ -317,10 +317,10 @@
           {
             "name": "Benefit",
             "values": [
-              0.0,
-              0.0,
-              0.0,
-              0.0
+              1260.0,
+              1398.0,
+              1236.0,
+              1374.0
             ],
             "values_ref": "Model!$D$2:$D$5",
             "color": "548235",
@@ -413,5 +413,43 @@
         ]
       }
     ]
+  },
+  "ux": {
+    "hidden": [
+      "Data",
+      "Model",
+      "Team",
+      "Gantt",
+      "Relations"
+    ],
+    "very_hidden": [
+      "Pivot",
+      "Lookups"
+    ],
+    "protected": [
+      "Dashboard",
+      "Input"
+    ],
+    "tab_colors": {
+      "Data": "FF7F7F7F",
+      "Model": "FF7F7F7F",
+      "Team": "FF7F7F7F",
+      "Gantt": "FF7F7F7F",
+      "Relations": "FF7F7F7F",
+      "Dashboard": "FF1F4E79",
+      "Pivot": "FF7F7F7F",
+      "Lookups": "FF7F7F7F",
+      "Input": "FFC55A11"
+    },
+    "merged_ranges": 36,
+    "validations": 8,
+    "buttons": [
+      "[0]!DashboardTools.AddRecord",
+      "[0]!DashboardTools.ClearForm",
+      "[0]!DashboardTools.RefreshDashboard"
+    ],
+    "active_tab": 8,
+    "first_sheet": 5,
+    "sheets": 9
   }
 }
