@@ -30,9 +30,9 @@ place coordinates or pick animation effects by hand.
    warnings (rule, measured, expected, fix). It is advisory, so it does not
    change `ok`. Fix what the spec controls: density (DEN-WORDS) and type sizes
    (TYP-SIZES).
-5. **Look.** If PowerPoint is available, run
-   `python3 $ROOT/scripts/slide_forge.py render deck.pptx -d render/` and read
-   every `render/slide-NN.png` strip (6 frames across the slide's motion).
+5. **Look.** Render slides natively in Full HD 1080p (<1s) using DeckCraft:
+   `python3 $ROOT/scripts/deckcraft_bridge.py render deck.pptx -o previews/`
+   (or `python3 $ROOT/scripts/slide_forge.py render deck.pptx -d render/` with PowerPoint). Read every frame to check:
    Check:
    - Hierarchy reads at a glance.
    - Nothing wraps badly or collides mid-motion.
@@ -85,6 +85,9 @@ You do not need the user to supply assets. Forge can find licensed ones.
 | 3–6 ordered steps | `process` | steps and arrows; sequence words in `notes` give one click per step |
 | 3–6 stages that loop | `cycle` (+`center`) | parts assemble, spotlight tour, release |
 | A vs B | `comparison` | one side per click |
+| Golden Ratio (61.8% / 38.2%) | `asymmetric` (`major`, `minor`, `reverse`?) | major narrative card + secondary KPI/takeaway |
+| Tech architecture / dashboard | `bento` (`hero`, `top_right`, `bottom_right_1`, `bottom_right_2`) | 7/12 hero card + 3 split feature/stat cards |
+| Cognitive reset / emotional break | `duarte_break` (`statement` or `kpi`+`label`) | >=70% whitespace, single bold takeaway |
 | Voice of a customer/expert | `quote` | quote then attribution |
 | Ending / ask | `closing` | title, accent, subtitle |
 

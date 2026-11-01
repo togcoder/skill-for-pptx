@@ -1,0 +1,77 @@
+{
+  "title": "Autonomous AI Presentation Craft",
+  "theme": "midnight",
+  "chrome": true,
+  "logo": "ARTCRAFT",
+  "motion": {
+    "style": "modern",
+    "counters": true,
+    "morph": true
+  },
+  "slides": [
+    {
+      "layout": "title",
+      "kicker": "Design Intelligence 2026",
+      "title": "Autonomous AI Presentation Craft",
+      "subtitle": "Proof of Deterministic Design Canons, Bento Grids & Native Motion",
+      "image": {"generate": "abstract geometric neural network deep navy cyan"}
+    },
+    {
+      "layout": "asymmetric",
+      "title": "Golden Ratio Architecture",
+      "kicker": "Cognitive Focus",
+      "major": {
+        "heading": "61.8% Primary Narrative Plane",
+        "text": "By allocating the primary visual weight to the major golden column, audience eye tracking follows the natural Z-pattern without fatigue. Text hierarchy and surface glassmorphism establish immediate depth."
+      },
+      "minor": {
+        "heading": "Key Impact",
+        "kpi": "61.8%",
+        "text": "Visual mass focused on the primary takeaway while retaining 38.2% context."
+      }
+    },
+    {
+      "layout": "bento",
+      "title": "Bento Grid Dashboard",
+      "kicker": "Multi-Craft System",
+      "hero": {
+        "title": "Universal Orchestration Hub",
+        "text": "The central coordinator manages task delegation across native DeckCraft, WordCraft, GridCraft, and VectorCraft engines with strict handoff contracts."
+      },
+      "top_right": {
+        "title": "DeckCraft Headless Engine",
+        "text": "Native Rust rendering pipeline producing Full HD 1080p slide frames in sub-second latency."
+      },
+      "bottom_right_1": {
+        "kpi": "<1s",
+        "label": "Native 1080p render"
+      },
+      "bottom_right_2": {
+        "kpi": "100%",
+        "label": "Audit pass rate"
+      }
+    },
+    {
+      "layout": "duarte_break",
+      "kpi": "99.8%",
+      "label": "First-pass deterministic execution accuracy under Nancy Duarte cognitive pacing rules."
+    },
+    {
+      "layout": "kpis",
+      "title": "Measurable Production Metrics",
+      "kicker": "Empirical QA",
+      "items": [
+        {"value": "<800ms", "label": "Full HD render speed"},
+        {"value": "314", "label": "Passing unit tests"},
+        {"value": "4.5:1+", "label": "WCAG AA contrast"},
+        {"value": "100%", "label": "Native PPTX fidelity"}
+      ],
+      "takeaway": "Every slide is validated by automated critic grading before human delivery."
+    },
+    {
+      "layout": "closing",
+      "title": "Production Craft, Proven",
+      "subtitle": "Any AI agent can now author world-class presentation decks autonomously."
+    }
+  ]
+}
