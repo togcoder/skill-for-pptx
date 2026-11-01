@@ -22,6 +22,8 @@ chart synthesis) before compound assembly into target applications (pptx, docx, 
 | `lab/protocols/00–04` (intent decoder, capability-first gate, delegation DAG, red-team rubric, cross-asset pipeline & local autonomy) | T036, T044; Vietnamese |
 | `lab/schemas/` (intent_brief, handoff_contract, critique_report) | T036 |
 | `lab/registry/artcraft_capabilities.json` | T036; depends on the owner's local ArtCraft install (`D:\artcraft`) |
+| `scripts/office_link_bridge.py` | T047; Interactive Excel-to-PPTX/DOCX linked charts, full SheetCraft workbook embedding, and offline cache synchronization |
+| `scripts/cross_pipeline.py` | T044; Programmatic validators for broadcast audio, image aspect/alpha, and presentation chart data |
 | `scripts/intent_decoder.py`, `artcraft_hub.py`, `sync_artcraft_capabilities.py`, `validate_handoff.py` | Experimental (T036–T037); unreviewed |
 
 ## Rules
@@ -29,8 +31,10 @@ chart synthesis) before compound assembly into target applications (pptx, docx, 
   domains** (`lab/PROTOCOL.md`, anti-monoculture).
 - Domain cards may reject a cross-layer rule for their domain, with reasons.
 - **Pre-process before embedding (`lab/protocols/04`):** Never embed raw, unprocessed assets. Images must be cropped/masked; audio must be normalized (-14 LUFS); data must be verified in spreadsheets before embedding.
+- **Office Interoperability Law (`T047`):** Charts shared between Excel and PowerPoint/Word must either maintain a live external link (`TargetMode="External"`) or embed the full multi-sheet SheetCraft model, and maintain synchronized cache values (`<c:numCache>`, `<c:strCache>`) so that clicking "Edit Data in Excel" opens the real calculation model.
 - **Local autonomy & hygiene:** Full authority to download external assets and libraries locally; all transient scratch files must remain in `workspace/` and be cleaned up when done.
 
 ## State (2026-11-01)
 - T044 added Protocol 04 (Cross-Asset Pipeline & Local Autonomy Charter) per official owner mandate.
-- OpenCode is progressing on Word (`docx`) and Excel (`xlsx`); Antigravity is progressing on PowerPoint (`pptx`) and Cross-Domain (`cross`).
+- T047 added Office Link Bridge (`scripts/office_link_bridge.py`) solving the sequential agent interaction problem between Excel models and PowerPoint/Word presentation decks.
+- OpenCode has integrated advanced docx (`T045`) and advanced xlsx (`T046`) onto `main`. Antigravity leads PowerPoint (`pptx`) and Cross-Domain (`cross`).

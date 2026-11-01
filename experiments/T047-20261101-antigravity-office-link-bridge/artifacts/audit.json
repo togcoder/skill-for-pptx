@@ -1,0 +1,246 @@
+{
+  "embedded_deck": {
+    "file": "C:\\Users\\COMPUTER\\Desktop\\làm chung với ai\\skill-for-pptx\\experiments\\T047-20261101-antigravity-office-link-bridge\\artifacts\\executive_deck_embedded.pptx",
+    "document_type": "pptx",
+    "total_charts": 1,
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart1.xml",
+        "title": null,
+        "link_mode": "embedded",
+        "auto_update": "0",
+        "external_id": "rId1",
+        "relationship": {
+          "id": "rId1",
+          "type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/package",
+          "target": "../embeddings/Microsoft_Excel_Worksheet1.xlsx",
+          "target_mode": "Internal"
+        },
+        "series_count": 2,
+        "series": [
+          {
+            "idx": "0",
+            "name": "Doanh thu thuần",
+            "name_formula": "'DoanhThu_LoiNhuan'!$A2",
+            "categories_formula": "'DoanhThu_LoiNhuan'!$B$1:$E$1",
+            "categories_count": 4,
+            "categories_sample": [
+              "Quý 1",
+              "Quý 2",
+              "Quý 3",
+              "Quý 4"
+            ],
+            "values_formula": "'DoanhThu_LoiNhuan'!$B$2:$E$2",
+            "values_count": 4,
+            "values": [
+              1250,
+              1480,
+              1620,
+              1950
+            ]
+          },
+          {
+            "idx": "1",
+            "name": "Lợi nhuận thuần (EBIT)",
+            "name_formula": "'DoanhThu_LoiNhuan'!$A6",
+            "categories_formula": "'DoanhThu_LoiNhuan'!$B$1:$E$1",
+            "categories_count": 4,
+            "categories_sample": [
+              "Quý 1",
+              "Quý 2",
+              "Quý 3",
+              "Quý 4"
+            ],
+            "values_formula": "'DoanhThu_LoiNhuan'!$B$6:$E$6",
+            "values_count": 4,
+            "values": [
+              350,
+              480,
+              550,
+              680
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "linked_deck": {
+    "file": "C:\\Users\\COMPUTER\\Desktop\\làm chung với ai\\skill-for-pptx\\experiments\\T047-20261101-antigravity-office-link-bridge\\artifacts\\executive_deck_linked.pptx",
+    "document_type": "pptx",
+    "total_charts": 1,
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart1.xml",
+        "title": null,
+        "link_mode": "linked_external",
+        "auto_update": "1",
+        "external_id": "rId1",
+        "relationship": {
+          "id": "rId1",
+          "type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/oleObject",
+          "target": "file:///C:\\Users\\COMPUTER\\Desktop\\l%C3%A0m%20chung%20v%E1%BB%9Bi%20ai\\skill-for-pptx\\experiments\\T047-20261101-antigravity-office-link-bridge\\artifacts\\financial_model.xlsx",
+          "target_mode": "External"
+        },
+        "series_count": 2,
+        "series": [
+          {
+            "idx": "0",
+            "name": "Doanh thu thuần",
+            "name_formula": "'DoanhThu_LoiNhuan'!$A2",
+            "categories_formula": "'DoanhThu_LoiNhuan'!$B$1:$E$1",
+            "categories_count": 4,
+            "categories_sample": [
+              "Quý 1",
+              "Quý 2",
+              "Quý 3",
+              "Quý 4"
+            ],
+            "values_formula": "'DoanhThu_LoiNhuan'!$B$2:$E$2",
+            "values_count": 4,
+            "values": [
+              1250,
+              1480,
+              1620,
+              1950
+            ]
+          },
+          {
+            "idx": "1",
+            "name": "Lợi nhuận thuần (EBIT)",
+            "name_formula": "'DoanhThu_LoiNhuan'!$A6",
+            "categories_formula": "'DoanhThu_LoiNhuan'!$B$1:$E$1",
+            "categories_count": 4,
+            "categories_sample": [
+              "Quý 1",
+              "Quý 2",
+              "Quý 3",
+              "Quý 4"
+            ],
+            "values_formula": "'DoanhThu_LoiNhuan'!$B$6:$E$6",
+            "values_count": 4,
+            "values": [
+              350,
+              480,
+              550,
+              680
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "synced_deck": {
+    "file": "C:\\Users\\COMPUTER\\Desktop\\làm chung với ai\\skill-for-pptx\\experiments\\T047-20261101-antigravity-office-link-bridge\\artifacts\\executive_deck_synced.pptx",
+    "document_type": "pptx",
+    "total_charts": 1,
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart1.xml",
+        "title": null,
+        "link_mode": "linked_external",
+        "auto_update": "1",
+        "external_id": "rId1",
+        "relationship": {
+          "id": "rId1",
+          "type": "http://schemas.openxmlformats.org/officeDocument/2006/relationships/oleObject",
+          "target": "file:///C:\\Users\\COMPUTER\\Desktop\\l%C3%A0m%20chung%20v%E1%BB%9Bi%20ai\\skill-for-pptx\\experiments\\T047-20261101-antigravity-office-link-bridge\\artifacts\\financial_model.xlsx",
+          "target_mode": "External"
+        },
+        "series_count": 2,
+        "series": [
+          {
+            "idx": "0",
+            "name": "Doanh thu thuần",
+            "name_formula": "'DoanhThu_LoiNhuan'!$A2",
+            "categories_formula": "'DoanhThu_LoiNhuan'!$B$1:$E$1",
+            "categories_count": 4,
+            "categories_sample": [
+              "Quý 1",
+              "Quý 2",
+              "Quý 3",
+              "Quý 4"
+            ],
+            "values_formula": "'DoanhThu_LoiNhuan'!$B$2:$E$2",
+            "values_count": 4,
+            "values": [
+              1250,
+              1480,
+              1620,
+              2450
+            ]
+          },
+          {
+            "idx": "1",
+            "name": "Lợi nhuận thuần (EBIT)",
+            "name_formula": "'DoanhThu_LoiNhuan'!$A6",
+            "categories_formula": "'DoanhThu_LoiNhuan'!$B$1:$E$1",
+            "categories_count": 4,
+            "categories_sample": [
+              "Quý 1",
+              "Quý 2",
+              "Quý 3",
+              "Quý 4"
+            ],
+            "values_formula": "'DoanhThu_LoiNhuan'!$B$6:$E$6",
+            "values_count": 4,
+            "values": [
+              350,
+              480,
+              550,
+              980
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "sync_diff": {
+    "ok": true,
+    "output_file": "C:\\Users\\COMPUTER\\Desktop\\làm chung với ai\\skill-for-pptx\\experiments\\T047-20261101-antigravity-office-link-bridge\\artifacts\\executive_deck_synced.pptx",
+    "synced_charts": [
+      {
+        "chart": "ppt/charts/chart1.xml",
+        "status": "synced",
+        "source": "C:\\Users\\COMPUTER\\Desktop\\làm chung với ai\\skill-for-pptx\\experiments\\T047-20261101-antigravity-office-link-bridge\\artifacts\\financial_model.xlsx",
+        "series": [
+          {
+            "series_idx": "0",
+            "formula": "'DoanhThu_LoiNhuan'!$B$2:$E$2",
+            "sheet": "DoanhThu_LoiNhuan",
+            "old_values": [
+              "1250",
+              "1480",
+              "1620",
+              "1950"
+            ],
+            "new_values": [
+              1250,
+              1480,
+              1620,
+              2450
+            ],
+            "changed": true
+          },
+          {
+            "series_idx": "1",
+            "formula": "'DoanhThu_LoiNhuan'!$B$6:$E$6",
+            "sheet": "DoanhThu_LoiNhuan",
+            "old_values": [
+              "350",
+              "480",
+              "550",
+              "680"
+            ],
+            "new_values": [
+              350,
+              480,
+              550,
+              980
+            ],
+            "changed": true
+          }
+        ]
+      }
+    ]
+  }
+}
