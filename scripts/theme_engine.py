@@ -233,6 +233,8 @@ class PPTXThemeExtractor:
             raw_colors: List[Dict[str, Any]] = []
             text_runs: List[Dict[str, Any]] = []
             shape_geometries: List[str] = []
+            detected_shape_alphas: List[float] = []
+            translucent_media_stats: List[Dict[str, Any]] = []
 
             for s_file in slide_files:
                 s_root = ET.fromstring(z.read(s_file))
@@ -276,6 +278,12 @@ class PPTXThemeExtractor:
                     elif sp.find(".//a:custGeom", self.NS) is not None:
                         shape_geometries.append("custGeom")
 
+                    # Check for explicit shape transparency (<a:alpha val="...">)
+                    for alpha_node in sp.findall(".//a:alpha", self.NS):
+                        val = alpha_node.attrib.get("val")
+                        if val:
+                            detected_shape_alphas.append(int(val) / 1000.0)
+
                     # Shape Size
                     xfrm = sp.find(".//a:xfrm", self.NS)
                     if xfrm is None:
@@ -285,9 +293,9 @@ class PPTXThemeExtractor:
                     cy = int(ext.attrib.get("cy", 914400)) if ext is not None else 914400
                     shape_area = float(cx) * float(cy)
 
-                    # Check for Full-Slide Image Background (blipFill covering >= 70% of slide)
+                    # Check for Full-Slide Image Background or Translucent Media Overlays
                     blip = sp.find(".//a:blip", self.NS)
-                    if blip is not None and cx >= 0.7 * slide_cx and cy >= 0.7 * slide_cy:
+                    if blip is not None:
                         embed_id = blip.attrib.get("{http://schemas.openxmlformats.org/officeDocument/2006/relationships}embed")
                         media_path = rel_targets.get(embed_id)
                         if media_path and media_path in names:
@@ -295,31 +303,48 @@ class PPTXThemeExtractor:
                                 from io import BytesIO
                                 from PIL import Image
                                 img_bytes = z.read(media_path)
-                                im = Image.open(BytesIO(img_bytes)).convert("RGB")
-                                avg_color = im.resize((1, 1)).getpixel((0, 0))
-                                bg_hex = f"#{avg_color[0]:02X}{avg_color[1]:02X}{avg_color[2]:02X}"
-                                raw_colors.append({
-                                    "hex": bg_hex,
-                                    "weight": slide_area * 1.5,
-                                    "is_bg": True,
-                                    "is_text": False,
-                                })
-                                bg_found = True
+                                im = Image.open(BytesIO(img_bytes))
 
-                                # Sample top chromatic accent from background image
-                                im_small = im.resize((50, 50))
-                                for px in im_small.getdata():
-                                    L, a_c, b_c = rgb_to_oklab(px)
-                                    _, C, _ = oklab_to_oklch(L, a_c, b_c)
-                                    if C > 0.10:  # High chroma accent
-                                        accent_h = rgb_to_hex(*px)
-                                        raw_colors.append({
-                                            "hex": accent_h,
-                                            "weight": shape_area * 0.2,
-                                            "is_bg": False,
-                                            "is_text": False,
+                                # Analyze Alpha Channel Translucency
+                                if "A" in im.getbands():
+                                    alpha = im.getchannel("A")
+                                    hist = alpha.histogram()
+                                    total_px = im.size[0] * im.size[1]
+                                    translucent_px = sum(hist[1:255])
+                                    translucent_ratio = translucent_px / float(total_px)
+                                    if translucent_ratio > 0.15:
+                                        translucent_media_stats.append({
+                                            "media": media_path,
+                                            "ratio": translucent_ratio,
+                                            "size": im.size,
                                         })
-                                        break
+
+                                im_rgb = im.convert("RGB")
+                                if cx >= 0.7 * slide_cx and cy >= 0.7 * slide_cy:
+                                    avg_color = im_rgb.resize((1, 1)).getpixel((0, 0))
+                                    bg_hex = f"#{avg_color[0]:02X}{avg_color[1]:02X}{avg_color[2]:02X}"
+                                    raw_colors.append({
+                                        "hex": bg_hex,
+                                        "weight": slide_area * 1.5,
+                                        "is_bg": True,
+                                        "is_text": False,
+                                    })
+                                    bg_found = True
+
+                                    # Sample top chromatic accent from background image
+                                    im_small = im_rgb.resize((50, 50))
+                                    for px in im_small.getdata():
+                                        L, a_c, b_c = rgb_to_oklab(px)
+                                        _, C, _ = oklab_to_oklch(L, a_c, b_c)
+                                        if C > 0.10:  # High chroma accent
+                                            accent_h = rgb_to_hex(*px)
+                                            raw_colors.append({
+                                                "hex": accent_h,
+                                                "weight": shape_area * 0.2,
+                                                "is_bg": False,
+                                                "is_text": False,
+                                            })
+                                            break
                             except Exception:
                                 pass
 
@@ -388,7 +413,39 @@ class PPTXThemeExtractor:
             # 5. Extract Typography & Modular Scale
             typography = self._extract_typography(text_runs, major_font, minor_font)
 
-            # 6. Synthesize Full ThemeSpec
+            # 6. Background Recipe Analysis (Multi-layer composite: base canvas, translucent PNG overlays, alpha tint washes)
+            is_pure_solid = True
+            bg_style = "PURE_SOLID"
+            bg_description = "Clean flat solid background fill."
+
+            if translucent_media_stats:
+                is_pure_solid = False
+                bg_style = "TRANSLUCENT_PNG_OVERLAY"
+                max_ratio = max(m["ratio"] for m in translucent_media_stats)
+                bg_description = (
+                    f"Multi-layer composite background featuring {len(translucent_media_stats)} translucent "
+                    f"PNG assets (up to {max_ratio * 100:.1f}% translucent pixels with alpha 1..254) "
+                    f"overlaying a warm canvas ({palette['canvas_hex']}) for soft organic depth."
+                )
+            elif bg_found:
+                is_pure_solid = False
+                bg_style = "COMPOSITE_TEXTURE_IMAGE"
+                bg_description = (
+                    f"Atmospheric full-bleed composite texture image with dark lighting gradients "
+                    f"and low-key exposure ({palette['canvas_hex']})."
+                )
+
+            background_recipe = {
+                "is_pure_solid": is_pure_solid,
+                "style": bg_style,
+                "base_tone_hex": palette["canvas_hex"],
+                "translucent_media_layers": translucent_media_stats,
+                "detected_shape_alphas": detected_shape_alphas,
+                "has_translucent_cards": any(a < 99.0 for a in detected_shape_alphas),
+                "description": bg_description,
+            }
+
+            # 7. Synthesize Full ThemeSpec
             canvas_mode = classify_canvas_mode(palette["canvas_hex"])
             theme_spec = {
                 "source_file": self.pptx_path.name,
@@ -396,9 +453,11 @@ class PPTXThemeExtractor:
                 "slide_count": len(slide_files),
                 "palette_60_30_10": palette,
                 "typography": typography,
+                "background_recipe": background_recipe,
                 "shape_dna": {
                     "has_cust_geom_mask": "custGeom" in shape_geometries,
                     "dominant_shape": max(set(shape_geometries), key=shape_geometries.count) if shape_geometries else "rect",
+                    "has_translucent_shapes": background_recipe["has_translucent_cards"],
                 },
                 "image_direct_prompt": self._generate_image_directive(canvas_mode, palette["accent_primary_hex"]),
             }
@@ -595,6 +654,11 @@ ARCHETYPES = {
         "shape_style": "SHARP_CHAMFER",
         "border_weight_pt": 1.0,
         "corner_radius_pt": 2,
+        "background_recipe": {
+            "is_pure_solid": True,
+            "style": "PURE_SOLID",
+            "description": "High-clarity technical solid canvas (#F4F6F9) with crisp solid surface cards",
+        },
     },
     "TECH_PITCH_DARK": {
         "keywords": ["pitch deck", "gọi vốn", "ai", "startup", "công nghệ", "hiện đại", "blue modern", "data", "cyber", "software"],
@@ -610,6 +674,13 @@ ARCHETYPES = {
         "shape_style": "FREEFORM_ANGLED_AND_GLASS",
         "border_weight_pt": 1.0,
         "corner_radius_pt": 0,
+        "background_recipe": {
+            "is_pure_solid": False,
+            "style": "COMPOSITE_TEXTURE_IMAGE",
+            "has_translucent_cards": True,
+            "shape_alpha": 0.35,
+            "description": "Deep obsidian base (#0B1B3D) with directional geometric lighting textures and frosted glass translucent cards (35% alpha)",
+        },
     },
     "EDITORIAL_WARM_KEYNOTE": {
         "keywords": ["hội thảo", "văn hóa", "nội bộ", "webinar", "keynote", "nhân sự", "thương hiệu", "storytelling", "lifestyle", "ấm áp"],
@@ -624,6 +695,13 @@ ARCHETYPES = {
         "shape_style": "SOFT_ORGANIC_PILL",
         "border_weight_pt": 0.0,
         "corner_radius_pt": 18,
+        "background_recipe": {
+            "is_pure_solid": False,
+            "style": "TRANSLUCENT_PNG_OVERLAY",
+            "has_translucent_cards": True,
+            "translucent_alpha_range": "40%-70%",
+            "description": "Warm ecru canvas (#F4F1E9) layered with translucent organic pastel PNG watercolor washes and soft rounded cards",
+        },
     },
     "EXECUTIVE_STRATEGY": {
         "keywords": ["tài chính", "chiến lược", "hđqt", "board", "doanh thu", "ngân hàng", "báo cáo năm", "executive", "finance"],
@@ -638,6 +716,11 @@ ARCHETYPES = {
         "shape_style": "STRUCTURED_GRID",
         "border_weight_pt": 0.75,
         "corner_radius_pt": 0,
+        "background_recipe": {
+            "is_pure_solid": True,
+            "style": "PURE_SOLID",
+            "description": "Crisp off-white executive canvas (#FAF9F6) with high-contrast structural grid",
+        },
     },
     "SUSTAINABLE_BIO": {
         "keywords": ["esg", "xanh", "bền vững", "môi trường", "y tế", "năng lượng", "bio", "health", "green"],
@@ -652,6 +735,12 @@ ARCHETYPES = {
         "shape_style": "ROUNDED_BENTO",
         "border_weight_pt": 1.0,
         "corner_radius_pt": 10,
+        "background_recipe": {
+            "is_pure_solid": False,
+            "style": "TRANSLUCENT_PNG_OVERLAY",
+            "has_translucent_cards": True,
+            "description": "Soft organic sage canvas (#F0F5F1) with translucent botanical watercolor accents",
+        },
     },
 }
 
@@ -696,6 +785,13 @@ def synthesize_theme_from_need(
 
     canvas_mode = classify_canvas_mode(canvas_hex)
 
+    bg_rec = dict(arch.get("background_recipe", {
+        "is_pure_solid": True,
+        "style": "PURE_SOLID",
+        "description": "Clean flat solid background fill.",
+    }))
+    bg_rec["base_tone_hex"] = canvas_hex
+
     return {
         "archetype_id": best_id,
         "canvas_mode": canvas_mode,
@@ -713,10 +809,12 @@ def synthesize_theme_from_need(
             "modular_scale_ratio": arch["modular_scale"],
             "hero_kpi_pt": arch.get("hero_kpi_pt"),
         },
+        "background_recipe": bg_rec,
         "shape_dna": {
             "shape_style": arch["shape_style"],
             "border_weight_pt": arch["border_weight_pt"],
             "corner_radius_pt": arch["corner_radius_pt"],
+            "has_translucent_shapes": bg_rec.get("has_translucent_cards", False),
         },
     }
 
@@ -747,15 +845,25 @@ def build_harmonized_image_prompt(
     if slot_type == "hero_full_bleed":
         aspect_ratio = "16:9"
         framing = "cinematic wide composition, subject anchored on the right third, leaving 60% clean uncluttered negative space on the left for presentation typography overlay"
+    elif slot_type == "atmospheric_backdrop":
+        aspect_ratio = "16:9"
+        framing = "full-frame atmospheric background texture, expansive seamless gradient depth, zero prominent foreground focal objects, optimized as slide presentation backdrop"
     elif slot_type in ("split_vertical_panel", "angled_mask_feature"):
         aspect_ratio = "4:5"
         framing = "tight vertical composition, centered subject with 25% clean breathing margin around all edges to withstand diagonal and geometric polygon mask cropping"
+    elif slot_type == "translucent_art_wash":
+        aspect_ratio = "1:1"
+        framing = "isolated abstract organic fluid wash, soft diffuse edges, gentle watercolor dispersal, isolated on pure solid white background for alpha channel extraction, zero boundary clipping"
     else:  # bento_card_square, avatar_icon
         aspect_ratio = "1:1"
         framing = "centered isometric or macro product object framing on an elegant uniform studio background"
 
     # 2. Lighting & Kelvin
-    if canvas_mode == "DARK_CANVAS":
+    if slot_type == "translucent_art_wash":
+        kelvin = 4500
+        lighting = "soft high-key ambient light, gentle pastel luminescence, zero harsh shadows"
+        color_grade = f"soft dusty pastel gradients featuring {accent_hex} and delicate translucent tints, subtle watercolor paper texture"
+    elif canvas_mode == "DARK_CANVAS":
         kelvin = 6500
         lighting = "dramatic directional rim lighting, cool-toned key light at 6500K, deep obsidian-navy shadows, subtle cyan/cobalt specular highlights"
         color_grade = f"color graded with deep navy shadow floor and electric highlights ({accent_hex}), low-key exposure blending seamlessly into dark slide background without white borders"

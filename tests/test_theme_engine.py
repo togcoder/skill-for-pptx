@@ -91,6 +91,14 @@ class PPTXReferenceTeardownTests(unittest.TestCase):
         # Check Shape DNA: custGeom detected
         self.assertTrue(spec["shape_dna"]["has_cust_geom_mask"])
 
+        # Check Background Recipe: Composite texture background + Shape Alpha
+        bg_recipe = spec["background_recipe"]
+        self.assertFalse(bg_recipe["is_pure_solid"])
+        self.assertIn(bg_recipe["style"], ("COMPOSITE_TEXTURE_IMAGE", "TRANSLUCENT_PNG_OVERLAY"))
+        # Verify detected shape alpha (~36.8% detected on translucent cards)
+        self.assertTrue(bg_recipe["has_translucent_cards"])
+        self.assertTrue(any(abs(a - 36.86) < 1.0 for a in bg_recipe["detected_shape_alphas"]))
+
     @unittest.skipUnless(SAMPLE_DECKS_DIR.is_dir(), "Sample decks folder required")
     def test_teardown_webinar_keynote_presentation(self):
         deck_path = SAMPLE_DECKS_DIR / "Webinar Keynote Presentation.pptx"
@@ -114,6 +122,15 @@ class PPTXReferenceTeardownTests(unittest.TestCase):
         typo = spec["typography"]
         combined_fonts = typo["font_display"] + " " + typo["font_body"]
         self.assertTrue("TT Commons" in combined_fonts or "TAN Mon Cheri" in combined_fonts)
+
+        # Check Background Recipe: Multi-layer Translucent PNG Overlays
+        bg_recipe = spec["background_recipe"]
+        self.assertFalse(bg_recipe["is_pure_solid"])
+        self.assertEqual(bg_recipe["style"], "TRANSLUCENT_PNG_OVERLAY")
+        # Assert translucent media layers detected with high ratio (>50% translucent pixels)
+        layers = bg_recipe["translucent_media_layers"]
+        self.assertGreater(len(layers), 0)
+        self.assertTrue(any(layer["ratio"] > 0.50 for layer in layers))
 
 
 class NeedBasedSynthesizerTests(unittest.TestCase):
@@ -140,6 +157,8 @@ class NeedBasedSynthesizerTests(unittest.TestCase):
         pal = theme["palette_60_30_10"]
         self.assertGreaterEqual(pal["wcag_contrast_ratio"], 4.5)
         self.assertEqual(theme["shape_dna"]["shape_style"], "SOFT_ORGANIC_PILL")
+        self.assertEqual(theme["background_recipe"]["style"], "TRANSLUCENT_PNG_OVERLAY")
+        self.assertFalse(theme["background_recipe"]["is_pure_solid"])
 
     def test_dynamic_hue_override(self):
         # Rotate hue to emerald green (~140 degrees)
@@ -172,6 +191,23 @@ class ImagePromptHarmonizerTests(unittest.TestCase):
         self.assertIn("3800K", res["prompt"])
         self.assertIn("Kodak Portra", res["prompt"])
         self.assertEqual(res["recommended_mask"], "soft_pill")
+
+    def test_translucent_art_wash_isolation(self):
+        warm_theme = {"canvas_mode": "WARM_PAPER", "palette_60_30_10": {"accent_primary_hex": "#FFD0E0"}}
+        res = build_harmonized_image_prompt("Organic fluid watercolor wash", warm_theme, "translucent_art_wash")
+
+        self.assertEqual(res["aspect_ratio"], "1:1")
+        self.assertEqual(res["lighting_kelvin"], 4500)
+        self.assertIn("isolated on pure solid white background for alpha channel extraction", res["prompt"])
+        self.assertIn("#FFD0E0", res["prompt"])
+
+    def test_atmospheric_backdrop(self):
+        dark_theme = {"canvas_mode": "DARK_CANVAS", "palette_60_30_10": {"accent_primary_hex": "#3B82F6"}}
+        res = build_harmonized_image_prompt("Subtle angular geometric facet gradients", dark_theme, "atmospheric_backdrop")
+
+        self.assertEqual(res["aspect_ratio"], "16:9")
+        self.assertIn("full-frame atmospheric background texture", res["prompt"])
+        self.assertIn("6500K", res["prompt"])
 
 
 if __name__ == "__main__":

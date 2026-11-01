@@ -43,13 +43,22 @@ python lab/tools/check_layout.py
 | Area-Weighted Color Math | Rung 0 | `scripts/theme_engine.py`: OKLab/OKLCH roundtrip, Relative Luminance, WCAG contrast pass in `ColorMathTests` |
 | Native Reference Teardown (Blue Modern) | Rung 4 | Extracted `DARK_CANVAS` (`#01152B`), `#FFFFFF` text, `Aileron` font, `hero_kpi_pt = 202.0`, `custGeom` mask from `Blue Modern` PPTX |
 | Native Reference Teardown (Webinar) | Rung 4 | Extracted `WARM_PAPER` (`#F4F1E9`), `#1A1A1A` text, `TT Commons Pro` + `TAN Mon Cheri` fonts, pastel accents (`#FFD0E0`, `#C6A4BF`, `#EAA86B`) from `Webinar` PPTX |
-| Need-Based Semantic Synthesizer | Rung 0 | Synthesizes tailored palettes for QCC reports, AI Pitch Decks, and Corporate Keynotes with $\ge 4.5$ WCAG contrast |
+| Composite Background & Translucency | Rung 4 | Proved user critique: `Webinar` deck uses translucent PNG washes (`image1.png` has 60.9% translucent alpha pixels; `image6.png` has 64.9%). `Blue Modern` uses `<a:alpha val="36863"/>` (36.86% opacity) for frosted glass cards over full-bleed texture. |
+| Background Recipe Extraction | Rung 0 | `theme_engine.py` classifies backgrounds into `TRANSLUCENT_PNG_OVERLAY`, `COMPOSITE_TEXTURE_IMAGE`, or `PURE_SOLID` with exact layer stats. |
+| Need-Based Semantic Synthesizer | Rung 0 | Synthesizes tailored palettes for QCC reports, AI Pitch Decks, and Corporate Keynotes with $\ge 4.5$ WCAG contrast and layered background recipes. |
 | Dynamic Hue Override | Rung 0 | Rotates accent Hue in OKLCH while preserving Lightness and Chroma without contrast degradation |
-| AI Image Visual Harmonizer | Rung 0 | Generates 6-layer prompts with 6500K for Dark Canvas, 3800K for Warm Paper, 5500K for Light Canvas, and slots (16:9, 4:5, 1:1) |
-| Full Suite Conformance | Rung 0 | All 352 unit tests pass 100% (skipped=4); `lab/tools/check_layout.py` reports `layout OK` |
+| AI Image Visual Harmonizer | Rung 0 | Formulates prompts for full-bleed hero (16:9), split panels (4:5), atmospheric backdrops (16:9), and isolated translucent pastel art washes (1:1 with alpha mask extraction). |
+| Full Suite Conformance | Rung 0 | All 354 unit tests pass 100% (skipped=4); `lab/tools/check_layout.py` reports `layout OK` |
+
+## Composite Background Architecture (Addressing Non-Solid Backgrounds)
+Presentations in high-tier design NEVER treat backgrounds as simple flat solid colors (`đơn sắc`). The engine models backgrounds as a 4-layer composite stack:
+1. **Layer 0 (Canvas Base Tone):** Foundational solid color or paper tone (`#F4F1E9` Warm Paper, `#0B1B3D` Deep Obsidian, `#F4F6F9` Industrial Mist).
+2. **Layer 1 (Atmosphere & Translucent PNG Washes):** Organic pastel watercolor washes or geometric lighting meshes with variable alpha channels ($1 \le \alpha \le 254$). In `Webinar Keynote`, 60.9%–64.9% of asset pixels are semi-transparent, creating subtle pastel tones that blend seamlessly into the warm paper.
+3. **Layer 2 (Tint Washes & Translucent Cards):** Surface shapes with explicit OOXML opacity (`<a:alpha val="36863"/>` = 36.86% opacity) providing frosted glass cards and contrast elevation.
+4. **Layer 3 (Foreground Typography & Data):** Text and data elements satisfying WCAG 2.1 AA/AAA contrast.
 
 ## Negative results and limitations
-- If full-bleed background artwork is a purely raster graphic without XML vector tokens, `Pillow` is required to sample pixel clusters; a mathematical fallback is provided when Pillow is absent.
+- If full-bleed background artwork is a purely raster graphic without XML vector tokens, `Pillow` is required to sample pixel clusters and alpha channels; a mathematical fallback is provided when Pillow is absent.
 - Custom boutique display fonts (e.g. `TAN Mon Cheri`, `Aileron`) require the font files to be present on the presenter's operating system to render; fallback font stacks (`Century Gothic`, `Segoe UI`, `Georgia`, `Playfair Display`) are supplied in each ThemeSpec.
 
 ## Next
@@ -59,4 +68,5 @@ python lab/tools/check_layout.py
 ## Review response
 | Finding | Response (fixed / disputed / deferred → task) |
 |---|---|
+| User critique: Background is NOT flat solid hex; pastel colors are translucent PNG washes (alpha xx%) and composite images. | FIXED: Analyzed sample deck alpha histograms (60.9% translucent pixels), added `background_recipe` to `PPTXThemeExtractor`, `synthesize_theme_from_need`, and added `translucent_art_wash` image prompt mode. |
 | (Pending peer review from Claude / OpenCode) | review requested |

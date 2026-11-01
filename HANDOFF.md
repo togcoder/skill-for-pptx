@@ -25,7 +25,7 @@ PowerPoint chỉ là domain lâu đời nhất.
 2. Đọc theo thứ tự `AGENTS.md`, `lab/CHARTER.md`, `lab/PROTOCOL.md`, rồi thẻ
    domain của bạn (`domains/<domain>/DOMAIN.md`).
 3. Chạy `python -m unittest discover -s tests` và
-   `python lab/tools/check_layout.py`. (Đảm bảo 352 tests pass 100%).
+   `python lab/tools/check_layout.py`. (Đảm bảo 354 tests pass 100%).
 4. Lấy mã kế tiếp trong `research/tasks/INDEX.md` (hiện là **T044**). Tiêu đề
    ghi domain trong ngoặc, ví dụ `[pptx]`, `[video]`, `[3d]`, `[cad]`.
 
@@ -33,7 +33,7 @@ PowerPoint chỉ là domain lâu đời nhất.
 
 | Domain | Trạng thái |
 |---|---|
-| `pptx` | Trưởng thành: Director, Morph Studio, Forge, hệ thiết kế Bento/Asymmetric grids, Critic, và **Dynamic Theme Engine (T043)**: Area-weighted reference teardown, Need-based semantic synthesizer (5 archetypes), OKLCH 60-30-10, AI Image visual harmonizer. (352 tests pass 100%). |
+| `pptx` | Trưởng thành: Director, Morph Studio, Forge, hệ thiết kế Bento/Asymmetric grids, Critic, và **Dynamic Theme Engine (T043)**: Area-weighted reference teardown, Composite Background Architecture (Layered translucent PNGs, alpha stats, shape opacity), Need-based semantic synthesizer (5 archetypes), OKLCH 60-30-10, AI Image visual harmonizer. (354 tests pass 100%). |
 | `video` | Nền tảng (T042): SMPTE RP 2046-2 / EBU R95 safe areas (Action 3.5%, Title 5.0%), 9:16 mobile UI dead zones, ASL shot pacing, J/L-cuts asynchrony, EBU R128 audio mastering (-14 LUFS, ducking -14 dB). Native bridges: `filmcraft_bridge.py` & `soundcraft_bridge.py`. |
 | `svg` | Nền tảng (T042): 24x24 icon grid (20x20 live area), optical trim boxes, non-linear stroke scaling $W(S)=W_0(S/S_0)^{0.75}$, Bézier circle handle $\kappa \approx 0.55228$. Native bridge: `vectorcraft_bridge.py`. |
 | `3d` | Nền tảng (T042): Metric scale (mm, Y-up glTF), No-Sharp-Edge Law (micro-bevel $0.2-0.5\text{ mm}$), concentric fillets, True Isometric camera ($35.264^\circ$ elev), 3-point studio lighting, PBR albedo clamp. Native bridge: `solidcraft_bridge.py`. |
