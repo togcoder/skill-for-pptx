@@ -1,0 +1,287 @@
+﻿{
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "fields were refreshed before delivery; w:updateFields is no longer needed",
+    "no explicit run language (w:lang); proofing/accessibility may guess"
+  ],
+  "stats": {
+    "fields": 32,
+    "field_commands": {
+      "TOC": 1,
+      "PAGEREF": 13,
+      "REF": 9,
+      "SEQ": 5,
+      "PAGE": 2,
+      "STYLEREF": 1,
+      "NUMPAGES": 1
+    },
+    "bookmarks": 22,
+    "headings": 7,
+    "max_heading_level": 1,
+    "tables": 3,
+    "figures": 2,
+    "sections": 3,
+    "paragraphs": 186,
+    "text_width_twips": 8788
+  },
+  "fields": [
+    {
+      "part": "word/document.xml",
+      "command": "TOC",
+      "instr": "TOC \\o \"1-3\" \\h \\z \\u",
+      "result": "1 Tá»•ng quan2 PhÆ°Æ¡ng phĂ¡p vĂ  pháº¡m vi3 Káº¿t quáº£ chĂ­nh4 Rá»§i ro vĂ  biá»‡n phĂ¡p5 Káº¿t luáº­n vĂ  kiáº¿n nghá»‹6 TĂ i liá»‡u tham kháº£oPhá»¥ lá»¥",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244415209 \\h",
+      "result": "1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244415210 \\h",
+      "result": "2",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244415211 \\h",
+      "result": "3",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244415212 \\h",
+      "result": "4",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244415213 \\h",
+      "result": "5",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244415214 \\h",
+      "result": "6",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF _Toc244415215 \\h",
+      "result": "7",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF fig-1 \\h",
+      "result": "HĂ¬nh 1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF fig-1 \\h",
+      "result": "2",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF fig-2 \\h",
+      "result": "HĂ¬nh 2",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF fig-2 \\h",
+      "result": "3",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF tbl-1 \\h",
+      "result": "Báº£ng 1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF tbl-1 \\h",
+      "result": "2",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF tbl-2 \\h",
+      "result": "Báº£ng 2",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF tbl-2 \\h",
+      "result": "3",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF tbl-3 \\h",
+      "result": "Báº£ng A.1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF tbl-3 \\h",
+      "result": "7",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF fig-1 \\h",
+      "result": "HĂ¬nh 1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Figure \\* ARABIC",
+      "result": "1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Table \\* ARABIC",
+      "result": "1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF tbl-1-num \\h",
+      "result": "1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Figure \\* ARABIC",
+      "result": "2",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF fig-2 \\h",
+      "result": "HĂ¬nh 2",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Table \\* ARABIC",
+      "result": "2",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "PAGEREF",
+      "instr": "PAGEREF tbl-2 \\h",
+      "result": "3",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "REF",
+      "instr": "REF tbl-2-num \\h",
+      "result": "2",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/document.xml",
+      "command": "SEQ",
+      "instr": "SEQ Table \\* ARABIC \\r 1",
+      "result": "1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/footer2.xml",
+      "command": "PAGE",
+      "instr": "PAGE \\* MERGEFORMAT",
+      "result": "i",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/header3.xml",
+      "command": "STYLEREF",
+      "instr": "STYLEREF \"Heading 1\" \\* MERGEFORMAT",
+      "result": "Dá»¯ liá»‡u chi tiáº¿t theo Ä‘Æ¡n vá»‹",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/footer3.xml",
+      "command": "PAGE",
+      "instr": "PAGE \\* MERGEFORMAT",
+      "result": "1",
+      "complete": true,
+      "dirty": false
+    },
+    {
+      "part": "word/footer3.xml",
+      "command": "NUMPAGES",
+      "instr": "NUMPAGES \\* MERGEFORMAT",
+      "result": "1",
+      "complete": true,
+      "dirty": false
+    }
+  ]
+}

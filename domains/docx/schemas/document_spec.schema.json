@@ -1,0 +1,281 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/togcoder/skill-for-pptx/schemas/document_spec.schema.json",
+  "title": "Document Forge specification",
+  "description": "Semantic input for scripts/document_forge.py. The generator owns the Word mechanics; the spec owns the content, hierarchy and design choices.",
+  "type": "object",
+  "required": ["meta", "sections"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["title"],
+      "properties": {
+        "title": {"type": "string", "minLength": 1},
+        "subtitle": {"type": "string"},
+        "author": {"type": "string"},
+        "organization": {"type": "string"},
+        "document_id": {"type": "string"},
+        "version": {"type": "string"},
+        "date": {"type": "string", "description": "ISO 8601 date, e.g. 2026-11-01"},
+        "language": {"type": "string", "default": "vi-VN"},
+        "classification": {"type": "string"},
+        "keywords": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": true
+    },
+    "page": {
+      "type": "object",
+      "properties": {
+        "size": {"enum": ["A4", "Letter", "A5"]},
+        "orientation": {"enum": ["portrait", "landscape"]},
+        "margins_mm": {
+          "type": "object",
+          "properties": {
+            "top": {"type": "number", "minimum": 10},
+            "bottom": {"type": "number", "minimum": 10},
+            "left": {"type": "number", "minimum": 10},
+            "right": {"type": "number", "minimum": 10}
+          },
+          "additionalProperties": false
+        },
+        "header_distance_mm": {"type": "number"},
+        "footer_distance_mm": {"type": "number"},
+        "mirror_margins": {"type": "boolean"},
+        "gutter_mm": {"type": "number", "minimum": 0}
+      },
+      "additionalProperties": true
+    },
+    "typography": {
+      "type": "object",
+      "properties": {
+        "body_font": {"type": "string"},
+        "heading_font": {"type": "string"},
+        "mono_font": {"type": "string"},
+        "east_asia_font": {"type": "string"},
+        "body_pt": {"type": "number", "minimum": 8, "maximum": 16},
+        "line_spacing": {"type": "number", "minimum": 1.0, "maximum": 2.0},
+        "space_after_pt": {"type": "number"},
+        "heading_sizes_pt": {"type": "array", "items": {"type": "number"}, "minItems": 1, "maxItems": 9},
+        "caption_pt": {"type": "number"},
+        "table_pt": {"type": "number"},
+        "header_pt": {"type": "number"},
+        "reference_pt": {"type": "number"},
+        "color_text": {"type": "string", "pattern": "^[0-9A-Fa-f]{6}$"},
+        "color_muted": {"type": "string", "pattern": "^[0-9A-Fa-f]{6}$"},
+        "color_accent": {"type": "string", "pattern": "^[0-9A-Fa-f]{6}$"},
+        "color_rule": {"type": "string", "pattern": "^[0-9A-Fa-f]{6}$"}
+      },
+      "additionalProperties": true
+    },
+    "cover": {
+      "type": "object",
+      "properties": {
+        "enabled": {"type": "boolean"},
+        "logo": {"type": "string"},
+        "logo_alt": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "front_matter": {
+      "type": "object",
+      "properties": {
+        "toc": {"$ref": "#/$defs/toc"},
+        "list_of_figures": {"$ref": "#/$defs/list"},
+        "list_of_tables": {"$ref": "#/$defs/list"},
+        "abstract": {
+          "type": "object",
+          "properties": {
+            "enabled": {"type": "boolean"},
+            "title": {"type": "string"},
+            "text": {"type": "string"},
+            "keywords": {"type": "array", "items": {"type": "string"}}
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "headers_footers": {
+      "type": "object",
+      "properties": {
+        "enabled": {"type": "boolean"},
+        "odd_even": {"type": "boolean"},
+        "document_id_in_header": {"type": "boolean"},
+        "chapter_in_header": {"type": "boolean"},
+        "classification_in_footer": {"type": "boolean"},
+        "page_numbers": {"type": "boolean"}
+      },
+      "additionalProperties": true
+    },
+    "sections": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["heading"],
+        "properties": {
+          "heading": {"type": "string", "minLength": 1},
+          "level": {"type": "integer", "minimum": 1, "maximum": 9, "default": 1},
+          "page_break_before": {"type": "boolean"},
+          "blocks": {"type": "array", "items": {"$ref": "#/$defs/block"}}
+        },
+        "additionalProperties": true
+      }
+    },
+    "references": {
+      "type": "object",
+      "properties": {
+        "enabled": {"type": "boolean"},
+        "title": {"type": "string"},
+        "items": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {"type": "string"},
+              {
+                "type": "object",
+                "required": ["text"],
+                "properties": {
+                  "key": {"type": "string"},
+                  "label": {"type": "string"},
+                  "text": {"type": "string"}
+                },
+                "additionalProperties": true
+              }
+            ]
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "appendix": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title"],
+        "properties": {
+          "letter": {"type": "string", "pattern": "^[A-Z]$"},
+          "title": {"type": "string", "minLength": 1},
+          "blocks": {"type": "array", "items": {"$ref": "#/$defs/block"}}
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "$defs": {
+    "toc": {
+      "type": "object",
+      "properties": {
+        "enabled": {"type": "boolean"},
+        "levels": {"type": "integer", "minimum": 1, "maximum": 9},
+        "title": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "list": {
+      "type": "object",
+      "properties": {
+        "enabled": {"type": "boolean"},
+        "title": {"type": "string"},
+        "mode": {"enum": ["ref_pageref", "toc_switch"], "default": "ref_pageref"}
+      },
+      "additionalProperties": true
+    },
+    "block": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["type", "text"],
+          "properties": {
+            "type": {"enum": ["paragraph", "text"]},
+            "text": {"type": "string"},
+            "align": {"enum": ["left", "center", "right", "justify"]}
+          },
+          "additionalProperties": true
+        },
+        {
+          "type": "object",
+          "required": ["type", "items"],
+          "properties": {
+            "type": {"enum": ["bullets", "bullet", "numbered", "number"]},
+            "items": {"type": "array", "items": {"type": "string"}}
+          },
+          "additionalProperties": true
+        },
+        {
+          "type": "object",
+          "required": ["type", "path", "alt", "caption"],
+          "properties": {
+            "type": {"const": "figure"},
+            "path": {"type": "string"},
+            "alt": {"type": "string", "minLength": 1},
+            "title": {"type": "string"},
+            "caption": {"type": "string"},
+            "width_mm": {"type": "number", "minimum": 20},
+            "max_height_ratio": {"type": "number", "minimum": 0.2, "maximum": 0.9},
+            "source": {"type": "string"}
+          },
+          "additionalProperties": true
+        },
+        {
+          "type": "object",
+          "required": ["type", "columns", "rows"],
+          "properties": {
+            "type": {"const": "table"},
+            "caption": {"type": "string"},
+            "alt": {"type": "string"},
+            "columns": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": ["header"],
+                "properties": {
+                  "header": {"type": "string"},
+                  "width_mm": {"type": "number", "minimum": 8},
+                  "align": {"enum": ["left", "center", "right"]}
+                },
+                "additionalProperties": true
+              }
+            },
+            "rows": {"type": "array", "items": {"type": "array", "items": {}}},
+            "source": {"type": "string"},
+            "header": {"type": "boolean"},
+            "zebra": {"type": "boolean"},
+            "borders": {"enum": ["booktabs", "grid", "none"]}
+          },
+          "additionalProperties": true
+        },
+        {
+          "type": "object",
+          "required": ["type", "text"],
+          "properties": {"type": {"const": "quote"}, "text": {"type": "string"}},
+          "additionalProperties": true
+        },
+        {
+          "type": "object",
+          "required": ["type", "text"],
+          "properties": {"type": {"const": "source"}, "text": {"type": "string"}},
+          "additionalProperties": true
+        },
+        {
+          "type": "object",
+          "required": ["type"],
+          "properties": {"type": {"enum": ["page_break", "spacer"]}},
+          "additionalProperties": true
+        },
+        {
+          "type": "object",
+          "required": ["type", "level", "text"],
+          "properties": {
+            "type": {"const": "heading"},
+            "level": {"type": "integer", "minimum": 2, "maximum": 9},
+            "text": {"type": "string"}
+          },
+          "additionalProperties": true
+        }
+      ]
+    }
+  },
+  "additionalProperties": true
+}

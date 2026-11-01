@@ -1,0 +1,607 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-11-01",
+  "scope": "Professional reports, theses, project documentation and technical manuscripts produced as DOCX/PDF in the docx domain. Mandatory status comes from law, regulation, contract or institutional rules; verify the current edition.",
+  "legal_note": "This file is research guidance, not legal advice. A standard becomes obligatory when a law, regulation, customer contract, procurement clause or university regulation references it. ISO 5966:1982 is withdrawn; it is listed because many older report templates still cite it.",
+  "page": {
+    "sizes_mm": {
+      "A4": [
+        210,
+        297
+      ],
+      "Letter": [
+        215.9,
+        279.4
+      ],
+      "A5": [
+        148,
+        210
+      ]
+    },
+    "default_margins_mm": {
+      "top": 25,
+      "bottom": 25,
+      "left": 30,
+      "right": 25
+    },
+    "margin_min_mm": 20,
+    "gutter_mm": [
+      0,
+      10
+    ],
+    "header_distance_mm": 12,
+    "footer_distance_mm": 12,
+    "text_width_mm": 155,
+    "text_height_mm": 247,
+    "columns": [
+      1,
+      2
+    ]
+  },
+  "typography": {
+    "body_pt": [
+      10,
+      12
+    ],
+    "body_default_pt": 11,
+    "line_spacing": [
+      1.15,
+      1.5
+    ],
+    "line_spacing_default": 1.15,
+    "space_after_pt": [
+      4,
+      8
+    ],
+    "heading_sizes_pt": [
+      [
+        18,
+        20
+      ],
+      [
+        14,
+        16
+      ],
+      [
+        12,
+        13
+      ],
+      [
+        10.5,
+        12
+      ]
+    ],
+    "caption_pt": [
+      8,
+      10
+    ],
+    "table_pt": [
+      8,
+      10
+    ],
+    "header_pt": [
+      8,
+      9.5
+    ],
+    "reference_pt": [
+      9,
+      10.5
+    ],
+    "line_length_chars": [
+      60,
+      90
+    ],
+    "min_body_pt": 10,
+    "fonts_recommended": [
+      "Calibri",
+      "Arial",
+      "Times New Roman",
+      "Aptos",
+      "Noto Sans",
+      "Noto Serif"
+    ],
+    "font_pairing_rule": "One display/heading family plus one text family; confirm Vietnamese, CJK and Greek glyph coverage before delivery.",
+    "justification": "left",
+    "hyphenation": "off for headings; optional for justified body text with a language dictionary"
+  },
+  "figure": {
+    "caption_position": "below",
+    "caption_numbering": "SEQ Figure \\* ARABIC",
+    "dpi_screen_min": 150,
+    "dpi_print_min": 300,
+    "dpi_line_min": 600,
+    "max_width_pct": 100,
+    "max_height_ratio": 0.55,
+    "formats": [
+      "PNG",
+      "JPEG",
+      "SVG",
+      "EMF",
+      "WMF",
+      "TIFF"
+    ],
+    "default_wrap": "inline",
+    "alt_text_required": true,
+    "source_note_required_when_third_party": true,
+    "caption_with_figure": true
+  },
+  "table": {
+    "caption_position": "above",
+    "caption_numbering": "SEQ Table \\* ARABIC",
+    "font_pt": [
+      8,
+      10
+    ],
+    "cell_padding_mm": [
+      1.5,
+      3
+    ],
+    "max_columns": 8,
+    "header_repeat": true,
+    "header_fill": "F2F2F2",
+    "border_style": "booktabs",
+    "numeric_alignment": "right",
+    "text_alignment": "left",
+    "width_tolerance_twips": 20,
+    "row_split": "avoid",
+    "source_note_required": true,
+    "alt_text_required": true
+  },
+  "fields": {
+    "toc_levels": 3,
+    "toc_switches": [
+      "\\o",
+      "\\h",
+      "\\z",
+      "\\u"
+    ],
+    "list_of_figures_mode": "ref_pageref",
+    "list_of_figures_switch": "TOC \\h \\z \\c \"Figure\"",
+    "caption_labels": [
+      "Figure",
+      "Table",
+      "Equation"
+    ],
+    "crossref_kinds": [
+      "text",
+      "number",
+      "page",
+      "aboveBelow"
+    ],
+    "update_before_delivery": true,
+    "bookmark_name_max": 40,
+    "bookmark_name_pattern": "^[A-Za-z_][A-Za-z0-9_-]{0,39}$"
+  },
+  "accessibility": {
+    "text_contrast": 4.5,
+    "large_text_contrast": 3.0,
+    "large_text_pt": 18,
+    "large_text_bold_pt": 14,
+    "graphic_contrast": 3.0,
+    "alt_text_required": true,
+    "heading_hierarchy_max_jump": 1,
+    "table_header_required": true,
+    "language_required": true,
+    "document_title_required": true,
+    "reading_order": "single column or clearly ordered columns; avoid floating text boxes for body copy"
+  },
+  "standards": [
+    {
+      "id": "ISO/IEC 29500-1:2016",
+      "title": "Information technology — Document description and processing languages — Office Open XML File Formats — Part 1: Fundamentals and Markup Language Reference",
+      "status": "current",
+      "mandatory_when": "A contract, regulator or archive requires OOXML (DOCX/XLSX/PPTX) as the editable source format.",
+      "controls": "Package structure, WordprocessingML, SpreadsheetML, PresentationML, DrawingML, fields, styles, sections, tables and drawings.",
+      "how_to_comply": "Write valid OOXML parts, keep relationships consistent, validate the ZIP/XML, and preserve the package when patching. Word writes transitional OOXML by default; do not claim Strict conformance unless tested.",
+      "source": "https://ecma-international.org/publications-and-standards/standards/ecma-376/",
+      "accessed": "2026-11-01"
+    },
+    {
+      "id": "ISO 2145:1978",
+      "title": "Documentation — Numbering of divisions and subdivisions in written documents",
+      "status": "current (confirmed 2026)",
+      "mandatory_when": "The report style guide or contract requires numbered divisions; often cited by engineering and scientific report templates.",
+      "controls": "Arabic numerals, full stops between levels, no trailing full stop, hierarchical numbering (1, 1.1, 1.1.1).",
+      "how_to_comply": "Link a multilevel list to Heading 1–9 in Word; use lvlText %1 / %1.%2 (no trailing dot); keep numbering automatic so the TOC and cross-references see it.",
+      "source": "https://www.iso.org/standard/6937.html",
+      "accessed": "2026-11-01"
+    },
+    {
+      "id": "ISO 7144:1986",
+      "title": "Documentation — Presentation of theses and similar documents",
+      "status": "current (confirmed)",
+      "mandatory_when": "A university, research institute or contract requires the ISO thesis layout; many institutions override it with their own regulation.",
+      "controls": "Title page, front matter, table of contents, headings, illustrations, tables, references, appendices, page numbering and paper.",
+      "how_to_comply": "Use the institutional template first; where silent, apply ISO 7144 structure. Keep the cover, front matter, body, references and appendices in separate sections.",
+      "source": "https://www.iso.org/standard/13736.html",
+      "accessed": "2026-11-01"
+    },
+    {
+      "id": "ISO 5966:1982",
+      "title": "Documentation — Presentation of scientific and technical reports",
+      "status": "withdrawn (2000-10-03)",
+      "mandatory_when": "Legacy templates or older contracts still cite it. Do not present it as a current ISO requirement.",
+      "controls": "Report title page, contents, headings, illustrations, tables, references and appendices.",
+      "how_to_comply": "Use it as historical guidance only. Prefer ISO 7144, the customer style guide and the current ISO/IEC Directives.",
+      "source": "https://www.iso.org/standard/12160.html",
+      "accessed": "2026-11-01"
+    },
+    {
+      "id": "ISO 690:2021",
+      "title": "Information and documentation — Guidelines for bibliographic references and citations to information resources",
+      "status": "current",
+      "mandatory_when": "The contract, journal or institution requires ISO 690; otherwise APA, IEEE, Chicago, Harvard or Vancouver may be specified.",
+      "controls": "Deterministic citation and reference output for monographs, articles, web resources, datasets and legal materials.",
+      "how_to_comply": "Pick one style and apply it consistently. Use hanging indents, ISO 8601 dates, DOI/URL with access date, and link in-text citations to the reference entry.",
+      "source": "https://www.iso.org/standard/72642.html",
+      "accessed": "2026-11-01"
+    },
+    {
+      "id": "ISO 7200:2004",
+      "title": "Technical product documentation — Data fields in title blocks and document headers",
+      "status": "current (confirmed 2025)",
+      "mandatory_when": "Engineering drawings or technical product documents are exchanged under a contract that cites ISO 7200.",
+      "controls": "Document identifier, title, revision, date, author, owner, classification and page count fields.",
+      "how_to_comply": "Map the required fields into the Word header/footer or the drawing title block. Keep field names and lengths stable across the document set.",
+      "source": "https://www.iso.org/standard/35446.html",
+      "accessed": "2026-11-01"
+    },
+    {
+      "id": "ISO 8601-1:2019 / ISO 8601-2:2019",
+      "title": "Date and time — Representations for information interchange",
+      "status": "current",
+      "mandatory_when": "International projects, data exchanges, audit trails and any document with dates that must be unambiguous.",
+      "controls": "Calendar dates (YYYY-MM-DD), times, durations, intervals, UTC offsets and reduced precision.",
+      "how_to_comply": "Use YYYY-MM-DD in metadata and references; use an explicit time zone for timestamps; do not use locale-only dates such as 03/04/2026 without a month name.",
+      "source": "https://www.iso.org/iso-8601-date-and-time-format.html",
+      "accessed": "2026-11-01"
+    },
+    {
+      "id": "ISO 80000-1:2022",
+      "title": "Quantities and units — Part 1: General",
+      "status": "current",
+      "mandatory_when": "Scientific, engineering, financial or regulatory reports that state measured quantities.",
+      "controls": "Quantity symbols, unit symbols, prefixes, decimal sign, significant figures and quantity calculus.",
+      "how_to_comply": "Put units in column headers, not every cell; use a space between value and unit; use the decimal marker of the document language consistently; keep significant figures stable.",
+      "source": "https://www.iso.org/search.html?q=ISO%2080000-1%3A2022",
+      "accessed": "2026-11-01"
+    },
+    {
+      "id": "ISO 216:2007",
+      "title": "Writing paper and certain classes of printed matter — Trimmed sizes — A and B series",
+      "status": "current",
+      "mandatory_when": "Print production or a customer requires ISO A-series paper.",
+      "controls": "A4 (210 × 297 mm), A5, A3 and the B series.",
+      "how_to_comply": "Set A4 in Word page setup; keep margins and the text column stable; test the PDF at 100% scale.",
+      "source": "https://www.iso.org/search.html?q=ISO%20216%3A2007",
+      "accessed": "2026-11-01"
+    },
+    {
+      "id": "ISO 3098-1:2015",
+      "title": "Technical product documentation — Lettering — Part 1: Currently used lettering",
+      "status": "current",
+      "mandatory_when": "Engineering drawings and technical illustrations that must follow ISO lettering.",
+      "controls": "Legibility, character shapes, heights and stroke widths for technical lettering.",
+      "how_to_comply": "Use a technical sans-serif face at the specified height; do not use decorative or condensed display faces for dimensions and labels.",
+      "source": "https://www.iso.org/search.html?q=ISO%203098-1%3A2015",
+      "accessed": "2026-11-01"
+    },
+    {
+      "id": "ISO 19005-4:2020",
+      "title": "Document management — Electronic document file format for long-term preservation — Part 4: Use of ISO 32000-2 (PDF/A-4)",
+      "status": "current",
+      "mandatory_when": "National archives, courts, regulators or procurement require PDF/A for long-term preservation.",
+      "controls": "Embedded fonts, device-independent colour, no external dependencies, metadata and tagged structure.",
+      "how_to_comply": "Export a tagged PDF, embed all fonts, avoid transparency that the target PDF/A level forbids, and validate with veraPDF before submission.",
+      "source": "https://pdfa.org/resource/iso-19005/",
+      "accessed": "2026-11-01"
+    },
+    {
+      "id": "ISO 14289-1:2014 (PDF/UA-1)",
+      "title": "Document management applications — Electronic document file format enhancement for accessibility — Part 1: Use of ISO 32000-1 (PDF/UA-1)",
+      "status": "current; PDF/UA-2:2024 exists",
+      "mandatory_when": "Public-sector accessibility law, EN 301 549 procurement, or a customer accessibility clause cites PDF/UA.",
+      "controls": "Tagged structure, reading order, alternative text, language, table headers, bookmarks and metadata.",
+      "how_to_comply": "Author with real heading styles and alt text, export a tagged PDF, then validate the tag tree and reading order. A visually correct PDF is not necessarily PDF/UA.",
+      "source": "https://pdfa.org/resource/iso-14289-pdfua/",
+      "accessed": "2026-11-01"
+    },
+    {
+      "id": "ISO 15489-1:2016",
+      "title": "Information and documentation — Records management — Part 1: Concepts and principles",
+      "status": "current",
+      "mandatory_when": "Records, audit files, quality records or regulated project documentation.",
+      "controls": "Authenticity, reliability, integrity, usability, retention, access and metadata.",
+      "how_to_comply": "Give each controlled document an identifier, version, owner, approval date, classification and retention rule; keep the audit trail and avoid overwriting approved records.",
+      "source": "https://www.iso.org/search.html?q=ISO%2015489-1%3A2016",
+      "accessed": "2026-11-01"
+    },
+    {
+      "id": "ISO 9001:2015 clause 7.5",
+      "title": "Quality management systems — Requirements — Documented information",
+      "status": "check the current edition at iso.org before citing",
+      "mandatory_when": "A quality management system, supplier qualification or customer contract requires controlled documented information.",
+      "controls": "Creation, updating, identification, format, review, approval, availability, protection, retention and control of documented information.",
+      "how_to_comply": "Use a controlled template with document ID, revision, approval, change log and classification; keep distribution and retention records.",
+      "source": "https://www.iso.org/search.html?q=ISO%209001%3A2015",
+      "accessed": "2026-11-01"
+    },
+    {
+      "id": "ISO 10013:2021",
+      "title": "Quality management systems — Guidance for documented information",
+      "status": "current",
+      "mandatory_when": "Guidance for implementing ISO 9001 clause 7.5; not a certifiable requirement by itself.",
+      "controls": "Structure, content, review, approval, control and maintenance of documented information.",
+      "how_to_comply": "Define document types, owners, approval workflow and change control before writing; keep the document set small and usable.",
+      "source": "https://www.iso.org/search.html?q=ISO%2010013%3A2021",
+      "accessed": "2026-11-01"
+    },
+    {
+      "id": "ISO/IEC 27001:2022",
+      "title": "Information security, cybersecurity and privacy protection — Information security management systems — Requirements",
+      "status": "current",
+      "mandatory_when": "A contract or regulation requires an ISMS; security-classified documents.",
+      "controls": "Documented information, classification, access control, supplier security, incident records and retention.",
+      "how_to_comply": "Mark classification in header/footer, restrict distribution, keep an access/retention matrix, and avoid putting sensitive details in document metadata.",
+      "source": "https://www.iso.org/search.html?q=ISO%2FIEC%2027001%3A2022",
+      "accessed": "2026-11-01"
+    },
+    {
+      "id": "ISO 21502:2020",
+      "title": "Project, programme and portfolio management — Guidance on project management",
+      "status": "current",
+      "mandatory_when": "Large projects that require a documented management approach and stage reports.",
+      "controls": "Project governance, business case, plans, stage/phase reports, risk, issue, change and lessons-learned documentation.",
+      "how_to_comply": "Use the report structure the project management plan defines; align the document hierarchy with the project lifecycle and decision gates.",
+      "source": "https://www.iso.org/search.html?q=ISO%2021502%3A2020",
+      "accessed": "2026-11-01"
+    },
+    {
+      "id": "ISO/IEC/IEEE 15288:2023",
+      "title": "Systems and software engineering — System life cycle processes",
+      "status": "current",
+      "mandatory_when": "Systems engineering contracts and lifecycle documentation for complex products.",
+      "controls": "Technical processes, project processes, agreement processes and the information items they produce.",
+      "how_to_comply": "Map each deliverable to a lifecycle process and a decision gate; keep requirements, architecture, verification and validation records linked.",
+      "source": "https://www.iso.org/search.html?q=ISO%2FIEC%2FIEEE%2015288%3A2023",
+      "accessed": "2026-11-01"
+    },
+    {
+      "id": "IEC/IEEE 82079-1:2019",
+      "title": "Preparation of information for use (instructions for use) of products — Part 1: Principles and general requirements",
+      "status": "current",
+      "mandatory_when": "Product safety law or a product-specific standard cites it; EU machinery and medical-device documentation often does.",
+      "controls": "Information for use, safety information, task orientation, language, readability, structure, illustrations and usability.",
+      "how_to_comply": "Write task-based instructions, put safety information before the task, keep warnings visually distinct, test with representative users, and use the required language(s).",
+      "source": "https://www.iso.org/search.html?q=IEC%2FIEEE%2082079-1%3A2019",
+      "accessed": "2026-11-01"
+    },
+    {
+      "id": "ISO 17100:2015 / ISO 18587:2017",
+      "title": "Translation services — Requirements for translation services / Post-editing of machine translation output",
+      "status": "current",
+      "mandatory_when": "A multilingual deliverable is procured as a professional translation or post-edited MT service.",
+      "controls": "Competence, translation process, revision, review, project management and post-editing quality.",
+      "how_to_comply": "Freeze the source, provide terminology and style guides, require revision by a second linguist, and record the post-editing level.",
+      "source": "https://www.iso.org/search.html?q=ISO%2017100%3A2015",
+      "accessed": "2026-11-01"
+    },
+    {
+      "id": "ISO 704:2022 / ISO 10241-1:2011",
+      "title": "Terminology work — Principles and methods / Terminological entries in standards",
+      "status": "current",
+      "mandatory_when": "Terminology-heavy standards, glossaries and multilingual projects.",
+      "controls": "Term formation, definitions, synonyms, scope notes and term entries.",
+      "how_to_comply": "Keep a project glossary with one preferred term per concept; define terms before first use; do not use synonyms as if they were different concepts.",
+      "source": "https://www.iso.org/search.html?q=ISO%20704%3A2022",
+      "accessed": "2026-11-01"
+    },
+    {
+      "id": "ISO 3166-1:2020 / ISO 639:2023 / ISO 4217:2015",
+      "title": "Country codes / Language codes / Currency codes",
+      "status": "current",
+      "mandatory_when": "International data exchanges, country lists, language metadata and financial reports.",
+      "controls": "Two-letter country codes, language codes and three-letter currency codes.",
+      "how_to_comply": "Use ISO codes in metadata and tables; do not invent abbreviations; keep the code list version in the data dictionary.",
+      "source": "https://www.iso.org/iso-3166-country-codes.html",
+      "accessed": "2026-11-01"
+    },
+    {
+      "id": "WCAG 2.2 / EN 301 549",
+      "title": "Web Content Accessibility Guidelines 2.2 / Accessibility requirements for ICT products and services",
+      "status": "current (WCAG 2.2 W3C Recommendation, 5 October 2023; EN 301 549 v3.2.1, 2021)",
+      "mandatory_when": "EU public-sector procurement, the European Accessibility Act, US Section 508, or a customer accessibility clause.",
+      "controls": "Perceivable, operable, understandable, robust content: contrast, alt text, headings, tables, keyboard, reading order and language.",
+      "how_to_comply": "Use real heading styles, alt text, table header rows, 4.5:1 text contrast (3:1 for large text and graphics), a document title and language. Export tagged PDF and test with a screen reader.",
+      "source": "https://www.w3.org/TR/WCAG22/",
+      "accessed": "2026-11-01"
+    },
+    {
+      "id": "ISO 12647-2:2013 / ISO 15930 (PDF/X) / ISO 3664:2009",
+      "title": "Printing process control / PDF/X / Viewing conditions",
+      "status": "current",
+      "mandatory_when": "Commercial print, colour-critical brand documents or print procurement.",
+      "controls": "Colour separation, ink limits, ICC profiles, PDF/X conformance and viewing conditions.",
+      "how_to_comply": "Use the printer's ICC profile, convert images to the target CMYK space, export PDF/X with bleed and trim marks, and proof under ISO 3664 viewing conditions.",
+      "source": "https://www.iso.org/search.html?q=ISO%2012647-2%3A2013",
+      "accessed": "2026-11-01"
+    }
+  ],
+  "rules": [
+    {
+      "id": "DOC-PAGE-A4",
+      "statement": "A4 or Letter is set explicitly; margins leave at least 20 mm on every side.",
+      "check": "page size + margins",
+      "source": "ISO 216; institutional template"
+    },
+    {
+      "id": "DOC-HEADING-HIERARCHY",
+      "statement": "Headings use built-in Heading 1–9 styles; no level jumps greater than one.",
+      "check": "style/outline level",
+      "source": "ISO 2145; WCAG 2.2 1.3.1"
+    },
+    {
+      "id": "DOC-HEADING-NUMBER",
+      "statement": "Numbered headings use a multilevel list linked to the heading styles, not typed numbers.",
+      "check": "numbering.xml + pStyle link",
+      "source": "ISO 2145"
+    },
+    {
+      "id": "DOC-TOC-FIELD",
+      "statement": "The table of contents is a TOC field with hyperlinks, not manually typed entries.",
+      "check": "TOC field + w:updateFields",
+      "source": "ISO 7144; ISO 29500-1 §17.16"
+    },
+    {
+      "id": "DOC-CAPTION-SEQ",
+      "statement": "Figure and table numbers are SEQ fields; captions are bookmarked for cross-reference.",
+      "check": "SEQ + bookmark",
+      "source": "ISO 7144; ISO 29500-1 §17.16"
+    },
+    {
+      "id": "DOC-XREF-RESOLVE",
+      "statement": "Every REF/PAGEREF target exists as a bookmark.",
+      "check": "REF/PAGEREF vs bookmarkStart",
+      "source": "ISO 29500-1 §17.16"
+    },
+    {
+      "id": "DOC-FIGURE-INLINE",
+      "statement": "Report figures are inline, centred, aspect-preserving and no wider than the text column.",
+      "check": "wp:inline + wp:extent",
+      "source": "ISO 7144; accessibility practice"
+    },
+    {
+      "id": "DOC-FIGURE-ALT",
+      "statement": "Every informative figure has alt text; decorative images are marked as decorative.",
+      "check": "wp:docPr@descr",
+      "source": "WCAG 2.2 1.1.1; PDF/UA"
+    },
+    {
+      "id": "DOC-FIGURE-DPI",
+      "statement": "Photos are at least 150 PPI at final size (300 PPI for print); line art 600 PPI.",
+      "check": "pixels / display size",
+      "source": "print production practice"
+    },
+    {
+      "id": "DOC-TABLE-WIDTH",
+      "statement": "Table grid widths fit the text column; the table does not spill into the margin.",
+      "check": "tblGrid vs pgSz - pgMar",
+      "source": "ISO 7144; layout practice"
+    },
+    {
+      "id": "DOC-TABLE-HEADER",
+      "statement": "The header row repeats on every page and rows do not split across pages.",
+      "check": "tblHeader + cantSplit",
+      "source": "accessibility and report practice"
+    },
+    {
+      "id": "DOC-TABLE-CAPTION",
+      "statement": "Table captions sit above the table; figure captions sit below the figure.",
+      "check": "caption paragraph position",
+      "source": "ISO 7144; APA/Chicago practice"
+    },
+    {
+      "id": "DOC-SECTION-PAGINATION",
+      "statement": "Cover has no header/footer; front matter uses roman numerals; body starts at 1.",
+      "check": "sectPr/pgNumType",
+      "source": "ISO 7144; institutional practice"
+    },
+    {
+      "id": "DOC-HEADER-FIELDS",
+      "statement": "Running headers use STYLEREF and page numbers use PAGE/NUMPAGES fields.",
+      "check": "STYLEREF/PAGE fields",
+      "source": "ISO 7200; ISO 29500-1"
+    },
+    {
+      "id": "DOC-LANG",
+      "statement": "The document language is set (vi-VN or en-US) for proofing and accessibility.",
+      "check": "w:lang",
+      "source": "WCAG 2.2 3.1.1"
+    },
+    {
+      "id": "DOC-METADATA",
+      "statement": "Title, author, subject, keywords and classification are set in core properties.",
+      "check": "docProps/core.xml",
+      "source": "ISO 15489; accessibility"
+    },
+    {
+      "id": "DOC-FIELDS-UPDATED",
+      "statement": "Fields are refreshed before delivery; a dirty TOC is not a final deliverable.",
+      "check": "w:updateFields / dirty flags",
+      "source": "Word field behaviour"
+    },
+    {
+      "id": "DOC-REFS-STYLE",
+      "statement": "One citation style is used consistently, with hanging indents and ISO 8601 dates.",
+      "check": "reference paragraphs",
+      "source": "ISO 690:2021"
+    },
+    {
+      "id": "DOC-APPENDIX",
+      "statement": "Appendices follow the references, start on a new page and have their own A, A.1 numbering.",
+      "check": "appendix heading numbering",
+      "source": "ISO 7144"
+    },
+    {
+      "id": "DOC-PDF-A",
+      "statement": "When PDF/A is required, fonts are embedded and the file validates with veraPDF.",
+      "check": "PDF/A validation",
+      "source": "ISO 19005-4"
+    },
+    {
+      "id": "DOC-PDF-UA",
+      "statement": "When PDF/UA is required, the PDF has a tag tree, reading order, alt text and language.",
+      "check": "PDF/UA validation",
+      "source": "ISO 14289-1"
+    }
+  ],
+  "sources": {
+    "ISO_5966": {
+      "url": "https://www.iso.org/standard/12160.html",
+      "note": "Withdrawn 2000-10-03; legacy guidance only."
+    },
+    "ISO_7144": {
+      "url": "https://www.iso.org/standard/13736.html",
+      "note": "Current thesis/report presentation guidance."
+    },
+    "ISO_2145": {
+      "url": "https://www.iso.org/standard/6937.html",
+      "note": "Confirmed 2026; numbering convention."
+    },
+    "ISO_7200": {
+      "url": "https://www.iso.org/standard/35446.html",
+      "note": "Confirmed 2025; title-block/header data fields."
+    },
+    "ISO_690": {
+      "url": "https://www.iso.org/standard/72642.html",
+      "note": "2021 edition."
+    },
+    "OOXML": {
+      "url": "https://ecma-international.org/publications-and-standards/standards/ecma-376/",
+      "note": "ECMA-376 is the publicly available OOXML specification; ISO/IEC 29500 is the ISO edition."
+    },
+    "WCAG22": {
+      "url": "https://www.w3.org/TR/WCAG22/",
+      "note": "W3C Recommendation, 5 October 2023."
+    },
+    "PDFUA": {
+      "url": "https://pdfa.org/resource/iso-14289-pdfua/",
+      "note": "PDF/UA-1 (ISO 14289-1) and PDF/UA-2 (ISO 14289-2:2024)."
+    },
+    "PDFA": {
+      "url": "https://pdfa.org/resource/iso-19005/",
+      "note": "PDF/A family."
+    }
+  },
+  "provenance": {
+    "source": "ISO catalogue pages, W3C WCAG 2.2, ECMA-376/ISO 29500, Microsoft Word field documentation; compiled by T039",
+    "accessed": "2026-11-01",
+    "licence": "Derived metadata and thresholds; no ISO/W3C text redistributed. Verify the publisher edition before citing.",
+    "scope": [
+      "docx"
+    ],
+    "confidence": "published + judgement; thresholds marked in rules",
+    "task": "T039",
+    "status": "unreviewed (EXPERIMENTAL)"
+  }
+}
