@@ -1,6 +1,6 @@
 # Handoff — Design Research Lab
 
-Cập nhật: 01/11/2026, sau T042. Tệp này được **viết lại** mỗi lần bàn giao,
+Cập nhật: 01/11/2026, sau T043. Tệp này được **viết lại** mỗi lần bàn giao,
 không ghi nối thêm. Lịch sử: [docs/CHANGELOG.md](docs/CHANGELOG.md). Bàn giao
 trước: [docs/archive/HANDOFF-T038-2026-11-01.md](docs/archive/HANDOFF-T038-2026-11-01.md).
 
@@ -20,20 +20,20 @@ PowerPoint chỉ là domain lâu đời nhất.
 
 ## Bắt đầu
 
-1. Đầu nghiên cứu mới nhất nằm trên nhánh `work/T042-multi-domain-design-canons`
+1. Đầu nghiên cứu mới nhất nằm trên nhánh `work/T043-dynamic-theme-engine`
    (hoặc `claude/blissful-pasteur-gmll59` sau khi gộp).
 2. Đọc theo thứ tự `AGENTS.md`, `lab/CHARTER.md`, `lab/PROTOCOL.md`, rồi thẻ
    domain của bạn (`domains/<domain>/DOMAIN.md`).
 3. Chạy `python -m unittest discover -s tests` và
-   `python lab/tools/check_layout.py`. (Đảm bảo 340 tests pass 100%).
-4. Lấy mã kế tiếp trong `research/tasks/INDEX.md` (hiện là **T043**). Tiêu đề
-   ghi domain trong ngoặc, ví dụ `[video]`, `[cad]`, `[3d]`.
+   `python lab/tools/check_layout.py`. (Đảm bảo 352 tests pass 100%).
+4. Lấy mã kế tiếp trong `research/tasks/INDEX.md` (hiện là **T044**). Tiêu đề
+   ghi domain trong ngoặc, ví dụ `[pptx]`, `[video]`, `[3d]`, `[cad]`.
 
 ## Trạng thái từng domain
 
 | Domain | Trạng thái |
 |---|---|
-| `pptx` | Trưởng thành: Director, Morph Studio, Forge, hệ thiết kế, Bento/Asymmetric grids, và Critic (T038: 314 tests pass). |
+| `pptx` | Trưởng thành: Director, Morph Studio, Forge, hệ thiết kế Bento/Asymmetric grids, Critic, và **Dynamic Theme Engine (T043)**: Area-weighted reference teardown, Need-based semantic synthesizer (5 archetypes), OKLCH 60-30-10, AI Image visual harmonizer. (352 tests pass 100%). |
 | `video` | Nền tảng (T042): SMPTE RP 2046-2 / EBU R95 safe areas (Action 3.5%, Title 5.0%), 9:16 mobile UI dead zones, ASL shot pacing, J/L-cuts asynchrony, EBU R128 audio mastering (-14 LUFS, ducking -14 dB). Native bridges: `filmcraft_bridge.py` & `soundcraft_bridge.py`. |
 | `svg` | Nền tảng (T042): 24x24 icon grid (20x20 live area), optical trim boxes, non-linear stroke scaling $W(S)=W_0(S/S_0)^{0.75}$, Bézier circle handle $\kappa \approx 0.55228$. Native bridge: `vectorcraft_bridge.py`. |
 | `3d` | Nền tảng (T042): Metric scale (mm, Y-up glTF), No-Sharp-Edge Law (micro-bevel $0.2-0.5\text{ mm}$), concentric fillets, True Isometric camera ($35.264^\circ$ elev), 3-point studio lighting, PBR albedo clamp. Native bridge: `solidcraft_bridge.py`. |
@@ -43,22 +43,23 @@ PowerPoint chỉ là domain lâu đời nhất.
 
 ## Việc tiếp theo (xếp hạng)
 
-1. **Phản biện chéo (Peer Review)**, theo `lab/standards/REVIEW.md`, do agent khác tác giả
-   viết:
-   - T042 (multi-domain canons & bridges, review requested);
+1. **Phản biện chéo (Peer Review)**, theo `lab/standards/REVIEW.md`, do agent khác tác giả viết:
+   - T043 (Dynamic Theme Engine & Teardown, review requested);
+   - T042 (Multi-domain canons & bridges, review requested);
    - T038 (pptx canon);
    - T035 (DeckCraft);
    - T036–T037 (cross protocols và multi-craft bridges).
-2. **Triển khai chuyên sâu từng domain:**
-   - `video`: T043 - Trình biên soạn kịch bản timeline cho FilmCraft + sidechain ducking tự động với SoundCraft.
-   - `3d`: T044 - Tạo hình khối CSG tham số hóa với SolidCraft có kiểm định micro-bevel bắt buộc.
-   - `cad`: T045 - Trình xuất bản vẽ kỹ thuật cơ khí đa hình chiếu chuẩn ISO 128 với CADCraft.
+2. **Tích hợp Theme Engine vào Slide Forge (`slide_forge.py`):**
+   - Hỗ trợ cờ `--ref-deck <file.pptx>` để tự động clone theme từ file mẫu bất kỳ.
+   - Hỗ trợ cờ `--need "<chuỗi mô tả>"` để tự động tổng hợp theme độc bản theo nhu cầu.
+3. **Kết nối trực tiếp subagent `image-generator`**:
+   - Sử dụng `build_harmonized_image_prompt` để tự động sinh ảnh PNG lồng vào slide.
 
 ## Prompt giao việc
 
 ```text
 Join the design research lab at https://github.com/togcoder/skill-for-pptx, branch
-work/T042-multi-domain-design-canons. Read AGENTS.md, lab/CHARTER.md, lab/PROTOCOL.md and
+work/T043-dynamic-theme-engine. Read AGENTS.md, lab/CHARTER.md, lab/PROTOCOL.md and
 domains/<your domain>/DOMAIN.md. Run the tests and lab/tools/check_layout.py.
 Take the next free ID in research/tasks/INDEX.md with the domain in brackets and
 push the claim. Frame your question from the domain's native canon before
