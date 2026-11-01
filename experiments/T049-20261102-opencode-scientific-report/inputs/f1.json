@@ -1,0 +1,101 @@
+{
+  "meta": {
+    "title": "So sánh F1",
+    "sheet": "Data",
+    "author": "T049",
+    "company": "DocumentCraft"
+  },
+  "data": {
+    "headers": [
+      "Phương pháp",
+      "F1"
+    ],
+    "rows": [
+      [
+        "Isolation Forest",
+        0.71
+      ],
+      [
+        "OCSVM",
+        0.68
+      ],
+      [
+        "LSTM-AE",
+        0.79
+      ],
+      [
+        "USAD",
+        0.84
+      ],
+      [
+        "OmniAnomaly",
+        0.86
+      ],
+      [
+        "Đề xuất",
+        0.89
+      ]
+    ],
+    "widths": {
+      "A:A": 20,
+      "B:B": 10
+    }
+  },
+  "chart": {
+    "type": "column",
+    "title": "So sánh F1 trên bốn bộ dữ liệu",
+    "style": 10,
+    "palette": [
+      "#1F4E79"
+    ],
+    "position": {
+      "cell": "E2",
+      "width_cm": 14.8,
+      "height_cm": 8.0
+    },
+    "categories_column": 0,
+    "axes": {
+      "x": {
+        "title": "",
+        "label_size": 9,
+        "label_rotation": -20
+      },
+      "y": {
+        "title": "F1",
+        "min": 0,
+        "max": 1.0,
+        "major_unit": 0.2,
+        "number_format": "0.00",
+        "gridlines": true,
+        "label_size": 9
+      }
+    },
+    "legend": {
+      "position": "none",
+      "size": 9
+    },
+    "series": [
+      {
+        "name": "F1",
+        "column": 1,
+        "color": "#1F4E79",
+        "gap": 45,
+        "data_labels": {
+          "show": true,
+          "position": "outside_end",
+          "size": 9,
+          "number_format": "0.00"
+        }
+      }
+    ]
+  },
+  "post": {
+    "anchor": "one_cell",
+    "plot_layout": {
+      "x": 0.1,
+      "y": 0.16,
+      "w": 0.78,
+      "h": 0.58
+    }
+  }
+}

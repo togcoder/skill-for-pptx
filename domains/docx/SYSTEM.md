@@ -1,6 +1,6 @@
 # Document system: professional DOCX with real links
 
-Status: EXPERIMENTAL — T039/T045/T047 [docx], review requested (2026-11-01).
+Status: EXPERIMENTAL — T039/T045/T047/T049 [docx], review requested (2026-11-02).
 Evidence reached: structural (rung 1), WordCraft layout (rung 2) and Microsoft
 Word parse + field refresh + PDF export (rungs 4–5). No LibreOffice (rung 3), no
 human edit/print (rung 6), no PDF/UA or PDF/A validation. PowerPoint playback is
@@ -39,6 +39,7 @@ word_field_kit.py                    word_field_kit.audit_docx
 |---|---|
 | `domains/docx/data/document_system.json` | Page/type/figure/table/field/accessibility tokens, standards, rules, sources |
 | `domains/docx/data/report_standard.json` | T047 ISO/GRI standards profile, controls, evidence and status |
+| `domains/docx/data/standard_profiles.json` | T049 named profiles: HUST 2017, VNU-UET, ISO 7144, annual/GRI |
 | `domains/docx/schemas/document_spec.schema.json` | Semantic input for the generator |
 | `scripts/word_field_kit.py` | Fields, TOC, SEQ captions, REF/PAGEREF, STYLEREF, bookmarks, numbering, audit |
 | `scripts/document_forge.py` | Build DOCX from a spec; refresh with Word/WordCraft; render |
@@ -96,6 +97,37 @@ word_field_kit.py                    word_field_kit.audit_docx
 - **Cross-craft asset**: the T045 cover/icon SVG is rasterised with VectorCraft;
   the receiving DOCX test is the acceptance gate. The generator still works
   with a plain PNG if VectorCraft is absent.
+
+## Standard profiles (T049)
+
+A user does not ask for "a Word document"; they ask for a thesis, a đồ án, a
+scientific report, an annual report. Each has a presentation contract.
+
+- **Profile file:** `domains/docx/data/standard_profiles.json`. Every profile
+  has `id`, `title`, `source` (publisher, document, URL, access date, evidence,
+  status), `page`, `typography`, `paragraph`, `numbering`, `captions`,
+  `front_matter_order`, `cover`, `headers_footers`, `references`, `limits`.
+- **Merge order:** `DEFAULTS` → profile → explicit spec. The spec always wins;
+  the profile is a default, never a cage. A profile is not "applied" by copying
+  its values into a spec by hand.
+- **Conformance:** `check_docx()` reads the produced DOCX and measures page
+  size, margins, body/table font and size, line spacing, first-line indent,
+  heading depth/numbering, caption numbering and position, page-number field,
+  front-matter order, references/citations, abstract length, body pages and
+  equation numbering. It returns `pass` / `warn` / `fail`; warnings are
+  disclosures, failures block delivery.
+- **University profiles:** `hust-datn-2017` (20/15/35/20 mm, TNR 13, 1.5,
+  chapter captions, references before appendices, ≤50 body pages) and
+  `vnu-uet-kl-2024` (25/30/30/20 mm, TNR 13, 1.3, 1 cm indent, 35–50 body
+  pages, references after appendices).
+- **Chapter numbering:** when `numbering.captions = "chapter"`, captions use
+  `STYLEREF "Heading 1" \s` + `SEQ ... \s 1`; equations use the same pair.
+  `Mở đầu` must use the standalone `Chapter Unnumbered` style, not a style based
+  on Heading 1, or Word shifts every chapter by one.
+- **Reference position:** `references.position` is `before_appendix` (HUST) or
+  `after_appendix` (VNU/ISO).
+- **Honesty:** a profile is a source, not a certificate. HUST 2017 is a faculty
+  regulation; VNU-UET is one programme PDF. Label the scope.
 
 ## Standards-controlled report (T047)
 
