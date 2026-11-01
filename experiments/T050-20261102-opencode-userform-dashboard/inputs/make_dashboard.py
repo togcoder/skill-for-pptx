@@ -28,13 +28,20 @@ def build() -> dict:
     trend = []
     for m in range(1, 13):
         trend.append([f"T{m}", 120 + (m - 1) * 18, 180 + (m - 1) * 24])
-    model = [
-        {"name": "Dữ liệu", "cost": 214, "benefit": 320, "tasks": 6},
-        {"name": "Nền tảng", "cost": 186, "benefit": 298, "tasks": 6},
-        {"name": "Năng lực", "cost": 142, "benefit": 210, "tasks": 6},
-        {"name": "Trải nghiệm", "cost": 168, "benefit": 262, "tasks": 6},
-    ]
-    status_counts = [["On track", 12], ["At risk", 5], ["Blocked", 2], ["Done", 5]]
+    model = []
+    for name in workstreams:
+        subset = [r for r in rows if r[1] == name]
+        model.append({
+            "name": name,
+            "cost": sum(r[7] for r in subset),
+            "benefit": sum(r[8] for r in subset),
+            "tasks": len(subset),
+        })
+    counts = {s: sum(1 for r in rows if r[9] == s) for s in ["On track", "At risk", "Blocked", "Done"]}
+    status_counts = [[s, counts[s]] for s in ["On track", "At risk", "Blocked", "Done"]]
+    total_cost = sum(r[7] for r in rows)
+    total_benefit = sum(r[8] for r in rows)
+    risk = counts["At risk"] + counts["Blocked"]
     return {
         "title": "Điều hành chương trình chuyển đổi số 2026",
         "subtitle": "24 công việc · 4 nhóm · dữ liệu ẩn · biểu đồ native · một trang A4 ngang",
@@ -47,13 +54,18 @@ def build() -> dict:
         "model": model,
         "status_counts": status_counts,
         "kpis": [
-            {"label": "Công việc", "value": "24", "delta": "4 nhóm · 6 người",
+            {"label": "Công việc", "value": "24", "formula": "=SUM(Data!$L$2:$L$200)",
+             "cached": len(rows), "delta": "4 nhóm · 6 người",
              "fill": "#EAF1F8", "positive": True},
-            {"label": "Chi phí", "value": "710 tr", "delta": "ngân sách 750 tr",
+            {"label": "Chi phí", "value": f"{total_cost} tr", "formula": "=SUM(Model!$B$2:$B$5)",
+             "cached": total_cost, "num_format": '#,##0" tr"', "delta": "tổng 4 nhóm",
              "fill": "#EAF4E7", "positive": True},
-            {"label": "Lợi ích", "value": "1.090 tr", "delta": "ROI 1,54×",
+            {"label": "Lợi ích", "value": f"{total_benefit} tr", "formula": "=SUM(Model!$C$2:$C$5)",
+             "cached": total_benefit, "num_format": '#,##0" tr"', "delta": f"ROI {total_benefit / total_cost:.2f}×",
              "fill": "#FFF2E5", "positive": True},
-            {"label": "Rủi ro", "value": "7", "delta": "5 at risk · 2 blocked",
+            {"label": "Rủi ro", "value": str(risk),
+             "formula": '=COUNTIFS(Data!$J$2:$J$200,"At risk",Data!$L$2:$L$200,1)+COUNTIFS(Data!$J$2:$J$200,"Blocked",Data!$L$2:$L$200,1)',
+             "cached": risk, "delta": f"{counts['At risk']} at risk · {counts['Blocked']} blocked",
              "fill": "#FCE4D6", "positive": False},
         ],
     }

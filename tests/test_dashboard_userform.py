@@ -29,11 +29,15 @@ def _spec(tmp: Path) -> Path:
                   {"name": "Nền tảng", "cost": 80, "benefit": 140, "tasks": 4}],
         "status_counts": [["On track", 4], ["At risk", 4], ["Blocked", 0], ["Done", 0]],
         "kpis": [
-            {"label": "Tasks", "value": "8", "delta": "+2", "fill": "#EAF1F8"},
-            {"label": "Cost", "value": "1.080", "delta": "budget", "fill": "#EAF4E7"},
-            {"label": "Benefit", "value": "1.600", "delta": "ROI", "fill": "#FFF2E5"},
-            {"label": "Risk", "value": "4", "delta": "at risk", "fill": "#FCE4D6",
-             "positive": False},
+            {"label": "Tasks", "value": "8", "formula": "=SUM(Data!$L$2:$L$200)",
+             "cached": 8, "delta": "+2", "fill": "#EAF1F8"},
+            {"label": "Cost", "value": "1.080", "formula": "=SUM(Model!$B$2:$B$5)",
+             "cached": 1080, "delta": "budget", "fill": "#EAF4E7"},
+            {"label": "Benefit", "value": "1.600", "formula": "=SUM(Model!$C$2:$C$5)",
+             "cached": 1600, "delta": "ROI", "fill": "#FFF2E5"},
+            {"label": "Risk", "value": "4",
+             "formula": '=COUNTIFS(Data!$J$2:$J$200,"At risk",Data!$L$2:$L$200,1)',
+             "cached": 4, "delta": "at risk", "fill": "#FCE4D6", "positive": False},
         ],
     }
     path = tmp / "dashboard.json"
@@ -53,6 +57,13 @@ class DashboardTests(unittest.TestCase):
                 book = zf.read("xl/workbook.xml").decode("utf-8")
                 self.assertIn('state="hidden"', book)
                 self.assertEqual(book.count("<sheet "), 4)
+                data_xml = zf.read("xl/worksheets/sheet1.xml").decode("utf-8")
+                model_xml = zf.read("xl/worksheets/sheet3.xml").decode("utf-8")
+                dash_xml = zf.read("xl/worksheets/sheet4.xml").decode("utf-8")
+                self.assertIn("SUBTOTAL(103", data_xml)
+                self.assertIn("SUMIFS(Data!", model_xml)
+                self.assertIn("COUNTIFS(Data!", dash_xml)
+                self.assertIn("SUM(Data!$L$2:$L$200)", dash_xml)
                 vml = [n for n in zf.namelist() if n.endswith(".vml")]
                 self.assertTrue(vml)
                 text = "\n".join(zf.read(n).decode("utf-8", errors="replace") for n in vml)
@@ -79,8 +90,16 @@ class DashboardTests(unittest.TestCase):
             tmp = Path(td)
             out = tmp / "dash.xlsx"
             build_dashboard(_spec(tmp), out)
-            # The audit is structural; a normal build is clean.
-            self.assertTrue(audit_dashboard(out)["ok"])
+            bad = tmp / "bad.xlsx"
+            with zipfile.ZipFile(out) as zin, zipfile.ZipFile(bad, "w", zipfile.ZIP_DEFLATED) as zout:
+                for name in zin.namelist():
+                    blob = zin.read(name)
+                    if name == "xl/workbook.xml":
+                        blob = blob.replace(b'state="hidden"', b'state="visible"')
+                    zout.writestr(name, blob)
+            report = audit_dashboard(bad)
+            self.assertFalse(report["ok"])
+            self.assertTrue(any("not hidden" in e for e in report["errors"]))
 
 
 if __name__ == "__main__":

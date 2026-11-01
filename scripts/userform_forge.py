@@ -336,7 +336,16 @@ def main() -> None:
     p = sub.add_parser("inspect")
     p.add_argument("xlsm", type=Path)
     args = parser.parse_args()
-    result = build_form(args.xlsm) if args.cmd == "build" else inspect_workbook(args.xlsm)
+    if args.cmd == "build":
+        result = build_form(args.xlsm)
+        if result.get("ok"):
+            try:
+                from .vba_forge import normalize_button_macros
+            except ImportError:
+                from vba_forge import normalize_button_macros
+            normalize_button_macros(args.xlsm)
+    else:
+        result = inspect_workbook(args.xlsm)
     print(json.dumps(result, ensure_ascii=False, indent=2, default=str))
 
 

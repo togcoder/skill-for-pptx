@@ -35,9 +35,9 @@
 ```powershell
 python experiments/T050-.../inputs/make_dashboard.py
 python scripts/dashboard_forge.py build inputs/dashboard_spec.json `
-  -o artifacts/dashboard.xlsx
-# inject DashboardTools, then the real frmEntry + FormTools
-python -c "from scripts.vba_forge import ...; ..."
+  -o artifacts/dashboard.xlsx --userform
+# builds the XLSX, injects DashboardTools, adds frmEntry + FormTools,
+# normalizes the VML buttons to [0]!FormTools.*
 python scripts/userform_forge.py inspect artifacts/dashboard.xlsm
 python experiments/T050-.../inputs/make_form_preview.py
 # Excel COM: export Dashboard to PDF/PNG; inspect sheets/buttons/form
@@ -86,6 +86,8 @@ points, 4 model groups, 4 KPI cards, 4 charts.
 | Charts are native, not a screenshot collage | 1 | 4 chart parts (`xl/charts/chart1..4.xml`), line/column/bar/doughnut; audit 0 errors/warnings |
 | Data layer is hidden | 1 + 4 | Data/Trend/Model `Visible=0`; Dashboard `Visible=-1`; only Dashboard visible |
 | Dashboard has interaction | 1 + 4 | 3 form buttons; OnAction `FormTools.ShowEntryForm/FilterRisk/FilterAll`; VML `[0]!` |
+| Dashboard is live, not a static picture | 1 + 4 | Data has a `Visible` SUBTOTAL column; Model uses `SUMIFS`/`COUNTIFS` over `Data`; KPI/status use formulas. Excel filter `At risk` changes 24→4 tasks and 3,492→668 cost; appending one row changes 24→25 and 3,492→3,592 (`formula-check.json`) |
+| Build pipeline is one command | 1 | `python scripts/dashboard_forge.py build spec.json -o dashboard.xlsx --userform` builds the XLSX, injects `DashboardTools`, adds `frmEntry`/`FormTools`, normalizes `[0]!FormTools.*` |
 | A real UserForm exists | 1 + 4 | `frmEntry` in `VBProject`; **22 controls**; code has `btnSave_Click`, `ClearForm`, `ws.Cells(nextRow, 1).Value = nextId` |
 | Form is not a worksheet range | 1 | `VBComponents.Add(3)` (MSForm), controls `Forms.ComboBox.1`, `Forms.TextBox.1`, `Forms.CommandButton.1` |
 | Macro execution is blocked | — | `Application.Run` would hang on the modal form; **not executed**; host policy, same as T048 |
@@ -102,18 +104,23 @@ Preview: `preview/dashboard.png` (1-page dashboard),
 
 1. **The form was not shown end-to-end.** The host macro policy blocks
    `Application.Run`; a modal `frmEntry.Show` would hang COM. The form/controls/
-   code are inspected, but a human has not typed a record through the form.
+   code are inspected, and the data path is validated by appending the same row
+   shape with Excel COM (`formula-check.json`), but a human has not typed a
+   record through the form.
 2. **The form preview is a layout mock, not a runtime screenshot.** It is drawn
    from the actual control positions/captions and labelled as such. It is not
    evidence that the form rendered.
 3. **The dashboard is one page with bottom whitespace.** The charts end around
    row 36; the print area includes row 39 for the source/buttons. A future
    revision can enlarge the bottom charts or move the footer up.
-4. **No slicers.** The filters are VBA buttons, not native slicers. Slicers need
-   a table/pivot and are harder to audit in the package.
-5. **Static ranges.** Charts point at `Data`/`Model`/`Trend` fixed ranges; adding
-   rows beyond the modeled range will not auto-expand. A structured table or
-   dynamic named range is next.
+4. **No slicers.** The filters are VBA buttons, not native slicers. The filter
+   changes the hidden `Data` sheet and the dashboard formulas recalculate; the
+   user does not see the filtered table itself, only the recalculated cards and
+   charts.
+5. **Ranges are wide but static.** Data/Model formulas cover rows 2–200; adding
+   rows beyond 200 will not auto-expand. A structured table or dynamic named
+   range is next. The trend chart is a plan curve, not a live aggregation of
+   `Data`; the KPI/status/composition charts are live.
 6. **Hidden ≠ secure.** Data/Trend/Model are hidden; anyone can unhide them or
    read the XML. Workbook structure protection is not set.
 7. **No audit log/undo.** `btnSave_Click` writes directly to Data; there is no

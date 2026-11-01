@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import zipfile
 from pathlib import Path
 from typing import Any
@@ -56,7 +57,7 @@ def _sheet(wb, name: str, *, hidden: bool = False, very_hidden: bool = False):
 
 def _data_sheet(wb, spec: dict, fmt_header, fmt_text, fmt_num) -> None:
     ws = _sheet(wb, "Data", hidden=True)
-    headers = spec["data"]["headers"]
+    headers = spec["data"]["headers"] + ["Visible"]
     ws.write_row(0, 0, headers, fmt_header)
     for r, row in enumerate(spec["data"]["rows"], start=1):
         for c, value in enumerate(row):
@@ -64,6 +65,7 @@ def _data_sheet(wb, spec: dict, fmt_header, fmt_text, fmt_num) -> None:
                 ws.write_number(r, c, value, fmt_num)
             else:
                 ws.write_string(r, c, str(value), fmt_text)
+        ws.write_formula(r, 11, f"=SUBTOTAL(103,$A{r + 1})", fmt_num, 1)
     ws.set_column("A:A", 10)
     ws.set_column("B:B", 18)
     ws.set_column("C:C", 18)
@@ -72,8 +74,9 @@ def _data_sheet(wb, spec: dict, fmt_header, fmt_text, fmt_num) -> None:
     ws.set_column("G:G", 10)
     ws.set_column("H:I", 12)
     ws.set_column("J:K", 11)
+    ws.set_column("L:L", 9)
     ws.freeze_panes(1, 0)
-    ws.autofilter(0, 0, len(spec["data"]["rows"]), len(headers) - 1)
+    ws.autofilter(0, 0, 200, len(headers) - 1)
     ws.print_area(0, 0, len(spec["data"]["rows"]), len(headers) - 1)
 
 
@@ -92,9 +95,12 @@ def _model_sheet(wb, spec: dict, fmt_header, fmt_text, fmt_num) -> None:
     ws.write_row(0, 0, ["Nhóm", "Chi phí", "Lợi ích", "Công việc"], fmt_header)
     for r, row in enumerate(spec["model"], start=1):
         ws.write_string(r, 0, row["name"], fmt_text)
-        ws.write_number(r, 1, row["cost"], fmt_num)
-        ws.write_number(r, 2, row["benefit"], fmt_num)
-        ws.write_number(r, 3, row["tasks"], fmt_num)
+        ws.write_formula(r, 1, f"=SUMIFS(Data!$H$2:$H$200,Data!$B$2:$B$200,$A{r + 1},Data!$L$2:$L$200,1)",
+                         fmt_num, row["cost"])
+        ws.write_formula(r, 2, f"=SUMIFS(Data!$I$2:$I$200,Data!$B$2:$B$200,$A{r + 1},Data!$L$2:$L$200,1)",
+                         fmt_num, row["benefit"])
+        ws.write_formula(r, 3, f"=COUNTIFS(Data!$B$2:$B$200,$A{r + 1},Data!$L$2:$L$200,1)",
+                         fmt_num, row["tasks"])
     ws.set_column("A:A", 20)
     ws.set_column("B:D", 12)
 
@@ -130,13 +136,13 @@ def _trend_chart(wb):
 
 
 def _composition_chart(wb):
-    chart = _chart(wb, "column", "Chi phí theo nhóm", width=390, height=250)
+    chart = _chart(wb, "column", "Số công việc theo nhóm", width=390, height=250)
     chart.add_series({
-        "name": "Chi phí", "categories": "=Model!$A$2:$A$5", "values": "=Model!$B$2:$B$5",
-        "fill": {"color": NAVY}, "gap": 55,
-        "data_labels": {"value": True, "num_format": "#,##0", "font": {"size": 8}},
+        "name": "Công việc", "categories": "=Model!$A$2:$A$5", "values": "=Model!$D$2:$D$5",
+        "fill": {"color": BLUE}, "gap": 55,
+        "data_labels": {"value": True, "num_format": "0", "font": {"size": 8}},
     })
-    chart.set_y_axis({"num_format": "#,##0", "num_font": {"size": 8},
+    chart.set_y_axis({"num_format": "0", "num_font": {"size": 8},
                       "major_gridlines": {"visible": True, "line": {"color": "#E6E6E6"}}})
     chart.set_x_axis({"num_font": {"size": 8}, "label_position": "low"})
     chart.set_legend({"none": True})
@@ -147,7 +153,7 @@ def _comparison_chart(wb):
     chart = _chart(wb, "bar", "Chi phí và lợi ích theo nhóm", width=540, height=250)
     chart.add_series({
         "name": "Chi phí", "categories": "=Model!$A$2:$A$5", "values": "=Model!$B$2:$B$5",
-        "fill": {"color": LIGHT},
+        "fill": {"color": NAVY},
     })
     chart.add_series({
         "name": "Lợi ích", "categories": "=Model!$A$2:$A$5", "values": "=Model!$C$2:$C$5",
@@ -183,7 +189,7 @@ def _dashboard_sheet(wb, spec: dict, charts: dict, fmt_title, fmt_sub, fmt_card,
                         15: 15, 16: 15, 17: 15, 18: 15, 19: 15, 20: 15, 21: 15,
                         22: 6, 23: 14, 24: 15, 25: 15, 26: 15, 27: 15, 28: 15,
                         29: 15, 30: 15, 31: 15, 32: 15, 33: 15, 34: 15, 35: 15,
-                        36: 15, 37: 6}.items():
+                        36: 15, 37: 6, 38: 24}.items():
         ws.set_row(row, height)
     ws.merge_range("A1:L2", spec["title"], fmt_title)
     ws.merge_range("A3:H3", spec.get("subtitle", ""), fmt_sub)
@@ -196,12 +202,17 @@ def _dashboard_sheet(wb, spec: dict, charts: dict, fmt_title, fmt_sub, fmt_card,
                                "valign": "vcenter", "border": 1, "border_color": "#D6DEE8"})
         value = wb.add_format({"bg_color": fill, "font_size": 22, "bold": True,
                                "font_color": NAVY, "align": "center", "valign": "vcenter",
+                               "num_format": kpi.get("num_format", "0"),
                                "border": 1, "border_color": "#D6DEE8"})
         delta = wb.add_format({"bg_color": fill, "font_size": 9,
                                "font_color": GREEN if kpi.get("positive", True) else "#C00000",
                                "border": 1, "border_color": "#D6DEE8"})
         ws.merge_range(4, c, 4, c + 2, kpi["label"], label)
-        ws.merge_range(5, c, 5, c + 2, kpi["value"], value)
+        ws.merge_range(5, c, 5, c + 2, "", value)
+        if kpi.get("formula"):
+            ws.write_formula(5, c, kpi["formula"], value, kpi.get("cached", 0))
+        else:
+            ws.write_string(5, c, kpi["value"], value)
         ws.merge_range(6, c, 6, c + 2, kpi.get("delta", ""), delta)
     # Section labels + charts.
     ws.merge_range("A9:G9", "XU HƯỚNG", fmt_section)
@@ -217,15 +228,16 @@ def _dashboard_sheet(wb, spec: dict, charts: dict, fmt_title, fmt_sub, fmt_card,
     ws.write_row(39, 0, ["Trạng thái", "Số việc"], fmt_section)
     for r, (label, value) in enumerate(spec["status_counts"], start=40):
         ws.write_string(r, 0, label, fmt_text)
-        ws.write_number(r, 1, value, fmt_num)
+        ws.write_formula(r, 1, f"=COUNTIFS(Data!$J$2:$J$200,$A{r + 1},Data!$L$2:$L$200,1)",
+                         fmt_num, value)
     # Footer + filter buttons.
-    ws.merge_range("A38:I38", "Nguồn: dữ liệu tổng hợp cho mục đích trình diễn. "
+    ws.merge_range("A39:I39", "Nguồn: dữ liệu tổng hợp cho mục đích trình diễn. "
                               "Biểu đồ native Excel; bảng dữ liệu được ẩn.", fmt_sub)
-    ws.insert_button("J38", {"caption": "Nhập liệu", "macro": "FormTools.ShowEntryForm",
+    ws.insert_button("J39", {"caption": "Nhập liệu", "macro": "FormTools.ShowEntryForm",
                              "width": 78, "height": 24})
-    ws.insert_button("K38", {"caption": "Rủi ro", "macro": "FormTools.FilterRisk",
+    ws.insert_button("K39", {"caption": "Rủi ro", "macro": "FormTools.FilterRisk",
                              "width": 60, "height": 24})
-    ws.insert_button("L38", {"caption": "Tất cả", "macro": "FormTools.FilterAll",
+    ws.insert_button("L39", {"caption": "Tất cả", "macro": "FormTools.FilterAll",
                              "width": 60, "height": 24})
     ws.print_area("A1:L39")
     ws.set_landscape()
@@ -282,14 +294,21 @@ def audit_dashboard(path: str | Path) -> dict:
         stats["sheets"] = book.count("<sheet ")
         if 'state="hidden"' not in book:
             errors.append("data sheet is not hidden")
-        if 'tabColor rgb="FF1F4E79"' not in zf.read("xl/worksheets/sheet4.xml").decode("utf-8"):
+        sheet4 = zf.read("xl/worksheets/sheet4.xml").decode("utf-8")
+        if 'tabColor rgb="FF1F4E79"' not in sheet4:
             warnings.append("dashboard tab colour missing")
+        if 'orientation="landscape"' not in sheet4:
+            warnings.append("dashboard is not landscape")
         for name in names:
             xml = zf.read(name).decode("utf-8")
             if "<c:title>" not in xml:
                 warnings.append(f"{name}: no chart title")
             if xml.count("<c:ser>") > 1 and "<c:legend>" not in xml:
                 warnings.append(f"{name}: multi-series chart without legend")
+            for block in re.findall(r"<c:numCache>.*?</c:numCache>", xml, re.S):
+                values = [float(v) for v in re.findall(r"<c:v>([-0-9.]+)</c:v>", block)]
+                if len(values) >= 3 and all(abs(v) < 1e-9 for v in values):
+                    warnings.append(f"{name}: chart series cache is all zero")
     stats["ok"] = not errors
     return {"ok": not errors, "errors": errors, "warnings": warnings, "stats": stats}
 
@@ -300,11 +319,33 @@ def main() -> None:
     p = sub.add_parser("build")
     p.add_argument("spec", type=Path)
     p.add_argument("-o", "--output", type=Path, required=True)
+    p.add_argument("--userform", action="store_true",
+                   help="Also save an .xlsm and inject frmEntry/FormTools")
     p = sub.add_parser("inspect")
     p.add_argument("xlsx", type=Path)
     args = parser.parse_args()
     if args.cmd == "build":
-        print(json.dumps(build_dashboard(args.spec, args.output), ensure_ascii=False, indent=2))
+        report = build_dashboard(args.spec, args.output)
+        if args.userform:
+            try:
+                from .vba_forge import inject_vba, normalize_button_macros, write_dashboard_module
+            except ImportError:
+                from vba_forge import inject_vba, normalize_button_macros, write_dashboard_module
+            try:
+                from .userform_forge import build_form
+            except ImportError:
+                from userform_forge import build_form
+            bas = args.output.with_suffix(".bas")
+            write_dashboard_module(bas)
+            xlsm = inject_vba(args.output, bas)
+            if xlsm:
+                normalize_button_macros(xlsm)
+                form = build_form(xlsm)
+                normalize_button_macros(xlsm)
+                report["userform"] = form
+            else:
+                report["userform"] = {"ok": False, "reason": "VBA injection blocked"}
+        print(json.dumps(report, ensure_ascii=False, indent=2))
     else:
         print(json.dumps(audit_dashboard(args.xlsx), ensure_ascii=False, indent=2))
 

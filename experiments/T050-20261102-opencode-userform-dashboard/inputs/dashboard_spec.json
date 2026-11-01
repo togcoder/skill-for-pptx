@@ -395,26 +395,26 @@
   "model": [
     {
       "name": "Dữ liệu",
-      "cost": 214,
-      "benefit": 320,
+      "cost": 780,
+      "benefit": 1260,
       "tasks": 6
     },
     {
       "name": "Nền tảng",
-      "cost": 186,
-      "benefit": 298,
+      "cost": 882,
+      "benefit": 1398,
       "tasks": 6
     },
     {
       "name": "Năng lực",
-      "cost": 142,
-      "benefit": 210,
+      "cost": 984,
+      "benefit": 1236,
       "tasks": 6
     },
     {
       "name": "Trải nghiệm",
-      "cost": 168,
-      "benefit": 262,
+      "cost": 846,
+      "benefit": 1374,
       "tasks": 6
     }
   ],
@@ -425,43 +425,53 @@
     ],
     [
       "At risk",
-      5
+      4
     ],
     [
       "Blocked",
-      2
+      4
     ],
     [
       "Done",
-      5
+      4
     ]
   ],
   "kpis": [
     {
       "label": "Công việc",
       "value": "24",
+      "formula": "=SUM(Data!$L$2:$L$200)",
+      "cached": 24,
       "delta": "4 nhóm · 6 người",
       "fill": "#EAF1F8",
       "positive": true
     },
     {
       "label": "Chi phí",
-      "value": "710 tr",
-      "delta": "ngân sách 750 tr",
+      "value": "3492 tr",
+      "formula": "=SUM(Model!$B$2:$B$5)",
+      "cached": 3492,
+      "num_format": "#,##0\" tr\"",
+      "delta": "tổng 4 nhóm",
       "fill": "#EAF4E7",
       "positive": true
     },
     {
       "label": "Lợi ích",
-      "value": "1.090 tr",
-      "delta": "ROI 1,54×",
+      "value": "5268 tr",
+      "formula": "=SUM(Model!$C$2:$C$5)",
+      "cached": 5268,
+      "num_format": "#,##0\" tr\"",
+      "delta": "ROI 1.51×",
       "fill": "#FFF2E5",
       "positive": true
     },
     {
       "label": "Rủi ro",
-      "value": "7",
-      "delta": "5 at risk · 2 blocked",
+      "value": "8",
+      "formula": "=COUNTIFS(Data!$J$2:$J$200,\"At risk\",Data!$L$2:$L$200,1)+COUNTIFS(Data!$J$2:$J$200,\"Blocked\",Data!$L$2:$L$200,1)",
+      "cached": 8,
+      "delta": "4 at risk · 4 blocked",
       "fill": "#FCE4D6",
       "positive": false
     }
