@@ -1,4 +1,4 @@
-# Changelog — research log, newest first
+﻿# Changelog â€” research log, newest first
 
 This is the chronological record each task wrote when it finished. It used to
 be `docs/STATUS.md`; since T034 the current state lives in
@@ -7,7 +7,7 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
-## T045 [docx] Advanced report craft — side-by-side media, equations, rich tables — 2026-11-01
+## T045 [docx] Advanced report craft â€” side-by-side media, equations, rich tables â€” 2026-11-01
 
 - **Native equations.** `scripts/word_math.py` parses a strict LaTeX subset into
   OMML (`m:oMath`): fractions, scripts, roots, sums/integrals, delimiters,
@@ -29,15 +29,15 @@ were true at the time. Task IDs and their branches are listed in
 - **Evidence.** 11-page Word PDF inspected; audit clean (20 fields, 15
   bookmarks, 6 tables, 6 drawings, 2 equations/1 numbered, 5 merged cells,
   5 images in cells); `tests/test_document_advanced.py` (5 tests) + T039 tests;
-  full suite 337 tests OK with `PYTHONUTF8=1`. Argon **approve T045** (round 2).
+  full suite 380 tests OK with `PYTHONUTF8=1`. Argon **approve T045** (round 2).
 - **Status.** EXPERIMENTAL; review accepted; awaiting owner merge.
 - Report: `experiments/T045-20261101-opencode-advanced-docx/REPORT.md`.
 
-## T044 Multi-Asset Pipeline Protocol, User Experience Maximization & Local Autonomy Charter — 2026-11-01
+## T044 Multi-Asset Pipeline Protocol, User Experience Maximization & Local Autonomy Charter â€” 2026-11-01
 
 - **Official Owner Mandate Codification (togcoder).** Integrated official directive on cross-domain agentic skill development:
   - Skills do not produce single isolated files; they orchestrate compound assets across multiple target applications.
-  - Elevate user experience to the peak: deeply decode user intent to achieve first-pass satisfaction ("đúng ý ngay từ lượt đầu"), eliminating tedious regeneration.
+  - Elevate user experience to the peak: deeply decode user intent to achieve first-pass satisfaction ("Ä‘Ăºng Ă½ ngay tá»« lÆ°á»£t Ä‘áº§u"), eliminating tedious regeneration.
   - Mandate cross-asset pre-processing pipelines: edit/crop/mask images before slide/doc embedding; normalize audio (EBU R128) before video muxing; validate structured data before chart rendering.
   - Authorize full local operational autonomy: agents working locally have complete freedom to download fonts, models, and install code libraries, provided workspaces remain tidy in git-ignored `workspace/` and transient files are deleted.
 - **Protocol 04 Added (`lab/protocols/04_cross_asset_pipeline.md`):** Formally codified the 3 canonical pre-processing pipelines (Visual/Raster, Audio/Motion, Data/Chart), the First-Pass Excellence law, and the Local Autonomy & Cleanliness Law.
@@ -53,13 +53,13 @@ were true at the time. Task IDs and their branches are listed in
   - `validate_chart_data_for_presentation`: Verifies zero-error numerical integrity (no NaNs, nulls, division-by-zero) and Miller 7+-2 cognitive density.
 - **Tests.** Added `tests/test_cross_pipeline.py` (5 unit tests). Full lab test suite passes **359 tests 100% (skipped=4)**; `lab/tools/check_layout.py` reports `layout OK`.
 
-## T043 Dynamic Theme Engine: Need-Based Synthesizer, Reference Teardown, Composite Backgrounds & AI Image Harmonizer — 2026-11-01
+## T043 Dynamic Theme Engine: Need-Based Synthesizer, Reference Teardown, Composite Backgrounds & AI Image Harmonizer â€” 2026-11-01
 
 - **Argon Strategic Consultation (game25072003 / yep).** In response to owner directive that themes are infinite and must be driven by user need and reference decks, collaborated with Gemini 4 Argon (`gemini-argon`) on `chat_id: 2:53675cab70c50cda` to formulate the Dynamic Theme Engine architecture:
   - Adversarial review rejected raw `<a:srgbClr>` counting in favor of Area-Weighted Clustering and `<a:schemeClr>` resolution.
   - Perceptual color math in pure Python (sRGB <-> Linear <-> OKLab <-> OKLCH, Relative Luminance Y, WCAG 2.1 contrast ratio).
 - **Composite Background & Translucency Architecture (Addressing User Feedback):**
-  - Addressed critical design reality: professional decks NEVER rely on flat single-color (`đơn sắc`) fills.
+  - Addressed critical design reality: professional decks NEVER rely on flat single-color (`Ä‘Æ¡n sáº¯c`) fills.
   - Proved via Pillow alpha histogram on user's sample decks: `Webinar Keynote Presentation.pptx` media assets `image1.png` and `image6.png` feature 60.9% to 64.9% translucent pixels ($1 \le lpha \le 254$), overlaying a warm ecru canvas (`#F4F1E9`) to create soft organic pastel tone variations.
   - Proved shape alpha in `Blue Modern Business Pitch Deck Presentation.pptx`: explicit OOXML `<a:alpha val="36863"/>` (36.86% opacity) for frosted glass containers over a 2362x1575 composite image texture.
   - Integrated 4-layer Composite Background Recipe into `scripts/theme_engine.py`: Layer 0 Canvas Base Tone, Layer 1 Atmosphere/Translucent PNG Washes, Layer 2 Tint Washes/Glassmorphism Cards, Layer 3 Foreground Typography.
@@ -70,7 +70,7 @@ were true at the time. Task IDs and their branches are listed in
   - `build_harmonized_image_prompt`: Prompt builder guaranteeing visual harmony between generated AI images and the slide theme (6500K cool studio for Dark Canvas, 3800K soft morning window light for Warm Paper, 5500K high-key for Light Canvas). Slot framing: 16:9 hero full-bleed (60% negative space for typography), 16:9 atmospheric backdrop texture, 4:5 split/angled mask, 1:1 isolated translucent art wash on white background for alpha-mask conversion, 1:1 isometric bento.
 - **Tests.** Added `tests/test_theme_engine.py` (14 unit tests). Verified native teardown of user's `Blue Modern Business Pitch Deck` (`DARK_CANVAS`, `#01152B`, `Aileron`, 202pt KPI, 36.86% shape alpha) and `Webinar Keynote Presentation` (`WARM_PAPER`, `#F4F1E9`, `TT Commons Pro` + `TAN Mon Cheri`, pastel accents, >60% translucent PNG overlays). Full suite passes **354 tests 100% (skipped=4)**; `lab/tools/check_layout.py` reports `layout OK`.
 
-## T042 Multi-Domain Design Canons: Video, Vector/SVG, 3D/Solid, CAD & Audio — 2026-11-01
+## T042 Multi-Domain Design Canons: Video, Vector/SVG, 3D/Solid, CAD & Audio â€” 2026-11-01
 
 - **Argon Multi-Domain Consultation.** Partnered with Gemini 4 Argon (\gemini-argon\) to establish mathematical formulas, geometric tokens, and handoff contracts across all specialized ArtCraft domains (\D:\\artcraft\).
 - **5 Formal Domain Canons (\knowledge/\):**
@@ -91,7 +91,7 @@ were true at the time. Task IDs and their branches are listed in
   - \solidcraft_icon.png\ (21 KB) via \solidcraft-cli.exe icon\.
 - **Tests.** Added \	ests/test_multi_domain_canons.py\ (24 unit tests). All **340 tests pass 100% (skipped=4)**; \lab/tools/check_layout.py\ reports \layout OK\.
 
-## T041 [xlsx] SheetCraft — controlled standard DrawingML charts — 2026-11-01
+## T041 [xlsx] SheetCraft â€” controlled standard DrawingML charts â€” 2026-11-01
 
 - **Chart Forge.** `scripts/chart_forge.py` builds a workbook/chart from
   `domains/xlsx/schemas/chart_spec.schema.json`: column/bar, line, area, pie,
@@ -120,10 +120,10 @@ were true at the time. Task IDs and their branches are listed in
   document half is T039 [docx].
 - Report: `experiments/T041-20261101-opencode-sheet-craft/REPORT.md`.
 
-## T039 [docx] DocumentCraft — professional Word canon and real fields — 2026-11-01
+## T039 [docx] DocumentCraft â€” professional Word canon and real fields â€” 2026-11-01
 
-- **Standards research.** Mapped the binding hierarchy (law/contract/template →
-  ISO 7144/2145/690/7200/8601/80000 → institutional rules), marked ISO 5966 as
+- **Standards research.** Mapped the binding hierarchy (law/contract/template â†’
+  ISO 7144/2145/690/7200/8601/80000 â†’ institutional rules), marked ISO 5966 as
   withdrawn, and recorded the sources/statuses in
   `domains/docx/data/document_system.json`.
 - **Document Forge.** `scripts/document_forge.py` builds a DOCX from
@@ -149,7 +149,7 @@ were true at the time. Task IDs and their branches are listed in
   spreadsheet half is T041 [xlsx].
 - Report: `experiments/T039-20261101-opencode-office-canon/REPORT.md`.
 
-## T040 multi-domain lab restructure — 2026-11-01
+## T040 multi-domain lab restructure â€” 2026-11-01
 
 The repository is now organised as a multi-domain design lab:
 
@@ -166,12 +166,12 @@ The repository is now organised as a multi-domain design lab:
 No design research was done. Report:
 experiments/T040-20261101-claude-lab-restructure/REPORT.md.
 
-## T038 PPTX Design Canon Tokens, Asymmetric & Bento Grids, Optical Balance & Critic Rules — 2026-11-01
+## T038 PPTX Design Canon Tokens, Asymmetric & Bento Grids, Optical Balance & Critic Rules â€” 2026-11-01
 
 - **Argon Dissection & Design Canon Foundations.** Partnered with Gemini 4 Argon (`gemini-argon`) to dissect and codify high-craft mathematical formulas into `knowledge/design_system.json` (v1.1.0):
   - *Deck Chrome Bounds:* Slide $960 \times 540\text{ pt}$, safe margins $48/36\text{ pt}$, logo watermark ($w \le 72, h \le 24$, $y=20\text{ pt}$ top-right, suppressed on cover/divider/closing/break slides), section breadcrumbs ($10\text{ pt}$ uppercase tracked font), and progress tracker ($y=537, h=3\text{ pt}$ along bottom edge).
   - *Optical Icon Balance:* Equalizes perceived mass across geometric shapes (Square $0.88\times$, Circle $1.0\times$, Wide $1.08\times/0.82\times$, Triangle $1.05\times$ with $+0.06\times$ apex upward shift, Badge $2.0\times$).
-  - *3-Layer Background Depth:* Z0 Base Canvas (135° Deep Slate `#0B0F19` $\rightarrow$ `#111827` or Light Alabaster `#F8FAFC` $\rightarrow$ `#EDF2F7`), Z1 Ambient Radial Glow Orbs (blurred $120-160\text{ pt}$, opacity $0.12-0.18$, morph-linked via `!!` prefix), Z2 Surface Cards (glassmorphism opacity $65-75\%$, top-lit border, corner radius $8-12\text{ pt}$, inner padding $20-28\text{ pt}$).
+  - *3-Layer Background Depth:* Z0 Base Canvas (135Â° Deep Slate `#0B0F19` $\rightarrow$ `#111827` or Light Alabaster `#F8FAFC` $\rightarrow$ `#EDF2F7`), Z1 Ambient Radial Glow Orbs (blurred $120-160\text{ pt}$, opacity $0.12-0.18$, morph-linked via `!!` prefix), Z2 Surface Cards (glassmorphism opacity $65-75\%$, top-lit border, corner radius $8-12\text{ pt}$, inner padding $20-28\text{ pt}$).
   - *Content Layout Canons:* Symmetric grids (2-col $422\text{ pt}$, 3-col $274\text{ pt}$, 4-col $204\text{ pt}$), Asymmetric Golden Ratio (Major $522\text{ pt}$ / $61.8\%$, Minor $322\text{ pt}$ / $38.2\%$), and Bento Grid (Hero $496 \times 396\text{ pt}$ [7/12 width], Top-Right $348 \times 188\text{ pt}$, and 2 Bottom-Right split cards $164 \times 188\text{ pt}$).
   - *Nancy Duarte Pattern Breaks:* Automatic pacing triggers for decks of $\ge 5$ slides near $1/3$ and $2/3$ milestones ($\ge 70\%$ negative space, single bold statement $36-44\text{ pt}$ or mammoth KPI $72-96\text{ pt}$, chrome suppressed) to eliminate cognitive fatigue.
   - *Color & Typography:* 60-30-10 surface area bounds, Modular Scale token table (caption $11\text{ pt}$, body_base $14\text{ pt}$, card_title $18\text{ pt}$, slide_title $28\text{ pt}$, hero $44\text{ pt}$, kpi_stat $72\text{ pt}$).
@@ -180,7 +180,7 @@ experiments/T040-20261101-claude-lab-restructure/REPORT.md.
 - **Design Critic Rules (`scripts/design_critic.py`).** Implemented and registered `CHROME-SAFE`, `OPT-ICON`, `LAY-BENTO`, and `DUA-BREAK` rules; returns detailed `evaluations` audit log.
 - **Tests.** Added `tests/test_pptx_design_canon.py` (12 unit tests). Total project test suite expanded to **314 tests, 100% passing (0 failures, 4 skipped)** in 14.90s.
 
-## T037 Multi-Craft Native Bridges & Intent-Empathy Decoder — 2026-11-01
+## T037 Multi-Craft Native Bridges & Intent-Empathy Decoder â€” 2026-11-01
 
 - **Multi-Craft Bridges.** Built `scripts/wordcraft_bridge.py`, `scripts/gridcraft_bridge.py`,
   and `scripts/vectorcraft_bridge.py`. Connects natively to `wordcraft-cli.exe`, `gridcraft-cli.exe`,
@@ -192,7 +192,7 @@ experiments/T040-20261101-claude-lab-restructure/REPORT.md.
 - **Tests.** Added `tests/test_craft_bridges.py` and `tests/test_intent_decoder.py`. Test suite
   expanded from 296 to **302 tests, all passing (0 failures, 4 skipped)** in 8.69s.
 
-## T036 Universal ArtCraft Hub, Multi-Agent Protocols & Intent Schemas — 2026-11-01
+## T036 Universal ArtCraft Hub, Multi-Agent Protocols & Intent Schemas â€” 2026-11-01
 
 - **Argon Architecture Consultation.** Consulted Gemini 4 Argon (`gemini-argon`) on multi-agent
   governance, identifying 4 architectural traps: unbounded mesh chat (solved by DAG contracts),
@@ -211,7 +211,7 @@ experiments/T040-20261101-claude-lab-restructure/REPORT.md.
 - **Validation & Tests.** Created `scripts/validate_handoff.py` and `tests/test_artcraft_hub.py`.
   Test suite expanded from 292 to **296 tests, all passing (0 failures, 4 skipped)** in 8.64s.
 
-## T035 DeckCraft native bridge + Skill-for-Design evolution — 2026-10-31
+## T035 DeckCraft native bridge + Skill-for-Design evolution â€” 2026-10-31
 
 - **Native rendering bridge (`scripts/deckcraft_bridge.py`).** Discovers `deckcraft-cli.exe`
   from the ArtCraft suite (`D:\artcraft\DeckCraft`). Headlessly renders slides to Full HD
@@ -225,7 +225,7 @@ experiments/T040-20261101-claude-lab-restructure/REPORT.md.
 - **Skill-for-Design roadmap.** Established the architectural blueprint to evolve `skill-for-pptx`
   into the comprehensive Skill for Design suite with PPTX as pioneer.
 
-## T034 design system + documentation standardised — 2026-10-19
+## T034 design system + documentation standardised â€” 2026-10-19
 
 Beauty and technique now share one source,
 `knowledge/design_system.json` (see `docs/DESIGN_SYSTEM.md`):
@@ -259,7 +259,7 @@ Beauty and technique now share one source,
 289 tests pass. Report:
 experiments/T034-20261019-claude-design-system/REPORT.md.
 
-## T033 Argon second drop: morph twins, triggers, pacing — 2026-10-16
+## T033 Argon second drop: morph twins, triggers, pacing â€” 2026-10-16
 
 The owner integrated three Argon answers:
 
@@ -272,13 +272,13 @@ wired into a product path, and that each one writes schema-invalid or wrong
 XML on real decks. All three are quarantined as experimental. Report
 (written in T034): experiments/T033-20261016-argon-research/REPORT.md.
 
-## T031 measurable critique (WIP) — 2026-10-08
+## T031 measurable critique (WIP) â€” 2026-10-08
 
 `scripts/forge_critique.py` scored PPTEval-style dimensions (content, design,
 coherence) plus motion from measurements. It was a single WIP commit with no
 tests or wiring and no report. T034 folded its checks into `design_critic.py`.
 
-## T032 Argon (Gemini) research drop evaluated and integrated — 2026-10-15
+## T032 Argon (Gemini) research drop evaluated and integrated â€” 2026-10-15
 
 Argon worked offline on the old main and reused ID T024. Its drop is preserved
 verbatim on `import/argon-t024-20261014` and merged here. **Adopted:**
@@ -301,32 +301,32 @@ into `loop:{}`.
 and PowerPoint 16.0 renders the 3D carousel and the cascade.
 Report: experiments/T032-20261015-claude-argon-integration/REPORT.md.
 
-## T030 brand palette from one colour + highlight fix — 2026-10-08
+## T030 brand palette from one colour + highlight fix â€” 2026-10-08
 
 `scripts/brand_palette.py` builds a whole Forge theme from one brand colour
 (`"theme": {"seed": "#DA251D", "mode": "light|dark", "harmony": 150}`). It
 works in OKLCH (Ottosson) and picks colours by contrast target, the way Adobe
 Leonardo does. The brand hue is kept, and its lightness moves only as far as
 WCAG AA requires; the raw colour still paints the decoration. A test holds 47
-seeds × 2 modes to AA on bg and surface.
+seeds Ă— 2 modes to AA on bg and surface.
 
 The PowerPoint render of a Vietnamese brand deck showed the T028 highlight
 marker above a centred, wrapped takeaway. The marker now uses the
 anchor-aware `text_block` and covers wrapped blocks; a regression test was
 added and the re-render was checked. 256 tests pass.
 
-## T029 motion tokens — 2026-10-08
+## T029 motion tokens â€” 2026-10-08
 
 Carbon and Material 3 easing curves (Apache-2.0) are fitted to PowerPoint's
-accel/decel. Carbon fits within 1.5–8%; Material's emphasized curves are
-18–44% off with one behaviour.
+accel/decel. Carbon fits within 1.5â€“8%; Material's emphasized curves are
+18â€“44% off with one behaviour.
 
 The keyframe default moves from the symmetric 0.5/0.5 to Carbon standard
 (0.15/0.70). Assemble and rise now enter with a deceleration, and disperse
 exits with an acceleration. PowerPoint 16.0 parsed all 122 effects of a
 cinematic showcase deck. 251 tests pass. See `knowledge/README.md`.
 
-## Integration 2026-10-08 — both lines merged
+## Integration 2026-10-08 â€” both lines merged
 
 Two sessions worked in parallel, and both used the ID **T024**. Experiment
 folders keep their names:
@@ -342,7 +342,7 @@ layers. Natively verified so far: PowerPoint CreateVideo renders (T024
 picture, T025, T027) and EffectType recognition of library presets. The
 cloud work (T024 layers, T028) has simulated previews only.
 
-## T028 Morph Studio + professional text tricks — 2026-10-08
+## T028 Morph Studio + professional text tricks â€” 2026-10-08
 
 Goal: the polish seen in motion-design tutorials. `scripts/morph_studio.py`
 adds cross-slide Morph to a directed deck. **Continuity** pairs titles,
@@ -363,16 +363,16 @@ container or background colour, and is refused if it would cover anything),
 `skills/pptx-motion-director/references/pro-techniques.md` lists 50
 techniques with when and how.
 
-Evidence: report deck (7→8 slides) and showcase deck (8→10 slides) with
+Evidence: report deck (7â†’8 slides) and showcase deck (8â†’10 slides) with
 simulated previews. LibreOffice reads every Morph slide's fallback as Fade.
 Five defects were found by looking at the previews and fixed with tests.
 Smoke test: 34/34 repository decks pass
-propose → apply with every suggestion accepted. **219 tests pass.** PowerPoint playback is pending; the native gate is in
-T020 §A.
+propose â†’ apply with every suggestion accepted. **219 tests pass.** PowerPoint playback is pending; the native gate is in
+T020 Â§A.
 
 Report: experiments/T028-20261008-claude-morph-studio/REPORT.md.
 
-## T027 design + complex-motion knowledge — 2026-10-07
+## T027 design + complex-motion knowledge â€” 2026-10-07
 
 - PowerPoint authored all 198 built-in effects. They are now writable as
   `ppt:<name>` (verified 7/7 by native EffectType).
@@ -382,7 +382,7 @@ Report: experiments/T028-20261008-claude-morph-studio/REPORT.md.
 - New `dynamic` motion style. See `knowledge/README.md` and
   experiments/T027-20261007-claude-design-motion-corpus/REPORT.md.
 
-## T026 Forge online assets — 2026-10-07
+## T026 Forge online assets â€” 2026-10-07
 
 Forge now finds licensed photos (Openverse CC0/BY/BY-SA, or Pexels with a
 key) and open-source icons (Iconify: Lucide/Tabler/Phosphor) by itself.
@@ -391,10 +391,10 @@ SVG. Attribution goes on an automatic credits slide, in the notes and in the
 verdict. Example deck rendered by PowerPoint 16.0.
 Report: experiments/T026-20261007-claude-forge-assets/REPORT.md.
 
-## T025 Slide Forge — agent-facing deck compiler — 2026-10-07
+## T025 Slide Forge â€” agent-facing deck compiler â€” 2026-10-07
 
-New product path for *new* decks: `scripts/slide_forge.py` (schema → build →
-qa → render). An agent writes a semantic spec with 12 layouts. Forge handles
+New product path for *new* decks: `scripts/slide_forge.py` (schema â†’ build â†’
+qa â†’ render). An agent writes a semantic spec with 12 layouts. Forge handles
 layout, measured type, art, Director motion (KPI count-up, chart builds,
 process, cycle tour, Ken Burns, accent draw-ins, Morph orbs) and coded QA.
 Two example decks (EN and VI) pass QA and were rendered by PowerPoint 16.0.
@@ -402,7 +402,7 @@ The renders found wrap and mid-word-break defects that QA now catches.
 Skill: `skills/slide-forge/SKILL.md`; command `/forge-deck`.
 Report: experiments/T025-20261007-claude-slide-forge/REPORT.md.
 
-## T024 picture motion + motion-graphic intro — 2026-10-07
+## T024 picture motion + motion-graphic intro â€” 2026-10-07
 
 Prompt-made decks animated only their text: the draft heuristic skipped small
 pictures, kept single-picture and title slides static, and gave other pictures
@@ -416,7 +416,7 @@ the effects and its own `CreateVideo` render shows the picture push-in and the
 loop (pixel-measured). Interactive click playback is still pending.
 
 Report: experiments/T024-20261007-claude-picture-motion/REPORT.md.
-## T024 motion layers + script layer — 2026-10-05
+## T024 motion layers + script layer â€” 2026-10-05
 
 Motion now has three layers. **Primary** is the meaning. **Secondary** covers
 a halo following each spotlight, a rail plus progress token under walked
@@ -440,7 +440,7 @@ human-style script and a Vietnamese paraphrase.
 is pending.
 
 Report: experiments/T024-20261005-claude-layers-script/REPORT.md.
-## Argon (Gemini) "T024" virtual rigging, poly-segment paths, auto-arc collision solver & interactiveSeq — 2026-10-14
+## Argon (Gemini) "T024" virtual rigging, poly-segment paths, auto-arc collision solver & interactiveSeq â€” 2026-10-14
 
 Resolved the three compound-motion limitations identified in T023 and incorporated architectural lessons from an open-source review (`hugohe3/ppt-master`, `JimLiu/baoyu-design`, `scanny/python-pptx#942`, and the Open XML SDK SMIL specification):
 
@@ -454,7 +454,7 @@ Resolved the three compound-motion limitations identified in T023 and incorporat
 
 Report: `experiments/T024-20261014-gemini-complex-motion-rigging/REPORT.md`.
 
-## T023 compound motion engine — 2026-10-05
+## T023 compound motion engine â€” 2026-10-05
 
 Existing decks can now receive compound choreography, not only builds.
 `scripts/motion_engine.py` compiles keyframe tracks and recipes (assemble,
@@ -479,7 +479,7 @@ against its preview sheets.
 
 Report: experiments/T023-20261005-claude-compound-motion/REPORT.md.
 
-## T022 T009 recompile + text-box deck direction — 2026-10-05
+## T022 T009 recompile + text-box deck direction â€” 2026-10-05
 
 Continued Codex's T009 arm C (PR #22, which its review held back from merging).
 The plan, unchanged, was recompiled through T019 on a timing-stripped
@@ -500,14 +500,14 @@ two PPTX files in `experiments/T022-20261005-claude-t009-recompile/output/`.
 
 Report: experiments/T022-20261005-claude-t009-recompile/REPORT.md.
 
-## T019 canonical timing + one-command Motion Director — 2026-10-05
+## T019 canonical timing + one-command Motion Director â€” 2026-10-05
 
 Product path now exists end to end: `scripts/motion_director.py`
-`inspect → draft → apply → storyboard/verify`, packaged as skill
+`inspect â†’ draft â†’ apply â†’ storyboard/verify`, packaged as skill
 `skills/pptx-motion-director/` and Claude Code plugin (`.claude-plugin/`,
 `/animate-deck`). Input can be only a PPTX + vague goal.
 
-Found and fixed a writer defect: patch v0.2–v0.5 put all stages of a click in
+Found and fixed a writer defect: patch v0.2â€“v0.5 put all stages of a click in
 one `p:par` at delay 0, so `after-previous` ran concurrently, and entrances had
 no `set style.visibility`. LibreOffice's importer reads the old H001 tree as
 three effects at 0s with no preset; the new `scripts/pptx_animator.py` tree as
@@ -518,13 +518,13 @@ Synthetic real-world fixture `tests/fixtures/report_deck.pptx` (placeholders,
 bullets, KPI cards, chart, process, picture, group, notes, PowerPoint-authored
 animation): autonomous draft gives 4/3/2/5/3 clicks on slides 2/3/4/5/7, keeps
 title and existing-animation slides untouched; preservation checks pass.
-**167 tests pass.** PowerPoint playback still pending — play
+**167 tests pass.** PowerPoint playback still pending â€” play
 `experiments/T019-20261005-claude-motion-director/report_deck_motion.pptx`.
 
 Report: experiments/T019-20261005-claude-motion-director/REPORT.md.
 Next task: research/tasks/T020-motion-director-continuation.md.
 
-## T018 native QA evidence integrity — 2026-10-05
+## T018 native QA evidence integrity â€” 2026-10-05
 
 Reviewed the unfinished T018 harness from a00ea03 on a separate branch (PR #21).
 Frozen synthetic evidence cases found 18 false click passes and one crash in
@@ -542,7 +542,7 @@ Next: run the four frozen T006 hashes on an actual Windows PowerPoint desktop,
 then chart/KPI/focus capture. Do not repeat the matrix or expand effects to avoid
 the native gate. Report: experiments/T018-20261005-qa-evidence-review/REPORT.md.
 
-## T017 generic report motion — 2026-10-05
+## T017 generic report motion â€” 2026-10-05
 
 Generic existing-deck semantics now bridge to native timing for reveal, staggered
 reveal, process reveal, focus/emphasis, explicit move and explicit rotate.
@@ -562,9 +562,9 @@ PowerPoint runtime remains the decisive missing gate.
 Task: `research/tasks/T017-generic-report-motion.md`.
 Report: `experiments/T017-20261005-generic-report-motion/REPORT.md`.
 
-## T016 real-package data motion — 2026-10-05
+## T016 real-package data motion â€” 2026-10-05
 
-T012–T015 now pass a real PPTX package integration, not only isolated XML.
+T012â€“T015 now pass a real PPTX package integration, not only isolated XML.
 
 A fixture derived from the valid H001 deck adds a native two-series/four-category
 line chart plus `98.5%` KPI, then executes:
@@ -585,7 +585,7 @@ PowerPoint runtime playback remains pending.
 Task: `research/tasks/T016-real-package-data-motion.md`.
 Report: `experiments/T016-20261005-real-package-data-motion/REPORT.md`.
 
-## T015 Director → execution compiler — 2026-10-05
+## T015 Director â†’ execution compiler â€” 2026-10-05
 
 The manual bridge between Director v0.3 and patch v0.4 is removed for complete
 data-motion slides.
@@ -595,10 +595,10 @@ data-motion slides.
 preserves Director click grouping.
 
 Safety: mixed/unsupported slides are blocked instead of partially compiled.
-Odometer → stepped-text fallback is explicit and can be disabled.
+Odometer â†’ stepped-text fallback is explicit and can be disabled.
 
 Final CI run 37238859486: **126/126 tests pass** + Python compile. Integration
-regression preserves two presenter clicks across Director → patch → timing
+regression preserves two presenter clicks across Director â†’ patch â†’ timing
 read-back.
 
 PowerPoint playback remains pending.
@@ -606,7 +606,7 @@ PowerPoint playback remains pending.
 Task: `research/tasks/T015-director-to-execution.md`.
 Report: `experiments/T015-20261005-director-to-execution/REPORT.md`.
 
-## T014 KPI counter execution — 2026-10-05
+## T014 KPI counter execution â€” 2026-10-05
 
 T012 hero-metric counters now have a structural v0.4 execution path.
 
@@ -626,7 +626,7 @@ is visible at a time.
 Task: `research/tasks/T014-kpi-counter-execution.md`.
 Report: `experiments/T014-20261005-kpi-counter-execution/REPORT.md`.
 
-## T013 native chart execution — 2026-10-05
+## T013 native chart execution â€” 2026-10-05
 
 T012 semantic chart recipes now have a structural native execution path.
 
@@ -650,7 +650,7 @@ PowerPoint playback is still pending; this is not a native-playback claim.
 Task: `research/tasks/T013-native-chart-execution.md`.
 Report: `experiments/T013-20261005-native-chart-execution/REPORT.md`.
 
-## T012 semantic data motion — 2026-10-05
+## T012 semantic data motion â€” 2026-10-05
 
 User added a new product requirement: charts need type-specific animation, and
 standalone hero metrics need dedicated number counting.
@@ -672,7 +672,7 @@ playback remain pending.
 Reference: `skills/pptx-motion/references/data-motion-recipes.md`.
 Report: `experiments/T012-20261005-data-motion-recipes/REPORT.md`.
 
-## T011 director click rhythm — 2026-10-05
+## T011 director click rhythm â€” 2026-10-05
 
 T010 established click groups in the timing writer. T011 moves that decision
 upstream into the AI Director.
@@ -698,7 +698,7 @@ one-click-per-motion overfragmentation and premature reveals.
 
 Report: `experiments/T011-20261005-director-click-rhythm/REPORT.md`.
 
-## T010 presenter-paced click beats — 2026-10-05
+## T010 presenter-paced click beats â€” 2026-10-05
 
 User corrected the packed-motion target: one physical slide may contain many
 motions **and many presenter clicks**. Packing and pacing are now separate.
@@ -723,16 +723,16 @@ reproducibility and uses multiple `mainSeq` click groups for v0.2. The
 existing-deck inspector also exposes click-group structure so authored presenter
 rhythm can be preserved.
 
-CI evidence: run 37234235795 — **86/86 tests pass**, Python compile pass.
+CI evidence: run 37234235795 â€” **86/86 tests pass**, Python compile pass.
 Integration regression locks 4 clickEffect stages, 2 afterEffect stages and
 82 behaviors on one slide. Native PowerPoint playback is still pending, so this
 is structural evidence only.
 
 Report: `experiments/T010-20261005-click-beat-choreography/REPORT.md`.
 
-Cập nhật ngày 04/10/2026, giờ Việt Nam. Phiên bản nguồn nghiên cứu v0.7 (thêm T005 compound intent).
+Cáº­p nháº­t ngĂ y 04/10/2026, giá» Viá»‡t Nam. PhiĂªn báº£n nguá»“n nghiĂªn cá»©u v0.7 (thĂªm T005 compound intent).
 
-## T006 controlled motion semantics matrix — 2026-10-04 20:08 UTC
+## T006 controlled motion semantics matrix â€” 2026-10-04 20:08 UTC
 
 PR #12 prepares four exact one-slide files that differ only by stage-local vs
 authored-layout motion paths and fill=remove vs fill=hold. Every file has two
@@ -746,7 +746,7 @@ run all four exact hashes using
 experiments/T006-20261004-motion-semantics-matrix/playback-checklist.json.
 Only then revise path anchoring/fill and rebuild the full packed candidate.
 
-## T006 full packed candidate — 2026-10-04 19:16 UTC / 05-10 Vietnam
+## T006 full packed candidate â€” 2026-10-04 19:16 UTC / 05-10 Vietnam
 
 Built `output/T006_packed_candidate.pptx`: **1 slide, 31 native objects, 6 stages,
 82 encoded behaviors, 7,100 ms planned duration**. Exact SHA-256:
@@ -776,8 +776,8 @@ reuse deck resources, synthesize only justified missing components, and return
 the same report motion-directed.
 
 Existing native animation is now first-class source evidence. Script priority is:
-provided script → speaker notes → existing timing/choreography → visible
-narrative → inferred narrative → researched narrative. Existing timing must be
+provided script â†’ speaker notes â†’ existing timing/choreography â†’ visible
+narrative â†’ inferred narrative â†’ researched narrative. Existing timing must be
 preserved/extended by default rather than rejected or deleted.
 
 `inspect_existing_deck.py` now exposes transition and timing choreography:
@@ -790,163 +790,163 @@ Branch CI run 37215400829: **75/75 tests pass** plus Python compile. New tasks:
 
 Report: `experiments/T007-20261004-autonomy-existing-motion/REPORT.md`.
 
-## Product destination — T007 Existing Deck Motion Director
+## Product destination â€” T007 Existing Deck Motion Director
 
-Người dùng đã mở rộng đích đến: hệ thống phải nhận **file PPTX có sẵn** và tự
-đạo diễn chuyển động. Nếu có script/storyboard thì bám script. Nếu không có,
-ưu tiên speaker notes, sau đó tự phân tích trình tự báo cáo; chỉ nghiên cứu ngoài
-khi cần và phù hợp. Nếu narrative thiếu component thì tự tạo helper component
-trong đúng visual framework của deck, không sinh decoration vô cớ.
+NgÆ°á»i dĂ¹ng Ä‘Ă£ má»Ÿ rá»™ng Ä‘Ă­ch Ä‘áº¿n: há»‡ thá»‘ng pháº£i nháº­n **file PPTX cĂ³ sáºµn** vĂ  tá»±
+Ä‘áº¡o diá»…n chuyá»ƒn Ä‘á»™ng. Náº¿u cĂ³ script/storyboard thĂ¬ bĂ¡m script. Náº¿u khĂ´ng cĂ³,
+Æ°u tiĂªn speaker notes, sau Ä‘Ă³ tá»± phĂ¢n tĂ­ch trĂ¬nh tá»± bĂ¡o cĂ¡o; chá»‰ nghiĂªn cá»©u ngoĂ i
+khi cáº§n vĂ  phĂ¹ há»£p. Náº¿u narrative thiáº¿u component thĂ¬ tá»± táº¡o helper component
+trong Ä‘Ăºng visual framework cá»§a deck, khĂ´ng sinh decoration vĂ´ cá»›.
 
-Tài liệu chuẩn: `docs/PRODUCT_TARGET.md`.
+TĂ i liá»‡u chuáº©n: `docs/PRODUCT_TARGET.md`.
 Task: `research/tasks/T007-existing-deck-motion-director.md`.
 
-Scaffold hiện có:
+Scaffold hiá»‡n cĂ³:
 - `scripts/inspect_existing_deck.py`: source-hash + slide/object/text/geometry/
   relationships/timing/transition/notes/theme/media inventory;
 - `skills/pptx-motion/references/existing-deck-director.md`: director contract;
-- `scripts/validate_director_plan.py`: buộc script source, source grounding,
-  preserve slide count, target resource validity và justification cho component;
+- `scripts/validate_director_plan.py`: buá»™c script source, source grounding,
+  preserve slide count, target resource validity vĂ  justification cho component;
 - final branch CI run `37214340363`: **67/67 tests pass**, `py_compile` pass.
 
-Report: `experiments/T007-20261004-existing-deck-director/REPORT.md`. Phần còn
-pending: inference trên deck thật không có script, synthesis component theo design
-system, director-beat → T006 timeline adapter, và patch/playback exact-file.
+Report: `experiments/T007-20261004-existing-deck-director/REPORT.md`. Pháº§n cĂ²n
+pending: inference trĂªn deck tháº­t khĂ´ng cĂ³ script, synthesis component theo design
+system, director-beat â†’ T006 timeline adapter, vĂ  patch/playback exact-file.
 
-Default mới: preserve source slide count/order/content; resource cũ được reuse
-trước; same-resource motion phải pack trong slide; generated component chỉ lấp
+Default má»›i: preserve source slide count/order/content; resource cÅ© Ä‘Æ°á»£c reuse
+trÆ°á»›c; same-resource motion pháº£i pack trong slide; generated component chá»‰ láº¥p
 narrative gap.
 
 ### T007 source-object patcher checkpoint
 
-Đã thêm `scripts/patch_existing_timeline.py` và
-`existing-deck-timeline-patch.md`: object deck thật được target bằng source
-slide + native `cNvPr id` + name, không cần `!!`. Patcher kiểm source SHA-256,
-chỉ sửa slide được chọn, giữ slide khác byte-identical, preserve transition và
-từ chối merge timing cũ mù quáng.
+ÄĂ£ thĂªm `scripts/patch_existing_timeline.py` vĂ 
+`existing-deck-timeline-patch.md`: object deck tháº­t Ä‘Æ°á»£c target báº±ng source
+slide + native `cNvPr id` + name, khĂ´ng cáº§n `!!`. Patcher kiá»ƒm source SHA-256,
+chá»‰ sá»­a slide Ä‘Æ°á»£c chá»n, giá»¯ slide khĂ¡c byte-identical, preserve transition vĂ 
+tá»« chá»‘i merge timing cÅ© mĂ¹ quĂ¡ng.
 
-Deck intake cũng đã có `design_profile` gồm font/fill/line/text-color/geometry
-frequency để làm basis khi sau này phải sinh helper component.
+Deck intake cÅ©ng Ä‘Ă£ cĂ³ `design_profile` gá»“m font/fill/line/text-color/geometry
+frequency Ä‘á»ƒ lĂ m basis khi sau nĂ y pháº£i sinh helper component.
 
 Final temporary CI run `37214809106`: **73/73 tests pass** + `py_compile`
 pass. Report: `experiments/T007-20261004-source-object-patcher/REPORT.md`.
 
-Phần còn thiếu cho product path: director beat → concrete patch-plan compiler;
-native helper-component insertion + re-inventory; no-script narrative test trên
-deck thật; exact-file PowerPoint playback.
+Pháº§n cĂ²n thiáº¿u cho product path: director beat â†’ concrete patch-plan compiler;
+native helper-component insertion + re-inventory; no-script narrative test trĂªn
+deck tháº­t; exact-file PowerPoint playback.
 
-## T006 native timing writer — đã có backend cấu trúc, playback còn pending
+## T006 native timing writer â€” Ä‘Ă£ cĂ³ backend cáº¥u trĂºc, playback cĂ²n pending
 
-T006 đã tiến từ planning sang writer native hạn chế. `scripts/pack_timeline.py`
-vẫn nén T005 candidate 12 legacy states thành 1 semantic slide/6 stage và
-transfer 10→1. `scripts/add_timeline.py` hiện ghi `p:timing` cho motion path,
-scale và rotate trên cùng slide: waypoint nằm trong path, các stage dùng delay
-tích lũy và các effect cùng stage chạy song song trong một packed click group.
+T006 Ä‘Ă£ tiáº¿n tá»« planning sang writer native háº¡n cháº¿. `scripts/pack_timeline.py`
+váº«n nĂ©n T005 candidate 12 legacy states thĂ nh 1 semantic slide/6 stage vĂ 
+transfer 10â†’1. `scripts/add_timeline.py` hiá»‡n ghi `p:timing` cho motion path,
+scale vĂ  rotate trĂªn cĂ¹ng slide: waypoint náº±m trong path, cĂ¡c stage dĂ¹ng delay
+tĂ­ch lÅ©y vĂ  cĂ¡c effect cĂ¹ng stage cháº¡y song song trong má»™t packed click group.
 
-Đường dựng end-to-end mới:
+ÄÆ°á»ng dá»±ng end-to-end má»›i:
 `validate_timeline.py -> render_timeline.mjs -> normalize_timeline_textboxes.py
--> add_timeline.py -> host finalizer`, gọi bằng
+-> add_timeline.py -> host finalizer`, gá»i báº±ng
 `scripts/run_timeline_experiment.sh`.
 
-Bằng chứng tự động: GitHub Actions branch-only run 37213501515 đạt
-`py_compile`, **55 unit tests**, `node --check` renderer và `bash -n` runner.
-Workflow tạm đã xóa sau kiểm tra. Prototype 1 slide/2 shape sau patch vẫn pass ZIP
-CRC, mở lại bằng python-pptx và LibreOffice export PDF. Đây là bằng chứng package,
-**không phải playback PowerPoint**.
+Báº±ng chá»©ng tá»± Ä‘á»™ng: GitHub Actions branch-only run 37213501515 Ä‘áº¡t
+`py_compile`, **55 unit tests**, `node --check` renderer vĂ  `bash -n` runner.
+Workflow táº¡m Ä‘Ă£ xĂ³a sau kiá»ƒm tra. Prototype 1 slide/2 shape sau patch váº«n pass ZIP
+CRC, má»Ÿ láº¡i báº±ng python-pptx vĂ  LibreOffice export PDF. ÄĂ¢y lĂ  báº±ng chá»©ng package,
+**khĂ´ng pháº£i playback PowerPoint**.
 
 Report: `experiments/T006-20261004-native-timing/REPORT.md`.
-Native playback/editability exact-file vẫn pending; M1 chưa đạt.
+Native playback/editability exact-file váº«n pending; M1 chÆ°a Ä‘áº¡t.
 
-## Chỉ thị mới — resource-local motion packing
+## Chá»‰ thá»‹ má»›i â€” resource-local motion packing
 
-Người dùng yêu cầu đổi kiến trúc: không coi mỗi chuyển động/state là một slide.
-Khi các action dùng chung resource set và cùng semantic scene, ưu tiên gom tối đa
-vào một native slide timeline. Tài liệu chuẩn: `docs/MOTION_PACKING.md`.
+NgÆ°á»i dĂ¹ng yĂªu cáº§u Ä‘á»•i kiáº¿n trĂºc: khĂ´ng coi má»—i chuyá»ƒn Ä‘á»™ng/state lĂ  má»™t slide.
+Khi cĂ¡c action dĂ¹ng chung resource set vĂ  cĂ¹ng semantic scene, Æ°u tiĂªn gom tá»‘i Ä‘a
+vĂ o má»™t native slide timeline. TĂ i liá»‡u chuáº©n: `docs/MOTION_PACKING.md`.
 
-T005 12-state Morph giữ nguyên làm baseline lịch sử. Nó không còn là mẫu kiến
-trúc mục tiêu. T006 phải cố gắng tái hiện burst → orbit → focus → split →
-reassemble → restore trong 1 slide với nhiều track/timing/trigger native; nếu
-PowerPoint/backend buộc tách, ghi blocker và dùng số slide tối thiểu. Các model
-sau phải đọc rule này trước khi thiết kế choreography.
+T005 12-state Morph giá»¯ nguyĂªn lĂ m baseline lá»‹ch sá»­. NĂ³ khĂ´ng cĂ²n lĂ  máº«u kiáº¿n
+trĂºc má»¥c tiĂªu. T006 pháº£i cá»‘ gáº¯ng tĂ¡i hiá»‡n burst â†’ orbit â†’ focus â†’ split â†’
+reassemble â†’ restore trong 1 slide vá»›i nhiá»u track/timing/trigger native; náº¿u
+PowerPoint/backend buá»™c tĂ¡ch, ghi blocker vĂ  dĂ¹ng sá»‘ slide tá»‘i thiá»ƒu. CĂ¡c model
+sau pháº£i Ä‘á»c rule nĂ y trÆ°á»›c khi thiáº¿t káº¿ choreography.
 
-## Kết quả mới nhất — T005
+## Káº¿t quáº£ má»›i nháº¥t â€” T005
 
-Ưu tiên mới của người dùng là hiệu ứng phức tạp từ một câu lệnh ngắn, giữ đúng ý định. PR #3 và `experiments/T005-20261004-codex-choreography/REPORT.md` có compiler intent nghiêm ngặt cho chuỗi bung nút, xoay vòng, phóng đối tượng, tách lớp, ghép lại và trở về. AI diễn giải prompt; compiler chỉ nhận dữ liệu có cấu trúc, không phải NLP tổng quát.
+Æ¯u tiĂªn má»›i cá»§a ngÆ°á»i dĂ¹ng lĂ  hiá»‡u á»©ng phá»©c táº¡p tá»« má»™t cĂ¢u lá»‡nh ngáº¯n, giá»¯ Ä‘Ăºng Ă½ Ä‘á»‹nh. PR #3 vĂ  `experiments/T005-20261004-codex-choreography/REPORT.md` cĂ³ compiler intent nghiĂªm ngáº·t cho chuá»—i bung nĂºt, xoay vĂ²ng, phĂ³ng Ä‘á»‘i tÆ°á»£ng, tĂ¡ch lá»›p, ghĂ©p láº¡i vĂ  trá»Ÿ vá». AI diá»…n giáº£i prompt; compiler chá»‰ nháº­n dá»¯ liá»‡u cĂ³ cáº¥u trĂºc, khĂ´ng pháº£i NLP tá»•ng quĂ¡t.
 
-Hai PPTX native: candidate 12 trạng thái/31 đối tượng, transfer 10 trạng thái/22 đối tượng. 7 nhóm kiểm tra geometry và package parity đều đạt trên mỗi file. Đã xem riêng đủ 22 ảnh cuối. 41 unit tests đạt. Đối chứng cố ý bỏ waypoint cho sai lệch bán kính tuyến tính 65,608 px; candidate còn 1,916 px. Không coi số này là độ mượt phát thực tế.
+Hai PPTX native: candidate 12 tráº¡ng thĂ¡i/31 Ä‘á»‘i tÆ°á»£ng, transfer 10 tráº¡ng thĂ¡i/22 Ä‘á»‘i tÆ°á»£ng. 7 nhĂ³m kiá»ƒm tra geometry vĂ  package parity Ä‘á»u Ä‘áº¡t trĂªn má»—i file. ÄĂ£ xem riĂªng Ä‘á»§ 22 áº£nh cuá»‘i. 41 unit tests Ä‘áº¡t. Äá»‘i chá»©ng cá»‘ Ă½ bá» waypoint cho sai lá»‡ch bĂ¡n kĂ­nh tuyáº¿n tĂ­nh 65,608 px; candidate cĂ²n 1,916 px. KhĂ´ng coi sá»‘ nĂ y lĂ  Ä‘á»™ mÆ°á»£t phĂ¡t thá»±c táº¿.
 
-Lỗi có ích: tổng góc xoay đúng vẫn có thể che waypoint sai; đã giữ test đột biến và sửa kiểm tra từng waypoint/ràng buộc nhãn. Agent mới tạo bài học tập 8 nút, ngược chiều 60°, nút 6, 3 lớp; parent xuất file. Agent đã đọc brief do AGENTS yêu cầu nên không gọi đây là kiểm thử mù hoàn toàn.
+Lá»—i cĂ³ Ă­ch: tá»•ng gĂ³c xoay Ä‘Ăºng váº«n cĂ³ thá»ƒ che waypoint sai; Ä‘Ă£ giá»¯ test Ä‘á»™t biáº¿n vĂ  sá»­a kiá»ƒm tra tá»«ng waypoint/rĂ ng buá»™c nhĂ£n. Agent má»›i táº¡o bĂ i há»c táº­p 8 nĂºt, ngÆ°á»£c chiá»u 60Â°, nĂºt 6, 3 lá»›p; parent xuáº¥t file. Agent Ä‘Ă£ Ä‘á»c brief do AGENTS yĂªu cáº§u nĂªn khĂ´ng gá»i Ä‘Ă¢y lĂ  kiá»ƒm thá»­ mĂ¹ hoĂ n toĂ n.
 
-Giới hạn quan trọng: vẫn là 2D Morph theo từng lần bấm, một recipe hạn chế, hình học còn đơn giản; chưa có bằng chứng hiệu ứng ấn tượng hoặc playback PowerPoint. Không phải skill hoàn chỉnh hiểu mọi ý tưởng phức tạp, chưa cài personal skill. Bước tiếp ưu tiên T006 native timeline/path và T001 playback exact-hash; giữ nguyên T005 làm đối chứng.
+Giá»›i háº¡n quan trá»ng: váº«n lĂ  2D Morph theo tá»«ng láº§n báº¥m, má»™t recipe háº¡n cháº¿, hĂ¬nh há»c cĂ²n Ä‘Æ¡n giáº£n; chÆ°a cĂ³ báº±ng chá»©ng hiá»‡u á»©ng áº¥n tÆ°á»£ng hoáº·c playback PowerPoint. KhĂ´ng pháº£i skill hoĂ n chá»‰nh hiá»ƒu má»i Ă½ tÆ°á»Ÿng phá»©c táº¡p, chÆ°a cĂ i personal skill. BÆ°á»›c tiáº¿p Æ°u tiĂªn T006 native timeline/path vĂ  T001 playback exact-hash; giá»¯ nguyĂªn T005 lĂ m Ä‘á»‘i chá»©ng.
 
 File: `output/T005_compound_candidate.pptx` SHA-256 `05ddf33c89725dbb66083f5130c549d59d9aa291893321a34cc68c6cf9e9cf58`; `output/T005_compound_transfer.pptx` SHA-256 `e87d37db4a76f51c56dac893bade9c2966960cbc6bfc869ebb5bceb3d8cb5e16`.
 
-## Kết quả mới nhất — T002
+## Káº¿t quáº£ má»›i nháº¥t â€” T002
 
-PR #2, `experiments/T002-20261004-codex-tight-carriers/REPORT.md` giữ E004 bất biến và chỉ siết carrier quanh label. Trong cùng proxy tuyến tính, label giữ 0/6 cặp chồng và carrier giảm 6/6→0/6. Candidate có 3 slide, 8 đối tượng native/slide, 5 textbox/slide, 2 Morph 1100 ms; 3/3 ảnh cuối đã xem và 34 tests đạt. SHA-256 `c41f2289bfd662f2642ea611b119d8aeaf35678425cba4cf4b7ffe0640922186`.
+PR #2, `experiments/T002-20261004-codex-tight-carriers/REPORT.md` giá»¯ E004 báº¥t biáº¿n vĂ  chá»‰ siáº¿t carrier quanh label. Trong cĂ¹ng proxy tuyáº¿n tĂ­nh, label giá»¯ 0/6 cáº·p chá»“ng vĂ  carrier giáº£m 6/6â†’0/6. Candidate cĂ³ 3 slide, 8 Ä‘á»‘i tÆ°á»£ng native/slide, 5 textbox/slide, 2 Morph 1100 ms; 3/3 áº£nh cuá»‘i Ä‘Ă£ xem vĂ  34 tests Ä‘áº¡t. SHA-256 `c41f2289bfd662f2642ea611b119d8aeaf35678425cba4cf4b7ffe0640922186`.
 
-Tradeoff: focus emphasis tĩnh chủ quan giảm 4/5→3/5; creative vẫn 2/5. Đây là sửa rủi ro geometry, không chứng minh motion đẹp hoặc playback đúng. Native motion/editing null. Nguồn v0.6 chưa cài personal skill. Bước tiếp: exact-hash PowerPoint playback so E004/T002, hoặc T004 portable backend; T002 tiếp theo phải có giả thuyết mới về emphasis/z-order.
+Tradeoff: focus emphasis tÄ©nh chá»§ quan giáº£m 4/5â†’3/5; creative váº«n 2/5. ÄĂ¢y lĂ  sá»­a rá»§i ro geometry, khĂ´ng chá»©ng minh motion Ä‘áº¹p hoáº·c playback Ä‘Ăºng. Native motion/editing null. Nguá»“n v0.6 chÆ°a cĂ i personal skill. BÆ°á»›c tiáº¿p: exact-hash PowerPoint playback so E004/T002, hoáº·c T004 portable backend; T002 tiáº¿p theo pháº£i cĂ³ giáº£ thuyáº¿t má»›i vá» emphasis/z-order.
 
-## Kết quả mới nhất — T003
+## Káº¿t quáº£ má»›i nháº¥t â€” T003
 
-Đọc `experiments/T003-20261004-codex-layer01/REPORT.md` trước khi tiếp tục. Nhánh `work/T003-codex-20261004`, PR #1 có generator 3–5 lớp, nguồn và rubric đã đóng băng, hai chủ đề (QUANTA 5 lớp; học trực tuyến 4 lớp), 5 PPTX giữ cả thất bại và 15 ảnh cuối đã xem. Native parity đạt trên cả 5 file; repo có 34 tests đạt. Backend cũ và các baseline E001–E004/H001–H003 giữ nguyên.
+Äá»c `experiments/T003-20261004-codex-layer01/REPORT.md` trÆ°á»›c khi tiáº¿p tá»¥c. NhĂ¡nh `work/T003-codex-20261004`, PR #1 cĂ³ generator 3â€“5 lá»›p, nguá»“n vĂ  rubric Ä‘Ă£ Ä‘Ă³ng bÄƒng, hai chá»§ Ä‘á» (QUANTA 5 lá»›p; há»c trá»±c tuyáº¿n 4 lá»›p), 5 PPTX giá»¯ cáº£ tháº¥t báº¡i vĂ  15 áº£nh cuá»‘i Ä‘Ă£ xem. Native parity Ä‘áº¡t trĂªn cáº£ 5 file; repo cĂ³ 34 tests Ä‘áº¡t. Backend cÅ© vĂ  cĂ¡c baseline E001â€“E004/H001â€“H003 giá»¯ nguyĂªn.
 
-Phép đo fixture ràng buộc: 16/60 child-state lệch → 0/60, max 64 → 0 px; đây là lỗi cố ý để thử quy tắc, không phải benchmark độc lập. Lỗi số thật được phát hiện bằng render: ô 42 px làm hai chữ số xuống dòng. Chỉ mở rộng thành 60 px, số lỗi quan sát QUANTA 15→0 và bài mới 12→0. Bài mới do agent ngữ cảnh riêng lập plan; parent xuất PPTX và sửa, không gọi là benchmark tự hành end-to-end. Bản nên dùng: `output/T003_layer_candidate_v2.pptx`, `output/T003_transfer_v2.pptx`.
+PhĂ©p Ä‘o fixture rĂ ng buá»™c: 16/60 child-state lá»‡ch â†’ 0/60, max 64 â†’ 0 px; Ä‘Ă¢y lĂ  lá»—i cá»‘ Ă½ Ä‘á»ƒ thá»­ quy táº¯c, khĂ´ng pháº£i benchmark Ä‘á»™c láº­p. Lá»—i sá»‘ tháº­t Ä‘Æ°á»£c phĂ¡t hiá»‡n báº±ng render: Ă´ 42 px lĂ m hai chá»¯ sá»‘ xuá»‘ng dĂ²ng. Chá»‰ má»Ÿ rá»™ng thĂ nh 60 px, sá»‘ lá»—i quan sĂ¡t QUANTA 15â†’0 vĂ  bĂ i má»›i 12â†’0. BĂ i má»›i do agent ngá»¯ cáº£nh riĂªng láº­p plan; parent xuáº¥t PPTX vĂ  sá»­a, khĂ´ng gá»i lĂ  benchmark tá»± hĂ nh end-to-end. Báº£n nĂªn dĂ¹ng: `output/T003_layer_candidate_v2.pptx`, `output/T003_transfer_v2.pptx`.
 
-T003 mới đạt phần recipe 2D và transfer cấu trúc/ảnh tĩnh. Chỉ đọc tutorial nguồn, chưa xem choreography nguồn; không tái hiện 3D extrusion. Native playback, sửa thật trong PowerPoint, M1 vẫn pending; điểm motion/editing null. Điểm sáng tạo tĩnh 3/5 là chủ quan, không phải đạt mục tiêu chuyển động ấn tượng. Nguồn v0.5 chưa cài thành personal skill.
+T003 má»›i Ä‘áº¡t pháº§n recipe 2D vĂ  transfer cáº¥u trĂºc/áº£nh tÄ©nh. Chá»‰ Ä‘á»c tutorial nguá»“n, chÆ°a xem choreography nguá»“n; khĂ´ng tĂ¡i hiá»‡n 3D extrusion. Native playback, sá»­a tháº­t trong PowerPoint, M1 váº«n pending; Ä‘iá»ƒm motion/editing null. Äiá»ƒm sĂ¡ng táº¡o tÄ©nh 3/5 lĂ  chá»§ quan, khĂ´ng pháº£i Ä‘áº¡t má»¥c tiĂªu chuyá»ƒn Ä‘á»™ng áº¥n tÆ°á»£ng. Nguá»“n v0.5 chÆ°a cĂ i thĂ nh personal skill.
 
-Bước có giá trị tiếp: T001 phát exact-hash hai file v2; hoặc phần tiếp T003 xem animation nguồn thực rồi lập giả thuyết choreography mới; hoặc T002 xử lý carrier crossing cũ. Claim đầu tiên đã xong phạm vi nghiên cứu này; kiểm tra nhánh/PR mới nhất trước khi nhận phần tiếp, không lặp v1/v2.
+BÆ°á»›c cĂ³ giĂ¡ trá»‹ tiáº¿p: T001 phĂ¡t exact-hash hai file v2; hoáº·c pháº§n tiáº¿p T003 xem animation nguá»“n thá»±c rá»“i láº­p giáº£ thuyáº¿t choreography má»›i; hoáº·c T002 xá»­ lĂ½ carrier crossing cÅ©. Claim Ä‘áº§u tiĂªn Ä‘Ă£ xong pháº¡m vi nghiĂªn cá»©u nĂ y; kiá»ƒm tra nhĂ¡nh/PR má»›i nháº¥t trÆ°á»›c khi nháº­n pháº§n tiáº¿p, khĂ´ng láº·p v1/v2.
 
-## Trạng thái thực tế
+## Tráº¡ng thĂ¡i thá»±c táº¿
 
-M0 đã có bộ thực thi thử nghiệm và bằng chứng cấu trúc/bố cục E001, H001. M1 chưa đạt vì thiếu phát thử PowerPoint. Đây là nhánh dựng mẫu và kiểm tra phần mềm trong lúc chờ cổng native; không hạ tiêu chuẩn nghiệm thu M1. Nguồn skill là bản nghiên cứu trong dự án, chưa cài vào tài khoản.
+M0 Ä‘Ă£ cĂ³ bá»™ thá»±c thi thá»­ nghiá»‡m vĂ  báº±ng chá»©ng cáº¥u trĂºc/bá»‘ cá»¥c E001, H001. M1 chÆ°a Ä‘áº¡t vĂ¬ thiáº¿u phĂ¡t thá»­ PowerPoint. ÄĂ¢y lĂ  nhĂ¡nh dá»±ng máº«u vĂ  kiá»ƒm tra pháº§n má»m trong lĂºc chá» cá»•ng native; khĂ´ng háº¡ tiĂªu chuáº©n nghiá»‡m thu M1. Nguá»“n skill lĂ  báº£n nghiĂªn cá»©u trong dá»± Ă¡n, chÆ°a cĂ i vĂ o tĂ i khoáº£n.
 
-Repo chính đã xác minh: `https://github.com/togcoder/skill-for-pptx`, private, owner `togcoder`, quyền push. Chủ repo tạo README khởi tạo ngày 04/10/2026. Bản handoff nhập snapshot v0.4 cùng nguồn, demo và bằng chứng vào repo này; lịch sử cũ nguyên vẹn tại `archive/pre-github-v0.4.bundle`. Đọc `HANDOFF.md`, `docs/COLLABORATION.md` và các nhánh/PR trước khi nhận việc. Không dùng tên dự kiến `pptx-motion-lab` làm repo GitHub nữa.
+Repo chĂ­nh Ä‘Ă£ xĂ¡c minh: `https://github.com/togcoder/skill-for-pptx`, private, owner `togcoder`, quyá»n push. Chá»§ repo táº¡o README khá»Ÿi táº¡o ngĂ y 04/10/2026. Báº£n handoff nháº­p snapshot v0.4 cĂ¹ng nguá»“n, demo vĂ  báº±ng chá»©ng vĂ o repo nĂ y; lá»‹ch sá»­ cÅ© nguyĂªn váº¹n táº¡i `archive/pre-github-v0.4.bundle`. Äá»c `HANDOFF.md`, `docs/COLLABORATION.md` vĂ  cĂ¡c nhĂ¡nh/PR trÆ°á»›c khi nháº­n viá»‡c. KhĂ´ng dĂ¹ng tĂªn dá»± kiáº¿n `pptx-motion-lab` lĂ m repo GitHub ná»¯a.
 
-## Đã hoàn tất
+## ÄĂ£ hoĂ n táº¥t
 
-1. Khôi phục scaffold từ phiên trước, giữ snapshot gốc. Phát hiện nguồn SKILL.md còn template TODO và đường dựng chưa hoàn tất.
-2. Hoàn thiện đường dựng hạn chế bằng artifact-tool, kế hoạch JSON, chèn Morph và kiểm tra file cuối.
-3. Dựng E001 ba cảnh với 13 đối tượng native mỗi slide; hai khai báo Morph 1.200 ms. Render và xem toàn bộ file cuối.
-4. Sửa bộ chèn Morph: đọc đúng thứ tự slide, kiểm tra số cảnh và tên, bảo vệ file có timing, từ chối duration lẻ, không để lại file dở và không ghi đè.
-5. Cùng bộ 7 lỗi mục tiêu: baseline 1/7, candidate 7/7. Toàn bộ 19 unit tests hiện có pass. Không coi đó là điểm chất lượng chuyển động hay benchmark độc lập.
-6. Viết nguồn skill v0.2 cùng hợp đồng, công thức, rubric và hướng dẫn thực thi có thể gọi lại.
-7. Dùng một agent với ngữ cảnh tối thiểu để áp dụng skill vào H001: hai cảnh Collect/Inspect/Decide, phóng lớn Inspect và giữ bối cảnh hai bên. Đã tạo PPTX và xem hai slide cuối. Không tiết lộ đáp án/chẩn đoán E001 cho agent đó.
-8. H001 phát hiện nguồn tham khảo E001 bị gắn cứng trong speaker notes; đã sửa renderer để dùng nguồn thực sự trong kế hoạch.
-9. H001 cũng phát hiện planned textbox xuất thành native shape có p:txBody nhưng không có txBox=1. Giữ kiểm tra nghiêm ngặt thất bại, ghi ranh giới trong skill; không sửa rubric để che lỗi.
-10. E002 sửa đúng 14 khai báo textbox của H001 theo kế hoạch. Bộ kiểm tra H001 giữ nguyên: từ 14 lỗi còn 0 lỗi, 93/93 kiểm tra đạt. Chỉ hai slide XML thay đổi bởi txBox; mọi phần khác giữ nguyên byte. Hai ảnh cuối giống H001 từng pixel. 25 unit tests đạt. Nguồn skill/bộ dựng đã dùng bước chuẩn hóa này.
+1. KhĂ´i phá»¥c scaffold tá»« phiĂªn trÆ°á»›c, giá»¯ snapshot gá»‘c. PhĂ¡t hiá»‡n nguá»“n SKILL.md cĂ²n template TODO vĂ  Ä‘Æ°á»ng dá»±ng chÆ°a hoĂ n táº¥t.
+2. HoĂ n thiá»‡n Ä‘Æ°á»ng dá»±ng háº¡n cháº¿ báº±ng artifact-tool, káº¿ hoáº¡ch JSON, chĂ¨n Morph vĂ  kiá»ƒm tra file cuá»‘i.
+3. Dá»±ng E001 ba cáº£nh vá»›i 13 Ä‘á»‘i tÆ°á»£ng native má»—i slide; hai khai bĂ¡o Morph 1.200 ms. Render vĂ  xem toĂ n bá»™ file cuá»‘i.
+4. Sá»­a bá»™ chĂ¨n Morph: Ä‘á»c Ä‘Ăºng thá»© tá»± slide, kiá»ƒm tra sá»‘ cáº£nh vĂ  tĂªn, báº£o vá»‡ file cĂ³ timing, tá»« chá»‘i duration láº», khĂ´ng Ä‘á»ƒ láº¡i file dá»Ÿ vĂ  khĂ´ng ghi Ä‘Ă¨.
+5. CĂ¹ng bá»™ 7 lá»—i má»¥c tiĂªu: baseline 1/7, candidate 7/7. ToĂ n bá»™ 19 unit tests hiá»‡n cĂ³ pass. KhĂ´ng coi Ä‘Ă³ lĂ  Ä‘iá»ƒm cháº¥t lÆ°á»£ng chuyá»ƒn Ä‘á»™ng hay benchmark Ä‘á»™c láº­p.
+6. Viáº¿t nguá»“n skill v0.2 cĂ¹ng há»£p Ä‘á»“ng, cĂ´ng thá»©c, rubric vĂ  hÆ°á»›ng dáº«n thá»±c thi cĂ³ thá»ƒ gá»i láº¡i.
+7. DĂ¹ng má»™t agent vá»›i ngá»¯ cáº£nh tá»‘i thiá»ƒu Ä‘á»ƒ Ă¡p dá»¥ng skill vĂ o H001: hai cáº£nh Collect/Inspect/Decide, phĂ³ng lá»›n Inspect vĂ  giá»¯ bá»‘i cáº£nh hai bĂªn. ÄĂ£ táº¡o PPTX vĂ  xem hai slide cuá»‘i. KhĂ´ng tiáº¿t lá»™ Ä‘Ă¡p Ă¡n/cháº©n Ä‘oĂ¡n E001 cho agent Ä‘Ă³.
+8. H001 phĂ¡t hiá»‡n nguá»“n tham kháº£o E001 bá»‹ gáº¯n cá»©ng trong speaker notes; Ä‘Ă£ sá»­a renderer Ä‘á»ƒ dĂ¹ng nguá»“n thá»±c sá»± trong káº¿ hoáº¡ch.
+9. H001 cÅ©ng phĂ¡t hiá»‡n planned textbox xuáº¥t thĂ nh native shape cĂ³ p:txBody nhÆ°ng khĂ´ng cĂ³ txBox=1. Giá»¯ kiá»ƒm tra nghiĂªm ngáº·t tháº¥t báº¡i, ghi ranh giá»›i trong skill; khĂ´ng sá»­a rubric Ä‘á»ƒ che lá»—i.
+10. E002 sá»­a Ä‘Ăºng 14 khai bĂ¡o textbox cá»§a H001 theo káº¿ hoáº¡ch. Bá»™ kiá»ƒm tra H001 giá»¯ nguyĂªn: tá»« 14 lá»—i cĂ²n 0 lá»—i, 93/93 kiá»ƒm tra Ä‘áº¡t. Chá»‰ hai slide XML thay Ä‘á»•i bá»Ÿi txBox; má»i pháº§n khĂ¡c giá»¯ nguyĂªn byte. Hai áº£nh cuá»‘i giá»‘ng H001 tá»«ng pixel. 25 unit tests Ä‘áº¡t. Nguá»“n skill/bá»™ dá»±ng Ä‘Ă£ dĂ¹ng bÆ°á»›c chuáº©n hĂ³a nĂ y.
 
-11. H002 đã hoàn tất từ đề độc lập về đèn ORBIT: 3 slide, 11 đối tượng native mỗi slide, 6 textbox/slide đúng khai báo, 2 Morph 1.100 ms. Agent và parent đã xem đủ ảnh cuối. Agent không đọc plan/artifact cũ, nhưng được thu gọn phần việc sau giai đoạn đọc hướng dẫn; không coi đây là benchmark tự hành có đo thời gian.
-12. H002 lộ nguy cơ nhãn gặp nhau khi đổi chỗ đối ứng. E003 giữ baseline và cùng phép đo hình học tuyến tính liên tục: từ 2 cặp nhãn có khoảng chồng xuống 0 trên 6 cặp/chuyển cảnh. Chỉ đổi bố trí/đường đi thành chu kỳ qua ba đỉnh tam giác; giữ 3 slide, chữ, loại/kích thước đối tượng và thời lượng. File cuối đạt cấu trúc, render/xem đủ 3 slide. Đây là cải thiện trong mô hình giả định, chưa phải playback PowerPoint.
+11. H002 Ä‘Ă£ hoĂ n táº¥t tá»« Ä‘á» Ä‘á»™c láº­p vá» Ä‘Ă¨n ORBIT: 3 slide, 11 Ä‘á»‘i tÆ°á»£ng native má»—i slide, 6 textbox/slide Ä‘Ăºng khai bĂ¡o, 2 Morph 1.100 ms. Agent vĂ  parent Ä‘Ă£ xem Ä‘á»§ áº£nh cuá»‘i. Agent khĂ´ng Ä‘á»c plan/artifact cÅ©, nhÆ°ng Ä‘Æ°á»£c thu gá»n pháº§n viá»‡c sau giai Ä‘oáº¡n Ä‘á»c hÆ°á»›ng dáº«n; khĂ´ng coi Ä‘Ă¢y lĂ  benchmark tá»± hĂ nh cĂ³ Ä‘o thá»i gian.
+12. H002 lá»™ nguy cÆ¡ nhĂ£n gáº·p nhau khi Ä‘á»•i chá»— Ä‘á»‘i á»©ng. E003 giá»¯ baseline vĂ  cĂ¹ng phĂ©p Ä‘o hĂ¬nh há»c tuyáº¿n tĂ­nh liĂªn tá»¥c: tá»« 2 cáº·p nhĂ£n cĂ³ khoáº£ng chá»“ng xuá»‘ng 0 trĂªn 6 cáº·p/chuyá»ƒn cáº£nh. Chá»‰ Ä‘á»•i bá»‘ trĂ­/Ä‘Æ°á»ng Ä‘i thĂ nh chu ká»³ qua ba Ä‘á»‰nh tam giĂ¡c; giá»¯ 3 slide, chá»¯, loáº¡i/kĂ­ch thÆ°á»›c Ä‘á»‘i tÆ°á»£ng vĂ  thá»i lÆ°á»£ng. File cuá»‘i Ä‘áº¡t cáº¥u trĂºc, render/xem Ä‘á»§ 3 slide. ÄĂ¢y lĂ  cáº£i thiá»‡n trong mĂ´ hĂ¬nh giáº£ Ä‘á»‹nh, chÆ°a pháº£i playback PowerPoint.
 
-13. H003 thử đề mới với ba nhãn tiếng Việt dài 360×96 px. Giữ rubric và chẩn đoán E003: 4/6 cặp nhãn có khoảng chồng theo mô hình. E004 chỉ đổi y của khối/nhãn, tăng khoảng cách hai tầng từ 200 lên 300 px, số cặp nhãn chồng về 0. Cả hai vẫn 6/6 cặp khối có khoảng chồng. File cuối có 3×8 đối tượng native, 5 textbox/slide và hai Morph 1.100 ms; kiểm tra và xem đủ 6 ảnh cuối.
-14. Bổ sung scripts/cyclic_label_clearance.py với ngưỡng H >= 3*d*h/(2*d-w) cho ba nhãn đều, ba vị trí đối xứng, nội suy đồng bộ tuyến tính; có miền áp dụng rõ. Bốn test mới đối chiếu chẩn đoán cũ, tổng 29 unit tests đạt. Đã cập nhật nguồn skill với bài học và giữ lỗi plan/preflight ban đầu.
+13. H003 thá»­ Ä‘á» má»›i vá»›i ba nhĂ£n tiáº¿ng Viá»‡t dĂ i 360Ă—96 px. Giá»¯ rubric vĂ  cháº©n Ä‘oĂ¡n E003: 4/6 cáº·p nhĂ£n cĂ³ khoáº£ng chá»“ng theo mĂ´ hĂ¬nh. E004 chá»‰ Ä‘á»•i y cá»§a khá»‘i/nhĂ£n, tÄƒng khoáº£ng cĂ¡ch hai táº§ng tá»« 200 lĂªn 300 px, sá»‘ cáº·p nhĂ£n chá»“ng vá» 0. Cáº£ hai váº«n 6/6 cáº·p khá»‘i cĂ³ khoáº£ng chá»“ng. File cuá»‘i cĂ³ 3Ă—8 Ä‘á»‘i tÆ°á»£ng native, 5 textbox/slide vĂ  hai Morph 1.100 ms; kiá»ƒm tra vĂ  xem Ä‘á»§ 6 áº£nh cuá»‘i.
+14. Bá»• sung scripts/cyclic_label_clearance.py vá»›i ngÆ°á»¡ng H >= 3*d*h/(2*d-w) cho ba nhĂ£n Ä‘á»u, ba vá»‹ trĂ­ Ä‘á»‘i xá»©ng, ná»™i suy Ä‘á»“ng bá»™ tuyáº¿n tĂ­nh; cĂ³ miá»n Ă¡p dá»¥ng rĂµ. Bá»‘n test má»›i Ä‘á»‘i chiáº¿u cháº©n Ä‘oĂ¡n cÅ©, tá»•ng 29 unit tests Ä‘áº¡t. ÄĂ£ cáº­p nháº­t nguá»“n skill vá»›i bĂ i há»c vĂ  giá»¯ lá»—i plan/preflight ban Ä‘áº§u.
 
-Tại mốc bàn giao v0.4 chưa có claim nghiên cứu mới; T003 sau đó được nhận tại PR #1 như mục mới nhất phía trên. Luôn kiểm tra nhánh và PR mở để biết công việc đang chạy. Nguồn skill bổ sung công thức cyclic focus và phân biệt số trạng thái với số chuyển cảnh. Read của H002/E003 mở ở tư thế lớn; không có đoạn phóng lớn riêng trên slide đầu.
+Táº¡i má»‘c bĂ n giao v0.4 chÆ°a cĂ³ claim nghiĂªn cá»©u má»›i; T003 sau Ä‘Ă³ Ä‘Æ°á»£c nháº­n táº¡i PR #1 nhÆ° má»¥c má»›i nháº¥t phĂ­a trĂªn. LuĂ´n kiá»ƒm tra nhĂ¡nh vĂ  PR má»Ÿ Ä‘á»ƒ biáº¿t cĂ´ng viá»‡c Ä‘ang cháº¡y. Nguá»“n skill bá»• sung cĂ´ng thá»©c cyclic focus vĂ  phĂ¢n biá»‡t sá»‘ tráº¡ng thĂ¡i vá»›i sá»‘ chuyá»ƒn cáº£nh. Read cá»§a H002/E003 má»Ÿ á»Ÿ tÆ° tháº¿ lá»›n; khĂ´ng cĂ³ Ä‘oáº¡n phĂ³ng lá»›n riĂªng trĂªn slide Ä‘áº§u.
 
-## Bằng chứng cần đọc
+## Báº±ng chá»©ng cáº§n Ä‘á»c
 
 - `experiments/E001/REPORT.md`, `scores.json`, `regression-comparison.json`, `validation.json`, `final-renders/`.
-- `experiments/H001/`: kế hoạch độc lập, rubric, báo cáo và bằng chứng file cuối.
-- `experiments/E002/REPORT.md`, `comparison.json`: sửa textbox, giữ baseline và tiêu chí H001; `output/PPTX_Motion_Lab_E002.pptx`.
-- `experiments/H002/`: đề, plan, rubric, qa và bản sao bằng chứng tại `evidence/`.
-- `experiments/E003/REPORT.md`: H002 và E003, chẩn đoán đường đi, kiểm tra cấu trúc và điểm tĩnh chủ quan. Native motion/editability vẫn null; không tính điểm tổng.
-- `experiments/E004/REPORT.md`, `package-comparison.json`, `unit-tests.txt`, `scores.json`, các `path-diagnostic.json` và `carrier-paths.json` H003/E004; `output/PPTX_Motion_Lab_E004.pptx`.
-- `research/skill-source-validation.json`: kiểm tra nguồn thử nghiệm, không phải chứng nhận cài đặt skill.
-- `docs/POWERPOINT_QA.md`: yêu cầu bằng chứng native.
+- `experiments/H001/`: káº¿ hoáº¡ch Ä‘á»™c láº­p, rubric, bĂ¡o cĂ¡o vĂ  báº±ng chá»©ng file cuá»‘i.
+- `experiments/E002/REPORT.md`, `comparison.json`: sá»­a textbox, giá»¯ baseline vĂ  tiĂªu chĂ­ H001; `output/PPTX_Motion_Lab_E002.pptx`.
+- `experiments/H002/`: Ä‘á», plan, rubric, qa vĂ  báº£n sao báº±ng chá»©ng táº¡i `evidence/`.
+- `experiments/E003/REPORT.md`: H002 vĂ  E003, cháº©n Ä‘oĂ¡n Ä‘Æ°á»ng Ä‘i, kiá»ƒm tra cáº¥u trĂºc vĂ  Ä‘iá»ƒm tÄ©nh chá»§ quan. Native motion/editability váº«n null; khĂ´ng tĂ­nh Ä‘iá»ƒm tá»•ng.
+- `experiments/E004/REPORT.md`, `package-comparison.json`, `unit-tests.txt`, `scores.json`, cĂ¡c `path-diagnostic.json` vĂ  `carrier-paths.json` H003/E004; `output/PPTX_Motion_Lab_E004.pptx`.
+- `research/skill-source-validation.json`: kiá»ƒm tra nguá»“n thá»­ nghiá»‡m, khĂ´ng pháº£i chá»©ng nháº­n cĂ i Ä‘áº·t skill.
+- `docs/POWERPOINT_QA.md`: yĂªu cáº§u báº±ng chá»©ng native.
 
 PPTX E001: `output/PPTX_Motion_Lab_E001.pptx`. SHA-256: b3b4e28c14f00bc4fe05d6a71400752819413661e1280eb92301b4a6305e7c37.
-PPTX H001: `output/PPTX_Motion_Lab_H001.pptx`; dùng hash trong bằng chứng H001.
+PPTX H001: `output/PPTX_Motion_Lab_H001.pptx`; dĂ¹ng hash trong báº±ng chá»©ng H001.
 
-Điểm E001: đáp ứng đề 4/5, cấu trúc chỉnh sửa 4/5, định danh 4/5, dễ đọc tĩnh 4/5, bố cục sáng tạo tĩnh 3/5. Đây là nhận xét không mù của người làm. Chuyển động chưa chấm, không có điểm tổng.
+Äiá»ƒm E001: Ä‘Ă¡p á»©ng Ä‘á» 4/5, cáº¥u trĂºc chá»‰nh sá»­a 4/5, Ä‘á»‹nh danh 4/5, dá»… Ä‘á»c tÄ©nh 4/5, bá»‘ cá»¥c sĂ¡ng táº¡o tÄ©nh 3/5. ÄĂ¢y lĂ  nháº­n xĂ©t khĂ´ng mĂ¹ cá»§a ngÆ°á»i lĂ m. Chuyá»ƒn Ä‘á»™ng chÆ°a cháº¥m, khĂ´ng cĂ³ Ä‘iá»ƒm tá»•ng.
 
-## Việc tiếp theo theo giá trị
+## Viá»‡c tiáº¿p theo theo giĂ¡ trá»‹
 
-1. Hai đường ưu tiên: (a) dùng `output/T006_packed_candidate.pptx` đã freeze hash trong báo cáo packed-validation để kiểm playback PowerPoint và đối chiếu fixture hai chặng về origin/fill/trigger; (b) T007 lấy một deck thật 3–10 slide, inventory → script/infer → motion-direct một slide bằng resource có sẵn, tối đa một helper component, không đổi slide count. Không dựng lại candidate cũ nếu chưa có giả thuyết mới. Không quay lại waypoint slides nếu playback lỗi; sửa trong cùng slide và giữ baseline. T001/native exact-hash vẫn là cổng nghiệm thu; M1 pending.
-2. Nếu chưa có PowerPoint, không lặp ma trận origin/fill vừa tạo. Chọn T007/T008 hoặc chuẩn bị một fixture native khác chỉ khi có biến số mới rõ ràng. Không gọi mô phỏng là playback hoặc tăng số đối tượng là tăng chất lượng hiệu ứng.
-3. Chia phần việc theo task trong `research/tasks/`. Nhận claim/nhánh riêng trước khi làm để tránh trùng. Skill và renderer hiện vẫn phụ thuộc môi trường Work như `docs/ENVIRONMENT.md`.
-4. Chuẩn bị công cụ thu bằng chứng trên PowerPoint Windows khi phù hợp, không giả lập kết quả. Benchmark 18 lượt chưa thực hiện.
+1. Hai Ä‘Æ°á»ng Æ°u tiĂªn: (a) dĂ¹ng `output/T006_packed_candidate.pptx` Ä‘Ă£ freeze hash trong bĂ¡o cĂ¡o packed-validation Ä‘á»ƒ kiá»ƒm playback PowerPoint vĂ  Ä‘á»‘i chiáº¿u fixture hai cháº·ng vá» origin/fill/trigger; (b) T007 láº¥y má»™t deck tháº­t 3â€“10 slide, inventory â†’ script/infer â†’ motion-direct má»™t slide báº±ng resource cĂ³ sáºµn, tá»‘i Ä‘a má»™t helper component, khĂ´ng Ä‘á»•i slide count. KhĂ´ng dá»±ng láº¡i candidate cÅ© náº¿u chÆ°a cĂ³ giáº£ thuyáº¿t má»›i. KhĂ´ng quay láº¡i waypoint slides náº¿u playback lá»—i; sá»­a trong cĂ¹ng slide vĂ  giá»¯ baseline. T001/native exact-hash váº«n lĂ  cá»•ng nghiá»‡m thu; M1 pending.
+2. Náº¿u chÆ°a cĂ³ PowerPoint, khĂ´ng láº·p ma tráº­n origin/fill vá»«a táº¡o. Chá»n T007/T008 hoáº·c chuáº©n bá»‹ má»™t fixture native khĂ¡c chá»‰ khi cĂ³ biáº¿n sá»‘ má»›i rĂµ rĂ ng. KhĂ´ng gá»i mĂ´ phá»ng lĂ  playback hoáº·c tÄƒng sá»‘ Ä‘á»‘i tÆ°á»£ng lĂ  tÄƒng cháº¥t lÆ°á»£ng hiá»‡u á»©ng.
+3. Chia pháº§n viá»‡c theo task trong `research/tasks/`. Nháº­n claim/nhĂ¡nh riĂªng trÆ°á»›c khi lĂ m Ä‘á»ƒ trĂ¡nh trĂ¹ng. Skill vĂ  renderer hiá»‡n váº«n phá»¥ thuá»™c mĂ´i trÆ°á»ng Work nhÆ° `docs/ENVIRONMENT.md`.
+4. Chuáº©n bá»‹ cĂ´ng cá»¥ thu báº±ng chá»©ng trĂªn PowerPoint Windows khi phĂ¹ há»£p, khĂ´ng giáº£ láº­p káº¿t quáº£. Benchmark 18 lÆ°á»£t chÆ°a thá»±c hiá»‡n.
 
-## Khôi phục và lưu tiếp
+## KhĂ´i phá»¥c vĂ  lÆ°u tiáº¿p
 
-GitHub `togcoder/skill-for-pptx` là nguồn làm việc chính. Clone/fetch main mới nhất, kiểm tra nhánh/PR và đọc HANDOFF.md. Đọc docs/RECOVERY.md để tra lịch sử trước khi nhập GitHub. Bundle và các checkpoint cloud cũ là snapshot phục hồi lịch sử; không ghi chúng đè lên repo mới hơn. Code và kết quả đã gắn GitHub được commit/push về đúng repo, không tạo bản sao code mới song song trong Library.
+GitHub `togcoder/skill-for-pptx` lĂ  nguá»“n lĂ m viá»‡c chĂ­nh. Clone/fetch main má»›i nháº¥t, kiá»ƒm tra nhĂ¡nh/PR vĂ  Ä‘á»c HANDOFF.md. Äá»c docs/RECOVERY.md Ä‘á»ƒ tra lá»‹ch sá»­ trÆ°á»›c khi nháº­p GitHub. Bundle vĂ  cĂ¡c checkpoint cloud cÅ© lĂ  snapshot phá»¥c há»“i lá»‹ch sá»­; khĂ´ng ghi chĂºng Ä‘Ă¨ lĂªn repo má»›i hÆ¡n. Code vĂ  káº¿t quáº£ Ä‘Ă£ gáº¯n GitHub Ä‘Æ°á»£c commit/push vá» Ä‘Ăºng repo, khĂ´ng táº¡o báº£n sao code má»›i song song trong Library.
