@@ -1,10 +1,10 @@
 # Document system: professional DOCX with real links
 
-Status: EXPERIMENTAL — T039 [docx], review requested (2026-11-01). Evidence
-reached: structural (rung 1), WordCraft layout (rung 2) and Microsoft Word
-parse + field refresh + PDF export (rungs 4–5). No LibreOffice (rung 3), no
-human edit/print (rung 6), no PDF/UA or PDF/A validation. PowerPoint playback
-is irrelevant here; Word playback is not claimed.
+Status: EXPERIMENTAL — T039/T045/T047 [docx], review requested (2026-11-01).
+Evidence reached: structural (rung 1), WordCraft layout (rung 2) and Microsoft
+Word parse + field refresh + PDF export (rungs 4–5). No LibreOffice (rung 3), no
+human edit/print (rung 6), no PDF/UA or PDF/A validation. PowerPoint playback is
+irrelevant here; Word playback is not claimed.
 
 ## Why
 
@@ -38,6 +38,7 @@ word_field_kit.py                    word_field_kit.audit_docx
 | File | Role |
 |---|---|
 | `domains/docx/data/document_system.json` | Page/type/figure/table/field/accessibility tokens, standards, rules, sources |
+| `domains/docx/data/report_standard.json` | T047 ISO/GRI standards profile, controls, evidence and status |
 | `domains/docx/schemas/document_spec.schema.json` | Semantic input for the generator |
 | `scripts/word_field_kit.py` | Fields, TOC, SEQ captions, REF/PAGEREF, STYLEREF, bookmarks, numbering, audit |
 | `scripts/document_forge.py` | Build DOCX from a spec; refresh with Word/WordCraft; render |
@@ -47,6 +48,7 @@ word_field_kit.py                    word_field_kit.audit_docx
 | `skills/document-craft/` | Workflow, standards note, Word property matrix, layout recipes |
 | `tests/test_document_craft.py` | Structural build/audit tests |
 | `tests/test_document_advanced.py` | OMML, side-by-side, rich tables, malformed-grid/alt negative tests |
+| `tests/test_document_standards.py` | Escaped LaTeX, ISO 7144 front-matter order, references after appendix |
 
 ## What the generator guarantees
 
@@ -94,6 +96,28 @@ word_field_kit.py                    word_field_kit.audit_docx
 - **Cross-craft asset**: the T045 cover/icon SVG is rasterised with VectorCraft;
   the receiving DOCX test is the acceptance gate. The generator still works
   with a plain PNG if VectorCraft is absent.
+
+## Standards-controlled report (T047)
+
+A report that claims a standard must print the claim and the evidence.
+
+- **Profile:** `domains/docx/data/report_standard.json` lists the standard,
+  clause/scope, control, evidence and status. `front_matter.preface` renders it
+  before the TOC.
+- **ISO 7144 order:** `front_matter.order: "iso7144"` renders abstract → preface
+  → TOC → lists. References are placed after appendices and use an unnumbered
+  Heading 1 so the running header/STYLEREF still works.
+- **ISO 2145:** heading numbering remains `1 / 1.1 / 1.1.1`.
+- **ISO 690:** references use a labelled list plus `{{cite:key}}` links.
+- **ISO 80000/8601:** unit symbols and value–unit spacing; ISO dates in data
+  tables. ISO 7144 does not define margins/typeface, so those are house style.
+- **GRI:** materiality, stakeholder table, GRI content index and Scope 1/2/3.
+  The report says “self-declared, not externally assured”.
+- **PDF/UA:** target only; the audit checks headings/alt/table headers/language,
+  not the PDF tag tree.
+
+**Do not turn the control table into a certificate.** A row is `met`,
+`partly met` or `limited`; evidence is a file/field/page, not a logo.
 
 ## Rules → generator → checker
 

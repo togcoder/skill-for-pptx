@@ -59,9 +59,9 @@ except ImportError as exc:  # pragma: no cover
     raise SystemExit("python-docx is required: pip install python-docx") from exc
 
 try:
-    from .word_math import omml_from_latex
+    from .word_math import omml_from_latex, omml_para
 except ImportError:
-    from word_math import omml_from_latex
+    from word_math import omml_from_latex, omml_para
 
 try:  # package import (tests) or script import (CLI)
     from .word_field_kit import (
@@ -599,7 +599,7 @@ def _add_equation(doc, block: dict, section, owner) -> None:
     p.paragraph_format.tab_stops.add_tab_stop(Mm(width_mm / 2), WD_TAB_ALIGNMENT.CENTER)
     p.paragraph_format.tab_stops.add_tab_stop(Mm(width_mm), WD_TAB_ALIGNMENT.RIGHT)
     p.add_run("\t")
-    p._p.append(omml_from_latex(latex))
+    p._p.append(omml_para(latex))
     if block.get("number", True):
         p.add_run("\t(")
         add_field(p, r"SEQ Equation \* ARABIC", "1")
@@ -1511,33 +1511,43 @@ def _add_field_list(doc, entries: list[dict], spec: dict, section, *, kind: str,
 def _add_front_matter(doc, spec: dict, section, owner, manifest: dict) -> None:
     fm = spec["front_matter"]
     labels = _labels(spec)
-    toc = fm.get("toc", {})
-    if toc.get("enabled", True):
+    counters = {"Figure": 0, "Table": 0}
+
+    def add_toc_page():
+        toc = fm.get("toc", {})
+        if not toc.get("enabled", True):
+            return
         p = doc.add_paragraph(style="TOC Heading")
         p.add_run(toc.get("title") or labels["toc"])
         tp = doc.add_paragraph()
         add_toc(tp, levels=int(toc.get("levels", 3)))
         doc.add_page_break()
-    for key, kind, label_key, entries in [
-        ("list_of_figures", "figure", "figures", manifest.get("figures", [])),
-        ("list_of_tables", "table", "tables", manifest.get("tables", [])),
-    ]:
-        cfg = fm.get(key, {})
-        if not cfg.get("enabled"):
-            continue
-        if not entries:
-            continue
-        if cfg.get("mode", "toc_switch") == "ref_pageref":
-            _add_field_list(doc, entries, spec, section, kind=kind,
-                            title=cfg.get("title") or labels[label_key])
-        else:
-            p = doc.add_paragraph(style="TOC Heading")
-            p.add_run(cfg.get("title") or labels[label_key])
-            tp = doc.add_paragraph()
-            add_toc_of(tp, "Figure" if kind == "figure" else "Table")
-        doc.add_page_break()
-    abstract = fm.get("abstract", {})
-    if abstract.get("enabled") or abstract.get("text"):
+
+    def add_lists_page():
+        for key, kind, label_key, entries in [
+            ("list_of_figures", "figure", "figures", manifest.get("figures", [])),
+            ("list_of_tables", "table", "tables", manifest.get("tables", [])),
+        ]:
+            cfg = fm.get(key, {})
+            if not cfg.get("enabled"):
+                continue
+            if not entries:
+                continue
+            if cfg.get("mode", "toc_switch") == "ref_pageref":
+                _add_field_list(doc, entries, spec, section, kind=kind,
+                                title=cfg.get("title") or labels[label_key])
+            else:
+                p = doc.add_paragraph(style="TOC Heading")
+                p.add_run(cfg.get("title") or labels[label_key])
+                tp = doc.add_paragraph()
+                add_toc_of(tp, "Figure" if kind == "figure" else "Table")
+            if cfg.get("page_break_after", True):
+                doc.add_page_break()
+
+    def add_abstract_page():
+        abstract = fm.get("abstract", {})
+        if not (abstract.get("enabled") or abstract.get("text")):
+            return
         p = doc.add_paragraph(style="Front Matter Heading")
         p.add_run(abstract.get("title") or labels["abstract"])
         p.paragraph_format.page_break_before = False
@@ -1552,14 +1562,48 @@ def _add_front_matter(doc, spec: dict, section, owner, manifest: dict) -> None:
             p.add_run(", ".join(abstract["keywords"]))
         doc.add_page_break()
 
+    def add_preface_page():
+        preface = fm.get("preface", {})
+        if not (preface.get("enabled") or preface.get("blocks") or preface.get("text")):
+            return
+        p = doc.add_paragraph(style="Front Matter Heading")
+        p.add_run(preface.get("title") or "Lời nói đầu")
+        for para in (preface.get("text") or "").split("\n\n"):
+            if para.strip():
+                body = doc.add_paragraph()
+                _add_text(body, para.strip(), spec)
+        _add_blocks(doc, preface.get("blocks", []), spec, section, owner, counters,
+                    heading_level_start=2)
+        doc.add_page_break()
+
+    order = str(fm.get("order") or "toc_first").lower()
+    if order == "iso7144":
+        add_abstract_page()
+        add_preface_page()
+        add_toc_page()
+        add_lists_page()
+    else:
+        add_toc_page()
+        add_lists_page()
+        add_abstract_page()
+        add_preface_page()
+
 
 def _add_references(doc, spec: dict, owner) -> None:
     refs = spec.get("references", {})
     if not refs.get("enabled") and not refs.get("items"):
         return
     labels = _labels(spec)
+    # Bibliography is end matter: Heading 1 for the running header/STYLEREF,
+    # but with numbering suppressed (numId 0) so it is not body section 15.
     p = doc.add_heading(refs.get("title") or labels["references"], 1)
     p.paragraph_format.page_break_before = True
+    ppr = p._p.get_or_add_pPr()
+    numpr = OxmlElement("w:numPr")
+    ilvl = OxmlElement("w:ilvl"); ilvl.set(qn("w:val"), "0")
+    numid = OxmlElement("w:numId"); numid.set(qn("w:val"), "0")
+    numpr.append(ilvl); numpr.append(numid)
+    ppr.append(numpr)
     for i, item in enumerate(refs.get("items", []), start=1):
         if isinstance(item, str):
             item = {"text": item}
@@ -1607,6 +1651,10 @@ def _resolve_paths(spec: dict, base_dir: Path) -> None:
         if isinstance(node, dict):
             if "path" in node and isinstance(node["path"], str) and not Path(node["path"]).is_absolute():
                 node["_base_dir"] = str(base_dir)
+            for key in ("hero_image", "logo", "image"):
+                value = node.get(key)
+                if isinstance(value, str) and value and not Path(value).is_absolute():
+                    node["_base_dir"] = str(base_dir)
             for v in node.values():
                 walk(v)
         elif isinstance(node, list):
@@ -1684,8 +1732,8 @@ def build_document(spec_path: str | Path, out_path: str | Path, *,
             add_bookmark_to_paragraph(p, f"sec-{i + 1}", doc)
         _add_blocks(doc, section_spec.get("blocks", []), spec, body_section, doc, counters)
 
-    _add_references(doc, spec, doc)
     _add_appendix(doc, spec, body_section, doc, counters)
+    _add_references(doc, spec, doc)
 
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
