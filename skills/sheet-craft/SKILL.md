@@ -78,7 +78,7 @@ order; each one has a native object and an evidence check.
 | Data | One typed table; freeze header; filter; percent format on progress | `table`, `numFmt` |
 | Model | `SUMIFS`/`COUNTIFS`/`AVERAGEIF`/`INDEX`+`MATCH` across sheets; named ranges | Excel recalculates; values match |
 | Image table | Picture in the cell, row height ≥ image + padding, alt text | `xdr:pic`, `docPr@descr` |
-| Gantt | Stacked bar; start series invisible; date axis; reversed categories | `barChart` + `dateAx` |
+| Gantt | Stacked bar; transparent start series; date-formatted value axis; reversed categories | `barChart`, `valAx` + `numFmt` |
 | Relations | Pairwise matrix with a 3-colour scale | `conditionalFormatting` |
 | Summary | Native PivotTable (GridCraft) or formula summary | pivot source/rows/values |
 | Dashboard | ≤4 KPI cards, 2–3 charts, one palette, fixed anchors, print area | `mergeCell`, `oneCellAnchor` |

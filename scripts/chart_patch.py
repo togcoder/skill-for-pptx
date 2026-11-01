@@ -295,6 +295,8 @@ def _set_axis(axis, options: dict):
                      log_base=options.get("log_base"), reverse=bool(options.get("reverse")))
     if options.get("number_format"):
         _set_numfmt(axis, options["number_format"], order_key=_local(axis))
+    if options.get("major_unit") is not None:
+        _set_val(axis, "majorUnit", str(options["major_unit"]), _local(axis))
     if "visible" in options:
         _set_val(axis, "delete", "0" if options["visible"] else "1", _local(axis))
     if options.get("gridlines") is not None:
@@ -378,6 +380,20 @@ def _set_dlbls(parent, value, *, order_key: str):
         etree.SubElement(p, a("endParaRPr")).set("lang", "en-US")
         _insert_ordered(node, txpr, "txPr")
     _insert_ordered(parent, node, "dLbls")
+
+
+def _hide_series(series):
+    """Make a series fully transparent (used for the Gantt start offset)."""
+    sp = series.find(c("spPr"))
+    if sp is None:
+        sp = etree.Element(c("spPr"))
+        _insert_ordered(series, sp, "spPr")
+    for child in list(sp):
+        if _local(child) in {"solidFill", "noFill", "ln", "gradFill", "pattFill"}:
+            sp.remove(child)
+    etree.SubElement(sp, a("noFill"))
+    ln = etree.SubElement(sp, a("ln"))
+    etree.SubElement(ln, a("noFill"))
 
 
 def _set_series_style(series, options: dict, *, chart_type: str = ""):
@@ -653,6 +669,14 @@ def patch_chart_xml(root, patch: dict) -> dict:
                     group, ser = series_refs[i]
                     _set_series_style(ser, ser_patch, chart_type=_local(group))
                     changed.append(f"series[{i}]")
+            hide = {name.lower() for name in patch.get("hide_series") or []}
+            if hide:
+                for _, ser in series_refs:
+                    tx = ser.find(c("tx"))
+                    value = tx.find(f".//{c('v')}") if tx is not None else None
+                    if value is not None and (value.text or "").strip().lower() in hide:
+                        _hide_series(ser)
+                        changed.append(f"hide_series:{value.text}")
 
         axes = patch.get("axes") or {}
         if axes:
@@ -668,6 +692,20 @@ def patch_chart_xml(root, patch: dict) -> dict:
                 _set_axis(y_axis, axes["y"]); changed.append("axis.y")
             if axes.get("y2") and y2_axis is not None:
                 _set_axis(y2_axis, axes["y2"]); changed.append("axis.y2")
+            # Role-based selectors: bar charts put the value axis at the
+            # bottom and the category axis at the left.
+            if axes.get("value"):
+                value_axis = _find_axis(plot, "y", "b")
+                if value_axis is None:
+                    value_axis = _find_axis(plot, "y")
+                if value_axis is not None:
+                    _set_axis(value_axis, axes["value"]); changed.append("axis.value")
+            if axes.get("category"):
+                category_axis = _find_axis(plot, "x", "l")
+                if category_axis is None:
+                    category_axis = _find_axis(plot, "x")
+                if category_axis is not None:
+                    _set_axis(category_axis, axes["category"]); changed.append("axis.category")
     return {"changed": changed}
 
 

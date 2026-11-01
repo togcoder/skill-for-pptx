@@ -15,6 +15,9 @@ changing a dashboard block.
 
 - Each card = 3 merged columns × 3 rows. Equal widths; 6–8 pt gap between cards.
 - Label, value, delta are three merged ranges; no single cell holds all three.
+- The value is a **formula** (`=TaskCount`, `=COUNTIF(Data!…,"At risk")`,
+  `=TEXT(TotalCost/1000,"0.00")&" tỷ"`), not a typed string; a cached value keeps
+  the card readable before recalculation.
 - Fill is a pale tint; value colour is the same navy as the dashboard title.
 - Delta colour: green `#548235` for good, red `#C00000` for risk. Never colour
   the label.
@@ -43,13 +46,18 @@ cause of an earlier “Excel cannot open the file” bug.
 - Data: `Task`, `Start` (date), `Days` (number), `End` formula `=Start+Days-1`,
   `Progress` (0–1, `0%`).
 - Chart: stacked bar with two series:
-  1. `Start` — no fill, no border (the invisible offset);
+  1. `Start` — fully transparent (`<a:noFill/>` on both fill and line); a bar
+     chart has no date category axis, so the start offset is a value, not a date
+     axis;
   2. `Duration` — accent fill.
-- `reverse` the category axis so the first task is on top; `date_axis: true`;
-  number format `mmm-yy`; vertical gridlines light.
+- Value axis (horizontal): explicit serial `min`/`max` from the task dates,
+  `num_format: "mmm-yy"`, major unit 30. Use `set_x_axis` in XlsxWriter — for
+  bar charts the API's x/y are swapped relative to the visual position.
+- Category axis (vertical): `reverse` so the first task is on top.
 - Legend off: the colours are self-evident and the labels carry the tasks.
 - Insert the same chart on the Gantt sheet and on the dashboard (two chart
-  objects, not one shared object).
+  objects, not one shared object). GridCraft's pivot round-trip can drop axis
+  settings; re-apply them with `chart_patch` after the pivot.
 
 ## Relationship matrix
 
@@ -82,9 +90,10 @@ GridCraft JSONL:
 ```
 
 - The destination sheet must exist before the pivot step.
-- Without GridCraft, the `Model` sheet (`SUMIFS`, `COUNTIFS`) is the summary.
-  Never rewrite the workbook with xlsxwriter to “add” a fallback — that destroys
-  the dashboard.
+- Without GridCraft, `sheet_forge` writes a `SUMIF`/`COUNTIF` summary on the
+  `Pivot` sheet in the first pass; the `Model` sheet remains the cross-sheet
+  check. Never rewrite the workbook with xlsxwriter to “add” a fallback — that
+  destroys the dashboard.
 - Verify with Excel: `PivotTables().Count`, `SourceData`, `TableRange1`.
 
 ## VBA
@@ -98,8 +107,9 @@ GridCraft JSONL:
 
 ## Print
 
-- Dashboard: `A1:N50`, landscape, fit 1×1, margins 0.3–0.4.
+- Dashboard: `A1:N38`, landscape, fit 1×1, margins 0.3–0.4.
 - Data: `A1:K61`, landscape, fit 1 wide; 2 pages tall is acceptable.
 - Team: `A1:D7`, 1×1.
+- Gantt: table + chart stacked, `A1:L27`, landscape, fit 1×1.
 - Relations: nodes + matrix block only; edge list outside the print area.
 - Always export the exact sheet and count pages; do not assume.

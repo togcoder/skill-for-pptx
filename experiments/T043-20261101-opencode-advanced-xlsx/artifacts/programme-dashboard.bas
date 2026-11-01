@@ -5,6 +5,10 @@ Option Explicit
 Public Sub RefreshDashboard()
     On Error GoTo Failed
     Application.ScreenUpdating = False
+    If Not WorksheetExists("Dashboard") Then
+        Err.Raise 5, , "Dashboard sheet missing"
+    End If
+    ' RefreshAll is safe with or without a PivotTable; calculate the model last.
     ThisWorkbook.RefreshAll
     Application.CalculateFullRebuild
     ThisWorkbook.Worksheets("Dashboard").Activate
@@ -18,7 +22,16 @@ End Sub
 
 Public Sub FilterAtRisk()
     Dim ws As Worksheet
+    If Not WorksheetExists("Data") Then Exit Sub
     Set ws = ThisWorkbook.Worksheets("Data")
     If ws.AutoFilterMode Then ws.AutoFilterMode = False
     ws.Range("A1:K61").AutoFilter Field:=10, Criteria1:="At risk"
 End Sub
+
+Private Function WorksheetExists(ByVal name As String) As Boolean
+    Dim ws As Worksheet
+    On Error Resume Next
+    Set ws = ThisWorkbook.Worksheets(name)
+    WorksheetExists = Not ws Is Nothing
+    On Error GoTo 0
+End Function

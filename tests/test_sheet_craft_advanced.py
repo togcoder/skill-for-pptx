@@ -63,7 +63,8 @@ def _spec(tmp: Path) -> Path:
                    "x1": 1, "y1": 8, "x2": 5, "y2": 9, "weight": 3},
                   {"name": "Data→People", "from": "Data", "to": "People",
                    "x1": 1, "y1": 8, "x2": 3, "y2": 4, "weight": 2}],
-        "kpis": [{"label": "Tasks", "value": "8", "delta": "+2", "fill": "#EAF1F8"}],
+        "kpis": [{"label": "Tasks", "formula": "=COUNTA(Data!$A$2:$A$9)",
+                  "cached": 8, "format": "0", "delta": "+2", "fill": "#EAF1F8"}],
         "pivot_source": "Data!A1:K9",
         "pivot_rows": ["Workstream"],
         "pivot_values": [{"field": "Cost", "func": "sum"}],
@@ -73,67 +74,86 @@ def _spec(tmp: Path) -> Path:
     return path
 
 
+def _sheet_files(members: dict[str, bytes]) -> dict[str, str]:
+    from lxml import etree
+    rel_ns = "http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+    wb = etree.fromstring(members["xl/workbook.xml"])
+    rels = etree.fromstring(members["xl/_rels/workbook.xml.rels"])
+    targets = {rel.get("Id"): rel.get("Target") for rel in rels}
+    result = {}
+    for sheet in wb.iter():
+        if not sheet.tag.endswith("}sheet"):
+            continue
+        target = targets[sheet.get(f"{{{rel_ns}}}id")]
+        result[sheet.get("name")] = "xl/" + target.lstrip("/")
+    return result
+
+
 class SheetForgeAdvancedTests(unittest.TestCase):
+    def _build(self, tmp: Path):
+        out = tmp / "mini.xlsx"
+        report = build_dashboard(_spec(tmp), out, pivot=False)
+        self.assertTrue(report["ok"], report["audit"])
+        with zipfile.ZipFile(out) as zf:
+            return out, {n: zf.read(n) for n in zf.namelist()}
+
     def test_workbook_package_has_the_advanced_features(self):
         with tempfile.TemporaryDirectory() as td:
             tmp = Path(td)
-            out = tmp / "mini.xlsx"
-            report = build_dashboard(_spec(tmp), out, pivot=False)
-            self.assertTrue(report["ok"], report["audit"])
-            self.assertTrue(out.is_file())
-            with zipfile.ZipFile(out) as zf:
-                names = set(zf.namelist())
-                book = zf.read("xl/workbook.xml").decode("utf-8")
-                for sheet in ("Data", "Model", "Team", "Gantt", "Relations", "Dashboard"):
-                    self.assertIn(f'name="{sheet}"', book)
-                model = zf.read("xl/worksheets/sheet2.xml").decode("utf-8")
-                self.assertIn("SUMIF(", model)
-                self.assertIn("COUNTIF(", model)
-                self.assertIn("AVERAGEIF(", model)
-                self.assertIn("INDEX(", model)
-                styles = zf.read("xl/styles.xml").decode("utf-8")
-                self.assertIn('formatCode="0%"', styles)
-                charts = [n for n in names if n.startswith("xl/charts/chart")]
-                self.assertEqual(len(charts), 3)  # Gantt sheet + dashboard Gantt + cost
-                blunt = "".join(zf.read(n).decode("utf-8") for n in charts)
-                self.assertIn("barChart", blunt)
-                self.assertIn("dateAx", blunt)
+            out, members = self._build(tmp)
+            book = members["xl/workbook.xml"].decode("utf-8")
+            for sheet in ("Data", "Pivot", "Model", "Team", "Gantt", "Relations", "Dashboard"):
+                self.assertIn(f'name="{sheet}"', book)
+            files = _sheet_files(members)
+            model = members[files["Model"]]
+            for formula in (b"SUMIF(", b"COUNTIF(", b"AVERAGEIF(", b"INDEX("):
+                self.assertIn(formula, model)
+            styles = members["xl/styles.xml"].decode("utf-8")
+            self.assertIn('formatCode="0%"', styles)
+            charts = [n for n in members if n.startswith("xl/charts/chart")]
+            self.assertEqual(len(charts), 3)  # Gantt sheet + dashboard Gantt + cost
+            blunt = "".join(members[n].decode("utf-8") for n in charts)
+            self.assertIn("barChart", blunt)
+            self.assertIn("mmm-yy", blunt)       # Gantt value axis is date-formatted
+            self.assertIn("<a:noFill/>", blunt)  # Start series is transparent
+            self.assertIn('c:min val="', blunt)  # explicit Gantt range
 
     def test_image_table_and_matrix_are_native(self):
         with tempfile.TemporaryDirectory() as td:
             tmp = Path(td)
-            out = tmp / "mini.xlsx"
-            report = build_dashboard(_spec(tmp), out, pivot=False)
-            self.assertTrue(report["ok"], report["audit"])
-            with zipfile.ZipFile(out) as zf:
-                members = {n: zf.read(n) for n in zf.namelist()}
-                pics = sum(blob.count(b"<xdr:pic>") for name, blob in members.items()
-                           if name.startswith("xl/drawings/drawing"))
-                self.assertEqual(pics, 1)  # one team photo
-                image_rels = [name for name, blob in members.items()
-                              if name.endswith(".rels") and b"/image" in blob]
-                self.assertTrue(image_rels)
-                cfgs = [name for name, blob in members.items()
-                        if name.startswith("xl/worksheets/sheet") and
-                        b"colorScale" in blob]
-                self.assertTrue(cfgs, "relationship matrix needs a colour scale")
+            out, members = self._build(tmp)
+            pics = sum(blob.count(b"<xdr:pic>") for name, blob in members.items()
+                       if name.startswith("xl/drawings/drawing"))
+            self.assertEqual(pics, 1)  # one team photo
+            image_rels = [name for name, blob in members.items()
+                          if name.endswith(".rels") and b"/image" in blob]
+            self.assertTrue(image_rels)
+            cfgs = [name for name, blob in members.items()
+                    if name.startswith("xl/worksheets/sheet") and b"colorScale" in blob]
+            self.assertTrue(cfgs, "relationship matrix needs a colour scale")
 
-    def test_dashboard_has_fixed_chart_anchors(self):
+    def test_dashboard_has_fixed_chart_anchors_and_formula_kpis(self):
         with tempfile.TemporaryDirectory() as td:
             tmp = Path(td)
-            out = tmp / "mini.xlsx"
-            report = build_dashboard(_spec(tmp), out, pivot=False)
-            self.assertTrue(report["ok"], report["audit"])
-            with zipfile.ZipFile(out) as zf:
-                members = {n: zf.read(n) for n in zf.namelist()}
-                dashboard = zf.read("xl/worksheets/sheet6.xml").decode("utf-8")
-                self.assertIn("mergeCell", dashboard)
-                self.assertIn('ref="A2:N3"', dashboard)
-                drawing = _sheet_drawing_index(members)["Dashboard"]
-                xml = zf.read(f"xl/drawings/drawing{drawing}.xml").decode("utf-8")
-                self.assertEqual(xml.count("<xdr:oneCellAnchor>"), 2)
-                self.assertIn("Gantt chart", xml)
-                self.assertIn("Cost and benefit chart", xml)
+            out, members = self._build(tmp)
+            files = _sheet_files(members)
+            dashboard = members[files["Dashboard"]]
+            self.assertIn(b"mergeCell", dashboard)
+            self.assertIn(b"COUNTA(Data!", dashboard)
+            drawing = _sheet_drawing_index(members)["Dashboard"]
+            xml = members[f"xl/drawings/drawing{drawing}.xml"].decode("utf-8")
+            self.assertEqual(xml.count("<xdr:oneCellAnchor>"), 2)
+            self.assertIn("Gantt chart", xml)
+            self.assertIn("Cost and benefit chart", xml)
+
+    def test_pivot_fallback_writes_the_summary_sheet(self):
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            out, members = self._build(tmp)
+            files = _sheet_files(members)
+            pivot = members[files["Pivot"]]
+            self.assertIn(b"SUMIF(Data!", pivot)
+            self.assertIn(b"COUNTIF(Data!", pivot)
 
     def test_vba_module_is_a_labelled_artifact(self):
         with tempfile.TemporaryDirectory() as td:
@@ -143,6 +163,7 @@ class SheetForgeAdvancedTests(unittest.TestCase):
             self.assertIn('Attribute VB_Name = "DashboardTools"', text)
             self.assertIn("Sub RefreshDashboard()", text)
             self.assertIn("Sub FilterAtRisk()", text)
+            self.assertIn("WorksheetExists", text)
             self.assertIn("Option Explicit", text)
             self.assertEqual(text, MODULE)
 

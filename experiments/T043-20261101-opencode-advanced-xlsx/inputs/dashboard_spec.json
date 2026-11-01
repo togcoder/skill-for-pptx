@@ -1030,29 +1030,37 @@
   "kpis": [
     {
       "label": "Công việc",
-      "value": "60",
+      "formula": "=TaskCount",
+      "format": "0",
+      "cached": 60,
       "delta": "+12 trong quý",
       "fill": "#EAF1F8",
       "positive": true
     },
     {
-      "label": "Ngân sách",
-      "value": "8,4 tỷ",
-      "delta": "72% đã phân bổ",
+      "label": "Chi phí",
+      "formula": "=SUBSTITUTE(TEXT(TotalCost/1000,\"0.00\"),\".\",\",\")&\" tỷ\"",
+      "format": "General",
+      "cached": "9,45 tỷ",
+      "delta": "9.450 triệu đã phân bổ",
       "fill": "#EAF4E7",
       "positive": true
     },
     {
       "label": "Lợi ích",
-      "value": "12,1 tỷ",
-      "delta": "1,44× chi phí",
+      "formula": "=SUBSTITUTE(TEXT(TotalBenefit/1000,\"0.0\"),\".\",\",\")&\" tỷ\"",
+      "format": "General",
+      "cached": "15,1 tỷ",
+      "delta": "1,60× chi phí",
       "fill": "#FFF2E5",
       "positive": true
     },
     {
       "label": "Rủi ro",
-      "value": "3",
-      "delta": "1 đang theo dõi",
+      "formula": "=COUNTIF(Data!$J$2:$J$61,\"At risk\")",
+      "format": "0",
+      "cached": 15,
+      "delta": "trong 60 công việc",
       "fill": "#F3EDF7",
       "positive": false
     }

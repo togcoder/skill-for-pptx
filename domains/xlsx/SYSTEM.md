@@ -59,7 +59,7 @@ model, the summary and the page to agree.
 | Data | Typed table, frozen header, filter, percent/number formats | `w:table`, `numFmt` |
 | Model | Cross-sheet formulas and named ranges | `SUMIFS`, `COUNTIFS`, `AVERAGEIF`, `INDEX`/`MATCH`, `definedName` |
 | Image table | Team/product rows with a picture in the cell, fixed row height, alt text | `xdr:pic` + row height |
-| Gantt | Stacked bar, hidden start series, date axis, reversed categories | `c:barChart`, `c:dateAx` |
+| Gantt | Stacked bar, transparent start series, date-formatted value axis, reversed categories | `c:barChart`, `c:valAx` (`numFmt` + explicit serial min/max) |
 | Relationship matrix | Pairwise weights + 3-colour scale | `conditionalFormatting` |
 | Pivot | Native PivotTable over the data range | `pivotTable` part |
 | VBA | Refresh/filter module, labelled `.bas`; injection optional | `vbaProject` |
@@ -114,7 +114,7 @@ node-link scatter was not reliable in Excel (T043 negative result).
 | WB-CROSS-SHEET | formulas reference `Data!$A$2:$A$n` | Excel recalculation; formula XML |
 | WB-NAMED-RANGE | `define_name` | `definedName` in workbook.xml |
 | WB-IMAGE-CELL | picture in a cell, row height fixed | `xdr:pic` + `wp:docPr@descr` |
-| WB-GANTT | hidden start + duration + `dateAx` | `c:barChart` + date axis; Excel render |
+| WB-GANTT | transparent start + duration + date-formatted `valAx` | `c:barChart`, `c:valAx`; Excel render |
 | WB-MATRIX | pairwise weights + 3-colour scale | `conditionalFormatting`/`colorScale` |
 | WB-PIVOT | GridCraft `insert.pivotTable` | PivotTable count/source in Excel |
 | WB-VBA | `.bas` written; injection gated | `vbaProject` module in `.xlsm` |
@@ -174,7 +174,8 @@ $wb.Close($false); $excel.Quit()
   observed failures, not a user study. Treat them as a floor, not a taste score.
 - **Excel repair** is not detected by the audit; open the exact file in Excel.
 - **Pivot without GridCraft.** The Python path cannot create a PivotTable; the
-  Model sheet's formulas are the fallback summary.
+  generator writes a `SUMIF`/`COUNTIF` summary on the Pivot sheet, and the Model
+  sheet is the cross-sheet check.
 - **Node-link scatter.** A one-series-per-edge scatter did not render all series
   consistently in Excel/Graph; use the matrix unless a working native
   connected-scatter path is proven.
@@ -196,7 +197,8 @@ $wb.Close($false); $excel.Quit()
 5. Add a workbook-level dashboard audit (alignment grid, shared axes, card
    sizes, print pages).
 6. Add a LibreOffice Calc rung 3 for the T043 dashboard.
-7. Make the pivot fallback a real static summary when GridCraft is absent.
+7. Add a real PivotTable fallback (or keep the formula summary as the
+   documented non-GridCraft path).
 8. Prove a native node-link chart (connected scatter/Graph) or document the
    matrix as the only supported relationship view.
 9. Add a VBA preflight that reports the trust gate before writing a `.xlsm`.

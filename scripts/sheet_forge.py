@@ -161,9 +161,21 @@ def _gantt_chart(wb, spec: dict):
     })
     chart.set_title({"name": "Lịch trình chương trình", "name_font": {"size": 13, "bold": True}})
     chart.set_legend({"none": True})
+    # Bar charts swap the axes internally: set_y_axis controls the vertical
+    # category axis (task names), set_x_axis controls the horizontal value
+    # axis (dates).  Excel has no date category axis here, so use an explicit
+    # serial range + date number format.  The Start series is made transparent
+    # by the build patch.
+    starts = [_date(task["start"]) for task in spec["tasks"]]
+    ends = [start + dt.timedelta(days=int(task["days"]) - 1)
+            for start, task in zip(starts, spec["tasks"])]
+    serial = lambda value: (value - dt.date(1899, 12, 30)).days
     chart.set_y_axis({"reverse": True, "num_font": {"size": 8}})
-    chart.set_x_axis({"date_axis": True, "num_format": "mmm-yy", "num_font": {"size": 8},
-                      "major_gridlines": {"visible": True, "line": {"color": "#E6E6E6"}}})
+    chart.set_x_axis({
+        "min": serial(min(starts)) - 7, "max": serial(max(ends)) + 7,
+        "major_unit": 30, "num_format": "mmm-yy", "num_font": {"size": 8},
+        "major_gridlines": {"visible": True, "line": {"color": "#E6E6E6"}},
+    })
     chart.set_size({"width": 680, "height": 320})
     chart.set_plotarea({"layout": {"x": 0.24, "y": 0.12, "width": 0.72, "height": 0.78}})
     return chart
@@ -181,8 +193,9 @@ def _add_gantt_sheet(wb, spec: dict, fmt_header, fmt_text, fmt_num):
     ws.set_column("A:A", 34); ws.set_column("B:D", 13); ws.set_column("E:E", 10)
     ws.freeze_panes("A2")
     chart = _gantt_chart(wb, spec)
-    ws.insert_chart("F2", chart, {"x_offset": 6, "y_offset": 4})
-    ws.print_area("A1:S20")
+    ws.insert_chart("A13", chart, {"x_offset": 4, "y_offset": 6,
+                                   "x_scale": 1.1, "y_scale": 1.0})
+    ws.print_area("A1:L27")
     ws.set_landscape()
     ws.fit_to_pages(1, 1)
     ws.set_margins(0.3, 0.3, 0.4, 0.4)
@@ -265,24 +278,31 @@ def _add_dashboard(wb, spec: dict, charts: dict, fmt_header, fmt_text):
         fill = kpi.get("fill", CARD_FILLS[i % len(CARD_FILLS)])
         ws.merge_range(row, col, row, col + 2, kpi["label"], wb.add_format({
             "bg_color": fill, "font_size": 9, "font_color": "#595959", "valign": "vcenter"}))
-        ws.merge_range(row + 1, col, row + 1, col + 2, kpi["value"], wb.add_format({
-            "bg_color": fill, "font_size": 20, "bold": True, "font_color": "#1F4E79", "valign": "vcenter"}))
+        value_fmt = wb.add_format({
+            "bg_color": fill, "font_size": 20, "bold": True, "font_color": "#1F4E79",
+            "valign": "vcenter", "align": "center", "num_format": kpi.get("format", "0")})
+        ws.merge_range(row + 1, col, row + 1, col + 2, "", value_fmt)
+        if kpi.get("formula"):
+            ws.write_formula(row + 1, col, kpi["formula"], value_fmt,
+                             kpi.get("cached", 0))
+        else:
+            ws.write_string(row + 1, col, kpi["value"], value_fmt)
         ws.merge_range(row + 2, col, row + 2, col + 2, kpi.get("delta", ""), wb.add_format({
             "bg_color": fill, "font_size": 9,
             "font_color": "#548235" if kpi.get("positive", True) else "#C00000"}))
-    ws.insert_chart("A12", charts["gantt"], {"x_offset": 4, "y_offset": 4})
-    ws.insert_chart("H30", charts["cost"], {"x_offset": 4, "y_offset": 4})
+    ws.insert_chart("A11", charts["gantt"], {"x_offset": 4, "y_offset": 4})
+    ws.insert_chart("H25", charts["cost"], {"x_offset": 4, "y_offset": 4})
     # Relationship matrix (native conditional-format heatmap).
     nodes = spec["nodes"]
     edges = spec["edges"]
-    ws.merge_range("A33:G33", "Ma trận quan hệ công việc", wb.add_format({
+    ws.merge_range("A27:G27", "Ma trận quan hệ công việc", wb.add_format({
         "bold": True, "font_size": 12, "font_color": "#1F4E79"}))
-    ws.write(33, 0, "Từ \\ Đến", wb.add_format({"bold": True, "font_size": 8,
+    ws.write(27, 0, "Từ \\ Đến", wb.add_format({"bold": True, "font_size": 8,
                                                 "bg_color": "#1F4E79", "font_color": "#FFFFFF"}))
     for c, node in enumerate(nodes, start=1):
-        ws.write(33, c, node["name"], wb.add_format({"bold": True, "font_size": 8,
+        ws.write(27, c, node["name"], wb.add_format({"bold": True, "font_size": 8,
                                                      "bg_color": "#1F4E79", "font_color": "#FFFFFF"}))
-    for r, a in enumerate(nodes, start=34):
+    for r, a in enumerate(nodes, start=28):
         ws.write(r, 0, a["name"], wb.add_format({"font_size": 8, "bold": True}))
         for c, b in enumerate(nodes, start=1):
             value = 0
@@ -291,13 +311,13 @@ def _add_dashboard(wb, spec: dict, charts: dict, fmt_header, fmt_text):
                     value = edge.get("weight", 1)
             ws.write_number(r, c, value, wb.add_format({"font_size": 8, "num_format": "0",
                                                         "border": 1, "border_color": "#FFFFFF"}))
-    ws.conditional_format(34, 1, 34 + len(nodes) - 1, len(nodes), {
+    ws.conditional_format(28, 1, 28 + len(nodes) - 1, len(nodes), {
         "type": "3_color_scale", "min_color": "#EAF1F8",
         "mid_color": "#9DC3E6", "max_color": "#1F4E79",
     })
-    ws.merge_range("A48:N48", "Nguồn: dữ liệu tổng hợp cho mục đích trình diễn.", wb.add_format({
+    ws.merge_range("A37:N37", "Nguồn: dữ liệu tổng hợp cho mục đích trình diễn.", wb.add_format({
         "font_size": 8, "italic": True, "font_color": "#7F7F7F"}))
-    ws.print_area("A1:N50")
+    ws.print_area("A1:N38")
     ws.set_landscape()
     ws.fit_to_pages(1, 1)
     ws.set_margins(0.3, 0.3, 0.4, 0.4)
@@ -323,15 +343,19 @@ def _add_cost_chart(wb, spec: dict):
     return chart
 
 
-def _gridcraft_pivot(path: Path, spec: dict) -> bool:
+def _gridcraft_cli():
     try:
         try:
             from .gridcraft_bridge import find_gridcraft_cli
         except ImportError:
             from gridcraft_bridge import find_gridcraft_cli
-        cli = find_gridcraft_cli()
+        return find_gridcraft_cli()
     except Exception:
-        cli = None
+        return None
+
+
+def _gridcraft_pivot(path: Path, spec: dict, cli=None) -> bool:
+    cli = cli or _gridcraft_cli()
     if not cli:
         return False
     steps = [
@@ -354,14 +378,19 @@ def _gridcraft_pivot(path: Path, spec: dict) -> bool:
 
 
 def _filter_summary(wb, spec: dict, fmt_header, fmt_text, fmt_num):
-    """Formula fallback when GridCraft is unavailable."""
+    """Formula summary on the Pivot sheet when GridCraft is unavailable."""
     ws = wb.add_worksheet("Pivot")
     ws.write_row(2, 0, ["Workstream", "Cost", "Tasks"], fmt_header)
+    last = spec.get("data_last_row", 61)
     for i, workstream in enumerate(spec["workstreams"], start=3):
         ws.write_string(i, 0, workstream, fmt_text)
-        ws.write_formula(i, 1, f'=SUMIF(Data!$B$2:$B$61,A{i + 1},Data!$H$2:$H$61)', fmt_num, 0)
-        ws.write_formula(i, 2, f'=COUNTIF(Data!$B$2:$B$61,A{i + 1})', fmt_num, 0)
+        ws.write_formula(i, 1, f'=SUMIF(Data!$B$2:$B${last},A{i + 1},Data!$H$2:$H${last})', fmt_num, 0)
+        ws.write_formula(i, 2, f'=COUNTIF(Data!$B$2:$B${last},A{i + 1})', fmt_num, 0)
     ws.set_column("A:A", 20); ws.set_column("B:C", 14)
+    ws.print_area(0, 0, 3 + len(spec["workstreams"]) - 1, 2)
+    ws.set_landscape()
+    ws.fit_to_pages(1, 1)
+    return ws
 
 
 def build_dashboard(spec_path: str | Path, out_path: str | Path, *, pivot: bool = True,
@@ -376,6 +405,10 @@ def build_dashboard(spec_path: str | Path, out_path: str | Path, *, pivot: bool 
             member["photo"] = str((base / photo).resolve())
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
+    # Decide the pivot path before the workbook is written: if GridCraft is
+    # absent, put a formula summary on the Pivot sheet in the same pass instead
+    # of leaving it empty or rewriting (and destroying) the dashboard later.
+    gridcraft = _gridcraft_cli() if pivot else None
     wb = xlsxwriter.Workbook(str(out_path), {"use_future_functions": True, "nan_inf_to_errors": True})
     fmt_header = wb.add_format({"bold": True, "bg_color": "#1F4E79", "font_color": "#FFFFFF",
                                 "border": 1, "border_color": "#FFFFFF", "align": "left"})
@@ -389,22 +422,37 @@ def build_dashboard(spec_path: str | Path, out_path: str | Path, *, pivot: bool 
     cost_chart = _add_cost_chart(wb, spec)
     _add_dashboard(wb, spec, {"gantt": _gantt_chart(wb, spec), "cost": cost_chart},
                    fmt_header, fmt_text)
-    if not pivot:
+    if not pivot or not gridcraft:
         _filter_summary(wb, spec, fmt_header, fmt_text, fmt_num)
     wb.close()
 
-    pivot_ok = _gridcraft_pivot(out_path, spec) if pivot else False
-    # If GridCraft is absent, the Model sheet (SUMIFS/COUNTIFS) is the summary.
-    # Re-opening with xlsxwriter would destroy the dashboard, so never fall back
-    # by rewriting the package.
+    pivot_ok = _gridcraft_pivot(out_path, spec, gridcraft) if (pivot and gridcraft) else False
 
     # Fixed chart anchors: Dashboard charts must not stretch with row/column
     # changes.  The sizes are in the insertion order.
+    # Fixed chart anchors and axis repair.  GridCraft's pivot round-trip can
+    # drop axis scaling/number formats, so re-apply them after it has run.
+    starts = [_date(task["start"]) for task in spec["tasks"]]
+    ends = [start + dt.timedelta(days=int(task["days"]) - 1)
+            for start, task in zip(starts, spec["tasks"])]
+    serial = lambda value: (value - dt.date(1899, 12, 30)).days
+    gantt_axis = {
+        "min": serial(min(starts)) - 7, "max": serial(max(ends)) + 7,
+        "major_unit": 30, "number_format": "mmm-yy",
+        "gridlines": True, "gridline_color": "E6E6E6",
+    }
     if out_path.is_file():
         patch_workbook(out_path, {
+            "charts": [
+                {"index": 1, "hide_series": ["Start"], "axes": {"value": gantt_axis}},
+                {"index": 2, "hide_series": ["Start"], "axes": {"value": gantt_axis}},
+                {"index": 3, "axes": {"value": {"number_format": "#,##0",
+                                                "gridlines": True,
+                                                "gridline_color": "E6E6E6"}}},
+            ],
             "anchors": [{"sheet": "Dashboard", "anchor": {
                 "mode": "one_cell",
-                "sizes": [[18.0, 8.5], [13.2, 7.4]],
+                "sizes": [[18.0, 7.0], [13.2, 6.6]],
                 "alts": ["Gantt chart", "Cost and benefit chart"],
             }}],
         }, out_path)
