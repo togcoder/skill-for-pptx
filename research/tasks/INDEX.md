@@ -62,5 +62,5 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T035 | DeckCraft native bridge & Skill-for-Design evolution | Antigravity | `work/T035-deckcraft-bridge` | tip | `experiments/T035-20261031-deckcraft-bridge/REPORT.md` |
 | T036 | Skill-for-Design Foundation: Universal ArtCraft Hub, Multi-Agent Protocols & Intent Schemas | Antigravity + Argon | `work/T036-skill-for-design-core` | tip | `experiments/T036-20261101-skill-for-design-core/REPORT.md` |
 | T037 | Multi-Craft Bridges (WordCraft, GridCraft, VectorCraft) & Intent Decoder | Antigravity | `work/T037-multi-craft-bridges` | tip | `experiments/T037-20261101-multi-craft-bridges/REPORT.md` |
-| T038 | PPTX Design Canon Tokens, Asymmetric & Bento Grids, Optical Balance & Critic Rules | Antigravity + Argon | `work/T038-pptx-design-canon-tokens` | claimed | `experiments/T038-20261101-pptx-design-canon-tokens/REPORT.md` |
+| T038 | PPTX Design Canon Tokens, Asymmetric & Bento Grids, Optical Balance & Critic Rules | Antigravity + Argon | `work/T038-pptx-design-canon-tokens` | tip | `experiments/T038-20261101-pptx-design-canon-tokens/REPORT.md` |
 | T039 | *next free ID* | | | | |

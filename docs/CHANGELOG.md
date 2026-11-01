@@ -7,6 +7,20 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T038 PPTX Design Canon Tokens, Asymmetric & Bento Grids, Optical Balance & Critic Rules — 2026-11-01
+
+- **Argon Dissection & Design Canon Foundations.** Partnered with Gemini 4 Argon (`gemini-argon`) to dissect and codify high-craft mathematical formulas into `knowledge/design_system.json` (v1.1.0):
+  - *Deck Chrome Bounds:* Slide $960 \times 540\text{ pt}$, safe margins $48/36\text{ pt}$, logo watermark ($w \le 72, h \le 24$, $y=20\text{ pt}$ top-right, suppressed on cover/divider/closing/break slides), section breadcrumbs ($10\text{ pt}$ uppercase tracked font), and progress tracker ($y=537, h=3\text{ pt}$ along bottom edge).
+  - *Optical Icon Balance:* Equalizes perceived mass across geometric shapes (Square $0.88\times$, Circle $1.0\times$, Wide $1.08\times/0.82\times$, Triangle $1.05\times$ with $+0.06\times$ apex upward shift, Badge $2.0\times$).
+  - *3-Layer Background Depth:* Z0 Base Canvas (135° Deep Slate `#0B0F19` $\rightarrow$ `#111827` or Light Alabaster `#F8FAFC` $\rightarrow$ `#EDF2F7`), Z1 Ambient Radial Glow Orbs (blurred $120-160\text{ pt}$, opacity $0.12-0.18$, morph-linked via `!!` prefix), Z2 Surface Cards (glassmorphism opacity $65-75\%$, top-lit border, corner radius $8-12\text{ pt}$, inner padding $20-28\text{ pt}$).
+  - *Content Layout Canons:* Symmetric grids (2-col $422\text{ pt}$, 3-col $274\text{ pt}$, 4-col $204\text{ pt}$), Asymmetric Golden Ratio (Major $522\text{ pt}$ / $61.8\%$, Minor $322\text{ pt}$ / $38.2\%$), and Bento Grid (Hero $496 \times 396\text{ pt}$ [7/12 width], Top-Right $348 \times 188\text{ pt}$, and 2 Bottom-Right split cards $164 \times 188\text{ pt}$).
+  - *Nancy Duarte Pattern Breaks:* Automatic pacing triggers for decks of $\ge 5$ slides near $1/3$ and $2/3$ milestones ($\ge 70\%$ negative space, single bold statement $36-44\text{ pt}$ or mammoth KPI $72-96\text{ pt}$, chrome suppressed) to eliminate cognitive fatigue.
+  - *Color & Typography:* 60-30-10 surface area bounds, Modular Scale token table (caption $11\text{ pt}$, body_base $14\text{ pt}$, card_title $18\text{ pt}$, slide_title $28\text{ pt}$, hero $44\text{ pt}$, kpi_stat $72\text{ pt}$).
+- **Programmatic Helpers (`scripts/design_system.py`).** Added `chrome()`, `optical_icon_compensation()`, `bento_grid_layout()`, `asymmetric_golden_layout()`, `duarte_break_positions()`, `modular_scale()`, and `background_layers()`.
+- **Slide Forge Compilation (`scripts/slide_forge.py`).** Added `asymmetric`, `bento`, and `duarte_break` layout compilers, automatic deck chrome injection, and optical icon balancing.
+- **Design Critic Rules (`scripts/design_critic.py`).** Implemented and registered `CHROME-SAFE`, `OPT-ICON`, `LAY-BENTO`, and `DUA-BREAK` rules; returns detailed `evaluations` audit log.
+- **Tests.** Added `tests/test_pptx_design_canon.py` (12 unit tests). Total project test suite expanded to **314 tests, 100% passing (0 failures, 4 skipped)** in 14.90s.
+
 ## T037 Multi-Craft Native Bridges & Intent-Empathy Decoder — 2026-11-01
 
 - **Multi-Craft Bridges.** Built `scripts/wordcraft_bridge.py`, `scripts/gridcraft_bridge.py`,

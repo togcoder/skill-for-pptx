@@ -1,7 +1,7 @@
 {
   "name": "PPTX Motion Lab design system",
-  "version": "1.0.0",
-  "updated": "2026-10-19",
+  "version": "1.1.0",
+  "updated": "2026-11-01",
   "about": "One source of truth for what looks good and how it is built. Generators (motion_engine, motion_director, motion_components, morph_studio, slide_forge) read these values; validators and scripts/design_critic.py check decks against the same values. A band is [good_min, good_max]; a limit is [hard_min, hard_max]: outside the band is a note, outside the limit is a warning. Easing curves live in scripts/motion_tokens.py (fitted from Carbon/Material); this file names the roles. Sources are listed at the end and in docs/DESIGN_SYSTEM.md.",
   "motion": {
     "easing_roles": {
@@ -13,32 +13,198 @@
       "ambient": "linear"
     },
     "duration_ms": {
-      "enter":       {"band": [250, 700],  "limit": [150, 1000], "default": 500},
-      "exit":        {"band": [200, 500],  "limit": [120, 900],  "default": 350},
-      "emphasis":    {"band": [250, 600],  "limit": [150, 1200], "default": 450},
-      "move":        {"band": [400, 1200], "limit": [250, 2000], "default": 700},
-      "morph":       {"band": [1000, 1600],"limit": [500, 3000], "default": 1400},
-      "ambient_cycle": {"band": [6000, 60000], "limit": [3000, 120000], "default": 12000},
-      "letter_gap":  {"band": [20, 60],    "limit": [10, 120],   "default": 35},
-      "word_gap":    {"band": [60, 200],   "limit": [30, 400],   "default": 100},
-      "stagger":     {"band": [60, 150],   "limit": [0, 400],    "default": 120}
+      "enter": {
+        "band": [
+          250,
+          700
+        ],
+        "limit": [
+          150,
+          1000
+        ],
+        "default": 500
+      },
+      "exit": {
+        "band": [
+          200,
+          500
+        ],
+        "limit": [
+          120,
+          900
+        ],
+        "default": 350
+      },
+      "emphasis": {
+        "band": [
+          250,
+          600
+        ],
+        "limit": [
+          150,
+          1200
+        ],
+        "default": 450
+      },
+      "move": {
+        "band": [
+          400,
+          1200
+        ],
+        "limit": [
+          250,
+          2000
+        ],
+        "default": 700
+      },
+      "morph": {
+        "band": [
+          1000,
+          1600
+        ],
+        "limit": [
+          500,
+          3000
+        ],
+        "default": 1400
+      },
+      "ambient_cycle": {
+        "band": [
+          6000,
+          60000
+        ],
+        "limit": [
+          3000,
+          120000
+        ],
+        "default": 12000
+      },
+      "letter_gap": {
+        "band": [
+          20,
+          60
+        ],
+        "limit": [
+          10,
+          120
+        ],
+        "default": 35
+      },
+      "word_gap": {
+        "band": [
+          60,
+          200
+        ],
+        "limit": [
+          30,
+          400
+        ],
+        "default": 100
+      },
+      "stagger": {
+        "band": [
+          60,
+          150
+        ],
+        "limit": [
+          0,
+          400
+        ],
+        "default": 120
+      }
     },
-    "travel": {"min_ms": 400, "max_ms": 1200, "per_slide_width_ms": 900},
+    "travel": {
+      "min_ms": 400,
+      "max_ms": 1200,
+      "per_slide_width_ms": 900
+    },
     "overshoot_max": 0.08,
     "anticipate_max": 0.05,
     "rhythm": {
-      "clicks_per_slide":   {"band": [0, 6],  "limit": [0, 8]},
-      "movers_per_click":   {"band": [0, 4],  "limit": [0, 8]},
-      "effects_per_click":  {"band": [0, 8],  "limit": [0, 14]},
-      "effect_kinds_per_deck": {"band": [3, 10], "limit": [2, 14]},
+      "clicks_per_slide": {
+        "band": [
+          0,
+          6
+        ],
+        "limit": [
+          0,
+          8
+        ]
+      },
+      "movers_per_click": {
+        "band": [
+          0,
+          4
+        ],
+        "limit": [
+          0,
+          8
+        ]
+      },
+      "effects_per_click": {
+        "band": [
+          0,
+          8
+        ],
+        "limit": [
+          0,
+          14
+        ]
+      },
+      "effect_kinds_per_deck": {
+        "band": [
+          3,
+          10
+        ],
+        "limit": [
+          2,
+          14
+        ]
+      },
       "static_slide_share_max": 0.3
     }
   },
   "type": {
-    "sizes_per_deck":  {"band": [3, 6], "limit": [2, 9]},
-    "body_min_pt":     {"band": [18, 40], "limit": [12, 60]},
-    "title_to_body":   {"band": [1.5, 2.6], "limit": [1.2, 4.0]},
-    "families_per_deck": {"band": [1, 2], "limit": [1, 3]}
+    "sizes_per_deck": {
+      "band": [
+        3,
+        6
+      ],
+      "limit": [
+        2,
+        9
+      ]
+    },
+    "body_min_pt": {
+      "band": [
+        18,
+        40
+      ],
+      "limit": [
+        12,
+        60
+      ]
+    },
+    "title_to_body": {
+      "band": [
+        1.5,
+        2.6
+      ],
+      "limit": [
+        1.2,
+        4.0
+      ]
+    },
+    "families_per_deck": {
+      "band": [
+        1,
+        2
+      ],
+      "limit": [
+        1,
+        3
+      ]
+    }
   },
   "color": {
     "text_contrast": 4.5,
@@ -48,34 +214,349 @@
     "graphic_contrast": 3.0
   },
   "density": {
-    "words_per_slide": {"band": [0, 45], "limit": [0, 80]},
-    "words_per_bullet": {"band": [0, 12], "limit": [0, 20]}
+    "words_per_slide": {
+      "band": [
+        0,
+        45
+      ],
+      "limit": [
+        0,
+        80
+      ]
+    },
+    "words_per_bullet": {
+      "band": [
+        0,
+        12
+      ],
+      "limit": [
+        0,
+        20
+      ]
+    }
   },
   "layout": {
     "safe_margin": 0.03,
-    "frame_background_share": {"band": [0.6, 0.95], "limit": [0.45, 0.985]},
-    "balance_offset": {"band": [0.0, 0.15], "limit": [0.0, 0.22]},
-    "colourfulness": {"band": [15, 80], "limit": [5, 110]}
+    "frame_background_share": {
+      "band": [
+        0.6,
+        0.95
+      ],
+      "limit": [
+        0.45,
+        0.985
+      ]
+    },
+    "balance_offset": {
+      "band": [
+        0.0,
+        0.15
+      ],
+      "limit": [
+        0.0,
+        0.22
+      ]
+    },
+    "colourfulness": {
+      "band": [
+        15,
+        80
+      ],
+      "limit": [
+        5,
+        110
+      ]
+    }
   },
   "rules": [
-    {"id": "MOT-DURATION", "domain": "motion", "statement": "Every effect lasts what its role allows: entrances 250-700 ms, exits 200-500, emphasis 250-600, moves 400-1200 scaled with distance, Morph 1.0-1.6 s.", "evidence": ["carbon", "md3", "heer2007", "tversky2002"], "generators": ["motion_director.STYLES", "motion_engine recipes", "morph_studio"], "checker": "design_critic: MOT-DURATION"},
-    {"id": "MOT-EASING", "domain": "motion", "statement": "Moves slow in and slow out (role easing); nothing important moves at constant speed.", "evidence": ["dragicevic2011", "carbon"], "generators": ["motion_tokens.ROLES via motion_engine.EASE", "pptx_animator default path easing"], "checker": "design_critic: MOT-LINEAR"},
-    {"id": "MOT-STAGGER", "domain": "motion", "statement": "Stagger only to show order, 60-150 ms between items; common fate (moving together) beats a long cascade for tracking.", "evidence": ["chevalier2014", "corpus"], "generators": ["motion_engine assemble/reveal/cascade"], "checker": "design_critic: MOT-STAGGER"},
-    {"id": "MOT-MOVERS", "domain": "motion", "statement": "At most about four independent things move at once in a click; objects moving together count as one.", "evidence": ["mot1988", "mot2007"], "generators": ["motion_director cinematic draft"], "checker": "design_critic: MOT-MOVERS"},
-    {"id": "MOT-CLICKS", "domain": "rhythm", "statement": "One idea per click, at most six clicks per slide.", "evidence": ["mayer-segmenting"], "generators": ["motion_director draft", "motion_script"], "checker": "design_critic: MOT-CLICKS"},
-    {"id": "MOT-VOCAB", "domain": "rhythm", "statement": "One motion language per deck: 3-10 effect kinds, lifecycles over exotic presets.", "evidence": ["corpus"], "generators": ["motion_director styles"], "checker": "design_critic: MOT-MONOTONE / MOT-CHAOTIC"},
-    {"id": "MOT-STATIC", "domain": "rhythm", "statement": "Structure (process, data, pictures) moves; at most 30% of content slides stay still.", "evidence": ["corpus", "mayer-signaling"], "generators": ["motion_director draft"], "checker": "design_critic: MOT-STATIC"},
-    {"id": "MOT-AMBIENT", "domain": "motion", "statement": "Ambient loops are slow (cycle >= 6 s) and never on the object being discussed.", "evidence": ["mayer-coherence"], "generators": ["motion_engine ambient recipes"], "checker": "design_critic: MOT-AMBIENT-FAST; motion_engine.conflicts"},
-    {"id": "MOT-TITLE", "domain": "motion", "statement": "Titles stay still inside a slide; they move only by Morph.", "evidence": ["pro-techniques#45"], "generators": ["motion_director (titles never targeted)"], "checker": "design_critic: MOT-TITLE"},
-    {"id": "MOT-SETTLE", "domain": "morph", "statement": "A slide that leaves by Morph ends on its authored layout, or objects snap back when the transition starts.", "evidence": ["T028"], "generators": ["motion_script settle click"], "checker": "morph_studio.settle_report; design_critic: MOT-SETTLE"},
-    {"id": "MOT-OVERSHOOT", "domain": "motion", "statement": "Overshoot <= 0.08, anticipation <= 0.05 of the move.", "evidence": ["md3-expressive"], "generators": ["motion_engine keyframes (clamped)"], "checker": "validate_director_plan"},
-    {"id": "COL-TEXT", "domain": "colour", "statement": "Text contrast >= 4.5:1, large text (>= 18 pt, or 14 pt bold) >= 3:1.", "evidence": ["wcag22"], "generators": ["brand_palette", "slide_forge themes"], "checker": "forge_qa LOW_CONTRAST; design_critic: COL-TEXT"},
-    {"id": "COL-GRAPHIC", "domain": "colour", "statement": "Generated motion helpers (halo, ring, rail, token, marker, underline) reach >= 3:1 against what is behind them (marker: a tint behind text, exempt).", "evidence": ["wcag22"], "generators": ["motion_components.deck_style"], "checker": "design_critic: COL-GRAPHIC"},
-    {"id": "TYP-SCALE", "domain": "type", "statement": "A deck uses 3-6 text sizes, title about 1.5-2.6x body, body >= 18 pt (never below 12).", "evidence": ["office-themes", "corpus"], "generators": ["slide_forge type scale"], "checker": "forge_qa TYPE_TOO_SMALL; design_critic: TYP-SIZES / TYP-SMALL"},
-    {"id": "TYP-FAMILIES", "domain": "type", "statement": "One or two type families per deck.", "evidence": ["office-themes"], "generators": ["slide_forge themes"], "checker": "design_critic: TYP-FAMILIES"},
-    {"id": "DEN-WORDS", "domain": "density", "statement": "A slide carries a claim and its evidence: <= 45 words is good, > 80 is a wall of text.", "evidence": ["office-themes", "corpus", "mayer-coherence"], "generators": ["slide_forge spec limits"], "checker": "design_critic: DEN-WORDS"},
-    {"id": "LAY-FRAME", "domain": "layout", "statement": "The settled frame keeps 60-95% background and its visual weight near the centre.", "evidence": ["inui2025", "slidesgen2026"], "generators": ["slide_forge layouts"], "checker": "design_critic --render: LAY-DENSITY / LAY-BALANCE"},
-    {"id": "LAY-SAFE", "domain": "layout", "statement": "Content sits inside the slide with a 3% safe margin; off-slide objects only as Morph staging.", "evidence": ["office-themes"], "generators": ["slide_forge", "morph_studio staging"], "checker": "forge_qa OFF_SLIDE; design_critic: LAY-SAFE"}
+    {
+      "id": "MOT-DURATION",
+      "domain": "motion",
+      "statement": "Every effect lasts what its role allows: entrances 250-700 ms, exits 200-500, emphasis 250-600, moves 400-1200 scaled with distance, Morph 1.0-1.6 s.",
+      "evidence": [
+        "carbon",
+        "md3",
+        "heer2007",
+        "tversky2002"
+      ],
+      "generators": [
+        "motion_director.STYLES",
+        "motion_engine recipes",
+        "morph_studio"
+      ],
+      "checker": "design_critic: MOT-DURATION"
+    },
+    {
+      "id": "MOT-EASING",
+      "domain": "motion",
+      "statement": "Moves slow in and slow out (role easing); nothing important moves at constant speed.",
+      "evidence": [
+        "dragicevic2011",
+        "carbon"
+      ],
+      "generators": [
+        "motion_tokens.ROLES via motion_engine.EASE",
+        "pptx_animator default path easing"
+      ],
+      "checker": "design_critic: MOT-LINEAR"
+    },
+    {
+      "id": "MOT-STAGGER",
+      "domain": "motion",
+      "statement": "Stagger only to show order, 60-150 ms between items; common fate (moving together) beats a long cascade for tracking.",
+      "evidence": [
+        "chevalier2014",
+        "corpus"
+      ],
+      "generators": [
+        "motion_engine assemble/reveal/cascade"
+      ],
+      "checker": "design_critic: MOT-STAGGER"
+    },
+    {
+      "id": "MOT-MOVERS",
+      "domain": "motion",
+      "statement": "At most about four independent things move at once in a click; objects moving together count as one.",
+      "evidence": [
+        "mot1988",
+        "mot2007"
+      ],
+      "generators": [
+        "motion_director cinematic draft"
+      ],
+      "checker": "design_critic: MOT-MOVERS"
+    },
+    {
+      "id": "MOT-CLICKS",
+      "domain": "rhythm",
+      "statement": "One idea per click, at most six clicks per slide.",
+      "evidence": [
+        "mayer-segmenting"
+      ],
+      "generators": [
+        "motion_director draft",
+        "motion_script"
+      ],
+      "checker": "design_critic: MOT-CLICKS"
+    },
+    {
+      "id": "MOT-VOCAB",
+      "domain": "rhythm",
+      "statement": "One motion language per deck: 3-10 effect kinds, lifecycles over exotic presets.",
+      "evidence": [
+        "corpus"
+      ],
+      "generators": [
+        "motion_director styles"
+      ],
+      "checker": "design_critic: MOT-MONOTONE / MOT-CHAOTIC"
+    },
+    {
+      "id": "MOT-STATIC",
+      "domain": "rhythm",
+      "statement": "Structure (process, data, pictures) moves; at most 30% of content slides stay still.",
+      "evidence": [
+        "corpus",
+        "mayer-signaling"
+      ],
+      "generators": [
+        "motion_director draft"
+      ],
+      "checker": "design_critic: MOT-STATIC"
+    },
+    {
+      "id": "MOT-AMBIENT",
+      "domain": "motion",
+      "statement": "Ambient loops are slow (cycle >= 6 s) and never on the object being discussed.",
+      "evidence": [
+        "mayer-coherence"
+      ],
+      "generators": [
+        "motion_engine ambient recipes"
+      ],
+      "checker": "design_critic: MOT-AMBIENT-FAST; motion_engine.conflicts"
+    },
+    {
+      "id": "MOT-TITLE",
+      "domain": "motion",
+      "statement": "Titles stay still inside a slide; they move only by Morph.",
+      "evidence": [
+        "pro-techniques#45"
+      ],
+      "generators": [
+        "motion_director (titles never targeted)"
+      ],
+      "checker": "design_critic: MOT-TITLE"
+    },
+    {
+      "id": "MOT-SETTLE",
+      "domain": "morph",
+      "statement": "A slide that leaves by Morph ends on its authored layout, or objects snap back when the transition starts.",
+      "evidence": [
+        "T028"
+      ],
+      "generators": [
+        "motion_script settle click"
+      ],
+      "checker": "morph_studio.settle_report; design_critic: MOT-SETTLE"
+    },
+    {
+      "id": "MOT-OVERSHOOT",
+      "domain": "motion",
+      "statement": "Overshoot <= 0.08, anticipation <= 0.05 of the move.",
+      "evidence": [
+        "md3-expressive"
+      ],
+      "generators": [
+        "motion_engine keyframes (clamped)"
+      ],
+      "checker": "validate_director_plan"
+    },
+    {
+      "id": "COL-TEXT",
+      "domain": "colour",
+      "statement": "Text contrast >= 4.5:1, large text (>= 18 pt, or 14 pt bold) >= 3:1.",
+      "evidence": [
+        "wcag22"
+      ],
+      "generators": [
+        "brand_palette",
+        "slide_forge themes"
+      ],
+      "checker": "forge_qa LOW_CONTRAST; design_critic: COL-TEXT"
+    },
+    {
+      "id": "COL-GRAPHIC",
+      "domain": "colour",
+      "statement": "Generated motion helpers (halo, ring, rail, token, marker, underline) reach >= 3:1 against what is behind them (marker: a tint behind text, exempt).",
+      "evidence": [
+        "wcag22"
+      ],
+      "generators": [
+        "motion_components.deck_style"
+      ],
+      "checker": "design_critic: COL-GRAPHIC"
+    },
+    {
+      "id": "TYP-SCALE",
+      "domain": "type",
+      "statement": "A deck uses 3-6 text sizes, title about 1.5-2.6x body, body >= 18 pt (never below 12).",
+      "evidence": [
+        "office-themes",
+        "corpus"
+      ],
+      "generators": [
+        "slide_forge type scale"
+      ],
+      "checker": "forge_qa TYPE_TOO_SMALL; design_critic: TYP-SIZES / TYP-SMALL"
+    },
+    {
+      "id": "TYP-FAMILIES",
+      "domain": "type",
+      "statement": "One or two type families per deck.",
+      "evidence": [
+        "office-themes"
+      ],
+      "generators": [
+        "slide_forge themes"
+      ],
+      "checker": "design_critic: TYP-FAMILIES"
+    },
+    {
+      "id": "DEN-WORDS",
+      "domain": "density",
+      "statement": "A slide carries a claim and its evidence: <= 45 words is good, > 80 is a wall of text.",
+      "evidence": [
+        "office-themes",
+        "corpus",
+        "mayer-coherence"
+      ],
+      "generators": [
+        "slide_forge spec limits"
+      ],
+      "checker": "design_critic: DEN-WORDS"
+    },
+    {
+      "id": "LAY-FRAME",
+      "domain": "layout",
+      "statement": "The settled frame keeps 60-95% background and its visual weight near the centre.",
+      "evidence": [
+        "inui2025",
+        "slidesgen2026"
+      ],
+      "generators": [
+        "slide_forge layouts"
+      ],
+      "checker": "design_critic --render: LAY-DENSITY / LAY-BALANCE"
+    },
+    {
+      "id": "LAY-SAFE",
+      "domain": "layout",
+      "statement": "Content sits inside the slide with a 3% safe margin; off-slide objects only as Morph staging.",
+      "evidence": [
+        "office-themes"
+      ],
+      "generators": [
+        "slide_forge",
+        "morph_studio staging"
+      ],
+      "checker": "forge_qa OFF_SLIDE; design_critic: LAY-SAFE"
+    },
+    {
+      "id": "CHROME-SAFE",
+      "domain": "layout",
+      "statement": "Deck chrome adheres to canonical boundaries: logo at top-right (w<=72, h<=24, y=20), breadcrumb at top-left (y=22), progress bar at bottom edge (y=537, h=3). Logos and progress bars are suppressed on cover/divider/break/closing slides.",
+      "evidence": [
+        "swiss-grid-muller-brockmann",
+        "office-themes"
+      ],
+      "generators": [
+        "slide_forge chrome",
+        "layout_engine"
+      ],
+      "checker": "design_critic: CHROME-SAFE"
+    },
+    {
+      "id": "OPT-ICON",
+      "domain": "design",
+      "statement": "Icons are optically balanced by geometric shape: boxy/square icons scale to 0.88x, circle 1.0x, wide 1.08x/0.82x, triangle 1.05x with +0.06x upward apex offset to equalize perceived visual mass.",
+      "evidence": [
+        "bringhurst-elements",
+        "md3"
+      ],
+      "generators": [
+        "slide_forge icon",
+        "motion_components"
+      ],
+      "checker": "design_critic: OPT-ICON"
+    },
+    {
+      "id": "LAY-BENTO",
+      "domain": "layout",
+      "statement": "Bento and asymmetric golden ratio layouts maintain proportional hierarchy (7/12 hero card or 61.8/38.2 split) with 16-20 pt gutters within the 864x396 pt content box.",
+      "evidence": [
+        "swiss-grid-muller-brockmann",
+        "inui2025"
+      ],
+      "generators": [
+        "slide_forge bento/asymmetric"
+      ],
+      "checker": "design_critic: LAY-BENTO"
+    },
+    {
+      "id": "DUA-BREAK",
+      "domain": "rhythm",
+      "statement": "Decks of 5+ slides introduce Nancy Duarte pattern breaks near 1/3 and 2/3 milestones (>=70% negative space, inverted polarity, chrome hidden, single statement or mammoth KPI) to reset audience cognitive fatigue.",
+      "evidence": [
+        "duarte-resonate",
+        "mayer-coherence"
+      ],
+      "generators": [
+        "slide_forge duarte_break",
+        "cognitive_pacing"
+      ],
+      "checker": "design_critic: DUA-BREAK"
+    }
   ],
   "sources": {
     "carbon": "IBM Carbon motion tokens, @carbon/motion, Apache-2.0, https://carbondesignsystem.com/elements/motion/overview/",
@@ -96,6 +577,278 @@
     "office-themes": "knowledge/office_design_kits.json (Microsoft designer themes, derived metrics only)",
     "corpus": "knowledge/corpus_motion_design.json (797 licensed Zenodo10K decks)",
     "pro-techniques#45": "skills/pptx-motion-director/references/pro-techniques.md, craft rule 45",
-    "T028": "experiments/T028-20261008-claude-morph-studio/REPORT.md"
+    "T028": "experiments/T028-20261008-claude-morph-studio/REPORT.md",
+    "duarte-resonate": "Nancy Duarte, Resonate: Present Visual Stories that Transform Audiences, 2010 (Sparkline pattern breaks and visual contrast)",
+    "swiss-grid-muller-brockmann": "Josef Müller-Brockmann, Grid Systems in Graphic Design, 1981 (Asymmetric & modular baseline grids)",
+    "bringhurst-elements": "Robert Bringhurst, The Elements of Typographic Style, 2004 (Modular typographic scales & optical balancing)"
+  },
+  "chrome": {
+    "slide_dimensions_pt": {
+      "w": 960,
+      "h": 540
+    },
+    "safe_margins_pt": {
+      "left": 48,
+      "right": 48,
+      "top": 36,
+      "bottom": 36
+    },
+    "logo": {
+      "anchor": "top_right",
+      "x_offset_pt": 20,
+      "y_pt": 20,
+      "max_w_pt": 72,
+      "max_h_pt": 24,
+      "opacity": 0.75,
+      "hidden_layouts": [
+        "title",
+        "section",
+        "closing",
+        "statement",
+        "duarte_break"
+      ],
+      "shown_layouts": [
+        "bullets",
+        "kpis",
+        "process",
+        "cycle",
+        "chart",
+        "comparison",
+        "bento",
+        "asymmetric",
+        "quote",
+        "image"
+      ]
+    },
+    "breadcrumb": {
+      "x_pt": 48,
+      "y_pt": 22,
+      "font_size_pt": 10,
+      "tracking_pt": 1.2,
+      "uppercase": true,
+      "active_opacity": 1.0,
+      "inactive_opacity": 0.4
+    },
+    "progress_bar": {
+      "y_pt": 537,
+      "h_pt": 3,
+      "track_opacity": 0.1,
+      "fill_opacity": 1.0,
+      "hidden_layouts": [
+        "title",
+        "closing"
+      ]
+    }
+  },
+  "optical_icons": {
+    "base_size_pt": 32,
+    "compensation_multipliers": {
+      "square": 0.88,
+      "circle": 1.0,
+      "wide": {
+        "x": 1.08,
+        "y": 0.82
+      },
+      "triangle": {
+        "scale": 1.05,
+        "vertical_offset_factor": 0.06
+      }
+    },
+    "badge": {
+      "scale_multiplier": 2.0,
+      "bg_opacity": 0.12,
+      "corner_radius_pt": 8
+    }
+  },
+  "background_layers": {
+    "z0_canvas": {
+      "dark_gradient": {
+        "angle_deg": 135,
+        "stops": [
+          {
+            "color": "0B0F19",
+            "pos": 0.0
+          },
+          {
+            "color": "111827",
+            "pos": 1.0
+          }
+        ]
+      },
+      "light_gradient": {
+        "angle_deg": 135,
+        "stops": [
+          {
+            "color": "F8FAFC",
+            "pos": 0.0
+          },
+          {
+            "color": "EDF2F7",
+            "pos": 1.0
+          }
+        ]
+      }
+    },
+    "z1_ambient_glow": {
+      "max_orbs": 2,
+      "w_range_pt": [
+        380,
+        520
+      ],
+      "h_range_pt": [
+        320,
+        440
+      ],
+      "blur_radius_pt": [
+        120,
+        160
+      ],
+      "opacity_dark": [
+        0.12,
+        0.18
+      ],
+      "opacity_light": [
+        0.06,
+        0.1
+      ],
+      "morph_id_prefix": "!!"
+    },
+    "z2_surface_card": {
+      "opacity": [
+        0.65,
+        0.75
+      ],
+      "border_width_pt": 1.0,
+      "border_opacity_dark": 0.1,
+      "border_opacity_light": 0.6,
+      "corner_radius_pt": [
+        8,
+        12
+      ],
+      "inner_padding_pt": [
+        20,
+        28
+      ],
+      "card_gutter_pt": [
+        16,
+        20
+      ]
+    }
+  },
+  "layout_grids": {
+    "content_box_pt": {
+      "x": 48,
+      "y": 108,
+      "w": 864,
+      "h": 396
+    },
+    "symmetric": {
+      "two_column": {
+        "columns": 2,
+        "card_w_pt": 422,
+        "gutter_pt": 20,
+        "card_h_pt": 396
+      },
+      "three_column": {
+        "columns": 3,
+        "card_w_pt": 274,
+        "gutter_pt": 21,
+        "card_h_pt": 396
+      },
+      "four_column": {
+        "columns": 4,
+        "card_w_pt": 204,
+        "gutter_pt": 16,
+        "card_h_pt": 396
+      }
+    },
+    "asymmetric_golden_ratio": {
+      "major_w_pt": 522,
+      "minor_w_pt": 322,
+      "gutter_pt": 20,
+      "card_h_pt": 396,
+      "major_ratio": 0.618,
+      "minor_ratio": 0.382
+    },
+    "bento_grid": {
+      "hero_card": {
+        "x": 48,
+        "y": 108,
+        "w": 496,
+        "h": 396
+      },
+      "top_right_card": {
+        "x": 564,
+        "y": 108,
+        "w": 348,
+        "h": 188
+      },
+      "bottom_right_card_1": {
+        "x": 564,
+        "y": 316,
+        "w": 164,
+        "h": 188
+      },
+      "bottom_right_card_2": {
+        "x": 748,
+        "y": 316,
+        "w": 164,
+        "h": 188
+      },
+      "gutter_pt": 20
+    }
+  },
+  "duarte_breaks": {
+    "trigger_min_slides": 5,
+    "position_fractions": [
+      0.33,
+      0.67
+    ],
+    "min_negative_space_ratio": 0.7,
+    "statement_font_size_pt": [
+      36,
+      44
+    ],
+    "max_statement_words": 15,
+    "kpi_hero_font_size_pt": [
+      72,
+      96
+    ],
+    "hide_cards": true,
+    "hide_chrome": true,
+    "invert_polarity": true
+  },
+  "color_and_type_scales": {
+    "color_60_30_10": {
+      "dominant_canvas_percent": [
+        55,
+        65
+      ],
+      "structural_surface_percent": [
+        25,
+        35
+      ],
+      "focal_accent_percent": [
+        8,
+        12
+      ]
+    },
+    "modular_scale": {
+      "base_pt": 14,
+      "ratios": {
+        "major_third": 1.25,
+        "perfect_fourth": 1.333
+      },
+      "tokens_pt": {
+        "caption": 11,
+        "body_sm": 13,
+        "body_base": 14,
+        "card_title": 18,
+        "section_sub": 22,
+        "slide_title": 28,
+        "hero_display": 44,
+        "kpi_stat": 72
+      }
+    }
   }
 }

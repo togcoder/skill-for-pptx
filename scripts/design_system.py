@@ -105,6 +105,98 @@ def graphic_contrast_needed():
     return load()["color"]["graphic_contrast"]
 
 
+
+
+def chrome():
+    """Deck chrome safe margins, logo, breadcrumbs, and progress bar specs."""
+    return load().get("chrome", {})
+
+
+def optical_icon_compensation(shape_type, base_size=32):
+    """Calculate optically balanced dimensions (w, h, dx, dy, badge_size) for icons."""
+    opt = load().get("optical_icons", {})
+    mults = opt.get("compensation_multipliers", {})
+    st = str(shape_type).lower()
+    if st in ("square", "box", "rect"):
+        factor = mults.get("square", 0.88)
+        w, h, dx, dy = base_size * factor, base_size * factor, 0.0, 0.0
+    elif st in ("wide", "horizontal"):
+        w_fac = mults.get("wide", {}).get("x", 1.08)
+        h_fac = mults.get("wide", {}).get("y", 0.82)
+        w, h, dx, dy = base_size * w_fac, base_size * h_fac, 0.0, 0.0
+    elif st in ("triangle", "apex", "cone"):
+        scale = mults.get("triangle", {}).get("scale", 1.05)
+        v_offset = mults.get("triangle", {}).get("vertical_offset_factor", 0.06)
+        w, h = base_size * scale, base_size * scale
+        dx, dy = 0.0, -base_size * v_offset
+    else:  # circle / default
+        factor = mults.get("circle", 1.00)
+        w, h, dx, dy = base_size * factor, base_size * factor, 0.0, 0.0
+
+    badge_scale = opt.get("badge", {}).get("scale_multiplier", 2.0)
+    return {
+        "width": round(w, 2),
+        "height": round(h, 2),
+        "dx": round(dx, 2),
+        "dy": round(dy, 2),
+        "badge_size": round(base_size * badge_scale, 2)
+    }
+
+
+def bento_grid_layout(content_box=None):
+    """Return the 4 canonical bounding boxes for a Bento Grid layout."""
+    grids = load().get("layout_grids", {})
+    bento = grids.get("bento_grid", {})
+    return {
+        "hero": bento.get("hero_card", {"x": 48, "y": 108, "w": 496, "h": 396}),
+        "top_right": bento.get("top_right_card", {"x": 564, "y": 108, "w": 348, "h": 188}),
+        "bottom_right_1": bento.get("bottom_right_card_1", {"x": 564, "y": 316, "w": 164, "h": 188}),
+        "bottom_right_2": bento.get("bottom_right_card_2", {"x": 748, "y": 316, "w": 164, "h": 188}),
+        "gutter": bento.get("gutter_pt", 20)
+    }
+
+
+def asymmetric_golden_layout(reverse=False):
+    """Return major and minor card bounding boxes using the Golden Ratio (61.8% / 38.2%)."""
+    grids = load().get("layout_grids", {})
+    asym = grids.get("asymmetric_golden_ratio", {})
+    cbox = grids.get("content_box_pt", {"x": 48, "y": 108, "w": 864, "h": 396})
+    maj_w = asym.get("major_w_pt", 522)
+    min_w = asym.get("minor_w_pt", 322)
+    gutter = asym.get("gutter_pt", 20)
+    h = asym.get("card_h_pt", 396)
+
+    if not reverse:
+        major = {"x": cbox["x"], "y": cbox["y"], "w": maj_w, "h": h}
+        minor = {"x": cbox["x"] + maj_w + gutter, "y": cbox["y"], "w": min_w, "h": h}
+    else:
+        minor = {"x": cbox["x"], "y": cbox["y"], "w": min_w, "h": h}
+        major = {"x": cbox["x"] + min_w + gutter, "y": cbox["y"], "w": maj_w, "h": h}
+
+    return {"major": major, "minor": minor, "gutter": gutter}
+
+
+def duarte_break_positions(total_slides):
+    """Return 1-based slide indices where Nancy Duarte pattern breaks should occur."""
+    db = load().get("duarte_breaks", {})
+    if total_slides < db.get("trigger_min_slides", 5):
+        return []
+    fractions = db.get("position_fractions", [0.33, 0.67])
+    positions = sorted(list({max(1, min(total_slides, round(total_slides * f))) for f in fractions}))
+    return positions
+
+
+def modular_scale(step_name):
+    """Return font size in points for a named modular scale token."""
+    tokens = load().get("color_and_type_scales", {}).get("modular_scale", {}).get("tokens_pt", {})
+    return tokens.get(step_name)
+
+
+def background_layers():
+    """Return Z0, Z1, Z2 background depth layer configurations."""
+    return load().get("background_layers", {})
+
+
 def main():
     ap=argparse.ArgumentParser(description=__doc__,formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--rule")
