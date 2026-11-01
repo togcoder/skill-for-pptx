@@ -7,6 +7,24 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T051 [vector] Photo-to-vector line hierarchy and detail budget — 2026-11-02
+
+- **Pipeline.** `scripts/photo_vector.py` segments a product photo (GrabCut,
+  shadow trim), flattens 5 material tones, extracts/dedupes Canny edges, and
+  classifies them as silhouette, form, detail or removed with recorded reasons.
+- **Policy.** Form: length ≥ 5.5% of the object diagonal and turning ≤ 0.55°/px.
+  Detail: short + strong, closed controls ≥ 3 mm and circularity ≥ 0.28; 1.5 mm
+  scale floor. The full trace is kept as the strawman.
+- **Result.** Line style: 34 form + 16 detail, 1,437 nodes, 0 fills, GrabCut IoU
+  0.959, VectorCraft 0 warnings. Colour style: 15 fills, ΔE76 10.56. Full-line strawman:
+  58 + 133, 2,268 (colour 3,178) nodes, visibly scribbled.
+- **Evidence.** Four budget SVGs + line + full-line, VectorCraft renders, photo-vs-vector,
+  layer stack, budget sheet, `levels.json`/`line.json`; 18 new tests.
+- **Tests.** `tests/test_photo_vector.py` (18 tests); full suite 422 tests OK
+  (8 skipped).
+- **Status.** EXPERIMENTAL; review accepted by Argon (approve T051, round 2);
+  merged to `main` (PR #49).
+- Report: `experiments/T051-20261102-opencode-photo-vector/REPORT.md`.
 ## T052 [docx] Configurable standard profiles + Vietnamese scientific report — 2026-11-02
 
 - **Profile layer.** `domains/docx/data/standard_profiles.json` adds four
@@ -34,7 +52,7 @@ were true at the time. Task IDs and their branches are listed in
   pages.
 - **Tests.** `tests/test_docx_profiles.py` (7 tests); full suite 411 tests OK
   (8 skipped).
-- **Status.** EXPERIMENTAL; review accepted by Argon (approve T052, round 2); awaiting owner merge.
+- **Status.** EXPERIMENTAL; review accepted by Argon (approve T052, round 2); merged to main (306f5f2).
 - Report: `experiments/T052-20261102-opencode-scientific-report/REPORT.md`.
 
 ## T050 [xlsx] VBA UserForm + composed dashboard — 2026-11-02
@@ -52,7 +70,7 @@ were true at the time. Task IDs and their branches are listed in
   policy; the form was not shown end-to-end.
 - **Tests.** `tests/test_dashboard_userform.py` (3 tests); full suite 407 tests
   OK (8 skipped).
-- **Status.** EXPERIMENTAL; review accepted by Argon (approve T050, round 2); awaiting owner merge.
+- **Status.** EXPERIMENTAL; review accepted by Argon (approve T050, round 2); merged to main (90695a9).
 - Report: `experiments/T050-20261102-opencode-userform-dashboard/REPORT.md`.
 
 ## T048 [xlsx] Workbook UX: hidden data, VBA input, tab colour, merges — 2026-11-01
@@ -305,7 +323,7 @@ experiments/T040-20261101-claude-lab-restructure/REPORT.md.
 - **Programmatic Helpers (`scripts/design_system.py`).** Added `chrome()`, `optical_icon_compensation()`, `bento_grid_layout()`, `asymmetric_golden_layout()`, `duarte_break_positions()`, `modular_scale()`, and `background_layers()`.
 - **Slide Forge Compilation (`scripts/slide_forge.py`).** Added `asymmetric`, `bento`, and `duarte_break` layout compilers, automatic deck chrome injection, and optical icon balancing.
 - **Design Critic Rules (`scripts/design_critic.py`).** Implemented and registered `CHROME-SAFE`, `OPT-ICON`, `LAY-BENTO`, and `DUA-BREAK` rules; returns detailed `evaluations` audit log.
-- **Tests.** Added `tests/test_pptx_design_canon.py` (12 unit tests). Total project test suite expanded to **314 tests, 100% passing (0 failures, 4 skipped)** in 14.90s.
+- **Tests.** Added `tests/test_pptx_design_canon.py` (12 unit tests). Total project test suite expanded to **318 tests, 100% passing (0 failures, 4 skipped)** in 14.90s.
 
 ## T037 Multi-Craft Native Bridges & Intent-Empathy Decoder â€” 2026-11-01
 

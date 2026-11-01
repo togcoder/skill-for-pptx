@@ -1,0 +1,450 @@
+{
+  "silhouette": {
+    "svg": "experiments\\T051-20261102-opencode-photo-vector\\artifacts\\silhouette.svg",
+    "level": "silhouette",
+    "style": "colour",
+    "size_px": [
+      1015,
+      1200
+    ],
+    "bbox": [
+      198,
+      250,
+      629,
+      879
+    ],
+    "palette": [
+      "#141617",
+      "#4B4842",
+      "#A37A27",
+      "#7D7D77",
+      "#AFA999"
+    ],
+    "canny": [
+      51,
+      136
+    ],
+    "counts": {
+      "form": 0,
+      "detail": 0,
+      "removed": 275,
+      "total_candidates": 275
+    },
+    "reasons": {
+      "removed: over the detail budget": 133,
+      "removed: over the form budget": 58,
+      "removed: reflection: high turning rate": 58,
+      "removed: weak or broken: not a readable control": 18,
+      "removed: below the 1.5 mm scale floor": 6,
+      "removed: below the 3 mm control floor": 2
+    },
+    "stats": {
+      "level": "silhouette",
+      "style": "colour",
+      "form_paths": 0,
+      "detail_paths": 0,
+      "colour_paths": 0,
+      "nodes": 105,
+      "stroke_length_px": 0,
+      "stroke_weights_px": {
+        "silhouette": 4.21,
+        "form": 2.28,
+        "detail": 1.1
+      },
+      "smallest_detail_mm": 0.0,
+      "viewBox": [
+        0,
+        0,
+        1015,
+        1200
+      ]
+    },
+    "fidelity": {
+      "grabcut_iou": 0.9592,
+      "colour_delta_e76": null
+    },
+    "edges": {
+      "edge_coverage": 0.0,
+      "long_edge_coverage": 0.0,
+      "ink_ratio": 0.0,
+      "kept_pixels": 0,
+      "reference_pixels": 44201
+    },
+    "render": "experiments\\T051-20261102-opencode-photo-vector\\artifacts\\silhouette.png"
+  },
+  "form": {
+    "svg": "experiments\\T051-20261102-opencode-photo-vector\\artifacts\\form.svg",
+    "level": "form",
+    "style": "colour",
+    "size_px": [
+      1015,
+      1200
+    ],
+    "bbox": [
+      198,
+      250,
+      629,
+      879
+    ],
+    "palette": [
+      "#141617",
+      "#4B4842",
+      "#A37A27",
+      "#7D7D77",
+      "#AFA999"
+    ],
+    "canny": [
+      51,
+      136
+    ],
+    "counts": {
+      "form": 30,
+      "detail": 0,
+      "removed": 245,
+      "total_candidates": 275
+    },
+    "reasons": {
+      "removed: over the detail budget": 133,
+      "removed: reflection: high turning rate": 58,
+      "removed: over the form budget": 28,
+      "form: long + coherent": 22,
+      "removed: weak or broken: not a readable control": 18,
+      "form: closed loop": 8,
+      "removed: below the 1.5 mm scale floor": 6,
+      "removed: below the 3 mm control floor": 2
+    },
+    "stats": {
+      "level": "form",
+      "style": "colour",
+      "form_paths": 30,
+      "detail_paths": 0,
+      "colour_paths": 15,
+      "nodes": 2180,
+      "stroke_length_px": 16571.6,
+      "stroke_weights_px": {
+        "silhouette": 4.21,
+        "form": 2.28,
+        "detail": 1.1
+      },
+      "smallest_detail_mm": 0.0,
+      "viewBox": [
+        0,
+        0,
+        1015,
+        1200
+      ]
+    },
+    "fidelity": {
+      "grabcut_iou": 0.9592,
+      "colour_delta_e76": 10.56
+    },
+    "edges": {
+      "edge_coverage": 0.266,
+      "long_edge_coverage": 0.309,
+      "ink_ratio": 0.24,
+      "kept_pixels": 10589,
+      "reference_pixels": 44201
+    },
+    "render": "experiments\\T051-20261102-opencode-photo-vector\\artifacts\\form.png"
+  },
+  "catalogue": {
+    "svg": "experiments\\T051-20261102-opencode-photo-vector\\artifacts\\catalogue.svg",
+    "level": "catalogue",
+    "style": "colour",
+    "size_px": [
+      1015,
+      1200
+    ],
+    "bbox": [
+      198,
+      250,
+      629,
+      879
+    ],
+    "palette": [
+      "#141617",
+      "#4B4842",
+      "#A37A27",
+      "#7D7D77",
+      "#AFA999"
+    ],
+    "canny": [
+      51,
+      136
+    ],
+    "counts": {
+      "form": 34,
+      "detail": 16,
+      "removed": 225,
+      "total_candidates": 275
+    },
+    "reasons": {
+      "removed: over the detail budget": 117,
+      "removed: reflection: high turning rate": 58,
+      "form: long + coherent": 25,
+      "removed: over the form budget": 24,
+      "removed: weak or broken: not a readable control": 18,
+      "detail: short structural detail": 16,
+      "form: closed loop": 9,
+      "removed: below the 1.5 mm scale floor": 6,
+      "removed: below the 3 mm control floor": 2
+    },
+    "stats": {
+      "level": "catalogue",
+      "style": "colour",
+      "form_paths": 34,
+      "detail_paths": 16,
+      "colour_paths": 15,
+      "nodes": 2347,
+      "stroke_length_px": 17892.8,
+      "stroke_weights_px": {
+        "silhouette": 4.21,
+        "form": 2.28,
+        "detail": 1.1
+      },
+      "smallest_detail_mm": 6.194,
+      "viewBox": [
+        0,
+        0,
+        1015,
+        1200
+      ]
+    },
+    "fidelity": {
+      "grabcut_iou": 0.9592,
+      "colour_delta_e76": 10.56
+    },
+    "edges": {
+      "edge_coverage": 0.305,
+      "long_edge_coverage": 0.351,
+      "ink_ratio": 0.265,
+      "kept_pixels": 11734,
+      "reference_pixels": 44201
+    },
+    "render": "experiments\\T051-20261102-opencode-photo-vector\\artifacts\\catalogue.png"
+  },
+  "full": {
+    "svg": "experiments\\T051-20261102-opencode-photo-vector\\artifacts\\full.svg",
+    "level": "full",
+    "style": "colour",
+    "size_px": [
+      1015,
+      1200
+    ],
+    "bbox": [
+      198,
+      250,
+      629,
+      879
+    ],
+    "palette": [
+      "#141617",
+      "#4B4842",
+      "#A37A27",
+      "#7D7D77",
+      "#AFA999"
+    ],
+    "canny": [
+      51,
+      136
+    ],
+    "counts": {
+      "form": 58,
+      "detail": 133,
+      "removed": 84,
+      "total_candidates": 275
+    },
+    "reasons": {
+      "detail: short structural detail": 133,
+      "removed: reflection: high turning rate": 58,
+      "form: long + coherent": 38,
+      "form: closed loop": 20,
+      "removed: weak or broken: not a readable control": 18,
+      "removed: below the 1.5 mm scale floor": 6,
+      "removed: below the 3 mm control floor": 2
+    },
+    "stats": {
+      "level": "full",
+      "style": "colour",
+      "form_paths": 58,
+      "detail_paths": 133,
+      "colour_paths": 15,
+      "nodes": 3178,
+      "stroke_length_px": 22192.0,
+      "stroke_weights_px": {
+        "silhouette": 4.21,
+        "form": 2.28,
+        "detail": 1.1
+      },
+      "smallest_detail_mm": 1.575,
+      "viewBox": [
+        0,
+        0,
+        1015,
+        1200
+      ]
+    },
+    "fidelity": {
+      "grabcut_iou": 0.9592,
+      "colour_delta_e76": 10.56
+    },
+    "edges": {
+      "edge_coverage": 0.423,
+      "long_edge_coverage": 0.456,
+      "ink_ratio": 0.347,
+      "kept_pixels": 15347,
+      "reference_pixels": 44201
+    },
+    "render": "experiments\\T051-20261102-opencode-photo-vector\\artifacts\\full.png"
+  },
+  "line": {
+    "svg": "experiments\\T051-20261102-opencode-photo-vector\\artifacts\\line.svg",
+    "level": "catalogue",
+    "style": "line",
+    "size_px": [
+      1015,
+      1200
+    ],
+    "bbox": [
+      198,
+      250,
+      629,
+      879
+    ],
+    "palette": [
+      "#141617",
+      "#4B4842",
+      "#A37A27",
+      "#7D7D77",
+      "#AFA999"
+    ],
+    "canny": [
+      51,
+      136
+    ],
+    "counts": {
+      "form": 34,
+      "detail": 16,
+      "removed": 225,
+      "total_candidates": 275
+    },
+    "reasons": {
+      "removed: over the detail budget": 117,
+      "removed: reflection: high turning rate": 58,
+      "form: long + coherent": 25,
+      "removed: over the form budget": 24,
+      "removed: weak or broken: not a readable control": 18,
+      "detail: short structural detail": 16,
+      "form: closed loop": 9,
+      "removed: below the 1.5 mm scale floor": 6,
+      "removed: below the 3 mm control floor": 2
+    },
+    "stats": {
+      "level": "catalogue",
+      "style": "line",
+      "form_paths": 34,
+      "detail_paths": 16,
+      "colour_paths": 0,
+      "nodes": 1437,
+      "stroke_length_px": 17892.8,
+      "stroke_weights_px": {
+        "silhouette": 4.21,
+        "form": 2.28,
+        "detail": 1.1
+      },
+      "smallest_detail_mm": 6.194,
+      "viewBox": [
+        0,
+        0,
+        1015,
+        1200
+      ]
+    },
+    "fidelity": {
+      "grabcut_iou": 0.9592,
+      "colour_delta_e76": null
+    },
+    "edges": {
+      "edge_coverage": 0.305,
+      "long_edge_coverage": 0.351,
+      "ink_ratio": 0.265,
+      "kept_pixels": 11734,
+      "reference_pixels": 44201
+    },
+    "render": "experiments\\T051-20261102-opencode-photo-vector\\artifacts\\line.png"
+  },
+  "full-line": {
+    "svg": "experiments\\T051-20261102-opencode-photo-vector\\artifacts\\full-line.svg",
+    "level": "full",
+    "style": "line",
+    "size_px": [
+      1015,
+      1200
+    ],
+    "bbox": [
+      198,
+      250,
+      629,
+      879
+    ],
+    "palette": [
+      "#141617",
+      "#4B4842",
+      "#A37A27",
+      "#7D7D77",
+      "#AFA999"
+    ],
+    "canny": [
+      51,
+      136
+    ],
+    "counts": {
+      "form": 58,
+      "detail": 133,
+      "removed": 84,
+      "total_candidates": 275
+    },
+    "reasons": {
+      "detail: short structural detail": 133,
+      "removed: reflection: high turning rate": 58,
+      "form: long + coherent": 38,
+      "form: closed loop": 20,
+      "removed: weak or broken: not a readable control": 18,
+      "removed: below the 1.5 mm scale floor": 6,
+      "removed: below the 3 mm control floor": 2
+    },
+    "stats": {
+      "level": "full",
+      "style": "line",
+      "form_paths": 58,
+      "detail_paths": 133,
+      "colour_paths": 0,
+      "nodes": 2268,
+      "stroke_length_px": 22192.0,
+      "stroke_weights_px": {
+        "silhouette": 4.21,
+        "form": 2.28,
+        "detail": 1.1
+      },
+      "smallest_detail_mm": 1.575,
+      "viewBox": [
+        0,
+        0,
+        1015,
+        1200
+      ]
+    },
+    "fidelity": {
+      "grabcut_iou": 0.9592,
+      "colour_delta_e76": null
+    },
+    "edges": {
+      "edge_coverage": 0.423,
+      "long_edge_coverage": 0.456,
+      "ink_ratio": 0.347,
+      "kept_pixels": 15347,
+      "reference_pixels": 44201
+    },
+    "render": "experiments\\T051-20261102-opencode-photo-vector\\artifacts\\full-line.png"
+  }
+}

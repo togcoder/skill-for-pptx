@@ -99,7 +99,7 @@ The T041 report is
 - **T050 [xlsx] VBA UserForm + composed dashboard**: a 4-sheet workbook
   (Data/Trend/Model hidden, Dashboard visible), 4 native charts, 4 KPI cards,
   12-column grid, one A4 landscape page; real `frmEntry` UserForm with 22
-  controls and `FormTools` module; 3 filter/form buttons; **review accepted (Argon); awaiting owner merge**.
+  controls and `FormTools` module; 3 filter/form buttons; **review accepted (Argon); merged to `main` (`90695a9`)**.
 - **T048 [xlsx] workbook UX**: a 9-sheet workbook with only Dashboard/Input
   visible; Data/Model/Team/Gantt/Relations hidden, Pivot/Lookups veryHidden;
   Input form with 18 merges, 8 validations, 3 macro buttons and sheet

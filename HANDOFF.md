@@ -74,15 +74,15 @@ PowerPoint chá»‰ lĂ  domain lĂ¢u Ä‘á»i nháº¥t.
 
 | `video` | Ná»n táº£ng (T042): SMPTE RP 2046-2 / EBU R95 safe areas (Action 3.5%, Title 5.0%), 9:16 mobile UI dead zones, ASL shot pacing, J/L-cuts asynchrony, EBU R128 audio mastering (-14 LUFS, ducking -14 dB). Native bridges: `filmcraft_bridge.py` & `soundcraft_bridge.py`. |
 
-| `svg` | Ná»n táº£ng (T042): 24x24 icon grid (20x20 live area), optical trim boxes, non-linear stroke scaling $W(S)=W_0(S/S_0)^{0.75}$, BĂ©zier circle handle $\kappa pprox 0.55228$. Native bridge: `vectorcraft_bridge.py`. |
+| `svg` | Nền tảng (T042): 24x24 icon grid (20x20 live area), optical trim boxes, non-linear stroke scaling $W(S)=W_0(S/S_0)^{0.75}$, Bézier circle handle $\kappa \approx 0.55228$. Native bridge: `vectorcraft_bridge.py`. **T051** photo→vector line hierarchy: silhouette/form/detail + 1.5 mm scale test; line 34 form + 16 detail, 1,437 nodes, GrabCut IoU 0.959; colour 5 tones, ΔE76 10.56; full-line 58 + 133 là strawman. `work/T051-opencode-photo-vector`; Argon **approve T051** (round 2), merged `main` (PR #49). Chưa có Illustrator/Inkscape, print proof, human rung 6. |
 
 | `3d` | Ná»n táº£ng (T042): Metric scale (mm, Y-up glTF), No-Sharp-Edge Law (micro-bevel $0.2-0.5	ext{ mm}$), concentric fillets, True Isometric camera ($35.264^\circ$ elev), 3-point studio lighting, PBR albedo clamp. Native bridge: `solidcraft_bridge.py`. |
 
 | `cad` | Ná»n táº£ng (T042): ISO 5457 sheet dimensions (A4â€“A0, 20mm left margin), ISO 128 line weight hierarchy (0.50mm group: 0.50, 0.25, 0.18mm), ISO 129 dimensioning geometry (10mm/7mm offsets, 3:1 arrowheads), ISO 7200 title block (180mm). Native bridge: `cadcraft_bridge.py`. |
 
-| `docx` | T039/T045/T047 on `main`; **T052** configurable standard profiles (HUST 2017, VNU-UET, ISO 7144, annual/GRI) + Vietnamese scientific report: `hust-datn-2017` 34 body pages/48 total, `vnu-uet-kl-2024` 35 body/45 total, conformance 23/23 and 24/24, Word PDFs inspected; Argon **approve T052** (round 2), chờ owner merge. Chưa có PDF/UA, PDF/A, LibreOffice rung 3, human rung 6. |
+| `docx` | T039/T045/T047 on `main`; **T052** configurable standard profiles (HUST 2017, VNU-UET, ISO 7144, annual/GRI) + Vietnamese scientific report: `hust-datn-2017` 34 body pages/48 total, `vnu-uet-kl-2024` 35 body/45 total, conformance 23/23 and 24/24, Word PDFs inspected; Argon **approve T052** (round 2), đã merge `main` (`306f5f2`). Chưa có PDF/UA, PDF/A, LibreOffice rung 3, human rung 6. |
 
-| `xlsx` | T041/T046/T048 on `main`; **T050** VBA UserForm (22 controls, `frmEntry` + `FormTools`) + 12-column dashboard (4 native charts, 4 KPI, 3 buttons, 1-page A4), macro execution blocked by host policy `work/T050-opencode-userform-dashboard`, audit clean; Argon **approve T050** (round 2), chờ owner merge. Waterfall/treemap/histogram/box/funnel vẫn là recipe OOXML. |
+| `xlsx` | T041/T046/T048 on `main`; **T050** VBA UserForm (22 controls, `frmEntry` + `FormTools`) + 12-column dashboard (4 native charts, 4 KPI, 3 buttons, 1-page A4), macro execution blocked by host policy `work/T050-opencode-userform-dashboard`, audit clean; Argon **approve T050** (round 2), đã merge `main` (`90695a9`). Waterfall/treemap/histogram/box/funnel vẫn là recipe OOXML. |
 
 
 
