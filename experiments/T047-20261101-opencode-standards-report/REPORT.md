@@ -88,8 +88,8 @@ the claim, the clause and the evidence in one place.
 |---|---|---|---|
 | DOC-STRUCT | ISO 7144 §5 | abstract → preface → TOC → lists → body → annexes → end matter | `front_matter.order = iso7144`; 3 sections; TOC/lists |
 | DOC-NUMBER | ISO 2145 | 1 / 1.1 / 1.1.1, no trailing dot | Word multilevel list; TOC |
-| DOC-EQUATION | ISO 7144 §15.5 | display equation, extra space, number in parentheses at right | 5 OMML equations; 2 `SEQ Equation` |
-| DOC-FIGTABLE | ISO 7144 §12, §15.7 | caption + source; list of figures/tables with page | 4 figures (cover + 3 captioned), 38 tables (22 captioned), 2 lists |
+| DOC-EQUATION | ISO 7144 §15.5 | display equation, extra space, number in parentheses at right | 5 OMML equations in Equation style (5 display); 2 `SEQ Equation` |
+| DOC-FIGTABLE | ISO 7144 §12, §15.7 | caption + source; list of figures/tables with page | 4 figures (cover + 3 captioned), 38 tables (23 captioned), 2 lists |
 | DOC-REF | ISO 690:2021 | element order; numbered citations | 11 references; `{{cite:key}}` links |
 | DOC-UNITS | ISO 80000-1 / 8601-1 | unit symbols, value–unit space, ISO dates | table headers, document control |
 | DOC-ACCESS | WCAG 2.2 AA / PDF/UA target | headings, alt text, table headers, `vi-VN` | audit: 4 figures, 38 tables, language `vi-VN` |
@@ -107,7 +107,7 @@ obtained.
 |---|---|---|
 | The report is a real Word document, not a PDF mock | 4 | Word opened the exact DOCX, refreshed fields and saved; `updated_by: word`; 25-page PDF exported |
 | Front matter follows the declared ISO 7144 order | 1 | New `front_matter.order = iso7144`; test asserts abstract < preface < TOC; references after appendix |
-| ISO 2145 numbering is live | 1 + 4 | multilevel heading list; TOC; 18 headings, max level 1 |
+| ISO 2145 numbering is live | 1 + 4 | multilevel heading list; TOC 3 levels; 37 headings, max level 3 |
 | Equations are native OMML with ISO 7144 numbering | 1 + 4 | 5 `m:oMath`; 2 `SEQ Equation`; Word page 5/10/12 show right-aligned numbers |
 | Figures/tables are captioned and listed | 1 | 4 figures (cover + 3 captioned), 23 captioned tables, List of Figures/Tables via REF/PAGEREF (63 PAGEREF fields) |
 | References are ISO 690-shaped and linked | 1 | 11 references, labels [1]–[11], citation bookmarks; references after appendices |
@@ -157,9 +157,9 @@ Preview: `preview/page-01.png` (cover), `page-03.png` (standards control),
    than a photoreal render, and still a synthetic product.
 9. **No human reader test (rung 6).** The pages were inspected as images; no
    usability or comprehension test was run.
-10. **Page 11 is still lighter than the rest.** The financial section now has
-    cost, market and cash-flow tables, but the page is not full; a future
-    revision could add quarterly data or a balance-sheet summary.
+10. **The table of contents is two pages.** The 37-entry, three-level TOC
+    spills a few lines onto the second page; a shorter H2 set or a smaller TOC
+    font would fit one page. Body pagination is otherwise continuous.
 
 ## Next
 
@@ -173,6 +173,14 @@ Preview: `preview/page-01.png` (cover), `page-03.png` (standards control),
 
 ## Review response
 
+Argon review 2026-11-01 (chat `0:cf4bb6173adaaa34`), verdict **revise**.
+
 | Finding | Response (fixed / disputed / deferred → task) |
 |---|---|
-| — | Pending review. No findings yet. |
+| B1: ISO 2145 claim not evidenced (`max_heading_level=1`) | **Fixed.** Added H2/H3 sections (37 headings, max level 3); TOC is 3 levels; test asserts `max_heading_level >= 3`. |
+| B2: display equations count 0; equation pages inconsistent | **Fixed/clarified.** Word flattens `m:oMathPara` on save, so the audit now counts `m:oMath` in `Equation` style: 5/5 display equations, 2 numbered. Report no longer claims `m:oMathPara` or three numbered pages. |
+| B3: figure/table/reference counts wrong; only one reference cited | **Fixed.** Counts corrected: 4 figures (cover + 3 captioned), 38 tables (23 captioned), 22 `SEQ Table`; all 11 references now have `REF ref-*-label` citations (13 REF fields, 11 unique); test checks citations. |
+| M1: sparse body page / mixed PDF vs body page numbers | **Fixed.** Section 6/10/11 now flow instead of forced page breaks; materiality equation moved up; balance-sheet table added; 25 pages, continuous body. Report uses PDF page numbers and explains the body-footer numbering. |
+| M2: Control Matrix before TOC is outside ISO 7144 §5; units/GRI not automated | **Clarified/limited.** Preface and report now say the control matrix is a DocumentCraft house extension, not an ISO 7144 clause. Unit/date and GRI checks remain manual inspection; no automated checker is claimed. |
+| m1: only 2 tests | **Improved.** The 2 tests now cover escaped LaTeX, front-matter order, references-after-appendix, H3 structure, display equations and citation fields. Full suite 387 tests. |
+| Note: `display_equations` definition | **Disputed as an XML-only definition, fixed as a semantic one.** Word rewrites display OMML; the style-based count is the stable contract. |
