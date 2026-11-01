@@ -220,10 +220,10 @@ selective rather than lazy.
     parameters, not universal constants; the report gives the values so another
     photo can be tested against them.
 
-## Review round 1 (Argon) — fixed
+## Review (Argon) — approve T051
 
-Argon reviewed PR #49 and returned **revise** with three blockers and several
-majors. The important one was real: `cv2.findContours` traces a 1 px Canny ridge
+Argon reviewed PR #49, returned **revise** in round 1 and **approve T051** in
+round 2 (0 blockers/majors remaining). The important finding was real: `cv2.findContours` traces a 1 px Canny ridge
 as a closed polygon that walks out and back, so every open line was classified
 `closed=True`, its length was doubled, and the turning-rate rule never fired.
 The fix splits the contour at its farthest point when the two halves nearly
@@ -258,4 +258,4 @@ removes **58** reflections (it removed 0 before the fix).
   path counts.
 - Run Inkscape and Illustrator parity, a PDF/X export and a 120 mm print.
 - Add a small human preference test: line vs colour vs full trace.
-- Ask Argon to re-review this revision before merge.
+- Argon approved this revision; await owner merge, then start the curation hook.

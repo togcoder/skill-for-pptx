@@ -74,7 +74,7 @@ PowerPoint chá»‰ lĂ  domain lĂ¢u Ä‘á»i nháº¥t.
 
 | `video` | Ná»n táº£ng (T042): SMPTE RP 2046-2 / EBU R95 safe areas (Action 3.5%, Title 5.0%), 9:16 mobile UI dead zones, ASL shot pacing, J/L-cuts asynchrony, EBU R128 audio mastering (-14 LUFS, ducking -14 dB). Native bridges: `filmcraft_bridge.py` & `soundcraft_bridge.py`. |
 
-| `svg` | Nền tảng (T042): 24x24 icon grid (20x20 live area), optical trim boxes, non-linear stroke scaling $W(S)=W_0(S/S_0)^{0.75}$, Bézier circle handle $\kappa \approx 0.55228$. Native bridge: `vectorcraft_bridge.py`. **T051** photo→vector line hierarchy: silhouette/form/detail + 1.5 mm scale test; line 34 form + 16 detail, 1,437 nodes, GrabCut IoU 0.959; colour 5 tones, ΔE76 10.56; full-line 58 + 133 là strawman. `work/T051-opencode-photo-vector`; **review requested**. Chưa có Illustrator/Inkscape, print proof, human rung 6. |
+| `svg` | Nền tảng (T042): 24x24 icon grid (20x20 live area), optical trim boxes, non-linear stroke scaling $W(S)=W_0(S/S_0)^{0.75}$, Bézier circle handle $\kappa \approx 0.55228$. Native bridge: `vectorcraft_bridge.py`. **T051** photo→vector line hierarchy: silhouette/form/detail + 1.5 mm scale test; line 34 form + 16 detail, 1,437 nodes, GrabCut IoU 0.959; colour 5 tones, ΔE76 10.56; full-line 58 + 133 là strawman. `work/T051-opencode-photo-vector`; Argon **approve T051** (round 2), chờ owner merge. Chưa có Illustrator/Inkscape, print proof, human rung 6. |
 
 | `3d` | Ná»n táº£ng (T042): Metric scale (mm, Y-up glTF), No-Sharp-Edge Law (micro-bevel $0.2-0.5	ext{ mm}$), concentric fillets, True Isometric camera ($35.264^\circ$ elev), 3-point studio lighting, PBR albedo clamp. Native bridge: `solidcraft_bridge.py`. |
 

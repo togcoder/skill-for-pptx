@@ -27,7 +27,7 @@ illustrator.  A human still chooses the level and corrects semantics.
 CLI::
 
     python scripts/photo_vector.py build photo.jpg -o illustration.svg \
-        --level catalogue --colors 6 --width-mm 120 --json metrics.json
+        --level catalogue --colors 5 --width-mm 120 --json metrics.json
     python scripts/photo_vector.py analyze photo.jpg --json edges.json
 """
 from __future__ import annotations
@@ -890,8 +890,9 @@ def build_svg(*, width: int, height: int, mask, regions: Regions, edges: list[Ed
                               "form": round(w_form, 2),
                               "detail": round(w_detail, 2)},
         "smallest_detail_mm": round(
-            (min((e.length for e in detail), default=0.0) * width_mm
-             / max(1.0, float(_bbox(sil_pts)[2] - _bbox(sil_pts)[0]))), 3),
+            min(((math.hypot(e.bbox[2] - e.bbox[0], e.bbox[3] - e.bbox[1])
+                  if e.closed else e.length) for e in detail), default=0.0)
+            * width_mm / max(1.0, float(_bbox(sil_pts)[2] - _bbox(sil_pts)[0])), 3),
         "viewBox": [0, 0, width, height],
     }
     return "\n".join(parts), stats

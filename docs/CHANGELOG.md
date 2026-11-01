@@ -22,7 +22,8 @@ were true at the time. Task IDs and their branches are listed in
   layer stack, budget sheet, `levels.json`/`line.json`; 18 new tests.
 - **Tests.** `tests/test_photo_vector.py` (18 tests); full suite 422 tests OK
   (8 skipped).
-- **Status.** EXPERIMENTAL; review requested.
+- **Status.** EXPERIMENTAL; review accepted by Argon (approve T051, round 2);
+  awaiting owner merge.
 - Report: `experiments/T051-20261102-opencode-photo-vector/REPORT.md`.
 
 ## T048 [xlsx] Workbook UX: hidden data, VBA input, tab colour, merges — 2026-11-01

@@ -65,7 +65,7 @@ on the T051 photo it produces 58 form + 133 detail and 2,268 nodes (3,178 in col
 - **T051 photo-to-vector**: a CC0 espresso-machine photo → layered SVG. Line
   style: 34 form + 16 detail, 1,437 nodes, GrabCut IoU 0.959, 0 VectorCraft
   warnings; colour style: 5 tones, ΔE76 10.56. Full trace (58 + 133, 2,268 (colour 3,178)
-  nodes) is the strawman. **Review requested.**
+  nodes) is the strawman. **Review accepted (Argon); awaiting owner merge.**
 - Known limitation: the pipeline is not semantic (a human must curate logos and
   controls); the ground-shadow trim assumes a dark contact line; true
   through-holes are filled; no Illustrator/Inkscape or print proof; one product
