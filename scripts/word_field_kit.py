@@ -827,7 +827,21 @@ def audit_docx(path: str | Path, *, system: dict | None = None) -> AuditReport:
         # emits OMML; this catches a silently empty or one-sided construct.
         math_ns = "http://schemas.openxmlformats.org/officeDocument/2006/math"
         equations = list(document.iter(f"{{{math_ns}}}oMath"))
-        display_equations = list(document.iter(f"{{{math_ns}}}oMathPara"))
+        display_equations = []
+        for eq in equations:
+            parent = eq.getparent()
+            if parent is not None and parent.tag == f"{{{math_ns}}}oMathPara":
+                display_equations.append(eq)
+                continue
+            node = parent
+            while node is not None and node.tag != qn("w:p"):
+                node = node.getparent()
+            if node is None:
+                continue
+            ppr = node.find(qn("w:pPr"))
+            style = ppr.find(qn("w:pStyle")) if ppr is not None else None
+            if style is not None and (style.get(qn("w:val")) or "") == "Equation":
+                display_equations.append(eq)
         for i, eq in enumerate(equations, start=1):
             if len(eq) == 0:
                 report.errors.append(f"equation {i} has no content")

@@ -1,0 +1,125 @@
+{
+  "meta": {
+    "title": "Doanh thu và mục tiêu 2022–2026",
+    "sheet": "Data",
+    "author": "Phòng Tài chính",
+    "company": "ANSMART"
+  },
+  "data": {
+    "headers": [
+      "Năm",
+      "Doanh thu",
+      "EBITDA",
+      "Mục tiêu"
+    ],
+    "rows": [
+      [
+        "2022",
+        420,
+        64,
+        400
+      ],
+      [
+        "2023",
+        512,
+        82,
+        480
+      ],
+      [
+        "2024",
+        638,
+        104,
+        590
+      ],
+      [
+        "2025",
+        781,
+        132,
+        720
+      ],
+      [
+        "2026",
+        940,
+        166,
+        900
+      ]
+    ],
+    "widths": {
+      "A:A": 10,
+      "B:D": 14
+    },
+    "freeze": "A2"
+  },
+  "chart": {
+    "type": "combo",
+    "title": "Doanh thu và mục tiêu 2022–2026",
+    "style": 10,
+    "palette": [
+      "#1F4E79",
+      "#C55A11"
+    ],
+    "position": {
+      "cell": "F2",
+      "width_cm": 16.4,
+      "height_cm": 8.6
+    },
+    "categories_column": 0,
+    "axes": {
+      "x": {
+        "title": "Năm",
+        "label_size": 9
+      },
+      "y": {
+        "title": "Doanh thu (tỷ VND)",
+        "min": 0,
+        "max": 1000,
+        "major_unit": 200,
+        "number_format": "#,##0",
+        "gridlines": true,
+        "label_size": 9
+      }
+    },
+    "legend": {
+      "position": "bottom",
+      "size": 9
+    },
+    "series": [
+      {
+        "name": "Doanh thu",
+        "column": 1,
+        "type": "column",
+        "color": "#1F4E79",
+        "gap": 58,
+        "data_labels": {
+          "show": true,
+          "position": "outside_end",
+          "size": 8,
+          "number_format": "#,##0"
+        }
+      },
+      {
+        "name": "Mục tiêu",
+        "column": 3,
+        "type": "line",
+        "color": "#C55A11",
+        "line_width": 2.2,
+        "dash_type": "dash",
+        "marker": "circle",
+        "marker_size": 5
+      }
+    ]
+  },
+  "post": {
+    "anchor": "one_cell",
+    "plot_layout": {
+      "x": 0.11,
+      "y": 0.17,
+      "w": 0.72,
+      "h": 0.58
+    },
+    "legend": {
+      "position": "bottom",
+      "size": 9
+    }
+  }
+}

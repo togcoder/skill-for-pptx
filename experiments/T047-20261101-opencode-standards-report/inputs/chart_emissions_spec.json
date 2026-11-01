@@ -1,0 +1,120 @@
+{
+  "meta": {
+    "title": "Phát thải theo phạm vi 2022–2026",
+    "sheet": "Data",
+    "author": "Phòng ESG",
+    "company": "ANSMART"
+  },
+  "data": {
+    "headers": [
+      "Năm",
+      "Phạm vi 1",
+      "Phạm vi 2",
+      "Phạm vi 3"
+    ],
+    "rows": [
+      [
+        "2022",
+        1450,
+        4100,
+        19800
+      ],
+      [
+        "2023",
+        1380,
+        3900,
+        19400
+      ],
+      [
+        "2024",
+        1320,
+        3700,
+        19000
+      ],
+      [
+        "2025",
+        1280,
+        3550,
+        18800
+      ],
+      [
+        "2026",
+        1250,
+        3400,
+        18600
+      ]
+    ],
+    "widths": {
+      "A:A": 10,
+      "B:D": 16
+    },
+    "freeze": "A2"
+  },
+  "chart": {
+    "type": "column",
+    "subtype": "stacked",
+    "title": "Phát thải theo phạm vi 2022–2026",
+    "style": 10,
+    "palette": [
+      "#1F4E79",
+      "#2E75B6",
+      "#7F7F7F"
+    ],
+    "position": {
+      "cell": "F2",
+      "width_cm": 16.4,
+      "height_cm": 8.0
+    },
+    "categories_column": 0,
+    "axes": {
+      "x": {
+        "title": "Năm",
+        "label_size": 9
+      },
+      "y": {
+        "title": "tCO₂e",
+        "min": 0,
+        "max": 24000,
+        "major_unit": 6000,
+        "number_format": "#,##0",
+        "gridlines": true,
+        "label_size": 9
+      }
+    },
+    "legend": {
+      "position": "bottom",
+      "size": 9
+    },
+    "series": [
+      {
+        "name": "Phạm vi 1",
+        "column": 1,
+        "color": "#1F4E79",
+        "gap": 55
+      },
+      {
+        "name": "Phạm vi 2",
+        "column": 2,
+        "color": "#2E75B6"
+      },
+      {
+        "name": "Phạm vi 3",
+        "column": 3,
+        "color": "#7F7F7F"
+      }
+    ]
+  },
+  "post": {
+    "anchor": "one_cell",
+    "plot_layout": {
+      "x": 0.11,
+      "y": 0.16,
+      "w": 0.74,
+      "h": 0.6
+    },
+    "legend": {
+      "position": "bottom",
+      "size": 9
+    }
+  }
+}

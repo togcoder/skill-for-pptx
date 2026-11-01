@@ -7,6 +7,49 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T048 [xlsx] Workbook UX: hidden data, VBA input, tab colour, merges — 2026-11-01
+
+- **UX layer.** `sheet_forge` accepts a `ux` block: per-sheet `hidden` /
+  `very_hidden`, `tab_color`, `protect`, and `input_form`.
+- **Input form.** A visible Input sheet with 18 merged layout ranges, 8 data
+  validations, auto Task ID, inline status and 3 macro buttons.
+- **Hidden data.** Data/Model/Team/Gantt/Relations hidden; Pivot/Lookups
+  veryHidden; only Dashboard/Input visible. Tab colours set.
+- **Protection.** Input and Dashboard protected; input cells unlocked.
+- **VBA.** `AddRecord`/`ClearForm`/`RefreshDashboard`/`SetStatus`; button
+  macros rewritten to `[0]!DashboardTools.*` after SaveAs.
+- **Evidence.** Excel opened XLSX/XLSM; 3 buttons, 8 validations, 2 protections,
+  5 hidden + 2 veryHidden; Input and Dashboard 1-page PDFs; module present in
+  `.xlsm`. Macro execution blocked by host policy — not claimed.
+- **Limits.** Hidden ≠ secure; merged cells layout-only; no UserForm/audit
+  log/undo; form validation is type/list only.
+- **Status.** EXPERIMENTAL; review accepted by Argon (approve T048, round 2); awaiting owner merge.
+- Report: `experiments/T048-20261101-opencode-workbook-ux/REPORT.md`.
+
+## T047 [docx] Standards-controlled annual/ESG report — 2026-11-01
+
+- **Standards profile.** `domains/docx/data/report_standard.json` declares ISO
+  7144:1986 (structure), ISO 2145 (numbering), ISO 690:2021 (references), ISO
+  80000-1/8601-1 (units/dates), WCAG 2.2, GRI 1/2/3/305, with 10 controls and
+  evidence. The report prints the control matrix before the TOC.
+- **Front matter order.** `front_matter.order: "iso7144"` renders abstract →
+  preface → TOC → lists; references move after appendices and use an
+  unnumbered Heading 1 so the running header still works.
+- **Content depth.** 25 pages, 37 tables, 5 equations (2 numbered), 4 figures,
+  10 material topics, 5 stakeholder groups, Scope 1/2/3, a 37-row GRI content
+  index, data appendix, glossary and 11 references.
+- **Cross-asset.** Camera illustration authored as SVG, rasterised by
+  VectorCraft, trimmed/graded/composited by Pillow; revenue and emissions charts
+  built by Chart Forge (SheetCraft), exported by Excel, embedded with source and
+  alt text.
+- **Parser.** `word_math` now accepts escaped punctuation and the LaTeX control
+  space (`\%`, `\&`, `\ `), covered by tests.
+- **Evidence.** Word opened the exact DOCX, refreshed fields and saved; 25-page
+  PDF inspected; audit clean: 101 fields, 89 bookmarks, 37 tables, 4 figures,
+  5 equations, `vi-VN`; full suite 395 tests OK.
+- **Status.** EXPERIMENTAL; review accepted by Argon (approve T047, round 2); awaiting owner merge.
+- Report: `experiments/T047-20261101-opencode-standards-report/REPORT.md`.
+
 ## T046 [xlsx] Advanced workbook and dashboard â€” 2026-11-01
 
 - **Sheet Forge.** `scripts/sheet_forge.py` composes a 7-sheet programme

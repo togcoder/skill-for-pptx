@@ -1,0 +1,90 @@
+{
+  "id": "report-standard-2026",
+  "title": "ANSMART annual & ESG report — standards profile",
+  "version": "1.0",
+  "date": "2026-12-31",
+  "standards": [
+    {
+      "key": "ISO7144",
+      "title": "ISO 7144:1986 — Documentation: Presentation of theses and similar documents",
+      "url": "https://www.iso.org/standard/13736.html",
+      "status": "current (reviewed and confirmed 2024)",
+      "scope": "order of front matter/body/annexes/end matter; title leaf; abstract; preface; contents; lists of figures/tables; numbering; equations; bibliography"
+    },
+    {
+      "key": "ISO2145",
+      "title": "ISO 2145:1978 — Numbering of divisions and subdivisions in written documents",
+      "url": "https://www.iso.org/standard/5964.html",
+      "status": "current",
+      "scope": "Arabic numerals, dot between levels, no trailing dot, continuous numbering"
+    },
+    {
+      "key": "ISO690",
+      "title": "ISO 690:2021 — Information and documentation: Guidelines for bibliographic references and citations",
+      "url": "https://www.iso.org/standard/72642.html",
+      "status": "current",
+      "scope": "reference elements and order; citation-to-reference linking"
+    },
+    {
+      "key": "ISO80000",
+      "title": "ISO 80000-1:2022 — Quantities and units, Part 1: General",
+      "url": "https://www.iso.org/standard/76921.html",
+      "status": "current",
+      "scope": "quantity names, unit symbols, space between value and unit, thousand grouping"
+    },
+    {
+      "key": "ISO8601",
+      "title": "ISO 8601-1:2019 — Date and time representations",
+      "url": "https://www.iso.org/standard/70907.html",
+      "status": "current",
+      "scope": "YYYY-MM-DD in data tables and document control; prose may spell the date"
+    },
+    {
+      "key": "WCAG22",
+      "title": "WCAG 2.2 — Web Content Accessibility Guidelines (W3C Recommendation, 2023)",
+      "url": "https://www.w3.org/TR/WCAG22/",
+      "status": "current W3C Recommendation",
+      "scope": "structure, headings, alt text, table headers, contrast, language; PDF/UA validation is a separate step"
+    },
+    {
+      "key": "GRI1",
+      "title": "GRI 1: Foundation 2021",
+      "url": "https://www.globalreporting.org/standards/",
+      "status": "effective 2023-01-01",
+      "scope": "reporting principles, in-accordance claim, content index"
+    },
+    {
+      "key": "GRI2",
+      "title": "GRI 2: General Disclosures 2021",
+      "url": "https://www.globalreporting.org/standards/",
+      "status": "effective 2023-01-01",
+      "scope": "organisational profile, governance, strategy, stakeholders, reporting practice"
+    },
+    {
+      "key": "GRI3",
+      "title": "GRI 3: Material Topics 2021",
+      "url": "https://www.globalreporting.org/standards/",
+      "status": "effective 2023-01-01",
+      "scope": "materiality process, list of material topics, management of material topics"
+    },
+    {
+      "key": "GRI305",
+      "title": "GRI 305: Emissions 2016",
+      "url": "https://www.globalreporting.org/standards/",
+      "status": "current",
+      "scope": "Scope 1, 2, 3; intensity; reduction targets"
+    }
+  ],
+  "controls": [
+    {"id": "DOC-STRUCT", "standard": "ISO 7144 §5", "control": "Front matter → body → annexes → end matter, in that order", "evidence": "section order + TOC; audit sections/headings", "status": "met"},
+    {"id": "DOC-NUMBER", "standard": "ISO 2145", "control": "1 / 1.1 / 1.1.1, no trailing dot, continuous", "evidence": "multilevel heading list; TOC field", "status": "met"},
+    {"id": "DOC-EQUATION", "standard": "ISO 7144 §15.5", "control": "Display equations indented/extra space; number in parentheses at the right", "evidence": "Equation style + right tab + SEQ Equation", "status": "met"},
+    {"id": "DOC-FIGTABLE", "standard": "ISO 7144 §12, §15.7", "control": "Figures/tables near first reference; lists with number, caption, page; source note", "evidence": "SEQ captions, List of Figures/Tables, source lines", "status": "met"},
+    {"id": "DOC-REF", "standard": "ISO 690:2021", "control": "Reference elements in order; numbered citation links", "evidence": "reference list + [n] citations", "status": "met"},
+    {"id": "DOC-UNITS", "standard": "ISO 80000-1 / ISO 8601-1", "control": "Unit symbols, value–unit space, ISO dates in data tables", "evidence": "table headers and document-control dates", "status": "met"},
+    {"id": "DOC-ACCESS", "standard": "WCAG 2.2 AA / PDF-UA target", "control": "Heading structure, alt text, table header rows, language, contrast", "evidence": "audit alt/header/language stats; Word tagged export", "status": "partly met — PDF/UA validator not run"},
+    {"id": "GRI-CONTENT", "standard": "GRI 1 / GRI 2 / GRI 3", "control": "Material topics, boundary, governance, stakeholder engagement, content index", "evidence": "GRI content index appendix; materiality table", "status": "met (self-declared, not externally assured)"},
+    {"id": "GRI-305", "standard": "GRI 305: Emissions 2016", "control": "Scope 1/2/3, intensity, target and base year", "evidence": "emissions table, intensity equation, target callout", "status": "met"},
+    {"id": "DOC-ASSURANCE", "standard": "GRI 1 §5 / ISO 7144 preface", "control": "Assurance statement and limitations", "evidence": "document-control callout; no external assurance claimed", "status": "disclosed limitation"}
+  ]
+}

@@ -25,8 +25,10 @@ import datetime as dt
 import json
 import math
 from pathlib import Path
+import re
 import subprocess
 import sys
+import zipfile
 import tempfile
 from typing import Any
 
@@ -98,19 +100,29 @@ def _add_table_sheet(wb, name: str, spec: dict, fmt_header, fmt_text, fmt_num):
 
 def _add_formula_sheet(wb, spec: dict, fmt_header, fmt_text, fmt_num):
     ws = wb.add_worksheet("Model")
+    last = int(spec.get("data_last_row", 61))
+    rows = spec.get("data", {}).get("rows") or []
     ws.write_row(0, 0, ["Workstream", "Tasks", "Cost", "Benefit", "Avg progress"], fmt_header)
     for r, workstream in enumerate(spec["workstreams"], start=1):
+        subset = [row for row in rows if len(row) > 7 and row[1] == workstream]
+        count = len(subset)
+        cost = sum(float(row[7]) for row in subset)
+        benefit = sum(float(row[8]) for row in subset)
+        avg = (sum(float(row[6]) for row in subset) / count) if count else 0
         ws.write_string(r, 0, workstream, fmt_text)
-        ws.write_formula(r, 1, f'=COUNTIF(Data!$B$2:$B${spec["data_last_row"]},A{r + 1})', fmt_num, 0)
-        ws.write_formula(r, 2, f'=SUMIF(Data!$B$2:$B${spec["data_last_row"]},A{r + 1},Data!$H$2:$H${spec["data_last_row"]})', fmt_num, 0)
-        ws.write_formula(r, 3, f'=SUMIF(Data!$B$2:$B${spec["data_last_row"]},A{r + 1},Data!$I$2:$I${spec["data_last_row"]})', fmt_num, 0)
-        ws.write_formula(r, 4, f'=IFERROR(AVERAGEIF(Data!$B$2:$B${spec["data_last_row"]},A{r + 1},Data!$G$2:$G${spec["data_last_row"]}),0)', fmt_num, 0)
-    ws.write_formula(7, 0, "=COUNTA(Data!$A$2:$A$61)", fmt_num, 0)
-    ws.write_formula(8, 0, "=INDEX(Data!$C$2:$C$61,MATCH(MAX(Data!$H$2:$H$61),Data!$H$2:$H$61,0))", fmt_text, "")
+        ws.write_formula(r, 1, f'=COUNTIF(Data!$B$2:$B${last},A{r + 1})', fmt_num, count)
+        ws.write_formula(r, 2, f'=SUMIF(Data!$B$2:$B${last},A{r + 1},Data!$H$2:$H${last})', fmt_num, cost)
+        ws.write_formula(r, 3, f'=SUMIF(Data!$B$2:$B${last},A{r + 1},Data!$I$2:$I${last})', fmt_num, benefit)
+        ws.write_formula(r, 4, f'=IFERROR(AVERAGEIF(Data!$B$2:$B${last},A{r + 1},Data!$G$2:$G${last}),0)',
+                         fmt_num, avg)
+    ws.write_formula(7, 0, f"=COUNTA(Data!$A$2:$A${last})", fmt_num, len(rows))
+    top = max(rows, key=lambda row: float(row[7])) if rows else ["", "", ""]
+    ws.write_formula(8, 0, f"=INDEX(Data!$C$2:$C${last},MATCH(MAX(Data!$H$2:$H${last}),Data!$H$2:$H${last},0))",
+                     fmt_text, str(top[2]) if len(top) > 2 else "")
     ws.set_column("A:A", 18); ws.set_column("B:E", 14)
-    wb.define_name("TaskCount", "=COUNTA(Data!$A$2:$A$61)")
-    wb.define_name("TotalCost", "=SUM(Data!$H$2:$H$61)")
-    wb.define_name("TotalBenefit", "=SUM(Data!$I$2:$I$61)")
+    wb.define_name("TaskCount", f"=COUNTA(Data!$A$2:$A${last})")
+    wb.define_name("TotalCost", f"=SUM(Data!$H$2:$H${last})")
+    wb.define_name("TotalBenefit", f"=SUM(Data!$I$2:$I${last})")
     ws.print_area("A1:E10")
     ws.set_landscape()
     ws.fit_to_pages(1, 1)
@@ -170,7 +182,7 @@ def _gantt_chart(wb, spec: dict):
     ends = [start + dt.timedelta(days=int(task["days"]) - 1)
             for start, task in zip(starts, spec["tasks"])]
     serial = lambda value: (value - dt.date(1899, 12, 30)).days
-    chart.set_y_axis({"reverse": True, "num_font": {"size": 8}})
+    chart.set_y_axis({"num_font": {"size": 8}})
     chart.set_x_axis({
         "min": serial(min(starts)) - 7, "max": serial(max(ends)) + 7,
         "major_unit": 30, "num_format": "mmm-yy", "num_font": {"size": 8},
@@ -393,6 +405,216 @@ def _filter_summary(wb, spec: dict, fmt_header, fmt_text, fmt_num):
     return ws
 
 
+def _add_lookups_sheet(wb, spec: dict, fmt_header, fmt_text):
+    ws = wb.add_worksheet("Lookups")
+    ws.write_row(0, 0, ["Workstream", "Owner", "Status", "Priority"], fmt_header)
+    workstreams = spec.get("workstreams") or ["Dữ liệu", "Nền tảng", "Năng lực", "Trải nghiệm"]
+    owners = [m["name"] for m in spec.get("team", [])] or ["Lan", "Minh", "Hà", "Tuấn"]
+    statuses = ["On track", "At risk", "Blocked", "Done"]
+    priorities = ["High", "Medium", "Low"]
+    for i, value in enumerate(workstreams, start=1):
+        ws.write_string(i, 0, value, fmt_text)
+    for i, value in enumerate(owners, start=1):
+        ws.write_string(i, 1, value, fmt_text)
+    for i, value in enumerate(statuses, start=1):
+        ws.write_string(i, 2, value, fmt_text)
+    for i, value in enumerate(priorities, start=1):
+        ws.write_string(i, 3, value, fmt_text)
+    ws.set_column("A:D", 20)
+    return ws
+
+
+def _add_input_sheet(wb, spec: dict, fmt_header, fmt_text):
+    """A visible, protected data-entry surface over the hidden Data sheet."""
+    ws = wb.add_worksheet("Input")
+    ws.hide_gridlines(2)
+    ws.set_column("A:A", 2)
+    ws.set_column("B:B", 18)
+    ws.set_column("C:D", 17)
+    ws.set_column("E:E", 16)
+    ws.set_column("F:G", 17)
+    ws.set_column("H:H", 3)
+    ws.set_row(0, 10)
+    ws.merge_range("B2:G2", "NHẬP CÔNG VIỆC", wb.add_format({
+        "bold": True, "font_size": 20, "font_color": "#FFFFFF", "bg_color": "#1F4E79",
+        "valign": "vcenter", "align": "left"}))
+    ws.set_row(1, 34)
+    ws.merge_range("B3:G3", "Biểu mẫu ghi vào sheet Data (ẩn). Mỗi lần thêm một dòng; dashboard tự tính lại.",
+                   wb.add_format({"font_size": 9, "font_color": "#595959", "valign": "vcenter"}))
+    ws.merge_range("B5:G5", "THÔNG TIN CÔNG VIỆC", wb.add_format({
+        "bold": True, "font_size": 10, "font_color": "#1F4E79", "bg_color": "#EAF1F8",
+        "valign": "vcenter"}))
+    label = wb.add_format({"bold": True, "font_size": 9, "font_color": "#404040",
+                           "valign": "vcenter", "align": "right"})
+    inp = wb.add_format({"locked": False, "font_size": 10, "bg_color": "#FFFFFF",
+                         "border": 1, "border_color": "#BFBFBF", "valign": "vcenter"})
+    auto = wb.add_format({"font_size": 10, "bg_color": "#F2F2F2", "border": 1,
+                          "border_color": "#BFBFBF", "valign": "vcenter"})
+    rows = [
+        (6, "Workstream", "C6:D6", "Owner", "F6:G6", "C6", "=Lookups!$A$2:$A$5",
+         "F6", "=Lookups!$B$2:$B$7"),
+        (7, "Ngày bắt đầu", "C7:D7", "Số ngày", "F7:G7", None, None, None, None),
+        (8, "Chi phí (triệu)", "C8:D8", "Lợi ích (triệu)", "F8:G8", None, None, None, None),
+        (9, "Trạng thái", "C9:D9", "Ưu tiên", "F9:G9", "C9", "=Lookups!$C$2:$C$5",
+         "F9", "=Lookups!$D$2:$D$4"),
+    ]
+    for row, l1, m1, l2, m2, s1, src1, s2, src2 in rows:
+        ws.set_row(row - 1, 26)
+        ws.write(row - 1, 1, l1, label)
+        ws.merge_range(row - 1, 2, row - 1, 3, "", inp)
+        ws.write(row - 1, 4, l2, label)
+        ws.merge_range(row - 1, 5, row - 1, 6, "", inp)
+        if src1:
+            ws.data_validation(s1, {"validate": "list", "source": src1,
+                                    "error_message": "Chọn từ danh sách."})
+            ws.data_validation(s2, {"validate": "list", "source": src2,
+                                    "error_message": "Chọn từ danh sách."})
+    ws.write(9, 1, "Mã công việc", label)
+    ws.merge_range("C10:D10", "", auto)
+    ws.write_formula(9, 2, '=IF(COUNTA(Data!$A$2:$A$999)=0,"T001","T"&TEXT(COUNTA(Data!$A$2:$A$999)+1,"000"))', auto)
+    ws.data_validation("C7", {"validate": "date", "criteria": "between",
+                              "minimum": dt.date(2026, 1, 1), "maximum": dt.date(2027, 12, 31),
+                              "error_title": "Ngày không hợp lệ",
+                              "error_message": "Chọn ngày trong khoảng 2026-01-01 → 2027-12-31."})
+    ws.data_validation("F7", {"validate": "integer", "criteria": "between", "minimum": 1,
+                              "maximum": 365, "error_message": "Số ngày từ 1 đến 365."})
+    for cell in ("C8", "F8"):
+        ws.data_validation(cell, {"validate": "decimal", "criteria": ">=", "value": 0,
+                                  "error_message": "Giá trị phải >= 0."})
+
+    button = {"width": 132, "height": 30}
+    ws.insert_button("B12", {**button, "caption": "Thêm bản ghi",
+                             "macro": "DashboardTools.AddRecord"})
+    ws.insert_button("D12", {**button, "caption": "Xóa biểu mẫu",
+                             "macro": "DashboardTools.ClearForm"})
+    ws.insert_button("F12", {**button, "caption": "Làm mới",
+                             "macro": "DashboardTools.RefreshDashboard"})
+
+    ws.merge_range("B14:G14", "QUY TẮC NHẬP", wb.add_format({
+        "bold": True, "font_size": 10, "font_color": "#1F4E79", "bg_color": "#FFF2E5"}))
+    notes = [
+        "1. Chọn Workstream, Owner, Trạng thái, Ưu tiên từ danh sách — không gõ tay.",
+        "2. Ngày bắt đầu theo ISO 8601 (YYYY-MM-DD); số ngày 1–365.",
+        "3. Mã công việc tự sinh; không sửa ô xám.",
+        "4. Nhấn “Thêm bản ghi” (nút hiển thị khi mở trong Excel) để ghi vào sheet Data (ẩn).",
+        "5. Sheet này được bảo vệ; chỉ các ô trắng được nhập.",
+    ]
+    for i, note in enumerate(notes):
+        ws.merge_range(14 + i, 1, 14 + i, 6, note, wb.add_format({
+            "font_size": 9, "font_color": "#404040", "valign": "vcenter", "text_wrap": True}))
+    ws.set_row(18, 8)
+    ws.merge_range("B20:G20", "Sẵn sàng.", wb.add_format({
+        "font_size": 9, "italic": True, "font_color": "#1F4E79", "bg_color": "#EAF1F8",
+        "valign": "vcenter"}))
+    ws.protect("", {"select_locked_cells": True, "select_unlocked_cells": True})
+    ws.print_area("B2:G20")
+    ws.set_landscape()
+    ws.fit_to_pages(1, 1)
+    ws.set_margins(0.4, 0.4, 0.5, 0.5)
+    ws.activate()
+    ws.set_tab_color("#C55A11")
+    return ws
+
+
+def _apply_ux(wb, spec: dict) -> None:
+    ux = spec.get("ux") or {}
+    for name, cfg in (ux.get("sheets") or {}).items():
+        ws = wb.get_worksheet_by_name(name)
+        if ws is None:
+            continue
+        if cfg.get("very_hidden"):
+            ws.very_hidden()
+        elif cfg.get("hidden"):
+            ws.hide()
+        if cfg.get("tab_color"):
+            ws.set_tab_color(cfg["tab_color"])
+        if cfg.get("protect"):
+            ws.protect("", {"select_locked_cells": True, "select_unlocked_cells": True})
+
+
+
+
+
+def _normalize_workbook_view(path: str | Path) -> bool:
+    """Make Dashboard the first visible tab while Input stays active.
+
+    XlsxWriter's ``set_first_sheet`` counts differently from OOXML; rewriting
+    ``firstSheet`` to the Dashboard index avoids an out-of-range/blank tab bar.
+    """
+    path = Path(path)
+    if not path.is_file():
+        return False
+    with zipfile.ZipFile(path) as zin:
+        members = {name: zin.read(name) for name in zin.namelist()}
+    if "xl/workbook.xml" not in members:
+        return False
+    text = members["xl/workbook.xml"].decode("utf-8")
+    names = re.findall(r'<sheet name="([^"]+)"', text)
+    if "Dashboard" not in names:
+        return False
+    index = names.index("Dashboard")
+    new = re.sub(r'firstSheet="\d+"', f'firstSheet="{index}"', text)
+    if new == text:
+        return False
+    members["xl/workbook.xml"] = new.encode("utf-8")
+    tmp = path.with_suffix(".view.xlsx")
+    with zipfile.ZipFile(tmp, "w", zipfile.ZIP_DEFLATED) as zout:
+        for name, blob in members.items():
+            zout.writestr(name, blob)
+    tmp.replace(path)
+    return True
+
+
+def _ux_stats(path: str | Path) -> dict:
+    """Rung-1 summary of the workbook UX layer, read back from the package."""
+    path = Path(path)
+    out = {"hidden": [], "very_hidden": [], "protected": [], "tab_colors": {},
+           "merged_ranges": 0, "validations": 0, "buttons": [],
+           "active_tab": None, "first_sheet": None, "sheets": 0}
+    if not path.is_file():
+        return out
+    with zipfile.ZipFile(path) as zf:
+        wb = zf.read("xl/workbook.xml").decode("utf-8")
+        active = re.search(r'activeTab="(\d+)"', wb)
+        first = re.search(r'firstSheet="(\d+)"', wb)
+        out["active_tab"] = int(active.group(1)) if active else None
+        out["first_sheet"] = int(first.group(1)) if first else None
+        rels = zf.read("xl/_rels/workbook.xml.rels").decode("utf-8")
+        targets = dict(re.findall(r'Id="([^"]+)"[^>]*Target="([^"]+)"', rels))
+        for tag in re.findall(r'<sheet [^>]+/>', wb):
+            name = re.search(r'name="([^"]+)"', tag)
+            rid = re.search(r'r:id="([^"]+)"', tag)
+            state = re.search(r'state="([^"]+)"', tag)
+            if not name or not rid:
+                continue
+            out["sheets"] += 1
+            name, rid = name.group(1), rid.group(1)
+            if state:
+                if state.group(1) == "hidden":
+                    out["hidden"].append(name)
+                elif state.group(1) == "veryHidden":
+                    out["very_hidden"].append(name)
+            target = targets.get(rid)
+            if not target:
+                continue
+            part = "xl/" + target.lstrip("/").replace("xl/", "", 1)
+            if part not in zf.namelist():
+                continue
+            xml = zf.read(part).decode("utf-8")
+            out["merged_ranges"] += xml.count("<mergeCell ")
+            out["validations"] += xml.count("<dataValidation ")
+            if "<sheetProtection" in xml:
+                out["protected"].append(name)
+            color = re.search(r'<tabColor rgb="([0-9A-Fa-f]+)"', xml)
+            if color:
+                out["tab_colors"][name] = color.group(1)
+        for name in zf.namelist():
+            if name.startswith("xl/drawings/") and name.endswith(".vml"):
+                vml = zf.read(name).decode("utf-8", errors="replace")
+                out["buttons"].extend(re.findall(r"<x:FmlaMacro>([^<]+)</x:FmlaMacro>", vml))
+    return out
+
+
 def build_dashboard(spec_path: str | Path, out_path: str | Path, *, pivot: bool = True,
                     vba: bool = False) -> dict:
     spec = json.loads(Path(spec_path).read_text(encoding="utf-8"))
@@ -424,6 +646,14 @@ def build_dashboard(spec_path: str | Path, out_path: str | Path, *, pivot: bool 
                    fmt_header, fmt_text)
     if not pivot or not gridcraft:
         _filter_summary(wb, spec, fmt_header, fmt_text, fmt_num)
+    if (spec.get("ux") or {}).get("input_form"):
+        _add_lookups_sheet(wb, spec, fmt_header, fmt_text)
+        input_ws = _add_input_sheet(wb, spec, fmt_header, fmt_text)
+        dashboard = wb.get_worksheet_by_name("Dashboard")
+        if dashboard is not None:
+            dashboard.set_first_sheet()
+        input_ws.activate()
+    _apply_ux(wb, spec)
     wb.close()
 
     pivot_ok = _gridcraft_pivot(out_path, spec, gridcraft) if (pivot and gridcraft) else False
@@ -457,18 +687,24 @@ def build_dashboard(spec_path: str | Path, out_path: str | Path, *, pivot: bool 
             }}],
         }, out_path)
 
+    _normalize_workbook_view(out_path)
+
     vba_info = None
     if vba:
         try:
-            from .vba_forge import write_dashboard_module, inject_vba
+            from .vba_forge import write_dashboard_module, inject_vba, normalize_button_macros
         except ImportError:
-            from vba_forge import write_dashboard_module, inject_vba
+            from vba_forge import write_dashboard_module, inject_vba, normalize_button_macros
         bas = out_path.with_suffix(".bas")
         write_dashboard_module(bas)
-        vba_info = {"bas": str(bas), "injected": inject_vba(out_path, bas)}
+        injected = inject_vba(out_path, bas)
+        if injected:
+            normalize_button_macros(injected)
+        vba_info = {"bas": str(bas), "injected": injected}
     audit = audit_workbook(out_path)
     return {"ok": audit["ok"], "output": str(out_path), "bytes": out_path.stat().st_size,
-            "pivot": pivot_ok, "vba": vba_info, "audit": audit}
+            "pivot": pivot_ok, "vba": vba_info, "audit": audit,
+            "ux": _ux_stats(out_path) if (spec.get("ux") or {}) else None}
 
 
 def _render_excel(xlsx: Path, out_dir: Path) -> list[str]:

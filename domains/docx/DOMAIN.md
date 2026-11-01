@@ -61,8 +61,9 @@ review. The modules carry `Status: EXPERIMENTAL` in their headers.
 | Item | Path | Status |
 |---|---|---|
 | Design/standards data | `domains/docx/data/document_system.json` | T039; provenance recorded; unreviewed |
+| Report standards profile | `domains/docx/data/report_standard.json` | T047; ISO/GRI sources, controls and status; unreviewed |
 | Spec schema | `domains/docx/schemas/document_spec.schema.json` | T039/T045; unreviewed |
-| Skill | `skills/document-craft/` | T039/T045; experimental |
+| Skill | `skills/document-craft/` | T039/T045/T047; experimental |
 | Example specs | `examples/docx/report_spec.json`, `annual_report_spec.json` | T039/T045; synthetic, CC0-style assets |
 
 The data file contains page/type/figure/table/field/accessibility tokens,
@@ -71,21 +72,23 @@ do not hard-code a new one in a generator.
 
 ## Evidence ladder
 
-| Rung | Tool | T039 evidence |
+| Rung | Tool | T039/T045/T047 evidence |
 |---|---|---|
-| 1 | schema / structural audit | T039: 29 fields, 22 bookmarks, 3 sections, 3 tables, 2 figures; T045: 20 fields, 2 equations (1 `SEQ Equation`), 5 merged cells, 5 images in cells, table-grid/vMerge/image-width/alt checks, language `vi-VN`; no errors/warnings |
-| 2 | layout engine (WordCraft) | T045 render: side-by-side, equations, rich table and callouts visible; WordCraft keeps the same font limitation as T039 |
-| 4 | Word COM open / field update | T045: Word opened the exact DOCX, refreshed fields and saved; the resulting document still audits clean |
-| 5 | Word PDF export / page inspection | T045: 11-page PDF; cover, KPI/callout, side-by-side/equations, rich table and appendix inspected as images |
-| 2 | layout engine (WordCraft) | WordCraft render; TOC updated, but page numbers were physical and a `TOC \\c` caption list repeated the first number |
-| 3 | independent reader | Not run (LibreOffice Writer not installed on this host) |
-| 4–5 | Word COM open / PDF export | Word opened the exact DOCX, refreshed fields, exported a 12-page PDF; pages inspected |
+| 1 | schema / structural audit | T039: 29 fields, 22 bookmarks; T045: 20 fields, 2 equations, 5 merged cells; T047: 135 fields, 91 bookmarks, 37 headings (max H3), 38 tables, 4 figures, 5 equations (5 display, 2 numbered), 11 unique references cited, `vi-VN`, 1,174 paragraphs; no errors/warnings |
+| 2 | layout engine (WordCraft) | T039/T045 WordCraft render; T047 uses Word COM for the final layout |
+| 3 | independent reader (LibreOffice Writer) | Not run on this host |
+| 4 | Word COM open / field update | T045 and T047: Word opened the exact DOCX, refreshed fields, saved; T047 `updated_by: word` |
+| 5 | Word PDF export / page inspection | T045: 11 pages; T047: 25 pages; cover, standards control, financial, materiality, emissions and references inspected |
 | 6 | human edits/prints | Not run |
 
 The T039 report is `experiments/T039-20261101-opencode-office-canon/REPORT.md`.
 
 ## State (2026-11-01)
 
+- **T047 [docx] standards report**: a 25-page annual/ESG report with a declared
+  ISO/GRI standards profile, a control matrix, ISO 7144 front-matter order,
+  ISO 2145 numbering, 5 OMML equations, 38 tables, GRI index, VectorCraft
+  product illustration and SheetCraft charts; **review requested**.
 - **T045 [docx] advanced report**: native OMML equations, side-by-side
   figure/text, merged-header tables, image cells, callouts, cover hero and a
   synthetic annual-report fixture; **review requested**.

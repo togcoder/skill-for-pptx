@@ -160,6 +160,10 @@ class _Parser:
         ch = self.text[self.i]
         if ch == "\\":
             cmd = self.command()
+            if len(cmd) == 1:
+                # Escaped punctuation and the LaTeX control space (\%, \&,
+                # \_, \{, \}, backslash-space) are literal runs.
+                return _run(cmd)
             if cmd in GREEK:
                 return _run(GREEK[cmd])
             if cmd in SYMBOLS:
