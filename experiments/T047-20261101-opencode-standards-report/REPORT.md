@@ -108,7 +108,7 @@ obtained.
 | The report is a real Word document, not a PDF mock | 4 | Word opened the exact DOCX, refreshed fields and saved; `updated_by: word`; 25-page PDF exported |
 | Front matter follows the declared ISO 7144 order | 1 | New `front_matter.order = iso7144`; test asserts abstract < preface < TOC; references after appendix |
 | ISO 2145 numbering is live | 1 + 4 | multilevel heading list; TOC 3 levels; 37 headings, max level 3 |
-| Equations are native OMML with ISO 7144 numbering | 1 + 4 | 5 `m:oMath`; 2 `SEQ Equation`; Word page 5/10/12 show right-aligned numbers |
+| Equations are native OMML with ISO 7144 numbering | 1 + 4 | 5 `m:oMath` in Equation style (5 display); 2 `SEQ Equation`; Word pages 11 and 17 show the numbered equations |
 | Figures/tables are captioned and listed | 1 | 4 figures (cover + 3 captioned), 23 captioned tables, List of Figures/Tables via REF/PAGEREF (63 PAGEREF fields) |
 | References are ISO 690-shaped and linked | 1 | 11 references, labels [1]–[11], citation bookmarks; references after appendices |
 | GRI content is substantive | 1 | 10 material topics, 5 stakeholder groups, 37-row GRI index, Scope 1/2/3, intensity, target |
@@ -173,7 +173,7 @@ Preview: `preview/page-01.png` (cover), `page-03.png` (standards control),
 
 ## Review response
 
-Argon review 2026-11-01 (chat `0:cf4bb6173adaaa34`), verdict **revise**.
+Argon review 2026-11-01 (chat `0:cf4bb6173adaaa34`), verdict **revise** in round 1 and **approve T047** in round 2. Full record: `research/reviews/T047-argon-20261101.md`.
 
 | Finding | Response (fixed / disputed / deferred → task) |
 |---|---|

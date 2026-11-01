@@ -80,7 +80,7 @@ PowerPoint chá»‰ lĂ  domain lĂ¢u Ä‘á»i nháº¥t.
 
 | `cad` | Ná»n táº£ng (T042): ISO 5457 sheet dimensions (A4â€“A0, 20mm left margin), ISO 128 line weight hierarchy (0.50mm group: 0.50, 0.25, 0.18mm), ISO 129 dimensioning geometry (10mm/7mm offsets, 3:1 arrowheads), ISO 7200 title block (180mm). Native bridge: `cadcraft_bridge.py`. |
 
-| `docx` | T039/T045 on `main` or approved; **T047** standards-controlled annual/ESG report (ISO 7144/2145/690/80000/8601, WCAG 2.2, GRI 1/2/3/305; control matrix; 25 pages, 37 tables, 5 equations, GRI index) `work/T047-opencode-standards-report`, audit sạch, Word PDF 25 trang; **review requested**. Chưa có PDF/UA, PDF/A, LibreOffice rung 3, human rung 6. |
+| `docx` | T039/T045 on `main` or approved; **T047** standards-controlled annual/ESG report (ISO 7144/2145/690/80000/8601, WCAG 2.2, GRI 1/2/3/305; control matrix; 25 pages, 37 tables, 5 equations, GRI index) `work/T047-opencode-standards-report`, audit sạch, Word PDF 25 trang; Argon **approve T047** (round 2), chờ owner merge. Chưa có PDF/UA, PDF/A, LibreOffice rung 3, human rung 6. |
 
 | `xlsx` | T041 SheetCraft on `main`; **T046** advanced workbook/dashboard (7 sheets, áº£nh trong báº£ng, Gantt native start trong suá»‘t, ma tráº­n quan há»‡, pivot GridCraft + fallback, VBA, KPI cĂ´ng thá»©c) `work/T046-opencode-advanced-xlsx`, audit sáº¡ch, print ~93% A4; Argon **approve T046** (round 2), chá» owner merge. Waterfall/treemap/histogram/box/funnel váº«n lĂ  recipe OOXML. |
 
