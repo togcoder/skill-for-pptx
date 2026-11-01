@@ -60,9 +60,11 @@ Order: cover → TOC → list of figures → list of tables → abstract → bod
 - “Mục lục/Contents” uses the `TOC Heading` style, based on Normal with outline
   level 9, so it is **not** included in its own TOC.
 - The TOC field: `TOC \o "1-3" \h \z \u`.
-- The list of figures/tables: either `TOC \h \z \c "Figure"` or a field list
-  (`REF` + `PAGEREF` per entry). The T039 generator uses the field list because
-  Word's caption cache repeated the first `SEQ` number in testing.
+- The list of figures/tables: standard `TOC \h \z \c "Figure"` / `"Table"`,
+  refreshed through Word's `TablesOfFigures` collection. The T039 generator
+  uses this by default; an optional `ref_pageref` mode exists for renderers
+  that cannot update a table of figures, but it has static caption text and
+  does not auto-add new entries.
 - Front matter pagination: `pgNumType fmt="lowerRoman" start="1"`.
 - Body: section break, `pgNumType fmt="decimal" start="1"`.
 - Refresh the fields before delivery. If the TOC still shows a placeholder,
@@ -115,8 +117,9 @@ Header:  [Document ID]                         [Chapter title]
 Footer:  [Classification]                      Trang 3 / 12
 ```
 
-- `STYLEREF "Heading 1" \* MERGEFORMAT` for the chapter; `PAGE` / `NUMPAGES`
-  for the page.
+- `STYLEREF "Heading 1" \* MERGEFORMAT` for the chapter; `PAGE` /
+  `SECTIONPAGES` for the page (use `NUMPAGES` only when the body is not
+  restarted).
 - Cover: no header/footer. Front matter: document ID only, roman page.
 - Body: chapter + page. Even pages can mirror the header for duplex.
 - Header rule 0.5 pt, colour `BFBFBF`; 8–9 pt text.

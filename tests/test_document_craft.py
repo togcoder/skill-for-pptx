@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+import re
 import tempfile
 import unittest
 import zipfile
@@ -58,7 +59,7 @@ def _spec(tmp: Path) -> Path:
                 "heading": "Giới thiệu",
                 "level": 1,
                 "blocks": [
-                    {"type": "paragraph", "text": "Tham chiếu {{ref:fig-1}} và {{num:tbl-1}}."},
+                    {"type": "paragraph", "text": "Tham chiếu {{ref:fig-1}}, {{num:tbl-1}} và trang {{page:fig-1}}."},
                     {"type": "figure", "path": str(fig), "alt": "Hình kiểm thử", "caption": "Hình kiểm thử.", "width_mm": 155},
                     {"type": "table", "caption": "Bảng kiểm thử", "columns": [
                         {"header": "Hạng mục", "width_mm": 80},
@@ -107,6 +108,8 @@ class DocumentForgeTests(unittest.TestCase):
             self.assertIn("REF", commands)
             self.assertIn("PAGEREF", commands)
             self.assertIn("PAGE", commands)
+            self.assertIn("SECTIONPAGES", commands)
+            self.assertGreaterEqual(sum(1 for f in fields if f.command == "TOC"), 3)
             self.assertTrue(all(f.complete for f in fields))
             audit = audit_docx(out)
             self.assertTrue(audit.ok, audit.errors)
@@ -115,11 +118,15 @@ class DocumentForgeTests(unittest.TestCase):
             self.assertEqual(audit.stats["sections"], 3)
             with zipfile.ZipFile(out) as zf:
                 xml = zf.read("word/document.xml").decode("utf-8")
+                styles = zf.read("word/styles.xml").decode("utf-8")
             self.assertIn('w:pgNumType w:fmt="lowerRoman"', xml)
             self.assertIn('w:pgNumType w:fmt="decimal"', xml)
             self.assertIn("w:tblHeader", xml)
             self.assertIn("Bảng A.", xml)
             self.assertIn('descr="Hình kiểm thử"', xml)
+            self.assertIn('TOC \\h \\z \\c "Figure"', xml)
+            self.assertIn('TOC \\h \\z \\c "Table"', xml)
+            self.assertIn('w:lang w:val="vi-VN"', styles)
 
     def test_broken_cross_reference_is_an_error(self):
         with tempfile.TemporaryDirectory() as td:
@@ -139,6 +146,39 @@ class DocumentForgeTests(unittest.TestCase):
             audit = audit_docx(broken)
             self.assertFalse(audit.ok)
             self.assertTrue(any("target missing" in e for e in audit.errors), audit.errors)
+
+    def test_bookmark_end_balance_is_checked(self):
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            spec = _spec(tmp)
+            out = tmp / "report.docx"
+            build_document(spec, out, update="none")
+            with zipfile.ZipFile(out) as zin:
+                members = {n: zin.read(n) for n in zin.namelist()}
+            xml = members["word/document.xml"].decode("utf-8")
+            xml = re.sub(r'<w:bookmarkEnd w:id="\d+"/>', "", xml, count=1)
+            members["word/document.xml"] = xml.encode("utf-8")
+            broken = tmp / "broken.docx"
+            with zipfile.ZipFile(broken, "w", zipfile.ZIP_DEFLATED) as zout:
+                for name, blob in members.items():
+                    zout.writestr(name, blob)
+            audit = audit_docx(broken)
+            self.assertFalse(audit.ok)
+            self.assertTrue(any("no bookmarkEnd" in e for e in audit.errors), audit.errors)
+
+    def test_english_language_overrides_vietnamese_default(self):
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            spec_data = json.loads(_spec(tmp).read_text(encoding="utf-8"))
+            spec_data["meta"]["language"] = "en-US"
+            spec_path = tmp / "en.json"
+            spec_path.write_text(json.dumps(spec_data, ensure_ascii=False), encoding="utf-8")
+            out = tmp / "en.docx"
+            build_document(spec_path, out, update="none")
+            with zipfile.ZipFile(out) as zf:
+                styles = zf.read("word/styles.xml").decode("utf-8")
+            self.assertIn('w:lang w:val="en-US"', styles)
+            self.assertNotIn('w:lang w:val="vi-VN"', styles)
 
     def test_table_grid_fits_text_column(self):
         with tempfile.TemporaryDirectory() as td:

@@ -124,8 +124,8 @@ DEFAULTS: dict[str, Any] = {
     "cover": {"enabled": True, "logo": "", "logo_alt": ""},
     "front_matter": {
         "toc": {"enabled": True, "levels": 3, "title": ""},
-        "list_of_figures": {"enabled": False, "title": ""},
-        "list_of_tables": {"enabled": False, "title": ""},
+        "list_of_figures": {"enabled": False, "title": "", "mode": "toc_switch"},
+        "list_of_tables": {"enabled": False, "title": "", "mode": "toc_switch"},
         "abstract": {"enabled": False, "title": "", "text": "", "keywords": []},
     },
     "headers_footers": {
@@ -329,6 +329,21 @@ def _setup_styles(doc, spec: dict) -> None:
         quote = doc.styles["Quote"]
         _set_style_font(quote, body, typo["body_pt"], color=typo["color_muted"], east_asia=ea)
 
+    # Language is a document-level accessibility signal, not a Vietnamese
+    # constant.  Override every style so an en-US spec does not inherit vi-VN.
+    language = str(spec["meta"].get("language") or "vi-VN")
+    for style in doc.styles:
+        try:
+            rpr = style.element.get_or_add_rPr()
+        except Exception:
+            continue
+        lang = rpr.find(qn("w:lang"))
+        if lang is None:
+            lang = OxmlElement("w:lang")
+            rpr.append(lang)
+        lang.set(qn("w:val"), language)
+        lang.set(qn("w:eastAsia"), language)
+
 
 def _setup_page(section, spec: dict) -> None:
     page = spec["page"]
@@ -432,7 +447,11 @@ def _write_footer(section, spec: dict, width_mm: float, *, even: bool = False,
         add_page_number(p, "PAGE", result="i" if roman else "1")
         if not roman:
             p.add_run(" / ")
-            add_page_number(p, "NUMPAGES", result="1")
+            # The body restarts at 1 after the cover/front matter, so NUMPAGES
+            # (total physical pages) is wrong here; SECTIONPAGES counts the body
+            # section.  If a document has several body sections, the footer
+            # needs a PAGEREF to the end bookmark instead.
+            add_page_number(p, "SECTIONPAGES", result="1")
     for run in p.runs:
         run.font.size = Pt(spec["typography"]["header_pt"])
         run.font.color.rgb = RGBColor.from_string(spec["typography"]["color_muted"])
@@ -566,12 +585,13 @@ def _strip_number(text: str) -> str:
 def _number_blocks(spec: dict) -> dict:
     """Assign stable figure/table numbers before the front matter is written.
 
-    The list of figures/tables is built from REF/PAGEREF fields (not a
-    ``TOC \\c`` caption cache), so it needs the bookmarks before the body is
-    built.  Numbering order is the reading order: body sections first, then
-    appendices.
+    The list of figures/tables needs stable numbers and bookmarks before the
+    front matter is written; the default list is a ``TOC \\c`` field, with a
+    REF/PAGEREF fallback.  Numbering order is the reading order: body sections
+    first, then appendices.
     """
     counters = {"figure": 0, "table": 0}
+    appendix_tables: dict[str, int] = {}
     figures: list[dict] = []
     tables: list[dict] = []
 
@@ -594,10 +614,14 @@ def _number_blocks(spec: dict) -> dict:
                 counters["table"] += 1
                 block["_number"] = counters["table"]
                 block["_appendix_letter"] = letter
+                if letter:
+                    appendix_tables[letter] = appendix_tables.get(letter, 0) + 1
+                    block["_appendix_number"] = appendix_tables[letter]
                 tables.append({
                     "number": counters["table"],
                     "bookmark": f"tbl-{counters['table']}",
                     "appendix_letter": letter,
+                    "appendix_number": block.get("_appendix_number"),
                     "caption": block.get("caption", ""),
                 })
             elif kind == "table":
@@ -747,12 +771,14 @@ def _set_tbl_layout(table, total_twips: int, *, first_row: bool = True) -> None:
         )
     tblw.set(qn("w:type"), "dxa")
     tblw.set(qn("w:w"), str(total_twips))
-    layout = OxmlElement("w:tblLayout")
+    layout = tblpr.find(qn("w:tblLayout"))
+    if layout is None:
+        layout = OxmlElement("w:tblLayout")
+        tblpr.insert_element_before(
+            layout, "w:tblCellMar", "w:tblLook", "w:tblCaption",
+            "w:tblDescription",
+        )
     layout.set(qn("w:type"), "fixed")
-    tblpr.insert_element_before(
-        layout, "w:tblCellMar", "w:tblLook", "w:tblCaption",
-        "w:tblDescription",
-    )
     cellmar = OxmlElement("w:tblCellMar")
     for side, val in [("top", 40), ("left", 85), ("bottom", 40), ("right", 85)]:
         node = OxmlElement(f"w:{side}")
@@ -762,15 +788,21 @@ def _set_tbl_layout(table, total_twips: int, *, first_row: bool = True) -> None:
     tblpr.insert_element_before(
         cellmar, "w:tblLook", "w:tblCaption", "w:tblDescription",
     )
-    look = OxmlElement("w:tblLook")
+    look = tblpr.find(qn("w:tblLook"))
+    if look is None:
+        look = OxmlElement("w:tblLook")
+        tblpr.insert_element_before(look, "w:tblCaption", "w:tblDescription")
+    # python-docx already writes a tblLook; overwrite it instead of appending a
+    # second one (duplicate tblLook/tblLayout can make Word offer a repair).
+    for attr in ("w:val", "w:firstRow", "w:lastRow", "w:firstColumn", "w:lastColumn", "w:noHBand", "w:noVBand"):
+        look.attrib.pop(qn(attr), None)
     look.set(qn("w:val"), "04A0")
     look.set(qn("w:firstRow"), "1" if first_row else "0")
     look.set(qn("w:lastRow"), "0")
     look.set(qn("w:firstColumn"), "0")
     look.set(qn("w:lastColumn"), "0")
-    look.set(qn("w:noHBand"), "0")
+    look.set(qn("w:noHBand"), "1")
     look.set(qn("w:noVBand"), "1")
-    tblpr.insert_element_before(look, "w:tblCaption", "w:tblDescription")
 
 
 def _add_table(doc, table_spec: dict, spec: dict, section, owner, counters: dict, *, appendix: bool = False) -> None:
@@ -828,7 +860,8 @@ def _add_table(doc, table_spec: dict, spec: dict, section, owner, counters: dict
     if caption:
         prefix = f"{table_spec.get('_appendix_letter')}." if table_spec.get("_appendix_letter") else ""
         capnode = OxmlElement("w:tblCaption")
-        capnode.set(qn("w:val"), f"{labels['table']} {prefix}{n} — {caption}")
+        visible_number = table_spec.get("_appendix_number") or n
+        capnode.set(qn("w:val"), f"{labels['table']} {prefix}{visible_number} — {caption}")
         tblpr.append(capnode)
     desc = OxmlElement("w:tblDescription")
     desc.set(qn("w:val"), table_spec.get("alt", caption or f"{labels['table']} {n or ''}".strip()))
@@ -1028,10 +1061,17 @@ def _add_front_matter(doc, spec: dict, section, owner, manifest: dict) -> None:
         cfg = fm.get(key, {})
         if not cfg.get("enabled"):
             continue
-        if entries:
+        if not entries:
+            continue
+        if cfg.get("mode", "toc_switch") == "ref_pageref":
             _add_field_list(doc, entries, spec, section, kind=kind,
                             title=cfg.get("title") or labels[label_key])
-            doc.add_page_break()
+        else:
+            p = doc.add_paragraph(style="TOC Heading")
+            p.add_run(cfg.get("title") or labels[label_key])
+            tp = doc.add_paragraph()
+            add_toc_of(tp, "Figure" if kind == "figure" else "Table")
+        doc.add_page_break()
     abstract = fm.get("abstract", {})
     if abstract.get("enabled") or abstract.get("text"):
         p = doc.add_paragraph(style="Front Matter Heading")
@@ -1267,6 +1307,11 @@ def _update_with_word(docx_path: Path) -> str | None:
             doc.Fields.Update()
             for i in range(1, doc.TablesOfContents.Count + 1):
                 doc.TablesOfContents(i).Update()
+            # A table of figures/tables is a TOC field with \c, but Word exposes
+            # it in TablesOfFigures, not TablesOfContents.  Without this loop a
+            # TOC \c list can keep the first caption number.
+            for i in range(1, doc.TablesOfFigures.Count + 1):
+                doc.TablesOfFigures(i).Update()
         doc.Save()
         return "word"
     except Exception:
@@ -1294,7 +1339,8 @@ def _update_with_word_powershell(docx_path: Path) -> str | None:
         f"$d=$w.Documents.Open('{str(docx_path).replace(chr(39), chr(39)+chr(39))}',"
         "$false,$false,$false);"
         "for($i=0;$i -lt 3;$i++){$d.Repaginate();$d.Fields.Update()|Out-Null;"
-        "foreach($t in $d.TablesOfContents){$t.Update()|Out-Null}};"
+        "foreach($t in $d.TablesOfContents){$t.Update()|Out-Null};"
+        "foreach($t in $d.TablesOfFigures){$t.Update()|Out-Null}};"
         "$d.Save();$d.Close(0);$w.Quit()"
     )
     try:

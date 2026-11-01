@@ -48,8 +48,9 @@ python scripts/document_forge.py build `
   --update word `
   --render experiments/T039-20261101-opencode-office-canon/preview
 
-# Native Word PDF for the evidence images (pywin32)
-# Word.Documents.Open(report.docx).ExportAsFixedFormat(report.pdf, 17)
+# `--render` writes preview/document.pdf through Word when available and
+# falls back to WordCraft. The final PDF was re-exported from the exact DOCX
+# to keep the evidence file and the hashes aligned.
 
 # Audit
 python scripts/document_audit.py `
@@ -69,22 +70,22 @@ media.
 
 | Claim | Rung | Evidence |
 |---|---|---|
-| DOCX package opens and the field/bookmark/table/image invariants hold | 1 | `artifacts/report-audit.json`: `ok: true`, no errors/warnings; 32 fields, 22 bookmarks, 7 headings, 3 tables, 2 figures, 3 sections |
-| TOC, list of figures/tables, captions and cross-references are real fields | 1 | field commands: `TOC` 1, `REF` 9, `PAGEREF` 13, `SEQ` 5, `PAGE` 2, `STYLEREF` 1, `NUMPAGES` 1; every `REF`/`PAGEREF` target exists |
-| Word refreshes the exact file and paginates it | 4–5 | Word COM: 12 pages; TOC entries 1–7; list of figures 1–2; list of tables 1, 2, A.1; `artifacts/report.pdf` (SHA-256 below) |
+| DOCX package opens and the field/bookmark/table/image invariants hold | 1 | `artifacts/report-audit.json`: `ok: true`, no errors/warnings; 29 fields, 22 bookmarks, 7 headings, 3 tables, 2 figures, 3 sections |
+| TOC, list of figures/tables, captions and cross-references are real fields | 1 | field commands: `TOC` 3 (main + Figure + Table), `REF` 4, `PAGEREF` 13 (nested in the TOC results), `SEQ` 5, `PAGE` 2, `STYLEREF` 1, `SECTIONPAGES` 1; every `REF`/`PAGEREF` target exists |
+| Word refreshes the exact file and paginates it | 4–5 | Word COM (`Fields`, `TablesOfContents`, `TablesOfFigures`): 12 pages; TOC entries 1–7; list of figures 1–2; list of tables 1, 2, A.1; body footer “Trang 2 / 7 … 7 / 7”; `artifacts/report.pdf` (SHA-256 below) |
 | Rendered pages look correct | 5 | `preview/report-cover.png`, `report-toc.png`, `report-list-tables.png`, `report-figure-table.png`, `report-appendix.png`; inspected |
 | Tables fit the text column and repeat the header | 1 | grid/twips audit; 155 mm column; `w:tblHeader` on first row; no width warning |
 | Images are inline, centred, alt-texted, high enough DPI | 1 | `wp:inline`, `wp:docPr@descr`, 155 mm width, effective DPI >150 |
 | Appendix numbering is A / A.1 | 1+5 | `Phụ lục A`, caption `Bảng A.1`; Word PDF page 7 |
 | Build works without WordCraft | 1 | `--update none` tests build and audit; WordCraft is optional |
-| Tests cover the failure modes | 1 | `tests/test_document_craft.py`: build/fields/bookmarks, broken target, table width, optional WordCraft refresh; 4 tests |
+| Tests cover the failure modes | 1 | `tests/test_document_craft.py`: build/fields/bookmarks, broken target, broken bookmarkEnd, table width, en-US language, optional WordCraft refresh; 6 tests |
 
 **Hashes:** see `artifacts/SHA256SUMS.txt`.
 
 | File | SHA-256 |
 |---|---|
-| `report.docx` | `1f790b6e4add893f10de1770c83fe331cf37d749175bdc91230dfda3bcae1919` |
-| `report.pdf` | `17cdf397aa43dae914f57586127dfe1af01534914a059eb826274bae9a665155` |
+| `report.docx` | `e076ce481c7a176e4c0594e4584546af4a6c2ccb15a11e8bb9742d9d3f4095dc` |
+| `report.pdf` | `4c46360a7cc7600298217addd2d1ea499463fd4d17ea450e0e575bd2b73983c5` |
 
 ## Negative results and limitations
 
@@ -92,10 +93,11 @@ media.
    same DOCX, WordCraft updated the TOC to 4, 5, … while Word showed 1, 2, ….
    The final file uses Word for field refresh. WordCraft is a fallback with a
    documented limitation, not equivalent evidence.
-2. **`TOC \c "Figure"` repeated the first SEQ number.** Word's caption list
-   showed “Hình 1” for both figures after three update passes. Replaced the list
-   with `REF` + `PAGEREF` per entry; numbers and pages are now correct and still
-   live fields. `TOC \c` remains documented as an alternative.
+2. **`TOC \c "Figure"` repeated the first SEQ number.** Root cause: the refresh
+   loop updated `TablesOfContents` but not `TablesOfFigures`; Word's TOF field
+   kept the first caption number. Fixed by updating `TablesOfFigures` in the
+   Word path and verifying Hình 1/2 and Bảng 1/2/A.1. The `ref_pageref` mode is
+   kept as a documented fallback, not the default.
 3. **WordCraft `convert --update-fields` dropped `wp:docPr@descr`.** Alt text
    survived in `@title`, not `@descr`. Added a repair step for the WordCraft
    path; Word preserves `@descr` natively.
@@ -119,6 +121,28 @@ media.
 10. **Standards status is time-bound.** ISO 5966 is withdrawn; ISO 7144/2145/7200/
     690 were checked 2026-11-01. The full texts are paywalled; the report cites
     the catalogue/abstract pages.
+11. **List of figures/tables needs `TablesOfFigures.Update`.** The document now
+    uses standard `TOC \c "Figure"` / `TOC \c "Table"` fields. Word updates them
+    through `TablesOfFigures`; the WordCraft fallback may leave them dirty. A
+    `ref_pageref` mode remains for renderers that cannot update a TOF, but that
+    mode has static caption text and does not auto-add new entries.
+12. **Appendix captions use a static `A.` prefix plus `SEQ … \r 1`.** This makes
+    `Bảng A.1` deterministic, but a figure moved from an appendix to the body
+    would need the prefix removed and the sequence re-evaluated. Moving to
+    `SEQ Figure_A` per appendix would need a separate list-of-figures pass.
+13. **`w:tblCaption`/`w:tblDescription` are metadata, not fields.** The generator
+    writes the caption text (including A.1) for accessibility, but it is not
+    refreshed by Word if the visible caption changes. The visible caption is the
+    `SEQ` field.
+14. **Tables do not support merged cells or per-cell formatting.** `gridSpan`,
+    `vMerge`, per-cell shading and rich cell runs are not exposed by the spec;
+    use Word/WordCraft for those, then re-audit.
+15. **`SECTIONPAGES` assumes one continuously numbered body section.** If a
+    document splits the body into several sections, the footer needs a
+    `PAGEREF` to an end bookmark instead.
+16. **Width checks are section-local but element mapping is top-level.** A table
+    or inline drawing is mapped to the section of its top-level body child; a
+    floating shape inside a nested table is not measured.
 
 ## Next
 
@@ -134,6 +158,15 @@ media.
 
 ## Review response
 
+Review: `research/reviews/T039-argon-20261101.md` (Argon, 2026-11-01; code/report
+review only, no repo/test run). Verdict `revise`; responses below are fixes in
+this branch, not a new review round.
+
 | Finding | Response (fixed / disputed / deferred → task) |
 |---|---|
-| — | Pending review. No findings yet. |
+| R1 list/captions partly frozen | **Fixed:** default switched to standard `TOC \c "Figure"/"Table"`; `_update_with_word` now updates `TablesOfFigures`; verified Word lists 1–2 and 1/2/A.1. The `ref_pageref` mode is retained only as a fallback and its static-caption limitation is documented. `w:tblCaption` remains static metadata (limitation 13). |
+| R2 bookmarkEnd not checked; one width for all sections | **Fixed:** `audit_docx` now errors on missing/duplicate `bookmarkStart`/`bookmarkEnd` IDs; `_body_section_widths` maps each table/drawing to its section width. Tests added: broken bookmarkEnd and per-section geometry. |
+| R3 hard-coded vi-VN; NUMPAGES vs restarted body | **Fixed:** language comes from `meta.language`; all styles are updated; en-US test added. Body footer uses `SECTIONPAGES`; Word PDF now shows “Trang 2 / 7 … 7 / 7”. Multi-section body limitation recorded. |
+| R7 rung 4–5 was a manual COM run | **Fixed/clarified:** `--render` now runs Word → PDF → PNG (WordCraft only as fallback); `--update word` refreshes fields. The evidence PDF was re-exported from the exact DOCX. A frozen Word build/harness with a recorded version is still in Next. |
+| R8 overlap with wordcraft_bridge | **Disputed for docx:** `document_forge` already imports the bridge; no hard-coded CLI path. The bridge is an adapter, the forge is the OOXML builder; boundary recorded in `DOMAIN.md`. |
+| R9 limitations incomplete | **Fixed:** limitations 11–16 added (TOF update, appendix prefix/reset, table metadata, merged cells, SECTIONPAGES, nested floating shapes). |

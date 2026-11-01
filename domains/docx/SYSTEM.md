@@ -50,9 +50,10 @@ word_field_kit.py                    word_field_kit.audit_docx
 - **Headings** use built-in Heading 1–9 styles, linked to a multilevel list
   (ISO 2145: `1`, `1.1`, `1.1.1`, no trailing dot). Front matter headings are
   unnumbered and excluded from the TOC.
-- **TOC** is a `TOC \o "1-3" \h \z \u` field; list of figures/tables is built
-  from `REF` + `PAGEREF` bookmarks (avoids Word's caption-cache repeat bug
-  observed in testing).
+- **TOC** is a `TOC \o "1-3" \h \z \u` field. The list of figures/tables is a
+  standard `TOC \h \z \c "Figure"` / `"Table"` field; Word updates it through
+  `TablesOfFigures`. A `ref_pageref` fallback exists for renderers that cannot
+  update a TOF, but it has static caption text and does not auto-add entries.
 - **Captions** are `SEQ Figure/Table` fields; the number and the label+number
   are bookmarked; body text uses `{{ref:fig-1}}`, `{{num:fig-1}}`,
   `{{page:fig-1}}`, `{{cite:key}}`.
@@ -62,12 +63,13 @@ word_field_kit.py                    word_field_kit.audit_docx
   repeats, numeric columns right-align, caption above, source note below.
 - **Sections**: cover (no header/footer), front matter (roman, start 1), body
   (arabic, start 1); `STYLEREF "Heading 1"` in the body header; `PAGE` /
-  `NUMPAGES` in the footer.
+  `SECTIONPAGES` in the footer (`NUMPAGES` would count the front matter too).
 - **Appendices** use `Phụ lục A`, `A.1`; captions use `Bảng A.1` and reset the
   sequence per appendix.
-- **Fields** are refreshed by Microsoft Word (three passes, via `pywin32`) or
-  by WordCraft `convert --update-fields`; `w:updateFields` is set when the file
-  is delivered without a native refresh.
+- **Fields** are refreshed by Microsoft Word (three passes, via `pywin32`),
+  including `TablesOfContents` and `TablesOfFigures`; WordCraft
+  `convert --update-fields` is the fallback. `w:updateFields` is set when the
+  file is delivered without a native refresh.
 
 ## Rules → generator → checker
 

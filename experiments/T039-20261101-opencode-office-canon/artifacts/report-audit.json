@@ -7,15 +7,15 @@
     "no explicit run language (w:lang); proofing/accessibility may guess"
   ],
   "stats": {
-    "fields": 32,
+    "fields": 29,
     "field_commands": {
-      "TOC": 1,
+      "TOC": 3,
       "PAGEREF": 13,
-      "REF": 9,
+      "REF": 4,
       "SEQ": 5,
       "PAGE": 2,
       "STYLEREF": 1,
-      "NUMPAGES": 1
+      "SECTIONPAGES": 1
     },
     "bookmarks": 22,
     "headings": 7,
@@ -23,8 +23,97 @@
     "tables": 3,
     "figures": 2,
     "sections": 3,
-    "paragraphs": 186,
-    "text_width_twips": 8788
+    "paragraphs": 188,
+    "text_width_twips": 8788,
+    "section_text_widths": [
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788,
+      8788
+    ]
   },
   "fields": [
     {
@@ -38,7 +127,7 @@
     {
       "part": "word/document.xml",
       "command": "PAGEREF",
-      "instr": "PAGEREF _Toc244415209 \\h",
+      "instr": "PAGEREF _Toc244417303 \\h",
       "result": "1",
       "complete": true,
       "dirty": false
@@ -46,7 +135,7 @@
     {
       "part": "word/document.xml",
       "command": "PAGEREF",
-      "instr": "PAGEREF _Toc244415210 \\h",
+      "instr": "PAGEREF _Toc244417304 \\h",
       "result": "2",
       "complete": true,
       "dirty": false
@@ -54,7 +143,7 @@
     {
       "part": "word/document.xml",
       "command": "PAGEREF",
-      "instr": "PAGEREF _Toc244415211 \\h",
+      "instr": "PAGEREF _Toc244417305 \\h",
       "result": "3",
       "complete": true,
       "dirty": false
@@ -62,7 +151,7 @@
     {
       "part": "word/document.xml",
       "command": "PAGEREF",
-      "instr": "PAGEREF _Toc244415212 \\h",
+      "instr": "PAGEREF _Toc244417306 \\h",
       "result": "4",
       "complete": true,
       "dirty": false
@@ -70,7 +159,7 @@
     {
       "part": "word/document.xml",
       "command": "PAGEREF",
-      "instr": "PAGEREF _Toc244415213 \\h",
+      "instr": "PAGEREF _Toc244417307 \\h",
       "result": "5",
       "complete": true,
       "dirty": false
@@ -78,7 +167,7 @@
     {
       "part": "word/document.xml",
       "command": "PAGEREF",
-      "instr": "PAGEREF _Toc244415214 \\h",
+      "instr": "PAGEREF _Toc244417308 \\h",
       "result": "6",
       "complete": true,
       "dirty": false
@@ -86,87 +175,63 @@
     {
       "part": "word/document.xml",
       "command": "PAGEREF",
-      "instr": "PAGEREF _Toc244415215 \\h",
+      "instr": "PAGEREF _Toc244417309 \\h",
       "result": "7",
       "complete": true,
       "dirty": false
     },
     {
       "part": "word/document.xml",
-      "command": "REF",
-      "instr": "REF fig-1 \\h",
-      "result": "HĂ¬nh 1",
+      "command": "TOC",
+      "instr": "TOC \\h \\z \\c \"Figure\"",
+      "result": "HĂ¬nh 1 â€” Kiáº¿n trĂºc tham chiáº¿u cho luá»“ng dá»¯ liá»‡u váº­n hĂ nh.HĂ¬nh 2 â€” Chá»‰ sá»‘ thá»±c táº¿ so vá»›i má»¥c tiĂªu theo thĂ¡ng.",
       "complete": true,
       "dirty": false
     },
     {
       "part": "word/document.xml",
       "command": "PAGEREF",
-      "instr": "PAGEREF fig-1 \\h",
+      "instr": "PAGEREF _Toc244417310 \\h",
       "result": "2",
       "complete": true,
       "dirty": false
     },
     {
       "part": "word/document.xml",
-      "command": "REF",
-      "instr": "REF fig-2 \\h",
-      "result": "HĂ¬nh 2",
-      "complete": true,
-      "dirty": false
-    },
-    {
-      "part": "word/document.xml",
       "command": "PAGEREF",
-      "instr": "PAGEREF fig-2 \\h",
+      "instr": "PAGEREF _Toc244417311 \\h",
       "result": "3",
       "complete": true,
       "dirty": false
     },
     {
       "part": "word/document.xml",
-      "command": "REF",
-      "instr": "REF tbl-1 \\h",
-      "result": "Báº£ng 1",
+      "command": "TOC",
+      "instr": "TOC \\h \\z \\c \"Table\"",
+      "result": "Báº£ng 1 â€” Káº¿t quáº£ Ä‘o lÆ°á»ng theo nÄƒmBáº£ng 2 â€” Rá»§i ro Æ°u tiĂªn vĂ  biá»‡n phĂ¡pBáº£ng A.1 â€” Dá»¯ liá»‡u chi tiáº¿t theo Ä‘Æ¡n vá»‹",
       "complete": true,
       "dirty": false
     },
     {
       "part": "word/document.xml",
       "command": "PAGEREF",
-      "instr": "PAGEREF tbl-1 \\h",
+      "instr": "PAGEREF _Toc244417312 \\h",
       "result": "2",
       "complete": true,
       "dirty": false
     },
     {
       "part": "word/document.xml",
-      "command": "REF",
-      "instr": "REF tbl-2 \\h",
-      "result": "Báº£ng 2",
-      "complete": true,
-      "dirty": false
-    },
-    {
-      "part": "word/document.xml",
       "command": "PAGEREF",
-      "instr": "PAGEREF tbl-2 \\h",
+      "instr": "PAGEREF _Toc244417313 \\h",
       "result": "3",
       "complete": true,
       "dirty": false
     },
     {
       "part": "word/document.xml",
-      "command": "REF",
-      "instr": "REF tbl-3 \\h",
-      "result": "Báº£ng A.1",
-      "complete": true,
-      "dirty": false
-    },
-    {
-      "part": "word/document.xml",
       "command": "PAGEREF",
-      "instr": "PAGEREF tbl-3 \\h",
+      "instr": "PAGEREF _Toc244417314 \\h",
       "result": "7",
       "complete": true,
       "dirty": false
@@ -277,9 +342,9 @@
     },
     {
       "part": "word/footer3.xml",
-      "command": "NUMPAGES",
-      "instr": "NUMPAGES \\* MERGEFORMAT",
-      "result": "1",
+      "command": "SECTIONPAGES",
+      "instr": "SECTIONPAGES \\* MERGEFORMAT",
+      "result": "7",
       "complete": true,
       "dirty": false
     }

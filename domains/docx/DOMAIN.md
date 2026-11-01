@@ -70,7 +70,7 @@ do not hard-code a new one in a generator.
 
 | Rung | Tool | T039 evidence |
 |---|---|---|
-| 1 | schema / structural audit | `document_audit.py`: 32 fields, 22 bookmarks, 3 sections, 3 tables, 2 figures; no errors/warnings |
+| 1 | schema / structural audit | `document_audit.py`: 29 fields, 22 bookmarks, 3 sections, 3 tables, 2 figures; no errors/warnings |
 | 2 | layout engine (WordCraft) | WordCraft render; TOC updated, but page numbers were physical and a `TOC \\c` caption list repeated the first number |
 | 3 | independent reader | Not run (LibreOffice Writer not installed on this host) |
 | 4–5 | Word COM open / PDF export | Word opened the exact DOCX, refreshed fields, exported a 12-page PDF; pages inspected |
@@ -88,8 +88,10 @@ The T039 report is `experiments/T039-20261101-opencode-office-canon/REPORT.md`.
 - Known limitation: Word and WordCraft paginate differently (12 vs 13 pages on
   the fixture). The generator uses Word for final field refresh when available;
   WordCraft is a fallback.
-- Known limitation: a list of figures/tables built with `TOC \\c` repeated the
-  first `SEQ` number in Word in testing; T039 uses `REF` + `PAGEREF` entries.
+- Known limitation: an early `TOC \\c` list repeated the first `SEQ` number
+  because the Word refresh updated `TablesOfContents` but not
+  `TablesOfFigures`. The fix updates `TablesOfFigures`; the `ref_pageref`
+  fallback remains for renderers that cannot update a TOF.
 - Known limitation: WordCraft `convert --update-fields` dropped
   `wp:docPr@descr`; T039 repairs it for the WordCraft path.
 

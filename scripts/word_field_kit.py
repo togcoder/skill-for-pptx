@@ -599,6 +599,8 @@ def audit_docx(path: str | Path, *, system: dict | None = None) -> AuditReport:
             if root is None:
                 continue
             fields.extend(_field_records(root, part))
+            starts_in_part: dict[str, str] = {}
+            ends_in_part: set[str] = set()
             for start in root.iter(qn("w:bookmarkStart")):
                 name = start.get(qn("w:name")) or ""
                 bid = start.get(qn("w:id")) or ""
@@ -606,6 +608,17 @@ def audit_docx(path: str | Path, *, system: dict | None = None) -> AuditReport:
                     report.errors.append(f"duplicate bookmark name: {name}")
                 bookmarks[name] = bookmarks.get(name, 0) + 1
                 bookmark_ids[bid] = name
+                starts_in_part[bid] = name
+            for end in root.iter(qn("w:bookmarkEnd")):
+                bid = end.get(qn("w:id")) or ""
+                if bid in ends_in_part:
+                    report.errors.append(f"duplicate bookmarkEnd id {bid} in {part}")
+                ends_in_part.add(bid)
+            for bid, name in starts_in_part.items():
+                if bid not in ends_in_part:
+                    report.errors.append(f"bookmark {name!r} (id {bid}) has no bookmarkEnd in {part}")
+            for bid in ends_in_part - set(starts_in_part):
+                report.errors.append(f"bookmarkEnd id {bid} has no bookmarkStart in {part}")
             for drawing in root.iter(qn("wp:inline")):
                 drawings.append(_drawing_info(drawing, "inline", part))
             for drawing in root.iter(qn("wp:anchor")):
@@ -622,6 +635,19 @@ def audit_docx(path: str | Path, *, system: dict | None = None) -> AuditReport:
                     if ps is not None:
                         style = ps.get(qn("w:val"))
                 paragraphs.append({"style": style, "text": _text_of(p)})
+
+        # Width is section-local: a landscape section may legitimately hold a
+        # wider table than the portrait body.  Map every body element to the
+        # text width of the section that contains it.
+        child_width: dict[int, int | None] = {}
+        section_widths: list[int] = []
+        body = document.find(qn("w:body"))
+        if body is not None:
+            widths = _body_section_widths(body)
+            section_widths = [w for w in widths if w]
+            for child, width in zip(body, widths):
+                for el in child.iter():
+                    child_width[id(el)] = width
 
         # Resolve image parts so effective DPI is real, not guessed.  The
         # drawing extent is in EMU; pixels come from the related image blob.
@@ -722,13 +748,14 @@ def audit_docx(path: str | Path, *, system: dict | None = None) -> AuditReport:
 
         # Sections and geometry.
         default_page = (system or {}).get("page", {})
-        text_width_twips = None
+        text_width_twips = max(section_widths, default=None)
         for s in sections:
             width = s.get("page_w_twips")
             left = s.get("margin_left_twips")
             right = s.get("margin_right_twips")
             if width and left is not None and right is not None:
-                text_width_twips = width - left - right
+                value = width - left - right
+                text_width_twips = max(text_width_twips or 0, value)
             if s.get("page_w_twips") and s.get("page_h_twips"):
                 mm_w = s["page_w_twips"] / 56.6929
                 mm_h = s["page_h_twips"] / 56.6929
@@ -744,8 +771,9 @@ def audit_docx(path: str | Path, *, system: dict | None = None) -> AuditReport:
         for i, t in enumerate(tables, start=1):
             grid = t.get("grid_twips") or []
             total = sum(grid)
-            if total and text_width_twips and total > text_width_twips + width_tolerance:
-                report.warnings.append(f"table {i} grid {total} twips exceeds text width {text_width_twips} twips")
+            element_width = child_width.get(id(t.get("_element"))) or text_width_twips
+            if total and element_width and total > element_width + width_tolerance:
+                report.warnings.append(f"table {i} grid {total} twips exceeds its text width {element_width} twips")
             if (table_header_required and t.get("rows", 0) > 1 and
                     t.get("has_header_look", True) and not t.get("header_repeat")):
                 report.warnings.append(f"table {i} has no repeating header row")
@@ -754,10 +782,11 @@ def audit_docx(path: str | Path, *, system: dict | None = None) -> AuditReport:
 
         # Drawings.
         for i, d in enumerate(drawings, start=1):
-            if text_width_twips and d.get("width_emu"):
+            element_width = child_width.get(id(d.get("_element"))) or text_width_twips
+            if element_width and d.get("width_emu"):
                 width_twips = d["width_emu"] / 635
-                if width_twips > text_width_twips + 20:
-                    report.warnings.append(f"figure {i} is wider than the text column")
+                if width_twips > element_width + width_tolerance:
+                    report.warnings.append(f"figure {i} is wider than its text column")
             if alt_required and not d.get("descr") and not d.get("decorative"):
                 report.warnings.append(f"figure {i} has no alt text")
             if d.get("dpi") is not None and d["dpi"] < dpi_min:
@@ -790,6 +819,7 @@ def audit_docx(path: str | Path, *, system: dict | None = None) -> AuditReport:
             "sections": len(sections),
             "paragraphs": len(paragraphs),
             "text_width_twips": text_width_twips,
+            "section_text_widths": sorted(set(section_widths)),
         }
         report.fields = [{"part": f.part, "command": f.command, "instr": f.instr.strip(),
                           "result": f.result.strip()[:120], "complete": f.complete,
@@ -843,7 +873,8 @@ def _drawing_info(drawing, kind: str, part: str) -> dict:
     blip = drawing.find(f".//{qn('a:blip')}")
     rid = blip.get(qn("r:embed")) if blip is not None else None
     return {"part": part, "kind": kind, "width_emu": width, "height_emu": height,
-            "descr": descr, "title": title, "dpi": dpi, "wrap": wrap, "rid": rid}
+            "descr": descr, "title": title, "dpi": dpi, "wrap": wrap, "rid": rid,
+            "_element": drawing}
 
 
 def _table_info(tbl) -> dict:
@@ -869,7 +900,49 @@ def _table_info(tbl) -> dict:
             header = trpr.find(qn("w:tblHeader")) is not None
     return {"rows": len(rows), "cols": len(grid), "grid_twips": grid,
             "fixed_layout": fixed, "header_repeat": header, "caption": caption,
-            "has_header_look": first_row_look}
+            "has_header_look": first_row_look, "_element": tbl}
+
+
+def _body_section_widths(body) -> list[int | None]:
+    """Return the text-column width (twips) for each top-level body child.
+
+    A ``w:sectPr`` at the end of a paragraph describes the section that ends
+    there; the final ``w:sectPr`` describes the last section.  Assigning the
+    width per child lets a landscape table use the landscape width while the
+    portrait body still gets the narrower check.
+    """
+    children = list(body)
+    widths: list[int | None] = [None] * len(children)
+
+    def width_of(sect) -> int | None:
+        if sect is None:
+            return None
+        pg = sect.find(qn("w:pgSz"))
+        mar = sect.find(qn("w:pgMar"))
+        if pg is None or mar is None:
+            return None
+        try:
+            w = int(pg.get(qn("w:w")) or 0)
+            left = int(mar.get(qn("w:left")) or 0)
+            right = int(mar.get(qn("w:right")) or 0)
+        except (TypeError, ValueError):
+            return None
+        return w - left - right if w else None
+
+    segment_start = 0
+    for i, child in enumerate(children):
+        sect = child.find(f".//{qn('w:sectPr')}")
+        if sect is not None:
+            w = width_of(sect)
+            for j in range(segment_start, i + 1):
+                widths[j] = w
+            segment_start = i + 1
+    final = body.find(qn("w:sectPr"))
+    if final is not None:
+        w = width_of(final)
+        for j in range(segment_start, len(children)):
+            widths[j] = w
+    return widths
 
 
 def _section_info(sect) -> dict:
