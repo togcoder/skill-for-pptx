@@ -79,7 +79,7 @@ third-party media is redistributed.
 | Cover hero is a designed asset, title still a paragraph | 1 + 4 | inline hero image + `wp:docPr@descr`; title remains `Title` style; Word PDF page 1 |
 | Cross-craft asset is accepted in DOCX | 1 + 4 | VectorCraft converted `cover.svg`/`icon-*.svg`; DOCX audit/render is the acceptance gate |
 | Existing T039 guarantees still hold | 1 | TOC 3, `SEQ` 4, `STYLEREF`/`SECTIONPAGES`; no broken reference; T039 tests still pass |
-| Tests cover the new blocks and negative paths | 1 | `tests/test_document_advanced.py` (5 tests) + `test_document_craft.py` (6); full suite 380 tests OK |
+| Tests cover the new blocks and negative paths | 1 | `tests/test_document_advanced.py` (5 tests) + `test_document_craft.py` (6); full suite 385 tests OK |
 
 **Hashes:** see `artifacts/SHA256SUMS.txt`.
 

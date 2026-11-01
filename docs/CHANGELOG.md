@@ -7,6 +7,42 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T046 [xlsx] Advanced workbook and dashboard â€” 2026-11-01
+
+- **Sheet Forge.** `scripts/sheet_forge.py` composes a 7-sheet programme
+  workbook from a semantic spec: typed data table, cross-sheet model
+  (`SUMIFS`/`COUNTIFS`/`AVERAGEIF`/`INDEX`+`MATCH`, named ranges), image table,
+  native Gantt, relationship matrix, PivotTable and a designed dashboard.
+- **Image table.** Pictures are inserted in cells with alt text and a fixed row
+  height; the `Team` sheet prints A1:D7 on one page.
+- **Gantt.** Stacked bar, transparent start series (`<a:noFill/>`),
+  date-formatted value axis with explicit serial min/max (bar charts have no
+  date category axis), reversed categories; inserted on the Gantt sheet and on
+  the dashboard.
+- **Relationship view.** Matrix heatmap with a 3-colour scale; the node-link
+  scatter was tested and rejected (one series per edge does not scale, and the
+  experimental build did not render every series consistently) and is recorded
+  as a negative result.
+- **Pivot.** Native PivotTable built by GridCraft `insert.pivotTable`; Excel
+  reads `PivotTable1` over `Data!R1C1:R61C11`. Without GridCraft a `SUMIF`/
+  `COUNTIF` summary is written to the `Pivot` sheet in the first pass.
+- **VBA.** `scripts/vba_forge.py` writes a `DashboardTools` `.bas` (with a
+  worksheet guard) and injects it into an `.xlsm` only when Excel trusts the
+  VBA project object model.
+- **Dashboard.** 4 formula-driven KPI cards, 2 fixed one-cell-anchored charts,
+  matrix, one source note; print area 29.21 Ă— 20.39 cm (â‰ˆ93% A4), Excel export
+  one page. Audit clean (3 charts, 0 errors/0 warnings/0 notes).
+- **Evidence.** Excel opened the exact XLSX/XLSM, recalculated formulas, read
+  the pivot and exported 5 sheets; `tests/test_sheet_craft_advanced.py` (5
+  tests); full suite 385 tests OK with `PYTHONUTF8=1`.
+- **Review fixes (Argon).** Gantt `Start` transparency + value-axis min/max/date
+  format; re-apply axes after GridCraft's pivot round-trip; KPI formulas; pivot
+  fallback on the Pivot sheet; VBA worksheet guard; dashboard/Gantt print areas
+  reduced to ~93% A4; hidden-series/`gantt` audit detection; negative-result
+  reasoning corrected. Argon **approve T046** (round 2).
+- **Status.** EXPERIMENTAL; review accepted; awaiting owner merge.
+- Report: `experiments/T046-20261101-opencode-advanced-xlsx/REPORT.md`.
+
 ## T045 [docx] Advanced report craft â€” side-by-side media, equations, rich tables â€” 2026-11-01
 
 - **Native equations.** `scripts/word_math.py` parses a strict LaTeX subset into
@@ -29,7 +65,7 @@ were true at the time. Task IDs and their branches are listed in
 - **Evidence.** 11-page Word PDF inspected; audit clean (20 fields, 15
   bookmarks, 6 tables, 6 drawings, 2 equations/1 numbered, 5 merged cells,
   5 images in cells); `tests/test_document_advanced.py` (5 tests) + T039 tests;
-  full suite 380 tests OK with `PYTHONUTF8=1`. Argon **approve T045** (round 2).
+  full suite 385 tests OK with `PYTHONUTF8=1`. Argon **approve T045** (round 2).
 - **Status.** EXPERIMENTAL; review accepted; awaiting owner merge.
 - Report: `experiments/T045-20261101-opencode-advanced-docx/REPORT.md`.
 

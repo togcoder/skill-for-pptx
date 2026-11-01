@@ -295,6 +295,8 @@ def _set_axis(axis, options: dict):
                      log_base=options.get("log_base"), reverse=bool(options.get("reverse")))
     if options.get("number_format"):
         _set_numfmt(axis, options["number_format"], order_key=_local(axis))
+    if options.get("major_unit") is not None:
+        _set_val(axis, "majorUnit", str(options["major_unit"]), _local(axis))
     if "visible" in options:
         _set_val(axis, "delete", "0" if options["visible"] else "1", _local(axis))
     if options.get("gridlines") is not None:
@@ -378,6 +380,20 @@ def _set_dlbls(parent, value, *, order_key: str):
         etree.SubElement(p, a("endParaRPr")).set("lang", "en-US")
         _insert_ordered(node, txpr, "txPr")
     _insert_ordered(parent, node, "dLbls")
+
+
+def _hide_series(series):
+    """Make a series fully transparent (used for the Gantt start offset)."""
+    sp = series.find(c("spPr"))
+    if sp is None:
+        sp = etree.Element(c("spPr"))
+        _insert_ordered(series, sp, "spPr")
+    for child in list(sp):
+        if _local(child) in {"solidFill", "noFill", "ln", "gradFill", "pattFill"}:
+            sp.remove(child)
+    etree.SubElement(sp, a("noFill"))
+    ln = etree.SubElement(sp, a("ln"))
+    etree.SubElement(ln, a("noFill"))
 
 
 def _set_series_style(series, options: dict, *, chart_type: str = ""):
@@ -515,23 +531,35 @@ def _patch_anchor(root, patch: dict):
     mode = patch.get("mode", "one_cell")
     if mode != "one_cell":
         return
+    sizes = patch.get("sizes") or []
+    alts = patch.get("alts") or []
+    chart_pos = 0
     for anchor in list(root):
         if _local(anchor) not in {"twoCellAnchor", "oneCellAnchor", "absoluteAnchor"}:
             continue
+        # Only chart frames are converted here.  Pictures (team photos) keep
+        # their two-cell anchor and their xdr:pic child.
+        if anchor.find(f".//{xdr('graphicFrame')}") is None:
+            continue
+        size = sizes[chart_pos] if chart_pos < len(sizes) else [patch.get("width_cm"), patch.get("height_cm")]
+        alt = alts[chart_pos] if chart_pos < len(alts) else patch.get("alt")
+        chart_pos += 1
+        width = size[0] if size else None
+        height = size[1] if size else None
         if _local(anchor) == "oneCellAnchor":
-            if patch.get("width_cm") and patch.get("height_cm"):
+            if width and height:
                 ext = anchor.find(xdr("ext"))
                 if ext is not None:
-                    ext.set("cx", str(int(patch["width_cm"] * CM_TO_EMU)))
-                    ext.set("cy", str(int(patch["height_cm"] * CM_TO_EMU)))
-            _set_anchor_alt(anchor, patch.get("alt"))
+                    ext.set("cx", str(int(width * CM_TO_EMU)))
+                    ext.set("cy", str(int(height * CM_TO_EMU)))
+            _set_anchor_alt(anchor, alt)
             continue
         frm = anchor.find(xdr("from"))
         if frm is None:
             continue
         # Compute existing size for a fallback.
-        width = patch.get("width_cm")
-        height = patch.get("height_cm")
+        width = width or patch.get("width_cm")
+        height = height or patch.get("height_cm")
         if not width or not height:
             ext = anchor.find(xdr("ext"))
             if ext is not None:
@@ -547,7 +575,7 @@ def _patch_anchor(root, patch: dict):
         for child in list(anchor):
             if _local(child) in {"graphicFrame", "clientData"}:
                 new.append(child)
-        _set_anchor_alt(new, patch.get("alt"))
+        _set_anchor_alt(new, alt)
         anchor.getparent().replace(anchor, new)
 
 
@@ -641,10 +669,21 @@ def patch_chart_xml(root, patch: dict) -> dict:
                     group, ser = series_refs[i]
                     _set_series_style(ser, ser_patch, chart_type=_local(group))
                     changed.append(f"series[{i}]")
+            hide = {name.lower() for name in patch.get("hide_series") or []}
+            if hide:
+                for _, ser in series_refs:
+                    tx = ser.find(c("tx"))
+                    value = tx.find(f".//{c('v')}") if tx is not None else None
+                    if value is not None and (value.text or "").strip().lower() in hide:
+                        _hide_series(ser)
+                        changed.append(f"hide_series:{value.text}")
 
         axes = patch.get("axes") or {}
         if axes:
             x_axis = _find_axis(plot, "x")
+            if x_axis is None:
+                # Scatter charts use a value axis on the bottom for X.
+                x_axis = _find_axis(plot, "y", "b")
             y_axis = _find_axis(plot, "y", "l")
             y2_axis = _find_axis(plot, "y", "r")
             if axes.get("x") and x_axis is not None:
@@ -653,7 +692,54 @@ def patch_chart_xml(root, patch: dict) -> dict:
                 _set_axis(y_axis, axes["y"]); changed.append("axis.y")
             if axes.get("y2") and y2_axis is not None:
                 _set_axis(y2_axis, axes["y2"]); changed.append("axis.y2")
+            # Role-based selectors: bar charts put the value axis at the
+            # bottom and the category axis at the left.
+            if axes.get("value"):
+                value_axis = _find_axis(plot, "y", "b")
+                if value_axis is None:
+                    value_axis = _find_axis(plot, "y")
+                if value_axis is not None:
+                    _set_axis(value_axis, axes["value"]); changed.append("axis.value")
+            if axes.get("category"):
+                category_axis = _find_axis(plot, "x", "l")
+                if category_axis is None:
+                    category_axis = _find_axis(plot, "x")
+                if category_axis is not None:
+                    _set_axis(category_axis, axes["category"]); changed.append("axis.category")
     return {"changed": changed}
+
+
+def _sheet_drawing_index(members: dict[str, bytes]) -> dict[str, int]:
+    """Map a worksheet name to its drawing part number (1-based)."""
+    rel_ns = "http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+    pkg_rel_ns = "http://schemas.openxmlformats.org/package/2006/relationships"
+    workbook = members.get("xl/workbook.xml")
+    wb_rels = members.get("xl/_rels/workbook.xml.rels")
+    if not workbook or not wb_rels:
+        return {}
+    rel_target = {}
+    for rel in etree.fromstring(wb_rels):
+        rel_target[rel.get("Id")] = rel.get("Target")
+    result = {}
+    for sheet in etree.fromstring(workbook).iter():
+        if not sheet.tag.endswith("}sheet"):
+            continue
+        rid = sheet.get(f"{{{rel_ns}}}id")
+        target = rel_target.get(rid, "")
+        sheet_part = "xl/" + target.lstrip("/").replace("xl/", "", 1) if target else ""
+        if not sheet_part:
+            continue
+        rels_name = sheet_part.rsplit("/", 1)[0] + "/_rels/" + sheet_part.rsplit("/", 1)[1] + ".rels"
+        rels = members.get(rels_name)
+        if not rels:
+            continue
+        for rel in etree.fromstring(rels):
+            if rel.get("Type", "").endswith("/drawing"):
+                drawing = rel.get("Target", "").rsplit("/", 1)[-1]
+                match = re.fullmatch(r"drawing(\d+)\.xml", drawing)
+                if match:
+                    result[sheet.get("name")] = int(match.group(1))
+    return result
 
 
 def patch_workbook(path: str | Path, patch: dict, out_path: str | Path | None = None) -> dict:
@@ -665,6 +751,7 @@ def patch_workbook(path: str | Path, patch: dict, out_path: str | Path | None = 
     results = []
     with zipfile.ZipFile(path) as zin:
         members = {name: zin.read(name) for name in zin.namelist()}
+        sheet_drawings = _sheet_drawing_index(members)
         chart_names = sorted(n for n in members if re.fullmatch(r"xl/charts/chart\d+\.xml", n))
         for i, chart_name in enumerate(chart_names, start=1):
             chart_patch = next((p for p in patches if int(p.get("index", i)) == i), None)
@@ -673,11 +760,14 @@ def patch_workbook(path: str | Path, patch: dict, out_path: str | Path | None = 
             root = etree.fromstring(members[chart_name])
             results.append({"chart": i, **patch_chart_xml(root, chart_patch)})
             members[chart_name] = etree.tostring(root, xml_declaration=True, encoding="UTF-8", standalone=True)
-        # Anchors: apply the first anchor patch to every drawing, or per index.
+        # Anchors: apply the first anchor patch to every drawing, or per index/sheet.
         drawing_names = sorted(n for n in members if re.fullmatch(r"xl/drawings/drawing\d+\.xml", n))
         for i, name in enumerate(drawing_names, start=1):
-            anchor_patch = next((p for p in anchors if int(p.get("drawing", i)) == i), None)
-            if anchor_patch is None and anchors and len(anchors) == 1:
+            anchor_patch = next((p for p in anchors
+                                 if p.get("sheet") and sheet_drawings.get(p["sheet"]) == i), None)
+            if anchor_patch is None:
+                anchor_patch = next((p for p in anchors if int(p.get("drawing", i)) == i), None)
+            if anchor_patch is None and anchors and len(anchors) == 1 and not anchors[0].get("sheet"):
                 anchor_patch = anchors[0]
             if not anchor_patch:
                 continue

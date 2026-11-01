@@ -43,8 +43,34 @@ chart_patch.py  (existing XLSX)      (geometry, axes, cache, contrast)
 | `scripts/chart_forge.py` | Build a workbook + chart from a spec |
 | `scripts/chart_patch.py` | Patch an existing chart's OOXML/anchors |
 | `scripts/chart_audit.py` | Structural audit: geometry, axes, labels, colours, cache |
+| `scripts/sheet_forge.py` | Workbook/dashboard composer: tables, formulas, image table, Gantt, matrix, pivot, print |
+| `scripts/vba_forge.py` | Write a `.bas` module; inject into `.xlsm` only with Excel trust access |
 | `skills/sheet-craft/` | Workflow, chart property matrix, recipes, audit guide |
-| `tests/test_sheet_craft.py` | Structural build/patch/audit tests |
+| `tests/test_sheet_craft.py` | Chart build/patch/audit tests |
+| `tests/test_sheet_craft_advanced.py` | Dashboard package: formulas, image table, Gantt, matrix, anchors, VBA |
+
+## Workbook and dashboard (T046)
+
+A chart-only tool produces a chart; a professional workbook needs the data, the
+model, the summary and the page to agree.
+
+| Layer | What it means | Native object |
+|---|---|---|
+| Data | Typed table, frozen header, filter, percent/number formats | `w:table`, `numFmt` |
+| Model | Cross-sheet formulas and named ranges | `SUMIFS`, `COUNTIFS`, `AVERAGEIF`, `INDEX`/`MATCH`, `definedName` |
+| Image table | Team/product rows with a picture in the cell, fixed row height, alt text | `xdr:pic` + row height |
+| Gantt | Stacked bar, transparent start series, date-formatted value axis, reversed categories | `c:barChart`, `c:valAx` (`numFmt` + explicit serial min/max) |
+| Relationship matrix | Pairwise weights + 3-colour scale | `conditionalFormatting` |
+| Pivot | Native PivotTable over the data range | `pivotTable` part |
+| VBA | Refresh/filter module, labelled `.bas`; injection optional | `vbaProject` |
+| Dashboard | KPI cards, shared palette, fixed chart anchors, print area | merged cells + `xdr:oneCellAnchor` |
+
+**Dashboard design rules.** A large dataset is not a deliverable. The dashboard
+carries ≤4 KPI cards, one scheduling view, one relationship view and one
+comparison chart; the rest stays on data sheets. Keep one accent per KPI state
+(neutral/positive/warning), one chart title that states the insight, and one
+source note. A matrix is used for pairwise relationships because a native
+node-link scatter was not reliable in Excel (T046 negative result).
 
 ## What the tools control
 
@@ -85,10 +111,25 @@ chart_patch.py  (existing XLSX)      (geometry, axes, cache, contrast)
 | CHART-SERIES-COUNT | series list | ≤8 |
 | CHART-PRINT | `print_area` | chart inside print area |
 | CHART-ALT | `chart.alt`/title | `cNvPr@descr` |
+| WB-CROSS-SHEET | formulas reference `Data!$A$2:$A$n` | Excel recalculation; formula XML |
+| WB-NAMED-RANGE | `define_name` | `definedName` in workbook.xml |
+| WB-IMAGE-CELL | picture in a cell, row height fixed | `xdr:pic` + `wp:docPr@descr` |
+| WB-GANTT | transparent start + duration + date-formatted `valAx` | `c:barChart`, `c:valAx`; Excel render |
+| WB-MATRIX | pairwise weights + 3-colour scale | `conditionalFormatting`/`colorScale` |
+| WB-PIVOT | GridCraft `insert.pivotTable` | PivotTable count/source in Excel |
+| WB-VBA | `.bas` written; injection gated | `vbaProject` module in `.xlsm` |
+| WB-DASHBOARD | KPI cards, fixed anchors, print area | `mergeCell`; `oneCellAnchor` count |
+| WB-PRINT | one sheet = one readable page | Excel `ExportAsFixedFormat` pages |
 
 ## Using it
 
 ```bash
+# A designed dashboard from a semantic spec (tables, formulas, Gantt, matrix)
+python3 scripts/sheet_forge.py build spec.json -o dashboard.xlsx \
+  --render preview/          # Excel COM when available
+python3 scripts/sheet_forge.py build spec.json -o dashboard.xlsx --vba
+
+# Chart-only workbook
 python3 scripts/chart_forge.py build spec.json -o chart.xlsx \
   --render preview/ --report build.json
 python3 scripts/chart_audit.py chart.xlsx --md audit.md
@@ -132,6 +173,17 @@ $wb.Close($false); $excel.Quit()
 - **No human calibration.** The rules are anchored to Tufte/Few/WCAG and
   observed failures, not a user study. Treat them as a floor, not a taste score.
 - **Excel repair** is not detected by the audit; open the exact file in Excel.
+- **Pivot without GridCraft.** The Python path cannot create a PivotTable; the
+  generator writes a `SUMIF`/`COUNTIF` summary on the Pivot sheet, and the Model
+  sheet is the cross-sheet check.
+- **Node-link scatter.** A one-series-per-edge scatter did not render all series
+  consistently in Excel/Graph; use the matrix unless a working native
+  connected-scatter path is proven.
+- **VBA trust.** Injection needs Excel and the VBA object-model trust setting;
+  the `.bas` is the portable artifact.
+- **Excel print pagination.** A 60-row data sheet prints on 2 pages; the
+  dashboard is one page. Count pages in the render; do not assume fit-to-1x1
+  means one page for every sheet.
 
 ## Next
 
@@ -144,3 +196,9 @@ $wb.Close($false); $excel.Quit()
    with palette suggestions.
 5. Add a workbook-level dashboard audit (alignment grid, shared axes, card
    sizes, print pages).
+6. Add a LibreOffice Calc rung 3 for the T046 dashboard.
+7. Add a real PivotTable fallback (or keep the formula summary as the
+   documented non-GridCraft path).
+8. Prove a native node-link chart (connected scatter/Graph) or document the
+   matrix as the only supported relationship view.
+9. Add a VBA preflight that reports the trust gate before writing a `.xlsm`.

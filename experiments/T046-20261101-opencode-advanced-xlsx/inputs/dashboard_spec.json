@@ -1,0 +1,1081 @@
+{
+  "title": "Điều hành chương trình chuyển đổi số 2026",
+  "subtitle": "Danh mục 60 công việc · 4 nhóm · cập nhật 01/11/2026",
+  "workstreams": [
+    "Dữ liệu",
+    "Nền tảng",
+    "Năng lực",
+    "Trải nghiệm"
+  ],
+  "data_last_row": 61,
+  "data": {
+    "headers": [
+      "Task ID",
+      "Workstream",
+      "Owner",
+      "Start",
+      "End",
+      "Days",
+      "Progress",
+      "Cost",
+      "Benefit",
+      "Status",
+      "Priority"
+    ],
+    "rows": [
+      [
+        "T001",
+        "Dữ liệu",
+        "Lan",
+        "2026-01-05",
+        "2026-01-10",
+        5,
+        0.15,
+        40,
+        44,
+        "On track",
+        "High"
+      ],
+      [
+        "T002",
+        "Nền tảng",
+        "Minh",
+        "2026-01-11",
+        "2026-01-19",
+        8,
+        0.24,
+        57,
+        76,
+        "At risk",
+        "Medium"
+      ],
+      [
+        "T003",
+        "Năng lực",
+        "Hà",
+        "2026-01-17",
+        "2026-01-28",
+        11,
+        0.33,
+        74,
+        118,
+        "Blocked",
+        "Low"
+      ],
+      [
+        "T004",
+        "Trải nghiệm",
+        "Tuấn",
+        "2026-01-23",
+        "2026-02-06",
+        14,
+        0.42,
+        91,
+        168,
+        "Done",
+        "High"
+      ],
+      [
+        "T005",
+        "Dữ liệu",
+        "Mai",
+        "2026-01-29",
+        "2026-02-15",
+        17,
+        0.51,
+        108,
+        226,
+        "On track",
+        "Medium"
+      ],
+      [
+        "T006",
+        "Nền tảng",
+        "Khánh",
+        "2026-02-04",
+        "2026-02-24",
+        20,
+        0.6,
+        125,
+        137,
+        "At risk",
+        "Low"
+      ],
+      [
+        "T007",
+        "Năng lực",
+        "Lan",
+        "2026-02-10",
+        "2026-03-05",
+        23,
+        0.69,
+        142,
+        191,
+        "Blocked",
+        "High"
+      ],
+      [
+        "T008",
+        "Trải nghiệm",
+        "Minh",
+        "2026-02-16",
+        "2026-03-14",
+        26,
+        0.78,
+        159,
+        254,
+        "Done",
+        "Medium"
+      ],
+      [
+        "T009",
+        "Dữ liệu",
+        "Hà",
+        "2026-02-22",
+        "2026-03-23",
+        29,
+        0.87,
+        176,
+        325,
+        "On track",
+        "Low"
+      ],
+      [
+        "T010",
+        "Nền tảng",
+        "Tuấn",
+        "2026-02-28",
+        "2026-03-07",
+        7,
+        0.15,
+        193,
+        405,
+        "At risk",
+        "High"
+      ],
+      [
+        "T011",
+        "Năng lực",
+        "Mai",
+        "2026-03-06",
+        "2026-03-16",
+        10,
+        0.24,
+        210,
+        231,
+        "Blocked",
+        "Medium"
+      ],
+      [
+        "T012",
+        "Trải nghiệm",
+        "Khánh",
+        "2026-03-12",
+        "2026-03-25",
+        13,
+        0.33,
+        227,
+        306,
+        "Done",
+        "Low"
+      ],
+      [
+        "T013",
+        "Dữ liệu",
+        "Lan",
+        "2026-03-18",
+        "2026-04-03",
+        16,
+        0.42,
+        244,
+        390,
+        "On track",
+        "High"
+      ],
+      [
+        "T014",
+        "Nền tảng",
+        "Minh",
+        "2026-03-24",
+        "2026-04-12",
+        19,
+        0.51,
+        261,
+        482,
+        "At risk",
+        "Medium"
+      ],
+      [
+        "T015",
+        "Năng lực",
+        "Hà",
+        "2026-03-30",
+        "2026-04-21",
+        22,
+        0.6,
+        278,
+        583,
+        "Blocked",
+        "Low"
+      ],
+      [
+        "T016",
+        "Trải nghiệm",
+        "Tuấn",
+        "2026-04-05",
+        "2026-04-30",
+        25,
+        0.69,
+        55,
+        60,
+        "Done",
+        "High"
+      ],
+      [
+        "T017",
+        "Dữ liệu",
+        "Mai",
+        "2026-04-11",
+        "2026-05-09",
+        28,
+        0.78,
+        72,
+        97,
+        "On track",
+        "Medium"
+      ],
+      [
+        "T018",
+        "Nền tảng",
+        "Khánh",
+        "2026-04-17",
+        "2026-04-23",
+        6,
+        0.87,
+        89,
+        142,
+        "At risk",
+        "Low"
+      ],
+      [
+        "T019",
+        "Năng lực",
+        "Lan",
+        "2026-04-23",
+        "2026-05-02",
+        9,
+        0.15,
+        106,
+        196,
+        "Blocked",
+        "High"
+      ],
+      [
+        "T020",
+        "Trải nghiệm",
+        "Minh",
+        "2026-04-29",
+        "2026-05-11",
+        12,
+        0.24,
+        123,
+        258,
+        "Done",
+        "Medium"
+      ],
+      [
+        "T021",
+        "Dữ liệu",
+        "Hà",
+        "2026-05-05",
+        "2026-05-20",
+        15,
+        0.33,
+        140,
+        154,
+        "On track",
+        "Low"
+      ],
+      [
+        "T022",
+        "Nền tảng",
+        "Tuấn",
+        "2026-05-11",
+        "2026-05-29",
+        18,
+        0.42,
+        157,
+        211,
+        "At risk",
+        "High"
+      ],
+      [
+        "T023",
+        "Năng lực",
+        "Mai",
+        "2026-05-17",
+        "2026-06-07",
+        21,
+        0.51,
+        174,
+        278,
+        "Blocked",
+        "Medium"
+      ],
+      [
+        "T024",
+        "Trải nghiệm",
+        "Khánh",
+        "2026-05-23",
+        "2026-06-16",
+        24,
+        0.6,
+        191,
+        353,
+        "Done",
+        "Low"
+      ],
+      [
+        "T025",
+        "Dữ liệu",
+        "Lan",
+        "2026-05-29",
+        "2026-06-25",
+        27,
+        0.69,
+        208,
+        436,
+        "On track",
+        "High"
+      ],
+      [
+        "T026",
+        "Nền tảng",
+        "Minh",
+        "2026-06-04",
+        "2026-06-09",
+        5,
+        0.78,
+        225,
+        247,
+        "At risk",
+        "Medium"
+      ],
+      [
+        "T027",
+        "Năng lực",
+        "Hà",
+        "2026-06-10",
+        "2026-06-18",
+        8,
+        0.87,
+        242,
+        326,
+        "Blocked",
+        "Low"
+      ],
+      [
+        "T028",
+        "Trải nghiệm",
+        "Tuấn",
+        "2026-06-16",
+        "2026-06-27",
+        11,
+        0.15,
+        259,
+        414,
+        "Done",
+        "High"
+      ],
+      [
+        "T029",
+        "Dữ liệu",
+        "Mai",
+        "2026-06-22",
+        "2026-07-06",
+        14,
+        0.24,
+        276,
+        510,
+        "On track",
+        "Medium"
+      ],
+      [
+        "T030",
+        "Nền tảng",
+        "Khánh",
+        "2026-06-28",
+        "2026-07-15",
+        17,
+        0.33,
+        53,
+        111,
+        "At risk",
+        "Low"
+      ],
+      [
+        "T031",
+        "Năng lực",
+        "Lan",
+        "2026-07-04",
+        "2026-07-24",
+        20,
+        0.42,
+        70,
+        77,
+        "Blocked",
+        "High"
+      ],
+      [
+        "T032",
+        "Trải nghiệm",
+        "Minh",
+        "2026-07-10",
+        "2026-08-02",
+        23,
+        0.51,
+        87,
+        117,
+        "Done",
+        "Medium"
+      ],
+      [
+        "T033",
+        "Dữ liệu",
+        "Hà",
+        "2026-07-16",
+        "2026-08-11",
+        26,
+        0.6,
+        104,
+        166,
+        "On track",
+        "Low"
+      ],
+      [
+        "T034",
+        "Nền tảng",
+        "Tuấn",
+        "2026-07-22",
+        "2026-08-20",
+        29,
+        0.69,
+        121,
+        223,
+        "At risk",
+        "High"
+      ],
+      [
+        "T035",
+        "Năng lực",
+        "Mai",
+        "2026-07-28",
+        "2026-08-04",
+        7,
+        0.78,
+        138,
+        289,
+        "Blocked",
+        "Medium"
+      ],
+      [
+        "T036",
+        "Trải nghiệm",
+        "Khánh",
+        "2026-08-03",
+        "2026-08-13",
+        10,
+        0.87,
+        155,
+        170,
+        "Done",
+        "Low"
+      ],
+      [
+        "T037",
+        "Dữ liệu",
+        "Lan",
+        "2026-08-09",
+        "2026-08-22",
+        13,
+        0.15,
+        172,
+        232,
+        "On track",
+        "High"
+      ],
+      [
+        "T038",
+        "Nền tảng",
+        "Minh",
+        "2026-08-15",
+        "2026-08-31",
+        16,
+        0.24,
+        189,
+        302,
+        "At risk",
+        "Medium"
+      ],
+      [
+        "T039",
+        "Năng lực",
+        "Hà",
+        "2026-08-21",
+        "2026-09-09",
+        19,
+        0.33,
+        206,
+        381,
+        "Blocked",
+        "Low"
+      ],
+      [
+        "T040",
+        "Trải nghiệm",
+        "Tuấn",
+        "2026-08-27",
+        "2026-09-18",
+        22,
+        0.42,
+        223,
+        468,
+        "Done",
+        "High"
+      ],
+      [
+        "T041",
+        "Dữ liệu",
+        "Mai",
+        "2026-09-02",
+        "2026-09-27",
+        25,
+        0.51,
+        240,
+        264,
+        "On track",
+        "Medium"
+      ],
+      [
+        "T042",
+        "Nền tảng",
+        "Khánh",
+        "2026-09-08",
+        "2026-10-06",
+        28,
+        0.6,
+        257,
+        346,
+        "At risk",
+        "Low"
+      ],
+      [
+        "T043",
+        "Năng lực",
+        "Lan",
+        "2026-01-07",
+        "2026-01-13",
+        6,
+        0.69,
+        274,
+        438,
+        "Blocked",
+        "High"
+      ],
+      [
+        "T044",
+        "Trải nghiệm",
+        "Minh",
+        "2026-01-13",
+        "2026-01-22",
+        9,
+        0.78,
+        51,
+        94,
+        "Done",
+        "Medium"
+      ],
+      [
+        "T045",
+        "Dữ liệu",
+        "Hà",
+        "2026-01-19",
+        "2026-01-31",
+        12,
+        0.87,
+        68,
+        142,
+        "On track",
+        "Low"
+      ],
+      [
+        "T046",
+        "Nền tảng",
+        "Tuấn",
+        "2026-01-25",
+        "2026-02-09",
+        15,
+        0.15,
+        85,
+        93,
+        "At risk",
+        "High"
+      ],
+      [
+        "T047",
+        "Năng lực",
+        "Mai",
+        "2026-01-31",
+        "2026-02-18",
+        18,
+        0.24,
+        102,
+        137,
+        "Blocked",
+        "Medium"
+      ],
+      [
+        "T048",
+        "Trải nghiệm",
+        "Khánh",
+        "2026-02-06",
+        "2026-02-27",
+        21,
+        0.33,
+        119,
+        190,
+        "Done",
+        "Low"
+      ],
+      [
+        "T049",
+        "Dữ liệu",
+        "Lan",
+        "2026-02-12",
+        "2026-03-08",
+        24,
+        0.42,
+        136,
+        251,
+        "On track",
+        "High"
+      ],
+      [
+        "T050",
+        "Nền tảng",
+        "Minh",
+        "2026-02-18",
+        "2026-03-17",
+        27,
+        0.51,
+        153,
+        321,
+        "At risk",
+        "Medium"
+      ],
+      [
+        "T051",
+        "Năng lực",
+        "Hà",
+        "2026-02-24",
+        "2026-03-01",
+        5,
+        0.6,
+        170,
+        187,
+        "Blocked",
+        "Low"
+      ],
+      [
+        "T052",
+        "Trải nghiệm",
+        "Tuấn",
+        "2026-03-02",
+        "2026-03-10",
+        8,
+        0.69,
+        187,
+        252,
+        "Done",
+        "High"
+      ],
+      [
+        "T053",
+        "Dữ liệu",
+        "Mai",
+        "2026-03-08",
+        "2026-03-19",
+        11,
+        0.78,
+        204,
+        326,
+        "On track",
+        "Medium"
+      ],
+      [
+        "T054",
+        "Nền tảng",
+        "Khánh",
+        "2026-03-14",
+        "2026-03-28",
+        14,
+        0.87,
+        221,
+        408,
+        "At risk",
+        "Low"
+      ],
+      [
+        "T055",
+        "Năng lực",
+        "Lan",
+        "2026-03-20",
+        "2026-04-06",
+        17,
+        0.15,
+        238,
+        499,
+        "Blocked",
+        "High"
+      ],
+      [
+        "T056",
+        "Trải nghiệm",
+        "Minh",
+        "2026-03-26",
+        "2026-04-15",
+        20,
+        0.24,
+        255,
+        280,
+        "Done",
+        "Medium"
+      ],
+      [
+        "T057",
+        "Dữ liệu",
+        "Hà",
+        "2026-04-01",
+        "2026-04-24",
+        23,
+        0.33,
+        272,
+        367,
+        "On track",
+        "Low"
+      ],
+      [
+        "T058",
+        "Nền tảng",
+        "Tuấn",
+        "2026-04-07",
+        "2026-05-03",
+        26,
+        0.42,
+        49,
+        78,
+        "At risk",
+        "High"
+      ],
+      [
+        "T059",
+        "Năng lực",
+        "Mai",
+        "2026-04-13",
+        "2026-05-12",
+        29,
+        0.51,
+        66,
+        122,
+        "Blocked",
+        "Medium"
+      ],
+      [
+        "T060",
+        "Trải nghiệm",
+        "Khánh",
+        "2026-04-19",
+        "2026-04-26",
+        7,
+        0.6,
+        83,
+        174,
+        "Done",
+        "Low"
+      ]
+    ],
+    "freeze": "C2",
+    "print_area": "A1:K61",
+    "formats": {
+      "Progress": "0%"
+    },
+    "widths": {
+      "A:A": 10,
+      "B:B": 16,
+      "C:C": 12,
+      "D:E": 13,
+      "F:F": 8,
+      "G:G": 10,
+      "H:I": 12,
+      "J:J": 12,
+      "K:K": 9
+    }
+  },
+  "tasks": [
+    {
+      "name": "Khảo sát hiện trạng",
+      "start": "2026-01-05",
+      "days": 12,
+      "progress": 0.2
+    },
+    {
+      "name": "Chuẩn hoá dữ liệu chủ",
+      "start": "2026-01-23",
+      "days": 17,
+      "progress": 0.27
+    },
+    {
+      "name": "Tích hợp nguồn",
+      "start": "2026-02-10",
+      "days": 22,
+      "progress": 0.34
+    },
+    {
+      "name": "Kiểm thử chất lượng",
+      "start": "2026-02-28",
+      "days": 27,
+      "progress": 0.41
+    },
+    {
+      "name": "Đào tạo người dùng",
+      "start": "2026-03-18",
+      "days": 12,
+      "progress": 0.48
+    },
+    {
+      "name": "Dashboard điều hành",
+      "start": "2026-04-05",
+      "days": 17,
+      "progress": 0.55
+    },
+    {
+      "name": "Tự động hoá báo cáo",
+      "start": "2026-04-23",
+      "days": 22,
+      "progress": 0.62
+    },
+    {
+      "name": "Đánh giá tác động",
+      "start": "2026-05-11",
+      "days": 27,
+      "progress": 0.69
+    },
+    {
+      "name": "Mở rộng phạm vi",
+      "start": "2026-05-29",
+      "days": 12,
+      "progress": 0.76
+    },
+    {
+      "name": "Chuyển giao vận hành",
+      "start": "2026-06-16",
+      "days": 17,
+      "progress": 0.83
+    }
+  ],
+  "team": [
+    {
+      "name": "Lan Nguyễn",
+      "role": "Programme lead",
+      "focus": "Điều phối lộ trình và quyết định",
+      "photo": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T039\\experiments\\T043-20261101-opencode-advanced-xlsx\\inputs\\avatar-0.png",
+      "alt": "Ảnh Lan Nguyễn"
+    },
+    {
+      "name": "Minh Trần",
+      "role": "Data lead",
+      "focus": "Chuẩn dữ liệu chủ và chất lượng",
+      "photo": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T039\\experiments\\T043-20261101-opencode-advanced-xlsx\\inputs\\avatar-1.png",
+      "alt": "Ảnh Minh Trần"
+    },
+    {
+      "name": "Hà Phạm",
+      "role": "Platform lead",
+      "focus": "Tích hợp, API và vận hành",
+      "photo": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T039\\experiments\\T043-20261101-opencode-advanced-xlsx\\inputs\\avatar-2.png",
+      "alt": "Ảnh Hà Phạm"
+    },
+    {
+      "name": "Tuấn Lê",
+      "role": "Analytics lead",
+      "focus": "Mô hình, KPI và dashboard",
+      "photo": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T039\\experiments\\T043-20261101-opencode-advanced-xlsx\\inputs\\avatar-3.png",
+      "alt": "Ảnh Tuấn Lê"
+    },
+    {
+      "name": "Mai Vũ",
+      "role": "Change lead",
+      "focus": "Đào tạo và tiếp nhận",
+      "photo": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T039\\experiments\\T043-20261101-opencode-advanced-xlsx\\inputs\\avatar-4.png",
+      "alt": "Ảnh Mai Vũ"
+    },
+    {
+      "name": "Khánh Đỗ",
+      "role": "PMO",
+      "focus": "Kế hoạch, rủi ro và báo cáo",
+      "photo": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T039\\experiments\\T043-20261101-opencode-advanced-xlsx\\inputs\\avatar-5.png",
+      "alt": "Ảnh Khánh Đỗ"
+    }
+  ],
+  "nodes": [
+    {
+      "name": "Data",
+      "x": 1,
+      "y": 8,
+      "group": "Core"
+    },
+    {
+      "name": "Platform",
+      "x": 5,
+      "y": 9,
+      "group": "Core"
+    },
+    {
+      "name": "Analytics",
+      "x": 9,
+      "y": 7,
+      "group": "Core"
+    },
+    {
+      "name": "People",
+      "x": 3,
+      "y": 4,
+      "group": "Enable"
+    },
+    {
+      "name": "Process",
+      "x": 7,
+      "y": 3,
+      "group": "Enable"
+    },
+    {
+      "name": "Customer",
+      "x": 10,
+      "y": 2,
+      "group": "Outcome"
+    }
+  ],
+  "edges": [
+    {
+      "name": "Data→Platform",
+      "from": "Data",
+      "to": "Platform",
+      "x1": 1,
+      "y1": 8,
+      "x2": 5,
+      "y2": 9,
+      "weight": 3
+    },
+    {
+      "name": "Platform→Analytics",
+      "from": "Platform",
+      "to": "Analytics",
+      "x1": 5,
+      "y1": 9,
+      "x2": 9,
+      "y2": 7,
+      "weight": 3
+    },
+    {
+      "name": "Data→People",
+      "from": "Data",
+      "to": "People",
+      "x1": 1,
+      "y1": 8,
+      "x2": 3,
+      "y2": 4,
+      "weight": 2
+    },
+    {
+      "name": "People→Process",
+      "from": "People",
+      "to": "Process",
+      "x1": 3,
+      "y1": 4,
+      "x2": 7,
+      "y2": 3,
+      "weight": 2
+    },
+    {
+      "name": "Analytics→Customer",
+      "from": "Analytics",
+      "to": "Customer",
+      "x1": 9,
+      "y1": 7,
+      "x2": 10,
+      "y2": 2,
+      "weight": 2
+    },
+    {
+      "name": "Process→Customer",
+      "from": "Process",
+      "to": "Customer",
+      "x1": 7,
+      "y1": 3,
+      "x2": 10,
+      "y2": 2,
+      "weight": 1
+    }
+  ],
+  "kpis": [
+    {
+      "label": "Công việc",
+      "formula": "=TaskCount",
+      "format": "0",
+      "cached": 60,
+      "delta": "+12 trong quý",
+      "fill": "#EAF1F8",
+      "positive": true
+    },
+    {
+      "label": "Chi phí",
+      "formula": "=SUBSTITUTE(TEXT(TotalCost/1000,\"0.00\"),\".\",\",\")&\" tỷ\"",
+      "format": "General",
+      "cached": "9,45 tỷ",
+      "delta": "9.450 triệu đã phân bổ",
+      "fill": "#EAF4E7",
+      "positive": true
+    },
+    {
+      "label": "Lợi ích",
+      "formula": "=SUBSTITUTE(TEXT(TotalBenefit/1000,\"0.0\"),\".\",\",\")&\" tỷ\"",
+      "format": "General",
+      "cached": "15,1 tỷ",
+      "delta": "1,60× chi phí",
+      "fill": "#FFF2E5",
+      "positive": true
+    },
+    {
+      "label": "Rủi ro",
+      "formula": "=COUNTIF(Data!$J$2:$J$61,\"At risk\")",
+      "format": "0",
+      "cached": 15,
+      "delta": "trong 60 công việc",
+      "fill": "#F3EDF7",
+      "positive": false
+    }
+  ],
+  "pivot_source": "Data!A1:K61",
+  "pivot_rows": [
+    "Workstream"
+  ],
+  "pivot_columns": [
+    "Status"
+  ],
+  "pivot_values": [
+    {
+      "field": "Cost",
+      "func": "sum"
+    }
+  ]
+}
