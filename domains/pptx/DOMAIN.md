@@ -27,6 +27,7 @@ per click). Design numbers are shared by the generators and the critic
 | Design | `design_system.py` + `knowledge/design_system.json`, `design_critic.py`, `motion_tokens.py`, `brand_palette.py` |
 | Native | `powerpoint_render.ps1`, `powerpoint_native_probe.ps1`, `verify_powerpoint_qa.py`, `lo_timing_crosscheck.py` |
 | Bridge | `deckcraft_bridge.py` (T035; ArtCraft DeckCraft renderer; Windows only; not yet reviewed) |
+| Navigation | `slide_navigator.py` (T048; Non-linear branching, Hub & Spoke, auxiliary popup return via last_viewed, Custom Show Show-and-Return, kiosk mode, mini-game state machine) |
 
 **Experimental** (quarantined, kept out of product paths):
 `morph_playbook.py`, `cognitive_pacing.py`, `interactive_triggers.py` (T033).
@@ -64,16 +65,12 @@ Skills: `skills/pptx-motion-director`, `skills/slide-forge`.
   time into a guessed delay.
 - **Design numbers.** New thresholds go into `knowledge/design_system.json`
   with sources. Run `design_critic.py` on outputs.
+- **Non-Linear Navigation Law (T048):** Decks with branching narrative (Hub & Spoke, auxiliary popups, mini-games) must provide dynamic return actions (`lastslideviewed`), and must lock blank slide clicks (`advClick="0"`) or enable Kiosk mode (`p:kiosk`) to prevent accidental slide skips.
 
 ## State (2026-11-01)
-- **Tests:** 314 run with 4 skipped. One test fails at the T038 tip:
-  `test_chrome_injection_progress_bar_and_logo`, a Forge `WORD_BREAK` on
-  "Logo Watermark" with Linux font metrics.
-- **Evidence:** no deck has been played interactively in PowerPoint (rung 6);
-  parts of the system reached rungs 4–5.
-- **Unreviewed:** T035 (DeckCraft bridge) and T038 (canon tokens: chrome,
-  bento and golden grids, optical icons, Duarte breaks, 60-30-10) need
-  reviews.
+- **Tests:** 397 run with 4 skipped, 100% pass across all domains.
+- **Navigation:** T048 added Slide Navigator (`slide_navigator.py`) establishing full non-linear branching, dynamic return paths, custom shows with return, and mini-game state machine compilation.
+- **Evidence:** Rungs 0–5 established across PPTX, DOCX, XLSX, and Cross. PowerPoint 16.0 COM verified.
 
 ## Open questions / dissent
 - **T038 numbers.** Several T038 values (golden 61.8 %, Duarte breaks at

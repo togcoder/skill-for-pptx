@@ -1,0 +1,212 @@
+{
+  "presentation": "C:\\Users\\COMPUTER\\Desktop\\làm chung với ai\\skill-for-pptx\\experiments\\T048-20261101-antigravity-slide-branching\\artifacts\\interactive_adventure_game.pptx",
+  "total_slides": 5,
+  "kiosk_mode": true,
+  "custom_shows": [],
+  "nodes": [
+    {
+      "slide_index": 0,
+      "file": "slide1.xml",
+      "title": "THỬ THÁCH TRÍ TUỆ NHÂN TẠO",
+      "advance_on_click": false,
+      "button_count": 1,
+      "buttons": [
+        {
+          "shape_name": "btn_start_game",
+          "label": "BẮT ĐẦU HÀNH TRÌNH ➔",
+          "action_type": "slide_jump",
+          "target": 1,
+          "raw_action": "ppaction://hlinksldjump"
+        }
+      ]
+    },
+    {
+      "slide_index": 1,
+      "file": "slide2.xml",
+      "title": "CÂU HỎI 1: BẢO TỒN DỮ LIỆU LIÊN ỨNG DỤNG",
+      "advance_on_click": false,
+      "button_count": 3,
+      "buttons": [
+        {
+          "shape_name": "btn_opt_wrong_1",
+          "label": "A. Chụp ảnh màn hình (Screenshot) dán vào slide",
+          "action_type": "slide_jump",
+          "target": 2,
+          "raw_action": "ppaction://hlinksldjump"
+        },
+        {
+          "shape_name": "btn_opt_correct_1",
+          "label": "B. Nhúng Workbook Hoàn Chỉnh (Embedded Connected Model)",
+          "action_type": "slide_jump",
+          "target": 3,
+          "raw_action": "ppaction://hlinksldjump"
+        },
+        {
+          "shape_name": "btn_opt_wrong_2",
+          "label": "C. Link ngoài đường dẫn tuyệt đối (External Link c:\\...) rồi gửi email",
+          "action_type": "slide_jump",
+          "target": 2,
+          "raw_action": "ppaction://hlinksldjump"
+        }
+      ]
+    },
+    {
+      "slide_index": 2,
+      "file": "slide3.xml",
+      "title": "LỰA CHỌN CHƯA CHÍNH XÁC!",
+      "advance_on_click": false,
+      "button_count": 2,
+      "buttons": [
+        {
+          "shape_name": "btn_try_again",
+          "label": "↺ THỬ LẠI",
+          "action_type": "last_viewed",
+          "target": "LAST_VIEWED",
+          "raw_action": "ppaction://hlinkshowjump?jump=lastslideviewed"
+        },
+        {
+          "shape_name": "btn_quit_home",
+          "label": "⌂ VỀ TRANG ĐẦU",
+          "action_type": "first_slide",
+          "target": 0,
+          "raw_action": "ppaction://hlinkshowjump?jump=firstslide"
+        }
+      ]
+    },
+    {
+      "slide_index": 3,
+      "file": "slide4.xml",
+      "title": "CÂU HỎI 2: ĐIỀU HƯỚNG PHI TUYẾN TÍNH (NON-LINEAR NAVIGATION)",
+      "advance_on_click": false,
+      "button_count": 3,
+      "buttons": [
+        {
+          "shape_name": "btn_q2_wrong",
+          "label": "A. Cố định liên kết cứng (Hardcode) luôn nhảy về Slide số 1",
+          "action_type": "slide_jump",
+          "target": 2,
+          "raw_action": "ppaction://hlinksldjump"
+        },
+        {
+          "shape_name": "btn_q2_correct",
+          "label": "B. Dùng hành động Last Slide Viewed (lastslideviewed) hoặc Custom Show Return",
+          "action_type": "slide_jump",
+          "target": 4,
+          "raw_action": "ppaction://hlinksldjump"
+        },
+        {
+          "shape_name": "btn_q2_wrong_2",
+          "label": "C. Bắt buộc người dùng nhấn phím mũi tên lùi nhiều lần",
+          "action_type": "slide_jump",
+          "target": 2,
+          "raw_action": "ppaction://hlinksldjump"
+        }
+      ]
+    },
+    {
+      "slide_index": 4,
+      "file": "slide5.xml",
+      "title": "CHIẾN THẮNG XUẤT SẮC!",
+      "advance_on_click": false,
+      "button_count": 2,
+      "buttons": [
+        {
+          "shape_name": "btn_replay",
+          "label": "CHƠI LẠI TỪ ĐẦU",
+          "action_type": "first_slide",
+          "target": 0,
+          "raw_action": "ppaction://hlinkshowjump?jump=firstslide"
+        },
+        {
+          "shape_name": "btn_end_show",
+          "label": "KẾT THÚC SHOW ✖",
+          "action_type": "end_show",
+          "target": "END",
+          "raw_action": "ppaction://hlinkshowjump?jump=endshow"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from_slide": 0,
+      "from_title": "THỬ THÁCH TRÍ TUỆ NHÂN TẠO",
+      "to_slide": 1,
+      "button_label": "BẮT ĐẦU HÀNH TRÌNH ➔",
+      "type": "slide_jump"
+    },
+    {
+      "from_slide": 1,
+      "from_title": "CÂU HỎI 1: BẢO TỒN DỮ LIỆU LIÊN ỨNG DỤNG",
+      "to_slide": 2,
+      "button_label": "A. Chụp ảnh màn hình (Screenshot) dán vào slide",
+      "type": "slide_jump"
+    },
+    {
+      "from_slide": 1,
+      "from_title": "CÂU HỎI 1: BẢO TỒN DỮ LIỆU LIÊN ỨNG DỤNG",
+      "to_slide": 3,
+      "button_label": "B. Nhúng Workbook Hoàn Chỉnh (Embedded Connected Model)",
+      "type": "slide_jump"
+    },
+    {
+      "from_slide": 1,
+      "from_title": "CÂU HỎI 1: BẢO TỒN DỮ LIỆU LIÊN ỨNG DỤNG",
+      "to_slide": 2,
+      "button_label": "C. Link ngoài đường dẫn tuyệt đối (External Link c:\\...) rồi gửi email",
+      "type": "slide_jump"
+    },
+    {
+      "from_slide": 2,
+      "from_title": "LỰA CHỌN CHƯA CHÍNH XÁC!",
+      "to_slide": "LAST_VIEWED",
+      "button_label": "↺ THỬ LẠI",
+      "type": "last_viewed"
+    },
+    {
+      "from_slide": 2,
+      "from_title": "LỰA CHỌN CHƯA CHÍNH XÁC!",
+      "to_slide": 0,
+      "button_label": "⌂ VỀ TRANG ĐẦU",
+      "type": "first_slide"
+    },
+    {
+      "from_slide": 3,
+      "from_title": "CÂU HỎI 2: ĐIỀU HƯỚNG PHI TUYẾN TÍNH (NON-LINEAR NAVIGATION)",
+      "to_slide": 2,
+      "button_label": "A. Cố định liên kết cứng (Hardcode) luôn nhảy về Slide số 1",
+      "type": "slide_jump"
+    },
+    {
+      "from_slide": 3,
+      "from_title": "CÂU HỎI 2: ĐIỀU HƯỚNG PHI TUYẾN TÍNH (NON-LINEAR NAVIGATION)",
+      "to_slide": 4,
+      "button_label": "B. Dùng hành động Last Slide Viewed (lastslideviewed) hoặc Custom Show Return",
+      "type": "slide_jump"
+    },
+    {
+      "from_slide": 3,
+      "from_title": "CÂU HỎI 2: ĐIỀU HƯỚNG PHI TUYẾN TÍNH (NON-LINEAR NAVIGATION)",
+      "to_slide": 2,
+      "button_label": "C. Bắt buộc người dùng nhấn phím mũi tên lùi nhiều lần",
+      "type": "slide_jump"
+    },
+    {
+      "from_slide": 4,
+      "from_title": "CHIẾN THẮNG XUẤT SẮC!",
+      "to_slide": 0,
+      "button_label": "CHƠI LẠI TỪ ĐẦU",
+      "type": "first_slide"
+    },
+    {
+      "from_slide": 4,
+      "from_title": "CHIẾN THẮNG XUẤT SẮC!",
+      "to_slide": "END",
+      "button_label": "KẾT THÚC SHOW ✖",
+      "type": "end_show"
+    }
+  ],
+  "dead_ends": [],
+  "is_non_linear": true,
+  "mermaid": "graph TD\n  S0[\"Slide 1: THỬ THÁCH TRÍ TUỆ NHÂN TẠ\"]\n  S1[\"Slide 2: CÂU HỎI 1: BẢO TỒN DỮ LIỆ\"]\n  S2[\"Slide 3: LỰA CHỌN CHƯA CHÍNH XÁC!\"]\n  S3[\"Slide 4: CÂU HỎI 2: ĐIỀU HƯỚNG PHI\"]\n  S4[\"Slide 5: CHIẾN THẮNG XUẤT SẮC!\"]\n  S0 -->|\"BẮT ĐẦU HÀNH TRÌNH ➔\"| S1\n  S1 -->|\"A. Chụp ảnh màn hình\"| S2\n  S1 -->|\"B. Nhúng Workbook Ho\"| S3\n  S1 -->|\"C. Link ngoài đường \"| S2\n  S2 -.->|\"↺ THỬ LẠI\"| LAST_VIEWED\n  S2 -->|\"⌂ VỀ TRANG ĐẦU\"| S0\n  S3 -->|\"A. Cố định liên kết \"| S2\n  S3 -->|\"B. Dùng hành động La\"| S4\n  S3 -->|\"C. Bắt buộc người dù\"| S2\n  S4 -->|\"CHƠI LẠI TỪ ĐẦU\"| S0\n  S4 -.->|\"KẾT THÚC SHOW ✖\"| END"
+}
