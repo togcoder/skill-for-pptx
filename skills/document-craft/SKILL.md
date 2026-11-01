@@ -83,6 +83,33 @@ is the acceptance gate. Record the source tool/version/command and the asset
 licence. If VectorCraft is absent, use a plain PNG; the document path must still
 work.
 
+## Standards-controlled report (T047)
+
+Use this when the user says “a real report”, “a standard”, “show me what you
+control”, or asks for an annual/ESG/thesis/manual.
+
+1. **Pick a profile, not a vibe.** `domains/docx/data/report_standard.json`
+   records ISO 7144 (structure), ISO 2145 (numbering), ISO 690 (references),
+   ISO 80000/8601 (units/dates), WCAG 2.2, GRI 1/2/3/305. Do not claim a
+   standard you cannot evidence.
+2. **Print the control matrix before the TOC.** For each control: ID, clause,
+   implementation, evidence, status (`met` / `partly` / `limited`).
+3. **Order front matter for the standard.** `front_matter.order: "iso7144"`
+   gives abstract → preface → TOC → lists. References go after appendices and
+   carry no body section number.
+4. **Give the reader enough.** A 20+ page annual report has: cover, document
+   control, abstract, TOC/lists, strategy, products, financials, operations,
+   governance, risk, materiality, environment, social, supply chain,
+   methodology, conclusion, GRI index, data appendix, glossary, references.
+5. **Every table/figure has caption, source and number; every equation has a
+   number and a symbol legend when needed.**
+6. **State limits.** Self-declared ESG, no external assurance, PDF/UA not
+   validated, synthetic data. A limitation is part of the craft.
+
+**Do not use ISO 7144 as a certification for an annual report.** It is a
+presentation standard for theses and similar documents; use its structure and
+numbering, and say so.
+
 ## One rule per failure mode
 
 | Symptom | Real cause | Fix |

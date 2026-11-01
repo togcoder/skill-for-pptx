@@ -1,0 +1,4429 @@
+{
+  "meta": {
+    "title": "Báo cáo thường niên và ESG 2026",
+    "subtitle": "Thiết bị thông minh cho không gian sống",
+    "author": "Ban Tài chính và Phát triển bền vững",
+    "organization": "Công ty CP Thiết bị Thông minh An Nhiên (ANSMART)",
+    "document_id": "ANSMART-AR-2026",
+    "version": "1.0",
+    "date": "2026-12-31",
+    "language": "vi-VN",
+    "classification": "Công khai",
+    "keywords": [
+      "báo cáo thường niên",
+      "ESG",
+      "GRI",
+      "quản trị",
+      "phát thải"
+    ]
+  },
+  "cover": {
+    "enabled": true,
+    "hero_image": "../artifacts/cover.png",
+    "hero_alt": "Dải bìa navy với camera AI ANSMART bên phải, vạch cam và lưới isometric mờ."
+  },
+  "front_matter": {
+    "order": "iso7144",
+    "abstract": {
+      "enabled": true,
+      "title": "Tóm tắt điều hành",
+      "text": "Báo cáo thường niên và ESG 2026 của ANSMART trình bày kết quả kinh doanh, quản trị và tác động môi trường – xã hội trong kỳ 2026-01-01 đến 2026-12-31. Doanh thu đạt 940 tỷ VND (+20,4%), EBITDA 166 tỷ (biên 17,7%), lợi nhuận sau thuế 118 tỷ (+28,3%).\n\nBáo cáo được lập theo GRI 1: Foundation 2021 và các tiêu chuẩn trình bày ISO 7144/2145/690/80000/8601; cấu trúc, đánh số, tài liệu tham khảo và kiểm soát dữ liệu được nêu trong Lời nói đầu. Nội dung ESG tự công bố, chưa được đảm bảo bên ngoài; báo cáo tài chính đã kiểm toán độc lập.\n\nBáo cáo gồm 14 mục, 3 phụ lục và 11 tài liệu tham khảo. Phần trọng yếu nêu phương pháp và giới hạn; phần môi trường trình bày Scope 1–3 và cường độ phát thải; phần xã hội trình bày nhân sự, đào tạo và an toàn; phần quản trị trình bày HĐQT, rủi ro và đạo đức.\n\nNgười đọc có thể kiểm tra chéo: mỗi bảng có nguồn, mỗi hình có số hiệu, mỗi công thức có số; chỉ mục GRI ở Phụ lục A liên kết từng disclosure tới vị trí tương ứng.",
+      "keywords": [
+        "ANSMART",
+        "GRI 2021",
+        "ESG",
+        "ISO 7144",
+        "báo cáo thường niên"
+      ]
+    },
+    "preface": {
+      "enabled": true,
+      "title": "Lời nói đầu và kiểm soát tài liệu",
+      "text": "Báo cáo này được kiểm soát như một tài liệu có phiên bản, không phải một tệp trình bày. Bảng dưới đây công bố bộ tiêu chuẩn áp dụng và bằng chứng kiểm soát tương ứng; mọi thay đổi sau phát hành phải qua quy trình phê duyệt và được ghi trong nhật ký phiên bản.",
+      "blocks": [
+        {
+          "type": "table",
+          "advanced": true,
+          "columns": [
+            {
+              "header": "Hạng mục",
+              "width_mm": 42,
+              "align": "left"
+            },
+            {
+              "header": "Nội dung",
+              "width_mm": 110,
+              "align": "left"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "text": "Tên tài liệu",
+                "bold": true
+              },
+              {
+                "text": "Báo cáo thường niên và ESG 2026"
+              }
+            ],
+            [
+              {
+                "text": "Mã tài liệu / phiên bản",
+                "bold": true
+              },
+              {
+                "text": "ANSMART-AR-2026 / 1.0"
+              }
+            ],
+            [
+              {
+                "text": "Ngày phát hành",
+                "bold": true
+              },
+              {
+                "text": "2026-12-31"
+              }
+            ],
+            [
+              {
+                "text": "Kỳ báo cáo",
+                "bold": true
+              },
+              {
+                "text": "2026-01-01 → 2026-12-31"
+              }
+            ],
+            [
+              {
+                "text": "Phạm vi",
+                "bold": true
+              },
+              {
+                "text": "ANSMART và 3 công ty con; nhà máy Bình Dương, R&D TP.HCM"
+              }
+            ],
+            [
+              {
+                "text": "Đơn vị tiền tệ",
+                "bold": true
+              },
+              {
+                "text": "tỷ VND; 1 tỷ = 10⁹ VND"
+              }
+            ],
+            [
+              {
+                "text": "Phê duyệt",
+                "bold": true
+              },
+              {
+                "text": "HĐQT 2026-12-20; TGĐ ký 2026-12-31"
+              }
+            ],
+            [
+              {
+                "text": "Đảm bảo",
+                "bold": true
+              },
+              {
+                "text": "BCTC kiểm toán độc lập; ESG tự công bố, chưa assured"
+              }
+            ],
+            [
+              {
+                "text": "Liên hệ",
+                "bold": true
+              },
+              {
+                "text": "investor@ansmart.example"
+              }
+            ]
+          ],
+          "alt": "Thông tin kiểm soát tài liệu",
+          "caption": ""
+        },
+        {
+          "type": "table",
+          "advanced": true,
+          "columns": [
+            {
+              "header": "Mã",
+              "width_mm": 22,
+              "align": "center"
+            },
+            {
+              "header": "Tiêu chuẩn / điều",
+              "width_mm": 32,
+              "align": "left"
+            },
+            {
+              "header": "Kiểm soát",
+              "width_mm": 40,
+              "align": "left"
+            },
+            {
+              "header": "Bằng chứng",
+              "width_mm": 38,
+              "align": "left"
+            },
+            {
+              "header": "Trạng thái",
+              "width_mm": 23,
+              "align": "center"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "text": "DOC-STRUCT",
+                "bold": true
+              },
+              {
+                "text": "ISO 7144 §5"
+              },
+              {
+                "text": "Front matter → body → annexes → end matter, in that order"
+              },
+              {
+                "text": "section order + TOC; audit sections/headings"
+              },
+              {
+                "text": "Đạt",
+                "fill": "E2EFDA",
+                "bold": true,
+                "align": "center"
+              }
+            ],
+            [
+              {
+                "text": "DOC-NUMBER",
+                "bold": true
+              },
+              {
+                "text": "ISO 2145"
+              },
+              {
+                "text": "1 / 1.1 / 1.1.1, no trailing dot, continuous"
+              },
+              {
+                "text": "multilevel heading list; TOC field"
+              },
+              {
+                "text": "Đạt",
+                "fill": "E2EFDA",
+                "bold": true,
+                "align": "center"
+              }
+            ],
+            [
+              {
+                "text": "DOC-EQUATION",
+                "bold": true
+              },
+              {
+                "text": "ISO 7144 §15.5"
+              },
+              {
+                "text": "Display equations indented/extra space; number in parentheses at the right"
+              },
+              {
+                "text": "Equation style + right tab + SEQ Equation"
+              },
+              {
+                "text": "Đạt",
+                "fill": "E2EFDA",
+                "bold": true,
+                "align": "center"
+              }
+            ],
+            [
+              {
+                "text": "DOC-FIGTABLE",
+                "bold": true
+              },
+              {
+                "text": "ISO 7144 §12, §15.7"
+              },
+              {
+                "text": "Figures/tables near first reference; lists with number, caption, page; source note"
+              },
+              {
+                "text": "SEQ captions, List of Figures/Tables, source lines"
+              },
+              {
+                "text": "Đạt",
+                "fill": "E2EFDA",
+                "bold": true,
+                "align": "center"
+              }
+            ],
+            [
+              {
+                "text": "DOC-REF",
+                "bold": true
+              },
+              {
+                "text": "ISO 690:2021"
+              },
+              {
+                "text": "Reference elements in order; numbered citation links"
+              },
+              {
+                "text": "reference list + [n] citations"
+              },
+              {
+                "text": "Đạt",
+                "fill": "E2EFDA",
+                "bold": true,
+                "align": "center"
+              }
+            ],
+            [
+              {
+                "text": "DOC-UNITS",
+                "bold": true
+              },
+              {
+                "text": "ISO 80000-1 / ISO 8601-1"
+              },
+              {
+                "text": "Unit symbols, value–unit space, ISO dates in data tables"
+              },
+              {
+                "text": "table headers and document-control dates"
+              },
+              {
+                "text": "Đạt",
+                "fill": "E2EFDA",
+                "bold": true,
+                "align": "center"
+              }
+            ],
+            [
+              {
+                "text": "DOC-ACCESS",
+                "bold": true
+              },
+              {
+                "text": "WCAG 2.2 AA / PDF-UA target"
+              },
+              {
+                "text": "Heading structure, alt text, table header rows, language, contrast"
+              },
+              {
+                "text": "audit alt/header/language stats; Word tagged export"
+              },
+              {
+                "text": "Một phần",
+                "fill": "FFF2CC",
+                "bold": true,
+                "align": "center"
+              }
+            ],
+            [
+              {
+                "text": "GRI-CONTENT",
+                "bold": true
+              },
+              {
+                "text": "GRI 1 / GRI 2 / GRI 3"
+              },
+              {
+                "text": "Material topics, boundary, governance, stakeholder engagement, content index"
+              },
+              {
+                "text": "GRI content index appendix; materiality table"
+              },
+              {
+                "text": "Đạt (tự công bố)",
+                "fill": "E2EFDA",
+                "bold": true,
+                "align": "center"
+              }
+            ],
+            [
+              {
+                "text": "GRI-305",
+                "bold": true
+              },
+              {
+                "text": "GRI 305: Emissions 2016"
+              },
+              {
+                "text": "Scope 1/2/3, intensity, target and base year"
+              },
+              {
+                "text": "emissions table, intensity equation, target callout"
+              },
+              {
+                "text": "Đạt",
+                "fill": "E2EFDA",
+                "bold": true,
+                "align": "center"
+              }
+            ],
+            [
+              {
+                "text": "DOC-ASSURANCE",
+                "bold": true
+              },
+              {
+                "text": "GRI 1 §5 / ISO 7144 preface"
+              },
+              {
+                "text": "Assurance statement and limitations"
+              },
+              {
+                "text": "document-control callout; no external assurance claimed"
+              },
+              {
+                "text": "Hạn chế",
+                "fill": "FCE4D6",
+                "bold": true,
+                "align": "center"
+              }
+            ]
+          ],
+          "alt": "Bảng kiểm soát tiêu chuẩn",
+          "caption": "",
+          "cell_margins_mm": 0.9
+        }
+      ]
+    },
+    "toc": {
+      "enabled": true,
+      "levels": 3,
+      "title": "Mục lục"
+    },
+    "list_of_figures": {
+      "enabled": true,
+      "title": "Danh mục hình",
+      "mode": "ref_pageref",
+      "page_break_after": false
+    },
+    "list_of_tables": {
+      "enabled": true,
+      "title": "Danh mục bảng",
+      "mode": "ref_pageref"
+    }
+  },
+  "sections": [
+    {
+      "heading": "Tổng quan và phạm vi báo cáo",
+      "level": 1,
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Báo cáo thường niên và ESG 2026 của ANSMART trình bày kết quả kinh doanh, quản trị và tác động môi trường – xã hội của công ty trong kỳ 2026-01-01 đến 2026-12-31. Báo cáo được lập cho HĐQT, cổ đông, nhà đầu tư và các bên liên quan; nội dung ESG được chuẩn bị theo GRI 1: Foundation 2021 {{cite:gri1}}."
+        },
+        {
+          "type": "key_values",
+          "items": [
+            {
+              "label": "Doanh thu",
+              "value": "940 tỷ",
+              "delta": "+20,4% so với 2025"
+            },
+            {
+              "label": "EBITDA",
+              "value": "166 tỷ",
+              "delta": "biên 17,7%"
+            },
+            {
+              "label": "Lợi nhuận sau thuế",
+              "value": "118 tỷ",
+              "delta": "+28,3%"
+            },
+            {
+              "label": "Nhân sự",
+              "value": "880",
+              "delta": "+70 người"
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "advanced": true,
+          "columns": [
+            {
+              "header": "Hạng mục",
+              "width_mm": 42,
+              "align": "left"
+            },
+            {
+              "header": "Nội dung",
+              "width_mm": 110,
+              "align": "left"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "text": "Tên tài liệu",
+                "bold": true
+              },
+              {
+                "text": "Báo cáo thường niên và ESG 2026"
+              }
+            ],
+            [
+              {
+                "text": "Mã tài liệu",
+                "bold": true
+              },
+              {
+                "text": "ANSMART-AR-2026"
+              }
+            ],
+            [
+              {
+                "text": "Kỳ báo cáo",
+                "bold": true
+              },
+              {
+                "text": "2026-01-01 → 2026-12-31"
+              }
+            ],
+            [
+              {
+                "text": "Phạm vi",
+                "bold": true
+              },
+              {
+                "text": "ANSMART và 3 công ty con; nhà máy Bình Dương, R&D TP.HCM"
+              }
+            ],
+            [
+              {
+                "text": "Đơn vị tiền tệ",
+                "bold": true
+              },
+              {
+                "text": "tỷ VND; 1 tỷ = 10⁹ VND"
+              }
+            ],
+            [
+              {
+                "text": "Tiêu chuẩn",
+                "bold": true
+              },
+              {
+                "text": "ISO 7144:1986; ISO 2145; ISO 690:2021; ISO 80000-1; ISO 8601-1; WCAG 2.2 AA; GRI 1/2/3/305"
+              }
+            ],
+            [
+              {
+                "text": "Đảm bảo",
+                "bold": true
+              },
+              {
+                "text": "BCTC kiểm toán độc lập; nội dung ESG tự công bố, chưa được đảm bảo bên ngoài"
+              }
+            ]
+          ],
+          "alt": "Thông tin kỳ báo cáo và phạm vi",
+          "caption": ""
+        },
+        {
+          "type": "callout",
+          "title": "Cách đọc báo cáo",
+          "text": "Số liệu tài chính làm tròn đến 1 tỷ VND; tỷ lệ % làm tròn 1 chữ số thập phân. Chênh lệch nhỏ có thể do làm tròn. Các số liệu trình bày lại được nêu rõ ở Mục 8.2.",
+          "fill": "EAF1F8"
+        },
+        {
+          "type": "callout",
+          "title": "Tuyên bố tuân thủ",
+          "text": "Báo cáo được lập theo GRI 1: Foundation 2021 và GRI 2/3/305 ở mức tự công bố. Cấu trúc và đánh số theo ISO 7144/ISO 2145; tài liệu tham khảo theo ISO 690:2021. PDF/UA là mục tiêu nhưng chưa được xác nhận bằng veraPDF/PAC; đây là giới hạn được công bố, không phải một tuyên bố tuân thủ.",
+          "fill": "EAF1F8"
+        },
+        {
+          "type": "paragraph",
+          "text": "Báo cáo ưu tiên tính có thể kiểm chứng: mỗi bảng có nguồn, mỗi hình có số và chú thích, mỗi công thức có số hiệu; danh mục kiểm soát tiêu chuẩn ở phần Lời nói đầu nêu rõ điều khoản và bằng chứng."
+        }
+      ]
+    },
+    {
+      "heading": "Tóm tắt điều hành",
+      "level": 1,
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Năm 2026 là năm tăng tốc có kiểm soát. Doanh thu đạt 940 tỷ VND, tăng 20,4%; EBITDA đạt 166 tỷ, biên 17,7%. Tăng trưởng đến từ camera AI thế hệ mới, mở rộng kênh xuất khẩu và doanh thu thuê bao Cloud."
+        },
+        {
+          "type": "table",
+          "advanced": true,
+          "columns": [
+            {
+              "header": "Chỉ tiêu",
+              "width_mm": 36,
+              "align": "left"
+            },
+            {
+              "header": "2026",
+              "width_mm": 22,
+              "align": "right"
+            },
+            {
+              "header": "2025",
+              "width_mm": 22,
+              "align": "right"
+            },
+            {
+              "header": "Thay đổi",
+              "width_mm": 26,
+              "align": "right"
+            },
+            {
+              "header": "Ghi chú",
+              "width_mm": 46,
+              "align": "left"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "text": "Doanh thu",
+                "bold": true
+              },
+              {
+                "text": "940",
+                "align": "right"
+              },
+              {
+                "text": "781",
+                "align": "right"
+              },
+              {
+                "text": "+20,4%",
+                "align": "right",
+                "fill": "E2EFDA"
+              },
+              {
+                "text": "Tăng nhờ kênh Smart Home và xuất khẩu"
+              }
+            ],
+            [
+              {
+                "text": "EBITDA",
+                "bold": true
+              },
+              {
+                "text": "166",
+                "align": "right"
+              },
+              {
+                "text": "132",
+                "align": "right"
+              },
+              {
+                "text": "+25,8%",
+                "align": "right",
+                "fill": "E2EFDA"
+              },
+              {
+                "text": "Biên 17,7% (2025: 16,9%)"
+              }
+            ],
+            [
+              {
+                "text": "Lợi nhuận sau thuế",
+                "bold": true
+              },
+              {
+                "text": "118",
+                "align": "right"
+              },
+              {
+                "text": "92",
+                "align": "right"
+              },
+              {
+                "text": "+28,3%",
+                "align": "right",
+                "fill": "E2EFDA"
+              },
+              {
+                "text": "Một lần hoàn nhập thuế 4,2 tỷ"
+              }
+            ],
+            [
+              {
+                "text": "Nhân sự",
+                "bold": true
+              },
+              {
+                "text": "880",
+                "align": "right"
+              },
+              {
+                "text": "810",
+                "align": "right"
+              },
+              {
+                "text": "+8,6%",
+                "align": "right"
+              },
+              {
+                "text": "Tuyển 112, nghỉ 42"
+              }
+            ],
+            [
+              {
+                "text": "Cường độ phát thải",
+                "bold": true
+              },
+              {
+                "text": "24,73",
+                "align": "right"
+              },
+              {
+                "text": "30,26",
+                "align": "right"
+              },
+              {
+                "text": "-18,3%",
+                "align": "right",
+                "fill": "E2EFDA"
+              },
+              {
+                "text": "tCO₂e/tỷ VND doanh thu"
+              }
+            ],
+            [
+              {
+                "text": "Giờ đào tạo/người",
+                "bold": true
+              },
+              {
+                "text": "20,9",
+                "align": "right"
+              },
+              {
+                "text": "18,5",
+                "align": "right"
+              },
+              {
+                "text": "+13,0%",
+                "align": "right",
+                "fill": "E2EFDA"
+              },
+              {
+                "text": "Tổng 18.400 giờ"
+              }
+            ]
+          ],
+          "caption": "Chỉ tiêu điều hành 2026",
+          "alt": "Bảng chỉ tiêu điều hành 2026 so với 2025",
+          "source": "BCTC kiểm toán 2026; HRIS; ESG ledger"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "**Tăng trưởng có chất lượng:** doanh thu tăng 20,4% nhưng điện năng chỉ tăng 4,2%; cường độ phát thải giảm 18,3%.",
+            "**Khách hàng:** NPS 62 (+4 điểm), tỷ lệ lỗi sản phẩm 0,42% (2025: 0,55%).",
+            "**Con người:** 880 nhân sự, 18.400 giờ đào tạo, tỷ lệ nghỉ việc 4,8%.",
+            "**Quản trị:** 3/6 thành viên HĐQT độc lập; Ủy ban ESG & rủi ro họp 4 lần/năm."
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "Thông điệp của Chủ tịch HĐQT",
+          "text": "“Chúng tôi không đổi tăng trưởng lấy niềm tin. Mỗi sản phẩm mới phải vượt qua kiểm soát dữ liệu, an toàn và tác động môi trường trước khi ra thị trường.” — Trần Minh An",
+          "fill": "FFF2E5"
+        },
+        {
+          "type": "paragraph",
+          "text": "Báo cáo này cũng là một bài kiểm tra tính minh bạch: các chỉ số được trình bày cùng nguồn, chủ sở hữu dữ liệu và kiểm soát nội bộ; các giới hạn được nêu thay vì che giấu. Người đọc có thể đối chiếu bảng số với hình, công thức và phụ lục GRI."
+        }
+      ]
+    },
+    {
+      "heading": "Mô hình kinh doanh và chiến lược",
+      "level": 1,
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "ANSMART thiết kế, sản xuất và vận hành thiết bị thông minh cho không gian sống: camera AI, hub, cảm biến và thiết bị chăm sóc sức khỏe tại nhà. Doanh thu đến từ phần cứng, thuê bao phần mềm và dịch vụ tích hợp cho doanh nghiệp."
+        },
+        {
+          "type": "table",
+          "advanced": true,
+          "columns": [
+            {
+              "header": "Danh mục",
+              "width_mm": 42,
+              "align": "left"
+            },
+            {
+              "header": "Doanh thu 2026 (tỷ VND)",
+              "width_mm": 32,
+              "align": "right"
+            },
+            {
+              "header": "Tỷ trọng",
+              "width_mm": 24,
+              "align": "right"
+            },
+            {
+              "header": "Biên gộp",
+              "width_mm": 24,
+              "align": "right"
+            },
+            {
+              "header": "Sản phẩm chính",
+              "width_mm": 33,
+              "align": "left"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "text": "Smart Home",
+                "bold": true
+              },
+              {
+                "text": "612",
+                "align": "right"
+              },
+              {
+                "text": "65%",
+                "align": "right"
+              },
+              {
+                "text": "34,0%",
+                "align": "right"
+              },
+              {
+                "text": "Camera AI, hub, cảm biến"
+              }
+            ],
+            [
+              {
+                "text": "Smart Care",
+                "bold": true
+              },
+              {
+                "text": "214",
+                "align": "right"
+              },
+              {
+                "text": "23%",
+                "align": "right"
+              },
+              {
+                "text": "41,0%",
+                "align": "right"
+              },
+              {
+                "text": "Thiết bị chăm sóc sức khỏe tại nhà"
+              }
+            ],
+            [
+              {
+                "text": "Platform & dịch vụ",
+                "bold": true
+              },
+              {
+                "text": "114",
+                "align": "right"
+              },
+              {
+                "text": "12%",
+                "align": "right"
+              },
+              {
+                "text": "52,0%",
+                "align": "right"
+              },
+              {
+                "text": "Thuê bao ANSMART Cloud, tích hợp API"
+              }
+            ]
+          ],
+          "caption": "Cơ cấu doanh thu theo danh mục",
+          "alt": "Bảng cơ cấu doanh thu theo ba danh mục",
+          "source": "Báo cáo quản trị 2026"
+        },
+        {
+          "type": "paragraph",
+          "text": "Chiến lược 2026–2030 gồm ba trụ: (1) tăng tỷ trọng thuê bao và dịch vụ; (2) mở rộng thị trường Đông Nam Á; (3) giảm cường độ phát thải trên mỗi tỷ doanh thu. Mỗi trụ có chỉ tiêu và chủ sở hữu riêng trong bảng điều hành."
+        },
+        {
+          "type": "callout",
+          "title": "Lợi thế cạnh tranh",
+          "text": "Tích hợp phần cứng – phần mềm – dữ liệu trong cùng một hệ sinh thái; chứng nhận ISO 27001 cho nền tảng Cloud; mạng lưới 1.200 đối tác lắp đặt tại 12 tỉnh thành.",
+          "fill": "EAF4E7"
+        }
+      ]
+    },
+    {
+      "heading": "Danh mục sản phẩm và đổi mới",
+      "level": 1,
+      "blocks": [
+        {
+          "type": "figure_text",
+          "path": "../artifacts/product-camera.png",
+          "alt": "Minh họa sản phẩm camera AI ANSMART: thân máy graphite, ống kính nhiều lớp, vòng lấy nét màu cam và tay nắm có vân.",
+          "title": "Camera AI ANSMART S2",
+          "caption": "Camera AI S2 — thiết kế năm 2026.",
+          "heading": "Thiết kế để tin cậy",
+          "text": "Camera S2 dùng ống kính 5 lớp, cảm biến 1/1.8 inch và xử lý AI tại biên. Vỏ graphite giảm phản xạ, tay nắm có vân giúp lắp đặt nhanh; vòng cam là điểm nhận diện thương hiệu.\n\nThiết kế phần cứng được đánh giá cùng kiểm soát quyền riêng tư: đèn trạng thái vật lý, công tắc che ống kính và mã hóa đầu cuối.",
+          "image_side": "left",
+          "image_width_mm": 72,
+          "source": "ANSMART Design Studio; minh họa vector bởi VectorCraft + Pillow."
+        },
+        {
+          "type": "table",
+          "advanced": true,
+          "columns": [
+            {
+              "header": "Nhóm",
+              "width_mm": 40,
+              "align": "left"
+            },
+            {
+              "header": "Sản phẩm",
+              "width_mm": 44,
+              "align": "left"
+            },
+            {
+              "header": "Doanh thu 2026",
+              "width_mm": 28,
+              "align": "right"
+            },
+            {
+              "header": "Tỷ trọng",
+              "width_mm": 20,
+              "align": "right"
+            },
+            {
+              "header": "Biên gộp",
+              "width_mm": 23,
+              "align": "right"
+            }
+          ],
+          "header_rows": [
+            [
+              {
+                "text": "Danh mục",
+                "rowspan": 2
+              },
+              {
+                "text": "Doanh thu",
+                "colspan": 2,
+                "align": "center"
+              },
+              {
+                "text": "Hiệu quả",
+                "rowspan": 2
+              }
+            ],
+            [
+              {
+                "text": "2026 (tỷ VND)",
+                "align": "right"
+              },
+              {
+                "text": "Tỷ trọng",
+                "align": "right"
+              }
+            ]
+          ],
+          "rows": [
+            [
+              {
+                "text": "Smart Home",
+                "bold": true
+              },
+              {
+                "text": "Camera AI S2, Hub H3, cảm biến"
+              },
+              {
+                "text": "612",
+                "align": "right"
+              },
+              {
+                "text": "65%",
+                "align": "right"
+              },
+              {
+                "text": "34,0%",
+                "align": "right"
+              }
+            ],
+            [
+              {
+                "text": "Smart Care",
+                "bold": true
+              },
+              {
+                "text": "Thiết bị chăm sóc tại nhà"
+              },
+              {
+                "text": "214",
+                "align": "right"
+              },
+              {
+                "text": "23%",
+                "align": "right"
+              },
+              {
+                "text": "41,0%",
+                "align": "right"
+              }
+            ],
+            [
+              {
+                "text": "Platform",
+                "bold": true
+              },
+              {
+                "text": "ANSMART Cloud, API"
+              },
+              {
+                "text": "114",
+                "align": "right"
+              },
+              {
+                "text": "12%",
+                "align": "right"
+              },
+              {
+                "text": "52,0%",
+                "align": "right"
+              }
+            ]
+          ],
+          "caption": "Danh mục sản phẩm và hiệu quả",
+          "alt": "Bảng danh mục sản phẩm với header hai tầng",
+          "row_heights_mm": [
+            8,
+            8,
+            10,
+            10,
+            10
+          ],
+          "cell_margins_mm": 1.6,
+          "source": "Báo cáo quản trị 2026"
+        },
+        {
+          "type": "paragraph",
+          "text": "R&D là trung tâm của mô hình: 78 tỷ VND, 8,3% doanh thu, 186 kỹ sư. Danh mục sáng chế đạt 42 bằng sáng chế được cấp, trong đó 11 bằng liên quan đến xử lý ảnh tại biên và tiết kiệm năng lượng."
+        }
+      ]
+    },
+    {
+      "heading": "Hiệu quả tài chính",
+      "level": 1,
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Doanh thu 2026 đạt 940 tỷ VND, hoàn thành 104% kế hoạch. EBITDA 166 tỷ, biên 17,7%. Lợi nhuận sau thuế 118 tỷ, tăng 28,3% nhờ tăng trưởng doanh thu và tối ưu chi phí bán hàng."
+        },
+        {
+          "type": "table",
+          "advanced": true,
+          "columns": [
+            {
+              "header": "Chỉ tiêu",
+              "width_mm": 46,
+              "align": "left"
+            },
+            {
+              "header": "2022",
+              "width_mm": 20,
+              "align": "right"
+            },
+            {
+              "header": "2023",
+              "width_mm": 20,
+              "align": "right"
+            },
+            {
+              "header": "2024",
+              "width_mm": 20,
+              "align": "right"
+            },
+            {
+              "header": "2025",
+              "width_mm": 20,
+              "align": "right"
+            },
+            {
+              "header": "2026",
+              "width_mm": 20,
+              "align": "right"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "text": "Doanh thu",
+                "bold": true
+              },
+              {
+                "text": "420",
+                "align": "right"
+              },
+              {
+                "text": "512",
+                "align": "right"
+              },
+              {
+                "text": "638",
+                "align": "right"
+              },
+              {
+                "text": "781",
+                "align": "right"
+              },
+              {
+                "text": "940",
+                "align": "right"
+              }
+            ],
+            [
+              {
+                "text": "EBITDA",
+                "bold": true
+              },
+              {
+                "text": "64",
+                "align": "right"
+              },
+              {
+                "text": "82",
+                "align": "right"
+              },
+              {
+                "text": "104",
+                "align": "right"
+              },
+              {
+                "text": "132",
+                "align": "right"
+              },
+              {
+                "text": "166",
+                "align": "right"
+              }
+            ],
+            [
+              {
+                "text": "Biên EBITDA",
+                "bold": true
+              },
+              {
+                "text": "15,2%",
+                "align": "right"
+              },
+              {
+                "text": "16,0%",
+                "align": "right"
+              },
+              {
+                "text": "16,3%",
+                "align": "right"
+              },
+              {
+                "text": "16,9%",
+                "align": "right"
+              },
+              {
+                "text": "17,7%",
+                "align": "right"
+              }
+            ],
+            [
+              {
+                "text": "Lợi nhuận sau thuế",
+                "bold": true
+              },
+              {
+                "text": "42",
+                "align": "right"
+              },
+              {
+                "text": "55",
+                "align": "right"
+              },
+              {
+                "text": "71",
+                "align": "right"
+              },
+              {
+                "text": "92",
+                "align": "right"
+              },
+              {
+                "text": "118",
+                "align": "right"
+              }
+            ],
+            [
+              {
+                "text": "Nhân sự",
+                "bold": true
+              },
+              {
+                "text": "620",
+                "align": "right"
+              },
+              {
+                "text": "680",
+                "align": "right"
+              },
+              {
+                "text": "740",
+                "align": "right"
+              },
+              {
+                "text": "810",
+                "align": "right"
+              },
+              {
+                "text": "880",
+                "align": "right"
+              }
+            ],
+            [
+              {
+                "text": "Phát thải (tCO₂e)",
+                "bold": true
+              },
+              {
+                "text": "25.350",
+                "align": "right"
+              },
+              {
+                "text": "24.680",
+                "align": "right"
+              },
+              {
+                "text": "24.020",
+                "align": "right"
+              },
+              {
+                "text": "23.630",
+                "align": "right"
+              },
+              {
+                "text": "23.250",
+                "align": "right"
+              }
+            ]
+          ],
+          "caption": "Tóm tắt tài chính 5 năm",
+          "alt": "Bảng tóm tắt tài chính 2022–2026",
+          "source": "BCTC kiểm toán 2022–2026; đơn vị tỷ VND trừ khi ghi khác"
+        },
+        {
+          "type": "figure",
+          "path": "../artifacts/charts/revenue-print.png",
+          "alt": "Biểu đồ cột doanh thu 2022–2026 và đường mục tiêu; doanh thu tăng từ 420 lên 940 tỷ VND.",
+          "caption": "Doanh thu và mục tiêu 2022–2026.",
+          "width_mm": 145,
+          "source": "Chart Forge (SheetCraft) từ BCTC kiểm toán; xuất bằng Excel."
+        },
+        {
+          "type": "paragraph",
+          "text": "Tốc độ tăng trưởng kép 2022–2026 được tính như sau:"
+        },
+        {
+          "type": "equation",
+          "latex": "CAGR = \\left(\\frac{940}{420}\\right)^{1/4} - 1 = 22{,}3\\%",
+          "caption": "Tăng trưởng kép doanh thu 2022–2026."
+        },
+        {
+          "type": "page_break"
+        },
+        {
+          "type": "table",
+          "advanced": true,
+          "columns": [
+            {
+              "header": "Khoản mục",
+              "width_mm": 62,
+              "align": "left"
+            },
+            {
+              "header": "2026 (tỷ VND)",
+              "width_mm": 30,
+              "align": "right"
+            },
+            {
+              "header": "% doanh thu",
+              "width_mm": 26,
+              "align": "right"
+            },
+            {
+              "header": "2025 (tỷ VND)",
+              "width_mm": 30,
+              "align": "right"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "text": "Giá vốn hàng bán",
+                "bold": true
+              },
+              {
+                "text": "598",
+                "align": "right"
+              },
+              {
+                "text": "63,6%",
+                "align": "right"
+              },
+              {
+                "text": "595",
+                "align": "right"
+              }
+            ],
+            [
+              {
+                "text": "Lợi nhuận gộp",
+                "bold": true
+              },
+              {
+                "text": "342",
+                "align": "right"
+              },
+              {
+                "text": "36,4%",
+                "align": "right"
+              },
+              {
+                "text": "331",
+                "align": "right"
+              }
+            ],
+            [
+              {
+                "text": "R&D",
+                "bold": true
+              },
+              {
+                "text": "78",
+                "align": "right"
+              },
+              {
+                "text": "8,3%",
+                "align": "right"
+              },
+              {
+                "text": "66",
+                "align": "right"
+              }
+            ],
+            [
+              {
+                "text": "Bán hàng & marketing",
+                "bold": true
+              },
+              {
+                "text": "62",
+                "align": "right"
+              },
+              {
+                "text": "6,6%",
+                "align": "right"
+              },
+              {
+                "text": "58",
+                "align": "right"
+              }
+            ],
+            [
+              {
+                "text": "Quản lý doanh nghiệp",
+                "bold": true
+              },
+              {
+                "text": "36",
+                "align": "right"
+              },
+              {
+                "text": "3,8%",
+                "align": "right"
+              },
+              {
+                "text": "35",
+                "align": "right"
+              }
+            ],
+            [
+              {
+                "text": "EBITDA",
+                "bold": true
+              },
+              {
+                "text": "166",
+                "align": "right",
+                "fill": "E2EFDA"
+              },
+              {
+                "text": "17,7%",
+                "align": "right",
+                "fill": "E2EFDA"
+              },
+              {
+                "text": "132",
+                "align": "right"
+              }
+            ]
+          ],
+          "caption": "Cơ cấu chi phí và EBITDA",
+          "alt": "Bảng cơ cấu chi phí 2026 so với 2025",
+          "source": "BCTC kiểm toán 2026"
+        },
+        {
+          "type": "paragraph",
+          "text": "R&D tăng 18,2% lên 78 tỷ, tập trung vào cảm biến hình ảnh và mô hình AI tiết kiệm điện. Chi phí bán hàng tăng chậm hơn doanh thu nhờ kênh đối tác và thuê bao."
+        },
+        {
+          "type": "table",
+          "advanced": true,
+          "columns": [
+            {
+              "header": "Thị trường",
+              "width_mm": 52,
+              "align": "left"
+            },
+            {
+              "header": "2026 (tỷ VND)",
+              "width_mm": 28,
+              "align": "right"
+            },
+            {
+              "header": "2025 (tỷ VND)",
+              "width_mm": 28,
+              "align": "right"
+            },
+            {
+              "header": "Tăng trưởng",
+              "width_mm": 24,
+              "align": "right"
+            },
+            {
+              "header": "Tỷ trọng",
+              "width_mm": 23,
+              "align": "right"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "text": "Việt Nam",
+                "bold": true
+              },
+              {
+                "text": "704",
+                "align": "right"
+              },
+              {
+                "text": "598",
+                "align": "right"
+              },
+              {
+                "text": "+17,7%",
+                "align": "right"
+              },
+              {
+                "text": "75%",
+                "align": "right"
+              }
+            ],
+            [
+              {
+                "text": "ASEAN",
+                "bold": true
+              },
+              {
+                "text": "178",
+                "align": "right"
+              },
+              {
+                "text": "141",
+                "align": "right"
+              },
+              {
+                "text": "+26,2%",
+                "align": "right"
+              },
+              {
+                "text": "19%",
+                "align": "right"
+              }
+            ],
+            [
+              {
+                "text": "Khác",
+                "bold": true
+              },
+              {
+                "text": "58",
+                "align": "right"
+              },
+              {
+                "text": "42",
+                "align": "right"
+              },
+              {
+                "text": "+38,1%",
+                "align": "right"
+              },
+              {
+                "text": "6%",
+                "align": "right"
+              }
+            ],
+            [
+              {
+                "text": "Tổng",
+                "bold": true
+              },
+              {
+                "text": "940",
+                "align": "right",
+                "fill": "E2EFDA"
+              },
+              {
+                "text": "781",
+                "align": "right"
+              },
+              {
+                "text": "+20,4%",
+                "align": "right",
+                "fill": "E2EFDA"
+              },
+              {
+                "text": "100%",
+                "align": "right"
+              }
+            ]
+          ],
+          "caption": "Doanh thu theo thị trường",
+          "alt": "Bảng doanh thu theo thị trường 2026",
+          "source": "Báo cáo bán hàng 2026"
+        },
+        {
+          "type": "table",
+          "advanced": true,
+          "columns": [
+            {
+              "header": "Chỉ tiêu",
+              "width_mm": 60,
+              "align": "left"
+            },
+            {
+              "header": "2026",
+              "width_mm": 32,
+              "align": "right"
+            },
+            {
+              "header": "2025",
+              "width_mm": 32,
+              "align": "right"
+            },
+            {
+              "header": "Thay đổi",
+              "width_mm": 31,
+              "align": "right"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "text": "Dòng tiền hoạt động kinh doanh (tỷ VND)",
+                "bold": true
+              },
+              {
+                "text": "172",
+                "align": "right"
+              },
+              {
+                "text": "138",
+                "align": "right"
+              },
+              {
+                "text": "+24,6%",
+                "align": "right"
+              }
+            ],
+            [
+              {
+                "text": "Capex (tỷ VND)",
+                "bold": true
+              },
+              {
+                "text": "-64",
+                "align": "right"
+              },
+              {
+                "text": "-52",
+                "align": "right"
+              },
+              {
+                "text": "+23,1%",
+                "align": "right"
+              }
+            ],
+            [
+              {
+                "text": "Nợ ròng / EBITDA",
+                "bold": true
+              },
+              {
+                "text": "0,8x",
+                "align": "right"
+              },
+              {
+                "text": "1,1x",
+                "align": "right"
+              },
+              {
+                "text": "-0,3x",
+                "align": "right"
+              }
+            ],
+            [
+              {
+                "text": "ROE",
+                "bold": true
+              },
+              {
+                "text": "18,4%",
+                "align": "right"
+              },
+              {
+                "text": "16,1%",
+                "align": "right"
+              },
+              {
+                "text": "+2,3 điểm",
+                "align": "right"
+              }
+            ],
+            [
+              {
+                "text": "Cổ tức trên cổ phiếu",
+                "bold": true
+              },
+              {
+                "text": "1.200 đ",
+                "align": "right"
+              },
+              {
+                "text": "1.000 đ",
+                "align": "right"
+              },
+              {
+                "text": "+20%",
+                "align": "right"
+              }
+            ]
+          ],
+          "caption": "Dòng tiền và chỉ số tài chính",
+          "alt": "Bảng dòng tiền và chỉ số tài chính",
+          "source": "BCTC kiểm toán 2026; Nghị quyết ĐHĐCĐ 2026"
+        },
+        {
+          "type": "paragraph",
+          "text": "Phân bổ vốn 2026 ưu tiên R&D (34% capex), tự động hóa nhà máy (28%), mở rộng kênh phân phối (22%) và hạ tầng dữ liệu (16%). Công ty giữ nợ ròng/EBITDA dưới 1,0x và duy trì tỷ lệ cổ tức 20% lợi nhuận sau thuế."
+        }
+      ]
+    },
+    {
+      "heading": "Hiệu quả vận hành",
+      "level": 1,
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Sáu chỉ tiêu vận hành dưới đây là bảng điều hành hàng tháng của Ban Tổng Giám đốc. Mỗi chỉ tiêu có chủ sở hữu, nguồn dữ liệu và ngưỡng cảnh báo."
+        },
+        {
+          "type": "table",
+          "advanced": true,
+          "columns": [
+            {
+              "header": "Chỉ tiêu",
+              "width_mm": 42,
+              "align": "left"
+            },
+            {
+              "header": "2026",
+              "width_mm": 24,
+              "align": "right"
+            },
+            {
+              "header": "2025",
+              "width_mm": 24,
+              "align": "right"
+            },
+            {
+              "header": "Thay đổi",
+              "width_mm": 24,
+              "align": "right"
+            },
+            {
+              "header": "Ghi chú",
+              "width_mm": 41,
+              "align": "left"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "text": "NPS",
+                "bold": true
+              },
+              {
+                "text": "62",
+                "align": "right"
+              },
+              {
+                "text": "58",
+                "align": "right"
+              },
+              {
+                "text": "+4",
+                "align": "right"
+              },
+              {
+                "text": "Khảo sát 3.240 khách hàng"
+              }
+            ],
+            [
+              {
+                "text": "Giao hàng đúng hạn",
+                "bold": true
+              },
+              {
+                "text": "96,4%",
+                "align": "right"
+              },
+              {
+                "text": "94,1%",
+                "align": "right"
+              },
+              {
+                "text": "+2,3 điểm",
+                "align": "right"
+              },
+              {
+                "text": "Đơn hàng B2B, 4 nhà máy"
+              }
+            ],
+            [
+              {
+                "text": "Tỷ lệ lỗi sản phẩm",
+                "bold": true
+              },
+              {
+                "text": "0,42%",
+                "align": "right"
+              },
+              {
+                "text": "0,55%",
+                "align": "right"
+              },
+              {
+                "text": "-0,13 điểm",
+                "align": "right"
+              },
+              {
+                "text": "Lô xuất xưởng"
+              }
+            ],
+            [
+              {
+                "text": "Điện năng tiêu thụ",
+                "bold": true
+              },
+              {
+                "text": "12,4 GWh",
+                "align": "right"
+              },
+              {
+                "text": "11,9 GWh",
+                "align": "right"
+              },
+              {
+                "text": "+4,2%",
+                "align": "right"
+              },
+              {
+                "text": "Sản lượng tăng 18%"
+              }
+            ],
+            [
+              {
+                "text": "Nước tiêu thụ",
+                "bold": true
+              },
+              {
+                "text": "38.000 m³",
+                "align": "right"
+              },
+              {
+                "text": "36.500 m³",
+                "align": "right"
+              },
+              {
+                "text": "+4,1%",
+                "align": "right"
+              },
+              {
+                "text": "Tái sử dụng 22%"
+              }
+            ],
+            [
+              {
+                "text": "LTIFR",
+                "bold": true
+              },
+              {
+                "text": "0,21",
+                "align": "right"
+              },
+              {
+                "text": "0,28",
+                "align": "right"
+              },
+              {
+                "text": "-25%",
+                "align": "right"
+              },
+              {
+                "text": "Số vụ mất ngày công/1 triệu giờ"
+              }
+            ]
+          ],
+          "caption": "Chỉ tiêu vận hành 2026",
+          "alt": "Bảng chỉ tiêu vận hành 2026",
+          "source": "ERP, HRIS, nhật ký sản xuất"
+        },
+        {
+          "type": "callout",
+          "title": "Điểm cần cải thiện",
+          "text": "Điện năng tăng 4,2% trong khi sản lượng tăng 18% — tốt hơn mục tiêu decoupling, nhưng vẫn cần giảm 6% vào 2027 để đạt lộ trình 1,5°C.",
+          "fill": "FFF2CC"
+        }
+      ]
+    },
+    {
+      "heading": "Quản trị công ty",
+      "level": 1,
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "HĐQT gồm 6 thành viên, 3 độc lập (50%), 2 nữ (33%). HĐQT họp 7 lần trong năm; tỷ lệ tham dự 6,9/7. Các ủy ban giúp HĐQT giám sát kiểm toán, chiến lược và ESG – rủi ro."
+        },
+        {
+          "type": "table",
+          "advanced": true,
+          "columns": [
+            {
+              "header": "Thành viên",
+              "width_mm": 38,
+              "align": "left"
+            },
+            {
+              "header": "Vai trò",
+              "width_mm": 38,
+              "align": "left"
+            },
+            {
+              "header": "Tính độc lập",
+              "width_mm": 32,
+              "align": "center"
+            },
+            {
+              "header": "Tham dự",
+              "width_mm": 18,
+              "align": "right"
+            },
+            {
+              "header": "Chuyên môn",
+              "width_mm": 29,
+              "align": "left"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "text": "Trần Minh An",
+                "bold": true
+              },
+              {
+                "text": "Chủ tịch HĐQT"
+              },
+              {
+                "text": "Không điều hành"
+              },
+              {
+                "text": "7/7"
+              },
+              {
+                "text": "Chiến lược, M&A"
+              }
+            ],
+            [
+              {
+                "text": "Nguyễn Thu Hà",
+                "bold": true
+              },
+              {
+                "text": "Thành viên HĐQT"
+              },
+              {
+                "text": "Điều hành (TGĐ)"
+              },
+              {
+                "text": "7/7"
+              },
+              {
+                "text": "Điều hành, sản phẩm"
+              }
+            ],
+            [
+              {
+                "text": "Lê Quang Dũng",
+                "bold": true
+              },
+              {
+                "text": "Thành viên HĐQT"
+              },
+              {
+                "text": "Không điều hành"
+              },
+              {
+                "text": "6/7"
+              },
+              {
+                "text": "Tài chính, kiểm toán"
+              }
+            ],
+            [
+              {
+                "text": "Phạm Mai Lan",
+                "bold": true
+              },
+              {
+                "text": "Thành viên HĐQT"
+              },
+              {
+                "text": "Độc lập"
+              },
+              {
+                "text": "7/7"
+              },
+              {
+                "text": "ESG, nhân sự"
+              }
+            ],
+            [
+              {
+                "text": "Vũ Hoàng Nam",
+                "bold": true
+              },
+              {
+                "text": "Thành viên HĐQT"
+              },
+              {
+                "text": "Độc lập"
+              },
+              {
+                "text": "7/7"
+              },
+              {
+                "text": "Công nghệ, rủi ro"
+              }
+            ],
+            [
+              {
+                "text": "Đỗ Thị Kim",
+                "bold": true
+              },
+              {
+                "text": "Thành viên HĐQT"
+              },
+              {
+                "text": "Độc lập"
+              },
+              {
+                "text": "6/7"
+              },
+              {
+                "text": "Khách hàng, thị trường"
+              }
+            ]
+          ],
+          "caption": "Thành viên HĐQT và tỷ lệ tham dự",
+          "alt": "Bảng thành viên HĐQT",
+          "source": "Báo cáo quản trị 2026"
+        },
+        {
+          "type": "table",
+          "advanced": true,
+          "columns": [
+            {
+              "header": "Ủy ban",
+              "width_mm": 34,
+              "align": "left"
+            },
+            {
+              "header": "Thành viên",
+              "width_mm": 62,
+              "align": "left"
+            },
+            {
+              "header": "Số cuộc họp",
+              "width_mm": 22,
+              "align": "right"
+            },
+            {
+              "header": "Nhiệm vụ",
+              "width_mm": 37,
+              "align": "left"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "text": "Kiểm toán",
+                "bold": true
+              },
+              {
+                "text": "Phạm Mai Lan (chủ tịch), Vũ Hoàng Nam, Lê Quang Dũng"
+              },
+              {
+                "text": "4"
+              },
+              {
+                "text": "Giám sát kiểm toán, soát xét BCTC"
+              }
+            ],
+            [
+              {
+                "text": "Chiến lược & đầu tư",
+                "bold": true
+              },
+              {
+                "text": "Trần Minh An (chủ tịch), Nguyễn Thu Hà, Đỗ Thị Kim"
+              },
+              {
+                "text": "3"
+              },
+              {
+                "text": "Kế hoạch 5 năm, M&A"
+              }
+            ],
+            [
+              {
+                "text": "ESG & rủi ro",
+                "bold": true
+              },
+              {
+                "text": "Phạm Mai Lan (chủ tịch), Vũ Hoàng Nam, Nguyễn Thu Hà"
+              },
+              {
+                "text": "4"
+              },
+              {
+                "text": "Khí hậu, chuỗi cung ứng, tuân thủ"
+              }
+            ]
+          ],
+          "caption": "Các ủy ban của HĐQT",
+          "alt": "Bảng các ủy ban của HĐQT",
+          "source": "Điều lệ HĐQT; biên bản 2026"
+        },
+        {
+          "type": "paragraph",
+          "text": "Chính sách chống tham nhũng, xung đột lợi ích và bảo vệ người tố giác được phổ biến hàng năm; 100% thành viên HĐQT và 96% nhân sự quản lý đã ký cam kết tuân thủ."
+        }
+      ]
+    },
+    {
+      "heading": "Quản trị rủi ro",
+      "level": 1,
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Rủi ro được đánh giá theo khả năng xảy ra (1–5) và tác động (1–5). Ma trận dưới đây là công cụ điều hành: vùng đỏ cần kế hoạch giảm thiểu trong 90 ngày; vùng vàng theo dõi hàng quý."
+        },
+        {
+          "type": "table",
+          "advanced": true,
+          "columns": [
+            {
+              "header": "Khả năng \\ Tác động",
+              "width_mm": 34,
+              "align": "left"
+            },
+            {
+              "header": "1",
+              "width_mm": 20,
+              "align": "center"
+            },
+            {
+              "header": "2",
+              "width_mm": 20,
+              "align": "center"
+            },
+            {
+              "header": "3",
+              "width_mm": 20,
+              "align": "center"
+            },
+            {
+              "header": "4",
+              "width_mm": 20,
+              "align": "center"
+            },
+            {
+              "header": "5",
+              "width_mm": 20,
+              "align": "center"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "text": "5 (Cao)",
+                "bold": true
+              },
+              {
+                "text": "",
+                "fill": "FFF2CC"
+              },
+              {
+                "text": "",
+                "fill": "FFF2CC"
+              },
+              {
+                "text": "",
+                "fill": "FCE4D6"
+              },
+              {
+                "text": "",
+                "fill": "F8CBAD"
+              },
+              {
+                "text": "",
+                "fill": "F8CBAD"
+              }
+            ],
+            [
+              {
+                "text": "4",
+                "bold": true
+              },
+              {
+                "text": "",
+                "fill": "E2EFDA"
+              },
+              {
+                "text": "",
+                "fill": "FFF2CC"
+              },
+              {
+                "text": "R4",
+                "fill": "FCE4D6"
+              },
+              {
+                "text": "R1",
+                "fill": "F8CBAD"
+              },
+              {
+                "text": "",
+                "fill": "F8CBAD"
+              }
+            ],
+            [
+              {
+                "text": "3",
+                "bold": true
+              },
+              {
+                "text": "",
+                "fill": "E2EFDA"
+              },
+              {
+                "text": "",
+                "fill": "E2EFDA"
+              },
+              {
+                "text": "R5",
+                "fill": "FFF2CC"
+              },
+              {
+                "text": "R3",
+                "fill": "FCE4D6"
+              },
+              {
+                "text": "R2",
+                "fill": "F8CBAD"
+              }
+            ],
+            [
+              {
+                "text": "2",
+                "bold": true
+              },
+              {
+                "text": "",
+                "fill": "E2EFDA"
+              },
+              {
+                "text": "",
+                "fill": "E2EFDA"
+              },
+              {
+                "text": "",
+                "fill": "FFF2CC"
+              },
+              {
+                "text": "R6",
+                "fill": "FCE4D6"
+              },
+              {
+                "text": "",
+                "fill": "FCE4D6"
+              }
+            ],
+            [
+              {
+                "text": "1",
+                "bold": true
+              },
+              {
+                "text": "",
+                "fill": "E2EFDA"
+              },
+              {
+                "text": "",
+                "fill": "E2EFDA"
+              },
+              {
+                "text": "",
+                "fill": "E2EFDA"
+              },
+              {
+                "text": "",
+                "fill": "FFF2CC"
+              },
+              {
+                "text": "",
+                "fill": "FFF2CC"
+              }
+            ]
+          ],
+          "caption": "Ma trận rủi ro 2026",
+          "alt": "Ma trận 5x5 khả năng và tác động, các rủi ro R1–R6",
+          "row_heights_mm": [
+            9,
+            9,
+            9,
+            9,
+            9,
+            9
+          ],
+          "source": "Ban Quản trị rủi ro, 2026-11-30"
+        },
+        {
+          "type": "table",
+          "advanced": true,
+          "columns": [
+            {
+              "header": "Mã",
+              "width_mm": 14,
+              "align": "center"
+            },
+            {
+              "header": "Rủi ro",
+              "width_mm": 46,
+              "align": "left"
+            },
+            {
+              "header": "Khả năng",
+              "width_mm": 18,
+              "align": "right"
+            },
+            {
+              "header": "Tác động",
+              "width_mm": 18,
+              "align": "right"
+            },
+            {
+              "header": "Giảm thiểu",
+              "width_mm": 44,
+              "align": "left"
+            },
+            {
+              "header": "Chủ sở hữu",
+              "width_mm": 15,
+              "align": "left"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "text": "R1",
+                "bold": true
+              },
+              {
+                "text": "Gián đoạn chuỗi cung ứng linh kiện"
+              },
+              {
+                "text": "4"
+              },
+              {
+                "text": "4"
+              },
+              {
+                "text": "Đa nguồn 2 nhà cung cấp; tồn kho an toàn 8 tuần"
+              },
+              {
+                "text": "COO"
+              }
+            ],
+            [
+              {
+                "text": "R2",
+                "bold": true
+              },
+              {
+                "text": "Tấn công mạng vào nền tảng Cloud"
+              },
+              {
+                "text": "3"
+              },
+              {
+                "text": "5"
+              },
+              {
+                "text": "SOC 24/7, ISO 27001, diễn tập ứng cứu"
+              },
+              {
+                "text": "CTO"
+              }
+            ],
+            [
+              {
+                "text": "R3",
+                "bold": true
+              },
+              {
+                "text": "Thay đổi quy định dữ liệu tại EU"
+              },
+              {
+                "text": "3"
+              },
+              {
+                "text": "4"
+              },
+              {
+                "text": "Rà soát luật theo quý; DPIA cho sản phẩm mới"
+              },
+              {
+                "text": "Legal"
+              }
+            ],
+            [
+              {
+                "text": "R4",
+                "bold": true
+              },
+              {
+                "text": "Biến động tỷ giá VND/USD"
+              },
+              {
+                "text": "4"
+              },
+              {
+                "text": "3"
+              },
+              {
+                "text": "Hợp đồng forward 60% nhu cầu 6 tháng"
+              },
+              {
+                "text": "CFO"
+              }
+            ],
+            [
+              {
+                "text": "R5",
+                "bold": true
+              },
+              {
+                "text": "Thiếu hụt nhân sự R&D"
+              },
+              {
+                "text": "3"
+              },
+              {
+                "text": "3"
+              },
+              {
+                "text": "Học bổng, cổ phiếu thưởng, đối tác đại học"
+              },
+              {
+                "text": "CHRO"
+              }
+            ],
+            [
+              {
+                "text": "R6",
+                "bold": true
+              },
+              {
+                "text": "Rủi ro khí hậu vật lý (lũ lụt)"
+              },
+              {
+                "text": "2"
+              },
+              {
+                "text": "4"
+              },
+              {
+                "text": "Nâng nền nhà máy, bảo hiểm, kế hoạch BCP"
+              },
+              {
+                "text": "COO"
+              }
+            ]
+          ],
+          "caption": "Danh mục rủi ro trọng yếu",
+          "alt": "Bảng rủi ro trọng yếu R1–R6",
+          "source": "Ban Quản trị rủi ro, 2026-11-30"
+        }
+      ]
+    },
+    {
+      "heading": "Trọng yếu và các bên liên quan",
+      "level": 1,
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Quy trình trọng yếu 2026 kết hợp khảo sát 3.240 khách hàng, 42 cuộc phỏng vấn bên liên quan và đánh giá tác động kinh doanh. 10 chủ đề được xếp hạng; 5 chủ đề trọng yếu cao được đưa vào kế hoạch hành động 2027."
+        },
+        {
+          "type": "table",
+          "advanced": true,
+          "columns": [
+            {
+              "header": "Tác động kinh doanh \\ Kỳ vọng bên liên quan",
+              "width_mm": 34,
+              "align": "left"
+            },
+            {
+              "header": "1",
+              "width_mm": 20,
+              "align": "center"
+            },
+            {
+              "header": "2",
+              "width_mm": 20,
+              "align": "center"
+            },
+            {
+              "header": "3",
+              "width_mm": 20,
+              "align": "center"
+            },
+            {
+              "header": "4",
+              "width_mm": 20,
+              "align": "center"
+            },
+            {
+              "header": "5",
+              "width_mm": 20,
+              "align": "center"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "text": "5",
+                "bold": true
+              },
+              {
+                "text": "",
+                "fill": "FFF2CC"
+              },
+              {
+                "text": "",
+                "fill": "FCE4D6"
+              },
+              {
+                "text": "",
+                "fill": "FCE4D6"
+              },
+              {
+                "text": "T2",
+                "fill": "F8CBAD"
+              },
+              {
+                "text": "T10",
+                "fill": "F8CBAD"
+              }
+            ],
+            [
+              {
+                "text": "4",
+                "bold": true
+              },
+              {
+                "text": "",
+                "fill": "E2EFDA"
+              },
+              {
+                "text": "",
+                "fill": "FFF2CC"
+              },
+              {
+                "text": "T4",
+                "fill": "FCE4D6"
+              },
+              {
+                "text": "T1",
+                "fill": "F8CBAD"
+              },
+              {
+                "text": "T8",
+                "fill": "F8CBAD"
+              }
+            ],
+            [
+              {
+                "text": "3",
+                "bold": true
+              },
+              {
+                "text": "",
+                "fill": "E2EFDA"
+              },
+              {
+                "text": "T7",
+                "fill": "FFF2CC"
+              },
+              {
+                "text": "T3",
+                "fill": "FCE4D6"
+              },
+              {
+                "text": "",
+                "fill": "FCE4D6"
+              },
+              {
+                "text": "T5",
+                "fill": "F8CBAD"
+              }
+            ],
+            [
+              {
+                "text": "2",
+                "bold": true
+              },
+              {
+                "text": "",
+                "fill": "E2EFDA"
+              },
+              {
+                "text": "T6",
+                "fill": "E2EFDA"
+              },
+              {
+                "text": "",
+                "fill": "FFF2CC"
+              },
+              {
+                "text": "T9",
+                "fill": "FCE4D6"
+              },
+              {
+                "text": "",
+                "fill": "FCE4D6"
+              }
+            ],
+            [
+              {
+                "text": "1",
+                "bold": true
+              },
+              {
+                "text": "",
+                "fill": "E2EFDA"
+              },
+              {
+                "text": "",
+                "fill": "E2EFDA"
+              },
+              {
+                "text": "",
+                "fill": "E2EFDA"
+              },
+              {
+                "text": "",
+                "fill": "FFF2CC"
+              },
+              {
+                "text": "",
+                "fill": "FFF2CC"
+              }
+            ]
+          ],
+          "caption": "Ma trận trọng yếu 2026",
+          "alt": "Ma trận trọng yếu 5x5 với các chủ đề T1–T10",
+          "row_heights_mm": [
+            9,
+            9,
+            9,
+            9,
+            9,
+            9
+          ],
+          "source": "Khảo sát bên liên quan 2026; Ủy ban ESG"
+        },
+        {
+          "type": "table",
+          "advanced": true,
+          "columns": [
+            {
+              "header": "Mã",
+              "width_mm": 14,
+              "align": "center"
+            },
+            {
+              "header": "Chủ đề",
+              "width_mm": 58,
+              "align": "left"
+            },
+            {
+              "header": "Kỳ vọng",
+              "width_mm": 22,
+              "align": "right"
+            },
+            {
+              "header": "Tác động",
+              "width_mm": 22,
+              "align": "right"
+            },
+            {
+              "header": "Mức",
+              "width_mm": 30,
+              "align": "left"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "text": "T1",
+                "bold": true
+              },
+              {
+                "text": "Chất lượng dữ liệu và quyền riêng tư"
+              },
+              {
+                "text": "4"
+              },
+              {
+                "text": "4"
+              },
+              {
+                "text": "Trọng yếu cao"
+              }
+            ],
+            [
+              {
+                "text": "T2",
+                "bold": true
+              },
+              {
+                "text": "An ninh mạng và liên tục kinh doanh"
+              },
+              {
+                "text": "5"
+              },
+              {
+                "text": "4"
+              },
+              {
+                "text": "Trọng yếu cao"
+              }
+            ],
+            [
+              {
+                "text": "T3",
+                "bold": true
+              },
+              {
+                "text": "Đổi mới sản phẩm và IP"
+              },
+              {
+                "text": "3"
+              },
+              {
+                "text": "3"
+              },
+              {
+                "text": "Trọng yếu"
+              }
+            ],
+            [
+              {
+                "text": "T4",
+                "bold": true
+              },
+              {
+                "text": "Phát thải và hiệu quả năng lượng"
+              },
+              {
+                "text": "4"
+              },
+              {
+                "text": "3"
+              },
+              {
+                "text": "Trọng yếu"
+              }
+            ],
+            [
+              {
+                "text": "T5",
+                "bold": true
+              },
+              {
+                "text": "Chuỗi cung ứng có trách nhiệm"
+              },
+              {
+                "text": "3"
+              },
+              {
+                "text": "5"
+              },
+              {
+                "text": "Trọng yếu cao"
+              }
+            ],
+            [
+              {
+                "text": "T6",
+                "bold": true
+              },
+              {
+                "text": "Đa dạng và hòa nhập"
+              },
+              {
+                "text": "2"
+              },
+              {
+                "text": "2"
+              },
+              {
+                "text": "Theo dõi"
+              }
+            ],
+            [
+              {
+                "text": "T7",
+                "bold": true
+              },
+              {
+                "text": "An toàn và sức khỏe nghề nghiệp"
+              },
+              {
+                "text": "3"
+              },
+              {
+                "text": "2"
+              },
+              {
+                "text": "Theo dõi"
+              }
+            ],
+            [
+              {
+                "text": "T8",
+                "bold": true
+              },
+              {
+                "text": "Tác động kinh tế địa phương"
+              },
+              {
+                "text": "4"
+              },
+              {
+                "text": "5"
+              },
+              {
+                "text": "Trọng yếu cao"
+              }
+            ],
+            [
+              {
+                "text": "T9",
+                "bold": true
+              },
+              {
+                "text": "Tiếng nói khách hàng và NPS"
+              },
+              {
+                "text": "2"
+              },
+              {
+                "text": "4"
+              },
+              {
+                "text": "Trọng yếu"
+              }
+            ],
+            [
+              {
+                "text": "T10",
+                "bold": true
+              },
+              {
+                "text": "Quản trị và minh bạch thuế"
+              },
+              {
+                "text": "5"
+              },
+              {
+                "text": "5"
+              },
+              {
+                "text": "Trọng yếu cao"
+              }
+            ]
+          ],
+          "caption": "Danh mục chủ đề trọng yếu",
+          "alt": "Bảng 10 chủ đề trọng yếu",
+          "source": "Ủy ban ESG, 2026-11-30"
+        },
+        {
+          "type": "table",
+          "advanced": true,
+          "columns": [
+            {
+              "header": "Bên liên quan",
+              "width_mm": 32,
+              "align": "left"
+            },
+            {
+              "header": "Cách tương tác",
+              "width_mm": 62,
+              "align": "left"
+            },
+            {
+              "header": "Tần suất",
+              "width_mm": 22,
+              "align": "left"
+            },
+            {
+              "header": "Chỉ số theo dõi",
+              "width_mm": 39,
+              "align": "left"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "text": "Khách hàng",
+                "bold": true
+              },
+              {
+                "text": "Khảo sát NPS, hộp thư hỗ trợ, hội đồng người dùng"
+              },
+              {
+                "text": "Hàng tháng"
+              },
+              {
+                "text": "NPS, tỷ lệ lỗi, thời gian phản hồi"
+              }
+            ],
+            [
+              {
+                "text": "Nhân viên",
+                "bold": true
+              },
+              {
+                "text": "Khảo sát gắn kết, đối thoại công đoàn"
+              },
+              {
+                "text": "6 tháng"
+              },
+              {
+                "text": "Gắn kết, đào tạo, LTIFR"
+              }
+            ],
+            [
+              {
+                "text": "Nhà đầu tư",
+                "bold": true
+              },
+              {
+                "text": "Đại hội cổ đông, công bố thông tin, roadshow"
+              },
+              {
+                "text": "Quý"
+              },
+              {
+                "text": "Doanh thu, EBITDA, ESG"
+              }
+            ],
+            [
+              {
+                "text": "Nhà cung cấp",
+                "bold": true
+              },
+              {
+                "text": "Đánh giá ESG, hội nghị nhà cung cấp"
+              },
+              {
+                "text": "Năm"
+              },
+              {
+                "text": "Tỷ lệ đánh giá, OTIF"
+              }
+            ],
+            [
+              {
+                "text": "Cộng đồng",
+                "bold": true
+              },
+              {
+                "text": "Đối thoại địa phương, quỹ học bổng"
+              },
+              {
+                "text": "6 tháng"
+              },
+              {
+                "text": "Việc làm, đào tạo, tác động môi trường"
+              }
+            ]
+          ],
+          "caption": "Tương tác với các bên liên quan",
+          "alt": "Bảng tương tác bên liên quan",
+          "source": "Báo cáo ESG 2026"
+        },
+        {
+          "type": "paragraph",
+          "text": "Điểm trọng yếu được tính theo công thức có trọng số, sau đó chuẩn hóa về thang 1–5:"
+        },
+        {
+          "type": "equation",
+          "latex": "S_i = 0{,}45\\,B_i + 0{,}35\\,P_i + 0{,}20\\,D_i",
+          "caption": "Điểm trọng yếu có trọng số (B: tác động kinh doanh; P: kỳ vọng bên liên quan; D: mức độ dữ liệu sẵn có).",
+          "number": false
+        }
+      ]
+    },
+    {
+      "heading": "Môi trường",
+      "level": 1,
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Tổng phát thải 2026 là 23.250 tCO₂e, giảm 1,6% so với 2025 trong khi doanh thu tăng 20,4%. Cường độ phát thải giảm 18,3%, đưa công ty về gần mục tiêu 2027."
+        },
+        {
+          "type": "table",
+          "advanced": true,
+          "columns": [
+            {
+              "header": "Phạm vi",
+              "width_mm": 52,
+              "align": "left"
+            },
+            {
+              "header": "2026 (tCO₂e)",
+              "width_mm": 30,
+              "align": "right"
+            },
+            {
+              "header": "2025 (tCO₂e)",
+              "width_mm": 30,
+              "align": "right"
+            },
+            {
+              "header": "Mục tiêu 2027",
+              "width_mm": 28,
+              "align": "right"
+            },
+            {
+              "header": "Thay đổi",
+              "width_mm": 20,
+              "align": "right"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "text": "Phạm vi 1",
+                "bold": true
+              },
+              {
+                "text": "1.250",
+                "align": "right"
+              },
+              {
+                "text": "1.280",
+                "align": "right"
+              },
+              {
+                "text": "1.200",
+                "align": "right"
+              },
+              {
+                "text": "-2,3%",
+                "align": "right"
+              }
+            ],
+            [
+              {
+                "text": "Phạm vi 2 (thị trường)",
+                "bold": true
+              },
+              {
+                "text": "3.400",
+                "align": "right"
+              },
+              {
+                "text": "3.550",
+                "align": "right"
+              },
+              {
+                "text": "3.150",
+                "align": "right"
+              },
+              {
+                "text": "-4,2%",
+                "align": "right"
+              }
+            ],
+            [
+              {
+                "text": "Phạm vi 3",
+                "bold": true
+              },
+              {
+                "text": "18.600",
+                "align": "right"
+              },
+              {
+                "text": "18.800",
+                "align": "right"
+              },
+              {
+                "text": "17.500",
+                "align": "right"
+              },
+              {
+                "text": "-1,1%",
+                "align": "right"
+              }
+            ],
+            [
+              {
+                "text": "Tổng",
+                "bold": true
+              },
+              {
+                "text": "23.250",
+                "align": "right",
+                "fill": "E2EFDA"
+              },
+              {
+                "text": "23.630",
+                "align": "right"
+              },
+              {
+                "text": "21.850",
+                "align": "right"
+              },
+              {
+                "text": "-1,6%",
+                "align": "right"
+              }
+            ],
+            [
+              {
+                "text": "Cường độ (tCO₂e/tỷ VND)",
+                "bold": true
+              },
+              {
+                "text": "24,73",
+                "align": "right",
+                "fill": "E2EFDA"
+              },
+              {
+                "text": "30,26",
+                "align": "right"
+              },
+              {
+                "text": "24,28",
+                "align": "right"
+              },
+              {
+                "text": "-18,3%",
+                "align": "right"
+              }
+            ]
+          ],
+          "caption": "Phát thải khí nhà kính theo phạm vi",
+          "alt": "Bảng phát thải Scope 1, 2, 3 và cường độ",
+          "source": "GRI 305; hệ số phát thải Việt Nam 2024; ESG ledger"
+        },
+        {
+          "type": "figure",
+          "path": "../artifacts/charts/emissions-print.png",
+          "alt": "Biểu đồ cột chồng phát thải 2022–2026; Scope 3 chiếm phần lớn, Scope 1 và 2 nhỏ hơn.",
+          "caption": "Phát thải theo phạm vi 2022–2026.",
+          "width_mm": 145,
+          "source": "Chart Forge (SheetCraft) từ ESG ledger; xuất bằng Excel."
+        },
+        {
+          "type": "paragraph",
+          "text": "Cường độ phát thải được tính trên doanh thu:"
+        },
+        {
+          "type": "equation",
+          "latex": "I_{2026} = \\frac{23.250}{940} = 24{,}73\\ \\text{tCO}_2\\text{e/tỷ VND}",
+          "caption": "Cường độ phát thải 2026 (GRI 305-4)."
+        },
+        {
+          "type": "paragraph",
+          "text": "Lộ trình giảm phát thải gồm: điện mặt trời áp mái 4,2 MWp (hoàn thành 2026), thay thế 60% xe vận chuyển bằng xe điện vào 2028, và yêu cầu nhà cung cấp Tier 1 công bố dữ liệu Scope 3 từ 2027."
+        },
+        {
+          "type": "callout",
+          "title": "Mục tiêu 2030",
+          "text": "Giảm 42% phát thải Scope 1+2 và 25% cường độ Scope 3 so với 2022; Net Zero vào 2050. Lộ trình được rà soát hàng năm bởi Ủy ban ESG & rủi ro.",
+          "fill": "EAF4E7"
+        }
+      ]
+    },
+    {
+      "heading": "Xã hội",
+      "level": 1,
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "ANSMART có 880 nhân sự tại 4 địa điểm. Năm 2026, tỷ lệ nghỉ việc giảm còn 4,8%; giờ đào tạo tăng 22,8% nhờ chương trình học trực tuyến và chứng chỉ kỹ năng."
+        },
+        {
+          "type": "table",
+          "advanced": true,
+          "columns": [
+            {
+              "header": "Chỉ tiêu",
+              "width_mm": 62,
+              "align": "left"
+            },
+            {
+              "header": "2026",
+              "width_mm": 34,
+              "align": "right"
+            },
+            {
+              "header": "2025",
+              "width_mm": 34,
+              "align": "right"
+            },
+            {
+              "header": "Thay đổi",
+              "width_mm": 25,
+              "align": "right"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "text": "Tổng nhân sự",
+                "bold": true
+              },
+              {
+                "text": "880",
+                "align": "right"
+              },
+              {
+                "text": "810",
+                "align": "right"
+              },
+              {
+                "text": "+8,6%",
+                "align": "right"
+              }
+            ],
+            [
+              {
+                "text": "Nữ giới",
+                "bold": true
+              },
+              {
+                "text": "392 (44,5%)",
+                "align": "right"
+              },
+              {
+                "text": "355 (43,8%)",
+                "align": "right"
+              },
+              {
+                "text": "+37",
+                "align": "right"
+              }
+            ],
+            [
+              {
+                "text": "Nữ ở cấp quản lý",
+                "bold": true
+              },
+              {
+                "text": "38%",
+                "align": "right"
+              },
+              {
+                "text": "35%",
+                "align": "right"
+              },
+              {
+                "text": "+3 điểm",
+                "align": "right"
+              }
+            ],
+            [
+              {
+                "text": "Nhân sự dưới 30",
+                "bold": true
+              },
+              {
+                "text": "31%",
+                "align": "right"
+              },
+              {
+                "text": "30%",
+                "align": "right"
+              },
+              {
+                "text": "+1 điểm",
+                "align": "right"
+              }
+            ],
+            [
+              {
+                "text": "Giờ đào tạo",
+                "bold": true
+              },
+              {
+                "text": "18.400",
+                "align": "right"
+              },
+              {
+                "text": "14.985",
+                "align": "right"
+              },
+              {
+                "text": "+22,8%",
+                "align": "right"
+              }
+            ],
+            [
+              {
+                "text": "Tỷ lệ nghỉ việc",
+                "bold": true
+              },
+              {
+                "text": "4,8%",
+                "align": "right"
+              },
+              {
+                "text": "5,2%",
+                "align": "right"
+              },
+              {
+                "text": "-0,4 điểm",
+                "align": "right"
+              }
+            ]
+          ],
+          "caption": "Nhân sự và đào tạo",
+          "alt": "Bảng nhân sự, giới tính, đào tạo và nghỉ việc",
+          "source": "HRIS 2026; GRI 401, 404, 405"
+        },
+        {
+          "type": "paragraph",
+          "text": "Giờ đào tạo bình quân được tính như sau:"
+        },
+        {
+          "type": "equation",
+          "latex": "H_{tb} = \\frac{18.400}{880} = 20{,}9\\ \\text{giờ/người}",
+          "caption": "Giờ đào tạo bình quân đầu người 2026.",
+          "number": false
+        },
+        {
+          "type": "paragraph",
+          "text": "An toàn lao động: LTIFR 0,21, không có tai nạn nghiêm trọng. 100% nhân sự được huấn luyện an toàn định kỳ; 92% tham gia khảo sát gắn kết, điểm gắn kết 78/100."
+        },
+        {
+          "type": "callout",
+          "title": "Cam kết cộng đồng",
+          "text": "Quỹ học bổng ANSMART trao 120 suất cho sinh viên STEM tại Bình Dương và TP.HCM; 38% người nhận là nữ.",
+          "fill": "EAF1F8"
+        }
+      ]
+    },
+    {
+      "heading": "Chuỗi cung ứng và đạo đức kinh doanh",
+      "level": 1,
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Chuỗi cung ứng gồm 252 nhà cung cấp, trong đó 86 Tier 1. 78% chi tiêu Tier 1 được đánh giá ESG trong 24 tháng gần nhất; 4 nhà cung cấp chiến lược chiếm 46% chi tiêu."
+        },
+        {
+          "type": "table",
+          "advanced": true,
+          "columns": [
+            {
+              "header": "Nhóm",
+              "width_mm": 42,
+              "align": "left"
+            },
+            {
+              "header": "Số lượng",
+              "width_mm": 20,
+              "align": "right"
+            },
+            {
+              "header": "Đã đánh giá ESG",
+              "width_mm": 30,
+              "align": "right"
+            },
+            {
+              "header": "Cơ chế",
+              "width_mm": 42,
+              "align": "left"
+            },
+            {
+              "header": "Ghi chú",
+              "width_mm": 21,
+              "align": "left"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "text": "Tier 1 — linh kiện chính",
+                "bold": true
+              },
+              {
+                "text": "86"
+              },
+              {
+                "text": "78%"
+              },
+              {
+                "text": "Đánh giá ESG 2 năm/lần"
+              },
+              {
+                "text": "4 nhà cung cấp chiến lược"
+              }
+            ],
+            [
+              {
+                "text": "Tier 2 — gia công",
+                "bold": true
+              },
+              {
+                "text": "124"
+              },
+              {
+                "text": "54%"
+              },
+              {
+                "text": "Tự đánh giá + mẫu kiểm tra"
+              },
+              {
+                "text": "Ưu tiên 20 nhà cung cấp"
+              }
+            ],
+            [
+              {
+                "text": "Dịch vụ & logistics",
+                "bold": true
+              },
+              {
+                "text": "42"
+              },
+              {
+                "text": "61%"
+              },
+              {
+                "text": "Điều khoản ESG trong hợp đồng"
+              },
+              {
+                "text": "3 nhà vận chuyển chính"
+              }
+            ]
+          ],
+          "caption": "Chuỗi cung ứng và đánh giá ESG",
+          "alt": "Bảng nhà cung cấp theo tier và tỷ lệ đánh giá ESG",
+          "source": "Procurement 2026"
+        },
+        {
+          "type": "paragraph",
+          "text": "Bộ Quy tắc Ứng xử Nhà cung cấp quy định về lao động, môi trường, dữ liệu và chống tham nhũng. 100% hợp đồng mới có điều khoản ESG; 3 nhà cung cấp bị yêu cầu khắc phục trong năm, 2 đã hoàn tất."
+        },
+        {
+          "type": "callout",
+          "title": "Kênh tố giác",
+          "text": "Đường dây độc lập 24/7 và hộp thư ethics@ansmart.example; 12 báo cáo trong 2026, 100% được xác nhận trong 5 ngày làm việc, không có báo cáo về tham nhũng.",
+          "fill": "FFF2E5"
+        }
+      ]
+    },
+    {
+      "heading": "Phương pháp và chất lượng dữ liệu",
+      "level": 1,
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Mỗi chỉ số trong báo cáo có một chủ sở hữu dữ liệu, nguồn, tần suất và kiểm soát. Bảng dưới đây là danh mục kiểm soát nội bộ; các trình bày lại được nêu riêng."
+        },
+        {
+          "type": "table",
+          "advanced": true,
+          "columns": [
+            {
+              "header": "Chỉ số",
+              "width_mm": 40,
+              "align": "left"
+            },
+            {
+              "header": "Nguồn",
+              "width_mm": 44,
+              "align": "left"
+            },
+            {
+              "header": "Chủ sở hữu",
+              "width_mm": 20,
+              "align": "left"
+            },
+            {
+              "header": "Kiểm soát",
+              "width_mm": 40,
+              "align": "left"
+            },
+            {
+              "header": "Trình bày lại",
+              "width_mm": 21,
+              "align": "left"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "text": "Doanh thu, EBITDA",
+                "bold": true
+              },
+              {
+                "text": "ERP + BCTC kiểm toán"
+              },
+              {
+                "text": "CFO"
+              },
+              {
+                "text": "Đối chiếu 3 chiều; khóa sổ hàng tháng"
+              },
+              {
+                "text": "Không"
+              }
+            ],
+            [
+              {
+                "text": "Phát thải Scope 1–3",
+                "bold": true
+              },
+              {
+                "text": "Đồng hồ, hóa đơn, mô hình chi tiêu"
+              },
+              {
+                "text": "ESG"
+              },
+              {
+                "text": "Hệ số phát thải có nguồn; soát xét nội bộ"
+              },
+              {
+                "text": "Scope 3 2025: +1,2%"
+              }
+            ],
+            [
+              {
+                "text": "Nhân sự & đào tạo",
+                "bold": true
+              },
+              {
+                "text": "HRIS"
+              },
+              {
+                "text": "CHRO"
+              },
+              {
+                "text": "Đối chiếu bảng lương; kiểm tra 10% mẫu"
+              },
+              {
+                "text": "Không"
+              }
+            ],
+            [
+              {
+                "text": "NPS",
+                "bold": true
+              },
+              {
+                "text": "Khảo sát độc lập"
+              },
+              {
+                "text": "CMO"
+              },
+              {
+                "text": "Cỡ mẫu 3.240; biên ±1,7 điểm"
+              },
+              {
+                "text": "Không"
+              }
+            ],
+            [
+              {
+                "text": "Nhà cung cấp",
+                "bold": true
+              },
+              {
+                "text": "Hồ sơ đánh giá"
+              },
+              {
+                "text": "COO"
+              },
+              {
+                "text": "Mẫu 20%; hiệu lực 24 tháng"
+              },
+              {
+                "text": "Không"
+              }
+            ]
+          ],
+          "caption": "Danh mục chất lượng dữ liệu",
+          "alt": "Bảng nguồn và kiểm soát dữ liệu",
+          "source": "Ban Kiểm soát nội bộ, 2026-12-15"
+        },
+        {
+          "type": "paragraph",
+          "text": "Điểm chất lượng dữ liệu tổng hợp được tính theo trọng số nguồn, kiểm soát và tần suất:"
+        },
+        {
+          "type": "equation",
+          "latex": "Q = 0{,}40\\,N + 0{,}35\\,K + 0{,}25\\,T",
+          "caption": "Điểm chất lượng dữ liệu (N: nguồn; K: kiểm soát; T: tần suất). Kết quả 2026: 86/100.",
+          "number": false
+        },
+        {
+          "type": "callout",
+          "title": "Trình bày lại",
+          "text": "Scope 3 năm 2025 được điều chỉnh +1,2% (từ 18.576 lên 18.800 tCO₂e) do cập nhật hệ số phát thải của nhà cung cấp logistics. Số 2026 đã dùng hệ số mới; không có trình bày lại nào khác.",
+          "fill": "FFF2CC"
+        },
+        {
+          "type": "paragraph",
+          "text": "Giới hạn: báo cáo ESG chưa được đảm bảo bên ngoài; một số dữ liệu Scope 3 là ước tính từ chi tiêu. Báo cáo tài chính đã được kiểm toán độc lập. PDF/UA chưa được xác nhận bằng trình kiểm tra chuyên dụng."
+        }
+      ]
+    },
+    {
+      "heading": "Kết luận và kiến nghị",
+      "level": 1,
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "2026 là năm ANSMART chứng minh tăng trưởng có thể đi cùng kỷ luật dữ liệu. Doanh thu tăng 20,4%, cường độ phát thải giảm 18,3%, NPS tăng 4 điểm và quản trị có 50% thành viên độc lập."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "**Duy trì đà giảm phát thải:** ưu tiên Scope 3, yêu cầu nhà cung cấp Tier 1 công bố dữ liệu từ 2027.",
+            "**Tăng tỷ trọng thuê bao:** mục tiêu 18% doanh thu từ Platform vào 2028.",
+            "**Chuẩn hóa dữ liệu:** mở rộng kiểm soát tự động từ 5 chỉ số lên 12 chỉ số trọng yếu.",
+            "**Quản trị:** giữ 50% thành viên HĐQT độc lập; thành lập tiểu ban an ninh mạng trực thuộc Ủy ban ESG & rủi ro.",
+            "**Minh bạch:** tiến tới đảm bảo ESG có giới hạn cho các chỉ số phát thải và nhân sự vào 2028."
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "Cam kết 2027",
+          "text": "Hoàn thành lộ trình 1,5°C theo kế hoạch; công bố báo cáo ESG có đảm bảo giới hạn; duy trì tỷ lệ trình bày lại dưới 2% số chỉ số.",
+          "fill": "EAF4E7"
+        }
+      ]
+    }
+  ],
+  "appendix": [
+    {
+      "letter": "A",
+      "title": "Chỉ mục nội dung GRI",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Bảng dưới đây đối chiếu các disclosure GRI 2, GRI 3, GRI 305, GRI 401, 404, 405, 413 và 418 với vị trí trong báo cáo. Báo cáo tự công bố theo GRI 1; chưa có đảm bảo bên ngoài."
+        },
+        {
+          "type": "table",
+          "advanced": true,
+          "columns": [
+            {
+              "header": "GRI",
+              "width_mm": 22,
+              "align": "left"
+            },
+            {
+              "header": "Nội dung",
+              "width_mm": 98,
+              "align": "left"
+            },
+            {
+              "header": "Vị trí",
+              "width_mm": 34,
+              "align": "left"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "text": "GRI 2-1",
+                "bold": true
+              },
+              {
+                "text": "Tên, địa chỉ, hình thức pháp lý"
+              },
+              {
+                "text": "Mục 2.1; Phụ lục C"
+              }
+            ],
+            [
+              {
+                "text": "GRI 2-2",
+                "bold": true
+              },
+              {
+                "text": "Các thực thể trong báo cáo"
+              },
+              {
+                "text": "Mục 1.2"
+              }
+            ],
+            [
+              {
+                "text": "GRI 2-3",
+                "bold": true
+              },
+              {
+                "text": "Kỳ báo cáo, tần suất, đầu mối"
+              },
+              {
+                "text": "Mục 1.1"
+              }
+            ],
+            [
+              {
+                "text": "GRI 2-4",
+                "bold": true
+              },
+              {
+                "text": "Trình bày lại thông tin"
+              },
+              {
+                "text": "Mục 8.2"
+              }
+            ],
+            [
+              {
+                "text": "GRI 2-5",
+                "bold": true
+              },
+              {
+                "text": "Đảm bảo bên ngoài"
+              },
+              {
+                "text": "Lời nói đầu; Mục 8.3"
+              }
+            ],
+            [
+              {
+                "text": "GRI 2-6",
+                "bold": true
+              },
+              {
+                "text": "Hoạt động, chuỗi giá trị"
+              },
+              {
+                "text": "Mục 2.2"
+              }
+            ],
+            [
+              {
+                "text": "GRI 2-7",
+                "bold": true
+              },
+              {
+                "text": "Nhân sự"
+              },
+              {
+                "text": "Mục 7.1; Bảng 7.1"
+              }
+            ],
+            [
+              {
+                "text": "GRI 2-9",
+                "bold": true
+              },
+              {
+                "text": "Cơ cấu quản trị"
+              },
+              {
+                "text": "Mục 5.1; Bảng 5.1"
+              }
+            ],
+            [
+              {
+                "text": "GRI 2-10",
+                "bold": true
+              },
+              {
+                "text": "Đề cử và lựa chọn HĐQT"
+              },
+              {
+                "text": "Mục 5.1"
+              }
+            ],
+            [
+              {
+                "text": "GRI 2-11",
+                "bold": true
+              },
+              {
+                "text": "Chủ tịch HĐQT"
+              },
+              {
+                "text": "Mục 5.1"
+              }
+            ],
+            [
+              {
+                "text": "GRI 2-12",
+                "bold": true
+              },
+              {
+                "text": "Vai trò HĐQT trong giám sát tác động"
+              },
+              {
+                "text": "Mục 5.2"
+              }
+            ],
+            [
+              {
+                "text": "GRI 2-13",
+                "bold": true
+              },
+              {
+                "text": "Ủy quyền quản lý tác động"
+              },
+              {
+                "text": "Mục 5.2"
+              }
+            ],
+            [
+              {
+                "text": "GRI 2-14",
+                "bold": true
+              },
+              {
+                "text": "Vai trò HĐQT trong báo cáo"
+              },
+              {
+                "text": "Lời nói đầu"
+              }
+            ],
+            [
+              {
+                "text": "GRI 2-15",
+                "bold": true
+              },
+              {
+                "text": "Xung đột lợi ích"
+              },
+              {
+                "text": "Mục 5.3"
+              }
+            ],
+            [
+              {
+                "text": "GRI 2-16",
+                "bold": true
+              },
+              {
+                "text": "Trao đổi mối quan tâm"
+              },
+              {
+                "text": "Mục 5.3"
+              }
+            ],
+            [
+              {
+                "text": "GRI 2-22",
+                "bold": true
+              },
+              {
+                "text": "Tuyên bố chiến lược phát triển bền vững"
+              },
+              {
+                "text": "Mục 2.3"
+              }
+            ],
+            [
+              {
+                "text": "GRI 2-23",
+                "bold": true
+              },
+              {
+                "text": "Cam kết chính sách"
+              },
+              {
+                "text": "Mục 6.2"
+              }
+            ],
+            [
+              {
+                "text": "GRI 2-24",
+                "bold": true
+              },
+              {
+                "text": "Nhúng cam kết vào thực thi"
+              },
+              {
+                "text": "Mục 6.2"
+              }
+            ],
+            [
+              {
+                "text": "GRI 2-25",
+                "bold": true
+              },
+              {
+                "text": "Quy trình khắc phục tác động tiêu cực"
+              },
+              {
+                "text": "Mục 6.3"
+              }
+            ],
+            [
+              {
+                "text": "GRI 2-26",
+                "bold": true
+              },
+              {
+                "text": "Cơ chế tư vấn và khiếu nại"
+              },
+              {
+                "text": "Mục 6.3"
+              }
+            ],
+            [
+              {
+                "text": "GRI 2-27",
+                "bold": true
+              },
+              {
+                "text": "Tuân thủ pháp luật"
+              },
+              {
+                "text": "Mục 6.3"
+              }
+            ],
+            [
+              {
+                "text": "GRI 2-28",
+                "bold": true
+              },
+              {
+                "text": "Hiệp hội thành viên"
+              },
+              {
+                "text": "Mục 6.4"
+              }
+            ],
+            [
+              {
+                "text": "GRI 2-29",
+                "bold": true
+              },
+              {
+                "text": "Cách tiếp cận bên liên quan"
+              },
+              {
+                "text": "Mục 6.1"
+              }
+            ],
+            [
+              {
+                "text": "GRI 2-30",
+                "bold": true
+              },
+              {
+                "text": "Thỏa ước lao động tập thể"
+              },
+              {
+                "text": "Mục 7.2"
+              }
+            ],
+            [
+              {
+                "text": "GRI 3-1",
+                "bold": true
+              },
+              {
+                "text": "Quy trình xác định trọng yếu"
+              },
+              {
+                "text": "Mục 6.1; Hình 6.1"
+              }
+            ],
+            [
+              {
+                "text": "GRI 3-2",
+                "bold": true
+              },
+              {
+                "text": "Danh mục chủ đề trọng yếu"
+              },
+              {
+                "text": "Bảng 6.2"
+              }
+            ],
+            [
+              {
+                "text": "GRI 3-3",
+                "bold": true
+              },
+              {
+                "text": "Quản lý từng chủ đề trọng yếu"
+              },
+              {
+                "text": "Mục 6.2; 7; 8"
+              }
+            ],
+            [
+              {
+                "text": "GRI 305-1",
+                "bold": true
+              },
+              {
+                "text": "Phát thải Scope 1"
+              },
+              {
+                "text": "Bảng 7.1"
+              }
+            ],
+            [
+              {
+                "text": "GRI 305-2",
+                "bold": true
+              },
+              {
+                "text": "Phát thải Scope 2"
+              },
+              {
+                "text": "Bảng 7.1"
+              }
+            ],
+            [
+              {
+                "text": "GRI 305-3",
+                "bold": true
+              },
+              {
+                "text": "Phát thải Scope 3"
+              },
+              {
+                "text": "Bảng 7.1; Mục 8.2"
+              }
+            ],
+            [
+              {
+                "text": "GRI 305-4",
+                "bold": true
+              },
+              {
+                "text": "Cường độ phát thải"
+              },
+              {
+                "text": "Công thức 7.1; Bảng 7.1"
+              }
+            ],
+            [
+              {
+                "text": "GRI 305-5",
+                "bold": true
+              },
+              {
+                "text": "Giảm phát thải và mục tiêu"
+              },
+              {
+                "text": "Mục 7.3"
+              }
+            ],
+            [
+              {
+                "text": "GRI 401-1",
+                "bold": true
+              },
+              {
+                "text": "Tuyển dụng và nghỉ việc"
+              },
+              {
+                "text": "Bảng 7.2"
+              }
+            ],
+            [
+              {
+                "text": "GRI 404-1",
+                "bold": true
+              },
+              {
+                "text": "Giờ đào tạo/người"
+              },
+              {
+                "text": "Bảng 7.2"
+              }
+            ],
+            [
+              {
+                "text": "GRI 405-1",
+                "bold": true
+              },
+              {
+                "text": "Đa dạng trong quản trị"
+              },
+              {
+                "text": "Bảng 5.1; 7.2"
+              }
+            ],
+            [
+              {
+                "text": "GRI 413-1",
+                "bold": true
+              },
+              {
+                "text": "Tác động cộng đồng địa phương"
+              },
+              {
+                "text": "Mục 7.4"
+              }
+            ],
+            [
+              {
+                "text": "GRI 418-1",
+                "bold": true
+              },
+              {
+                "text": "Khiếu nại về quyền riêng tư"
+              },
+              {
+                "text": "Mục 8.3"
+              }
+            ]
+          ],
+          "caption": "Chỉ mục nội dung GRI 2026",
+          "alt": "Bảng đối chiếu disclosure GRI với vị trí báo cáo",
+          "source": "GRI 1: Foundation 2021; GRI 2/3/305/401/404/405/413/418"
+        }
+      ]
+    },
+    {
+      "letter": "B",
+      "title": "Dữ liệu 5 năm",
+      "blocks": [
+        {
+          "type": "table",
+          "advanced": true,
+          "columns": [
+            {
+              "header": "Chỉ tiêu",
+              "width_mm": 46,
+              "align": "left"
+            },
+            {
+              "header": "2022",
+              "width_mm": 20,
+              "align": "right"
+            },
+            {
+              "header": "2023",
+              "width_mm": 20,
+              "align": "right"
+            },
+            {
+              "header": "2024",
+              "width_mm": 20,
+              "align": "right"
+            },
+            {
+              "header": "2025",
+              "width_mm": 20,
+              "align": "right"
+            },
+            {
+              "header": "2026",
+              "width_mm": 20,
+              "align": "right"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "text": "Doanh thu (tỷ VND)",
+                "bold": true
+              },
+              {
+                "text": "420"
+              },
+              {
+                "text": "512"
+              },
+              {
+                "text": "638"
+              },
+              {
+                "text": "781"
+              },
+              {
+                "text": "940"
+              }
+            ],
+            [
+              {
+                "text": "EBITDA (tỷ VND)",
+                "bold": true
+              },
+              {
+                "text": "64"
+              },
+              {
+                "text": "82"
+              },
+              {
+                "text": "104"
+              },
+              {
+                "text": "132"
+              },
+              {
+                "text": "166"
+              }
+            ],
+            [
+              {
+                "text": "Lợi nhuận sau thuế (tỷ VND)",
+                "bold": true
+              },
+              {
+                "text": "42"
+              },
+              {
+                "text": "55"
+              },
+              {
+                "text": "71"
+              },
+              {
+                "text": "92"
+              },
+              {
+                "text": "118"
+              }
+            ],
+            [
+              {
+                "text": "Nhân sự (người)",
+                "bold": true
+              },
+              {
+                "text": "620"
+              },
+              {
+                "text": "680"
+              },
+              {
+                "text": "740"
+              },
+              {
+                "text": "810"
+              },
+              {
+                "text": "880"
+              }
+            ],
+            [
+              {
+                "text": "Phát thải Scope 1+2 (tCO₂e)",
+                "bold": true
+              },
+              {
+                "text": "5.550"
+              },
+              {
+                "text": "5.280"
+              },
+              {
+                "text": "5.020"
+              },
+              {
+                "text": "4.830"
+              },
+              {
+                "text": "4.650"
+              }
+            ],
+            [
+              {
+                "text": "Phát thải Scope 3 (tCO₂e)",
+                "bold": true
+              },
+              {
+                "text": "19.800"
+              },
+              {
+                "text": "19.400"
+              },
+              {
+                "text": "19.000"
+              },
+              {
+                "text": "18.800"
+              },
+              {
+                "text": "18.600"
+              }
+            ],
+            [
+              {
+                "text": "Giờ đào tạo (giờ)",
+                "bold": true
+              },
+              {
+                "text": "7.400"
+              },
+              {
+                "text": "9.600"
+              },
+              {
+                "text": "12.100"
+              },
+              {
+                "text": "14.985"
+              },
+              {
+                "text": "18.400"
+              }
+            ]
+          ],
+          "caption": "Dữ liệu 5 năm 2022–2026",
+          "alt": "Bảng dữ liệu 5 năm",
+          "source": "BCTC kiểm toán; ESG ledger; HRIS"
+        }
+      ]
+    },
+    {
+      "letter": "C",
+      "title": "Thuật ngữ và chữ viết tắt",
+      "blocks": [
+        {
+          "type": "table",
+          "advanced": true,
+          "columns": [
+            {
+              "header": "Thuật ngữ",
+              "width_mm": 34,
+              "align": "left"
+            },
+            {
+              "header": "Định nghĩa",
+              "width_mm": 118,
+              "align": "left"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "text": "ANSMART",
+                "bold": true
+              },
+              {
+                "text": "Công ty CP Thiết bị Thông minh An Nhiên"
+              }
+            ],
+            [
+              {
+                "text": "EBITDA",
+                "bold": true
+              },
+              {
+                "text": "Lợi nhuận trước lãi vay, thuế và khấu hao"
+              }
+            ],
+            [
+              {
+                "text": "GRI",
+                "bold": true
+              },
+              {
+                "text": "Global Reporting Initiative — bộ tiêu chuẩn báo cáo phát triển bền vững"
+              }
+            ],
+            [
+              {
+                "text": "LTIFR",
+                "bold": true
+              },
+              {
+                "text": "Tần suất tai nạn lao động mất ngày công trên 1 triệu giờ làm việc"
+              }
+            ],
+            [
+              {
+                "text": "NPS",
+                "bold": true
+              },
+              {
+                "text": "Net Promoter Score — chỉ số thiện chí giới thiệu"
+              }
+            ],
+            [
+              {
+                "text": "Scope 1/2/3",
+                "bold": true
+              },
+              {
+                "text": "Phân loại phát thải khí nhà kính theo GRI 305 / GHG Protocol"
+              }
+            ],
+            [
+              {
+                "text": "Tier 1/2",
+                "bold": true
+              },
+              {
+                "text": "Nhà cung cấp trực tiếp / gián tiếp trong chuỗi cung ứng"
+              }
+            ],
+            [
+              {
+                "text": "tCO₂e",
+                "bold": true
+              },
+              {
+                "text": "Tấn CO₂ tương đương"
+              }
+            ],
+            [
+              {
+                "text": "DPIA",
+                "bold": true
+              },
+              {
+                "text": "Đánh giá tác động quyền riêng tư dữ liệu"
+              }
+            ],
+            [
+              {
+                "text": "OTIF",
+                "bold": true
+              },
+              {
+                "text": "Giao đúng hạn và đủ số lượng"
+              }
+            ]
+          ],
+          "caption": "Thuật ngữ và chữ viết tắt",
+          "alt": "Bảng thuật ngữ",
+          "source": ""
+        }
+      ]
+    }
+  ],
+  "references": {
+    "enabled": true,
+    "title": "Tài liệu tham khảo",
+    "items": [
+      {
+        "key": "iso7144",
+        "label": "[1]",
+        "text": "ISO. 1986. ISO 7144:1986 Documentation — Presentation of theses and similar documents. Geneva: ISO. https://www.iso.org/standard/13736.html (truy cập 2026-11-01)."
+      },
+      {
+        "key": "iso2145",
+        "label": "[2]",
+        "text": "ISO. 1978. ISO 2145:1978 Documentation — Numbering of divisions and subdivisions in written documents. Geneva: ISO. https://www.iso.org/standard/5964.html (truy cập 2026-11-01)."
+      },
+      {
+        "key": "iso690",
+        "label": "[3]",
+        "text": "ISO. 2021. ISO 690:2021 Information and documentation — Guidelines for bibliographic references and citations to information resources. Geneva: ISO. https://www.iso.org/standard/72642.html (truy cập 2026-11-01)."
+      },
+      {
+        "key": "iso80000",
+        "label": "[4]",
+        "text": "ISO. 2022. ISO 80000-1:2022 Quantities and units — Part 1: General. Geneva: ISO. https://www.iso.org/standard/76921.html (truy cập 2026-11-01)."
+      },
+      {
+        "key": "iso8601",
+        "label": "[5]",
+        "text": "ISO. 2019. ISO 8601-1:2019 Date and time — Representations for information interchange — Part 1: Basic rules. Geneva: ISO. https://www.iso.org/standard/70907.html (truy cập 2026-11-01)."
+      },
+      {
+        "key": "wcag22",
+        "label": "[6]",
+        "text": "W3C. 2023. Web Content Accessibility Guidelines (WCAG) 2.2. W3C Recommendation. https://www.w3.org/TR/WCAG22/ (truy cập 2026-11-01)."
+      },
+      {
+        "key": "gri1",
+        "label": "[7]",
+        "text": "Global Reporting Initiative. 2021. GRI 1: Foundation 2021. Amsterdam: GRI. https://www.globalreporting.org/standards/ (truy cập 2026-11-01)."
+      },
+      {
+        "key": "gri2",
+        "label": "[8]",
+        "text": "Global Reporting Initiative. 2021. GRI 2: General Disclosures 2021. Amsterdam: GRI."
+      },
+      {
+        "key": "gri3",
+        "label": "[9]",
+        "text": "Global Reporting Initiative. 2021. GRI 3: Material Topics 2021. Amsterdam: GRI."
+      },
+      {
+        "key": "gri305",
+        "label": "[10]",
+        "text": "Global Reporting Initiative. 2016. GRI 305: Emissions 2016. Amsterdam: GRI."
+      },
+      {
+        "key": "vnm2025",
+        "label": "[11]",
+        "text": "Vinamilk. 2026. Annual Report 2025. https://www.vinamilk.com.vn/en/investor/reports/annual (truy cập 2026-11-01; dùng làm mẫu tham chiếu bố cục, không sao chép nội dung)."
+      }
+    ]
+  }
+}

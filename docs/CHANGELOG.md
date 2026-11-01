@@ -7,6 +7,30 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T047 [docx] Standards-controlled annual/ESG report — 2026-11-01
+
+- **Standards profile.** `domains/docx/data/report_standard.json` declares ISO
+  7144:1986 (structure), ISO 2145 (numbering), ISO 690:2021 (references), ISO
+  80000-1/8601-1 (units/dates), WCAG 2.2, GRI 1/2/3/305, with 10 controls and
+  evidence. The report prints the control matrix before the TOC.
+- **Front matter order.** `front_matter.order: "iso7144"` renders abstract →
+  preface → TOC → lists; references move after appendices and use an
+  unnumbered Heading 1 so the running header still works.
+- **Content depth.** 25 pages, 37 tables, 5 equations (2 numbered), 4 figures,
+  10 material topics, 5 stakeholder groups, Scope 1/2/3, a 37-row GRI content
+  index, data appendix, glossary and 11 references.
+- **Cross-asset.** Camera illustration authored as SVG, rasterised by
+  VectorCraft, trimmed/graded/composited by Pillow; revenue and emissions charts
+  built by Chart Forge (SheetCraft), exported by Excel, embedded with source and
+  alt text.
+- **Parser.** `word_math` now accepts escaped punctuation and the LaTeX control
+  space (`\%`, `\&`, `\ `), covered by tests.
+- **Evidence.** Word opened the exact DOCX, refreshed fields and saved; 25-page
+  PDF inspected; audit clean: 101 fields, 89 bookmarks, 37 tables, 4 figures,
+  5 equations, `vi-VN`; full suite 387 tests OK.
+- **Status.** EXPERIMENTAL; review requested.
+- Report: `experiments/T047-20261101-opencode-standards-report/REPORT.md`.
+
 ## T046 [xlsx] Advanced workbook and dashboard â€” 2026-11-01
 
 - **Sheet Forge.** `scripts/sheet_forge.py` composes a 7-sheet programme
