@@ -199,14 +199,14 @@ hence 23 vs 22 total tables.
 | Content is substantive | 1 | 59 headings (max H3), 23/22 tables, 7 figures, 9 equations, 12 references, 13 citation fields, 1,055/1,032 paragraphs |
 | Cross-asset pipeline works | 1 + 4 | SVG → VectorCraft → Pillow for architecture/window; Chart Forge → Excel → PNG for 5 charts; sources/alt text in DOCX |
 | Audit is clean | 1 | HUST and VNU: `ok: true`, 0 errors, 0 warnings (profile-aware margin floor); 204 fields, 88 bookmarks, `vi-VN` |
-| Tests cover the profile layer | 1 | `tests/test_docx_profiles.py` (4 tests); full suite 402 tests OK, 8 skipped |
+| Tests cover the profile layer | 1 | `tests/test_docx_profiles.py` (4 tests); full suite 411 tests OK, 8 skipped |
 
 **Hashes:** see `artifacts/SHA256SUMS.txt`.
 
 | File | SHA-256 |
 |---|---|
-| `bao-cao-khoa-hoc-hust.docx` | `37c99a0c427372d7619f36577f9c4797bd81616f196f5332e5e28a28190c1831` |
-| `bao-cao-khoa-hoc-vnu.docx` | `1d8801d938653fa8fd376abfe2943b392b77c903ceb6800217638570f07f533b` |
+| `bao-cao-khoa-hoc-hust.docx` | `3dbbad0043ca186b074784de9f94c3c21ad70ed2ac954475943f88c19b53c62e` |
+| `bao-cao-khoa-hoc-vnu.docx` | `363777013650f6aeb0a23c5bf63bfc15286eaeee012f37788928fda553987538` |
 
 Preview: `preview/hust/page-01.png` (cover), `page-06.png` (TOC),
 `page-15.png` (chapter 1), `page-26.png` (architecture), `page-46.png`

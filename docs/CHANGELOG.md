@@ -32,7 +32,7 @@ were true at the time. Task IDs and their branches are listed in
 - **Audit.** Both builds: 0 errors, 0 warnings with profile-aware margin floor;
   204 fields, 88 bookmarks, `vi-VN`; Word refreshed fields and exported 48/45
   pages.
-- **Tests.** `tests/test_docx_profiles.py` (7 tests); full suite 402 tests OK
+- **Tests.** `tests/test_docx_profiles.py` (7 tests); full suite 411 tests OK
   (8 skipped).
 - **Status.** EXPERIMENTAL; review requested.
 - Report: `experiments/T052-20261102-opencode-scientific-report/REPORT.md`.
