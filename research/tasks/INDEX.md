@@ -8,7 +8,7 @@ Since T040: every new title starts with its domain in brackets: `[pptx]`, `[docx
 
 This file is the one place to take a task ID. Before starting, add a row with
 
-status `claimed`, using the next free ID (**T047**). Push the row before you do
+status `claimed`, using the next free ID (**T052**). Push the row before you do
 
 expensive work. IDs are never reused. T024 was taken three times in parallel,
 
@@ -148,7 +148,10 @@ owner's machine. The "Agent" column comes from claims and reports.
 
 | T046 | [xlsx] Advanced workbook: image tables, Gantt, relationship matrix, cross-sheet formulas, pivot, VBA and dashboard design | OpenCode (DeepSeek V4.1 Flash) | `work/T046-opencode-advanced-xlsx` | review accepted (Argon); awaiting owner merge | `experiments/T046-20261101-opencode-advanced-xlsx/REPORT.md` |
 
-| T047 | [docx] Standards-controlled annual/ESG report: ISO 7144/2145/690/80000 + GRI content, conformance sheet and richer narrative | OpenCode (DeepSeek V4.1 Flash) | `work/T047-opencode-standards-report` | review requested | `experiments/T047-20261101-opencode-standards-report/REPORT.md` |
-| T048 | [xlsx] Workbook UX: hidden data sheets, VBA data-entry form, tab colour, merged-cell rules and sheet protection | OpenCode (DeepSeek V4.1 Flash) | `work/T048-opencode-workbook-ux` | review accepted (Argon); awaiting owner merge | `experiments/T048-20261101-opencode-workbook-ux/REPORT.md` |
-| T049 | *next free ID* | | | | |
+| T047 | [docx] Standards-controlled annual/ESG report: ISO 7144/2145/690/80000 + GRI content, conformance sheet and richer narrative | OpenCode (DeepSeek V4.1 Flash) | `work/T047-opencode-standards-report` | main (Argon approved; PR #45) | `experiments/T047-20261101-opencode-standards-report/REPORT.md` |
+| T048 | [xlsx] Workbook UX: hidden data sheets, VBA data-entry form, tab colour, merged-cell rules and sheet protection | OpenCode (DeepSeek V4.1 Flash) | `work/T048-opencode-workbook-ux` | main (Argon approved; PR #45) | `experiments/T048-20261101-opencode-workbook-ux/REPORT.md` |
+| T049 | [docx] Configurable standard profiles + Vietnamese university scientific report (declaration, chapters, equations, references) | OpenCode (DeepSeek V4.1 Flash) | `work/T049-opencode-scientific-report` | claimed | `experiments/T049-20261102-opencode-scientific-report/REPORT.md` |
+| T050 | [xlsx] VBA UserForm data entry + composed dashboard (grid, chart selection, interaction, visual quality) | OpenCode (DeepSeek V4.1 Flash) | `work/T050-opencode-userform-dashboard` | claimed | `experiments/T050-20261102-opencode-userform-dashboard/REPORT.md` |
+| T051 | [vector] Photo-to-vector line hierarchy: what to keep, simplify or remove for a controlled technical illustration | OpenCode (DeepSeek V4.1 Flash) | `work/T051-opencode-photo-vector` | claimed | `experiments/T051-20261102-opencode-photo-vector/REPORT.md` |
+| T052 | *next free ID* | | | | |
 
