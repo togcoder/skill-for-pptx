@@ -18,7 +18,7 @@ Mỗi Agent đại diện cho một phân hệ ArtCraft chỉ tập trung vào t
 
 ## 2. Giao thức Hợp đồng Bắt buộc (`HandoffContract`)
 
-Khi Agent A cần tài nguyên từ Agent B, Agent A **không được chat tự do**, mà phải phát hành một **`HandoffContract`** (tuân thủ `schemas/handoff_contract.schema.json`):
+Khi Agent A cần tài nguyên từ Agent B, Agent A **không được chat tự do**, mà phải phát hành một **`HandoffContract`** (tuân thủ `lab/schemas/handoff_contract.schema.json`):
 
 ```json
 {

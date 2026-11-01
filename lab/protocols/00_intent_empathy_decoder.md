@@ -41,7 +41,7 @@ Bộ não con người bị giới hạn bởi bộ nhớ ngắn hạn:
 
 ## 2. Quy trình Thực thi của Tầng 0
 
-Mỗi khi nhận đề bài, Agent Orchestrator phải xuất ra một bản **`IntentBrief`** tuân thủ schema `schemas/intent_brief.schema.json`.
+Mỗi khi nhận đề bài, Agent Orchestrator phải xuất ra một bản **`IntentBrief`** tuân thủ schema `lab/schemas/intent_brief.schema.json`.
 
 ```text
 Prompt Người dùng ──> [Protocol 00 Decoder] ──> intent_brief.json ──> Chuyển tiếp tới Orchestrator

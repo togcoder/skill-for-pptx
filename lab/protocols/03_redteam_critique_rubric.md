@@ -45,7 +45,7 @@ Sản phẩm chỉ được duyệt (**PASS**) khi:
 
 ## 3. Đầu ra của Báo cáo Thẩm định
 
-Critic Agent phải xuất bản báo cáo tuân thủ `schemas/critique_report.schema.json`.
+Critic Agent phải xuất bản báo cáo tuân thủ `lab/schemas/critique_report.schema.json`.
 Nếu bị **REJECT**, Critic phải chỉ rõ:
 1. `issue_code` vi phạm.
 2. `severity` (critical, warn, note).

@@ -5,7 +5,7 @@ Discovers all available tools in D:\\artcraft (DeckCraft, WordCraft, GridCraft,
 VectorCraft, DesignCraft, FigCraft, PhotoCraft, LightCraft, FilmCraft, SoundCraft,
 PdfCraft, CADCraft, SolidCraft), parses their CLI capabilities, subcommands,
 and MCP server support, and writes a machine-readable capability manifest to
-``registry/artcraft_capabilities.json``.
+``lab/registry/artcraft_capabilities.json``.
 
 This acts as the Pre-flight Capability Gate to prevent AI agents from
 reinventing the wheel with custom scripts when native commands already exist.
@@ -156,7 +156,7 @@ def sync_capabilities(artcraft_root: Path | None = None) -> dict:
 
 def main() -> None:
     repo_root = Path(__file__).resolve().parents[1]
-    registry_dir = repo_root / "registry"
+    registry_dir = repo_root / "lab" / "registry"
     registry_dir.mkdir(parents=True, exist_ok=True)
 
     out_file = registry_dir / "artcraft_capabilities.json"

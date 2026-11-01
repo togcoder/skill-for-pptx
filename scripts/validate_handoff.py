@@ -2,7 +2,7 @@
 """Validate Handoff Contracts and Schemas (T036).
 
 Verifies whether an intent brief, delegation contract, or critique report
-matches the formal JSON schemas defined under ``schemas/``.
+matches the formal JSON schemas defined under ``lab/schemas/``.
 
 Usage:
     python scripts/validate_handoff.py brief sample_brief.json
@@ -30,7 +30,7 @@ def load_schema(kind: str) -> dict[str, Any]:
     if not schema_name:
         raise ValueError(f"Unknown schema kind '{kind}'. Valid kinds: {list(SCHEMA_MAP.keys())}")
 
-    schema_file = repo_root / "schemas" / schema_name
+    schema_file = repo_root / "lab" / "schemas" / schema_name
     if not schema_file.is_file():
         raise FileNotFoundError(f"Schema file missing: {schema_file}")
 

@@ -1,5 +1,7 @@
 # Task registry
 
+Since T040: every new title starts with its domain in brackets: `[pptx]`, `[docx]`, `[xlsx]`, `[svg]` or `[cross]` (see `domains/README.md`). Lifecycle: `lab/PROTOCOL.md`. A row may carry `review requested` / `reviewed: <verdict>`.
+
 This file is the one place to take a task ID. Before starting, add a row with
 status `claimed`, using the next free ID (**T040**). Push the row before you do
 expensive work. IDs are never reused. T024 was taken three times in parallel,

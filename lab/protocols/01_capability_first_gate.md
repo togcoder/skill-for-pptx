@@ -16,7 +16,7 @@ bắt buộc phải tuân thủ nghiêm ngặt thứ tự ưu tiên sau:
         ▼
 ┌────────────────────────────────────────────────────────┐
 │ CẤP 1: NATIVE CLI / MCP TOOL CỦA ARTCRAFT (BẮT BUỘC)   │
-│ - Tra cứu `registry/artcraft_capabilities.json`        │
+│ - Tra cứu `lab/registry/artcraft_capabilities.json`        │
 │ - Gọi lệnh subcommands hoặc server MCP tương ứng       │
 │ - Kiểm tra exit code và dữ liệu phản hồi               │
 └───────────────────────┬────────────────────────────────┘
@@ -41,7 +41,7 @@ bắt buộc phải tuân thủ nghiêm ngặt thứ tự ưu tiên sau:
 ## 2. Thủ tục Mở khóa Cấp 3 (`CAPABILITY_GAP_PROOF`)
 
 Agent **nghiêm cấm** tự ý viết script Python thao tác file trực tiếp (như can thiệp XML hay dùng Pillow/Pptx thô) trừ khi:
-1. Đã chạy lệnh đối chiếu với `registry/artcraft_capabilities.json` và chứng minh tính năng đó chưa có trong CLI.
+1. Đã chạy lệnh đối chiếu với `lab/registry/artcraft_capabilities.json` và chứng minh tính năng đó chưa có trong CLI.
 2. Xuất trình khối chứng cứ định dạng:
    ```markdown
    ### CAPABILITY_GAP_PROOF
@@ -50,7 +50,7 @@ Agent **nghiêm cấm** tự ý viết script Python thao tác file trực tiế
    - CLI Query Result: Lệnh `shape.corner` chưa hỗ trợ tham số `smooth_radius`
    - Temporary Fallback: Script tính toán tọa độ Bézier thủ công
    ```
-3. Ghi một dòng mới vào `registry/capability_gaps_backlog.md` để đội ngũ phát triển ArtCraft bổ sung vào bản cập nhật sau.
+3. Ghi một dòng mới vào `lab/registry/capability_gaps_backlog.md` để đội ngũ phát triển ArtCraft bổ sung vào bản cập nhật sau.
 
 ---
 

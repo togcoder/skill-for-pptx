@@ -14,7 +14,7 @@ sys.path.insert(0,str(ROOT/"scripts"))
 import forge_qa
 import slide_forge as sf
 
-EXAMPLES=ROOT/"examples"/"forge"
+EXAMPLES=ROOT/"examples"/"pptx"/"forge"
 
 
 class SpecTests(unittest.TestCase):

@@ -35,7 +35,7 @@ except ImportError:
 
 def get_capabilities_file() -> Path:
     repo_root = Path(__file__).resolve().parents[1]
-    return repo_root / "registry" / "artcraft_capabilities.json"
+    return repo_root / "lab" / "registry" / "artcraft_capabilities.json"
 
 
 def load_capabilities(refresh_if_missing: bool = True) -> dict[str, Any]:

@@ -2,7 +2,7 @@
 """Intent & Empathy Decoder Engine (T037).
 
 Implements Protocol 00: parses raw user prompts into structured, human-centric
-5-dimensional ``IntentBrief`` documents complying with ``schemas/intent_brief.schema.json``.
+5-dimensional ``IntentBrief`` documents complying with ``lab/schemas/intent_brief.schema.json``.
 
 Ensures AI agents decode audience psychology, cognitive budget, and viewing context
 before touching any tool.

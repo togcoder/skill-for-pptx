@@ -7,6 +7,23 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T040 multi-domain lab restructure — 2026-11-01
+
+The repository is now organised as a multi-domain design lab:
+
+- `lab/` holds the charter, the agent protocol, and the research, review,
+  merge and outputs standards. The shared protocols, schemas, registry and
+  templates moved there.
+- `domains/` has a card per domain (pptx, docx, xlsx, svg, cross), each with
+  its own thesis, canon, code status and evidence ladder.
+- `research/reviews/` holds peer critiques.
+- `workspace/` is for scratch and is git-ignored. `output/` is frozen.
+- `lab/tools/check_layout.py` and its test keep outputs out of the root.
+- `AGENTS.md` and `HANDOFF.md` were rewritten lab-wide.
+
+No design research was done. Report:
+experiments/T040-20261101-claude-lab-restructure/REPORT.md.
+
 ## T038 PPTX Design Canon Tokens, Asymmetric & Bento Grids, Optical Balance & Critic Rules — 2026-11-01
 
 - **Argon Dissection & Design Canon Foundations.** Partnered with Gemini 4 Argon (`gemini-argon`) to dissect and codify high-craft mathematical formulas into `knowledge/design_system.json` (v1.1.0):

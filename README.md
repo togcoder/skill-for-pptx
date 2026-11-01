@@ -1,13 +1,25 @@
-# PPTX Motion Lab
+# Design Research Lab (khởi đầu từ PPTX Motion Lab)
 
-Nghiên cứu xây dựng **AI Motion Director cho PowerPoint**: nhận một deck (hoặc
-một spec) cùng mục tiêu chung, rồi tự viết kịch bản, chia nhịp click và tạo
-chuyển động native, chỉnh sửa được, đẹp và đúng kỹ thuật.
+Lab nghiên cứu thiết kế **đa lĩnh vực**: nhiều agent và nhiều model cùng
+nghiên cứu, phản biện và gộp kết quả, để AI tạo ra thiết kế vừa đẹp vừa đúng
+kỹ thuật trong từng ứng dụng đích.
 
-- Model mới bắt đầu tại **[HANDOFF.md](HANDOFF.md)**. Trạng thái hiện tại ở
-  [docs/STATUS.md](docs/STATUS.md).
-- Đầu nghiên cứu mới nhất nằm trên nhánh `claude/blissful-pasteur-gmll59`
-  (T034). `main` đang chậm hơn: mới dừng ở T023.
+| Domain | Ứng dụng | Thẻ |
+|---|---|---|
+| pptx | PowerPoint (domain trưởng thành nhất) | [domains/pptx](domains/pptx/DOMAIN.md) |
+| docx | Word | [domains/docx](domains/docx/DOMAIN.md) |
+| xlsx | Excel | [domains/xlsx](domains/xlsx/DOMAIN.md) |
+| svg | Vector, in ấn | [domains/svg](domains/svg/DOMAIN.md) |
+| cross | Điều phối giữa các ứng dụng | [domains/cross](domains/cross/DOMAIN.md) |
+
+- Bắt đầu tại **[HANDOFF.md](HANDOFF.md)**.
+- Cách agent làm việc: [lab/PROTOCOL.md](lab/PROTOCOL.md).
+- Các chuẩn nghiên cứu, phản biện, gộp dữ liệu và nơi đặt file:
+  [lab/standards/](lab/standards/).
+- Không file đầu ra nào được nằm ở thư mục gốc: kết quả của mỗi task vào
+  `experiments/<ID>-…/artifacts/`, file nháp vào `workspace/`.
+
+Phần dưới đây mô tả domain **pptx**.
 
 ## Ba đường sản phẩm
 
@@ -58,7 +70,7 @@ Danh mục 50 kỹ thuật:
 
 ```bash
 python3 scripts/slide_forge.py schema
-python3 scripts/slide_forge.py build examples/forge/coffee_report.json -o deck.pptx   # dựng + chuyển động + QA + critique
+python3 scripts/slide_forge.py build examples/pptx/forge/coffee_report.json -o deck.pptx   # dựng + chuyển động + QA + critique
 ```
 
 AI viết một spec ngữ nghĩa với 12 layout, rồi Forge tự lo:
