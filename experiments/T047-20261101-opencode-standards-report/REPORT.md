@@ -89,10 +89,10 @@ the claim, the clause and the evidence in one place.
 | DOC-STRUCT | ISO 7144 §5 | abstract → preface → TOC → lists → body → annexes → end matter | `front_matter.order = iso7144`; 3 sections; TOC/lists |
 | DOC-NUMBER | ISO 2145 | 1 / 1.1 / 1.1.1, no trailing dot | Word multilevel list; TOC |
 | DOC-EQUATION | ISO 7144 §15.5 | display equation, extra space, number in parentheses at right | 5 OMML equations; 2 `SEQ Equation` |
-| DOC-FIGTABLE | ISO 7144 §12, §15.7 | caption + source; list of figures/tables with page | 4 figures, 20 captioned tables, 2 lists |
+| DOC-FIGTABLE | ISO 7144 §12, §15.7 | caption + source; list of figures/tables with page | 4 figures (cover + 3 captioned), 38 tables (22 captioned), 2 lists |
 | DOC-REF | ISO 690:2021 | element order; numbered citations | 11 references; `{{cite:key}}` links |
 | DOC-UNITS | ISO 80000-1 / 8601-1 | unit symbols, value–unit space, ISO dates | table headers, document control |
-| DOC-ACCESS | WCAG 2.2 AA / PDF/UA target | headings, alt text, table headers, `vi-VN` | audit: 4 figures, 37 tables, language `vi-VN` |
+| DOC-ACCESS | WCAG 2.2 AA / PDF/UA target | headings, alt text, table headers, `vi-VN` | audit: 4 figures, 38 tables, language `vi-VN` |
 | GRI-CONTENT | GRI 1/2/3 | materiality, boundary, stakeholders, index | 37-row GRI index appendix |
 | GRI-305 | GRI 305:2016 | Scope 1/2/3, intensity, target | emissions table, equation, 2030 target |
 | DOC-ASSURANCE | GRI 1 §5 / ISO 7144 preface | limitation statement | self-declared, no external assurance |
@@ -109,24 +109,24 @@ obtained.
 | Front matter follows the declared ISO 7144 order | 1 | New `front_matter.order = iso7144`; test asserts abstract < preface < TOC; references after appendix |
 | ISO 2145 numbering is live | 1 + 4 | multilevel heading list; TOC; 18 headings, max level 1 |
 | Equations are native OMML with ISO 7144 numbering | 1 + 4 | 5 `m:oMath`; 2 `SEQ Equation`; Word page 5/10/12 show right-aligned numbers |
-| Figures/tables are captioned and listed | 1 | 4 figures, 20 captioned tables, List of Figures/Tables via REF/PAGEREF (43 PAGEREF fields) |
+| Figures/tables are captioned and listed | 1 | 4 figures (cover + 3 captioned), 23 captioned tables, List of Figures/Tables via REF/PAGEREF (63 PAGEREF fields) |
 | References are ISO 690-shaped and linked | 1 | 11 references, labels [1]–[11], citation bookmarks; references after appendices |
 | GRI content is substantive | 1 | 10 material topics, 5 stakeholder groups, 37-row GRI index, Scope 1/2/3, intensity, target |
 | The product illustration is a controlled vector asset | 1 + 4 | SVG authored (≈120 shapes), VectorCraft 2× raster, Pillow trim/grade/composite; DOCX render page 4 |
 | Charts are native SheetCraft exports | 1 + 4 | Chart Forge combo/stacked workbooks, Excel PNG export, embedded with source + alt; audit no DPI note at 145 mm |
-| Audit is clean | 1 | `ok: true`, 0 errors/warnings; 101 fields, 89 bookmarks, 37 tables, 4 figures, 5 equations, 1 image in cell, 5 merged cells, `vi-VN`, 1,112 paragraphs |
+| Audit is clean | 1 | `ok: true`, 0 errors/warnings; 135 fields, 91 bookmarks, 37 headings (max H3), 38 tables, 4 figures, 5 equations (5 display, 2 numbered), 1 image in cell, 5 merged cells, `vi-VN`, 1,174 paragraphs; 11 unique references cited |
 | Tests cover the new order/parser | 1 | `tests/test_document_standards.py` (2 tests); full suite 387 tests OK |
 
 **Hashes:** see `artifacts/SHA256SUMS.txt`.
 
 | File | SHA-256 |
 |---|---|
-| `annual-report-2026.docx` | `5785ccdc72ab0888971d6821c4c6fa0c7df1cc5c1170cf2af47299029967c206` |
-| `annual-report-2026.pdf` | `ae3a35d3e6928096bd938bbb473644eacc4c01d46948d951270c53ac938df9bf` |
+| `annual-report-2026.docx` | `0915dd049a31455e9e760927540431542eb94698a8699acab5e7f0acf95ef14a` |
+| `annual-report-2026.pdf` | `a53b459f5b327ada78c1f3cd5bfc81f64ccb35a77df7f963876e5bee1e2c9e56` |
 | `audit.json` | see SHA256SUMS |
 
 Preview: `preview/page-01.png` (cover), `page-03.png` (standards control),
-`page-10.png` (financial chart/equation), `page-15.png` (materiality),
+`page-11.png` (financial chart/equation), `page-16.png` (materiality),
 `page-17.png` (emissions), `page-25.png` (references).
 
 ## Negative results and limitations

@@ -74,7 +74,7 @@ do not hard-code a new one in a generator.
 
 | Rung | Tool | T039/T045/T047 evidence |
 |---|---|---|
-| 1 | schema / structural audit | T039: 29 fields, 22 bookmarks; T045: 20 fields, 2 equations, 5 merged cells; T047: 101 fields, 89 bookmarks, 18 headings, 37 tables, 4 figures, 5 equations (2 numbered), `vi-VN`, 1,112 paragraphs; no errors/warnings |
+| 1 | schema / structural audit | T039: 29 fields, 22 bookmarks; T045: 20 fields, 2 equations, 5 merged cells; T047: 135 fields, 91 bookmarks, 37 headings (max H3), 38 tables, 4 figures, 5 equations (5 display, 2 numbered), 11 unique references cited, `vi-VN`, 1,174 paragraphs; no errors/warnings |
 | 2 | layout engine (WordCraft) | T039/T045 WordCraft render; T047 uses Word COM for the final layout |
 | 3 | independent reader (LibreOffice Writer) | Not run on this host |
 | 4 | Word COM open / field update | T045 and T047: Word opened the exact DOCX, refreshed fields, saved; T047 `updated_by: word` |
@@ -87,7 +87,7 @@ The T039 report is `experiments/T039-20261101-opencode-office-canon/REPORT.md`.
 
 - **T047 [docx] standards report**: a 25-page annual/ESG report with a declared
   ISO/GRI standards profile, a control matrix, ISO 7144 front-matter order,
-  ISO 2145 numbering, 5 OMML equations, 37 tables, GRI index, VectorCraft
+  ISO 2145 numbering, 5 OMML equations, 38 tables, GRI index, VectorCraft
   product illustration and SheetCraft charts; **review requested**.
 - **T045 [docx] advanced report**: native OMML equations, side-by-side
   figure/text, merged-header tables, image cells, callouts, cover hero and a

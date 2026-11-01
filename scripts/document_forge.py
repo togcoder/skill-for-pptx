@@ -59,9 +59,9 @@ except ImportError as exc:  # pragma: no cover
     raise SystemExit("python-docx is required: pip install python-docx") from exc
 
 try:
-    from .word_math import omml_from_latex
+    from .word_math import omml_from_latex, omml_para
 except ImportError:
-    from word_math import omml_from_latex
+    from word_math import omml_from_latex, omml_para
 
 try:  # package import (tests) or script import (CLI)
     from .word_field_kit import (
@@ -599,7 +599,7 @@ def _add_equation(doc, block: dict, section, owner) -> None:
     p.paragraph_format.tab_stops.add_tab_stop(Mm(width_mm / 2), WD_TAB_ALIGNMENT.CENTER)
     p.paragraph_format.tab_stops.add_tab_stop(Mm(width_mm), WD_TAB_ALIGNMENT.RIGHT)
     p.add_run("\t")
-    p._p.append(omml_from_latex(latex))
+    p._p.append(omml_para(latex))
     if block.get("number", True):
         p.add_run("\t(")
         add_field(p, r"SEQ Equation \* ARABIC", "1")
