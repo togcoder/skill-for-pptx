@@ -44,20 +44,20 @@ were true at the time. Task IDs and their branches are listed in
   `domains/docx/data/document_system.json`.
 - **Document Forge.** `scripts/document_forge.py` builds a DOCX from
   `domains/docx/schemas/document_spec.schema.json`: cover, unnumbered front
-  matter, linked multilevel headings, `TOC` field, `REF`/`PAGEREF` list of
-  figures/tables, `SEQ` captions, `STYLEREF`/`PAGE` headers/footers, inline
-  images with alt text, fixed table grids with repeating headers, references and
-  appendix A/A.1.
+  matter, linked multilevel headings, `TOC` field, standard `TOC \c` lists of
+  figures/tables updated through `TablesOfFigures`, `SEQ` captions,
+  `STYLEREF`/`SECTIONPAGES` headers/footers, inline images with alt text, fixed
+  table grids with repeating headers, references and appendix A/A.1.
 - **Word field kit.** `scripts/word_field_kit.py` writes/audits fields,
   bookmarks and captions; `scripts/document_audit.py` is the standalone audit.
-- **Evidence.** Structural audit clean (32 fields, 22 bookmarks, 3 tables, 2
-  figures, no errors/warnings); Word refreshed the exact file and exported a
-  12-page PDF; pages inspected. WordCraft was a fallback (physical TOC page
-  numbers, dropped `descr`, Vietnamese PDF font clipping). No PDF/UA, PDF/A or
-  human edit/print yet.
-- **Tests.** `tests/test_document_craft.py` (4 tests) covers fields/bookmarks,
-  broken targets, table width and optional WordCraft refresh. Full suite: 320
-  tests OK with `PYTHONUTF8=1`.
+- **Evidence.** Structural audit clean (29 fields, 22 bookmarks, 3 tables, 2
+  figures, no errors/warnings); Word refreshed the exact file (including
+  `TablesOfFigures`) and exported a 12-page PDF; pages inspected. WordCraft was
+  a fallback (physical TOC page numbers, dropped `descr`, Vietnamese PDF font
+  clipping). No PDF/UA, PDF/A or human edit/print yet.
+- **Tests.** `tests/test_document_craft.py` (6 tests) covers fields/bookmarks,
+  broken targets, broken bookmarkEnd, table width, en-US language and optional
+  WordCraft refresh. Full suite: 322 tests OK with `PYTHONUTF8=1`.
 - **Status.** EXPERIMENTAL; review requested. One task = one domain; the
   spreadsheet half is T041 [xlsx].
 - Report: `experiments/T039-20261101-opencode-office-canon/REPORT.md`.
