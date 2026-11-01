@@ -1,4 +1,4 @@
-# T043 [xlsx] — Advanced workbook: image table, Gantt, relationship matrix, pivot, VBA and dashboard
+# T046 [xlsx] — Advanced workbook: image table, Gantt, relationship matrix, pivot, VBA and dashboard
 
 ## Frame
 
@@ -26,9 +26,12 @@
 
 ## Frozen input
 
-- **Task/claim:** T043 [xlsx], OpenCode (DeepSeek V4.1 Flash), branch
-  `work/T043-opencode-advanced-xlsx`, based on `main` (`db58b3d`, after
-  T039/T041).
+- **Task/claim:** T046 [xlsx], OpenCode (DeepSeek V4.1 Flash), branch
+  `work/T046-opencode-advanced-xlsx`, based on `main` (`db58b3d`, after
+  T039/T041), merged with `main` (`c09b13b`) during the ID renumbering.
+- **ID note:** this work started as T043; meanwhile `main` merged Antigravity's
+  T042/T043. It was renumbered to **T046** on 2026-11-01 to respect the
+  one-task-one-ID rule. The old T043 branch/PR is superseded.
 - **Request/date:** 2026-11-01; the owner asked for image tables, relationship
   charts, Gantt, very complex cross-sheet formulas, pivot, VBA and a designed
   dashboard: “a huge database does not mean it is good; it needs intelligent
@@ -43,23 +46,23 @@
 
 ```powershell
 # 1. Synthetic programme data, avatars, spec
-cd experiments/T043-20261101-opencode-advanced-xlsx/inputs
+cd experiments/T046-20261101-opencode-advanced-xlsx/inputs
 python make_dashboard.py
 
 # 2. Build the workbook, native pivot (GridCraft), VBA module + injection
 cd ../../..
 python scripts/sheet_forge.py build `
-  experiments/T043-20261101-opencode-advanced-xlsx/inputs/dashboard_spec.json `
-  -o experiments/T043-20261101-opencode-advanced-xlsx/artifacts/programme-dashboard.xlsx `
+  experiments/T046-20261101-opencode-advanced-xlsx/inputs/dashboard_spec.json `
+  -o experiments/T046-20261101-opencode-advanced-xlsx/artifacts/programme-dashboard.xlsx `
   --vba
 
 # 3. Audit
 python scripts/chart_audit.py `
-  experiments/T043-20261101-opencode-advanced-xlsx/artifacts/programme-dashboard.xlsx `
-  --md experiments/T043-20261101-opencode-advanced-xlsx/artifacts/audit.md
+  experiments/T046-20261101-opencode-advanced-xlsx/artifacts/programme-dashboard.xlsx `
+  --md experiments/T046-20261101-opencode-advanced-xlsx/artifacts/audit.md
 
 # 4. Open in Excel, read formulas/pivot/shapes/modules, export sheets
-python experiments/T043-20261101-opencode-advanced-xlsx/inputs/verify.py
+python experiments/T046-20261101-opencode-advanced-xlsx/inputs/verify.py
 
 # 5. Tests
 $env:PYTHONUTF8='1'; python -m unittest discover -s tests -v
@@ -153,8 +156,8 @@ Preview: `preview/dashboard-page-1.png`, `data-page-1.png`, `team-page-1.png`,
 ## Review response
 
 Argon review 2026-11-01 (chat `0:cf4bb6173adaaa34`), verdict **revise** in
-round 1 and **approve T043** in round 2 (0 blockers). Full record:
-`research/reviews/T043-argon-20261101.md`.
+round 1 and **approve T046** in round 2 (0 blockers). Full record:
+`research/reviews/T046-argon-20261101.md`.
 
 | Finding | Response (fixed / disputed / deferred → task) |
 |---|---|

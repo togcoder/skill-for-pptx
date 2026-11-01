@@ -49,7 +49,7 @@ chart_patch.py  (existing XLSX)      (geometry, axes, cache, contrast)
 | `tests/test_sheet_craft.py` | Chart build/patch/audit tests |
 | `tests/test_sheet_craft_advanced.py` | Dashboard package: formulas, image table, Gantt, matrix, anchors, VBA |
 
-## Workbook and dashboard (T043)
+## Workbook and dashboard (T046)
 
 A chart-only tool produces a chart; a professional workbook needs the data, the
 model, the summary and the page to agree.
@@ -70,7 +70,7 @@ carries ≤4 KPI cards, one scheduling view, one relationship view and one
 comparison chart; the rest stays on data sheets. Keep one accent per KPI state
 (neutral/positive/warning), one chart title that states the insight, and one
 source note. A matrix is used for pairwise relationships because a native
-node-link scatter was not reliable in Excel (T043 negative result).
+node-link scatter was not reliable in Excel (T046 negative result).
 
 ## What the tools control
 
@@ -196,7 +196,7 @@ $wb.Close($false); $excel.Quit()
    with palette suggestions.
 5. Add a workbook-level dashboard audit (alignment grid, shared axes, card
    sizes, print pages).
-6. Add a LibreOffice Calc rung 3 for the T043 dashboard.
+6. Add a LibreOffice Calc rung 3 for the T046 dashboard.
 7. Add a real PivotTable fallback (or keep the formula summary as the
    documented non-GridCraft path).
 8. Prove a native node-link chart (connected scatter/Graph) or document the

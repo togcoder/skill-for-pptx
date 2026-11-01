@@ -1,4 +1,4 @@
-# Dashboard recipes (T043)
+# Dashboard recipes (T046)
 
 Concrete OOXML/Excel patterns behind `scripts/sheet_forge.py`. Read this before
 changing a dashboard block.
@@ -65,7 +65,7 @@ cause of an earlier “Excel cannot open the file” bug.
 - 3-colour scale: `#EAF1F8` → `#9DC3E6` → `#1F4E79`; white cell borders.
 - Keep the raw edge list (from, to, x1/y1, x2/y2) on the same sheet as
   provenance, outside the print area.
-- **Do not** ship a node-link scatter built as one series per edge: in the T043
+- **Do not** ship a node-link scatter built as one series per edge: in the T046
   fixture Excel/Graph did not render all series consistently, and the audit
   could not classify the hidden axes reliably. A matrix is the accepted visual.
 

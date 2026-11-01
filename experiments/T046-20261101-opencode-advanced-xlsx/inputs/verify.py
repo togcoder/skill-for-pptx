@@ -1,4 +1,4 @@
-"""T043 verification: open in Excel, check formulas/pivot/VBA, render sheets."""
+"""T046 verification: open in Excel, check formulas/pivot/VBA, render sheets."""
 from __future__ import annotations
 
 import os

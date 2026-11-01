@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Sheet Forge — a designed Excel dashboard from a semantic spec (T043, xlsx).
+"""Sheet Forge — a designed Excel dashboard from a semantic spec (T046, xlsx).
 
-Status: EXPERIMENTAL — T043 [xlsx], review requested.
+Status: EXPERIMENTAL — T046 [xlsx], review requested.
 
 This module covers the workbook-level work that a chart-only tool misses:
 

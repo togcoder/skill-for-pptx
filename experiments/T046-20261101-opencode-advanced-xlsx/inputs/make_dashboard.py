@@ -1,4 +1,4 @@
-"""Generate the T043 synthetic programme workbook spec and avatar images."""
+"""Generate the T046 synthetic programme workbook spec and avatar images."""
 from __future__ import annotations
 
 import datetime as dt

@@ -5,7 +5,7 @@ description: Build, repair and audit Excel workbooks and charts — formulas, ta
 
 # Sheet Craft
 
-> **Status: EXPERIMENTAL — T041/T043 [xlsx], review requested.** This skill is
+> **Status: EXPERIMENTAL — T041/T046 [xlsx], review requested.** This skill is
 > not a canonical product path until an independent review accepts it. Use it,
 > test it, and report failures; do not cite it as lab canon yet.
 
@@ -68,7 +68,7 @@ Scripts live two levels above this file: `ROOT=<this skill dir>/../..`.
 | Hierarchy | Treemap, sunburst | 3-D pie |
 | KPI vs target | Bullet, bar with target line | Gauge (low data-ink) |
 
-## Workbook layers and dashboard design (T043)
+## Workbook layers and dashboard design (T046)
 
 A workbook that will be used, not just opened, has seven layers. Build them in
 order; each one has a native object and an evidence check.
@@ -101,7 +101,7 @@ order; each one has a native object and an evidence check.
    margins per sheet. Inspect the exported PDF page count; a 60-row sheet may
    legitimately take 2 pages.
 7. **Relationship view.** Prefer a matrix heatmap. A one-series-per-edge
-   scatter is not reliable in Excel/Graph (T043 negative result); keep edge
+   scatter is not reliable in Excel/Graph (T046 negative result); keep edge
    data for provenance, do not ship a broken node-link.
 8. **VBA.** Write the `.bas` module with `Option Explicit`; inject only when
    Excel trust access is on. Otherwise ship the `.xlsx` plus the `.bas` and say

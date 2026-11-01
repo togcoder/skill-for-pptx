@@ -1,6 +1,6 @@
 """Advanced Sheet Forge tests: image table, Gantt, matrix, dashboard, VBA.
 
-EXPERIMENTAL — T043 [xlsx].  These tests inspect the OOXML package, not a
+EXPERIMENTAL — T046 [xlsx].  These tests inspect the OOXML package, not a
 running Excel; the Excel COM open/render is recorded in the task report.
 """
 from __future__ import annotations

@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "domain": "cad",
+  "version": "1.0.0",
+  "description": "Design canons, sheet sizes, ISO line weights, dimensioning geometry, and title block contracts for technical drawings (CADCraft)",
+  "standards": [
+    "ISO 5457 (Drawing sheets: sizes and layout)",
+    "ISO 128 (Technical product documentation: general principles of execution)",
+    "ISO 129 (Technical drawings: dimensioning and tolerancing)",
+    "ISO 7200 (Technical product documentation: title blocks)"
+  ],
+  "sheet_sizes_mm": {
+    "A4": { "width": 210, "height": 297, "border_margin_left": 20.0, "border_margin_other": 10.0, "border_weight_mm": 0.50 },
+    "A3": { "width": 420, "height": 297, "border_margin_left": 20.0, "border_margin_other": 10.0, "border_weight_mm": 0.50 },
+    "A2": { "width": 594, "height": 420, "border_margin_left": 20.0, "border_margin_other": 10.0, "border_weight_mm": 0.50 },
+    "A1": { "width": 841, "height": 594, "border_margin_left": 20.0, "border_margin_other": 20.0, "border_weight_mm": 0.70 },
+    "A0": { "width": 1189, "height": 841, "border_margin_left": 20.0, "border_margin_other": 20.0, "border_weight_mm": 0.70 }
+  },
+  "line_weight_hierarchy": {
+    "ratio": "sqrt(2) ≈ 1.414",
+    "group_0_5mm_a3_a4": {
+      "VISIBLE_OUTLINE": {
+        "line_type": "Continuous Thick",
+        "weight_mm": 0.50,
+        "color": "#FFFFFF",
+        "description": "Visible outlines and edges of parts"
+      },
+      "HIDDEN_EDGE": {
+        "line_type": "Dashed Narrow",
+        "weight_mm": 0.25,
+        "dash_length_mm": 3.0,
+        "gap_length_mm": 1.0,
+        "color": "#EAB308",
+        "description": "Hidden outlines and edges"
+      },
+      "CENTER_AXIS": {
+        "line_type": "Chain Thin",
+        "weight_mm": 0.18,
+        "dash_length_mm": 12.0,
+        "gap_length_mm": 1.5,
+        "dot_length_mm": 1.5,
+        "color": "#EF4444",
+        "description": "Centerlines, pitch circles, axes of symmetry"
+      },
+      "DIMENSION_HATCH": {
+        "line_type": "Continuous Narrow",
+        "weight_mm": 0.18,
+        "hatch_angle_degrees": 45.0,
+        "color": "#22C55E",
+        "description": "Dimension lines, extension lines, cross-hatching, leader lines"
+      },
+      "PHANTOM_BOUNDARY": {
+        "line_type": "Double-dot Dashed",
+        "weight_mm": 0.18,
+        "color": "#A855F7",
+        "description": "Adjacent parts, extreme positions of movable mechanisms"
+      }
+    },
+    "group_0_7mm_a0_a1": {
+      "VISIBLE_OUTLINE": { "weight_mm": 0.70 },
+      "HIDDEN_EDGE": { "weight_mm": 0.35 },
+      "CENTER_AXIS": { "weight_mm": 0.25 },
+      "DIMENSION_HATCH": { "weight_mm": 0.25 },
+      "PHANTOM_BOUNDARY": { "weight_mm": 0.25 }
+    }
+  },
+  "dimensioning_geometry": {
+    "text_height_mm": {
+      "normal_a3_a4": 3.5,
+      "normal_a0_a1": 5.0,
+      "titles_and_sections": 5.0,
+      "stroke_thickness_ratio": "h / 10"
+    },
+    "offsets_mm": {
+      "first_dimension_line_offset_min": 10.0,
+      "parallel_dimension_spacing_min": 7.0,
+      "extension_line_origin_offset": 1.0,
+      "extension_line_overshoot": 2.0,
+      "centerline_extension_beyond_feature": 3.0
+    },
+    "arrowheads": {
+      "style": "Closed Filled",
+      "opening_angle_degrees": 15.0,
+      "length_mm": 3.5,
+      "width_mm": 1.15,
+      "aspect_ratio": "3:1"
+    }
+  },
+  "title_block_iso_7200": {
+    "position": "Bottom-right corner touching border line",
+    "width_mm": 180.0,
+    "height_mm_range": [36.0, 55.0],
+    "mandatory_fields": [
+      "title",
+      "drawing_number",
+      "scale",
+      "projection_symbol",
+      "material",
+      "general_tolerance",
+      "creator_author",
+      "approver",
+      "date"
+    ]
+  }
+}
