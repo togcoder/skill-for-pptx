@@ -1,0 +1,417 @@
+{
+  "ok": true,
+  "output": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T039\\experiments\\T048-20261101-opencode-workbook-ux\\artifacts\\workbook-ux.xlsx",
+  "bytes": 31873,
+  "pivot": false,
+  "vba": {
+    "bas": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T039\\experiments\\T048-20261101-opencode-workbook-ux\\artifacts\\workbook-ux.bas",
+    "injected": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T039\\experiments\\T048-20261101-opencode-workbook-ux\\artifacts\\workbook-ux.xlsm"
+  },
+  "audit": {
+    "ok": true,
+    "errors": [],
+    "warnings": [],
+    "notes": [],
+    "stats": {
+      "charts": 3,
+      "types": [
+        "barChart",
+        "barChart",
+        "barChart"
+      ],
+      "sheets": [
+        "Data",
+        "Model",
+        "Team",
+        "Gantt",
+        "Relations",
+        "Dashboard",
+        "Pivot",
+        "Lookups",
+        "Input"
+      ],
+      "min_width_cm": 10.0,
+      "min_height_cm": 6.0
+    },
+    "charts": [
+      {
+        "type": "barChart",
+        "types": [
+          "barChart"
+        ],
+        "network": false,
+        "gantt": true,
+        "title": "Lịch trình chương trình",
+        "series": [
+          {
+            "name": "Start",
+            "values": [
+              46027.0,
+              46048.0,
+              46069.0,
+              46097.0,
+              46125.0,
+              46146.0
+            ],
+            "values_ref": "Gantt!$B$2:$B$7",
+            "color": null,
+            "hidden": true,
+            "marker": null,
+            "has_labels": false,
+            "point_colors": [],
+            "ax_ids": [
+              "50010001",
+              "50010002"
+            ]
+          },
+          {
+            "name": "Duration",
+            "values": [
+              12.0,
+              18.0,
+              21.0,
+              15.0,
+              12.0,
+              24.0
+            ],
+            "values_ref": "Gantt!$C$2:$C$7",
+            "color": "1F4E79",
+            "hidden": false,
+            "marker": null,
+            "has_labels": false,
+            "point_colors": [],
+            "ax_ids": [
+              "50010001",
+              "50010002"
+            ]
+          }
+        ],
+        "axes": [
+          {
+            "kind": "catAx",
+            "ax_id": "50010001",
+            "pos": "l",
+            "min": null,
+            "max": null,
+            "log": null,
+            "num_fmt": null,
+            "title": "",
+            "gridlines": false,
+            "delete": null
+          },
+          {
+            "kind": "valAx",
+            "ax_id": "50010002",
+            "pos": "b",
+            "min": "46020",
+            "max": "46176",
+            "log": null,
+            "num_fmt": "mmm-yy",
+            "title": "",
+            "gridlines": true,
+            "delete": null
+          }
+        ],
+        "fonts": [
+          13.0,
+          13.0,
+          8.0,
+          8.0
+        ],
+        "min_font": 8.0,
+        "max_font": 13.0,
+        "show_labels": false,
+        "legend": null,
+        "gap": null,
+        "overlap": "100",
+        "hole": null,
+        "rotation": null,
+        "index": 1,
+        "part": "xl/charts/chart1.xml",
+        "sheet": "Gantt",
+        "anchor": {
+          "kind": "chart",
+          "rect_cm": [
+            0.10583333333333335,
+            6.508750000000001,
+            18.0,
+            7.0
+          ],
+          "anchor": "oneCellAnchor",
+          "chart_part": "xl/charts/chart1.xml",
+          "alt": "Gantt chart"
+        },
+        "rect_cm": [
+          0.11,
+          6.51,
+          18.0,
+          7.0
+        ],
+        "width_cm": 18.0,
+        "height_cm": 7.0,
+        "aspect": 2.571,
+        "anchor_kind": "oneCellAnchor",
+        "alt": "Gantt chart",
+        "inside_print_area": true,
+        "print_area_cm": [
+          0.0,
+          0.0,
+          28.55,
+          14.29
+        ]
+      },
+      {
+        "type": "barChart",
+        "types": [
+          "barChart"
+        ],
+        "network": false,
+        "gantt": true,
+        "title": "Lịch trình chương trình",
+        "series": [
+          {
+            "name": "Start",
+            "values": [
+              46027.0,
+              46048.0,
+              46069.0,
+              46097.0,
+              46125.0,
+              46146.0
+            ],
+            "values_ref": "Gantt!$B$2:$B$7",
+            "color": null,
+            "hidden": true,
+            "marker": null,
+            "has_labels": false,
+            "point_colors": [],
+            "ax_ids": [
+              "50020001",
+              "50020002"
+            ]
+          },
+          {
+            "name": "Duration",
+            "values": [
+              12.0,
+              18.0,
+              21.0,
+              15.0,
+              12.0,
+              24.0
+            ],
+            "values_ref": "Gantt!$C$2:$C$7",
+            "color": "1F4E79",
+            "hidden": false,
+            "marker": null,
+            "has_labels": false,
+            "point_colors": [],
+            "ax_ids": [
+              "50020001",
+              "50020002"
+            ]
+          }
+        ],
+        "axes": [
+          {
+            "kind": "catAx",
+            "ax_id": "50020001",
+            "pos": "l",
+            "min": null,
+            "max": null,
+            "log": null,
+            "num_fmt": null,
+            "title": "",
+            "gridlines": false,
+            "delete": null
+          },
+          {
+            "kind": "valAx",
+            "ax_id": "50020002",
+            "pos": "b",
+            "min": "46020",
+            "max": "46176",
+            "log": null,
+            "num_fmt": "mmm-yy",
+            "title": "",
+            "gridlines": true,
+            "delete": null
+          }
+        ],
+        "fonts": [
+          13.0,
+          13.0,
+          8.0,
+          8.0
+        ],
+        "min_font": 8.0,
+        "max_font": 13.0,
+        "show_labels": false,
+        "legend": null,
+        "gap": null,
+        "overlap": "100",
+        "hole": null,
+        "rotation": null,
+        "index": 2,
+        "part": "xl/charts/chart2.xml",
+        "sheet": "Dashboard",
+        "anchor": {
+          "kind": "chart",
+          "rect_cm": [
+            0.10583333333333335,
+            5.150555555555556,
+            18.0,
+            7.0
+          ],
+          "anchor": "oneCellAnchor",
+          "chart_part": "xl/charts/chart2.xml",
+          "alt": "Gantt chart"
+        },
+        "rect_cm": [
+          0.11,
+          5.15,
+          18.0,
+          7.0
+        ],
+        "width_cm": 18.0,
+        "height_cm": 7.0,
+        "aspect": 2.571,
+        "anchor_kind": "oneCellAnchor",
+        "alt": "Gantt chart",
+        "inside_print_area": true,
+        "print_area_cm": [
+          0.0,
+          0.0,
+          29.21,
+          20.39
+        ]
+      },
+      {
+        "type": "barChart",
+        "types": [
+          "barChart"
+        ],
+        "network": false,
+        "gantt": false,
+        "title": "Chi phí và lợi ích theo nhóm",
+        "series": [
+          {
+            "name": "Cost",
+            "values": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "values_ref": "Model!$C$2:$C$5",
+            "color": "2E75B6",
+            "hidden": false,
+            "marker": null,
+            "has_labels": true,
+            "point_colors": [],
+            "ax_ids": [
+              "50030001",
+              "50030002"
+            ]
+          },
+          {
+            "name": "Benefit",
+            "values": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "values_ref": "Model!$D$2:$D$5",
+            "color": "548235",
+            "hidden": false,
+            "marker": null,
+            "has_labels": false,
+            "point_colors": [],
+            "ax_ids": [
+              "50030001",
+              "50030002"
+            ]
+          }
+        ],
+        "axes": [
+          {
+            "kind": "catAx",
+            "ax_id": "50030001",
+            "pos": "b",
+            "min": null,
+            "max": null,
+            "log": null,
+            "num_fmt": null,
+            "title": "",
+            "gridlines": false,
+            "delete": null
+          },
+          {
+            "kind": "valAx",
+            "ax_id": "50030002",
+            "pos": "l",
+            "min": null,
+            "max": null,
+            "log": null,
+            "num_fmt": "#,##0",
+            "title": "",
+            "gridlines": true,
+            "delete": null
+          }
+        ],
+        "fonts": [
+          13.0,
+          13.0,
+          8.0,
+          8.0,
+          8.0
+        ],
+        "min_font": 8.0,
+        "max_font": 13.0,
+        "show_labels": false,
+        "legend": {
+          "pos": "b",
+          "overlay": null
+        },
+        "gap": null,
+        "overlap": null,
+        "hole": null,
+        "rotation": null,
+        "index": 3,
+        "part": "xl/charts/chart3.xml",
+        "sheet": "Dashboard",
+        "anchor": {
+          "kind": "chart",
+          "rect_cm": [
+            14.499166666666667,
+            13.088055555555558,
+            13.2,
+            6.6
+          ],
+          "anchor": "oneCellAnchor",
+          "chart_part": "xl/charts/chart3.xml",
+          "alt": "Cost and benefit chart"
+        },
+        "rect_cm": [
+          14.5,
+          13.09,
+          13.2,
+          6.6
+        ],
+        "width_cm": 13.2,
+        "height_cm": 6.6,
+        "aspect": 2.0,
+        "anchor_kind": "oneCellAnchor",
+        "alt": "Cost and benefit chart",
+        "inside_print_area": true,
+        "print_area_cm": [
+          0.0,
+          0.0,
+          29.21,
+          20.39
+        ]
+      }
+    ]
+  }
+}

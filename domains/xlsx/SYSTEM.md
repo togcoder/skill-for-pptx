@@ -72,6 +72,31 @@ comparison chart; the rest stays on data sheets. Keep one accent per KPI state
 source note. A matrix is used for pairwise relationships because a native
 node-link scatter was not reliable in Excel (T046 negative result).
 
+## Workbook UX (T048)
+
+A delivered workbook often shows two sheets, not nine. The UX layer is data:
+
+| Concern | Native mechanism | Rule |
+|---|---|---|
+| Hide data | `sheet state="hidden"` / `veryHidden` | Hide Data/Model/Team/Gantt/Relations; `veryHidden` for Pivot/Lookups. Hidden is not security. |
+| Input surface | merged layout cells + locked/unlocked formats + `sheetProtection` | Merge only layout cells; Data table stays unmerged. Unlock only input cells. |
+| Validation | `dataValidation` list/date/integer/decimal | Lists point to a veryHidden Lookups sheet; do not rely on free text. |
+| Tab colour | `tabColor` | Dashboard navy, Input orange, data grey. |
+| VBA entry | `.bas` module + form buttons (`FmlaMacro`) | Buttons use `[0]!DashboardTools.AddRecord`; `SaveAs(.xlsm)` must not leave the source `.xlsx` name. |
+| Status | inline cell (not MsgBox) | A status line (`B20`) avoids blocking the macro/COM test. |
+
+**Do not print the form buttons by default.** Excel form controls have
+`PrintObject=False`; a print-first form needs a text strip or explicit
+`PrintObject=True`. A worksheet form is not a UserForm; say which one is used.
+
+**Merged-cell contract.** Only the top-left cell holds a value; VBA must write
+that cell; sorting/filtering a merged range is unsafe. The generated data table
+never uses merges.
+
+**Macro gate.** The module can be injected with VBA trust, but execution can
+still be blocked by macro security. Report module present vs macro executed as
+separate evidence.
+
 ## What the tools control
 
 - **Chart types:** column/bar, line, area, pie, doughnut, scatter, bubble, radar,

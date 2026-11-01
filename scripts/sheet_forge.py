@@ -170,7 +170,7 @@ def _gantt_chart(wb, spec: dict):
     ends = [start + dt.timedelta(days=int(task["days"]) - 1)
             for start, task in zip(starts, spec["tasks"])]
     serial = lambda value: (value - dt.date(1899, 12, 30)).days
-    chart.set_y_axis({"reverse": True, "num_font": {"size": 8}})
+    chart.set_y_axis({"num_font": {"size": 8}})
     chart.set_x_axis({
         "min": serial(min(starts)) - 7, "max": serial(max(ends)) + 7,
         "major_unit": 30, "num_format": "mmm-yy", "num_font": {"size": 8},
@@ -393,6 +393,135 @@ def _filter_summary(wb, spec: dict, fmt_header, fmt_text, fmt_num):
     return ws
 
 
+def _add_lookups_sheet(wb, spec: dict, fmt_header, fmt_text):
+    ws = wb.add_worksheet("Lookups")
+    ws.write_row(0, 0, ["Workstream", "Owner", "Status", "Priority"], fmt_header)
+    workstreams = spec.get("workstreams") or ["Dữ liệu", "Nền tảng", "Năng lực", "Trải nghiệm"]
+    owners = [m["name"] for m in spec.get("team", [])] or ["Lan", "Minh", "Hà", "Tuấn"]
+    statuses = ["On track", "At risk", "Blocked", "Done"]
+    priorities = ["High", "Medium", "Low"]
+    for i, value in enumerate(workstreams, start=1):
+        ws.write_string(i, 0, value, fmt_text)
+    for i, value in enumerate(owners, start=1):
+        ws.write_string(i, 1, value, fmt_text)
+    for i, value in enumerate(statuses, start=1):
+        ws.write_string(i, 2, value, fmt_text)
+    for i, value in enumerate(priorities, start=1):
+        ws.write_string(i, 3, value, fmt_text)
+    ws.set_column("A:D", 20)
+    return ws
+
+
+def _add_input_sheet(wb, spec: dict, fmt_header, fmt_text):
+    """A visible, protected data-entry surface over the hidden Data sheet."""
+    ws = wb.add_worksheet("Input")
+    ws.hide_gridlines(2)
+    ws.set_column("A:A", 2)
+    ws.set_column("B:B", 18)
+    ws.set_column("C:D", 17)
+    ws.set_column("E:E", 16)
+    ws.set_column("F:G", 17)
+    ws.set_column("H:H", 3)
+    ws.set_row(0, 10)
+    ws.merge_range("B2:G2", "NHẬP CÔNG VIỆC", wb.add_format({
+        "bold": True, "font_size": 20, "font_color": "#FFFFFF", "bg_color": "#1F4E79",
+        "valign": "vcenter", "align": "left"}))
+    ws.set_row(1, 34)
+    ws.merge_range("B3:G3", "Biểu mẫu ghi vào sheet Data (ẩn). Mỗi lần thêm một dòng; dashboard tự tính lại.",
+                   wb.add_format({"font_size": 9, "font_color": "#595959", "valign": "vcenter"}))
+    ws.merge_range("B5:G5", "THÔNG TIN CÔNG VIỆC", wb.add_format({
+        "bold": True, "font_size": 10, "font_color": "#1F4E79", "bg_color": "#EAF1F8",
+        "valign": "vcenter"}))
+    label = wb.add_format({"bold": True, "font_size": 9, "font_color": "#404040",
+                           "valign": "vcenter", "align": "right"})
+    inp = wb.add_format({"locked": False, "font_size": 10, "bg_color": "#FFFFFF",
+                         "border": 1, "border_color": "#BFBFBF", "valign": "vcenter"})
+    auto = wb.add_format({"font_size": 10, "bg_color": "#F2F2F2", "border": 1,
+                          "border_color": "#BFBFBF", "valign": "vcenter"})
+    rows = [
+        (6, "Workstream", "C6:D6", "Owner", "F6:G6", "C6", "=Lookups!$A$2:$A$5",
+         "F6", "=Lookups!$B$2:$B$7"),
+        (7, "Ngày bắt đầu", "C7:D7", "Số ngày", "F7:G7", None, None, None, None),
+        (8, "Chi phí (triệu)", "C8:D8", "Lợi ích (triệu)", "F8:G8", None, None, None, None),
+        (9, "Trạng thái", "C9:D9", "Ưu tiên", "F9:G9", "C9", "=Lookups!$C$2:$C$5",
+         "F9", "=Lookups!$D$2:$D$4"),
+    ]
+    for row, l1, m1, l2, m2, s1, src1, s2, src2 in rows:
+        ws.set_row(row - 1, 26)
+        ws.write(row - 1, 1, l1, label)
+        ws.merge_range(row - 1, 2, row - 1, 3, "", inp)
+        ws.write(row - 1, 4, l2, label)
+        ws.merge_range(row - 1, 5, row - 1, 6, "", inp)
+        if src1:
+            ws.data_validation(s1, {"validate": "list", "source": src1,
+                                    "error_message": "Chọn từ danh sách."})
+            ws.data_validation(s2, {"validate": "list", "source": src2,
+                                    "error_message": "Chọn từ danh sách."})
+    ws.write(9, 1, "Mã công việc", label)
+    ws.merge_range("C10:D10", "", auto)
+    ws.write_formula(9, 2, '=IF(COUNTA(Data!$A$2:$A$999)=0,"T001","T"&TEXT(COUNTA(Data!$A$2:$A$999)+1,"000"))', auto)
+    ws.data_validation("C7", {"validate": "date", "criteria": "between",
+                              "minimum": dt.date(2026, 1, 1), "maximum": dt.date(2027, 12, 31),
+                              "error_title": "Ngày không hợp lệ",
+                              "error_message": "Chọn ngày trong khoảng 2026-01-01 → 2027-12-31."})
+    ws.data_validation("F7", {"validate": "integer", "criteria": "between", "minimum": 1,
+                              "maximum": 365, "error_message": "Số ngày từ 1 đến 365."})
+    for cell in ("C8", "F8"):
+        ws.data_validation(cell, {"validate": "decimal", "criteria": ">=", "value": 0,
+                                  "error_message": "Giá trị phải >= 0."})
+
+    button = {"width": 132, "height": 30}
+    ws.insert_button("B12", {**button, "caption": "Thêm bản ghi",
+                             "macro": "DashboardTools.AddRecord"})
+    ws.insert_button("D12", {**button, "caption": "Xóa biểu mẫu",
+                             "macro": "DashboardTools.ClearForm"})
+    ws.insert_button("F12", {**button, "caption": "Làm mới",
+                             "macro": "DashboardTools.RefreshDashboard"})
+
+    ws.merge_range("B14:G14", "QUY TẮC NHẬP", wb.add_format({
+        "bold": True, "font_size": 10, "font_color": "#1F4E79", "bg_color": "#FFF2E5"}))
+    notes = [
+        "1. Chọn Workstream, Owner, Trạng thái, Ưu tiên từ danh sách — không gõ tay.",
+        "2. Ngày bắt đầu theo ISO 8601 (YYYY-MM-DD); số ngày 1–365.",
+        "3. Mã công việc tự sinh; không sửa ô xám.",
+        "4. Nhấn “Thêm bản ghi” (nút hiển thị khi mở trong Excel) để ghi vào sheet Data (ẩn).",
+        "5. Sheet này được bảo vệ; chỉ các ô trắng được nhập.",
+    ]
+    for i, note in enumerate(notes):
+        ws.merge_range(14 + i, 1, 14 + i, 6, note, wb.add_format({
+            "font_size": 9, "font_color": "#404040", "valign": "vcenter", "text_wrap": True}))
+    ws.set_row(18, 8)
+    ws.merge_range("B20:G20", "Sẵn sàng.", wb.add_format({
+        "font_size": 9, "italic": True, "font_color": "#1F4E79", "bg_color": "#EAF1F8",
+        "valign": "vcenter"}))
+    ws.protect("", {"select_locked_cells": True, "select_unlocked_cells": True})
+    ws.print_area("B2:G20")
+    ws.set_landscape()
+    ws.fit_to_pages(1, 1)
+    ws.set_margins(0.4, 0.4, 0.5, 0.5)
+    ws.activate()
+    ws.set_first_sheet()
+    ws.set_tab_color("#C55A11")
+    return ws
+
+
+def _apply_ux(wb, spec: dict) -> None:
+    ux = spec.get("ux") or {}
+    for name, cfg in (ux.get("sheets") or {}).items():
+        ws = wb.get_worksheet_by_name(name)
+        if ws is None:
+            continue
+        if cfg.get("very_hidden"):
+            ws.very_hidden()
+        elif cfg.get("hidden"):
+            ws.hide()
+        if cfg.get("tab_color"):
+            ws.set_tab_color(cfg["tab_color"])
+        if cfg.get("protect"):
+            ws.protect("", {"select_locked_cells": True, "select_unlocked_cells": True})
+
+
+
 def build_dashboard(spec_path: str | Path, out_path: str | Path, *, pivot: bool = True,
                     vba: bool = False) -> dict:
     spec = json.loads(Path(spec_path).read_text(encoding="utf-8"))
@@ -424,6 +553,10 @@ def build_dashboard(spec_path: str | Path, out_path: str | Path, *, pivot: bool 
                    fmt_header, fmt_text)
     if not pivot or not gridcraft:
         _filter_summary(wb, spec, fmt_header, fmt_text, fmt_num)
+    if (spec.get("ux") or {}).get("input_form"):
+        _add_lookups_sheet(wb, spec, fmt_header, fmt_text)
+        _add_input_sheet(wb, spec, fmt_header, fmt_text)
+    _apply_ux(wb, spec)
     wb.close()
 
     pivot_ok = _gridcraft_pivot(out_path, spec, gridcraft) if (pivot and gridcraft) else False
@@ -460,12 +593,15 @@ def build_dashboard(spec_path: str | Path, out_path: str | Path, *, pivot: bool 
     vba_info = None
     if vba:
         try:
-            from .vba_forge import write_dashboard_module, inject_vba
+            from .vba_forge import write_dashboard_module, inject_vba, normalize_button_macros
         except ImportError:
-            from vba_forge import write_dashboard_module, inject_vba
+            from vba_forge import write_dashboard_module, inject_vba, normalize_button_macros
         bas = out_path.with_suffix(".bas")
         write_dashboard_module(bas)
-        vba_info = {"bas": str(bas), "injected": inject_vba(out_path, bas)}
+        injected = inject_vba(out_path, bas)
+        if injected:
+            normalize_button_macros(injected)
+        vba_info = {"bas": str(bas), "injected": injected}
     audit = audit_workbook(out_path)
     return {"ok": audit["ok"], "output": str(out_path), "bytes": out_path.stat().st_size,
             "pivot": pivot_ok, "vba": vba_info, "audit": audit}

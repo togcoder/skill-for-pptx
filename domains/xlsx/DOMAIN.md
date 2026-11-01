@@ -59,8 +59,8 @@ No pptx→xlsx transfer is accepted yet.
 | `scripts/chart_forge.py` | Experimental (T041): build a workbook/chart from `domains/xlsx/schemas/chart_spec.schema.json` | `tests/test_sheet_craft.py` |
 | `scripts/chart_patch.py` | Experimental (T041): patch an existing chart's OOXML/anchors | `tests/test_sheet_craft.py` |
 | `scripts/chart_audit.py` | Experimental (T041): geometry/axes/cache/contrast audit | `tests/test_sheet_craft.py` |
-| `scripts/sheet_forge.py` | Experimental (T046): designed workbook/dashboard from a spec — tables, formulas, image table, Gantt, matrix, pivot, print | `tests/test_sheet_craft_advanced.py` |
-| `scripts/vba_forge.py` | Experimental (T046): write a `.bas` module; optional Excel COM injection into `.xlsm` | `tests/test_sheet_craft_advanced.py` |
+| `scripts/sheet_forge.py` | Experimental (T046/T048): designed workbook/dashboard from a spec — tables, formulas, image table, Gantt, matrix, pivot, print, hidden sheets, input form | `tests/test_sheet_craft_advanced.py`, `tests/test_sheet_craft_ux.py` |
+| `scripts/vba_forge.py` | Experimental (T046/T048): write a `.bas` module; optional Excel COM injection into `.xlsm`; normalize form-button macros | `tests/test_sheet_craft_advanced.py`, `tests/test_sheet_craft_ux.py` |
 
 No xlsx module is a product path until `research/reviews/` contains an accepted
 review. The modules carry `Status: EXPERIMENTAL` in their headers.
@@ -71,7 +71,7 @@ review. The modules carry `Status: EXPERIMENTAL` in their headers.
 |---|---|---|
 | Chart/design data | `domains/xlsx/data/spreadsheet_system.json` | T041; provenance recorded; unreviewed |
 | Spec schema | `domains/xlsx/schemas/chart_spec.schema.json` | T041; unreviewed |
-| Skill | `skills/sheet-craft/` | T041/T046; experimental |
+| Skill | `skills/sheet-craft/` | T041/T046/T048; experimental |
 | Example specs | `examples/xlsx/chart_*_spec.json`, `programme_dashboard_spec.json` | T041/T046; synthetic |
 
 The data file contains chart selection, geometry/type/colour tokens, rules and
@@ -82,10 +82,10 @@ one in a generator.
 
 | Rung | Tool | T041/T046 evidence |
 |---|---|---|
-| 1 | schema / structural audit | T041: 3 workbooks, combo/doughnut/scatter, no errors/warnings. T046: dashboard workbook audit clean; 3 bar charts, 7 sheets |
+| 1 | schema / structural audit | T041: 3 workbooks, combo/doughnut/scatter, no errors/warnings. T046: dashboard workbook audit clean; 3 bar charts, 7 sheets. T048: 9 sheets, 5 hidden + 2 veryHidden, 18 merges, 8 validations, 2 protections, 3 buttons |
 | 2 | library (xlsxwriter) | `chart_forge.py`/`sheet_forge.py` build; audits re-read the package in tests |
 | 3 | GridCraft PDF render | T041 rendered; font limitation: Vietnamese diacritics clipped in the PDF. T046 pivot via GridCraft |
-| 4–5 | Excel COM open / chart export | T041 charts exported. T046: Excel opened the exact XLSX/XLSM, recalculated formulas, read the PivotTable, exported 5 sheets and 2 dashboard charts; VBA module present in the XLSM |
+| 4–5 | Excel COM open / chart export | T041 charts exported. T046/T048: Excel opened the exact XLSX/XLSM, read pivot/formulas/buttons/validation; T048 exported Input and Dashboard (1 page each); macro execution blocked by host policy |
 | 6 | human works with the file | Not run |
 
 The T041 report is
@@ -94,6 +94,10 @@ The T041 report is
 
 ## State (2026-11-01)
 
+- **T048 [xlsx] workbook UX**: a 9-sheet workbook with only Dashboard/Input
+  visible; Data/Model/Team/Gantt/Relations hidden, Pivot/Lookups veryHidden;
+  Input form with 18 merges, 8 validations, 3 macro buttons and sheet
+  protection; tab colours; VBA `AddRecord`/`ClearForm`; **review requested**.
 - **T046 [xlsx] advanced workbook**: a 7-sheet programme dashboard (Data,
   Pivot, Model, Team, Gantt, Relations, Dashboard) with cross-sheet formulas,
   named ranges, an image table, a native Gantt (transparent start, date-formatted
@@ -140,6 +144,14 @@ The T041 report is
   number formats. `sheet_forge` re-applies the Gantt value axis and cost-axis
   number format after the pivot; the audit checks `mmm-yy`, explicit min/max and
   the transparent `Start` series.
+- T048 limitation: hidden/veryHidden is not security; the password is empty.
+  Merged cells are layout-only; the Data table stays unmerged. Input/ Dashboard
+  are protected, but workbook structure is not.
+- T048 limitation: macro execution is blocked by the host policy, so
+  `AddRecord` was not run end-to-end; the `.xlsm` module, button OnAction and
+  source contract are verified. Buttons are not printed by default.
+- T048 limitation: the form validates types/lists, not duplicate IDs, owner
+  capacity or date overlap; no UserForm, audit log or undo.
 
 ## Open questions
 

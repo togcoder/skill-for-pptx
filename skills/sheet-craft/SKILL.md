@@ -110,6 +110,35 @@ order; each one has a native object and an evidence check.
    the column. A picture that overflows the cell is not “an image table”.
 10. **One source note** on the dashboard, one document id, one update date.
 
+## Workbook UX: hide, protect, input (T048)
+
+A workbook that users open is not the same as a workbook that users edit.
+
+1. **Hide the data.** Visible: Dashboard + Input. Hide Data/Model/Team/Gantt/
+   Relations; `veryHidden` Pivot/Lookups. Say clearly that hidden ≠ secure.
+2. **Build an Input sheet, not a raw grid.** Title band, section band, labels,
+   merged input cells, auto ID, 3 buttons. Merge only layout cells; never merge
+   the data table.
+3. **Protect the sheet, unlock the inputs.** `sheetProtection` on Input and
+   Dashboard; input formats `locked: False`; allow select locked/unlocked.
+4. **Validate at the edge.** List validations for workstream/owner/status/
+   priority; date, integer and >=0 rules; lists live on a veryHidden Lookups
+   sheet.
+5. **Colour the tabs.** Dashboard navy, Input orange, data grey. It is a map,
+   not decoration.
+6. **VBA contract.** `AddRecord` reads the top-left cell of each merged input,
+   finds the last Data row, writes the record, clears the form, recalculates.
+   `ClearForm`, `RefreshDashboard`, `SetStatus`, `WorksheetExists`.
+7. **Buttons.** XlsxWriter writes `FmlaMacro` with the source workbook name;
+   after SaveAs(.xlsm) rewrite it to `[0]!DashboardTools.*` and set OnAction
+   with COM. Verify buttons exist and point at the module.
+8. **Status, not MsgBox.** Write to `Input!B20`; a modal MsgBox blocks COM and
+   the user. Use a status line for success/error.
+9. **Macro gate.** `VBProject` injection ≠ macro execution. Record both;
+   macro policy can block `Application.Run` even when the module exists.
+10. **Print.** A form control is not printed by default; export Input and
+    Dashboard separately and inspect 1 page each.
+
 ## The non-negotiables
 
 - **Zero baseline** for bar/column. A truncated axis is a lie unless the chart
