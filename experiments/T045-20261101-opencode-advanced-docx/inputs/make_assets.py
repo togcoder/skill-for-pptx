@@ -1,6 +1,6 @@
-"""Generate the T042 rich-report spec and a VectorCraft cover asset.
+"""Generate the T045 rich-report spec and a VectorCraft cover asset.
 
-This script is part of the T042 fixture, not the product generator.  It writes
+This script is part of the T045 fixture, not the product generator.  It writes
 the synthetic report data + a cover SVG, then asks VectorCraft to rasterise the
 SVG (the cross-craft step recorded in the report).
 """

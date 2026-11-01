@@ -19,7 +19,29 @@ Fetch remote branches and read open claims first.
 
 ## Rules for every agent
 
-- **Lifecycle.** Follow `lab/PROTOCOL.md`: orient → claim → frame → research →
+- **First-Pass User Intent Fulfillment (Official Owner Mandate).** Skills and tools
+  are not built to trap the user in one rigid, isolated use case, but to elevate
+  the user experience to its peak. Decode human intent, audience, context and
+  aesthetic requirements deeply so that the generated deliverable matches user
+  vision on the first pass, eliminating repetitive trial-and-error regeneration.
+- **Cross-Asset Pre-Processing Pipeline.** Never embed raw, unprocessed assets.
+  Cross-domain skills orchestrate domain-specialized tools before composite assembly:
+  - *Images:* Always crop, mask, remove background, and color-grade (Kelvin/tone)
+    via dedicated tools (Pillow/PhotoCraft/ImageMagick) before embedding into
+    PPTX, Word DOCX, or Excel XLSX.
+  - *Audio:* Always normalize (EBU R128: -14.0 LUFS, True Peak <= -1.0 dBTP),
+    filter noise, and auto-duck before muxing with video (FilmCraft) or slide
+    choreo (DeckCraft).
+  - *Data & Charts:* Verify zero-error formulas and render Tufte-grade vector
+    charts in SheetCraft before embedding into slides or annual report docs.
+- **Local Autonomy & Cleanliness Law.** When operating locally, agents have full
+  operational authority to download any necessary resources (fonts, reference
+  decks, sample media, models) and install any programming language, CLI, or
+  library (pip, uv, npm, ffmpeg) required for peak craft.
+  *Cleanliness constraint:* Transient downloads and scratch scripts belong strictly
+  in git-ignored workspace/ or task scratch folders; delete temporary files when
+  no longer needed so python3 lab/tools/check_layout.py always passes.
+- **Lifecycle. Follow `lab/PROTOCOL.md`: orient → claim → frame → research →
   self-check → review → respond → merge → handoff.
 - **Claim.** Take the next free ID in `research/tasks/INDEX.md`. The title
   carries the domain in brackets (`[docx] …`). Push the claim before

@@ -51,7 +51,7 @@ to `docx` yet.
 | `scripts/word_field_kit.py` | Experimental (T039): fields, TOC, SEQ captions, REF/PAGEREF, STYLEREF, bookmarks, numbering, structural audit | `tests/test_document_craft.py` |
 | `scripts/document_forge.py` | Experimental (T039): build a DOCX from `domains/docx/schemas/document_spec.schema.json`; refresh via Word/WordCraft; render | `tests/test_document_craft.py` |
 | `scripts/document_audit.py` | Experimental (T039): standalone audit entry point | `tests/test_document_craft.py` |
-| `scripts/word_math.py` | Experimental (T042): LaTeX subset → OMML equations; strict errors for unsupported commands | `tests/test_document_advanced.py` |
+| `scripts/word_math.py` | Experimental (T045): LaTeX subset → OMML equations; strict errors for unsupported commands | `tests/test_document_advanced.py` |
 
 No docx module is a product path until `research/reviews/` contains an accepted
 review. The modules carry `Status: EXPERIMENTAL` in their headers.
@@ -61,9 +61,9 @@ review. The modules carry `Status: EXPERIMENTAL` in their headers.
 | Item | Path | Status |
 |---|---|---|
 | Design/standards data | `domains/docx/data/document_system.json` | T039; provenance recorded; unreviewed |
-| Spec schema | `domains/docx/schemas/document_spec.schema.json` | T039/T042; unreviewed |
-| Skill | `skills/document-craft/` | T039/T042; experimental |
-| Example specs | `examples/docx/report_spec.json`, `annual_report_spec.json` | T039/T042; synthetic, CC0-style assets |
+| Spec schema | `domains/docx/schemas/document_spec.schema.json` | T039/T045; unreviewed |
+| Skill | `skills/document-craft/` | T039/T045; experimental |
+| Example specs | `examples/docx/report_spec.json`, `annual_report_spec.json` | T039/T045; synthetic, CC0-style assets |
 
 The data file contains page/type/figure/table/field/accessibility tokens,
 standard statuses and `sources`. Every threshold used by the audit reads a token;
@@ -73,10 +73,10 @@ do not hard-code a new one in a generator.
 
 | Rung | Tool | T039 evidence |
 |---|---|---|
-| 1 | schema / structural audit | T039: 29 fields, 22 bookmarks, 3 sections, 3 tables, 2 figures; T042: 20 fields, 2 equations (1 `SEQ Equation`), 5 merged cells, 5 images in cells, table-grid/vMerge/image-width/alt checks, language `vi-VN`; no errors/warnings |
-| 2 | layout engine (WordCraft) | T042 render: side-by-side, equations, rich table and callouts visible; WordCraft keeps the same font limitation as T039 |
-| 4 | Word COM open / field update | T042: Word opened the exact DOCX, refreshed fields and saved; the resulting document still audits clean |
-| 5 | Word PDF export / page inspection | T042: 11-page PDF; cover, KPI/callout, side-by-side/equations, rich table and appendix inspected as images |
+| 1 | schema / structural audit | T039: 29 fields, 22 bookmarks, 3 sections, 3 tables, 2 figures; T045: 20 fields, 2 equations (1 `SEQ Equation`), 5 merged cells, 5 images in cells, table-grid/vMerge/image-width/alt checks, language `vi-VN`; no errors/warnings |
+| 2 | layout engine (WordCraft) | T045 render: side-by-side, equations, rich table and callouts visible; WordCraft keeps the same font limitation as T039 |
+| 4 | Word COM open / field update | T045: Word opened the exact DOCX, refreshed fields and saved; the resulting document still audits clean |
+| 5 | Word PDF export / page inspection | T045: 11-page PDF; cover, KPI/callout, side-by-side/equations, rich table and appendix inspected as images |
 | 2 | layout engine (WordCraft) | WordCraft render; TOC updated, but page numbers were physical and a `TOC \\c` caption list repeated the first number |
 | 3 | independent reader | Not run (LibreOffice Writer not installed on this host) |
 | 4–5 | Word COM open / PDF export | Word opened the exact DOCX, refreshed fields, exported a 12-page PDF; pages inspected |
@@ -86,7 +86,7 @@ The T039 report is `experiments/T039-20261101-opencode-office-canon/REPORT.md`.
 
 ## State (2026-11-01)
 
-- **T042 [docx] advanced report**: native OMML equations, side-by-side
+- **T045 [docx] advanced report**: native OMML equations, side-by-side
   figure/text, merged-header tables, image cells, callouts, cover hero and a
   synthetic annual-report fixture; **review requested**.
 - **T039 [docx]**: DocumentCraft prototypes + audit + standards/data + skill;

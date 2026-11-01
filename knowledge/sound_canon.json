@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "domain": "sound",
+  "version": "1.0.0",
+  "description": "Audio mastering standards, dynamic range stems, ducking envelopes, and broadcast parameters for SoundCraft",
+  "standards": [
+    "EBU R128",
+    "ITU-R BS.1770-4",
+    "AES TD1004"
+  ],
+  "sample_formats": {
+    "default_sample_rate_hz": 48000,
+    "default_bit_depth": 24,
+    "channels": "Stereo (2.0) or Mono (1.0 for voiceover)"
+  },
+  "loudness_targets": {
+    "web_streaming_lufs": -14.0,
+    "auditorium_presentation_lufs": -16.0,
+    "broadcast_tv_lufs": -23.0,
+    "loudness_tolerance_lu": 1.0,
+    "true_peak_max_dbtp": -1.0
+  },
+  "mix_stems": {
+    "voiceover": {
+      "nominal_range_dbfs": [-12.0, -6.0],
+      "integrated_target_lufs": -16.0,
+      "eq_high_pass_filter_hz": 80.0
+    },
+    "sound_effects": {
+      "nominal_range_dbfs": [-18.0, -12.0],
+      "true_peak_max_dbfs": -3.0
+    },
+    "background_music": {
+      "dry_level_dbfs": [-18.0, -16.0],
+      "ducked_level_dbfs": [-30.0, -28.0]
+    }
+  },
+  "sidechain_ducking_envelope": {
+    "lookahead_ms": 150,
+    "attack_time_ms": 250,
+    "attenuation_delta_db": -14.0,
+    "hold_time_ms": 600,
+    "release_time_ms": 700,
+    "curve": "exponential_s_curve"
+  }
+}

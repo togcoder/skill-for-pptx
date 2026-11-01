@@ -1,4 +1,4 @@
-# T042 [docx] — Advanced report craft: side-by-side media, equations, rich tables
+# T045 [docx] — Advanced report craft: side-by-side media, equations, rich tables
 
 ## Frame
 
@@ -21,9 +21,12 @@
 
 ## Frozen input
 
-- **Task/claim:** T042 [docx], OpenCode (DeepSeek V4.1 Flash), branch
-  `work/T042-opencode-advanced-docx`, based on `main` (`db58b3d`, after
-  T039/T041).
+- **Task/claim:** T045 [docx], OpenCode (DeepSeek V4.1 Flash), branch
+  `work/T045-opencode-advanced-docx`, based on `main` (`db58b3d`, after
+  T039/T041), merged with `main` (`c09b13b`) during the ID renumbering.
+- **ID note:** this work started as T042; meanwhile `main` merged Antigravity's
+  T042/T043. It was renumbered to **T045** on 2026-11-01 to respect the
+  one-task-one-ID rule. The old T042 branch/PR is superseded.
 - **Request/date:** 2026-11-01; the owner asked for a real report: image left /
   text right, math formulas, a real cover, complex table alignment and image
   cells; use online/local assets where useful, and feed cross-craft needs back
@@ -39,21 +42,21 @@
 
 ```powershell
 # 1. Synthetic cover/icons: SVG written locally, rasterised by VectorCraft
-cd experiments/T042-20261101-opencode-advanced-docx/inputs
+cd experiments/T045-20261101-opencode-advanced-docx/inputs
 vectorcraft-cli convert cover.svg cover.png --scale 1
 vectorcraft-cli convert icon-1.svg icon-1.png --scale 1
 
 # 2. Build the report; Word refreshes fields; PDF for page inspection
 python scripts/document_forge.py build `
-  experiments/T042-20261101-opencode-advanced-docx/inputs/annual_report_spec.json `
-  -o experiments/T042-20261101-opencode-advanced-docx/artifacts/annual-report.docx `
+  experiments/T045-20261101-opencode-advanced-docx/inputs/annual_report_spec.json `
+  -o experiments/T045-20261101-opencode-advanced-docx/artifacts/annual-report.docx `
   --update word
 # Word.Documents.Open(...).ExportAsFixedFormat(annual-report.pdf, 17)
 
 # 3. Audit
 python scripts/document_audit.py `
-  experiments/T042-20261101-opencode-advanced-docx/artifacts/annual-report.docx `
-  --md experiments/T042-20261101-opencode-advanced-docx/artifacts/audit.md
+  experiments/T045-20261101-opencode-advanced-docx/artifacts/annual-report.docx `
+  --md experiments/T045-20261101-opencode-advanced-docx/artifacts/audit.md
 
 # 4. Tests
 $env:PYTHONUTF8='1'; python -m unittest discover -s tests -v
@@ -129,8 +132,8 @@ Preview: `preview/cover.png`, `kpi-callout.png`, `side-equations.png`,
 ## Review response
 
 Argon review 2026-11-01 (chat `0:cf4bb6173adaaa34`), verdict **revise** in
-round 1 and **approve T042** in round 2 (0 blockers). Full record:
-`research/reviews/T042-argon-20261101.md`.
+round 1 and **approve T045** in round 2 (0 blockers). Full record:
+`research/reviews/T045-argon-20261101.md`.
 
 | Finding | Response (fixed / disputed / deferred → task) |
 |---|---|

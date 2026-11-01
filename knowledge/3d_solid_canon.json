@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "domain": "3d",
+  "version": "1.0.0",
+  "description": "Design canons, units, bevel rules, 3-point lighting, and PBR material contracts for 3D modeling and rendering (SolidCraft & LightCraft)",
+  "standards": [
+    "ISO 10303 (STEP)",
+    "Khronos glTF 2.0 PBR",
+    "Right-handed Y-up / Z-up orientation"
+  ],
+  "coordinates_and_units": {
+    "base_unit_mechanical": "1.0 unit = 1.0 mm",
+    "base_unit_architectural": "1.0 unit = 1.0 m",
+    "coordinate_system": "Right-handed",
+    "export_orientation_gltf": {
+      "up_axis": "+Y",
+      "ground_plane": "XZ (Y=0)",
+      "pivot_rule": "Bottom center at (0,0,0) such that min(Y) == 0.0"
+    }
+  },
+  "no_sharp_edge_law": {
+    "rationale": "Perfect 90-degree knife edges do not exist in physical reality and fail to catch specular highlights in PBR rendering",
+    "micro_bevel": {
+      "min_radius_mm": 0.2,
+      "max_radius_mm": 0.5,
+      "proportional_formula": "R = 0.005 * min(width, height, depth)"
+    },
+    "structural_fillet": {
+      "min_radius_mm": 1.5,
+      "max_radius_mm": 5.0
+    },
+    "concentric_fillet_rule": {
+      "formula": "R_in = max(0.5, R_out - wall_thickness)",
+      "description": "Inner radius must equal outer radius minus wall thickness to maintain constant wall section"
+    }
+  },
+  "camera_framing": {
+    "true_isometric": {
+      "projection": "Orthographic",
+      "azimuth_degrees": 45.0,
+      "elevation_degrees": 35.264389682754654,
+      "elevation_formula": "arctan(1 / sqrt(2))",
+      "framing_fill_factor": [0.70, 0.78]
+    },
+    "product_hero": {
+      "projection": "Perspective",
+      "focal_length_mm_range": [50.0, 85.0],
+      "horizontal_fov_degrees_range": [23.9, 39.6],
+      "banned_focal_length_single_product": "< 35mm (excessive barrel distortion)"
+    }
+  },
+  "three_point_lighting": {
+    "coordinate_origin": "Object center (0,0,0) with bounding radius Rb",
+    "key_light": {
+      "azimuth_degrees": 40.0,
+      "elevation_degrees": 40.0,
+      "distance_factor": 3.5,
+      "intensity_ratio": 1.0,
+      "color_temp_kelvin": 5500,
+      "light_radius_factor": 0.8
+    },
+    "fill_light": {
+      "azimuth_degrees": -50.0,
+      "elevation_degrees": 20.0,
+      "distance_factor": 4.0,
+      "intensity_ratios": {
+        "technical_engineering": 0.50,
+        "dramatic_hero": 0.25
+      },
+      "light_radius_factor": 1.6
+    },
+    "rim_light": {
+      "azimuth_degrees": 140.0,
+      "elevation_degrees": 50.0,
+      "distance_factor": 2.5,
+      "intensity_ratio_range": [0.80, 1.50]
+    }
+  },
+  "pbr_materials": {
+    "albedo_luminance_limits": {
+      "min_dark_srgb": [30, 50],
+      "max_white_srgb": [235, 243]
+    },
+    "dielectrics": {
+      "metalness": 0.0,
+      "ior": 1.50,
+      "presets": {
+        "glossy_abs": { "roughness_range": [0.08, 0.15] },
+        "matte_polycarbonate": { "roughness_range": [0.45, 0.65] },
+        "epdm_rubber": { "roughness_range": [0.75, 0.90], "albedo_hex": "#242424" }
+      }
+    },
+    "conductors": {
+      "metalness": 1.0,
+      "presets": {
+        "polished_steel": { "albedo_hex": "#C8C8C8", "roughness_range": [0.05, 0.12] },
+        "anodized_aluminum": { "albedo_hex": "#D8DADF", "roughness_range": [0.28, 0.42] },
+        "brass": { "albedo_hex": "#F5D67B", "roughness_range": [0.15, 0.30] }
+      }
+    },
+    "prohibition": "Metalness values between 0.2 and 0.8 are physically invalid for uniform materials"
+  }
+}

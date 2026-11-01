@@ -64,7 +64,7 @@ Scripts live two levels above this file: `ROOT=<this skill dir>/../..`.
    a short change report naming the evidence rung (see
    `$ROOT/docs/VERIFICATION.md`).
 
-## Rich-report blocks (T042)
+## Rich-report blocks (T045)
 
 A real report is not only body paragraphs. The spec supports:
 
@@ -77,7 +77,7 @@ A real report is not only body paragraphs. The spec supports:
 | `key_values` | KPI strip | Borderless label/value rows; values bold; no fake table header |
 | `cover.hero_image` | Brand/cover band | Inline image, alt text, title remains a paragraph for metadata/accessibility |
 
-**Cover assets are a cross-craft opportunity.** The T042 fixture writes a cover
+**Cover assets are a cross-craft opportunity.** The T045 fixture writes a cover
 SVG, rasterises it with VectorCraft, then embeds the PNG. The DOCX render/audit
 is the acceptance gate. Record the source tool/version/command and the asset
 licence. If VectorCraft is absent, use a plain PNG; the document path must still

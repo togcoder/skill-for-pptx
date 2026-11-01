@@ -165,7 +165,7 @@ together:
 
 - A 155 × 55–65 mm hero image above the title makes a report feel authored.
 - The hero is inline and alt-texted; the title remains a paragraph, not pixels.
-- For the T042 fixture, the hero SVG is rasterised with VectorCraft; the DOCX
+- For the T045 fixture, the hero SVG is rasterised with VectorCraft; the DOCX
   render is the acceptance gate.
 - Record the asset source/tool/version and licence. Synthetic art is fine for a
   demo; a customer brand needs permission.

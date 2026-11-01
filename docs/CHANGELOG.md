@@ -7,7 +7,7 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
-## T042 [docx] Advanced report craft — side-by-side media, equations, rich tables — 2026-11-01
+## T045 [docx] Advanced report craft — side-by-side media, equations, rich tables — 2026-11-01
 
 - **Native equations.** `scripts/word_math.py` parses a strict LaTeX subset into
   OMML (`m:oMath`): fractions, scripts, roots, sums/integrals, delimiters,
@@ -21,18 +21,75 @@ were true at the time. Task IDs and their branches are listed in
 - **Callouts / KPI strip / cover hero.** Shaded single-cell callouts, a
   borderless label/value strip, and a full-text-width inline cover image.
 - **Cross-craft.** Cover and icons are SVG rasterised by VectorCraft
-  (`convert --scale 1`), then accepted by the DOCX audit/render. The
-  cross-craft rule was added to `AGENTS.md` and `lab/standards/RESEARCH.md`.
+  (`convert --scale 1`), then accepted by the DOCX audit/render.
+- **Audit depth (review fix).** `audit_docx` counts equations/equation numbers,
+  merged cells, images in cells and languages; validates `gridSpan` vs
+  `tblGrid`, orphan `vMerge`, image width vs `tcW`, OMML empty/one-sided parts
+  and alt text; `docDefaults` + styles carry `vi-VN`.
 - **Evidence.** 11-page Word PDF inspected; audit clean (20 fields, 15
   bookmarks, 6 tables, 6 drawings, 2 equations/1 numbered, 5 merged cells,
-  5 images in cells, language `vi-VN`; table-grid/vMerge/image-width/alt
-  checks); `tests/test_document_advanced.py` (5 tests) + T039 tests; full suite
-  337 tests OK with `PYTHONUTF8=1`.
-- **Review fixes (Argon).** Advanced OOXML audit counters/checks, docDefaults
-  language, negative tests for unsupported LaTeX and malformed tables; Argon
-  **approve T042** (round 2).
+  5 images in cells); `tests/test_document_advanced.py` (5 tests) + T039 tests;
+  full suite 337 tests OK with `PYTHONUTF8=1`. Argon **approve T045** (round 2).
 - **Status.** EXPERIMENTAL; review accepted; awaiting owner merge.
-- Report: `experiments/T042-20261101-opencode-advanced-docx/REPORT.md`.
+- Report: `experiments/T045-20261101-opencode-advanced-docx/REPORT.md`.
+
+## T044 Multi-Asset Pipeline Protocol, User Experience Maximization & Local Autonomy Charter — 2026-11-01
+
+- **Official Owner Mandate Codification (togcoder).** Integrated official directive on cross-domain agentic skill development:
+  - Skills do not produce single isolated files; they orchestrate compound assets across multiple target applications.
+  - Elevate user experience to the peak: deeply decode user intent to achieve first-pass satisfaction ("đúng ý ngay từ lượt đầu"), eliminating tedious regeneration.
+  - Mandate cross-asset pre-processing pipelines: edit/crop/mask images before slide/doc embedding; normalize audio (EBU R128) before video muxing; validate structured data before chart rendering.
+  - Authorize full local operational autonomy: agents working locally have complete freedom to download fonts, models, and install code libraries, provided workspaces remain tidy in git-ignored `workspace/` and transient files are deleted.
+- **Protocol 04 Added (`lab/protocols/04_cross_asset_pipeline.md`):** Formally codified the 3 canonical pre-processing pipelines (Visual/Raster, Audio/Motion, Data/Chart), the First-Pass Excellence law, and the Local Autonomy & Cleanliness Law.
+- **Core Governance Updates:**
+  - `AGENTS.md`: Added First-Pass Intent Fulfillment, Cross-Asset Pre-processing Pipeline, and Local Autonomy & Cleanliness Law to Rules for Every Agent.
+  - `lab/CHARTER.md`: Added Goals 4 & 5 (First-Pass Fulfillment, Cross-Asset Orchestration) and principles on pre-processing before embedding and local autonomy.
+  - `lab/PROTOCOL.md`: Added cross-asset pipeline step and local resource freedom to the agent research lifecycle.
+  - `README.md`: Upgraded the lab introduction to reflect the Cross-Domain Agentic AI Lab vision.
+  - `domains/cross/DOMAIN.md`: Updated scope, code table, and rules with Protocol 04.
+- **Cross-Pipeline Validator (`scripts/cross_pipeline.py`):**
+  - `validate_image_for_embedding`: Verifies aspect ratios (16:9, 4:5, 1:1), minimum resolutions, alpha channels for art washes, and canvas mode luminance harmony.
+  - `validate_audio_for_muxing`: Verifies EBU R128 loudness (-14.0 LUFS), True Peak safety ceiling (<= -1.0 dBTP), and BGM auto-ducking attenuation.
+  - `validate_chart_data_for_presentation`: Verifies zero-error numerical integrity (no NaNs, nulls, division-by-zero) and Miller 7+-2 cognitive density.
+- **Tests.** Added `tests/test_cross_pipeline.py` (5 unit tests). Full lab test suite passes **359 tests 100% (skipped=4)**; `lab/tools/check_layout.py` reports `layout OK`.
+
+## T043 Dynamic Theme Engine: Need-Based Synthesizer, Reference Teardown, Composite Backgrounds & AI Image Harmonizer — 2026-11-01
+
+- **Argon Strategic Consultation (game25072003 / yep).** In response to owner directive that themes are infinite and must be driven by user need and reference decks, collaborated with Gemini 4 Argon (`gemini-argon`) on `chat_id: 2:53675cab70c50cda` to formulate the Dynamic Theme Engine architecture:
+  - Adversarial review rejected raw `<a:srgbClr>` counting in favor of Area-Weighted Clustering and `<a:schemeClr>` resolution.
+  - Perceptual color math in pure Python (sRGB <-> Linear <-> OKLab <-> OKLCH, Relative Luminance Y, WCAG 2.1 contrast ratio).
+- **Composite Background & Translucency Architecture (Addressing User Feedback):**
+  - Addressed critical design reality: professional decks NEVER rely on flat single-color (`đơn sắc`) fills.
+  - Proved via Pillow alpha histogram on user's sample decks: `Webinar Keynote Presentation.pptx` media assets `image1.png` and `image6.png` feature 60.9% to 64.9% translucent pixels ($1 \le lpha \le 254$), overlaying a warm ecru canvas (`#F4F1E9`) to create soft organic pastel tone variations.
+  - Proved shape alpha in `Blue Modern Business Pitch Deck Presentation.pptx`: explicit OOXML `<a:alpha val="36863"/>` (36.86% opacity) for frosted glass containers over a 2362x1575 composite image texture.
+  - Integrated 4-layer Composite Background Recipe into `scripts/theme_engine.py`: Layer 0 Canvas Base Tone, Layer 1 Atmosphere/Translucent PNG Washes, Layer 2 Tint Washes/Glassmorphism Cards, Layer 3 Foreground Typography.
+- **Core Engine Module (`scripts/theme_engine.py`):**
+  - `PPTXThemeExtractor`: Reverse-engineers any PPTX reference file. Weighting: Backgrounds ($A = 	ext{slide\_area} 	imes 1.0$), Shapes ($A = 	ext{cx} 	imes 	ext{cy}$), Text ($W = 	ext{len} 	imes 	ext{size}^2 	imes 12700^2$), Full-slide background sampling via Pillow. Agglomerative clustering in OKLab ($\Delta E < 0.035$). Computes Salience Score for Accent: $	ext{Score} = C 	imes 2.5 + \Delta E 	imes 1.5 + \ln(1 + 	ext{ratio})$. Extracts typography hierarchy, detects mammoth Hero KPIs (e.g. 202pt), and geometric modular scale ($r = (S_{	ext{h1}} / S_{	ext{body}})^{1/3}$). Extracts `background_recipe` with translucency ratios and shape alphas.
+  - `classify_canvas_mode`: Distinguishes `DARK_CANVAS` ($Y < 0.18$), `WARM_PAPER` ($0.72 \le Y \le 0.96, 0.010 \le C \le 0.060, 50^\circ \le H \le 110^\circ$), `LIGHT_CANVAS` ($Y \ge 0.72$), and `MID_TONE_CANVAS`.
+  - `synthesize_theme_from_need`: Synthesizes complete ThemeSpecs from user topic/intent strings across 5 foundational archetypes (`INDUSTRIAL_QCC`, `TECH_PITCH_DARK`, `EDITORIAL_WARM_KEYNOTE`, `EXECUTIVE_STRATEGY`, `SUSTAINABLE_BIO`). Supports Dynamic Hue Override (rotates Hue in OKLCH while strictly preserving Lightness and Chroma) and assigns layered background recipes.
+  - `build_harmonized_image_prompt`: Prompt builder guaranteeing visual harmony between generated AI images and the slide theme (6500K cool studio for Dark Canvas, 3800K soft morning window light for Warm Paper, 5500K high-key for Light Canvas). Slot framing: 16:9 hero full-bleed (60% negative space for typography), 16:9 atmospheric backdrop texture, 4:5 split/angled mask, 1:1 isolated translucent art wash on white background for alpha-mask conversion, 1:1 isometric bento.
+- **Tests.** Added `tests/test_theme_engine.py` (14 unit tests). Verified native teardown of user's `Blue Modern Business Pitch Deck` (`DARK_CANVAS`, `#01152B`, `Aileron`, 202pt KPI, 36.86% shape alpha) and `Webinar Keynote Presentation` (`WARM_PAPER`, `#F4F1E9`, `TT Commons Pro` + `TAN Mon Cheri`, pastel accents, >60% translucent PNG overlays). Full suite passes **354 tests 100% (skipped=4)**; `lab/tools/check_layout.py` reports `layout OK`.
+
+## T042 Multi-Domain Design Canons: Video, Vector/SVG, 3D/Solid, CAD & Audio — 2026-11-01
+
+- **Argon Multi-Domain Consultation.** Partnered with Gemini 4 Argon (\gemini-argon\) to establish mathematical formulas, geometric tokens, and handoff contracts across all specialized ArtCraft domains (\D:\\artcraft\).
+- **5 Formal Domain Canons (\knowledge/\):**
+  - \knowledge/video_canon.json\: SMPTE RP 2046-2 / EBU R95 safe areas (Action Safe 3.5%, Title Safe 5.0%), 9:16 vertical dead zones (top 220px, bottom 440px, right action rail), ASL shot duration, J-cut (12-24 frames lead) and L-cut (15-30 frames trail) asynchrony, and EBU R128 audio mastering (-14.0 LUFS, True Peak <= -1.0 dBTP, sidechain ducking -14 dB).
+  - \knowledge/vector_canon.json\: W3C SVG 2.0, 24x24 icon grid (20x20 live area), optical trim boxes (Circle d=20, Square 18x18, Landscape 20x16, Portrait 16x20), non-linear stroke scaling formula W(S) = W0 * (S/S0)^0.75, and Bezier 90-degree circle handle ratio kappa ~ 0.55228.
+  - \knowledge/3d_solid_canon.json\: Metric scale (1 unit = 1.0 mm, Y-up glTF), No-Sharp-Edge Law (micro-bevel R = 0.005 * min(W,H,D) bounded in [0.2, 0.5] mm), concentric fillets, True Isometric camera (45-deg azimuth, elevation arctan(1/sqrt(2)) ~ 35.264-deg), 3-point studio lighting (Key 1.0, Fill 2:1/4:1, Rim 1.0), and PBR material albedo clamp with strict prohibition on ambiguous metalness M in [0.2, 0.8].
+  - \knowledge/cad_iso_canon.json\: ISO 5457 sheet dimensions (A4 to A0) with 20.0mm left margin, ISO 128 line weight hierarchy (0.50mm group: 0.50, 0.25, 0.18mm), ISO 129 dimensioning geometry (10mm 1st tier, 7mm 2nd tier, 1.0mm origin offset, 2.0mm overshoot, 3:1 closed filled arrows), and ISO 7200 title block (180.0mm width).
+  - \knowledge/sound_canon.json\: SoundCraft mastering targets (EBU R128, ITU BS.1770-4, 48kHz 24-bit PCM, stem dynamic ranges, auto-ducking attack/hold/release envelopes).
+- **Multi-Domain Evaluator & Calculators (\scripts/multi_domain_canons.py\).** Implemented pure Python token accessors, geometric calculators, and pre-flight validation rules for all 5 domains.
+- **4 Native ArtCraft Bridges (\scripts/\):**
+  - \scripts/filmcraft_bridge.py\: Headless runner for \FilmCraft\\filmcraft-cli.exe\ (probe, render frame, export, inspect).
+  - \scripts/solidcraft_bridge.py\: Headless runner for \SolidCraft\\solidcraft-cli.exe\ (eval, snapshot, render, icon export).
+  - \scripts/cadcraft_bridge.py\: Headless runner for \CADCraft\\cadcraft-cli.exe\ (info, convert DXF/DWG/SVG/PNG/PDF, sample generator).
+  - \scripts/soundcraft_bridge.py\: Headless runner for \SoundCraft\\soundcraft-cli.exe\ (info, convert, normalize, resample).
+- **Domain Cards Registered (\domains/\):** Created \domains/video/DOMAIN.md\, \domains/3d/DOMAIN.md\, \domains/cad/DOMAIN.md\; updated \domains/svg/DOMAIN.md\ and \domains/README.md\.
+- **Verification Evidence Artifacts (\experiments/T042-20261101-antigravity-multi-domain-canons/artifacts/\):**
+  - \cad_sample_bracket.svg\ (99 KB) & \cad_sample_bracket.png\ (115 KB) via \cadcraft-cli.exe sample\.
+  - \solidcraft_icon.png\ (21 KB) via \solidcraft-cli.exe icon\.
+- **Tests.** Added \	ests/test_multi_domain_canons.py\ (24 unit tests). All **340 tests pass 100% (skipped=4)**; \lab/tools/check_layout.py\ reports \layout OK\.
 
 ## T041 [xlsx] SheetCraft — controlled standard DrawingML charts — 2026-11-01
 

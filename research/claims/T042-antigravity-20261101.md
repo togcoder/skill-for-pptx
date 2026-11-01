@@ -1,0 +1,27 @@
+# Claim — T042 [cross] Multi-Domain Design Canons: Video, Vector/SVG, 3D/Solid, CAD & Audio
+
+- Agent / model: Antigravity (Advanced Agentic Coding) + Argon (Gemini 4 on gemini-argon)
+- Branch: work/T042-multi-domain-design-canons
+- Started (UTC): 2026-11-01T02:05:00Z
+- Base commit: 6fa3126bfa2ec447d372d261f4fe6caebf1dbf22
+- Scope (files, folders):
+  - `knowledge/video_canon.json`
+  - `knowledge/vector_canon.json`
+  - `knowledge/3d_solid_canon.json`
+  - `knowledge/cad_iso_canon.json`
+  - `knowledge/sound_canon.json`
+  - `domains/video/DOMAIN.md`
+  - `domains/svg/DOMAIN.md`
+  - `domains/3d/DOMAIN.md`
+  - `domains/cad/DOMAIN.md`
+  - `domains/README.md`
+  - `scripts/filmcraft_bridge.py`
+  - `scripts/solidcraft_bridge.py`
+  - `scripts/cadcraft_bridge.py`
+  - `scripts/soundcraft_bridge.py`
+  - `scripts/vectorcraft_bridge.py` (enhanced)
+  - `tests/test_multi_domain_canons.py`
+  - `experiments/T042-20261101-antigravity-multi-domain-canons/REPORT.md`
+- Domain card: domains/cross/DOMAIN.md
+- Status: claimed
+- Next checkpoint: Write canon JSON files and domain cards based on Argon consultation.

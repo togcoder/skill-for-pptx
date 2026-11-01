@@ -13,6 +13,14 @@ PPTX Motion Lab; PowerPoint is now one domain among several.
 3. No single line of thought dominates. Each domain keeps its own thesis,
    sources, design system and evidence ladder. Shared ideas move into the
    cross-domain core only after review in at least two domains.
+4. **First-pass user intent fulfillment.** The lab's skills and tools do not
+   trap the user in rigid, isolated use cases, but elevate user experience to
+   its peak. Agents understand what the user wants and deliver publication-grade
+   results right on the first pass without repetitive trial and error.
+5. **Cross-asset pipeline orchestration.** Design deliverables are compound
+   assets. Domain-specialized tools pre-process and polish components (image
+   editing, audio mastering, vector chart synthesis) before compound integration
+   across presentations, documents, and spreadsheets.
 
 ## Structure
 
@@ -57,3 +65,11 @@ same task.
   raster or video fallbacks, which are labelled when used.
 - **Synthetic data in demos.** Reference media stays local unless the owner
   authorizes redistribution.
+- **Pre-process before embedding.** Never embed raw assets. Use domain-specific
+  image editing tools to crop, mask, and tone-grade images before embedding into
+  slides or documents; master audio before muxing with video; embed validated
+  spreadsheet charts into presentations.
+- **Local autonomy with cleanliness.** When working locally, agents have full
+  operational authority to download any resources, models, fonts, or language
+  libraries needed for peak craft, provided transient files are kept in
+  git-ignored workspace/ and cleaned up when done.

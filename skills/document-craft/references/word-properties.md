@@ -93,7 +93,7 @@ Legend:
 | Don't split row | Row → Allow row to break | `table.properties={"allowBreak":false}` | `w:cantSplit` | `trPr` | rows |
 | Cell alignment | Table Layout → Align | `table.cellAlign={"value":"center"}` | `w:tcPr/w:vAlign`, `w:jc` | `cell.vertical_alignment` | numeric right |
 | Cell margins | Table Properties → Cell Margins | `table.cellMargins={"top":2,"left":2,"bottom":2,"right":2}` | `w:tblCellMar` | raw XML | 1.5–3 mm |
-| Merge / split | Table Layout → Merge/Split | `table.merge`, `table.split` | `w:gridSpan`, `w:vMerge` | `cell.merge`; T042 `merges`/`header_rows` | accessibility |
+| Merge / split | Table Layout → Merge/Split | `table.merge`, `table.split` | `w:gridSpan`, `w:vMerge` | `cell.merge`; T045 `merges`/`header_rows` | accessibility |
 | Image in cell | Insert → Pictures inside a cell | `insert.picture` at the caret | `w:drawing` in `w:tc` | `cell.paragraphs[0].add_run().add_picture` | alt text, row height |
 | Table caption/alt | Table Properties → Alt Text | `table.altText={"text":"…","title":"…"}` | `w:tblCaption`, `w:tblDescription` | raw XML | present |
 | Sort table | Table Layout → Sort | `table.sort={"column":1,"header":true}` | table data | manual | numeric order |

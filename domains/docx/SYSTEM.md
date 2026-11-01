@@ -42,8 +42,8 @@ word_field_kit.py                    word_field_kit.audit_docx
 | `scripts/word_field_kit.py` | Fields, TOC, SEQ captions, REF/PAGEREF, STYLEREF, bookmarks, numbering, audit |
 | `scripts/document_forge.py` | Build DOCX from a spec; refresh with Word/WordCraft; render |
 | `scripts/document_audit.py` | Standalone structural audit |
-| `scripts/word_math.py` | LaTeX subset → OMML equations (T042) |
-| `examples/docx/annual_report_spec.json` | Rich-report fixture: cover hero, side-by-side, equations, merged table, image cells (T042) |
+| `scripts/word_math.py` | LaTeX subset → OMML equations (T045) |
+| `examples/docx/annual_report_spec.json` | Rich-report fixture: cover hero, side-by-side, equations, merged table, image cells (T045) |
 | `skills/document-craft/` | Workflow, standards note, Word property matrix, layout recipes |
 | `tests/test_document_craft.py` | Structural build/audit tests |
 | `tests/test_document_advanced.py` | OMML, side-by-side, rich tables, malformed-grid/alt negative tests |
@@ -74,7 +74,7 @@ word_field_kit.py                    word_field_kit.audit_docx
   `convert --update-fields` is the fallback. `w:updateFields` is set when the
   file is delivered without a native refresh.
 
-## Advanced report blocks (T042)
+## Advanced report blocks (T045)
 
 - **Side-by-side media/text** (`figure_text`): a borderless two-cell table,
   image on the left or right, text column beside it, caption below. Inline
@@ -91,7 +91,7 @@ word_field_kit.py                    word_field_kit.audit_docx
 - **KPI list** (`key_values`): a borderless label/value table; values bold.
 - **Cover hero** (`cover.hero_image`): a full-text-width inline image above the
   title; the title remains a paragraph for accessibility and metadata.
-- **Cross-craft asset**: the T042 cover/icon SVG is rasterised with VectorCraft;
+- **Cross-craft asset**: the T045 cover/icon SVG is rasterised with VectorCraft;
   the receiving DOCX test is the acceptance gate. The generator still works
   with a plain PNG if VectorCraft is absent.
 
@@ -122,7 +122,7 @@ word_field_kit.py                    word_field_kit.audit_docx
 | DOC-CELL-IMAGE | inline image in a table cell, alt text | `wp:docPr@descr`; row height |
 | DOC-COVER-HERO | inline hero image, alt text, title still a paragraph | image width/alt; cover title |
 
-## T042 evidence
+## T045 evidence
 
 - 11-page annual-report fixture: cover hero, KPI strip, callout, side-by-side
   figure/text, 2 OMML equations, merged-header table with icon cells, appendix.
@@ -135,7 +135,7 @@ word_field_kit.py                    word_field_kit.audit_docx
 - Cross-craft: VectorCraft rasterised the SVG cover/icons; the DOCX render is
   the acceptance gate. The cross-craft rule is in `AGENTS.md` and
   `lab/standards/RESEARCH.md`.
-- Report: `experiments/T042-20261101-opencode-advanced-docx/REPORT.md`.
+- Report: `experiments/T045-20261101-opencode-advanced-docx/REPORT.md`.
 
 ## Using it
 
