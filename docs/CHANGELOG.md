@@ -40,7 +40,8 @@ were true at the time. Task IDs and their branches are listed in
   fallback on the Pivot sheet; VBA worksheet guard; dashboard/Gantt print areas
   reduced to ~95% A4; hidden-series/`gantt` audit detection; negative-result
   reasoning corrected.
-- **Status.** EXPERIMENTAL; review requested.
+- **Status.** EXPERIMENTAL; review accepted by Argon (approve T043, round 2);
+  awaiting owner merge.
 - Report: `experiments/T043-20261101-opencode-advanced-xlsx/REPORT.md`.
 
 ## T041 [xlsx] SheetCraft — controlled standard DrawingML charts — 2026-11-01
