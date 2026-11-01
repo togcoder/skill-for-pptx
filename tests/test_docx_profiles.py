@@ -1,4 +1,4 @@
-"""T049 tests: named standard profiles and chapter-based captions."""
+"""T052 tests: named standard profiles and chapter-based captions."""
 from __future__ import annotations
 
 import json
@@ -121,6 +121,49 @@ class ProfileTests(unittest.TestCase):
             ids = {c["id"] for c in report["checks"] if c["status"] == "fail"}
             self.assertIn("margins", ids)
             self.assertIn("body-font", ids)
+
+    def test_missing_task_page_fails_front_matter(self):
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            spec = _mini_spec()
+            spec["front_matter"]["task"]["enabled"] = False
+            spec_path = tmp / "spec.json"
+            spec_path.write_text(json.dumps(spec, ensure_ascii=False), encoding="utf-8")
+            out = tmp / "no-task.docx"
+            build_document(spec_path, out, update="none", profile="hust-datn-2017")
+            report = check_docx(out, get_profile("hust-datn-2017"))
+            ids = {c["id"] for c in report["checks"] if c["status"] == "fail"}
+            self.assertIn("front-matter-order", ids)
+
+    def test_wrong_reference_position_fails(self):
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            spec = _mini_spec()
+            spec["appendix"] = [{"letter": "A", "title": "Dữ liệu",
+                                 "blocks": [{"type": "paragraph", "text": "Appendix."}]}]
+            spec["references"]["position"] = "before_appendix"
+            spec_path = tmp / "spec.json"
+            spec_path.write_text(json.dumps(spec, ensure_ascii=False), encoding="utf-8")
+            out = tmp / "refs.docx"
+            build_document(spec_path, out, update="none", profile="vnu-uet-kl-2024")
+            report = check_docx(out, get_profile("vnu-uet-kl-2024"))
+            ids = {c["id"] for c in report["checks"] if c["status"] == "fail"}
+            self.assertIn("references-position", ids)
+
+    def test_equation_in_unnumbered_chapter_fails(self):
+        with tempfile.TemporaryDirectory() as td:
+            tmp = Path(td)
+            spec = _mini_spec()
+            spec["sections"][0]["numbered"] = False
+            spec["sections"][0]["blocks"].append(
+                {"type": "equation", "latex": r"E = mc^2", "caption": "Eq."})
+            spec_path = tmp / "spec.json"
+            spec_path.write_text(json.dumps(spec, ensure_ascii=False), encoding="utf-8")
+            out = tmp / "eq.docx"
+            build_document(spec_path, out, update="none", profile="hust-datn-2017")
+            report = check_docx(out, get_profile("hust-datn-2017"))
+            ids = {c["id"] for c in report["checks"] if c["status"] == "fail"}
+            self.assertIn("equation-numbering", ids)
 
 
 if __name__ == "__main__":

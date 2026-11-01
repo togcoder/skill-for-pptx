@@ -1,4 +1,4 @@
-"""Named standard profiles for DocumentCraft (T049).
+"""Named standard profiles for DocumentCraft (T052).
 
 A profile is a sourced presentation contract: page geometry, typography,
 numbering, caption position, front-matter order, reference position and
@@ -11,7 +11,7 @@ profile.  It never trusts the spec: it measures the file that Word will open.
 CLI:
     python scripts/docx_profiles.py list
     python scripts/docx_profiles.py show hust-datn-2017
-    python scripts/docx_profiles.py check report.docx --profile hust-datn-2017
+    python scripts/docx_profiles.py check report.docx --profile hust-datn-2017 --body-pages 34
 """
 from __future__ import annotations
 
@@ -40,10 +40,12 @@ DEFAULT_PROFILES_PATH = ROOT / "domains" / "docx" / "data" / "standard_profiles.
 def _deep_merge(base: dict, override: dict) -> dict:
     out = copy.deepcopy(base)
     for key, value in (override or {}).items():
+        if value is None:
+            continue
         if isinstance(value, dict) and isinstance(out.get(key), dict):
             out[key] = _deep_merge(out[key], value)
         else:
-            out[key] = value
+            out[key] = copy.deepcopy(value)
     return out
 
 
@@ -112,6 +114,18 @@ def _style_size(style):
     return style.font.size.pt if style.font.size is not None else None
 
 
+def _effective_style_size(style):
+    """Walk the basedOn chain; Heading 3/4 often inherit Normal's size."""
+    seen = set()
+    while style is not None and id(style) not in seen:
+        seen.add(id(style))
+        size = style.font.size
+        if size is not None:
+            return size.pt
+        style = style.base_style
+    return None
+
+
 def _style_line_spacing(style):
     value = style.paragraph_format.line_spacing
     if value is None:
@@ -169,29 +183,57 @@ def _abstract_words(doc) -> int | None:
     return words or None
 
 
-def _caption_positions(doc):
-    """Check table caption above the table and figure caption below the figure."""
+def _heading_num_id(p) -> int | None:
+    element = p._p if hasattr(p, "_p") else p
+    ppr = element.find(qn("w:pPr"))
+    if ppr is None:
+        return None
+    numpr = ppr.find(qn("w:numPr"))
+    if numpr is None:
+        return None
+    numid = numpr.find(qn("w:numId"))
+    if numid is None:
+        return None
+    try:
+        return int(numid.get(qn("w:val")))
+    except (TypeError, ValueError):
+        return None
+
+
+def _caption_positions(doc, body_num_id: int | None = None):
+    """Check table caption above the table and figure caption below the figure.
+
+    Counts body and appendix separately so a body-caption total is not compared
+    with an all-document table/figure total.
+    """
     issues: list[str] = []
-    checked_tables = 0
-    checked_figures = 0
+    counts = {"body_tables": 0, "body_figures": 0,
+              "appendix_tables": 0, "appendix_figures": 0}
+    in_appendix = False
     body = list(doc.element.body.iterchildren())
     for i, node in enumerate(body):
+        if node.tag == qn("w:p") and _pstyle(node) == "Heading1":
+            if body_num_id is not None and _heading_num_id(node) not in (None, 0, body_num_id):
+                in_appendix = True
+            elif _text(node).upper().startswith("PHỤ LỤC"):
+                in_appendix = True
         if node.tag == qn("w:tbl"):
             tblpr = node.find(qn("w:tblPr"))
             captioned = tblpr is not None and tblpr.find(qn("w:tblCaption")) is not None
             if not captioned:
                 continue
-            checked_tables += 1
+            counts["appendix_tables" if in_appendix else "body_tables"] += 1
             if i == 0 or body[i - 1].tag != qn("w:p") or _pstyle(body[i - 1]) != "Caption":
                 issues.append("table caption is not the paragraph immediately above the table")
         elif node.tag == qn("w:p") and node.find(".//" + qn("w:drawing")) is not None:
             if _pstyle(node) == "Caption":
                 continue
-            checked_figures += 1
+            counts["appendix_figures" if in_appendix else "body_figures"] += 1
             nxt = body[i + 1] if i + 1 < len(body) else None
             if nxt is None or nxt.tag != qn("w:p") or _pstyle(nxt) != "Caption":
                 issues.append("figure caption is not the paragraph immediately below the figure")
-    return checked_tables, checked_figures, issues
+    counts["issues"] = issues
+    return counts
 
 
 def _check(id: str, label: str, expected: Any, actual: Any, source: str,
@@ -206,7 +248,7 @@ def _check(id: str, label: str, expected: Any, actual: Any, source: str,
             "source": source, "status": status}
 
 
-def _caption_sequence(doc):
+def _caption_sequence(doc, body_num_id: int | None = None):
     """Yield ``(chapter, caption)`` in body order, stopping at end matter."""
     rows = []
     chapter = 0
@@ -220,6 +262,9 @@ def _caption_sequence(doc):
             upper = text.upper()
             if upper.startswith("TÀI LIỆU THAM KHẢO") or upper.startswith("PHỤ LỤC"):
                 break
+            if (style == "Heading1" and body_num_id is not None
+                    and _heading_num_id(node) not in (None, 0, body_num_id)):
+                break  # first appendix heading
             if style == "ChapterUnnumbered":
                 body_started = True
                 continue
@@ -227,6 +272,21 @@ def _caption_sequence(doc):
             body_started = True
         elif style == "Caption" and CAPTION_RE.match(text) and body_started:
             rows.append((chapter, text))
+    return rows
+
+
+def _equation_sequence(doc):
+    """Return (chapter, number_tuple_or_None, paragraph) for Equation style."""
+    rows = []
+    chapter = 0
+    for p in doc.paragraphs:
+        style = p.style.name or ""
+        if style == "Heading 1":
+            chapter += 1
+        elif style == "Equation":
+            text = p.text.strip()
+            m = re.search(r"\((\d+)\.(\d+)\)\s*$", text)
+            rows.append((chapter, (int(m.group(1)), int(m.group(2))) if m else None, p))
     return rows
 
 
@@ -272,6 +332,39 @@ def check_docx(docx_path: str | Path, profile: dict, *, body_pages: int | None =
                          _style_size(normal), source + " §cỡ chữ"))
     checks.append(_check("line-spacing", "Giãn dòng", typo.get("line_spacing"),
                          _style_line_spacing(normal), source + " §giãn dòng"))
+    space_after = normal.paragraph_format.space_after
+    checks.append(_check("space-after", "Khoảng cách sau đoạn (pt)",
+                         typo.get("space_after_pt"),
+                         round(space_after.pt, 1) if space_after is not None else 0,
+                         source + " §đoạn văn"))
+    expected_align = (profile.get("paragraph") or {}).get("alignment", "left")
+    actual_align = normal.paragraph_format.alignment
+    align_ok = (expected_align == "justify" and actual_align == WD_ALIGN_PARAGRAPH.JUSTIFY) or \
+               (expected_align == "left" and actual_align in (None, WD_ALIGN_PARAGRAPH.LEFT))
+    checks.append(_check("alignment", "Căn đoạn văn", expected_align,
+                         str(actual_align), source + " §đoạn văn",
+                         status="pass" if align_ok else "fail"))
+    heading_sizes = typo.get("heading_sizes_pt") or []
+    heading_actual = []
+    for level in range(1, min(len(heading_sizes), 4) + 1):
+        try:
+            style = doc.styles[f"Heading {level}"]
+        except KeyError:
+            style = None
+        heading_actual.append(round(_effective_style_size(style), 1) if style and _effective_style_size(style) else None)
+    expected_heading = [float(v) for v in heading_sizes[:len(heading_actual)]]
+    checks.append(_check("heading-sizes", "Cỡ chữ Heading 1–3 (pt)", expected_heading,
+                         heading_actual, source + " §tiêu đề",
+                         status="pass" if heading_actual and all(
+                             a is not None and abs(a - e) <= 0.5
+                             for a, e in zip(heading_actual, expected_heading)) else "fail"))
+    try:
+        caption_style = doc.styles["Caption"]
+    except KeyError:
+        caption_style = None
+    checks.append(_check("caption-size", "Cỡ chữ chú thích (pt)", typo.get("caption_pt"),
+                         round(_effective_style_size(caption_style), 1) if caption_style and _effective_style_size(caption_style) else None,
+                         source + " §chú thích"))
     indent = normal.paragraph_format.first_line_indent
     checks.append(_check("first-line-indent", "Thụt đầu dòng (mm)",
                          (profile.get("paragraph") or {}).get("first_line_indent_mm", 0),
@@ -294,9 +387,34 @@ def check_docx(docx_path: str | Path, profile: dict, *, body_pages: int | None =
     has_num = h1_ppr is not None and h1_ppr.find(qn("w:numPr")) is not None
     checks.append(_check("heading-numbering", "Heading 1 có đánh số tự động",
                          True, has_num, "ISO 2145", status="pass" if has_num else "fail"))
+    try:
+        unnumbered = doc.styles["Chapter Unnumbered"]
+    except KeyError:
+        unnumbered = None
+    if unnumbered is not None and numbering.get("captions") == "chapter":
+        uppr = unnumbered.element.find(qn("w:pPr"))
+        unum = uppr.find(qn("w:numPr")) if uppr is not None else None
+        uoutline = uppr.find(qn("w:outlineLvl")) if uppr is not None else None
+        valid = unum is None and uoutline is not None and (uoutline.get(qn("w:val")) or "") == "0"
+        checks.append(_check("chapter-unnumbered", "Mở đầu không đánh số nhưng vẫn vào TOC",
+                             "no numPr, outlineLvl 0", "ok" if valid else "invalid",
+                             source + " §cấu trúc chương",
+                             status="pass" if valid else "fail"))
 
     # 4. Captions.
-    captions = _caption_sequence(doc)
+    body_num_id = None
+    try:
+        body_num_id = _heading_num_id(doc.styles["Heading 1"].element)
+    except KeyError:
+        body_num_id = None
+    if body_num_id in (None, 0):
+        for p in doc.paragraphs:
+            if p.style.name == "Heading 1":
+                nid = _heading_num_id(p)
+                if nid not in (None, 0):
+                    body_num_id = nid
+                    break
+    captions = _caption_sequence(doc, body_num_id)
     chapter_mode = numbering.get("captions") == "chapter"
     if chapter_mode:
         counters = {"Hình": 0, "Bảng": 0}
@@ -330,12 +448,17 @@ def check_docx(docx_path: str | Path, profile: dict, *, body_pages: int | None =
                              "sequential", f"{len(captions)} caption",
                              source, status="pass" if captions else "warn"))
 
-    checked_tables, checked_figures, position_issues = _caption_positions(doc)
+    pos = _caption_positions(doc, body_num_id)
+    position_issues = pos["issues"]
+    counts_text = (f"body {pos['body_tables']} bảng + {pos['body_figures']} hình; "
+                   f"appendix {pos['appendix_tables']} bảng + {pos['appendix_figures']} hình; "
+                   f"{len(position_issues)} lỗi")
     checks.append(_check("caption-position", "Vị trí chú thích bảng/hình",
-                         "bảng trên, hình dưới",
-                         f"{checked_tables} bảng, {checked_figures} hình; {len(position_issues)} lỗi",
+                         "bảng trên, hình dưới", counts_text,
                          source + " §bảng/hình",
-                         status="pass" if (checked_tables or checked_figures) and not position_issues else "fail"))
+                         status="pass" if (pos["body_tables"] or pos["body_figures"]
+                                           or pos["appendix_tables"] or pos["appendix_figures"])
+                         and not position_issues else "fail"))
     if position_issues:
         checks[-1]["details"] = position_issues[:8]
 
@@ -353,9 +476,11 @@ def check_docx(docx_path: str | Path, profile: dict, *, body_pages: int | None =
     # 6. Front matter order.
     wanted = profile.get("front_matter_order") or []
     title_map = {
+        "task": "NHIỆM VỤ",
         "declaration": "LỜI CAM ĐOAN",
         "acknowledgements": "LỜI CẢM ƠN",
         "abstract": "TÓM TẮT",
+        "preface": "LỜI NÓI ĐẦU",
         "toc": "MỤC LỤC",
         "abbreviations": "DANH MỤC KÝ HIỆU",
         "list_of_tables": "DANH MỤC BẢNG",
@@ -363,6 +488,8 @@ def check_docx(docx_path: str | Path, profile: dict, *, body_pages: int | None =
     }
     positions = {}
     for i, p in enumerate(doc.paragraphs):
+        if p.style.name in {"Heading 1", "Chapter Unnumbered"}:
+            break  # front matter ends at the first body chapter
         upper = p.text.strip().upper()
         for key, title in title_map.items():
             if key not in positions and upper.startswith(title):
@@ -373,6 +500,7 @@ def check_docx(docx_path: str | Path, profile: dict, *, body_pages: int | None =
     has_tables = bool(doc.tables)
     for key in wanted:
         if key not in title_map:
+            order_issues.append(f"profile has unknown front-matter key {key!r}")
             continue
         if key == "list_of_figures" and not has_figures:
             continue
@@ -384,9 +512,10 @@ def check_docx(docx_path: str | Path, profile: dict, *, body_pages: int | None =
         if positions[key] < last:
             order_issues.append(f"{title_map[key]} sai thứ tự")
         last = positions[key]
+    actual_order = [title_map[k] for k in wanted if k in positions]
     checks.append(_check("front-matter-order", "Thứ tự front matter",
                          " → ".join(title_map.get(k, k) for k in wanted),
-                         " → ".join(sorted(positions, key=positions.get)) or "không tìm thấy",
+                         " → ".join(actual_order) or "không tìm thấy",
                          source + " §bố cục",
                          status="pass" if not order_issues else "fail"))
     if order_issues:
@@ -409,6 +538,31 @@ def check_docx(docx_path: str | Path, profile: dict, *, body_pages: int | None =
     checks.append(_check("references-count", "Số tài liệu tham khảo tối thiểu",
                          8, len(ref_paras), "ISO 690 / quy định khoa",
                          status="pass" if len(ref_paras) >= 8 else "fail"))
+    # Reference position relative to the first appendix.
+    ref_index = app_index = None
+    for i, p in enumerate(doc.paragraphs):
+        style_name = (p.style.name or "").lower()
+        if style_name.startswith("toc"):
+            continue
+        text = p.text.strip().upper()
+        if ref_index is None and text.startswith("TÀI LIỆU THAM KHẢO"):
+            ref_index = i
+        if (app_index is None and p.style.name == "Heading 1"
+                and body_num_id is not None
+                and _heading_num_id(p) not in (None, 0, body_num_id)):
+            app_index = i
+    expected_position = (profile.get("references") or {}).get("position", "after_appendix")
+    if ref_index is not None and app_index is not None:
+        actual_position = "before_appendix" if ref_index < app_index else "after_appendix"
+        checks.append(_check("references-position", "Vị trí tài liệu tham khảo",
+                             expected_position, actual_position,
+                             source + " §tài liệu tham khảo",
+                             status="pass" if actual_position == expected_position else "fail"))
+    else:
+        checks.append(_check("references-position", "Vị trí tài liệu tham khảo",
+                             expected_position,
+                             f"refs={ref_index is not None}, appendix={app_index is not None}",
+                             source + " §tài liệu tham khảo", status="warn"))
     citation_refs = [i for i in _field_instrs(doc.element.body) if i.upper().startswith("REF REF-")]
     checks.append(_check("citation-links", "Trích dẫn động tới tài liệu",
                          ">= 8 REF ref-*", len(citation_refs), "ISO 690",
@@ -423,31 +577,74 @@ def check_docx(docx_path: str | Path, profile: dict, *, body_pages: int | None =
         checks.append(_check("abstract-words", "Độ dài tóm tắt (từ)",
                              f"{low}–{high}", words, source + " §tóm tắt", status=status))
 
-    # 9. Body page count, when supplied by the renderer.
-    if body_pages is not None:
-        low, high = limits.get("body_pages_min"), limits.get("body_pages_max")
+    # 9. Body page count.  The build passes Word's count; a standalone
+    # `docx_profiles.py check` must pass --body-pages or it is reported as a
+    # warning, never silently skipped.
+    low, high = limits.get("body_pages_min"), limits.get("body_pages_max")
+
+    def page_range() -> str:
+        if low is None and high is not None:
+            return f"≤ {high}"
+        if low is not None and high is None:
+            return f"≥ {low}"
+        return f"{low}–{high}"
+
+    if body_pages is None:
+        checks.append(_check("body-pages", "Số trang phần thân",
+                             page_range(), "not measured",
+                             source + " §số trang", status="warn"))
+    else:
         status = "pass"
         if low is not None and body_pages < low:
-            status = "warn"
+            status = "fail"
         if high is not None and body_pages > high:
             status = "fail"
         checks.append(_check("body-pages", "Số trang phần thân",
-                             f"{low or '—'}–{high or '—'}", body_pages,
+                             page_range(), body_pages,
                              source + " §số trang", status=status))
+        checks[-1]["details"] = [
+            "measured from the body start to the first end-matter heading; "
+            "includes tables and figures, so a rule that excludes them is stricter"
+        ]
 
     # 10. Equations (chapter numbering, when declared).
-    eq_paras = [p for p in doc.paragraphs if (p.style.name or "") == "Equation"]
-    eq_with_number = 0
-    for p in eq_paras:
+    eq_rows = _equation_sequence(doc)
+    eq_issues: list[str] = []
+    counters: dict[int, int] = {}
+    chapter_mode_eq = numbering.get("equations") == "chapter"
+    for chapter, nums, p in eq_rows:
         instrs = _field_instrs(p._p)
         has_seq = any(i.upper().startswith("SEQ EQUATION") for i in instrs)
-        has_chapter = any(i.upper().startswith("STYLEREF") for i in instrs)
-        if has_seq and (has_chapter or numbering.get("equations") != "chapter"):
-            eq_with_number += 1
+        has_chapter = any(i.upper().startswith("STYLEREF") and "HEADING 1" in i.upper()
+                          and "\\S" in i.upper() for i in instrs)
+        if not has_seq:
+            eq_issues.append("equation has no SEQ Equation field")
+        if chapter_mode_eq:
+            if chapter == 0:
+                eq_issues.append("equation appears before the first numbered chapter")
+                continue
+            if not has_chapter:
+                eq_issues.append("equation has no STYLEREF \"Heading 1\" \\s field")
+            if nums is None:
+                eq_issues.append("equation has no visible (chapter.local) number")
+                continue
+            if nums[0] != chapter:
+                eq_issues.append(f"equation chapter {nums[0]} != {chapter}")
+            counters[chapter] = counters.get(chapter, 0) + 1
+            if nums[1] != counters[chapter]:
+                eq_issues.append(
+                    f"equation local {nums[1]} != {counters[chapter]} in chapter {chapter}")
+    status = "pass"
+    if not eq_rows:
+        status = "warn"
+    elif eq_issues:
+        status = "fail"
     checks.append(_check("equation-numbering", "Phương trình có số hiệu",
-                         len(eq_paras), f"{eq_with_number}/{len(eq_paras)}",
-                         source + " §công thức",
-                         status="pass" if eq_paras and eq_with_number == len(eq_paras) else "warn"))
+                         "chapter.local, reset mỗi chương" if chapter_mode_eq else "sequential",
+                         f"{len(eq_rows)} equations; {len(eq_issues)} lỗi",
+                         source + " §công thức", status=status))
+    if eq_issues:
+        checks[-1]["details"] = eq_issues[:8]
 
     summary = {"pass": sum(c["status"] == "pass" for c in checks),
                "warn": sum(c["status"] == "warn" for c in checks),

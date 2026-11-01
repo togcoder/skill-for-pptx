@@ -7,7 +7,7 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
-## T049 [docx] Configurable standard profiles + Vietnamese scientific report — 2026-11-02
+## T052 [docx] Configurable standard profiles + Vietnamese scientific report — 2026-11-02
 
 - **Profile layer.** `domains/docx/data/standard_profiles.json` adds four
   sourced profiles: `hust-datn-2017`, `vnu-uet-kl-2024`, `iso-7144-thesis` and
@@ -20,7 +20,7 @@ were true at the time. Task IDs and their branches are listed in
 - **Conformance.** `check_docx()` measures A4, margins, body/table font, size,
   line spacing, first-line indent, heading depth/numbering, chapter captions
   and position, page number, front-matter order, references/citations, abstract
-  length, body pages and equations. Both builds pass (17/17 and 18/18).
+  length, body pages and equations. Both builds pass (23/23 and 24/24).
 - **Chapter numbering.** `STYLEREF "Heading 1" \s` + `SEQ ... \s 1` for
   figures, tables and equations; `Chapter Unnumbered` standalone style for
   `Mở đầu` so it does not shift the Heading 1 counter.
@@ -32,10 +32,10 @@ were true at the time. Task IDs and their branches are listed in
 - **Audit.** Both builds: 0 errors, 0 warnings with profile-aware margin floor;
   204 fields, 88 bookmarks, `vi-VN`; Word refreshed fields and exported 48/45
   pages.
-- **Tests.** `tests/test_docx_profiles.py` (4 tests); full suite 399 tests OK
+- **Tests.** `tests/test_docx_profiles.py` (7 tests); full suite 402 tests OK
   (8 skipped).
 - **Status.** EXPERIMENTAL; review requested.
-- Report: `experiments/T049-20261102-opencode-scientific-report/REPORT.md`.
+- Report: `experiments/T052-20261102-opencode-scientific-report/REPORT.md`.
 
 ## T048 [xlsx] Workbook UX: hidden data, VBA input, tab colour, merges — 2026-11-01
 

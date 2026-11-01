@@ -52,7 +52,7 @@ to `docx` yet.
 | `scripts/document_forge.py` | Experimental (T039): build a DOCX from `domains/docx/schemas/document_spec.schema.json`; refresh via Word/WordCraft; render | `tests/test_document_craft.py` |
 | `scripts/document_audit.py` | Experimental (T039): standalone audit entry point | `tests/test_document_craft.py` |
 | `scripts/word_math.py` | Experimental (T045): LaTeX subset → OMML equations; strict errors for unsupported commands | `tests/test_document_advanced.py` |
-| `scripts/docx_profiles.py` | Experimental (T049): named standard profiles, profile merge and DOCX conformance check | `tests/test_docx_profiles.py` |
+| `scripts/docx_profiles.py` | Experimental (T052): named standard profiles, profile merge and DOCX conformance check | `tests/test_docx_profiles.py` |
 
 No docx module is a product path until `research/reviews/` contains an accepted
 review. The modules carry `Status: EXPERIMENTAL` in their headers.
@@ -63,9 +63,9 @@ review. The modules carry `Status: EXPERIMENTAL` in their headers.
 |---|---|---|
 | Design/standards data | `domains/docx/data/document_system.json` | T039; provenance recorded; unreviewed |
 | Report standards profile | `domains/docx/data/report_standard.json` | T047; ISO/GRI sources, controls and status; unreviewed |
-| Named standard profiles | `domains/docx/data/standard_profiles.json` | T049; HUST 2017, VNU-UET, ISO 7144, annual/GRI; sourced; unreviewed |
+| Named standard profiles | `domains/docx/data/standard_profiles.json` | T052; HUST 2017, VNU-UET, ISO 7144, annual/GRI; sourced; unreviewed |
 | Spec schema | `domains/docx/schemas/document_spec.schema.json` | T039/T045; unreviewed |
-| Skill | `skills/document-craft/` | T039/T045/T047/T049; experimental |
+| Skill | `skills/document-craft/` | T039/T045/T047/T052; experimental |
 | Example specs | `examples/docx/report_spec.json`, `annual_report_spec.json` | T039/T045; synthetic, CC0-style assets |
 
 The data file contains page/type/figure/table/field/accessibility tokens,
@@ -74,24 +74,24 @@ do not hard-code a new one in a generator.
 
 ## Evidence ladder
 
-| Rung | Tool | T039/T045/T047/T049 evidence |
+| Rung | Tool | T039/T045/T047/T052 evidence |
 |---|---|---|
-| 1 | schema / structural audit | T039: 29 fields, 22 bookmarks; T045: 20 fields, 2 equations, 5 merged cells; T047: 135 fields, 91 bookmarks, 37 headings (max H3), 38 tables, 4 figures, 5 equations, 11 references; T049: HUST 204 fields, 88 bookmarks, 59 headings (max H3), 23 tables, 7 figures, 9 equations, 12 references, 13 citations, 1,055 paragraphs; VNU 22 tables, 1,032 paragraphs; both `vi-VN`, no errors/warnings |
-| 2 | layout engine (WordCraft) | T039/T045 WordCraft render; T047/T049 use Word COM for the final layout |
+| 1 | schema / structural audit | T039: 29 fields, 22 bookmarks; T045: 20 fields, 2 equations, 5 merged cells; T047: 135 fields, 91 bookmarks, 37 headings (max H3), 38 tables, 4 figures, 5 equations, 11 references; T052: HUST 204 fields, 88 bookmarks, 59 headings (max H3), 23 tables, 7 figures, 9 equations, 12 references, 13 citations, 1,055 paragraphs; VNU 22 tables, 1,032 paragraphs; both `vi-VN`, no errors/warnings |
+| 2 | layout engine (WordCraft) | T039/T045 WordCraft render; T047/T052 use Word COM for the final layout |
 | 3 | independent reader (LibreOffice Writer) | Not run on this host |
-| 4 | Word COM open / field update | T045/T047/T049: Word opened the exact DOCX, refreshed fields, saved; T049 `updated_by: word` |
-| 5 | Word PDF export / page inspection | T045: 11 pages; T047: 25 pages; T049: HUST 48 pages (34 body pages), VNU-UET 45 pages (35 body pages); cover, TOC, chapter, table, architecture, equations, references and appendix inspected |
+| 4 | Word COM open / field update | T045/T047/T052: Word opened the exact DOCX, refreshed fields, saved; T052 `updated_by: word` |
+| 5 | Word PDF export / page inspection | T045: 11 pages; T047: 25 pages; T052: HUST 48 pages (34 body pages), VNU-UET 45 pages (35 body pages); cover, TOC, chapter, table, architecture, equations, references and appendix inspected |
 | 6 | human edits/prints | Not run |
 
 The T039 report is `experiments/T039-20261101-opencode-office-canon/REPORT.md`.
 
 ## State (2026-11-02)
 
-- **T049 [docx] configurable standard profiles**: a profile layer
+- **T052 [docx] configurable standard profiles**: a profile layer
   (`hust-datn-2017`, `vnu-uet-kl-2024`, `iso-7144-thesis`,
   `annual-report-gri`), a 34-page HUST scientific report (48 pages total) and a
   35-page VNU-UET build of the same content (45 pages total). Both pass their
-  conformance check (17/17 and 18/18); **review requested**.
+  conformance check (23/23 and 24/24); **review requested**.
 - **T047 [docx] standards report**: a 25-page annual/ESG report with a declared
   ISO/GRI standards profile, a control matrix, ISO 7144 front-matter order,
   ISO 2145 numbering, 5 OMML equations, 38 tables, GRI index, VectorCraft
@@ -106,14 +106,14 @@ The T039 report is `experiments/T039-20261101-opencode-office-canon/REPORT.md`.
 - Known limitation: Word and WordCraft paginate differently (12 vs 13 pages on
   the fixture). The generator uses Word for final field refresh when available;
   WordCraft is a fallback.
-- Known limitation (T049): a style based on Heading 1 is still counted by
+- Known limitation (T052): a style based on Heading 1 is still counted by
   `STYLEREF "Heading 1"` and shifts the chapter counter. `Mở đầu` uses a
   standalone `Chapter Unnumbered` style (outlineLvl 0, no basedOn); do not
   "simplify" it back to a Heading 1 derivative.
-- Known limitation (T049): `body_pages` excludes end matter but includes
+- Known limitation (T052): `body_pages` excludes end matter but includes
   tables/figures. VNU-UET's 35–50 rule excludes tables/figures, so the check is
   lenient; a strict counter is still open.
-- Known limitation (T049): the HUST profile is the 2017 faculty regulation, not
+- Known limitation (T052): the HUST profile is the 2017 faculty regulation, not
   the current university-wide template; the VNU-UET profile is one faculty PDF.
   Both are named sources, not universal rules.
 - Known limitation: an early `TOC \\c` list repeated the first `SEQ` number

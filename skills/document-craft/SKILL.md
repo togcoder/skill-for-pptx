@@ -83,7 +83,7 @@ is the acceptance gate. Record the source tool/version/command and the asset
 licence. If VectorCraft is absent, use a plain PNG; the document path must still
 work.
 
-## Ask for the standard, then control it (T049)
+## Ask for the standard, then control it (T052)
 
 A Word report is not "a document"; it is a thesis, a đồ án, a scientific report,
 an annual report. The presentation rules are part of the deliverable.

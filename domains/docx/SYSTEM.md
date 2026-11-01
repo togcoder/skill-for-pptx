@@ -1,6 +1,6 @@
 # Document system: professional DOCX with real links
 
-Status: EXPERIMENTAL — T039/T045/T047/T049 [docx], review requested (2026-11-02).
+Status: EXPERIMENTAL — T039/T045/T047/T052 [docx], review requested (2026-11-02).
 Evidence reached: structural (rung 1), WordCraft layout (rung 2) and Microsoft
 Word parse + field refresh + PDF export (rungs 4–5). No LibreOffice (rung 3), no
 human edit/print (rung 6), no PDF/UA or PDF/A validation. PowerPoint playback is
@@ -39,7 +39,7 @@ word_field_kit.py                    word_field_kit.audit_docx
 |---|---|
 | `domains/docx/data/document_system.json` | Page/type/figure/table/field/accessibility tokens, standards, rules, sources |
 | `domains/docx/data/report_standard.json` | T047 ISO/GRI standards profile, controls, evidence and status |
-| `domains/docx/data/standard_profiles.json` | T049 named profiles: HUST 2017, VNU-UET, ISO 7144, annual/GRI |
+| `domains/docx/data/standard_profiles.json` | T052 named profiles: HUST 2017, VNU-UET, ISO 7144, annual/GRI |
 | `domains/docx/schemas/document_spec.schema.json` | Semantic input for the generator |
 | `scripts/word_field_kit.py` | Fields, TOC, SEQ captions, REF/PAGEREF, STYLEREF, bookmarks, numbering, audit |
 | `scripts/document_forge.py` | Build DOCX from a spec; refresh with Word/WordCraft; render |
@@ -98,7 +98,7 @@ word_field_kit.py                    word_field_kit.audit_docx
   the receiving DOCX test is the acceptance gate. The generator still works
   with a plain PNG if VectorCraft is absent.
 
-## Standard profiles (T049)
+## Standard profiles (T052)
 
 A user does not ask for "a Word document"; they ask for a thesis, a đồ án, a
 scientific report, an annual report. Each has a presentation contract.

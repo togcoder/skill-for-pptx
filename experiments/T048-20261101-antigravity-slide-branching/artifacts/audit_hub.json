@@ -1,0 +1,170 @@
+{
+  "presentation": "C:\\Users\\COMPUTER\\Desktop\\làm chung với ai\\skill-for-pptx\\experiments\\T048-20261101-antigravity-slide-branching\\artifacts\\executive_interactive_hub.pptx",
+  "total_slides": 5,
+  "kiosk_mode": false,
+  "custom_shows": [],
+  "nodes": [
+    {
+      "slide_index": 0,
+      "file": "slide1.xml",
+      "title": "EXECUTIVE BRIEFING 2026 — INTERACTIVE HUB",
+      "advance_on_click": false,
+      "button_count": 3,
+      "buttons": [
+        {
+          "shape_name": "btn_hub_strategy",
+          "label": "TRỤ CỘT 1 CHIẾN LƯỢC TĂNG TRƯỞNG ➔ Xem chi tiết",
+          "action_type": "slide_jump",
+          "target": 1,
+          "raw_action": "ppaction://hlinksldjump"
+        },
+        {
+          "shape_name": "btn_hub_finance",
+          "label": "TRỤ CỘT 2 TÀI CHÍNH & LỢI NHUẬN ➔ Xem chi tiết",
+          "action_type": "slide_jump",
+          "target": 2,
+          "raw_action": "ppaction://hlinksldjump"
+        },
+        {
+          "shape_name": "btn_hub_risk",
+          "label": "TRỤ CỘT 3 QUẢN TRỊ RỦI RO ➔ Xem chi tiết",
+          "action_type": "slide_jump",
+          "target": 3,
+          "raw_action": "ppaction://hlinksldjump"
+        }
+      ]
+    },
+    {
+      "slide_index": 1,
+      "file": "slide2.xml",
+      "title": "CHIẾN LƯỢC MỞ RỘNG THỊ TRƯỜNG 2026",
+      "advance_on_click": false,
+      "button_count": 1,
+      "buttons": [
+        {
+          "shape_name": "btn_return_hub_1",
+          "label": "⌂ VỀ MENU HUB",
+          "action_type": "slide_jump",
+          "target": 0,
+          "raw_action": "ppaction://hlinksldjump"
+        }
+      ]
+    },
+    {
+      "slide_index": 2,
+      "file": "slide3.xml",
+      "title": "KẾT QUẢ TÀI CHÍNH & DỰ BÁO LỢI NHUẬN",
+      "advance_on_click": false,
+      "button_count": 2,
+      "buttons": [
+        {
+          "shape_name": "btn_return_hub_2",
+          "label": "⌂ VỀ MENU HUB",
+          "action_type": "slide_jump",
+          "target": 0,
+          "raw_action": "ppaction://hlinksldjump"
+        },
+        {
+          "shape_name": "btn_goto_deepdive",
+          "label": "XEM PHỤ LỤC KỸ THUẬT (DEEP DIVE) ➔",
+          "action_type": "slide_jump",
+          "target": 4,
+          "raw_action": "ppaction://hlinksldjump"
+        }
+      ]
+    },
+    {
+      "slide_index": 3,
+      "file": "slide4.xml",
+      "title": "QUẢN TRỊ RỦI RO & BẢO MẬT HỆ THỐNG",
+      "advance_on_click": false,
+      "button_count": 1,
+      "buttons": [
+        {
+          "shape_name": "btn_return_hub_3",
+          "label": "⌂ VỀ MENU HUB",
+          "action_type": "slide_jump",
+          "target": 0,
+          "raw_action": "ppaction://hlinksldjump"
+        }
+      ]
+    },
+    {
+      "slide_index": 4,
+      "file": "slide5.xml",
+      "title": "PHỤ LỤC KỸ THUẬT (AUXILIARY DRILL-DOWN)",
+      "advance_on_click": false,
+      "button_count": 1,
+      "buttons": [
+        {
+          "shape_name": "btn_back_to_caller",
+          "label": "↺ QUAY VỀ MẠCH BÁO CÁO (LAST VIEWED)",
+          "action_type": "last_viewed",
+          "target": "LAST_VIEWED",
+          "raw_action": "ppaction://hlinkshowjump?jump=lastslideviewed"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from_slide": 0,
+      "from_title": "EXECUTIVE BRIEFING 2026 — INTERACTIVE HUB",
+      "to_slide": 1,
+      "button_label": "TRỤ CỘT 1 CHIẾN LƯỢC TĂNG TRƯỞNG ➔ Xem chi tiết",
+      "type": "slide_jump"
+    },
+    {
+      "from_slide": 0,
+      "from_title": "EXECUTIVE BRIEFING 2026 — INTERACTIVE HUB",
+      "to_slide": 2,
+      "button_label": "TRỤ CỘT 2 TÀI CHÍNH & LỢI NHUẬN ➔ Xem chi tiết",
+      "type": "slide_jump"
+    },
+    {
+      "from_slide": 0,
+      "from_title": "EXECUTIVE BRIEFING 2026 — INTERACTIVE HUB",
+      "to_slide": 3,
+      "button_label": "TRỤ CỘT 3 QUẢN TRỊ RỦI RO ➔ Xem chi tiết",
+      "type": "slide_jump"
+    },
+    {
+      "from_slide": 1,
+      "from_title": "CHIẾN LƯỢC MỞ RỘNG THỊ TRƯỜNG 2026",
+      "to_slide": 0,
+      "button_label": "⌂ VỀ MENU HUB",
+      "type": "slide_jump"
+    },
+    {
+      "from_slide": 2,
+      "from_title": "KẾT QUẢ TÀI CHÍNH & DỰ BÁO LỢI NHUẬN",
+      "to_slide": 0,
+      "button_label": "⌂ VỀ MENU HUB",
+      "type": "slide_jump"
+    },
+    {
+      "from_slide": 2,
+      "from_title": "KẾT QUẢ TÀI CHÍNH & DỰ BÁO LỢI NHUẬN",
+      "to_slide": 4,
+      "button_label": "XEM PHỤ LỤC KỸ THUẬT (DEEP DIVE) ➔",
+      "type": "slide_jump"
+    },
+    {
+      "from_slide": 3,
+      "from_title": "QUẢN TRỊ RỦI RO & BẢO MẬT HỆ THỐNG",
+      "to_slide": 0,
+      "button_label": "⌂ VỀ MENU HUB",
+      "type": "slide_jump"
+    },
+    {
+      "from_slide": 4,
+      "from_title": "PHỤ LỤC KỸ THUẬT (AUXILIARY DRILL-DOWN)",
+      "to_slide": "LAST_VIEWED",
+      "button_label": "↺ QUAY VỀ MẠCH BÁO CÁO (LAST VIEWED)",
+      "type": "last_viewed"
+    }
+  ],
+  "dead_ends": [],
+  "is_non_linear": true,
+  "mermaid": "graph TD\n  S0[\"Slide 1: EXECUTIVE BRIEFING 2026 —\"]\n  S1[\"Slide 2: CHIẾN LƯỢC MỞ RỘNG THỊ TR\"]\n  S2[\"Slide 3: KẾT QUẢ TÀI CHÍNH & DỰ BÁ\"]\n  S3[\"Slide 4: QUẢN TRỊ RỦI RO & BẢO MẬT\"]\n  S4[\"Slide 5: PHỤ LỤC KỸ THUẬT AUXILIAR\"]\n  S0 -->|\"TRỤ CỘT 1 CHIẾN LƯỢC\"| S1\n  S0 -->|\"TRỤ CỘT 2 TÀI CHÍNH \"| S2\n  S0 -->|\"TRỤ CỘT 3 QUẢN TRỊ R\"| S3\n  S1 -->|\"⌂ VỀ MENU HUB\"| S0\n  S2 -->|\"⌂ VỀ MENU HUB\"| S0\n  S2 -->|\"XEM PHỤ LỤC KỸ THUẬT\"| S4\n  S3 -->|\"⌂ VỀ MENU HUB\"| S0\n  S4 -.->|\"↺ QUAY VỀ MẠCH BÁO C\"| LAST_VIEWED"
+}
