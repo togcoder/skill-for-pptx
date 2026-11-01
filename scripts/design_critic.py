@@ -62,16 +62,20 @@ WEIGHT_WORDS={"light","semilight","semibold","bold","black","medium","thin","dis
 EXEMPT_GRAPHIC={"mask","highlight","backdrop"}
 DIMENSION={"COL-TEXT":"design","COL-GRAPHIC":"design","TYP-SMALL":"design","TYP-RATIO":"design",
            "DEN-WORDS":"design","LAY-SAFE":"design","LAY-DENSITY":"design","LAY-BALANCE":"design",
-           "COL-COLOURFUL":"design",
+           "COL-COLOURFUL":"design","CHROME-SAFE":"design","OPT-ICON":"design","LAY-BENTO":"design",
            "MOT-DURATION":"motion","MOT-EASING":"motion","MOT-STAGGER":"motion","MOT-AMBIENT":"motion",
            "MOT-TITLE":"motion","TEC-PRESET":"motion",
            "MOT-CLICKS":"rhythm","MOT-MOVERS":"rhythm","MOT-EFFECTS":"rhythm","MOT-STATIC":"rhythm",
-           "MOT-SETTLE":"rhythm",
+           "MOT-SETTLE":"rhythm","DUA-BREAK":"rhythm",
            "TYP-SIZES":"coherence","TYP-FAMILIES":"coherence","MOT-VOCAB":"coherence",
            "TEC-SCHEMA":"technique"}
 FIX={
     "COL-TEXT":("use the theme text colour or a palette colour that reaches the contrast","slide_forge theme / brand_palette"),
     "COL-GRAPHIC":("re-apply: helpers take a deck colour that reaches 3:1 (motion_components.deck_style), or set components[].generate.color","motion_director"),
+    "CHROME-SAFE":("place logo at top-right (w<=72pt, h<=24pt, y=20pt) and suppress on cover/closing slides; progress bar at bottom edge","slide_forge chrome / layout_engine"),
+    "OPT-ICON":("scale square icons to 0.88x, circle 1.0x, wide 1.08x/0.82x, triangle 1.05x with +0.06x apex offset","slide_forge icon / motion_components"),
+    "LAY-BENTO":("follow 7/12 hero card or golden ratio 61.8/38.2 split with 16-20pt gutters","slide_forge bento/asymmetric"),
+    "DUA-BREAK":("insert high-whitespace pattern break slides near 1/3 and 2/3 deck milestones to prevent audience fatigue","cognitive_pacing / slide_forge duarte_break"),
     "TYP-SMALL":("raise the size: body text >= 18 pt in a presentation, never below 12","slide_forge spec / manual"),
     "TYP-RATIO":("make the title about 1.5-2.6x the body size","slide_forge type scale"),
     "TYP-SIZES":("use the theme scale: 3-6 sizes per deck","slide_forge type scale"),
@@ -444,6 +448,16 @@ def frame_metrics(img,light=False):
     return {"background_share":round(share,3),"balance_offset":round(bal,3),"colourfulness":round(colourful,1)}
 
 
+def render_deckcraft(pptx,out_dir):
+    try:
+        from scripts.deckcraft_bridge import render_slides, is_available
+    except ImportError:
+        from deckcraft_bridge import render_slides, is_available
+    if not is_available():
+        raise RuntimeError("DeckCraft CLI is not available on this system.")
+    return render_slides(pptx, out_dir, scale=2)
+
+
 def render_lo(pptx,out_dir):
     soffice=shutil.which("soffice") or shutil.which("libreoffice")
     if not soffice or not shutil.which("pdftoppm"):
@@ -605,6 +619,31 @@ def critique(path,render=None,xsd=None):
             check("DEN-WORDS",ds.grade(info["words"],ds.load()["density"]["words_per_slide"]),idx,None,info["words"],
                   ds.load()["density"]["words_per_slide"]["band"])
 
+        # ---- chrome and layout canons
+        for o in s["objects"]:
+            name = (o["name"] or "").lower()
+            g = o.get("geometry")
+            if not g:
+                continue
+            if "logo" in name:
+                if idx == 1 or idx == len(parts):
+                    check("CHROME-SAFE", "note", idx, o["name"], "present", "suppressed on cover/closing", "logo is typically hidden on cover or closing slide")
+                elif g["y"] > 0.18 or g["x"] < 0.55:
+                    check("CHROME-SAFE", "note", idx, o["name"], [round(g["x"], 3), round(g["y"], 3)], "x>=0.55, y<=0.18", "logo outside standard top-right safe zone")
+                else:
+                    check("CHROME-SAFE", "good", idx, o["name"], [round(g["x"], 3), round(g["y"], 3)], "top-right anchor", "canonical logo placement")
+            elif "progress-bar" in name or "track-bar" in name:
+                if g["y"] < 0.88:
+                    check("CHROME-SAFE", "note", idx, o["name"], round(g["y"], 3), "y>=0.88", "progress bar should sit along bottom edge")
+                else:
+                    check("CHROME-SAFE", "good", idx, o["name"], round(g["y"], 3), "bottom edge y>=0.88", "canonical progress bar")
+            elif "hero card" in name or "major card" in name:
+                is_hero_prop = 0.45 <= g["w"] <= 0.75
+                check("LAY-BENTO", "good" if is_hero_prop else "note", idx, o["name"], round(g["w"], 3), "0.45-0.75", "hero/major card proportional width")
+            elif "icon" in name:
+                asp = round(g["w"] / max(0.001, g["h"]), 2)
+                check("OPT-ICON", "good" if 0.50 <= asp <= 2.0 else "note", idx, o["name"], asp, "0.50-2.00", "optical icon aspect ratio")
+
         # ---- motion and rhythm
         groups,inter=slide_timing(root)
         effects=[e for g in groups for e in g["effects"]]+inter
@@ -677,6 +716,12 @@ def critique(path,render=None,xsd=None):
         share=len(static)/content
         check("MOT-STATIC","good" if share<=ds.rhythm("static_slide_share_max") else "warn",None,None,
               {"static":static,"content_slides":content},f"<= {ds.rhythm('static_slide_share_max'):.0%} of content slides")
+        if content >= 5:
+            breaks = [s["slide"] for s in slides if s.get("content") and s.get("words", 0) <= 15 and len(s.get("sizes", [])) <= 2]
+            if not breaks:
+                check("DUA-BREAK", "note", None, None, 0, ">= 1 pattern break for 5+ slide decks", "monotonous rhythm: insert a pattern break near 1/3 or 2/3 deck position")
+            else:
+                check("DUA-BREAK", "good", None, None, len(breaks), ">= 1 pattern break", f"pattern break slide(s): {breaks}")
     for (cls,pid),first in unknown_presets.items():
         check("TEC-PRESET","note",first,None,f"{cls}:{pid}","a PowerPoint preset id (knowledge/powerpoint_presets.json)")
     kinds=len(deck_kinds)
@@ -714,6 +759,8 @@ def critique(path,render=None,xsd=None):
         with tempfile.TemporaryDirectory() as td:
             if str(render)=="lo":
                 images=render_lo(path,td)
+            elif str(render) in ("deckcraft", "dc"):
+                images=render_deckcraft(path,td)
             else:
                 images=sorted(Path(render).glob("slide-*.png"))
             for i,img in enumerate(_frames(images,aspect),1):
@@ -751,7 +798,7 @@ def critique(path,render=None,xsd=None):
         per=Counter(e["spid"] for g in slide_timing(pkg.xml(part))[0] for e in g["effects"] if e["spid"])
         lifecycles+=sum(1 for n in per.values() if n>=2)
     return {"design_system":ds.load()["version"],"scores":scores,
-            "checks":len(checks),"issues_by_severity":dict(counts),
+            "checks":len(checks),"evaluations":checks,"issues_by_severity":dict(counts),
             "issues_by_code":dict(Counter(i["code"] for i in issues if i["severity"]=="warn")),
             "issues":issues,"slides":slides,"frames":frame,
             "deck":{"slides":len(slides),"content_slides":content,"static_slides":static,"lifecycles":lifecycles,
@@ -784,7 +831,7 @@ def markdown(v):
 def main():
     ap=argparse.ArgumentParser(description=__doc__,formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("pptx",type=Path)
-    ap.add_argument("--render",help="'lo' to render with LibreOffice, or a directory of slide-NN.png")
+    ap.add_argument("--render",help="'deckcraft'/'dc' (native ArtCraft), 'lo' (LibreOffice), or a directory of slide-NN.png")
     ap.add_argument("--xsd",type=Path,default=os.environ.get("PPTX_PML_XSD"))
     ap.add_argument("--md",type=Path)
     ap.add_argument("-o","--output",type=Path)

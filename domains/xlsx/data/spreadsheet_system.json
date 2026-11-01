@@ -1,0 +1,364 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-11-01",
+  "scope": "Business, scientific and project workbooks in the xlsx domain where the chart is the deliverable. The audit measures OOXML; a render or Excel export is still required before claiming visual quality.",
+  "geometry": {
+    "min_width_cm": 10.0,
+    "min_height_cm": 6.0,
+    "max_width_cm": 25.0,
+    "preferred_aspect": [
+      1.4,
+      2.0
+    ],
+    "pie_aspect": [
+      0.8,
+      1.25
+    ],
+    "pie_aspect_with_side_legend": [
+      0.8,
+      2.2
+    ],
+    "plot_area_share": [
+      0.55,
+      0.85
+    ],
+    "max_series": 8,
+    "max_pie_slices": 7,
+    "min_category_width_cm": 0.55,
+    "max_title_chars": 90
+  },
+  "typography": {
+    "min_font_pt": 8.0,
+    "min_title_pt": 10.0,
+    "title_pt": [
+      12,
+      16
+    ],
+    "axis_title_pt": [
+      9,
+      11
+    ],
+    "label_pt": [
+      8,
+      10
+    ],
+    "legend_pt": [
+      8,
+      10
+    ],
+    "source_pt": [
+      7,
+      9
+    ],
+    "font_family": "Calibri",
+    "font_family_fallback": [
+      "Arial",
+      "Aptos",
+      "Noto Sans"
+    ]
+  },
+  "color": {
+    "contrast_graphic": 3.0,
+    "contrast_text": 4.5,
+    "min_rgb_distance": 40,
+    "min_deuteranopia_distance": 25,
+    "max_series_colors": 8,
+    "palette": [
+      {
+        "name": "Navy",
+        "hex": "#1F4E79"
+      },
+      {
+        "name": "Burnt orange",
+        "hex": "#C55A11"
+      },
+      {
+        "name": "Blue",
+        "hex": "#2E75B6"
+      },
+      {
+        "name": "Green",
+        "hex": "#548235"
+      },
+      {
+        "name": "Purple",
+        "hex": "#7030A0"
+      },
+      {
+        "name": "Grey",
+        "hex": "#7F7F7F"
+      },
+      {
+        "name": "Olive",
+        "hex": "#7F6000"
+      },
+      {
+        "name": "Dark red",
+        "hex": "#C00000"
+      }
+    ]
+  },
+  "chart_types": {
+    "comparison": [
+      "column",
+      "bar",
+      "dot_plot"
+    ],
+    "trend_over_time": [
+      "line",
+      "area"
+    ],
+    "part_to_whole": [
+      "stacked_bar",
+      "doughnut",
+      "pie"
+    ],
+    "distribution": [
+      "histogram",
+      "box_whisker"
+    ],
+    "correlation": [
+      "scatter",
+      "bubble"
+    ],
+    "ranking": [
+      "sorted_bar",
+      "dot_plot"
+    ],
+    "deviation": [
+      "diverging_bar",
+      "waterfall"
+    ],
+    "flow": [
+      "waterfall",
+      "sankey"
+    ],
+    "hierarchy": [
+      "treemap",
+      "sunburst"
+    ],
+    "kpi": [
+      "bullet",
+      "bar"
+    ],
+    "notes": {
+      "pie": "Use only for 2–5 parts of a whole, never for ranking or more than 7 slices.",
+      "bar": "Sort categories by value unless the category order is meaningful.",
+      "line": "Use a date/numeric axis for time; do not connect categorical points that are not ordered.",
+      "scatter": "Use numeric X and Y columns; add a trendline only when the relationship is the message.",
+      "combo": "Use a secondary axis only when the units differ, and title both axes.",
+      "waterfall": "Start from a real total, keep one colour for increases and one for decreases, and label the bridge.",
+      "histogram": "State the bin width/count; do not use it for categories.",
+      "box_whisker": "State the quartile method and whether outliers/mean are shown."
+    }
+  },
+  "rules": [
+    {
+      "id": "CHART-GEOMETRY",
+      "statement": "Charts are at least 10×6 cm, fit the printable area, and use a stable aspect ratio.",
+      "limit": "10 cm / 6 cm",
+      "fix": "Resize the chart frame; use a one-cell anchor.",
+      "source": "layout practice"
+    },
+    {
+      "id": "CHART-ANCHOR",
+      "statement": "Charts use a one-cell anchor with a fixed extent so row/column changes do not stretch them.",
+      "limit": "oneCellAnchor",
+      "fix": "patch the drawing anchor; see chart_patch.py",
+      "source": "ECMA-376 §20.5"
+    },
+    {
+      "id": "CHART-ZERO-BASELINE",
+      "statement": "Bar and column charts start at zero; a truncated axis exaggerates differences.",
+      "limit": "min = 0",
+      "fix": "set the value axis minimum to 0 or use a dot plot",
+      "source": "Tufte; Few"
+    },
+    {
+      "id": "CHART-LOG",
+      "statement": "Log axes have base > 1 and a positive minimum; label the scale.",
+      "limit": "base > 1, min > 0",
+      "fix": "fix the scaling or use a linear axis",
+      "source": "data visualization practice"
+    },
+    {
+      "id": "CHART-CATEGORY-DENSITY",
+      "statement": "Each category has at least 0.55 cm of plot width; rotate or reduce labels when denser.",
+      "limit": "0.55 cm/category",
+      "fix": "rotate labels, shorten names, or split the chart",
+      "source": "layout practice"
+    },
+    {
+      "id": "CHART-LABELS",
+      "statement": "Data labels use a readable size and do not collide with the line or axis title.",
+      "limit": "8 pt minimum",
+      "fix": "reduce labels, move the legend outside, or annotate only the key point",
+      "source": "Few; WCAG 2.2"
+    },
+    {
+      "id": "CHART-LEGEND",
+      "statement": "A legend is present for multiple series and does not cover the plot when there are many series.",
+      "limit": "overlay false when > 4 series",
+      "fix": "move the legend below/right or direct-label series",
+      "source": "Few"
+    },
+    {
+      "id": "CHART-COLOR-CONTRAST",
+      "statement": "Series colours have at least 3:1 contrast against the chart background.",
+      "limit": "3:1",
+      "fix": "darken the colour or add a border/marker",
+      "source": "WCAG 2.2 SC 1.4.11"
+    },
+    {
+      "id": "CHART-COLOR-DISTINCT",
+      "statement": "Adjacent series are distinguishable in normal vision and deuteranopia.",
+      "limit": "RGB distance ≥ 40; simulated ≥ 25",
+      "fix": "change the palette or add markers/patterns",
+      "source": "WCAG 2.2 1.4.1; colour-vision practice"
+    },
+    {
+      "id": "CHART-DATA-CACHE",
+      "statement": "The chart cache matches the worksheet values; stale caches are a common 'wrong chart' bug.",
+      "limit": "tolerance 1e-6",
+      "fix": "refresh/rebuild the chart or recalculate the workbook",
+      "source": "ECMA-376 chart cache"
+    },
+    {
+      "id": "CHART-PIE",
+      "statement": "Pie/doughnut charts have positive values, at most 7 slices, and a categorical palette.",
+      "limit": "≤ 7 slices",
+      "fix": "use a sorted bar chart",
+      "source": "Few"
+    },
+    {
+      "id": "CHART-3D",
+      "statement": "No 3-D charts for quantitative comparison; they distort area and hide values.",
+      "limit": "2-D only",
+      "fix": "change the chart type to 2-D",
+      "source": "Tufte; Few"
+    },
+    {
+      "id": "CHART-TITLE",
+      "statement": "The title states the insight and stays under 90 characters; the axis title carries the unit.",
+      "limit": "90 characters",
+      "fix": "rewrite the title, move detail to a subtitle/source note",
+      "source": "Few; editorial practice"
+    },
+    {
+      "id": "CHART-AXIS-TITLE",
+      "statement": "Every axis has a title with units; a secondary axis always has its own title.",
+      "limit": "required",
+      "fix": "add axis titles, including the secondary axis",
+      "source": "ISO 80000-1; Few"
+    },
+    {
+      "id": "CHART-PRINT",
+      "statement": "The chart is inside the print area; the sheet is set to landscape/fit when needed.",
+      "limit": "inside print area",
+      "fix": "set print area and orientation; do not clip the chart",
+      "source": "print production practice"
+    },
+    {
+      "id": "CHART-ALT",
+      "statement": "The chart frame has alt text; a data table or direct labels provide a non-visual alternative.",
+      "limit": "required",
+      "fix": "set cNvPr descr/title; add direct labels",
+      "source": "WCAG 2.2 1.1.1; PDF/UA"
+    },
+    {
+      "id": "CHART-FONT",
+      "statement": "Chart text is at least 8 pt (10 pt title); use one family per workbook.",
+      "limit": "8 pt / 10 pt",
+      "fix": "increase font sizes or reduce content",
+      "source": "print and screen practice"
+    },
+    {
+      "id": "CHART-SERIES-COUNT",
+      "statement": "No more than 8 series in one chart; highlight one or use small multiples beyond that.",
+      "limit": "8 series",
+      "fix": "combine low-volume series, facet the chart, or highlight one line",
+      "source": "Few; Tufte"
+    }
+  ],
+  "standards": [
+    {
+      "id": "ISO/IEC 29500-1:2016",
+      "role": "SpreadsheetML and DrawingML chart XML; anchors, chart caches and number formats.",
+      "source": "https://ecma-international.org/publications-and-standards/standards/ecma-376/"
+    },
+    {
+      "id": "ISO 80000-1:2022",
+      "role": "Units, quantity symbols and decimal conventions in axis titles and labels.",
+      "source": "https://www.bipm.org/en/publications/si-brochure"
+    },
+    {
+      "id": "ISO 8601-1:2019",
+      "role": "Date/time axes and metadata timestamps.",
+      "source": "https://www.iso.org/iso-8601-date-and-time-format.html"
+    },
+    {
+      "id": "ISO 690:2021",
+      "role": "Source notes and data citations.",
+      "source": "https://www.iso.org/standard/72642.html"
+    },
+    {
+      "id": "WCAG 2.2",
+      "role": "Non-text contrast (1.4.11), use of colour (1.4.1), alt text (1.1.1), readable text.",
+      "source": "https://www.w3.org/TR/WCAG22/"
+    },
+    {
+      "id": "ISO 14289-1:2014",
+      "role": "Accessible chart alternatives in PDF/UA exports.",
+      "source": "https://pdfa.org/resource/iso-14289-pdfua/"
+    },
+    {
+      "id": "ISO 9241-303:2011",
+      "role": "Visual display ergonomics for on-screen reading.",
+      "source": "https://www.iso.org/search.html?q=ISO%209241-303%3A2011"
+    },
+    {
+      "id": "ISO 12647-2:2013 / ISO 15930",
+      "role": "Colour-managed print and PDF/X export when the workbook is printed commercially.",
+      "source": "https://www.iso.org/search.html?q=ISO%2012647-2%3A2013"
+    }
+  ],
+  "sources": {
+    "Tufte": {
+      "title": "The Visual Display of Quantitative Information",
+      "author": "Edward R. Tufte",
+      "note": "Data-ink ratio, lie factor, chartjunk; qualitative principles, not a standard."
+    },
+    "Few": {
+      "title": "Show Me the Numbers: Designing Tables and Graphs to Enlighten",
+      "author": "Stephen Few",
+      "note": "Chart selection, zero baseline, direct labels, dashboard practice."
+    },
+    "WCAG22": {
+      "url": "https://www.w3.org/TR/WCAG22/",
+      "note": "SC 1.1.1, 1.4.1, 1.4.3, 1.4.11."
+    },
+    "OOXML": {
+      "url": "https://ecma-international.org/publications-and-standards/standards/ecma-376/",
+      "note": "ECMA-376 Part 1 §21.2 chart schema; DrawingML anchors."
+    },
+    "XlsxWriter": {
+      "url": "https://xlsxwriter.readthedocs.io/chart.html",
+      "note": "Chart API used by chart_forge; not a normative source."
+    },
+    "MicrosoftCharts": {
+      "url": "https://support.microsoft.com/en-us/office/create-a-chart-from-start-to-finish-0baf399e-dd61-4e18-8a73-b3fd5d5680c2",
+      "note": "Excel chart UI and accessibility guidance."
+    }
+  },
+  "provenance": {
+    "source": "ECMA-376/ISO 29500 DrawingML charts, Microsoft Excel chart model, WCAG 2.2, Tufte/Few data-visualisation research; compiled by T041",
+    "accessed": "2026-11-01",
+    "licence": "Derived thresholds and metadata; no third-party chart images redistributed. The fixture data is synthetic.",
+    "scope": [
+      "xlsx"
+    ],
+    "confidence": "published + judgement; geometry/contrast thresholds are labelled",
+    "task": "T041",
+    "status": "unreviewed (EXPERIMENTAL)"
+  }
+}

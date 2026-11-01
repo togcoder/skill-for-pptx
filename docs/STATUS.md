@@ -1,3 +1,6 @@
+> **Since T040 this page is the pptx domain's status.** Lab-wide state lives in
+> `HANDOFF.md` and `domains/README.md`; how agents work is in `lab/PROTOCOL.md`.
+
 # Status — current state (2026-10-19, after T034)
 
 This page is rewritten, not appended. History is in [CHANGELOG.md](CHANGELOG.md),

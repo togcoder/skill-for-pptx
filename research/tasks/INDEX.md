@@ -1,7 +1,9 @@
 # Task registry
 
+Since T040: every new title starts with its domain in brackets: `[pptx]`, `[docx]`, `[xlsx]`, `[svg]` or `[cross]` (see `domains/README.md`). Lifecycle: `lab/PROTOCOL.md`. A row may carry `review requested` / `reviewed: <verdict>`.
+
 This file is the one place to take a task ID. Before starting, add a row with
-status `claimed`, using the next free ID (**T035**). Push the row before you do
+status `claimed`, using the next free ID (**T042**). Push the row before you do
 expensive work. IDs are never reused. T024 was taken three times in parallel,
 so those rows carry a suffix. The experiment folders keep the names they were
 created with.
@@ -59,4 +61,11 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T032 | Evaluate + integrate Argon's T024c | Claude (desktop) | `work/T032-claude-argon-integration` | tip | `experiments/T032-20261015-claude-argon-integration/REPORT.md` |
 | T033 | Argon second drop: morph twins, triggers, pacing | owner + Argon | `work/T033-argon-morph-staging` | experimental (quarantined in T034) | `experiments/T033-20261016-argon-research/REPORT.md` |
 | T034 | Design system (beauty ↔ technique) + documentation standardised | Claude (cloud) | `claude/blissful-pasteur-gmll59` | tip | `experiments/T034-20261019-claude-design-system/REPORT.md` |
-| T035 | *next free ID* | | | | |
+| T035 | DeckCraft native bridge & Skill-for-Design evolution | Antigravity | `work/T035-deckcraft-bridge` | tip | `experiments/T035-20261031-deckcraft-bridge/REPORT.md` |
+| T036 | Skill-for-Design Foundation: Universal ArtCraft Hub, Multi-Agent Protocols & Intent Schemas | Antigravity + Argon | `work/T036-skill-for-design-core` | tip | `experiments/T036-20261101-skill-for-design-core/REPORT.md` |
+| T037 | Multi-Craft Bridges (WordCraft, GridCraft, VectorCraft) & Intent Decoder | Antigravity | `work/T037-multi-craft-bridges` | tip | `experiments/T037-20261101-multi-craft-bridges/REPORT.md` |
+| T038 | PPTX Design Canon Tokens, Asymmetric & Bento Grids, Optical Balance & Critic Rules | Antigravity + Argon | `work/T038-pptx-design-canon-tokens` | tip | `experiments/T038-20261101-pptx-design-canon-tokens/REPORT.md` |
+| T039 | [docx] DocumentCraft: professional Word canon, real fields, tables/images and linked appendices | OpenCode (DeepSeek V4.1 Flash) | `work/T039-opencode-docx` | review requested | `experiments/T039-20261101-opencode-office-canon/REPORT.md` |
+| T040 | Multi-domain lab restructure: domains, agent protocol, research/review/merge standards | Claude (cloud) | `claude/blissful-pasteur-gmll59` | tip | `experiments/T040-20261101-claude-lab-restructure/REPORT.md` |
+| T041 | [xlsx] SheetCraft: full Excel chart control, combo/secondary axis, geometry, palette, cache and print audit | OpenCode (DeepSeek V4.1 Flash) | `work/T041-opencode-xlsx` | review requested | `experiments/T041-20261101-opencode-sheet-craft/REPORT.md` |
+| T042 | *next free ID* | | | | |

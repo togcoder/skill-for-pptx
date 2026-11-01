@@ -7,6 +7,140 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T041 [xlsx] SheetCraft — controlled standard DrawingML charts — 2026-11-01
+
+- **Chart Forge.** `scripts/chart_forge.py` builds a workbook/chart from
+  `domains/xlsx/schemas/chart_spec.schema.json`: column/bar, line, area, pie,
+  doughnut, scatter, bubble, radar, stock and combo; axes, labels, legend,
+  markers, trendlines, number formats and print area.
+- **Chart patch.** `scripts/chart_patch.py` edits existing chart OOXML:
+  title/legend/axes/bar gap/data labels/series style/manual plot layout and
+  converts `xdr:twoCellAnchor` to a fixed `xdr:oneCellAnchor`.
+- **Chart audit.** `scripts/chart_audit.py` measures geometry, zero baseline,
+  log scaling, category density, labels, legend, contrast/deuteranopia, pie
+  slices, 3-D, fonts, series count, print area, alt text and the chart cache.
+- **Evidence.** Three synthetic fixtures (combo secondary axis, doughnut,
+  scatter + trendline) pass the audit with no errors/warnings; Excel opened the
+  exact files and exported the charts; GridCraft PDF rendered them but dropped
+  Vietnamese diacritics. Waterfall/treemap/histogram/box/funnel remain raw-OOXML
+  recipes, not generated.
+- **Review fixes (Argon).** Combo series/axis mapping, manualLayout/`a:ln` child
+  order, print-area geometry, full cache comparison with worksheet fallback,
+  Excel-first `--render`, and `gridcraft_bridge` use instead of a hard-coded
+  `D:\artcraft` path.
+- **Tests.** `tests/test_sheet_craft.py` (10 tests) covers build/audit, combo
+  second-series patch, per-axis max, print-area rejection, stale cache,
+  manualLayout order, small chart, doughnut palette and schema. Full suite:
+  326 tests OK with `PYTHONUTF8=1`.
+- **Status.** EXPERIMENTAL; review requested. One task = one domain; the
+  document half is T039 [docx].
+- Report: `experiments/T041-20261101-opencode-sheet-craft/REPORT.md`.
+
+## T039 [docx] DocumentCraft — professional Word canon and real fields — 2026-11-01
+
+- **Standards research.** Mapped the binding hierarchy (law/contract/template →
+  ISO 7144/2145/690/7200/8601/80000 → institutional rules), marked ISO 5966 as
+  withdrawn, and recorded the sources/statuses in
+  `domains/docx/data/document_system.json`.
+- **Document Forge.** `scripts/document_forge.py` builds a DOCX from
+  `domains/docx/schemas/document_spec.schema.json`: cover, unnumbered front
+  matter, linked multilevel headings, `TOC` field, standard `TOC \c` lists of
+  figures/tables updated through `TablesOfFigures`, `SEQ` captions,
+  `STYLEREF`/`SECTIONPAGES` headers/footers, inline images with alt text, fixed
+  table grids with repeating headers, references and appendix A/A.1.
+- **Word field kit.** `scripts/word_field_kit.py` writes/audits fields,
+  bookmarks and captions; `scripts/document_audit.py` is the standalone audit.
+- **Evidence.** Structural audit clean (29 fields, 22 bookmarks, 3 tables, 2
+  figures, no errors/warnings); Word refreshed the exact file (including
+  `TablesOfFigures`) and exported a 12-page PDF; pages inspected. WordCraft was
+  a fallback (physical TOC page numbers, dropped `descr`, Vietnamese PDF font
+  clipping). No PDF/UA, PDF/A or human edit/print yet.
+- **Tests.** `tests/test_document_craft.py` (6 tests) covers fields/bookmarks,
+  broken targets, broken bookmarkEnd, table width, en-US language and optional
+  WordCraft refresh. Full suite: 322 tests OK with `PYTHONUTF8=1`.
+- **Review fixes (Argon).** Standard `TOC \c` lists updated via
+  `TablesOfFigures`; bookmarkEnd balance and per-section width checks; spec
+  language instead of hard-coded `vi-VN`; `SECTIONPAGES` for the restarted body.
+- **Status.** EXPERIMENTAL; review requested. One task = one domain; the
+  spreadsheet half is T041 [xlsx].
+- Report: `experiments/T039-20261101-opencode-office-canon/REPORT.md`.
+
+## T040 multi-domain lab restructure — 2026-11-01
+
+The repository is now organised as a multi-domain design lab:
+
+- `lab/` holds the charter, the agent protocol, and the research, review,
+  merge and outputs standards. The shared protocols, schemas, registry and
+  templates moved there.
+- `domains/` has a card per domain (pptx, docx, xlsx, svg, cross), each with
+  its own thesis, canon, code status and evidence ladder.
+- `research/reviews/` holds peer critiques.
+- `workspace/` is for scratch and is git-ignored. `output/` is frozen.
+- `lab/tools/check_layout.py` and its test keep outputs out of the root.
+- `AGENTS.md` and `HANDOFF.md` were rewritten lab-wide.
+
+No design research was done. Report:
+experiments/T040-20261101-claude-lab-restructure/REPORT.md.
+
+## T038 PPTX Design Canon Tokens, Asymmetric & Bento Grids, Optical Balance & Critic Rules — 2026-11-01
+
+- **Argon Dissection & Design Canon Foundations.** Partnered with Gemini 4 Argon (`gemini-argon`) to dissect and codify high-craft mathematical formulas into `knowledge/design_system.json` (v1.1.0):
+  - *Deck Chrome Bounds:* Slide $960 \times 540\text{ pt}$, safe margins $48/36\text{ pt}$, logo watermark ($w \le 72, h \le 24$, $y=20\text{ pt}$ top-right, suppressed on cover/divider/closing/break slides), section breadcrumbs ($10\text{ pt}$ uppercase tracked font), and progress tracker ($y=537, h=3\text{ pt}$ along bottom edge).
+  - *Optical Icon Balance:* Equalizes perceived mass across geometric shapes (Square $0.88\times$, Circle $1.0\times$, Wide $1.08\times/0.82\times$, Triangle $1.05\times$ with $+0.06\times$ apex upward shift, Badge $2.0\times$).
+  - *3-Layer Background Depth:* Z0 Base Canvas (135° Deep Slate `#0B0F19` $\rightarrow$ `#111827` or Light Alabaster `#F8FAFC` $\rightarrow$ `#EDF2F7`), Z1 Ambient Radial Glow Orbs (blurred $120-160\text{ pt}$, opacity $0.12-0.18$, morph-linked via `!!` prefix), Z2 Surface Cards (glassmorphism opacity $65-75\%$, top-lit border, corner radius $8-12\text{ pt}$, inner padding $20-28\text{ pt}$).
+  - *Content Layout Canons:* Symmetric grids (2-col $422\text{ pt}$, 3-col $274\text{ pt}$, 4-col $204\text{ pt}$), Asymmetric Golden Ratio (Major $522\text{ pt}$ / $61.8\%$, Minor $322\text{ pt}$ / $38.2\%$), and Bento Grid (Hero $496 \times 396\text{ pt}$ [7/12 width], Top-Right $348 \times 188\text{ pt}$, and 2 Bottom-Right split cards $164 \times 188\text{ pt}$).
+  - *Nancy Duarte Pattern Breaks:* Automatic pacing triggers for decks of $\ge 5$ slides near $1/3$ and $2/3$ milestones ($\ge 70\%$ negative space, single bold statement $36-44\text{ pt}$ or mammoth KPI $72-96\text{ pt}$, chrome suppressed) to eliminate cognitive fatigue.
+  - *Color & Typography:* 60-30-10 surface area bounds, Modular Scale token table (caption $11\text{ pt}$, body_base $14\text{ pt}$, card_title $18\text{ pt}$, slide_title $28\text{ pt}$, hero $44\text{ pt}$, kpi_stat $72\text{ pt}$).
+- **Programmatic Helpers (`scripts/design_system.py`).** Added `chrome()`, `optical_icon_compensation()`, `bento_grid_layout()`, `asymmetric_golden_layout()`, `duarte_break_positions()`, `modular_scale()`, and `background_layers()`.
+- **Slide Forge Compilation (`scripts/slide_forge.py`).** Added `asymmetric`, `bento`, and `duarte_break` layout compilers, automatic deck chrome injection, and optical icon balancing.
+- **Design Critic Rules (`scripts/design_critic.py`).** Implemented and registered `CHROME-SAFE`, `OPT-ICON`, `LAY-BENTO`, and `DUA-BREAK` rules; returns detailed `evaluations` audit log.
+- **Tests.** Added `tests/test_pptx_design_canon.py` (12 unit tests). Total project test suite expanded to **314 tests, 100% passing (0 failures, 4 skipped)** in 14.90s.
+
+## T037 Multi-Craft Native Bridges & Intent-Empathy Decoder — 2026-11-01
+
+- **Multi-Craft Bridges.** Built `scripts/wordcraft_bridge.py`, `scripts/gridcraft_bridge.py`,
+  and `scripts/vectorcraft_bridge.py`. Connects natively to `wordcraft-cli.exe`, `gridcraft-cli.exe`,
+  and `vectorcraft-cli.exe` in `D:\artcraft`. Provides headless document/sheet/vector inspection,
+  page rendering, formula evaluation, and cross-format conversion.
+- **Intent & Empathy Decoder Engine (`scripts/intent_decoder.py`).** Implemented Protocol 00:
+  parses raw prompts into 5-dimensional `IntentBrief` documents matching `schemas/intent_brief.schema.json`
+  (Audience Persona, Cognitive Budget, Viewing Context, Canonical System, Craft Routing).
+- **Tests.** Added `tests/test_craft_bridges.py` and `tests/test_intent_decoder.py`. Test suite
+  expanded from 296 to **302 tests, all passing (0 failures, 4 skipped)** in 8.69s.
+
+## T036 Universal ArtCraft Hub, Multi-Agent Protocols & Intent Schemas — 2026-11-01
+
+- **Argon Architecture Consultation.** Consulted Gemini 4 Argon (`gemini-argon`) on multi-agent
+  governance, identifying 4 architectural traps: unbounded mesh chat (solved by DAG contracts),
+  LLM python bias (solved by 3-tier capability escalation gate), blind code review (solved by
+  render-before-review), and lack of empathy (solved by 5-dimensional intent briefs).
+- **Universal ArtCraft Discovery & Hub.** Built `scripts/sync_artcraft_capabilities.py` and
+  `scripts/artcraft_hub.py`. Automatically catalogs all 13 tools in `D:\artcraft`, generates
+  `registry/artcraft_capabilities.json` (hash `21eaaf51d6891acf`) and `registry/capability_gaps_backlog.md`.
+- **Human Intent & Empathy Schema.** Created `schemas/intent_brief.schema.json` modeling 5 dimensions:
+  Audience Persona, Cognitive Budget (Miller/Hick, Z/F pattern), Viewing Context, Canonical System
+  (Swiss Grid, Dieter Rams, Tufte, IBM Carbon, Material 3), and Craft Routing.
+- **Cross-Delegation & Critique Contracts.** Created `schemas/handoff_contract.schema.json`
+  (enforcing max 2 iteration loops) and `schemas/critique_report.schema.json` (100-point dual-layer audit).
+- **Foundation Protocols.** Established `protocols/00_intent_empathy_decoder.md`, `01_capability_first_gate.md`,
+  `02_cross_delegation_dag.md`, and `03_redteam_critique_rubric.md`.
+- **Validation & Tests.** Created `scripts/validate_handoff.py` and `tests/test_artcraft_hub.py`.
+  Test suite expanded from 292 to **296 tests, all passing (0 failures, 4 skipped)** in 8.64s.
+
+## T035 DeckCraft native bridge + Skill-for-Design evolution — 2026-10-31
+
+- **Native rendering bridge (`scripts/deckcraft_bridge.py`).** Discovers `deckcraft-cli.exe`
+  from the ArtCraft suite (`D:\artcraft\DeckCraft`). Headlessly renders slides to Full HD
+  (1920x1080) PNGs in < 1s, inspects presentation JSON, and converts formats without
+  requiring Microsoft Office or LibreOffice.
+- **Critic integration.** `scripts/design_critic.py` now supports `--render deckcraft` (or `--render dc`),
+  enabling instantaneous offline visual metrics extraction (background share, balance offset,
+  colourfulness). Tested on `report_deck_motion.pptx` in 2.1s with 100% success.
+- **Tests.** Added `tests/test_deckcraft_bridge.py`. Test suite expanded from 289 to 292 tests,
+  all passing (0 failures, 4 skipped).
+- **Skill-for-Design roadmap.** Established the architectural blueprint to evolve `skill-for-pptx`
+  into the comprehensive Skill for Design suite with PPTX as pioneer.
+
 ## T034 design system + documentation standardised — 2026-10-19
 
 Beauty and technique now share one source,

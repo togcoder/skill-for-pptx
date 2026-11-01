@@ -1,0 +1,101 @@
+﻿{
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "stats": {
+    "charts": 1,
+    "types": [
+      "doughnutChart"
+    ],
+    "sheets": [
+      "Data"
+    ],
+    "min_width_cm": 10.0,
+    "min_height_cm": 6.0
+  },
+  "charts": [
+    {
+      "type": "doughnutChart",
+      "types": [
+        "doughnutChart"
+      ],
+      "title": "CÆ¡ cáº¥u chi phĂ­ váº­n hĂ nh",
+      "series": [
+        {
+          "name": "Tá»· trá»ng",
+          "values": [
+            42.0,
+            24.0,
+            18.0,
+            9.0,
+            7.0
+          ],
+          "values_ref": "Data!$B$2:$B$6",
+          "color": "1F4E79",
+          "marker": null,
+          "has_labels": true,
+          "point_colors": [
+            "1F4E79",
+            "2E75B6",
+            "5B9BD5",
+            "A5A5A5",
+            "D9D9D9"
+          ],
+          "ax_ids": []
+        }
+      ],
+      "axes": [],
+      "fonts": [
+        14.0,
+        14.0,
+        9.0,
+        9.0
+      ],
+      "min_font": 9.0,
+      "max_font": 14.0,
+      "show_labels": false,
+      "legend": {
+        "pos": "r",
+        "overlay": null
+      },
+      "gap": null,
+      "overlap": null,
+      "hole": "55",
+      "rotation": "0",
+      "index": 1,
+      "part": "xl/charts/chart1.xml",
+      "sheet": "Data",
+      "anchor": {
+        "kind": "chart",
+        "rect_cm": [
+          8.89,
+          0.5291666666666667,
+          13.5,
+          9.0
+        ],
+        "anchor": "oneCellAnchor",
+        "chart_part": "xl/charts/chart1.xml",
+        "alt": "CÆ¡ cáº¥u chi phĂ­ váº­n hĂ nh"
+      },
+      "rect_cm": [
+        8.89,
+        0.53,
+        13.5,
+        9.0
+      ],
+      "width_cm": 13.5,
+      "height_cm": 9.0,
+      "aspect": 1.5,
+      "anchor_kind": "oneCellAnchor",
+      "alt": "CÆ¡ cáº¥u chi phĂ­ váº­n hĂ nh",
+      "inside_print_area": true,
+      "print_area_cm": [
+        0.0,
+        0.0,
+        25.82,
+        11.64
+      ]
+    }
+  ]
+}

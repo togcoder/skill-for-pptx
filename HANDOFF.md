@@ -1,74 +1,71 @@
-# Handoff — PPTX Motion Lab
+# Handoff — Design Research Lab
 
-Cập nhật: 19/10/2026 (sau T034). Tệp này **viết lại mỗi lần bàn giao, không ghi
-nối thêm**. Lịch sử: [docs/CHANGELOG.md](docs/CHANGELOG.md) và
-[docs/archive/HANDOFF-history-2026-10.md](docs/archive/HANDOFF-history-2026-10.md).
+Cập nhật: 01/11/2026, sau T039/T041 (docx/xlsx). Tệp này được **viết lại** mỗi
+lần bàn giao, không ghi nối thêm. Lịch sử: [docs/CHANGELOG.md](docs/CHANGELOG.md).
+Bàn giao trước (T040): [docs/archive/](docs/archive/).
 
 Repo: https://github.com/togcoder/skill-for-pptx (private). Chủ dự án: togcoder.
 
-## Bắt đầu trong 5 phút
+## Dự án bây giờ là gì
 
-1. Đầu nghiên cứu mới nhất **không phải `main`**. Hãy fetch và làm việc trên
-   nhánh `claude/blissful-pasteur-gmll59`, tức T033 cộng với T034. `main`
-   (`bb82c70`) mới dừng ở T023.
-2. Đọc theo thứ tự:
-   - `AGENTS.md`;
-   - tệp này;
-   - `docs/STATUS.md`;
-   - `docs/DESIGN_SYSTEM.md`;
-   - `docs/VERIFICATION.md`;
-   - skill của phần việc bạn làm: `skills/pptx-motion-director/SKILL.md` hoặc
-     `skills/slide-forge/SKILL.md`.
-3. Chạy `python3 -m unittest discover -s tests`. Kết quả phải là 289 tests OK.
-4. Lấy mã task kế tiếp trong `research/tasks/INDEX.md` (hiện là **T035**). Thêm
-   dòng `claimed` rồi push trước khi làm phần tốn kém.
+Một **lab nghiên cứu thiết kế đa lĩnh vực**: nhiều agent (nhiều model) cùng
+nghiên cứu, phản biện và gộp kết quả cho nhiều ứng dụng. Mỗi lĩnh vực
+(domain) có luận điểm, nguồn, dữ liệu thiết kế và thang bằng chứng riêng;
+PowerPoint chỉ là domain lâu đời nhất.
 
-## Đang ở đâu
+- Cách agent làm việc: [lab/PROTOCOL.md](lab/PROTOCOL.md).
+- Các chuẩn: [lab/standards/](lab/standards/), gồm nghiên cứu, phản biện, gộp
+  dữ liệu và nơi đặt file.
+- Danh sách domain: [domains/README.md](domains/README.md).
 
-- **Ba đường sản phẩm**:
-  - Motion Director: deck có sẵn, kịch bản → nhịp click → chuyển động phức hợp
-    nhiều lớp.
-  - Morph Studio: Morph giữa các slide (`!!`, bay vào/ra, camera, thẻ nở,
-    cuộn ngang).
-  - Slide Forge: dựng deck mới từ spec.
-- **Hệ thiết kế (T034)**: `knowledge/design_system.json` là nguồn duy nhất cho
-  cái đẹp và kỹ thuật (thời lượng, easing, nhịp, tương phản, cỡ chữ, mật độ).
-  Bộ sinh đọc nó, còn `scripts/design_critic.py` chấm deck theo đúng các con
-  số đó. Báo cáo của Director, Forge và Morph Studio đều có phần critique.
-- **Bằng chứng**:
-  - PowerPoint 16.0 đã đọc và render (CreateVideo) một phần hệ thống.
-  - **Chưa deck nào được trình chiếu tương tác bằng click trong PowerPoint.**
-  - Ma trận đầy đủ nằm trong `docs/STATUS.md`.
-- **Thử nghiệm, đã cách ly**: `morph_playbook.py`, `cognitive_pacing.py`,
-  `interactive_triggers.py` (T033). Không dùng trong sản phẩm.
+## Bắt đầu
+
+1. Đầu nghiên cứu lab-wide vẫn là `claude/blissful-pasteur-gmll59` (T035–T040).
+   Hai nhánh docx/xlsx mới dựa trên tip đó:
+   - `work/T039-opencode-docx` — PR #36 (draft, review requested);
+   - `work/T041-opencode-xlsx` — PR #35 (draft, review requested).
+2. Đọc theo thứ tự `AGENTS.md`, `lab/CHARTER.md`, `lab/PROTOCOL.md`, rồi thẻ
+   domain của bạn (`domains/docx/DOMAIN.md`, `domains/xlsx/DOMAIN.md`).
+3. Chạy `python3 -m unittest discover -s tests` (đặt `PYTHONUTF8=1` trên Windows
+   để tránh lỗi encoding của các test cũ) và `python3 lab/tools/check_layout.py`.
+4. Lấy mã kế tiếp trong `research/tasks/INDEX.md` (hiện là **T042**). Tiêu đề
+   ghi domain trong ngoặc, ví dụ `[cross]`.
+
+## Trạng thái từng domain
+
+| Domain | Trạng thái |
+|---|---|
+| pptx | Trưởng thành: Director, Morph Studio, Forge, hệ thiết kế và critic. T035 và T038 **chưa được phản biện**; còn 1 test lỗi của T038 (WORD_BREAK ở "Logo Watermark", phụ thuộc font). |
+| docx | T039 DocumentCraft: `word_field_kit.py`, `document_forge.py`, `document_audit.py`, dữ liệu `domains/docx/data/document_system.json`, skill `document-craft`. Audit sạch, Word 12 trang, PDF/preview; Argon review verdict `revise`, R1–R3 đã sửa (TOC \\c + `TablesOfFigures`, bookmarkEnd, per-section widths, language, `SECTIONPAGES`); **review round 2 requested** (PR #36). Chưa có PDF/UA, PDF/A, LibreOffice rung 3, human rung 6. |
+| xlsx | T041 SheetCraft: `chart_forge.py`, `chart_patch.py`, `chart_audit.py`, dữ liệu `domains/xlsx/data/spreadsheet_system.json`, skill `sheet-craft`. Combo/doughnut/scatter audit sạch, Excel export đúng; Argon review verdict `revise`, R4–R6/R8 đã sửa (combo series/axes, XML order, print area, cache, Excel-first render); **review round 2 requested** (PR #35). Waterfall/treemap/histogram/box/funnel còn là recipe OOXML, chưa sinh. |
+| svg | Mới có bridge thử nghiệm T037; chưa phản biện. |
+| cross | Protocol 00–03, schema, registry ArtCraft, intent decoder (T036–T037); chưa phản biện, chưa thành chuẩn chung (cần 2 domain chấp nhận). |
 
 ## Việc tiếp theo (xếp hạng)
 
-1. **Cổng native** (cần Windows + PowerPoint):
-   - Phát `experiments/T028-…/output/T028_*_pro.pptx`, một deck Forge
-     cinematic và các deck dark-brand của T034.
-   - Ghi nhận easing, xung `autoRev`, helper có hiện trên nền tối không, Morph
-     ghép `!!`, hiện tượng "giật về" trước Morph.
-   - Quy trình: `docs/VERIFICATION.md`.
-2. **Sửa hai phát hiện của critic** (chạy được trên cloud):
-   - MOT-SETTLE: token kết thúc lệch chỗ trước Morph orb của Forge. Cách sửa:
-     đặt token ở điểm đích, chuyển động *từ* điểm đầu.
-   - Thang cỡ chữ của Forge: hiện dùng 13–15 cỡ, cần đọc `type_scale_pt` từ
-     Office kit.
-3. **Hiệu chỉnh critic bằng người**: xếp hạng tay khoảng 20 deck rồi so
-   Spearman với critic.
-4. **Gộp đầu nghiên cứu vào `main` qua PR.** Chủ dự án quyết định.
+1. **Phản biện chéo** theo `lab/standards/REVIEW.md`, do agent khác tác giả:
+   - T039 [docx] và T041 [xlsx] — **round 2** sau khi sửa Argon review
+     (`research/reviews/T039-argon-20261101.md`, `T041-argon-20261101.md`);
+   - T038 (pptx canon), T035 (DeckCraft), T036–T037 (cross + bridges).
+2. **Docx**: PDF/UA/veraPDF, PDF/A, LibreOffice Writer rung 3, native Word
+   bibliography (`b:Sources`), landscape/two-column fixture; quyết định module
+   canonical (`document_forge` vs `wordcraft_bridge`).
+3. **Xlsx**: raw-XML builder cho waterfall/treemap/histogram/box/funnel; Excel
+   COM audit đọc mọi `Chart`; label-collision từ glyph box; dashboard audit.
+4. **T042 [cross]**: dời code từ `scripts/` vào package theo domain(s), sửa
+   import/skill/test, không phá thí nghiệm đã đóng băng.
+5. **pptx**: cổng native (trình chiếu tương tác) và sửa test T038.
 
-## Prompt giao việc cho model khác
+## Prompt giao việc
 
 ```text
-Continue PPTX Motion Lab at https://github.com/togcoder/skill-for-pptx on branch
-claude/blissful-pasteur-gmll59 (the research tip; main is behind). Read AGENTS.md,
-HANDOFF.md, docs/STATUS.md, docs/DESIGN_SYSTEM.md and docs/VERIFICATION.md. Run the
-tests (289 must pass). Take the next free ID in research/tasks/INDEX.md and claim it.
-With Windows + PowerPoint: do the native gate (HANDOFF item 1, docs/VERIFICATION.md).
-Otherwise: fix item 2 with a failing critic finding first and a regression test.
-New numbers go into knowledge/design_system.json, never hard-coded. Write your report
-in experiments/<ID>-<date>-<agent>-<slug>/REPORT.md, add a CHANGELOG entry, rewrite
-docs/STATUS.md and this HANDOFF, and open a PR. Never claim playback below rung 6.
+Join the design research lab at https://github.com/togcoder/skill-for-pptx, branch
+claude/blissful-pasteur-gmll59. Read AGENTS.md, HANDOFF.md, lab/CHARTER.md,
+lab/PROTOCOL.md and domains/<your domain>/DOMAIN.md. Run the tests and
+lab/tools/check_layout.py. Take the next free ID in research/tasks/INDEX.md with
+the domain in brackets and push the claim. Frame your question from the domain's
+native canon before building. Put every output into
+experiments/<ID>-<date>-<agent>-<slug>/ (never the repo root). Tag claims with
+evidence rungs. Ask another agent to review per lab/standards/REVIEW.md before
+anything enters a product path.
 ```

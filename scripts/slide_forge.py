@@ -114,6 +114,9 @@ LAYOUTS={
     "comparison":{"required":["title","left","right"],"optional":[]},
     "quote":{"required":["quote"],"optional":["author"]},
     "closing":{"required":["title"],"optional":["subtitle"]},
+    "asymmetric":{"required":["title","major","minor"],"optional":["kicker","reverse"]},
+    "bento":{"required":["title","hero","top_right","bottom_right_1","bottom_right_2"],"optional":["kicker"]},
+    "duarte_break":{"required":[],"optional":["statement","kpi","label","theme_invert","text"]},
 }
 CHART_TYPES={"column":XL_CHART_TYPE.COLUMN_CLUSTERED,"bar":XL_CHART_TYPE.BAR_CLUSTERED,
              "line":XL_CHART_TYPE.LINE_MARKERS,"pie":XL_CHART_TYPE.PIE,"doughnut":XL_CHART_TYPE.DOUGHNUT,
@@ -185,6 +188,8 @@ def validate_spec(spec):
         for key in LAYOUTS[lay]["required"]:
             if not s.get(key):
                 err("FIELD_MISSING",i,f"{lay} needs {key!r}","add the field")
+        if lay=="duarte_break" and not (s.get("statement") or s.get("kpi") or s.get("text")):
+            err("FIELD_MISSING",i,"duarte_break needs 'statement' or 'kpi'","add statement or kpi")
         n=lambda k:len(s.get(k) or [])
         if lay=="bullets" and n("bullets")>LIMITS["bullets"]:
             err("TOO_DENSE",i,f"{n('bullets')} bullets",f"split into two slides or keep <= {LIMITS['bullets']}")
@@ -342,6 +347,7 @@ def generated_art(seed,theme,w=1600,h=1000):
 
 class Builder:
     def __init__(self,spec):
+        self.spec=spec
         t=spec.get("theme","midnight")
         kit_fonts={}
         if isinstance(t,str) and t.lower().startswith("office:"):
@@ -442,17 +448,22 @@ class Builder:
             pic.crop_top=pic.crop_bottom=c
         return pic
 
-    def icon(self,slide,ref,x,y,size,name,color="accent"):
+    def icon(self,slide,ref,x,y,size,name,color="accent",shape="circle"):
         """Vector icon (Iconify, open-source sets) as an SVG picture: PowerPoint
-        2016+ draws the SVG; older readers get a transparent PNG fallback."""
+        2016+ draws the SVG; older readers get a transparent PNG fallback.
+        Applies optical balance compensation according to geometry shape."""
         import forge_assets
+        import design_system as ds
         from pptx.opc.constants import RELATIONSHIP_TYPE as RT
         from pptx.opc.package import Part
+        comp = ds.optical_icon_compensation(shape, size * 72)
+        w_in, h_in = comp["width"] / 72, comp["height"] / 72
+        dx_in, dy_in = comp["dx"] / 72, comp["dy"] / 72
         svg_path,resolved=forge_assets.fetch_icon(ref,self.theme.get(color,color),self.cache)
         buf=io.BytesIO()
         Image.new("RGBA",(256,256),(0,0,0,0)).save(buf,format="PNG")
         buf.seek(0)
-        pic=slide.shapes.add_picture(buf,Inches(x),Inches(y),Inches(size),Inches(size))
+        pic=slide.shapes.add_picture(buf,Inches(x+dx_in),Inches(y+dy_in),Inches(w_in),Inches(h_in))
         pic.name=name
         pkg=slide.part.package
         part=Part(pkg.next_partname("/ppt/media/image%d.svg"),"image/svg+xml",pkg,svg_path.read_bytes())
@@ -481,10 +492,13 @@ class Builder:
 
     def heading(self,slide,title,idx,kicker=None):
         y=0.45
+        tw=W-2*MARGIN
+        if getattr(self,"spec",{}).get("logo") or getattr(self,"spec",{}).get("chrome"):
+            tw-=1.3
         if kicker:
-            self.text(slide,MARGIN,0.32,W-2*MARGIN,0.4,[kicker.upper()],13,"Kicker",color="accent",bold=True,idx=idx)
-            y=0.62
-        self.text(slide,MARGIN,y,W-2*MARGIN,0.85,[title],36,"Title",role="head",bold=True,idx=idx)
+            self.text(slide,MARGIN,0.18,tw,0.38,[kicker.upper()],12,"Kicker",color="accent",bold=True,idx=idx)
+            y=0.58
+        self.text(slide,MARGIN,y,tw,0.85,[title],36,"Title",role="head",bold=True,idx=idx)
         self.rect(slide,MARGIN+0.1,y+0.92,1.4,0.07,"accent","Title accent")
         return y+1.25
 
@@ -686,12 +700,138 @@ class Builder:
             self.text(slide,MARGIN+1,4.45,W-2*MARGIN-2,1.2,[s["subtitle"]],24,"Subtitle",color="muted",
                       align=PP_ALIGN.CENTER,idx=idx)
 
+    def l_asymmetric(self,slide,s,idx):
+        import design_system as ds
+        top=self.heading(slide,s["title"],idx,s.get("kicker"))
+        rev=bool(s.get("reverse",False))
+        lay=ds.asymmetric_golden_layout(reverse=rev)
+        maj,minor=lay["major"],lay["minor"]
+        card_h=H-top-0.65
+        mx,my,mw=maj["x"]/72,top+0.05,maj["w"]/72
+        c1=self.rect(slide,mx,my,mw,card_h,"surface","Major Card",MSO_SHAPE.ROUNDED_RECTANGLE)
+        _alpha(c1,75)
+        m_data=s.get("major",{})
+        if isinstance(m_data,dict):
+            if m_data.get("heading"):
+                self.text(slide,mx+0.35,my+0.3,mw-0.7,0.45,[m_data["heading"]],22,"Major Heading",role="head",bold=True,idx=idx)
+            if m_data.get("text"):
+                self.text(slide,mx+0.35,my+0.85,mw-0.7,card_h-1.2,[m_data["text"]],16,"Major Text",idx=idx)
+            elif m_data.get("points"):
+                self.text(slide,mx+0.35,my+0.85,mw-0.7,card_h-1.2,["• "+p for p in m_data["points"]],16,"Major Points",gap=12,idx=idx)
+            if m_data.get("image"):
+                self.picture(slide,m_data["image"],mx+0.3,my+0.8,mw-0.6,card_h-1.1,"Major Picture",idx)
+        else:
+            self.text(slide,mx+0.35,my+0.4,mw-0.7,card_h-0.8,[str(m_data)],18,"Major Content",idx=idx)
+        nx,ny,nw=minor["x"]/72,top+0.05,minor["w"]/72
+        c2=self.rect(slide,nx,ny,nw,card_h,"surface","Minor Card",MSO_SHAPE.ROUNDED_RECTANGLE)
+        _alpha(c2,75)
+        n_data=s.get("minor",{})
+        if isinstance(n_data,dict):
+            if n_data.get("heading"):
+                self.text(slide,nx+0.3,ny+0.3,nw-0.6,0.45,[n_data["heading"]],18,"Minor Heading",role="head",bold=True,idx=idx)
+            if n_data.get("kpi"):
+                self.text(slide,nx+0.3,ny+0.8,nw-0.6,1.2,[n_data["kpi"]],44,"Minor KPI",role="head",color="accent",bold=True,idx=idx)
+            if n_data.get("points"):
+                self.text(slide,nx+0.3,ny+0.85,nw-0.6,card_h-1.2,["• "+p for p in n_data["points"]],14,"Minor Points",gap=10,idx=idx)
+            elif n_data.get("text"):
+                y_off=2.1 if n_data.get("kpi") else 0.85
+                self.text(slide,nx+0.3,ny+y_off,nw-0.6,card_h-y_off-0.3,[n_data["text"]],14,"Minor Text",color="muted",idx=idx)
+        else:
+            self.text(slide,nx+0.3,ny+0.4,nw-0.6,card_h-0.8,[str(n_data)],16,"Minor Content",idx=idx)
+
+    def l_bento(self,slide,s,idx):
+        top=self.heading(slide,s["title"],idx,s.get("kicker"))
+        total_h=H-top-0.65
+        hero_w=496/72
+        hx,hy=48/72,top+0.05
+        c_hero=self.rect(slide,hx,hy,hero_w,total_h,"surface","Hero Card",MSO_SHAPE.ROUNDED_RECTANGLE)
+        _alpha(c_hero,75)
+        h_data=s.get("hero",{})
+        if isinstance(h_data,dict):
+            if h_data.get("title"):
+                self.text(slide,hx+0.35,hy+0.3,hero_w-0.7,0.45,[h_data["title"]],22,"Hero Title",role="head",bold=True,idx=idx)
+            if h_data.get("text"):
+                self.text(slide,hx+0.35,hy+0.85,hero_w-0.7,total_h-1.2,[h_data["text"]],16,"Hero Text",idx=idx)
+            elif h_data.get("image"):
+                self.picture(slide,h_data["image"],hx+0.25,hy+0.8,hero_w-0.5,total_h-1.05,"Hero Picture",idx)
+        else:
+            self.text(slide,hx+0.35,hy+0.4,hero_w-0.7,total_h-0.8,[str(h_data)],18,"Hero Content",idx=idx)
+        rx,rw,gutter=564/72,348/72,20/72
+        sub_h=(total_h-gutter)/2
+        c_tr=self.rect(slide,rx,hy,rw,sub_h,"surface","Top Right Card",MSO_SHAPE.ROUNDED_RECTANGLE)
+        _alpha(c_tr,75)
+        tr_data=s.get("top_right",{})
+        if isinstance(tr_data,dict):
+            if tr_data.get("title"):
+                self.text(slide,rx+0.3,hy+0.25,rw-0.6,0.4,[tr_data["title"]],18,"TopRight Title",role="head",bold=True,idx=idx)
+            if tr_data.get("text"):
+                self.text(slide,rx+0.3,hy+0.7,rw-0.6,sub_h-0.9,[tr_data["text"]],14,"TopRight Text",color="muted",idx=idx)
+        else:
+            self.text(slide,rx+0.3,hy+0.3,rw-0.6,sub_h-0.6,[str(tr_data)],14,"TopRight Content",idx=idx)
+        by=hy+sub_h+gutter
+        mini_w=(rw-gutter)/2
+        c_br1=self.rect(slide,rx,by,mini_w,sub_h,"surface","Bottom Right 1",MSO_SHAPE.ROUNDED_RECTANGLE)
+        _alpha(c_br1,75)
+        b1_data=s.get("bottom_right_1",{})
+        if isinstance(b1_data,dict):
+            if b1_data.get("kpi"):
+                self.text(slide,rx+0.15,by+0.25,mini_w-0.3,0.8,[b1_data["kpi"]],32,"BR1 KPI",role="head",color="accent",bold=True,align=PP_ALIGN.CENTER,idx=idx)
+            if b1_data.get("label"):
+                self.text(slide,rx+0.15,by+1.05,mini_w-0.3,0.6,[b1_data["label"]],12,"BR1 Label",color="muted",align=PP_ALIGN.CENTER,idx=idx)
+        else:
+            self.text(slide,rx+0.2,by+0.3,mini_w-0.4,sub_h-0.6,[str(b1_data)],13,"BR1 Content",idx=idx)
+        rx2=rx+mini_w+gutter
+        c_br2=self.rect(slide,rx2,by,mini_w,sub_h,"surface","Bottom Right 2",MSO_SHAPE.ROUNDED_RECTANGLE)
+        _alpha(c_br2,75)
+        b2_data=s.get("bottom_right_2",{})
+        if isinstance(b2_data,dict):
+            if b2_data.get("kpi"):
+                self.text(slide,rx2+0.15,by+0.25,mini_w-0.3,0.8,[b2_data["kpi"]],32,"BR2 KPI",role="head",color="accent2",bold=True,align=PP_ALIGN.CENTER,idx=idx)
+            if b2_data.get("label"):
+                self.text(slide,rx2+0.15,by+1.05,mini_w-0.3,0.6,[b2_data["label"]],12,"BR2 Label",color="muted",align=PP_ALIGN.CENTER,idx=idx)
+        else:
+            self.text(slide,rx2+0.2,by+0.3,mini_w-0.4,sub_h-0.6,[str(b2_data)],13,"BR2 Content",idx=idx)
+
+    def l_duarte_break(self,slide,s,idx):
+        if s.get("kpi"):
+            self.text(slide,1.5,1.8,W-3.0,1.8,[s["kpi"]],80,"Duarte KPI",role="head",color="accent",bold=True,align=PP_ALIGN.CENTER,idx=idx)
+            lbl=s.get("label") or s.get("statement","")
+            if lbl:
+                self.text(slide,1.5,3.8,W-3.0,1.2,[lbl],24,"Duarte Statement",role="body",align=PP_ALIGN.CENTER,idx=idx)
+        else:
+            stmt=s.get("statement",s.get("text",""))
+            self.text(slide,1.6,2.0,W-3.2,3.4,[stmt],44,"Duarte Statement",role="head",bold=True,align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE,idx=idx)
+
+    def chrome_elements(self,slide,s,idx,n,spec):
+        lay=s.get("layout")
+        use_chrome=spec.get("chrome",False) or s.get("chrome",False) or spec.get("progress_bar",False) or spec.get("logo")
+        if not use_chrome:
+            return
+        if lay not in ("title","closing","duarte_break"):
+            y_in=537/72
+            h_in=3/72
+            track=self.rect(slide,0,y_in,W,h_in,"surface","!!track-bar")
+            _alpha(track,15)
+            prog_w=W*(idx/n)
+            bar=self.rect(slide,0,y_in,prog_w,h_in,"accent","!!progress-bar")
+            _alpha(bar,100)
+        logo_val=spec.get("logo") or s.get("logo")
+        if logo_val and lay not in ("title","section","closing","statement","duarte_break"):
+            lw=72/72
+            lh=24/72
+            lx=(960-48-72)/72
+            ly=20/72
+            box=self.rect(slide,lx,ly,lw,lh,"surface","Logo Watermark")
+            _alpha(box,85)
+            _shape_text(self,box,str(logo_val),10,"accent")
+
     def build(self,spec,out):
         n=len(spec["slides"])
         for idx,s in enumerate(spec["slides"],1):
             slide=self.prs.slides.add_slide(self.blank)
             self.background(slide,idx,n)
             getattr(self,"l_"+s["layout"])(slide,s,idx)
+            self.chrome_elements(slide,s,idx,n,spec)
             notes=[s["notes"]] if s.get("notes") else []
             notes+=[f"Image: {c['attribution']} ({c['landing']})" for c in self.credits if c["slide"]==idx]
             if notes:
@@ -755,6 +895,17 @@ def build(spec,out,work=None):
     model=md.deck_model(static)
     plan=md.draft(model,goal=spec.get("title",""),style=b.motion["style"],counters=bool(b.motion["counters"]),
                   morph=bool(b.motion["morph"]))
+    if not plan.get("slides"):
+        import shutil
+        shutil.copyfile(static,out)
+        verdict=forge_qa.qa(out,b.theme)
+        verdict["errors"]=[r for r in b.receipts if r.get("severity")=="error"]+verdict["errors"]
+        verdict["warnings"]=[r for r in b.receipts if r.get("severity")!="error"]+verdict["warnings"]
+        verdict["ok"]=not verdict["errors"]
+        verdict["generated_art"]=b.generated
+        verdict["image_credits"]=b.credits
+        verdict["icons"]=b.icons
+        return verdict
     report=md.apply(static,plan,out,force=True)  # the agent loop rebuilds the same output
     verdict=forge_qa.qa(out,b.theme)
     verdict["errors"]=[r for r in b.receipts if r.get("severity")=="error"]+verdict["errors"]

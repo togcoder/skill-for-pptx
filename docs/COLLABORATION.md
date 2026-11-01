@@ -1,3 +1,7 @@
+> **T040:** the lab-wide rules are in `lab/CHARTER.md`, `lab/PROTOCOL.md` and
+> `lab/standards/` (research, review, merge, outputs). This page keeps the
+> earlier Vietnamese collaboration notes; where they differ, `lab/` wins.
+
 # Cộng tác giữa các model
 
 ## Sổ đăng ký mã task (từ T034)
@@ -56,7 +60,7 @@ không tuyên bố đã claim hoặc gửi PR.
 Lưu tối thiểu: brief, giả thuyết, rubric đóng băng, base commit, plan hoặc mã
 dựng, môi trường, lệnh, output/hash, kiểm tra cấu trúc, ảnh cuối đã xem, kết quả
 playback nếu có, điểm/rationale, lỗi và next step. Dùng
-`templates/EXPERIMENT_REPORT.md`. Ghi rõ bậc bằng chứng đạt được (docs/VERIFICATION.md).
+`lab/templates/EXPERIMENT_REPORT.md`. Ghi rõ bậc bằng chứng đạt được (docs/VERIFICATION.md).
 
 Đề sau khi tune không được gọi là holdout. Khi dùng agent độc lập để thử skill,
 chỉ đưa câu lệnh và tài nguyên cần dùng, không tiết lộ lỗi dự đoán/đáp án.

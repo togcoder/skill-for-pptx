@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HandoffContract",
+  "description": "Structured peer-to-peer delegation contract between ArtCraft specialist agents.",
+  "type": "object",
+  "required": [
+    "contract_id",
+    "intent_id",
+    "from_craft",
+    "to_craft",
+    "requested_asset",
+    "constraints",
+    "delivery",
+    "iteration_count",
+    "max_iterations"
+  ],
+  "properties": {
+    "contract_id": {
+      "type": "string",
+      "description": "Unique delegation ID (e.g. DEL-20261101-001)"
+    },
+    "intent_id": {
+      "type": "string"
+    },
+    "from_craft": {
+      "type": "string",
+      "description": "Delegating agent (e.g. deckcraft)"
+    },
+    "to_craft": {
+      "type": "string",
+      "description": "Specialist agent executing sub-task (e.g. vectorcraft)"
+    },
+    "requested_asset": {
+      "type": "object",
+      "required": ["kind", "spec"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["svg_diagram", "data_chart", "raster_photo", "audio_clip", "video_frame", "cad_drawing"]
+        },
+        "spec": {
+          "type": "object",
+          "description": "Specific asset attributes, viewBox, data points, or coordinates"
+        }
+      }
+    },
+    "constraints": {
+      "type": "object",
+      "required": ["palette_hex", "stroke_width_px", "bounding_box"],
+      "properties": {
+        "palette_hex": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "stroke_width_px": {
+          "type": "number"
+        },
+        "bounding_box": {
+          "type": "array",
+          "items": {"type": "number"},
+          "minItems": 4,
+          "maxItems": 4,
+          "description": "[x, y, width, height]"
+        }
+      }
+    },
+    "delivery": {
+      "type": "object",
+      "required": ["expected_format", "target_path"],
+      "properties": {
+        "expected_format": {
+          "type": "string",
+          "enum": ["svg", "png", "pdf", "xlsx", "csv", "wav", "mp4"]
+        },
+        "target_path": {
+          "type": "string"
+        }
+      }
+    },
+    "iteration_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "max_iterations": {
+      "type": "integer",
+      "maximum": 2,
+      "description": "Hard ceiling on critique loops to prevent infinite back-and-forth"
+    }
+  }
+}

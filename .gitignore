@@ -9,3 +9,4 @@ local-media/
 !*.example
 
 *.mp4
+workspace/

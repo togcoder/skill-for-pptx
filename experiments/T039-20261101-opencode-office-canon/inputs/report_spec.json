@@ -1,0 +1,179 @@
+{
+  "meta": {
+    "title": "Báo cáo đánh giá hiện trạng và lộ trình chuyển đổi số",
+    "subtitle": "Giai đoạn 2026–2028, khối vận hành",
+    "author": "Nhóm Nghiên cứu và Chuyển đổi số",
+    "organization": "Văn phòng Chương trình",
+    "document_id": "DX-2026-001",
+    "version": "1.0",
+    "date": "2026-11-01",
+    "language": "vi-VN",
+    "classification": "Nội bộ",
+    "keywords": ["chuyển đổi số", "vận hành", "lộ trình", "dữ liệu"]
+  },
+  "page": {
+    "size": "A4",
+    "orientation": "portrait",
+    "margins_mm": {"top": 25, "bottom": 25, "left": 30, "right": 25},
+    "header_distance_mm": 12,
+    "footer_distance_mm": 12
+  },
+  "typography": {
+    "body_font": "Calibri",
+    "heading_font": "Calibri Light",
+    "east_asia_font": "Microsoft YaHei",
+    "body_pt": 11,
+    "line_spacing": 1.15,
+    "space_after_pt": 6,
+    "heading_sizes_pt": [18, 15, 13, 12],
+    "caption_pt": 9,
+    "table_pt": 9,
+    "header_pt": 8.5,
+    "reference_pt": 9.5,
+    "color_text": "1A1A1A",
+    "color_muted": "595959",
+    "color_accent": "1F4E79",
+    "color_rule": "BFBFBF"
+  },
+  "cover": {
+    "enabled": true,
+    "logo": "",
+    "logo_alt": ""
+  },
+  "front_matter": {
+    "toc": {"enabled": true, "levels": 3, "title": "Mục lục"},
+    "list_of_figures": {"enabled": true, "title": "Danh mục hình"},
+    "list_of_tables": {"enabled": true, "title": "Danh mục bảng"},
+    "abstract": {
+      "enabled": true,
+      "title": "Tóm tắt điều hành",
+      "text": "Báo cáo trình bày hiện trạng dữ liệu vận hành, khoảng trống so với mục tiêu và lộ trình ba năm. Kết quả cho thấy nền tảng dữ liệu đã hình thành nhưng chất lượng dữ liệu và năng lực phân tích vẫn là hai điểm nghẽn chính. Báo cáo kiến nghị ưu tiên chuẩn hóa dữ liệu chủ, thiết lập vòng phản hồi đo lường và đầu tư có trọng điểm vào ba năng lực: tích hợp, quản trị chất lượng và kể chuyện dữ liệu.\n\nCác khuyến nghị được thiết kế để có thể kiểm chứng bằng chỉ số đo lường hàng quý, không dựa trên cảm nhận chủ quan.",
+      "keywords": ["dữ liệu chủ", "chất lượng dữ liệu", "lộ trình", "KPI"]
+    }
+  },
+  "headers_footers": {
+    "enabled": true,
+    "odd_even": false,
+    "document_id_in_header": true,
+    "chapter_in_header": true,
+    "classification_in_footer": true,
+    "page_numbers": true
+  },
+  "sections": [
+    {
+      "heading": "Tổng quan",
+      "level": 1,
+      "page_break_before": false,
+      "blocks": [
+        {"type": "paragraph", "text": "Báo cáo này tổng hợp kết quả khảo sát hiện trạng và đề xuất lộ trình chuyển đổi số cho khối vận hành trong giai đoạn 2026–2028. Phạm vi bao gồm bốn quy trình cốt lõi: tiếp nhận, xử lý, kiểm soát chất lượng và báo cáo."},
+        {"type": "paragraph", "text": "Mục tiêu của báo cáo không phải là liệt kê công nghệ mà là trả lời ba câu hỏi: dữ liệu hiện có đáng tin đến đâu, năng lực nào còn thiếu, và khoản đầu tư nào tạo ra kết quả đo lường được trong 12 tháng tới."},
+        {"type": "bullets", "items": [
+          "Chuẩn hóa dữ liệu chủ và quy tắc chất lượng dữ liệu.",
+          "Thiết lập vòng phản hồi đo lường theo quý.",
+          "Ưu tiên ba năng lực: tích hợp, quản trị chất lượng và kể chuyện dữ liệu."
+        ]},
+        {"type": "paragraph", "text": "Cấu trúc báo cáo gồm phương pháp, kết quả, rủi ro và kết luận. Phụ lục A cung cấp bảng dữ liệu chi tiết để đối chiếu."}
+      ]
+    },
+    {
+      "heading": "Phương pháp và phạm vi",
+      "level": 1,
+      "blocks": [
+        {"type": "paragraph", "text": "Nhóm nghiên cứu đã phỏng vấn 24 cán bộ vận hành, rà soát 18 bộ dữ liệu và đối chiếu với khung quản trị dữ liệu của tổ chức. Kiến trúc tham chiếu được mô tả trong {{ref:fig-1}}."},
+        {"type": "figure", "path": "architecture.png", "alt": "Sơ đồ kiến trúc tham chiếu gồm nguồn dữ liệu, tiếp nhận, kiểm tra, lưu trữ, báo cáo và rà soát.", "caption": "Kiến trúc tham chiếu cho luồng dữ liệu vận hành.", "width_mm": 155, "source": "Nhóm nghiên cứu, 2026."},
+        {"type": "paragraph", "text": "Mỗi bộ dữ liệu được chấm theo bốn tiêu chí: đầy đủ, chính xác, nhất quán và kịp thời. Thang điểm 1–5 được quy đổi thành tỷ lệ phần trăm để so sánh giữa các đơn vị."},
+        {"type": "table", "caption": "Kết quả đo lường theo năm", "alt": "Bảng so sánh chỉ số hiện trạng năm 2024 và 2025 cùng mức thay đổi.", "columns": [
+          {"header": "Hạng mục", "width_mm": 70, "align": "left"},
+          {"header": "2024", "width_mm": 25, "align": "right"},
+          {"header": "2025", "width_mm": 25, "align": "right"},
+          {"header": "Δ (%)", "width_mm": 25, "align": "right"}
+        ], "rows": [
+          ["Độ đầy đủ dữ liệu", "72", "81", "+12,5"],
+          ["Độ chính xác", "68", "76", "+11,8"],
+          ["Tính nhất quán", "61", "70", "+14,8"],
+          ["Tính kịp thời", "74", "79", "+6,8"],
+          ["Chỉ số tổng hợp", "69", "77", "+11,6"]
+        ], "source": "Khảo sát nội bộ, tháng 9/2026.", "zebra": true},
+        {"type": "paragraph", "text": "Bảng {{num:tbl-1}} cho thấy tiến bộ rõ nhất ở tính nhất quán; tính kịp thời cải thiện chậm nhất và cần một giải pháp riêng về luồng dữ liệu."}
+      ]
+    },
+    {
+      "heading": "Kết quả chính",
+      "level": 1,
+      "blocks": [
+        {"type": "paragraph", "text": "Chỉ số tổng hợp tăng từ 69% lên 77%, tương đương mức cải thiện 11,6% trong một năm. Tuy nhiên, khoảng cách so với mục tiêu 90% vào năm 2028 vẫn còn lớn, đặc biệt ở nhóm quy trình kiểm soát chất lượng."},
+        {"type": "figure", "path": "trend.png", "alt": "Biểu đồ đường so sánh chỉ số thực tế và mục tiêu theo tháng, từ tháng 1 đến tháng 9.", "caption": "Chỉ số thực tế so với mục tiêu theo tháng.", "width_mm": 155, "source": "Tổng hợp từ báo cáo vận hành tháng."},
+        {"type": "paragraph", "text": "Xu hướng trong {{ref:fig-2}} cho thấy thực tế bám sát mục tiêu trong sáu tháng đầu nhưng chững lại từ tháng 7. Nguyên nhân chính là độ trễ của dữ liệu đầu vào và thiếu kiểm tra tự động trước khi báo cáo."},
+        {"type": "table", "caption": "Rủi ro ưu tiên và biện pháp", "alt": "Bảng liệt kê bốn rủi ro chính, xác suất, tác động và biện pháp giảm thiểu.", "columns": [
+          {"header": "Rủi ro", "width_mm": 65, "align": "left"},
+          {"header": "Xác suất", "width_mm": 25, "align": "center"},
+          {"header": "Tác động", "width_mm": 25, "align": "center"},
+          {"header": "Biện pháp", "width_mm": 50, "align": "left"}
+        ], "rows": [
+          ["Dữ liệu đầu vào không đầy đủ", "Cao", "Cao", "Kiểm tra bắt buộc tại nguồn"],
+          ["Sai lệch định nghĩa chỉ số", "Trung bình", "Cao", "Từ điển dữ liệu dùng chung"],
+          ["Phụ thuộc báo cáo thủ công", "Cao", "Trung bình", "Tự động hóa ba báo cáo chính"],
+          ["Thiếu năng lực phân tích", "Trung bình", "Trung bình", "Đào tạo theo vai trò"]
+        ], "source": "Hội thảo rủi ro, tháng 10/2026."},
+        {"type": "paragraph", "text": "Chi tiết dữ liệu nguồn được trình bày trong Phụ lục A; bảng tổng hợp nằm ở trang {{page:tbl-2}}."}
+      ]
+    },
+    {
+      "heading": "Rủi ro và biện pháp",
+      "level": 1,
+      "blocks": [
+        {"type": "paragraph", "text": "Bốn rủi ro trong bảng {{num:tbl-2}} được xếp hạng theo tích của xác suất và tác động. Hai rủi ro đầu cần được xử lý trong quý 1/2027 vì chúng ảnh hưởng trực tiếp đến độ tin cậy của báo cáo điều hành."},
+        {"type": "paragraph", "text": "Biện pháp được thiết kế theo nguyên tắc phòng ngừa tại nguồn: kiểm tra dữ liệu ngay khi tiếp nhận, không chờ đến khâu báo cáo. Điều này giảm chi phí sửa lỗi và giữ được ngữ cảnh nghiệp vụ."}
+      ]
+    },
+    {
+      "heading": "Kết luận và kiến nghị",
+      "level": 1,
+      "blocks": [
+        {"type": "paragraph", "text": "Nền tảng dữ liệu đã hình thành nhưng chất lượng và năng lực phân tích vẫn là hai điểm nghẽn. Ba kiến nghị dưới đây được ưu tiên theo mức độ tác động và khả năng thực thi trong 12 tháng:"},
+        {"type": "numbered", "items": [
+          "Chuẩn hóa dữ liệu chủ và ban hành từ điển dữ liệu dùng chung trong quý 1/2027.",
+          "Tự động hóa kiểm tra chất lượng trước khi phát hành báo cáo định kỳ.",
+          "Đào tạo năng lực kể chuyện dữ liệu cho 20 cán bộ chủ chốt."
+        ]},
+        {"type": "paragraph", "text": "Tiến độ sẽ được đo bằng ba chỉ số: tỷ lệ dữ liệu đạt chuẩn, thời gian phát hành báo cáo và số quyết định dựa trên dữ liệu. Các chỉ số này được rà soát hàng quý và công bố trong báo cáo điều hành."}
+      ]
+    }
+  ],
+  "references": {
+    "enabled": true,
+    "title": "Tài liệu tham khảo",
+    "items": [
+      {"key": "iso690", "label": "[1]", "text": "ISO. 2021. ISO 690:2021 Information and documentation — Guidelines for bibliographic references and citations to information resources. Geneva: International Organization for Standardization."},
+      {"key": "iso7144", "label": "[2]", "text": "ISO. 1986. ISO 7144:1986 Documentation — Presentation of theses and similar documents. Geneva: International Organization for Standardization."},
+      {"key": "wcag22", "label": "[3]", "text": "W3C. 2023. Web Content Accessibility Guidelines (WCAG) 2.2. W3C Recommendation, 5 October 2023. https://www.w3.org/TR/WCAG22/."}
+    ]
+  },
+  "appendix": [
+    {
+      "letter": "A",
+      "title": "Dữ liệu chi tiết theo đơn vị",
+      "blocks": [
+        {"type": "paragraph", "text": "Bảng dưới đây cung cấp dữ liệu nguồn cho các chỉ số tổng hợp trong phần Kết quả. Giá trị được làm tròn đến một chữ số thập phân; sai số do làm tròn không ảnh hưởng đến kết luận."},
+        {"type": "table", "caption": "Dữ liệu chi tiết theo đơn vị", "alt": "Bảng dữ liệu chi tiết gồm mã, nhóm, giá trị, đơn vị và ghi chú cho mười đơn vị.", "columns": [
+          {"header": "Mã", "width_mm": 24, "align": "left"},
+          {"header": "Nhóm", "width_mm": 38, "align": "left"},
+          {"header": "Giá trị", "width_mm": 24, "align": "right"},
+          {"header": "Đơn vị", "width_mm": 22, "align": "center"},
+          {"header": "Ghi chú", "width_mm": 47, "align": "left"}
+        ], "rows": [
+          ["A-01", "Tiếp nhận", "81,0", "%", "Đạt chuẩn"],
+          ["A-02", "Tiếp nhận", "76,0", "%", "Đạt chuẩn"],
+          ["A-03", "Xử lý", "70,0", "%", "Cần cải thiện"],
+          ["A-04", "Xử lý", "79,0", "%", "Đạt chuẩn"],
+          ["A-05", "Kiểm soát", "68,0", "%", "Cần cải thiện"],
+          ["A-06", "Kiểm soát", "72,0", "%", "Theo dõi"],
+          ["A-07", "Báo cáo", "83,0", "%", "Đạt chuẩn"],
+          ["A-08", "Báo cáo", "77,0", "%", "Đạt chuẩn"],
+          ["A-09", "Tích hợp", "74,0", "%", "Theo dõi"],
+          ["A-10", "Tích hợp", "80,0", "%", "Đạt chuẩn"]
+        ], "source": "Cơ sở dữ liệu vận hành, tháng 9/2026.", "zebra": true}
+      ]
+    }
+  ]
+}
