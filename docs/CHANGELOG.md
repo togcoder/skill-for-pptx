@@ -7,6 +7,26 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T044 Multi-Asset Pipeline Protocol, User Experience Maximization & Local Autonomy Charter — 2026-11-01
+
+- **Official Owner Mandate Codification (togcoder).** Integrated official directive on cross-domain agentic skill development:
+  - Skills do not produce single isolated files; they orchestrate compound assets across multiple target applications.
+  - Elevate user experience to the peak: deeply decode user intent to achieve first-pass satisfaction ("đúng ý ngay từ lượt đầu"), eliminating tedious regeneration.
+  - Mandate cross-asset pre-processing pipelines: edit/crop/mask images before slide/doc embedding; normalize audio (EBU R128) before video muxing; validate structured data before chart rendering.
+  - Authorize full local operational autonomy: agents working locally have complete freedom to download fonts, models, and install code libraries, provided workspaces remain tidy in git-ignored `workspace/` and transient files are deleted.
+- **Protocol 04 Added (`lab/protocols/04_cross_asset_pipeline.md`):** Formally codified the 3 canonical pre-processing pipelines (Visual/Raster, Audio/Motion, Data/Chart), the First-Pass Excellence law, and the Local Autonomy & Cleanliness Law.
+- **Core Governance Updates:**
+  - `AGENTS.md`: Added First-Pass Intent Fulfillment, Cross-Asset Pre-processing Pipeline, and Local Autonomy & Cleanliness Law to Rules for Every Agent.
+  - `lab/CHARTER.md`: Added Goals 4 & 5 (First-Pass Fulfillment, Cross-Asset Orchestration) and principles on pre-processing before embedding and local autonomy.
+  - `lab/PROTOCOL.md`: Added cross-asset pipeline step and local resource freedom to the agent research lifecycle.
+  - `README.md`: Upgraded the lab introduction to reflect the Cross-Domain Agentic AI Lab vision.
+  - `domains/cross/DOMAIN.md`: Updated scope, code table, and rules with Protocol 04.
+- **Cross-Pipeline Validator (`scripts/cross_pipeline.py`):**
+  - `validate_image_for_embedding`: Verifies aspect ratios (16:9, 4:5, 1:1), minimum resolutions, alpha channels for art washes, and canvas mode luminance harmony.
+  - `validate_audio_for_muxing`: Verifies EBU R128 loudness (-14.0 LUFS), True Peak safety ceiling (<= -1.0 dBTP), and BGM auto-ducking attenuation.
+  - `validate_chart_data_for_presentation`: Verifies zero-error numerical integrity (no NaNs, nulls, division-by-zero) and Miller 7+-2 cognitive density.
+- **Tests.** Added `tests/test_cross_pipeline.py` (5 unit tests). Full lab test suite passes **359 tests 100% (skipped=4)**; `lab/tools/check_layout.py` reports `layout OK`.
+
 ## T043 Dynamic Theme Engine: Need-Based Synthesizer, Reference Teardown, Composite Backgrounds & AI Image Harmonizer — 2026-11-01
 
 - **Argon Strategic Consultation (game25072003 / yep).** In response to owner directive that themes are infinite and must be driven by user need and reference decks, collaborated with Gemini 4 Argon (`gemini-argon`) on `chat_id: 2:53675cab70c50cda` to formulate the Dynamic Theme Engine architecture:

@@ -70,4 +70,5 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T041 | [xlsx] SheetCraft chart forge, patch, audit, data and report | OpenCode (DeepSeek V4.1 Flash) | `work/T041-opencode-xlsx` | tip | `experiments/T041-20261101-opencode-sheetcraft/REPORT.md` |
 | T042 | [cross] Multi-Domain Design Canons: Video, Vector/SVG, 3D/Solid, CAD & Audio | Antigravity + Argon | `work/T042-multi-domain-design-canons` | tip (review requested) | `experiments/T042-20261101-antigravity-multi-domain-canons/REPORT.md` |
 | T043 | [pptx] Dynamic Theme Engine: Need-Based Synthesizer, Reference Teardown & AI Image Visual Harmonizer | Antigravity + Argon | `work/T043-dynamic-theme-engine` | tip (review requested) | `experiments/T043-20261101-antigravity-dynamic-theme-engine/REPORT.md` |
-| T044 | *next free ID* | | | | |
+| T044 | [cross] Multi-Asset Pipeline Protocol, User Experience Maximization & Local Autonomy Charter | Antigravity | `work/T044-cross-asset-pipeline-and-autonomy` | tip (review requested) | `experiments/T044-20261101-antigravity-cross-asset-pipeline/REPORT.md` |
+| T045 | *next free ID* | | | | |

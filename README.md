@@ -1,8 +1,17 @@
 # Design Research Lab (khởi đầu từ PPTX Motion Lab)
 
-Lab nghiên cứu thiết kế **đa lĩnh vực**: nhiều agent và nhiều model cùng
-nghiên cứu, phản biện và gộp kết quả, để AI tạo ra thiết kế vừa đẹp vừa đúng
-kỹ thuật trong từng ứng dụng đích.
+Lab nghiên cứu thiết kế **đa lĩnh vực (Cross-Domain Agentic AI Lab)**: nhiều agent và nhiều model cùng
+nghiên cứu, phản biện và xâu chuỗi kết quả, để AI tạo ra các sản phẩm thiết kế vừa đẹp vừa chuẩn xác
+kỹ thuật, đáp ứng đúng ý người dùng ngay từ lượt đầu.
+
+### Triết lý Cốt lõi của Hệ thống Kỹ năng Agentic AI:
+1. **Không tạo tài nguyên đơn lẻ:** Kỹ năng không bị giới hạn trong việc sinh ra một file rời rạc, mà xâu chuỗi đa tài nguyên (ảnh, video, âm thanh, bảng tính, đồ thị, vector, slide, tài liệu) thành sản phẩm hoàn chỉnh theo nhu cầu đa dạng.
+2. **Nâng trải nghiệm người dùng lên mức cao nhất (First-Pass Excellence):** Thấu hiểu sâu sắc tâm lý người dùng, bối cảnh thưởng thức và đối tượng khán giả để tạo ra sản phẩm đúng ý ngay từ lượt đầu, triệt tiêu việc phải làm đi làm lại nhiều lần.
+3. **Đường ống Tiền xử lý Chuyên sâu (Pre-process Before Embedding):**
+   - **Ảnh:** Dùng công cụ chỉnh ảnh (Pillow, PhotoCraft) để cắt cúp, tách nền kênh Alpha, cân màu đồng bộ với tone slide/tài liệu trước khi chèn.
+   - **Âm thanh:** Khử ồn, chuẩn hóa âm lượng chuẩn phát sóng (EBU R128 -14 LUFS), tự động auto-ducking nhạc nền trước khi ghép vào video (FilmCraft) hay hiệu ứng chuyển cảnh.
+   - **Dữ liệu & Đồ thị:** Xử lý và kiểm toán công thức bảng tính (SheetCraft), tạo biểu đồ chuẩn Tufte trước khi nhúng vào slide báo cáo hoặc tài liệu Word.
+4. **Toàn quyền Thực thi Cục bộ & Tự do Tài nguyên:** Agent hoạt động cục bộ có toàn quyền tải font chữ, file mẫu, mô hình và cài đặt mọi thư viện code cần thiết; mọi tệp tạm thời phải lưu gọn trong `workspace/` và được dọn dẹp sạch sẽ sau khi hoàn tất.
 
 | Domain | Ứng dụng | Thẻ |
 |---|---|---|
