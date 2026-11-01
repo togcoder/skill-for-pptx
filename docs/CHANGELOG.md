@@ -7,6 +7,30 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T041 [xlsx] SheetCraft — full Excel chart control — 2026-11-01
+
+- **Chart Forge.** `scripts/chart_forge.py` builds a workbook/chart from
+  `domains/xlsx/schemas/chart_spec.schema.json`: column/bar, line, area, pie,
+  doughnut, scatter, bubble, radar, stock and combo; axes, labels, legend,
+  markers, trendlines, number formats and print area.
+- **Chart patch.** `scripts/chart_patch.py` edits existing chart OOXML:
+  title/legend/axes/bar gap/data labels/series style/manual plot layout and
+  converts `xdr:twoCellAnchor` to a fixed `xdr:oneCellAnchor`.
+- **Chart audit.** `scripts/chart_audit.py` measures geometry, zero baseline,
+  log scaling, category density, labels, legend, contrast/deuteranopia, pie
+  slices, 3-D, fonts, series count, print area, alt text and the chart cache.
+- **Evidence.** Three synthetic fixtures (combo secondary axis, doughnut,
+  scatter + trendline) pass the audit with no errors/warnings; Excel opened the
+  exact files and exported the charts; GridCraft PDF rendered them but dropped
+  Vietnamese diacritics. Waterfall/treemap/histogram/box/funnel remain raw-OOXML
+  recipes, not generated.
+- **Tests.** `tests/test_sheet_craft.py` (5 tests) covers build/audit, patch,
+  small-chart rejection, doughnut palette and schema. Full suite: 321 tests OK
+  with `PYTHONUTF8=1`.
+- **Status.** EXPERIMENTAL; review requested. One task = one domain; the
+  document half is T039 [docx].
+- Report: `experiments/T041-20261101-opencode-sheet-craft/REPORT.md`.
+
 ## T040 multi-domain lab restructure — 2026-11-01
 
 The repository is now organised as a multi-domain design lab:

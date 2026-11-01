@@ -1,0 +1,260 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/togcoder/skill-for-pptx/schemas/chart_spec.schema.json",
+  "title": "Chart Forge specification",
+  "description": "Semantic input for scripts/chart_forge.py. Geometry, axes, labels, series and accessibility are data, so a chart can be replayed and audited.",
+  "type": "object",
+  "required": ["meta", "data", "chart"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["title"],
+      "properties": {
+        "title": {"type": "string", "minLength": 1},
+        "subject": {"type": "string"},
+        "author": {"type": "string"},
+        "company": {"type": "string"},
+        "sheet": {"type": "string", "default": "Data"}
+      },
+      "additionalProperties": true
+    },
+    "data": {
+      "type": "object",
+      "required": ["headers", "rows"],
+      "properties": {
+        "headers": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "rows": {"type": "array", "minItems": 1, "items": {"type": "array"}},
+        "widths": {"type": "object", "additionalProperties": {"type": "number"}},
+        "freeze": {"type": "string"},
+        "table": {"type": "boolean"},
+        "table_style": {"type": "string"},
+        "print_area": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "chart": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {"enum": ["column", "bar", "line", "area", "pie", "doughnut", "scatter", "bubble", "radar", "stock", "combo"]},
+        "subtype": {"type": "string"},
+        "title": {"type": "string", "maxLength": 90},
+        "alt": {"type": "string"},
+        "title_size": {"type": "number"},
+        "title_color": {"type": "string"},
+        "style": {"type": "integer", "minimum": 1, "maximum": 48},
+        "palette": {"type": "array", "items": {"type": "string", "pattern": "^#[0-9A-Fa-f]{6}$"}},
+        "categories_column": {"type": "integer", "minimum": 0},
+        "position": {
+          "type": "object",
+          "properties": {
+            "cell": {"type": "string", "pattern": "^[A-Z]+[0-9]+$"},
+            "width_cm": {"type": "number", "minimum": 5, "maximum": 40},
+            "height_cm": {"type": "number", "minimum": 4, "maximum": 30},
+            "offset_cm": {"type": "number", "minimum": 0}
+          },
+          "additionalProperties": true
+        },
+        "axes": {
+          "type": "object",
+          "properties": {
+            "x": {"$ref": "#/$defs/axis"},
+            "y": {"$ref": "#/$defs/axis"},
+            "y2": {"$ref": "#/$defs/axis"}
+          },
+          "additionalProperties": false
+        },
+        "legend": {
+          "oneOf": [
+            {"type": "string", "enum": ["bottom", "top", "left", "right", "top_right"]},
+            {
+              "type": "object",
+              "properties": {
+                "position": {"enum": ["bottom", "top", "left", "right", "top_right"]},
+                "size": {"type": "number"},
+                "color": {"type": "string"},
+                "none": {"type": "boolean"},
+                "overlay": {"type": "boolean"}
+              },
+              "additionalProperties": true
+            }
+          ]
+        },
+        "data_labels": {"$ref": "#/$defs/labels"},
+        "plot_layout": {
+          "type": "object",
+          "properties": {
+            "x": {"type": "number"}, "y": {"type": "number"},
+            "width": {"type": "number"}, "height": {"type": "number"}
+          },
+          "additionalProperties": false
+        },
+        "data_table": {
+          "type": "object",
+          "properties": {"keys": {"type": "boolean"}},
+          "additionalProperties": true
+        },
+        "disp_blanks": {"enum": ["gap", "zero", "span"]},
+        "series": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/series"}
+        }
+      },
+      "additionalProperties": true
+    },
+    "post": {
+      "type": "object",
+      "description": "OOXML-level overrides applied after xlsxwriter (legend overlay, doughnut hole, pie rotation, one-cell anchor, plot layout, series patches).",
+      "properties": {
+        "anchor": {"enum": ["one_cell", "two_cell"]},
+        "legend": {"$ref": "#/$defs/legend_patch"},
+        "doughnut_hole": {"type": "integer", "minimum": 10, "maximum": 90},
+        "pie_rotation": {"type": "integer", "minimum": 0, "maximum": 360},
+        "plot_layout": {
+          "type": "object",
+          "properties": {
+            "x": {"type": "number"}, "y": {"type": "number"},
+            "w": {"type": "number"}, "h": {"type": "number"}
+          },
+          "additionalProperties": false
+        },
+        "rounded_corners": {"type": "boolean"},
+        "plot_vis_only": {"type": "boolean"},
+        "disp_blanks": {"enum": ["gap", "zero", "span"]},
+        "data_labels": {"$ref": "#/$defs/labels"},
+        "series": {"type": "array", "items": {"$ref": "#/$defs/series_patch"}},
+        "bar": {
+          "type": "object",
+          "properties": {"gap": {"type": "integer", "minimum": 0, "maximum": 500}, "overlap": {"type": "integer", "minimum": -100, "maximum": 100}},
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "axis": {
+      "type": "object",
+      "properties": {
+        "title": {"type": "string"},
+        "title_size": {"type": "number"},
+        "min": {"type": "number"},
+        "max": {"type": "number"},
+        "major_unit": {"type": "number"},
+        "minor_unit": {"type": "number"},
+        "log_base": {"type": "number", "minimum": 2},
+        "number_format": {"type": "string"},
+        "gridlines": {"type": "boolean"},
+        "gridline_color": {"type": "string"},
+        "gridline_width": {"type": "number"},
+        "label_size": {"type": "number"},
+        "label_rotation": {"type": "number"},
+        "label_color": {"type": "string"},
+        "reverse": {"type": "boolean"},
+        "visible": {"type": "boolean"},
+        "tick_label_position": {"type": "string"},
+        "date_axis": {"type": "boolean"},
+        "major_unit_type": {"type": "string"},
+        "crossing": {"type": ["string", "number"]},
+        "position_axis": {"type": "string"},
+        "display_units": {"type": "string"},
+        "label_align": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "labels": {
+      "type": "object",
+      "properties": {
+        "show": {"type": "boolean"},
+        "show_value": {"type": "boolean"},
+        "show_category": {"type": "boolean"},
+        "show_series": {"type": "boolean"},
+        "show_percent": {"type": "boolean"},
+        "show_legend_key": {"type": "boolean"},
+        "show_bubble_size": {"type": "boolean"},
+        "position": {"enum": ["center", "inside_end", "outside_end", "inside_base", "best_fit", "left", "right", "top", "bottom", "above", "below"]},
+        "number_format": {"type": "string"},
+        "separator": {"type": "string"},
+        "size": {"type": "number"},
+        "bold": {"type": "boolean"},
+        "color": {"type": "string"},
+        "leader_lines": {"type": "boolean"},
+        "none": {"type": "boolean"}
+      },
+      "additionalProperties": true
+    },
+    "series": {
+      "type": "object",
+      "properties": {
+        "name": {"type": "string"},
+        "column": {"type": "integer", "minimum": 1},
+        "x_column": {"type": "integer", "minimum": 1},
+        "values": {"type": "string"},
+        "categories": {"type": "string"},
+        "type": {"enum": ["column", "bar", "line", "area", "pie", "doughnut", "scatter", "bubble", "radar", "stock", "combo"]},
+        "axis": {"enum": ["primary", "secondary"]},
+        "y2_axis": {"type": "boolean"},
+        "color": {"type": "string"},
+        "border_color": {"type": "string"},
+        "line_width": {"type": "number"},
+        "dash_type": {"type": "string"},
+        "marker": {"type": "string"},
+        "marker_size": {"type": "number"},
+        "marker_color": {"type": "string"},
+        "marker_border": {"type": "string"},
+        "data_labels": {"$ref": "#/$defs/labels"},
+        "trendline": {
+          "type": "object",
+          "properties": {
+            "type": {"enum": ["linear", "exponential", "logarithmic", "polynomial", "power", "moving_average"]},
+            "order": {"type": "integer"},
+            "period": {"type": "integer"},
+            "forward": {"type": "number"},
+            "backward": {"type": "number"},
+            "intercept": {"type": "number"},
+            "name": {"type": "string"},
+            "display_equation": {"type": "boolean"},
+            "display_r_squared": {"type": "boolean"}
+          },
+          "additionalProperties": true
+        },
+        "trendline_label_layout": {
+          "type": "object",
+          "properties": {"x": {"type": "number"}, "y": {"type": "number"}, "w": {"type": "number"}, "h": {"type": "number"}},
+          "additionalProperties": false
+        },
+        "gap": {"type": "integer", "minimum": 0, "maximum": 500},
+        "overlap": {"type": "integer", "minimum": -100, "maximum": 100},
+        "points": {"type": "array", "items": {"type": "object"}}
+      },
+      "additionalProperties": true
+    },
+    "legend_patch": {
+      "type": "object",
+      "properties": {
+        "position": {"enum": ["bottom", "top", "left", "right", "top_right"]},
+        "overlay": {"type": "boolean"},
+        "size": {"type": "number"},
+        "color": {"type": "string"},
+        "none": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    },
+    "series_patch": {
+      "type": "object",
+      "properties": {
+        "color": {"type": "string"},
+        "line_color": {"type": "string"},
+        "line_width": {"type": "number"},
+        "marker": {"type": "string"},
+        "marker_size": {"type": "number"},
+        "marker_color": {"type": "string"},
+        "data_labels": {"$ref": "#/$defs/labels"},
+        "trendline_label_layout": {"type": "object"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

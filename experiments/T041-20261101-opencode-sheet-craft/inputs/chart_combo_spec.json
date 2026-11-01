@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "Chỉ số thực tế so với mục tiêu",
+    "sheet": "Data",
+    "author": "Nhóm Nghiên cứu và Chuyển đổi số",
+    "company": "Văn phòng Chương trình"
+  },
+  "data": {
+    "headers": ["Tháng", "Thực tế", "Mục tiêu"],
+    "rows": [
+      ["T1", 120, 130],
+      ["T2", 128, 138],
+      ["T3", 135, 148],
+      ["T4", 140, 158],
+      ["T5", 150, 170],
+      ["T6", 158, 182],
+      ["T7", 166, 195],
+      ["T8", 172, 208],
+      ["T9", 180, 220]
+    ],
+    "widths": {"A:A": 12, "B:C": 14},
+    "freeze": "A2"
+  },
+  "chart": {
+    "type": "combo",
+    "title": "Chỉ số thực tế so với mục tiêu",
+    "style": 10,
+    "palette": ["#1F4E79", "#C55A11"],
+    "position": {"cell": "E2", "width_cm": 16.5, "height_cm": 9.2},
+    "categories_column": 0,
+    "axes": {
+      "x": {"title": "Tháng", "label_size": 9, "label_rotation": -45},
+      "y": {"title": "Chỉ số (2025 = 100)", "min": 0, "max": 240, "major_unit": 40, "number_format": "#,##0", "gridlines": true, "label_size": 9},
+      "y2": {"title": "Mục tiêu (chỉ số)", "min": 0, "max": 240, "major_unit": 40, "number_format": "#,##0", "gridlines": false, "label_size": 9}
+    },
+    "legend": {"position": "bottom", "size": 9},
+    "series": [
+      {"name": "Thực tế", "column": 1, "type": "column", "color": "#1F4E79", "gap": 55},
+      {"name": "Mục tiêu", "column": 2, "type": "line", "axis": "secondary", "color": "#C55A11", "line_width": 2.5, "marker": "circle", "marker_size": 6, "data_labels": {"show": true, "position": "above", "size": 8, "number_format": "#,##0"}}
+    ]
+  },
+  "post": {
+    "anchor": "one_cell",
+    "plot_layout": {"x": 0.11, "y": 0.17, "w": 0.72, "h": 0.60},
+    "legend": {"position": "bottom", "size": 9}
+  }
+}
