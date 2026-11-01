@@ -1,0 +1,123 @@
+﻿{
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "stats": {
+    "charts": 1,
+    "types": [
+      "scatterChart"
+    ],
+    "sheets": [
+      "Data"
+    ],
+    "min_width_cm": 10.0,
+    "min_height_cm": 6.0
+  },
+  "charts": [
+    {
+      "type": "scatterChart",
+      "types": [
+        "scatterChart"
+      ],
+      "title": "TÆ°Æ¡ng quan chi phĂ­ vĂ  má»©c Ä‘á»™ hĂ i lĂ²ng",
+      "series": [
+        {
+          "name": "HĂ i lĂ²ng",
+          "values": [
+            68.0,
+            74.0,
+            79.0,
+            83.0,
+            86.0,
+            88.0,
+            91.0,
+            93.0
+          ],
+          "values_ref": "Data!$C$2:$C$9",
+          "color": null,
+          "marker": "",
+          "has_labels": false,
+          "point_colors": [],
+          "ax_ids": [
+            "50010001",
+            "50010002"
+          ]
+        }
+      ],
+      "axes": [
+        {
+          "kind": "valAx",
+          "ax_id": "50010001",
+          "pos": "b",
+          "min": "0.0",
+          "max": "70.0",
+          "log": null,
+          "num_fmt": "#,##0",
+          "title": "Chi phĂ­ (triá»‡u Ä‘á»“ng)",
+          "gridlines": true,
+          "delete": null
+        },
+        {
+          "kind": "valAx",
+          "ax_id": "50010002",
+          "pos": "l",
+          "min": "60.0",
+          "max": "100.0",
+          "log": null,
+          "num_fmt": "0",
+          "title": "Má»©c Ä‘á»™ hĂ i lĂ²ng (%)",
+          "gridlines": true,
+          "delete": null
+        }
+      ],
+      "fonts": [
+        14.0,
+        14.0,
+        9.0,
+        9.0
+      ],
+      "min_font": 9.0,
+      "max_font": 14.0,
+      "show_labels": false,
+      "legend": null,
+      "gap": null,
+      "overlap": null,
+      "hole": null,
+      "rotation": null,
+      "index": 1,
+      "part": "xl/charts/chart1.xml",
+      "sheet": "Data",
+      "anchor": {
+        "kind": "chart",
+        "rect_cm": [
+          9.525,
+          0.5291666666666667,
+          15.5,
+          9.0
+        ],
+        "anchor": "oneCellAnchor",
+        "chart_part": "xl/charts/chart1.xml",
+        "alt": "TÆ°Æ¡ng quan chi phĂ­ vĂ  má»©c Ä‘á»™ hĂ i lĂ²ng"
+      },
+      "rect_cm": [
+        9.53,
+        0.53,
+        15.5,
+        9.0
+      ],
+      "width_cm": 15.5,
+      "height_cm": 9.0,
+      "aspect": 1.722,
+      "anchor_kind": "oneCellAnchor",
+      "alt": "TÆ°Æ¡ng quan chi phĂ­ vĂ  má»©c Ä‘á»™ hĂ i lĂ²ng",
+      "inside_print_area": true,
+      "print_area_cm": [
+        0.0,
+        0.0,
+        29.85,
+        11.64
+      ]
+    }
+  ]
+}

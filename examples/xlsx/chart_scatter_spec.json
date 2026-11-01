@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "title": "Tương quan chi phí và mức độ hài lòng",
+    "sheet": "Data",
+    "author": "Nhóm Nghiên cứu và Chuyển đổi số"
+  },
+  "data": {
+    "headers": ["Đơn vị", "Chi phí", "Hài lòng"],
+    "rows": [
+      ["A", 12, 68],
+      ["B", 18, 74],
+      ["C", 25, 79],
+      ["D", 31, 83],
+      ["E", 38, 86],
+      ["F", 44, 88],
+      ["G", 52, 91],
+      ["H", 61, 93]
+    ],
+    "widths": {"A:A": 10, "B:C": 14}
+  },
+  "chart": {
+    "type": "scatter",
+    "subtype": "markers",
+    "title": "Tương quan chi phí và mức độ hài lòng",
+    "style": 10,
+    "palette": ["#1F4E79"],
+    "position": {"cell": "E2", "width_cm": 15.5, "height_cm": 9.0},
+    "categories_column": 0,
+    "axes": {
+      "x": {"title": "Chi phí (triệu đồng)", "min": 0, "max": 70, "major_unit": 10, "number_format": "#,##0", "gridlines": true, "label_size": 9},
+      "y": {"title": "Mức độ hài lòng (%)", "min": 60, "max": 100, "major_unit": 10, "number_format": "0", "gridlines": true, "label_size": 9}
+    },
+    "legend": {"none": true},
+    "series": [
+      {"name": "Đơn vị", "column": 2, "x_column": 1, "type": "scatter", "color": "#1F4E79", "marker": "circle", "marker_size": 8, "trendline": {"type": "linear", "display_equation": true, "display_r_squared": true}, "trendline_label_layout": {"x": 0.55, "y": 0.2, "w": 0.4, "h": 0.14}}
+    ]
+  },
+  "post": {
+    "anchor": "one_cell",
+    "plot_layout": {"x": 0.12, "y": 0.16, "w": 0.74, "h": 0.62}
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "meta": {
+    "title": "Cơ cấu chi phí vận hành",
+    "sheet": "Data",
+    "author": "Nhóm Nghiên cứu và Chuyển đổi số"
+  },
+  "data": {
+    "headers": ["Nhóm chi phí", "Tỷ trọng"],
+    "rows": [
+      ["Nhân sự", 42],
+      ["Hạ tầng", 24],
+      ["Phần mềm", 18],
+      ["Đào tạo", 9],
+      ["Khác", 7]
+    ],
+    "widths": {"A:A": 22, "B:B": 14}
+  },
+  "chart": {
+    "type": "doughnut",
+    "title": "Cơ cấu chi phí vận hành",
+    "style": 10,
+    "palette": ["#1F4E79", "#2E75B6", "#5B9BD5", "#A5A5A5", "#D9D9D9"],
+    "position": {"cell": "D2", "width_cm": 13.5, "height_cm": 9.0},
+    "categories_column": 0,
+    "legend": {"position": "right", "size": 9},
+    "series": [
+      {"name": "Tỷ trọng", "column": 1, "type": "doughnut", "data_labels": {"show": true, "show_percent": true, "position": "best_fit", "size": 9, "number_format": "0%"}}
+    ]
+  },
+  "post": {
+    "anchor": "one_cell",
+    "doughnut_hole": 55,
+    "pie_rotation": 0,
+    "plot_layout": {"x": 0.08, "y": 0.12, "w": 0.62, "h": 0.74}
+  }
+}
