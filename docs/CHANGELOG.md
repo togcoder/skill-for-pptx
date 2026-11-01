@@ -7,6 +7,25 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T048 [xlsx] Workbook UX: hidden data, VBA input, tab colour, merges — 2026-11-01
+
+- **UX layer.** `sheet_forge` accepts a `ux` block: per-sheet `hidden` /
+  `very_hidden`, `tab_color`, `protect`, and `input_form`.
+- **Input form.** A visible Input sheet with 18 merged layout ranges, 8 data
+  validations, auto Task ID, inline status and 3 macro buttons.
+- **Hidden data.** Data/Model/Team/Gantt/Relations hidden; Pivot/Lookups
+  veryHidden; only Dashboard/Input visible. Tab colours set.
+- **Protection.** Input and Dashboard protected; input cells unlocked.
+- **VBA.** `AddRecord`/`ClearForm`/`RefreshDashboard`/`SetStatus`; button
+  macros rewritten to `[0]!DashboardTools.*` after SaveAs.
+- **Evidence.** Excel opened XLSX/XLSM; 3 buttons, 8 validations, 2 protections,
+  5 hidden + 2 veryHidden; Input and Dashboard 1-page PDFs; module present in
+  `.xlsm`. Macro execution blocked by host policy — not claimed.
+- **Limits.** Hidden ≠ secure; merged cells layout-only; no UserForm/audit
+  log/undo; form validation is type/list only.
+- **Status.** EXPERIMENTAL; review accepted by Argon (approve T048, round 2); awaiting owner merge.
+- Report: `experiments/T048-20261101-opencode-workbook-ux/REPORT.md`.
+
 ## T047 [docx] Standards-controlled annual/ESG report — 2026-11-01
 
 - **Standards profile.** `domains/docx/data/report_standard.json` declares ISO

@@ -82,7 +82,7 @@ PowerPoint chá»‰ lĂ  domain lĂ¢u Ä‘á»i nháº¥t.
 
 | `docx` | T039/T045 on `main` or approved; **T047** standards-controlled annual/ESG report (ISO 7144/2145/690/80000/8601, WCAG 2.2, GRI 1/2/3/305; control matrix; 25 pages, 37 tables, 5 equations, GRI index) `work/T047-opencode-standards-report`, audit sạch, Word PDF 25 trang; Argon **approve T047** (round 2), chờ owner merge. Chưa có PDF/UA, PDF/A, LibreOffice rung 3, human rung 6. |
 
-| `xlsx` | T041 SheetCraft on `main`; **T046** advanced workbook/dashboard (7 sheets, áº£nh trong báº£ng, Gantt native start trong suá»‘t, ma tráº­n quan há»‡, pivot GridCraft + fallback, VBA, KPI cĂ´ng thá»©c) `work/T046-opencode-advanced-xlsx`, audit sáº¡ch, print ~93% A4; Argon **approve T046** (round 2), chá» owner merge. Waterfall/treemap/histogram/box/funnel váº«n lĂ  recipe OOXML. |
+| `xlsx` | T041 SheetCraft on `main`; **T046** advanced workbook on `main`; **T048** workbook UX (only Dashboard/Input visible; Input form with 18 merges, 8 validations, 3 macro buttons; hidden/veryHidden data; tab colours; protection; VBA `AddRecord`) `work/T048-opencode-workbook-ux`, audit sạch, Input/Dashboard 1 trang; **review requested**. Argon **approve T048** (round 2), chờ owner merge; macro execution bị host policy chặn — không claim. Waterfall/treemap/histogram/box/funnel vẫn là recipe OOXML. |
 
 
 

@@ -1,0 +1,596 @@
+{
+  "title": "Điều hành chương trình chuyển đổi số 2026",
+  "subtitle": "24 công việc · nhập liệu qua biểu mẫu · dữ liệu ẩn",
+  "workstreams": [
+    "Dữ liệu",
+    "Nền tảng",
+    "Năng lực",
+    "Trải nghiệm"
+  ],
+  "data_last_row": 30,
+  "data": {
+    "headers": [
+      "Task ID",
+      "Workstream",
+      "Owner",
+      "Start",
+      "End",
+      "Days",
+      "Progress",
+      "Cost",
+      "Benefit",
+      "Status",
+      "Priority"
+    ],
+    "rows": [
+      [
+        "T001",
+        "Dữ liệu",
+        "Lan Nguyễn",
+        "2026-01-05",
+        "2026-01-10",
+        5,
+        0.1,
+        40,
+        80,
+        "On track",
+        "High"
+      ],
+      [
+        "T002",
+        "Nền tảng",
+        "Minh Trần",
+        "2026-01-16",
+        "2026-01-24",
+        8,
+        0.2,
+        57,
+        103,
+        "At risk",
+        "Medium"
+      ],
+      [
+        "T003",
+        "Năng lực",
+        "Hà Phạm",
+        "2026-01-27",
+        "2026-02-07",
+        11,
+        0.3,
+        74,
+        126,
+        "Blocked",
+        "Low"
+      ],
+      [
+        "T004",
+        "Trải nghiệm",
+        "Tuấn Lê",
+        "2026-02-07",
+        "2026-02-21",
+        14,
+        0.4,
+        91,
+        149,
+        "Done",
+        "High"
+      ],
+      [
+        "T005",
+        "Dữ liệu",
+        "Mai Vũ",
+        "2026-02-18",
+        "2026-03-07",
+        17,
+        0.5,
+        108,
+        172,
+        "On track",
+        "Medium"
+      ],
+      [
+        "T006",
+        "Nền tảng",
+        "Khánh Đỗ",
+        "2026-03-01",
+        "2026-03-21",
+        20,
+        0.6,
+        125,
+        195,
+        "At risk",
+        "Low"
+      ],
+      [
+        "T007",
+        "Năng lực",
+        "Lan Nguyễn",
+        "2026-03-12",
+        "2026-04-04",
+        23,
+        0.7,
+        142,
+        218,
+        "Blocked",
+        "High"
+      ],
+      [
+        "T008",
+        "Trải nghiệm",
+        "Minh Trần",
+        "2026-03-23",
+        "2026-04-18",
+        26,
+        0.8,
+        159,
+        241,
+        "Done",
+        "Medium"
+      ],
+      [
+        "T009",
+        "Dữ liệu",
+        "Hà Phạm",
+        "2026-04-03",
+        "2026-05-02",
+        29,
+        0.9,
+        176,
+        264,
+        "On track",
+        "Low"
+      ],
+      [
+        "T010",
+        "Nền tảng",
+        "Tuấn Lê",
+        "2026-04-14",
+        "2026-04-21",
+        7,
+        0.1,
+        193,
+        287,
+        "At risk",
+        "High"
+      ],
+      [
+        "T011",
+        "Năng lực",
+        "Mai Vũ",
+        "2026-04-25",
+        "2026-05-05",
+        10,
+        0.2,
+        210,
+        310,
+        "Blocked",
+        "Medium"
+      ],
+      [
+        "T012",
+        "Trải nghiệm",
+        "Khánh Đỗ",
+        "2026-05-06",
+        "2026-05-19",
+        13,
+        0.3,
+        227,
+        333,
+        "Done",
+        "Low"
+      ],
+      [
+        "T013",
+        "Dữ liệu",
+        "Lan Nguyễn",
+        "2026-05-17",
+        "2026-06-02",
+        16,
+        0.4,
+        244,
+        356,
+        "On track",
+        "High"
+      ],
+      [
+        "T014",
+        "Nền tảng",
+        "Minh Trần",
+        "2026-05-28",
+        "2026-06-16",
+        19,
+        0.5,
+        261,
+        379,
+        "At risk",
+        "Medium"
+      ],
+      [
+        "T015",
+        "Năng lực",
+        "Hà Phạm",
+        "2026-06-08",
+        "2026-06-30",
+        22,
+        0.6,
+        278,
+        102,
+        "Blocked",
+        "Low"
+      ],
+      [
+        "T016",
+        "Trải nghiệm",
+        "Tuấn Lê",
+        "2026-06-19",
+        "2026-07-14",
+        25,
+        0.7,
+        55,
+        125,
+        "Done",
+        "High"
+      ],
+      [
+        "T017",
+        "Dữ liệu",
+        "Mai Vũ",
+        "2026-06-30",
+        "2026-07-28",
+        28,
+        0.8,
+        72,
+        148,
+        "On track",
+        "Medium"
+      ],
+      [
+        "T018",
+        "Nền tảng",
+        "Khánh Đỗ",
+        "2026-07-11",
+        "2026-07-17",
+        6,
+        0.9,
+        89,
+        171,
+        "At risk",
+        "Low"
+      ],
+      [
+        "T019",
+        "Năng lực",
+        "Lan Nguyễn",
+        "2026-07-22",
+        "2026-07-31",
+        9,
+        0.1,
+        106,
+        194,
+        "Blocked",
+        "High"
+      ],
+      [
+        "T020",
+        "Trải nghiệm",
+        "Minh Trần",
+        "2026-08-02",
+        "2026-08-14",
+        12,
+        0.2,
+        123,
+        217,
+        "Done",
+        "Medium"
+      ],
+      [
+        "T021",
+        "Dữ liệu",
+        "Hà Phạm",
+        "2026-08-13",
+        "2026-08-28",
+        15,
+        0.3,
+        140,
+        240,
+        "On track",
+        "Low"
+      ],
+      [
+        "T022",
+        "Nền tảng",
+        "Tuấn Lê",
+        "2026-08-24",
+        "2026-09-11",
+        18,
+        0.4,
+        157,
+        263,
+        "At risk",
+        "High"
+      ],
+      [
+        "T023",
+        "Năng lực",
+        "Mai Vũ",
+        "2026-09-04",
+        "2026-09-25",
+        21,
+        0.5,
+        174,
+        286,
+        "Blocked",
+        "Medium"
+      ],
+      [
+        "T024",
+        "Trải nghiệm",
+        "Khánh Đỗ",
+        "2026-01-08",
+        "2026-02-01",
+        24,
+        0.6,
+        191,
+        309,
+        "Done",
+        "Low"
+      ]
+    ],
+    "freeze": "C2",
+    "print_area": "A1:K30",
+    "formats": {
+      "Progress": "0%"
+    },
+    "widths": {
+      "A:A": 10,
+      "B:B": 16,
+      "C:C": 18,
+      "D:E": 13,
+      "F:F": 8,
+      "G:G": 10,
+      "H:I": 12,
+      "J:J": 12,
+      "K:K": 9
+    }
+  },
+  "tasks": [
+    {
+      "name": "Khảo sát hiện trạng",
+      "start": "2026-01-05",
+      "days": 12
+    },
+    {
+      "name": "Chuẩn hoá dữ liệu",
+      "start": "2026-01-26",
+      "days": 18
+    },
+    {
+      "name": "Tích hợp nguồn",
+      "start": "2026-02-16",
+      "days": 21
+    },
+    {
+      "name": "Kiểm thử chất lượng",
+      "start": "2026-03-16",
+      "days": 15
+    },
+    {
+      "name": "Đào tạo người dùng",
+      "start": "2026-04-13",
+      "days": 12
+    },
+    {
+      "name": "Dashboard điều hành",
+      "start": "2026-05-04",
+      "days": 24
+    }
+  ],
+  "team": [
+    {
+      "name": "Lan Nguyễn",
+      "role": "Programme lead",
+      "focus": "Điều phối lộ trình",
+      "photo": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T039\\experiments\\T048-20261101-opencode-workbook-ux\\inputs\\avatar-0.png",
+      "alt": "Ảnh Lan Nguyễn"
+    },
+    {
+      "name": "Minh Trần",
+      "role": "Data lead",
+      "focus": "Chuẩn dữ liệu chủ",
+      "photo": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T039\\experiments\\T048-20261101-opencode-workbook-ux\\inputs\\avatar-1.png",
+      "alt": "Ảnh Minh Trần"
+    },
+    {
+      "name": "Hà Phạm",
+      "role": "Platform lead",
+      "focus": "Tích hợp và vận hành",
+      "photo": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T039\\experiments\\T048-20261101-opencode-workbook-ux\\inputs\\avatar-2.png",
+      "alt": "Ảnh Hà Phạm"
+    },
+    {
+      "name": "Tuấn Lê",
+      "role": "Analytics lead",
+      "focus": "KPI và dashboard",
+      "photo": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T039\\experiments\\T048-20261101-opencode-workbook-ux\\inputs\\avatar-3.png",
+      "alt": "Ảnh Tuấn Lê"
+    }
+  ],
+  "nodes": [
+    {
+      "name": "Data",
+      "x": 1,
+      "y": 8,
+      "group": "Core"
+    },
+    {
+      "name": "Platform",
+      "x": 5,
+      "y": 9,
+      "group": "Core"
+    },
+    {
+      "name": "Analytics",
+      "x": 9,
+      "y": 7,
+      "group": "Core"
+    },
+    {
+      "name": "People",
+      "x": 3,
+      "y": 4,
+      "group": "Enable"
+    },
+    {
+      "name": "Process",
+      "x": 7,
+      "y": 3,
+      "group": "Enable"
+    },
+    {
+      "name": "Customer",
+      "x": 10,
+      "y": 2,
+      "group": "Outcome"
+    }
+  ],
+  "edges": [
+    {
+      "name": "Data→Platform",
+      "from": "Data",
+      "to": "Platform",
+      "x1": 1,
+      "y1": 8,
+      "x2": 5,
+      "y2": 9,
+      "weight": 3
+    },
+    {
+      "name": "Platform→Analytics",
+      "from": "Platform",
+      "to": "Analytics",
+      "x1": 5,
+      "y1": 9,
+      "x2": 9,
+      "y2": 7,
+      "weight": 3
+    },
+    {
+      "name": "Data→People",
+      "from": "Data",
+      "to": "People",
+      "x1": 1,
+      "y1": 8,
+      "x2": 3,
+      "y2": 4,
+      "weight": 2
+    },
+    {
+      "name": "People→Process",
+      "from": "People",
+      "to": "Process",
+      "x1": 3,
+      "y1": 4,
+      "x2": 7,
+      "y2": 3,
+      "weight": 2
+    },
+    {
+      "name": "Analytics→Customer",
+      "from": "Analytics",
+      "to": "Customer",
+      "x1": 9,
+      "y1": 7,
+      "x2": 10,
+      "y2": 2,
+      "weight": 2
+    }
+  ],
+  "kpis": [
+    {
+      "label": "Công việc",
+      "formula": "=TaskCount",
+      "format": "0",
+      "cached": 24,
+      "delta": "+24 trong danh mục",
+      "fill": "#EAF1F8",
+      "positive": true
+    },
+    {
+      "label": "Chi phí",
+      "formula": "=SUBSTITUTE(TEXT(TotalCost/1000,\"0.00\"),\".\",\",\")&\" tỷ\"",
+      "format": "General",
+      "cached": "3,49 tỷ",
+      "delta": "tổng danh mục",
+      "fill": "#EAF4E7",
+      "positive": true
+    },
+    {
+      "label": "Lợi ích",
+      "formula": "=SUBSTITUTE(TEXT(TotalBenefit/1000,\"0.0\"),\".\",\",\")&\" tỷ\"",
+      "format": "General",
+      "cached": "5,3 tỷ",
+      "delta": "tổng danh mục",
+      "fill": "#FFF2E5",
+      "positive": true
+    },
+    {
+      "label": "Rủi ro",
+      "formula": "=COUNTIF(Data!$J$2:$J$30,\"At risk\")",
+      "format": "0",
+      "cached": 6,
+      "delta": "trong 24 công việc",
+      "fill": "#F3EDF7",
+      "positive": false
+    }
+  ],
+  "pivot_source": "Data!A1:K30",
+  "pivot_rows": [
+    "Workstream"
+  ],
+  "pivot_values": [
+    {
+      "field": "Cost",
+      "func": "sum"
+    }
+  ],
+  "ux": {
+    "input_form": true,
+    "sheets": {
+      "Data": {
+        "hidden": true,
+        "tab_color": "7F7F7F"
+      },
+      "Pivot": {
+        "very_hidden": true,
+        "tab_color": "7F7F7F"
+      },
+      "Model": {
+        "hidden": true,
+        "tab_color": "7F7F7F"
+      },
+      "Team": {
+        "hidden": true,
+        "tab_color": "7F7F7F"
+      },
+      "Gantt": {
+        "hidden": true,
+        "tab_color": "7F7F7F"
+      },
+      "Relations": {
+        "hidden": true,
+        "tab_color": "7F7F7F"
+      },
+      "Lookups": {
+        "very_hidden": true,
+        "tab_color": "7F7F7F"
+      },
+      "Dashboard": {
+        "tab_color": "1F4E79",
+        "protect": true
+      },
+      "Input": {
+        "tab_color": "C55A11"
+      }
+    }
+  }
+}
