@@ -1,8 +1,8 @@
 # Handoff — Design Research Lab
 
-Cập nhật: 01/11/2026, sau T040. Tệp này được **viết lại** mỗi lần bàn giao,
-không ghi nối thêm. Lịch sử: [docs/CHANGELOG.md](docs/CHANGELOG.md). Bàn giao
-trước (T038): [docs/archive/HANDOFF-T038-2026-11-01.md](docs/archive/HANDOFF-T038-2026-11-01.md).
+Cập nhật: 01/11/2026, sau T039/T041 (docx/xlsx). Tệp này được **viết lại** mỗi
+lần bàn giao, không ghi nối thêm. Lịch sử: [docs/CHANGELOG.md](docs/CHANGELOG.md).
+Bàn giao trước (T040): [docs/archive/](docs/archive/).
 
 Repo: https://github.com/togcoder/skill-for-pptx (private). Chủ dự án: togcoder.
 
@@ -20,46 +20,51 @@ PowerPoint chỉ là domain lâu đời nhất.
 
 ## Bắt đầu
 
-1. Đầu nghiên cứu mới nhất nằm trên nhánh `claude/blissful-pasteur-gmll59`
-   (đã gộp T035–T040). `main` vẫn chậm hơn.
+1. Đầu nghiên cứu lab-wide vẫn là `claude/blissful-pasteur-gmll59` (T035–T040).
+   Hai nhánh docx/xlsx mới dựa trên tip đó:
+   - `work/T039-opencode-docx` — PR #36 (draft, review requested);
+   - `work/T041-opencode-xlsx` — PR #35 (draft, review requested).
 2. Đọc theo thứ tự `AGENTS.md`, `lab/CHARTER.md`, `lab/PROTOCOL.md`, rồi thẻ
-   domain của bạn.
-3. Chạy `python3 -m unittest discover -s tests` và
-   `python3 lab/tools/check_layout.py`.
-4. Lấy mã kế tiếp trong `research/tasks/INDEX.md` (hiện là **T041**). Tiêu đề
-   ghi domain trong ngoặc, ví dụ `[xlsx]`.
+   domain của bạn (`domains/docx/DOMAIN.md`, `domains/xlsx/DOMAIN.md`).
+3. Chạy `python3 -m unittest discover -s tests` (đặt `PYTHONUTF8=1` trên Windows
+   để tránh lỗi encoding của các test cũ) và `python3 lab/tools/check_layout.py`.
+4. Lấy mã kế tiếp trong `research/tasks/INDEX.md` (hiện là **T042**). Tiêu đề
+   ghi domain trong ngoặc, ví dụ `[cross]`.
 
 ## Trạng thái từng domain
 
 | Domain | Trạng thái |
 |---|---|
-| pptx | Trưởng thành: Director, Morph Studio, Forge, hệ thiết kế và critic. T035 và T038 **chưa được phản biện**. Còn 1 test lỗi của T038 (WORD_BREAK ở "Logo Watermark", phụ thuộc font). |
-| docx, xlsx, svg | Mới có một bridge thử nghiệm mỗi domain (T037), đều chưa được phản biện. T039 (OpenCode) đã nhận docx + xlsx. |
-| cross | Có protocol 00–03, schema, registry ArtCraft và intent decoder (T036–T037). Chưa được phản biện; chưa được làm chuẩn chung (cần 2 domain chấp nhận). |
+| pptx | Trưởng thành: Director, Morph Studio, Forge, hệ thiết kế và critic. T035 và T038 **chưa được phản biện**; còn 1 test lỗi của T038 (WORD_BREAK ở "Logo Watermark", phụ thuộc font). |
+| docx | T039 DocumentCraft: `word_field_kit.py`, `document_forge.py`, `document_audit.py`, dữ liệu `domains/docx/data/document_system.json`, skill `document-craft`. Có audit sạch, Word 12 trang, PDF và preview; **review requested** (PR #36). Chưa có PDF/UA, PDF/A, LibreOffice rung 3, human rung 6. |
+| xlsx | T041 SheetCraft: `chart_forge.py`, `chart_patch.py`, `chart_audit.py`, dữ liệu `domains/xlsx/data/spreadsheet_system.json`, skill `sheet-craft`. Combo/doughnut/scatter audit sạch, Excel export đúng; **review requested** (PR #35). Waterfall/treemap/histogram/box/funnel còn là recipe OOXML, chưa sinh. |
+| svg | Mới có bridge thử nghiệm T037; chưa phản biện. |
+| cross | Protocol 00–03, schema, registry ArtCraft, intent decoder (T036–T037); chưa phản biện, chưa thành chuẩn chung (cần 2 domain chấp nhận). |
 
 ## Việc tiếp theo (xếp hạng)
 
-1. **Phản biện chéo**, theo `lab/standards/REVIEW.md`, do agent khác tác giả
-   viết:
-   - T038 (pptx canon);
-   - T035 (DeckCraft);
-   - T036–T037 (lớp cross và các bridge).
-2. **T039 docx/xlsx**: viết luận điểm riêng của domain trong thẻ domain trước
-   khi viết code.
-3. **T041 (cross)**: dời code từ `scripts/` vào thư mục theo domain, sửa
-   import, skill và test, không phá các thí nghiệm đã đóng băng.
-4. **pptx**: cổng native (trình chiếu tương tác trong PowerPoint) và sửa test
-   lỗi của T038.
+1. **Phản biện chéo** theo `lab/standards/REVIEW.md`, do agent khác tác giả:
+   - T039 [docx] và T041 [xlsx] (PR #36, #35);
+   - T038 (pptx canon), T035 (DeckCraft), T036–T037 (cross + bridges).
+2. **Docx**: PDF/UA/veraPDF, PDF/A, LibreOffice Writer rung 3, native Word
+   bibliography (`b:Sources`), landscape/two-column fixture; quyết định module
+   canonical (`document_forge` vs `wordcraft_bridge`).
+3. **Xlsx**: raw-XML builder cho waterfall/treemap/histogram/box/funnel; Excel
+   COM audit đọc mọi `Chart`; label-collision từ glyph box; dashboard audit.
+4. **T042 [cross]**: dời code từ `scripts/` vào package theo domain(s), sửa
+   import/skill/test, không phá thí nghiệm đã đóng băng.
+5. **pptx**: cổng native (trình chiếu tương tác) và sửa test T038.
 
 ## Prompt giao việc
 
 ```text
 Join the design research lab at https://github.com/togcoder/skill-for-pptx, branch
-claude/blissful-pasteur-gmll59. Read AGENTS.md, lab/CHARTER.md, lab/PROTOCOL.md and
-domains/<your domain>/DOMAIN.md. Run the tests and lab/tools/check_layout.py.
-Take the next free ID in research/tasks/INDEX.md with the domain in brackets and
-push the claim. Frame your question from the domain's native canon before
-building. Put every output into experiments/<ID>-<date>-<agent>-<slug>/ (never the
-repo root). Tag claims with evidence rungs. Ask another agent to review per
-lab/standards/REVIEW.md before anything enters a product path.
+claude/blissful-pasteur-gmll59. Read AGENTS.md, HANDOFF.md, lab/CHARTER.md,
+lab/PROTOCOL.md and domains/<your domain>/DOMAIN.md. Run the tests and
+lab/tools/check_layout.py. Take the next free ID in research/tasks/INDEX.md with
+the domain in brackets and push the claim. Frame your question from the domain's
+native canon before building. Put every output into
+experiments/<ID>-<date>-<agent>-<slug>/ (never the repo root). Tag claims with
+evidence rungs. Ask another agent to review per lab/standards/REVIEW.md before
+anything enters a product path.
 ```
