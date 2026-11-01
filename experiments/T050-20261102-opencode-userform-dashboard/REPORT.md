@@ -86,7 +86,7 @@ points, 4 model groups, 4 KPI cards, 4 charts.
 | Charts are native, not a screenshot collage | 1 | 4 chart parts (`xl/charts/chart1..4.xml`), line/column/bar/doughnut; audit 0 errors/warnings |
 | Data layer is hidden | 1 + 4 | Data/Trend/Model `Visible=0`; Dashboard `Visible=-1`; only Dashboard visible |
 | Dashboard has interaction | 1 + 4 | 3 form buttons; OnAction `FormTools.ShowEntryForm/FilterRisk/FilterAll`; VML `[0]!` |
-| Dashboard is live, not a static picture | 1 + 4 | Data has a `Visible` SUBTOTAL column; Model uses `SUMIFS`/`COUNTIFS` over `Data`; KPI/status use formulas. Excel filter `At risk` changes 24→4 tasks and 3,492→668 cost; appending one row changes 24→25 and 3,492→3,592 (`formula-check.json`) |
+| Dashboard is live, not a static picture | 1 + 4 | Data has a `Visible` SUBTOTAL column; Model uses `SUMIFS`/`COUNTIFS` over `Data`; KPI/status use formulas. Excel filter `At risk` changes 24→4 tasks and 3,492→668 cost; appending one row changes 24→25 and 3,492→3,592. Risk KPI counts `At risk` only: initial 4 = status chart, append 5 = status chart (`formula-check.json`) |
 | Build pipeline is one command | 1 | `python scripts/dashboard_forge.py build spec.json -o dashboard.xlsx --userform` builds the XLSX, injects `DashboardTools`, adds `frmEntry`/`FormTools`, normalizes `[0]!FormTools.*` |
 | A real UserForm exists | 1 + 4 | `frmEntry` in `VBProject`; **22 controls**; code has `btnSave_Click`, `ClearForm`, `ws.Cells(nextRow, 1).Value = nextId` |
 | Form is not a worksheet range | 1 | `VBComponents.Add(3)` (MSForm), controls `Forms.ComboBox.1`, `Forms.TextBox.1`, `Forms.CommandButton.1` |

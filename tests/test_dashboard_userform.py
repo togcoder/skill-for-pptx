@@ -78,10 +78,13 @@ class DashboardTests(unittest.TestCase):
                       "Me.cboWorkstream", "Me.txtStart", "Me.lblStatus",
                       "ThisWorkbook.Worksheets(\"Data\")",
                       "ws.Cells(nextRow, 1).Value = nextId",
-                      "CDate(Me.txtStart.Value) + days - 1"):
+                      "CDate(Me.txtStart.Value) + days - 1",
+                      "ws.Cells(nextRow, 12).Formula", "SUBTOTAL(103",
+                      "####-##-##", "< 0"):
             self.assertIn(token, FORM_CODE)
         for token in ("Public Sub ShowEntryForm", "frmEntry.Show",
-                      "Public Sub FilterRisk", "Public Sub FilterAll"):
+                      "Public Sub FilterRisk", "Public Sub FilterAll",
+                      "A1:L200", "CalculateFullRebuild"):
             self.assertIn(token, MODULE_CODE)
         self.assertEqual(_rgb("#1F4E79"), 0x794E1F)
 

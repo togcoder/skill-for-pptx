@@ -64,8 +64,8 @@ def build() -> dict:
              "cached": total_benefit, "num_format": '#,##0" tr"', "delta": f"ROI {total_benefit / total_cost:.2f}×",
              "fill": "#FFF2E5", "positive": True},
             {"label": "Rủi ro", "value": str(risk),
-             "formula": '=COUNTIFS(Data!$J$2:$J$200,"At risk",Data!$L$2:$L$200,1)+COUNTIFS(Data!$J$2:$J$200,"Blocked",Data!$L$2:$L$200,1)',
-             "cached": risk, "delta": f"{counts['At risk']} at risk · {counts['Blocked']} blocked",
+             "formula": '=COUNTIFS(Data!$J$2:$J$200,"At risk",Data!$L$2:$L$200,1)',
+             "cached": counts['At risk'], "delta": f"{counts['At risk']} at risk · {counts['Blocked']} blocked",
              "fill": "#FCE4D6", "positive": False},
         ],
     }

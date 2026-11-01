@@ -469,8 +469,8 @@
     {
       "label": "Rủi ro",
       "value": "8",
-      "formula": "=COUNTIFS(Data!$J$2:$J$200,\"At risk\",Data!$L$2:$L$200,1)+COUNTIFS(Data!$J$2:$J$200,\"Blocked\",Data!$L$2:$L$200,1)",
-      "cached": 8,
+      "formula": "=COUNTIFS(Data!$J$2:$J$200,\"At risk\",Data!$L$2:$L$200,1)",
+      "cached": 4,
       "delta": "4 at risk · 4 blocked",
       "fill": "#FCE4D6",
       "positive": false

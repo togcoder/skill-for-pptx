@@ -61,8 +61,12 @@ Private Sub btnSave_Click()
         Me.lblStatus.Caption = "Chọn Trạng thái và Ưu tiên."
         Exit Sub
     End If
+    If Not (Me.txtStart.Value Like "####-##-##") Then
+        Me.lblStatus.Caption = "Ngày bắt đầu phải có dạng YYYY-MM-DD."
+        Exit Sub
+    End If
     If Not IsDate(Me.txtStart.Value) Then
-        Me.lblStatus.Caption = "Ngày bắt đầu không hợp lệ (YYYY-MM-DD)."
+        Me.lblStatus.Caption = "Ngày bắt đầu không hợp lệ."
         Exit Sub
     End If
     If Not IsNumeric(Me.txtDays.Value) Then
@@ -76,6 +80,10 @@ Private Sub btnSave_Click()
     End If
     If Not IsNumeric(Me.txtCost.Value) Or Not IsNumeric(Me.txtBenefit.Value) Then
         Me.lblStatus.Caption = "Chi phí và lợi ích phải là số."
+        Exit Sub
+    End If
+    If CDbl(Me.txtCost.Value) < 0 Or CDbl(Me.txtBenefit.Value) < 0 Then
+        Me.lblStatus.Caption = "Chi phí và lợi ích không được âm."
         Exit Sub
     End If
 
@@ -94,8 +102,10 @@ Private Sub btnSave_Click()
     ws.Cells(nextRow, 9).Value = CDbl(Me.txtBenefit.Value)
     ws.Cells(nextRow, 10).Value = Me.cboStatus.Value
     ws.Cells(nextRow, 11).Value = Me.cboPriority.Value
+    ws.Cells(nextRow, 12).Formula = "=SUBTOTAL(103,$A" & nextRow & ")"
     Me.lblStatus.Caption = "Đã lưu " & nextId & "."
     ClearForm
+    Application.CalculateFullRebuild
     ThisWorkbook.RefreshAll
     Exit Sub
 
@@ -134,14 +144,16 @@ Public Sub FilterRisk()
     On Error Resume Next
     With ThisWorkbook.Worksheets("Data")
         .AutoFilter.ShowAllData
-        .Range("A1:K25").AutoFilter Field:=10, Criteria1:="At risk"
+        .Range("A1:L200").AutoFilter Field:=10, Criteria1:="At risk"
     End With
+    Application.CalculateFullRebuild
     ThisWorkbook.RefreshAll
 End Sub
 
 Public Sub FilterAll()
     On Error Resume Next
     ThisWorkbook.Worksheets("Data").AutoFilter.ShowAllData
+    Application.CalculateFullRebuild
     ThisWorkbook.RefreshAll
 End Sub
 '''
