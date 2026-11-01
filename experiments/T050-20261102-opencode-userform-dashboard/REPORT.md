@@ -139,6 +139,13 @@ Preview: `preview/dashboard.png` (1-page dashboard),
 
 ## Review response
 
+Argon review 2026-11-02 (chat `0:cf4bb6173adaaa34`, then `2:3de1025dc6882c32`), verdict **revise** in round 1 and **approve T050** in round 2. Full record: `research/reviews/T050-argon-20261102.md`.
+
 | Finding | Response (fixed / disputed / deferred → task) |
 |---|---|
-| — | Pending review. No findings yet. |
+| B1: dashboard static | **Fixed.** Visible SUBTOTAL column; Model `SUMIFS/COUNTIFS`; KPI/status formulas; filter 24→4, 3,492→668; append 24→25, 3,492→3,592. |
+| B2: footer row 6 pt / layout | **Fixed.** Row 38 spacer 6 pt; row 39 source/buttons 24 pt; charts no longer collide. |
+| B3: pipeline / normalize / fake test | **Fixed.** `--userform` one-command pipeline; `[0]!` normalization; real bad-workbook audit test. |
+| M1: duplicate cost chart / colour | **Fixed.** Composition = tasks by group; comparison cost = NAVY. |
+| M2: date/negative validation | **Fixed.** `Like "####-##-##"` + `IsDate`; `< 0` blocked. |
+| m1: audit page/cache | **Fixed.** Landscape and all-zero `numCache` warnings. |
