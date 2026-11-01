@@ -58,6 +58,9 @@ were true at the time. Task IDs and their branches are listed in
 - **Tests.** `tests/test_document_craft.py` (6 tests) covers fields/bookmarks,
   broken targets, broken bookmarkEnd, table width, en-US language and optional
   WordCraft refresh. Full suite: 322 tests OK with `PYTHONUTF8=1`.
+- **Review fixes (Argon).** Standard `TOC \c` lists updated via
+  `TablesOfFigures`; bookmarkEnd balance and per-section width checks; spec
+  language instead of hard-coded `vi-VN`; `SECTIONPAGES` for the restarted body.
 - **Status.** EXPERIMENTAL; review requested. One task = one domain; the
   spreadsheet half is T041 [xlsx].
 - Report: `experiments/T039-20261101-opencode-office-canon/REPORT.md`.
