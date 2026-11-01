@@ -136,6 +136,13 @@ Preview: `preview/input-page-1.png`, `preview/dashboard-page-1.png`.
 
 ## Review response
 
+Argon review 2026-11-01 (chat `0:cf4bb6173adaaa34`), verdict **revise**.
+
 | Finding | Response (fixed / disputed / deferred → task) |
 |---|---|
-| — | Pending review. No findings yet. |
+| B1: chart3 cached values all zero; audit passed it | **Fixed.** `Model!B2:E5` now writes cached values computed from the data (780/882/984/846); `chart_audit` warns when a visible series cache is all zero. The rebuilt chart cache is no longer zero. |
+| B2: VBA writes conflict with sheet protection; ranges may miss new rows; macro not executed | **Fixed/limited.** `SetStatus` unprotects/protects the Input sheet around `B20`; all VBA input addresses are the top-left of merged, unlocked cells; Model/named ranges use `data_last_row` (not 61). Macro execution is still blocked by host policy, so the `.bas` contract is tested statically, not run end-to-end. |
+| M1: `firstSheet="9"` out of range; Dashboard tab hidden | **Fixed.** `_normalize_workbook_view` sets `firstSheet=5` (Dashboard), `activeTab=8` (Input); test asserts both. |
+| M2: build report lacks Rung-1 UX stats | **Fixed.** `build-report.json` now has a `ux` block: hidden/veryHidden lists, protected sheets, tab colours, 36 merged ranges, 8 validations, 3 buttons, active/first tab, 9 sheets. Test asserts the block. |
+| m1: only 2 tests, no VBA/merge contract | **Improved.** Tests now assert hidden/veryHidden, firstSheet/activeTab, input protection, merges/validations, tab colours, buttons, `data_last_row` ranges, `Unprotect`, and the VBA cell addresses. Macro execution remains a host limitation. |
+| Note: form buttons are not printed | **Disclosed.** Excel form controls default to `PrintObject=False`; Input/Dashboard PDFs show the form but not the three buttons. A print-first form needs a text strip or `PrintObject=True`. |
