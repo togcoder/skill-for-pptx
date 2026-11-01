@@ -115,7 +115,7 @@ obtained.
 | The product illustration is a controlled vector asset | 1 + 4 | SVG authored (≈120 shapes), VectorCraft 2× raster, Pillow trim/grade/composite; DOCX render page 4 |
 | Charts are native SheetCraft exports | 1 + 4 | Chart Forge combo/stacked workbooks, Excel PNG export, embedded with source + alt; audit no DPI note at 145 mm |
 | Audit is clean | 1 | `ok: true`, 0 errors/warnings; 135 fields, 91 bookmarks, 37 headings (max H3), 38 tables, 4 figures, 5 equations (5 display, 2 numbered), 1 image in cell, 5 merged cells, `vi-VN`, 1,174 paragraphs; 11 unique references cited |
-| Tests cover the new order/parser | 1 | `tests/test_document_standards.py` (2 tests); full suite 387 tests OK |
+| Tests cover the new order/parser | 1 | `tests/test_document_standards.py` (2 tests); full suite 395 tests OK |
 
 **Hashes:** see `artifacts/SHA256SUMS.txt`.
 

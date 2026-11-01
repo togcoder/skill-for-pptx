@@ -46,7 +46,7 @@ were true at the time. Task IDs and their branches are listed in
   space (`\%`, `\&`, `\ `), covered by tests.
 - **Evidence.** Word opened the exact DOCX, refreshed fields and saved; 25-page
   PDF inspected; audit clean: 101 fields, 89 bookmarks, 37 tables, 4 figures,
-  5 equations, `vi-VN`; full suite 387 tests OK.
+  5 equations, `vi-VN`; full suite 395 tests OK.
 - **Status.** EXPERIMENTAL; review accepted by Argon (approve T047, round 2); awaiting owner merge.
 - Report: `experiments/T047-20261101-opencode-standards-report/REPORT.md`.
 

@@ -81,7 +81,7 @@ Forge; T048 adds the UX layer.
 | VBA module exists | 4 | `.xlsm` `VBProject` has `DashboardTools`; code contains `AddRecord`, `ClearForm`, `SetStatus`, `WorksheetExists` |
 | Dashboard still works with data hidden | 4 + 5 | Excel opens XLSM, Dashboard 1 page; 24 tasks, 3.49 tỷ cost, 5.3 tỷ benefit, 6 risks; Model!C2:C5 cache = 780/882/984/846 |
 | Audit is clean | 1 | `build-report.json`: `ok: true`, 0 errors/warnings/notes; 3 charts, 9 sheets |
-| Tests cover the UX contract | 1 | `tests/test_sheet_craft_ux.py` (2 tests); full suite 387 tests OK |
+| Tests cover the UX contract | 1 | `tests/test_sheet_craft_ux.py` (2 tests); full suite 395 tests OK |
 
 **Hashes:** see `artifacts/SHA256SUMS.txt`.
 
