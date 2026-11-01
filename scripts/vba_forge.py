@@ -207,7 +207,7 @@ def normalize_button_macros(path: str | Path) -> bool:
         if not name.endswith(".vml"):
             continue
         text = blob.decode("utf-8", errors="replace")
-        new = re.sub(r"'[^']+'\.(DashboardTools\.)", r"[0]!\1", text)
+        new = re.sub(r"'[^']+'\.([A-Za-z_][A-Za-z0-9_]*\.)", r"[0]!\1", text)
         if new != text:
             members[name] = new.encode("utf-8")
             changed = True

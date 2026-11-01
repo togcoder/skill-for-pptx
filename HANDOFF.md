@@ -82,7 +82,7 @@ PowerPoint chá»‰ lĂ  domain lĂ¢u Ä‘á»i nháº¥t.
 
 | `docx` | T039/T045/T047 on `main`; **T052** configurable standard profiles (HUST 2017, VNU-UET, ISO 7144, annual/GRI) + Vietnamese scientific report: `hust-datn-2017` 34 body pages/48 total, `vnu-uet-kl-2024` 35 body/45 total, conformance 23/23 and 24/24, Word PDFs inspected; Argon **approve T052** (round 2), chờ owner merge. Chưa có PDF/UA, PDF/A, LibreOffice rung 3, human rung 6. |
 
-| `xlsx` | T041 SheetCraft on `main`; **T046** advanced workbook on `main`; **T048** workbook UX (only Dashboard/Input visible; Input form with 18 merges, 8 validations, 3 macro buttons; hidden/veryHidden data; tab colours; protection; VBA `AddRecord`) `work/T048-opencode-workbook-ux`, audit sạch, Input/Dashboard 1 trang; **review requested**. Argon **approve T048** (round 2), chờ owner merge; macro execution bị host policy chặn — không claim. Waterfall/treemap/histogram/box/funnel vẫn là recipe OOXML. |
+| `xlsx` | T041/T046/T048 on `main`; **T050** VBA UserForm (22 controls, `frmEntry` + `FormTools`) + 12-column dashboard (4 native charts, 4 KPI, 3 buttons, 1-page A4), macro execution blocked by host policy `work/T050-opencode-userform-dashboard`, audit clean; Argon **approve T050** (round 2), chờ owner merge. Waterfall/treemap/histogram/box/funnel vẫn là recipe OOXML. |
 
 
 

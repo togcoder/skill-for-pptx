@@ -1,6 +1,6 @@
 # Spreadsheet system: chart control, not chart decoration
 
-Status: EXPERIMENTAL — T041 [xlsx], review requested (2026-11-01). Evidence
+Status: EXPERIMENTAL — T041/T046/T048/T050 [xlsx], review requested (2026-11-02). Evidence
 reached: structural (rung 1), GridCraft PDF render (rung 3) and Microsoft Excel
 chart export (rung 4–5 for the exact files in
 `experiments/T041-20261101-opencode-sheet-craft/artifacts/`; `--render` prefers
@@ -96,6 +96,33 @@ never uses merges.
 **Macro gate.** The module can be injected with VBA trust, but execution can
 still be blocked by macro security. Report module present vs macro executed as
 separate evidence.
+
+## UserForm + dashboard composition (T050)
+
+A dashboard is not a pile of charts. Compose it on one grid and one reading
+order, then put data entry in a real modal form.
+
+- **Grid:** A:L (12 columns). KPI cards are 3 columns; charts are 7/5. Every
+  card/chart snaps to the grid. Do not place charts by eye.
+- **Reading order:** title → KPI strip → trend/composition → comparison/status
+  → source line. A reader can stop after the KPI strip.
+- **Palette:** navy `#1F4E79` primary, orange `#C55A11` attention, blue
+  `#9DC3E6` context, green `#548235` benefit, grey secondary. No rainbow.
+- **Charts:** native only, with title, legend when multi-series, light
+  gridlines, data labels only where they help, and a source line. One chart
+  type per question: trend = line, composition = column, comparison = bar,
+  status = doughnut.
+- **Print:** A4 landscape, `A1:L39`, fit 1×1. Export and inspect one page.
+- **UserForm:** `VBComponents.Add(3)` + `Designer.Controls.Add("Forms.*.1")`.
+  Controls are the source of truth; the form code reads the **top-left** of
+  each control, validates, writes to the hidden Data sheet, clears and
+  refreshes. A worksheet form is not a UserForm; say which one is used.
+- **Buttons:** `FormTools.ShowEntryForm`, `FilterRisk`, `FilterAll`. After
+  `SaveAs(.xlsm)`, verify `FmlaMacro` is `[0]!FormTools.*`, not the source
+  `.xlsx`.
+- **Macro gate:** injection/inspection ≠ execution. A modal form under a
+  blocked macro policy will hang COM; do not call `Show` in an automated test.
+  Record "not executed" and show the control inventory separately.
 
 ## What the tools control
 
