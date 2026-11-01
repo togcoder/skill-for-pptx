@@ -1,0 +1,78 @@
+{
+  "svg": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T039\\experiments\\T051-20261102-opencode-photo-vector\\artifacts\\line.svg",
+  "level": "catalogue",
+  "style": "line",
+  "size_px": [
+    1015,
+    1200
+  ],
+  "bbox": [
+    198,
+    248,
+    629,
+    881
+  ],
+  "palette": [
+    "#17191A",
+    "#7A7B77",
+    "#A37924",
+    "#3D3C34",
+    "#AAA69A"
+  ],
+  "canny": [
+    51,
+    136
+  ],
+  "counts": {
+    "form": 34,
+    "detail": 16,
+    "removed": 227,
+    "total_candidates": 277
+  },
+  "reasons": {
+    "removed: over the form budget": 107,
+    "removed: weak or broken: not a readable control": 43,
+    "removed: over the detail budget": 30,
+    "form: long + coherent": 28,
+    "removed: below the 3 mm control floor": 24,
+    "removed: decal/lettering: closed but not a control shape": 20,
+    "detail: short structural detail": 15,
+    "form: closed loop": 6,
+    "removed: below the 1.5 mm scale floor": 3,
+    "detail: closed control loop": 1
+  },
+  "stats": {
+    "level": "catalogue",
+    "style": "line",
+    "form_paths": 34,
+    "detail_paths": 16,
+    "colour_paths": 0,
+    "nodes": 1567,
+    "stroke_length_px": 22699.2,
+    "stroke_weights_px": {
+      "silhouette": 4.22,
+      "form": 2.29,
+      "detail": 1.1
+    },
+    "smallest_detail_mm": 5.555,
+    "viewBox": [
+      0,
+      0,
+      1015,
+      1200
+    ]
+  },
+  "fidelity": {
+    "silhouette_iou": 0.9979,
+    "grabcut_iou": 0.9685,
+    "colour_delta_e76": null
+  },
+  "edges": {
+    "edge_coverage": 0.329,
+    "long_edge_coverage": 0.378,
+    "ink_ratio": 0.338,
+    "kept_pixels": 14950,
+    "reference_pixels": 44191
+  },
+  "render": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T039\\experiments\\T051-20261102-opencode-photo-vector\\artifacts\\line.png"
+}

@@ -7,6 +7,24 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T051 [vector] Photo-to-vector line hierarchy and detail budget — 2026-11-02
+
+- **Pipeline.** `scripts/photo_vector.py` segments a product photo (GrabCut,
+  shadow trim), flattens 5 material tones, extracts/dedupes Canny edges, and
+  classifies them as silhouette, form, detail or removed with recorded reasons.
+- **Policy.** Form: length ≥ 5.5% of the object diagonal and turning ≤ 0.55°/px.
+  Detail: short + strong, closed controls ≥ 3 mm and circularity ≥ 0.28; 1.5 mm
+  scale floor. The full trace is kept as the strawman.
+- **Result.** Line style: 34 form + 16 detail, 1,567 nodes, 0 fills, GrabCut IoU
+  0.968, VectorCraft 0 warnings. Colour style: 26 fills, ΔE76 9.84. Full trace:
+  141 + 49, 5,034 nodes, visibly scribbled.
+- **Evidence.** Four budget SVGs + line SVG, VectorCraft renders, photo-vs-vector,
+  layer stack, budget sheet, `levels.json`/`line.json`; 14 new tests.
+- **Tests.** `tests/test_photo_vector.py` (14 tests); full suite 418 tests OK
+  (8 skipped).
+- **Status.** EXPERIMENTAL; review requested.
+- Report: `experiments/T051-20261102-opencode-photo-vector/REPORT.md`.
+
 ## T048 [xlsx] Workbook UX: hidden data, VBA input, tab colour, merges — 2026-11-01
 
 - **UX layer.** `sheet_forge` accepts a `ux` block: per-sheet `hidden` /
