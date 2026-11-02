@@ -187,8 +187,10 @@ part face, not an edge fragment.
 
 ## Review response (Argon, round 1)
 
-Argon returned **revise** with three blockers. All are fixed in this revision;
-the brief is unchanged, the scene was rebuilt.
+Argon returned **revise** with three blockers, then **revise** once more for
+the painter's order, then **approve T053** (round 3, 0 blockers/majors). The
+brief is unchanged; the scene was rebuilt. Full record:
+`research/reviews/T053-argon-20261102.md`.
 
 | Finding | Response |
 |---|---|
@@ -198,4 +200,4 @@ the brief is unchanged, the scene was rebuilt.
 | Major: text labels were wrong (“MOL”, “FEENO”) and appeared missing | **Fixed.** “MILL”, “FERMO”; text is live and renders (2× crop verified); test checks the text contract |
 | Major: top panel was offset (z8..71) and the wand went behind the front face | **Fixed.** Top panel is `z0-2..z1`, overhangs 1 unit; wand stays at `z <= 0`; bracket is drawn before the tube |
 | Major: no `cylinder_z`/scene/CLI tests; docstring promised a `demo` command | **Fixed.** 16 tests cover `cylinder_z`, `inspect_svg`, the Quick Mill scene and width change; `demo` implemented |
-| Minor: 14/15/16 counts, 100 vs 102 paths, pixel-space shadow, unused gradient/clip | **Fixed.** 16 groups (14 parts + shadow + highlights); 105 `<path>` + 1 `<rect>` + 5 `<text>`; VectorCraft reports 102 path objects; shadow uses `disc_y`; unused `yellowFront`/`clip` removed |
+| Minor: 14/15/16 counts, 100 vs 102 paths, pixel-space shadow, unused gradient/clip | **Fixed.** 16 groups (14 parts + shadow + highlights); 101 `<path>` + 1 `<rect>` + 5 `<text>`; VectorCraft reports 102 path objects; shadow uses `disc_y`; unused `yellowFront`/`clip` removed |

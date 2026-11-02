@@ -21,7 +21,8 @@ were true at the time. Task IDs and their branches are listed in
   before/after sheet shows the T051 trace next to the reconstruction.
 - **Tests.** `tests/test_vector_reconstruct.py` (16 tests); full suite 448
   tests OK (8 skipped).
-- **Status.** EXPERIMENTAL; review requested.
+- **Status.** EXPERIMENTAL; review accepted by Argon (approve T053, round 3);
+  merged to main (PR #50).
 - Report: `experiments/T053-20261102-opencode-vector-reconstruction/REPORT.md`.
 
 ## T051 [vector] Photo-to-vector line hierarchy and detail budget — 2026-11-02
@@ -40,7 +41,7 @@ were true at the time. Task IDs and their branches are listed in
 - **Tests.** `tests/test_photo_vector.py` (18 tests); full suite 422 tests OK
   (8 skipped).
 - **Status.** EXPERIMENTAL; review accepted by Argon (approve T051, round 2);
-  merged to `main` (PR #49).
+  merged to main (PR #49).
 - Report: `experiments/T051-20261102-opencode-photo-vector/REPORT.md`.
 ## T052 [docx] Configurable standard profiles + Vietnamese scientific report — 2026-11-02
 
