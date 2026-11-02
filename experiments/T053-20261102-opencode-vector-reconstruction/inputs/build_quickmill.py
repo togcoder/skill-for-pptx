@@ -37,8 +37,8 @@ class Dimensions:
     top_h: float = 4
     tray_front: float = -6
     tray_depth: float = 46
-    group_r: float = 9.5
-    portafilter_r: float = 8.0
+    group_r: float = 8.5
+    portafilter_r: float = 7.5
 
     @property
     def x1(self) -> float:
@@ -190,40 +190,36 @@ def build(dims: Dimensions | None = None) -> str:
          (d.x0, d.tower_top, d.z1), (d.x0, d.tower_top, d.z0)],
         fill=yellow_side, sw=2.2)])
 
-    # Group head: an overhang + a vertical cylinder + a basket.  Not a lens.
+    # Portafilter is lower than the group housing, so it is painted first.
     gx = d.cx
-    gz = d.z0 - 4
+    gz = d.z0 - 6.0
     gy = d.group_y
-    # Vertical group.  The overhang is painted after the cylinder so it
-    # covers the cylinder's top ellipse; the bottom disc is not drawn because
-    # the camera is above and a bottom disc would show through the shell.
-    group_head = [
-        s.front_ellipse(gx, gy - 11, 18, 3.0, d.z0 - 4.05, "#000000",
-                        stroke=None, sw=0, opacity=0.14),
-        s.front_ellipse(gx, gy - 11, 11, 2.0, d.z0 - 4.05, "#000000",
-                        stroke=None, sw=0, opacity=0.14),
-        s.front_ellipse(gx, gy + 9, 18, 2.2, d.z0 - 0.1, "#000000",
-                        stroke=None, sw=0, opacity=0.12),
+    portafilter = [
+        s.cylinder_y(gx, gz, d.portafilter_r + 0.2, gy - 9.4, gy - 8.4,
+                     side="#1E2022", top="#1E2022", sw=0.8)[0],
+        s.cylinder_y(gx, gz, d.portafilter_r, gy - 8.4, gy + 1.0,
+                     side="#B8B6AD", top=chrome_top, sw=1.4)[0],
+        s.cylinder_y(gx, gz, d.portafilter_r + 0.5, gy + 0.6, gy + 1.2,
+                     side=chrome_side, top=chrome_top, sw=1.0)[0],
     ]
-    group_head += s.cylinder_y(gx, gz, d.group_r, gy - 3, gy + 9,
-                               side="#9E9C93", top=chrome_top, sw=1.6)
-    group_head.append(s.cylinder_y(gx, gz, d.group_r + 0.35, gy - 1.2, gy + 1.2,
-                                   side="#6F7274", top="#6F7274", sw=0.8)[0])
-    group_head += s.box(gx - 18, gy + 9, d.z0 - 4, gx + 18, gy + 15, d.z0,
-                        front=chrome_front, side=chrome_side, top=chrome_top, sw=1.8)
-    group(s, "group-head", group_head)
-
-    # Basket: side only; its top is hidden under the group head.  The handle
-    # is painted last because it is the front-most part.
-    portafilter = s.cylinder_y(gx, gz, d.portafilter_r, gy - 9, gy - 3,
-                               side="#B8B6AD", top=chrome_top, sw=1.4)[:1]
-    portafilter.append(s.cylinder_y(gx, gz, d.portafilter_r + 0.4, gy - 3.6, gy - 2.4,
-                                    side=chrome_side, top=chrome_top, sw=1.0)[0])
-    portafilter.append(s.cylinder_y(gx, gz, d.portafilter_r + 0.2, gy - 9.4, gy - 8.6,
-                                    side="#1E2022", top="#1E2022", sw=0.8)[0])
-    portafilter += s.cylinder_z(gx, gy - 5, gz, d.z0 - 40, 5.4, 4.6,
-                                side=black_side, cap="#24272A", sw=1.4)
+    portafilter += s.cylinder_z(gx, gy - 4.0, gz - d.portafilter_r + 1.5, d.z0 - 42,
+                                4.4, 3.8, side=black_side, cap="#24272A", sw=1.4)
     group(s, "portafilter", portafilter)
+
+    # Rectangular group housing.  It is drawn after the basket, so its bottom
+    # face covers the basket top; no top ellipse peeks out.
+    group_head = [
+        s.front_ellipse(gx, gy - 11, 18, 3.0, d.z0 - 0.1, "#000000",
+                        stroke=None, sw=0, opacity=0.14),
+    ]
+    group_head += s.box(gx - 16, gy + 1.0, d.z0 - 10, gx + 16, gy + 9.0, d.z0,
+                        front=chrome_front, side=chrome_side, top=chrome_top, sw=1.8)
+    group_head.append(s.face([(gx - 16, gy + 1.0, d.z0 - 10.1),
+                              (gx + 16, gy + 1.0, d.z0 - 10.1),
+                              (gx + 16, gy + 2.2, d.z0 - 10.1),
+                              (gx - 16, gy + 2.2, d.z0 - 10.1)],
+                             fill=chrome_side, stroke=None, sw=0))
+    group(s, "group-head", group_head)
 
     # Steam wand: bracket first, then the tube; z stays in front of the face.
     wand = [s.front_circle(d.x0 + d.width * 0.84, gy + 4, 4.0, d.z0 - 0.2,
