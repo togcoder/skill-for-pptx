@@ -5,9 +5,9 @@ description: Reconstruct a product photo as a clean, editable 2.5D vector illust
 
 # Vector Craft
 
-> **Status: EXPERIMENTAL — T053 [vector], review requested.** This skill is not a
-> canonical product path until an independent review accepts it. T051 is kept
-> as a **negative result**: Canny tracing was rejected by the owner.
+> **Status: EXPERIMENTAL — T053/T054 [vector], review requested.** This skill is
+> not a canonical product path until an independent review accepts it. T051 is
+> kept as a **negative result**: Canny tracing was rejected by the owner.
 
 You are reconstructing an object, not tracing a photograph. A camera image is
 a projection full of noise, reflections and occlusion. A drawing is a **model**:
@@ -76,6 +76,27 @@ The distinction is testable:
    - The scene is deterministic: building twice gives the same bytes.
    - The smallest detail is readable at the final width.
 
+## Compare first, not alone
+
+A render judged on its own hides proportion errors.  Put the source and the
+vector together at the **same machine height** before changing details.
+
+1. Crop both to the full machine (knobs to feet); never stretch one axis.
+2. Make a side-by-side, a 50 % blend and an edge map (photo red, vector blue).
+3. Measure six rows as fractions of body height: top-panel top, black-band
+   bottom, group-head centre, tray top, lower-panel top, base top.
+4. Rebuild the scene from those fractions; re-run the comparison.
+
+T054 is the worked example: the T053 body was 0.969 W/H against the photo's
+0.800, and its group-head centre sat at 0.424 against 0.275.  Matching the
+fractions moved the aspect to 0.806 and every landmark to within 0.001.  The
+remaining work is local shape and perspective, not another redraw.
+
+```powershell
+python experiments/T054-.../inputs/make_compare.py
+python experiments/T054-.../inputs/make_before_after.py
+```
+
 ## Primitive map
 
 | Part | Primitive | Notes |
@@ -83,13 +104,13 @@ The distinction is testable:
 | base / plinth | box | slightly larger than the body; feet below |
 | lower body | box | chrome front, yellow side |
 | tower | box + split front faces | chrome lower, black upper |
-| top panel | box | overhangs the tower; cup rails on top |
-| drip tray | box + top slot pattern | grid is repeated quads, not texture |
-| group head | cylinder along z + rings | boss + gasket + portafilter |
-| portafilter | cylinder along z | chrome collar, black handle |
-| steam wand | screen-space tube | chrome + black grip |
-| knobs | vertical cylinder | black base ring + yellow body |
-| badge | front circle + text | cream disc, red ring, vector wordmark |
+| top panel | thin chrome box | overhangs the black band; the top is not black |
+| drip tray | deep box + top slot pattern | grid is repeated quads; chrome lip |
+| group head | chrome overhang + vertical cylinder | round collar, gasket, visible basket |
+| portafilter | vertical basket + angled tube | chrome collar, thick black handle |
+| steam wand | screen-space tube | chrome + black grip; draw it before the handle |
+| knobs | vertical cylinder | black base ring + yellow body; watch the scale |
+| badge | front oval + text | cream oval, red ring, vector wordmark |
 | controls | front rounded rects | black plate, cream paddles, labels |
 
 ## Do not

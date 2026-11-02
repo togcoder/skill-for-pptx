@@ -7,6 +7,28 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T054 [vector] Comparison-first match to the source photo — 2026-11-02
+
+- **Why.** T053 was approved but still looked squat and boxy. The owner points
+  out that a single render hides the proportion error; the source and the vector
+  together expose it. T054 makes the comparison the acceptance test.
+- **Method.** Crop both to the full machine, scale to the same height, build a
+  side-by-side / 50% overlay / edge map, and measure six landmark fractions of
+  body height.
+- **Result.** T053 was 0.969 W/H with the group centre at 0.424; T054 is 0.806
+  against the photo's 0.800, with every landmark within 0.001. 16 groups, 115
+  paths, 6 texts; VectorCraft 0 warnings.
+- **Scene changes.** Chrome top (not black), oval badge, group head moved to
+  0.61 of front width, compact chrome overhang + visible cylinder, angled black
+  portafilter, steam wand behind the handle, deep tray with a visible grid,
+  smaller knobs, two side screws.
+- **Evidence.** `preview/t053-vs-t054.png`, `preview/compare-t054.png`,
+  `preview/measure-t054.json`; `tests/test_vector_match.py` (4 tests); full suite
+  452 tests OK.
+- **Status.** EXPERIMENTAL; review requested. Still axonometric, not perspective;
+  group head and chrome are simplified.
+- Report: `experiments/T054-20261102-opencode-vector-match/REPORT.md`.
+
 ## T053 [vector] Semantic 2.5D reconstruction (supersedes T051) — 2026-11-02
 
 - **Why.** The owner rejected T051: Canny edges are a trace, not a

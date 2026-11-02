@@ -1,0 +1,52 @@
+{
+  "photo_crop": [
+    220,
+    300,
+    1100,
+    1400
+  ],
+  "vector_crop": [
+    500,
+    530,
+    1730,
+    1800
+  ],
+  "photo_aspect_w_over_h": 0.8,
+  "vector_aspect_w_over_h": 0.969,
+  "landmark_names": [
+    "top_panel_top",
+    "black_band_bottom",
+    "group_centre",
+    "tray_top",
+    "lower_panel_top",
+    "base_top",
+    "base_bottom"
+  ],
+  "photo_fractions": [
+    0.0,
+    0.216,
+    0.275,
+    0.52,
+    0.618,
+    0.843,
+    1.0
+  ],
+  "vector_fractions": [
+    0.0,
+    0.312,
+    0.424,
+    0.496,
+    0.632,
+    0.888,
+    1.0
+  ],
+  "delta": [
+    0.0,
+    0.096,
+    0.149,
+    -0.024,
+    0.014,
+    0.045,
+    0.0
+  ]
+}

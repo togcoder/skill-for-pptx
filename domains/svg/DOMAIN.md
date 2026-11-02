@@ -26,7 +26,7 @@ Vector graphic quality is governed by mathematical and optical balance:
 | `scripts/multi_domain_canons.py` | Canonical (T042): Stroke scaling, Bézier $\kappa$, optical trim | `tests/test_multi_domain_canons.py` |
 | `scripts/vectorcraft_bridge.py` | Experimental (T037, T042): VectorCraft headless CLI runner | `tests/test_craft_bridges.py` |
 | `scripts/photo_vector.py` | Experimental (T051, **negative result**): photo → edge hierarchy → layered SVG; rejected as a trace, kept for evidence | `tests/test_photo_vector.py` |
-| `scripts/vector_reconstruct.py` | Experimental (T053): semantic 2.5D reconstruction — projection, box, cylinder, plate, tube, gradients, SVG scene | `tests/test_vector_reconstruct.py` |
+| `scripts/vector_reconstruct.py` | Experimental (T053/T054): semantic 2.5D reconstruction — projection, box, cylinder, plate, tube, gradients, SVG scene | `tests/test_vector_reconstruct.py`, `tests/test_vector_match.py` |
 | `skills/vector-craft/SKILL.md` | Experimental (T053): reconstruction method; T051 is the “do not trace” example | — |
 
 ## Data
@@ -87,7 +87,9 @@ on the T051 photo it produces 58 form + 133 detail and 2,268 nodes (3,178 in col
   style: 34 form + 16 detail, 1,437 nodes, GrabCut IoU 0.959, 0 VectorCraft
   warnings; colour style: 5 tones, ΔE76 10.56. Full trace (58 + 133, 2,268 (colour 3,178)
   nodes) is the strawman. **Review accepted (Argon); merged to main (PR #49).**
+- **T053 semantic reconstruction**: 16 groups, 101 paths, 5 live text elements; VectorCraft 0 warnings; no Canny/raster. Review accepted (Argon), merged to main (PR #50).
+- **T054 comparison-first match**: photo and vector at matched machine height, six landmark fractions and edge overlay. T053 was 0.969 W/H with the group centre at 0.424; T054 is 0.806 vs the photo's 0.800, with landmark deltas 0.000–0.001. 16 groups, 115 paths, 6 texts; VectorCraft 0 warnings. **Review requested.**
 - Known limitation: the pipeline is not semantic (a human must curate logos and
   controls); the ground-shadow trim assumes a dark contact line; true
   through-holes are filled; no Illustrator/Inkscape or print proof; one product
-  photo only.
+  photo only. T054 is still axonometric, not a perspective camera.
