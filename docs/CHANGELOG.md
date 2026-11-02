@@ -7,6 +7,23 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T053 [vector] Semantic 2.5D reconstruction (supersedes T051) — 2026-11-02
+
+- **Why.** The owner rejected T051: Canny edges are a trace, not a
+  reconstruction. T053 models the machine in object coordinates and draws the
+  parts, instead of extracting pixel lines.
+- **Module.** `scripts/vector_reconstruct.py`: axonometric projection, box,
+  front rounded rect/circle, vertical/horizontal cylinder, tube, gradients and
+  an SVG scene with semantic groups.
+- **Scene.** `build_quickmill.py`: 14 parts / 16 groups, 100 primitive paths,
+  5 live text elements, 1000 × 1000; one light, painter's order, no raster.
+- **Evidence.** VectorCraft `info`: 16 groups, 102 paths, 5 types, 0 warnings;
+  before/after sheet shows the T051 trace next to the reconstruction.
+- **Tests.** `tests/test_vector_reconstruct.py` (12 tests); full suite 444
+  tests OK (8 skipped).
+- **Status.** EXPERIMENTAL; review requested.
+- Report: `experiments/T053-20261102-opencode-vector-reconstruction/REPORT.md`.
+
 ## T051 [vector] Photo-to-vector line hierarchy and detail budget — 2026-11-02
 
 - **Pipeline.** `scripts/photo_vector.py` segments a product photo (GrabCut,

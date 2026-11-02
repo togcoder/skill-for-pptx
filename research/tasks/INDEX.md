@@ -3,7 +3,7 @@
 Since T040: every new title starts with its domain in brackets: `[pptx]`, `[docx]`, `[xlsx]`, `[svg]` or `[cross]` (see `domains/README.md`). Lifecycle: `lab/PROTOCOL.md`. A row may carry `review requested` / `reviewed: <verdict>`.
 
 This file is the one place to take a task ID. Before starting, add a row with
-status `claimed`, using the next free ID (**T053**). Push the row before you do
+status `claimed`, using the next free ID (**T054**). Push the row before you do
 expensive work. IDs are never reused. T024 was taken three times in parallel,
 so those rows carry a suffix. The experiment folders keep the names they were
 created with.
@@ -81,5 +81,5 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T050 | [xlsx] VBA UserForm data entry + composed dashboard (grid, chart selection, interaction, visual quality) | OpenCode (DeepSeek V4.1 Flash) | `work/T050-opencode-userform-dashboard` | main | `experiments/T050-20261102-opencode-userform-dashboard/REPORT.md` |
 | T051 | [vector] Photo-to-vector line hierarchy: what to keep, simplify or remove for a controlled technical illustration | OpenCode (DeepSeek V4.1 Flash) | `work/T051-opencode-photo-vector` | main | `experiments/T051-20261102-opencode-photo-vector/REPORT.md` |
 | T052 | [docx] Configurable standard profiles + Vietnamese university scientific report (declaration, chapters, equations, references) | OpenCode (DeepSeek V4.1 Flash) | `work/T052-opencode-scientific-report` | main | `experiments/T052-20261102-opencode-scientific-report/REPORT.md` |
-| T053 | [vector] Semantic product reconstruction: parametric 2.5D vector illustration from a photo (supersedes the T051 edge trace) | OpenCode (DeepSeek V4.1 Flash) | `work/T053-opencode-vector-reconstruction` | claimed | `experiments/T053-20261102-opencode-vector-reconstruction/REPORT.md` |
+| T053 | [vector] Semantic product reconstruction: parametric 2.5D vector illustration from a photo (supersedes the T051 edge trace) | OpenCode (DeepSeek V4.1 Flash) | `work/T053-opencode-vector-reconstruction` | review requested | `experiments/T053-20261102-opencode-vector-reconstruction/REPORT.md` |
 | T054 | *next free ID* | | | | |

@@ -1,96 +1,114 @@
 ---
 name: vector-craft
-description: Turn a product photo into a controlled, editable SVG line illustration — keep the silhouette, simplify part boundaries, cap detail and remove texture/lettering that cannot be read at the final size. Use when the user supplies a photo and asks for a vector drawing, a technical illustration, a line-art version, a laser/print asset, or complains that an auto-trace looks noisy, sketchy or over-detailed.
+description: Reconstruct a product photo as a clean, editable 2.5D vector illustration — identify the parts, set one projection, build boxes/cylinders/plates/controls, and paint the visible faces. Use when the user supplies a photo and asks for a vector drawing, product illustration, technical line art, print asset, or says an auto-trace looks crude, noisy or traced. Do not use edge tracing as the deliverable.
 ---
 
 # Vector Craft
 
-> **Status: EXPERIMENTAL — T051 [vector], review requested.** This skill is not a
-> canonical product path until an independent review accepts it. Use it, test
-> it, and report failures; do not cite it as lab canon yet.
+> **Status: EXPERIMENTAL — T053 [vector], review requested.** This skill is not a
+> canonical product path until an independent review accepts it. T051 is kept
+> as a **negative result**: Canny tracing was rejected by the owner.
 
-You are the illustrator, not a tracer. A camera photo contains four kinds of
-ink: the **silhouette**, **part boundaries**, **controls**, and **texture**
-(reflections, dust, lettering, shadows). A good drawing keeps the first three
-selectively and removes the fourth. "Trace every edge" is the failure mode, not
-the goal.
+You are reconstructing an object, not tracing a photograph. A camera image is
+a projection full of noise, reflections and occlusion. A drawing is a **model**:
+parts with known shapes, one camera, deliberate materials. The photo supplies
+proportions, colours and the camera; it never supplies the line work.
 
-Scripts live two levels above this file: `ROOT=<this skill dir>/../..`.
+The distinction is testable:
 
-- **Required:** Python 3, OpenCV (`opencv-python-headless`), NumPy, Pillow.
-- **Native vector tool:** VectorCraft (`vectorcraft-cli`) for SVG inspection and
-  rendering. The SVG is the deliverable; a PNG is a preview only.
+| Trace (T051, rejected) | Reconstruction (T053) |
+|---|---|
+| Canny contours in pixel coordinates | boxes/cylinders in object coordinates |
+| every reflection becomes a line | reflections become material tones |
+| 1,437 nodes of edge soup | semantic groups: `base`, `tower`, `group-head` |
+| one line at a time | a dimension change moves the whole part |
+| no occlusion model | faces painted back-to-front |
 
 ## Workflow
 
-1. **Freeze the brief.**
-   - What is the final width (mm or px)? Detail that is 1 mm wide is invisible
-     at 60 mm and clear at 300 mm.
-   - Line style or flat colour? A **line drawing** is usually more readable for
-     a technical product; flat colour is a material study.
-   - Which marks are semantic (a logo, a warning label, a control) and which
-     are texture? Ask if a brand mark must remain; do not trace lettering.
-   - Is the photo licensed for reuse? Record source, licence, access date.
-2. **Segment before drawing.**
-   ```powershell
-   python $ROOT/scripts/photo_vector.py build photo.jpg -o line.svg `
-     --level catalogue --colors 5 --width-mm 120 --style line `
-     --source "..." --license "CC0" --json metrics.json
+1. **Measure the object, not the pixels.**
+   - Crop the product; record overall width, height and depth ratios.
+   - List the parts and their primitives: base, lower body, tower, top panel,
+     drip tray, group head, portafilter, steam wand, knobs, badge, controls.
+   - Write down which faces are visible (front, left side, top) and the
+     approximate depth order. This list is the scene graph.
+2. **Choose one projection.**
    ```
-   The default segments with GrabCut, removes the shadow skirt, flattens colour,
-   extracts/dedupes Canny edges, classifies and writes a layered SVG.
-3. **Read the layers, not just the render.**
-   ```powershell
-   vectorcraft-cli info line.svg
-   vectorcraft-cli convert line.svg line.png --scale 2
+   X = ox + x·sx + z·dx
+   Y = oy − y·sy + z·dy
    ```
-   Open `preview/layer-stack.png` or make it: silhouette / colour / form /
-   detail. If the form layer is not a clean drawing, fix the form budget before
-   adding detail.
-4. **Choose a budget and say why.**
-   - `silhouette`: shape check only.
-   - `form`: material blocks + structure, no detail.
-   - `catalogue`: 30–35 form + 12–16 detail; the default.
-   - `full`: the strawman; use only to show why it is worse.
-5. **Curate.** The pipeline is a first pass. Remove brand lettering, decals,
-   dust and reflection clusters by hand or with an include/exclude box. A
-   single wrong line is better removed than smoothed.
-6. **Verify.** SVG parses; `vectorcraft-cli info` reports no warnings; render at
-   the final size; check that the smallest kept detail is ≥ 1.5 mm and that the
-   silhouette IoU is ≥ 0.96 against a hand-checked mask. State the limits.
+   `x` runs along the front, `y` up, `z` back. One projection for every part;
+   never eyeball a second vanishing point. If the view is taller than wide,
+   stretch `sy` and compensate front-plane circles (`ry = r·sx/sy`) so they
+   stay round on screen.
+3. **Build primitives in object coordinates.**
+   ```powershell
+   python $ROOT/scripts/vector_reconstruct.py inspect reconstruction.svg
+   ```
+   - `box(x0,y0,z0,x1,y1,z1)` paints left side, top, front.
+   - `cylinder_y` for knobs and feet; `cylinder_z` for the portafilter.
+   - `front_rounded` / `front_circle` for plates, badges, switches.
+   - `tube` only for a hose/wand; it is screen-space, not a traced edge.
+4. **Paint the faces with one light.**
+   - Front lighter, left side darker, top lightest (or the reverse, but keep it
+     consistent).
+   - Chrome is a light-to-dark gradient, not a copy of the reflections.
+   - Add at most two designed highlight bands on the front; they are shapes,
+     not edge clusters.
+5. **Add only the controls that identify the product.**
+   - A badge is a cream disc + red ring + **typeset** wordmark, not traced
+     lettering.
+   - A switch plate is a rounded black plate + three cream paddles + tiny
+     labels. Do not trace every screw or vent.
+   - A drip grid is a repeated slot pattern on the tray's top face.
+6. **Render and iterate.**
+   ```powershell
+   vectorcraft-cli convert reconstruction.svg reconstruction.png --scale 2
+   vectorcraft-cli info reconstruction.svg
+   ```
+   Look for: floating parts, a part that reads as a different object (a group
+   head that looks like a camera lens), a seam that cuts a panel in half,
+   inconsistent depth, a badge that is too large, a cast shadow that is not a
+   designed ellipse.
+7. **Verify.**
+   - SVG parses; groups carry semantic IDs; no `<image>`, no base64.
+   - VectorCraft `info` reports paths/groups and no warnings.
+   - The scene is deterministic: building twice gives the same bytes.
+   - The smallest detail is readable at the final width.
 
-## The hierarchy
+## Primitive map
 
-| Layer | What belongs | Line weight (share of object height) | Rule |
-|---|---|---|---|
-| Silhouette | outer body, base, handle, wand | 0.48% | always; RDP 1.2 px + Bézier |
-| Form | panel edges, part boundaries, tray lip | 0.26% | length ≥ 5.5% diagonal, turning ≤ 0.55°/px |
-| Detail | buttons, knobs, vents, badge ring | 0.125% | short + strong; closed controls ≥ 3 mm, circularity ≥ 0.28 |
-| Texture | reflections, dust, lettering, shadow | — | remove; flatten colour instead |
-
-At 120 mm width this photo gives 0.80 / 0.43 / 0.21 mm. The ratios are optical,
-not ISO 128 millimetres; do not claim ISO 128 compliance.
-
-## One rule per failure
-
-| Symptom | Real cause | Fix |
+| Part | Primitive | Notes |
 |---|---|---|
-| Every edge is a double line | Canny returns two contours per ridge | dedupe with a 3 px mask, ≥70% coverage |
-| Drawing looks sketchy | detail budget is filling with 20×2 px slivers | score closed loops by bbox/area, not circumference; reject < 3 mm |
-| Badge/logo is a scribble | lettering traced as line or as holes | fill small holes; remove low-circularity decals; keep the badge shape |
-| Grey puddle under the object | cast shadow is inside the GrabCut mask | trim below the lowest dark pixel per column; disclose the IoU loss |
-| “Detail” is a second pile of long lines | detail chosen from leftover long edges | classify form first; detail only from short edges |
-| Chrome is a dark clump | k-means splits reflections into islands | 5 tones, bilateral + mode filter, small-island merge, rim suppression |
-| Line drawing is too heavy | silhouette/form weights are absolute px | derive from object height, clamp, then check at final width |
-| Full trace looks “more accurate” | coverage is chasing texture | compare node count and ink; show the full trace as the strawman |
+| base / plinth | box | slightly larger than the body; feet below |
+| lower body | box | chrome front, yellow side |
+| tower | box + split front faces | chrome lower, black upper |
+| top panel | box | overhangs the tower; cup rails on top |
+| drip tray | box + top slot pattern | grid is repeated quads, not texture |
+| group head | cylinder along z + rings | boss + gasket + portafilter |
+| portafilter | cylinder along z | chrome collar, black handle |
+| steam wand | screen-space tube | chrome + black grip |
+| knobs | vertical cylinder | black base ring + yellow body |
+| badge | front circle + text | cream disc, red ring, vector wordmark |
+| controls | front rounded rects | black plate, cream paddles, labels |
+
+## Do not
+
+- **Do not pass Canny/RDP contours off as a reconstruction.** T051 did that and
+  was rejected. The tell is node soup, doubled contours, text traced as a
+  scribble, and reflections drawn as lines.
+- Do not use a different projection for each part.
+- Do not trace a logo at 2–3 mm; typeset it or omit it.
+- Do not model a through-hole by filling it; add a paper-coloured layer.
+- Do not claim photogrammetry or exact dimensions. This is a designed
+  interpretation from a single photo.
 
 ## Honesty
 
-- The pipeline is **not semantic**: it cannot know a logo from a vent. Say which
-  parts were curated by a human.
-- A photo is a projection; a drawing is an interpretation. Removing a shadow or
-  a reflection is a decision, not a bug — record it.
-- Do not promise a print proof from a screen render. VectorCraft render is rung
-  4; Illustrator/Inkscape and print are separate rungs.
-- Keep the source photo only when its licence permits redistribution; otherwise
-  reference it and keep it out of the repository.
+- Record the photo source/licence and the manual measurements.
+- Say which parts are simplified, which controls are omitted, and which
+  materials are flat approximations.
+- A reconstruction can be edited by changing a number; a trace cannot. If the
+  user cannot change the depth/width without redrawing, it is a trace.
+- VectorCraft render is rung 4; a physical print and a second editor are still
+  separate checks.

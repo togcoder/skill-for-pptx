@@ -25,13 +25,34 @@ Vector graphic quality is governed by mathematical and optical balance:
 |---|---|---|
 | `scripts/multi_domain_canons.py` | Canonical (T042): Stroke scaling, Bézier $\kappa$, optical trim | `tests/test_multi_domain_canons.py` |
 | `scripts/vectorcraft_bridge.py` | Experimental (T037, T042): VectorCraft headless CLI runner | `tests/test_craft_bridges.py` |
-| `scripts/photo_vector.py` | Experimental (T051): photo → GrabCut mask → flat colour → form/detail edge hierarchy → layered SVG; line and colour styles | `tests/test_photo_vector.py` |
-| `skills/vector-craft/SKILL.md` | Experimental (T051): the working method and failure modes | — |
+| `scripts/photo_vector.py` | Experimental (T051, **negative result**): photo → edge hierarchy → layered SVG; rejected as a trace, kept for evidence | `tests/test_photo_vector.py` |
+| `scripts/vector_reconstruct.py` | Experimental (T053): semantic 2.5D reconstruction — projection, box, cylinder, plate, tube, gradients, SVG scene | `tests/test_vector_reconstruct.py` |
+| `skills/vector-craft/SKILL.md` | Experimental (T053): reconstruction method; T051 is the “do not trace” example | — |
 
 ## Data
 - `knowledge/vector_canon.json`: 24x24 grid, optical trim bounds, scaling exponent 0.75, Bézier handles.
 
-## Photo-to-vector hierarchy (T051)
+## Semantic reconstruction (T053)
+
+The owner rejected T051: edge tracing is not a reconstruction. T053 models the
+object instead.
+
+- **Object coordinates:** `x` width, `y` height, `z` depth; one axonometric
+  projection for every part. The photo supplies proportions and materials, not
+  line work.
+- **Parts as primitives:** base/tower/top are boxes; knobs/feet are vertical
+  cylinders; the group head/portafilter are cylinders along `z`; the badge and
+  controls are front-plane circles/rectangles; the steam wand is a screen-space
+  tube.
+- **Painter's order:** base → body → tower → top → rails → tray → side →
+  group head → portafilter → wand → knobs → badge → controls.
+- **One light:** front lighter, left side darker, top lightest; chrome is a
+  three-stop gradient, not a copy of reflections.
+- **Type, not trace:** the badge wordmark and switch labels are live text.
+- **Test:** changing a dimension moves the whole part; a trace cannot do that.
+  The SVG has 16 semantic groups, no `<image>`, no Canny.
+
+## Photo-to-vector hierarchy (T051 — negative result)
 A camera photo is not a line drawing. The pipeline keeps three layers and
 removes the fourth:
 
