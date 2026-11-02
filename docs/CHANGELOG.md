@@ -7,6 +7,24 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T053 [vector] Semantic 2.5D reconstruction (supersedes T051) — 2026-11-02
+
+- **Why.** The owner rejected T051: Canny edges are a trace, not a
+  reconstruction. T053 models the machine in object coordinates and draws the
+  parts, instead of extracting pixel lines.
+- **Module.** `scripts/vector_reconstruct.py`: axonometric projection, box,
+  front rounded rect/circle, vertical/horizontal cylinder, tube, gradients and
+  an SVG scene with semantic groups.
+- **Scene.** `build_quickmill.py`: 14 parts / 16 groups, 101 primitive paths,
+  5 live text elements, 1000 × 1000; one light, painter's order, no raster.
+- **Evidence.** VectorCraft `info`: 16 groups, 102 paths, 5 types, 0 warnings;
+  before/after sheet shows the T051 trace next to the reconstruction.
+- **Tests.** `tests/test_vector_reconstruct.py` (16 tests); full suite 448
+  tests OK (8 skipped).
+- **Status.** EXPERIMENTAL; review accepted by Argon (approve T053, round 3);
+  merged to main (PR #50).
+- Report: `experiments/T053-20261102-opencode-vector-reconstruction/REPORT.md`.
+
 ## T051 [vector] Photo-to-vector line hierarchy and detail budget — 2026-11-02
 
 - **Pipeline.** `scripts/photo_vector.py` segments a product photo (GrabCut,
@@ -23,7 +41,7 @@ were true at the time. Task IDs and their branches are listed in
 - **Tests.** `tests/test_photo_vector.py` (18 tests); full suite 422 tests OK
   (8 skipped).
 - **Status.** EXPERIMENTAL; review accepted by Argon (approve T051, round 2);
-  merged to `main` (PR #49).
+  merged to main (PR #49).
 - Report: `experiments/T051-20261102-opencode-photo-vector/REPORT.md`.
 ## T052 [docx] Configurable standard profiles + Vietnamese scientific report — 2026-11-02
 

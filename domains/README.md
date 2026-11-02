@@ -24,7 +24,7 @@ the contract for agents working in that domain.
 
 | `xlsx` | Excel (OOXML workbook, charts) | [xlsx/DOMAIN.md](xlsx/DOMAIN.md) | T041/T046/T048 on main; T050 UserForm + composed dashboard (review requested) | `chart_forge.py`, `chart_patch.py`, `chart_audit.py`, `sheet_forge.py`, `vba_forge.py`, `dashboard_forge.py`, `userform_forge.py`, `gridcraft_bridge.py` |
 
-| `svg` | Vector graphics (SVG, print, icon grids) | [svg/DOMAIN.md](svg/DOMAIN.md) | T042 canon tokens; T051 photo-to-vector line hierarchy (review requested) | `multi_domain_canons.py`, `vectorcraft_bridge.py`, `photo_vector.py` |
+| `svg` | Vector graphics (SVG, print, icon grids) | [svg/DOMAIN.md](svg/DOMAIN.md) | T042 canon tokens; T053 semantic 2.5D reconstruction (T051 trace = negative) | `multi_domain_canons.py`, `vectorcraft_bridge.py`, `photo_vector.py`, `vector_reconstruct.py` |
 
 | `video` | Video editing, motion pacing & broadcast audio (FilmCraft & SoundCraft) | [video/DOMAIN.md](video/DOMAIN.md) | Foundational: T042 safe zones, ASL, J/L-cuts, EBU R128 | `multi_domain_canons.py`, `filmcraft_bridge.py`, `soundcraft_bridge.py` |
 
