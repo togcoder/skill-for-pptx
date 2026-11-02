@@ -114,7 +114,6 @@ class Scene:
     height: int = 1200
     defs: list[str] = field(default_factory=list)
     body: list[str] = field(default_factory=list)
-    _clip_id: int = 0
 
     # -- primitives ------------------------------------------------------
     def gradient(self, name: str, stops: Sequence[tuple[float, str]],
@@ -125,12 +124,6 @@ class Scene:
         parts.append("</linearGradient>")
         self.defs.append("".join(parts))
         return f"url(#{name})"
-
-    def clip(self, d: str) -> str:
-        self._clip_id += 1
-        name = f"clip{self._clip_id}"
-        self.defs.append(f'<clipPath id="{name}"><path d="{d}"/></clipPath>')
-        return name
 
     def path(self, d: str, fill: str = "none", stroke: str | None = INK,
              sw: float = 2.0, opacity: float | None = None,
@@ -194,15 +187,26 @@ class Scene:
         return self.front_ellipse(cx, cy, r, ry, z, fill=fill, stroke=stroke,
                                   sw=sw, opacity=opacity)
 
+    def disc_y(self, cx: float, cz: float, rx: float, rz: float, y: float,
+               fill: str, opacity: float | None = None) -> str:
+        """A filled ellipse on a horizontal plane, projected."""
+        local = circle_points(0, 0, 1.0, 64)
+        screen = [self.projection.p(cx + x * rx, y, cz + z * rz)
+                  for x, z in local]
+        d = "M " + " L ".join(f"{_n(x)} {_n(y)}" for x, y in screen) + " Z"
+        return self.path(d, fill=fill, stroke=None, sw=0, opacity=opacity)
+
     # -- vertical cylinder (knobs, feet) --------------------------------
     def cylinder_y(self, cx: float, cz: float, r: float, y0: float, y1: float,
                    *, side: str, top: str, stroke: str | None = INK,
                    sw: float = 1.6) -> list[str]:
-        bottom = [self.projection.p(cx + dx, y0, cz + dz) for dx, dz in circle_points(0, 0, r, 40)]
-        top = [self.projection.p(cx + dx, y1, cz + dz) for dx, dz in circle_points(0, 0, r, 40)]
-        hull = convex_hull(bottom + top)
+        bottom_pts = [self.projection.p(cx + dx, y0, cz + dz)
+                      for dx, dz in circle_points(0, 0, r, 40)]
+        top_pts = [self.projection.p(cx + dx, y1, cz + dz)
+                   for dx, dz in circle_points(0, 0, r, 40)]
+        hull = convex_hull(bottom_pts + top_pts)
         d_side = "M " + " L ".join(f"{_n(x)} {_n(y)}" for x, y in hull) + " Z"
-        d_top = "M " + " L ".join(f"{_n(x)} {_n(y)}" for x, y in top) + " Z"
+        d_top = "M " + " L ".join(f"{_n(x)} {_n(y)}" for x, y in top_pts) + " Z"
         return [self.path(d_side, fill=side, stroke=stroke, sw=sw),
                 self.path(d_top, fill=top, stroke=stroke, sw=sw)]
 
@@ -283,7 +287,24 @@ def main() -> None:
     sub = parser.add_subparsers(dest="cmd", required=True)
     p = sub.add_parser("inspect")
     p.add_argument("svg", type=Path)
+    p = sub.add_parser("demo", help="Write a small primitive demo SVG")
+    p.add_argument("-o", "--output", type=Path, required=True)
     args = parser.parse_args()
+    if args.cmd == "demo":
+        scene = Scene(Projection(120, 260, 4.0, 4.0, -1.4, -1.0), width=420, height=300)
+        scene.gradient("demo", [(0, "#EDE4CF"), (1, "#B9B5A8")])
+        scene.body.extend(scene.box(10, 0, 0, 50, 40, 30, front="url(#demo)",
+                                    side="#8F8C82", top="#F2EFE6"))
+        scene.body.extend(scene.cylinder_y(30, 15, 7, 40, 52, side="#C8921C",
+                                           top="#F0C24A"))
+        scene.body.append(scene.front_circle(30, 20, 8, -0.1, "#EDE4CF"))
+        scene.body.append(scene.text_front(30, 20, -0.2, "DEMO", 4, "#B43A2E"))
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        args.output.write_text(scene.svg(title="Demo", desc="Primitive demo",
+                                         metadata={"source": "generated"}),
+                               encoding="utf-8")
+        print(args.output)
+        return
     print(json.dumps(inspect_svg(args.svg), ensure_ascii=False, indent=2))
 
 

@@ -3,7 +3,9 @@ from __future__ import annotations
 
 import math
 import re
+import tempfile
 import unittest
+from pathlib import Path
 import xml.etree.ElementTree as ET
 
 from scripts.vector_reconstruct import (
@@ -82,6 +84,20 @@ class PrimitiveTests(unittest.TestCase):
         parts = self.scene.cylinder_y(20, 30, 6, 0, 10, side="#AAAAAA", top="#BBBBBB")
         self.assertEqual(len(parts), 2)
         self.assertTrue(all("Z" in part for part in parts))
+        self.assertIn("fill=\"#AAAAAA\"", parts[0])
+        self.assertIn("fill=\"#BBBBBB\"", parts[1])
+        self.assertNotIn("fill=\"[", "".join(parts))
+
+    def test_horizontal_cylinder_has_side_and_cap(self):
+        parts = self.scene.cylinder_z(20, 30, 0, -10, 5, 4, side="#AAAAAA", cap="#BBBBBB")
+        self.assertEqual(len(parts), 2)
+        self.assertIn("fill=\"#AAAAAA\"", parts[0])
+        self.assertIn("fill=\"#BBBBBB\"", parts[1])
+
+    def test_floor_disc_is_projected(self):
+        disc = self.scene.disc_y(20, 30, 10, 5, 0, "#E7E1D4", opacity=0.5)
+        self.assertIn("opacity=\"0.5\"", disc)
+        self.assertIn("Z", disc)
 
     def test_tube_draws_outline_plus_metal(self):
         parts = self.scene.tube([(0, 0, 0), (10, 10, 0)], 6, "#CCCCCC")
@@ -125,6 +141,41 @@ class DocumentTests(unittest.TestCase):
         svg = self._scene().svg(title="A", desc="B", metadata={})
         self.assertIn('id="paper"', svg)
         self.assertIn("#F7F4EC", svg)
+
+    def test_inspect_svg_counts_contract(self):
+        from scripts.vector_reconstruct import inspect_svg
+
+        with tempfile.TemporaryDirectory() as td:
+            path = Path(td) / "scene.svg"
+            path.write_text(self._scene().svg(title="A", desc="B", metadata={}),
+                            encoding="utf-8")
+            info = inspect_svg(path)
+            self.assertTrue(info["ok"])
+            self.assertIn("part", info["groups"])
+            self.assertGreater(info["paths"], 0)
+
+    def test_quickmill_scene_is_parametric(self):
+        import importlib.util
+
+        root = Path(__file__).resolve().parents[1]
+        path = (root / "experiments" / "T053-20261102-opencode-vector-reconstruction"
+                / "inputs" / "build_quickmill.py")
+        spec = importlib.util.spec_from_file_location("t053_scene", path)
+        module = importlib.util.module_from_spec(spec)
+        import sys
+        sys.modules["t053_scene"] = module
+        spec.loader.exec_module(module)
+        base = module.build()
+        narrow = module.build(module.Dimensions(width=88))
+        self.assertEqual(base.count("<g id="), 16)
+        self.assertGreaterEqual(base.count("<path"), 100)
+        self.assertNotIn('fill="[', base)
+        self.assertNotIn("<image", base)
+        self.assertNotEqual(base, narrow)
+        # The badge follows the body width: its text x must move left.
+        base_x = float(re.search(r'<text x="([0-9.]+)"', base).group(1))
+        narrow_x = float(re.search(r'<text x="([0-9.]+)"', narrow).group(1))
+        self.assertLess(narrow_x, base_x)
 
 
 if __name__ == "__main__":

@@ -15,11 +15,11 @@ were true at the time. Task IDs and their branches are listed in
 - **Module.** `scripts/vector_reconstruct.py`: axonometric projection, box,
   front rounded rect/circle, vertical/horizontal cylinder, tube, gradients and
   an SVG scene with semantic groups.
-- **Scene.** `build_quickmill.py`: 14 parts / 16 groups, 100 primitive paths,
+- **Scene.** `build_quickmill.py`: 14 parts / 16 groups, 108 primitive paths,
   5 live text elements, 1000 × 1000; one light, painter's order, no raster.
-- **Evidence.** VectorCraft `info`: 16 groups, 102 paths, 5 types, 0 warnings;
+- **Evidence.** VectorCraft `info`: 16 groups, 109 paths, 5 types, 0 warnings;
   before/after sheet shows the T051 trace next to the reconstruction.
-- **Tests.** `tests/test_vector_reconstruct.py` (12 tests); full suite 444
+- **Tests.** `tests/test_vector_reconstruct.py` (16 tests); full suite 448
   tests OK (8 skipped).
 - **Status.** EXPERIMENTAL; review requested.
 - Report: `experiments/T053-20261102-opencode-vector-reconstruction/REPORT.md`.
