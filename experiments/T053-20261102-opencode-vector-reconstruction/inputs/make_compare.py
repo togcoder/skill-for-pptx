@@ -49,7 +49,7 @@ def main() -> None:
            "T051: 54 traced paths, 1,437 nodes, noise and doubled contours.",
            font=font(13), fill="#4A4F55")
     d.text((gap, top + height + 38),
-           "T053: 16 part groups, 108 primitive paths, 5 text elements, 0 traced pixels.",
+           "T053: 16 part groups, 105 primitive paths, 5 text elements, 0 traced pixels.",
            font=font(13), fill="#4A4F55")
     d.text((gap + trace.width + gap, top + height + 14),
            "Boxes, cylinders, plates and controls in one projection; the photo supplies",

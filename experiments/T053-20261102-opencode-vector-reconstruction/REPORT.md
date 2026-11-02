@@ -85,7 +85,7 @@ python -m unittest tests.test_vector_reconstruct -v
   front, circle/ellipse, vertical/horizontal cylinder, tube, gradients, SVG
   document and `inspect` CLI.
 - **`experiments/T053-.../inputs/build_quickmill.py`** — the Quick Mill scene:
-  16 semantic groups, 108 primitive paths, 5 text elements.
+  16 semantic groups, 105 primitive paths, 5 text elements.
 - **`tests/test_vector_reconstruct.py`** — 16 tests: linear projection,
   rounded rect, circle, hull, box faces, round front circles, cylinder parts,
   tube, live text, well-formed SVG without raster, determinism, paper layer.
@@ -101,7 +101,7 @@ python -m unittest tests.test_vector_reconstruct -v
 | Feet | 4 × vertical cylinder | side, top | two dark rear, two brass front |
 | Lower body | box 94×35×69 | left, top, front | yellow side, chrome front, switch plate |
 | Tower | box + split front faces | left, top, chrome lower, black upper | the upper black panel carries the badge |
-| Top panel | box 92×4×63 | left, top, front | overhangs the tower; cup rails sit on it |
+| Top panel | box 96×4×71 | left, top, front | overhangs the tower; cup rails sit on it |
 | Cup rails | 4 × thin chrome boxes | top, front | repeated bars, not a traced grid |
 | Drip tray | box 94×5×46 + slot pattern | top, front | black tray with a fine repeated grid |
 | Side panel | one yellow face | left | continuous from base to top; no tray cut |
@@ -123,8 +123,8 @@ scene.
 
 | Claim | Rung | Evidence |
 |---|---|---|
-| The SVG is a real, editable vector document | 1 | XML parses; 16 groups; 108 paths; 5 text elements; viewBox `0 0 1000 1000` |
-| It is rendered by the vector tool | 4 | VectorCraft `info`: 16 groups, 109 path objects, 5 types, 0 warnings; 2× PNG inspected |
+| The SVG is a real, editable vector document | 1 | XML parses; 16 groups; 105 paths; 5 text elements; viewBox `0 0 1000 1000` |
+| It is rendered by the vector tool | 4 | VectorCraft `info`: 16 groups, 106 path objects, 5 types, 0 warnings; 2× PNG inspected |
 | No raster underlay or trace | 1 | `build_quickmill.py` imports no OpenCV/Canny; SVG has no `<image>`/base64; scene uses object coordinates |
 | Parts are semantic and independent | 1 | group IDs `base`, `lower-body`, `tower`, `top-panel`, `drip-tray`, `side-panel`, `group-head`, `portafilter`, `steam-wand`, `top-knobs`, `badge`, `controls` |
 | Geometry is deterministic | 1 | two builds produce identical SVG; `test_scene_is_deterministic` |
@@ -137,7 +137,7 @@ scene.
 | Build | Method | Paths | Nodes / structure | Noise |
 |---|---|---|---:|---|
 | T051 line | Canny → RDP → Bézier | 54 | 1,437 nodes | doubled contours, traced reflections, badge C |
-| **T053** | **semantic 2.5D primitives** | **108** | **16 groups, 108 primitive paths, 5 texts** | **none by construction** |
+| **T053** | **semantic 2.5D primitives** | **105** | **16 groups, 105 primitive paths, 5 texts** | **none by construction** |
 
 Path count is not the metric; structure is. T053 has more paths because each
 box contributes three faces and each cylinder two, but every path is a named
@@ -197,4 +197,4 @@ the brief is unchanged, the scene was rebuilt.
 | Major: text labels were wrong (“MOL”, “FEENO”) and appeared missing | **Fixed.** “MILL”, “FERMO”; text is live and renders (2× crop verified); test checks the text contract |
 | Major: top panel was offset (z8..71) and the wand went behind the front face | **Fixed.** Top panel is `z0-2..z1`, overhangs 1 unit; wand stays at `z <= 0`; bracket is drawn before the tube |
 | Major: no `cylinder_z`/scene/CLI tests; docstring promised a `demo` command | **Fixed.** 16 tests cover `cylinder_z`, `inspect_svg`, the Quick Mill scene and width change; `demo` implemented |
-| Minor: 14/15/16 counts, 100 vs 102 paths, pixel-space shadow, unused gradient/clip | **Fixed.** 16 groups (14 parts + shadow + highlights); 108 `<path>` + 1 `<rect>` + 5 `<text>`; VectorCraft reports 109 path objects; shadow uses `disc_y`; unused `yellowFront`/`clip` removed |
+| Minor: 14/15/16 counts, 100 vs 102 paths, pixel-space shadow, unused gradient/clip | **Fixed.** 16 groups (14 parts + shadow + highlights); 105 `<path>` + 1 `<rect>` + 5 `<text>`; VectorCraft reports 106 path objects; shadow uses `disc_y`; unused `yellowFront`/`clip` removed |

@@ -194,31 +194,33 @@ def build(dims: Dimensions | None = None) -> str:
     gx = d.cx
     gz = d.z0 - 4
     gy = d.group_y
-    group_head = s.box(gx - 18, gy + 9, d.z0 - 4, gx + 18, gy + 15, d.z0,
-                       front=chrome_front, side=chrome_side, top=chrome_top, sw=1.8)
-    group_head += [
+    # Vertical group.  The overhang is painted after the cylinder so it
+    # covers the cylinder's top ellipse; the bottom disc is not drawn because
+    # the camera is above and a bottom disc would show through the shell.
+    group_head = [
         s.front_ellipse(gx, gy - 11, 18, 3.0, d.z0 - 4.05, "#000000",
                         stroke=None, sw=0, opacity=0.14),
         s.front_ellipse(gx, gy - 11, 11, 2.0, d.z0 - 4.05, "#000000",
                         stroke=None, sw=0, opacity=0.14),
+        s.front_ellipse(gx, gy + 9, 18, 2.2, d.z0 - 0.1, "#000000",
+                        stroke=None, sw=0, opacity=0.12),
     ]
-    group_head.append(s.front_ellipse(gx, gy + 9, 18, 2.2, d.z0 - 0.1,
-                                      "#000000", stroke=None, sw=0, opacity=0.12))
     group_head += s.cylinder_y(gx, gz, d.group_r, gy - 3, gy + 9,
                                side="#9E9C93", top=chrome_top, sw=1.6)
     group_head.append(s.cylinder_y(gx, gz, d.group_r + 0.35, gy - 1.2, gy + 1.2,
                                    side="#6F7274", top="#6F7274", sw=0.8)[0])
-    group_head.append(s.disc_y(gx, gz, d.group_r, d.group_r, gy - 3.05, "#1E2022"))
+    group_head += s.box(gx - 18, gy + 9, d.z0 - 4, gx + 18, gy + 15, d.z0,
+                        front=chrome_front, side=chrome_side, top=chrome_top, sw=1.8)
     group(s, "group-head", group_head)
 
+    # Basket: side only; its top is hidden under the group head.  The handle
+    # is painted last because it is the front-most part.
     portafilter = s.cylinder_y(gx, gz, d.portafilter_r, gy - 9, gy - 3,
-                               side="#B8B6AD", top=chrome_top, sw=1.4)
+                               side="#B8B6AD", top=chrome_top, sw=1.4)[:1]
     portafilter.append(s.cylinder_y(gx, gz, d.portafilter_r + 0.4, gy - 3.6, gy - 2.4,
                                     side=chrome_side, top=chrome_top, sw=1.0)[0])
     portafilter.append(s.cylinder_y(gx, gz, d.portafilter_r + 0.2, gy - 9.4, gy - 8.6,
                                     side="#1E2022", top="#1E2022", sw=0.8)[0])
-    portafilter.append(s.disc_y(gx, gz, d.portafilter_r, d.portafilter_r,
-                                gy - 9.05, "#1E2022"))
     portafilter += s.cylinder_z(gx, gy - 5, gz, d.z0 - 40, 5.4, 4.6,
                                 side=black_side, cap="#24272A", sw=1.4)
     group(s, "portafilter", portafilter)
