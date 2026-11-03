@@ -68,10 +68,20 @@ Skills: `skills/pptx-motion-director`, `skills/slide-forge`.
 - **Non-Linear Navigation Law (T048):** Decks with branching narrative (Hub & Spoke, auxiliary popups, mini-games) must provide dynamic return actions (`lastslideviewed`), and must lock blank slide clicks (`advClick="0"`) or enable Kiosk mode (`p:kiosk`) to prevent accidental slide skips.
 - **Advanced Interactivity Law (T049):** For auxiliary drill-downs, detail dialogs, and multi-perspective views, agents MUST prefer In-Slide Lightbox Modals and In-Slide Tabbed Switchers (via native `<p:cTn nodeType="interactiveSeq">`) over creating duplicate slides. In-slide triggers preserve visual context, eliminate disruptive screen cuts, and keep the presentation compact. Tactile sound effects (`<a:snd>` in `<a:hlinkClick>`/`<a:hlinkHover>`) and Morph transitions (`p14:morph`) should be integrated for high-polish interactivity.
 
-## State (2026-11-01)
-- **Tests:** 404 run with 4 skipped, 100% pass across all domains.
+## State (2026-11-03)
+- **Tests:** 469 run, OK, 8 skipped; `lab/tools/check_layout.py` passes.
+- **Native 3D (T055):** `Shapes.Add3DModel` + embedded GLB + editable callouts.
+  3-slide deck, one Type-30 model per slide, three embedded `model3d*.glb`,
+  cameras/rotation/FOV preserved after save/reopen, PDF export. Source GLB is
+  Y-up metres, 400 × 553 × 326 mm, 34 non-metallic material regions. Report:
+  `experiments/T055-20261103-opencode-pptx-3d/REPORT.md`; branch
+  `work/T055-opencode-pptx-3d`; **review requested**, stacked on T054.
 - **Navigation & Interactivity:** T048 added Slide Navigator (`slide_navigator.py`) establishing full non-linear branching, dynamic return paths, custom shows with return, and mini-game state machine compilation. T049 added Advanced Presentation Interactivity (`advanced_interactivity.py`) establishing native in-slide lightbox modals, multi-tab switchers, pure-Python synthetic sound FX (click/chime/buzz), hover actions, and twin-morph visual flow.
 - **Evidence:** Rungs 0–5 established across PPTX, DOCX, XLSX, and Cross. PowerPoint 16.0 COM verified.
+- **3D limits:** native lighting is fixed (black horizontal faces render grey);
+  metallic PBR renders as a white mirror; `COLOR_0` is ignored when a material
+  exists; Morph on the 3D camera is not visually verified. The T055 model is a
+  massing study, not final product fidelity.
 
 ## Open questions / dissent
 - **T038 numbers.** Several T038 values (golden 61.8 %, Duarte breaks at

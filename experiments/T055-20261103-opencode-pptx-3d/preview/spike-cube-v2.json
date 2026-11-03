@@ -1,0 +1,41 @@
+{
+  "shape": "3D Model 1",
+  "type": 30,
+  "RotationX": 18.0,
+  "RotationY": 35.0,
+  "RotationZ": 0.0,
+  "CameraPositionX": 0.0,
+  "CameraPositionY": 0.5,
+  "CameraPositionZ": 2.5,
+  "LookAtPointX": 0.0,
+  "LookAtPointY": 0.5,
+  "LookAtPointZ": 0.0,
+  "FieldOfView": 45.0,
+  "pptx": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T055\\experiments\\T055-20261103-opencode-pptx-3d\\artifacts\\spike-cube-v2.pptx",
+  "png": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T055\\experiments\\T055-20261103-opencode-pptx-3d\\preview\\spike-cube-v2.png",
+  "pptx_bytes": 73955,
+  "reopen": {
+    "shape": "3D Model 1",
+    "type": 30,
+    "RotationX": 18.0,
+    "RotationY": 35.0,
+    "RotationZ": 0.0,
+    "CameraPositionX": 0.0,
+    "CameraPositionY": 0.5,
+    "CameraPositionZ": 2.5,
+    "LookAtPointX": 0.0,
+    "LookAtPointY": 0.5,
+    "LookAtPointZ": 0.0,
+    "FieldOfView": 45.0
+  },
+  "package": {
+    "media": [
+      "ppt/media/image1.png",
+      "ppt/media/model3d1.glb"
+    ],
+    "has_model3d": false,
+    "slides": [
+      "ppt/slides/slide1.xml"
+    ]
+  }
+}

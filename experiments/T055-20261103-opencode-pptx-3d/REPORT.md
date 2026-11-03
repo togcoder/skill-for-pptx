@@ -1,0 +1,173 @@
+# T055 [pptx] — PowerPoint-native 3D product explainer
+
+## Frame
+
+- **Question:** after the T054 vector route failed the owner's eye test, can
+  PowerPoint itself carry a product explainer — a real 3D model that the
+  audience can rotate, with callouts that stay editable — instead of another
+  flattened illustration?
+- **Hypothesis:** `Shapes.Add3DModel` with an embedded GLB, a fixed
+  three-quarter camera and native PowerPoint callouts produces a deck that is
+  natively 3D, reopens without repair, keeps its camera after save, and keeps
+  every annotation editable.
+- **Falsifiers:** the imported model becomes a picture; the camera or rotation
+  is lost on reopen; the model requires a repair; the callouts are baked into a
+  raster; the GLB cannot be re-extracted from the package; the deck cannot be
+  exported by PowerPoint.
+- **Domain lens:** PowerPoint native 3D (`am3d` / `model3d`), glTF 2.0, PBR
+  materials, slide-level art direction, editable native shapes.
+- **Transfers:** the geometry is the T054 SolidCraft CSG blockout (24 bodies,
+  53.96 × 10⁶ mm³). The GLB is rebuilt from the blockout's command stream, not
+  from its OBJ, because the OBJ export merges `group_housing` into
+  `chrome_top`. No vector asset is used in the deck.
+
+## Frozen input
+
+- **Task/claim:** T055 [pptx], OpenCode (DeepSeek V4.1 Flash), branch
+  `work/T055-opencode-pptx-3d`, claim commit `64d6d47`, based on T054
+  `b387146` (T054 is review-requested and unmerged; T055 is stacked on it).
+- **Request/date:** 2026-11-03. The owner asked for a capability that current
+  AI models do not have, after repeated SVG/vector disappointment.
+- **Geometry source:** `experiments/T054-20261102-opencode-vector-match/artifacts/blockout.json`,
+  24 visible bodies, 196 edges, 118 faces, 53.96 × 10⁶ mm³.
+- **Photo reference (not redistributed):** Wikimedia Commons, *File:Quick Mill
+  Omre Espresso Machine.jpg*, **CC0**,
+  <https://commons.wikimedia.org/wiki/File:Quick_Mill_Omre_Espresso_Machine.jpg>,
+  accessed 2026-11-02.
+- **Environment:** Windows 10/11 x64; Microsoft PowerPoint 16.0 (COM,
+  `Add3DModel`); Python 3.13; trimesh 5.2.0; manifold3d; pywin32; Pillow;
+  ffmpeg 8.1.1.
+- **Could not access:** a final product CAD mesh; a clean-room PowerPoint
+  session for Morph playback; a human reviewer for rung 6.
+
+## Method
+
+1. **Rebuild the GLB from the blockout definition** (`inputs/make_product_glb.py`):
+   - read `solid.box`, `solid.cylinder` and `solid.combine` commands;
+   - boolean-cut the bay and tray with manifold3d;
+   - paint the yellow left tower, the dark bay and the dark tray from face
+     geometry in source millimetres;
+   - split each colour region into its own mesh/material (PowerPoint ignores
+     `COLOR_0` when a material is present);
+   - set every material to `metallicFactor = 0` (PowerPoint's IBL turns metal
+     into a white mirror);
+   - convert X/Y/Z millimetres to glTF Y-up metres, bottom on Y = 0;
+   - add four chrome rim bars and one vertical corner trim.
+2. **Build the deck** (`inputs/build_product_deck_v3.py`):
+   - 960 × 540 pt, dark stage, native radial glow, floor rule;
+   - one `Add3DModel` per slide, camera `(-0.85, 0.45, 2.10)`, look-at
+     `(0, 0.28, 0)`, FOV 40°, rotation `(6, 0, 0)`;
+   - native focus boxes (corner ticks + numbered chip), native spec rows,
+     editable callout label/caption, footer.
+3. **Reopen and audit** (`inputs/native_audit_v3.py`):
+   - reopen the exact PPTX in PowerPoint, count Type-30 shapes, read cameras,
+     export PDF;
+   - inspect the three embedded `model3d*.glb` files.
+4. **Contract tests** (`tests/test_product_deck_3d.py`): 3 slides, one native
+   model per slide, three GLBs, Y-up metre bounds, metallic 0, editable text,
+   native shapes, manifest camera, native-audit evidence.
+5. **Review sheets** (`inputs/make_contact_sheets.py`).
+
+```powershell
+python experiments/T055-20261103-opencode-pptx-3d/inputs/make_product_glb.py
+python experiments/T055-20261103-opencode-pptx-3d/inputs/build_product_deck_v3.py
+python experiments/T055-20261103-opencode-pptx-3d/inputs/native_audit_v3.py
+python experiments/T055-20261103-opencode-pptx-3d/inputs/make_contact_sheets.py
+python -m unittest tests.test_product_deck_3d -v
+python -m unittest discover -s tests -v
+python lab/tools/check_layout.py
+```
+
+## Evidence
+
+| Claim | Evidence | Rung |
+|---|---|---|
+| PowerPoint inserts a native 3D model, shape Type **30** | `preview/spike-cube-v2.png`, `preview/spike-cube-v2.json`; `native-audit-v3.json` reports Type 30 on all three slides | 4 |
+| Camera, look-at, rotation and FOV survive save/reopen | `preview/native-audit-v3.json`; values `(-0.85, 0.45, 2.1)`, `(0, 0.28, 0)`, `(6, 0, 0)`, FOV 40 | 4 |
+| The deck has three slides, one native model each | 3 slides × 33 shapes; one `am3d:model3d` per slide; `native-audit-v3.json` | 4 |
+| The model is embedded, not linked | 3 `ppt/media/model3d*.glb`; slide relationships type `.../2017/06/relationships/model3d`; no external link | 1/4 |
+| The three embedded GLBs are the same model | semantic fingerprint (mesh names, node names, material colours) identical; each 93,832 bytes after PowerPoint re-encode | 1 |
+| The GLB is Y-up, metres, 400 × 553 × 326 mm | source GLB bounds `[-0.2, 0, -0.163] … [0.2, 0.553, 0.163]`; `glb-manifest.json` | 1 |
+| Materials are non-metallic | all 34 materials `metallicFactor = 0`; `native-audit-v3.json` `metallic = [0.0]` | 1/4 |
+| Callouts are editable PowerPoint text | `TOP HOUSING`, `GROUP HEAD`, `SWITCH PLATE`, captions and `ROTATE IN POWERPOINT` are `<a:t>` runs; test `test_callouts_are_editable_powerpoint_text` | 1/4 |
+| The focus boxes are native shapes, not images | 20 `p:sp` + 12 `p:cxnSp` + 1 `p:graphicFrame` per slide; test `test_focus_boxes_are_native_shapes` | 1 |
+| PowerPoint opens the exact file and exports it | `preview/quickmill_native_product_tour_v3.pdf`, 252,051 bytes; `native-audit-v3.json` | 5 |
+| The deck is internally consistent | 469 tests, OK, 8 skipped (after this REPORT was added); `check_layout.py` passes | 1 |
+| Human "mỹ mãn" approval | not obtained | 6 (missing) |
+
+Artifacts and hashes (SHA-256):
+
+| File | Bytes | SHA-256 |
+|---|---:|---|
+| `artifacts/quickmill_native_product_tour_v3.pptx` | 456,861 | `c4c8c18c7fc00149aa6a4e488132748fcc9693c54b7754db501c65413c1d0027` |
+| `artifacts/quickmill-blockout.glb` | 56,500 | `68fa27b558fd26dac7ab22a6b68270090ab528b1dc8cf804c211ca909a3d8ea0` |
+| `preview/quickmill_native_product_tour_v3.pdf` | 252,051 | `b57deab5a388ef1bee8660aaa041d1bad705409ba3a974d83b5b55ca61bb5c01` |
+| `preview/contact-sheet-v3.png` | 156,841 | `30cbbccc9b4c5f7a119bbb10c1425a2af2756bcb6d3e020d49b5afac853ab966` |
+
+### What the native renderer does to materials
+
+These are the observations that changed the design; each is a negative result
+for a naive "just import a PBR model" assumption.
+
+| Test | Observation | Evidence |
+|---|---|---|
+| glTF metallic 1.0 (trimesh default) | The whole model renders white/cream; the black top and yellow tower disappear | `preview/product-spike.png` |
+| Per-face `COLOR_0` inside a cream material | PowerPoint keeps the material colour and ignores the yellow `COLOR_0`; the left tower stays cream | first v2 render; material-split fix in `make_product_glb.py` |
+| Metallic 0 + one mesh per colour region | Yellow tower, dark bay and black tray survive | `preview/tour-v3-1.png` |
+| Black top face under the fixed key light | A rough black cube's top renders light grey (`#B0B0B0`), even at `metallic 0`, `roughness 0.82` | `preview/calib-black.png` |
+| Patch `am3d:ambientLight` / `am3d:ptLight` in the slide XML | PowerPoint re-renders with the same light rig; the export is visually identical | `preview/light-test.png` |
+| glTF base-colour texture | Textures render, but the per-face UVs in the calibration cube are wrong; not used in the deck | `preview/calib-texture.png` |
+
+The design consequence is explicit: the lid is a **chrome lid**, not a black
+lid, and the black mass is the 80 mm band around the bay. The copy and the
+callout were rewritten to match what the native renderer can actually show.
+
+### Camera study
+
+Six camera candidates were rendered from the same GLB. The left three-quarter
+view (B) is the only one that keeps the front controls, the group head and the
+yellow tower readable at once. `preview/camera-study-sheet.png` is the review
+sheet; `camera-study.json` records the cameras.
+
+## Negative results and limitations
+
+- **The model is a massing study, not final product fidelity.** It has no
+  bevels, no group-head detail, no realistic portafilter, and no textures. It
+  is honest about being a blockout; it is not a photoreal product render.
+- **The native 3D lighting is fixed.** A black horizontal face renders grey.
+  The deck designs around it (chrome lid, black vertical band). An XML patch of
+  the `am3d` light rig did not change the render.
+- **Morph was not verified visually.** `SlideShowTransition.EntryEffect = 384`
+  fails with "Invalid enumeration value". A direct `<p14:morph>` was stripped
+  by PowerPoint. The correct structure — `mc:AlternateContent` with
+  `p159:morph` and a fade fallback, as used by `scripts/add_morph.py` — is
+  accepted: `EntryEffect` reads **3954** on slides 2 and 3, and the XML survives
+  a save (`preview/morph-3d.json`). The 3D camera interpolation itself was not
+  observed: `CreateVideo` produced a 52 × 28 clip, and a screen-capture attempt
+  captured the wrong foreground window. **No Morph claim is made.**
+- **The first 3D product render washed out** because of metallic materials; the
+  v2 deck was discarded rather than shipped. `preview/product-spike.png` keeps
+  the failure.
+- **The focus boxes are approximate.** They are placed from the rendered
+  three-quarter view; rotating the model in PowerPoint moves the feature away
+  from the box. They are annotations for the authored view, not tracking
+  overlays.
+- **No human review.** The owner has not yet accepted the deck as "mỹ mãn".
+  Rung 6 is missing.
+- T054 and T055 are not merged. T054 remains review-requested; T055 is stacked
+  on it.
+
+## Next
+
+1. Replace the blockout with a proper product mesh (bevelled boxes, group-head
+   detail, portafilter, knobs) and re-run the same three-slide compiler.
+2. Verify Morph playback in a clean PowerPoint session; if the 3D camera
+   interpolates, record it as a separate claim with a full-resolution capture.
+3. Add a fourth "rotate me" slide or a short screen recording that shows the
+   model responding to drag, so the native interaction is visible without a
+   narrator.
+4. Send the deck and this report to review; do not merge T055 before T054.
+
+## Review response
+
+Pending. No reviewer has accepted this report yet.

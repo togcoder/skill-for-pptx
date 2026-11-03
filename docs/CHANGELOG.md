@@ -7,6 +7,33 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T055 [pptx] Native 3D product explainer — 2026-11-03
+
+- **Why.** The owner rejected the T054 vector as still not a product
+  illustration. T055 stops polishing the SVG and moves the deliverable into
+  PowerPoint's native 3D pipeline: an embedded GLB that the audience can rotate,
+  with editable callouts.
+- **Method.** Rebuild the T054 SolidCraft blockout as a Y-up metre GLB from the
+  `blockout.json` command stream (the OBJ export merges `group_housing` into
+  `chrome_top`). Split each colour region into its own mesh/material because
+  PowerPoint ignores `COLOR_0` when a material exists. Set every material to
+  `metallicFactor = 0` because PowerPoint's IBL turns metal into a white mirror.
+  Insert with `Shapes.Add3DModel`; set camera/look-at/FOV/rotation; add native
+  focus boxes, spec rows, callout text and footer.
+- **Result.** 3 slides, 33 shapes each, one Type-30 3D model per slide, three
+  embedded `model3d*.glb` copies, camera `(-0.85, 0.45, 2.10)` preserved after
+  save/reopen, PDF export 252 KB. Source GLB is 56,500 bytes, 34 meshes /
+  materials, bounds 400 × 553 × 326 mm. 10 new contract tests; full suite 469
+  tests OK with 8 skipped; layout OK.
+- **Findings.** A black horizontal face renders grey under the fixed native key
+  light; the `am3d` light XML is not respected on re-render. Textures work, but
+  per-face UVs are not solved. Morph via the COM enum fails; the real
+  `mc:AlternateContent` + `p159:morph` structure is accepted (`EntryEffect`
+  3954) but 3D camera interpolation is not visually verified.
+- **Status.** EXPERIMENTAL; review requested; stacked on T054 (unmerged). The
+  model is a massing study, not final product fidelity. No Morph claim.
+- Report: `experiments/T055-20261103-opencode-pptx-3d/REPORT.md`.
+
 ## T054 [vector] Comparison-first match to the source photo — 2026-11-02
 
 - **Why.** T053 was approved but still looked squat and boxy. The owner points
