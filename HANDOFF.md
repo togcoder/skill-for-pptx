@@ -2,7 +2,9 @@
 
 
 
-Cáº­p nháº­t: 01/11/2026, sau T044. Tá»‡p nĂ y Ä‘Æ°á»£c **viáº¿t láº¡i** má»—i láº§n bĂ n giao,
+Cập nhật: 03/11/2026, sau T056.
+
+> Ghi chú: phần nội dung cũ bên dưới bị lỗi mã hóa (UTF-8 đọc nhầm); dòng T056 là bản cập nhật đúng. Tá»‡p nĂ y Ä‘Æ°á»£c **viáº¿t láº¡i** má»—i láº§n bĂ n giao,
 
 khĂ´ng ghi ná»‘i thĂªm. Lá»‹ch sá»­: [docs/CHANGELOG.md](docs/CHANGELOG.md). BĂ n giao
 
@@ -74,7 +76,7 @@ PowerPoint chá»‰ lĂ  domain lĂ¢u Ä‘á»i nháº¥t.
 
 | `video` | Ná»n táº£ng (T042): SMPTE RP 2046-2 / EBU R95 safe areas (Action 3.5%, Title 5.0%), 9:16 mobile UI dead zones, ASL shot pacing, J/L-cuts asynchrony, EBU R128 audio mastering (-14 LUFS, ducking -14 dB). Native bridges: `filmcraft_bridge.py` & `soundcraft_bridge.py`. |
 
-| `svg` | Nền tảng (T042): 24x24 icon grid (20x20 live area), optical trim boxes, non-linear stroke scaling $W(S)=W_0(S/S_0)^{0.75}$, Bézier circle handle $\kappa \approx 0.55228$. Native bridge: `vectorcraft_bridge.py`. **T053** semantic 2.5D reconstruction: 16 groups, 101 primitive paths, 5 texts, 0 Canny/raster; T051 edge trace kept as **negative result**. `work/T053-opencode-vector-reconstruction`; Argon **approve T053** (round 3), merged main (PR #50). Chưa có print/Illustrator/Inkscape, human rung 6. |
+| `svg` | Nền tảng (T042): 24x24 icon grid, optical trim, stroke scaling, Bézier κ. Native bridge: `vectorcraft_bridge.py`. **T053** semantic 2.5D reconstruction (16 groups, 101 paths; T051 trace kept as negative result; Argon approve, PR #50). **T056 `iso-vector-craft`**: part-based isometric product illustration; Technics SL-1200 518 paths / 12 part groups / 0 VectorCraft warnings; Gale speaker 79+114; Rolleiflex 217 (stress test); MIT Anatomy kit vendored; 12 tests. `work/T056-opencode-iso-vector`, review requested. Chưa có print/Illustrator/Inkscape. |
 
 | `3d` | Ná»n táº£ng (T042): Metric scale (mm, Y-up glTF), No-Sharp-Edge Law (micro-bevel $0.2-0.5	ext{ mm}$), concentric fillets, True Isometric camera ($35.264^\circ$ elev), 3-point studio lighting, PBR albedo clamp. Native bridge: `solidcraft_bridge.py`. |
 
@@ -92,6 +94,7 @@ PowerPoint chá»‰ lĂ  domain lĂ¢u Ä‘á»i nháº¥t.
 
 1. **Pháº£n biá»‡n chĂ©o (Peer Review)**, theo `lab/standards/REVIEW.md`, do agent khĂ¡c tĂ¡c giáº£ viáº¿t:
 
+   - T056 (iso-vector-craft, reviewed: accept-with-fixes; use on a second product family);
    - T044 (Cross-Asset Pipeline & Local Autonomy, review requested);
 
    - T043 (Dynamic Theme Engine & Teardown, review requested);
