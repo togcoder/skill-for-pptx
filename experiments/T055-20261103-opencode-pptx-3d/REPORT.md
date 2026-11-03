@@ -101,7 +101,7 @@ Artifacts and hashes (SHA-256):
 |---|---:|---|
 | `artifacts/quickmill_native_product_tour_v3.pptx` | 456,861 | `c4c8c18c7fc00149aa6a4e488132748fcc9693c54b7754db501c65413c1d0027` |
 | `artifacts/quickmill-blockout.glb` | 56,500 | `68fa27b558fd26dac7ab22a6b68270090ab528b1dc8cf804c211ca909a3d8ea0` |
-| `preview/quickmill_native_product_tour_v3.pdf` | 252,051 | `b57deab5a388ef1bee8660aaa041d1bad705409ba3a974d83b5b55ca61bb5c01` |
+| `preview/quickmill_native_product_tour_v3.pdf` | 252,051 | `ac45beeec238953c5fabd46b029fb65a3ac7d8ce390b88d18a5de049ab40bfe4` |
 | `preview/contact-sheet-v3.png` | 156,841 | `30cbbccc9b4c5f7a119bbb10c1425a2af2756bcb6d3e020d49b5afac853ab966` |
 
 ### What the native renderer does to materials
