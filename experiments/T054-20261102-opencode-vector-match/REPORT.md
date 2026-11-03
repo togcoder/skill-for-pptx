@@ -158,6 +158,7 @@ Evidence: `preview/photo-top-grid.png` (photo coordinates), `preview/compare-t05
 - `preview/t053-vs-t054.png` (source, T053, T054 at matched height)
 - `preview/measure-t054.json` (landmark table)
 - `preview/photo-top-grid.png` (front-face coordinates)
+- `preview/face-split.png` (photo vs T054: chrome left panel, black badge panel, switch plate at the seam)
 - `preview/camera-fit.json` (failed 6-corner fit, RMS 33 px)
 - `tests/test_vector_match.py` (5 tests)
 
