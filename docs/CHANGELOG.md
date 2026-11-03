@@ -16,17 +16,19 @@ were true at the time. Task IDs and their branches are listed in
   side-by-side / 50% overlay / edge map, and measure six landmark fractions of
   body height.
 - **Result.** T053 was 0.969 W/H with the group centre at 0.424; T054 is 0.806
-  against the photo's 0.800, with every landmark within 0.001. 16 groups, 115
+  against the photo's 0.800, with every landmark within 0.001. 16 groups, 117
   paths, 6 texts; VectorCraft 0 warnings.
-- **Scene changes.** Chrome top (not black), oval badge, group head moved to
-  0.61 of front width, compact chrome overhang + visible cylinder, angled black
-  portafilter, steam wand behind the handle, deep tray with a visible grid,
-  smaller knobs, two side screws.
+- **Scene changes.** Chrome top (not black), upper front split at 0.40
+  (chrome left, black badge panel right; switch plate ends at the split),
+  oval badge, group head moved to 0.61 of front width, compact chrome overhang
+  + visible cylinder, angled black portafilter, steam wand behind the handle,
+  deep tray with a visible grid, smaller knobs, two side screws.
 - **Evidence.** `preview/t053-vs-t054.png`, `preview/compare-t054.png`,
-  `preview/measure-t054.json`; `tests/test_vector_match.py` (4 tests); full suite
-  452 tests OK.
+  `preview/measure-t054.json`; `tests/test_vector_match.py` (5 tests); full suite
+  453 tests OK.
 - **Status.** EXPERIMENTAL; review requested. Still axonometric, not perspective;
-  group head and chrome are simplified.
+  a 6-corner camera fit reached RMS 33 px and a 2-VP fit was inconsistent, so no
+  perspective camera is claimed. Group head and chrome are simplified.
 - Report: `experiments/T054-20261102-opencode-vector-match/REPORT.md`.
 
 ## T053 [vector] Semantic 2.5D reconstruction (supersedes T051) — 2026-11-02

@@ -88,8 +88,8 @@ on the T051 photo it produces 58 form + 133 detail and 2,268 nodes (3,178 in col
   warnings; colour style: 5 tones, ΔE76 10.56. Full trace (58 + 133, 2,268 (colour 3,178)
   nodes) is the strawman. **Review accepted (Argon); merged to main (PR #49).**
 - **T053 semantic reconstruction**: 16 groups, 101 paths, 5 live text elements; VectorCraft 0 warnings; no Canny/raster. Review accepted (Argon), merged to main (PR #50).
-- **T054 comparison-first match**: photo and vector at matched machine height, six landmark fractions and edge overlay. T053 was 0.969 W/H with the group centre at 0.424; T054 is 0.806 vs the photo's 0.800, with landmark deltas 0.000–0.001. 16 groups, 115 paths, 6 texts; VectorCraft 0 warnings. **Review requested.**
+- **T054 comparison-first match**: photo and vector at matched machine height, six landmark fractions and edge overlay. T053 was 0.969 W/H with the group centre at 0.424; T054 is 0.806 vs the photo's 0.800, with landmark deltas 0.000–0.001. 16 groups, 117 paths, 6 texts; VectorCraft 0 warnings. The upper front is split at 0.40: chrome left, black badge panel right; the switch plate ends at the split. **Review requested.**
 - Known limitation: the pipeline is not semantic (a human must curate logos and
   controls); the ground-shadow trim assumes a dark contact line; true
   through-holes are filled; no Illustrator/Inkscape or print proof; one product
-  photo only. T054 is still axonometric, not a perspective camera.
+  photo only. T054 is still axonometric; a 6-corner camera fit (RMS 33 px) and a 2-VP fit were not stable enough to claim perspective.

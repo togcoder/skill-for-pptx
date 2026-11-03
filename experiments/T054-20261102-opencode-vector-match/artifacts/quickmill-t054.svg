@@ -32,9 +32,11 @@
 </g>
 <g id="tower">
 <path d="M 293 546.63 L 853 546.63 L 853 297.12 L 293 297.12 Z" fill="url(#chromeFront)" stroke="#1C1F23" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-<path d="M 293 297.12 L 853 297.12 L 853 160.21 L 293 160.21 Z" fill="url(#blackFront)" stroke="#1C1F23" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 293 297.12 L 517 297.12 L 517 160.21 L 293 160.21 Z" fill="url(#chromeFront)" stroke="#1C1F23" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 517 297.12 L 853 297.12 L 853 160.21 L 517 160.21 Z" fill="url(#blackFront)" stroke="#1C1F23" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
 <path d="M 293 160.21 L 853 160.21 L 707.8 106.21 L 147.8 106.21 Z" fill="#2A2D31" stroke="#1C1F23" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
 <path d="M 293.24 300.69 L 853.24 300.69 L 853.24 295.82 L 293.24 295.82 Z" fill="url(#chromeSide)"/>
+<path d="M 516.03 297.23 L 518.55 297.23 L 518.55 160.32 L 516.03 160.32 Z" fill="#6E7174" opacity="0.55"/>
 </g>
 <g id="top-panel">
 <path d="M 292.84 160.93 L 145.7 106.21 L 145.7 65.9 L 292.84 120.62 Z" fill="url(#chromeEdge)" stroke="#1C1F23" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
@@ -138,7 +140,7 @@
 <text x="688.21" y="255.09" text-anchor="middle" dominant-baseline="middle" font-family="Arial, Helvetica, sans-serif" font-size="3.64" font-weight="400" letter-spacing="0.56" fill="#B43A2E">OMRE</text>
 </g>
 <g id="controls">
-<path d="M 510.97 786.76 L 514.59 786.29 L 517.97 784.9 L 520.87 782.69 L 523.09 779.81 L 524.49 776.46 L 524.97 772.87 L 524.97 665.83 L 524.49 662.24 L 523.09 658.88 L 520.87 656.01 L 517.97 653.8 L 514.59 652.41 L 510.97 651.94 L 384.97 651.94 L 381.34 652.41 L 377.97 653.8 L 375.07 656.01 L 372.84 658.88 L 371.45 662.24 L 370.97 665.83 L 370.97 772.87 L 371.45 776.46 L 372.84 779.81 L 375.07 782.69 L 377.97 784.9 L 381.34 786.29 L 384.97 786.76 Z" fill="#202225" stroke="#1C1F23" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M 503.97 786.76 L 507.59 786.29 L 510.97 784.9 L 513.87 782.69 L 516.09 779.81 L 517.49 776.46 L 517.97 772.87 L 517.97 665.83 L 517.49 662.24 L 516.09 658.88 L 513.87 656.01 L 510.97 653.8 L 507.59 652.41 L 503.97 651.94 L 384.97 651.94 L 381.34 652.41 L 377.97 653.8 L 375.07 656.01 L 372.84 658.88 L 371.45 662.24 L 370.97 665.83 L 370.97 772.87 L 371.45 776.46 L 372.84 779.81 L 375.07 782.69 L 377.97 784.9 L 381.34 786.29 L 384.97 786.76 Z" fill="#202225" stroke="#1C1F23" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"/>
 <path d="M 414.61 749.33 L 416.06 749.14 L 417.41 748.58 L 418.57 747.7 L 419.46 746.55 L 420.02 745.2 L 420.21 743.77 L 420.21 695.12 L 420.02 693.68 L 419.46 692.34 L 418.57 691.18 L 417.41 690.3 L 416.06 689.74 L 414.61 689.56 L 390.81 689.56 L 389.36 689.74 L 388.01 690.3 L 386.85 691.18 L 385.96 692.34 L 385.4 693.68 L 385.21 695.12 L 385.21 743.77 L 385.4 745.2 L 385.96 746.55 L 386.85 747.7 L 388.01 748.58 L 389.36 749.14 L 390.81 749.33 Z" fill="#EDE4CF" stroke="#1C1F23" stroke-width="0.8" stroke-linejoin="round" stroke-linecap="round"/>
 <path d="M 403.65 738.29 L 404.38 738.2 L 405.05 737.92 L 405.63 737.48 L 406.08 736.9 L 406.36 736.23 L 406.45 735.51 L 406.45 703.54 L 406.36 702.83 L 406.08 702.15 L 405.63 701.58 L 405.05 701.14 L 404.38 700.86 L 403.65 700.76 L 402.25 700.76 L 401.53 700.86 L 400.85 701.14 L 400.27 701.58 L 399.83 702.15 L 399.55 702.83 L 399.45 703.54 L 399.45 735.51 L 399.55 736.23 L 399.83 736.9 L 400.27 737.48 L 400.85 737.92 L 401.53 738.2 L 402.25 738.29 Z" fill="#8E8775" stroke="#1C1F23" stroke-width="0.5" stroke-linejoin="round" stroke-linecap="round"/>
 <text x="402.95" y="666.01" text-anchor="middle" dominant-baseline="middle" font-family="Arial, Helvetica, sans-serif" font-size="6.02" font-weight="400" letter-spacing="0.07" fill="#D8D2C2">SPENTO</text>

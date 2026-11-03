@@ -58,6 +58,36 @@ vectorcraft-cli info .../quickmill-t054.svg
 python -m unittest tests.test_vector_match -v
 ```
 
+## Research first
+
+Searched 2026-11-03, before changing the scene:
+
+- **fSpy — camera matching from vanishing points** (basics and source):
+  <https://fspy.io/basics>, <https://github.com/stuffmatic/fSpy>.  fSpy estimates
+  focal length, orientation and position from two or three perpendicular
+  vanishing-point pairs.  It confirms that a photo with converging verticals
+  cannot be matched by an axonometric projection.
+- **Single View Metrology** (MIT vision book chapter; Criminisi et al.):
+  <https://visionbook.mit.edu/3d_scene_understanding_single_view.html>,
+  <https://www.cs.cmu.edu/~ph/869/papers/Criminisi99.pdf>.  The useful part is
+  measuring a box and placing points on a face from one image using vanishing
+  points and cross-ratios.
+- **fSpy/Blender camera-match workflow**:
+  <https://fspy.io/tutorial>.  Two-point perspective plus a principal point is
+  enough for this machine; the verticals are close to parallel in the photo.
+- **Quick Mill Omre references**: the Home-Barista restoration thread
+  (`t29137`), the Orphan Espresso video `YRbjsZWRjC8`, eBay listing `267191254986`
+  and the Fondazione Fiera archive.  The thread/listing returned 403; the video
+  page and archive were reachable.  They were used only to confirm the machine's
+  front layout, not as a second tracing source.
+
+No ready-made "photo → clean vector product illustration" pipeline was found.
+The applicable solution is: calibrate one camera or one face plane, verify the
+face assignment on the photo, then redraw the primitives.  A six-corner pinhole
+fit (`inputs/calibrate_camera.py`) reached **RMS 33 px**, too loose to drive the
+final scene; it is recorded as a failed calibration, not used as evidence.  The
+clear, verified result is the **front-face split** and switch placement below.
+
 ## Measurement, before and after
 
 | Metric | Photo | T053 | T054 | T054 − photo |
@@ -74,13 +104,30 @@ the group head sat **15 points of body height too low**, the black band extended
 **10 points too far down**, and the base was too tall.  T054 moves all six
 landmarks onto the photo's fractions.
 
+### The face that was wrong
+
+The photo's upper front is **not a full-width black band**.  On the front face
+(`x = 390..930` in the photo) the chrome/black seam is at `x ≈ 600`, so the
+front is **39 % chrome on the left and 61 % black on the right**.  The switch
+plate (`x ≈ 455..600`) ends exactly at that seam; it sits under the **chrome
+left panel**, not under the black badge panel.
+
+T053 and the first T054 pass painted the whole upper front black.  That made the
+switch plate read as if it were on a different face.  T054 now uses
+`front_split_frac = 0.40`: the chrome left panel runs from `x0` to the split,
+the black badge panel from the split to `x1`, and the switch plate's right edge
+is the split.  The badge stays on the black panel.
+
+Evidence: `preview/photo-top-grid.png` (photo coordinates), `preview/compare-t054.png`
+(50 % overlay), `preview/t053-vs-t054.png`.
+
 **What changed in the scene**
 
 - `Dimensions`: width 80, height 118, depth 60; base 18.5, lower 26.6, tray 11.5,
   tower 55.6, top 5.8, black band 19.7.
 - Projection: `X = 223 + 7.0x − 2.42z`, `Y = 940 − 6.95y − 0.90z` (less top-down,
   more front-on than T053).
-- Top panel is **chrome**, not black; the black band stays on the upper front.
+- Top panel is **chrome**; the upper front is split: chrome left panel, black badge panel on the right; the switch plate ends at the split.
 - Badge is an **oval** (7.8 × 9.6) with live `QUICK` / `MOL` / `OMRE` type.
 - Group head is a compact chrome overhang over a visible vertical cylinder, with
   a round collar, dark gasket and a **chrome basket**; the handle is a thick,
@@ -98,8 +145,8 @@ landmarks onto the photo's fractions.
 | The comparison is reproducible | 1 | `inputs/make_compare.py`, `inputs/make_before_after.py`; fixed crops and rows |
 | T054 matches the six photo landmark fractions | 1 | `preview/measure-t054.json`; deltas 0.000–0.001 |
 | T054 is much closer in silhouette | 1 | aspect 0.806 vs 0.800; T053 was 0.969 |
-| The SVG is semantic and editable | 1 | 16 groups, 115 paths, 6 text elements; no `<image>` |
-| It renders in the vector tool | 4 | VectorCraft: 16 groups, 116 path objects, 6 types, 0 warnings |
+| The SVG is semantic and editable | 1 | 16 groups, 117 paths, 6 text elements; no `<image>` |
+| It renders in the vector tool | 4 | VectorCraft: 16 groups, 118 path objects, 6 types, 0 warnings |
 | The scene is parametric and deterministic | 1 | `Dimensions(width=74)` changes the SVG; two builds equal |
 | The photo and both vectors are visibly comparable | 4 | `preview/t053-vs-t054.png`, `preview/compare-t054.png` |
 
@@ -110,18 +157,22 @@ landmarks onto the photo's fractions.
 - `preview/compare-t054.png` (source, T054, 50 % overlay, edges)
 - `preview/t053-vs-t054.png` (source, T053, T054 at matched height)
 - `preview/measure-t054.json` (landmark table)
-- `tests/test_vector_match.py` (4 tests)
+- `preview/photo-top-grid.png` (front-face coordinates)
+- `preview/camera-fit.json` (failed 6-corner fit, RMS 33 px)
+- `tests/test_vector_match.py` (5 tests)
 
 ## Negative results and limitations
 
-1. **Axonometric vs camera perspective.**  T054 matches the landmark fractions,
-   but a parallel projection cannot reproduce the photo's converging verticals
-   and the slight front-face rotation.  A perspective camera is the next real
+1. **Axonometric vs camera perspective.**  T054 matches the landmark fractions
+   and the face split, but a parallel projection still cannot reproduce the
+   photo's converging verticals.  A six-corner pinhole fit reached RMS 33 px and
+   was not good enough; a proper fSpy/vanishing-point camera is the next real
    improvement, not more decoration.
 2. **The group head is still simplified.**  It is a chrome overhang + cylinder +
    basket, not the full cast group, shower screen, solenoid or portafilter
    geometry.  It reads as a group head now, but a machinist would still see the
-   simplification.
+   simplification.  The switch plate is placed by the photo's seam, not by a
+   measured switch cutout.
 3. **Chrome is a designed gradient.**  There are no photographic reflections,
    brushed-metal texture, scratches or dents.  The reference photo's chrome is
    doing a lot of the identity work; flat bands cannot match it.
@@ -135,11 +186,18 @@ landmarks onto the photo's fractions.
    observed.  A second photo would change the model.
 7. **No human test, no print proof, no Illustrator/Inkscape parity.**  VectorCraft
    is rung 4; a physical print and a second editor are still open.
+8. **Camera calibration failed on this photo.**  A six-corner pinhole fit reached
+   RMS 33 px (`preview/camera-fit.json`); a two-vanishing-point fit from the
+   visible box edges put both VPs on the same side and produced no real focal
+   length.  The photo is low-resolution, partly occluded and slightly inconsistent
+   as a box.  A perspective camera is therefore not claimed; a second view or a
+   measured drawing is required.
 
 ## Next
 
-- Add a perspective camera (`w` divide) and compare the same landmarks; keep the
-  axonometric scene as a fallback.
+- Get a second photo or a measured drawing before attempting an fSpy-style
+  camera; the single view does not give a stable calibration.  Until then, keep
+  the axonometric scene and treat the face split as the verified improvement.
 - Model the group head as a rounded housing with a separate collar, gasket and
   basket; test it at 100 % and at a 120 mm print.
 - Add two or three designed chrome reflection bands to the lower panel and the

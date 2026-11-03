@@ -37,6 +37,13 @@ class LandmarkTests(unittest.TestCase):
         # this is a sanity check on the vertical rebalance, not the projection.
         self.assertAlmostEqual(self.d.width / self.d.top_top, 0.678, delta=0.03)
 
+    def test_front_split_matches_the_photo(self):
+        # Photo: front face 390..930, chrome/black seam at 600 -> 0.389.
+        self.assertAlmostEqual(self.d.front_split_frac, 0.40, delta=0.02)
+        split_x = self.d.x0 + self.d.width * self.d.front_split_frac
+        # The switch plate ends at the split, directly below the chrome panel.
+        self.assertAlmostEqual(split_x, 42.0, delta=0.5)
+
     def test_scene_is_parametric(self):
         base = self.mod.build()
         narrow = self.mod.build(self.mod.Dimensions(width=74))

@@ -43,6 +43,7 @@ class Dimensions:
     group_r: float = 9.5
     portafilter_r: float = 7.5
     group_center_frac: float = 0.806
+    front_split_frac: float = 0.40
 
     @property
     def x1(self) -> float:
@@ -147,12 +148,16 @@ def build(dims: Dimensions | None = None) -> str:
     group(s, "lower-body", lower)
 
     # Tower front: chrome below the black band; the side is one yellow sheet.
+    split_x = d.x0 + d.width * d.front_split_frac
     tower = [
         s.face([(d.x0, d.tray_top, d.z0), (d.x1, d.tray_top, d.z0),
                 (d.x1, d.black_bottom, d.z0), (d.x0, d.black_bottom, d.z0)],
                fill=chrome_front, sw=2.0),
-        s.face([(d.x0, d.black_bottom, d.z0), (d.x1, d.black_bottom, d.z0),
-                (d.x1, d.tower_top, d.z0), (d.x0, d.tower_top, d.z0)],
+        s.face([(d.x0, d.black_bottom, d.z0), (split_x, d.black_bottom, d.z0),
+                (split_x, d.tower_top, d.z0), (d.x0, d.tower_top, d.z0)],
+               fill=chrome_front, sw=2.0),
+        s.face([(split_x, d.black_bottom, d.z0), (d.x1, d.black_bottom, d.z0),
+                (d.x1, d.tower_top, d.z0), (split_x, d.tower_top, d.z0)],
                fill=black_front, sw=2.0),
         s.face([(d.x0, d.tower_top, d.z0), (d.x1, d.tower_top, d.z0),
                 (d.x1, d.tower_top, d.z1), (d.x0, d.tower_top, d.z1)],
@@ -162,6 +167,11 @@ def build(dims: Dimensions | None = None) -> str:
                 (d.x1, d.black_bottom + 0.2, d.z0 - 0.1),
                 (d.x0, d.black_bottom + 0.2, d.z0 - 0.1)],
                fill=chrome_side, stroke=None, sw=0),
+        s.face([(split_x - 0.18, d.black_bottom, d.z0 - 0.12),
+                (split_x + 0.18, d.black_bottom, d.z0 - 0.12),
+                (split_x + 0.18, d.tower_top, d.z0 - 0.12),
+                (split_x - 0.18, d.tower_top, d.z0 - 0.12)],
+               fill="#6E7174", stroke=None, sw=0, opacity=0.55),
     ]
     group(s, "tower", tower)
 
@@ -326,7 +336,7 @@ def build(dims: Dimensions | None = None) -> str:
     group(s, "badge", badge)
 
     # Lower switch plate at the left, red jewel, right-side steam valve.
-    px0, px1 = d.x0 + 11, d.x0 + 33
+    px0, px1 = d.x0 + 11, split_x
     py0, py1 = d.base_h + 3.6, d.base_h + 23.0
     controls = [s.front_rounded(px0, py0, px1, py1, 2.0, d.z0 - 0.4, "#202225", sw=1.2)]
     for i, x in enumerate((px0 + 2.0, px0 + 8.2, px0 + 14.4)):

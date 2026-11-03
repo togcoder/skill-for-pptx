@@ -86,6 +86,10 @@ vector together at the **same machine height** before changing details.
 3. Measure six rows as fractions of body height: top-panel top, black-band
    bottom, group-head centre, tray top, lower-panel top, base top.
 4. Rebuild the scene from those fractions; re-run the comparison.
+5. **Check the face, not only the silhouette.** A control belongs to a specific
+   plane. A full-width material band can hide a split face: on the Quick Mill the
+   upper front is chrome on the left and black on the right, and the switch plate
+   ends exactly at that seam.
 
 T054 is the worked example: the T053 body was 0.969 W/H against the photo's
 0.800, and its group-head centre sat at 0.424 against 0.275.  Matching the
