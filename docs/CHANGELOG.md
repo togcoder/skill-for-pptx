@@ -7,6 +7,34 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T056 [vector] Part-based isometric product illustration (`iso-vector-craft`) — 2026-11-03
+
+- **Why.** T053 proved that a product drawing must be a model, not a trace, but
+  the result still read as a diagram. T056 adds the missing method: a measured
+  part inventory, one camera chosen per product, four-tone materials and a
+  written painter's order. The owner accepted the Technics V3 result and asked
+  for the method on `main`.
+- **Skill.** `skills/iso-vector-craft/SKILL.md`: 30–60 named parts, 1 unit = 1 mm,
+  azimuth/elevation rules, 4–6 materials, detail budget, failure modes and a
+  checklist. The MIT **Anatomy** kit (commit `1482e84`) is vendored with
+  `LICENSE`/`ATTRIBUTION.md`; `kit/product-svg.mjs` bakes the light palette into
+  literal values, adds `<title>/<desc>` and pins a real font.
+- **Examples.** Technics SL-1200: 518 paths, 12 part groups, plinth 54, Ø330
+  platter, Ø300 record, Ø100 label, Ø96 arm well. Gale Silver Monitor: 79
+  paths front / 114 rear. Rolleiflex TLR: 217 paths, kept as a labelled hard
+  subject stress test, not a showcase.
+- **Evidence.** resvg renders for every artifact; VectorCraft `info` 0 warnings
+  and all fonts exact; `tests/test_iso_vector_skill.py` (13 tests) checks XML,
+  no raster/external refs, baked palette, path counts, 12 Technics part groups
+  and the MIT attribution. Progression sheet keeps V1 (411 paths, 98-unit
+  plinth, 18°) as the negative result; V2 (463, 54 units, 24°) is the silhouette
+  win.
+- **Status.** EXPERIMENTAL; owner approved the direction; Argon review
+  `accept-with-fixes` (round 2) after the gimbal order, relative anchors,
+  generic rules and DOM contract fixes; merged to `main` as a skill (not a
+  canonical replacement for T053).
+- Report: `experiments/T056-20261103-opencode-iso-vector/REPORT.md`.
+
 ## T053 [vector] Semantic 2.5D reconstruction (supersedes T051) — 2026-11-02
 
 - **Why.** The owner rejected T051: Canny edges are a trace, not a

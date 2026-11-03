@@ -1,0 +1,129 @@
+{
+  "gale-speaker-front.svg": {
+    "warnings": [],
+    "fonts": [
+      {
+        "family": "Segoe Script",
+        "status": "exact",
+        "missing": false
+      }
+    ],
+    "kinds": {
+      "Compound Path": 32,
+      "Group": 10,
+      "Layer": 1,
+      "Path": 170,
+      "Type": 1
+    },
+    "artboards": [
+      {
+        "name": "Artboard 1",
+        "rect": [
+          0.0,
+          0.0,
+          820.0,
+          900.0
+        ]
+      }
+    ]
+  },
+  "gale-speaker-rear.svg": {
+    "warnings": [],
+    "fonts": [
+      {
+        "family": "Arial",
+        "status": "exact",
+        "missing": false
+      },
+      {
+        "family": "Segoe Script",
+        "status": "exact",
+        "missing": false
+      }
+    ],
+    "kinds": {
+      "Compound Path": 46,
+      "Group": 9,
+      "Layer": 1,
+      "Path": 225,
+      "Type": 2
+    },
+    "artboards": [
+      {
+        "name": "Artboard 1",
+        "rect": [
+          0.0,
+          0.0,
+          820.0,
+          900.0
+        ]
+      }
+    ]
+  },
+  "rolleiflex-tlr.svg": {
+    "warnings": [],
+    "fonts": [
+      {
+        "family": "Arial",
+        "status": "exact",
+        "missing": false
+      },
+      {
+        "family": "Arial Narrow",
+        "status": "exact",
+        "missing": false
+      }
+    ],
+    "kinds": {
+      "Compound Path": 84,
+      "Group": 26,
+      "Layer": 1,
+      "Path": 461,
+      "Type": 7
+    },
+    "artboards": [
+      {
+        "name": "Artboard 1",
+        "rect": [
+          0.0,
+          0.0,
+          820.0,
+          900.0
+        ]
+      }
+    ]
+  },
+  "technics-sl1200.svg": {
+    "warnings": [],
+    "fonts": [
+      {
+        "family": "Arial",
+        "status": "exact",
+        "missing": false
+      },
+      {
+        "family": "Arial",
+        "status": "exact",
+        "missing": false
+      }
+    ],
+    "kinds": {
+      "Compound Path": 219,
+      "Group": 84,
+      "Layer": 1,
+      "Path": 1193,
+      "Type": 7
+    },
+    "artboards": [
+      {
+        "name": "Artboard 1",
+        "rect": [
+          0.0,
+          0.0,
+          980.0,
+          900.0
+        ]
+      }
+    ]
+  }
+}
