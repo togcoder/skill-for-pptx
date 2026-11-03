@@ -3,7 +3,7 @@
 Since T040: every new title starts with its domain in brackets: `[pptx]`, `[docx]`, `[xlsx]`, `[svg]` or `[cross]` (see `domains/README.md`). Lifecycle: `lab/PROTOCOL.md`. A row may carry `review requested` / `reviewed: <verdict>`.
 
 This file is the one place to take a task ID. Before starting, add a row with
-status `claimed`, using the next free ID (**T055**). Push the row before you do
+status `claimed`, using the next free ID (**T056**). Push the row before you do
 expensive work. IDs are never reused. T024 was taken three times in parallel,
 so those rows carry a suffix. The experiment folders keep the names they were
 created with.
@@ -83,4 +83,5 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T052 | [docx] Configurable standard profiles + Vietnamese university scientific report (declaration, chapters, equations, references) | OpenCode (DeepSeek V4.1 Flash) | `work/T052-opencode-scientific-report` | main | `experiments/T052-20261102-opencode-scientific-report/REPORT.md` |
 | T053 | [vector] Semantic product reconstruction: parametric 2.5D vector illustration from a photo (supersedes the T051 edge trace) | OpenCode (DeepSeek V4.1 Flash) | `work/T053-opencode-vector-reconstruction` | main | `experiments/T053-20261102-opencode-vector-reconstruction/REPORT.md` |
 | T054 | [vector] Comparative match to the source photo: silhouette/proportion, chrome top, group head/portafilter and tray; photo-vector overlay as acceptance test | OpenCode (DeepSeek V4.1 Flash) | `work/T054-opencode-vector-match` | review requested | `experiments/T054-20261102-opencode-vector-match/REPORT.md` |
-| T055 | *next free ID* | | | | |
+| T055 | [pptx] Native 3D product explainer: semantic scene → embedded GLB + native callouts + camera views + Morph, verified in PowerPoint | OpenCode (DeepSeek V4.1 Flash) | `work/T055-opencode-pptx-3d` | claimed | `experiments/T055-20261103-opencode-pptx-3d/REPORT.md` |
+| T056 | *next free ID* | | | | |
