@@ -138,6 +138,39 @@ Evidence: `preview/photo-top-grid.png` (photo coordinates), `preview/compare-t05
   chrome bands; knobs are smaller; the top has a shallow warmer recess, not four
   heavy rails.
 
+## 3D CSG blockout — the missing depth layer
+
+Argon's diagnosis (chat `0:ebea1485768ae394`) is the correction that mattered:
+T054's six landmarks only locked the **2D outer hull**.  The right upper front is
+not a flat black panel; it is a **recessed brewing bay** with a deep black top
+housing, a chrome left tower in front, an inner cheek wall, a soffit, a
+protruding group head/portafilter and a recessed tray.
+
+A first 3D blockout is now built with **SolidCraft CSG** (Z-up, mm):
+`inputs/build_blockout.py` → `artifacts/blockout.json` → GPU snapshot.
+
+- **Masses:** base, lower body, upper core, left tower, top housing; a 228 × 121
+  × 211 mm bay is cut from the upper core; the tray is a 340 × 260 × 31 mm recess
+  cut into the lower body.
+- **Depth:** top housing 380 × 300 × 80 mm with a 152 mm chrome left fascia and
+  a soffit over the bay; group head is a Ø100 × 60 mm vertical cylinder under a
+  housing that hangs into the bay; the portafilter handle protrudes 130 mm.
+- **Face/switch:** the switch plate is on the lower front-left at `y=-4`, under
+  the chrome tower; the badge is on the black front fascia, not on a flat
+  full-width band.
+- **Evidence:** `preview/blockout.png` (GPU, 1280×1512),
+  `preview/blockout-vs-photo.png`; SolidCraft eval reports **24 bodies**, 196
+  edges, 118 faces, 53.96 × 10⁶ mm³.
+- **3D → vector:** `file.export_view_dxf` + CADCraft produced
+  `artifacts/blockout.dxf` and `artifacts/blockout.svg`: **904 vector
+  polylines**, no raster, no trace.  This is a *construction vector* — a true
+  hidden-line projection of the 3D blockout, not the final styled illustration.
+
+The blockout is deliberately crude: flat colours, no micro-bevels, no PBR
+chrome, no 12-landmark camera calibration.  It is the first artifact in this
+task that has the **recess, soffit, inner wall and protrusion** the owner
+pointed at, and the first vector produced from 3D rather than from 2D primitives.
+
 ## Evidence
 
 | Claim | Rung | Evidence |
@@ -149,6 +182,8 @@ Evidence: `preview/photo-top-grid.png` (photo coordinates), `preview/compare-t05
 | It renders in the vector tool | 4 | VectorCraft: 16 groups, 118 path objects, 6 types, 0 warnings |
 | The scene is parametric and deterministic | 1 | `Dimensions(width=74)` changes the SVG; two builds equal |
 | The photo and both vectors are visibly comparable | 4 | `preview/t053-vs-t054.png`, `preview/compare-t054.png` |
+| A true 3D blockout exists with a recessed bay | 3 | SolidCraft GPU snapshot; 24 bodies; `blockout-vs-photo.png` |
+| The 3D view can be exported as vector | 4 | CADCraft/VectorCraft: 904 polylines; no raster; `blockout.svg`, `blockout.dxf` |
 
 **Files**
 
@@ -160,7 +195,7 @@ Evidence: `preview/photo-top-grid.png` (photo coordinates), `preview/compare-t05
 - `preview/photo-top-grid.png` (front-face coordinates)
 - `preview/face-split.png` (photo vs T054: chrome left panel, black badge panel, switch plate at the seam)
 - `preview/camera-fit.json` (failed 6-corner fit, RMS 33 px)
-- `tests/test_vector_match.py` (5 tests)
+- `tests/test_vector_match.py` (5 tests), `tests/test_blockout.py` (6 tests)
 
 ## Negative results and limitations
 

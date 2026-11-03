@@ -92,4 +92,4 @@ on the T051 photo it produces 58 form + 133 detail and 2,268 nodes (3,178 in col
 - Known limitation: the pipeline is not semantic (a human must curate logos and
   controls); the ground-shadow trim assumes a dark contact line; true
   through-holes are filled; no Illustrator/Inkscape or print proof; one product
-  photo only. T054 is still axonometric; a 6-corner camera fit (RMS 33 px) and a 2-VP fit were not stable enough to claim perspective.
+  photo only. T054 is still axonometric; a 6-corner camera fit (RMS 33 px) and a 2-VP fit were not stable enough to claim perspective. A SolidCraft CSG blockout now provides the missing depth (24 bodies, recessed bay, soffit, protruding group head, deep tray); its view exports as a 904-polyline hidden-line SVG/DXF. The blockout is a first massing, not a styled final.

@@ -24,11 +24,17 @@ were true at the time. Task IDs and their branches are listed in
   + visible cylinder, angled black portafilter, steam wand behind the handle,
   deep tray with a visible grid, smaller knobs, two side screws.
 - **Evidence.** `preview/t053-vs-t054.png`, `preview/compare-t054.png`,
-  `preview/measure-t054.json`; `tests/test_vector_match.py` (5 tests); full suite
-  453 tests OK.
+  `preview/measure-t054.json`; `tests/test_vector_match.py` (5 tests), `tests/test_blockout.py` (6 tests);
+  full suite 459 tests OK.
+- **3D blockout.** SolidCraft CSG blockout: 24 bodies, recessed 228×121×211 mm bay,
+  380×300×80 mm top housing with soffit, protruding group head/portafilter, deep
+  tray, switch plate on the lower front-left. GPU snapshot + 904-polyline DXF/SVG
+  hidden-line export. The blockout is a first massing; the 12-landmark camera and
+  styled vector projection are next.
 - **Status.** EXPERIMENTAL; review requested. Still axonometric, not perspective;
   a 6-corner camera fit reached RMS 33 px and a 2-VP fit was inconsistent, so no
-  perspective camera is claimed. Group head and chrome are simplified.
+  perspective camera is claimed. The 3D blockout is a first massing, not a
+  calibrated or styled final.
 - Report: `experiments/T054-20261102-opencode-vector-match/REPORT.md`.
 
 ## T053 [vector] Semantic 2.5D reconstruction (supersedes T051) — 2026-11-02
