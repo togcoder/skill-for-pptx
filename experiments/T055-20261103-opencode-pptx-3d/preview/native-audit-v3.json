@@ -167,7 +167,7 @@
   "glb": [
     {
       "name": "ppt/media/model3d2.glb",
-      "bytes": 93832,
+      "bytes": 93876,
       "meshes": 34,
       "materials": 34,
       "metallic": [
@@ -188,7 +188,7 @@
     },
     {
       "name": "ppt/media/model3d3.glb",
-      "bytes": 93832,
+      "bytes": 93876,
       "meshes": 34,
       "materials": 34,
       "metallic": [
@@ -209,7 +209,7 @@
     },
     {
       "name": "ppt/media/model3d1.glb",
-      "bytes": 93832,
+      "bytes": 93876,
       "meshes": 34,
       "materials": 34,
       "metallic": [

@@ -94,8 +94,8 @@ COLORS = {
     "portafilter_handle": "#111315",
     "steam_wand": "#E8E6DE",
     "steam_grip": "#111315",
-    "knob_l": "#D9A21B",
-    "knob_r": "#D9A21B",
+    "knob_l": "#C08A12",
+    "knob_r": "#C08A12",
     "badge": "#EDE4CF",
     "switch_plate": "#1B1D20",
     "tray_grate": "#0C0E10",
@@ -106,7 +106,7 @@ COLORS = {
     "switch_2": "#EDE4CF",
     "switch_3": "#EDE4CF",
 }
-YELLOW = "#E0AE2E"
+YELLOW = "#C08A12"
 BAY_DARK = "#141619"
 TRAY_DARK = "#191B1E"
 CHROME = "#8E8C84"

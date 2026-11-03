@@ -22,7 +22,7 @@ were true at the time. Task IDs and their branches are listed in
   focus boxes, spec rows, callout text and footer.
 - **Result.** 3 slides, 33 shapes each, one Type-30 3D model per slide, three
   embedded `model3d*.glb` copies, camera `(-0.85, 0.45, 2.10)` preserved after
-  save/reopen, PDF export 252 KB. Source GLB is 56,500 bytes, 34 meshes /
+  save/reopen, PDF export 252 KB. Source GLB is 56,544 bytes, 34 meshes /
   materials, bounds 400 × 553 × 326 mm. 10 new contract tests; full suite 469
   tests OK with 8 skipped; layout OK.
 - **Findings.** A black horizontal face renders grey under the fixed native key

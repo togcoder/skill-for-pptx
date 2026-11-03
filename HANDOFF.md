@@ -55,7 +55,7 @@ state.
   native model per slide, editable callout/spec/focus-box objects, and a PDF
   export from the exact file.
 - **Deck.** `experiments/T055-20261103-opencode-pptx-3d/artifacts/quickmill_native_product_tour_v3.pptx`
-  (456,861 bytes). Source GLB 56,500 bytes, Y-up metres, 400 × 553 × 326 mm,
+  (459,597 bytes). Source GLB 56,544 bytes, Y-up metres, 400 × 553 × 326 mm,
   34 non-metallic material regions. Three embedded `model3d*.glb` copies.
 - **Native findings.** Metallic PBR renders as a white mirror; `COLOR_0` is
   ignored when a material exists (split colour regions into meshes instead);
