@@ -1,22 +1,28 @@
 > **Since T040 this page is the pptx domain's status.** Lab-wide state lives in
 > `HANDOFF.md` and `domains/README.md`; how agents work is in `lab/PROTOCOL.md`.
 
-# Status — current state (2026-10-19, after T034)
+# Status — current state (2026-11-04, after T057)
 
 This page is rewritten, not appended. History is in [CHANGELOG.md](CHANGELOG.md),
 task IDs in [research/tasks/INDEX.md](../research/tasks/INDEX.md), and the
-evidence vocabulary in [VERIFICATION.md](VERIFICATION.md).
+evidence vocabulary in [VERIFICATION.md](VERIFICATION.md). The lead review and
+the reserved next tasks (T058–T065) are in
+[T057](../experiments/T057-20261104-claude-leader-review/REPORT.md).
 
 ## Where the code is
 
-- **Research tip:** `claude/blissful-pasteur-gmll59`. That is `work/T033-argon-morph-staging` plus T034.
-  It holds everything through T034. **289 tests pass** (`python3 -m unittest discover -s tests`).
-- **`main` is behind** at `bb82c70` (T022/T023, PR #25). Merging the research tip into `main` is
-  the owner's decision: open a PR from the tip, don't push to `main` directly.
-- **Unmerged side branches** that are not part of the tip:
-  - `work/T021-codex-compound-motion-20261005`: a claim only, no code.
-  - `work/T009-codex-no-script-20261005`: PR #22, held back. T022 recompiled it.
-  - `work/T007-helper-component-synthesis-20261004`.
+- Everything through T056, plus T057, is on `main`. **461 tests pass**
+  (`python -m unittest discover -s tests`, 4 skipped).
+- **Unmerged:**
+  - `work/T054-opencode-vector-match` (vector).
+  - `work/T055-opencode-pptx-3d` (native 3D deck), which is stacked on T054.
+    T064 decouples it.
+  - The Codex T009/T021 branches are historical.
+- **pptx modules added since T034:**
+  - `theme_engine.py` (T043): not wired into Forge.
+  - `slide_navigator.py` (T048b) and `advanced_interactivity.py` (T049): no
+    review, and nothing has been played in a live slide show.
+  - `deckcraft_bridge.py` (T035): renders through DeckCraft.
 
 ## Product paths
 
@@ -70,15 +76,22 @@ frozen for reproducibility. Do not build on them.
 
 ## Open problems (ranked)
 
-1. **Native gate.** Play the T028 pro decks, a Forge cinematic deck and the
-   T034 dark-brand decks in PowerPoint. Record easing, autoRev pulses, the
-   visibility of helpers, Morph pairing and z-order, and settle behaviour.
-2. **MOT-SETTLE on Forge decks.** A token journey ends away from its authored
-   place before Forge's Morph orbs. Proposed fix: author the token at its
-   destination and travel from the start.
-3. **Forge type scale.** Forge uses 13–15 type sizes per deck; the design
-   system band is 3–6. It should read the Office kit `type_scale_pt`.
-4. **Human calibration of the critic.** Hand-rank about 20 decks and report
-   Spearman against the critic.
-5. **Integration.** Merge the research tip into `main` through a PR. The
-   ID-suffix convention (T024a/b/c) is now in the registry.
+Briefs, owners and critics are in T057.
+
+1. **Native interactive gate (T058).**
+   - Nothing interactive has been clicked in a live slide show. This covers
+     the T032 triggers and the T048b/T049 games and hubs.
+   - Build an automated click harness, or write a manual protocol.
+2. **One interaction writer (T061).** Three modules write `interactiveSeq`.
+3. **Forge debt (T063).**
+   - Count-up frames are stacked in the static, print and Morph views.
+   - The highlight marker is misaligned for centred text.
+   - A deck uses 13 type sizes (the band is 3–6).
+   - MOT-SETTLE.
+4. **DeckCraft (T059, T060, T062).**
+   - Measure its fidelity as a second renderer.
+   - Find out whether its source can render in-slide animation frames.
+   - Use its shape commands for native assets.
+5. **Native 3D (T064).** Decouple T055 from T054, then test Morph between
+   camera views.
+6. **Human calibration of the critic.** Hand-rank about 20 decks.

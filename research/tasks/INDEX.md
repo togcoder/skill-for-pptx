@@ -3,7 +3,7 @@
 Since T040: every new title starts with its domain in brackets: `[pptx]`, `[docx]`, `[xlsx]`, `[svg]` or `[cross]` (see `domains/README.md`). Lifecycle: `lab/PROTOCOL.md`. A row may carry `review requested` / `reviewed: <verdict>`.
 
 This file is the one place to take a task ID. Before starting, add a row with
-status `claimed`, using the next free ID (**T057**). Push the row before you do
+status `claimed`, using the next free ID (**T066**). Push the row before you do
 expensive work. IDs are never reused. T024 was taken three times in parallel,
 so those rows carry a suffix. The experiment folders keep the names they were
 created with.
@@ -85,4 +85,13 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T054 | [vector] Comparative match to the source photo: silhouette/proportion, chrome top, group head/portafilter and tray; photo-vector overlay as acceptance test | OpenCode (DeepSeek V4.1 Flash) | `work/T054-opencode-vector-match` | review requested | `experiments/T054-20261102-opencode-vector-match/REPORT.md` |
 | T055 | [pptx] Native 3D product explainer: semantic scene → embedded GLB + native callouts + camera views + Morph, verified in PowerPoint | OpenCode (DeepSeek V4.1 Flash) | `work/T055-opencode-pptx-3d` | review requested | `experiments/T055-20261103-opencode-pptx-3d/REPORT.md` |
 | T056 | [vector] Part-based isometric product illustration: measured parts, one camera, four-tone materials, painter's order; `iso-vector-craft` skill | OpenCode (DeepSeek V4.1 Flash) | `work/T056-opencode-iso-vector` | reviewed: accept-with-fixes | `experiments/T056-20261103-opencode-iso-vector/REPORT.md` |
-| T057 | *next free ID* | | | | |
+| T057 | [cross] Lead review after T035–T056, DeckCraft evaluation and next research programme | Claude (Opus 5.5, desktop) | `work/T057-claude-leader-review` | done | `experiments/T057-20261104-claude-leader-review/REPORT.md` |
+| T058 | [pptx] Interactive slide-show harness: automated clicks + capture (rung 6 without a human) | *open, suggested Claude desktop → critic Argon* |  | open (brief in T057) | `experiments/T057-20261104-claude-leader-review/REPORT.md` |
+| T059 | [pptx] DeckCraft as second renderer: static/Morph fidelity matrix vs PowerPoint, round-trip loss table | *open, suggested OpenCode → critic Claude* |  | open (brief in T057) | `experiments/T057-20261104-claude-leader-review/REPORT.md` |
+| T060 | [pptx] DeckCraft source study: in-slide animation frame renderer (`render-animation`) | *open, suggested Claude → critic OpenCode* |  | open (brief in T057) | `experiments/T057-20261104-claude-leader-review/REPORT.md` |
+| T061 | [pptx] One canonical interaction writer (interactiveSeq/triggers/hyperlinks) | *open, suggested OpenCode → critic Claude* |  | open (brief in T057) | `experiments/T057-20261104-claude-leader-review/REPORT.md` |
+| T062 | [pptx] Native asset factory through DeckCraft commands vs SVG vs GLB routes | *open, suggested Antigravity → critic Claude* |  | open (brief in T057) | `experiments/T057-20261104-claude-leader-review/REPORT.md` |
+| T063 | [pptx] Forge debt users see: print-safe count-ups, highlight alignment, type scale, MOT-SETTLE | *open, suggested OpenCode → critic Argon* |  | open (brief in T057) | `experiments/T057-20261104-claude-leader-review/REPORT.md` |
+| T064 | [pptx] Decouple T055 native 3D from T054, review, Morph between 3D camera views | *open, suggested Claude → critic OpenCode* |  | open (brief in T057) | `experiments/T057-20261104-claude-leader-review/REPORT.md` |
+| T065 | [cross] Lab hygiene: encoding repair + mojibake/duplicate-ID checks, PR rule for pptx paths, artifact size cap | *open* |  | open (brief in T057) | `experiments/T057-20261104-claude-leader-review/REPORT.md` |
+| T066 | *next free ID* | | | | |

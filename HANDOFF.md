@@ -1,149 +1,114 @@
-# Handoff â€” Design Research Lab
+# Handoff — Design Research Lab
+
+Cập nhật: 04/11/2026, sau **T057** (Claude, đánh giá vai trò trưởng nhóm). Tệp này được
+**viết lại** mỗi lần bàn giao, không ghi nối thêm. Lịch sử nằm ở
+[docs/CHANGELOG.md](docs/CHANGELOG.md). Bản đánh giá đầy đủ và các đề bài tiếp theo:
+[experiments/T057-20261104-claude-leader-review/REPORT.md](experiments/T057-20261104-claude-leader-review/REPORT.md).
+
+> Lưu tệp văn bản bằng **UTF-8**. Bản HANDOFF trước bị lỗi mã hóa (UTF-8 bị đọc thành
+> cp1252 rồi lưu lại). Nó ghi mã kế tiếp là T047, trong khi mã đúng lúc đó là T057.
+
+Repo: https://github.com/togcoder/skill-for-pptx (private). Chủ dự án: togcoder.
+
+## Mục tiêu không đổi
+
+Mục tiêu là một công cụ dành cho AI để tạo file **PPTX có độ hoàn thiện cao nhất, với chuyển động thật**:
+- ảnh chuyển động;
+- motion graphic;
+- vũ đạo theo nội dung;
+- Morph.
+
+Lab đa lĩnh vực (docx, xlsx, vector…) phục vụ mục tiêu đó. Nó không thay thế mục tiêu đó.
+
+## Chúng ta đang ở đâu
+
+- `main` @ sau T057: **461 test qua** (`python -m unittest discover -s tests`, 4 test bỏ qua).
+- **PPTX lõi đã trưởng thành và đã được PowerPoint render.** Gồm:
+  - Motion Director, Morph Studio và Slide Forge;
+  - 198 preset `ppt:`;
+  - hệ thiết kế cùng critic.
+- **Lõi PPTX đứng yên từ T038 (01/11).** Ba vấn đề của T034 vẫn còn mở:
+  - deck có 13 cỡ chữ, trong khi chuẩn là 3–6;
+  - lỗi MOT-SETTLE;
+  - chưa ai bấm thử tương tác trong slideshow thật.
+- **T035–T056 mở rộng theo bề ngang** sang docx, xlsx, vector, 3D, CAD và video.
+  Phần lớn do OpenCode/DeepSeek và Antigravity làm, và chỉ Argon review.
+- **Còn treo, chưa gộp:**
+  - `work/T054-opencode-vector-match`;
+  - `work/T055-opencode-pptx-3d`. Nhánh này xếp chồng trên T054 và sẽ được tách ra ở T064.
+
+## Khó khăn chính (chi tiết trong báo cáo T057)
+
+1. **Thiếu kiểm chứng thật.** Các tính năng tương tác (T048b/T049) được ghi là "100% working",
+   nhưng mới ở rung 4: PowerPoint đọc được trigger, chưa ai bấm thử trong slideshow.
+2. **Mở rộng bề ngang trước khi đào sâu.** 8/22 task là pptx nhưng không task nào đóng được
+   gate nào của pptx.
+3. **Quy trình hỏng khi nhiều agent chạy song song.**
+   - 5 mã task bị dùng trùng: T042, T043, T047, T048, T049.
+   - Code pptx được đẩy thẳng lên `main`, không qua PR hay review.
+   - Chỉ có một người review.
+4. **Lớp timing bị phân mảnh.** Ba module viết `interactiveSeq` riêng rẽ.
+5. **Lỗi Forge mà người dùng nhìn thấy.**
+   - Khi in hoặc xuất PDF, số count-up bị chồng lên nhau.
+   - Thanh highlight lệch so với chữ căn giữa.
+6. **Repo nặng.** `.git` 116 MB, 392 file media/office.
+
+## DeckCraft (ArtCraft, `D:\artcraft\DeckCraft`, v0.13.1, MIT/Apache)
+
+- **Dùng để tạo tài sản PPTX native.** DeckCraft có 330 lệnh, chạy qua CLI hoặc MCP:
+  - Merge Shapes;
+  - freeform dạng cong;
+  - hiệu ứng bevel/glow;
+  - xóa nền ảnh;
+  - SmartArt;
+  - icon.
+
+  python-pptx không làm được các việc này.
+- **Dùng để xem trước Morph nhanh,** khoảng 0,2 giây. Độ chính xác so với PowerPoint chưa
+  được kiểm chứng (T059).
+- **Không dùng để kiểm chứng chuyển động trong slide.** DeckCraft không render timeline
+  animation, nên việc này vẫn cần PowerPoint CreateVideo.
+- **Không để DeckCraft là bước ghi cuối** một deck mà ta đã viết timing, vì `convert` viết lại
+  một số node.
+
+## Việc tiếp theo: đề bài đã giữ chỗ
+
+Hãy nhận đúng mã đã giữ dưới đây. Sửa hàng tương ứng trong
+`research/tasks/INDEX.md` thành `claimed` cùng tên agent và nhánh, rồi push trước khi làm.
+Mã trống kế tiếp cho việc mới là **T066**.
+
+| Mã | Việc | Người làm → người phản biện (khác họ model) |
+|---|---|---|
+| T058 | [pptx] Harness bấm chuột tự động trong slideshow và chụp kết quả | Claude desktop → Argon |
+| T059 | [pptx] DeckCraft làm renderer thứ hai: ma trận độ khớp tĩnh/Morph, bảng mất mát khi lưu lại | OpenCode → Claude |
+| T060 | [pptx] Đọc mã nguồn DeckCraft: khả năng render khung hình animation trong slide | Claude → OpenCode |
+| T061 | [pptx] Một module duy nhất viết tương tác (interactiveSeq, trigger, hyperlink) | OpenCode → Claude |
+| T062 | [pptx] Nhà máy tài sản native qua lệnh DeckCraft, so với tuyến SVG và GLB | Antigravity → Claude |
+| T063 | [pptx] Nợ Forge: count-up an toàn khi in, căn highlight, thang cỡ chữ, MOT-SETTLE | OpenCode → Argon |
+| T064 | [pptx] Tách T055 (3D native) khỏi T054, review, thử Morph giữa hai góc camera 3D | Claude → OpenCode |
+| T065 | [cross] Vệ sinh lab: sửa mã hóa, chặn trùng mã task, bắt buộc PR cho pptx, giới hạn kích thước artifact | bất kỳ → chủ dự án |
+
+**Đóng băng một chu kỳ:**
+- Không mở domain hay canon mới cho video, 3D (trừ T064) và CAD cho đến khi T058–T061 được review.
+- docx, xlsx và vector chỉ tiếp tục khi chủ dự án yêu cầu.
+
+## Quy tắc bắt buộc (nhắc lại)
+
+- **Mọi thay đổi vào product path pptx phải qua PR và có review** của agent thuộc họ model
+  khác. Product path pptx gồm `motion_director`, `pptx_animator`, `motion_engine`,
+  `slide_forge`, `morph_studio`, `design_critic` và các module tương tác.
+- **Không tự review bài của mình. Không dùng lại mã task.**
+- **Ghi đúng rung bằng chứng.** "PowerPoint mở được" là rung 4, "PowerPoint render" là rung 5,
+  "bấm thử trong slideshow hoặc người xem" là rung 6.
 
-
-
-Cập nhật: 03/11/2026, sau T056.
-
-> Ghi chú: phần nội dung cũ bên dưới bị lỗi mã hóa (UTF-8 đọc nhầm); dòng T056 là bản cập nhật đúng. Tá»‡p nĂ y Ä‘Æ°á»£c **viáº¿t láº¡i** má»—i láº§n bĂ n giao,
-
-khĂ´ng ghi ná»‘i thĂªm. Lá»‹ch sá»­: [docs/CHANGELOG.md](docs/CHANGELOG.md). BĂ n giao
-
-trÆ°á»›c: [docs/archive/HANDOFF-T038-2026-11-01.md](docs/archive/HANDOFF-T038-2026-11-01.md).
-
-
-
-Repo: https://github.com/togcoder/skill-for-pptx (private). Chá»§ dá»± Ă¡n: togcoder.
-
-
-
-## Dá»± Ă¡n bĂ¢y giá» lĂ  gĂ¬
-
-
-
-Má»™t **lab nghiĂªn cá»©u thiáº¿t káº¿ Ä‘a lÄ©nh vá»±c (Cross-Domain Agentic AI Lab)**: nhiá»u agent
-
-(nhiá»u model) cĂ¹ng nghiĂªn cá»©u, pháº£n biá»‡n vĂ  xĂ¢u chuá»—i káº¿t quáº£ cho nhiá»u á»©ng dá»¥ng.
-
-Má»—i lÄ©nh vá»±c (domain) cĂ³ luáº­n Ä‘iá»ƒm, nguá»“n, dá»¯ liá»‡u thiáº¿t káº¿ vĂ  thang báº±ng chá»©ng riĂªng;
-
-PowerPoint chá»‰ lĂ  domain lĂ¢u Ä‘á»i nháº¥t.
-
-
-
-- CĂ¡ch agent lĂ m viá»‡c: [lab/PROTOCOL.md](lab/PROTOCOL.md).
-
-- CĂ¡c chuáº©n: [lab/standards/](lab/standards/), gá»“m nghiĂªn cá»©u, pháº£n biá»‡n, gá»™p
-
-  dá»¯ liá»‡u vĂ  nÆ¡i Ä‘áº·t file.
-
-- Danh sĂ¡ch domain: [domains/README.md](domains/README.md).
-
-- Quy táº¯c xĂ¢u chuá»—i Ä‘a tĂ i nguyĂªn & tá»± do cá»¥c bá»™: [lab/protocols/04_cross_asset_pipeline.md](lab/protocols/04_cross_asset_pipeline.md).
-
-
-
-## Báº¯t Ä‘áº§u
-
-
-
-1. Äáº§u nghiĂªn cá»©u má»›i nháº¥t Ä‘Ă£ Ä‘Æ°á»£c gá»™p lĂªn `main`.
-
-2. Äá»c theo thá»© tá»± `AGENTS.md`, `lab/CHARTER.md`, `lab/PROTOCOL.md`, rá»“i tháº»
-
-   domain cá»§a báº¡n (`domains/<domain>/DOMAIN.md`).
-
-3. Cháº¡y `python -m unittest discover -s tests` vĂ 
-
-   `python lab/tools/check_layout.py`. (Äáº£m báº£o táº¥t cáº£ tests pass 100%).
-
-4. Láº¥y mĂ£ káº¿ tiáº¿p trong `research/tasks/INDEX.md` (hiá»‡n lĂ  **T047**). TiĂªu Ä‘á»
-
-   ghi domain trong ngoáº·c, vĂ­ dá»¥ `[pptx]`, `[video]`, `[3d]`, `[cad]`, `[docx]`, `[xlsx]`.
-
-
-
-## Tráº¡ng thĂ¡i tá»«ng domain
-
-
-
-| Domain | Tráº¡ng thĂ¡i |
-
-|---|---|
-
-| `cross` | Protocols 00â€“04 (Intent Decoder, Capability Gate, Delegation DAG, Red-team Rubric, **Cross-Asset Pre-processing Pipeline & Local Autonomy Charter** - T044). Validator `scripts/cross_pipeline.py`. ToĂ n quyá»n táº£i font/model vĂ  cĂ i Ä‘áº·t thÆ° viá»‡n cá»¥c bá»™ sáº¡ch sáº½. |
-
-| `pptx` | TrÆ°á»Ÿng thĂ nh: Director, Morph Studio, Forge, há»‡ thiáº¿t káº¿ Bento/Asymmetric grids, Critic, vĂ  **Dynamic Theme Engine (T043)**: Area-weighted reference teardown, Composite Background Architecture (Layered translucent PNGs, alpha stats, shape opacity), Need-based semantic synthesizer (5 archetypes), OKLCH 60-30-10, AI Image visual harmonizer. |
-
-| `video` | Ná»n táº£ng (T042): SMPTE RP 2046-2 / EBU R95 safe areas (Action 3.5%, Title 5.0%), 9:16 mobile UI dead zones, ASL shot pacing, J/L-cuts asynchrony, EBU R128 audio mastering (-14 LUFS, ducking -14 dB). Native bridges: `filmcraft_bridge.py` & `soundcraft_bridge.py`. |
-
-| `svg` | Nền tảng (T042): 24x24 icon grid, optical trim, stroke scaling, Bézier κ. Native bridge: `vectorcraft_bridge.py`. **T053** semantic 2.5D reconstruction (16 groups, 101 paths; T051 trace kept as negative result; Argon approve, PR #50). **T056 `iso-vector-craft`**: part-based isometric product illustration; Technics SL-1200 518 paths / 12 part groups / 0 VectorCraft warnings; Gale speaker 79+114; Rolleiflex 217 (stress test); MIT Anatomy kit vendored; 12 tests. `work/T056-opencode-iso-vector`, review requested. Chưa có print/Illustrator/Inkscape. |
-
-| `3d` | Ná»n táº£ng (T042): Metric scale (mm, Y-up glTF), No-Sharp-Edge Law (micro-bevel $0.2-0.5	ext{ mm}$), concentric fillets, True Isometric camera ($35.264^\circ$ elev), 3-point studio lighting, PBR albedo clamp. Native bridge: `solidcraft_bridge.py`. |
-
-| `cad` | Ná»n táº£ng (T042): ISO 5457 sheet dimensions (A4â€“A0, 20mm left margin), ISO 128 line weight hierarchy (0.50mm group: 0.50, 0.25, 0.18mm), ISO 129 dimensioning geometry (10mm/7mm offsets, 3:1 arrowheads), ISO 7200 title block (180mm). Native bridge: `cadcraft_bridge.py`. |
-
-| `docx` | T039/T045/T047 on `main`; **T052** configurable standard profiles (HUST 2017, VNU-UET, ISO 7144, annual/GRI) + Vietnamese scientific report: `hust-datn-2017` 34 body pages/48 total, `vnu-uet-kl-2024` 35 body/45 total, conformance 23/23 and 24/24, Word PDFs inspected; Argon **approve T052** (round 2), đã merge `main` (`306f5f2`). Chưa có PDF/UA, PDF/A, LibreOffice rung 3, human rung 6. |
-
-| `xlsx` | T041/T046/T048 on `main`; **T050** VBA UserForm (22 controls, `frmEntry` + `FormTools`) + 12-column dashboard (4 native charts, 4 KPI, 3 buttons, 1-page A4), macro execution blocked by host policy `work/T050-opencode-userform-dashboard`, audit clean; Argon **approve T050** (round 2), đã merge `main` (`90695a9`). Waterfall/treemap/histogram/box/funnel vẫn là recipe OOXML. |
-
-
-
-## Viá»‡c tiáº¿p theo (xáº¿p háº¡ng)
-
-
-
-1. **Pháº£n biá»‡n chĂ©o (Peer Review)**, theo `lab/standards/REVIEW.md`, do agent khĂ¡c tĂ¡c giáº£ viáº¿t:
-
-   - T056 (iso-vector-craft, reviewed: accept-with-fixes; use on a second product family);
-   - T044 (Cross-Asset Pipeline & Local Autonomy, review requested);
-
-   - T043 (Dynamic Theme Engine & Teardown, review requested);
-
-   - T042 (Multi-domain canons & bridges, review requested);
-
-   - T039 & T041 (docx / xlsx round 2);
-
-   - T038 (pptx canon);
-
-   - T035 (DeckCraft);
-
-   - T036â€“T037 (cross protocols vĂ  multi-craft bridges).
-
-2. **Äá»“ng bá»™ hĂ³a vá»›i OpenCode:**
-
-   - Sá»­ dá»¥ng `scripts/cross_pipeline.py` Ä‘á»ƒ tiá»n xá»­ lĂ½ biá»ƒu Ä‘á»“ (`validate_chart_data_for_presentation`) vĂ  áº£nh (`validate_image_for_embedding`) trÆ°á»›c khi chĂ¨n chĂ©o vĂ o Word vĂ  Excel.
-
-3. **TĂ­ch há»£p Theme Engine vĂ o Slide Forge (`slide_forge.py`):**
-
-   - Há»— trá»£ cá» `--ref-deck <file.pptx>` Ä‘á»ƒ tá»± Ä‘á»™ng clone theme tá»« file máº«u báº¥t ká»³.
-
-   - Há»— trá»£ cá» `--need "<chuá»—i mĂ´ táº£>"` Ä‘á»ƒ tá»± Ä‘á»™ng tá»•ng há»£p theme Ä‘á»™c báº£n theo nhu cáº§u.
-
-
-
-## Prompt giao viá»‡c
-
-
+## Prompt giao việc
 
 ```text
-
-Join the design research lab at https://github.com/togcoder/skill-for-pptx, branch
-
-main. Read AGENTS.md, lab/CHARTER.md, lab/PROTOCOL.md and
-
-domains/<your domain>/DOMAIN.md. Run the tests and lab/tools/check_layout.py.
-
-Take the next free ID in research/tasks/INDEX.md with the domain in brackets and
-
-push the claim. Frame your question from the domain's native canon before
-
-building. Follow lab/protocols/04_cross_asset_pipeline.md to pre-process assets
-
-before embedding. Put every output into experiments/<ID>-<date>-<agent>-<slug>/ (never the
-
-repo root). Tag claims with evidence rungs. Ask another agent to review per
-
-lab/standards/REVIEW.md before anything enters a product path.
-
+Join the design research lab at https://github.com/togcoder/skill-for-pptx, branch main.
+Read HANDOFF.md, AGENTS.md, lab/PROTOCOL.md, domains/pptx/DOMAIN.md and
+experiments/T057-20261104-claude-leader-review/REPORT.md. Run the tests.
+Take one reserved brief (T058–T065): change its INDEX row to claimed with your agent and
+branch, push, then work on that branch. Try the brief's falsifiers yourself and tag every
+claim with its evidence rung. Open a PR; do not push product code to main. Ask the critic
+named in the brief to review in research/reviews/. Save every text file as UTF-8.
 ```
-
