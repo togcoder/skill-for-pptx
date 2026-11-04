@@ -1,0 +1,117 @@
+{
+  "file": "styles.pptx",
+  "bytes": 631684,
+  "slides": [
+    {
+      "index": 1,
+      "style": "editorial-crimson",
+      "colours_used": 5,
+      "unknown_colours": [],
+      "fonts_used": [
+        "Arial",
+        "Palatino Linotype"
+      ],
+      "unknown_fonts": [],
+      "shapes": 14,
+      "pictures": 1,
+      "native_share": 0.929,
+      "effect_lists": 0,
+      "sp3d": 0,
+      "gradient_fills": 0,
+      "pattern_fills": 0,
+      "raster_area_share": 0.309,
+      "raster_within_style": true,
+      "palette_ok": true,
+      "fonts_ok": true
+    },
+    {
+      "index": 2,
+      "style": "liquid-glass",
+      "colours_used": 6,
+      "unknown_colours": [],
+      "fonts_used": [
+        "Segoe UI",
+        "Segoe UI Light",
+        "Segoe UI Semibold"
+      ],
+      "unknown_fonts": [],
+      "shapes": 19,
+      "pictures": 1,
+      "native_share": 0.947,
+      "effect_lists": 8,
+      "sp3d": 0,
+      "gradient_fills": 4,
+      "pattern_fills": 0,
+      "raster_area_share": 0.223,
+      "raster_within_style": true,
+      "palette_ok": true,
+      "fonts_ok": true
+    },
+    {
+      "index": 3,
+      "style": "clay-cartoon",
+      "colours_used": 9,
+      "unknown_colours": [],
+      "fonts_used": [
+        "Segoe UI",
+        "Segoe UI Black",
+        "Segoe UI Semibold"
+      ],
+      "unknown_fonts": [],
+      "shapes": 18,
+      "pictures": 1,
+      "native_share": 0.944,
+      "effect_lists": 7,
+      "sp3d": 5,
+      "gradient_fills": 0,
+      "pattern_fills": 0,
+      "raster_area_share": 0.217,
+      "raster_within_style": true,
+      "palette_ok": true,
+      "fonts_ok": true
+    },
+    {
+      "index": 4,
+      "style": "swiss-minimal",
+      "colours_used": 4,
+      "unknown_colours": [],
+      "fonts_used": [
+        "Arial"
+      ],
+      "unknown_fonts": [],
+      "shapes": 16,
+      "pictures": 1,
+      "native_share": 0.938,
+      "effect_lists": 0,
+      "sp3d": 0,
+      "gradient_fills": 0,
+      "pattern_fills": 0,
+      "raster_area_share": 0.088,
+      "raster_within_style": true,
+      "palette_ok": true,
+      "fonts_ok": true
+    },
+    {
+      "index": 5,
+      "style": "maximalist-collage",
+      "colours_used": 9,
+      "unknown_colours": [],
+      "fonts_used": [
+        "Arial"
+      ],
+      "unknown_fonts": [],
+      "shapes": 20,
+      "pictures": 2,
+      "native_share": 0.9,
+      "effect_lists": 8,
+      "sp3d": 0,
+      "gradient_fills": 0,
+      "pattern_fills": 1,
+      "raster_area_share": 0.193,
+      "raster_within_style": true,
+      "palette_ok": true,
+      "fonts_ok": true
+    }
+  ],
+  "pass": true
+}

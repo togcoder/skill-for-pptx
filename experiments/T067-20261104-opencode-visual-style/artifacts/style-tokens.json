@@ -1,0 +1,527 @@
+{
+  "editorial-crimson": {
+    "schema": "visual-style/1",
+    "id": "editorial-crimson",
+    "label_vi": "Biên tập — đỏ son",
+    "palette": {
+      "canvas": "C1121F",
+      "surface": "7A0C14",
+      "surface_alt": "F7F1E8",
+      "text": "F7F1E8",
+      "text_muted": "E7C9C4",
+      "accent": "E8B04B",
+      "accent_2": "F2C9C9",
+      "accent_text": "FFD98A",
+      "ink": "1A0508"
+    },
+    "type": {
+      "families": {
+        "display": "Palatino Linotype",
+        "body": "Arial",
+        "label": "Arial"
+      },
+      "sizes_pt": {
+        "display": 42,
+        "title": 34,
+        "body": 20,
+        "label": 12,
+        "micro": 10
+      },
+      "tracking_em": {
+        "display": -0.01,
+        "body": 0.0,
+        "label": 0.16
+      },
+      "line_height": {
+        "display": 1.02,
+        "body": 1.25,
+        "label": 1.2
+      }
+    },
+    "geometry": {
+      "radius_pt": 0,
+      "smooth": false,
+      "stroke_pt": 1.0,
+      "image_frame": "circle"
+    },
+    "material": {
+      "kind": "flat",
+      "fill": "solid",
+      "alpha": [
+        1.0,
+        1.0
+      ]
+    },
+    "depth": {
+      "kind": "flat",
+      "shadow": null,
+      "bevel_pt": 0,
+      "specular": false
+    },
+    "texture": {
+      "kind": "none",
+      "opacity": 0.0
+    },
+    "image": {
+      "treatment": "cutout-duotone",
+      "mask": "circle",
+      "edge_pt": 0,
+      "grade": {
+        "mode": "duotone",
+        "shadow": "#5A0710",
+        "highlight": "#F7F1E8",
+        "posterize": null
+      },
+      "overlay": {
+        "kind": "none",
+        "alpha": 0.0
+      },
+      "area_share_max": 0.34,
+      "aspect": "1:1"
+    },
+    "motion": {
+      "enter_ms": 420,
+      "move_ms": 620,
+      "emphasis_ms": 380,
+      "morph_ms": 1200,
+      "stagger_ms": 90,
+      "easing": "standard",
+      "overshoot": 0.0
+    },
+    "density": {
+      "words_max": 34,
+      "elements_max": 14,
+      "negative_space": 0.55
+    },
+    "contrast": {
+      "text/canvas": 5.54,
+      "text/surface": 9.89,
+      "accent_text/surface": 8.22,
+      "ink/accent": 10.05
+    }
+  },
+  "liquid-glass": {
+    "schema": "visual-style/1",
+    "id": "liquid-glass",
+    "label_vi": "Kính lỏng",
+    "palette": {
+      "canvas": "070B1E",
+      "surface": "141B3A",
+      "surface_alt": "1E2750",
+      "text": "F2F6FF",
+      "text_muted": "AFC0E8",
+      "accent": "7CC7FF",
+      "accent_2": "B39DFF",
+      "accent_text": "DFF3FF",
+      "ink": "02040C"
+    },
+    "type": {
+      "families": {
+        "display": "Segoe UI Light",
+        "body": "Segoe UI",
+        "label": "Segoe UI Semibold"
+      },
+      "sizes_pt": {
+        "display": 40,
+        "title": 30,
+        "body": 18,
+        "label": 11,
+        "micro": 10
+      },
+      "tracking_em": {
+        "display": -0.015,
+        "body": 0.0,
+        "label": 0.12
+      },
+      "line_height": {
+        "display": 1.06,
+        "body": 1.3,
+        "label": 1.2
+      }
+    },
+    "geometry": {
+      "radius_pt": 26,
+      "smooth": false,
+      "stroke_pt": 0.75,
+      "image_frame": "rounded"
+    },
+    "material": {
+      "kind": "glass",
+      "fill": "translucent",
+      "alpha": [
+        0.08,
+        0.34
+      ]
+    },
+    "depth": {
+      "kind": "layered",
+      "shadow": {
+        "color": "#02040C",
+        "blur_pt": 48,
+        "dist_pt": 22,
+        "dir_deg": 90,
+        "transparency": 0.6
+      },
+      "bevel_pt": 1.5,
+      "specular": true
+    },
+    "texture": {
+      "kind": "none",
+      "opacity": 0.0
+    },
+    "image": {
+      "treatment": "cool-glass",
+      "mask": "rounded",
+      "edge_pt": 0,
+      "grade": {
+        "mode": "duotone",
+        "shadow": "#0A1030",
+        "highlight": "#DCE9FF",
+        "posterize": null
+      },
+      "overlay": {
+        "kind": "glass-sheet",
+        "alpha": 0.28
+      },
+      "area_share_max": 0.32,
+      "aspect": "4:5"
+    },
+    "motion": {
+      "enter_ms": 620,
+      "move_ms": 900,
+      "emphasis_ms": 520,
+      "morph_ms": 1500,
+      "stagger_ms": 110,
+      "easing": "expressive",
+      "overshoot": 0.02
+    },
+    "density": {
+      "words_max": 30,
+      "elements_max": 18,
+      "negative_space": 0.6
+    },
+    "contrast": {
+      "text/canvas": 18.04,
+      "text/surface": 15.55,
+      "accent_text/surface": 14.75,
+      "accent/canvas": 10.66
+    }
+  },
+  "clay-cartoon": {
+    "schema": "visual-style/1",
+    "id": "clay-cartoon",
+    "label_vi": "Đất sét — hoạt hình",
+    "palette": {
+      "canvas": "FFF3E2",
+      "surface": "FFE2C6",
+      "surface_alt": "FFD1AE",
+      "text": "3B2A22",
+      "text_muted": "7A5A4A",
+      "accent": "E2725B",
+      "accent_2": "1F7A6E",
+      "accent_3": "F2B24C",
+      "accent_text": "FFF8F0",
+      "ink": "2A1B14"
+    },
+    "type": {
+      "families": {
+        "display": "Segoe UI Black",
+        "body": "Segoe UI Semibold",
+        "label": "Segoe UI"
+      },
+      "sizes_pt": {
+        "display": 42,
+        "title": 30,
+        "body": 18,
+        "label": 11,
+        "micro": 10
+      },
+      "tracking_em": {
+        "display": -0.02,
+        "body": 0.0,
+        "label": 0.08
+      },
+      "line_height": {
+        "display": 1.0,
+        "body": 1.25,
+        "label": 1.2
+      }
+    },
+    "geometry": {
+      "radius_pt": 30,
+      "smooth": true,
+      "stroke_pt": 6.0,
+      "image_frame": "blob"
+    },
+    "material": {
+      "kind": "clay",
+      "fill": "solid",
+      "alpha": [
+        1.0,
+        1.0
+      ]
+    },
+    "depth": {
+      "kind": "2.5D",
+      "shadow": {
+        "color": "#2A1B14",
+        "blur_pt": 18,
+        "dist_pt": 8,
+        "dir_deg": 90,
+        "transparency": 0.72
+      },
+      "bevel_pt": 6,
+      "specular": false
+    },
+    "texture": {
+      "kind": "none",
+      "opacity": 0.0
+    },
+    "image": {
+      "treatment": "posterized-clay",
+      "mask": "blob",
+      "edge_pt": 8,
+      "grade": {
+        "mode": "posterize",
+        "shadow": "#5A3A2E",
+        "highlight": "#FFE9CF",
+        "posterize": 6
+      },
+      "overlay": {
+        "kind": "none",
+        "alpha": 0.0
+      },
+      "area_share_max": 0.33,
+      "aspect": "4:5"
+    },
+    "motion": {
+      "enter_ms": 300,
+      "move_ms": 520,
+      "emphasis_ms": 360,
+      "morph_ms": 1000,
+      "stagger_ms": 80,
+      "easing": "expressive",
+      "overshoot": 0.06
+    },
+    "density": {
+      "words_max": 28,
+      "elements_max": 16,
+      "negative_space": 0.5
+    },
+    "contrast": {
+      "text/canvas": 12.45,
+      "text/surface": 11.0,
+      "accent_text/accent_2": 4.9,
+      "ink/canvas": 15.15
+    }
+  },
+  "swiss-minimal": {
+    "schema": "visual-style/1",
+    "id": "swiss-minimal",
+    "label_vi": "Thụy Sĩ — tối giản",
+    "palette": {
+      "canvas": "F7F7F5",
+      "surface": "FFFFFF",
+      "surface_alt": "EDEDEA",
+      "text": "111111",
+      "text_muted": "6B6B6B",
+      "accent": "E30613",
+      "accent_2": "111111",
+      "accent_text": "FFFFFF",
+      "ink": "000000"
+    },
+    "type": {
+      "families": {
+        "display": "Arial",
+        "body": "Arial",
+        "label": "Arial"
+      },
+      "sizes_pt": {
+        "display": 54,
+        "title": 28,
+        "body": 18,
+        "label": 9,
+        "micro": 9
+      },
+      "tracking_em": {
+        "display": -0.03,
+        "body": 0.0,
+        "label": 0.18
+      },
+      "line_height": {
+        "display": 0.98,
+        "body": 1.3,
+        "label": 1.2
+      }
+    },
+    "geometry": {
+      "radius_pt": 0,
+      "smooth": false,
+      "stroke_pt": 0.5,
+      "image_frame": "rect"
+    },
+    "material": {
+      "kind": "paper",
+      "fill": "solid",
+      "alpha": [
+        1.0,
+        1.0
+      ]
+    },
+    "depth": {
+      "kind": "flat",
+      "shadow": null,
+      "bevel_pt": 0,
+      "specular": false
+    },
+    "texture": {
+      "kind": "paper",
+      "opacity": 0.0
+    },
+    "image": {
+      "treatment": "bw-editorial",
+      "mask": "rect",
+      "edge_pt": 0,
+      "grade": {
+        "mode": "grayscale",
+        "shadow": "#000000",
+        "highlight": "#FFFFFF",
+        "posterize": null
+      },
+      "overlay": {
+        "kind": "none",
+        "alpha": 0.0
+      },
+      "area_share_max": 0.16,
+      "aspect": "1:1"
+    },
+    "motion": {
+      "enter_ms": 250,
+      "move_ms": 400,
+      "emphasis_ms": 250,
+      "morph_ms": 1000,
+      "stagger_ms": 60,
+      "easing": "standard",
+      "overshoot": 0.0
+    },
+    "density": {
+      "words_max": 18,
+      "elements_max": 12,
+      "negative_space": 0.7
+    },
+    "contrast": {
+      "text/canvas": 17.6,
+      "text/surface": 18.88,
+      "accent_text/accent": 4.88,
+      "text_muted/canvas": 4.97
+    }
+  },
+  "maximalist-collage": {
+    "schema": "visual-style/1",
+    "id": "maximalist-collage",
+    "label_vi": "Cắt dán — cực đại",
+    "palette": {
+      "canvas": "F4E9D8",
+      "surface": "FFE9C9",
+      "surface_alt": "E8D5BC",
+      "text": "141414",
+      "text_muted": "5B4A3F",
+      "accent": "D7261B",
+      "accent_2": "1D4ED8",
+      "accent_3": "FFD400",
+      "accent_text": "FFF8EE",
+      "ink": "000000"
+    },
+    "type": {
+      "families": {
+        "display": "Arial",
+        "body": "Arial",
+        "label": "Arial"
+      },
+      "sizes_pt": {
+        "display": 58,
+        "title": 30,
+        "body": 18,
+        "label": 10,
+        "micro": 8
+      },
+      "tracking_em": {
+        "display": -0.02,
+        "body": 0.0,
+        "label": 0.1
+      },
+      "line_height": {
+        "display": 0.92,
+        "body": 1.25,
+        "label": 1.2
+      }
+    },
+    "geometry": {
+      "radius_pt": 4,
+      "smooth": false,
+      "stroke_pt": 3.0,
+      "image_frame": "rect"
+    },
+    "material": {
+      "kind": "collage",
+      "fill": "mixed",
+      "alpha": [
+        0.35,
+        1.0
+      ]
+    },
+    "depth": {
+      "kind": "layered",
+      "shadow": {
+        "color": "#000000",
+        "blur_pt": 0,
+        "dist_pt": 6,
+        "dir_deg": 45,
+        "transparency": 0.0
+      },
+      "bevel_pt": 0,
+      "specular": false
+    },
+    "texture": {
+      "kind": "halftone",
+      "opacity": 0.1
+    },
+    "image": {
+      "treatment": "halftone-collage",
+      "mask": "rect",
+      "edge_pt": 0,
+      "grade": {
+        "mode": "posterize",
+        "shadow": "#141414",
+        "highlight": "#F4E9D8",
+        "posterize": 4
+      },
+      "overlay": {
+        "kind": "halftone",
+        "alpha": 0.18
+      },
+      "area_share_max": 0.28,
+      "aspect": "4:5"
+    },
+    "motion": {
+      "enter_ms": 260,
+      "move_ms": 460,
+      "emphasis_ms": 300,
+      "morph_ms": 1000,
+      "stagger_ms": 60,
+      "easing": "standard",
+      "overshoot": 0.03
+    },
+    "density": {
+      "words_max": 40,
+      "elements_max": 24,
+      "negative_space": 0.35
+    },
+    "contrast": {
+      "text/canvas": 15.35,
+      "text/surface": 15.57,
+      "accent_text/accent": 4.76,
+      "accent_text/accent_2": 6.35
+    }
+  }
+}

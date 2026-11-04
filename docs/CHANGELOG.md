@@ -7,6 +7,37 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T067 [pptx] Visual style system — 2026-11-04
+
+- **Why.** The owner asked for style, not only background and type: cartoon,
+  liquid glass, clay, minimal, maximalist. The `theme` object had palette,
+  fonts and layout only, so two decks could share a palette and still feel like
+  different products.
+- **Schema.** `VisualStyle/1` (`inputs/visual_style.py`): 9 colour roles; 3 type
+  roles with a 5-step scale; geometry (sharp/rounded/blob/diagonal/mixed);
+  material (flat/paper/glass/clay/collage/chrome); depth (flat/layered/2.5D/3D);
+  texture (none/grain/halftone/paper/pattern); image treatment + mask + grade +
+  area cap; motion language with five durations; density. The resolver emits build
+  tokens; a linter audits a PPTX against its declared preset (palette, fonts,
+  native share, raster share, effect vocabulary).
+- **Presets.** `editorial-crimson` (T066), `liquid-glass`, `clay-cartoon`,
+  `swiss-minimal`, `maximalist-collage`; all five validate, all five built as
+  native specimens with one content unit (claim + portrait + two facts).
+- **Measured.** 631,684 B, 5 slides, 165 words, 4–6 type sizes, native share
+  90.0–94.7 %, raster 8.8–30.9 %, 49 native effects with durations exactly
+  0.25/0.26/0.30/0.42/0.62/0.90 s; PowerPoint COM opens in 152 ms, PDF 5 pages.
+- **Hardest native style.** Liquid glass: no backdrop blur, blend mode or
+  refraction in DrawingML; the pane is an illusion of alpha + rim + specular +
+  shadow. Clay is second (custGeom squircle + matte `sp3d` per object).
+- **Finding.** A `gradFill` appended after `a:ln` is ignored and PowerPoint falls
+  back to the theme fill; inserting it before the outline makes per-stop alpha
+  work. Radial gradients ring at the ellipse unless alpha reaches 0 by ~78 % of
+  radius. Both reproduced and documented.
+- **Limits.** No human eye (rung 6); no Morph in the specimen; easing is
+  plan-level, not frame-verified; clay rims are baked into the PNG; Swiss
+  title/body 3.0 is outside the band. No product path changed.
+  `experiments/T067-20261104-opencode-visual-style/style-system.md`.
+
 ## T067 [pptx] Image choreography (parallel stream) — 2026-11-04
 
 - **Why.** The owner's first complaint about T066 was the image order: the
