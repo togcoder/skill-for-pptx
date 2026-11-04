@@ -16,31 +16,56 @@ Chủ dự án nhận xét: *"tư duy dựng chuyển động bị tác động 
 Kịch bản yếu thì bộ biên dịch cảnh tốt đến đâu cũng chỉ biên dịch ra một deck yếu một cách chính
 xác. Vì thế kịch bản là một trục nghiên cứu riêng, và nó **đi trước** bộ biên dịch cảnh (T075).
 
-## Chẩn đoán: vì sao kịch bản do agent viết còn yếu
+## Những gì repo đã có về kịch bản (bản đồ, sửa lại ngày 2026-11-04)
 
-Chẩn đoán dựa trên `skills/deck-director/SKILL.md`, beat sheet T069a và các `direction.json` của
-T068/T069b.
+Bản đầu của tài liệu này so kịch bản mẫu với beat sheet T069a. Nó **chưa mở nội dung kịch bản
+thật** của T068/T069b (các file `direction.json`). Chủ dự án hỏi lại, và khi mở ra thì bức tranh
+khác đi. Kịch bản trong repo nằm ở năm chỗ, không nối với nhau:
 
-1. **Skill dạy biểu mẫu, không dạy cách nghĩ.**
-   - Skill có: 5 trường brief, 9 "job", các luật cấm (`NAR-KARAOKE`, `NAR-CODA-TRAP`…) và trình
-     kiểm tra.
-   - Skill không có: cách tìm *người nghe đang tin gì*, cách tạo căng thẳng, cách biến đề mục giáo
-     trình thành câu hỏi, cách chọn ẩn dụ.
-   - Luật cấm cho biết đừng làm gì; chúng không chỉ ra làm gì.
-2. **Không có ví dụ vàng.** Model yếu học tốt nhất bằng cách bắt chước một mẫu tốt có chú thích.
-   Lab chưa có kịch bản mẫu nào được chủ dự án duyệt.
-3. **Điểm xuất phát sai: đi từ đề mục giáo trình.**
-   - Beat sheet T069a đi theo đúng thứ tự mục lục.
-   - Lời nói phần lớn đọc lại định nghĩa ("Triết học là hệ thống tri thức…").
-   - Khi điểm xuất phát là mục lục, chuyển động chỉ còn cách trang trí mục lục.
-4. **Không có cầu nối từ câu chữ sang chuyển động.** Bảng "job → figure" của skill hiện tại
-   trừu tượng (`arrive`, `join`, `build`…). Agent không biết câu nói nào thì gọi figure nào.
-5. **Kịch bản không được người đọc trước khi dựng.** Agent viết kịch bản, dựng ngay, rồi để
-   critic chấm. Chủ dự án chỉ thấy kịch bản qua deck đã dựng, tức là sau khi mọi công sức đã bỏ
-   ra.
-6. **Model yếu thật sự yếu ở phần này.** Viết kịch bản tốt cần hiểu người nghe, có sự đồng cảm
-   và cảm giác về nhịp. Đó là phần phán đoán nhiều nhất trong cả quy trình. Không nên giả vờ rằng
-   một biểu mẫu sẽ khiến DeepSeek viết như một biên kịch.
+| Mảnh | Ai làm | Là gì | Giá trị thật |
+|---|---|---|---|
+| `scripts/motion_script.py` (T024a) | Claude cloud | Đọc kịch bản Markdown có `[click]` / `[nhấp]`, gắn từng đoạn lời với vật thể trên slide, sinh kịch bản nháp, ghi vào speaker notes | Dùng cho deck có sẵn. Định dạng tốt, đang chạy trong Motion Director |
+| T067 `DECK-DIRECTOR-SKILL-DRAFT.md` | DeepSeek | Bảng **job → figure** (9 việc của người nghe → 6 kiểu chuyển động), dòng `claim:` cho mỗi cảnh, quy tắc "tương phản phải hiện cùng lúc" (Mayer), đề nghị **dùng lại định dạng của `motion_script.py`** | **Phần suy nghĩ tốt nhất của agent.** Ví dụ "Ai cũng đã từng triết học mà không gọi tên nó" gần với ý mở đầu của kịch bản mẫu T078 |
+| T068 `deck_director.py` + `direction.json` | Gemini | Khung chứa: brief, beats, shots, `t0_says` / `lead_in` / `post_click_says`, 5 luật kiểm, biên dịch sang Forge | Cơ chế dùng được. **Bỏ qua đề nghị của T067** về định dạng `motion_script`, nên lab có hai hệ kịch bản song song |
+| T069b scaffold + narrative critic | Gemini | Kiểm hai lượt, lệnh `scaffold`, speaker notes `[T=0]` / `[CLICK]`, chiều "narrative" trong critic | Speaker notes có ích. **`scaffold` tự viết lời thoại mẫu** (xem dưới) |
+| T069a `beat-sheet.md` | DeepSeek | Beat sheet viết tay cho deck thật, 4 cặp Morph trạng thái | Kịch bản tốt nhất agent đã viết, nhưng nằm ngoài công cụ |
+
+**Nội dung thật bên trong T068/T069b.**
+
+- `scaffold_direction()` trong `scripts/deck_director.py` sinh sẵn các câu như:
+  - "Chào mừng quý vị đến với chuyên đề: {title}."
+  - "các dữ liệu phụ trợ xác nhận xu thế này là tất yếu khách quan."
+  - "hành động quyết liệt là chìa khóa đạt kết quả vượt bậc."
+
+  Deck chứng minh của T069b dùng nguyên các câu này. Narrative critic chấm nó **5,00**.
+- Kịch bản Triết học của T068 (`experiments/T068-…/inputs/direction.json`):
+  - nói *về slide* thay vì nói *với người nghe*: "Ngay từ trang bìa, hình ảnh ba nhà tư tưởng vĩ
+    đại đã định vị toàn bộ linh hồn của học thuyết.";
+  - có câu rỗng nghĩa: "giáo trình phân lập bức tranh tổng thể thành hai miền thực tại…".
+- Báo cáo T068/T069b mô tả *cơ chế* ("Two-Pass", "5 laws", "narrative 5.00") chứ không trích nội
+  dung. Phải mở JSON mới thấy lời thoại là chữ điền sẵn. Đây là lý do một người đọc báo cáo, kể
+  cả trưởng nhóm, dễ nhìn không ra.
+
+## Chẩn đoán (sửa lại)
+
+1. **Agent không phải không biết nghĩ.** T067 đã nghĩ đúng hướng: job → figure, claim, tương phản
+   cùng lúc, đặt click ở chữ bản lề (T068). Kịch bản mẫu T078 cũng dùng các ý này.
+2. **Ý tưởng tốt bị cơ khí hóa.** T068/T069b biến bản thảo của T067 thành các trường, luật và một
+   máy sinh chữ mẫu. Không ai kiểm *nội dung* lời nói. Critic kiểm *hình thức* (có `[T=0]`, có
+   tham chiếu vật thể, độ trùng chữ thấp), nên chữ điền sẵn vẫn được 5,00.
+3. **Hai hệ kịch bản không nối nhau:** `motion_script.py` (Markdown) và `direction.json`. T067 đã
+   cảnh báo nhưng không ai sửa.
+4. **Không có ví dụ vàng được duyệt,** nên mỗi agent tự đặt chuẩn.
+5. **Điểm xuất phát vẫn là mục lục.** T068 và T069a đều đi theo đề mục giáo trình. Chưa ai bắt
+   đầu từ *người nghe đang tin gì*.
+6. **Kịch bản không được đọc dạng chữ trước khi dựng.**
+7. **Model yếu thật sự yếu ở phần phán đoán:** người nghe, ẩn dụ, tự đánh giá. Biểu mẫu không
+   thay được phần này. Xem phân vai bên dưới.
+
+**Luật mới, có hiệu lực ngay:**
+- `scaffold` chỉ được sinh **ô trống kèm câu hỏi gợi ý**. Không được sinh câu thoại. Câu thoại
+  điền sẵn là nội dung bịa (ROADMAP nguyên tắc 6).
+- Điểm narrative không được dùng làm bằng chứng chất lượng kịch bản.
 
 ## Câu trả lời: model yếu làm được đến đâu, và cách giúp
 
@@ -115,6 +140,12 @@ Thí nghiệm T079 sẽ đo xem cách "phiếu cộng ví dụ" thu hẹp khoả
 
 ## Bảng động từ → chuyển động (v0, giả thuyết; T080 kiểm chứng bằng A/B)
 
+> Bảng này **không thay** bảng job → figure của T067. Hai bảng trả lời hai câu hỏi khác nhau:
+> - job → figure: *vì sao* cảnh tồn tại và *bao nhiêu* click;
+> - động từ → chuyển động: *cái gì* thay đổi trong click đó.
+>
+> T081 gộp hai bảng thành **một** bảng trong skill, theo nguyên tắc một nguồn sự thật.
+
 | Động từ trong câu then chốt | Chuyển động | Trong slide hay Morph |
 |---|---|---|
 | là, có (tĩnh) | xuất hiện nhẹ, hoặc không cần | trong slide |
@@ -171,6 +202,12 @@ nước tương ứng, có khung hình PowerPoint.
 
 ### T081: skill `script-writer`
 
+- **Gộp, không xây thêm:**
+  - một định dạng kịch bản, là Markdown của `motion_script.py` cộng dòng `claim:` (đề nghị của
+    T067);
+  - `direction.json` được *biên dịch* từ định dạng đó, không viết tay;
+  - một bảng duy nhất (job → figure + động từ → chuyển động);
+  - `scaffold` chỉ sinh ô trống.
 - **Nội dung:** tách phần kịch bản khỏi `deck-director` thành skill riêng, ngắn, gồm:
   - phiếu phỏng vấn;
   - phiếu ý đồ;
