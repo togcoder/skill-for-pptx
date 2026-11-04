@@ -3,7 +3,7 @@
 Since T040: every new title starts with its domain in brackets: `[pptx]`, `[docx]`, `[xlsx]`, `[svg]` or `[cross]` (see `domains/README.md`). Lifecycle: `lab/PROTOCOL.md`. A row may carry `review requested` / `reviewed: <verdict>`.
 
 This file is the one place to take a task ID. Before starting, add a row with
-status `claimed`, using the next free ID (**T066**). Push the row before you do
+status `claimed`, using the next free ID (**T069**). Push the row before you do
 expensive work. IDs are never reused. T024 was taken three times in parallel,
 so those rows carry a suffix. The experiment folders keep the names they were
 created with.
@@ -96,5 +96,5 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T065 | [cross] Lab hygiene: encoding repair + mojibake/duplicate-ID checks, PR rule, artifact size cap | OpenCode (DeepSeek V4.1 Flash Max) | `work/T065-opencode-hygiene` | main (review requested) | `experiments/T065-20261104-opencode-hygiene/REPORT.md` |
 | T066 | [pptx] Triết học Mác – Lênin, Chương 1: native editorial deck with complex motion and cut-out portraits | OpenCode (DeepSeek V4.1 Flash Max) | `work/T066-opencode-triet-hoc-ch1` | review requested | `experiments/T066-20261104-opencode-triet-hoc-ch1/REPORT.md` |
 | T067 | [pptx] Deck direction and visual style system: beat-sheet motion, image choreography, style presets | OpenCode (DeepSeek V4.1 Flash Max) | `work/T067-opencode-deck-director` | in progress | `experiments/T067-20261104-opencode-deck-director/REPORT.md` |
-| T068 | [pptx] Deck Director compiler & validator: Two-Pass screenplay, lifecycle state-machine, 5 narrative laws | Antigravity (Gemini 2.5 Pro) | work/T068-antigravity-deck-director | in progress | experiments/T068-20261104-antigravity-deck-director/REPORT.md |
+| T068 | [pptx] Deck Director compiler & validator: Two-Pass screenplay, lifecycle state-machine, 5 narrative laws | Antigravity (Gemini 2.5 Pro) | work/T068-antigravity-deck-director | main (Argon approved) | experiments/T068-20261104-antigravity-deck-director/REPORT.md |
 | T069 | *next free ID* | | | | |
