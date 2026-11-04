@@ -154,6 +154,19 @@
           "reuse_existing": true,
           "same_slide": true,
           "duration_ms": 600
+        },
+        {
+          "id": "dim-3-1",
+          "purpose": "Dim prior elements for b3.1",
+          "operation": "dim",
+          "targets": [
+            "Points"
+          ],
+          "timing_intent": "with-previous",
+          "effect": "dim",
+          "reuse_existing": true,
+          "same_slide": true,
+          "duration_ms": 400
         }
       ],
       "click_beats": [
@@ -161,7 +174,8 @@
           "id": "click-3-1",
           "purpose": "Hai trụ cột kinh tế chính trị và chủ nghĩa xã hội khoa học đồng thời xuất hiện",
           "motion_beats": [
-            "beat-3-1"
+            "beat-3-1",
+            "dim-3-1"
           ],
           "stable_state": "Hai trụ cột kinh tế chính trị và chủ nghĩa xã hội khoa học đồng thời xuất hiện",
           "pause_after": "slide-complete",

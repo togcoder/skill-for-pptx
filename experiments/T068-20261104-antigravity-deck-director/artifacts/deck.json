@@ -11,6 +11,7 @@
       "base_state": [
         "art:portraits"
       ],
+      "notes": "[T=0] Ngay từ trang bìa, hình ảnh ba nhà tư tưởng vĩ đại đã định vị toàn bộ linh hồn của học thuyết.\n\n[CLICK 1 - b1.1] Để mở đầu chương trình hôm nay, [CLICK] (Tiêu đề chính xuất hiện khẳng định chủ đề chương một) chúng ta cùng bước vào hành trình khai phá nguồn gốc và bản chất của học thuyết giải phóng con người.",
       "subtitle": "Khái luận về triết học và vai trò trong đời sống xã hội",
       "image": "experiments/T066-20261104-opencode-triet-hoc-ch1/inputs/assets/marx-circle.png"
     },
@@ -20,6 +21,7 @@
       "base_state": [
         "art:plato"
       ],
+      "notes": "[T=0] Bức tượng triết gia cổ đại nhắc nhở chúng ta rằng: triết học bắt đầu từ những câu hỏi ngây ngô nhất của con người.\n\n[CLICK 1 - b2.1] Tuy nhiên, để trở thành một hệ thống khoa học, [CLICK] (Hai trụ cột đầu tiên hiện rõ cấu trúc nhận thức) giáo trình phân lập bức tranh tổng thể thành hai miền thực tại: thế giới vật chất bên ngoài và các thiết chế tương tác giữa loài người.\n\n[CLICK 2 - b2.2] Và đỉnh cao của sự khái quát hóa — [CLICK] (Trụ cột xã hội mờ đi để nhường toàn bộ tiêu điểm cho quy luật tư duy) đỉnh cao nhất chính là năng lực phản ánh thế giới vào trong ý thức và phương pháp tư biện của chính chúng ta.",
       "major": "Quy luật Tự nhiên",
       "minor": "Quan hệ Xã hội\n\nQuy luật Tư duy"
     },
@@ -29,6 +31,7 @@
       "base_state": [
         "bullet:sys1"
       ],
+      "notes": "[T=0] Toàn bộ học thuyết Mác không phải là những mảnh ghép rời rạc, mà là một khối kim cương thống nhất.\n\n[CLICK 1 - b3.1] Khi nhìn vào cấu trúc bên dưới, [CLICK] (Hai trụ cột kinh tế chính trị và chủ nghĩa xã hội khoa học đồng thời xuất hiện) chúng ta thấy bộ phận đầu tiên đóng vai trò hạt nhân thế giới quan, phần thứ hai vạch trần bóc lột, và phần thứ ba vạch ra con đường đấu tranh thực tiễn.",
       "bullets": [
         "Triết học Mác – Lênin (Thế giới quan và phương pháp luận)",
         "Kinh tế chính trị Mác – Lênin (Quy luật phát triển kinh tế)",

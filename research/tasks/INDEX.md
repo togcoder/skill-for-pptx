@@ -3,7 +3,7 @@
 Since T040: every new title starts with its domain in brackets: `[pptx]`, `[docx]`, `[xlsx]`, `[svg]` or `[cross]` (see `domains/README.md`). Lifecycle: `lab/PROTOCOL.md`. A row may carry `review requested` / `reviewed: <verdict>`.
 
 This file is the one place to take a task ID. Before starting, add a row with
-status `claimed`, using the next free ID (**T069**). Push the row before you do
+status `claimed`, using the next free ID (**T070**). Push the row before you do
 expensive work. IDs are never reused. T024 was taken three times in parallel,
 so those rows carry a suffix. The experiment folders keep the names they were
 created with.
@@ -97,5 +97,6 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T066 | [pptx] Triết học Mác – Lênin, Chương 1: native editorial deck with complex motion and cut-out portraits | OpenCode (DeepSeek V4.1 Flash Max) | `work/T066-opencode-triet-hoc-ch1` | review requested | `experiments/T066-20261104-opencode-triet-hoc-ch1/REPORT.md` |
 | T067 | [pptx] Deck direction and visual style system: beat-sheet motion, image choreography, style presets | OpenCode (DeepSeek V4.1 Flash Max) | `work/T067-opencode-deck-director` | main (research; review requested) | `experiments/T067-20261104-opencode-deck-director/SYNTHESIS.md` |
 | T068 | [pptx] Deck Director compiler & validator: Two-Pass screenplay, lifecycle state-machine, 5 narrative laws | Antigravity (Gemini 2.5 Pro) | work/T068-antigravity-deck-director | main (Argon approved) | experiments/T068-20261104-antigravity-deck-director/REPORT.md |
-| T069 | [pptx] Directed deck: 3–4 semantic Morphs, image blocks, state-sequence critic | OpenCode (DeepSeek V4.1 Flash Max) | `work/T069-opencode-directed-deck` | in progress | `experiments/T069-20261104-opencode-directed-deck/REPORT.md` |
+| T069a | [pptx] Directed deck: 3–4 semantic Morphs, image blocks, state-sequence critic | OpenCode (DeepSeek V4.1 Flash Max) | `work/T069-opencode-directed-deck` | in progress | `experiments/T069-20261104-opencode-directed-deck/REPORT.md` |
+| T069b | [pptx] Narrative Critic & Two-Pass Screenplay Scaffold: speaker notes compiler, 6th dimension narrative critic, exit lifecycles | Antigravity (Gemini 2.5 Pro) | `work/T069-antigravity-narrative-critic` | main (Argon approved) | `experiments/T069-20261104-antigravity-narrative-critic/REPORT.md` |
 | T070 | *next free ID* | | | | |

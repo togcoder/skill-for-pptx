@@ -1,0 +1,215 @@
+{
+  "$schema": "../lab/schemas/deck_direction.schema.json",
+  "version": "0.2",
+  "brief": {
+    "topic": "Chuyển Đổi Số Toàn Diện",
+    "target_audience": "Chuyên gia và người thực hành",
+    "core_thesis": "Nghiên cứu có cấu trúc về Chuyển Đổi Số Toàn Diện.",
+    "takeaway": "Nắm vững nguyên lý và phương pháp thực thi hiệu quả.",
+    "one_sentence": "Khung phương pháp luận và lộ trình triển khai Chuyển Đổi Số Toàn Diện.",
+    "register": "editorial_teaching"
+  },
+  "style": {
+    "preset": "editorial-crimson",
+    "tone": "confident, rigorous, pedagogical",
+    "typography": "editorial serif headline + clean sans body",
+    "density": "balanced"
+  },
+  "beats": [
+    {
+      "id": "b1",
+      "job": "hook",
+      "figure": "arrive",
+      "claim": "Giới thiệu: Chuyển Đổi Số Toàn Diện",
+      "t0_says": "Chào mừng quý vị đến với chuyên đề: Chuyển Đổi Số Toàn Diện.",
+      "clicks": [
+        {
+          "id": "b1.1",
+          "lead_in": "Trước tiên,",
+          "state": "Hiển thị phụ đề định vị nội dung",
+          "post_click_says": "chúng ta cùng xác lập phương pháp tiếp cận và các luận điểm then chốt.",
+          "target_refs": [
+            "title:main",
+            "sub:main"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2",
+      "job": "prove",
+      "figure": "assemble",
+      "claim": "Luận cứ và Cấu trúc Cốt lõi",
+      "t0_says": "Hãy cùng nhìn vào bức tranh thực tế.",
+      "clicks": [
+        {
+          "id": "b2.1",
+          "lead_in": "Khi xem xét thành tố đầu tiên,",
+          "state": "Hiện luận điểm trọng tâm",
+          "post_click_says": "chúng ta thấy rõ sự chuyển dịch căn bản của toàn bộ hệ thống.",
+          "target_refs": [
+            "card:major"
+          ]
+        },
+        {
+          "id": "b2.2",
+          "lead_in": "Đồng thời,",
+          "state": "Làm mờ luận điểm chính và làm sáng tỏ chi tiết",
+          "post_click_says": "các dữ liệu phụ trợ xác nhận xu thế này là tất yếu khách quan.",
+          "target_refs": [
+            "card:minor"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b3",
+      "job": "land",
+      "figure": "clear",
+      "claim": "Luận điểm và Đột phá Bước 3",
+      "t0_says": "Từ các cơ sở trên, giải pháp cốt lõi ở bước 3 là gì?",
+      "clicks": [
+        {
+          "id": "b3.1",
+          "lead_in": "Chúng ta cần lưu ý,",
+          "state": "Hiện giải pháp 3.1",
+          "post_click_says": "hành động quyết liệt là chìa khóa đạt kết quả vượt bậc.",
+          "target_refs": [
+            "bullet:1"
+          ]
+        },
+        {
+          "id": "b3.2",
+          "lead_in": "Cuối cùng,",
+          "state": "Chuyển trạng thái và chốt kết quả 3.2",
+          "post_click_says": "chúng ta hoàn thành mục tiêu chiến lược dài hạn đã đề ra.",
+          "target_refs": [
+            "bullet:2"
+          ]
+        }
+      ]
+    }
+  ],
+  "shots": [
+    {
+      "id": "s1",
+      "beat": "b1",
+      "layout": "title",
+      "objects": [
+        {
+          "id": "title:main",
+          "role": "title",
+          "text": "Chuyển Đổi Số Toàn Diện"
+        },
+        {
+          "id": "sub:main",
+          "role": "subtitle",
+          "text": "Phân tích có hệ thống và bài bản"
+        }
+      ],
+      "base_state": [
+        "title:main"
+      ],
+      "state_after": {
+        "b1.1": {
+          "enter": [
+            "sub:main"
+          ],
+          "dim": [],
+          "highlight": [],
+          "exit": []
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "beat": "b2",
+      "layout": "asymmetric",
+      "objects": [
+        {
+          "id": "title:main",
+          "role": "title",
+          "text": "Luận cứ và Cấu trúc Cốt lõi"
+        },
+        {
+          "id": "card:major",
+          "role": "body",
+          "text": "Khung phân tích chuyển đổi số toàn diện"
+        },
+        {
+          "id": "card:minor",
+          "role": "body",
+          "text": "Tối ưu hóa năng suất lao động và trải nghiệm"
+        }
+      ],
+      "base_state": [
+        "title:main"
+      ],
+      "state_after": {
+        "b2.1": {
+          "enter": [
+            "card:major"
+          ],
+          "dim": [],
+          "highlight": [],
+          "exit": []
+        },
+        "b2.2": {
+          "enter": [
+            "card:minor"
+          ],
+          "dim": [
+            "card:major"
+          ],
+          "highlight": [],
+          "exit": []
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "beat": "b3",
+      "layout": "bullets",
+      "objects": [
+        {
+          "id": "title:main",
+          "role": "title",
+          "text": "Luận điểm và Đột phá Bước 3"
+        },
+        {
+          "id": "bullet:1",
+          "role": "body",
+          "text": "Hạ tầng công nghệ và nguồn nhân lực 3"
+        },
+        {
+          "id": "bullet:2",
+          "role": "body",
+          "text": "Chỉ số đo lường hiệu quả theo giá trị 3"
+        }
+      ],
+      "base_state": [
+        "title:main"
+      ],
+      "state_after": {
+        "b3.1": {
+          "enter": [
+            "bullet:1"
+          ],
+          "dim": [],
+          "highlight": [],
+          "exit": []
+        },
+        "b3.2": {
+          "enter": [
+            "bullet:2"
+          ],
+          "dim": [
+            "bullet:1"
+          ],
+          "highlight": [],
+          "exit": []
+        }
+      }
+    }
+  ]
+}

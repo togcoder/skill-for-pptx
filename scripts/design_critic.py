@@ -68,8 +68,13 @@ DIMENSION={"COL-TEXT":"design","COL-GRAPHIC":"design","TYP-SMALL":"design","TYP-
            "MOT-CLICKS":"rhythm","MOT-MOVERS":"rhythm","MOT-EFFECTS":"rhythm","MOT-STATIC":"rhythm",
            "MOT-SETTLE":"rhythm","DUA-BREAK":"rhythm",
            "TYP-SIZES":"coherence","TYP-FAMILIES":"coherence","MOT-VOCAB":"coherence",
-           "TEC-SCHEMA":"technique"}
+           "TEC-SCHEMA":"technique",
+           "NAR-BASE-STATE":"narrative","DEN-ACTIVE-WORDS":"narrative","NAR-LIFECYCLE":"narrative","NAR-ALIGN":"narrative"}
 FIX={
+    "NAR-BASE-STATE":("keep at least one visual anchor or title visible at t=0 before the first click","deck_director base_state"),
+    "DEN-ACTIVE-WORDS":("dim or exit prior cards/points so active on-screen words stay <= 45 per click state","deck_director state_after.dim/exit"),
+    "NAR-LIFECYCLE":("add dim or exit transitions across clicks instead of purely additive entrances","deck_director state_after"),
+    "NAR-ALIGN":("compile screenplay cues ([T=0], [CLICK]) into speaker notes matching slide click count","deck_director compile"),
     "COL-TEXT":("use the theme text colour or a palette colour that reaches the contrast","slide_forge theme / brand_palette"),
     "COL-GRAPHIC":("re-apply: helpers take a deck colour that reaches 3:1 (motion_components.deck_style), or set components[].generate.color","motion_director"),
     "CHROME-SAFE":("place logo at top-right (w<=72pt, h<=24pt, y=20pt) and suppress on cover/closing slides; progress bar at bottom edge","slide_forge chrome / layout_engine"),
@@ -213,6 +218,21 @@ def slide_timing(root):
     inter=[_effect(c,0) for seq in timing.findall(".//p:cTn[@nodeType='interactiveSeq']",NS)
            for c in seq.iter(_q(P,"cTn")) if c.get("presetClass")]
     return groups,inter
+
+
+def _slide_notes_text(pkg, slide_part):
+    """Read full text of speaker notes for a slide, or empty string."""
+    try:
+        rels = pkg.rels(slide_part)
+        notes_part = next((pkg.resolve(slide_part, r.get("Target")) for r in rels
+                           if r.get("Type", "").endswith("/notesSlide")), None)
+        if not notes_part:
+            return ""
+        nroot = pkg.xml(notes_part)
+        texts = [t.text for t in nroot.iter(_q(A, "t")) if t.text]
+        return "\n".join(texts)
+    except Exception:
+        return ""
 
 
 def morph_duration(root):
@@ -709,6 +729,66 @@ def critique(path,render=None,xsd=None):
             ok=schema.validate(E.ElementTree(root))
             check("TEC-SCHEMA","good" if ok else "warn",idx,None,
                   None if ok else str(schema.error_log.last_error.message)[:160],"valid ISO 29500 PresentationML")
+        # ---- narrative and screenplay checks
+        click_groups = [g for g in groups if g["trigger"] == "click"]
+        content_objs = [o for o in s["objects"] if visible(o) and not (o.get("name") or "").startswith(("__gen_", "__counter_", "!!"))]
+        obj_words = {o["id"]: len((o.get("text") or "").split()) for o in content_objs}
+        entr_spids = {e["spid"] for g in click_groups for e in g["effects"] if e.get("cls") == "entr" and e.get("spid")}
+        t0_objs = [o for o in content_objs if o["id"] not in entr_spids]
+
+        # Law 1: NAR-BASE-STATE (Non-empty visual anchor at t=0)
+        if click_groups:
+            if not t0_objs:
+                check("NAR-BASE-STATE", "warn", idx, None, 0, ">= 1 visible anchor at t=0", "slide opens blank before first click")
+            else:
+                check("NAR-BASE-STATE", "good", idx, None, len(t0_objs), ">= 1 visible anchor at t=0")
+
+        # Law 2: DEN-ACTIVE-WORDS (Active words <= 45 across click states)
+        active_ids = {o["id"] for o in t0_objs}
+        dimmed_ids = set()
+        peak_active_words = sum(obj_words.get(i, 0) for i in (active_ids - dimmed_ids))
+        for g in click_groups:
+            for e in g["effects"]:
+                if e.get("cls") == "entr" and e.get("spid"):
+                    active_ids.add(e["spid"])
+                    dimmed_ids.discard(e["spid"])
+                if e.get("cls") == "exit" and e.get("spid"):
+                    active_ids.discard(e["spid"])
+                    dimmed_ids.discard(e["spid"])
+                if e.get("cls") == "emph" and e.get("pid") == 9 and e.get("spid"):
+                    dimmed_ids.add(e["spid"])
+            state_words = sum(obj_words.get(i, 0) for i in (active_ids - dimmed_ids))
+            peak_active_words = max(peak_active_words, state_words)
+
+        if is_content or click_groups:
+            den_grade = "good" if peak_active_words <= 45 else ("note" if peak_active_words <= 55 else "warn")
+            check("DEN-ACTIVE-WORDS", den_grade, idx, None, peak_active_words, "<= 45 active words")
+
+        # Law 3: NAR-LIFECYCLE (Dim or exit transitions across clicks)
+        slide_per = Counter(e["spid"] for g in groups for e in g["effects"] if e.get("spid"))
+        slide_lifecycles = sum(1 for n in slide_per.values() if n >= 2)
+        if len(click_groups) >= 2 and (info["words"] > 45 or len(click_groups) >= 3):
+            if slide_lifecycles == 0:
+                check("NAR-LIFECYCLE", "warn", idx, None, 0, ">= 1 object lifecycle (enter -> dim/exit)", "purely additive clicks without dimming or exiting prior elements")
+            else:
+                check("NAR-LIFECYCLE", "good", idx, None, slide_lifecycles, ">= 1 object lifecycle")
+        elif slide_lifecycles >= 1:
+            check("NAR-LIFECYCLE", "good", idx, None, slide_lifecycles, ">= 1 object lifecycle")
+
+        # Law 4: NAR-ALIGN (Speaker notes screenplay cues synced with slide clicks)
+        notes_txt = _slide_notes_text(pkg, part)
+        if "[T=0]" in notes_txt or re.search(r"\[CLICK", notes_txt):
+            note_clicks = len(re.findall(r"\[CLICK\s+\d+", notes_txt))
+            has_t0 = "[T=0]" in notes_txt
+            if has_t0 and note_clicks == len(click_groups):
+                check("NAR-ALIGN", "good", idx, None, note_clicks, len(click_groups), "speaker notes aligned with slide clicks")
+            else:
+                check("NAR-ALIGN", "warn", idx, None, {"note_clicks": note_clicks, "has_t0": has_t0},
+                      {"slide_clicks": len(click_groups), "has_t0": True}, "speaker notes out of sync with timing tree")
+        elif len(click_groups) >= 1:
+            check("NAR-ALIGN", "note", idx, None, "no screenplay cues", "[T=0] and [CLICK] cues in speaker notes",
+                  "animated slide lacks choreographed speaker notes")
+
         slides.append(info)
 
     # ---- deck level
@@ -782,7 +862,7 @@ def critique(path,render=None,xsd=None):
         note=sum(g=="note" for g in got)
         return 1+4*(good+0.5*note)/len(got)
     scores={}
-    for dim in ("design","motion","rhythm","coherence","technique"):
+    for dim in ("design","motion","rhythm","coherence","technique","narrative"):
         halves=[part_score(got) for got in ([g for c,g,d in checks if DIMENSION.get(c)==dim and not d],
                                             [g for c,g,d in checks if DIMENSION.get(c)==dim and d]) if got]
         if halves:

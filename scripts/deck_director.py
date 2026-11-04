@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deck Director: Two-Pass Screenplay Compiler and State-Machine Validator (T068).
+"""Deck Director: Two-Pass Screenplay Compiler and State-Machine Validator (T068/T069).
 
 Directs presentation decks before layout: locks Stage Inventory, t=0 Resting Base State,
 and Lifecycle State Transitions (enter, dim, highlight, exit, zoom) in Pass 1,
@@ -12,7 +12,8 @@ Enforces 5 hard narrative laws:
 - DEN-ACTIVE-VIEW: Active on-screen words capped at <= 45 words per view.
 
 Usage:
-    python scripts/deck_director.py check direction.json
+    python scripts/deck_director.py check direction.json [--pass-1]
+    python scripts/deck_director.py scaffold -o direction_draft.json [--slides 3] [--title "Title"] [--preset editorial-crimson]
     python scripts/deck_director.py compile direction.json -o deck.json --director director.json
     python scripts/deck_director.py ledger deck.pptx [--direction direction.json]
 """
@@ -75,8 +76,12 @@ def _vocabulary_overlap(text_a: str, text_b: str) -> float:
 # Validator: check()
 # ---------------------------------------------------------------------------
 
-def check_direction(data: dict[str, Any]) -> dict[str, Any]:
-    """Validate direction data against schema and 5 hard narrative laws."""
+def check_direction(data: dict[str, Any], pass_num: int = 2) -> dict[str, Any]:
+    """Validate direction data against schema and 5 hard narrative laws.
+    
+    pass_num = 1: Validates stage inventory, base state, and object lifecycles (Pass 1).
+    pass_num = 2: Validates full screenplay including spoken lines, lead-in, and karaoke (Pass 2).
+    """
     errors: list[dict[str, str]] = []
     warnings: list[dict[str, str]] = []
 
@@ -140,10 +145,11 @@ def check_direction(data: dict[str, Any]) -> dict[str, Any]:
         t0_says = beat.get("t0_says", "").strip()
         clicks = beat.get("clicks", [])
 
-        if not t0_says:
-            errors.append({"code": "NAR-T0-SAYS-MISSING", "detail": f"Beat {b_id}: Missing 't0_says' for t=0 base state"})
-        elif len(clicks) > 0 and len(t0_says.split()) > 35:
-            errors.append({"code": "NAR-CODA-TRAP", "detail": f"Beat {b_id}: t0_says too long ({len(t0_says.split())} words > 35) without visual event"})
+        if pass_num >= 2:
+            if not t0_says:
+                errors.append({"code": "NAR-T0-SAYS-MISSING", "detail": f"Beat {b_id}: Missing 't0_says' for t=0 base state"})
+            elif len(clicks) > 0 and len(t0_says.split()) > 35:
+                errors.append({"code": "NAR-CODA-TRAP", "detail": f"Beat {b_id}: t0_says too long ({len(t0_says.split())} words > 35) without visual event"})
 
         # Shots state_after & lifecycle validation
         base_state = shot.get("base_state", [])
@@ -196,18 +202,20 @@ def check_direction(data: dict[str, Any]) -> dict[str, Any]:
                 if d in trans_dict["exit"]:
                     known_exited.add(d)
 
-            # NAR-COLLISION: Complex motion pacing
-            movers_count = len(trans_dict["enter"]) + len(trans_dict["dim"]) + len(trans_dict["exit"]) + len(trans_dict["highlight"])
-            if (fig in ("assemble", "drill") or movers_count >= 3) and not click.get("lead_in"):
-                errors.append({"code": "NAR-COLLISION", "detail": f"Click {c_id}: Cinematic transition ({fig}, {movers_count} movers) missing lead_in cue"})
+            # Pass 2 checks
+            if pass_num >= 2:
+                # NAR-COLLISION: Complex motion pacing
+                movers_count = len(trans_dict["enter"]) + len(trans_dict["dim"]) + len(trans_dict["exit"]) + len(trans_dict["highlight"])
+                if (fig in ("assemble", "drill") or movers_count >= 3) and not click.get("lead_in"):
+                    errors.append({"code": "NAR-COLLISION", "detail": f"Click {c_id}: Cinematic transition ({fig}, {movers_count} movers) missing lead_in cue"})
 
-            # NAR-UNANCHORED: target_refs verification
-            target_refs = click.get("target_refs", [])
-            active_changers = set(trans_dict["enter"] + trans_dict["highlight"] + trans_dict["dim"] + trans_dict["exit"])
-            if not target_refs:
-                errors.append({"code": "NAR-UNANCHORED", "detail": f"Click {c_id}: Missing target_refs"})
-            elif not set(target_refs) & active_changers and active_changers:
-                warnings.append({"code": "NAR-UNANCHORED-MISMATCH", "detail": f"Click {c_id}: target_refs {target_refs} not in changing actors {list(active_changers)}"})
+                # NAR-UNANCHORED: target_refs verification
+                target_refs = click.get("target_refs", [])
+                active_changers = set(trans_dict["enter"] + trans_dict["highlight"] + trans_dict["dim"] + trans_dict["exit"])
+                if not target_refs:
+                    errors.append({"code": "NAR-UNANCHORED", "detail": f"Click {c_id}: Missing target_refs"})
+                elif not set(target_refs) & active_changers and active_changers:
+                    warnings.append({"code": "NAR-UNANCHORED-MISMATCH", "detail": f"Click {c_id}: target_refs {target_refs} not in changing actors {list(active_changers)}"})
 
         # DEN-ACTIVE-VIEW check
         # Calculate active words for shot
@@ -217,11 +225,12 @@ def check_direction(data: dict[str, Any]) -> dict[str, Any]:
             errors.append({"code": "DEN-ACTIVE-VIEW", "detail": f"Shot {shot.get('id')}: Total words {total_shot_words} > 55 across {len(clicks)} clicks without any dim or exit (Additive Clutter)"})
 
         # NAR-KARAOKE check across all spoken lines vs slide text
-        shot_texts = " ".join(o.get("text", "") for o in objects_dict.values())
-        speech_texts = t0_says + " " + " ".join(f"{c.get('lead_in', '')} {c.get('post_click_says', '')}" for c in clicks)
-        overlap = _vocabulary_overlap(shot_texts, speech_texts)
-        if overlap > 0.45:
-            errors.append({"code": "NAR-KARAOKE", "detail": f"Beat {b_id} / Shot {shot.get('id')}: High text-speech overlap ({overlap*100:.1f}% > 45%). Presenter reading slide verbatim."})
+        if pass_num >= 2:
+            shot_texts = " ".join(o.get("text", "") for o in objects_dict.values())
+            speech_texts = t0_says + " " + " ".join(f"{c.get('lead_in', '')} {c.get('post_click_says', '')}" for c in clicks)
+            overlap = _vocabulary_overlap(shot_texts, speech_texts)
+            if overlap > 0.45:
+                errors.append({"code": "NAR-KARAOKE", "detail": f"Beat {b_id} / Shot {shot.get('id')}: High text-speech overlap ({overlap*100:.1f}% > 45%). Presenter reading slide verbatim."})
 
     ok = len(errors) == 0
     return {
@@ -230,6 +239,171 @@ def check_direction(data: dict[str, Any]) -> dict[str, Any]:
         "warnings": warnings,
         "beats_count": len(beats),
         "shots_count": len(shots)
+    }
+
+
+# ---------------------------------------------------------------------------
+# Speaker Notes Helper
+# ---------------------------------------------------------------------------
+
+def format_speaker_notes(beat: dict[str, Any]) -> str:
+    """Format choreographed screenplay cues into speaker notes tag format."""
+    lines: list[str] = []
+    t0 = (beat.get("t0_says") or "").strip()
+    if t0:
+        lines.append(f"[T=0] {t0}")
+    for idx, c in enumerate(beat.get("clicks", []), 1):
+        c_id = c.get("id", f"{beat.get('id', 'b')}.{idx}")
+        lead = (c.get("lead_in") or "").strip()
+        state = (c.get("state") or "").strip()
+        post = (c.get("post_click_says") or "").strip()
+        state_tag = f" ({state})" if state else ""
+        lines.append(f"[CLICK {idx} - {c_id}] {lead} [CLICK]{state_tag} {post}".strip())
+    return "\n\n".join(lines)
+
+
+# ---------------------------------------------------------------------------
+# Scaffold: scaffold_direction()
+# ---------------------------------------------------------------------------
+
+def scaffold_direction(title: str = "Tên Bài Thuyết Trình", slides_count: int = 3, preset: str = "editorial-crimson") -> dict[str, Any]:
+    """Generate a clean, compliant Two-Pass Screenplay direction.json template."""
+    beats: list[dict[str, Any]] = []
+    shots: list[dict[str, Any]] = []
+
+    # Slide 1: Hook (Title card)
+    beats.append({
+        "id": "b1",
+        "job": "hook",
+        "figure": "arrive",
+        "claim": f"Giới thiệu: {title}",
+        "t0_says": f"Chào mừng quý vị đến với chuyên đề: {title}.",
+        "clicks": [
+            {
+                "id": "b1.1",
+                "lead_in": "Trước tiên,",
+                "state": "Hiển thị phụ đề định vị nội dung",
+                "post_click_says": "chúng ta cùng xác lập phương pháp tiếp cận và các luận điểm then chốt.",
+                "target_refs": ["title:main", "sub:main"]
+            }
+        ]
+    })
+    shots.append({
+        "id": "s1",
+        "beat": "b1",
+        "layout": "title",
+        "objects": [
+            {"id": "title:main", "role": "title", "text": title},
+            {"id": "sub:main", "role": "subtitle", "text": "Phân tích có hệ thống và bài bản"}
+        ],
+        "base_state": ["title:main"],
+        "state_after": {
+            "b1.1": {"enter": ["sub:main"], "dim": [], "highlight": [], "exit": []}
+        }
+    })
+
+    # Slide 2: Evidence (Asymmetric split)
+    beats.append({
+        "id": "b2",
+        "job": "prove",
+        "figure": "assemble",
+        "claim": "Luận cứ và Cấu trúc Cốt lõi",
+        "t0_says": "Hãy cùng nhìn vào bức tranh thực tế.",
+        "clicks": [
+            {
+                "id": "b2.1",
+                "lead_in": "Khi xem xét thành tố đầu tiên,",
+                "state": "Hiện luận điểm trọng tâm",
+                "post_click_says": "chúng ta thấy rõ sự chuyển dịch căn bản của toàn bộ hệ thống.",
+                "target_refs": ["card:major"]
+            },
+            {
+                "id": "b2.2",
+                "lead_in": "Đồng thời,",
+                "state": "Làm mờ luận điểm chính và làm sáng tỏ chi tiết",
+                "post_click_says": "các dữ liệu phụ trợ xác nhận xu thế này là tất yếu khách quan.",
+                "target_refs": ["card:minor"]
+            }
+        ]
+    })
+    shots.append({
+        "id": "s2",
+        "beat": "b2",
+        "layout": "asymmetric",
+        "objects": [
+            {"id": "title:main", "role": "title", "text": "Luận cứ và Cấu trúc Cốt lõi"},
+            {"id": "card:major", "role": "body", "text": "Khung phân tích chuyển đổi số toàn diện"},
+            {"id": "card:minor", "role": "body", "text": "Tối ưu hóa năng suất lao động và trải nghiệm"}
+        ],
+        "base_state": ["title:main"],
+        "state_after": {
+            "b2.1": {"enter": ["card:major"], "dim": [], "highlight": [], "exit": []},
+            "b2.2": {"enter": ["card:minor"], "dim": ["card:major"], "highlight": [], "exit": []}
+        }
+    })
+
+    # Additional slides up to slides_count
+    for idx in range(3, slides_count + 1):
+        b_id = f"b{idx}"
+        s_id = f"s{idx}"
+        beats.append({
+            "id": b_id,
+            "job": "land" if idx == slides_count else "mechanism",
+            "figure": "clear" if idx == slides_count else "build",
+            "claim": f"Luận điểm và Đột phá Bước {idx}",
+            "t0_says": f"Từ các cơ sở trên, giải pháp cốt lõi ở bước {idx} là gì?",
+            "clicks": [
+                {
+                    "id": f"{b_id}.1",
+                    "lead_in": "Chúng ta cần lưu ý,",
+                    "state": f"Hiện giải pháp {idx}.1",
+                    "post_click_says": "hành động quyết liệt là chìa khóa đạt kết quả vượt bậc.",
+                    "target_refs": ["bullet:1"]
+                },
+                {
+                    "id": f"{b_id}.2",
+                    "lead_in": "Cuối cùng,",
+                    "state": f"Chuyển trạng thái và chốt kết quả {idx}.2",
+                    "post_click_says": "chúng ta hoàn thành mục tiêu chiến lược dài hạn đã đề ra.",
+                    "target_refs": ["bullet:2"]
+                }
+            ]
+        })
+        shots.append({
+            "id": s_id,
+            "beat": b_id,
+            "layout": "bullets",
+            "objects": [
+                {"id": "title:main", "role": "title", "text": f"Luận điểm và Đột phá Bước {idx}"},
+                {"id": "bullet:1", "role": "body", "text": f"Hạ tầng công nghệ và nguồn nhân lực {idx}"},
+                {"id": "bullet:2", "role": "body", "text": f"Chỉ số đo lường hiệu quả theo giá trị {idx}"}
+            ],
+            "base_state": ["title:main"],
+            "state_after": {
+                f"{b_id}.1": {"enter": ["bullet:1"], "dim": [], "highlight": [], "exit": []},
+                f"{b_id}.2": {"enter": ["bullet:2"], "dim": ["bullet:1"], "highlight": [], "exit": []}
+            }
+        })
+
+    return {
+        "$schema": "../lab/schemas/deck_direction.schema.json",
+        "version": "0.2",
+        "brief": {
+            "topic": title,
+            "target_audience": "Chuyên gia và người thực hành",
+            "core_thesis": f"Nghiên cứu có cấu trúc về {title}.",
+            "takeaway": "Nắm vững nguyên lý và phương pháp thực thi hiệu quả.",
+            "one_sentence": f"Khung phương pháp luận và lộ trình triển khai {title}.",
+            "register": "editorial_teaching"
+        },
+        "style": {
+            "preset": preset,
+            "tone": "confident, rigorous, pedagogical",
+            "typography": "editorial serif headline + clean sans body",
+            "density": "balanced"
+        },
+        "beats": beats,
+        "shots": shots
     }
 
 
@@ -286,6 +460,7 @@ def compile_direction(data: dict[str, Any]) -> tuple[dict[str, Any], dict[str, A
             "title": title,
             "layout": layout,
             "base_state": shot.get("base_state", []),
+            "notes": format_speaker_notes(beat),
         }
 
         if layout == "title":
@@ -339,6 +514,32 @@ def compile_direction(data: dict[str, Any]) -> tuple[dict[str, Any], dict[str, A
         elif layout == "bullets":
             token_map = {"bullet:sys1": "Points", "bullet:sys2": "Points", "bullet:sys3": "Points"}
 
+        def _map_target(actor_id: str, l_type: str) -> str:
+            aid = actor_id.lower()
+            if actor_id in token_map:
+                return token_map[actor_id]
+            if actor_id in ("Title", "Subtitle", "Points", "Hero picture", "Major Card", "Major Content", "Minor Card", "Minor Content"):
+                return actor_id
+            if l_type == "title":
+                if "sub" in aid:
+                    return "Subtitle"
+                if "art" in aid or "hero" in aid or "img" in aid or "pic" in aid:
+                    return "Hero picture"
+                return "Title"
+            elif l_type == "asymmetric":
+                if "art" in aid or "hero" in aid or "img" in aid:
+                    return "Hero picture"
+                if "minor" in aid or "def2" in aid or "def3" in aid:
+                    return "Minor Content"
+                return "Major Content"
+            elif l_type == "bullets":
+                return "Points"
+            elif l_type == "kpis":
+                return "KPI Cards"
+            elif l_type == "process":
+                return "Process Steps"
+            return "Points"
+
         slide_beats = []
         click_beats = []
 
@@ -354,9 +555,7 @@ def compile_direction(data: dict[str, Any]) -> tuple[dict[str, Any], dict[str, A
                 dim_targets = trans.get("dim", [])
                 exit_targets = trans.get("exit", [])
 
-            mapped_targets = [token_map.get(t, t) for t in raw_targets if t in token_map or t in ("Title", "Subtitle", "Points", "Hero picture", "Major Card", "Major Content", "Minor Card", "Minor Content")]
-            if not mapped_targets and raw_targets:
-                mapped_targets = [token_map.get(t, "Points") for t in raw_targets]
+            mapped_targets = [_map_target(t, layout) for t in raw_targets]
 
             # Figure mapping to v0.7 operations
             op = "reveal"
@@ -395,7 +594,7 @@ def compile_direction(data: dict[str, Any]) -> tuple[dict[str, Any], dict[str, A
             # If dimming targets exist, add dim beat
             if dim_targets:
                 dim_id = f"dim-{s_idx+1}-{c_idx+1}"
-                mapped_dims = [token_map.get(t, t) for t in dim_targets if t in token_map or t in ("Title", "Subtitle", "Points", "Hero picture", "Major Card", "Major Content", "Minor Card", "Minor Content")]
+                mapped_dims = [_map_target(t, layout) for t in dim_targets]
                 if mapped_dims:
                     slide_beats.append({
                         "id": dim_id,
@@ -409,6 +608,24 @@ def compile_direction(data: dict[str, Any]) -> tuple[dict[str, Any], dict[str, A
                         "duration_ms": 400
                     })
                     motion_beat_ids.append(dim_id)
+
+            # If exit targets exist, add exit beat
+            if exit_targets:
+                exit_id = f"exit-{s_idx+1}-{c_idx+1}"
+                mapped_exits = [_map_target(t, layout) for t in exit_targets]
+                if mapped_exits:
+                    slide_beats.append({
+                        "id": exit_id,
+                        "purpose": f"Exit elements for {c_id}",
+                        "operation": "exit",
+                        "targets": list(dict.fromkeys(mapped_exits)),
+                        "timing_intent": "with-previous",
+                        "effect": "fade-out",
+                        "reuse_existing": True,
+                        "same_slide": True,
+                        "duration_ms": 400
+                    })
+                    motion_beat_ids.append(exit_id)
 
             click_beats.append({
                 "id": f"click-{s_idx+1}-{c_idx+1}",
@@ -533,6 +750,14 @@ def main(argv: list[str] | None = None) -> int:
     # check
     p_check = sub.add_parser("check", help="Check direction.json against schema and 5 narrative laws")
     p_check.add_argument("direction", type=Path, help="Path to direction.json")
+    p_check.add_argument("--pass-1", dest="pass_1", action="store_true", help="Only check Pass 1: Stage inventory and lifecycles (skip speech checks)")
+
+    # scaffold
+    p_scaffold = sub.add_parser("scaffold", help="Generate a scaffold Two-Pass screenplay direction.json template")
+    p_scaffold.add_argument("-o", "--output", type=Path, required=True, help="Path to output direction.json")
+    p_scaffold.add_argument("--title", type=str, default="Bài Thuyết Trình Mẫu", help="Presentation title")
+    p_scaffold.add_argument("--slides", type=int, default=3, help="Number of slides (beats/shots)")
+    p_scaffold.add_argument("--preset", type=str, default="editorial-crimson", help="Visual style preset")
 
     # compile
     p_compile = sub.add_parser("compile", help="Compile direction.json to deck.json and director.json")
@@ -549,8 +774,9 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.cmd == "check":
         data = json.loads(args.direction.read_text(encoding="utf-8"))
-        res = check_direction(data)
-        print(f"Validation result for {args.direction.name}: {'PASSED' if res['ok'] else 'FAILED'}")
+        res = check_direction(data, pass_num=1 if args.pass_1 else 2)
+        mode_str = " (Pass 1 Stage Check)" if args.pass_1 else " (Pass 2 Full Screenplay Check)"
+        print(f"Validation result for {args.direction.name}{mode_str}: {'PASSED' if res['ok'] else 'FAILED'}")
         if res["errors"]:
             print(f"\nErrors ({len(res['errors'])}):")
             for e in res["errors"]:
@@ -560,6 +786,13 @@ def main(argv: list[str] | None = None) -> int:
             for w in res["warnings"]:
                 print(f"  [{w['code']}] {w['detail']}")
         return 0 if res["ok"] else 1
+
+    elif args.cmd == "scaffold":
+        data = scaffold_direction(title=args.title, slides_count=args.slides, preset=args.preset)
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        args.output.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+        print(f"Generated scaffold screenplay -> {args.output}")
+        return 0
 
     elif args.cmd == "compile":
         data = json.loads(args.direction.read_text(encoding="utf-8"))

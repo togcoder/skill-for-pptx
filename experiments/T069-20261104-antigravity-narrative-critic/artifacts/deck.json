@@ -1,0 +1,40 @@
+{
+  "title": "Khung phương pháp luận và lộ trình triển khai Chuyển Đổi Số Toàn Diện.",
+  "theme": {
+    "seed": "#C1121F",
+    "mode": "dark"
+  },
+  "slides": [
+    {
+      "title": "Chuyển Đổi Số Toàn Diện",
+      "layout": "title",
+      "base_state": [
+        "title:main"
+      ],
+      "notes": "[T=0] Chào mừng quý vị đến với chuyên đề: Chuyển Đổi Số Toàn Diện.\n\n[CLICK 1 - b1.1] Trước tiên, [CLICK] (Hiển thị phụ đề định vị nội dung) chúng ta cùng xác lập phương pháp tiếp cận và các luận điểm then chốt.",
+      "subtitle": "Phân tích có hệ thống và bài bản"
+    },
+    {
+      "title": "Luận cứ và Cấu trúc Cốt lõi",
+      "layout": "asymmetric",
+      "base_state": [
+        "title:main"
+      ],
+      "notes": "[T=0] Hãy cùng nhìn vào bức tranh thực tế.\n\n[CLICK 1 - b2.1] Khi xem xét thành tố đầu tiên, [CLICK] (Hiện luận điểm trọng tâm) chúng ta thấy rõ sự chuyển dịch căn bản của toàn bộ hệ thống.\n\n[CLICK 2 - b2.2] Đồng thời, [CLICK] (Làm mờ luận điểm chính và làm sáng tỏ chi tiết) các dữ liệu phụ trợ xác nhận xu thế này là tất yếu khách quan.",
+      "major": "Khung phân tích chuyển đổi số toàn diện",
+      "minor": "Tối ưu hóa năng suất lao động và trải nghiệm"
+    },
+    {
+      "title": "Luận điểm và Đột phá Bước 3",
+      "layout": "bullets",
+      "base_state": [
+        "title:main"
+      ],
+      "notes": "[T=0] Từ các cơ sở trên, giải pháp cốt lõi ở bước 3 là gì?\n\n[CLICK 1 - b3.1] Chúng ta cần lưu ý, [CLICK] (Hiện giải pháp 3.1) hành động quyết liệt là chìa khóa đạt kết quả vượt bậc.\n\n[CLICK 2 - b3.2] Cuối cùng, [CLICK] (Chuyển trạng thái và chốt kết quả 3.2) chúng ta hoàn thành mục tiêu chiến lược dài hạn đã đề ra.",
+      "bullets": [
+        "Hạ tầng công nghệ và nguồn nhân lực 3",
+        "Chỉ số đo lường hiệu quả theo giá trị 3"
+      ]
+    }
+  ]
+}
