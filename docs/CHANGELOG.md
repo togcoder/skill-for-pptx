@@ -7,6 +7,35 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T078 [pptx] Script track: diagnosis, method and the first gold script — 2026-11-04
+
+- **Why.** The owner pushed back on T070: motion thinking is driven by the
+  script, the agents' script skill is weak, and weak models may not manage
+  this part. T070 had treated the script as an input the agent "just writes".
+- **Diagnosis.**
+  - The deck-director skill teaches a form and prohibitions, not a way to think.
+  - It has no gold example.
+  - The T069a script starts from the textbook outline and restates
+    definitions.
+  - There is no bridge from sentences to motion.
+  - Scripts are never read as text before building.
+- **Method.** Direction lives in `docs/SCRIPT_TRACK.md`:
+  - a table of what a weak model can and cannot do;
+  - a 6-step method (ask, intent, shifts, scene sheet, verb → motion,
+    read-aloud and approval);
+  - a library of 8 narrative frames;
+  - an 18-row verb → motion table (hypotheses);
+  - a division of labour: a strong model or the owner approves scripts as
+    text.
+- **Gold script.** `experiments/T078-…/gold-script-triet-hoc-ch1.md`: 13 scenes for
+  the T066/T069a deck. It opens with two proverbs, uses a persistent lens
+  metaphor as the Morph actor, and derives motion from verbs: gather, tip,
+  flip, merge, become, pan through time, swap weight. It is compared with
+  T069a.
+- **Reserved.** T079 weak-model experiment, T080 verb-table validation, T081
+  `script-writer` skill, T082 gold scripts 2–5. Next free ID T083. The ROADMAP
+  principle 2 and architecture now put the script first.
+
 ## T070 [cross] Lead synthesis of T001–T069, critique and PPTX roadmap — 2026-11-04
 
 - **Why.** The owner saw a lot of activity but no clearly better deck, noticed

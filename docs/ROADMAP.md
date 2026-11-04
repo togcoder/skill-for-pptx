@@ -34,8 +34,13 @@ hiệu ứng, sửa file. Những công cụ đó đã làm tốt và ta dùng l
    - Điểm critic chỉ được dùng để nói "tốt hơn" sau khi nó dự đoán đúng lựa chọn A/B của chủ dự
      án từ 75% trở lên (T071).
    - Trước mốc đó, critic chỉ là công cụ bắt lỗi kỹ thuật.
-2. **Đặt trí tuệ vào công cụ, không vào agent.**
-   - Agent viết ý đồ, công cụ làm nghề, cổng kiểm chặn lỗi.
+2. **Đặt trí tuệ vào công cụ, không vào agent; riêng kịch bản thì phân vai.**
+   - Công cụ làm nghề, cổng kiểm chặn lỗi.
+   - **Kịch bản là nơi sinh ra chuyển động** (chuyển động là động từ của câu chuyện). Đây là phần
+     cần phán đoán nhiều nhất, nên có trục riêng:
+     [SCRIPT_TRACK.md](SCRIPT_TRACK.md) (T078).
+   - Model yếu viết kịch bản theo phiếu cộng ví dụ vàng. Model mạnh hoặc chủ dự án **duyệt bản
+     chữ trước khi dựng**.
    - Phép thử của mọi thay đổi là khoảng cách chất lượng giữa model yếu và model mạnh khi dùng
      cùng công cụ có thu hẹp lại không.
 3. **Morph là đầu ra của trình biên dịch cảnh,** không phải hiệu ứng để agent chọn tay.
@@ -57,7 +62,8 @@ hiệu ứng, sửa file. Những công cụ đó đã làm tốt và ta dùng l
 ## Kiến trúc mục tiêu
 
 ```
-brief.md ──► story (beats: mỗi beat một việc, có lời nói)          ← agent viết
+brief.md ──► script.md: ý đồ + cảnh + lời nói + động từ → chuyển động ← trục kịch bản (SCRIPT_TRACK)
+             │   (chủ dự án / model mạnh duyệt bản chữ trước khi dựng)
              │
              ▼
          scene.json: diễn viên bền vững + trạng thái theo click/cảnh ← agent viết (chọn từ công thức)
@@ -86,6 +92,11 @@ Những thứ bị thay:
 - 14 layout cố định là nơi *duy nhất* tạo bố cục;
 - cách ánh xạ diễn viên bằng chuỗi con trong `deck_director.py`;
 - điểm critic dùng làm bằng chứng chất lượng.
+
+## Trục kịch bản (T078–T082): chạy song song, đi trước chặng 2
+
+Chi tiết trong [SCRIPT_TRACK.md](SCRIPT_TRACK.md). Việc đầu tiên: chủ dự án đọc kịch bản mẫu T078
+và so với beat sheet T069a. Mọi deck mới ở chặng 2 phải có kịch bản đã được duyệt dạng chữ.
 
 ## Chặng 1: thước đo thật (đề bài đã giữ chỗ T071–T074)
 

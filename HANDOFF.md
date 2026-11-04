@@ -6,7 +6,7 @@ trình). Tệp này được **viết lại** mỗi lần bàn giao, không ghi 
 
 **Đọc theo thứ tự:**
 1. tệp này;
-2. [docs/ROADMAP.md](docs/ROADMAP.md): đích đến, 6 nguyên tắc, các chặng và đề bài;
+2. [docs/ROADMAP.md](docs/ROADMAP.md): đích đến, 6 nguyên tắc, các chặng và đề bài; [docs/SCRIPT_TRACK.md](docs/SCRIPT_TRACK.md) cho trục kịch bản;
 3. [T070 REPORT](experiments/T070-20261104-claude-lead-synthesis/REPORT.md): tổng hợp và phản
    biện;
 4. `AGENTS.md`, `lab/PROTOCOL.md`, `domains/pptx/DOMAIN.md`.
@@ -22,7 +22,7 @@ Một công cụ dành cho AI để tạo file **PPTX có độ hoàn thiện ca
 chuyển động, motion graphic, vũ đạo theo nội dung, Morph. Chất lượng phải đủ để chủ dự án chọn nó
 thay vì deck làm tay. Lab đa lĩnh vực phục vụ mục tiêu đó và đang **đóng băng**.
 
-## Ba điều trưởng nhóm muốn mọi agent biết (T070)
+## Bốn điều trưởng nhóm muốn mọi agent biết (T070, T078)
 
 1. **Điểm critic không phải chất lượng.** Deck T068/T069b có thẻ trống, tiêu đề bị cắt và chữ
    giữ chỗ nhưng vẫn được 4,99/5 (`experiments/T070-…/preview/critic-499-vs-eye.jpg`). Muốn nói
@@ -30,7 +30,10 @@ thay vì deck làm tay. Lab đa lĩnh vực phục vụ mục tiêu đó và đa
 2. **Gu phải nằm trong công cụ, không nằm trong script riêng.** Deck đẹp nhất (T066) là script
    viết tay 524 dòng. Đừng viết thêm deck kiểu đó làm sản phẩm. Hãy đưa phần gu vào công cụ (chặng
    2–3).
-3. **Morph = danh tính vật thể giữa hai trạng thái.** Đừng chọn Morph bằng tay; hãy mô tả trạng
+3. **Kịch bản đi trước, chuyển động là động từ của kịch bản** (T078). Không dựng deck mới khi
+   kịch bản chưa được duyệt dạng chữ. Đọc [docs/SCRIPT_TRACK.md](docs/SCRIPT_TRACK.md) và kịch bản
+   mẫu `experiments/T078-…/gold-script-triet-hoc-ch1.md`.
+4. **Morph = danh tính vật thể giữa hai trạng thái.** Đừng chọn Morph bằng tay; hãy mô tả trạng
    thái (chặng 2). Các luật đã biết:
    - tên `!!` ép ghép;
    - vật thể có entrance bị ẩn trong lúc Morph (T059);
@@ -66,6 +69,11 @@ thay vì deck làm tay. Lab đa lĩnh vực phục vụ mục tiêu đó và đa
 
 | Mã | Việc | Người làm → phản biện | Điều kiện bắt đầu |
 |---|---|---|---|
+| **T078** | **Trục kịch bản: phương pháp + kịch bản mẫu Triết học ch. 1** ([SCRIPT_TRACK](docs/SCRIPT_TRACK.md)) | Claude | **xong, chờ chủ dự án đọc** |
+| T079 | Model yếu + phương pháp có viết được kịch bản tốt? (A/B mù bản chữ) | OpenCode → Claude | sau khi T078 được duyệt |
+| T080 | Kiểm chứng bảng động từ → chuyển động | OpenCode → Claude | cần T073 |
+| T081 | Skill `script-writer` (phiếu + khung + bảng động từ + ví dụ vàng) | Claude → OpenCode | sau khi T078 được duyệt |
+| T082 | Ví dụ vàng 2–5 (báo cáo, pitch, quy trình, so sánh) | Claude → chủ dự án duyệt | sau T081 |
 | T071 | Bộ đề vàng 8 đề + trang chấm A/B + hiệu chỉnh critic | Claude → OpenCode | ngay |
 | T072 | Cổng lỗi thị giác trên khung hình (cắt chữ, thẻ trống, chữ giữ chỗ, chữ nhỏ, mất style, va chạm) | OpenCode → Claude | ngay |
 | T073 | Máy xem chuyển động nhanh: DeckCraft `render-animation` vs ghi slideshow bằng harness | Claude desktop → OpenCode | ngay |
@@ -74,7 +82,7 @@ thay vì deck làm tay. Lab đa lĩnh vực phục vụ mục tiêu đó và đa
 | T076 | Thư viện 10 nước Morph có khung hình mẫu | OpenCode → Claude | sau T074 |
 | T077 | Deck Director xuất cảnh; bỏ ánh xạ chuỗi con và giá trị bịa | Antigravity → Claude | sau T075 |
 
-Mã trống kế tiếp cho việc ngoài danh sách: **T078**.
+Mã trống kế tiếp cho việc ngoài danh sách: **T083**.
 
 **Dừng ngay:**
 - vá thêm luật chuỗi con trong `deck_director.py`;

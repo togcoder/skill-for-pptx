@@ -12,3 +12,4 @@ F6–F8 are the owner's message to the lead on 2026-11-04 (translated).
 - [ ] F6 "The models worked hard, but I still don't see a clearly better result." — proposed-fix: T071 (weekly bench release)
 - [ ] F7 Feedback and new tasks in one session confuse the agents. — process change: this ledger + one brief per session
 - [ ] F8 Complex motion such as Morph seems very hard. — proposed-fix: T074 → T075 → T076
+- [ ] F9 "Motion thinking is driven by the script; the agents' script skill is too weak, or the agents are; weak models may not manage this part." — proposed-fix: T078 (`docs/SCRIPT_TRACK.md` + gold script). **Owner: please read `experiments/T078-20261104-claude-script-track/gold-script-triet-hoc-ch1.md` and compare with the T069a beat sheet.**
