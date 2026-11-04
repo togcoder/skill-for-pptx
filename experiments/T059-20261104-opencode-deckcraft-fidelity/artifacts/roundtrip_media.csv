@@ -1,0 +1,15 @@
+deck,source,width_pt,height_pt,slides,shapes,pictures,svg_blips,charts,groups
+coffee_office_dynamic,original,960,540,10,101,2,0,1,0
+coffee_office_dynamic,roundtrip,960,540,10,101,2,0,1,0
+coffee_report,original,960,540,10,101,2,0,1,0
+coffee_report,roundtrip,960,540,10,101,2,0,1,0
+coffee_report_photos,original,960,540,11,111,7,5,1,0
+coffee_report_photos,roundtrip,960,540,11,111,7,0,1,0
+T028_report_pro,original,960,540,8,48,3,0,1,3
+T028_report_pro,roundtrip,960,540,8,48,3,0,1,3
+T028_showcase_pro,original,960,540,10,74,3,0,0,0
+T028_showcase_pro,roundtrip,960,540,10,74,3,0,0,0
+vi_brand_seed,original,960,540,9,99,1,0,1,0
+vi_brand_seed,roundtrip,960,540,9,99,1,0,1,0
+vi_chuyen_doi_so,original,960,540,9,99,1,0,1,0
+vi_chuyen_doi_so,roundtrip,960,540,9,99,1,0,1,0

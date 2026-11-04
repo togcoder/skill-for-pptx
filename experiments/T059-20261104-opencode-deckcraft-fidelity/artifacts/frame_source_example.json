@@ -1,0 +1,10 @@
+{
+  "renderer": "deckcraft",
+  "label": "DeckCraft render (not PowerPoint)",
+  "evidence_rung": 2,
+  "video": null,
+  "note": "DeckCraft has no in-slide animation renderer; static frames only.",
+  "fallback_reason": "DeckCraft requested",
+  "frames": 9,
+  "example": "not committed; generated in workspace/fallback_demo/slide-01.png"
+}

@@ -68,9 +68,18 @@ Skills: `skills/pptx-motion-director`, `skills/slide-forge`.
 - **Non-Linear Navigation Law (T048):** Decks with branching narrative (Hub & Spoke, auxiliary popups, mini-games) must provide dynamic return actions (`lastslideviewed`), and must lock blank slide clicks (`advClick="0"`) or enable Kiosk mode (`p:kiosk`) to prevent accidental slide skips.
 - **Advanced Interactivity Law (T049):** For auxiliary drill-downs, detail dialogs, and multi-perspective views, agents MUST prefer In-Slide Lightbox Modals and In-Slide Tabbed Switchers (via native `<p:cTn nodeType="interactiveSeq">`) over creating duplicate slides. In-slide triggers preserve visual context, eliminate disruptive screen cuts, and keep the presentation compact. Tactile sound effects (`<a:snd>` in `<a:hlinkClick>`/`<a:hlinkHover>`) and Morph transitions (`p14:morph`) should be integrated for high-polish interactivity.
 
-## State (2026-11-01)
-- **Tests:** 404 run with 4 skipped, 100% pass across all domains.
+## State (2026-11-04)
+- **Tests:** 471 run with 8 skipped, 100% pass across all domains (with
+  `PYTHONUTF8=1`; the default cp1258 console breaks legacy tests that read
+  UTF-8 without an explicit encoding).
 - **Navigation & Interactivity:** T048 added Slide Navigator (`slide_navigator.py`) establishing full non-linear branching, dynamic return paths, custom shows with return, and mini-game state machine compilation. T049 added Advanced Presentation Interactivity (`advanced_interactivity.py`) establishing native in-slide lightbox modals, multi-tab switchers, pure-Python synthetic sound FX (click/chime/buzz), hover actions, and twin-morph visual flow.
+- **DeckCraft fidelity (T059, unreviewed):** static frames are close for design
+  critique (critic delta ≤0.01) but break on charts (13.1 mean, 5–13% `>40`),
+  SVG icons (missing; transparent fallback), 3-stop gradients and soft
+  edges/bevels. `render-transition` is not PowerPoint Morph (entrance shapes
+  drawn; camera morph not interpolated). `convert` rewrites chart build
+  targets, GrowAndTurn rotation and SVG blips; it is not a safe last writer.
+  Use DeckCraft as a pre-Director asset tool or a labelled static fallback.
 - **Evidence:** Rungs 0–5 established across PPTX, DOCX, XLSX, and Cross. PowerPoint 16.0 COM verified.
 
 ## Open questions / dissent

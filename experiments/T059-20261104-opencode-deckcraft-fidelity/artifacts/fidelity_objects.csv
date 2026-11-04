@@ -1,0 +1,656 @@
+deck,slide,z,name,spid,kinds,box,pixels,mean_abs,pct_gt10,pct_gt40,max_abs
+T028_report_pro,1,0,!!m2-1-q3-operating-review,2,text,54x168x666x284,70992,0.813,2.479,0.456,83
+T028_report_pro,1,1,Subtitle 2,3,text,108x306x612x444,69552,1.079,3.83,0.157,61
+T028_report_pro,2,0,!!m2-1-q3-operating-review,2,text,36x22x684x112,58320,0.384,1.115,0.213,89
+T028_report_pro,2,1,Content Placeholder 2,3,text,36x126x684x482,230688,0.87,2.074,0.723,148
+T028_report_pro,3,0,!!m2-1-q3-operating-review,2,text,36x22x684x112,58320,0.677,1.967,0.422,92
+T028_report_pro,3,1,!!card3-3,3,effects-theme+vector,65x158x317x374,24336,0.21,0.238,0.0,26
+T028_report_pro,3,2,!!card3-4,4,text,86x187x295x274,18183,1.185,3.575,0.357,65
+T028_report_pro,3,3,!!card3-5,5,text,86x281x295x338,11913,1.427,4.323,0.562,70
+T028_report_pro,3,4,KPI Card 2,6,effects-theme+vector,353x158x605x374,24336,0.21,0.238,0.0,26
+T028_report_pro,3,5,KPI Value 2,7,text,374x187x583x274,18183,0.84,2.486,0.313,70
+T028_report_pro,3,6,KPI Label 2,8,text,374x281x583x338,11913,0.646,2.174,0.109,50
+T028_report_pro,3,7,KPI Card 3,9,effects-theme+vector,641x158x893x374,24336,0.21,0.238,0.0,26
+T028_report_pro,3,8,KPI Value 3,10,text,662x187x871x274,18183,0.984,2.849,0.341,63
+T028_report_pro,3,9,KPI Label 3,11,text,662x281x871x338,11913,0.917,2.846,0.369,61
+T028_report_pro,4,0,!!m5-1-q3-at-a-glance,2,text,36x22x684x112,58320,0.677,1.967,0.422,92
+T028_report_pro,4,1,!!card3-3,3,effects-theme+vector,58x119x902x486,120608,0.047,0.027,0.0,17
+T028_report_pro,4,2,!!card3-4,4,text,94x168x866x315,113484,0.344,0.7,0.277,96
+T028_report_pro,4,3,!!card3-5,5,text,94x327x866x425,75656,0.368,1.141,0.12,69
+T028_report_pro,5,0,!!m5-1-q3-at-a-glance,2,text,36x22x684x112,58320,1.011,2.954,0.674,92
+T028_report_pro,5,1,Channel Chart,3,chart,58x122x619x482,201960,20.444,15.612,12.661,255
+T028_report_pro,5,2,Takeaway Card,4,effects-theme+vector,648x158x907x389,18447,0.374,1.263,0.0,23
+T028_report_pro,5,3,Takeaway,5,text,670x180x886x367,20952,2.898,8.696,1.37,78
+T028_report_pro,5,4,__gen_mask_mask4,6,vector,664x258x891x348,20430,0.0,0.0,0.0,0
+T028_report_pro,5,5,!!card3-3,7,effects-theme+vector,58x551x902x540,0,,,,
+T028_report_pro,5,6,!!card3-4,8,text,94x600x866x540,0,,,,
+T028_report_pro,5,7,!!card3-5,9,text,94x759x866x540,0,,,,
+T028_report_pro,5,8,!!in6-11,10,group,979x29x960x101,0,,,,
+T028_report_pro,6,0,__gen_track-line_track,14,vector,144x180x835x187,4837,3.439,14.368,0.0,20
+T028_report_pro,6,1,!!m5-1-q3-at-a-glance,2,text,36x22x684x112,58320,1.264,3.416,0.919,95
+T028_report_pro,6,10,Result,10,text,58x360x907x418,49242,1.073,3.536,0.309,71
+T028_report_pro,6,11,!!in6-11,11,group,835x29x907x101,5184,3.682,9.491,2.72,80
+T028_report_pro,6,12,__gen_token_token,15,vector,24x171x48x196,600,5.22,11.833,5.0,75
+T028_report_pro,6,13,!!in7-4,17,picture,979x137x960x364,0,,,,
+T028_report_pro,6,2,Step 1,3,effects-theme+text,58x216x230x317,17372,1.123,3.108,0.53,69
+T028_report_pro,6,3,Step 2,4,effects-theme+text,288x216x461x317,17473,0.774,2.238,0.143,65
+T028_report_pro,6,4,Arrow 1,5,effects-theme+vector,230x266x288x266,0,,,,
+T028_report_pro,6,5,Step 3,6,effects-theme+text,518x216x691x317,17473,0.826,2.495,0.166,57
+T028_report_pro,6,6,Arrow 2,7,effects-theme+vector,461x266x518x266,0,,,,
+T028_report_pro,6,7,Step 4,8,effects-theme+text,749x216x922x317,17473,0.874,2.965,0.097,72
+T028_report_pro,6,8,Arrow 3,9,effects-theme+vector,691x266x749x266,0,,,,
+T028_report_pro,6,9,__gen_highlight_marker3,16,vector,61x363x495x395,0,,,,
+T028_report_pro,7,0,!!m5-1-q3-at-a-glance,2,text,36x22x684x112,58320,0.913,2.828,0.381,87
+T028_report_pro,7,1,Content Placeholder 2,3,text,58x130x562x475,173880,1.274,2.94,1.134,144
+T028_report_pro,7,2,!!in7-4,4,picture,605x137x907x364,68554,0.152,0.419,0.0,31
+T028_report_pro,7,3,!!in6-11,5,group,979x29x960x101,0,,,,
+T028_report_pro,8,0,!!m5-1-q3-at-a-glance,2,text,36x22x684x112,58320,0.851,2.409,0.52,94
+T028_report_pro,8,1,Content Placeholder 2,3,text,36x126x684x482,230688,1.681,2.694,1.525,210
+T028_report_pro,8,2,!!in7-4,4,picture,979x137x960x364,0,,,,
+T028_showcase_pro,1,0,!!cam6-2,2,text,54x168x666x284,70992,1.233,2.9,0.975,138
+T028_showcase_pro,1,1,Subtitle 2,3,text,108x306x612x444,69552,0.769,2.756,0.127,59
+T028_showcase_pro,2,0,__gen_orbit-ring_orbit,8,vector,329x162x631x464,35632,1.627,2.47,1.297,154
+T028_showcase_pro,2,1,__gen_halo_halo,9,gradient,388x70x572x254,11836,5.252,4.807,0.76,149
+T028_showcase_pro,2,10,!!in3-5,12,effects-theme+text,979x194x960x274,0,,,,
+T028_showcase_pro,2,11,!!in3-6,13,effects-theme+text,592x551x693x540,0,,,,
+T028_showcase_pro,2,12,!!in3-7,14,effects-theme+text,430x551x531x540,0,,,,
+T028_showcase_pro,2,13,!!in3-8,15,effects-theme+text,268x551x369x540,0,,,,
+T028_showcase_pro,2,14,!!in3-9,16,effects-theme+text,0x194x-19x274,0,,,,
+T028_showcase_pro,2,2,!!cam6-2,2,text,36x22x684x112,57400,1.428,3.415,0.599,102
+T028_showcase_pro,2,3,Hub,3,effects-theme+text,408x241x552x385,20736,1.791,4.943,1.037,88
+T028_showcase_pro,2,4,Stage Plan,4,effects-theme+text,423x104x538x220,13340,1.289,2.579,0.15,64
+T028_showcase_pro,2,5,Stage Do,5,effects-theme+text,574x256x689x371,13225,1.153,2.972,0.544,111
+T028_showcase_pro,2,6,Stage Check,6,effects-theme+text,423x407x538x522,13225,1.593,4.272,0.854,131
+T028_showcase_pro,2,7,Stage Act,7,effects-theme+text,271x256x387x371,13340,0.997,2.729,0.337,89
+T028_showcase_pro,2,8,!!in3-3,10,effects-theme+text,379x551x581x540,0,,,,
+T028_showcase_pro,2,9,!!in3-4,11,effects-theme+text,430x0x531x-11,0,,,,
+T028_showcase_pro,3,0,!!cam6-2,2,text,36x22x684x112,58320,1.009,2.606,0.708,121
+T028_showcase_pro,3,1,!!in3-3,3,effects-theme+text,379x270x581x356,17372,2.143,5.181,1.71,110
+T028_showcase_pro,3,10,!!in4-5,12,effects-theme+text,230x551x727x540,0,,,,
+T028_showcase_pro,3,2,!!in3-4,4,effects-theme+text,430x115x531x194,7979,1.965,5.364,0.953,133
+T028_showcase_pro,3,3,!!in3-5,5,effects-theme+text,592x194x693x274,8080,2.844,6.287,2.03,161
+T028_showcase_pro,3,4,!!in3-6,6,effects-theme+text,592x353x693x432,7979,2.274,5.464,1.78,123
+T028_showcase_pro,3,5,!!in3-7,7,effects-theme+text,430x432x531x511,7979,2.375,6.116,1.303,182
+T028_showcase_pro,3,6,!!in3-8,8,effects-theme+text,268x353x369x432,7979,2.203,5.903,1.266,135
+T028_showcase_pro,3,7,!!in3-9,9,effects-theme+text,268x194x369x274,8080,2.358,5.631,1.522,143
+T028_showcase_pro,3,8,!!in4-3,10,effects-theme+text,230x0x727x-11,0,,,,
+T028_showcase_pro,3,9,!!in4-4,11,effects-theme+text,230x551x727x540,0,,,,
+T028_showcase_pro,4,0,!!cam6-2,2,text,36x22x684x112,58320,2.077,4.556,1.735,201
+T028_showcase_pro,4,1,!!in4-3,3,effects-theme+text,230x144x727x223,39263,0.285,0.497,0.0,40
+T028_showcase_pro,4,10,!!in3-9,12,effects-theme+text,0x194x-19x274,0,,,,
+T028_showcase_pro,4,2,!!in4-4,4,effects-theme+text,230x252x727x331,39263,0.417,0.881,0.059,60
+T028_showcase_pro,4,3,!!in4-5,5,effects-theme+text,230x360x727x439,39263,0.481,1.294,0.059,65
+T028_showcase_pro,4,4,!!in3-3,6,effects-theme+text,379x551x581x540,0,,,,
+T028_showcase_pro,4,5,!!in3-4,7,effects-theme+text,430x0x531x-11,0,,,,
+T028_showcase_pro,4,6,!!in3-5,8,effects-theme+text,979x194x960x274,0,,,,
+T028_showcase_pro,4,7,!!in3-6,9,effects-theme+text,592x551x693x540,0,,,,
+T028_showcase_pro,4,8,!!in3-7,10,effects-theme+text,430x551x531x540,0,,,,
+T028_showcase_pro,4,9,!!in3-8,11,effects-theme+text,268x551x369x540,0,,,,
+T028_showcase_pro,5,0,!!cam6-2,2,text,36x22x684x112,58320,0.605,1.896,0.252,105
+T028_showcase_pro,5,1,Step Order,3,effects-theme+text,72x245x245x338,16089,1.0,3.157,0.298,70
+T028_showcase_pro,5,2,Step Roast,4,effects-theme+text,288x245x461x338,16089,1.007,3.257,0.329,72
+T028_showcase_pro,5,3,Step Pack,5,effects-theme+text,504x245x677x338,16089,0.876,2.803,0.273,62
+T028_showcase_pro,5,4,Step Deliver,6,effects-theme+text,720x245x893x338,16089,1.186,3.648,0.466,78
+T028_showcase_pro,5,5,Order token,7,effects-theme+vector,25x270x68x313,1849,1.051,2.326,0.0,34
+T028_showcase_pro,5,6,!!in4-3,8,effects-theme+text,230x0x727x-11,0,,,,
+T028_showcase_pro,5,7,!!in4-4,9,effects-theme+text,230x551x727x540,0,,,,
+T028_showcase_pro,5,8,!!in4-5,10,effects-theme+text,230x551x727x540,0,,,,
+T028_showcase_pro,6,0,!!cam6-7,7,gradient,401x0x873x456,82248,4.863,8.018,0.018,44
+T028_showcase_pro,6,1,!!cam6-2,2,text,36x22x684x112,58320,2.667,3.409,0.547,81
+T028_showcase_pro,6,2,!!cam6-3,3,effects-theme+text,173x137x468x302,48675,0.811,2.548,0.436,92
+T028_showcase_pro,6,3,!!cam6-4,4,effects-theme+text,490x137x785x302,48675,0.906,2.213,0.464,103
+T028_showcase_pro,6,4,!!cam6-5,5,effects-theme+text,173x324x468x490,48970,0.671,1.724,0.265,88
+T028_showcase_pro,6,5,!!cam6-6,6,effects-theme+text,490x324x785x490,48970,0.85,2.481,0.457,110
+T028_showcase_pro,7,0,!!cam6-2,2,text,0x0x960x-18,0,,,,
+T028_showcase_pro,7,1,!!cam6-3,3,effects-theme+text,86x49x874x491,348296,0.407,1.118,0.32,82
+T028_showcase_pro,7,2,!!cam6-4,4,effects-theme+text,931x49x960x491,12818,1.291,3.714,0.226,58
+T028_showcase_pro,7,3,!!cam6-5,5,effects-theme+text,86x548x874x540,0,,,,
+T028_showcase_pro,7,4,!!cam6-6,6,effects-theme+text,931x548x960x540,0,,,,
+T028_showcase_pro,8,0,!!cam6-2,2,text,36x22x684x112,58320,0.916,2.721,0.552,81
+T028_showcase_pro,8,1,!!cam6-3,3,effects-theme+text,173x137x468x302,48675,0.802,2.55,0.452,92
+T028_showcase_pro,8,2,!!cam6-4,4,effects-theme+text,490x137x785x302,48675,0.948,2.739,0.507,103
+T028_showcase_pro,8,3,!!cam6-5,5,effects-theme+text,173x324x468x490,48970,0.647,1.719,0.265,88
+T028_showcase_pro,8,4,!!cam6-6,6,effects-theme+text,490x324x785x490,48970,0.846,2.489,0.472,110
+T028_showcase_pro,8,5,!!in9-3,7,picture,0x130x-19x508,0,,,,
+T028_showcase_pro,9,0,!!cam6-2,2,text,36x22x684x112,58320,0.553,1.667,0.34,89
+T028_showcase_pro,9,1,!!in9-3,3,picture,58x130x562x508,190512,0.277,1.128,0.0,38
+T028_showcase_pro,9,2,!!cam6-3,4,effects-theme+text,0x137x-19x302,0,,,,
+T028_showcase_pro,9,3,!!cam6-4,5,effects-theme+text,979x137x960x302,0,,,,
+T028_showcase_pro,9,4,!!cam6-5,6,effects-theme+text,173x551x468x540,0,,,,
+T028_showcase_pro,9,5,!!cam6-6,7,effects-theme+text,490x551x785x540,0,,,,
+T028_showcase_pro,10,0,!!cam6-2,2,text,36x22x684x112,58320,0.553,1.667,0.34,89
+T028_showcase_pro,10,1,Content Placeholder 2,3,text,58x130x634x475,198720,1.246,2.541,1.075,198
+T028_showcase_pro,10,2,!!in9-3,4,picture,670x130x914x313,44652,0.716,2.475,0.047,52
+coffee_office_dynamic,1,0,!!orb-1,2,effects-theme+vector,816x0x960x144,0,,,,
+coffee_office_dynamic,1,1,!!orb-2,3,effects-theme+vector,0x439x101x540,9640,0.932,0.0,0.0,9
+coffee_office_dynamic,1,2,Hero picture,4,picture,480x0x960x540,259200,0.165,0.002,0.0,14
+coffee_office_dynamic,1,3,Kicker,5,text,50x144x444x176,12608,2.757,6.647,2.435,125
+coffee_office_dynamic,1,4,Title,6,text,50x176x444x335,62646,1.835,4.449,1.477,116
+coffee_office_dynamic,1,5,Title accent,7,effects-theme+vector,58x346x187x351,645,3.284,0.775,0.0,13
+coffee_office_dynamic,1,6,Subtitle,8,text,50x364x444x450,33884,1.487,4.114,0.844,90
+coffee_office_dynamic,2,0,!!orb-1,2,effects-theme+vector,816x396x960x540,20484,1.253,0.0,0.0,9
+coffee_office_dynamic,2,1,!!orb-2,3,effects-theme+vector,0x0x101x101,10201,0.898,0.0,0.0,10
+coffee_office_dynamic,2,2,Kicker,4,text,101x86x859x122,27288,0.614,1.986,0.279,65
+coffee_office_dynamic,2,3,Statement bar,5,effects-theme+vector,86x133x92x392,1554,5.596,17.053,0.0,34
+coffee_office_dynamic,2,4,Statement,6,text,108x122x852x403,209064,2.509,4.591,2.14,206
+coffee_office_dynamic,3,0,!!orb-1,2,effects-theme+vector,0x396x144x540,15378,0.898,0.0,0.0,3
+coffee_office_dynamic,3,1,!!orb-2,3,effects-theme+vector,859x0x960x101,7039,1.057,0.0,0.0,10
+coffee_office_dynamic,3,10,__counter_7_04,20,text,65x187x306x274,0,,,,
+coffee_office_dynamic,3,11,__counter_7_03,21,text,65x187x306x274,0,,,,
+coffee_office_dynamic,3,12,__counter_7_02,22,text,65x187x306x274,0,,,,
+coffee_office_dynamic,3,13,__counter_7_01,23,text,65x187x306x274,20967,0.695,2.065,0.143,77
+coffee_office_dynamic,3,14,KPI label 1,8,text,65x292x306x364,17352,1.359,3.441,0.997,67
+coffee_office_dynamic,3,15,KPI card 2,9,effects-theme+vector,345x166x615x382,20160,0.091,0.0,0.0,4
+coffee_office_dynamic,3,16,KPI value 2,10,text,360x187x600x274,0,,,,
+coffee_office_dynamic,3,17,__counter_10_11,24,text,360x187x600x274,0,,,,
+coffee_office_dynamic,3,18,__counter_10_10,25,text,360x187x600x274,0,,,,
+coffee_office_dynamic,3,19,__counter_10_09,26,text,360x187x600x274,0,,,,
+coffee_office_dynamic,3,2,Title,4,text,50x32x910x94,53320,1.158,2.594,0.928,127
+coffee_office_dynamic,3,20,__counter_10_08,27,text,360x187x600x274,0,,,,
+coffee_office_dynamic,3,21,__counter_10_07,28,text,360x187x600x274,0,,,,
+coffee_office_dynamic,3,22,__counter_10_06,29,text,360x187x600x274,0,,,,
+coffee_office_dynamic,3,23,__counter_10_05,30,text,360x187x600x274,0,,,,
+coffee_office_dynamic,3,24,__counter_10_04,31,text,360x187x600x274,0,,,,
+coffee_office_dynamic,3,25,__counter_10_03,32,text,360x187x600x274,0,,,,
+coffee_office_dynamic,3,26,__counter_10_02,33,text,360x187x600x274,0,,,,
+coffee_office_dynamic,3,27,__counter_10_01,34,text,360x187x600x274,20880,0.53,1.169,0.177,71
+coffee_office_dynamic,3,28,KPI label 2,11,text,360x292x600x364,17280,1.389,3.86,0.77,65
+coffee_office_dynamic,3,29,KPI card 3,12,effects-theme+vector,640x166x910x382,20001,0.039,0.0,0.0,2
+coffee_office_dynamic,3,3,Title accent,5,effects-theme+vector,58x99x158x104,500,9.06,20.8,0.0,31
+coffee_office_dynamic,3,30,KPI value 3,13,text,654x187x895x274,20967,0.493,0.901,0.086,56
+coffee_office_dynamic,3,31,KPI label 3,14,text,654x292x895x364,17352,1.066,3.291,0.536,62
+coffee_office_dynamic,3,32,Takeaway,15,text,50x407x910x464,49020,1.308,3.503,0.714,77
+coffee_office_dynamic,3,4,KPI card 1,6,effects-theme+vector,50x166x320x382,20001,0.042,0.0,0.0,3
+coffee_office_dynamic,3,5,KPI value 1,7,text,65x187x306x274,0,,,,
+coffee_office_dynamic,3,6,__counter_7_08,16,text,65x187x306x274,0,,,,
+coffee_office_dynamic,3,7,__counter_7_07,17,text,65x187x306x274,0,,,,
+coffee_office_dynamic,3,8,__counter_7_06,18,text,65x187x306x274,0,,,,
+coffee_office_dynamic,3,9,__counter_7_05,19,text,65x187x306x274,0,,,,
+coffee_office_dynamic,4,0,!!orb-1,2,effects-theme+vector,0x0x144x144,13162,1.495,0.691,0.0,26
+coffee_office_dynamic,4,1,!!orb-2,3,effects-theme+vector,859x439x960x540,10201,0.901,0.0,0.0,9
+coffee_office_dynamic,4,2,Title,4,text,50x32x910x94,53320,1.661,4.149,1.2,109
+coffee_office_dynamic,4,3,Title accent,5,effects-theme+vector,58x99x158x104,500,9.008,20.6,0.0,32
+coffee_office_dynamic,4,4,Chart,6,chart,50x130x595x504,203830,14.418,11.817,8.081,254
+coffee_office_dynamic,4,5,Takeaway bar,7,effects-theme+vector,617x166x622x353,935,9.763,40.107,0.107,54
+coffee_office_dynamic,4,6,Takeaway,8,text,635x158x910x367,57475,1.867,5.378,1.141,87
+coffee_office_dynamic,5,0,!!orb-1,2,effects-theme+vector,816x0x960x144,14908,0.821,0.0,0.0,5
+coffee_office_dynamic,5,1,!!orb-2,3,effects-theme+vector,0x439x101x540,10201,0.881,0.0,0.0,9
+coffee_office_dynamic,5,10,Link 3,12,effects-theme+vector,556x313x584x313,0,,,,
+coffee_office_dynamic,5,11,Step 5,13,effects-theme+text,769x234x910x392,22278,0.462,1.89,0.0,39
+coffee_office_dynamic,5,12,Link 4,14,effects-theme+vector,736x313x764x313,0,,,,
+coffee_office_dynamic,5,2,Title,4,text,50x32x910x94,53320,1.299,3.126,0.848,85
+coffee_office_dynamic,5,3,Title accent,5,effects-theme+vector,58x99x158x104,500,9.06,20.8,0.0,31
+coffee_office_dynamic,5,4,Step 1,6,effects-theme+text,50x234x191x392,22278,0.342,0.925,0.175,56
+coffee_office_dynamic,5,5,Step 2,7,effects-theme+text,230x234x370x392,22120,0.354,0.909,0.127,55
+coffee_office_dynamic,5,6,Link 1,8,effects-theme+vector,196x313x224x313,0,,,,
+coffee_office_dynamic,5,7,Step 3,9,effects-theme+text,410x234x550x392,22120,0.404,0.863,0.303,82
+coffee_office_dynamic,5,8,Link 2,10,effects-theme+vector,376x313x404x313,0,,,,
+coffee_office_dynamic,5,9,Step 4,11,effects-theme+text,590x234x730x392,22120,0.225,0.542,0.0,34
+coffee_office_dynamic,6,0,!!orb-1,2,effects-theme+vector,816x396x960x540,11900,1.041,0.0,0.0,7
+coffee_office_dynamic,6,1,!!orb-2,3,effects-theme+vector,0x0x101x101,6953,1.204,0.662,0.0,27
+coffee_office_dynamic,6,2,Title,4,text,50x32x910x94,53320,1.293,3.226,0.975,115
+coffee_office_dynamic,6,3,Title accent,5,effects-theme+vector,58x99x158x104,500,9.06,20.8,0.0,31
+coffee_office_dynamic,6,4,Supporting picture,6,picture,538x122x910x490,136896,0.292,0.293,0.001,42
+coffee_office_dynamic,6,5,Points,7,text,50x130x499x490,161640,2.838,5.839,2.538,173
+coffee_office_dynamic,7,0,!!orb-1,2,effects-theme+vector,0x396x144x540,20736,1.191,0.0,0.0,8
+coffee_office_dynamic,7,1,!!orb-2,3,effects-theme+vector,859x0x960x101,7039,1.064,0.0,0.0,10
+coffee_office_dynamic,7,2,Title,4,text,50x32x910x94,53320,1.693,3.94,1.407,125
+coffee_office_dynamic,7,3,Title accent,5,effects-theme+vector,58x99x158x104,500,8.36,20.2,0.0,31
+coffee_office_dynamic,7,4,Hub,6,effects-theme+text,419x259x541x382,15006,1.65,4.458,0.98,141
+coffee_office_dynamic,7,5,Stage 1,7,effects-theme+text,421x128x539x247,14042,2.179,4.9,0.52,86
+coffee_office_dynamic,7,6,Stage 2,8,effects-theme+text,580x261x699x380,14161,2.411,5.713,0.756,68
+coffee_office_dynamic,7,7,Stage 3,9,effects-theme+text,421x394x539x513,14042,2.357,5.711,0.299,60
+coffee_office_dynamic,7,8,Stage 4,10,effects-theme+text,261x261x380x380,14161,2.644,5.833,1.236,83
+coffee_office_dynamic,8,0,!!orb-1,2,effects-theme+vector,0x0x144x144,13162,1.596,0.691,0.0,26
+coffee_office_dynamic,8,1,!!orb-2,3,effects-theme+vector,859x439x960x540,7243,1.573,0.0,0.0,8
+coffee_office_dynamic,8,2,Title,4,text,50x32x910x94,53320,2.115,5.248,1.575,107
+coffee_office_dynamic,8,3,Title accent,5,effects-theme+vector,58x99x158x104,500,8.634,20.4,0.0,31
+coffee_office_dynamic,8,4,Left card,6,effects-theme+vector,50x130x462x497,36767,1.05,0.0,0.0,6
+coffee_office_dynamic,8,5,Left heading,7,text,76x151x437x209,20938,2.376,4.341,0.75,86
+coffee_office_dynamic,8,6,Left points,8,text,76x220x437x479,93499,2.501,4.36,1.262,132
+coffee_office_dynamic,8,7,Right card,9,effects-theme+vector,498x130x910x497,36767,1.011,0.0,0.0,6
+coffee_office_dynamic,8,8,Right heading,10,text,523x151x884x209,20938,3.0,5.402,1.648,102
+coffee_office_dynamic,8,9,Right points,11,text,523x220x884x479,93499,1.99,2.942,0.885,117
+coffee_office_dynamic,9,0,!!orb-1,2,effects-theme+vector,816x0x960x144,20736,1.191,0.0,0.0,8
+coffee_office_dynamic,9,1,!!orb-2,3,effects-theme+vector,0x439x101x540,10201,0.851,0.0,0.0,5
+coffee_office_dynamic,9,2,Quote mark,4,text,94x29x223x180,17535,0.106,0.205,0.0,19
+coffee_office_dynamic,9,3,Quote,5,text,115x162x845x374,154760,1.054,2.965,0.596,93
+coffee_office_dynamic,9,4,Author rule,6,effects-theme+vector,122x392x187x396,260,6.877,27.308,0.0,27
+coffee_office_dynamic,9,5,Author,7,text,198x374x841x418,28292,1.58,4.008,0.976,107
+coffee_office_dynamic,10,0,!!orb-1,2,effects-theme+vector,816x396x960x540,20494,1.254,0.0,0.0,9
+coffee_office_dynamic,10,1,!!orb-2,3,effects-theme+vector,0x0x101x101,10201,0.918,0.0,0.0,10
+coffee_office_dynamic,10,2,Title,4,text,50x173x910x288,98900,1.064,2.79,0.627,95
+coffee_office_dynamic,10,3,Closing accent,5,effects-theme+vector,408x299x552x305,864,4.498,16.088,0.0,11
+coffee_office_dynamic,10,4,Subtitle,6,text,122x320x838x407,62292,0.619,1.869,0.199,68
+coffee_report,1,0,!!orb-1,2,effects-theme+vector,816x0x960x144,0,,,,
+coffee_report,1,1,!!orb-2,3,effects-theme+vector,0x439x101x540,9640,0.936,0.0,0.0,10
+coffee_report,1,2,Hero picture,4,picture,480x0x960x540,259200,0.179,0.006,0.0,14
+coffee_report,1,3,Kicker,5,text,50x144x444x176,12608,2.872,7.17,2.332,116
+coffee_report,1,4,Title,6,text,50x176x444x335,62646,1.591,4.01,1.097,126
+coffee_report,1,5,Title accent,7,effects-theme+vector,58x346x187x351,645,3.293,0.62,0.0,13
+coffee_report,1,6,Subtitle,8,text,50x364x444x450,33884,4.01,7.192,3.863,142
+coffee_report,2,0,!!orb-1,2,effects-theme+vector,816x396x960x540,20484,1.217,0.005,0.0,11
+coffee_report,2,1,!!orb-2,3,effects-theme+vector,0x0x101x101,10201,0.933,0.0,0.0,10
+coffee_report,2,2,Kicker,4,text,101x86x859x122,27288,0.508,1.554,0.235,65
+coffee_report,2,3,Statement bar,5,effects-theme+vector,86x133x92x392,1554,5.973,19.82,0.0,39
+coffee_report,2,4,Statement,6,text,108x122x852x403,209064,1.55,3.728,1.015,152
+coffee_report,3,0,!!orb-1,2,effects-theme+vector,0x396x144x540,15378,0.899,0.0,0.0,3
+coffee_report,3,1,!!orb-2,3,effects-theme+vector,859x0x960x101,7039,1.058,0.0,0.0,9
+coffee_report,3,10,__counter_7_04,20,text,65x187x306x274,0,,,,
+coffee_report,3,11,__counter_7_03,21,text,65x187x306x274,0,,,,
+coffee_report,3,12,__counter_7_02,22,text,65x187x306x274,0,,,,
+coffee_report,3,13,__counter_7_01,23,text,65x187x306x274,20967,0.564,1.502,0.134,69
+coffee_report,3,14,KPI label 1,8,text,65x292x306x364,17352,1.275,4.161,0.38,64
+coffee_report,3,15,KPI card 2,9,effects-theme+vector,345x166x615x382,20160,0.112,0.0,0.0,5
+coffee_report,3,16,KPI value 2,10,text,360x187x600x274,0,,,,
+coffee_report,3,17,__counter_10_11,24,text,360x187x600x274,0,,,,
+coffee_report,3,18,__counter_10_10,25,text,360x187x600x274,0,,,,
+coffee_report,3,19,__counter_10_09,26,text,360x187x600x274,0,,,,
+coffee_report,3,2,Title,4,text,50x32x910x94,53320,0.609,1.467,0.219,82
+coffee_report,3,20,__counter_10_08,27,text,360x187x600x274,0,,,,
+coffee_report,3,21,__counter_10_07,28,text,360x187x600x274,0,,,,
+coffee_report,3,22,__counter_10_06,29,text,360x187x600x274,0,,,,
+coffee_report,3,23,__counter_10_05,30,text,360x187x600x274,0,,,,
+coffee_report,3,24,__counter_10_04,31,text,360x187x600x274,0,,,,
+coffee_report,3,25,__counter_10_03,32,text,360x187x600x274,0,,,,
+coffee_report,3,26,__counter_10_02,33,text,360x187x600x274,0,,,,
+coffee_report,3,27,__counter_10_01,34,text,360x187x600x274,20880,0.572,1.446,0.029,67
+coffee_report,3,28,KPI label 2,11,text,360x292x600x364,17280,2.21,5.307,2.095,104
+coffee_report,3,29,KPI card 3,12,effects-theme+vector,640x166x910x382,20001,0.049,0.0,0.0,2
+coffee_report,3,3,Title accent,5,effects-theme+vector,58x99x158x104,500,9.484,20.4,0.0,35
+coffee_report,3,30,KPI value 3,13,text,654x187x895x274,20967,0.895,2.356,0.01,45
+coffee_report,3,31,KPI label 3,14,text,654x292x895x364,17352,1.811,4.559,1.504,93
+coffee_report,3,32,Takeaway,15,text,50x407x910x464,49020,2.367,5.8,1.983,129
+coffee_report,3,4,KPI card 1,6,effects-theme+vector,50x166x320x382,20001,0.052,0.0,0.0,4
+coffee_report,3,5,KPI value 1,7,text,65x187x306x274,0,,,,
+coffee_report,3,6,__counter_7_08,16,text,65x187x306x274,0,,,,
+coffee_report,3,7,__counter_7_07,17,text,65x187x306x274,0,,,,
+coffee_report,3,8,__counter_7_06,18,text,65x187x306x274,0,,,,
+coffee_report,3,9,__counter_7_05,19,text,65x187x306x274,0,,,,
+coffee_report,4,0,!!orb-1,2,effects-theme+vector,0x0x144x144,13162,1.161,0.691,0.0,26
+coffee_report,4,1,!!orb-2,3,effects-theme+vector,859x439x960x540,10201,0.879,0.0,0.0,8
+coffee_report,4,2,Title,4,text,50x32x910x94,53320,1.441,3.44,1.033,90
+coffee_report,4,3,Title accent,5,effects-theme+vector,58x99x158x104,500,9.204,20.2,0.0,35
+coffee_report,4,4,Chart,6,chart,50x130x595x504,203830,13.465,10.687,7.866,255
+coffee_report,4,5,Takeaway bar,7,effects-theme+vector,617x166x622x353,935,10.572,40.214,0.107,60
+coffee_report,4,6,Takeaway,8,text,635x158x910x367,57475,2.747,6.3,1.98,160
+coffee_report,5,0,!!orb-1,2,effects-theme+vector,816x0x960x144,14908,1.507,0.0,0.0,8
+coffee_report,5,1,!!orb-2,3,effects-theme+vector,0x439x101x540,10201,1.078,0.0,0.0,9
+coffee_report,5,10,Link 3,12,effects-theme+vector,556x313x584x313,0,,,,
+coffee_report,5,11,Step 5,13,effects-theme+text,769x234x910x392,22278,0.785,2.783,0.126,62
+coffee_report,5,12,Link 4,14,effects-theme+vector,736x313x764x313,0,,,,
+coffee_report,5,2,Title,4,text,50x32x910x94,53320,1.779,2.326,0.433,91
+coffee_report,5,3,Title accent,5,effects-theme+vector,58x99x158x104,500,9.882,20.4,0.0,37
+coffee_report,5,4,Step 1,6,effects-theme+text,50x234x191x392,22278,2.103,1.634,0.431,85
+coffee_report,5,5,Step 2,7,effects-theme+text,230x234x370x392,22120,2.147,1.7,0.448,86
+coffee_report,5,6,Link 1,8,effects-theme+vector,196x313x224x313,0,,,,
+coffee_report,5,7,Step 3,9,effects-theme+text,410x234x550x392,22120,1.99,1.379,0.335,83
+coffee_report,5,8,Link 2,10,effects-theme+vector,376x313x404x313,0,,,,
+coffee_report,5,9,Step 4,11,effects-theme+text,590x234x730x392,22120,1.969,1.365,0.194,71
+coffee_report,6,0,!!orb-1,2,effects-theme+vector,816x396x960x540,11900,1.04,0.0,0.0,7
+coffee_report,6,1,!!orb-2,3,effects-theme+vector,0x0x101x101,6953,1.232,0.676,0.0,26
+coffee_report,6,2,Title,4,text,50x32x910x94,53320,0.941,2.524,0.396,81
+coffee_report,6,3,Title accent,5,effects-theme+vector,58x99x158x104,500,9.484,20.4,0.0,35
+coffee_report,6,4,Supporting picture,6,picture,538x122x910x490,136896,0.359,0.514,0.001,43
+coffee_report,6,5,Points,7,text,50x130x499x490,161640,4.24,6.43,3.299,255
+coffee_report,7,0,!!orb-1,2,effects-theme+vector,0x396x144x540,20736,1.135,0.019,0.0,11
+coffee_report,7,1,!!orb-2,3,effects-theme+vector,859x0x960x101,7039,1.1,0.0,0.0,10
+coffee_report,7,2,Title,4,text,50x32x910x94,53320,1.101,2.706,0.591,80
+coffee_report,7,3,Title accent,5,effects-theme+vector,58x99x158x104,500,9.28,20.4,0.0,35
+coffee_report,7,4,Hub,6,effects-theme+text,419x259x541x382,15006,1.148,3.345,0.293,59
+coffee_report,7,5,Stage 1,7,effects-theme+text,421x128x539x247,14042,2.33,4.935,0.855,71
+coffee_report,7,6,Stage 2,8,effects-theme+text,580x261x699x380,14161,2.567,5.734,0.989,72
+coffee_report,7,7,Stage 3,9,effects-theme+text,421x394x539x513,14042,2.217,5.085,0.399,69
+coffee_report,7,8,Stage 4,10,effects-theme+text,261x261x380x380,14161,2.729,5.671,1.419,93
+coffee_report,8,0,!!orb-1,2,effects-theme+vector,0x0x144x144,13162,1.14,0.691,0.0,28
+coffee_report,8,1,!!orb-2,3,effects-theme+vector,859x439x960x540,7243,1.079,0.0,0.0,7
+coffee_report,8,2,Title,4,text,50x32x910x94,53320,1.229,3.13,0.454,86
+coffee_report,8,3,Title accent,5,effects-theme+vector,58x99x158x104,500,9.1,20.2,0.0,35
+coffee_report,8,4,Left card,6,effects-theme+vector,50x130x462x497,36767,0.072,0.0,0.0,7
+coffee_report,8,5,Left heading,7,text,76x151x437x209,20938,1.856,5.125,0.86,93
+coffee_report,8,6,Left points,8,text,76x220x437x479,93499,2.331,5.16,2.075,150
+coffee_report,8,7,Right card,9,effects-theme+vector,498x130x910x497,36767,0.073,0.0,0.0,6
+coffee_report,8,8,Right heading,10,text,523x151x884x209,20938,1.477,4.399,0.248,62
+coffee_report,8,9,Right points,11,text,523x220x884x479,93499,1.514,3.466,1.288,151
+coffee_report,9,0,!!orb-1,2,effects-theme+vector,816x0x960x144,20736,1.232,0.0,0.0,8
+coffee_report,9,1,!!orb-2,3,effects-theme+vector,0x439x101x540,10201,0.863,0.0,0.0,5
+coffee_report,9,2,Quote mark,4,text,94x29x223x180,17535,0.089,0.148,0.0,15
+coffee_report,9,3,Quote,5,text,115x162x845x374,154760,1.254,3.339,0.698,99
+coffee_report,9,4,Author rule,6,effects-theme+vector,122x392x187x396,260,6.188,26.923,0.0,27
+coffee_report,9,5,Author,7,text,198x374x841x418,28292,2.065,5.45,1.629,107
+coffee_report,10,0,!!orb-1,2,effects-theme+vector,816x396x960x540,20494,0.898,0.005,0.0,12
+coffee_report,10,1,!!orb-2,3,effects-theme+vector,0x0x101x101,10201,0.933,0.0,0.0,10
+coffee_report,10,2,Title,4,text,50x173x910x288,98900,1.488,3.721,0.905,118
+coffee_report,10,3,Closing accent,5,effects-theme+vector,408x299x552x305,864,4.841,33.102,0.0,12
+coffee_report,10,4,Subtitle,6,text,122x320x838x407,62292,0.651,2.069,0.159,62
+coffee_report_photos,1,0,!!orb-1,2,effects-theme+vector,816x0x960x144,0,,,,
+coffee_report_photos,1,1,!!orb-2,3,effects-theme+vector,0x439x101x540,9640,0.936,0.0,0.0,10
+coffee_report_photos,1,2,Hero picture,4,picture,480x0x960x540,259200,0.952,0.0,0.0,10
+coffee_report_photos,1,3,Kicker,5,text,50x144x444x176,12608,2.872,7.17,2.332,116
+coffee_report_photos,1,4,Title,6,text,50x176x444x335,62646,1.591,4.01,1.097,126
+coffee_report_photos,1,5,Title accent,7,effects-theme+vector,58x346x187x351,645,3.293,0.62,0.0,13
+coffee_report_photos,1,6,Subtitle,8,text,50x364x444x450,33884,4.01,7.192,3.863,142
+coffee_report_photos,2,0,!!orb-1,2,effects-theme+vector,816x396x960x540,20484,1.217,0.005,0.0,11
+coffee_report_photos,2,1,!!orb-2,3,effects-theme+vector,0x0x101x101,10201,0.933,0.0,0.0,10
+coffee_report_photos,2,2,Kicker,4,text,101x86x859x122,27288,0.508,1.554,0.235,65
+coffee_report_photos,2,3,Statement bar,5,effects-theme+vector,86x133x92x392,1554,5.973,19.82,0.0,39
+coffee_report_photos,2,4,Statement,6,text,108x122x852x403,209064,1.55,3.728,1.015,152
+coffee_report_photos,3,0,!!orb-1,2,effects-theme+vector,0x396x144x540,14908,0.861,0.0,0.0,4
+coffee_report_photos,3,1,!!orb-2,3,effects-theme+vector,859x0x960x101,7039,1.058,0.0,0.0,9
+coffee_report_photos,3,10,__counter_8_05,22,text,65x208x306x294,0,,,,
+coffee_report_photos,3,11,__counter_8_04,23,text,65x208x306x294,0,,,,
+coffee_report_photos,3,12,__counter_8_03,24,text,65x208x306x294,0,,,,
+coffee_report_photos,3,13,__counter_8_02,25,text,65x208x306x294,0,,,,
+coffee_report_photos,3,14,__counter_8_01,26,text,65x208x306x294,20726,0.555,1.452,0.145,64
+coffee_report_photos,3,15,KPI label 1,9,text,65x312x306x369,13737,1.615,5.234,0.444,67
+coffee_report_photos,3,16,KPI card 2,10,effects-theme+vector,345x146x615x401,32638,0.076,0.0,0.0,7
+coffee_report_photos,3,17,KPI icon 2,11,picture-svg,458x162x502x205,1892,37.604,27.22,22.252,196
+coffee_report_photos,3,18,KPI value 2,12,text,360x208x600x294,0,,,,
+coffee_report_photos,3,19,__counter_12_11,27,text,360x208x600x294,0,,,,
+coffee_report_photos,3,2,Title,4,text,50x32x910x94,53320,0.609,1.467,0.219,82
+coffee_report_photos,3,20,__counter_12_10,28,text,360x208x600x294,0,,,,
+coffee_report_photos,3,21,__counter_12_09,29,text,360x208x600x294,0,,,,
+coffee_report_photos,3,22,__counter_12_08,30,text,360x208x600x294,0,,,,
+coffee_report_photos,3,23,__counter_12_07,31,text,360x208x600x294,0,,,,
+coffee_report_photos,3,24,__counter_12_06,32,text,360x208x600x294,0,,,,
+coffee_report_photos,3,25,__counter_12_05,33,text,360x208x600x294,0,,,,
+coffee_report_photos,3,26,__counter_12_04,34,text,360x208x600x294,0,,,,
+coffee_report_photos,3,27,__counter_12_03,35,text,360x208x600x294,0,,,,
+coffee_report_photos,3,28,__counter_12_02,36,text,360x208x600x294,0,,,,
+coffee_report_photos,3,29,__counter_12_01,37,text,360x208x600x294,20640,0.556,1.405,0.034,63
+coffee_report_photos,3,3,Title accent,5,effects-theme+vector,58x99x158x104,500,9.484,20.4,0.0,35
+coffee_report_photos,3,30,KPI label 2,13,text,360x312x600x369,13680,2.784,6.747,2.639,104
+coffee_report_photos,3,31,KPI card 3,14,effects-theme+vector,640x146x910x401,32538,0.034,0.0,0.0,5
+coffee_report_photos,3,32,KPI icon 3,15,picture-svg,753x162x796x205,1849,57.661,41.536,34.884,196
+coffee_report_photos,3,33,KPI value 3,16,text,654x208x895x294,20726,0.896,2.335,0.014,42
+coffee_report_photos,3,34,KPI label 3,17,text,654x312x895x369,13737,2.299,5.86,2.002,89
+coffee_report_photos,3,35,Takeaway,18,text,50x427x910x484,49020,2.235,5.594,1.597,126
+coffee_report_photos,3,4,KPI card 1,6,effects-theme+vector,50x146x320x401,32538,0.034,0.0,0.0,6
+coffee_report_photos,3,5,KPI icon 1,7,picture-svg,164x162x207x205,1849,27.883,18.496,17.144,196
+coffee_report_photos,3,6,KPI value 1,8,text,65x208x306x294,0,,,,
+coffee_report_photos,3,7,__counter_8_08,19,text,65x208x306x294,0,,,,
+coffee_report_photos,3,8,__counter_8_07,20,text,65x208x306x294,0,,,,
+coffee_report_photos,3,9,__counter_8_06,21,text,65x208x306x294,0,,,,
+coffee_report_photos,4,0,!!orb-1,2,effects-theme+vector,0x0x144x144,13162,1.161,0.691,0.0,26
+coffee_report_photos,4,1,!!orb-2,3,effects-theme+vector,859x439x960x540,10201,0.879,0.0,0.0,8
+coffee_report_photos,4,2,Title,4,text,50x32x910x94,53320,1.441,3.44,1.033,90
+coffee_report_photos,4,3,Title accent,5,effects-theme+vector,58x99x158x104,500,9.204,20.2,0.0,35
+coffee_report_photos,4,4,Chart,6,chart,50x130x595x504,203830,13.465,10.687,7.866,255
+coffee_report_photos,4,5,Takeaway bar,7,effects-theme+vector,617x166x622x353,935,10.572,40.214,0.107,60
+coffee_report_photos,4,6,Takeaway,8,text,635x158x910x367,57475,2.747,6.3,1.98,160
+coffee_report_photos,5,0,!!orb-1,2,effects-theme+vector,816x0x960x144,14908,1.507,0.0,0.0,8
+coffee_report_photos,5,1,!!orb-2,3,effects-theme+vector,0x439x101x540,10201,1.078,0.0,0.0,9
+coffee_report_photos,5,10,Link 3,12,effects-theme+vector,556x313x584x313,0,,,,
+coffee_report_photos,5,11,Step 5,13,effects-theme+text,769x234x910x392,22278,0.785,2.783,0.126,62
+coffee_report_photos,5,12,Link 4,14,effects-theme+vector,736x313x764x313,0,,,,
+coffee_report_photos,5,2,Title,4,text,50x32x910x94,53320,1.779,2.326,0.433,91
+coffee_report_photos,5,3,Title accent,5,effects-theme+vector,58x99x158x104,500,9.882,20.4,0.0,37
+coffee_report_photos,5,4,Step 1,6,effects-theme+text,50x234x191x392,22278,2.103,1.634,0.431,85
+coffee_report_photos,5,5,Step 2,7,effects-theme+text,230x234x370x392,22120,2.147,1.7,0.448,86
+coffee_report_photos,5,6,Link 1,8,effects-theme+vector,196x313x224x313,0,,,,
+coffee_report_photos,5,7,Step 3,9,effects-theme+text,410x234x550x392,22120,1.99,1.379,0.335,83
+coffee_report_photos,5,8,Link 2,10,effects-theme+vector,376x313x404x313,0,,,,
+coffee_report_photos,5,9,Step 4,11,effects-theme+text,590x234x730x392,22120,1.969,1.365,0.194,71
+coffee_report_photos,6,0,!!orb-1,2,effects-theme+vector,816x396x960x540,11900,1.046,0.0,0.0,7
+coffee_report_photos,6,1,!!orb-2,3,effects-theme+vector,0x0x101x101,6953,1.232,0.676,0.0,26
+coffee_report_photos,6,2,Title,4,text,50x32x910x94,53320,0.941,2.524,0.396,81
+coffee_report_photos,6,3,Title accent,5,effects-theme+vector,58x99x158x104,500,9.484,20.4,0.0,35
+coffee_report_photos,6,4,Supporting picture,6,picture,538x122x910x490,136896,2.847,1.565,0.0,30
+coffee_report_photos,6,5,Points,7,text,50x130x499x490,161640,4.24,6.43,3.299,255
+coffee_report_photos,7,0,!!orb-1,2,effects-theme+vector,0x396x144x540,20736,1.135,0.019,0.0,11
+coffee_report_photos,7,1,!!orb-2,3,effects-theme+vector,859x0x960x101,7039,1.1,0.0,0.0,10
+coffee_report_photos,7,2,Title,4,text,50x32x910x94,53320,1.101,2.706,0.591,80
+coffee_report_photos,7,3,Title accent,5,effects-theme+vector,58x99x158x104,500,9.28,20.4,0.0,35
+coffee_report_photos,7,4,Hub,6,effects-theme+text,419x259x541x382,15006,1.148,3.345,0.293,59
+coffee_report_photos,7,5,Stage 1,7,effects-theme+text,421x128x539x247,14042,2.33,4.935,0.855,71
+coffee_report_photos,7,6,Stage 2,8,effects-theme+text,580x261x699x380,14161,2.567,5.734,0.989,72
+coffee_report_photos,7,7,Stage 3,9,effects-theme+text,421x394x539x513,14042,2.217,5.085,0.399,69
+coffee_report_photos,7,8,Stage 4,10,effects-theme+text,261x261x380x380,14161,2.729,5.671,1.419,93
+coffee_report_photos,8,0,!!orb-1,2,effects-theme+vector,0x0x144x144,13162,1.14,0.691,0.0,28
+coffee_report_photos,8,1,!!orb-2,3,effects-theme+vector,859x439x960x540,7243,1.079,0.0,0.0,7
+coffee_report_photos,8,10,Right heading,12,text,581x151x884x209,17574,1.814,5.571,0.518,59
+coffee_report_photos,8,11,Right points,13,text,523x220x884x479,93499,1.514,3.466,1.288,151
+coffee_report_photos,8,2,Title,4,text,50x32x910x94,53320,1.229,3.13,0.454,86
+coffee_report_photos,8,3,Title accent,5,effects-theme+vector,58x99x158x104,500,9.1,20.2,0.0,35
+coffee_report_photos,8,4,Left card,6,effects-theme+vector,50x130x462x497,38093,0.069,0.0,0.0,7
+coffee_report_photos,8,5,Left icon,7,picture-svg,76x157x120x202,1980,44.523,30.152,27.071,196
+coffee_report_photos,8,6,Left heading,8,text,133x151x437x209,17632,2.161,5.734,0.958,96
+coffee_report_photos,8,7,Left points,9,text,76x220x437x479,93499,2.331,5.16,2.075,150
+coffee_report_photos,8,8,Right card,10,effects-theme+vector,498x130x910x497,38106,0.072,0.0,0.0,6
+coffee_report_photos,8,9,Right icon,11,picture-svg,523x157x568x202,2025,75.578,49.086,39.852,225
+coffee_report_photos,9,0,!!orb-1,2,effects-theme+vector,816x0x960x144,20736,1.232,0.0,0.0,8
+coffee_report_photos,9,1,!!orb-2,3,effects-theme+vector,0x439x101x540,10201,0.863,0.0,0.0,5
+coffee_report_photos,9,2,Quote mark,4,text,94x29x223x180,17535,0.089,0.148,0.0,15
+coffee_report_photos,9,3,Quote,5,text,115x162x845x374,154760,1.254,3.339,0.698,99
+coffee_report_photos,9,4,Author rule,6,effects-theme+vector,122x392x187x396,260,6.188,26.923,0.0,27
+coffee_report_photos,9,5,Author,7,text,198x374x841x418,28292,2.065,5.45,1.629,107
+coffee_report_photos,10,0,!!orb-1,2,effects-theme+vector,816x396x960x540,20494,0.898,0.005,0.0,12
+coffee_report_photos,10,1,!!orb-2,3,effects-theme+vector,0x0x101x101,10201,0.933,0.0,0.0,10
+coffee_report_photos,10,2,Title,4,text,50x173x910x288,98900,1.488,3.721,0.905,118
+coffee_report_photos,10,3,Closing accent,5,effects-theme+vector,408x299x552x305,864,4.841,33.102,0.0,12
+coffee_report_photos,10,4,Subtitle,6,text,122x320x838x407,62292,0.651,2.069,0.159,62
+coffee_report_photos,11,0,!!orb-1,2,effects-theme+vector,0x396x144x540,10584,1.032,0.0,0.0,8
+coffee_report_photos,11,1,!!orb-2,3,effects-theme+vector,859x0x960x101,7039,1.1,0.0,0.0,10
+coffee_report_photos,11,2,Title,4,text,50x32x910x94,53320,0.514,1.36,0.139,63
+coffee_report_photos,11,3,Title accent,5,effects-theme+vector,58x99x158x104,500,9.484,20.4,0.0,35
+coffee_report_photos,11,4,Credits,6,text,50x130x910x504,321640,2.057,2.77,1.772,174
+kind_probe,1,0,TextBox 1,2,text,34x19x245x43,5064,2.424,6.141,2.172,107
+kind_probe,1,1,TextBox 2,3,text,34x43x235x154,22311,2.187,6.002,1.519,129
+kind_probe,1,10,TextBox 11,12,text,494x259x706x283,5088,3.304,6.25,1.73,239
+kind_probe,1,11,Rounded Rectangle 12,13,effects+effects-theme,494x283x696x394,22422,0.444,0.923,0.0,27
+kind_probe,1,12,TextBox 13,14,text,725x259x936x283,5064,7.448,13.665,5.352,255
+kind_probe,1,13,Rounded Rectangle 14,15,effects+effects-theme,725x283x926x394,22311,8.634,30.478,1.775,53
+kind_probe,1,14,TextBox 15,16,text,34x422x245x446,5064,4.839,10.269,4.996,134
+kind_probe,1,15,Rounded Rectangle 16,17,effects+effects-theme,34x446x235x540,18894,0.287,1.069,0.0,34
+kind_probe,1,16,TextBox 17,18,text,264x422x475x446,5064,4.286,10.051,4.028,120
+kind_probe,1,17,Rounded Rectangle 18,19,effects-theme+gradient,264x446x466x540,18988,9.02,37.197,0.0,34
+kind_probe,1,18,TextBox 19,20,text,494x422x706x446,5088,6.319,14.013,6.506,152
+kind_probe,1,19,TextBox 20,21,text,494x446x696x494,9696,3.549,9.983,2.805,95
+kind_probe,1,2,TextBox 3,4,text,264x19x475x43,5064,3.836,12.105,2.824,106
+kind_probe,1,20,TextBox 21,22,text,725x422x936x446,5064,5.902,12.401,6.319,158
+kind_probe,1,21,TextBox 22,23,text,725x446x926x494,9648,2.228,5.918,1.897,80
+kind_probe,1,3,Picture 4,5,picture,264x43x466x154,22422,2.225,7.497,1.008,66
+kind_probe,1,4,TextBox 5,6,text,494x19x706x43,5088,2.749,7.881,1.828,112
+kind_probe,1,5,Chart 6,7,chart,494x43x917x274,91653,45.128,30.177,27.36,255
+kind_probe,1,6,TextBox 7,8,text,34x259x245x283,5064,3.221,8.649,2.014,102
+kind_probe,1,7,Rounded Rectangle 8,9,effects-theme+gradient,34x283x235x394,22311,14.21,48.353,6.132,68
+kind_probe,1,8,TextBox 9,10,text,264x259x475x283,5064,3.936,13.665,2.231,105
+kind_probe,1,9,Rounded Rectangle 10,11,effects+effects-theme,264x283x466x394,22422,0.72,1.409,0.821,45
+vi_brand_seed,1,0,!!orb-1,2,effects-theme+vector,816x0x960x144,0,,,,
+vi_brand_seed,1,1,!!orb-2,3,effects-theme+vector,0x439x101x540,9640,0.94,0.0,0.0,10
+vi_brand_seed,1,2,Hero picture,4,picture,480x0x960x540,259200,0.129,0.0,0.0,7
+vi_brand_seed,1,3,Kicker,5,text,50x144x444x176,12608,2.357,5.441,2.054,145
+vi_brand_seed,1,4,Title,6,text,50x176x444x335,62646,1.643,4.569,0.618,93
+vi_brand_seed,1,5,Title accent,7,effects-theme+vector,58x346x187x351,645,3.868,0.62,0.0,14
+vi_brand_seed,1,6,Subtitle,8,text,50x364x444x450,33884,1.806,4.034,1.762,111
+vi_brand_seed,2,0,!!orb-1,2,effects-theme+vector,816x396x960x540,20736,0.816,0.0,0.0,5
+vi_brand_seed,2,1,!!orb-2,3,effects-theme+vector,0x0x101x101,10201,0.983,0.5,0.0,16
+vi_brand_seed,2,2,Kicker,4,text,50x180x910x216,30897,0.286,0.897,0.21,50
+vi_brand_seed,2,3,__gen_underline_rule1,7,vector,56x215x119x219,63,48.857,100.0,98.413,70
+vi_brand_seed,2,4,Title,5,text,50x216x910x317,86860,1.049,2.595,0.83,110
+vi_brand_seed,2,5,Section accent,6,effects-theme+vector,58x324x230x330,1032,9.727,16.667,16.667,58
+vi_brand_seed,3,0,!!orb-1,2,effects-theme+vector,0x396x144x540,18386,0.892,0.0,0.0,4
+vi_brand_seed,3,1,!!orb-2,3,effects-theme+vector,859x0x960x101,7039,1.007,0.014,0.0,11
+vi_brand_seed,3,10,__counter_7_03,22,text,65x227x232x313,0,,,,
+vi_brand_seed,3,11,__counter_7_02,23,text,65x227x232x313,0,,,,
+vi_brand_seed,3,12,__counter_7_01,24,text,65x227x232x313,14362,0.886,2.486,0.272,64
+vi_brand_seed,3,13,KPI label 1,8,text,65x331x232x403,12024,1.767,5.664,0.441,65
+vi_brand_seed,3,14,KPI card 2,9,effects-theme+vector,272x205x467x421,15734,0.054,0.0,0.0,4
+vi_brand_seed,3,15,KPI value 2,10,text,286x227x453x313,14362,1.388,3.913,0.696,81
+vi_brand_seed,3,16,KPI label 2,11,text,286x331x453x403,12024,1.594,5.19,0.79,76
+vi_brand_seed,3,17,KPI card 3,12,effects-theme+vector,493x205x688x421,15734,0.053,0.0,0.0,3
+vi_brand_seed,3,18,KPI value 3,13,text,507x227x674x313,0,,,,
+vi_brand_seed,3,19,__counter_13_09,25,text,507x227x674x313,0,,,,
+vi_brand_seed,3,2,Title,4,text,50x32x910x94,53320,0.722,1.767,0.512,81
+vi_brand_seed,3,20,__counter_13_08,26,text,507x227x674x313,0,,,,
+vi_brand_seed,3,21,__counter_13_07,27,text,507x227x674x313,0,,,,
+vi_brand_seed,3,22,__counter_13_06,28,text,507x227x674x313,0,,,,
+vi_brand_seed,3,23,__counter_13_05,29,text,507x227x674x313,0,,,,
+vi_brand_seed,3,24,__counter_13_04,30,text,507x227x674x313,0,,,,
+vi_brand_seed,3,25,__counter_13_03,31,text,507x227x674x313,0,,,,
+vi_brand_seed,3,26,__counter_13_02,32,text,507x227x674x313,0,,,,
+vi_brand_seed,3,27,__counter_13_01,33,text,507x227x674x313,14362,1.183,3.182,0.522,83
+vi_brand_seed,3,28,KPI label 3,14,text,507x331x674x403,12024,2.046,7.028,0.416,57
+vi_brand_seed,3,29,KPI card 4,15,effects-theme+vector,714x205x910x421,15950,0.066,0.0,0.0,4
+vi_brand_seed,3,3,Title accent,5,effects-theme+vector,58x99x158x104,500,10.776,20.0,0.0,36
+vi_brand_seed,3,30,KPI value 4,16,text,728x227x895x313,0,,,,
+vi_brand_seed,3,31,__counter_16_07,34,text,728x227x895x313,0,,,,
+vi_brand_seed,3,32,__counter_16_06,35,text,728x227x895x313,0,,,,
+vi_brand_seed,3,33,__counter_16_05,36,text,728x227x895x313,0,,,,
+vi_brand_seed,3,34,__counter_16_04,37,text,728x227x895x313,0,,,,
+vi_brand_seed,3,35,__counter_16_03,38,text,728x227x895x313,0,,,,
+vi_brand_seed,3,36,__counter_16_02,39,text,728x227x895x313,0,,,,
+vi_brand_seed,3,37,__counter_16_01,40,text,728x227x895x313,14362,0.735,1.866,0.042,56
+vi_brand_seed,3,38,KPI label 4,17,text,728x331x895x403,12024,1.474,4.416,0.665,80
+vi_brand_seed,3,4,KPI card 1,6,effects-theme+vector,50x205x246x421,15950,0.082,0.0,0.0,5
+vi_brand_seed,3,5,KPI value 1,7,text,65x227x232x313,0,,,,
+vi_brand_seed,3,6,__counter_7_07,18,text,65x227x232x313,0,,,,
+vi_brand_seed,3,7,__counter_7_06,19,text,65x227x232x313,0,,,,
+vi_brand_seed,3,8,__counter_7_05,20,text,65x227x232x313,0,,,,
+vi_brand_seed,3,9,__counter_7_04,21,text,65x227x232x313,0,,,,
+vi_brand_seed,4,0,!!orb-1,2,effects-theme+vector,0x0x144x144,13162,1.128,0.98,0.0,31
+vi_brand_seed,4,1,!!orb-2,3,effects-theme+vector,859x439x960x540,10201,0.862,0.0,0.0,8
+vi_brand_seed,4,2,Title,4,text,50x32x910x94,53320,1.395,3.772,0.386,64
+vi_brand_seed,4,3,Title accent,5,effects-theme+vector,58x99x158x104,500,10.186,20.0,0.0,36
+vi_brand_seed,4,4,Chart,6,chart,50x130x595x504,203830,8.6,6.34,5.393,255
+vi_brand_seed,4,5,Takeaway bar,7,effects-theme+vector,617x166x622x353,935,11.795,40.321,0.428,65
+vi_brand_seed,4,6,__gen_highlight_marker1,9,vector,639x189x906x337,0,,,,
+vi_brand_seed,4,7,Takeaway,8,text,635x158x910x367,57475,2.439,6.264,1.225,117
+vi_brand_seed,5,0,!!orb-1,2,effects-theme+vector,816x0x960x144,14908,0.787,0.0,0.0,4
+vi_brand_seed,5,1,!!orb-2,3,effects-theme+vector,0x439x101x540,9997,0.906,0.0,0.0,10
+vi_brand_seed,5,10,Link 3,12,effects-theme+vector,691x270x719x270,0,,,,
+vi_brand_seed,5,11,__gen_highlight_marker1,14,vector,54x387x477x420,0,,,,
+vi_brand_seed,5,12,Takeaway,13,text,50x385x910x443,49880,1.706,4.755,0.898,110
+vi_brand_seed,5,2,Title,4,text,50x32x910x94,53320,1.067,2.466,0.713,82
+vi_brand_seed,5,3,Title accent,5,effects-theme+vector,58x99x158x104,500,10.776,20.0,0.0,36
+vi_brand_seed,5,4,Step 1,6,effects-theme+text,50x191x235x349,29230,0.637,1.912,0.287,67
+vi_brand_seed,5,5,Step 2,7,effects-theme+text,275x191x460x349,29230,0.899,2.313,0.756,94
+vi_brand_seed,5,6,Link 1,8,effects-theme+vector,241x270x269x270,0,,,,
+vi_brand_seed,5,7,Step 3,9,effects-theme+text,500x191x685x349,29230,0.779,2.046,0.599,99
+vi_brand_seed,5,8,Link 2,10,effects-theme+vector,466x270x494x270,0,,,,
+vi_brand_seed,5,9,Step 4,11,effects-theme+text,725x191x910x349,29230,0.987,3.613,0.397,82
+vi_brand_seed,6,0,!!orb-1,2,effects-theme+vector,816x396x960x540,11242,1.36,0.0,0.0,6
+vi_brand_seed,6,1,!!orb-2,3,effects-theme+vector,0x0x101x101,6953,1.286,1.021,0.0,33
+vi_brand_seed,6,2,Title,4,text,50x32x910x94,53320,1.302,3.093,0.84,93
+vi_brand_seed,6,3,Title accent,5,effects-theme+vector,58x99x158x104,500,10.776,20.0,0.0,36
+vi_brand_seed,6,4,Left card,6,effects-theme+vector,50x130x462x497,36767,1.251,0.0,0.0,6
+vi_brand_seed,6,5,Left heading,7,text,76x151x437x209,20938,1.758,1.672,0.153,63
+vi_brand_seed,6,6,Left points,8,text,76x220x437x479,93499,4.205,5.304,2.766,188
+vi_brand_seed,6,7,Right card,9,effects-theme+vector,498x130x910x497,36767,1.27,0.0,0.0,6
+vi_brand_seed,6,8,Right heading,10,text,523x151x884x209,20938,1.554,1.041,0.139,67
+vi_brand_seed,6,9,Right points,11,text,523x220x884x479,93499,4.029,5.318,2.567,216
+vi_brand_seed,7,0,!!orb-1,2,effects-theme+vector,0x396x144x540,11900,1.003,0.0,0.0,6
+vi_brand_seed,7,1,!!orb-2,3,effects-theme+vector,859x0x960x101,7039,1.05,0.227,0.0,13
+vi_brand_seed,7,2,Title,4,text,50x32x910x94,53320,0.752,1.992,0.263,64
+vi_brand_seed,7,3,Title accent,5,effects-theme+vector,58x99x158x104,500,10.776,20.0,0.0,36
+vi_brand_seed,7,4,Points,6,text,50x130x910x490,309600,1.817,3.468,1.431,226
+vi_brand_seed,8,0,!!orb-1,2,effects-theme+vector,0x0x144x144,14986,0.978,0.0,0.0,9
+vi_brand_seed,8,1,!!orb-2,3,effects-theme+vector,859x439x960x540,10201,0.898,0.01,0.0,11
+vi_brand_seed,8,2,Quote mark,4,text,94x29x223x180,17535,0.241,0.171,0.0,21
+vi_brand_seed,8,3,Quote,5,text,115x162x845x374,154760,1.716,4.554,0.948,113
+vi_brand_seed,8,4,Author rule,6,effects-theme+vector,122x392x187x396,260,6.419,26.923,0.0,26
+vi_brand_seed,8,5,Author,7,text,198x374x841x418,28292,2.33,5.274,2.008,118
+vi_brand_seed,9,0,!!orb-1,2,effects-theme+vector,816x0x960x144,20736,0.829,0.0,0.0,8
+vi_brand_seed,9,1,!!orb-2,3,effects-theme+vector,0x439x101x540,10201,0.92,0.098,0.0,12
+vi_brand_seed,9,2,Title,4,text,50x173x910x288,98900,1.074,2.593,0.8,99
+vi_brand_seed,9,3,Closing accent,5,effects-theme+vector,408x299x552x305,864,5.009,33.102,0.0,13
+vi_brand_seed,9,4,Subtitle,6,text,122x320x838x407,62292,1.545,3.997,1.161,128
+vi_chuyen_doi_so,1,0,!!orb-1,2,effects-theme+vector,816x0x960x144,0,,,,
+vi_chuyen_doi_so,1,1,!!orb-2,3,effects-theme+vector,0x439x101x540,9640,0.94,0.0,0.0,9
+vi_chuyen_doi_so,1,2,Hero picture,4,picture,480x0x960x540,259200,0.12,0.0,0.0,7
+vi_chuyen_doi_so,1,3,Kicker,5,text,50x144x444x176,12608,2.09,5.195,1.618,126
+vi_chuyen_doi_so,1,4,Title,6,text,50x176x444x335,62646,1.66,4.525,0.57,92
+vi_chuyen_doi_so,1,5,Title accent,7,effects-theme+vector,58x346x187x351,645,3.29,0.62,0.0,13
+vi_chuyen_doi_so,1,6,Subtitle,8,text,50x364x444x450,33884,1.755,4.037,1.682,107
+vi_chuyen_doi_so,2,0,!!orb-1,2,effects-theme+vector,816x396x960x540,20736,1.054,0.0,0.0,6
+vi_chuyen_doi_so,2,1,!!orb-2,3,effects-theme+vector,0x0x101x101,10201,1.044,0.48,0.0,14
+vi_chuyen_doi_so,2,2,Kicker,4,text,50x180x910x216,30897,0.261,0.842,0.023,43
+vi_chuyen_doi_so,2,3,__gen_underline_rule1,7,vector,56x215x119x219,63,42.794,100.0,96.825,61
+vi_chuyen_doi_so,2,4,Title,5,text,50x216x910x317,86860,1.075,2.559,0.802,107
+vi_chuyen_doi_so,2,5,Section accent,6,effects-theme+vector,58x324x230x330,1032,8.227,16.667,16.473,49
+vi_chuyen_doi_so,3,0,!!orb-1,2,effects-theme+vector,0x396x144x540,18386,0.898,0.0,0.0,6
+vi_chuyen_doi_so,3,1,!!orb-2,3,effects-theme+vector,859x0x960x101,7039,1.007,0.0,0.0,10
+vi_chuyen_doi_so,3,10,__counter_7_03,22,text,65x227x232x313,0,,,,
+vi_chuyen_doi_so,3,11,__counter_7_02,23,text,65x227x232x313,0,,,,
+vi_chuyen_doi_so,3,12,__counter_7_01,24,text,65x227x232x313,14362,0.788,2.242,0.244,63
+vi_chuyen_doi_so,3,13,KPI label 1,8,text,65x331x232x403,12024,1.689,5.697,0.657,71
+vi_chuyen_doi_so,3,14,KPI card 2,9,effects-theme+vector,272x205x467x421,15734,0.041,0.0,0.0,5
+vi_chuyen_doi_so,3,15,KPI value 2,10,text,286x227x453x313,14362,1.223,3.509,0.668,79
+vi_chuyen_doi_so,3,16,KPI label 2,11,text,286x331x453x403,12024,1.518,4.948,0.873,83
+vi_chuyen_doi_so,3,17,KPI card 3,12,effects-theme+vector,493x205x688x421,15734,0.041,0.0,0.0,3
+vi_chuyen_doi_so,3,18,KPI value 3,13,text,507x227x674x313,0,,,,
+vi_chuyen_doi_so,3,19,__counter_13_09,25,text,507x227x674x313,0,,,,
+vi_chuyen_doi_so,3,2,Title,4,text,50x32x910x94,53320,0.723,1.724,0.424,79
+vi_chuyen_doi_so,3,20,__counter_13_08,26,text,507x227x674x313,0,,,,
+vi_chuyen_doi_so,3,21,__counter_13_07,27,text,507x227x674x313,0,,,,
+vi_chuyen_doi_so,3,22,__counter_13_06,28,text,507x227x674x313,0,,,,
+vi_chuyen_doi_so,3,23,__counter_13_05,29,text,507x227x674x313,0,,,,
+vi_chuyen_doi_so,3,24,__counter_13_04,30,text,507x227x674x313,0,,,,
+vi_chuyen_doi_so,3,25,__counter_13_03,31,text,507x227x674x313,0,,,,
+vi_chuyen_doi_so,3,26,__counter_13_02,32,text,507x227x674x313,0,,,,
+vi_chuyen_doi_so,3,27,__counter_13_01,33,text,507x227x674x313,14362,1.053,2.973,0.508,81
+vi_chuyen_doi_so,3,28,KPI label 3,14,text,507x331x674x403,12024,1.935,7.152,0.524,63
+vi_chuyen_doi_so,3,29,KPI card 4,15,effects-theme+vector,714x205x910x421,15950,0.053,0.0,0.0,4
+vi_chuyen_doi_so,3,3,Title accent,5,effects-theme+vector,58x99x158x104,500,9.264,20.4,0.0,32
+vi_chuyen_doi_so,3,30,KPI value 4,16,text,728x227x895x313,0,,,,
+vi_chuyen_doi_so,3,31,__counter_16_07,34,text,728x227x895x313,0,,,,
+vi_chuyen_doi_so,3,32,__counter_16_06,35,text,728x227x895x313,0,,,,
+vi_chuyen_doi_so,3,33,__counter_16_05,36,text,728x227x895x313,0,,,,
+vi_chuyen_doi_so,3,34,__counter_16_04,37,text,728x227x895x313,0,,,,
+vi_chuyen_doi_so,3,35,__counter_16_03,38,text,728x227x895x313,0,,,,
+vi_chuyen_doi_so,3,36,__counter_16_02,39,text,728x227x895x313,0,,,,
+vi_chuyen_doi_so,3,37,__counter_16_01,40,text,728x227x895x313,14362,0.638,1.685,0.042,55
+vi_chuyen_doi_so,3,38,KPI label 4,17,text,728x331x895x403,12024,1.407,4.366,0.882,87
+vi_chuyen_doi_so,3,4,KPI card 1,6,effects-theme+vector,50x205x246x421,15950,0.064,0.0,0.0,7
+vi_chuyen_doi_so,3,5,KPI value 1,7,text,65x227x232x313,0,,,,
+vi_chuyen_doi_so,3,6,__counter_7_07,18,text,65x227x232x313,0,,,,
+vi_chuyen_doi_so,3,7,__counter_7_06,19,text,65x227x232x313,0,,,,
+vi_chuyen_doi_so,3,8,__counter_7_05,20,text,65x227x232x313,0,,,,
+vi_chuyen_doi_so,3,9,__counter_7_04,21,text,65x227x232x313,0,,,,
+vi_chuyen_doi_so,4,0,!!orb-1,2,effects-theme+vector,0x0x144x144,13162,1.108,0.691,0.0,26
+vi_chuyen_doi_so,4,1,!!orb-2,3,effects-theme+vector,859x439x960x540,10201,0.863,0.0,0.0,7
+vi_chuyen_doi_so,4,2,Title,4,text,50x32x910x94,53320,1.405,3.785,0.375,63
+vi_chuyen_doi_so,4,3,Title accent,5,effects-theme+vector,58x99x158x104,500,8.926,20.4,0.0,32
+vi_chuyen_doi_so,4,4,Chart,6,chart,50x130x595x504,203830,8.117,7.291,5.35,255
+vi_chuyen_doi_so,4,5,Takeaway bar,7,effects-theme+vector,617x166x622x353,935,10.365,40.107,0.107,57
+vi_chuyen_doi_so,4,6,__gen_highlight_marker1,9,vector,639x189x906x337,0,,,,
+vi_chuyen_doi_so,4,7,Takeaway,8,text,635x158x910x367,57475,2.45,6.091,1.207,115
+vi_chuyen_doi_so,5,0,!!orb-1,2,effects-theme+vector,816x0x960x144,14908,0.786,0.0,0.0,4
+vi_chuyen_doi_so,5,1,!!orb-2,3,effects-theme+vector,0x439x101x540,9997,0.907,0.0,0.0,9
+vi_chuyen_doi_so,5,10,Link 3,12,effects-theme+vector,691x270x719x270,0,,,,
+vi_chuyen_doi_so,5,11,__gen_highlight_marker1,14,vector,54x387x477x420,0,,,,
+vi_chuyen_doi_so,5,12,Takeaway,13,text,50x385x910x443,49880,1.669,3.911,0.838,109
+vi_chuyen_doi_so,5,2,Title,4,text,50x32x910x94,53320,1.067,2.393,0.671,81
+vi_chuyen_doi_so,5,3,Title accent,5,effects-theme+vector,58x99x158x104,500,9.264,20.4,0.0,32
+vi_chuyen_doi_so,5,4,Step 1,6,effects-theme+text,50x191x235x349,29230,0.606,1.83,0.356,72
+vi_chuyen_doi_so,5,5,Step 2,7,effects-theme+text,275x191x460x349,29230,0.846,1.995,0.842,99
+vi_chuyen_doi_so,5,6,Link 1,8,effects-theme+vector,241x270x269x270,0,,,,
+vi_chuyen_doi_so,5,7,Step 3,9,effects-theme+text,500x191x685x349,29230,0.748,1.885,0.667,106
+vi_chuyen_doi_so,5,8,Link 2,10,effects-theme+vector,466x270x494x270,0,,,,
+vi_chuyen_doi_so,5,9,Step 4,11,effects-theme+text,725x191x910x349,29230,0.865,2.391,0.243,71
+vi_chuyen_doi_so,6,0,!!orb-1,2,effects-theme+vector,816x396x960x540,11242,1.061,0.0,0.0,4
+vi_chuyen_doi_so,6,1,!!orb-2,3,effects-theme+vector,0x0x101x101,6953,1.712,0.849,0.0,28
+vi_chuyen_doi_so,6,2,Title,4,text,50x32x910x94,53320,2.367,3.063,0.814,92
+vi_chuyen_doi_so,6,3,Title accent,5,effects-theme+vector,58x99x158x104,500,8.92,20.4,0.0,31
+vi_chuyen_doi_so,6,4,Left card,6,effects-theme+vector,50x130x462x497,36767,0.068,0.0,0.0,4
+vi_chuyen_doi_so,6,5,Left heading,7,text,76x151x437x209,20938,0.527,1.605,0.139,65
+vi_chuyen_doi_so,6,6,Left points,8,text,76x220x437x479,93499,3.009,4.613,2.798,200
+vi_chuyen_doi_so,6,7,Right card,9,effects-theme+vector,498x130x910x497,36767,0.082,0.0,0.0,10
+vi_chuyen_doi_so,6,8,Right heading,10,text,523x151x884x209,20938,0.349,1.06,0.129,65
+vi_chuyen_doi_so,6,9,Right points,11,text,523x220x884x479,93499,2.826,4.603,2.579,231
+vi_chuyen_doi_so,7,0,!!orb-1,2,effects-theme+vector,0x396x144x540,11900,1.005,0.0,0.0,6
+vi_chuyen_doi_so,7,1,!!orb-2,3,effects-theme+vector,859x0x960x101,7039,1.105,0.185,0.0,13
+vi_chuyen_doi_so,7,2,Title,4,text,50x32x910x94,53320,0.769,1.952,0.248,62
+vi_chuyen_doi_so,7,3,Title accent,5,effects-theme+vector,58x99x158x104,500,9.264,20.4,0.0,32
+vi_chuyen_doi_so,7,4,Points,6,text,50x130x910x490,309600,1.808,3.522,1.379,220
+vi_chuyen_doi_so,8,0,!!orb-1,2,effects-theme+vector,0x0x144x144,14986,1.244,0.0,0.0,6
+vi_chuyen_doi_so,8,1,!!orb-2,3,effects-theme+vector,859x439x960x540,10201,0.907,0.0,0.0,10
+vi_chuyen_doi_so,8,2,Quote mark,4,text,94x29x223x180,17535,0.266,0.097,0.0,19
+vi_chuyen_doi_so,8,3,Quote,5,text,115x162x845x374,154760,1.734,4.499,0.896,110
+vi_chuyen_doi_so,8,4,Author rule,6,effects-theme+vector,122x392x187x396,260,5.385,26.538,0.0,22
+vi_chuyen_doi_so,8,5,Author,7,text,198x374x841x418,28292,2.271,5.185,1.94,114
+vi_chuyen_doi_so,9,0,!!orb-1,2,effects-theme+vector,816x0x960x144,20736,0.837,0.0,0.0,6
+vi_chuyen_doi_so,9,1,!!orb-2,3,effects-theme+vector,0x439x101x540,10201,0.926,0.01,0.0,11
+vi_chuyen_doi_so,9,2,Title,4,text,50x173x910x288,98900,1.073,2.567,0.761,96
+vi_chuyen_doi_so,9,3,Closing accent,5,effects-theme+vector,408x299x552x305,864,4.514,0.694,0.0,11
+vi_chuyen_doi_so,9,4,Subtitle,6,text,122x320x838x407,62292,1.494,3.94,1.056,123

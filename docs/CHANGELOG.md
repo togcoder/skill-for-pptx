@@ -7,6 +7,37 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T059 [pptx] DeckCraft as second renderer: static, Morph and round-trip fidelity — 2026-11-04
+
+- **Why.** T057 asked whether DeckCraft 0.13.1 can stand in for PowerPoint when
+  PowerPoint is absent, and where it stops. This task measured it on 67 slides
+  (five Forge decks, the two T028 pro decks) plus a synthetic per-kind probe,
+  against PowerPoint `Slide.Export` and `CreateVideo`.
+- **Static.** Whole-slide mean 0.5–1.5/255, `>40` 0.24–0.89%. Raster pictures
+  (0.50), theme effects (1.06), vector shapes (0.83) and text (1.54) are close;
+  charts break (13.1 weighted, 5.3–12.7% `>40`: markers, gridlines, legend,
+  plot area); SVG icons are absent because DeckCraft draws the transparent PNG
+  fallback (49.0, 28.4% `>40`); 3-stop gradients lose the middle stop
+  (14.2, 6.1%); soft edges/bevels differ (8.6). The design critic is
+  insensitive to all of it: score delta ≤0.01, far below the 0.2 falsifier.
+- **Morph.** `render-transition` is not a proxy for PowerPoint Morph. On the
+  Forge KPI transition PowerPoint hides 36/36 entrance shapes at t=0.25/0.5/0.75
+  while DeckCraft draws 29/35/35; the T028 camera morph differs by 64.3 mean /
+  40% `>40` even with zero entrance effects. Falsifier 2 triggered.
+- **Round trip.** `convert` rewrites `p:cTn` 2641→2492, `p:anim` 338→245,
+  `p:animEffect` 356→300, `p:graphicEl` 24→0 and drops all 5 SVG blips.
+  PowerPoint parses the same effect list and transitions on 67/67 slides but
+  149 fewer behaviours. Ascend/RiseUp `ppt_x` drops are identity (video diff
+  0.0); Transparency is redundant; GrowAndTurn loses its rotation (2.4 peak);
+  chart build targets are lost, so the round-trip chart runs 0.4–0.8 s ahead
+  (14.3 peak, 13 frames >5). Not a safe last writer.
+- **Wiring.** Proposed `slide_forge.render(..., renderer="auto")` fallback with
+  `renderer`/`frame_source`/`label="DeckCraft render (not PowerPoint)"`/
+  `evidence_rung=2`; implemented and unit-tested in
+  `scripts/deckcraft_fidelity.py`, not wired into the product path.
+- **Tests.** 471 run, 8 skipped, OK. Artifacts: 68 per-slide diffs, 8 contact
+  sheets, 20 Morph strips, 5 playback strips, 11 CSV tables (5.7 MB).
+
 ## T057 [cross] Lead review, DeckCraft evaluation and next programme — 2026-11-04
 
 - **Why.** After 22 tasks in four days (T035–T056) the owner asked Claude to
