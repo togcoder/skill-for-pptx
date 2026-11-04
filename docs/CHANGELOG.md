@@ -7,6 +7,47 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T069b [pptx] Narrative Critic, speaker notes compiler and two-pass scaffold — 2026-11-04
+
+- **Why.** `deck_director.py` could compile a screenplay, but `design_critic.py`
+  could not see whether the deck's spoken cues, `t=0` and lifecycles agreed.
+  The end-to-end loop stopped at the build.
+- **Added.** A sixth `narrative` dimension in `design_critic.py`
+  (`NAR-BASE-STATE`, `DEN-ACTIVE-WORDS`, `NAR-LIFECYCLE`, `NAR-ALIGN`), a
+  speaker-notes compiler that writes `[T=0]`/`[CLICK]` cues into native
+  `notesSlide` parts, `exit` lifecycles in the compiler, and a two-pass
+  `scaffold` / `check --pass-1` workflow.
+- **Measured.** 12/12 unit tests; T066 narrative **2.70** vs T068/T069 **5.00**;
+  T069 scaffolded deck overall **4.84**, 4 lifecycles, 0 empty base, all active
+  views ≤ 45 words, notes aligned. Review requested (Argon).
+  `experiments/T069-20261104-antigravity-narrative-critic/REPORT.md`.
+
+## T069a [pptx] Directed deck: four semantic Morphs, image blocks, state critic — 2026-11-04
+
+- **Why.** T067 removed all nine decorative Morphs and fixed the base states;
+  T068 built a direction compiler but proved it on three slides. Neither produced
+  one artifact where motion, images and the script agree on the real chapter.
+- **State pairs.** Four B states were added and joined by a 1.2 s `byObject`
+  Morph: two answer cards → the winning answer; two worldviews → the dialectic
+  one; three parts → one whole; quotation → thesis. Each pair shares 7–16
+  `!!` names; no background or thread Morph.
+- **Measured.** 14 slides, **9 click groups, 39 effects, 4 Morphs, 3 lifecycle
+  dims**; 0 empty base states, 0 pictures on the last click, 0 empty frames,
+  0 Morph/entrance conflicts; max active view **45 words**; five type sizes.
+  PowerPoint 16.0 opens 14 slides + 14 PNG + 14-page PDF, 0 repair; COM reports
+  EntryEffect **3954** (Morph) at 1.2 s on slides 4/6/9/13.
+- **Critic.** New experimental `scripts/deck_state_critic.py` grades `t=0` and
+  every click. It **fails T066** with 58 gates (51 fail) and **passes T069** with
+  0 gates. `design_critic.py` gives T069 **4.35** (design 3.99, motion 4.92,
+  rhythm 3.5, coherence 5.0).
+- **Images.** Cover portraits and Plato are present at `t=0`; the timeline was
+  re-ordered to Engels 1848 → Marx 1867 → Lenin 1917 so the dots sit under the
+  work each face carries (T066 had 1848 under Marx).
+- **Limits.** Morph interpolation was not captured frame-by-frame; 14 slides
+  instead of 10; B states hand-authored on the T067 copy, not compiled by
+  `deck_director.py`; no human rung 6.
+  `experiments/T069-20261104-opencode-directed-deck/REPORT.md`.
+
 ## T068 [pptx] Deck Director compiler: Two-Pass screenplay, lifecycle state machine, five narrative laws — 2026-11-04
 
 - **Why.** T067 named the missing artifact; T068 made it executable. The

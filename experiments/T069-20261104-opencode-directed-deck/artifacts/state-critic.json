@@ -1,0 +1,232 @@
+{
+ "deck": "T069-directed-morph.pptx",
+ "sha256": "8399d2038b635962",
+ "slides": 14,
+ "clicks": 9,
+ "effects": 39,
+ "morphs": 4,
+ "lifecycles": 3,
+ "gates": [],
+ "summary": {
+  "fail": 0,
+  "warn": 0
+ },
+ "verdict": "pass",
+ "rows": [
+  {
+   "slide": 1,
+   "clicks": 0,
+   "effects": 0,
+   "base_words": 28,
+   "base_claim": true,
+   "base_pictures": 3,
+   "words_per_view": [
+    28
+   ],
+   "pictures": {
+    "marx": 0,
+    "engels": 0,
+    "lenin": 0
+   },
+   "lifecycles": 0,
+   "morph": null
+  },
+  {
+   "slide": 2,
+   "clicks": 3,
+   "effects": 14,
+   "base_words": 14,
+   "base_claim": true,
+   "base_pictures": 1,
+   "words_per_view": [
+    14,
+    36,
+    52,
+    74
+   ],
+   "pictures": {
+    "plato": 0
+   },
+   "lifecycles": 0,
+   "morph": null
+  },
+  {
+   "slide": 3,
+   "clicks": 0,
+   "effects": 0,
+   "base_words": 37,
+   "base_claim": true,
+   "base_pictures": 0,
+   "words_per_view": [
+    37
+   ],
+   "pictures": {},
+   "lifecycles": 0,
+   "morph": null
+  },
+  {
+   "slide": 4,
+   "clicks": 0,
+   "effects": 0,
+   "base_words": 37,
+   "base_claim": true,
+   "base_pictures": 0,
+   "words_per_view": [
+    37
+   ],
+   "pictures": {},
+   "lifecycles": 0,
+   "morph": "byObject"
+  },
+  {
+   "slide": 5,
+   "clicks": 0,
+   "effects": 0,
+   "base_words": 33,
+   "base_claim": true,
+   "base_pictures": 0,
+   "words_per_view": [
+    33
+   ],
+   "pictures": {},
+   "lifecycles": 0,
+   "morph": null
+  },
+  {
+   "slide": 6,
+   "clicks": 0,
+   "effects": 0,
+   "base_words": 29,
+   "base_claim": true,
+   "base_pictures": 0,
+   "words_per_view": [
+    29
+   ],
+   "pictures": {},
+   "lifecycles": 0,
+   "morph": "byObject"
+  },
+  {
+   "slide": 7,
+   "clicks": 4,
+   "effects": 15,
+   "base_words": 12,
+   "base_claim": true,
+   "base_pictures": 0,
+   "words_per_view": [
+    12,
+    28,
+    43,
+    53,
+    60
+   ],
+   "pictures": {},
+   "lifecycles": 0,
+   "morph": null
+  },
+  {
+   "slide": 8,
+   "clicks": 0,
+   "effects": 0,
+   "base_words": 36,
+   "base_claim": true,
+   "base_pictures": 0,
+   "words_per_view": [
+    36
+   ],
+   "pictures": {},
+   "lifecycles": 0,
+   "morph": null
+  },
+  {
+   "slide": 9,
+   "clicks": 0,
+   "effects": 0,
+   "base_words": 39,
+   "base_claim": true,
+   "base_pictures": 0,
+   "words_per_view": [
+    39
+   ],
+   "pictures": {},
+   "lifecycles": 0,
+   "morph": "byObject"
+  },
+  {
+   "slide": 10,
+   "clicks": 1,
+   "effects": 7,
+   "base_words": 38,
+   "base_claim": true,
+   "base_pictures": 3,
+   "words_per_view": [
+    38,
+    41
+   ],
+   "pictures": {
+    "marx": 0,
+    "engels": 0,
+    "lenin": 0
+   },
+   "lifecycles": 0,
+   "morph": null
+  },
+  {
+   "slide": 11,
+   "clicks": 1,
+   "effects": 3,
+   "base_words": 45,
+   "base_claim": true,
+   "base_pictures": 0,
+   "words_per_view": [
+    45,
+    45
+   ],
+   "pictures": {},
+   "lifecycles": 3,
+   "morph": null
+  },
+  {
+   "slide": 12,
+   "clicks": 0,
+   "effects": 0,
+   "base_words": 32,
+   "base_claim": true,
+   "base_pictures": 0,
+   "words_per_view": [
+    32
+   ],
+   "pictures": {},
+   "lifecycles": 0,
+   "morph": null
+  },
+  {
+   "slide": 13,
+   "clicks": 0,
+   "effects": 0,
+   "base_words": 37,
+   "base_claim": true,
+   "base_pictures": 0,
+   "words_per_view": [
+    37
+   ],
+   "pictures": {},
+   "lifecycles": 0,
+   "morph": "byObject"
+  },
+  {
+   "slide": 14,
+   "clicks": 0,
+   "effects": 0,
+   "base_words": 44,
+   "base_claim": true,
+   "base_pictures": 0,
+   "words_per_view": [
+    44
+   ],
+   "pictures": {},
+   "lifecycles": 0,
+   "morph": null
+  }
+ ]
+}

@@ -1,7 +1,7 @@
 > **Since T040 this page is the pptx domain's status.** Lab-wide state lives in
 > `HANDOFF.md` and `domains/README.md`; how agents work is in `lab/PROTOCOL.md`.
 
-# Status — current state (2026-11-04, after T058–T068)
+# Status — current state (2026-11-04, after T058–T069)
 
 This page is rewritten, not appended. History is in [CHANGELOG.md](CHANGELOG.md),
 task IDs in [research/tasks/INDEX.md](../research/tasks/INDEX.md), and the
@@ -17,7 +17,8 @@ the briefs: [T057](../experiments/T057-20261104-claude-leader-review/REPORT.md).
   (native asset factory), T063 (Forge debt), T064 (T055 rebase + 3D Morph),
   T065 (lab hygiene), T066 (Chapter 1 deck, owner review), T067 (deck direction
   research, image choreography, `VisualStyle/1`), T068 (Deck Director compiler
-  and narrative laws).
+  and narrative laws), T069a (directed deck with four semantic Morphs and the
+  state critic), T069b (narrative critic, speaker notes, exit lifecycles).
 - **Unmerged:** `work/T054-opencode-vector-match` (vector only).
 - **T055** is on `main` as **EXPERIMENTAL**: rebased by T064, review
   `accept-with-fixes`, R3/R4/R6/R7/R8 open.
@@ -29,6 +30,7 @@ the briefs: [T057](../experiments/T057-20261104-claude-leader-review/REPORT.md).
 | Path | Entry point | For | Skill / command |
 |---|---|---|---|
 | Deck Director | `scripts/deck_director.py` (`check → compile → ledger`) | New decks: direction file, two-pass screenplay, base state and object lifecycle | `skills/deck-director` |
+| State critic (experimental) | `scripts/deck_state_critic.py` | Built decks: `t=0` readability, image/frame timing, Morph/entrance conflict, click budget, lifecycle | — |
 | Motion Director | `scripts/motion_director.py` (`inspect → draft → apply/auto → preview → verify → critique`) | Existing decks: script-driven click rhythm, compound and layered motion, preserving the source | `skills/pptx-motion-director`, `/animate-deck` |
 | Morph Studio | `scripts/morph_studio.py` (`propose → apply → preview`) | Cross-slide Morph: `!!` continuity, fly-in staging, camera, card expand, pan | same skill |
 | Slide Forge | `scripts/slide_forge.py` (`schema → build → qa → render`) | New decks from a semantic spec: layout, type, themes, assets, motion | `skills/slide-forge`, `/forge-deck` |

@@ -1,6 +1,6 @@
 # Handoff — Design Research Lab
 
-Cập nhật: 04/11/2026, sau chương trình **T058–T068** (T058–T065 nền tảng; T066 deck bị chủ dự án phê bình; T067 direction + style; T068 compiler). Tệp này được **viết lại** mỗi lần bàn giao, không ghi nối thêm. Lịch sử nằm ở [docs/CHANGELOG.md](docs/CHANGELOG.md). Chương trình và đề bài gốc: [experiments/T057-20261104-claude-leader-review/REPORT.md](experiments/T057-20261104-claude-leader-review/REPORT.md).
+Cập nhật: 04/11/2026, sau chương trình **T058–T069** (T058–T065 nền tảng; T066 deck bị chủ dự án phê bình; T067 direction + style; T068 compiler; T069a directed deck với 4 Morph; T069b narrative critic + speaker notes). Tệp này được **viết lại** mỗi lần bàn giao, không ghi nối thêm. Lịch sử nằm ở [docs/CHANGELOG.md](docs/CHANGELOG.md). Chương trình và đề bài gốc: [experiments/T057-20261104-claude-leader-review/REPORT.md](experiments/T057-20261104-claude-leader-review/REPORT.md).
 
 > Lưu tệp văn bản bằng **UTF-8 không BOM**. `lab/tools/check_layout.py` giờ chặn mojibake, BOM, ký tự điều khiển và mã task trùng.
 
@@ -18,7 +18,7 @@ Lab đa lĩnh vực (docx, xlsx, vector…) phục vụ mục tiêu đó, không
 
 ## Chúng ta đang ở đâu
 
-- `main` sau T058–T068: **556 test qua, 6 skipped**, cả khi đặt `PYTHONUTF8=1` và khi không đặt (máy Windows tiếng Việt, locale cp1258). `lab/tools/check_layout.py` OK.
+- `main` sau T058–T069: **556 test qua, 6 skipped**, cả khi đặt `PYTHONUTF8=1` và khi không đặt (máy Windows tiếng Việt, locale cp1258). `lab/tools/check_layout.py` OK.
 - **T058–T065 đã đóng một chu kỳ gate:**
 
 | Task | Kết quả thật |
@@ -34,6 +34,8 @@ Lab đa lĩnh vực (docx, xlsx, vector…) phục vụ mục tiêu đó, không
 | T066 | Deck 10 slide “Triết học Mác – Lênin, Chương 1”: đỏ son, Palatino, ảnh cắt nền duotone, 144 effect, 9 Morph. Chủ dự án chấp nhận cắt ảnh/theme/font nhưng **bác chuyển động và thứ tự ảnh**: motion không có *gu*, ảnh vĩ nhân hiện cuối vô nghĩa. |
 | T067 | Chạy 4 luồng song song: audit skill (17 finding), image choreography (25 luật, A/B), motion dramaturgy (51→27 click, 144→116 effect, 0 empty base, 0 ảnh cuối, 0 Morph), `VisualStyle/1` + 5 preset (631 KB, 5 specimen). Kết luận: thiếu **direction**, không thiếu effect; 0 Morph là reset, đích là **3–4 semantic Morph**. |
 | T068 | `deck_director.py` + schema + `slide_forge --plan`: Two-Pass screenplay (state machine trước, lời thoại sau), lifecycle enter/dim/highlight/exit, 5 luật cứng (`NAR-CODA-TRAP`, `NAR-KARAOKE`, `NAR-UNANCHORED`, `NAR-COLLISION`, `DEN-ACTIVE-VIEW`). Proof 3 slide: critic 4.99, 6 lifecycle, 0 empty base. |
+| T069a | Directed deck thật: **14 slide, 9 click, 39 effect, 4 Morph 1.2 s, 3 lifecycle**, 0 base trống, 0 ảnh cuối, max 45 từ/view, 5 cỡ chữ; timeline đổi thành Engels 1848 → Marx 1867 → Lenin 1917. `deck_state_critic.py` fail T066 (58 gate) / pass T069a (0); critic 4.35. Chưa quay Morph frame-by-frame. |
+| T069b | Narrative critic (dimension thứ 6 trong `design_critic.py`), speaker notes `[T=0]`/`[CLICK]`, exit lifecycle, scaffold hai pass. T066 narrative 2.70 vs T068/T069 5.00; 12/12 test; deck scaffold 4.84, 4 lifecycle. |
 
 - **T058 + T061 integration:** hai lỗi T058 tìm thấy (T032 writer bị PowerPoint từ chối; thiếu `stCondLst`) **đã hết** sau T061. Fixture rebuild mở được, XML có `stCondLst`/`onClick`.
 - **T055 giờ nằm trên `main` nhưng là EXPERIMENTAL**, review `accept-with-fixes`; R3/R4/R6/R7/R8 còn mở. R3 là claim “named camera views + Morph” chưa đúng với deck gốc.
@@ -41,8 +43,8 @@ Lab đa lĩnh vực (docx, xlsx, vector…) phục vụ mục tiêu đó, không
 
 ## Việc còn mở (ưu tiên)
 
-1. **T069 directed deck:** dùng `deck_director.py` + T067 rules để dựng lại deck 10 slide: base state đọc được, ảnh là block, **3–4 semantic Morph**, style `editorial-crimson`; render từng click bằng PowerPoint và đo bằng ledger. Đây là artifact chứng minh T067+T068 đi cùng nhau.
-2. **State-sequence critic:** `deck_director.py check` hiện chấm *plan*; cần cổng chấm *deck đã dựng* (t=0, orphan decorator, ảnh ở click cuối, Morph/entrance conflict, lifecycle). Chưa có thì critic vẫn có thể cho 4.99 một deck mở ra trống.
+1. **T070: join the four state pairs to `deck_director.py`.** Author the pairs as `direction.json` shots, compile, and compare the hand timing with the compiler's; add a short PowerPoint `CreateVideo` excerpt so Morph interpolation is frame evidence.
+2. **Promote `deck_state_critic`.** It exists (`scripts/deck_state_critic.py`, experimental) and separates T066 from T069; review it, add tests, then wire it as a post-build gate in `slide_forge build`.
 3. **T055 fixes** R3/R4/R6/R7/R8: camera views/Morph claim, evidence paths, review cùng họ model, v.v. Đọc `research/reviews/T055-opencode-20261104.md`.
 4. **T059/T060 wiring:** T059 mới là hàm fallback + test, chưa nối `slide_forge.render`; T060 mới là prototype, chưa upstream `storytold/deckcraft`.
 5. **Rung 6:** chưa ai review toàn bộ ảnh click/Morph; T058 chỉ đạt 5b, T068 mới có preview tĩnh.

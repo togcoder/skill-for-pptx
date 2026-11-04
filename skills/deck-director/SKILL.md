@@ -152,6 +152,24 @@ machine before weaving the spoken line.
 | `NAR-LIFECYCLE` | `narrative` | Slides with multi-click content must include >= 1 object lifecycle transition (dim or exit). Purely additive clutter fails. |
 | `NAR-ALIGN` | `narrative` | Speaker notes must contain choreographed cues ([T=0] and [CLICK]) precisely matching slide click groups. |
 
+## State gate (T069, experimental)
+
+`deck_director.py check` validates the **plan** and `design_critic.py` now has
+narrative checks on the built deck. The stricter state gate is a separate
+script because it needs the per-click shape sequence:
+
+```powershell
+python scripts/deck_state_critic.py deck.pptx
+```
+
+It fails a deck when a slide opens with no readable claim, a title enters on a
+click, a ring/disc/caption is visible before its picture, a picture first
+appears on the last click or after the last text click, a `!!` Morph object also
+has an entrance, a Morph has no shared `!!` pair, or a slide has more than six
+click groups. It warns when the deck only adds (no dim/exit lifecycle) or a
+slide exceeds four clicks. Exit code 1 on a fail. The script is experimental;
+its rules are the T066/T069 evidence, not product canon.
+
 ## Job and figure table
 
 | job | audience move | base state must carry | clicks | figure | never |

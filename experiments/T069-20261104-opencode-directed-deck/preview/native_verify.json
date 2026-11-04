@@ -1,0 +1,381 @@
+{
+ "powerpoint_version": "16.0",
+ "powerpoint_build": "17932",
+ "slides": [
+  {
+   "index": 1,
+   "effects": 0,
+   "morph_transition": 0,
+   "transition_duration_s": 2.0,
+   "effect_list": []
+  },
+  {
+   "index": 2,
+   "effects": 14,
+   "morph_transition": 3849,
+   "transition_duration_s": 0.35,
+   "effect_list": [
+    {
+     "shape": "def1",
+     "effect_type": 10,
+     "exit": 0,
+     "trigger": 1,
+     "duration_s": 0.35
+    },
+    {
+     "shape": "def2",
+     "effect_type": 10,
+     "exit": 0,
+     "trigger": 1,
+     "duration_s": 0.35
+    },
+    {
+     "shape": "l0-rule",
+     "effect_type": 22,
+     "exit": 0,
+     "trigger": 1,
+     "duration_s": 0.25
+    },
+    {
+     "shape": "l0-n",
+     "effect_type": 1,
+     "exit": 0,
+     "trigger": 3,
+     "duration_s": 0.001
+    },
+    {
+     "shape": "l0-h",
+     "effect_type": 1,
+     "exit": 0,
+     "trigger": 2,
+     "duration_s": 0.001
+    },
+    {
+     "shape": "l0-s",
+     "effect_type": 1,
+     "exit": 0,
+     "trigger": 2,
+     "duration_s": 0.001
+    },
+    {
+     "shape": "l1-rule",
+     "effect_type": 22,
+     "exit": 0,
+     "trigger": 3,
+     "duration_s": 0.25
+    },
+    {
+     "shape": "l1-n",
+     "effect_type": 1,
+     "exit": 0,
+     "trigger": 3,
+     "duration_s": 0.001
+    },
+    {
+     "shape": "l1-h",
+     "effect_type": 1,
+     "exit": 0,
+     "trigger": 2,
+     "duration_s": 0.001
+    },
+    {
+     "shape": "l1-s",
+     "effect_type": 1,
+     "exit": 0,
+     "trigger": 2,
+     "duration_s": 0.001
+    },
+    {
+     "shape": "l2-rule",
+     "effect_type": 22,
+     "exit": 0,
+     "trigger": 3,
+     "duration_s": 0.25
+    },
+    {
+     "shape": "l2-n",
+     "effect_type": 1,
+     "exit": 0,
+     "trigger": 3,
+     "duration_s": 0.001
+    },
+    {
+     "shape": "l2-h",
+     "effect_type": 1,
+     "exit": 0,
+     "trigger": 2,
+     "duration_s": 0.001
+    },
+    {
+     "shape": "l2-s",
+     "effect_type": 1,
+     "exit": 0,
+     "trigger": 2,
+     "duration_s": 0.001
+    }
+   ]
+  },
+  {
+   "index": 3,
+   "effects": 0,
+   "morph_transition": 3849,
+   "transition_duration_s": 0.35,
+   "effect_list": []
+  },
+  {
+   "index": 4,
+   "effects": 0,
+   "morph_transition": 3954,
+   "transition_duration_s": 1.2,
+   "effect_list": []
+  },
+  {
+   "index": 5,
+   "effects": 0,
+   "morph_transition": 3849,
+   "transition_duration_s": 0.35,
+   "effect_list": []
+  },
+  {
+   "index": 6,
+   "effects": 0,
+   "morph_transition": 3954,
+   "transition_duration_s": 1.2,
+   "effect_list": []
+  },
+  {
+   "index": 7,
+   "effects": 15,
+   "morph_transition": 3849,
+   "transition_duration_s": 0.35,
+   "effect_list": [
+    {
+     "shape": "card0",
+     "effect_type": 22,
+     "exit": 0,
+     "trigger": 1,
+     "duration_s": 0.3
+    },
+    {
+     "shape": "card0-h",
+     "effect_type": 10,
+     "exit": 0,
+     "trigger": 3,
+     "duration_s": 0.25
+    },
+    {
+     "shape": "card0-n",
+     "effect_type": 1,
+     "exit": 0,
+     "trigger": 3,
+     "duration_s": 0.001
+    },
+    {
+     "shape": "card0-b",
+     "effect_type": 1,
+     "exit": 0,
+     "trigger": 2,
+     "duration_s": 0.001
+    },
+    {
+     "shape": "card1",
+     "effect_type": 22,
+     "exit": 0,
+     "trigger": 1,
+     "duration_s": 0.3
+    },
+    {
+     "shape": "card1-h",
+     "effect_type": 10,
+     "exit": 0,
+     "trigger": 3,
+     "duration_s": 0.25
+    },
+    {
+     "shape": "card1-n",
+     "effect_type": 1,
+     "exit": 0,
+     "trigger": 3,
+     "duration_s": 0.001
+    },
+    {
+     "shape": "card1-b",
+     "effect_type": 1,
+     "exit": 0,
+     "trigger": 2,
+     "duration_s": 0.001
+    },
+    {
+     "shape": "card2",
+     "effect_type": 22,
+     "exit": 0,
+     "trigger": 1,
+     "duration_s": 0.3
+    },
+    {
+     "shape": "card2-h",
+     "effect_type": 10,
+     "exit": 0,
+     "trigger": 3,
+     "duration_s": 0.25
+    },
+    {
+     "shape": "card2-n",
+     "effect_type": 1,
+     "exit": 0,
+     "trigger": 3,
+     "duration_s": 0.001
+    },
+    {
+     "shape": "card2-b",
+     "effect_type": 1,
+     "exit": 0,
+     "trigger": 2,
+     "duration_s": 0.001
+    },
+    {
+     "shape": "timeline",
+     "effect_type": 22,
+     "exit": 0,
+     "trigger": 1,
+     "duration_s": 0.5
+    },
+    {
+     "shape": "timeline-dot",
+     "effect_type": 48,
+     "exit": 0,
+     "trigger": 3,
+     "duration_s": 0.25
+    },
+    {
+     "shape": "timeline-text",
+     "effect_type": 10,
+     "exit": 0,
+     "trigger": 3,
+     "duration_s": 0.25
+    }
+   ]
+  },
+  {
+   "index": 8,
+   "effects": 0,
+   "morph_transition": 3849,
+   "transition_duration_s": 0.35,
+   "effect_list": []
+  },
+  {
+   "index": 9,
+   "effects": 0,
+   "morph_transition": 3954,
+   "transition_duration_s": 1.2,
+   "effect_list": []
+  },
+  {
+   "index": 10,
+   "effects": 7,
+   "morph_transition": 3849,
+   "transition_duration_s": 0.35,
+   "effect_list": [
+    {
+     "shape": "timeline",
+     "effect_type": 10,
+     "exit": 0,
+     "trigger": 1,
+     "duration_s": 0.35
+    },
+    {
+     "shape": "tl-1848",
+     "effect_type": 10,
+     "exit": 0,
+     "trigger": 2,
+     "duration_s": 0.35
+    },
+    {
+     "shape": "tl-1848-t",
+     "effect_type": 10,
+     "exit": 0,
+     "trigger": 2,
+     "duration_s": 0.35
+    },
+    {
+     "shape": "tl-1867",
+     "effect_type": 10,
+     "exit": 0,
+     "trigger": 2,
+     "duration_s": 0.35
+    },
+    {
+     "shape": "tl-1867-t",
+     "effect_type": 10,
+     "exit": 0,
+     "trigger": 2,
+     "duration_s": 0.35
+    },
+    {
+     "shape": "tl-1917",
+     "effect_type": 10,
+     "exit": 0,
+     "trigger": 2,
+     "duration_s": 0.35
+    },
+    {
+     "shape": "tl-1917-t",
+     "effect_type": 10,
+     "exit": 0,
+     "trigger": 2,
+     "duration_s": 0.35
+    }
+   ]
+  },
+  {
+   "index": 11,
+   "effects": 3,
+   "morph_transition": 3849,
+   "transition_duration_s": 0.35,
+   "effect_list": [
+    {
+     "shape": "tile0",
+     "effect_type": 62,
+     "exit": 0,
+     "trigger": 1,
+     "duration_s": Infinity
+    },
+    {
+     "shape": "tile1",
+     "effect_type": 62,
+     "exit": 0,
+     "trigger": 2,
+     "duration_s": Infinity
+    },
+    {
+     "shape": "tile2",
+     "effect_type": 62,
+     "exit": 0,
+     "trigger": 2,
+     "duration_s": Infinity
+    }
+   ]
+  },
+  {
+   "index": 12,
+   "effects": 0,
+   "morph_transition": 3849,
+   "transition_duration_s": 0.35,
+   "effect_list": []
+  },
+  {
+   "index": 13,
+   "effects": 0,
+   "morph_transition": 3954,
+   "transition_duration_s": 1.2,
+   "effect_list": []
+  },
+  {
+   "index": 14,
+   "effects": 0,
+   "morph_transition": 3849,
+   "transition_duration_s": 0.35,
+   "effect_list": []
+  }
+ ]
+}
