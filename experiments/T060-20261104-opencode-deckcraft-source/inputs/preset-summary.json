@@ -1,0 +1,45 @@
+{
+  "deckcraft_animations": 107,
+  "deckcraft_by_class": {
+    "Entrance": 24,
+    "Emphasis": 17,
+    "Exit": 23,
+    "Path": 40,
+    "Media": 3
+  },
+  "lab_presets": 198,
+  "mapped_by_id": 102,
+  "mapped_pct": 51.5,
+  "fidelity_by_class": {
+    "entr": {
+      "exact": 10,
+      "approximate": 10,
+      "missing": 29,
+      "id-shift": 3
+    },
+    "exit": {
+      "exact": 10,
+      "approximate": 10,
+      "missing": 29,
+      "id-shift": 3
+    },
+    "emph": {
+      "missing": 13,
+      "approximate": 7,
+      "exact": 8,
+      "id-shift": 2
+    },
+    "path": {
+      "path": 39,
+      "missing": 25
+    }
+  },
+  "fidelity_total": {
+    "exact": 28,
+    "approximate": 27,
+    "missing": 96,
+    "id-shift": 8,
+    "path": 39
+  },
+  "table_conflicts": 11
+}

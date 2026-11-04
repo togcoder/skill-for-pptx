@@ -1,0 +1,71 @@
+﻿{
+    "powerpoint_version":  "16.0",
+    "build":  "17932",
+    "pptx":  "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T060\\workspace\\probe.pptx",
+    "slides":  [
+                   {
+                       "index":  1,
+                       "effects":  [
+                                       {
+                                           "shape":  "Rectangle 1",
+                                           "effect_type":  61,
+                                           "exit":  0,
+                                           "trigger":  3,
+                                           "delay_s":  0,
+                                           "duration_s":  1,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       }
+                                   ]
+                   },
+                   {
+                       "index":  2,
+                       "effects":  [
+                                       {
+                                           "shape":  "Rectangle 1",
+                                           "effect_type":  59,
+                                           "exit":  0,
+                                           "trigger":  3,
+                                           "delay_s":  0,
+                                           "duration_s":  3,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       }
+                                   ]
+                   },
+                   {
+                       "index":  3,
+                       "effects":  [
+                                       {
+                                           "shape":  "Rectangle 1",
+                                           "effect_type":  2,
+                                           "exit":  0,
+                                           "trigger":  3,
+                                           "delay_s":  0,
+                                           "duration_s":  0.800000011920929,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       }
+                                   ]
+                   },
+                   {
+                       "index":  4,
+                       "effects":  [
+                                       {
+                                           "shape":  "Rectangle 1",
+                                           "effect_type":  0,
+                                           "exit":  0,
+                                           "trigger":  3,
+                                           "delay_s":  0,
+                                           "duration_s":  1,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       }
+                                   ]
+                   }
+               ]
+}

@@ -1,0 +1,12 @@
+class,preset_id,deckcraft_id,deckcraft_label,powerpoint_name_in_lab_table
+Entrance,42,float,Float In,ascend
+Entrance,6,shape,Shape,circle
+Entrance,53,zoom,Zoom,faded-zoom
+Entrance,45,swivel,Swivel,faded-swivel
+Emphasis,26,pulse,Pulse,flash-bulb
+Emphasis,27,colorPulse,Color Pulse,flicker
+Emphasis,19,objectColor,Object Color,color-blend
+Exit,42,floatOut,Float Out,ascend-out
+Exit,6,shapeOut,Shape,circle-out
+Exit,53,zoomOut,Zoom,faded-zoom-out
+Exit,45,swivelOut,Swivel,faded-swivel-out

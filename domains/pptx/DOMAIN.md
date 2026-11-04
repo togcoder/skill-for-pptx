@@ -68,9 +68,19 @@ Skills: `skills/pptx-motion-director`, `skills/slide-forge`.
 - **Non-Linear Navigation Law (T048):** Decks with branching narrative (Hub & Spoke, auxiliary popups, mini-games) must provide dynamic return actions (`lastslideviewed`), and must lock blank slide clicks (`advClick="0"`) or enable Kiosk mode (`p:kiosk`) to prevent accidental slide skips.
 - **Advanced Interactivity Law (T049):** For auxiliary drill-downs, detail dialogs, and multi-perspective views, agents MUST prefer In-Slide Lightbox Modals and In-Slide Tabbed Switchers (via native `<p:cTn nodeType="interactiveSeq">`) over creating duplicate slides. In-slide triggers preserve visual context, eliminate disruptive screen cuts, and keep the presentation compact. Tactile sound effects (`<a:snd>` in `<a:hlinkClick>`/`<a:hlinkHover>`) and Morph transitions (`p14:morph`) should be integrated for high-polish interactivity.
 
-## State (2026-11-01)
-- **Tests:** 404 run with 4 skipped, 100% pass across all domains.
+## State (2026-11-04)
+- **Tests:** 461 run, 8 skipped, pass with `python -X utf8` (the default
+  Windows cp1258 locale still fails 12 pre-existing UTF-8 fixture decodes;
+  T065 hygiene).
 - **Navigation & Interactivity:** T048 added Slide Navigator (`slide_navigator.py`) establishing full non-linear branching, dynamic return paths, custom shows with return, and mini-game state machine compilation. T049 added Advanced Presentation Interactivity (`advanced_interactivity.py`) establishing native in-slide lightbox modals, multi-tab switchers, pure-Python synthetic sound FX (click/chime/buzz), hover actions, and twin-morph visual flow.
+- **DeckCraft (T060, research, unmerged):** the timing-tree player exists in
+  `deckcraft-anim` (Rust: `Timeline`, `ShowState`, effect evaluation) but has
+  no headless command. A local prototype adds
+  `render-animation --slide N --click K --t ms`; it renders main-sequence
+  frames of the Forge `dynamic` deck. Coverage is the limit: 102/198 lab
+  presets map, at most 67/198 are exact/path, and behaviour-level repeat is
+  dropped. Treat DeckCraft frames as rung 2 (`DeckCraft render`), never
+  PowerPoint.
 - **Evidence:** Rungs 0–5 established across PPTX, DOCX, XLSX, and Cross. PowerPoint 16.0 COM verified.
 
 ## Open questions / dissent
