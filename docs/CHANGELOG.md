@@ -7,6 +7,28 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T067 [pptx] Image choreography (parallel stream) — 2026-11-04
+
+- **Why.** The owner's first complaint about T066 was the image order: the
+  portraits arrive last and mean nothing. This stream audited all seven image
+  placements and wrote the timing law the deck was missing.
+- **Audit.** Cover: 3/3 portraits on click 4/4, with three empty gold rings
+  visible from t=0. Slide 2: the largest image in the deck (60.7 % of slide
+  height) on click 7/7, while its red disc **and its “statue” credit** are on
+  screen for six clicks. Slide 7: portraits 2–4, timeline 5, and the 1848 dot
+  sits under the portrait captioned “Tư bản · 1867”. `image-audit.md`.
+- **Rules.** 25 rules in five groups: role → legal beat (anchor at t=0,
+  evidence on its naming beat, never after), one image focus, order = argument,
+  grouping = argument, size/crop/cut-out, naming sentence. Two machine checks
+  (`empty_frame_states`, `image_lag`). `image-rules.md`.
+- **Variants.** Same layout, one variable: A = anchors at t=0; B = each image on
+  its naming beat. Built on T066's assets; 2 slides each, 19/37 native effects;
+  32 click states rendered by PowerPoint COM. A wins the cover, B wins the
+  argument slide; the recommendation is A-cover + B-body.
+- **Limits.** State renders are reconstructed, not played; no human eye; the
+  variants are excerpts; the Plato fix is proposed but not built.
+  `REPORT-image-choreography.md`.
+
 ## T067 [pptx] Skill audit and deck-direction draft — 2026-11-04
 
 - **Why.** The owner judged T066: crop, palette and fonts good; motion has no
