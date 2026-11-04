@@ -1,4 +1,4 @@
-﻿# Changelog â€” research log, newest first
+# Changelog — research log, newest first
 
 This is the chronological record each task wrote when it finished. It used to
 be `docs/STATUS.md`; since T034 the current state lives in
@@ -6,6 +6,32 @@ be `docs/STATUS.md`; since T034 the current state lives in
 kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
+
+## T057 [cross] Lead review, DeckCraft evaluation and next programme — 2026-11-04
+
+- **Why.** After 22 tasks in four days (T035–T056) the owner asked Claude to
+  act as lead: judge the state, name the difficulties and set the next
+  research directions, and answer whether DeckCraft makes PPTX asset creation
+  easier for an AI.
+- **Findings.** 461 tests pass. The pptx core has not changed since T038 and
+  the T034 problems (type scale, MOT-SETTLE, native interactive gate) are
+  open. Five task IDs were used twice; pptx features reached `main` without
+  PR or review; every review is by one agent (Argon); `HANDOFF.md` was
+  mojibake and pointed at T047 as the next ID; three modules write
+  `interactiveSeq` separately.
+- **DeckCraft 0.13.1.** Static renders match PowerPoint closely (0.1–2.1% of
+  pixels differ by >40; charts differ most); Morph frames in 0.19 s but their
+  fidelity is unproven; no in-slide animation renderer; `convert` rewrites
+  some timing nodes. Its 330 commands (also over MCP) add Merge Shapes,
+  freeform curves, shape effects, background removal and SmartArt that
+  python-pptx cannot do: useful for native PPTX assets, not for motion QA.
+  Open source (MIT/Apache-2.0), so an animation-frame renderer is a research
+  option (T060).
+- **Programme.** Reserved briefs T058–T065 (harness, DeckCraft fidelity,
+  DeckCraft source study, one interaction writer, native asset factory, Forge
+  debt, T055 3D, lab hygiene), each with a builder and a critic from a
+  different model family. Breadth domains frozen for one cycle.
+- **Rewritten.** `HANDOFF.md` (clean UTF-8, Vietnamese) and `docs/STATUS.md`.
 
 ## T056 [vector] Part-based isometric product illustration (`iso-vector-craft`) — 2026-11-03
 
