@@ -849,7 +849,10 @@ class Builder:
             _alpha(bar,100)
         logo_val=spec.get("logo") or s.get("logo")
         if logo_val and lay not in ("title","section","closing","statement","duarte_break"):
-            lw=1.3
+            # Wide enough for the logo word at the smallest step, in the
+            # font this host has (Linux falls back to wider DejaVu).
+            need=text_metrics.width_pt(str(logo_val),self.fonts["head"],self.type_scale["small"],bold=True)/72
+            lw=max(1.3,need+0.3)
             lh=0.42
             lx=W-0.7-lw
             ly=0.25
