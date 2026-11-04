@@ -1,0 +1,180 @@
+{
+  "version": "0.7",
+  "kind": "existing-deck-motion-director",
+  "source": {
+    "source_slide_count": 3
+  },
+  "user_instruction": "Triết học Mác – Lênin là vũ khí lý luận sắc bén giải phóng giai cấp và nhân loại.",
+  "script": {
+    "source": "provided",
+    "summary": "Triết học Mác – Lênin là vũ khí lý luận sắc bén giải phóng giai cấp và nhân loại.",
+    "evidence": [
+      "two-pass screenplay",
+      "stage inventory"
+    ],
+    "beats": [
+      "slide 1: Khái luận về triết học Mác – Lênin",
+      "slide 2: Triết học là hệ thống tri thức lý luận chung nhất về thế giới",
+      "slide 3: Ba bộ phận cấu thành chủ nghĩa Mác – Lênin gắn kết hữu cơ"
+    ]
+  },
+  "preservation": {
+    "preserve_text_by_default": true,
+    "preserve_media_by_default": true,
+    "preserve_theme_by_default": true,
+    "preserve_slide_order_by_default": true,
+    "slide_count_policy": "preserve"
+  },
+  "slides": [
+    {
+      "source_index": 1,
+      "role": "title slide",
+      "objective": "Khái luận về triết học Mác – Lênin",
+      "existing_timing": "replace",
+      "replace_reason": "Two-Pass Choreography: hook / arrive",
+      "beats": [
+        {
+          "id": "beat-1-1",
+          "purpose": "Tiêu đề chính xuất hiện khẳng định chủ đề chương một",
+          "operation": "reveal",
+          "targets": [
+            "Title",
+            "Subtitle"
+          ],
+          "timing_intent": "on-click",
+          "effect": "fade",
+          "reuse_existing": true,
+          "same_slide": true,
+          "duration_ms": 600
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-1-1",
+          "purpose": "Tiêu đề chính xuất hiện khẳng định chủ đề chương một",
+          "motion_beats": [
+            "beat-1-1"
+          ],
+          "stable_state": "Tiêu đề chính xuất hiện khẳng định chủ đề chương một",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Click b1.1 of beat b1."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 2,
+      "role": "content slide",
+      "objective": "Triết học là hệ thống tri thức lý luận chung nhất về thế giới",
+      "existing_timing": "replace",
+      "replace_reason": "Two-Pass Choreography: define / build",
+      "beats": [
+        {
+          "id": "beat-2-1",
+          "purpose": "Hai trụ cột đầu tiên hiện rõ cấu trúc nhận thức",
+          "operation": "reveal",
+          "targets": [
+            "Major Content",
+            "Minor Content"
+          ],
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "reuse_existing": true,
+          "same_slide": true,
+          "duration_ms": 600
+        },
+        {
+          "id": "beat-2-2",
+          "purpose": "Trụ cột xã hội mờ đi để nhường toàn bộ tiêu điểm cho quy luật tư duy",
+          "operation": "reveal",
+          "targets": [
+            "Minor Card"
+          ],
+          "timing_intent": "on-click",
+          "effect": "float-in",
+          "reuse_existing": true,
+          "same_slide": true,
+          "duration_ms": 600
+        },
+        {
+          "id": "dim-2-2",
+          "purpose": "Dim prior elements for b2.2",
+          "operation": "dim",
+          "targets": [
+            "Minor Content"
+          ],
+          "timing_intent": "with-previous",
+          "effect": "dim",
+          "reuse_existing": true,
+          "same_slide": true,
+          "duration_ms": 400
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-2-1",
+          "purpose": "Hai trụ cột đầu tiên hiện rõ cấu trúc nhận thức",
+          "motion_beats": [
+            "beat-2-1"
+          ],
+          "stable_state": "Hai trụ cột đầu tiên hiện rõ cấu trúc nhận thức",
+          "pause_after": "await-next-reveal",
+          "boundary_reason": "Click b2.1 of beat b2."
+        },
+        {
+          "id": "click-2-2",
+          "purpose": "Trụ cột xã hội mờ đi để nhường toàn bộ tiêu điểm cho quy luật tư duy",
+          "motion_beats": [
+            "beat-2-2",
+            "dim-2-2"
+          ],
+          "stable_state": "Trụ cột xã hội mờ đi để nhường toàn bộ tiêu điểm cho quy luật tư duy",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Click b2.2 of beat b2."
+        }
+      ],
+      "components": []
+    },
+    {
+      "source_index": 3,
+      "role": "content slide",
+      "objective": "Ba bộ phận cấu thành chủ nghĩa Mác – Lênin gắn kết hữu cơ",
+      "existing_timing": "replace",
+      "replace_reason": "Two-Pass Choreography: mechanism / assemble",
+      "beats": [
+        {
+          "id": "beat-3-1",
+          "purpose": "Hai trụ cột kinh tế chính trị và chủ nghĩa xã hội khoa học đồng thời xuất hiện",
+          "operation": "reveal",
+          "targets": [
+            "Points"
+          ],
+          "timing_intent": "on-click",
+          "effect": "zoom",
+          "reuse_existing": true,
+          "same_slide": true,
+          "duration_ms": 600
+        }
+      ],
+      "click_beats": [
+        {
+          "id": "click-3-1",
+          "purpose": "Hai trụ cột kinh tế chính trị và chủ nghĩa xã hội khoa học đồng thời xuất hiện",
+          "motion_beats": [
+            "beat-3-1"
+          ],
+          "stable_state": "Hai trụ cột kinh tế chính trị và chủ nghĩa xã hội khoa học đồng thời xuất hiện",
+          "pause_after": "slide-complete",
+          "boundary_reason": "Click b3.1 of beat b3."
+        }
+      ],
+      "components": []
+    }
+  ],
+  "target_slide_count": 3,
+  "research_metadata": {
+    "style": "modern",
+    "drafted_by": "deck_director.py v0.2",
+    "draft_notes": {}
+  }
+}

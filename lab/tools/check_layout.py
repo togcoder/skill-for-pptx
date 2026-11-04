@@ -31,7 +31,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
 ROOT_ALLOWED={".claude-plugin",".github",".gitignore",".git","AGENTS.md","HANDOFF.md","README.md","archive","commands",
               "docs","domains","examples","experiments","knowledge","lab","output","research","scripts","skills",
-              "tests","workspace","local-media",".venv","build","node_modules","__pycache__",".env"}
+              "tests","workspace","local-media",".venv","build","node_modules","__pycache__",".env",".pytest_cache"}
 MEDIA=re.compile(r"\.(pptx|potx|docx|xlsx|svg|pdf|png|jpe?g|gif|mp4|mov|zip)$",re.I)
 OUTPUT_FROZEN_BEFORE="2026-11-01"
 NEW_REPORT_FROM=40

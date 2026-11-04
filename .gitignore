@@ -10,3 +10,5 @@ local-media/
 
 *.mp4
 workspace/
+
+.pytest_cache/
