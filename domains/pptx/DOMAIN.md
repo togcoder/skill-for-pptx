@@ -27,10 +27,14 @@ per click). Design numbers are shared by the generators and the critic
 | Design | `design_system.py` + `knowledge/design_system.json`, `design_critic.py`, `motion_tokens.py`, `brand_palette.py` |
 | Native | `powerpoint_render.ps1`, `powerpoint_native_probe.ps1`, `verify_powerpoint_qa.py`, `lo_timing_crosscheck.py` |
 | Bridge | `deckcraft_bridge.py` (T035; ArtCraft DeckCraft renderer; Windows only; not yet reviewed) |
-| Navigation | `slide_navigator.py` (T048; Non-linear branching, Hub & Spoke, auxiliary popup return via last_viewed, Custom Show Show-and-Return, kiosk mode, mini-game state machine) |
+| Interaction | `pptx_animator.py` — the **one** writer for `interactiveSeq`, trigger conditions and click-hyperlink conflicts (T061); `slide_navigator.py` (T048; non-linear branching, `last_viewed` return, custom shows, kiosk, navigation graph) |
 
 **Experimental** (quarantined, kept out of product paths):
-`morph_playbook.py`, `cognitive_pacing.py`, `interactive_triggers.py` (T033).
+`morph_playbook.py`, `cognitive_pacing.py`, `interactive_triggers.py` (T033;
+since T061 a thin compatibility shim over `pptx_animator.apply_interactive_actions`,
+no XML of its own). `advanced_interactivity.py` (T049) keeps the PowerPoint COM
+1-slide game builder and WAV synthesis; its timing builder/parser delegate to
+`pptx_animator`.
 
 **Frozen:** the E001–T018 research paths (`docs/ARCHITECTURE.md`).
 
@@ -68,9 +72,9 @@ Skills: `skills/pptx-motion-director`, `skills/slide-forge`.
 - **Non-Linear Navigation Law (T048):** Decks with branching narrative (Hub & Spoke, auxiliary popups, mini-games) must provide dynamic return actions (`lastslideviewed`), and must lock blank slide clicks (`advClick="0"`) or enable Kiosk mode (`p:kiosk`) to prevent accidental slide skips.
 - **Advanced Interactivity Law (T049):** For auxiliary drill-downs, detail dialogs, and multi-perspective views, agents MUST prefer In-Slide Lightbox Modals and In-Slide Tabbed Switchers (via native `<p:cTn nodeType="interactiveSeq">`) over creating duplicate slides. In-slide triggers preserve visual context, eliminate disruptive screen cuts, and keep the presentation compact. Tactile sound effects (`<a:snd>` in `<a:hlinkClick>`/`<a:hlinkHover>`) and Morph transitions (`p14:morph`) should be integrated for high-polish interactivity.
 
-## State (2026-11-01)
-- **Tests:** 404 run with 4 skipped, 100% pass across all domains.
-- **Navigation & Interactivity:** T048 added Slide Navigator (`slide_navigator.py`) establishing full non-linear branching, dynamic return paths, custom shows with return, and mini-game state machine compilation. T049 added Advanced Presentation Interactivity (`advanced_interactivity.py`) establishing native in-slide lightbox modals, multi-tab switchers, pure-Python synthetic sound FX (click/chime/buzz), hover actions, and twin-morph visual flow.
+## State (2026-11-04)
+- **Tests:** 476 run, 8 skipped, 100 % pass across all domains (T061 final run).
+- **Navigation & Interactivity:** T048 added Slide Navigator (`slide_navigator.py`) establishing full non-linear branching, dynamic return paths, custom shows with return, and mini-game state machine compilation. T049 added Advanced Presentation Interactivity (`advanced_interactivity.py`) establishing native in-slide lightbox modals, multi-tab switchers, pure-Python synthetic sound FX (click/chime/buzz), hover actions, and twin-morph visual flow. **T061** consolidated every `interactiveSeq`/trigger/hyperlink writer into `pptx_animator.py`; T048b/T049 artifacts rebuild byte-identically (T048) or are unchanged and parse to the same counts (T049), and PowerPoint 16.0 COM parses the canonical subtree at rung 4. Playback of the T049 fix still waits for T058.
 - **Evidence:** Rungs 0–5 established across PPTX, DOCX, XLSX, and Cross. PowerPoint 16.0 COM verified.
 
 ## Open questions / dissent

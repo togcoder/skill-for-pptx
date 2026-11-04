@@ -14,6 +14,11 @@ Empowers AI agents to build non-linear, interactive presentations and mini-games
 6. Navigation Graph Inspection: Analyzes any PPTX, discovers all interactive links, detects dead ends,
    and outputs a directed graph (JSON + Mermaid).
 
+T061: click hyperlinks are written through pptx_animator.set_click_action, the
+one place that knows a hyperlink swallows an animation trigger's click
+(T049 1.2). Shapes that own an interactive sequence are reported in
+``conflicts`` instead of being wired into a dead button.
+
 CLI:
     python scripts/slide_navigator.py inspect deck.pptx
     python scripts/slide_navigator.py apply deck.pptx --recipe nav_recipe.json -o out.pptx
@@ -33,6 +38,11 @@ from typing import Any
 import zipfile
 
 from lxml import etree as ET
+
+try:
+    from . import pptx_animator as _interaction
+except ImportError:
+    import pptx_animator as _interaction
 
 NS_P = "http://schemas.openxmlformats.org/presentationml/2006/main"
 NS_A = "http://schemas.openxmlformats.org/drawingml/2006/main"
@@ -397,6 +407,7 @@ def configure_interactive_navigation(
     # 5. Wire navigation buttons
     nav_links = recipe.get("navigation", [])
     applied_links = []
+    conflicts = []
 
     for item in nav_links:
         src_slide_idx = item["slide"]
@@ -411,16 +422,25 @@ def configure_interactive_navigation(
         if cnvpr is None:
             continue
 
-        # Remove existing hlinkClick if any
-        existing_hlink = cnvpr.find("a:hlinkClick", namespaces=NAMESPACES)
-        if existing_hlink is not None:
-            cnvpr.remove(existing_hlink)
+        # T061: a shape that owns an animation trigger cannot also carry a click
+        # hyperlink — the hyperlink swallows the click before interactiveSeq
+        # fires (T049 1.2). Skip it instead of shipping a dead trigger.
+        shape_spid = cnvpr.get("id")
+        if _interaction.shape_trigger_spids(stree, shape_spid):
+            conflicts.append({
+                "from_slide": src_slide_idx,
+                "shape": item["shape_identifier"],
+                "shape_spid": shape_spid,
+                "action": item["action"],
+                "reason": "shape already owns an interactive animation trigger",
+            })
+            continue
 
         action_type = item["action"]
 
         if action_type in SPECIAL_ACTIONS:
             action_uri = SPECIAL_ACTIONS[action_type]
-            ET.SubElement(cnvpr, f"{{{NS_A}}}hlinkClick", action=action_uri)
+            _interaction.set_click_action(stree, shape_spid, action=action_uri, conflict="allow")
             applied_links.append({
                 "from_slide": src_slide_idx,
                 "shape": item["shape_identifier"],
@@ -458,7 +478,8 @@ def configure_interactive_navigation(
                 in_files[src_rels_path] = ET.tostring(rels_tree, xml_declaration=True, encoding="UTF-8", standalone=True)
 
             action_uri = "ppaction://hlinksldjump"
-            ET.SubElement(cnvpr, f"{{{NS_A}}}hlinkClick", {f"{{{NS_R}}}id": rel_id}, action=action_uri)
+            _interaction.set_click_action(stree, shape_spid, action=action_uri,
+                                          rel_id=rel_id, conflict="allow")
             applied_links.append({
                 "from_slide": src_slide_idx,
                 "shape": item["shape_identifier"],
@@ -471,7 +492,7 @@ def configure_interactive_navigation(
             show_id = str(item.get("show_id", 0))
             return_flag = "true" if item.get("return_after", True) else "false"
             action_uri = f"ppaction://customshow?id={show_id}&return={return_flag}"
-            ET.SubElement(cnvpr, f"{{{NS_A}}}hlinkClick", action=action_uri)
+            _interaction.set_click_action(stree, shape_spid, action=action_uri, conflict="allow")
             applied_links.append({
                 "from_slide": src_slide_idx,
                 "shape": item["shape_identifier"],
@@ -497,6 +518,7 @@ def configure_interactive_navigation(
         "kiosk_mode": audit["kiosk_mode"],
         "applied_links_count": len(applied_links),
         "applied_links": applied_links,
+        "conflicts": conflicts,
         "dead_ends": audit["dead_ends"],
         "mermaid": audit["mermaid"],
     }
