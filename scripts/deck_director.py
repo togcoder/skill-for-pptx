@@ -47,7 +47,11 @@ def _tokenize(text: str) -> list[str]:
 
 
 def _vocabulary_overlap(text_a: str, text_b: str) -> float:
-    """Compute vocabulary overlap (unigram + bigram) between on-slide text and speech."""
+    """Compute slide-to-speech text overlap (containment ratio).
+    
+    Checks what proportion of the on-slide text (text_a) is recited verbatim
+    in the spoken dialogue (text_b). High containment indicates Karaoke Effect.
+    """
     tokens_a = _tokenize(text_a)
     tokens_b = _tokenize(text_b)
     if not tokens_a or not tokens_b:
@@ -56,7 +60,6 @@ def _vocabulary_overlap(text_a: str, text_b: str) -> float:
     set_a = set(tokens_a)
     set_b = set(tokens_b)
 
-    # Add bigrams
     bigrams_a = {f"{tokens_a[i]}_{tokens_a[i+1]}" for i in range(len(tokens_a) - 1)}
     bigrams_b = {f"{tokens_b[i]}_{tokens_b[i+1]}" for i in range(len(tokens_b) - 1)}
 
@@ -64,8 +67,8 @@ def _vocabulary_overlap(text_a: str, text_b: str) -> float:
     all_b = set_b | bigrams_b
 
     intersection = all_a & all_b
-    union = all_a | all_b
-    return len(intersection) / len(union) if union else 0.0
+    # Containment: ratio of slide vocabulary repeated in speech
+    return len(intersection) / len(all_a) if all_a else 0.0
 
 
 # ---------------------------------------------------------------------------
@@ -218,7 +221,7 @@ def check_direction(data: dict[str, Any]) -> dict[str, Any]:
         speech_texts = t0_says + " " + " ".join(f"{c.get('lead_in', '')} {c.get('post_click_says', '')}" for c in clicks)
         overlap = _vocabulary_overlap(shot_texts, speech_texts)
         if overlap > 0.45:
-            warnings.append({"code": "NAR-KARAOKE", "detail": f"Beat {b_id} / Shot {shot.get('id')}: High text-speech overlap ({overlap*100:.1f}% > 45%). Presenter reading slide verbatim."})
+            errors.append({"code": "NAR-KARAOKE", "detail": f"Beat {b_id} / Shot {shot.get('id')}: High text-speech overlap ({overlap*100:.1f}% > 45%). Presenter reading slide verbatim."})
 
     ok = len(errors) == 0
     return {

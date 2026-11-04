@@ -26,8 +26,8 @@
           "id": "b1.1",
           "lead_in": "Để mở đầu chương trình hôm nay,",
           "state": "Tiêu đề chính xuất hiện khẳng định chủ đề chương một",
-          "post_click_says": "chúng ta cùng bước vào hành trình khai phá nguồn gốc và bản chất của triết học Mác – Lênin.",
-          "target_refs": ["title:main"]
+          "post_click_says": "chúng ta cùng bước vào hành trình khai phá nguồn gốc và bản chất của học thuyết giải phóng con người.",
+          "target_refs": ["title:main", "sub:main"]
         }
       ]
     },
@@ -44,14 +44,14 @@
           "id": "b2.1",
           "lead_in": "Tuy nhiên, để trở thành một hệ thống khoa học,",
           "state": "Hai trụ cột đầu tiên hiện rõ cấu trúc nhận thức",
-          "post_click_says": "giáo trình phân lập nó thành hai lĩnh vực bao quát: quy luật tự nhiên và đời sống xã hội.",
+          "post_click_says": "giáo trình phân lập bức tranh tổng thể thành hai miền thực tại: thế giới vật chất bên ngoài và các thiết chế tương tác giữa loài người.",
           "target_refs": ["card:def1", "card:def2"]
         },
         {
           "id": "b2.2",
           "lead_in": "Và đỉnh cao của sự khái quát hóa —",
           "state": "Trụ cột xã hội mờ đi để nhường toàn bộ tiêu điểm cho quy luật tư duy",
-          "post_click_says": "chính là quy luật vận động của tư duy nhận thức con người.",
+          "post_click_says": "đỉnh cao nhất chính là năng lực phản ánh thế giới vào trong ý thức và phương pháp tư biện của chính chúng ta.",
           "target_refs": ["card:def3"]
         }
       ]
@@ -69,7 +69,7 @@
           "id": "b3.1",
           "lead_in": "Khi nhìn vào cấu trúc bên dưới,",
           "state": "Hai trụ cột kinh tế chính trị và chủ nghĩa xã hội khoa học đồng thời xuất hiện",
-          "post_click_says": "chúng ta thấy triết học làm thế giới quan, kinh tế chính trị chỉ ra quy luật, và chủ nghĩa xã hội chỉ đường đấu tranh.",
+          "post_click_says": "chúng ta thấy bộ phận đầu tiên đóng vai trò hạt nhân thế giới quan, phần thứ hai vạch trần bóc lột, và phần thứ ba vạch ra con đường đấu tranh thực tiễn.",
           "target_refs": ["bullet:sys2", "bullet:sys3"]
         }
       ]

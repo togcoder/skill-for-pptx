@@ -30,7 +30,7 @@ def valid_direction_data():
                 "carrier": "art:hero",
                 "attention": "art:hero",
                 "figure": "arrive",
-                "t0_says": "Chào mừng các bạn đến với chương mở đầu của triết học Mác – Lênin.",
+                "t0_says": "Chào mừng các bạn đến với chương mở đầu của học thuyết kinh điển.",
                 "clicks": [
                     {
                         "id": "b1.1",
@@ -54,14 +54,14 @@ def valid_direction_data():
                         "id": "b2.1",
                         "lead_in": "Nhưng để đúc kết thành khoa học,",
                         "state": "Định nghĩa hiện thành ba tầng lý luận",
-                        "post_click_says": "giáo trình gói gọn nó vào đúng ba mối quan hệ: tự nhiên, xã hội và tư duy.",
+                        "post_click_says": "giáo trình phân lập bức tranh tổng thể thành hai miền thực tại: thế giới vật chất bên ngoài và các thiết chế tương tác giữa loài người.",
                         "target_refs": ["card:def1", "card:def2"]
                     },
                     {
                         "id": "b2.2",
                         "lead_in": "Và khi đối chiếu với thực tiễn,",
                         "state": "Hai đối tượng đầu mờ đi để làm nổi bật tầng thứ ba",
-                        "post_click_says": "tư duy con người chính là thước đo nhận thức thế giới khách quan.",
+                        "post_click_says": "đỉnh cao nhất chính là năng lực phản ánh thế giới vào trong ý thức và phương pháp tư biện của chính chúng ta.",
                         "target_refs": ["card:def3"]
                     }
                 ]
@@ -71,7 +71,7 @@ def valid_direction_data():
             {
                 "id": "sh1",
                 "beat": "b1",
-                "layout": "title_cards",
+                "layout": "title",
                 "objects": [
                     {"id": "art:hero", "role": "hero", "asset": {"file": "inputs/hero.png"}},
                     {"id": "title:main", "role": "title", "text": "Triết học Mác – Lênin"}
@@ -197,6 +197,17 @@ def test_additive_clutter_word_cap(valid_direction_data):
     assert res["ok"] is False
     codes = [e["code"] for e in res["errors"]]
     assert "DEN-ACTIVE-VIEW" in codes
+
+
+def test_karaoke_redundancy_fails(valid_direction_data):
+    # Make speech verbatim repeat on-slide text (> 45% containment)
+    beat = valid_direction_data["beats"][1]
+    beat["t0_says"] = "Quy luật Tự nhiên Quan hệ Xã hội Quy luật Tư duy bản chất vũ trụ"
+    beat["clicks"][0]["post_click_says"] = "Quy luật Tự nhiên Quan hệ Xã hội được thể hiện rõ"
+    res = check_direction(valid_direction_data)
+    assert res["ok"] is False
+    codes = [e["code"] for e in res["errors"]]
+    assert "NAR-KARAOKE" in codes
 
 
 def test_compile_direction(valid_direction_data):
