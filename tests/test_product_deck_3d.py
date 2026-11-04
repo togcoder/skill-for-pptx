@@ -186,7 +186,9 @@ class ProductDeck3DTests(unittest.TestCase):
         for glb in audit["glb"]:
             self.assertEqual(glb["metallic"], [0.0])
             self.assertGreater(glb["bytes"], 10_000)
-        self.assertTrue(Path(audit["pdf"]).exists())
+        pdf = EXP / "preview" / "quickmill_native_product_tour_v3.pdf"
+        self.assertTrue(pdf.exists())
+        self.assertGreater(pdf.stat().st_size, 100_000)
 
 
 if __name__ == "__main__":
