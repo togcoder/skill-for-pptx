@@ -7,6 +7,26 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T062 [pptx] Native asset factory: DeckCraft shapes vs SVG vs GLB — 2026-11-04
+
+- **Why.** T057 asked whether DeckCraft's Merge/Freeform/Effects commands can
+  give an agent **native, part-editable PowerPoint art**, instead of a picture
+  or a 3D model that the Director cannot touch.
+- **Built.** One 20-part device mockup compiled three ways from one part
+  table: 228 DeckCraft commands → 25 named native shapes; the same parts as
+  one SVG picture; the same parts as one extruded GLB. Evidence is PowerPoint
+  COM at rung 4/5 plus pixel diffs, not simulation.
+- **Result.** Native wins where it matters: 20/20 art parts addressable by
+  name, 21 animations on 20 movers vs 0/20 and 0 for both alternatives, 25 KB
+  vs 102 KB/224 KB, and 0.23 % renderer disagreement with DeckCraft. The
+  falsifier half-fired: names survive `convert`, but a merge re-ids its result
+  and DeckCraft silently accepts animation on the dead id (19/21 reached
+  PowerPoint on the first build). Cost: 228 commands, no SVG import, and the
+  art's own micro-text trips `design_critic.py`.
+- **Deliverable.** `{"native_art": …}` Forge spec proposal + compiler with
+  coded skips (`SKIP_NATIVE_ART_PLATFORM`, `SKIP_NATIVE_ART_NO_DECKCRAFT`);
+  EXPERIMENTAL, not wired into `slide_forge.py`.
+
 ## T057 [cross] Lead review, DeckCraft evaluation and next programme — 2026-11-04
 
 - **Why.** After 22 tasks in four days (T035–T056) the owner asked Claude to

@@ -1,0 +1,2 @@
+shape.merge={"op":"subtract","ids":[276,277]}
+shape.rename={"name":"art-badge-ring"}

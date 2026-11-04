@@ -1,0 +1,667 @@
+{
+  "asset": {
+    "id": "field-terminal",
+    "kind": "device_mockup",
+    "summary": "Handheld field terminal with a Q3 telemetry screen and a live badge.",
+    "route": "native_art",
+    "native_art": {
+      "compiler": "deckcraft",
+      "stage": {
+        "size": [
+          960,
+          540
+        ],
+        "theme": "midnight",
+        "background": "bg"
+      },
+      "units": "slide points",
+      "font": "Segoe UI",
+      "parts": [
+        {
+          "name": "art-shadow",
+          "role": "art",
+          "kind": "ellipse",
+          "rect": [
+            590,
+            452,
+            214,
+            24
+          ],
+          "fill": {
+            "color": "000000",
+            "transparency": 0.55
+          },
+          "effects": {
+            "softEdges": 14
+          }
+        },
+        {
+          "name": "art-back",
+          "role": "art",
+          "kind": "roundRect",
+          "rect": [
+            612,
+            84,
+            186,
+            376
+          ],
+          "radius_pt": 28,
+          "fill": {
+            "color": "surface",
+            "transparency": 0.55
+          }
+        },
+        {
+          "name": "art-body",
+          "role": "art",
+          "kind": "roundRect",
+          "rect": [
+            596,
+            72,
+            186,
+            376
+          ],
+          "radius_pt": 28,
+          "fill": {
+            "color": "surface"
+          }
+        },
+        {
+          "name": "art-screen",
+          "role": "art",
+          "kind": "roundRect",
+          "rect": [
+            605,
+            81,
+            168,
+            358
+          ],
+          "radius_pt": 20,
+          "fill": {
+            "color": "bg"
+          }
+        },
+        {
+          "name": "art-notch",
+          "role": "art",
+          "kind": "roundRect",
+          "rect": [
+            662,
+            88,
+            54,
+            7
+          ],
+          "radius_pt": 3.5,
+          "fill": {
+            "color": "surface"
+          }
+        },
+        {
+          "name": "art-topbar",
+          "role": "art",
+          "kind": "roundRect",
+          "rect": [
+            615,
+            100,
+            148,
+            28
+          ],
+          "radius_pt": 7,
+          "fill": {
+            "color": "accent",
+            "transparency": 0.86
+          }
+        },
+        {
+          "name": "art-ui-title",
+          "role": "art",
+          "kind": "text",
+          "rect": [
+            623,
+            108,
+            132,
+            12
+          ],
+          "text": {
+            "value": "Q3 · TELEMETRY",
+            "size_pt": 7.5,
+            "bold": true,
+            "color": "accent",
+            "spacing_pt": 1.2
+          }
+        },
+        {
+          "name": "art-ui-value",
+          "role": "art",
+          "kind": "text",
+          "rect": [
+            614,
+            136,
+            96,
+            60
+          ],
+          "text": {
+            "value": "98",
+            "size_pt": 46,
+            "bold": true,
+            "color": "text"
+          }
+        },
+        {
+          "name": "art-ui-unit",
+          "role": "art",
+          "kind": "text",
+          "rect": [
+            672,
+            160,
+            44,
+            24
+          ],
+          "text": {
+            "value": "%",
+            "size_pt": 15,
+            "bold": true,
+            "color": "accent"
+          }
+        },
+        {
+          "name": "art-ui-caption",
+          "role": "art",
+          "kind": "text",
+          "rect": [
+            615,
+            198,
+            148,
+            10
+          ],
+          "text": {
+            "value": "SIGNAL UPTIME",
+            "size_pt": 7.5,
+            "color": "muted",
+            "spacing_pt": 1.2
+          }
+        },
+        {
+          "name": "art-bar-1",
+          "role": "art",
+          "kind": "rect",
+          "rect": [
+            617,
+            348,
+            16,
+            52
+          ],
+          "fill": {
+            "color": "accent",
+            "transparency": 0.45
+          }
+        },
+        {
+          "name": "art-bar-2",
+          "role": "art",
+          "kind": "rect",
+          "rect": [
+            646,
+            326,
+            16,
+            74
+          ],
+          "fill": {
+            "color": "accent",
+            "transparency": 0.3
+          }
+        },
+        {
+          "name": "art-bar-3",
+          "role": "art",
+          "kind": "rect",
+          "rect": [
+            675,
+            338,
+            16,
+            62
+          ],
+          "fill": {
+            "color": "accent",
+            "transparency": 0.15
+          }
+        },
+        {
+          "name": "art-bar-4",
+          "role": "art",
+          "kind": "rect",
+          "rect": [
+            704,
+            298,
+            16,
+            102
+          ],
+          "fill": {
+            "color": "accent"
+          }
+        },
+        {
+          "name": "art-bar-5",
+          "role": "art",
+          "kind": "rect",
+          "rect": [
+            733,
+            272,
+            16,
+            128
+          ],
+          "fill": {
+            "color": "accent2"
+          }
+        },
+        {
+          "name": "art-baseline",
+          "role": "art",
+          "kind": "rect",
+          "rect": [
+            615,
+            400,
+            148,
+            1.5
+          ],
+          "fill": {
+            "color": "muted",
+            "transparency": 0.6
+          }
+        },
+        {
+          "name": "art-ui-footer",
+          "role": "art",
+          "kind": "text",
+          "rect": [
+            615,
+            410,
+            148,
+            10
+          ],
+          "text": {
+            "value": "12.4k · 24 h",
+            "size_pt": 7,
+            "color": "muted"
+          }
+        },
+        {
+          "name": "art-badge-glow",
+          "role": "art",
+          "kind": "ellipse",
+          "rect": [
+            764,
+            24,
+            124,
+            124
+          ],
+          "fill": {
+            "color": "accent",
+            "transparency": 0.84
+          },
+          "effects": {
+            "softEdges": 18
+          }
+        },
+        {
+          "name": "art-badge-ring",
+          "role": "art",
+          "kind": "ellipse",
+          "rect": [
+            780,
+            40,
+            92,
+            92
+          ],
+          "fill": {
+            "color": "accent"
+          }
+        },
+        {
+          "name": "art-badge-hole",
+          "role": "helper",
+          "kind": "ellipse",
+          "rect": [
+            789,
+            49,
+            74,
+            74
+          ],
+          "fill": {
+            "color": "accent"
+          }
+        },
+        {
+          "name": "art-badge-bolt",
+          "role": "art",
+          "kind": "polygon",
+          "polygon": [
+            [
+              834,
+              62
+            ],
+            [
+              812,
+              90
+            ],
+            [
+              824,
+              90
+            ],
+            [
+              818,
+              110
+            ],
+            [
+              840,
+              82
+            ],
+            [
+              828,
+              82
+            ]
+          ],
+          "fill": {
+            "color": "bg"
+          }
+        },
+        {
+          "name": "copy-rule",
+          "role": "copy",
+          "kind": "rect",
+          "rect": [
+            88,
+            150,
+            44,
+            4
+          ],
+          "fill": {
+            "color": "accent"
+          }
+        },
+        {
+          "name": "copy-kicker",
+          "role": "copy",
+          "kind": "text",
+          "rect": [
+            88,
+            166,
+            320,
+            16
+          ],
+          "text": {
+            "value": "HANDHELD TERMINAL",
+            "size_pt": 11,
+            "bold": true,
+            "color": "accent",
+            "spacing_pt": 2.0
+          }
+        },
+        {
+          "name": "copy-title",
+          "role": "copy",
+          "kind": "text",
+          "rect": [
+            88,
+            194,
+            430,
+            104
+          ],
+          "text": {
+            "value": "Field telemetry,\nin your hand.",
+            "size_pt": 36,
+            "bold": true,
+            "color": "text",
+            "line_spacing": 1.04
+          }
+        },
+        {
+          "name": "copy-caption",
+          "role": "copy",
+          "kind": "text",
+          "rect": [
+            88,
+            318,
+            380,
+            44
+          ],
+          "text": {
+            "value": "Every reading from the floor,\non one screen.",
+            "size_pt": 13.5,
+            "color": "muted",
+            "line_spacing": 1.35
+          }
+        },
+        {
+          "name": "copy-footer",
+          "role": "copy",
+          "kind": "text",
+          "rect": [
+            88,
+            494,
+            460,
+            12
+          ],
+          "text": {
+            "value": "asset · field-terminal · native shapes · {art_parts} parts",
+            "size_pt": 9,
+            "color": "muted"
+          }
+        }
+      ],
+      "ops": [
+        {
+          "merge": {
+            "op": "subtract",
+            "ids": [
+              "art-badge-ring",
+              "art-badge-hole"
+            ],
+            "name": "art-badge-ring"
+          }
+        }
+      ],
+      "motion": [
+        {
+          "parts": [
+            "art-shadow"
+          ],
+          "effect": "fade",
+          "start": "onClick",
+          "duration_ms": 300
+        },
+        {
+          "parts": [
+            "art-back"
+          ],
+          "effect": "float",
+          "option": "d",
+          "start": "withPrevious",
+          "duration_ms": 500,
+          "delay_ms": 60
+        },
+        {
+          "parts": [
+            "art-body"
+          ],
+          "effect": "float",
+          "option": "d",
+          "start": "withPrevious",
+          "duration_ms": 500,
+          "delay_ms": 120
+        },
+        {
+          "parts": [
+            "art-screen"
+          ],
+          "effect": "wipe",
+          "option": "b",
+          "start": "withPrevious",
+          "duration_ms": 400,
+          "delay_ms": 200
+        },
+        {
+          "parts": [
+            "art-notch"
+          ],
+          "effect": "fade",
+          "start": "withPrevious",
+          "duration_ms": 300,
+          "delay_ms": 300
+        },
+        {
+          "parts": [
+            "art-topbar"
+          ],
+          "effect": "wipe",
+          "option": "l",
+          "start": "onClick",
+          "duration_ms": 400
+        },
+        {
+          "parts": [
+            "art-ui-title"
+          ],
+          "effect": "fade",
+          "start": "withPrevious",
+          "duration_ms": 300,
+          "delay_ms": 120
+        },
+        {
+          "parts": [
+            "art-ui-value"
+          ],
+          "effect": "zoom",
+          "option": "in",
+          "start": "withPrevious",
+          "duration_ms": 450,
+          "delay_ms": 180
+        },
+        {
+          "parts": [
+            "art-ui-unit"
+          ],
+          "effect": "fade",
+          "start": "withPrevious",
+          "duration_ms": 300,
+          "delay_ms": 300
+        },
+        {
+          "parts": [
+            "art-ui-caption"
+          ],
+          "effect": "fade",
+          "start": "withPrevious",
+          "duration_ms": 300,
+          "delay_ms": 300
+        },
+        {
+          "parts": [
+            "art-baseline"
+          ],
+          "effect": "wipe",
+          "option": "l",
+          "start": "withPrevious",
+          "duration_ms": 350,
+          "delay_ms": 240
+        },
+        {
+          "parts": [
+            "art-ui-footer"
+          ],
+          "effect": "fade",
+          "start": "withPrevious",
+          "duration_ms": 300,
+          "delay_ms": 360
+        },
+        {
+          "parts": [
+            "art-bar-1"
+          ],
+          "effect": "wipe",
+          "option": "b",
+          "start": "onClick",
+          "duration_ms": 380
+        },
+        {
+          "parts": [
+            "art-bar-2"
+          ],
+          "effect": "wipe",
+          "option": "b",
+          "start": "withPrevious",
+          "duration_ms": 380,
+          "delay_ms": 70
+        },
+        {
+          "parts": [
+            "art-bar-3"
+          ],
+          "effect": "wipe",
+          "option": "b",
+          "start": "withPrevious",
+          "duration_ms": 380,
+          "delay_ms": 140
+        },
+        {
+          "parts": [
+            "art-bar-4"
+          ],
+          "effect": "wipe",
+          "option": "b",
+          "start": "withPrevious",
+          "duration_ms": 380,
+          "delay_ms": 210
+        },
+        {
+          "parts": [
+            "art-bar-5"
+          ],
+          "effect": "wipe",
+          "option": "b",
+          "start": "withPrevious",
+          "duration_ms": 380,
+          "delay_ms": 280
+        },
+        {
+          "parts": [
+            "art-badge-glow"
+          ],
+          "effect": "fade",
+          "start": "onClick",
+          "duration_ms": 400
+        },
+        {
+          "parts": [
+            "art-badge-ring"
+          ],
+          "effect": "zoom",
+          "option": "in",
+          "start": "withPrevious",
+          "duration_ms": 450,
+          "delay_ms": 80
+        },
+        {
+          "parts": [
+            "art-badge-bolt"
+          ],
+          "effect": "zoom",
+          "option": "in",
+          "start": "withPrevious",
+          "duration_ms": 400,
+          "delay_ms": 200
+        },
+        {
+          "parts": [
+            "art-badge-ring"
+          ],
+          "effect": "pulse",
+          "class": "emphasis",
+          "start": "withPrevious",
+          "duration_ms": 600,
+          "delay_ms": 300
+        }
+      ]
+    }
+  }
+}

@@ -68,9 +68,10 @@ Skills: `skills/pptx-motion-director`, `skills/slide-forge`.
 - **Non-Linear Navigation Law (T048):** Decks with branching narrative (Hub & Spoke, auxiliary popups, mini-games) must provide dynamic return actions (`lastslideviewed`), and must lock blank slide clicks (`advClick="0"`) or enable Kiosk mode (`p:kiosk`) to prevent accidental slide skips.
 - **Advanced Interactivity Law (T049):** For auxiliary drill-downs, detail dialogs, and multi-perspective views, agents MUST prefer In-Slide Lightbox Modals and In-Slide Tabbed Switchers (via native `<p:cTn nodeType="interactiveSeq">`) over creating duplicate slides. In-slide triggers preserve visual context, eliminate disruptive screen cuts, and keep the presentation compact. Tactile sound effects (`<a:snd>` in `<a:hlinkClick>`/`<a:hlinkHover>`) and Morph transitions (`p14:morph`) should be integrated for high-polish interactivity.
 
-## State (2026-11-01)
+## State (2026-11-04)
 - **Tests:** 404 run with 4 skipped, 100% pass across all domains.
 - **Navigation & Interactivity:** T048 added Slide Navigator (`slide_navigator.py`) establishing full non-linear branching, dynamic return paths, custom shows with return, and mini-game state machine compilation. T049 added Advanced Presentation Interactivity (`advanced_interactivity.py`) establishing native in-slide lightbox modals, multi-tab switchers, pure-Python synthetic sound FX (click/chime/buzz), hover actions, and twin-morph visual flow.
+- **Native illustration (T062):** DeckCraft commands compile a named, part-editable asset (20/20 parts addressable, 21 animations) where SVG and GLB give one object each. The `{"native_art": …}` Forge field and its compiler are EXPERIMENTAL in `experiments/T062-*/inputs/`, not wired into `slide_forge.py`. Merge Shapes re-ids its result and DeckCraft accepts animation on a dead id, so compilers must re-inspect; `design_critic.py` needs an `art-*` exemption before native art scores honestly.
 - **Evidence:** Rungs 0–5 established across PPTX, DOCX, XLSX, and Cross. PowerPoint 16.0 COM verified.
 
 ## Open questions / dissent
