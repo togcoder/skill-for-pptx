@@ -1,0 +1,20 @@
+{
+  "slides": 3,
+  "entry_effect": [
+    0,
+    0,
+    0
+  ],
+  "xml_after_save": {
+    "ppt/slides/slide2.xml": {
+      "has_morph": false,
+      "has_transition": true,
+      "snippet": "<p:transition spd=\"slow\"/></p:sld>"
+    },
+    "ppt/slides/slide3.xml": {
+      "has_morph": false,
+      "has_transition": true,
+      "snippet": "<p:transition spd=\"slow\"/></p:sld>"
+    }
+  }
+}

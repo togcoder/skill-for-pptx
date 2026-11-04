@@ -1,0 +1,23 @@
+{
+  "patched": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T055\\experiments\\T055-20261103-opencode-pptx-3d\\artifacts\\morph-3d.pptx",
+  "slides": 3,
+  "entry_effect": [
+    0,
+    3954,
+    3954
+  ],
+  "xml_after_save": {
+    "ppt/slides/slide2.xml": {
+      "has_morph": true,
+      "has_alternate": true,
+      "has_transition": true,
+      "snippet": "<mc:AlternateContent xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\"><mc:Choice xmlns:am3d=\"http://schemas.microsoft.com/office/drawing/2017/model3d\" Requires=\"am3d\"><p:graphicFrame><p:nvGraphicFramePr><p:cNvPr id=\"4\" name=\"Product3D\" descr=\"Embedded 3D model of the Quick Mill Omre massing study. Drag to rotate in PowerPoint.\"><a:extLst><a:ext uri=\"{FF2B5EF4-FFF2-40B4-BE49-F238E27FC236}\"><a16:creationId xmlns:a16=\"http://schemas.microsoft.com/office/drawing/2014/main\" id=\""
+    },
+    "ppt/slides/slide3.xml": {
+      "has_morph": true,
+      "has_alternate": true,
+      "has_transition": true,
+      "snippet": "<mc:AlternateContent xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\"><mc:Choice xmlns:am3d=\"http://schemas.microsoft.com/office/drawing/2017/model3d\" Requires=\"am3d\"><p:graphicFrame><p:nvGraphicFramePr><p:cNvPr id=\"4\" name=\"Product3D\" descr=\"Embedded 3D model of the Quick Mill Omre massing study. Drag to rotate in PowerPoint.\"><a:extLst><a:ext uri=\"{FF2B5EF4-FFF2-40B4-BE49-F238E27FC236}\"><a16:creationId xmlns:a16=\"http://schemas.microsoft.com/office/drawing/2014/main\" id=\""
+    }
+  }
+}

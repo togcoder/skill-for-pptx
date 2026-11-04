@@ -1,0 +1,90 @@
+{
+  "views": [
+    {
+      "slide": 1,
+      "shape": "Product3D",
+      "type": 30,
+      "camera": [
+        -0.8500000238418579,
+        0.44999998807907104,
+        2.0999999046325684
+      ],
+      "look_at": [
+        0.0,
+        0.2800000011920929,
+        0.0
+      ],
+      "rotation": [
+        6.0,
+        0.0,
+        0.0
+      ],
+      "fov": 40.0,
+      "focus_box": [
+        252,
+        234,
+        148,
+        46
+      ],
+      "label": "TOP HOUSING"
+    },
+    {
+      "slide": 2,
+      "shape": "Product3D",
+      "type": 30,
+      "camera": [
+        -0.8500000238418579,
+        0.44999998807907104,
+        2.0999999046325684
+      ],
+      "look_at": [
+        0.0,
+        0.2800000011920929,
+        0.0
+      ],
+      "rotation": [
+        6.0,
+        0.0,
+        0.0
+      ],
+      "fov": 40.0,
+      "focus_box": [
+        292,
+        280,
+        64,
+        76
+      ],
+      "label": "GROUP HEAD"
+    },
+    {
+      "slide": 3,
+      "shape": "Product3D",
+      "type": 30,
+      "camera": [
+        -0.8500000238418579,
+        0.44999998807907104,
+        2.0999999046325684
+      ],
+      "look_at": [
+        0.0,
+        0.2800000011920929,
+        0.0
+      ],
+      "rotation": [
+        6.0,
+        0.0,
+        0.0
+      ],
+      "fov": 40.0,
+      "focus_box": [
+        182,
+        434,
+        62,
+        50
+      ],
+      "label": "SWITCH PLATE"
+    }
+  ],
+  "pptx": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T055\\experiments\\T055-20261103-opencode-pptx-3d\\artifacts\\quickmill_native_product_tour_v3.pptx",
+  "bytes": 456861
+}
