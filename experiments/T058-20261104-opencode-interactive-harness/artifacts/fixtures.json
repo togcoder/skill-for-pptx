@@ -1,11 +1,11 @@
 {
   "fixtures": [
     {
-      "path": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T058\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\t032_trigger_fixture.pptx",
-      "bytes": 29376,
+      "path": "C:\\Users\\COMPUTER\\Desktop\\làm chung với ai\\skill-for-pptx\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\t032_trigger_fixture.pptx",
+      "bytes": 29412,
       "inspect": {
         "ok": true,
-        "path": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T058\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\t032_trigger_fixture.pptx",
+        "path": "C:\\Users\\COMPUTER\\Desktop\\làm chung với ai\\skill-for-pptx\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\t032_trigger_fixture.pptx",
         "total_slides": 1,
         "interactive_sequences_count": 1,
         "slides": [
@@ -24,11 +24,11 @@
       }
     },
     {
-      "path": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T058\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\animator_trigger_fixture.pptx",
+      "path": "C:\\Users\\COMPUTER\\Desktop\\làm chung với ai\\skill-for-pptx\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\animator_trigger_fixture.pptx",
       "bytes": 29310,
       "inspect": {
         "ok": true,
-        "path": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T058\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\animator_trigger_fixture.pptx",
+        "path": "C:\\Users\\COMPUTER\\Desktop\\làm chung với ai\\skill-for-pptx\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\animator_trigger_fixture.pptx",
         "total_slides": 1,
         "interactive_sequences_count": 1,
         "slides": [
@@ -47,11 +47,11 @@
       }
     },
     {
-      "path": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T058\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\t049_main_control.pptx",
+      "path": "C:\\Users\\COMPUTER\\Desktop\\làm chung với ai\\skill-for-pptx\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\t049_main_control.pptx",
       "bytes": 43742,
       "inspect": {
         "ok": true,
-        "path": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T058\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\t049_main_control.pptx",
+        "path": "C:\\Users\\COMPUTER\\Desktop\\làm chung với ai\\skill-for-pptx\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\t049_main_control.pptx",
         "total_slides": 2,
         "interactive_sequences_count": 8,
         "slides": [
@@ -60,22 +60,28 @@
             "interactive_sequences": [
               {
                 "trigger_spid": "6",
-                "animated_spids": []
+                "animated_spids": [
+                  "6"
+                ]
               },
               {
                 "trigger_spid": "8",
-                "animated_spids": []
+                "animated_spids": [
+                  "8"
+                ]
               },
               {
                 "trigger_spid": "10",
-                "animated_spids": []
+                "animated_spids": [
+                  "10"
+                ]
               },
               {
                 "trigger_spid": "11",
                 "animated_spids": [
-                  "10",
                   "6",
-                  "8"
+                  "8",
+                  "10"
                 ]
               }
             ]
@@ -104,9 +110,9 @@
               {
                 "trigger_spid": "11",
                 "animated_spids": [
-                  "10",
                   "6",
-                  "8"
+                  "8",
+                  "10"
                 ]
               }
             ]
