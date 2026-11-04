@@ -34,6 +34,10 @@ try:
     from . import pptx_animator as anim
 except ImportError:
     import pptx_animator as anim
+try:
+    from . import text_metrics as tm
+except ImportError:
+    import text_metrics as tm
 
 PROPS=("pos","scale","rot","opacity","color","visible")
 ENTER_DEFAULT=("fade",400)
@@ -51,9 +55,9 @@ def authored(obj):
 
 def text_block(obj,aspect=16/9):
     """Estimated box (x0,y0,x1,y1) of the visible text lines inside a text
-    shape, as slide fractions. Assumes a 7.5 in slide height, default insets
-    and an average glyph width; returns the shape box when the vertical
-    anchor is unknown (placeholders inherit it)."""
+    shape, as slide fractions. Respects paragraph alignment and measures the
+    real font when available, so a highlight under centred or right-aligned
+    text sits under the words rather than at the box edge (T063)."""
     g=obj.get("geometry")
     if not g:
         return None
@@ -61,18 +65,47 @@ def text_block(obj,aspect=16/9):
     if obj.get("filled"):
         return full  # a filled shape is seen as a whole box
     anchor=obj.get("text_anchor") or (None if obj.get("placeholder") else "t")
-    paras=[p.get("text","") for p in (obj.get("paragraphs") or [])] or (obj.get("text") or "").split("\n")
-    if anchor not in ("t","ctr","b") or not any(paras):
+    paras=obj.get("paragraphs") or [{"text":t,"align":"l","font":None,"size_pt":None,"bold":False}
+                                    for t in (obj.get("text") or "").split("\n")]
+    if anchor not in ("t","ctr","b") or not any(p.get("text") for p in paras):
         return full
-    size=float(obj.get("max_font_pt") or 18)
-    hp,wp=540.0,540.0*aspect
-    width=max(size,g["w"]*wp-14.4)
-    lines=sum(max(1,math.ceil(len(t)*size*0.55/width)) for t in paras)
+    slide_w=7.5*aspect
+    text_w=max(0.05,g["w"]*slide_w-0.2)  # 0.1 in insets each side
+    default_size=float(obj.get("max_font_pt") or 18)
+    size=max(float(p.get("size_pt") or default_size) for p in paras)
+    hp=540.0
+    # Vertical extent keeps the long-standing character estimate (the rise
+    # masks in existing plans were authored against it); horizontal extent
+    # uses the real font so centred/right-aligned markers sit under the words.
+    width_pt=max(size,g["w"]*540.0*aspect-14.4)
+    lines=sum(max(1,math.ceil(len(p.get("text",""))*size*0.55/width_pt)) for p in paras)
+    widths=[]
+    for p in paras:
+        fam=p.get("font") or ""
+        s=float(p.get("size_pt") or default_size)
+        bold=bool(p.get("bold"))
+        n=tm.wrap_lines(p.get("text",""),fam,s,text_w,bold)
+        if not math.isfinite(n):
+            n=max(1,math.ceil(len(p.get("text",""))*s*0.55/(text_w*72)))
+        if n<=1:
+            widths.append(min(text_w,tm.width_pt(p.get("text",""),fam,s,bold)/72))
+        else:
+            widths.append(text_w)
     block=min(g["h"],(lines*size*1.2)/hp)
-    inset=3.6/hp
-    y0={"t":g["y"]+inset,"ctr":g["y"]+(g["h"]-block)/2,"b":g["y"]+g["h"]-inset-block}[anchor]
+    y_inset=3.6/hp
+    x_inset=0.1/slide_w
+    y0={"t":g["y"]+y_inset,"ctr":g["y"]+(g["h"]-block)/2,"b":g["y"]+g["h"]-y_inset-block}[anchor]
     y0=max(g["y"],min(y0,g["y"]+g["h"]-block))
-    return (g["x"],y0,g["x"]+g["w"],y0+block)
+    widest=max(widths or [text_w])/slide_w
+    align=(paras[0].get("align") or "l").lower()
+    if align in ("ctr","r"):
+        x0=g["x"]+(g["w"]-widest)/2 if align=="ctr" else g["x"]+g["w"]-x_inset-widest
+    elif align in ("just","dist"):
+        x0=g["x"]+x_inset
+        widest=g["w"]-2*x_inset
+    else:
+        x0=g["x"]+x_inset
+    return (x0,y0,x0+widest,y0+block)
 
 
 def fresh_state(visible=True):
@@ -462,7 +495,7 @@ def compile_track(track,obj,objects_by_token,state,beat_id):
         ease=EASE.get(kf.get("ease","standard"))  # T029: Carbon standard instead of symmetric
         if ease is None:
             raise ValueError(f"unknown ease {kf.get('ease')!r}")
-        entering=kf.get("visible") is True and not visible
+        entering=kf.get("force_enter") or (kf.get("visible") is True and not visible)
         if entering:
             flush_poly()
             preset,ms=kf.get("enter",ENTER_DEFAULT[0]),kf.get("enter_ms",ENTER_DEFAULT[1])
@@ -977,19 +1010,30 @@ def recipe_tracks(recipe,objs,states,params=None):
             raise ValueError("travel needs a token and at least one stop")
         dwell=int(params.get("dwell_ms",250))
         poly=bool(params.get("poly_path",False))
-        kfs=[{"t":0}]
+        author_at_last=bool(params.get("author_at_last",False))
+        offset_x,offset_y=float(params.get("offset_x",0)),float(params.get("offset_y",0))
+        if author_at_last:
+            # T034/T063: the token is authored at its destination (the last
+            # stop). Jump to the first stop while it fades in, then travel.
+            sx,sy=_pos(stops[0],states)
+            kfs=[{"t":0,"x":sx+offset_x,"y":sy+offset_y,"jump":True,"visible":True,"force_enter":True,
+                  "enter":params.get("enter","fade"),"enter_ms":int(params.get("enter_ms",200))}]
+            px,py=sx,sy
+        else:
+            kfs=[{"t":0}]
+            px,py=_pos(token,states)
         t=0
         arrivals=[]
-        px,py=_pos(token,states)
         for si,stop in enumerate(stops):
             sx,sy=_pos(stop,states)
             # Without an explicit duration each hop takes design-system travel
             # time for its length (MOT-DURATION: longer journeys take longer).
-            hop=d if "duration_ms" in params else _ds.travel_ms(math.hypot(sx-px,sy-py))
+            hop=0 if (author_at_last and si==0) else (
+                d if "duration_ms" in params else _ds.travel_ms(math.hypot(sx-px,sy-py)))
             px,py=sx,sy
             t+=hop
             arrivals.append(t)
-            kf={"t":t,"x":sx+float(params.get("offset_x",0)),"y":sy+float(params.get("offset_y",0)),
+            kf={"t":t,"x":sx+offset_x,"y":sy+offset_y,
                 "curve":float(params.get("arc",0.0))}
             for key in ("overshoot","anticipate"):
                 if params.get(key):
@@ -1046,11 +1090,24 @@ def recipe_tracks(recipe,objs,states,params=None):
         d=int(params.get("duration_ms",6000))
         scale=float(params.get("scale",1.06))
         drift=float(params.get("drift",0.015))
+        # T063: a slide left by Morph must end on its authored layout, or the
+        # picture snaps back when the transition starts. The push-in releases
+        # back to the authored frame in the design system's move time, so the
+        # frame PowerPoint starts Morph from is the frame on the slide.
+        settle=int(params.get("settle_ms",min(round(d*0.2),_ds.duration("move")["default"])))
+        settle=max(0,min(settle,d-1))
         for i,o in enumerate(objs):
             s=states[o["id"]]
             sign=-1 if i%2 else 1
-            tracks.append({"target":o,"keyframes":[{"t":0},{"t":d,"scale":s["scale"]*scale,
-                                                           "dx":s["dx"]+sign*drift,"dy":s["dy"]-0.6*drift,"ease":"linear"}]})
+            end={"t":d,"scale":s["scale"],"dx":s["dx"],"dy":s["dy"],"ease":"enter" if settle else "linear"}
+            if settle:
+                tracks.append({"target":o,"keyframes":[
+                    {"t":0},
+                    {"t":d-settle,"scale":s["scale"]*scale,"dx":s["dx"]+sign*drift,"dy":s["dy"]-0.6*drift,
+                     "ease":"linear"},
+                    end]})
+            else:
+                tracks.append({"target":o,"keyframes":[{"t":0},end]})
     else:
         raise ValueError(f"unknown recipe {recipe!r}")
     return tracks

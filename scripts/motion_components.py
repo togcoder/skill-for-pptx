@@ -135,10 +135,17 @@ def layout(spec,anchors,slide,aspect):
         x,y=spots[i%len(spots)]
         return (x,y,size/aspect,size)
     if kind=="token":
-        a=anchors[0]
-        g=a["geometry"]
+        # Authored at its last stop (T034/T063): the slide's static state is the
+        # completed journey; the travel recipe jumps to the first stop while the
+        # token fades in, so Morph starts from the authored frame.
         d=float(spec.get("size",0.06))
-        cx,cy=g["x"]-d/aspect*0.9,g["y"]+g["h"]/2+float(spec.get("offset_y",0))
+        if len(anchors)>1:
+            cx,cy=_center(anchors[-1])
+            cx+=float(spec.get("offset_x",0))
+            cy+=float(spec.get("offset_y",0))
+        else:
+            g=anchors[0]["geometry"]
+            cx,cy=g["x"]-d/aspect*0.9,g["y"]+g["h"]/2+float(spec.get("offset_y",0))
         return (cx-d/aspect/2,cy-d/2,d/aspect,d)
     if kind=="badge":
         a=anchors[0]
@@ -168,18 +175,18 @@ def layout(spec,anchors,slide,aspect):
         return (box[0],box[1],box[2]-box[0],max(0.005,box[3]-box[1]))
     if kind=="highlight":
         # Marker behind the visible text, where the lines really sit (vertical
-        # anchor aware; T030: a centred, wrapped takeaway got its marker above
-        # the words). One line: as wide as the words. Wrapped: the whole block.
+        # anchor and horizontal alignment aware; T030 fixed the vertical case,
+        # T063 the centred/right-aligned case). One line: as wide as the words.
+        # Wrapped: the whole block.
         a=anchors[0]
         x0,y0,x1,y1=me.text_block(a,aspect) or _bbox(anchors)
         size=(a.get("max_font_pt") or 18)
-        line=(a.get("text") or "").split("\n")[0]
         lh=size*1.35/72/7.5
         pad=float(spec.get("padding",0.004))
+        width=max(0.02,x1-x0-0.008)
         if y1-y0>1.6*lh:
-            return (x0+0.004,y0-pad,x1-x0-0.008,y1-y0+2*pad)
-        est=min(x1-x0,len(line)*size*0.56/72/13.333*(16/9)/aspect+0.02)
-        return (x0+0.004,y0-pad,est,min(y1-y0,lh)+2*pad)
+            return (x0+0.004,y0-pad,width,y1-y0+2*pad)
+        return (x0+0.004,y0-pad,width,min(y1-y0,lh)+2*pad)
     if kind=="underline":
         x0,y0,x1,y1=_bbox(anchors)
         a=anchors[0]

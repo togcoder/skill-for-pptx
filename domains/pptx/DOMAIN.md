@@ -86,9 +86,10 @@ Skills: `skills/pptx-motion-director`, `skills/slide-forge`.
     reached `main` unreviewed (T057 review, finding 3).
 
 ## State (2026-11-04)
-- **Tests:** 476 run, 8 skipped, 100 % pass across all domains (T061 final run).
+- **Tests:** 500 run, 8 skipped, 100 % pass across all domains (after T061 + T063).
+- **Forge (T063):** type sizes come from the Office kit `type_scale_pt` (3–6 per deck); count-up stacks are print/PDF/Morph-safe (final value topmost and opaque, proxies below); highlight markers follow centred/right-aligned text; Ken Burns ends on the authored frame and generated process tokens use T034's author-at-destination fix. All five example decks have no `TYP-SIZES` or `MOT-SETTLE` warning.
 - **Navigation & Interactivity:** T048 added Slide Navigator (`slide_navigator.py`) establishing full non-linear branching, dynamic return paths, custom shows with return, and mini-game state machine compilation. T049 added Advanced Presentation Interactivity (`advanced_interactivity.py`) establishing native in-slide lightbox modals, multi-tab switchers, pure-Python synthetic sound FX (click/chime/buzz), hover actions, and twin-morph visual flow. **T061** consolidated every `interactiveSeq`/trigger/hyperlink writer into `pptx_animator.py`; T048b/T049 artifacts rebuild byte-identically (T048) or are unchanged and parse to the same counts (T049), and PowerPoint 16.0 COM parses the canonical subtree at rung 4. Playback of the T049 fix still waits for T058.
-- **Evidence:** Rungs 0–5 established across PPTX, DOCX, XLSX, and Cross. PowerPoint 16.0 COM verified.
+- **Evidence:** Rungs 0–4 established across PPTX, DOCX, XLSX and Cross; PowerPoint 16.0 COM is used for parse/render checks. T063 inspected PowerPoint PDF/PNG/CreateVideo frames (rung 5). Rung 6 (a human playing every click) has not been reached; the T057 audit retired the earlier "rungs 0–5 / COM verified" wording.
 
 ## Open questions / dissent
 - **T038 numbers.** Several T038 values (golden 61.8 %, Duarte breaks at

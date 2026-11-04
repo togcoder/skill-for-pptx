@@ -130,7 +130,7 @@ def top_level_objects(root):
 
 
 def text_paragraphs(node):
-    """Raw indices of nonempty paragraphs in a shape's text body."""
+    """Nonempty paragraphs with the facts text placement needs."""
     body=node.find("p:txBody",NS)
     if body is None:
         return []
@@ -139,7 +139,15 @@ def text_paragraphs(node):
         text="".join(t.text or "" for t in para.findall(".//a:t",NS)).strip()
         if text:
             ppr=para.find("a:pPr",NS)
-            out.append({"index":index,"text":text,"level":int(ppr.get("lvl","0")) if ppr is not None else 0})
+            run=para.find("a:r",NS)
+            rpr=run.find("a:rPr",NS) if run is not None else None
+            latin=rpr.find("a:latin",NS) if rpr is not None else None
+            out.append({"index":index,"text":text,
+                        "level":int(ppr.get("lvl","0")) if ppr is not None else 0,
+                        "align":(ppr.get("algn") if ppr is not None else None) or "l",
+                        "font":latin.get("typeface") if latin is not None else None,
+                        "size_pt":int(rpr.get("sz"))/100 if rpr is not None and (rpr.get("sz") or "").isdigit() else None,
+                        "bold":rpr is not None and rpr.get("b")=="1"})
     return out
 
 
