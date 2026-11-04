@@ -38,6 +38,33 @@ were true at the time. Task IDs and their branches are listed in
   re-extract, not text-edit. `HANDOFF.md`/`docs/STATUS.md` wait for the
   integrator after T058–T064. New workflow not yet run (no push from T065).
 - **Report.** `experiments/T065-20261104-opencode-hygiene/REPORT.md`.
+## T061 [pptx] One canonical interaction writer — 2026-11-04
+
+- **Why.** `interactiveSeq` was written by three modules
+  (`interactive_triggers.py`, `advanced_interactivity.py`,
+  `slide_navigator.py`); `pptx_animator.py` owned none of it, so the T049
+  root-cause fixes lived in one module and never reached the others.
+- **What moved.** The writer (sequence shell, trigger conditions, click-step
+  timing, hyperlink conflict, ID allocation) now lives in `pptx_animator.py`
+  under "Interactive triggers, hyperlink conflicts, semantic actions". The
+  three modules are thin callers; `interactive_triggers.py` keeps only the T033
+  plan vocabulary. `advanced_interactivity.compile_one_slide_games_suite` is
+  unchanged (PowerPoint COM writes its own timing).
+- **T049 findings ported.** The interactiveSeq `cTn` carries its own onClick
+  `stCondLst` and `endSync`; the click step runs at `delay="0"`; one `p:seq`
+  per trigger shape; a trigger shape's click hyperlink is stripped, and adding
+  a hyperlink to a trigger shape is reported as a conflict.
+- **Byte evidence.** Both T048b decks rebuild to 43 identical zip members
+  (`docProps/*` excluded). The T049 artifact is unchanged
+  (`f91531f8…`) and still parses to 8 sequences (4 + 4).
+  `build_canonical_interactive_seq` is byte-identical (`d1f76b7b…`).
+- **PowerPoint.** COM 16.0 reads the canonical subtree as 1 interactive
+  sequence, trigger "Inspect Button", target "Detail Panel", effect 48,
+  0.5 s. The pre-T061 shape parses identically, so a parse count cannot prove
+  the delay fix; T058's click harness must.
+- **Tests.** 476 run, 8 skipped, OK (15 new in
+  `tests/test_interaction_writer.py`). `lab/tools/check_layout.py` OK.
+- **Report.** `experiments/T061-20261104-opencode-interaction-writer/REPORT.md`.
 
 ## T057 [cross] Lead review, DeckCraft evaluation and next programme — 2026-11-04
 

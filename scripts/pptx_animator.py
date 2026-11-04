@@ -28,6 +28,8 @@ import re
 
 from lxml import etree as E
 
+import xml.etree.ElementTree as _ET
+
 try:
     from . import design_system as _ds
 except ImportError:
@@ -36,6 +38,7 @@ except ImportError:
 P="http://schemas.openxmlformats.org/presentationml/2006/main"
 A="http://schemas.openxmlformats.org/drawingml/2006/main"
 C="http://schemas.openxmlformats.org/drawingml/2006/chart"
+R="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
 MC="http://schemas.openxmlformats.org/markup-compatibility/2006"
 P14="http://schemas.microsoft.com/office/powerpoint/2010/main"
 P159="http://schemas.microsoft.com/office/powerpoint/2015/09/main"
@@ -62,6 +65,7 @@ PRESETS={
     "dim":("emph",9,0,400),
     "color":("emph",1,2,500),  # PowerPoint "Change Fill Color" (Argon wrote 7 = Change Line Color)
     "teeter":("emph",32,0,1000),  # PowerPoint "Teeter" (Argon wrote 14 = Blast)
+    "zoom-out":("exit",53,32,500),  # PowerPoint "Zoom" exit, same ids Office 16.0 COM writes (T049)
     "path":("path",0,0,800),
 }
 # T027: every built-in PowerPoint effect, harvested from PowerPoint itself
@@ -147,6 +151,14 @@ def is_chart_frame(node):
 def _max_ctn_id(timing):
     ids=[int(c.get("id")) for c in timing.iter(q("cTn")) if (c.get("id") or "").isdigit()]
     return max(ids,default=0)
+
+
+def max_ctn_id(root):
+    """Highest numeric ``<p:cTn id>`` under ``root`` (0 when none).
+
+    Public form of the allocator seed, shared by every interaction writer.
+    """
+    return _max_ctn_id(root)
 
 
 # ---------------------------------------------------------------------------
@@ -345,6 +357,10 @@ def _behaviours(parent,ids,eff):
     elif preset in EXITS:
         if preset=="fade-out":
             _anim_effect(parent,ids,eff,"out","fade",dur)
+        elif preset=="zoom-out":
+            _anim_prop(parent,ids,eff,"ppt_w",[(0,"#ppt_w"),(100000,0)],dur)
+            _anim_prop(parent,ids,eff,"ppt_h",[(0,"#ppt_h"),(100000,0)],dur)
+            _anim_effect(parent,ids,eff,"out","fade",dur)
         _set_visibility(parent,ids,eff,"hidden",max(0,dur-1) if preset!="disappear" else 0)
     elif preset=="grow":
         ratio=eff["ratio"]
@@ -531,30 +547,471 @@ def _main_sequence(timing,ids):
     return children,True
 
 
+# ---------------------------------------------------------------------------
+# Interactive triggers, hyperlink conflicts, semantic actions (T061)
+#
+# This is the ONE writer for shape-triggered ``interactiveSeq`` timing and for
+# the click-hyperlink conflicts around it. Three modules used to build their own
+# subtrees (T033 ``interactive_triggers``, T048 ``slide_navigator``, T049
+# ``advanced_interactivity``); they are thin callers now. Rules encoded here,
+# each with the finding that produced it:
+#
+# 1. The ``interactiveSeq`` cTn carries its own
+#    ``<p:stCondLst><p:cond evt="onClick">`` on the trigger shape (T049 1.3.1).
+#    A seq-level ``nextCondLst`` alone does not make PowerPoint start it.
+# 2. The click-step child starts at ``delay="0"`` (T049 1.3.2), not
+#    ``indefinite``; an indefinite child waits for a control command that never
+#    arrives on a click.
+# 3. ``<p:endSync evt="end"><p:rtn val="all"/></p:endSync>`` is written the way
+#    Office 16.0 COM writes it (T049 native capture).
+# 4. One ``<p:seq>`` per trigger shape. Two sequences on one shape are dead
+#    weight: PowerPoint routes the click to one of them.
+# 5. A shape with ``<a:hlinkClick>`` swallows the click before the trigger
+#    engine sees it (T049 1.2). Adding a trigger strips the hyperlink; adding a
+#    hyperlink to a shape that already owns a trigger raises
+#    :class:`InteractionConflict`.
+# ---------------------------------------------------------------------------
+
+
+class InteractionConflict(ValueError):
+    """A shape cannot be both an animation trigger and a click hyperlink."""
+
+
+def _local(elem):
+    return E.QName(elem.tag).localname
+
+
+def _seq_ctn(seq):
+    ctn=seq.find("p:cTn",NS)
+    if ctn is None or ctn.get("nodeType")!="interactiveSeq":
+        return None
+    return ctn
+
+
+def interactive_sequences(root):
+    """Return ``[(seq, ctn)]`` for every interactiveSeq, in document order."""
+    out=[]
+    for seq in root.findall(".//p:seq",NS):
+        ctn=_seq_ctn(seq)
+        if ctn is not None:
+            out.append((seq,ctn))
+    return out
+
+
+def sequence_trigger_spid(seq):
+    """Trigger spid of an interactive ``<p:seq>``; nextCondLst first, then the
+    seq cTn's own stCondLst (both are written; older decks may carry one)."""
+    for path in ("p:nextCondLst/p:cond/p:tgtEl/p:spTgt",
+                 "p:cTn/p:stCondLst/p:cond/p:tgtEl/p:spTgt"):
+        tgt=seq.find(path,NS)
+        if tgt is not None and tgt.get("spid"):
+            return tgt.get("spid")
+    return None
+
+
+def shape_trigger_spids(root,spid):
+    """Interactive sequences owned by ``spid`` (empty when it is not a trigger)."""
+    sid=str(spid)
+    return [seq for seq,_ in interactive_sequences(root) if sequence_trigger_spid(seq)==sid]
+
+
+def shape_ids(root):
+    """``({spid: name}, {name: spid})`` for the animatable shapes on a slide."""
+    by_id={}
+    by_name={}
+    for node in root.iter():
+        if _local(node)!="cNvPr":
+            continue
+        sid=node.get("id")
+        if not sid:
+            continue
+        name=node.get("name") or ""
+        by_id[sid]=name
+        if name:
+            by_name[name]=sid
+    return by_id,by_name
+
+
+def shape_cnvpr(root,spid):
+    sid=str(spid)
+    for node in root.iter():
+        if _local(node)=="cNvPr" and node.get("id")==sid:
+            return node
+    return None
+
+
+def strip_click_hyperlinks(root,spid):
+    """Remove click/hover hyperlinks from a shape so its trigger can fire.
+
+    Returns the number removed. T049 1.2: a ``<a:hlinkClick>`` (even
+    ``ppaction://noaction``) consumes the click and stops propagation, so the
+    trigger never sees it.
+    """
+    cnvpr=shape_cnvpr(root,spid)
+    if cnvpr is None:
+        return 0
+    removed=0
+    for child in list(cnvpr):
+        if _local(child) in ("hlinkClick","hlinkHover"):
+            cnvpr.remove(child)
+            removed+=1
+    return removed
+
+
+def set_click_action(root,spid,action=None,rel_id=None,conflict="raise",replace=True):
+    """Write one ``<a:hlinkClick>`` on a shape, guarding trigger conflicts.
+
+    ``conflict`` is ``"raise"`` (default), ``"skip"`` (return ok=False and let
+    the caller record it) or ``"allow"``. ``replace`` removes an existing
+    ``a:hlinkClick`` first, which is how T048 recipes overwrite a button action.
+    """
+    if conflict not in ("raise","skip","allow"):
+        raise ValueError("conflict must be raise, skip or allow")
+    if action is None and rel_id is None:
+        raise ValueError("set_click_action needs an action URI, a relationship id, or both")
+    owned=shape_trigger_spids(root,spid)
+    if owned and conflict!="allow":
+        if conflict=="skip":
+            return {"ok":False,"shape_spid":str(spid),"reason":"animation_trigger",
+                    "trigger_sequences":len(owned),"action":action}
+        raise InteractionConflict(
+            f"shape {spid} owns {len(owned)} interactive sequence(s); a click "
+            "hyperlink would swallow the trigger click (T049 1.2)")
+    cnvpr=shape_cnvpr(root,spid)
+    if cnvpr is None:
+        raise KeyError(f"shape {spid} is not on this slide")
+    removed=0
+    if replace:
+        for child in list(cnvpr):
+            if _local(child)=="hlinkClick":
+                cnvpr.remove(child)
+                removed+=1
+    attrs={}
+    if action is not None:
+        attrs["action"]=action
+    if rel_id is not None:
+        # lxml serialises **_extra before attrib; keep the action first so a
+        # T048 rebuild stays byte-identical to the committed artifacts.
+        attrs[f"{{{R}}}id"]=rel_id
+    E.SubElement(cnvpr,E.QName(A,"hlinkClick"),attrs)
+    return {"ok":True,"shape_spid":str(spid),"action":action,"rel_id":rel_id,
+            "removed":removed,"href":len(attrs)>0}
+
+
 def _interactive_sequence(timing,ids,trigger_spid):
-    """Find or create a shape-triggered interactiveSeq for ``trigger_spid``."""
+    """Find or create the ONE shape-triggered interactiveSeq for ``trigger_spid``."""
     root_ctn=timing.find("p:tnLst/p:par/p:cTn",NS)
     root_children=root_ctn.find("p:childTnLst",NS)
     if root_children is None:
         root_children=sub(root_ctn,"childTnLst")
-    for seq in root_children.findall("p:seq",NS):
-        ctn=seq.find("p:cTn[@nodeType='interactiveSeq']",NS)
-        if ctn is None:
-            continue
-        tgt=seq.find("p:nextCondLst/p:cond/p:tgtEl/p:spTgt",NS)
-        if tgt is not None and tgt.get("spid")==str(trigger_spid):
+    sid=str(trigger_spid)
+    for seq,_ in interactive_sequences(timing):
+        if seq.getparent() is root_children and sequence_trigger_spid(seq)==sid:
+            ctn=_seq_ctn(seq)
             children=ctn.find("p:childTnLst",NS)
             if children is None:
                 children=sub(ctn,"childTnLst")
             return children
     seq=sub(root_children,"seq",concurrent="1",nextAc="seek")
-    ctn=sub(seq,"cTn",id=next(ids),dur="indefinite",restart="whenNotActive",
-            fill="hold",evtFilter="cancelBubble",nodeType="interactiveSeq")
+    ctn=sub(seq,"cTn",id=next(ids),restart="whenNotActive",fill="hold",
+            evtFilter="cancelBubble",nodeType="interactiveSeq")
+    st=sub(ctn,"stCondLst")
+    cond=sub(st,"cond",evt="onClick",delay=0)
+    sub(sub(cond,"tgtEl"),"spTgt",spid=sid)
+    sub(sub(ctn,"endSync",evt="end",delay=0),"rtn",val="all")
     children=sub(ctn,"childTnLst")
-    nxt=sub(seq,"nextCondLst")
-    cond=sub(nxt,"cond",evt="onClick",delay=0)
-    sub(sub(cond,"tgtEl"),"spTgt",spid=trigger_spid)
+    cond=sub(sub(seq,"nextCondLst"),"cond",evt="onClick",delay=0)
+    sub(sub(cond,"tgtEl"),"spTgt",spid=sid)
     return children
+
+
+# Semantic action vocabulary kept from T033 so existing plans stay valid.
+INTERACTIVE_ACTIONS=("reveal","hide","highlight","toggle")
+INTERACTIVE_PRESETS=("fade","zoom","float-in","teeter")
+_ACTION_CLASS={"reveal":"entr","hide":"exit","highlight":"emph"}
+# (action, semantic preset) -> effect preset name in PRESETS. PowerPoint has no
+# separate exit "float out" or entrance "teeter"; those collapse to fade.
+_ACTION_EFFECT={
+    ("reveal","fade"):"fade",("reveal","zoom"):"zoom",
+    ("reveal","float-in"):"float-in",("reveal","teeter"):"fade",
+    ("hide","fade"):"fade-out",("hide","zoom"):"zoom-out",
+    ("hide","float-in"):"fade-out",("hide","teeter"):"fade-out",
+    ("highlight","teeter"):"teeter",("highlight","zoom"):"grow",
+    ("highlight","fade"):"dim",("highlight","float-in"):"teeter",
+}
+# presetID/class -> semantic name, for the reader. Lossy where PowerPoint
+# itself is ambiguous (emphasis zoom and grow share presetID 6).
+_PRESET_BY_ID={
+    ("entr","1"):"appear",("entr","10"):"fade",("entr","23"):"zoom",
+    ("entr","53"):"zoom",("entr","42"):"float-in",
+    ("exit","1"):"disappear",("exit","10"):"fade",("exit","23"):"zoom",
+    ("exit","53"):"zoom",("exit","42"):"float-in",
+    ("emph","32"):"teeter",("emph","6"):"grow",("emph","1"):"color",
+    ("emph","8"):"spin",("emph","9"):"dim",("path","0"):"path",
+}
+
+
+def interactive_preset_name(preset_class,preset_id):
+    if (preset_class,str(preset_id)) in _PRESET_BY_ID:
+        return _PRESET_BY_ID[(preset_class,str(preset_id))]
+    return "fade" if preset_class in ("entr","exit") else "teeter"
+
+
+def _action_effects(action,preset,target_spids,duration_ms,delay_ms):
+    """One interactive click group: first effect clickEffect, the rest withEffect."""
+    effects=[]
+    for index,spid in enumerate(target_spids):
+        name=preset if action=="reveal" else _ACTION_EFFECT[(action,preset)]
+        effects.append({"preset":name,"spid":spid,
+                        "trigger":"click" if index==0 else "with",
+                        "duration_ms":int(duration_ms),"delay_ms":int(delay_ms)})
+    return effects
+
+
+def _resolve_shape(key,by_id,by_name,external=None):
+    text=str(key).strip()
+    if external and text in external:
+        text=str(external[text]).strip()
+    if text in by_id:
+        return text
+    if text in by_name:
+        return by_name[text]
+    if text.isdigit():
+        return text
+    raise KeyError(f"shape {key!r} could not be resolved on this slide")
+
+
+def apply_interactive_actions(root,plan,shape_id_map=None):
+    """Write a T033-style trigger plan through the canonical writer.
+
+    ``plan`` items: ``{"trigger","action","targets","preset","duration_ms",
+    "delay_ms"}``. ``action`` is reveal / hide / highlight / toggle; ``toggle``
+    writes two click steps on one sequence (click 1 reveals, click 2 hides).
+    Returns one record per plan item.
+
+    Accepts an lxml slide root and, for the T033 compatibility layer, an
+    ``xml.etree.ElementTree`` root: the stdlib tree is written on an lxml twin
+    and its bytes are synced back into the caller's object.
+    """
+    if not plan:
+        return []
+    if hasattr(root,"getparent"):
+        return _apply_interactive_actions(root,plan,shape_id_map)
+    twin=E.fromstring(_ET.tostring(root,encoding="utf-8"))
+    records=_apply_interactive_actions(twin,plan,shape_id_map)
+    synced=_ET.fromstring(E.tostring(twin))
+    root.clear()
+    root.tag=synced.tag
+    root.attrib.update(synced.attrib)
+    root.text=synced.text
+    root.tail=synced.tail
+    for child in list(synced):
+        root.append(child)
+    return records
+
+
+def _apply_interactive_actions(root,plan,shape_id_map=None):
+    by_id,by_name=shape_ids(root)
+    external={str(k):v for k,v in (shape_id_map or {}).items()}
+    clicks=[]
+    resolved=[]
+    for item in plan:
+        if item.get("trigger") is None:
+            raise ValueError("trigger specification is missing 'trigger'")
+        trigger=_resolve_shape(item["trigger"],by_id,by_name,external)
+        action=str(item.get("action","reveal")).strip().lower()
+        if action not in INTERACTIVE_ACTIONS:
+            raise ValueError(f"invalid action {action!r}; use {INTERACTIVE_ACTIONS}")
+        preset=str(item.get("preset","fade")).strip().lower()
+        if preset not in INTERACTIVE_PRESETS:
+            raise ValueError(f"invalid preset {preset!r}; use {INTERACTIVE_PRESETS}")
+        raw=item.get("targets") or []
+        if isinstance(raw,(str,int)):
+            raw=[raw]
+        targets=[_resolve_shape(t,by_id,by_name,external) for t in raw] or [trigger]
+        duration=int(item.get("duration_ms",500))
+        delay=int(item.get("delay_ms",0))
+        steps=[action] if action!="toggle" else ["reveal","hide"]
+        for step in steps:
+            clicks.append({"id":f"{item.get('trigger')}:{step}","trigger_spid":trigger,
+                           "effects":_action_effects(step,preset,targets,duration,delay)})
+        resolved.append((item,trigger,action,preset,targets,duration,delay))
+    receipt=apply_timeline(root,clicks)
+    stripped={}
+    for click in receipt["clicks"]:
+        if click.get("trigger_spid") is not None:
+            stripped[click["trigger_spid"]]=stripped.get(click["trigger_spid"],0)+click.get("hyperlinks_stripped",0)
+    records=[]
+    by_seq={sequence_trigger_spid(seq):seq for seq,_ in interactive_sequences(root)}
+    for item,trigger,action,preset,targets,duration,delay in resolved:
+        seq=by_seq.get(trigger)
+        records.append({
+            "seq_ctn_id":int(_seq_ctn(seq).get("id")) if seq is not None else None,
+            "trigger_spid":trigger,
+            "trigger_name":by_id.get(trigger,str(item.get("trigger"))),
+            "action":action,
+            "preset":preset,
+            "target_spids":targets,
+            "targets":[by_id.get(s,s) for s in targets],
+            "duration_ms":duration,
+            "delay_ms":delay,
+            "hlinks_removed":stripped.get(trigger,0),
+            "seq_node":seq,
+        })
+    return records
+
+
+def read_interactive_actions(root):
+    """Read interactive sequences back as semantic actions.
+
+    Infers action from ``presetClass`` and preset from ``presetID``: T033 wrote
+    non-schema ``customAction``/``customPreset``/``customDur`` attributes, which
+    this reader deliberately does not need or emit.
+    """
+    out=[]
+    for seq,ctn in interactive_sequences(root):
+        trigger=sequence_trigger_spid(seq)
+        groups=_read_sequence_groups(ctn,trigger_spid=trigger)
+        effects=[e for group in groups for e in group["effects"]]
+        classes={e["class"] for e in effects if e["class"]}
+        if "entr" in classes and "exit" in classes:
+            action="toggle"
+        elif "exit" in classes:
+            action="hide"
+        elif "emph" in classes:
+            action="highlight"
+        else:
+            action="reveal"
+        first=next((e for e in effects if e["class"]),None)
+        targets=[]
+        for effect in effects:
+            if effect["spid"] not in targets:
+                targets.append(effect["spid"])
+        out.append({
+            "seq_ctn_id":int(ctn.get("id")) if (ctn.get("id") or "").isdigit() else None,
+            "trigger":trigger,
+            "trigger_spid":trigger,
+            "action":action,
+            "preset":interactive_preset_name(first["class"],first["preset_id"]) if first else "fade",
+            "target_spids":targets,
+            "duration_ms":max((e.get("duration_ms",0) for e in effects),default=0),
+            "delay_ms":min((e.get("delay_ms",0) for e in effects),default=0),
+            "click_groups":len(groups),
+        })
+    return out
+
+
+def interactive_summary(root):
+    """Per-sequence audit record: trigger, every animated spid in effect order.
+
+    Includes effects that target the trigger shape itself (a self-revealing
+    chest is legal); the T049 auditor dropped those and reported an empty
+    ``animated_spids`` list.
+    """
+    out=[]
+    for seq,ctn in interactive_sequences(root):
+        spids=[]
+        body=ctn.find("p:childTnLst",NS)
+        scope=body if body is not None else ctn
+        for tgt in scope.findall(".//p:tgtEl/p:spTgt",NS):
+            sid=tgt.get("spid")
+            if sid and sid not in spids:
+                spids.append(sid)
+        out.append({
+            "trigger_spid":sequence_trigger_spid(seq),
+            "animated_spids":spids,
+            "effect_count":sum(1 for c in ctn.iter(q("cTn")) if c.get("presetClass")),
+        })
+    return out
+
+
+def build_interactive_sequence(trigger_spid,target_spids,is_exit=False,
+                               preset_name="zoom",duration_ms=350,seq_id=2):
+    """Build one interactiveSeq subtree with explicit time-node ids.
+
+    Moved verbatim from T049 ``build_canonical_interactive_seq`` so that the
+    Office 16.0 COM-mirroring output stays byte-identical (frozen hash in
+    experiments/T061-.../inputs/canonical_seq.sha256). The effects here mirror
+    what COM wrote for the 1-slide games; it is the only code path that does
+    not go through :func:`_behaviours`, and unifying it waits for T058.
+    """
+    trig_s=str(trigger_spid)
+    preset_id="53" if preset_name=="zoom" else "10"
+    preset_cls="exit" if is_exit else "entr"
+    preset_sub="32" if preset_name=="zoom" else "0"
+
+    seq=E.Element(q("seq"),concurrent="1",nextAc="seek")
+    ctn=E.SubElement(seq,q("cTn"),id=str(seq_id),restart="whenNotActive",
+                     fill="hold",evtFilter="cancelBubble",nodeType="interactiveSeq")
+    st=E.SubElement(ctn,q("stCondLst"))
+    cond=E.SubElement(st,q("cond"),evt="onClick",delay="0")
+    tgt=E.SubElement(cond,q("tgtEl"))
+    E.SubElement(tgt,q("spTgt"),spid=trig_s)
+    endsync=E.SubElement(ctn,q("endSync"),evt="end",delay="0")
+    E.SubElement(endsync,q("rtn"),val="all")
+    child_tn=E.SubElement(ctn,q("childTnLst"))
+    outer_par=E.SubElement(child_tn,q("par"))
+    outer_ctn=E.SubElement(outer_par,q("cTn"),id=str(seq_id+1),fill="hold")
+    E.SubElement(E.SubElement(outer_ctn,q("stCondLst")),q("cond"),delay="0")
+    inner_child=E.SubElement(outer_ctn,q("childTnLst"))
+    sub_id=seq_id+2
+    for idx,tgt_spid in enumerate(target_spids):
+        tgt_s=str(tgt_spid)
+        bpar=E.SubElement(inner_child,q("par"))
+        bctn=E.SubElement(bpar,q("cTn"),id=str(sub_id),fill="hold")
+        E.SubElement(E.SubElement(bctn,q("stCondLst")),q("cond"),delay="0")
+        sub_id+=1
+        eff_child=E.SubElement(bctn,q("childTnLst"))
+        eff_par=E.SubElement(eff_child,q("par"))
+        eff_ctn=E.SubElement(eff_par,q("cTn"),id=str(sub_id),presetID=preset_id,
+                             presetClass=preset_cls,presetSubtype=preset_sub,
+                             fill="hold",grpId="0",
+                             nodeType="clickEffect" if idx==0 else "withEffect")
+        E.SubElement(E.SubElement(eff_ctn,q("stCondLst")),q("cond"),delay="0")
+        sub_id+=1
+        b_child=E.SubElement(eff_ctn,q("childTnLst"))
+        if is_exit:
+            if preset_name=="zoom":
+                for prop in ("ppt_w","ppt_h"):
+                    anim=E.SubElement(b_child,q("anim"),calcmode="lin",valueType="num")
+                    cbhvr=E.SubElement(anim,q("cBhvr"))
+                    E.SubElement(cbhvr,q("cTn"),id=str(sub_id),dur=str(duration_ms))
+                    sub_id+=1
+                    E.SubElement(E.SubElement(cbhvr,q("tgtEl")),q("spTgt"),spid=tgt_s)
+                    E.SubElement(E.SubElement(cbhvr,q("attrNameLst")),q("attrName")).text=prop
+                    tav_lst=E.SubElement(anim,q("tavLst"))
+                    E.SubElement(E.SubElement(E.SubElement(tav_lst,q("tav"),tm="0"),q("val")),q("strVal"),val=prop)
+                    E.SubElement(E.SubElement(E.SubElement(tav_lst,q("tav"),tm="100000"),q("val")),q("fltVal"),val="0")
+            anim_eff=E.SubElement(b_child,q("animEffect"),transition="out",filter="fade")
+            cbhvr_eff=E.SubElement(anim_eff,q("cBhvr"))
+            E.SubElement(cbhvr_eff,q("cTn"),id=str(sub_id),dur=str(duration_ms))
+            sub_id+=1
+            E.SubElement(E.SubElement(cbhvr_eff,q("tgtEl")),q("spTgt"),spid=tgt_s)
+            s_node=E.SubElement(b_child,q("set"))
+            cbhvr_set=E.SubElement(s_node,q("cBhvr"))
+            E.SubElement(E.SubElement(cbhvr_set,q("cTn"),id=str(sub_id),dur="1",fill="hold"),q("stCondLst"))
+            sub_id+=1
+            E.SubElement(E.SubElement(cbhvr_set,q("tgtEl")),q("spTgt"),spid=tgt_s)
+            E.SubElement(E.SubElement(cbhvr_set,q("attrNameLst")),q("attrName")).text="style.visibility"
+            E.SubElement(E.SubElement(s_node,q("to")),q("strVal"),val="hidden")
+        else:
+            s_node=E.SubElement(b_child,q("set"))
+            cbhvr_set=E.SubElement(s_node,q("cBhvr"))
+            E.SubElement(E.SubElement(cbhvr_set,q("cTn"),id=str(sub_id),dur="1",fill="hold"),q("stCondLst"))
+            sub_id+=1
+            E.SubElement(E.SubElement(cbhvr_set,q("tgtEl")),q("spTgt"),spid=tgt_s)
+            E.SubElement(E.SubElement(cbhvr_set,q("attrNameLst")),q("attrName")).text="style.visibility"
+            E.SubElement(E.SubElement(s_node,q("to")),q("strVal"),val="visible")
+            anim_eff=E.SubElement(b_child,q("animEffect"),transition="in",filter="fade")
+            cbhvr_eff=E.SubElement(anim_eff,q("cBhvr"))
+            E.SubElement(cbhvr_eff,q("cTn"),id=str(sub_id),dur=str(duration_ms))
+            sub_id+=1
+            E.SubElement(E.SubElement(cbhvr_eff,q("tgtEl")),q("spTgt"),spid=tgt_s)
+    nxt=E.SubElement(seq,q("nextCondLst"))
+    cond_nxt=E.SubElement(nxt,q("cond"),evt="onClick",delay="0")
+    tgt_nxt=E.SubElement(cond_nxt,q("tgtEl"))
+    E.SubElement(tgt_nxt,q("spTgt"),spid=trig_s)
+    return seq
 
 
 def _existing_grp_ids(timing):
@@ -638,19 +1095,25 @@ def apply_timeline(root,clicks,mode="extend"):
     for ci,click in enumerate(clicks):
         trig_spid=click.get("trigger_spid")
         auto=click.get("start","click")=="auto"
+        stripped=0
+        if trig_spid is not None:
+            # T049 1.2: a click hyperlink on the trigger shape swallows the click.
+            stripped=strip_click_hyperlinks(root,trig_spid)
         seq_children=_interactive_sequence(timing,id_iter,str(trig_spid)) if trig_spid is not None else main_children
         outer=sub(seq_children,"par")
         octn=sub(outer,"cTn",id=next(id_iter),fill="hold")
         st=sub(octn,"stCondLst")
-        sub(st,"cond",delay="indefinite")
         if trig_spid is not None:
-            cond=sub(st,"cond",evt="onBegin",delay=0)
-            sub(cond,"tn",val=seq_children.getparent().get("id"))
-        elif auto:
-            if existing_clicks+ordinary_ci!=0:
-                raise ValueError("only the first main-sequence group can start automatically")
-            cond=sub(st,"cond",evt="onBegin",delay=0)
-            sub(cond,"tn",val=2)
+            # T049 1.3.2: the click step starts at 0. The interactiveSeq cTn
+            # already carries the onClick start condition.
+            sub(st,"cond",delay=0)
+        else:
+            sub(st,"cond",delay="indefinite")
+            if auto:
+                if existing_clicks+ordinary_ci!=0:
+                    raise ValueError("only the first main-sequence group can start automatically")
+                cond=sub(st,"cond",evt="onBegin",delay=0)
+                sub(cond,"tn",val=2)
         if trig_spid is None:
             ordinary_ci+=1
         ochildren=sub(octn,"childTnLst")
@@ -688,6 +1151,7 @@ def apply_timeline(root,clicks,mode="extend"):
                   "duration_ms":end,"blocks":block_receipts}
         if trig_spid is not None:
             rec_item["trigger_spid"]=str(trig_spid)
+            rec_item["hyperlinks_stripped"]=stripped
         receipts.append(rec_item)
 
     bld=timing.find("p:bldLst",NS)
@@ -734,6 +1198,25 @@ def _first_target(ctn):
     return tgt.get("spid"),(int(pr.get("st")) if pr is not None else None)
 
 
+def _effect_duration(ctn):
+    """Longest behaviour duration under an effect cTn (the effect's own dur)."""
+    durs=[]
+    own=ctn.get("dur")
+    if own and own.isdigit():
+        durs.append(int(own))
+    for bhvr in ctn.findall(".//p:cBhvr/p:cTn",NS):
+        raw=bhvr.get("dur")
+        if raw and raw.isdigit():
+            durs.append(int(raw))
+    return max(durs,default=0)
+
+
+def _effect_delay(ctn):
+    cond=ctn.find("p:stCondLst/p:cond",NS)
+    raw=cond.get("delay") if cond is not None else None
+    return int(raw) if raw and raw.isdigit() else 0
+
+
 def _read_sequence_groups(seq_ctn,trigger_spid=None):
     groups=[]
     if seq_ctn is None:
@@ -766,7 +1249,8 @@ def _read_sequence_groups(seq_ctn,trigger_spid=None):
                     if tr is not None and tr.get("transition") in ("in","out"):
                         vis="visible" if tr.get("transition")=="in" else "hidden"
             effects.append({"spid":spid,"paragraph":para,"class":cls,"preset_id":ctn.get("presetID"),
-                            "node_type":ctn.get("nodeType"),"visibility":vis})
+                            "node_type":ctn.get("nodeType"),"visibility":vis,
+                            "duration_ms":_effect_duration(ctn),"delay_ms":_effect_delay(ctn)})
         item={"auto":auto,"effects":effects}
         if trigger_spid is not None:
             item["trigger_spid"]=trigger_spid
@@ -786,13 +1270,8 @@ def read_main_sequence(root):
 def read_interactive_sequences(root):
     """Parse shape-triggered interactive sequences into click group records."""
     out=[]
-    for seq in root.findall(".//p:timing//p:seq",NS):
-        ctn=seq.find("p:cTn[@nodeType='interactiveSeq']",NS)
-        if ctn is None:
-            continue
-        tgt=seq.find("p:nextCondLst/p:cond/p:tgtEl/p:spTgt",NS)
-        spid=tgt.get("spid") if tgt is not None else None
-        out.extend(_read_sequence_groups(ctn,trigger_spid=spid))
+    for seq,ctn in interactive_sequences(root):
+        out.extend(_read_sequence_groups(ctn,trigger_spid=sequence_trigger_spid(seq)))
     return out
 
 

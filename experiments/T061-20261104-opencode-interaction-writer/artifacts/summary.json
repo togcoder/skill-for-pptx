@@ -1,0 +1,212 @@
+{
+  "label": "after",
+  "timeline": {
+    "hyperlink_survived": false,
+    "ctn_ids_sorted": true,
+    "interactive_seq_ctn_attrs": {
+      "id": "2",
+      "restart": "whenNotActive",
+      "fill": "hold",
+      "evtFilter": "cancelBubble",
+      "nodeType": "interactiveSeq"
+    },
+    "sha256": "6b1b618a692e4a0a8d9030a11aabde1fb926806fb97a88c632a6ff3ab2cf772f",
+    "receipt": {
+      "mode": "extend",
+      "had_existing_timing": false,
+      "replaced_existing_timing": false,
+      "existing_click_groups": 0,
+      "appended_click_groups": 0,
+      "interactive_click_groups": 1,
+      "created_main_sequence": false,
+      "clicks": [
+        {
+          "id": "trig-1",
+          "start": "click",
+          "duration_ms": 500,
+          "blocks": [
+            {
+              "begin_ms": 0,
+              "effects": [
+                {
+                  "preset": "zoom",
+                  "spid": "20",
+                  "trigger": "click",
+                  "duration_ms": 500
+                }
+              ]
+            }
+          ],
+          "trigger_spid": "10",
+          "hyperlinks_stripped": 1
+        }
+      ]
+    }
+  },
+  "canonical_seq_sha256": "d1f76b7bdea601af3127d9b9b893acde11a35108136d6c5154740917e3e06a27",
+  "t048": {
+    "game": {
+      "committed": "experiments/T048-20261101-antigravity-slide-branching/artifacts/interactive_adventure_game.pptx",
+      "members_compared": 43,
+      "different_members": [],
+      "slide_xml_identical": true,
+      "graph_edges": 11,
+      "graph_edges_rebuilt": 11
+    },
+    "hub": {
+      "committed": "experiments/T048-20261101-antigravity-slide-branching/artifacts/executive_interactive_hub.pptx",
+      "members_compared": 43,
+      "different_members": [],
+      "slide_xml_identical": true,
+      "graph_edges": 8,
+      "graph_edges_rebuilt": 8
+    }
+  },
+  "t049": {
+    "artifact_sha256": "f91531f87e381fa2f84a02a1bb14f918ddf4d9d3c816098a223a3d22211bab3f",
+    "interactive_sequences_count": 8,
+    "per_slide": [
+      {
+        "file": "ppt/slides/slide1.xml",
+        "interactive_sequences": 4
+      },
+      {
+        "file": "ppt/slides/slide2.xml",
+        "interactive_sequences": 4
+      }
+    ],
+    "animated_spids_per_sequence": [
+      1,
+      1,
+      1,
+      3,
+      1,
+      1,
+      1,
+      3
+    ],
+    "parse_fingerprint": [
+      [
+        "ppt/slides/slide1.xml",
+        [
+          [
+            "6",
+            [
+              "6"
+            ]
+          ],
+          [
+            "8",
+            [
+              "8"
+            ]
+          ],
+          [
+            "10",
+            [
+              "10"
+            ]
+          ],
+          [
+            "11",
+            [
+              "6",
+              "8",
+              "10"
+            ]
+          ]
+        ]
+      ],
+      [
+        "ppt/slides/slide2.xml",
+        [
+          [
+            "5",
+            [
+              "6"
+            ]
+          ],
+          [
+            "7",
+            [
+              "8"
+            ]
+          ],
+          [
+            "9",
+            [
+              "10"
+            ]
+          ],
+          [
+            "11",
+            [
+              "6",
+              "8",
+              "10"
+            ]
+          ]
+        ]
+      ]
+    ],
+    "stored_parse_fingerprint": [
+      [
+        "ppt/slides/slide1.xml",
+        [
+          [
+            "6",
+            []
+          ],
+          [
+            "8",
+            []
+          ],
+          [
+            "10",
+            []
+          ],
+          [
+            "11",
+            [
+              "10",
+              "6",
+              "8"
+            ]
+          ]
+        ]
+      ],
+      [
+        "ppt/slides/slide2.xml",
+        [
+          [
+            "5",
+            [
+              "6"
+            ]
+          ],
+          [
+            "7",
+            [
+              "8"
+            ]
+          ],
+          [
+            "9",
+            [
+              "10"
+            ]
+          ],
+          [
+            "11",
+            [
+              "10",
+              "6",
+              "8"
+            ]
+          ]
+        ]
+      ]
+    ],
+    "stored_counts_match": true
+  }
+}

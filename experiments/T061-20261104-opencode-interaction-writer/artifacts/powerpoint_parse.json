@@ -1,0 +1,108 @@
+{
+  "canonical": {
+    "written": {
+      "receipt": {
+        "mode": "extend",
+        "had_existing_timing": false,
+        "replaced_existing_timing": false,
+        "existing_click_groups": 0,
+        "appended_click_groups": 0,
+        "interactive_click_groups": 1,
+        "created_main_sequence": false,
+        "clicks": [
+          {
+            "id": "trig",
+            "start": "click",
+            "duration_ms": 500,
+            "blocks": [
+              {
+                "begin_ms": 0,
+                "effects": [
+                  {
+                    "preset": "zoom",
+                    "spid": "3",
+                    "trigger": "click",
+                    "duration_ms": 500
+                  }
+                ]
+              }
+            ],
+            "trigger_spid": "2",
+            "hyperlinks_stripped": 0
+          }
+        ]
+      },
+      "spids": {
+        "Inspect Button": "2",
+        "Detail Panel": "3"
+      }
+    },
+    "path": "t061_trigger_probe.pptx",
+    "parsed": {
+      "ok": true,
+      "interactive_sequences": 1,
+      "main_sequence_effects": 0,
+      "effects": [
+        {
+          "trigger_shape": "Inspect Button",
+          "target_shape": "Detail Panel",
+          "effect_type": 48,
+          "duration_s": 0.5
+        }
+      ]
+    }
+  },
+  "pre_t061": {
+    "written": {
+      "receipt": {
+        "mode": "extend",
+        "had_existing_timing": false,
+        "replaced_existing_timing": false,
+        "existing_click_groups": 0,
+        "appended_click_groups": 0,
+        "interactive_click_groups": 1,
+        "created_main_sequence": false,
+        "clicks": [
+          {
+            "id": "trig",
+            "start": "click",
+            "duration_ms": 500,
+            "blocks": [
+              {
+                "begin_ms": 0,
+                "effects": [
+                  {
+                    "preset": "zoom",
+                    "spid": "3",
+                    "trigger": "click",
+                    "duration_ms": 500
+                  }
+                ]
+              }
+            ],
+            "trigger_spid": "2",
+            "hyperlinks_stripped": 0
+          }
+        ]
+      },
+      "spids": {
+        "Inspect Button": "2",
+        "Detail Panel": "3"
+      }
+    },
+    "path": "t061_trigger_probe_pre_t061.pptx",
+    "parsed": {
+      "ok": true,
+      "interactive_sequences": 1,
+      "main_sequence_effects": 0,
+      "effects": [
+        {
+          "trigger_shape": "Inspect Button",
+          "target_shape": "Detail Panel",
+          "effect_type": 48,
+          "duration_s": 0.5
+        }
+      ]
+    }
+  }
+}

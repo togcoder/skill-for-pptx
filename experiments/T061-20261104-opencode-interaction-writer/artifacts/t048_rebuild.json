@@ -1,0 +1,21 @@
+{
+  "decks": {
+    "game": {
+      "committed": "experiments/T048-20261101-antigravity-slide-branching/artifacts/interactive_adventure_game.pptx",
+      "members_compared": 43,
+      "different_members": [],
+      "slide_xml_identical": true,
+      "graph_edges": 11,
+      "graph_edges_rebuilt": 11
+    },
+    "hub": {
+      "committed": "experiments/T048-20261101-antigravity-slide-branching/artifacts/executive_interactive_hub.pptx",
+      "members_compared": 43,
+      "different_members": [],
+      "slide_xml_identical": true,
+      "graph_edges": 8,
+      "graph_edges_rebuilt": 8
+    }
+  },
+  "ok": true
+}

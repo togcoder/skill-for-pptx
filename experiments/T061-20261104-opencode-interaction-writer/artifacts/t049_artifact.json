@@ -1,0 +1,147 @@
+{
+  "artifact_sha256": "f91531f87e381fa2f84a02a1bb14f918ddf4d9d3c816098a223a3d22211bab3f",
+  "interactive_sequences_count": 8,
+  "per_slide": [
+    {
+      "file": "ppt/slides/slide1.xml",
+      "interactive_sequences": 4
+    },
+    {
+      "file": "ppt/slides/slide2.xml",
+      "interactive_sequences": 4
+    }
+  ],
+  "animated_spids_per_sequence": [
+    1,
+    1,
+    1,
+    3,
+    1,
+    1,
+    1,
+    3
+  ],
+  "parse_fingerprint": [
+    [
+      "ppt/slides/slide1.xml",
+      [
+        [
+          "6",
+          [
+            "6"
+          ]
+        ],
+        [
+          "8",
+          [
+            "8"
+          ]
+        ],
+        [
+          "10",
+          [
+            "10"
+          ]
+        ],
+        [
+          "11",
+          [
+            "6",
+            "8",
+            "10"
+          ]
+        ]
+      ]
+    ],
+    [
+      "ppt/slides/slide2.xml",
+      [
+        [
+          "5",
+          [
+            "6"
+          ]
+        ],
+        [
+          "7",
+          [
+            "8"
+          ]
+        ],
+        [
+          "9",
+          [
+            "10"
+          ]
+        ],
+        [
+          "11",
+          [
+            "6",
+            "8",
+            "10"
+          ]
+        ]
+      ]
+    ]
+  ],
+  "stored_parse_fingerprint": [
+    [
+      "ppt/slides/slide1.xml",
+      [
+        [
+          "6",
+          []
+        ],
+        [
+          "8",
+          []
+        ],
+        [
+          "10",
+          []
+        ],
+        [
+          "11",
+          [
+            "10",
+            "6",
+            "8"
+          ]
+        ]
+      ]
+    ],
+    [
+      "ppt/slides/slide2.xml",
+      [
+        [
+          "5",
+          [
+            "6"
+          ]
+        ],
+        [
+          "7",
+          [
+            "8"
+          ]
+        ],
+        [
+          "9",
+          [
+            "10"
+          ]
+        ],
+        [
+          "11",
+          [
+            "10",
+            "6",
+            "8"
+          ]
+        ]
+      ]
+    ]
+  ],
+  "stored_counts_match": true
+}
