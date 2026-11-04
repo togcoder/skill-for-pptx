@@ -42,6 +42,9 @@ DOMAIN_MAP = {
     "pdfcraft": "pdf_processing",
     "cadcraft": "cad_2d",
     "solidcraft": "solid_modeling_3d",
+    "materialcraft": "pbr_materials",
+    "texturecraft": "3d_texturing",
+    "craft anything": "reverse_engineering",
 }
 
 
