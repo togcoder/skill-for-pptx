@@ -58,5 +58,6 @@ No background Morph, no thread Morph, no Morph between unrelated slides.
   slides. Each pair shares 7–16 `!!` names (A 13, B 16, C 15, D 7).
 - Titles never animate inside a slide. They are on the base plate; the cross-
   slide change is the Morph.
-- The deck has **3 object lifecycles** (slide 11 dims three tiles); it is not a
-  deck that only adds.
+- The deck has **17 shape lifecycles** (slides 2 and 7 dim prior definitions/
+  cards as the next one lands, and slide 11 dims three of four functions); it is
+  not a deck that only adds.

@@ -31,15 +31,16 @@ were true at the time. Task IDs and their branches are listed in
   Morph: two answer cards → the winning answer; two worldviews → the dialectic
   one; three parts → one whole; quotation → thesis. Each pair shares 7–16
   `!!` names; no background or thread Morph.
-- **Measured.** 14 slides, **9 click groups, 39 effects, 4 Morphs, 3 lifecycle
-  dims**; 0 empty base states, 0 pictures on the last click, 0 empty frames,
-  0 Morph/entrance conflicts; max active view **45 words**; five type sizes.
-  PowerPoint 16.0 opens 14 slides + 14 PNG + 14-page PDF, 0 repair; COM reports
-  EntryEffect **3954** (Morph) at 1.2 s on slides 4/6/9/13.
+- **Measured.** 14 slides, **9 click groups, 61 effects, 4 Morphs, 17 shape
+  lifecycles**; 0 empty base states, 0 pictures on the last click, 0 empty
+  frames, 0 Morph/entrance conflicts; max active view **45 words**; five type
+  sizes. PowerPoint 16.0 opens 14 slides + 14 PNG + 14-page PDF, 0 repair; COM
+  reports EntryEffect **3954** (Morph) at 1.2 s on slides 4/6/9/13.
 - **Critic.** New experimental `scripts/deck_state_critic.py` grades `t=0` and
-  every click. It **fails T066** with 58 gates (51 fail) and **passes T069** with
-  0 gates. `design_critic.py` gives T069 **4.35** (design 3.99, motion 4.92,
-  rhythm 3.5, coherence 5.0).
+  every click. It **fails T066** with 58 gates (51 fail) and **passes T069a**
+  with 0 gates. `design_critic.py` (with T069b's narrative dimension) gives
+  T069a **4.33** (design 3.99, motion 5.0, rhythm 3.42, coherence 4.33,
+  narrative 4.92).
 - **Images.** Cover portraits and Plato are present at `t=0`; the timeline was
   re-ordered to Engels 1848 → Marx 1867 → Lenin 1917 so the dots sit under the
   work each face carries (T066 had 1848 under Marx).

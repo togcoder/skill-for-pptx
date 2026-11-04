@@ -75,17 +75,17 @@ clicks and reads better at `t=0`.
 | Base state is readable everywhere | state critic: 0 `STATE-EMPTY-BASE`, 0 `STATE-NO-CLAIM`; every slide has a claim/title at `t=0` | 4 |
 | Images are not a coda | 0 `STATE-IMAGE-CODA`, 0 `STATE-IMAGE-LAG`, 0 `STATE-DECOR-BEFORE-IMAGE` | 4 |
 | Morph and entrance do not collide | 0 `MORPH-ENTRANCE-CONFLICT` (`!!` objects have no entrance) | 4 |
-| Motion is smaller, not bigger | **9 clicks / 39 effects** vs T067 **27 / 116** and T066 **51 / 144** | 4 |
-| Object lifecycle exists | 3 dim lifecycles on slide 11; state critic `lifecycles=3` | 4 |
+| Motion is smaller, not bigger | **9 clicks / 61 effects** vs T067 **27 / 116** and T066 **51 / 144** | 4 |
+| Object lifecycle exists | **17 shape lifecycles** on slides 2 and 7; six function tiles were reduced to one focus | 4 |
 | No wall of text | max active view **45 words** (was 80 in T066/T067); type scale 5 sizes (was 27) | 4 |
-| Deck opens and renders | PowerPoint 16 opens 14 slides, 39 effects, 14 PNG + 14-page PDF, 0 repair | 4–5 |
-| Critic | `design_critic.py`: overall **4.35** (design 3.99, motion 4.92, rhythm 3.5, coherence 5.0), 0 errors; warnings: `MOT-STATIC`, `TYP-SMALL` note | 3 |
+| Deck opens and renders | PowerPoint 16 opens 14 slides, 61 effects, 14 PNG + 14-page PDF, 0 repair | 4–5 |
+| Critic | `design_critic.py` (with T069b narrative dimension): overall **4.33** (design 3.99, motion 5.0, rhythm 3.42, coherence 4.33, **narrative 4.92**), 0 errors; warnings: `MOT-STATIC`, `TYP-SMALL` note | 3 |
 | State critic discriminates | T066: **FAIL**, 58 gates (51 fail, 7 warn) incl. empty base, title on click, rings before faces, coda images, Morph/entrance conflict; T069: **PASS**, 0 gates | 4 |
 | A/B image order | slide 10 now 1848 Engels / 1867 Marx / 1917 Lenin; dots under the work, not the cast order | 5 (static render) |
 
 **Artifacts.**
-- `artifacts/T069-directed-morph.pptx` — 14 slides, 2,017,856 B,
-  SHA-256 `8399d2038b635962f95a2a3ef69f5cf1f57f18cc81836b1c6d226172e7e5e20c`.
+- `artifacts/T069-directed-morph.pptx` — 14 slides, 2,017,745 B,
+  SHA-256 `7a3d45890fdeac380a468c2e0cd5d8f043619241245285048ecf27cb27c6948d`.
 - `preview/slide-01..14.png`, `preview/T069-directed-morph.pdf` (14 pages),
   `preview/native_verify.json` (COM sequence and transitions).
 - `preview/morph-pairs.png` — the four source/destination pairs.
@@ -102,7 +102,9 @@ clicks and reads better at `t=0`.
 3. **The timeline now argues.** Re-ordering the portraits to Engels 1848 →
    Marx 1867 → Lenin 1917 makes the three dots mean what they point at. The
    T066 defect (1848 under Marx, 1867 under Engels) is gone.
-4. **The deck does more with less:** 9 clicks and 39 effects, down from 27/116.
+4. **The deck does more with less:** 9 clicks and 61 effects, down from 27/116;
+   the extra effects are the dim lifecycles that keep the active view under the
+   cap, not decoration.
    Four of the nine clicks are the two definition builds and the three
    conditions; everything else is a poster or a Morph.
 5. **A critic that can say no.** `deck_state_critic.py` fails T066 on the exact
@@ -126,10 +128,11 @@ clicks and reads better at `t=0`.
 4. **Two build-first slides remain** (slide 2 definitions, slide 7 conditions).
    They open on a readable title + image/frame, not on a blank stage, but they
    still use 3–4 clicks.
-5. **The design critic is not a narrative critic.** Overall 4.35; design 3.99
-   still trails T066's 4.03 because the critic weights per-slide checks. The
-   state critic is the instrument that sees the improvement; the design score
-   alone would not.
+5. **The critic needed T069b to see narrative.** T069a was measured with the
+   design critic before the narrative dimension existed; after T069b the same
+   deck scores **narrative 4.92**, overall **4.33**. Design 3.99 still trails
+   T066's 4.03 because the critic weights per-slide checks. The state critic is
+   the instrument that sees the improvement; the design score alone would not.
 6. **`MOT-STATIC` warning** is expected: the deck intentionally has poster
    slides with no in-slide motion, because the change happens at the Morph.
 7. **`deck_state_critic.py` is experimental** and not wired into

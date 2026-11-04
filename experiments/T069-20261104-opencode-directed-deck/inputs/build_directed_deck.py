@@ -370,6 +370,29 @@ set_text(by_name(s10, "closing"), "Học cách đặt câu hỏi đúng.", 26, B
          font=PALATINO)
 set_text(by_name(s10, "credits"), "Wikimedia · CC0", 8, DARK)
 
+# --- speaker notes: [T=0] plus one [CLICK n] per click group ----------------
+def notes(slide, text):
+    slide.notes_slide.notes_text_frame.text = text
+
+
+notes(prs.slides[1],
+      "[T=0] Triết học bắt đầu từ câu hỏi: nó là gì?\n"
+      "[CLICK 1] Định nghĩa thứ nhất: một hệ thống tri thức lý luận chung nhất.\n"
+      "[CLICK 2] Định nghĩa thứ hai: khoa học về những quy luật chung nhất.\n"
+      "[CLICK 3] Ba chức năng: thế giới quan, phương pháp luận, logic biện chứng.")
+notes(prs.slides[6],
+      "[T=0] Những năm 1840: ba điều kiện cùng chín.\n"
+      "[CLICK 1] Kinh tế – xã hội: CNTB phát triển, giai cấp vô sản xuất hiện.\n"
+      "[CLICK 2] Khoa học tự nhiên: tế bào, bảo toàn năng lượng, tiến hóa.\n"
+      "[CLICK 3] Tư tưởng: Hegel, Feuerbach, XHCN không tưởng.\n"
+      "[CLICK 4] 1848: Tuyên ngôn Đảng Cộng sản.")
+notes(prs.slides[9],
+      "[T=0] Ba con người, ba mốc: Engels 1848, Marx 1867, Lenin 1917.\n"
+      "[CLICK 1] Dòng thời gian nối ba mốc ấy thành một dòng chảy.")
+notes(prs.slides[10],
+      "[T=0] Bốn chức năng của triết học.\n"
+      "[CLICK 1] Khoa học là sợi chỉ xuyên suốt; ba chức năng kia lùi lại.")
+
 # --- one type scale: 9 / 12 / 16 / 24 / 36 / 54 pt -------------------------
 def snap_size(pt: float) -> int:
     if pt <= 13:
@@ -402,6 +425,65 @@ parts = pkg.slides()
 
 # closing summary: all three takes + thesis are readable at t=0
 strip_timing(pkg, parts[13])
+
+def shape_ids(root):
+    out = {}
+    for spid, node in anim.top_level_objects(root).items():
+        prop = node.find("./*/" + qn("p:cNvPr"))
+        if prop is not None:
+            out[prop.get("name")] = spid
+    return out
+
+
+def fade(name, first=False, dur=350):
+    return {"preset": "fade", "trigger": "click" if first else "with",
+            "duration_ms": dur, "spid": ids[name]}
+
+
+def dim(name, first=False, dur=400):
+    return {"preset": "dim", "trigger": "click" if first else "with",
+            "duration_ms": dur, "spid": ids[name], "opacity": 0.32}
+
+
+# slide 2: definitions build, then the three functions replace them
+root = pkg.xml(parts[1])
+ids = shape_ids(root)
+labels = ["l0-rule", "l0-n", "l0-h", "l0-s", "l1-rule", "l1-n", "l1-h", "l1-s",
+          "l2-rule", "l2-n", "l2-h", "l2-s"]
+clicks = [
+    {"id": "t069.def1", "start": "click",
+     "effects": [fade("def1", first=True)]},
+    {"id": "t069.def2", "start": "click",
+     "effects": [fade("def2", first=True)]},
+    {"id": "t069.functions", "start": "click",
+     "effects": [fade(n, first=(i == 0)) for i, n in enumerate(labels)]
+                + [dim("def1"), dim("def2")]},
+]
+anim.apply_timeline(root, clicks, mode="replace")
+pkg.put(parts[1], root)
+
+# slide 7: three conditions build; each new card dims the previous one
+root = pkg.xml(parts[6])
+ids = shape_ids(root)
+card0 = ["card0", "card0-n", "card0-h", "card0-b"]
+card1 = ["card1", "card1-n", "card1-h", "card1-b"]
+card2 = ["card2", "card2-n", "card2-h", "card2-b"]
+timeline = ["timeline", "timeline-dot", "timeline-text"]
+clicks = [
+    {"id": "t069.cond0", "start": "click",
+     "effects": [fade(n, first=(i == 0)) for i, n in enumerate(card0)]},
+    {"id": "t069.cond1", "start": "click",
+     "effects": [fade(n, first=(i == 0)) for i, n in enumerate(card1)]
+                + [dim(n) for n in card0]},
+    {"id": "t069.cond2", "start": "click",
+     "effects": [fade(n, first=(i == 0)) for i, n in enumerate(card2)]
+                + [dim(n) for n in card1]},
+    {"id": "t069.cond1848", "start": "click",
+     "effects": [fade(n, first=(i == 0)) for i, n in enumerate(timeline)]
+                + [dim(n) for n in card0 + card1 + card2]},
+]
+anim.apply_timeline(root, clicks, mode="replace")
+pkg.put(parts[6], root)
 
 # timeline slide: names/dates are the poster; one click draws the order
 root = pkg.xml(parts[9])

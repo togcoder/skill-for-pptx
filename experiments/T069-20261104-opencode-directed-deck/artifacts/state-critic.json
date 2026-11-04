@@ -1,11 +1,11 @@
 {
  "deck": "T069-directed-morph.pptx",
- "sha256": "8399d2038b635962",
+ "sha256": "7a3d45890fdeac38",
  "slides": 14,
  "clicks": 9,
- "effects": 39,
+ "effects": 61,
  "morphs": 4,
- "lifecycles": 3,
+ "lifecycles": 17,
  "gates": [],
  "summary": {
   "fail": 0,
@@ -34,7 +34,7 @@
   {
    "slide": 2,
    "clicks": 3,
-   "effects": 14,
+   "effects": 16,
    "base_words": 14,
    "base_claim": true,
    "base_pictures": 1,
@@ -47,7 +47,7 @@
    "pictures": {
     "plato": 0
    },
-   "lifecycles": 0,
+   "lifecycles": 2,
    "morph": null
   },
   {
@@ -109,7 +109,7 @@
   {
    "slide": 7,
    "clicks": 4,
-   "effects": 15,
+   "effects": 35,
    "base_words": 12,
    "base_claim": true,
    "base_pictures": 0,
@@ -121,7 +121,7 @@
     60
    ],
    "pictures": {},
-   "lifecycles": 0,
+   "lifecycles": 12,
    "morph": null
   },
   {

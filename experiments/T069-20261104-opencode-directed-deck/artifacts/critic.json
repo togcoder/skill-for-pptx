@@ -2,12 +2,13 @@
  "design_system": "1.1.0",
  "scores": {
   "design": 3.99,
-  "motion": 4.92,
-  "rhythm": 3.5,
-  "coherence": 5.0,
-  "overall": 4.35
+  "motion": 5.0,
+  "rhythm": 3.42,
+  "coherence": 4.33,
+  "narrative": 4.92,
+  "overall": 4.33
  },
- "checks": 314,
+ "checks": 352,
  "evaluations": [
   [
    "COL-TEXT",
@@ -55,12 +56,7 @@
    false
   ],
   [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
+   "DEN-ACTIVE-WORDS",
    "good",
    false
   ],
@@ -71,471 +67,6 @@
   ],
   [
    "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "DEN-WORDS",
-   "note",
-   false
-  ],
-  [
-   "MOT-CLICKS",
-   "good",
-   false
-  ],
-  [
-   "MOT-DURATION",
-   "good",
-   false
-  ],
-  [
-   "MOT-DURATION",
-   "good",
-   false
-  ],
-  [
-   "MOT-DURATION",
-   "good",
-   false
-  ],
-  [
-   "MOT-DURATION",
-   "good",
-   false
-  ],
-  [
-   "MOT-DURATION",
-   "good",
-   false
-  ],
-  [
-   "MOT-EFFECTS",
-   "good",
-   false
-  ],
-  [
-   "MOT-EFFECTS",
-   "good",
-   false
-  ],
-  [
-   "MOT-EFFECTS",
-   "good",
-   false
-  ],
-  [
-   "MOT-STAGGER",
-   "note",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "DEN-WORDS",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "DEN-WORDS",
-   "good",
-   false
-  ],
-  [
-   "MOT-DURATION",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "LAY-SAFE",
-   "good",
-   false
-  ],
-  [
-   "DEN-WORDS",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "COL-TEXT",
-   "good",
-   false
-  ],
-  [
-   "DEN-WORDS",
-   "good",
-   false
-  ],
-  [
-   "MOT-DURATION",
    "good",
    false
   ],
@@ -725,7 +256,27 @@
    false
   ],
   [
-   "MOT-EFFECTS",
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
    "good",
    false
   ],
@@ -741,6 +292,346 @@
   ],
   [
    "MOT-EFFECTS",
+   "note",
+   false
+  ],
+  [
+   "NAR-BASE-STATE",
+   "good",
+   false
+  ],
+  [
+   "DEN-ACTIVE-WORDS",
+   "note",
+   false
+  ],
+  [
+   "NAR-LIFECYCLE",
+   "good",
+   false
+  ],
+  [
+   "NAR-ALIGN",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "DEN-WORDS",
+   "good",
+   false
+  ],
+  [
+   "DEN-ACTIVE-WORDS",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "DEN-WORDS",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "DEN-ACTIVE-WORDS",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "DEN-WORDS",
+   "good",
+   false
+  ],
+  [
+   "DEN-ACTIVE-WORDS",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "DEN-WORDS",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "DEN-ACTIVE-WORDS",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
    "good",
    false
   ],
@@ -866,6 +757,256 @@
   ],
   [
    "DEN-WORDS",
+   "note",
+   false
+  ],
+  [
+   "MOT-CLICKS",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "NAR-BASE-STATE",
+   "good",
+   false
+  ],
+  [
+   "DEN-ACTIVE-WORDS",
+   "good",
+   false
+  ],
+  [
+   "NAR-LIFECYCLE",
+   "good",
+   false
+  ],
+  [
+   "NAR-ALIGN",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "DEN-WORDS",
+   "good",
+   false
+  ],
+  [
+   "DEN-ACTIVE-WORDS",
    "good",
    false
   ],
@@ -941,6 +1082,11 @@
   ],
   [
    "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "DEN-ACTIVE-WORDS",
    "good",
    false
   ],
@@ -1145,6 +1291,21 @@
    false
   ],
   [
+   "NAR-BASE-STATE",
+   "good",
+   false
+  ],
+  [
+   "DEN-ACTIVE-WORDS",
+   "good",
+   false
+  ],
+  [
+   "NAR-ALIGN",
+   "good",
+   false
+  ],
+  [
    "COL-TEXT",
    "good",
    false
@@ -1300,6 +1461,21 @@
    false
   ],
   [
+   "NAR-BASE-STATE",
+   "good",
+   false
+  ],
+  [
+   "DEN-ACTIVE-WORDS",
+   "good",
+   false
+  ],
+  [
+   "NAR-ALIGN",
+   "good",
+   false
+  ],
+  [
    "COL-TEXT",
    "good",
    false
@@ -1361,6 +1537,11 @@
   ],
   [
    "DEN-WORDS",
+   "good",
+   false
+  ],
+  [
+   "DEN-ACTIVE-WORDS",
    "good",
    false
   ],
@@ -1415,6 +1596,11 @@
    false
   ],
   [
+   "DEN-ACTIVE-WORDS",
+   "good",
+   false
+  ],
+  [
    "COL-TEXT",
    "good",
    false
@@ -1546,6 +1732,11 @@
   ],
   [
    "DEN-WORDS",
+   "good",
+   false
+  ],
+  [
+   "DEN-ACTIVE-WORDS",
    "good",
    false
   ],
@@ -1561,7 +1752,7 @@
   ],
   [
    "MOT-VOCAB",
-   "good",
+   "note",
    true
   ],
   [
@@ -1581,7 +1772,7 @@
   ]
  ],
  "issues_by_severity": {
-  "note": 5,
+  "note": 7,
   "warn": 1
  },
  "issues_by_code": {
@@ -1604,19 +1795,31 @@
    "tool": "slide_forge spec / author"
   },
   {
-   "code": "MOT-STAGGER",
-   "dimension": "motion",
+   "code": "MOT-EFFECTS",
+   "dimension": "rhythm",
    "severity": "note",
    "slide": 2,
    "object": null,
-   "measured": 251.0,
+   "measured": 12,
    "expected": [
-    60,
-    150
+    0,
+    8
    ],
    "detail": "",
-   "fix": "stagger 60-150 ms, only to show order; move together otherwise",
-   "tool": "motion_director plan (stagger_ms)"
+   "fix": "fewer simultaneous effects per click",
+   "tool": "motion_director plan"
+  },
+  {
+   "code": "DEN-ACTIVE-WORDS",
+   "dimension": "narrative",
+   "severity": "note",
+   "slide": 2,
+   "object": null,
+   "measured": 52,
+   "expected": "<= 45 active words",
+   "detail": "",
+   "fix": "dim or exit prior cards/points so active on-screen words stay <= 45 per click state",
+   "tool": "deck_director state_after.dim/exit"
   },
   {
    "code": "DEN-WORDS",
@@ -1668,6 +1871,21 @@
    "tool": "cognitive_pacing / slide_forge duarte_break"
   },
   {
+   "code": "MOT-VOCAB",
+   "dimension": "coherence",
+   "severity": "note",
+   "slide": null,
+   "object": null,
+   "measured": 2,
+   "expected": [
+    3,
+    10
+   ],
+   "detail": "fade, transparency",
+   "fix": "one motion language: a style with 3-10 effect kinds",
+   "tool": "motion_director --style"
+  },
+  {
    "code": "TYP-SMALL",
    "dimension": "design",
    "severity": "note",
@@ -1704,7 +1922,7 @@
     16.0,
     54.0
    ],
-   "effects": 14,
+   "effects": 16,
    "clicks": 3,
    "max_movers": 0
   },
@@ -1766,7 +1984,7 @@
     16.0,
     36.0
    ],
-   "effects": 15,
+   "effects": 35,
    "clicks": 4,
    "max_movers": 0
   },
@@ -1866,8 +2084,8 @@
    12,
    14
   ],
-  "lifecycles": 0,
-  "effect_kinds": 5,
+  "lifecycles": 14,
+  "effect_kinds": 2,
   "type_sizes": [
    12,
    16,
@@ -1880,5 +2098,5 @@
    "Palatino Linotype": 36
   }
  },
- "path": "experiments\\T069-20261104-opencode-directed-deck\\artifacts\\T069-directed-morph.pptx"
+ "path": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T069\\experiments\\T069-20261104-opencode-directed-deck\\artifacts\\T069-directed-morph.pptx"
 }
