@@ -94,4 +94,5 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T063 | [pptx] Forge debt users see: print-safe count-ups, highlight alignment, type scale, MOT-SETTLE | OpenCode (DeepSeek V4.1 Flash Max) | `work/T063-opencode-forge-debt` | main (review requested) | `experiments/T063-20261104-opencode-forge-debt/REPORT.md` |
 | T064 | [pptx] Decouple T055 native 3D from T054, review, Morph between 3D camera views | OpenCode (DeepSeek V4.1 Flash Max) | `work/T064-opencode-native-3d` | main (review requested; T055 accept-with-fixes) | `experiments/T064-20261104-opencode-native-3d/REPORT.md` |
 | T065 | [cross] Lab hygiene: encoding repair + mojibake/duplicate-ID checks, PR rule, artifact size cap | OpenCode (DeepSeek V4.1 Flash Max) | `work/T065-opencode-hygiene` | main (review requested) | `experiments/T065-20261104-opencode-hygiene/REPORT.md` |
-| T066 | *next free ID* | | | | |
+| T066 | [pptx] Triết học Mác – Lênin, Chương 1: native editorial deck with complex motion and cut-out portraits | OpenCode (DeepSeek V4.1 Flash Max) | `work/T066-opencode-triet-hoc-ch1` | in progress | `experiments/T066-20261104-opencode-triet-hoc-ch1/REPORT.md` |
+| T067 | *next free ID* | | | | |
