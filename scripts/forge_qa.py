@@ -114,9 +114,15 @@ def qa(path,theme=None):
                 bold=any(r.font.bold for r in runs)
                 paras=[p.text for p in sh.text_frame.paragraphs if p.text.strip()]
                 inset=(sh.text_frame.margin_left+sh.text_frame.margin_right)/EMU_IN
-                oval=sh.shape_type==1 and sh.auto_shape_type==9  # MSO_SHAPE.OVAL: inscribed text rectangle
-                k=0.707 if oval else 1.0
-                lines=sum(text_lines(t,family,max(sizes),sh.width/EMU_IN*k-inset,bold) for t in paras)
+                oval=sh.shape_type==1 and sh.auto_shape_type==9  # MSO_SHAPE.OVAL
+                k=1.0
+                lines=sum(text_lines(t,family,max(sizes),sh.width/EMU_IN-inset,bold) for t in paras)
+                if oval and lines>1:
+                    # Multi-line text in an ellipse has to stay inside the
+                    # inscribed rectangle; one centred line sits at mid-height
+                    # where the full diameter is available.
+                    k=0.707
+                    lines=sum(text_lines(t,family,max(sizes),sh.width/EMU_IN*k-inset,bold) for t in paras)
                 need=(lines*max(sizes)*1.18+6*(len(paras)-1))/72+0.1
                 have=sh.height/EMU_IN*k
                 if lines==float("inf"):

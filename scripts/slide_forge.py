@@ -18,6 +18,11 @@ Director recognises the structure (cards, process rows, cycles, charts) and
 choreographs it; pictures get Ken Burns and accents draw in (T024). Shared
 ``!!`` background orbs move between slides so Morph adds a motion-graphic
 layer across the deck.
+
+T063: type sizes come from the Office kit's ``type_scale_pt`` (3-6 sizes per
+deck), count-up stacks keep only the final value in print/PDF/Morph (the
+source is topmost and opaque), and highlight markers follow paragraph
+alignment. Ken Burns releases back to the authored frame before Morph.
 """
 import argparse
 import copy
@@ -31,7 +36,7 @@ import sys
 from pathlib import Path
 
 from lxml import etree as E
-from PIL import Image, ImageDraw, ImageFilter, ImageFont
+from PIL import Image, ImageDraw, ImageFilter
 from pptx import Presentation
 from pptx.chart.data import CategoryChartData
 from pptx.dml.color import RGBColor
@@ -43,7 +48,7 @@ from pptx.util import Emu, Inches, Pt
 
 sys.path.insert(0,str(Path(__file__).resolve().parent))
 
-VERSION="forge-0.1"
+VERSION="forge-0.2"
 W,H=13.333,7.5
 MARGIN=0.7
 THEMES={
@@ -101,6 +106,55 @@ def office_theme(name,mode="light"):
            "accent2":_legible(c["accent2"],[bg,surface],text)}
     fonts={"head":kit["fonts"]["majorFont"],"body":kit["fonts"]["minorFont"]}
     return theme,fonts,kit
+
+
+def _walk_keys(obj,key):
+    if isinstance(obj,dict):
+        if key in obj:
+            return True
+        return any(_walk_keys(v,key) for v in obj.values())
+    if isinstance(obj,list):
+        return any(_walk_keys(v,key) for v in obj)
+    return False
+
+
+def deck_type_scale(kit=None,spec=None):
+    """The deck's type scale, derived from the Office designer kit.
+
+    The kit's ``type_scale_pt`` is the source (Office themes ship 4-5 sizes:
+    title + body levels 1..4). Forge collapses it to six semantic levels:
+    display, title, subhead, body, label, small. ``body`` is the highest body
+    level that still satisfies the design system's 18 pt body minimum, so a
+    kit whose second body level is 16 pt (Facet) keeps 18 pt body text and
+    uses 16/14/12 for label/small. The display size is the design system's
+    ``kpi_stat`` token (72 pt) and is only added when the spec has a KPI, so
+    a plain deck stays at 4-5 sizes.
+    """
+    import design_system as ds
+    system=ds.load()
+    if kit is None:
+        kits={k["name"].lower():k for k in json.loads(KITS_PATH.read_text(encoding="utf-8"))["themes"]}
+        kit=kits.get("office theme") or next(iter(kits.values()))
+    ts=kit.get("type_scale_pt") or {"title":36.0,"body_l1":18.0,"body_l2":16.0,"body_l3":14.0,"body_l4":12.0}
+    title=float(ts.get("title",36.0))
+    bodies=sorted({float(v) for k,v in ts.items() if str(k).startswith("body")},reverse=True)
+    body=next((v for v in bodies[1:] if v>=18),None)
+    if body is None:
+        body=max(18.0,bodies[0]) if bodies else 24.0
+    subhead=bodies[0] if bodies and bodies[0]>body else body
+    label=max([v for v in bodies if v<body],default=body)
+    small=min(bodies) if bodies else label
+    # Kickers, captions and stage labels need one step below body. The kit's
+    # smallest body level can be 18 pt; the design system's body_base token
+    # (14 pt) is the cap, never below the 12 pt caption floor.
+    tokens=system.get("color_and_type_scales",{}).get("modular_scale",{}).get("tokens_pt",{})
+    small=max(12,min(small,float(tokens.get("body_base",14))))
+    scale={"title":title,"subhead":subhead,"body":body,"label":label,"small":small}
+    has_stats=(spec is not None and (_walk_keys(spec.get("slides") or [],"kpi")
+               or any(isinstance(s,dict) and s.get("layout") in ("kpis","duarte_break") for s in spec.get("slides") or [])))
+    if has_stats:
+        scale["display"]=max(float(tokens.get("kpi_stat",72)),title)
+    return {k:int(round(v)) for k,v in scale.items()}
 LAYOUTS={
     "title":{"required":["title"],"optional":["subtitle","image","kicker"]},
     "section":{"required":["title"],"optional":["kicker"]},
@@ -135,7 +189,7 @@ def schema():
                 "credits_slide":"bool, closing slide attributing licensed photos (default true)","theme":f"one of {sorted(THEMES)}, office:<Name>, {{\"seed\": \"#brandhex\", \"mode\"?: \"dark\", \"harmony\"?: 150}} "
                          "(OKLCH palette from one brand colour, AA guaranteed) or an object with the same color keys (hex)",
                 "fonts":{"head":"font family","body":"font family"},
-                "motion":{"style":"subtle|modern|bold|cinematic|dynamic (default modern; dynamic = PowerPoint's richer built-ins)","counters":"bool, count up KPI values (default true)",
+                "motion":{"style":"subtle|modern|bold|cinematic|dynamic (default modern; dynamic = PowerPoint's richer built-ins)","counters":"bool, count up KPI values (default true; the final value stays topmost in print/PDF/Morph)",
                           "morph":"bool, background orbs glide between slides (default true)"},
                 "slides":"list of slide objects"},
         "slide":{"layout":{k:v for k,v in LAYOUTS.items()},"notes":"speaker notes; sequence words (first, then, finally) make process steps one click each"},
@@ -226,73 +280,26 @@ def validate_spec(spec):
 # Text fitting
 
 
-_FONT_FILES={"segoe ui":["segoeui.ttf","DejaVuSans.ttf"],"segoe ui bold":["segoeuib.ttf","DejaVuSans-Bold.ttf"],
-             "segoe ui semibold":["seguisb.ttf","segoeuib.ttf","DejaVuSans-Bold.ttf"],
-             "segoe ui semibold bold":["segoeuib.ttf","DejaVuSans-Bold.ttf"],
-             "arial":["arial.ttf","LiberationSans-Regular.ttf"],"arial bold":["arialbd.ttf","LiberationSans-Bold.ttf"],
-             "calibri":["calibri.ttf","Carlito-Regular.ttf"],"calibri bold":["calibrib.ttf","Carlito-Bold.ttf"],
-             "calibri light":["calibril.ttf","Carlito-Regular.ttf"],"calibri light bold":["calibrib.ttf"],
-             "century gothic":["GOTHIC.TTF"],"century gothic bold":["GOTHICB.TTF"],
-             "trebuchet ms":["trebuc.ttf"],"trebuchet ms bold":["trebucbd.ttf"],
-             "gill sans mt":["GIL_____.TTF"],"gill sans mt bold":["GILB____.TTF"],
-             "garamond":["GARA.TTF"],"garamond bold":["GARABD.TTF"],
-             "tw cen mt":["TCM_____.TTF"],"tw cen mt bold":["TCB_____.TTF"],
-             "tw cen mt condensed":["TCCM____.TTF","TCM_____.TTF"],"tw cen mt condensed bold":["TCCB____.TTF","TCB_____.TTF"],
-             "georgia":["georgia.ttf"],"georgia bold":["georgiab.ttf"],"verdana":["verdana.ttf"],"verdana bold":["verdanab.ttf"]}
-SAFETY=1.06  # renderer kerning/hinting differs slightly from Pillow's metrics
-_FONT_DIRS=[Path("C:/Windows/Fonts"),Path("/usr/share/fonts"),Path("/Library/Fonts"),Path.home()/".fonts"]
-_font_cache={}
-_path_cache={}
+import text_metrics
+
+SAFETY=text_metrics.SAFETY
+_FONT_FILES=text_metrics.FONT_FILES  # kept for callers/tests that introspect it
 
 
 def _font_path(family):
-    fam=family.lower()
-    if fam not in _path_cache:
-        _path_cache[fam]=None
-        for name in _FONT_FILES.get(fam,[]):
-            for d in _FONT_DIRS:
-                if (d/name).is_file():
-                    _path_cache[fam]=d/name
-                elif d.is_dir() and d.name!="Fonts":
-                    _path_cache[fam]=next(d.rglob(name),None)
-                if _path_cache[fam]:
-                    return _path_cache[fam]
-    return _path_cache[fam]
+    return text_metrics.font_path(family)
 
 
 def _font(family,size_pt):
-    key=(family.lower(),size_pt)
-    if key not in _font_cache:
-        path=_font_path(family)
-        _font_cache[key]=ImageFont.truetype(str(path),size=max(1,round(size_pt*4))) if path else None
-    return _font_cache[key]
+    return text_metrics.load_font(family,size_pt)
 
 
 def text_lines(text,family,size_pt,width_in,bold=False):
     """Lines after word wrap, or inf when a single word is wider than the box
     (PowerPoint would break it mid-word). Measured with the real font file
-    when present; otherwise 0.55 em per character (ponytail: approximate)."""
-    fam=family+" bold" if bold and (family.lower()+" bold") in _FONT_FILES else family
-    font=_font(fam,size_pt)
-    width_px=width_in*72*4  # font loaded at 4 px per pt
-    def w(s):
-        return (font.getlength(s) if font else len(s)*size_pt*4*(0.6 if bold else 0.55))*SAFETY
-    if any(w(word)>width_px for word in str(text).split()):
-        return math.inf
-    lines=0
-    for para in str(text).split("\n"):
-        words=para.split() or [""]
-        cur=""
-        n=1
-        for word in words:
-            trial=(cur+" "+word).strip()
-            if w(trial)<=width_px or not cur:
-                cur=trial
-            else:
-                n+=1
-                cur=word
-        lines+=n
-    return lines
+    when present; otherwise 0.55 em per character. Shared with the motion
+    components (``text_metrics``) so highlights and fitting agree."""
+    return text_metrics.wrap_lines(text,family,size_pt,width_in,bold)
 
 
 def fit_size(paragraphs,family,size_pt,box_w,box_h,floor=12,spacing=1.18,gap_pt=6,bold=False):
@@ -350,8 +357,9 @@ class Builder:
         self.spec=spec
         t=spec.get("theme","midnight")
         kit_fonts={}
+        self.kit=None
         if isinstance(t,str) and t.lower().startswith("office:"):
-            self.theme,kit_fonts,_=office_theme(t.split(":",1)[1],spec.get("theme_mode","light"))
+            self.theme,kit_fonts,self.kit=office_theme(t.split(":",1)[1],spec.get("theme_mode","light"))
         elif isinstance(t,dict) and t.get("seed"):
             import brand_palette
             self.theme=brand_palette.brand_theme(t["seed"],t.get("mode",spec.get("theme_mode","light")),
@@ -359,6 +367,8 @@ class Builder:
         else:
             self.theme=dict(THEMES[t]) if isinstance(t,str) else {**THEMES["midnight"],**t}
         self.fonts={**FONTS,**kit_fonts,**(spec.get("fonts") or {})}
+        self.type_scale=deck_type_scale(self.kit,spec)
+        self.scale_sizes=sorted(set(self.type_scale.values()),reverse=True)
         self.motion={"style":"modern","counters":True,"morph":True,**(spec.get("motion") or {})}
         self.prs=Presentation()
         self.prs.slide_width=Inches(W)
@@ -373,19 +383,41 @@ class Builder:
     def rgb(self,key):
         return RGBColor.from_string(self.theme.get(key,key))
 
+    def snap(self,size):
+        """Nearest size on this deck's scale (ties go to the smaller size)."""
+        return min(self.scale_sizes,key=lambda s:(abs(s-float(size)),s))
+
+    def fit_level(self,paragraphs,start,box_w,box_h,floor="small",bold=False,gap=6,family=None):
+        """Largest size on the deck scale <= ``start`` whose text fits the box.
+
+        Sizes below ``floor`` are never used: the deck scale is the whole
+        vocabulary, so PowerPoint receives 3-6 sizes instead of 13 (T063)."""
+        start=int(start)
+        floor_pt=int(self.type_scale.get(floor,floor)) if isinstance(floor,str) else int(floor)
+        allowed=[s for s in self.scale_sizes if floor_pt<=s<=start] or [start]
+        fam=family or self.fonts["body"]
+        for size in allowed:
+            lines=sum(text_lines(p,fam,size,box_w-0.2,bold) for p in paragraphs)
+            height=(lines*size*1.18+gap*(len(paragraphs)-1))/72+0.15
+            if height<=box_h:
+                return size,True
+        return allowed[-1],False
+
     # -- primitives ---------------------------------------------------------
 
-    def text(self,slide,x,y,w,h,paragraphs,size,name,role="body",color="text",bold=False,align=None,
-             anchor=MSO_ANCHOR.TOP,floor=12,idx=None,gap=6):
+    def text(self,slide,x,y,w,h,paragraphs,name,size=None,role="body",color="text",bold=False,align=None,
+             anchor=MSO_ANCHOR.TOP,floor="small",idx=None,gap=6,level=None):
         if isinstance(paragraphs,str):
             paragraphs=[paragraphs]
         family=self.fonts["head" if role=="head" else "body"]
-        fitted,ok=fit_size(paragraphs,family,size,w,h,floor,gap_pt=gap,bold=bold)
-        if fitted<size:
-            self.receipts.append({"code":"TEXT_SHRUNK","slide":idx,"object":name,"detail":f"{size}->{fitted} pt",
+        start=int(self.type_scale[level]) if level else self.snap(size if size is not None else self.type_scale["body"])
+        fitted,ok=self.fit_level(paragraphs,start,w,h,floor=floor,gap=gap,bold=bold,family=family)
+        if fitted<start:
+            self.receipts.append({"code":"TEXT_SHRUNK","slide":idx,"object":name,"detail":f"{start}->{fitted} pt",
                                   "fix":"shorten the text if the smaller size hurts hierarchy"})
         if not ok:
-            self.receipts.append({"code":"TEXT_OVERFLOW","slide":idx,"object":name,"detail":f"does not fit at {floor} pt",
+            self.receipts.append({"code":"TEXT_OVERFLOW","slide":idx,"object":name,
+                                  "detail":f"does not fit at {self.type_scale.get(floor,floor)} pt",
                                   "fix":"shorten the text or split the slide","severity":"error"})
         box=slide.shapes.add_textbox(Inches(x),Inches(y),Inches(w),Inches(h))
         box.name=name
@@ -496,9 +528,9 @@ class Builder:
         if getattr(self,"spec",{}).get("logo") or getattr(self,"spec",{}).get("chrome"):
             tw-=1.3
         if kicker:
-            self.text(slide,MARGIN,0.18,tw,0.38,[kicker.upper()],12,"Kicker",color="accent",bold=True,idx=idx)
+            self.text(slide,MARGIN,0.18,tw,0.38,[kicker.upper()],"Kicker",level="small",color="accent",bold=True,idx=idx)
             y=0.58
-        self.text(slide,MARGIN,y,tw,0.85,[title],36,"Title",role="head",bold=True,idx=idx)
+        self.text(slide,MARGIN,y,tw,0.85,[title],"Title",level="subhead",role="head",bold=True,idx=idx)
         self.rect(slide,MARGIN+0.1,y+0.92,1.4,0.07,"accent","Title accent")
         return y+1.25
 
@@ -508,24 +540,24 @@ class Builder:
         img=s.get("image") or {"generate":s["title"]}
         self.picture(slide,img,W/2,0,W/2,H,"Hero picture",idx)
         if s.get("kicker"):
-            self.text(slide,MARGIN,2.0,W/2-1.2,0.45,[s["kicker"].upper()],14,"Kicker",color="accent",bold=True,idx=idx)
-        self.text(slide,MARGIN,2.45,W/2-1.2,2.2,[s["title"]],46,"Title",role="head",bold=True,
+            self.text(slide,MARGIN,2.0,W/2-1.2,0.45,[s["kicker"].upper()],"Kicker",level="small",color="accent",bold=True,idx=idx)
+        self.text(slide,MARGIN,2.45,W/2-1.2,2.2,[s["title"]],"Title",level="title",role="head",bold=True,
                   anchor=MSO_ANCHOR.BOTTOM,idx=idx)
         self.rect(slide,MARGIN+0.1,4.8,1.8,0.08,"accent","Title accent")
         if s.get("subtitle"):
-            self.text(slide,MARGIN,5.05,W/2-1.2,1.2,[s["subtitle"]],20,"Subtitle",color="muted",idx=idx)
+            self.text(slide,MARGIN,5.05,W/2-1.2,1.2,[s["subtitle"]],"Subtitle",level="label",color="muted",idx=idx)
 
     def l_section(self,slide,s,idx):
         if s.get("kicker"):
-            self.text(slide,MARGIN,2.5,W-2*MARGIN,0.5,[s["kicker"].upper()],16,"Kicker",color="accent",bold=True,idx=idx)
-        self.text(slide,MARGIN,3.0,W-2*MARGIN,1.4,[s["title"]],44,"Title",role="head",bold=True,idx=idx)
+            self.text(slide,MARGIN,2.5,W-2*MARGIN,0.5,[s["kicker"].upper()],"Kicker",level="small",color="accent",bold=True,idx=idx)
+        self.text(slide,MARGIN,3.0,W-2*MARGIN,1.4,[s["title"]],"Title",level="title",role="head",bold=True,idx=idx)
         self.rect(slide,MARGIN+0.1,4.5,2.4,0.08,"accent","Section accent")
 
     def l_statement(self,slide,s,idx):
         if s.get("kicker"):
-            self.text(slide,1.4,1.2,W-2.8,0.5,[s["kicker"].upper()],15,"Kicker",color="accent",bold=True,idx=idx)
+            self.text(slide,1.4,1.2,W-2.8,0.5,[s["kicker"].upper()],"Kicker",level="small",color="accent",bold=True,idx=idx)
         self.rect(slide,1.2,1.85,0.08,3.6,"accent","Statement bar")
-        self.text(slide,1.5,1.7,W-3.0,3.9,[s["text"]],54,"Statement",role="head",bold=True,
+        self.text(slide,1.5,1.7,W-3.0,3.9,[s["text"]],"Statement",level="title",role="head",bold=True,
                   anchor=MSO_ANCHOR.MIDDLE,idx=idx)
 
     def l_bullets(self,slide,s,idx):
@@ -534,7 +566,7 @@ class Builder:
         if s.get("image"):
             width=W*0.52-MARGIN
             self.picture(slide,s["image"],W*0.56,top,W*0.44-MARGIN,H-top-0.7,"Supporting picture",idx)
-        self.text(slide,MARGIN,top+0.1,width,H-top-0.8,["• "+b for b in s["bullets"]],28,"Points",
+        self.text(slide,MARGIN,top+0.1,width,H-top-0.8,["• "+b for b in s["bullets"]],"Points",level="body",
                   anchor=MSO_ANCHOR.MIDDLE,gap=18,idx=idx)
 
     def l_image(self,slide,s,idx):
@@ -545,7 +577,7 @@ class Builder:
         cap=0.7 if s.get("caption") else 0
         self.picture(slide,s["image"],1.4,top,W-2.8,H-top-0.5-cap,"Feature picture",idx)
         if cap:
-            self.text(slide,1.4,H-0.5-cap+0.1,W-2.8,cap-0.1,[s["caption"]],15,"Caption",color="muted",
+            self.text(slide,1.4,H-0.5-cap+0.1,W-2.8,cap-0.1,[s["caption"]],"Caption",level="small",color="muted",
                       align=PP_ALIGN.CENTER,idx=idx)
 
     def l_kpis(self,slide,s,idx):
@@ -557,7 +589,8 @@ class Builder:
         ch=3.0+(0.55 if any(t.get("icon") for t in items) else 0)
         y=top+(H-top-0.5-ch-(1.1 if s.get("takeaway") else 0))/2
         # One size for every value so the row reads as a set.
-        vsize=min(fit_size([it["value"]],self.fonts["head"],64,cw-0.4,1.2,floor=24,bold=True)[0] for it in items)
+        vsize=min(self.fit_level([it["value"]],self.type_scale["display"],cw-0.4,1.2,floor="body",bold=True,
+                                 family=self.fonts["head"])[0] for it in items)
         for i,it in enumerate(items):
             x=MARGIN+i*(cw+gap)
             self.rect(slide,x,y,cw,ch,"surface",f"KPI card {i+1}",MSO_SHAPE.ROUNDED_RECTANGLE)
@@ -566,12 +599,12 @@ class Builder:
                 dy=0.35
                 if it.get("icon"):
                     self.icon(slide,it["icon"],x+cw/2-0.3,y+0.22,0.6,f"KPI icon {i+1}")
-            self.text(slide,x+0.2,y+0.3+dy*1.6,cw-0.4,1.2,[it["value"]],vsize,f"KPI value {i+1}",role="head",color="accent",
+            self.text(slide,x+0.2,y+0.3+dy*1.6,cw-0.4,1.2,[it["value"]],f"KPI value {i+1}",size=vsize,role="head",color="accent",
                       bold=True,align=PP_ALIGN.CENTER,idx=idx)
-            self.text(slide,x+0.2,y+1.75+dy*1.6,cw-0.4,1.0-dy*0.6,[it["label"]],20,f"KPI label {i+1}",color="muted",
+            self.text(slide,x+0.2,y+1.75+dy*1.6,cw-0.4,1.0-dy*0.6,[it["label"]],f"KPI label {i+1}",level="label",color="muted",
                       align=PP_ALIGN.CENTER,idx=idx)
         if s.get("takeaway"):
-            self.text(slide,MARGIN,y+ch+0.35,W-2*MARGIN,0.8,[s["takeaway"]],24,"Takeaway",bold=True,
+            self.text(slide,MARGIN,y+ch+0.35,W-2*MARGIN,0.8,[s["takeaway"]],"Takeaway",level="subhead",bold=True,
                       align=PP_ALIGN.CENTER,idx=idx)
 
     def l_process(self,slide,s,idx):
@@ -588,7 +621,7 @@ class Builder:
             tf=box.text_frame
             tf.word_wrap=True
             fam=self.fonts["head"]
-            size,_=fit_size([st],fam,24,bw-0.2,bh-0.2,bold=True)
+            size,_=self.fit_level([st],self.type_scale["body"],bw-0.2,bh-0.2,bold=True,family=fam)
             tf.text=st
             for p in tf.paragraphs:
                 p.alignment=PP_ALIGN.CENTER
@@ -605,7 +638,7 @@ class Builder:
                 c.line.width=Pt(2.5)
                 _arrow(c)
         if s.get("takeaway"):
-            self.text(slide,MARGIN,y+bh+0.5,W-2*MARGIN,0.8,[s["takeaway"]],24,"Takeaway",bold=True,
+            self.text(slide,MARGIN,y+bh+0.5,W-2*MARGIN,0.8,[s["takeaway"]],"Takeaway",level="subhead",bold=True,
                       align=PP_ALIGN.CENTER,idx=idx)
 
     def l_cycle(self,slide,s,idx):
@@ -617,12 +650,12 @@ class Builder:
         d=1.65
         if s.get("center"):
             hub=self.rect(slide,cx-0.85,cy-0.85,1.7,1.7,"accent","Hub",MSO_SHAPE.OVAL)
-            _shape_text(self,hub,s["center"],20,"bg")
+            _shape_text(self,hub,s["center"],"bg",level="label")
         for i,it in enumerate(items):
             ang=-math.pi/2+2*math.pi*i/n
             x,y=cx+r*1.2*math.cos(ang),cy+r*math.sin(ang)  # near-circular: the Director detects cycles by radius spread
             node=self.rect(slide,x-d/2,y-d/2,d,d,"surface","Stage "+str(i+1),MSO_SHAPE.OVAL,line="accent")
-            _shape_text(self,node,it,18,"text")
+            _shape_text(self,node,it,"text",level="small")
 
     def l_chart(self,slide,s,idx):
         top=self.heading(slide,s["title"],idx)
@@ -635,7 +668,7 @@ class Builder:
         gf=slide.shapes.add_chart(CHART_TYPES[c["type"]],Inches(MARGIN),Inches(top+0.1),Inches(cw),Inches(H-top-0.6),data)
         gf.name="Chart"
         ch=gf.chart
-        ch.font.size=Pt(18)
+        ch.font.size=Pt(self.type_scale["label"])
         ch.font.name=self.fonts["body"]
         ch.font.color.rgb=self.rgb("muted")
         ch.has_legend=len(c["series"])>1 or c["type"] in ("pie","doughnut")
@@ -664,7 +697,7 @@ class Builder:
         if s.get("takeaway"):
             x=W*0.62+0.3
             self.rect(slide,x,top+0.6,0.07,2.6,"accent","Takeaway bar")
-            self.text(slide,x+0.25,top+0.5,W-x-0.25-MARGIN,2.9,[s["takeaway"]],30,"Takeaway",role="head",
+            self.text(slide,x+0.25,top+0.5,W-x-0.25-MARGIN,2.9,[s["takeaway"]],"Takeaway",level="subhead",role="head",
                       bold=True,anchor=MSO_ANCHOR.MIDDLE,idx=idx)
 
     def l_comparison(self,slide,s,idx):
@@ -680,24 +713,23 @@ class Builder:
                 self.icon(slide,s[side]["icon"],x+0.35,top+0.48,0.62,f"{side.title()} icon",
                           "accent" if i==0 else "accent2")
                 hx=0.8
-            self.text(slide,x+0.35+hx,top+0.4,cw-0.7-hx,0.8,[s[side]["heading"]],30,f"{side.title()} heading",role="head",
+            self.text(slide,x+0.35+hx,top+0.4,cw-0.7-hx,0.8,[s[side]["heading"]],f"{side.title()} heading",level="subhead",role="head",
                       color="accent" if i==0 else "accent2",bold=True,idx=idx)
-            self.text(slide,x+0.35,top+1.35,cw-0.7,chh-1.5,["• "+p for p in s[side].get("points",[])],24,
-                      f"{side.title()} points",gap=14,idx=idx)
+            self.text(slide,x+0.35,top+1.35,cw-0.7,chh-1.5,["• "+p for p in s[side].get("points",[])], f"{side.title()} points",level="body",gap=14,idx=idx)
 
     def l_quote(self,slide,s,idx):
-        self.text(slide,1.3,0.4,1.8,2.1,["\u201c"],110,"Quote mark",role="head",color="accent",bold=True,idx=idx)
-        self.text(slide,1.6,2.25,W-3.2,2.95,[s["quote"]],40,"Quote",role="head",anchor=MSO_ANCHOR.MIDDLE,idx=idx)
+        self.text(slide,1.3,0.4,1.8,2.1,["\u201c"],"Quote mark",level="display",role="head",color="accent",bold=True,idx=idx)
+        self.text(slide,1.6,2.25,W-3.2,2.95,[s["quote"]],"Quote",level="title",role="head",anchor=MSO_ANCHOR.MIDDLE,idx=idx)
         if s.get("author"):
             self.rect(slide,1.7,5.45,0.9,0.05,"accent","Author rule")
-            self.text(slide,2.75,5.2,W-4.4,0.6,[s["author"]],20,"Author",color="muted",idx=idx)
+            self.text(slide,2.75,5.2,W-4.4,0.6,[s["author"]],"Author",level="label",color="muted",idx=idx)
 
     def l_closing(self,slide,s,idx):
-        self.text(slide,MARGIN,2.4,W-2*MARGIN,1.6,[s["title"]],48,"Title",role="head",bold=True,
+        self.text(slide,MARGIN,2.4,W-2*MARGIN,1.6,[s["title"]],"Title",level="title",role="head",bold=True,
                   align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.BOTTOM,idx=idx)
         self.rect(slide,W/2-1.0,4.15,2.0,0.08,"accent","Closing accent")
         if s.get("subtitle"):
-            self.text(slide,MARGIN+1,4.45,W-2*MARGIN-2,1.2,[s["subtitle"]],24,"Subtitle",color="muted",
+            self.text(slide,MARGIN+1,4.45,W-2*MARGIN-2,1.2,[s["subtitle"]],"Subtitle",level="subhead",color="muted",
                       align=PP_ALIGN.CENTER,idx=idx)
 
     def l_asymmetric(self,slide,s,idx):
@@ -713,31 +745,31 @@ class Builder:
         m_data=s.get("major",{})
         if isinstance(m_data,dict):
             if m_data.get("heading"):
-                self.text(slide,mx+0.35,my+0.3,mw-0.7,0.45,[m_data["heading"]],22,"Major Heading",role="head",bold=True,idx=idx)
+                self.text(slide,mx+0.35,my+0.3,mw-0.7,0.45,[m_data["heading"]],"Major Heading",level="subhead",role="head",bold=True,idx=idx)
             if m_data.get("text"):
-                self.text(slide,mx+0.35,my+0.85,mw-0.7,card_h-1.2,[m_data["text"]],16,"Major Text",idx=idx)
+                self.text(slide,mx+0.35,my+0.85,mw-0.7,card_h-1.2,[m_data["text"]],"Major Text",level="label",idx=idx)
             elif m_data.get("points"):
-                self.text(slide,mx+0.35,my+0.85,mw-0.7,card_h-1.2,["• "+p for p in m_data["points"]],16,"Major Points",gap=12,idx=idx)
+                self.text(slide,mx+0.35,my+0.85,mw-0.7,card_h-1.2,["• "+p for p in m_data["points"]],"Major Points",level="label",gap=12,idx=idx)
             if m_data.get("image"):
                 self.picture(slide,m_data["image"],mx+0.3,my+0.8,mw-0.6,card_h-1.1,"Major Picture",idx)
         else:
-            self.text(slide,mx+0.35,my+0.4,mw-0.7,card_h-0.8,[str(m_data)],18,"Major Content",idx=idx)
+            self.text(slide,mx+0.35,my+0.4,mw-0.7,card_h-0.8,[str(m_data)],"Major Content",level="body",idx=idx)
         nx,ny,nw=minor["x"]/72,top+0.05,minor["w"]/72
         c2=self.rect(slide,nx,ny,nw,card_h,"surface","Minor Card",MSO_SHAPE.ROUNDED_RECTANGLE)
         _alpha(c2,75)
         n_data=s.get("minor",{})
         if isinstance(n_data,dict):
             if n_data.get("heading"):
-                self.text(slide,nx+0.3,ny+0.3,nw-0.6,0.45,[n_data["heading"]],18,"Minor Heading",role="head",bold=True,idx=idx)
+                self.text(slide,nx+0.3,ny+0.3,nw-0.6,0.45,[n_data["heading"]],"Minor Heading",level="label",role="head",bold=True,idx=idx)
             if n_data.get("kpi"):
-                self.text(slide,nx+0.3,ny+0.8,nw-0.6,1.2,[n_data["kpi"]],44,"Minor KPI",role="head",color="accent",bold=True,idx=idx)
+                self.text(slide,nx+0.3,ny+0.8,nw-0.6,1.2,[n_data["kpi"]],"Minor KPI",level="display",role="head",color="accent",bold=True,idx=idx)
             if n_data.get("points"):
-                self.text(slide,nx+0.3,ny+0.85,nw-0.6,card_h-1.2,["• "+p for p in n_data["points"]],14,"Minor Points",gap=10,idx=idx)
+                self.text(slide,nx+0.3,ny+0.85,nw-0.6,card_h-1.2,["• "+p for p in n_data["points"]],"Minor Points",level="small",gap=10,idx=idx)
             elif n_data.get("text"):
                 y_off=2.1 if n_data.get("kpi") else 0.85
-                self.text(slide,nx+0.3,ny+y_off,nw-0.6,card_h-y_off-0.3,[n_data["text"]],14,"Minor Text",color="muted",idx=idx)
+                self.text(slide,nx+0.3,ny+y_off,nw-0.6,card_h-y_off-0.3,[n_data["text"]],"Minor Text",level="small",color="muted",idx=idx)
         else:
-            self.text(slide,nx+0.3,ny+0.4,nw-0.6,card_h-0.8,[str(n_data)],16,"Minor Content",idx=idx)
+            self.text(slide,nx+0.3,ny+0.4,nw-0.6,card_h-0.8,[str(n_data)],"Minor Content",level="label",idx=idx)
 
     def l_bento(self,slide,s,idx):
         top=self.heading(slide,s["title"],idx,s.get("kicker"))
@@ -749,13 +781,13 @@ class Builder:
         h_data=s.get("hero",{})
         if isinstance(h_data,dict):
             if h_data.get("title"):
-                self.text(slide,hx+0.35,hy+0.3,hero_w-0.7,0.45,[h_data["title"]],22,"Hero Title",role="head",bold=True,idx=idx)
+                self.text(slide,hx+0.35,hy+0.3,hero_w-0.7,0.45,[h_data["title"]],"Hero Title",level="subhead",role="head",bold=True,idx=idx)
             if h_data.get("text"):
-                self.text(slide,hx+0.35,hy+0.85,hero_w-0.7,total_h-1.2,[h_data["text"]],16,"Hero Text",idx=idx)
+                self.text(slide,hx+0.35,hy+0.85,hero_w-0.7,total_h-1.2,[h_data["text"]],"Hero Text",level="label",idx=idx)
             elif h_data.get("image"):
                 self.picture(slide,h_data["image"],hx+0.25,hy+0.8,hero_w-0.5,total_h-1.05,"Hero Picture",idx)
         else:
-            self.text(slide,hx+0.35,hy+0.4,hero_w-0.7,total_h-0.8,[str(h_data)],18,"Hero Content",idx=idx)
+            self.text(slide,hx+0.35,hy+0.4,hero_w-0.7,total_h-0.8,[str(h_data)],"Hero Content",level="body",idx=idx)
         rx,rw,gutter=564/72,348/72,20/72
         sub_h=(total_h-gutter)/2
         c_tr=self.rect(slide,rx,hy,rw,sub_h,"surface","Top Right Card",MSO_SHAPE.ROUNDED_RECTANGLE)
@@ -763,11 +795,11 @@ class Builder:
         tr_data=s.get("top_right",{})
         if isinstance(tr_data,dict):
             if tr_data.get("title"):
-                self.text(slide,rx+0.3,hy+0.25,rw-0.6,0.4,[tr_data["title"]],18,"TopRight Title",role="head",bold=True,idx=idx)
+                self.text(slide,rx+0.3,hy+0.25,rw-0.6,0.4,[tr_data["title"]],"TopRight Title",level="label",role="head",bold=True,idx=idx)
             if tr_data.get("text"):
-                self.text(slide,rx+0.3,hy+0.7,rw-0.6,sub_h-0.9,[tr_data["text"]],14,"TopRight Text",color="muted",idx=idx)
+                self.text(slide,rx+0.3,hy+0.7,rw-0.6,sub_h-0.9,[tr_data["text"]],"TopRight Text",level="small",color="muted",idx=idx)
         else:
-            self.text(slide,rx+0.3,hy+0.3,rw-0.6,sub_h-0.6,[str(tr_data)],14,"TopRight Content",idx=idx)
+            self.text(slide,rx+0.3,hy+0.3,rw-0.6,sub_h-0.6,[str(tr_data)],"TopRight Content",level="small",idx=idx)
         by=hy+sub_h+gutter
         mini_w=(rw-gutter)/2
         c_br1=self.rect(slide,rx,by,mini_w,sub_h,"surface","Bottom Right 1",MSO_SHAPE.ROUNDED_RECTANGLE)
@@ -775,32 +807,32 @@ class Builder:
         b1_data=s.get("bottom_right_1",{})
         if isinstance(b1_data,dict):
             if b1_data.get("kpi"):
-                self.text(slide,rx+0.15,by+0.25,mini_w-0.3,0.8,[b1_data["kpi"]],32,"BR1 KPI",role="head",color="accent",bold=True,align=PP_ALIGN.CENTER,idx=idx)
+                self.text(slide,rx+0.15,by+0.25,mini_w-0.3,0.8,[b1_data["kpi"]],"BR1 KPI",level="subhead",role="head",color="accent",bold=True,align=PP_ALIGN.CENTER,idx=idx)
             if b1_data.get("label"):
-                self.text(slide,rx+0.15,by+1.05,mini_w-0.3,0.6,[b1_data["label"]],12,"BR1 Label",color="muted",align=PP_ALIGN.CENTER,idx=idx)
+                self.text(slide,rx+0.15,by+1.05,mini_w-0.3,0.6,[b1_data["label"]],"BR1 Label",level="small",color="muted",align=PP_ALIGN.CENTER,idx=idx)
         else:
-            self.text(slide,rx+0.2,by+0.3,mini_w-0.4,sub_h-0.6,[str(b1_data)],13,"BR1 Content",idx=idx)
+            self.text(slide,rx+0.2,by+0.3,mini_w-0.4,sub_h-0.6,[str(b1_data)],"BR1 Content",level="small",idx=idx)
         rx2=rx+mini_w+gutter
         c_br2=self.rect(slide,rx2,by,mini_w,sub_h,"surface","Bottom Right 2",MSO_SHAPE.ROUNDED_RECTANGLE)
         _alpha(c_br2,75)
         b2_data=s.get("bottom_right_2",{})
         if isinstance(b2_data,dict):
             if b2_data.get("kpi"):
-                self.text(slide,rx2+0.15,by+0.25,mini_w-0.3,0.8,[b2_data["kpi"]],32,"BR2 KPI",role="head",color="accent2",bold=True,align=PP_ALIGN.CENTER,idx=idx)
+                self.text(slide,rx2+0.15,by+0.25,mini_w-0.3,0.8,[b2_data["kpi"]],"BR2 KPI",level="subhead",role="head",color="accent2",bold=True,align=PP_ALIGN.CENTER,idx=idx)
             if b2_data.get("label"):
-                self.text(slide,rx2+0.15,by+1.05,mini_w-0.3,0.6,[b2_data["label"]],12,"BR2 Label",color="muted",align=PP_ALIGN.CENTER,idx=idx)
+                self.text(slide,rx2+0.15,by+1.05,mini_w-0.3,0.6,[b2_data["label"]],"BR2 Label",level="small",color="muted",align=PP_ALIGN.CENTER,idx=idx)
         else:
-            self.text(slide,rx2+0.2,by+0.3,mini_w-0.4,sub_h-0.6,[str(b2_data)],13,"BR2 Content",idx=idx)
+            self.text(slide,rx2+0.2,by+0.3,mini_w-0.4,sub_h-0.6,[str(b2_data)],"BR2 Content",level="small",idx=idx)
 
     def l_duarte_break(self,slide,s,idx):
         if s.get("kpi"):
-            self.text(slide,1.5,1.8,W-3.0,1.8,[s["kpi"]],80,"Duarte KPI",role="head",color="accent",bold=True,align=PP_ALIGN.CENTER,idx=idx)
+            self.text(slide,1.5,1.8,W-3.0,1.8,[s["kpi"]],"Duarte KPI",level="display",role="head",color="accent",bold=True,align=PP_ALIGN.CENTER,idx=idx)
             lbl=s.get("label") or s.get("statement","")
             if lbl:
-                self.text(slide,1.5,3.8,W-3.0,1.2,[lbl],24,"Duarte Statement",role="body",align=PP_ALIGN.CENTER,idx=idx)
+                self.text(slide,1.5,3.8,W-3.0,1.2,[lbl],"Duarte Statement",level="subhead",role="body",align=PP_ALIGN.CENTER,idx=idx)
         else:
             stmt=s.get("statement",s.get("text",""))
-            self.text(slide,1.6,2.0,W-3.2,3.4,[stmt],44,"Duarte Statement",role="head",bold=True,align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE,idx=idx)
+            self.text(slide,1.6,2.0,W-3.2,3.4,[stmt],"Duarte Statement",level="title",role="head",bold=True,align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE,idx=idx)
 
     def chrome_elements(self,slide,s,idx,n,spec):
         lay=s.get("layout")
@@ -817,13 +849,13 @@ class Builder:
             _alpha(bar,100)
         logo_val=spec.get("logo") or s.get("logo")
         if logo_val and lay not in ("title","section","closing","statement","duarte_break"):
-            lw=72/72
-            lh=24/72
-            lx=(960-48-72)/72
-            ly=20/72
+            lw=1.3
+            lh=0.42
+            lx=W-0.7-lw
+            ly=0.25
             box=self.rect(slide,lx,ly,lw,lh,"surface","Logo Watermark")
             _alpha(box,85)
-            _shape_text(self,box,str(logo_val),10,"accent")
+            _shape_text(self,box,str(logo_val),"accent",level="small")
 
     def build(self,spec,out):
         n=len(spec["slides"])
@@ -842,7 +874,7 @@ class Builder:
             self.background(slide,n+1,n+1)
             top=self.heading(slide,"Image credits",n+1)
             lines=[f"Slide {c['slide']}: {c['attribution']}" for c in self.credits]
-            self.text(slide,MARGIN,top+0.1,W-2*MARGIN,H-top-0.6,lines,16,"Credits",color="muted",floor=12,idx=n+1)
+            self.text(slide,MARGIN,top+0.1,W-2*MARGIN,H-top-0.6,lines,"Credits",level="small",color="muted",floor=12,idx=n+1)
             slide.notes_slide.notes_text_frame.text="[static] Attribution for licensed images."
         self.prs.save(out)
 
@@ -858,14 +890,17 @@ def _arrow(connector):
     E.SubElement(ln,qn("a:tailEnd"),type="triangle",w="med",len="med")
 
 
-def _shape_text(b,shape,text,size,color):
+def _shape_text(b,shape,text,color,level="small"):
     tf=shape.text_frame
     tf.word_wrap=True
+    tf.vertical_anchor=MSO_ANCHOR.MIDDLE
     fam=b.fonts["head"]
-    # An ellipse lays text out in its inscribed rectangle (~0.707 of each side).
-    k=0.707 if shape.auto_shape_type==MSO_SHAPE.OVAL else 1.0
-    w=shape.width/914400*k-0.2
-    fitted,_=fit_size([text],fam,size,w+0.2,shape.height/914400*k-0.2,floor=10,bold=True)
+    # A centred single line sits at the shape's mid-height, where an ellipse is
+    # as wide as its bounding box (PowerPoint lays text out in the box, not in
+    # a 0.707 inscribed rectangle). Use the full width so short stage labels
+    # do not shrink a size step for a conservative geometric fiction.
+    fitted,_=b.fit_level([text],b.type_scale.get(level,b.type_scale["body"]),shape.width/914400,
+                         shape.height/914400,floor="small",bold=True,family=fam)
     tf.text=text
     for p in tf.paragraphs:
         p.alignment=PP_ALIGN.CENTER

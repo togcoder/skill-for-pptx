@@ -7,6 +7,24 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T063 [pptx] Forge debt that users see — 2026-11-04
+
+- **Why.** T057 named four defects a Forge user sees: count-up proxies stack in
+  print/PDF/Morph, the highlight marker ignores horizontal alignment, decks
+  carry 13–15 type sizes, and every cinematic deck trips MOT-SETTLE.
+- **Fixed.** Count-up proxies now sit below an opaque final-value source (the
+  container colour), so print/PDF/static Morph show one value while PowerPoint
+  still counts up. Highlight geometry reads paragraph alignment and measures
+  the real font. Type sizes come from the Office kit `type_scale_pt`
+  (3–6 sizes; `kpi_stat` display token only when a KPI exists). Ken Burns
+  releases to the authored frame before Morph; generated process tokens are
+  authored at their last stop (T034 author-at-destination).
+- **Evidence.** All five example decks: no TYP-SIZES or MOT-SETTLE warning,
+  sizes 13–15 → 6, overall 4.36–4.53 → 4.70–4.88. PowerPoint PDF, PNG and
+  CreateVideo frames inspected (rung 5); DeckCraft Morph frame used only as a
+  static second reader (rung 4). 470 tests pass, 8 skipped.
+- **Report.** `experiments/T063-20261104-opencode-forge-debt/REPORT.md`.
+
 ## T057 [cross] Lead review, DeckCraft evaluation and next programme — 2026-11-04
 
 - **Why.** After 22 tasks in four days (T035–T056) the owner asked Claude to

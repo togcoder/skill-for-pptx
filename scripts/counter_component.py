@@ -8,6 +8,8 @@ one presenter click beat and reveal the untouched source value last.
 import copy
 import math
 
+from lxml import etree as E
+
 P="http://schemas.openxmlformats.org/presentationml/2006/main"
 A="http://schemas.openxmlformats.org/drawingml/2006/main"
 NS={"p":P,"a":A}
@@ -94,8 +96,37 @@ def _replace_text(shape,text):
     return shape
 
 
-def insert_counter_stack(root,effect):
-    """Insert source-style proxy text shapes and return animation-order metadata."""
+def _set_solid_fill(shape,color):
+    """Make a text shape opaque with ``color`` (the container behind it).
+
+    The final value is the topmost shape; painting it with the container colour
+    hides every proxy behind it in edit view, print and PDF, while the entrance
+    animation still reveals it last in the slide show."""
+    spPr=shape.find("p:spPr",NS)
+    if spPr is None:
+        raise ValueError("counter source has no spPr")
+    for tag in ("a:noFill","a:solidFill","a:gradFill","a:blipFill","a:pattFill","a:grpFill"):
+        for node in spPr.findall(tag,NS):
+            spPr.remove(node)
+    index=len(spPr)
+    for tag in ("a:ln","a:effectLst","a:scene3d","a:sp3d","a:extLst"):
+        node=spPr.find(tag,NS)
+        if node is not None:
+            index=list(spPr).index(node)
+            break
+    fill=E.Element("{%s}solidFill"%A)
+    E.SubElement(fill,"{%s}srgbClr"%A,val=color.upper())
+    spPr.insert(index,fill)
+
+
+def insert_counter_stack(root,effect,mask_color=None):
+    """Insert source-style proxy text shapes and return animation-order metadata.
+
+    Z-order is ``proxies (first..last) < source (final)`` and the source is
+    opaque when ``mask_color`` is given or it already has a solid fill. That is
+    what makes the counter static-safe: print and PDF see only the final value;
+    the slide show sees the proxies while the source is still entrance-hidden.
+    """
     target=effect["target"]
     tree,source=find_source_text_shape(root,target["source_id"],target["source_name"])
     source_text=_shape_text(source)
@@ -113,17 +144,19 @@ def insert_counter_stack(root,effect):
     if not proxy_texts:
         raise ValueError("counter produced no intermediate proxy values")
 
+    if mask_color:
+        _set_solid_fill(source,mask_color)
     source_index=list(tree).index(source)
     next_id=_next_shape_id(root)
     created_by_text={}
-    # XML z-order follows shape-tree order. Insert late counter values first and
-    # the initial value last so edit/static views show one coherent top value.
-    for offset,text in enumerate(reversed(proxy_texts),1):
+    # Ascending values are inserted immediately before the source, so the
+    # source (final text) stays the topmost shape in the shape tree.
+    for offset,text in enumerate(proxy_texts):
         clone=copy.deepcopy(source)
         props=clone.find("p:nvSpPr/p:cNvPr",NS)
         new_id=str(next_id)
         next_id+=1
-        new_name=f"__counter_{target['source_id']}_{len(proxy_texts)-offset+1:02d}"
+        new_name=f"__counter_{target['source_id']}_{offset+1:02d}"
         props.set("id",new_id)
         props.set("name",new_name)
         _replace_text(clone,text)

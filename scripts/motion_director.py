@@ -832,7 +832,8 @@ def draft_slide(slide,style="modern",counters=False,continuing=(),outgoing=(),am
                                              anchors=anchors,offset_y=below))
                 components.append(_component("token","token","marks where the process is right now",
                                              "Narrative resource the deck lacks: a progress marker that travels step by step with the speaker.",
-                                             anchors=[first["token"]],offset_y=below,size=0.045))
+                                             anchors=[first["token"],unit["steps"][-1]["step"]["token"]],
+                                             offset_y=below,size=0.045))
             for si,step in enumerate(unit["steps"]):
                 targets=[c["token"] for c in step["connectors"]]
                 step_beats=[]
@@ -849,14 +850,17 @@ def draft_slide(slide,style="modern",counters=False,continuing=(),outgoing=(),am
                 step_beats.append(sb["id"])
                 if journey:
                     if si==0 and not existing_token:
-                        tb=_beat(nid("rail"),"Lay the rail and place the progress marker.","reveal",["track","token"],
+                        tb=_beat(nid("rail"),"Lay the rail the progress marker travels along.","reveal",["track"],
                                  "with-previous","wipe-right",500,layer="secondary")
                         beats.append(tb)
                         step_beats.append(tb["id"])
+                    travel_params={"arc":0.3,"offset_y":below,"dwell_ms":0,
+                                   "overshoot":0.06,"pulse_stops":True}
+                    if si==0 and not existing_token:
+                        travel_params["author_at_last"]=True
                     gb=_beat(nid("go"),f"The marker travels to '{_label(step['step'])}'.","choreography",
                              [token_tok,step["step"]["token"]],"after-previous",recipe="travel",layer="secondary",
-                             motion_parameters={"arc":0.3,"offset_y":below,"dwell_ms":0,
-                                                "overshoot":0.06,"pulse_stops":True})
+                             motion_parameters=travel_params)
                     beats.append(gb)
                     step_beats.append(gb["id"])
                 if sequenced:
@@ -1261,9 +1265,15 @@ def compile_slide(plan_slide,slide_model,style="modern",prior_groups=()):
     return run(initial)
 
 
-def _expand_counters(root,clicks):
+def _expand_counters(root,clicks,objects=None):
     """Insert stepped-text proxies for counter effects and replace each counter
-    with appear/disappear effects inside the same time block."""
+    with appear/disappear effects inside the same time block.
+
+    A counter is only expanded over a solid container: the final value is
+    painted with that container colour and stays topmost, so print/PDF show the
+    final number while the proxies act behind it. Without a solid container the
+    value stays static (the ``[static]`` fallback) rather than printing a stack
+    of ghosts."""
     generated=[]
     for click in clicks:
         out=[]
@@ -1271,13 +1281,26 @@ def _expand_counters(root,clicks):
             if eff["preset"]!="counter":
                 out.append(eff)
                 continue
+            mask=None
+            if objects:
+                anchor=next((o for o in objects if o["id"]==eff["spid"]),None)
+                if anchor is not None:
+                    mask=mc.container_fill(root,anchor,objects)
+            if mask in (None,"NONSOLID"):
+                # No opaque container to mask the proxy stack: keep the value
+                # static but reveal it with its click, and say so in the receipt.
+                out.append({"preset":"appear","spid":eff["spid"],"trigger":eff["trigger"],
+                            "delay_ms":0,"duration_ms":0,"beat":eff["beat"]})
+                generated.append({"source_id":eff["spid"],"proxy_count":0,"static_fallback":True,
+                                  "proxy_texts":[]})
+                continue
             dm=eff["counter"]
             component=insert_counter_stack(root,{
                 "target":{"source_id":eff["spid"],"source_name":eff["name"]},
                 "from_value":dm["from_value"],"to_value":dm["to_value"],"steps":dm["steps"],
                 "decimal_places":dm["decimal_places"],"prefix":dm.get("prefix",""),"suffix":dm.get("suffix",""),
                 "preserve_final_text":eff["text"],
-            })
+            },mask_color=mask)
             proxies=component["proxies"]
             unit=max(30,dm["duration_ms"]//(len(proxies)+1))
             for i,proxy in enumerate(proxies):
@@ -1369,7 +1392,7 @@ def apply(source,plan,destination,force=False,style=None):
                 sm=dict(sm,objects=sm["objects"]+generated)
             prior=[] if policy=="replace" else me.effects_from_slide(root)[0]
             clicks=compile_slide(ps,sm,style,prior)
-            counters=_expand_counters(root,clicks)
+            counters=_expand_counters(root,clicks,sm["objects"])
             receipt=anim.apply_timeline(root,clicks,mode="replace" if policy=="replace" else "extend")
             receipt["slide"]=sm["index"]
             receipt["counters"]=counters

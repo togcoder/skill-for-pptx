@@ -1,0 +1,532 @@
+[
+ {
+  "deck": "coffee_office_dynamic",
+  "arm": "before",
+  "sizes": [
+   14,
+   15,
+   18,
+   20,
+   24,
+   28,
+   30,
+   36,
+   40,
+   46,
+   48,
+   53,
+   54,
+   110
+  ],
+  "warnings": {
+   "MOT-SETTLE": 2,
+   "TYP-SIZES": 1
+  },
+  "scores": {
+   "design": 5.0,
+   "motion": 5.0,
+   "rhythm": 4.42,
+   "coherence": 3.0,
+   "overall": 4.36
+  },
+  "checks": 236
+ },
+ {
+  "deck": "coffee_office_dynamic.static",
+  "arm": "before",
+  "sizes": [
+   14,
+   15,
+   18,
+   20,
+   24,
+   28,
+   30,
+   36,
+   40,
+   46,
+   48,
+   53,
+   54,
+   110
+  ],
+  "warnings": {
+   "MOT-STATIC": 1,
+   "TYP-SIZES": 1
+  },
+  "scores": {
+   "design": 5.0,
+   "rhythm": 2.0,
+   "coherence": 3.0,
+   "overall": 3.33
+  },
+  "checks": 93
+ },
+ {
+  "deck": "coffee_report",
+  "arm": "before",
+  "sizes": [
+   14,
+   15,
+   16,
+   18,
+   20,
+   24,
+   28,
+   30,
+   36,
+   40,
+   46,
+   48,
+   54,
+   55,
+   110
+  ],
+  "warnings": {
+   "MOT-SETTLE": 2,
+   "TYP-SIZES": 1
+  },
+  "scores": {
+   "design": 5.0,
+   "motion": 5.0,
+   "rhythm": 4.41,
+   "coherence": 3.67,
+   "overall": 4.52
+  },
+  "checks": 243
+ },
+ {
+  "deck": "coffee_report.static",
+  "arm": "before",
+  "sizes": [
+   14,
+   15,
+   16,
+   18,
+   20,
+   24,
+   28,
+   30,
+   36,
+   40,
+   46,
+   48,
+   54,
+   55,
+   110
+  ],
+  "warnings": {
+   "MOT-STATIC": 1,
+   "TYP-SIZES": 1
+  },
+  "scores": {
+   "design": 5.0,
+   "rhythm": 2.0,
+   "coherence": 3.0,
+   "overall": 3.33
+  },
+  "checks": 93
+ },
+ {
+  "deck": "coffee_report_photos",
+  "arm": "before",
+  "sizes": [
+   14,
+   15,
+   16,
+   18,
+   20,
+   24,
+   28,
+   30,
+   36,
+   40,
+   46,
+   48,
+   54,
+   55,
+   110
+  ],
+  "warnings": {
+   "MOT-SETTLE": 2,
+   "TYP-SIZES": 1
+  },
+  "scores": {
+   "design": 5.0,
+   "motion": 5.0,
+   "rhythm": 4.41,
+   "coherence": 3.67,
+   "overall": 4.52
+  },
+  "checks": 261
+ },
+ {
+  "deck": "coffee_report_photos.static",
+  "arm": "before",
+  "sizes": [
+   14,
+   15,
+   16,
+   18,
+   20,
+   24,
+   28,
+   30,
+   36,
+   40,
+   46,
+   48,
+   54,
+   55,
+   110
+  ],
+  "warnings": {
+   "MOT-STATIC": 1,
+   "TYP-SIZES": 1
+  },
+  "scores": {
+   "design": 5.0,
+   "rhythm": 2.0,
+   "coherence": 3.0,
+   "overall": 3.33
+  },
+  "checks": 103
+ },
+ {
+  "deck": "vi_brand_seed",
+  "arm": "before",
+  "sizes": [
+   14,
+   16,
+   20,
+   24,
+   28,
+   30,
+   36,
+   40,
+   41,
+   44,
+   48,
+   55,
+   110
+  ],
+  "warnings": {
+   "MOT-SETTLE": 1,
+   "TYP-SIZES": 1
+  },
+  "scores": {
+   "design": 5.0,
+   "motion": 5.0,
+   "rhythm": 4.46,
+   "coherence": 3.67,
+   "overall": 4.53
+  },
+  "checks": 193
+ },
+ {
+  "deck": "vi_brand_seed.static",
+  "arm": "before",
+  "sizes": [
+   14,
+   16,
+   20,
+   24,
+   28,
+   30,
+   36,
+   40,
+   41,
+   44,
+   48,
+   55,
+   110
+  ],
+  "warnings": {
+   "MOT-STATIC": 1,
+   "TYP-SIZES": 1
+  },
+  "scores": {
+   "design": 5.0,
+   "rhythm": 2.0,
+   "coherence": 3.0,
+   "overall": 3.33
+  },
+  "checks": 82
+ },
+ {
+  "deck": "vi_chuyen_doi_so",
+  "arm": "before",
+  "sizes": [
+   14,
+   16,
+   20,
+   24,
+   28,
+   30,
+   36,
+   40,
+   41,
+   44,
+   48,
+   55,
+   110
+  ],
+  "warnings": {
+   "MOT-SETTLE": 1,
+   "TYP-SIZES": 1
+  },
+  "scores": {
+   "design": 5.0,
+   "motion": 5.0,
+   "rhythm": 4.46,
+   "coherence": 3.67,
+   "overall": 4.53
+  },
+  "checks": 193
+ },
+ {
+  "deck": "vi_chuyen_doi_so.static",
+  "arm": "before",
+  "sizes": [
+   14,
+   16,
+   20,
+   24,
+   28,
+   30,
+   36,
+   40,
+   41,
+   44,
+   48,
+   55,
+   110
+  ],
+  "warnings": {
+   "MOT-STATIC": 1,
+   "TYP-SIZES": 1
+  },
+  "scores": {
+   "design": 5.0,
+   "rhythm": 2.0,
+   "coherence": 3.0,
+   "overall": 3.33
+  },
+  "checks": 82
+ },
+ {
+  "deck": "coffee_office_dynamic",
+  "arm": "after",
+  "sizes": [
+   14,
+   16,
+   18,
+   20,
+   36,
+   72
+  ],
+  "warnings": {},
+  "scores": {
+   "design": 5.0,
+   "motion": 5.0,
+   "rhythm": 4.48,
+   "coherence": 4.33,
+   "overall": 4.7
+  },
+  "checks": 234
+ },
+ {
+  "deck": "coffee_office_dynamic.static",
+  "arm": "after",
+  "sizes": [
+   14,
+   16,
+   18,
+   20,
+   36,
+   72
+  ],
+  "warnings": {
+   "MOT-STATIC": 1
+  },
+  "scores": {
+   "design": 5.0,
+   "rhythm": 2.0,
+   "coherence": 5.0,
+   "overall": 4.0
+  },
+  "checks": 93
+ },
+ {
+  "deck": "coffee_report",
+  "arm": "after",
+  "sizes": [
+   14,
+   20,
+   24,
+   28,
+   44,
+   72
+  ],
+  "warnings": {},
+  "scores": {
+   "design": 5.0,
+   "motion": 5.0,
+   "rhythm": 4.47,
+   "coherence": 5.0,
+   "overall": 4.87
+  },
+  "checks": 241
+ },
+ {
+  "deck": "coffee_report.static",
+  "arm": "after",
+  "sizes": [
+   14,
+   20,
+   24,
+   28,
+   44,
+   72
+  ],
+  "warnings": {
+   "MOT-STATIC": 1
+  },
+  "scores": {
+   "design": 5.0,
+   "rhythm": 2.0,
+   "coherence": 5.0,
+   "overall": 4.0
+  },
+  "checks": 93
+ },
+ {
+  "deck": "coffee_report_photos",
+  "arm": "after",
+  "sizes": [
+   14,
+   20,
+   24,
+   28,
+   44,
+   72
+  ],
+  "warnings": {},
+  "scores": {
+   "design": 5.0,
+   "motion": 5.0,
+   "rhythm": 4.47,
+   "coherence": 5.0,
+   "overall": 4.87
+  },
+  "checks": 259
+ },
+ {
+  "deck": "coffee_report_photos.static",
+  "arm": "after",
+  "sizes": [
+   14,
+   20,
+   24,
+   28,
+   44,
+   72
+  ],
+  "warnings": {
+   "MOT-STATIC": 1
+  },
+  "scores": {
+   "design": 5.0,
+   "rhythm": 2.0,
+   "coherence": 5.0,
+   "overall": 4.0
+  },
+  "checks": 103
+ },
+ {
+  "deck": "vi_brand_seed",
+  "arm": "after",
+  "sizes": [
+   14,
+   20,
+   24,
+   28,
+   44,
+   72
+  ],
+  "warnings": {},
+  "scores": {
+   "design": 5.0,
+   "motion": 5.0,
+   "rhythm": 4.5,
+   "coherence": 5.0,
+   "overall": 4.88
+  },
+  "checks": 192
+ },
+ {
+  "deck": "vi_brand_seed.static",
+  "arm": "after",
+  "sizes": [
+   14,
+   20,
+   24,
+   28,
+   44,
+   72
+  ],
+  "warnings": {
+   "MOT-STATIC": 1
+  },
+  "scores": {
+   "design": 5.0,
+   "rhythm": 2.0,
+   "coherence": 5.0,
+   "overall": 4.0
+  },
+  "checks": 82
+ },
+ {
+  "deck": "vi_chuyen_doi_so",
+  "arm": "after",
+  "sizes": [
+   14,
+   20,
+   24,
+   28,
+   44,
+   72
+  ],
+  "warnings": {},
+  "scores": {
+   "design": 5.0,
+   "motion": 5.0,
+   "rhythm": 4.5,
+   "coherence": 5.0,
+   "overall": 4.88
+  },
+  "checks": 192
+ },
+ {
+  "deck": "vi_chuyen_doi_so.static",
+  "arm": "after",
+  "sizes": [
+   14,
+   20,
+   24,
+   28,
+   44,
+   72
+  ],
+  "warnings": {
+   "MOT-STATIC": 1
+  },
+  "scores": {
+   "design": 5.0,
+   "rhythm": 2.0,
+   "coherence": 5.0,
+   "overall": 4.0
+  },
+  "checks": 82
+ }
+]

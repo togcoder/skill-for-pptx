@@ -103,10 +103,14 @@ class KpiCounterExecutionTests(unittest.TestCase):
             self.assertEqual(E.tostring(node.find("p:spPr/a:xfrm",NS)),source_xfrm)
             self.assertEqual(E.tostring(node.find("p:spPr/a:solidFill",NS)),source_fill)
         self.assertEqual(len(ids),component["proxy_count"])
-        # Topmost edit-view proxy is the first counter value.
+        # Topmost shape in edit/print/PDF is the untouched final source, so a
+        # stack of count-up proxies cannot print as overlapping numbers.
         top=shapes[-1]
+        top_props=top.find("p:nvSpPr/p:cNvPr",NS)
         top_text="".join(t.text or "" for t in top.findall(".//a:t",NS))
-        self.assertEqual(top_text,component["proxies"][0]["text"])
+        self.assertEqual(top_props.get("name"),"Hero KPI")
+        self.assertEqual(top_text,"98.5%")
+        self.assertEqual(component["proxies"][0]["text"],"0.0%")
 
     def test_v04_counter_plan_validates(self):
         self.assertEqual(validate_patch_plan(counter_plan()),[])
