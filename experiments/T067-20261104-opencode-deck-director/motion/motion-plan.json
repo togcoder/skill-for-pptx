@@ -1,0 +1,2111 @@
+{
+  "deck": "T066-deck-directed.pptx",
+  "source": "experiments/T066-20261104-opencode-triet-hoc-ch1/artifacts/T066-Triet-hoc-Mac-Lenin-Chuong-1.pptx",
+  "date": "2026-11-04",
+  "rules": {
+    "base_state": "title, claim, key image and margin rule are visible at t=0; no entrance effect on them",
+    "reading_order": "top-to-bottom, left-to-right; a label appears only after its carrier",
+    "max_simultaneous_movers": 2,
+    "hero_moves_per_slide": 1,
+    "transitions": "0 Morph; 350 ms Fade on slides 2-10; no transition on slide 1",
+    "morph_audit": "0 of 9 kept: no adjacent pair shares an object or an idea that survives the transition"
+  },
+  "renamed": [
+    {
+      "slide": 1,
+      "old": "!!bg",
+      "new": "bg"
+    },
+    {
+      "slide": 1,
+      "old": "!!panel",
+      "new": "panel"
+    },
+    {
+      "slide": 1,
+      "old": "!!marx-ring",
+      "new": "marx-ring"
+    },
+    {
+      "slide": 1,
+      "old": "!!marx",
+      "new": "marx"
+    },
+    {
+      "slide": 1,
+      "old": "!!engels-ring",
+      "new": "engels-ring"
+    },
+    {
+      "slide": 1,
+      "old": "!!engels",
+      "new": "engels"
+    },
+    {
+      "slide": 1,
+      "old": "!!lenin-ring",
+      "new": "lenin-ring"
+    },
+    {
+      "slide": 1,
+      "old": "!!lenin",
+      "new": "lenin"
+    },
+    {
+      "slide": 1,
+      "old": "!!thread",
+      "new": "margin-rule"
+    },
+    {
+      "slide": 1,
+      "old": "!!dot",
+      "new": "margin-dot"
+    },
+    {
+      "slide": 2,
+      "old": "!!bg",
+      "new": "bg"
+    },
+    {
+      "slide": 2,
+      "old": "!!thread",
+      "new": "margin-rule"
+    },
+    {
+      "slide": 2,
+      "old": "!!dot",
+      "new": "margin-dot"
+    },
+    {
+      "slide": 3,
+      "old": "!!bg",
+      "new": "bg"
+    },
+    {
+      "slide": 3,
+      "old": "!!thread",
+      "new": "margin-rule"
+    },
+    {
+      "slide": 3,
+      "old": "!!dot",
+      "new": "margin-dot"
+    },
+    {
+      "slide": 4,
+      "old": "!!bg",
+      "new": "bg"
+    },
+    {
+      "slide": 4,
+      "old": "!!thread",
+      "new": "margin-rule"
+    },
+    {
+      "slide": 4,
+      "old": "!!dot",
+      "new": "margin-dot"
+    },
+    {
+      "slide": 5,
+      "old": "!!bg",
+      "new": "bg"
+    },
+    {
+      "slide": 5,
+      "old": "!!thread",
+      "new": "margin-rule"
+    },
+    {
+      "slide": 5,
+      "old": "!!dot",
+      "new": "margin-dot"
+    },
+    {
+      "slide": 6,
+      "old": "!!bg",
+      "new": "bg"
+    },
+    {
+      "slide": 6,
+      "old": "!!thread",
+      "new": "margin-rule"
+    },
+    {
+      "slide": 6,
+      "old": "!!dot",
+      "new": "margin-dot"
+    },
+    {
+      "slide": 7,
+      "old": "!!bg",
+      "new": "bg"
+    },
+    {
+      "slide": 7,
+      "old": "!!marx-ring",
+      "new": "marx-ring"
+    },
+    {
+      "slide": 7,
+      "old": "!!marx",
+      "new": "marx"
+    },
+    {
+      "slide": 7,
+      "old": "!!marx-date",
+      "new": "marx-date"
+    },
+    {
+      "slide": 7,
+      "old": "!!marx-name",
+      "new": "marx-name"
+    },
+    {
+      "slide": 7,
+      "old": "!!marx-desc",
+      "new": "marx-desc"
+    },
+    {
+      "slide": 7,
+      "old": "!!engels-ring",
+      "new": "engels-ring"
+    },
+    {
+      "slide": 7,
+      "old": "!!engels",
+      "new": "engels"
+    },
+    {
+      "slide": 7,
+      "old": "!!engels-date",
+      "new": "engels-date"
+    },
+    {
+      "slide": 7,
+      "old": "!!engels-name",
+      "new": "engels-name"
+    },
+    {
+      "slide": 7,
+      "old": "!!engels-desc",
+      "new": "engels-desc"
+    },
+    {
+      "slide": 7,
+      "old": "!!lenin-ring",
+      "new": "lenin-ring"
+    },
+    {
+      "slide": 7,
+      "old": "!!lenin",
+      "new": "lenin"
+    },
+    {
+      "slide": 7,
+      "old": "!!lenin-date",
+      "new": "lenin-date"
+    },
+    {
+      "slide": 7,
+      "old": "!!lenin-name",
+      "new": "lenin-name"
+    },
+    {
+      "slide": 7,
+      "old": "!!lenin-desc",
+      "new": "lenin-desc"
+    },
+    {
+      "slide": 7,
+      "old": "!!thread",
+      "new": "margin-rule"
+    },
+    {
+      "slide": 7,
+      "old": "!!dot",
+      "new": "margin-dot"
+    },
+    {
+      "slide": 8,
+      "old": "!!bg",
+      "new": "bg"
+    },
+    {
+      "slide": 8,
+      "old": "!!thread",
+      "new": "margin-rule"
+    },
+    {
+      "slide": 8,
+      "old": "!!dot",
+      "new": "margin-dot"
+    },
+    {
+      "slide": 9,
+      "old": "!!bg",
+      "new": "bg"
+    },
+    {
+      "slide": 9,
+      "old": "!!thread",
+      "new": "margin-rule"
+    },
+    {
+      "slide": 9,
+      "old": "!!dot",
+      "new": "margin-dot"
+    },
+    {
+      "slide": 10,
+      "old": "!!bg",
+      "new": "bg"
+    },
+    {
+      "slide": 10,
+      "old": "!!thread",
+      "new": "margin-rule"
+    },
+    {
+      "slide": 10,
+      "old": "!!dot",
+      "new": "margin-dot"
+    }
+  ],
+  "slides": [
+    {
+      "slide": 1,
+      "title": "Cover",
+      "beats": [
+        {
+          "id": "auto-rings",
+          "kind": "auto",
+          "start": "auto",
+          "spoken": "Chương 1 mở bằng ba chân dung, không phải ba biểu tượng: ba mốc của một dòng lý luận gắn với thực tiễn.",
+          "visual": "Ba vòng vàng tự vẽ quanh ba chân dung đã hiện sẵn; không có gì bị giấu.",
+          "roles": {
+            "anchor": [
+              "title",
+              "marx",
+              "engels",
+              "lenin"
+            ],
+            "evidence": [
+              "subtitle",
+              "caption"
+            ],
+            "turn": [],
+            "payoff": []
+          },
+          "hero": "Ba vòng vàng vẽ liên tiếp như một nhịp thở, không phải một cú click.",
+          "duration_ms": 1500,
+          "effects": [
+            {
+              "shape": "marx-ring",
+              "preset": "circle",
+              "trigger": "click",
+              "duration_ms": 500,
+              "spid": "9"
+            },
+            {
+              "shape": "engels-ring",
+              "preset": "circle",
+              "trigger": "after",
+              "duration_ms": 500,
+              "spid": "11"
+            },
+            {
+              "shape": "lenin-ring",
+              "preset": "circle",
+              "trigger": "after",
+              "duration_ms": 500,
+              "spid": "13"
+            }
+          ],
+          "measured": {
+            "effects": 3,
+            "peak_movers": 1,
+            "duration_ms": 1500,
+            "auto": true
+          }
+        }
+      ],
+      "com": {
+        "appended_click_groups": 1,
+        "replaced_existing_timing": true
+      },
+      "base_visible": [
+        "bg",
+        "panel",
+        "kicker",
+        "title",
+        "rule",
+        "subtitle",
+        "caption",
+        "marx",
+        "engels",
+        "lenin",
+        "margin-rule",
+        "margin-dot"
+      ]
+    },
+    {
+      "slide": 2,
+      "title": "Triết học là gì?",
+      "beats": [
+        {
+          "id": "c1",
+          "kind": "click",
+          "start": "click",
+          "spoken": "Triết học không phải một định nghĩa để học thuộc: nó là hệ thống tri thức lý luận chung nhất về thế giới và vị trí con người trong đó.",
+          "visual": "Định nghĩa thứ nhất hiện lên dưới câu hỏi; tượng triết gia đã ở đó từ đầu.",
+          "roles": {
+            "anchor": [
+              "title",
+              "plato"
+            ],
+            "evidence": [
+              "def1"
+            ],
+            "turn": [],
+            "payoff": []
+          },
+          "hero": "Không có cú bay nào; chữ hiện như một dòng chú giải.",
+          "duration_ms": 350,
+          "effects": [
+            {
+              "shape": "def1",
+              "preset": "fade",
+              "trigger": "click",
+              "duration_ms": 350,
+              "spid": "5"
+            }
+          ],
+          "measured": {
+            "effects": 1,
+            "peak_movers": 1,
+            "duration_ms": 350,
+            "auto": false
+          }
+        },
+        {
+          "id": "c2",
+          "kind": "click",
+          "start": "click",
+          "spoken": "Định nghĩa thứ hai hẹp hơn: khoa học về những quy luật chung nhất của tự nhiên, xã hội và tư duy.",
+          "visual": "Dòng thứ hai nối tiếp, cùng một nhịp.",
+          "roles": {
+            "anchor": [
+              "title",
+              "plato"
+            ],
+            "evidence": [
+              "def2"
+            ],
+            "turn": [],
+            "payoff": []
+          },
+          "hero": "Một dòng nữa, không thêm hiệu ứng.",
+          "duration_ms": 350,
+          "effects": [
+            {
+              "shape": "def2",
+              "preset": "fade",
+              "trigger": "click",
+              "duration_ms": 350,
+              "spid": "6"
+            }
+          ],
+          "measured": {
+            "effects": 1,
+            "peak_movers": 1,
+            "duration_ms": 350,
+            "auto": false
+          }
+        },
+        {
+          "id": "c3",
+          "kind": "click",
+          "start": "click",
+          "spoken": "Ba việc triết học làm: cho ta một thế giới quan, một phương pháp luận, và một logic để không tự lừa mình.",
+          "visual": "Ba gạch vàng vẽ lần lượt; nhãn của từng gạch hiện ngay sau khi gạch tới.",
+          "roles": {
+            "anchor": [
+              "title",
+              "plato"
+            ],
+            "evidence": [
+              "l0-rule",
+              "l1-rule",
+              "l2-rule"
+            ],
+            "turn": [],
+            "payoff": [
+              "l0-h",
+              "l1-h",
+              "l2-h"
+            ]
+          },
+          "hero": "Ba gạch vàng như ba nhịp đánh dấu, mỗi lúc chỉ một gạch chạy.",
+          "duration_ms": 1000,
+          "effects": [
+            {
+              "shape": "l0-rule",
+              "preset": "wipe-left",
+              "trigger": "click",
+              "duration_ms": 250,
+              "spid": "7"
+            },
+            {
+              "shape": "l0-n",
+              "preset": "appear",
+              "trigger": "after",
+              "duration_ms": 0,
+              "spid": "8"
+            },
+            {
+              "shape": "l0-h",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "9"
+            },
+            {
+              "shape": "l0-s",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "10"
+            },
+            {
+              "shape": "l1-rule",
+              "preset": "wipe-left",
+              "trigger": "after",
+              "duration_ms": 250,
+              "spid": "11"
+            },
+            {
+              "shape": "l1-n",
+              "preset": "appear",
+              "trigger": "after",
+              "duration_ms": 0,
+              "spid": "12"
+            },
+            {
+              "shape": "l1-h",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "13"
+            },
+            {
+              "shape": "l1-s",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "14"
+            },
+            {
+              "shape": "l2-rule",
+              "preset": "wipe-left",
+              "trigger": "after",
+              "duration_ms": 250,
+              "spid": "15"
+            },
+            {
+              "shape": "l2-n",
+              "preset": "appear",
+              "trigger": "after",
+              "duration_ms": 0,
+              "spid": "16"
+            },
+            {
+              "shape": "l2-h",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "17"
+            },
+            {
+              "shape": "l2-s",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "18"
+            }
+          ],
+          "measured": {
+            "effects": 12,
+            "peak_movers": 1,
+            "duration_ms": 753,
+            "auto": false
+          }
+        }
+      ],
+      "com": {
+        "appended_click_groups": 3,
+        "replaced_existing_timing": true
+      },
+      "base_visible": [
+        "bg",
+        "kicker",
+        "title",
+        "plato-disc",
+        "plato",
+        "plato-cap",
+        "margin-rule",
+        "margin-dot"
+      ]
+    },
+    {
+      "slide": 3,
+      "title": "Vật chất hay ý thức?",
+      "beats": [
+        {
+          "id": "c1",
+          "kind": "click",
+          "start": "click",
+          "spoken": "Mặt thứ nhất là bản thể luận: vật chất có trước, quyết định ý thức.",
+          "visual": "Thẻ trái dựng lên; tiêu đề thẻ hiện sau tấm nền, thân và nhãn đi kèm.",
+          "roles": {
+            "anchor": [
+              "title"
+            ],
+            "evidence": [
+              "left"
+            ],
+            "turn": [],
+            "payoff": [
+              "left-foot"
+            ]
+          },
+          "hero": "Tấm nền đỏ thẫm trượt lên như một trang được đặt xuống.",
+          "duration_ms": 550,
+          "effects": [
+            {
+              "shape": "left",
+              "preset": "wipe-up",
+              "trigger": "click",
+              "duration_ms": 300,
+              "spid": "5"
+            },
+            {
+              "shape": "left-title",
+              "preset": "fade",
+              "trigger": "after",
+              "duration_ms": 250,
+              "spid": "6"
+            },
+            {
+              "shape": "left-body",
+              "preset": "appear",
+              "trigger": "after",
+              "duration_ms": 0,
+              "spid": "7"
+            },
+            {
+              "shape": "left-foot",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "8"
+            }
+          ],
+          "measured": {
+            "effects": 4,
+            "peak_movers": 1,
+            "duration_ms": 551,
+            "auto": false
+          }
+        },
+        {
+          "id": "c2",
+          "kind": "click",
+          "start": "click",
+          "spoken": "Mặt thứ hai là nhận thức luận: ý thức có sau, phản ánh vật chất.",
+          "visual": "Thẻ phải dựng lên, đối xứng với thẻ trái.",
+          "roles": {
+            "anchor": [
+              "title"
+            ],
+            "evidence": [
+              "right"
+            ],
+            "turn": [],
+            "payoff": [
+              "right-foot"
+            ]
+          },
+          "hero": "Cùng một động tác, đối xứng — không phải một hiệu ứng mới.",
+          "duration_ms": 550,
+          "effects": [
+            {
+              "shape": "right",
+              "preset": "wipe-down",
+              "trigger": "click",
+              "duration_ms": 300,
+              "spid": "9"
+            },
+            {
+              "shape": "right-title",
+              "preset": "fade",
+              "trigger": "after",
+              "duration_ms": 250,
+              "spid": "10"
+            },
+            {
+              "shape": "right-body",
+              "preset": "appear",
+              "trigger": "after",
+              "duration_ms": 0,
+              "spid": "11"
+            },
+            {
+              "shape": "right-foot",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "12"
+            }
+          ],
+          "measured": {
+            "effects": 4,
+            "peak_movers": 1,
+            "duration_ms": 551,
+            "auto": false
+          }
+        },
+        {
+          "id": "c3",
+          "kind": "click",
+          "start": "click",
+          "spoken": "Câu hỏi còn lại nằm giữa hai câu trả lời: cái nào có trước?",
+          "visual": "Dấu hỏi vàng rơi vào khoảng trống giữa hai thẻ; gạch và caption theo sau.",
+          "roles": {
+            "anchor": [
+              "title"
+            ],
+            "evidence": [
+              "left",
+              "right"
+            ],
+            "turn": [
+              "qmark"
+            ],
+            "payoff": [
+              "qcap"
+            ]
+          },
+          "hero": "Dấu hỏi là cú chốt: nó chỉ xuất hiện sau khi cả hai câu trả lời đã có mặt.",
+          "duration_ms": 800,
+          "effects": [
+            {
+              "shape": "qmark",
+              "preset": "zoom",
+              "trigger": "click",
+              "duration_ms": 350,
+              "spid": "13"
+            },
+            {
+              "shape": "qline",
+              "preset": "wipe-left",
+              "trigger": "after",
+              "duration_ms": 250,
+              "spid": "14"
+            },
+            {
+              "shape": "qcap",
+              "preset": "fade",
+              "trigger": "after",
+              "duration_ms": 250,
+              "spid": "15"
+            }
+          ],
+          "measured": {
+            "effects": 3,
+            "peak_movers": 1,
+            "duration_ms": 850,
+            "auto": false
+          }
+        }
+      ],
+      "com": {
+        "appended_click_groups": 3,
+        "replaced_existing_timing": true
+      },
+      "base_visible": [
+        "bg",
+        "kicker",
+        "title",
+        "margin-rule",
+        "margin-dot"
+      ]
+    },
+    {
+      "slide": 4,
+      "title": "Biện chứng hay siêu hình?",
+      "beats": [
+        {
+          "id": "c1",
+          "kind": "click",
+          "start": "click",
+          "spoken": "Biện chứng nhìn sự vật trong liên hệ, vận động, mâu thuẫn — vòng tròn đã ở đó, nhưng ý nghĩa chưa được gọi tên.",
+          "visual": "Thẻ đỏ thẫm của biện chứng dựng lên dưới vòng tròn; tên và mô tả hiện sau.",
+          "roles": {
+            "anchor": [
+              "title",
+              "dialectic-circle",
+              "dialectic-core"
+            ],
+            "evidence": [
+              "dialectic-card"
+            ],
+            "turn": [],
+            "payoff": [
+              "dialectic-desc"
+            ]
+          },
+          "hero": "Thẻ biện chứng là tấm nền duy nhất chuyển động; vòng tròn đứng yên làm điểm tựa.",
+          "duration_ms": 550,
+          "effects": [
+            {
+              "shape": "dialectic-card",
+              "preset": "wipe-up",
+              "trigger": "click",
+              "duration_ms": 300,
+              "spid": "14"
+            },
+            {
+              "shape": "dialectic-name",
+              "preset": "fade",
+              "trigger": "after",
+              "duration_ms": 250,
+              "spid": "15"
+            },
+            {
+              "shape": "dialectic-desc",
+              "preset": "appear",
+              "trigger": "after",
+              "duration_ms": 0,
+              "spid": "16"
+            }
+          ],
+          "measured": {
+            "effects": 3,
+            "peak_movers": 1,
+            "duration_ms": 551,
+            "auto": false
+          }
+        },
+        {
+          "id": "c2",
+          "kind": "click",
+          "start": "click",
+          "spoken": "Siêu hình nhìn sự vật tách rời, tĩnh tại, phiến diện — một đường thẳng có ba điểm dừng.",
+          "visual": "Đường thẳng vẽ từ trái sang phải, dừng ở ba điểm; nhãn hiện sau khi đường đã dừng.",
+          "roles": {
+            "anchor": [
+              "title"
+            ],
+            "evidence": [
+              "straight-line",
+              "straight-dot-8.35",
+              "straight-dot-9.95",
+              "straight-dot-11.55"
+            ],
+            "turn": [
+              "straight-label"
+            ],
+            "payoff": []
+          },
+          "hero": "Đường thẳng là cú tương phản: nó chạy nhưng không chuyển hóa, dừng ở ba mốc cố định.",
+          "duration_ms": 750,
+          "effects": [
+            {
+              "shape": "straight-line",
+              "preset": "wipe-left",
+              "trigger": "click",
+              "duration_ms": 450,
+              "spid": "9"
+            },
+            {
+              "shape": "straight-dot-8.35",
+              "preset": "appear",
+              "trigger": "after",
+              "duration_ms": 0,
+              "spid": "10"
+            },
+            {
+              "shape": "straight-dot-9.95",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "11"
+            },
+            {
+              "shape": "straight-dot-11.55",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "12"
+            },
+            {
+              "shape": "straight-label",
+              "preset": "fade",
+              "trigger": "after",
+              "duration_ms": 300,
+              "spid": "13"
+            }
+          ],
+          "measured": {
+            "effects": 5,
+            "peak_movers": 1,
+            "duration_ms": 751,
+            "auto": false
+          }
+        },
+        {
+          "id": "c3",
+          "kind": "click",
+          "start": "click",
+          "spoken": "Cùng một sự vật, hai cách nhìn; chọn cách nào là chọn cái gì được thấy.",
+          "visual": "Thẻ siêu hình khép lại bên phải; bố cục hai bên đã cân.",
+          "roles": {
+            "anchor": [
+              "title"
+            ],
+            "evidence": [
+              "meta-card"
+            ],
+            "turn": [],
+            "payoff": [
+              "meta-desc"
+            ]
+          },
+          "hero": "Không thêm chuyển động mới: chỉ khép tấm nền còn lại.",
+          "duration_ms": 550,
+          "effects": [
+            {
+              "shape": "meta-card",
+              "preset": "wipe-up",
+              "trigger": "click",
+              "duration_ms": 300,
+              "spid": "17"
+            },
+            {
+              "shape": "meta-name",
+              "preset": "fade",
+              "trigger": "after",
+              "duration_ms": 250,
+              "spid": "18"
+            },
+            {
+              "shape": "meta-desc",
+              "preset": "appear",
+              "trigger": "after",
+              "duration_ms": 0,
+              "spid": "19"
+            }
+          ],
+          "measured": {
+            "effects": 3,
+            "peak_movers": 1,
+            "duration_ms": 551,
+            "auto": false
+          }
+        }
+      ],
+      "com": {
+        "appended_click_groups": 3,
+        "replaced_existing_timing": true
+      },
+      "base_visible": [
+        "bg",
+        "kicker",
+        "title",
+        "dialectic-circle",
+        "dialectic-core",
+        "dialectic-arrow",
+        "margin-rule",
+        "margin-dot"
+      ]
+    },
+    {
+      "slide": 5,
+      "title": "Điều kiện ra đời",
+      "beats": [
+        {
+          "id": "c1",
+          "kind": "click",
+          "start": "click",
+          "spoken": "Điều kiện kinh tế – xã hội: chủ nghĩa tư bản phát triển mạnh, giai cấp vô sản xuất hiện.",
+          "visual": "Thẻ 01 dựng lên; số, tiêu đề, thân theo sau.",
+          "roles": {
+            "anchor": [
+              "title",
+              "sub"
+            ],
+            "evidence": [
+              "card0"
+            ],
+            "turn": [],
+            "payoff": []
+          },
+          "hero": "Tấm nền thẻ 01 trượt lên, một mình.",
+          "duration_ms": 550,
+          "effects": [
+            {
+              "shape": "card0",
+              "preset": "wipe-up",
+              "trigger": "click",
+              "duration_ms": 300,
+              "spid": "6"
+            },
+            {
+              "shape": "card0-h",
+              "preset": "fade",
+              "trigger": "after",
+              "duration_ms": 250,
+              "spid": "8"
+            },
+            {
+              "shape": "card0-n",
+              "preset": "appear",
+              "trigger": "after",
+              "duration_ms": 0,
+              "spid": "7"
+            },
+            {
+              "shape": "card0-b",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "9"
+            }
+          ],
+          "measured": {
+            "effects": 4,
+            "peak_movers": 1,
+            "duration_ms": 551,
+            "auto": false
+          }
+        },
+        {
+          "id": "c2",
+          "kind": "click",
+          "start": "click",
+          "spoken": "Điều kiện khoa học tự nhiên: tế bào, bảo toàn năng lượng, tiến hóa — ba phát hiện đổi cách nhìn thế giới.",
+          "visual": "Thẻ 02 dựng lên, cùng nhịp với thẻ 01.",
+          "roles": {
+            "anchor": [
+              "title",
+              "sub"
+            ],
+            "evidence": [
+              "card1"
+            ],
+            "turn": [],
+            "payoff": []
+          },
+          "hero": "Cùng một động tác, không đổi ngôn ngữ.",
+          "duration_ms": 550,
+          "effects": [
+            {
+              "shape": "card1",
+              "preset": "wipe-up",
+              "trigger": "click",
+              "duration_ms": 300,
+              "spid": "10"
+            },
+            {
+              "shape": "card1-h",
+              "preset": "fade",
+              "trigger": "after",
+              "duration_ms": 250,
+              "spid": "12"
+            },
+            {
+              "shape": "card1-n",
+              "preset": "appear",
+              "trigger": "after",
+              "duration_ms": 0,
+              "spid": "11"
+            },
+            {
+              "shape": "card1-b",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "13"
+            }
+          ],
+          "measured": {
+            "effects": 4,
+            "peak_movers": 1,
+            "duration_ms": 551,
+            "auto": false
+          }
+        },
+        {
+          "id": "c3",
+          "kind": "click",
+          "start": "click",
+          "spoken": "Điều kiện tư tưởng: Hegel, Feuerbach và chủ nghĩa xã hội không tưởng — một dòng để phê phán và kế thừa.",
+          "visual": "Thẻ 03 dựng lên, khép hàng ba điều kiện.",
+          "roles": {
+            "anchor": [
+              "title",
+              "sub"
+            ],
+            "evidence": [
+              "card2"
+            ],
+            "turn": [],
+            "payoff": []
+          },
+          "hero": "Tấm nền cuối cùng khép hàng; không có gì nhảy.",
+          "duration_ms": 550,
+          "effects": [
+            {
+              "shape": "card2",
+              "preset": "wipe-up",
+              "trigger": "click",
+              "duration_ms": 300,
+              "spid": "14"
+            },
+            {
+              "shape": "card2-h",
+              "preset": "fade",
+              "trigger": "after",
+              "duration_ms": 250,
+              "spid": "16"
+            },
+            {
+              "shape": "card2-n",
+              "preset": "appear",
+              "trigger": "after",
+              "duration_ms": 0,
+              "spid": "15"
+            },
+            {
+              "shape": "card2-b",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "17"
+            }
+          ],
+          "measured": {
+            "effects": 4,
+            "peak_movers": 1,
+            "duration_ms": 551,
+            "auto": false
+          }
+        },
+        {
+          "id": "c4",
+          "kind": "click",
+          "start": "click",
+          "spoken": "Ba điều kiện gặp nhau ở một mốc: 1848, Tuyên ngôn Đảng Cộng sản.",
+          "visual": "Đường thời gian vẽ từ trái sang phải; điểm 1848 và nhãn landing.",
+          "roles": {
+            "anchor": [
+              "title",
+              "sub"
+            ],
+            "evidence": [
+              "card0",
+              "card1",
+              "card2"
+            ],
+            "turn": [
+              "timeline"
+            ],
+            "payoff": [
+              "timeline-text"
+            ]
+          },
+          "hero": "Đường thời gian là cú chốt: nó nối ba điều kiện thành một mốc lịch sử.",
+          "duration_ms": 1000,
+          "effects": [
+            {
+              "shape": "timeline",
+              "preset": "wipe-left",
+              "trigger": "click",
+              "duration_ms": 500,
+              "spid": "18"
+            },
+            {
+              "shape": "timeline-dot",
+              "preset": "zoom",
+              "trigger": "after",
+              "duration_ms": 250,
+              "spid": "19"
+            },
+            {
+              "shape": "timeline-text",
+              "preset": "fade",
+              "trigger": "after",
+              "duration_ms": 250,
+              "spid": "20"
+            }
+          ],
+          "measured": {
+            "effects": 3,
+            "peak_movers": 1,
+            "duration_ms": 1000,
+            "auto": false
+          }
+        }
+      ],
+      "com": {
+        "appended_click_groups": 4,
+        "replaced_existing_timing": true
+      },
+      "base_visible": [
+        "bg",
+        "kicker",
+        "title",
+        "sub",
+        "margin-rule",
+        "margin-dot"
+      ]
+    },
+    {
+      "slide": 6,
+      "title": "Ba bộ phận",
+      "beats": [
+        {
+          "id": "c1",
+          "kind": "click",
+          "start": "click",
+          "spoken": "Ba bộ phận không phải ba môn học rời: triết học cho phương pháp, kinh tế chính trị chỉ ra quan hệ sản xuất, chủ nghĩa xã hội khoa học nói về con đường.",
+          "visual": "Ba thẻ dựng lên như một làn sóng từ trái sang phải; mỗi thẻ tự hoàn tất trước khi thẻ sau bắt đầu.",
+          "roles": {
+            "anchor": [
+              "title",
+              "sub"
+            ],
+            "evidence": [
+              "part0",
+              "part1",
+              "part2"
+            ],
+            "turn": [],
+            "payoff": []
+          },
+          "hero": "Làn sóng ba thẻ là cú chuyển động duy nhất; nó nói 'một chỉnh thể', không phải ba cú click rời.",
+          "duration_ms": 1650,
+          "effects": [
+            {
+              "shape": "part0",
+              "preset": "wipe-up",
+              "trigger": "click",
+              "duration_ms": 300,
+              "spid": "6"
+            },
+            {
+              "shape": "part0-h",
+              "preset": "fade",
+              "trigger": "after",
+              "duration_ms": 250,
+              "spid": "8"
+            },
+            {
+              "shape": "part0-n",
+              "preset": "appear",
+              "trigger": "after",
+              "duration_ms": 0,
+              "spid": "7"
+            },
+            {
+              "shape": "part0-b",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "9"
+            },
+            {
+              "shape": "part1",
+              "preset": "wipe-up",
+              "trigger": "after",
+              "duration_ms": 300,
+              "spid": "10"
+            },
+            {
+              "shape": "part1-h",
+              "preset": "fade",
+              "trigger": "after",
+              "duration_ms": 250,
+              "spid": "12"
+            },
+            {
+              "shape": "part1-n",
+              "preset": "appear",
+              "trigger": "after",
+              "duration_ms": 0,
+              "spid": "11"
+            },
+            {
+              "shape": "part1-b",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "13"
+            },
+            {
+              "shape": "part2",
+              "preset": "wipe-up",
+              "trigger": "after",
+              "duration_ms": 300,
+              "spid": "14"
+            },
+            {
+              "shape": "part2-h",
+              "preset": "fade",
+              "trigger": "after",
+              "duration_ms": 250,
+              "spid": "16"
+            },
+            {
+              "shape": "part2-n",
+              "preset": "appear",
+              "trigger": "after",
+              "duration_ms": 0,
+              "spid": "15"
+            },
+            {
+              "shape": "part2-b",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "17"
+            }
+          ],
+          "measured": {
+            "effects": 12,
+            "peak_movers": 1,
+            "duration_ms": 1653,
+            "auto": false
+          }
+        },
+        {
+          "id": "c2",
+          "kind": "click",
+          "start": "click",
+          "spoken": "Ba bộ phận nối với nhau, và cả hệ thống là một chỉnh thể: triết học là nền tảng phương pháp; kinh tế chính trị là giải phẫu xã hội; CNXH khoa học là mục tiêu và con đường.",
+          "visual": "Hai mũi nối hiện ra giữa các thẻ; câu chốt hiện cuối cùng.",
+          "roles": {
+            "anchor": [
+              "title",
+              "sub"
+            ],
+            "evidence": [
+              "part0",
+              "part1",
+              "part2"
+            ],
+            "turn": [
+              "arrow1",
+              "arrow2"
+            ],
+            "payoff": [
+              "note"
+            ]
+          },
+          "hero": "Hai mũi nối là cú chốt: chúng biến ba thẻ thành một hệ.",
+          "duration_ms": 800,
+          "effects": [
+            {
+              "shape": "arrow1",
+              "preset": "fade",
+              "trigger": "click",
+              "duration_ms": 250,
+              "spid": "18"
+            },
+            {
+              "shape": "arrow2",
+              "preset": "fade",
+              "trigger": "with",
+              "duration_ms": 250,
+              "spid": "19"
+            },
+            {
+              "shape": "note",
+              "preset": "fade",
+              "trigger": "after",
+              "duration_ms": 300,
+              "spid": "20"
+            }
+          ],
+          "measured": {
+            "effects": 3,
+            "peak_movers": 2,
+            "duration_ms": 550,
+            "auto": false
+          }
+        }
+      ],
+      "com": {
+        "appended_click_groups": 2,
+        "replaced_existing_timing": true
+      },
+      "base_visible": [
+        "bg",
+        "kicker",
+        "title",
+        "sub",
+        "margin-rule",
+        "margin-dot"
+      ]
+    },
+    {
+      "slide": 7,
+      "title": "Một dòng chảy",
+      "beats": [
+        {
+          "id": "c1",
+          "kind": "click",
+          "start": "click",
+          "spoken": "C. Mác, 1818–1883: Tư bản, 1867.",
+          "visual": "Ba chân dung đã ở đó; tên và niên đại của Mác hiện dưới chân dung ông.",
+          "roles": {
+            "anchor": [
+              "title",
+              "sub",
+              "marx",
+              "engels",
+              "lenin"
+            ],
+            "evidence": [
+              "marx-name",
+              "marx-date"
+            ],
+            "turn": [],
+            "payoff": []
+          },
+          "hero": "Không có ảnh nào xuất hiện; chỉ có nhãn được gọi tên.",
+          "duration_ms": 300,
+          "effects": [
+            {
+              "shape": "marx-name",
+              "preset": "fade",
+              "trigger": "click",
+              "duration_ms": 250,
+              "spid": "9"
+            },
+            {
+              "shape": "marx-date",
+              "preset": "appear",
+              "trigger": "after",
+              "duration_ms": 0,
+              "spid": "8"
+            },
+            {
+              "shape": "marx-desc",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "10"
+            }
+          ],
+          "measured": {
+            "effects": 3,
+            "peak_movers": 1,
+            "duration_ms": 251,
+            "auto": false
+          }
+        },
+        {
+          "id": "c2",
+          "kind": "click",
+          "start": "click",
+          "spoken": "Ph. Ăngghen, 1820–1895: Tuyên ngôn, 1848.",
+          "visual": "Nhãn của Ăngghen hiện, cùng nhịp.",
+          "roles": {
+            "anchor": [
+              "title",
+              "sub",
+              "marx",
+              "engels",
+              "lenin"
+            ],
+            "evidence": [
+              "engels-name",
+              "engels-date"
+            ],
+            "turn": [],
+            "payoff": []
+          },
+          "hero": "Cùng một nhịp, không đổi động tác.",
+          "duration_ms": 300,
+          "effects": [
+            {
+              "shape": "engels-name",
+              "preset": "fade",
+              "trigger": "click",
+              "duration_ms": 250,
+              "spid": "14"
+            },
+            {
+              "shape": "engels-date",
+              "preset": "appear",
+              "trigger": "after",
+              "duration_ms": 0,
+              "spid": "13"
+            },
+            {
+              "shape": "engels-desc",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "15"
+            }
+          ],
+          "measured": {
+            "effects": 3,
+            "peak_movers": 1,
+            "duration_ms": 251,
+            "auto": false
+          }
+        },
+        {
+          "id": "c3",
+          "kind": "click",
+          "start": "click",
+          "spoken": "V.I. Lênin, 1870–1924: Cách mạng, 1917.",
+          "visual": "Nhãn của Lênin hiện, khép ba chân dung.",
+          "roles": {
+            "anchor": [
+              "title",
+              "sub",
+              "marx",
+              "engels",
+              "lenin"
+            ],
+            "evidence": [
+              "lenin-name",
+              "lenin-date"
+            ],
+            "turn": [],
+            "payoff": []
+          },
+          "hero": "Nhãn cuối khép lại; ba người đã được gọi tên.",
+          "duration_ms": 300,
+          "effects": [
+            {
+              "shape": "lenin-name",
+              "preset": "fade",
+              "trigger": "click",
+              "duration_ms": 250,
+              "spid": "19"
+            },
+            {
+              "shape": "lenin-date",
+              "preset": "appear",
+              "trigger": "after",
+              "duration_ms": 0,
+              "spid": "18"
+            },
+            {
+              "shape": "lenin-desc",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "20"
+            }
+          ],
+          "measured": {
+            "effects": 3,
+            "peak_movers": 1,
+            "duration_ms": 251,
+            "auto": false
+          }
+        },
+        {
+          "id": "c4",
+          "kind": "click",
+          "start": "click",
+          "spoken": "Ba người, ba thời điểm, một dự án: dòng chảy từ lý luận đến cách mạng.",
+          "visual": "Đường thời gian vẽ; ba điểm 1848, 1867, 1917 landing theo thứ tự.",
+          "roles": {
+            "anchor": [
+              "title",
+              "sub",
+              "marx",
+              "engels",
+              "lenin"
+            ],
+            "evidence": [
+              "marx-name",
+              "engels-name",
+              "lenin-name"
+            ],
+            "turn": [
+              "timeline"
+            ],
+            "payoff": [
+              "tl-1917-t"
+            ]
+          },
+          "hero": "Đường thời gian là cú chốt: nó nối ba chân dung thành một dòng.",
+          "duration_ms": 1400,
+          "effects": [
+            {
+              "shape": "timeline",
+              "preset": "wipe-left",
+              "trigger": "click",
+              "duration_ms": 600,
+              "spid": "21"
+            },
+            {
+              "shape": "tl-1848",
+              "preset": "zoom",
+              "trigger": "after",
+              "duration_ms": 250,
+              "spid": "22"
+            },
+            {
+              "shape": "tl-1848-t",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "23"
+            },
+            {
+              "shape": "tl-1867",
+              "preset": "zoom",
+              "trigger": "after",
+              "duration_ms": 250,
+              "spid": "24"
+            },
+            {
+              "shape": "tl-1867-t",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "25"
+            },
+            {
+              "shape": "tl-1917",
+              "preset": "zoom",
+              "trigger": "after",
+              "duration_ms": 250,
+              "spid": "26"
+            },
+            {
+              "shape": "tl-1917-t",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "27"
+            }
+          ],
+          "measured": {
+            "effects": 7,
+            "peak_movers": 1,
+            "duration_ms": 1350,
+            "auto": false
+          }
+        }
+      ],
+      "com": {
+        "appended_click_groups": 4,
+        "replaced_existing_timing": true
+      },
+      "base_visible": [
+        "bg",
+        "kicker",
+        "title",
+        "sub",
+        "marx-ring",
+        "marx",
+        "engels-ring",
+        "engels",
+        "lenin-ring",
+        "lenin",
+        "margin-rule",
+        "margin-dot"
+      ]
+    },
+    {
+      "slide": 8,
+      "title": "Đối tượng & chức năng",
+      "beats": [
+        {
+          "id": "c1",
+          "kind": "click",
+          "start": "click",
+          "spoken": "Hai chức năng đầu: thế giới quan — nhìn thế giới như một chỉnh thể có quy luật; phương pháp luận — cách đặt vấn đề và hành động trong thực tiễn.",
+          "visual": "Hàng trên: hai khung cùng vẽ, rồi hai tiêu đề cùng hiện; số và thân theo sau.",
+          "roles": {
+            "anchor": [
+              "title"
+            ],
+            "evidence": [
+              "tile0",
+              "tile1"
+            ],
+            "turn": [],
+            "payoff": []
+          },
+          "hero": "Hai khung là một cặp: chúng vẽ cùng lúc, không lệch nhịp.",
+          "duration_ms": 550,
+          "effects": [
+            {
+              "shape": "tile0",
+              "preset": "wipe-up",
+              "trigger": "click",
+              "duration_ms": 300,
+              "spid": "5"
+            },
+            {
+              "shape": "tile1",
+              "preset": "wipe-up",
+              "trigger": "with",
+              "duration_ms": 300,
+              "spid": "9"
+            },
+            {
+              "shape": "tile0-h",
+              "preset": "fade",
+              "trigger": "after",
+              "duration_ms": 250,
+              "spid": "7"
+            },
+            {
+              "shape": "tile1-h",
+              "preset": "fade",
+              "trigger": "with",
+              "duration_ms": 250,
+              "spid": "11"
+            },
+            {
+              "shape": "tile0-n",
+              "preset": "appear",
+              "trigger": "after",
+              "duration_ms": 0,
+              "spid": "6"
+            },
+            {
+              "shape": "tile1-n",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "10"
+            },
+            {
+              "shape": "tile0-b",
+              "preset": "appear",
+              "trigger": "after",
+              "duration_ms": 0,
+              "spid": "8"
+            },
+            {
+              "shape": "tile1-b",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "12"
+            }
+          ],
+          "measured": {
+            "effects": 8,
+            "peak_movers": 2,
+            "duration_ms": 552,
+            "auto": false
+          }
+        },
+        {
+          "id": "c2",
+          "kind": "click",
+          "start": "click",
+          "spoken": "Hai chức năng sau: phê phán cái lỗi thời, mở đường cho cái mới; và không đứng trên khoa học — là phương pháp của khoa học.",
+          "visual": "Hàng dưới: cùng một cặp, khép lưới 2×2.",
+          "roles": {
+            "anchor": [
+              "title"
+            ],
+            "evidence": [
+              "tile2",
+              "tile3"
+            ],
+            "turn": [],
+            "payoff": [
+              "tile3-h"
+            ]
+          },
+          "hero": "Hàng dưới khép lưới; bốn chức năng thành một bộ công cụ.",
+          "duration_ms": 550,
+          "effects": [
+            {
+              "shape": "tile2",
+              "preset": "wipe-up",
+              "trigger": "click",
+              "duration_ms": 300,
+              "spid": "13"
+            },
+            {
+              "shape": "tile3",
+              "preset": "wipe-up",
+              "trigger": "with",
+              "duration_ms": 300,
+              "spid": "17"
+            },
+            {
+              "shape": "tile2-h",
+              "preset": "fade",
+              "trigger": "after",
+              "duration_ms": 250,
+              "spid": "15"
+            },
+            {
+              "shape": "tile3-h",
+              "preset": "fade",
+              "trigger": "with",
+              "duration_ms": 250,
+              "spid": "19"
+            },
+            {
+              "shape": "tile2-n",
+              "preset": "appear",
+              "trigger": "after",
+              "duration_ms": 0,
+              "spid": "14"
+            },
+            {
+              "shape": "tile3-n",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "18"
+            },
+            {
+              "shape": "tile2-b",
+              "preset": "appear",
+              "trigger": "after",
+              "duration_ms": 0,
+              "spid": "16"
+            },
+            {
+              "shape": "tile3-b",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "20"
+            }
+          ],
+          "measured": {
+            "effects": 8,
+            "peak_movers": 2,
+            "duration_ms": 552,
+            "auto": false
+          }
+        }
+      ],
+      "com": {
+        "appended_click_groups": 2,
+        "replaced_existing_timing": true
+      },
+      "base_visible": [
+        "bg",
+        "kicker",
+        "title",
+        "margin-rule",
+        "margin-dot"
+      ]
+    },
+    {
+      "slide": 9,
+      "title": "Luận cương",
+      "beats": [
+        {
+          "id": "c1",
+          "kind": "click",
+          "start": "click",
+          "spoken": "Câu này thường bị trích như một khẩu hiệu; tên tác giả và năm mới biến nó thành một phát ngôn có nguồn.",
+          "visual": "Cả câu đã ở đó từ đầu; gạch vàng và dòng tác giả hiện sau, như một chú thích.",
+          "roles": {
+            "anchor": [
+              "quote-mark",
+              "quote0",
+              "quote1",
+              "quote2"
+            ],
+            "evidence": [
+              "author"
+            ],
+            "turn": [
+              "quote-rule"
+            ],
+            "payoff": []
+          },
+          "hero": "Gạch vàng kéo ra dưới câu trích; không có chữ nào bị giấu.",
+          "duration_ms": 700,
+          "effects": [
+            {
+              "shape": "quote-rule",
+              "preset": "wipe-left",
+              "trigger": "click",
+              "duration_ms": 400,
+              "spid": "8"
+            },
+            {
+              "shape": "author",
+              "preset": "fade",
+              "trigger": "after",
+              "duration_ms": 300,
+              "spid": "9"
+            }
+          ],
+          "measured": {
+            "effects": 2,
+            "peak_movers": 1,
+            "duration_ms": 700,
+            "auto": false
+          }
+        }
+      ],
+      "com": {
+        "appended_click_groups": 1,
+        "replaced_existing_timing": true
+      },
+      "base_visible": [
+        "bg",
+        "kicker",
+        "quote-mark",
+        "quote0",
+        "quote1",
+        "quote2",
+        "margin-rule",
+        "margin-dot"
+      ]
+    },
+    {
+      "slide": 10,
+      "title": "Mang theo",
+      "beats": [
+        {
+          "id": "c1",
+          "kind": "click",
+          "start": "click",
+          "spoken": "Mang theo câu hỏi nền tảng: cái nào có trước, vật chất hay ý thức?",
+          "visual": "Dòng 01: tiêu đề hiện, số và câu hỏi theo sau; gạch mảnh khép dòng.",
+          "roles": {
+            "anchor": [
+              "title"
+            ],
+            "evidence": [
+              "take0-h",
+              "take0-b"
+            ],
+            "turn": [],
+            "payoff": []
+          },
+          "hero": "Một dòng được đặt xuống, không có gì bay.",
+          "duration_ms": 300,
+          "effects": [
+            {
+              "shape": "take0-h",
+              "preset": "fade",
+              "trigger": "click",
+              "duration_ms": 250,
+              "spid": "6"
+            },
+            {
+              "shape": "take0-n",
+              "preset": "appear",
+              "trigger": "after",
+              "duration_ms": 0,
+              "spid": "5"
+            },
+            {
+              "shape": "take0-b",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "7"
+            },
+            {
+              "shape": "take0-line",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "8"
+            }
+          ],
+          "measured": {
+            "effects": 4,
+            "peak_movers": 1,
+            "duration_ms": 251,
+            "auto": false
+          }
+        },
+        {
+          "id": "c2",
+          "kind": "click",
+          "start": "click",
+          "spoken": "Mang theo cách nhìn biện chứng: sự vật trong liên hệ, vận động, mâu thuẫn.",
+          "visual": "Dòng 02 hiện, cùng nhịp.",
+          "roles": {
+            "anchor": [
+              "title"
+            ],
+            "evidence": [
+              "take1-h",
+              "take1-b"
+            ],
+            "turn": [],
+            "payoff": []
+          },
+          "hero": "Cùng một nhịp.",
+          "duration_ms": 300,
+          "effects": [
+            {
+              "shape": "take1-h",
+              "preset": "fade",
+              "trigger": "click",
+              "duration_ms": 250,
+              "spid": "10"
+            },
+            {
+              "shape": "take1-n",
+              "preset": "appear",
+              "trigger": "after",
+              "duration_ms": 0,
+              "spid": "9"
+            },
+            {
+              "shape": "take1-b",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "11"
+            },
+            {
+              "shape": "take1-line",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "12"
+            }
+          ],
+          "measured": {
+            "effects": 4,
+            "peak_movers": 1,
+            "duration_ms": 251,
+            "auto": false
+          }
+        },
+        {
+          "id": "c3",
+          "kind": "click",
+          "start": "click",
+          "spoken": "Mang theo lý luận gắn thực tiễn: giải thích thế giới để cải tạo thế giới.",
+          "visual": "Dòng 03 hiện; ba dòng đã đủ.",
+          "roles": {
+            "anchor": [
+              "title"
+            ],
+            "evidence": [
+              "take2-h",
+              "take2-b"
+            ],
+            "turn": [],
+            "payoff": []
+          },
+          "hero": "Dòng cuối của danh sách khép lại.",
+          "duration_ms": 300,
+          "effects": [
+            {
+              "shape": "take2-h",
+              "preset": "fade",
+              "trigger": "click",
+              "duration_ms": 250,
+              "spid": "14"
+            },
+            {
+              "shape": "take2-n",
+              "preset": "appear",
+              "trigger": "after",
+              "duration_ms": 0,
+              "spid": "13"
+            },
+            {
+              "shape": "take2-b",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "15"
+            },
+            {
+              "shape": "take2-line",
+              "preset": "appear",
+              "trigger": "with",
+              "duration_ms": 0,
+              "spid": "16"
+            }
+          ],
+          "measured": {
+            "effects": 4,
+            "peak_movers": 1,
+            "duration_ms": 251,
+            "auto": false
+          }
+        },
+        {
+          "id": "c4",
+          "kind": "click",
+          "start": "click",
+          "spoken": "Kết bằng câu hỏi: trong ba cách nhìn này, cách nào bạn đang thiếu nhất khi phân tích một vấn đề thật?",
+          "visual": "Câu chốt nổi lên từ dưới danh sách; credits đã ở đó từ đầu.",
+          "roles": {
+            "anchor": [
+              "title"
+            ],
+            "evidence": [
+              "take0-h",
+              "take1-h",
+              "take2-h"
+            ],
+            "turn": [
+              "closing"
+            ],
+            "payoff": [
+              "closing"
+            ]
+          },
+          "hero": "Câu chốt là cú nâng duy nhất: nó thoát khỏi danh sách, không lặp lại một dòng nào.",
+          "duration_ms": 500,
+          "effects": [
+            {
+              "shape": "closing",
+              "preset": "float-in",
+              "trigger": "click",
+              "duration_ms": 500,
+              "spid": "17"
+            }
+          ],
+          "measured": {
+            "effects": 1,
+            "peak_movers": 1,
+            "duration_ms": 500,
+            "auto": false
+          }
+        }
+      ],
+      "com": {
+        "appended_click_groups": 4,
+        "replaced_existing_timing": true
+      },
+      "base_visible": [
+        "bg",
+        "kicker",
+        "title",
+        "credits",
+        "margin-rule",
+        "margin-dot"
+      ]
+    }
+  ]
+}
