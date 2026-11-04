@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 import pytest
 
-from scripts.deck_director import check_direction, compile_direction
+from scripts.deck_director import check_direction, compile_direction, scaffold_direction
 
 
 @pytest.fixture
@@ -225,3 +225,64 @@ def test_compile_direction(valid_direction_data):
     beat_id = director_plan["slides"][1]["click_beats"][0]["motion_beats"][0]
     beat_obj = next(b for b in director_plan["slides"][1]["beats"] if b["id"] == beat_id)
     assert "Major Content" in beat_obj["targets"]
+    assert "notes" in deck_spec["slides"][0]
+    assert "[T=0]" in deck_spec["slides"][0]["notes"]
+    assert "[CLICK 1 - b1.1]" in deck_spec["slides"][0]["notes"]
+
+
+def test_pass1_check_ignores_speech(valid_direction_data):
+    # Remove spoken cues and target_refs
+    for b in valid_direction_data["beats"]:
+        b["t0_says"] = ""
+        for c in b["clicks"]:
+            c["lead_in"] = ""
+            c["post_click_says"] = ""
+            c["target_refs"] = []
+
+    # Pass 1 should pass (Stage & State Machine only)
+    res_pass1 = check_direction(valid_direction_data, pass_num=1)
+    assert res_pass1["ok"] is True
+    assert len(res_pass1["errors"]) == 0
+
+    # Pass 2 must fail on speech checks
+    res_pass2 = check_direction(valid_direction_data, pass_num=2)
+    assert res_pass2["ok"] is False
+    codes = [e["code"] for e in res_pass2["errors"]]
+    assert "NAR-T0-SAYS-MISSING" in codes
+    assert "NAR-UNANCHORED" in codes
+
+
+def test_scaffold_direction():
+    scaffold = scaffold_direction(title="Học Thuyết Giá Trị", slides_count=3, preset="editorial-crimson")
+    assert scaffold["brief"]["topic"] == "Học Thuyết Giá Trị"
+    assert len(scaffold["beats"]) == 3
+    assert len(scaffold["shots"]) == 3
+
+    # Must pass both Pass 1 and Pass 2
+    res1 = check_direction(scaffold, pass_num=1)
+    assert res1["ok"] is True
+
+    res2 = check_direction(scaffold, pass_num=2)
+    assert res2["ok"] is True
+
+
+def test_compile_exit_targets(valid_direction_data):
+    # Add exit target to b2.2
+    valid_direction_data["shots"][1]["state_after"]["b2.2"]["exit"] = ["card:def2"]
+    deck_spec, director_plan = compile_direction(valid_direction_data)
+
+    s2 = director_plan["slides"][1]
+    exit_beats = [b for b in s2["beats"] if b["operation"] == "exit"]
+    assert len(exit_beats) >= 1
+    assert exit_beats[0]["effect"] == "fade-out"
+    assert "Minor Content" in exit_beats[0]["targets"]
+
+
+def test_narrative_critic_on_directed_pptx():
+    import scripts.design_critic as dc
+    pptx_path = Path("experiments/T068-20261104-antigravity-deck-director/artifacts/T068_directed.pptx")
+    if pptx_path.is_file():
+        crit = dc.critique(pptx_path)
+        assert "narrative" in crit["scores"]
+        assert crit["scores"]["narrative"] == 5.0
+        assert crit["scores"]["overall"] >= 4.9

@@ -27,7 +27,10 @@
           "lead_in": "Để mở đầu chương trình hôm nay,",
           "state": "Tiêu đề chính xuất hiện khẳng định chủ đề chương một",
           "post_click_says": "chúng ta cùng bước vào hành trình khai phá nguồn gốc và bản chất của học thuyết giải phóng con người.",
-          "target_refs": ["title:main", "sub:main"]
+          "target_refs": [
+            "title:main",
+            "sub:main"
+          ]
         }
       ]
     },
@@ -45,14 +48,19 @@
           "lead_in": "Tuy nhiên, để trở thành một hệ thống khoa học,",
           "state": "Hai trụ cột đầu tiên hiện rõ cấu trúc nhận thức",
           "post_click_says": "giáo trình phân lập bức tranh tổng thể thành hai miền thực tại: thế giới vật chất bên ngoài và các thiết chế tương tác giữa loài người.",
-          "target_refs": ["card:def1", "card:def2"]
+          "target_refs": [
+            "card:def1",
+            "card:def2"
+          ]
         },
         {
           "id": "b2.2",
           "lead_in": "Và đỉnh cao của sự khái quát hóa —",
           "state": "Trụ cột xã hội mờ đi để nhường toàn bộ tiêu điểm cho quy luật tư duy",
           "post_click_says": "đỉnh cao nhất chính là năng lực phản ánh thế giới vào trong ý thức và phương pháp tư biện của chính chúng ta.",
-          "target_refs": ["card:def3"]
+          "target_refs": [
+            "card:def3"
+          ]
         }
       ]
     },
@@ -70,7 +78,10 @@
           "lead_in": "Khi nhìn vào cấu trúc bên dưới,",
           "state": "Hai trụ cột kinh tế chính trị và chủ nghĩa xã hội khoa học đồng thời xuất hiện",
           "post_click_says": "chúng ta thấy bộ phận đầu tiên đóng vai trò hạt nhân thế giới quan, phần thứ hai vạch trần bóc lột, và phần thứ ba vạch ra con đường đấu tranh thực tiễn.",
-          "target_refs": ["bullet:sys2", "bullet:sys3"]
+          "target_refs": [
+            "bullet:sys2",
+            "bullet:sys3"
+          ]
         }
       ]
     }
@@ -81,14 +92,33 @@
       "beat": "b1",
       "layout": "title",
       "objects": [
-        {"id": "art:portraits", "role": "hero", "asset": {"file": "experiments/T066-20261104-opencode-triet-hoc-ch1/inputs/assets/marx-circle.png"}},
-        {"id": "title:main", "role": "title", "text": "Triết học Mác – Lênin: Chương 1"},
-        {"id": "sub:main", "role": "subtitle", "text": "Khái luận về triết học và vai trò trong đời sống xã hội"}
+        {
+          "id": "art:portraits",
+          "role": "hero",
+          "asset": {
+            "file": "experiments/T066-20261104-opencode-triet-hoc-ch1/inputs/assets/marx-circle.png"
+          }
+        },
+        {
+          "id": "title:main",
+          "role": "title",
+          "text": "Triết học Mác – Lênin: Chương 1"
+        },
+        {
+          "id": "sub:main",
+          "role": "subtitle",
+          "text": "Khái luận về triết học và vai trò trong đời sống xã hội"
+        }
       ],
-      "base_state": ["art:portraits"],
+      "base_state": [
+        "art:portraits"
+      ],
       "state_after": {
         "b1.1": {
-          "enter": ["title:main", "sub:main"],
+          "enter": [
+            "title:main",
+            "sub:main"
+          ],
           "dim": [],
           "highlight": [],
           "exit": [],
@@ -101,24 +131,53 @@
       "beat": "b2",
       "layout": "asymmetric",
       "objects": [
-        {"id": "art:plato", "role": "anchor", "asset": {"file": "experiments/T066-20261104-opencode-triet-hoc-ch1/inputs/assets/plato-bust.png"}},
-        {"id": "card:def1", "role": "card", "text": "Quy luật Tự nhiên"},
-        {"id": "card:def2", "role": "card", "text": "Quan hệ Xã hội"},
-        {"id": "card:def3", "role": "card", "text": "Quy luật Tư duy"}
+        {
+          "id": "art:plato",
+          "role": "anchor",
+          "asset": {
+            "file": "experiments/T066-20261104-opencode-triet-hoc-ch1/inputs/assets/plato-bust.png"
+          }
+        },
+        {
+          "id": "card:def1",
+          "role": "card",
+          "text": "Quy luật Tự nhiên"
+        },
+        {
+          "id": "card:def2",
+          "role": "card",
+          "text": "Quan hệ Xã hội"
+        },
+        {
+          "id": "card:def3",
+          "role": "card",
+          "text": "Quy luật Tư duy"
+        }
       ],
-      "base_state": ["art:plato"],
+      "base_state": [
+        "art:plato"
+      ],
       "state_after": {
         "b2.1": {
-          "enter": ["card:def1", "card:def2"],
+          "enter": [
+            "card:def1",
+            "card:def2"
+          ],
           "dim": [],
           "highlight": [],
           "exit": [],
           "action": null
         },
         "b2.2": {
-          "enter": ["card:def3"],
-          "dim": ["card:def2"],
-          "highlight": ["card:def3"],
+          "enter": [
+            "card:def3"
+          ],
+          "dim": [
+            "card:def2"
+          ],
+          "highlight": [
+            "card:def3"
+          ],
           "exit": [],
           "action": null
         }
@@ -129,16 +188,38 @@
       "beat": "b3",
       "layout": "bullets",
       "objects": [
-        {"id": "bullet:sys1", "role": "bullet", "text": "Triết học Mác – Lênin (Thế giới quan và phương pháp luận)"},
-        {"id": "bullet:sys2", "role": "bullet", "text": "Kinh tế chính trị Mác – Lênin (Quy luật phát triển kinh tế)"},
-        {"id": "bullet:sys3", "role": "bullet", "text": "Chủ nghĩa xã hội khoa học (Sứ mệnh giải phóng giai cấp)"}
+        {
+          "id": "bullet:sys1",
+          "role": "bullet",
+          "text": "Triết học Mác – Lênin (Thế giới quan và phương pháp luận)"
+        },
+        {
+          "id": "bullet:sys2",
+          "role": "bullet",
+          "text": "Kinh tế chính trị Mác – Lênin (Quy luật phát triển kinh tế)"
+        },
+        {
+          "id": "bullet:sys3",
+          "role": "bullet",
+          "text": "Chủ nghĩa xã hội khoa học (Sứ mệnh giải phóng giai cấp)"
+        }
       ],
-      "base_state": ["bullet:sys1"],
+      "base_state": [
+        "bullet:sys1"
+      ],
       "state_after": {
         "b3.1": {
-          "enter": ["bullet:sys2", "bullet:sys3"],
-          "dim": [],
-          "highlight": ["bullet:sys1"],
+          "enter": [
+            "bullet:sys2",
+            "bullet:sys3"
+          ],
+          "dim": [
+            "bullet:sys1"
+          ],
+          "highlight": [
+            "bullet:sys2",
+            "bullet:sys3"
+          ],
           "exit": [],
           "action": null
         }

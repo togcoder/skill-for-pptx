@@ -93,15 +93,28 @@ machine before weaving the spoken line.
    - **Implicit deictic anchoring:** never say *"As you see on the left"*. Say
      *"When we strip this outer caching layer…"* matching the visual transition.
 
-5. **Validate and compile.**
-   ```powershell
-   python scripts/deck_director.py check direction.json
-   python scripts/deck_director.py compile direction.json -o deck.json --director director.json
-   ```
+5. **Scaffold, validate and compile.**
+   - **Scaffold a new draft:**
+     ```powershell
+     python scripts/deck_director.py scaffold -o direction.json --title "My Topic" --slides 3 --preset editorial-crimson
+     ```
+   - **Validate Pass 1 (Stage & State Machine only):**
+     ```powershell
+     python scripts/deck_director.py check direction.json --pass-1
+     ```
+   - **Validate Pass 2 (Full Screenplay & Speech Weave):**
+     ```powershell
+     python scripts/deck_director.py check direction.json
+     ```
+   - **Compile to Forge deck and Director plan (Speaker notes auto-compiled):**
+     ```powershell
+     python scripts/deck_director.py compile direction.json -o deck.json --director director.json
+     ```
 
 6. **Build and measure.**
    ```powershell
    python scripts/slide_forge.py build deck.json -o deck.pptx --plan director.json
+   python scripts/design_critic.py deck.pptx
    python scripts/deck_director.py ledger deck.pptx --direction direction.json
    ```
 
@@ -127,6 +140,17 @@ machine before weaving the spoken line.
 | `NAR-UNANCHORED` | Spatial grounding | A click whose `post_click_says` does not reference any object in `target_refs` |
 | `NAR-COLLISION` | Cognitive pacing | Cinematic motion (`assemble`, `drill`, or ≥ 3 movers) without a pre-click `lead_in` |
 | `DEN-ACTIVE-VIEW` | Active clutter cap | Words in currently active (visible − dimmed − exited) objects > 45; a slide > 55 words with ≥ 3 clicks must contain `dim` or `exit` |
+
+## Narrative Critic in `design_critic.py` (6th Dimension)
+
+`scripts/design_critic.py` measures narrative technique on the native `.pptx` (both `p:timing` and `notesSlide` XML):
+
+| Code | Dimension | Requirement |
+|---|---|---|
+| `NAR-BASE-STATE` | `narrative` | Slide must not open blank at t=0; must have >= 1 visual anchor or title. |
+| `DEN-ACTIVE-WORDS` | `narrative` | Active on-screen words during any click state must stay <= 45 words. |
+| `NAR-LIFECYCLE` | `narrative` | Slides with multi-click content must include >= 1 object lifecycle transition (dim or exit). Purely additive clutter fails. |
+| `NAR-ALIGN` | `narrative` | Speaker notes must contain choreographed cues ([T=0] and [CLICK]) precisely matching slide click groups. |
 
 ## Job and figure table
 
