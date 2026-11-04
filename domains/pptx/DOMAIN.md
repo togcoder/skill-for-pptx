@@ -49,7 +49,8 @@ In `docs/`:
 - `MOTION_PACKING.md`
 - `POWERPOINT_NATIVE_HARNESS.md`
 
-Skills: `skills/pptx-motion-director`, `skills/slide-forge`.
+Skills: `skills/pptx-motion-director`, `skills/slide-forge`, and (draft,
+unwired) `skills/deck-director`.
 
 ## Domain rules
 - **Inventory first.** For an existing deck, inventory the source before
@@ -105,8 +106,15 @@ Skills: `skills/pptx-motion-director`, `skills/slide-forge`.
 - **Morph over a 3D camera (T064):** verified at rung 5 with CreateVideo frames. Morph interpolates `am3d:camera` only when consecutive slides share one `model3d` part; with one `Add3DModel` embed per slide it fades the model out and in (0.40 s blank) and never moves the camera. Authoring rule: insert the model once, duplicate the slide, then change the camera.
 - **3D limits:** native lighting is fixed (black horizontal faces render grey); metallic PBR renders as a white mirror; `COLOR_0` is ignored when a material exists. The T055 model is a massing study, not final product fidelity.
 - **Evidence:** Rungs 0–5b established across PPTX, DOCX, XLSX and Cross; PowerPoint 16.0 COM is used for parse/render/click checks. T059 measured DeckCraft against PowerPoint at rung 4/5; T062 used COM at rung 4/5; T063 inspected PDF/PNG/CreateVideo frames (rung 5); T064 used CreateVideo frames for 3D camera Morph (rung 5). Rung 6 (a human reviewing every click/frame) has not been reached; the T057 audit retired the earlier "rungs 0–5 / COM verified" wording.
+- **Deck direction (T067, draft):** the owner's read of T066 — motion without *gu*, images last, generated before a script — is a pipeline property, not a deck accident. Layout is compiled first and `md.draft()` reads the finished file back; the plan's `script` is generated from slide titles; the critic has no narrative dimension and recognises titles only by placeholder. The lab's own reference deck reproduces the defects at 4.88/5.0 motion. Draft layer: `skills/deck-director/SKILL.md` plus `direction.json` (brief → script → beats → shots → `base_state`). No code merged; compiler and critic changes are T068–T069.
 
 ## Open questions / dissent
+- **T067 job vocabulary.** The nine beat jobs (`hook`, `name`, `define`, `contrast`,
+  `prove`, `mechanism`, `turn`, `land`, `ask`) and six figures are a reasoned
+  taxonomy, not measured. Like T038's numbers, they need a reviewer to separate
+  craft judgement from evidence. `narrative.presence_min_clicks = 1` is the only
+  new number and the weakest one.
+
 - **T038 numbers.** Several T038 values (golden 61.8 %, Duarte breaks at
   1/3 and 2/3, optical multipliers) are design lore. A reviewer should
   separate the ones that are measured from the ones that are judgement.

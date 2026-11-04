@@ -1,0 +1,170 @@
+{
+ "scores": {
+  "design": 2.98,
+  "motion": 4.99,
+  "rhythm": 4.48,
+  "coherence": 3.67,
+  "overall": 4.03
+ },
+ "checks": 456,
+ "issues_by_severity": {
+  "note": 8,
+  "warn": 3
+ },
+ "issues_by_code": {
+  "TYP-SIZES": 1,
+  "TYP-SMALL": 2
+ },
+ "deck": {
+  "slides": 10,
+  "content_slides": 10,
+  "static_slides": [],
+  "lifecycles": 0,
+  "effect_kinds": 5,
+  "type_sizes": [
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   21,
+   22,
+   32,
+   33,
+   36,
+   38,
+   40,
+   52,
+   63,
+   92,
+   180
+  ],
+  "families": {
+   "Arial": 109,
+   "Palatino Linotype": 20
+  }
+ },
+ "frames": 0,
+ "issues": [
+  {
+   "code": "DEN-WORDS",
+   "severity": "note",
+   "slide": 2,
+   "object": null,
+   "measured": 74,
+   "expected": [
+    0,
+    45
+   ]
+  },
+  {
+   "code": "MOT-CLICKS",
+   "severity": "note",
+   "slide": 2,
+   "object": null,
+   "measured": 7,
+   "expected": [
+    0,
+    6
+   ]
+  },
+  {
+   "code": "MOT-DURATION",
+   "severity": "note",
+   "slide": 4,
+   "object": "dialectic-arrow",
+   "measured": 1200,
+   "expected": [
+    250,
+    600
+   ]
+  },
+  {
+   "code": "DEN-WORDS",
+   "severity": "note",
+   "slide": 5,
+   "object": null,
+   "measured": 60,
+   "expected": [
+    0,
+    45
+   ]
+  },
+  {
+   "code": "DEN-WORDS",
+   "severity": "note",
+   "slide": 6,
+   "object": null,
+   "measured": 78,
+   "expected": [
+    0,
+    45
+   ]
+  },
+  {
+   "code": "DEN-WORDS",
+   "severity": "note",
+   "slide": 8,
+   "object": null,
+   "measured": 64,
+   "expected": [
+    0,
+    45
+   ]
+  },
+  {
+   "code": "DEN-WORDS",
+   "severity": "note",
+   "slide": 10,
+   "object": null,
+   "measured": 80,
+   "expected": [
+    0,
+    45
+   ]
+  },
+  {
+   "code": "DUA-BREAK",
+   "severity": "note",
+   "slide": null,
+   "object": null,
+   "measured": 0,
+   "expected": ">= 1 pattern break for 5+ slide decks"
+  },
+  {
+   "code": "TYP-SIZES",
+   "severity": "warn",
+   "slide": null,
+   "object": null,
+   "measured": 21,
+   "expected": [
+    3,
+    6
+   ]
+  },
+  {
+   "code": "TYP-SMALL",
+   "severity": "warn",
+   "slide": null,
+   "object": null,
+   "measured": 10,
+   "expected": [
+    18,
+    40
+   ]
+  },
+  {
+   "code": "TYP-SMALL",
+   "severity": "warn",
+   "slide": null,
+   "object": null,
+   "measured": 8,
+   "expected": ">= 12"
+  }
+ ]
+}

@@ -7,6 +7,42 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T067 [pptx] Skill audit and deck-direction draft — 2026-11-04
+
+- **Why.** The owner judged T066: crop, palette and fonts good; motion has no
+  *gu*; images appear last with no meaning; the deck was generated before a script
+  existed. The brief was to find the cause in the skills, research it, and rewrite
+  if necessary.
+- **Audit.** Four root causes, each traced to code: (1) no causal artifact — Forge
+  compiles layout first and passes only the deck title to `md.draft()`, so motion
+  is a function of geometry; (2) intent is unrepresentable — the plan's `script`
+  block is generated from slide titles and the validator only counts the strings;
+  (3) style is a token list — `THEMES` + two fonts, while `theme_engine`'s seven
+  archetypes sit orphaned; (4) the critic has no narrative dimension, identifies
+  titles by placeholder only, and averages 153 per-effect checks so structure cannot
+  move the score.
+- **Control deck.** The lab's own reference example (`vi_chuyen_doi_so.json`, built
+  by the default pipeline) scores 5.0 design / 5.0 motion / 4.88 overall with zero
+  warnings and still opens its section and closing slides blank, and reveals its
+  only picture on the cover's last click.
+- **Measured.** T066: 51 click groups, 0 lifecycles, 9/10 titles animated, 4/4
+  pictures on the last click, three slides with no base state. Probe and JSONs in
+  `experiments/T067-20261104-opencode-deck-director/artifacts/measurements/`.
+- **Proposal (draft only).** A `deck-director` layer: brief → script → beat sheet
+  (9 jobs) → shot list (`base_state` first, `state_after` per click) → motion plan
+  → build; `direction.json` compiles to `deck.json` + `director.json`; Forge needs
+  one `plan` parameter and already has the `md.apply` seam. A style layer with
+  palette/type, grain, image treatment and six motion figures. Critic additions:
+  `narrative` dimension, `MOT-LIFECYCLE`, `MOT-FIGURE-REPEAT`, `DEN-VIEW`,
+  `PLAN-DRIFT`, and rule-level scoring.
+- **Limits.** No human eye and no PowerPoint render of either probe deck; the
+  post-fix numbers are one measured parallel rebuild (51 → 27 clicks, no empty
+  base state) plus untested predictions; the job vocabulary is a reasoned
+  taxonomy, not measured; no compiler exists.
+- **Status.** EXPERIMENTAL; review requested. Report:
+  `experiments/T067-20261104-opencode-deck-director/REPORT.md`; skill draft
+  `skills/deck-director/SKILL.md`.
+
 ## T066 [pptx] Triết học Mác – Lênin, Chương 1: native red editorial deck — 2026-11-04
 
 - **Why.** The owner asked for a real Chapter 1 deck, not a template demo:
