@@ -1,0 +1,1641 @@
+﻿{
+    "powerpoint_version":  "16.0",
+    "build":  "17932",
+    "pptx":  "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T066\\experiments\\T066-20261104-opencode-triet-hoc-ch1\\artifacts\\T066-Triet-hoc-Mac-Lenin-Chuong-1.pptx",
+    "slides":  [
+                   {
+                       "index":  1,
+                       "effects":  [
+                                       {
+                                           "shape":  "kicker",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.44999998807907104,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "title",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "rule",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "subtitle",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "caption",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.60000002384185791,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "!!thread",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "!!dot",
+                                           "effect_type":  48,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "!!marx",
+                                           "effect_type":  48,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "!!engels",
+                                           "effect_type":  48,
+                                           "exit":  0,
+                                           "trigger":  3,
+                                           "delay_s":  0,
+                                           "duration_s":  0.60000002384185791,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "!!lenin",
+                                           "effect_type":  48,
+                                           "exit":  0,
+                                           "trigger":  3,
+                                           "delay_s":  0,
+                                           "duration_s":  0.60000002384185791,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       }
+                                   ]
+                   },
+                   {
+                       "index":  2,
+                       "effects":  [
+                                       {
+                                           "shape":  "kicker",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.40000000596046448,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "title",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "def1",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "def2",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  3,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "l0-rule",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.40000000596046448,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "l0-n",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "l0-h",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "l0-s",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "l1-rule",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.40000000596046448,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "l1-n",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "l1-h",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "l1-s",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "l2-rule",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.40000000596046448,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "l2-n",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "l2-h",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "l2-s",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "plato",
+                                           "effect_type":  39,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       }
+                                   ]
+                   },
+                   {
+                       "index":  3,
+                       "effects":  [
+                                       {
+                                           "shape":  "kicker",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.40000000596046448,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "title",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "left",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "left-title",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "left-body",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "left-foot",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "right",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "right-title",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "right-body",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "right-foot",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "qmark",
+                                           "effect_type":  48,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.60000002384185791,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "qline",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "qcap",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       }
+                                   ]
+                   },
+                   {
+                       "index":  4,
+                       "effects":  [
+                                       {
+                                           "shape":  "title",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "dialectic-circle",
+                                           "effect_type":  48,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "dialectic-core",
+                                           "effect_type":  48,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "dialectic-arrow",
+                                           "effect_type":  59,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  1.2000000476837158,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "dialectic-card",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.60000002384185791,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "dialectic-name",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "dialectic-desc",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "dialectic-foot",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "straight-line",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "straight-label",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "meta-card",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.60000002384185791,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "meta-name",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "meta-desc",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       }
+                                   ]
+                   },
+                   {
+                       "index":  5,
+                       "effects":  [
+                                       {
+                                           "shape":  "kicker",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.40000000596046448,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "title",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "sub",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "card0",
+                                           "effect_type":  39,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "card0-n",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "card0-h",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "card0-b",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "card1",
+                                           "effect_type":  39,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "card1-n",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "card1-h",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "card1-b",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "card2",
+                                           "effect_type":  39,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "card2-n",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "card2-h",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "card2-b",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "timeline",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "timeline-dot",
+                                           "effect_type":  48,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "timeline-text",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       }
+                                   ]
+                   },
+                   {
+                       "index":  6,
+                       "effects":  [
+                                       {
+                                           "shape":  "title",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "sub",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "part0",
+                                           "effect_type":  48,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "part0-n",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "part0-h",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "part0-b",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "part1",
+                                           "effect_type":  48,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "part1-n",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "part1-h",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "part1-b",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "part2",
+                                           "effect_type":  48,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "part2-n",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "part2-h",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "part2-b",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "arrow1",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "arrow2",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "note",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       }
+                                   ]
+                   },
+                   {
+                       "index":  7,
+                       "effects":  [
+                                       {
+                                           "shape":  "title",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "sub",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "!!marx",
+                                           "effect_type":  48,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "!!marx-date",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "!!marx-name",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "!!marx-desc",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "!!engels",
+                                           "effect_type":  48,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "!!engels-date",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "!!engels-name",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "!!engels-desc",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "!!lenin",
+                                           "effect_type":  48,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "!!lenin-date",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "!!lenin-name",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "!!lenin-desc",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "timeline",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "tl-1848",
+                                           "effect_type":  48,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "tl-1867",
+                                           "effect_type":  48,
+                                           "exit":  0,
+                                           "trigger":  3,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "tl-1917",
+                                           "effect_type":  48,
+                                           "exit":  0,
+                                           "trigger":  3,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       }
+                                   ]
+                   },
+                   {
+                       "index":  8,
+                       "effects":  [
+                                       {
+                                           "shape":  "title",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "tile0",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.60000002384185791,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "tile0-n",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "tile0-h",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "tile0-b",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "tile1",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.60000002384185791,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "tile1-n",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "tile1-h",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "tile1-b",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "tile2",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.60000002384185791,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "tile2-n",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "tile2-h",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "tile2-b",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "tile3",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.60000002384185791,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "tile3-n",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "tile3-h",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "tile3-b",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       }
+                                   ]
+                   },
+                   {
+                       "index":  9,
+                       "effects":  [
+                                       {
+                                           "shape":  "quote-mark",
+                                           "effect_type":  48,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "quote0",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "quote1",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "quote2",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "quote-rule",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.60000002384185791,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "author",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       }
+                                   ]
+                   },
+                   {
+                       "index":  10,
+                       "effects":  [
+                                       {
+                                           "shape":  "title",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "take0-n",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "take0-h",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "take0-b",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "take0-line",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "take1-n",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "take1-h",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "take1-b",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "take1-line",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "take2-n",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "take2-h",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "take2-b",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "take2-line",
+                                           "effect_type":  22,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "closing",
+                                           "effect_type":  48,
+                                           "exit":  0,
+                                           "trigger":  1,
+                                           "delay_s":  0,
+                                           "duration_s":  0.699999988079071,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       },
+                                       {
+                                           "shape":  "credits",
+                                           "effect_type":  10,
+                                           "exit":  0,
+                                           "trigger":  2,
+                                           "delay_s":  0,
+                                           "duration_s":  0.5,
+                                           "repeat_count":  1,
+                                           "until_end_of_slide":  0,
+                                           "auto_reverse":  0
+                                       }
+                                   ]
+                   }
+               ]
+}

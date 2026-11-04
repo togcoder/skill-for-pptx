@@ -7,6 +7,23 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T066 [pptx] Triết học Mác – Lênin, Chương 1: native red editorial deck — 2026-11-04
+
+- **Why.** The owner asked for a real Chapter 1 deck, not a template demo:
+  vivid red, cut-out historical images from the internet, and complex motion.
+- **Deck.** 10 native slides, 16:9, crimson/cream/gold identity; Palatino
+  display + Arial body; four Wikimedia images background-removed with `rembg`,
+  duotoned and circular-masked. 144 main-sequence effects, 51 click groups,
+  nine 1.5 s Morph transitions (`!!thread` / `!!dot` continuity), speaker notes.
+- **Evidence.** PowerPoint 16.0 opens the exact file, 10 slides, no repair;
+  10 PNGs at 1920×1080; PDF 10 pages; `CreateVideo` 74 s (14 s teaser);
+  `design_critic` overall 4.03 (motion 4.99, rhythm 4.48, design 2.98).
+- **Limits.** Critic flags 21 type sizes and 10–12 pt card body / 8–9 pt
+  captions; no human rung 6; cut-out edge artefacts on Engels/Marx; content is
+  a summary, not a full textbook reproduction.
+- **Status.** EXPERIMENTAL; review requested. Report:
+  `experiments/T066-20261104-opencode-triet-hoc-ch1/REPORT.md`.
+
 ## T065 [cross] Lab hygiene: encoding repair, duplicate-ID and size checks — 2026-11-04
 
 - **Why.** The first file every agent reads was corrupt (T057, finding 3), five
