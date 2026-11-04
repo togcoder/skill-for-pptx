@@ -16,6 +16,11 @@ Fails on:
   damage on purpose may end with the HTML comment `<!-- allow-mojibake -->`;
   the marker check skips that line and still checks the rest of the file.
 
+- a script in scripts/ that is not registered in lab/capabilities.json, or a
+  registry entry that is missing or owned twice (T083, D002);
+- on a work/T###-<agent>-… branch whose agent is not the lead: a change to a
+  single-writer file (HANDOFF.md, docs/ROADMAP.md, …; T083, D006).
+
 Warns (does not fail) on:
 - a committed file larger than 2 MiB, or a task's committed files adding up
   to more than 10 MiB. The cap is the owner's T065 rule; see
@@ -27,6 +32,9 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+
+sys.path.insert(0,str(Path(__file__).resolve().parent))
+import coord  # noqa: E402  (T083: registry + single-writer checks)
 
 ROOT=Path(__file__).resolve().parents[2]
 ROOT_ALLOWED={".claude-plugin",".github",".gitignore",".git","AGENTS.md","HANDOFF.md","README.md","archive","commands",
@@ -203,6 +211,9 @@ def problems():
     rows=_index_ids()
     if rows is not None:
         out.extend(_duplicate_ids(rows))
+    reg=coord.load_registry(ROOT)
+    out.extend(coord.registry_problems(ROOT,reg))
+    out.extend(coord.single_writer_problems(coord.current_branch(ROOT),coord.changed_since_main(ROOT),reg))
     for path in _markdown_files():
         rel=path.relative_to(ROOT).as_posix()
         for line,kind,detail in _text_problems(path):
@@ -213,7 +224,8 @@ def problems():
 
 def warnings():
     files=_tracked_sizes()
-    return [] if files is None else _size_warnings(files)
+    out=[] if files is None else _size_warnings(files)
+    return out+coord.import_warnings(ROOT)
 
 
 def main():

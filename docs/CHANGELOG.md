@@ -7,6 +7,40 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T083 [cross] Coordination layer: registry, binding decisions, claim/board/check — 2026-11-04
+
+- **Why.** The owner: skills grow in parallel across agents, so "the last
+  version" is not final; agents and humans need a better channel so they stop
+  stepping on each other. The rules already existed in `lab/standards/MERGE.md`
+  but nothing checked them.
+- **Built.**
+  - `lab/capabilities.json`: 19 capabilities; every one of the 103 scripts has
+    one owner and one role.
+  - `lab/DECISIONS.md`: D001–D008.
+  - `lab/tools/coord.py`:
+    - `claim` reserves the ID against main and every open branch, then
+      creates the branch and worktree, pushes and prints the briefing;
+    - `board` shows active branches, collisions, a dirty shared checkout and
+      open owner items;
+    - `check` covers registry coverage, single-writer files and product →
+      experimental imports.
+  - `check_layout.py` runs the checks in CI (full fetch).
+  - 8 tests.
+  - `research/feedback/questions.md` is the agent → owner channel.
+  - AGENTS/PROTOCOL changes: claim with the tool; agents no longer edit
+    HANDOFF/ROADMAP (D006).
+- **Found on day one.** Three live collisions:
+  - T054 × T055 on `HANDOFF.md`, the svg card, the vector-craft skill and two
+    tests;
+  - both against T070 on `HANDOFF.md`;
+  - an uncommitted `deck_director.py` in the shared checkout.
+
+  There are also four product modules importing experimental bridges.
+- **Owner questions.**
+  - Q1: branch protection.
+  - Q2: GitHub Issues as a two-way channel.
+  - Q3: whether the configured `a12-hub` MCP server is meant to be the hub.
+
 ## T078 [pptx] Script track: diagnosis, method and the first gold script — 2026-11-04
 
 - **Why.** The owner pushed back on T070: motion thinking is driven by the

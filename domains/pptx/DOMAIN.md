@@ -19,6 +19,8 @@ per click). Design numbers are shared by the generators and the critic
 - Perception and design-system sources: `docs/SOURCES.md`.
 
 ## Code (canonical)
+
+> Since T083 the owner of every script is recorded in `lab/capabilities.json`, and CI checks it. This table is a summary; when they disagree, the registry wins.
 | Area | Modules |
 |---|---|
 | Director | `motion_director.py`, `motion_engine.py`, `pptx_animator.py`, `motion_components.py`, `motion_script.py`, `motion_preview.py`, `validate_director_plan.py` |

@@ -24,3 +24,14 @@ Deck/artifact reviewed: <path or link>
 - [ ] F1 "<owner's words>" — proposed-fix: T0xx
 - [x] F2 "<owner's words>" — closed 2026-11-10 after bench round 3 (votes.jsonl #12)
 ```
+
+## Questions to the owner
+
+Agents ask, the owner answers, everyone reads: `questions.md`.
+
+```markdown
+- [ ] Q3 (opencode, T074) Should the Morph rulebook include 4:3 decks? — answer: …
+```
+
+The owner answers inline and ticks the item. `coord.py board` and `coord.py claim` print
+every open item, so all agents see the same answer.

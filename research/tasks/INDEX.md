@@ -3,7 +3,7 @@
 Since T040: every new title starts with its domain in brackets: `[pptx]`, `[docx]`, `[xlsx]`, `[svg]` or `[cross]` (see `domains/README.md`). Lifecycle: `lab/PROTOCOL.md`. A row may carry `review requested` / `reviewed: <verdict>`.
 
 This file is the one place to take a task ID. Before starting, add a row with
-status `claimed`, using the next free ID (**T083**). Push the row before you do
+status `claimed`, using the next free ID (**T084**). Push the row before you do
 expensive work. IDs are never reused. T024 was taken three times in parallel,
 so those rows carry a suffix. The experiment folders keep the names they were
 created with.
@@ -112,4 +112,5 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T080 | [pptx] Validate the verb → motion table: 12 key sentences × 2–3 motion options, owner A/B | *open; suggested OpenCode → critic Claude* |  | open (brief in SCRIPT_TRACK) | `docs/SCRIPT_TRACK.md` |
 | T081 | [pptx] `script-writer` skill: interview, intent and scene sheets, frames, verb table, gold examples, check | *open, after owner approves T078; suggested Claude → critic OpenCode (critic uses the skill)* |  | open (brief in SCRIPT_TRACK) | `docs/SCRIPT_TRACK.md` |
 | T082 | [pptx] Gold scripts 2–5 (report, pitch, process, decision), owner-approved | *open, after T081; Claude writes, owner approves, OpenCode tests* |  | open (brief in SCRIPT_TRACK) | `docs/SCRIPT_TRACK.md` |
-| T083 | *next free ID* | | | | |
+| T083 | [cross] Coordination layer: capability registry, binding decisions, `coord.py` claim/board/check, single-writer docs | Claude (Opus 5.5, desktop, lead) | `work/T083-claude-coordination` | done (PR stacked on #60) | `experiments/T083-20261104-claude-coordination/REPORT.md` |
+| T084 | *next free ID* | | | | |
