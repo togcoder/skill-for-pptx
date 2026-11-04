@@ -20,6 +20,27 @@ python -m pip install lxml python-pptx Pillow
 python -m unittest discover -s tests          # 289 tests at T034
 ```
 
+## Text encoding (T065)
+
+Every text file in the lab is **UTF-8 without a BOM**. On Windows, Python
+opens files in the locale code page unless told otherwise: a Vietnamese
+install defaults to `cp1258`, which cannot decode many UTF-8 bytes, and a
+Western install to `cp1252`, which decodes them into mojibake (an em dash
+arrives as three characters of that code page, and a four-letter Vietnamese
+word can arrive as twelve characters with capital letters that the language
+does not use). Two rules follow:
+
+- Code that reads or writes text passes `encoding="utf-8"` explicitly; do not
+  rely on the machine's locale. `tests/` covers every read that used to fail.
+- Shells and CI export `PYTHONUTF8=1` (and `PYTHONIOENCODING=utf-8`) so the
+  same command gives the same result on every host. Both workflow files set
+  it; PowerShell users run `$env:PYTHONUTF8=1` once per session.
+
+`python3 lab/tools/check_layout.py` fails on Markdown that is not UTF-8, that
+starts with a BOM, or that contains mojibake markers. If a file is already
+damaged, `experiments/T065-20261104-opencode-hygiene/inputs/` has the two
+repair tools and their acceptance test.
+
 Cloud sessions (Claude Code on the web) have Python, LibreOffice and poppler,
 but no PowerPoint. Their network policy may block academic hosts, so record
 what you could not read.

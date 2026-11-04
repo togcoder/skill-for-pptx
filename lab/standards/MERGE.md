@@ -11,6 +11,9 @@
 - Merge through branches and PRs. Merge commits keep other agents' history;
   never rebase or force-push someone else's branch, and never force-push
   `main`.
+- The PowerPoint product paths change only through a PR with a review of the
+  diff: `domains/pptx/DOMAIN.md`, "Product paths change only through a pull
+  request with a review".
 
 ## Data and knowledge
 

@@ -45,7 +45,7 @@ class TextboxNormalizationTests(unittest.TestCase):
                 self.assertEqual(E.tostring(before, method='c14n'), E.tostring(after, method='c14n'))
 
     def test_text_in_carrier_is_not_reclassified(self):
-        plan = json.loads(PLAN.read_text())
+        plan = json.loads(PLAN.read_text(encoding="utf-8"))
         obj = next(o for o in plan['objects'] if o['kind'] == 'text')
         obj.update(kind='shape', geometry='rect')
         changed_plan = self.work / 'plan.json'
@@ -70,7 +70,7 @@ class TextboxNormalizationTests(unittest.TestCase):
         self.assertFalse(self.out.exists())
 
     def test_identity_mismatch_rejected(self):
-        plan = json.loads(PLAN.read_text())
+        plan = json.loads(PLAN.read_text(encoding="utf-8"))
         plan['objects'][0]['morph_name'] = '!!wrong'
         altered = self.work / 'plan.json'
         altered.write_text(json.dumps(plan))

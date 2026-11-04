@@ -1,0 +1,140 @@
+{
+  "rev": "ac5b45e",
+  "files": [
+    {
+      "path": "docs/CHANGELOG.md",
+      "before": {
+        "markers": 812,
+        "flagged_markers": 812,
+        "bom": false,
+        "controls": [
+          "U+0007",
+          "U+0081",
+          "U+008D",
+          "U+008F",
+          "U+0090",
+          "U+009D"
+        ],
+        "chars": 84276,
+        "valid_utf8": true
+      },
+      "after": {
+        "markers": 0,
+        "flagged_markers": 0,
+        "bom": false,
+        "controls": [],
+        "chars": 83640,
+        "valid_utf8": true
+      }
+    },
+    {
+      "path": "domains/README.md",
+      "before": {
+        "markers": 3,
+        "flagged_markers": 3,
+        "bom": false,
+        "controls": [],
+        "chars": 2679,
+        "valid_utf8": true
+      },
+      "after": {
+        "markers": 0,
+        "flagged_markers": 0,
+        "bom": false,
+        "controls": [],
+        "chars": 2673,
+        "valid_utf8": true
+      }
+    },
+    {
+      "path": "experiments/T045-20261101-opencode-advanced-docx/REPORT.md",
+      "before": {
+        "markers": 5,
+        "flagged_markers": 5,
+        "bom": true,
+        "controls": [],
+        "chars": 9724,
+        "valid_utf8": true
+      },
+      "after": {
+        "markers": 0,
+        "flagged_markers": 0,
+        "bom": false,
+        "controls": [],
+        "chars": 9708,
+        "valid_utf8": true
+      }
+    },
+    {
+      "path": "experiments/T046-20261101-opencode-advanced-xlsx/REPORT.md",
+      "before": {
+        "markers": 26,
+        "flagged_markers": 26,
+        "bom": true,
+        "controls": [
+          "U+009D"
+        ],
+        "chars": 12365,
+        "valid_utf8": true
+      },
+      "after": {
+        "markers": 0,
+        "flagged_markers": 0,
+        "bom": false,
+        "controls": [],
+        "chars": 12291,
+        "valid_utf8": true
+      }
+    },
+    {
+      "path": "experiments/T065-20261104-opencode-hygiene/REPORT.md",
+      "before": null,
+      "after": {
+        "markers": 12,
+        "flagged_markers": 0,
+        "bom": false,
+        "controls": [],
+        "chars": 19606,
+        "valid_utf8": true
+      }
+    },
+    {
+      "path": "lab/standards/OUTPUTS.md",
+      "before": {
+        "markers": 0,
+        "flagged_markers": 0,
+        "bom": false,
+        "controls": [],
+        "chars": 965,
+        "valid_utf8": true
+      },
+      "after": {
+        "markers": 4,
+        "flagged_markers": 0,
+        "bom": false,
+        "controls": [],
+        "chars": 2085,
+        "valid_utf8": true
+      }
+    },
+    {
+      "path": "research/claims/T050-opencode-20261102.md",
+      "before": {
+        "markers": 1,
+        "flagged_markers": 1,
+        "bom": false,
+        "controls": [],
+        "chars": 1579,
+        "valid_utf8": true
+      },
+      "after": {
+        "markers": 0,
+        "flagged_markers": 0,
+        "bom": false,
+        "controls": [],
+        "chars": 1577,
+        "valid_utf8": true
+      }
+    }
+  ]
+}

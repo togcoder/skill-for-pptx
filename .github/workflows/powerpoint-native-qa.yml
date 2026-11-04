@@ -3,6 +3,13 @@ name: powerpoint-native-qa
 on:
   workflow_dispatch:
 
+env:
+  # Windows runners default to the locale code page (cp1258 on a Vietnamese
+  # install). Every script and test reads text as UTF-8; without this the
+  # suite fails on Vietnamese fixtures (T065).
+  PYTHONUTF8: "1"
+  PYTHONIOENCODING: "utf-8"
+
 jobs:
   native-powerpoint:
     runs-on: [self-hosted, windows, powerpoint]

@@ -34,7 +34,16 @@ chart synthesis) before compound assembly into target applications (pptx, docx, 
 - **Office Interoperability Law (`T047`):** Charts shared between Excel and PowerPoint/Word must either maintain a live external link (`TargetMode="External"`) or embed the full multi-sheet SheetCraft model, and maintain synchronized cache values (`<c:numCache>`, `<c:strCache>`) so that clicking "Edit Data in Excel" opens the real calculation model.
 - **Local autonomy & hygiene:** Full authority to download external assets and libraries locally; all transient scratch files must remain in `workspace/` and be cleaned up when done.
 
-## State (2026-11-01)
+## State (2026-11-04)
 - T044 added Protocol 04 (Cross-Asset Pipeline & Local Autonomy Charter) per official owner mandate.
 - T047 added Office Link Bridge (`scripts/office_link_bridge.py`) solving the sequential agent interaction problem between Excel models and PowerPoint/Word presentation decks.
 - OpenCode has integrated advanced docx (`T045`) and advanced xlsx (`T046`) onto `main`. Antigravity leads PowerPoint (`pptx`) and Cross-Domain (`cross`).
+- **T065 repaired the lab's text encoding and made the process rules machine-checked.**
+  - `docs/CHANGELOG.md`, `domains/README.md`, two experiment reports and one claim were
+    cp1258/cp1252 mojibake; they now read as UTF-8.
+  - `lab/tools/check_layout.py` fails on mojibake markers, a byte-order mark, C0/C1
+    control characters, non-UTF-8 Markdown and duplicate task IDs; it warns on
+    committed artifacts over 2 MB/file or 10 MB/task.
+  - The test suite passes with the machine's cp1258 locale, without `PYTHONUTF8=1`.
+  - The PowerPoint product paths now change only through a PR with a review
+    (`domains/pptx/DOMAIN.md`). Whether Git LFS replaces the size cap is open.

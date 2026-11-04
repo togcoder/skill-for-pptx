@@ -1,0 +1,40 @@
+name: tests
+
+on:
+  push:
+    branches: ["main", "work/**", "integrate/**"]
+  pull_request:
+
+env:
+  # A Windows runner defaults to the locale code page (cp1258 on a Vietnamese
+  # install). The lab's text files are UTF-8, so pin UTF-8 mode instead of
+  # relying on each shell to export it (T065).
+  PYTHONUTF8: "1"
+  PYTHONIOENCODING: "utf-8"
+
+jobs:
+  unit:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install requirements
+        run: python -m pip install lxml python-pptx Pillow
+
+      - name: Compile every script
+        run: python -m compileall -q scripts lab/tools
+
+      - name: Lab layout and encoding check
+        run: python lab/tools/check_layout.py
+
+      - name: Unit tests
+        run: python -m unittest discover -s tests -v

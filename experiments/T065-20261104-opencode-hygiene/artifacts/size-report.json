@@ -1,0 +1,52 @@
+{
+  "tracked_files": 1314,
+  "tracked_bytes": 64068546,
+  "cap_file_bytes": 2097152,
+  "cap_task_bytes": 10485760,
+  "files_over_file_cap": [],
+  "tasks_over_task_cap": {},
+  "largest_tasks": [
+    {
+      "task": "T024",
+      "bytes": 10049754
+    },
+    {
+      "task": "T052",
+      "bytes": 8738434
+    },
+    {
+      "task": "T047",
+      "bytes": 8231097
+    },
+    {
+      "task": "T025",
+      "bytes": 2935525
+    },
+    {
+      "task": "T028",
+      "bytes": 2885008
+    }
+  ],
+  "largest_files": [
+    {
+      "path": "archive/pre-github-v0.4.bundle",
+      "bytes": 1492619
+    },
+    {
+      "path": "experiments/T052-20261102-opencode-scientific-report/artifacts/bao-cao-khoa-hoc-hust.pdf",
+      "bytes": 1178567
+    },
+    {
+      "path": "experiments/T052-20261102-opencode-scientific-report/artifacts/bao-cao-khoa-hoc-vnu.pdf",
+      "bytes": 1169054
+    },
+    {
+      "path": "experiments/T024-20261014-gemini-complex-motion-rigging/preview/slide-01.gif",
+      "bytes": 1103721
+    },
+    {
+      "path": "experiments/T047-20261101-opencode-standards-report/artifacts/annual-report-2026.pdf",
+      "bytes": 910528
+    }
+  ]
+}

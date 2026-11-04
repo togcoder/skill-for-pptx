@@ -1,0 +1,726 @@
+{
+  "file": "docs/CHANGELOG.md",
+  "good_rev": "318f748",
+  "bad_rev": "459852d",
+  "changed": 0,
+  "pairs": [
+    {
+      "damaged": "\ufeff# Changelog \u00e2\u20ac\u201d research log, newest first",
+      "restored": "# Changelog \u2014 research log, newest first",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T041 [xlsx] SheetCraft \u00e2\u20ac\u201d controlled standard DrawingML charts \u00e2\u20ac\u201d 2026-11-01",
+      "restored": "## T041 [xlsx] SheetCraft \u2014 controlled standard DrawingML charts \u2014 2026-11-01",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T039 [docx] DocumentCraft \u00e2\u20ac\u201d professional Word canon and real fields \u00e2\u20ac\u201d 2026-11-01",
+      "restored": "## T039 [docx] DocumentCraft \u2014 professional Word canon and real fields \u2014 2026-11-01",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T040 multi-domain lab restructure \u00e2\u20ac\u201d 2026-11-01",
+      "restored": "## T040 multi-domain lab restructure \u2014 2026-11-01",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T038 PPTX Design Canon Tokens, Asymmetric & Bento Grids, Optical Balance & Critic Rules \u00e2\u20ac\u201d 2026-11-01",
+      "restored": "## T038 PPTX Design Canon Tokens, Asymmetric & Bento Grids, Optical Balance & Critic Rules \u2014 2026-11-01",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T037 Multi-Craft Native Bridges & Intent-Empathy Decoder \u00e2\u20ac\u201d 2026-11-01",
+      "restored": "## T037 Multi-Craft Native Bridges & Intent-Empathy Decoder \u2014 2026-11-01",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T036 Universal ArtCraft Hub, Multi-Agent Protocols & Intent Schemas \u00e2\u20ac\u201d 2026-11-01",
+      "restored": "## T036 Universal ArtCraft Hub, Multi-Agent Protocols & Intent Schemas \u2014 2026-11-01",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T035 DeckCraft native bridge + Skill-for-Design evolution \u00e2\u20ac\u201d 2026-10-31",
+      "restored": "## T035 DeckCraft native bridge + Skill-for-Design evolution \u2014 2026-10-31",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T034 design system + documentation standardised \u00e2\u20ac\u201d 2026-10-19",
+      "restored": "## T034 design system + documentation standardised \u2014 2026-10-19",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T033 Argon second drop: morph twins, triggers, pacing \u00e2\u20ac\u201d 2026-10-16",
+      "restored": "## T033 Argon second drop: morph twins, triggers, pacing \u2014 2026-10-16",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T031 measurable critique (WIP) \u00e2\u20ac\u201d 2026-10-08",
+      "restored": "## T031 measurable critique (WIP) \u2014 2026-10-08",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T032 Argon (Gemini) research drop evaluated and integrated \u00e2\u20ac\u201d 2026-10-15",
+      "restored": "## T032 Argon (Gemini) research drop evaluated and integrated \u2014 2026-10-15",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T030 brand palette from one colour + highlight fix \u00e2\u20ac\u201d 2026-10-08",
+      "restored": "## T030 brand palette from one colour + highlight fix \u2014 2026-10-08",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "seeds \u0102\u2014 2 modes to AA on bg and surface.",
+      "restored": "seeds \u00d7 2 modes to AA on bg and surface.",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T029 motion tokens \u00e2\u20ac\u201d 2026-10-08",
+      "restored": "## T029 motion tokens \u2014 2026-10-08",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "accel/decel. Carbon fits within 1.5\u00e2\u20ac\u201c8%; Material's emphasized curves are",
+      "restored": "accel/decel. Carbon fits within 1.5\u20138%; Material's emphasized curves are",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "18\u00e2\u20ac\u201c44% off with one behaviour.",
+      "restored": "18\u201344% off with one behaviour.",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## Integration 2026-10-08 \u00e2\u20ac\u201d both lines merged",
+      "restored": "## Integration 2026-10-08 \u2014 both lines merged",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T028 Morph Studio + professional text tricks \u00e2\u20ac\u201d 2026-10-08",
+      "restored": "## T028 Morph Studio + professional text tricks \u2014 2026-10-08",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T027 design + complex-motion knowledge \u00e2\u20ac\u201d 2026-10-07",
+      "restored": "## T027 design + complex-motion knowledge \u2014 2026-10-07",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T026 Forge online assets \u00e2\u20ac\u201d 2026-10-07",
+      "restored": "## T026 Forge online assets \u2014 2026-10-07",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T025 Slide Forge \u00e2\u20ac\u201d agent-facing deck compiler \u00e2\u20ac\u201d 2026-10-07",
+      "restored": "## T025 Slide Forge \u2014 agent-facing deck compiler \u2014 2026-10-07",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T024 picture motion + motion-graphic intro \u00e2\u20ac\u201d 2026-10-07",
+      "restored": "## T024 picture motion + motion-graphic intro \u2014 2026-10-07",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T024 motion layers + script layer \u00e2\u20ac\u201d 2026-10-05",
+      "restored": "## T024 motion layers + script layer \u2014 2026-10-05",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## Argon (Gemini) \"T024\" virtual rigging, poly-segment paths, auto-arc collision solver & interactiveSeq \u00e2\u20ac\u201d 2026-10-14",
+      "restored": "## Argon (Gemini) \"T024\" virtual rigging, poly-segment paths, auto-arc collision solver & interactiveSeq \u2014 2026-10-14",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T023 compound motion engine \u00e2\u20ac\u201d 2026-10-05",
+      "restored": "## T023 compound motion engine \u2014 2026-10-05",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T022 T009 recompile + text-box deck direction \u00e2\u20ac\u201d 2026-10-05",
+      "restored": "## T022 T009 recompile + text-box deck direction \u2014 2026-10-05",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T019 canonical timing + one-command Motion Director \u00e2\u20ac\u201d 2026-10-05",
+      "restored": "## T019 canonical timing + one-command Motion Director \u2014 2026-10-05",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "Found and fixed a writer defect: patch v0.2\u00e2\u20ac\u201cv0.5 put all stages of a click in",
+      "restored": "Found and fixed a writer defect: patch v0.2\u2013v0.5 put all stages of a click in",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "**167 tests pass.** PowerPoint playback still pending \u00e2\u20ac\u201d play",
+      "restored": "**167 tests pass.** PowerPoint playback still pending \u2014 play",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T018 native QA evidence integrity \u00e2\u20ac\u201d 2026-10-05",
+      "restored": "## T018 native QA evidence integrity \u2014 2026-10-05",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T017 generic report motion \u00e2\u20ac\u201d 2026-10-05",
+      "restored": "## T017 generic report motion \u2014 2026-10-05",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T016 real-package data motion \u00e2\u20ac\u201d 2026-10-05",
+      "restored": "## T016 real-package data motion \u2014 2026-10-05",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "T012\u00e2\u20ac\u201cT015 now pass a real PPTX package integration, not only isolated XML.",
+      "restored": "T012\u2013T015 now pass a real PPTX package integration, not only isolated XML.",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T015 Director \u00e2\u2020\u2019 execution compiler \u00e2\u20ac\u201d 2026-10-05",
+      "restored": "## T015 Director \u2192 execution compiler \u2014 2026-10-05",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T014 KPI counter execution \u00e2\u20ac\u201d 2026-10-05",
+      "restored": "## T014 KPI counter execution \u2014 2026-10-05",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T013 native chart execution \u00e2\u20ac\u201d 2026-10-05",
+      "restored": "## T013 native chart execution \u2014 2026-10-05",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T012 semantic data motion \u00e2\u20ac\u201d 2026-10-05",
+      "restored": "## T012 semantic data motion \u2014 2026-10-05",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T011 director click rhythm \u00e2\u20ac\u201d 2026-10-05",
+      "restored": "## T011 director click rhythm \u2014 2026-10-05",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T010 presenter-paced click beats \u00e2\u20ac\u201d 2026-10-05",
+      "restored": "## T010 presenter-paced click beats \u2014 2026-10-05",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "CI evidence: run 37234235795 \u00e2\u20ac\u201d **86/86 tests pass**, Python compile pass.",
+      "restored": "CI evidence: run 37234235795 \u2014 **86/86 tests pass**, Python compile pass.",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T006 controlled motion semantics matrix \u00e2\u20ac\u201d 2026-10-04 20:08 UTC",
+      "restored": "## T006 controlled motion semantics matrix \u2014 2026-10-04 20:08 UTC",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## T006 full packed candidate \u00e2\u20ac\u201d 2026-10-04 19:16 UTC / 05-10 Vietnam",
+      "restored": "## T006 full packed candidate \u2014 2026-10-04 19:16 UTC / 05-10 Vietnam",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "## Product destination \u00e2\u20ac\u201d T007 Existing Deck Motion Director",
+      "restored": "## Product destination \u2014 T007 Existing Deck Motion Director",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "- `scripts/validate_director_plan.py`: bu\u00e1\u00bb\u2122c script source, source grounding,",
+      "restored": "- `scripts/validate_director_plan.py`: bu\u1ed9c script source, source grounding,",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "  preserve slide count, target resource validity v\u0102\u00a0 justification cho component;",
+      "restored": "  preserve slide count, target resource validity v\u00e0 justification cho component;",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "Report: `experiments/T007-20261004-existing-deck-director/REPORT.md`. Ph\u00e1\u00ba\u00a7n c\u0102\u00b2n",
+      "restored": "Report: `experiments/T007-20261004-existing-deck-director/REPORT.md`. Ph\u1ea7n c\u00f2n",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "pending: inference tr\u0102\u00aan deck th\u00e1\u00ba\u00adt kh\u0102\u00b4ng c\u0102\u00b3 script, synthesis component theo design",
+      "restored": "pending: inference tr\u00ean deck th\u1eadt kh\u00f4ng c\u00f3 script, synthesis component theo design",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "system, director-beat \u00e2\u2020\u2019 T006 timeline adapter, v\u0102\u00a0 patch/playback exact-file.",
+      "restored": "system, director-beat \u2192 T006 timeline adapter, v\u00e0 patch/playback exact-file.",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "slide + native `cNvPr id` + name, kh\u0102\u00b4ng c\u00e1\u00ba\u00a7n `!!`. Patcher ki\u00e1\u00bb\u0192m source SHA-256,",
+      "restored": "slide + native `cNvPr id` + name, kh\u00f4ng c\u1ea7n `!!`. Patcher ki\u1ec3m source SHA-256,",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "Deck intake c\u00c5\u00a9ng \u00c4\u2018\u0102\u00a3 c\u0102\u00b3 `design_profile` g\u00e1\u00bb\u201cm font/fill/line/text-color/geometry",
+      "restored": "Deck intake c\u0169ng \u0111\u00e3 c\u00f3 `design_profile` g\u1ed3m font/fill/line/text-color/geometry",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "Ph\u00e1\u00ba\u00a7n c\u0102\u00b2n thi\u00e1\u00ba\u00bfu cho product path: director beat \u00e2\u2020\u2019 concrete patch-plan compiler;",
+      "restored": "Ph\u1ea7n c\u00f2n thi\u1ebfu cho product path: director beat \u2192 concrete patch-plan compiler;",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "native helper-component insertion + re-inventory; no-script narrative test tr\u0102\u00aan",
+      "restored": "native helper-component insertion + re-inventory; no-script narrative test tr\u00ean",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "deck th\u00e1\u00ba\u00adt; exact-file PowerPoint playback.",
+      "restored": "deck th\u1eadt; exact-file PowerPoint playback.",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "v\u00e1\u00ba\u00abn n\u0102\u00a9n T005 candidate 12 legacy states th\u0102\u00a0nh 1 semantic slide/6 stage v\u0102\u00a0",
+      "restored": "v\u1eabn n\u00e9n T005 candidate 12 legacy states th\u00e0nh 1 semantic slide/6 stage v\u00e0",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "transfer 10\u00e2\u2020\u20191. `scripts/add_timeline.py` hi\u00e1\u00bb\u2021n ghi `p:timing` cho motion path,",
+      "restored": "transfer 10\u21921. `scripts/add_timeline.py` hi\u1ec7n ghi `p:timing` cho motion path,",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "`py_compile`, **55 unit tests**, `node --check` renderer v\u0102\u00a0 `bash -n` runner.",
+      "restored": "`py_compile`, **55 unit tests**, `node --check` renderer v\u00e0 `bash -n` runner.",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "**kh\u0102\u00b4ng ph\u00e1\u00ba\u00a3i playback PowerPoint**.",
+      "restored": "**kh\u00f4ng ph\u1ea3i playback PowerPoint**.",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "- `experiments/E002/REPORT.md`, `comparison.json`: s\u00e1\u00bb\u00ada textbox, gi\u00e1\u00bb\u00af baseline v\u0102\u00a0 ti\u0102\u00aau ch\u0102\u00ad H001; `output/PPTX_Motion_Lab_E002.pptx`.",
+      "restored": "- `experiments/E002/REPORT.md`, `comparison.json`: s\u1eeda textbox, gi\u1eef baseline v\u00e0 ti\u00eau ch\u00ed H001; `output/PPTX_Motion_Lab_E002.pptx`.",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "- `experiments/E004/REPORT.md`, `package-comparison.json`, `unit-tests.txt`, `scores.json`, c\u0102\u00a1c `path-diagnostic.json` v\u0102\u00a0 `carrier-paths.json` H003/E004; `output/PPTX_Motion_Lab_E004.pptx`.",
+      "restored": "- `experiments/E004/REPORT.md`, `package-comparison.json`, `unit-tests.txt`, `scores.json`, c\u00e1c `path-diagnostic.json` v\u00e0 `carrier-paths.json` H003/E004; `output/PPTX_Motion_Lab_E004.pptx`.",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "PPTX H001: `output/PPTX_Motion_Lab_H001.pptx`; d\u0102\u00b9ng hash trong b\u00e1\u00ba\u00b1ng ch\u00e1\u00bb\u00a9ng H001.",
+      "restored": "PPTX H001: `output/PPTX_Motion_Lab_H001.pptx`; d\u00f9ng hash trong b\u1eb1ng ch\u1ee9ng H001.",
+      "codec": "cp1258",
+      "applied": 0
+    }
+  ],
+  "rejected": [
+    {
+      "damaged": "## T046 [xlsx] Advanced workbook and dashboard \u00e2\u20ac\u201d 2026-11-01",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "  matrix, one source note; print area 29.21 \u0102\u2014 20.39 cm (\u00e2\u2030\u02c693% A4), Excel export",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "## T044 Multi-Asset Pipeline Protocol, User Experience Maximization & Local Autonomy Charter \u00e2\u20ac\u201d 2026-11-01",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "  - Elevate user experience to the peak: deeply decode user intent to achieve first-pass satisfaction (\"\u00c4\u2018\u0102\u00bang \u0102\u00bd ngay t\u00e1\u00bb\u00ab l\u00c6\u00b0\u00e1\u00bb\u00a3t \u00c4\u2018\u00e1\u00ba\u00a7u\"), eliminating tedious regeneration.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "## T043 Dynamic Theme Engine: Need-Based Synthesizer, Reference Teardown, Composite Backgrounds & AI Image Harmonizer \u00e2\u20ac\u201d 2026-11-01",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "  - Addressed critical design reality: professional decks NEVER rely on flat single-color (`\u00c4\u2018\u00c6\u00a1n s\u00e1\u00ba\u00afc`) fills.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "## T042 Multi-Domain Design Canons: Video, Vector/SVG, 3D/Solid, CAD & Audio \u00e2\u20ac\u201d 2026-11-01",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "C\u00e1\u00ba\u00adp nh\u00e1\u00ba\u00adt ng\u0102\u00a0y 04/10/2026, gi\u00e1\u00bb\u009d Vi\u00e1\u00bb\u2021t Nam. Phi\u0102\u00aan b\u00e1\u00ba\u00a3n ngu\u00e1\u00bb\u201cn nghi\u0102\u00aan c\u00e1\u00bb\u00a9u v0.7 (th\u0102\u00aam T005 compound intent).",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "Ng\u00c6\u00b0\u00e1\u00bb\u009di d\u0102\u00b9ng \u00c4\u2018\u0102\u00a3 m\u00e1\u00bb\u0178 r\u00e1\u00bb\u2122ng \u00c4\u2018\u0102\u00adch \u00c4\u2018\u00e1\u00ba\u00bfn: h\u00e1\u00bb\u2021 th\u00e1\u00bb\u2018ng ph\u00e1\u00ba\u00a3i nh\u00e1\u00ba\u00adn **file PPTX c\u0102\u00b3 s\u00e1\u00ba\u00b5n** v\u0102\u00a0 t\u00e1\u00bb\u00b1",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "\u00c4\u2018\u00e1\u00ba\u00a1o di\u00e1\u00bb\u2026n chuy\u00e1\u00bb\u0192n \u00c4\u2018\u00e1\u00bb\u2122ng. N\u00e1\u00ba\u00bfu c\u0102\u00b3 script/storyboard th\u0102\u00ac b\u0102\u00a1m script. N\u00e1\u00ba\u00bfu kh\u0102\u00b4ng c\u0102\u00b3,",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "\u00c6\u00b0u ti\u0102\u00aan speaker notes, sau \u00c4\u2018\u0102\u00b3 t\u00e1\u00bb\u00b1 ph\u0102\u00a2n t\u0102\u00adch tr\u0102\u00acnh t\u00e1\u00bb\u00b1 b\u0102\u00a1o c\u0102\u00a1o; ch\u00e1\u00bb\u2030 nghi\u0102\u00aan c\u00e1\u00bb\u00a9u ngo\u0102\u00a0i",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "khi c\u00e1\u00ba\u00a7n v\u0102\u00a0 ph\u0102\u00b9 h\u00e1\u00bb\u00a3p. N\u00e1\u00ba\u00bfu narrative thi\u00e1\u00ba\u00bfu component th\u0102\u00ac t\u00e1\u00bb\u00b1 t\u00e1\u00ba\u00a1o helper component",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "trong \u00c4\u2018\u0102\u00bang visual framework c\u00e1\u00bb\u00a7a deck, kh\u0102\u00b4ng sinh decoration v\u0102\u00b4 c\u00e1\u00bb\u203a.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "T\u0102\u00a0i li\u00e1\u00bb\u2021u chu\u00e1\u00ba\u00a9n: `docs/PRODUCT_TARGET.md`.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "Scaffold hi\u00e1\u00bb\u2021n c\u0102\u00b3:",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "Default m\u00e1\u00bb\u203ai: preserve source slide count/order/content; resource c\u00c5\u00a9 \u00c4\u2018\u00c6\u00b0\u00e1\u00bb\u00a3c reuse",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "tr\u00c6\u00b0\u00e1\u00bb\u203ac; same-resource motion ph\u00e1\u00ba\u00a3i pack trong slide; generated component ch\u00e1\u00bb\u2030 l\u00e1\u00ba\u00a5p",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "\u00c4\u0090\u0102\u00a3 th\u0102\u00aam `scripts/patch_existing_timeline.py` v\u0102\u00a0",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "`existing-deck-timeline-patch.md`: object deck th\u00e1\u00ba\u00adt \u00c4\u2018\u00c6\u00b0\u00e1\u00bb\u00a3c target b\u00e1\u00ba\u00b1ng source",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "ch\u00e1\u00bb\u2030 s\u00e1\u00bb\u00ada slide \u00c4\u2018\u00c6\u00b0\u00e1\u00bb\u00a3c ch\u00e1\u00bb\u008dn, gi\u00e1\u00bb\u00af slide kh\u0102\u00a1c byte-identical, preserve transition v\u0102\u00a0",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "t\u00e1\u00bb\u00ab ch\u00e1\u00bb\u2018i merge timing c\u00c5\u00a9 m\u0102\u00b9 qu\u0102\u00a1ng.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "frequency \u00c4\u2018\u00e1\u00bb\u0192 l\u0102\u00a0m basis khi sau n\u0102\u00a0y ph\u00e1\u00ba\u00a3i sinh helper component.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "## T006 native timing writer \u00e2\u20ac\u201d \u00c4\u2018\u0102\u00a3 c\u0102\u00b3 backend c\u00e1\u00ba\u00a5u tr\u0102\u00bac, playback c\u0102\u00b2n pending",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "T006 \u00c4\u2018\u0102\u00a3 ti\u00e1\u00ba\u00bfn t\u00e1\u00bb\u00ab planning sang writer native h\u00e1\u00ba\u00a1n ch\u00e1\u00ba\u00bf. `scripts/pack_timeline.py`",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "scale v\u0102\u00a0 rotate tr\u0102\u00aan c\u0102\u00b9ng slide: waypoint n\u00e1\u00ba\u00b1m trong path, c\u0102\u00a1c stage d\u0102\u00b9ng delay",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "t\u0102\u00adch l\u00c5\u00a9y v\u0102\u00a0 c\u0102\u00a1c effect c\u0102\u00b9ng stage ch\u00e1\u00ba\u00a1y song song trong m\u00e1\u00bb\u2122t packed click group.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "\u00c4\u0090\u00c6\u00b0\u00e1\u00bb\u009dng d\u00e1\u00bb\u00b1ng end-to-end m\u00e1\u00bb\u203ai:",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "-> add_timeline.py -> host finalizer`, g\u00e1\u00bb\u008di b\u00e1\u00ba\u00b1ng",
+      "reason": "damage not reproducible from this line",
+      "candidate": "-> add_timeline.py -> host finalizer`, g\u1ecdi b\u1eb1ng"
+    },
+    {
+      "damaged": "B\u00e1\u00ba\u00b1ng ch\u00e1\u00bb\u00a9ng t\u00e1\u00bb\u00b1 \u00c4\u2018\u00e1\u00bb\u2122ng: GitHub Actions branch-only run 37213501515 \u00c4\u2018\u00e1\u00ba\u00a1t",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "Workflow t\u00e1\u00ba\u00a1m \u00c4\u2018\u0102\u00a3 x\u0102\u00b3a sau ki\u00e1\u00bb\u0192m tra. Prototype 1 slide/2 shape sau patch v\u00e1\u00ba\u00abn pass ZIP",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "CRC, m\u00e1\u00bb\u0178 l\u00e1\u00ba\u00a1i b\u00e1\u00ba\u00b1ng python-pptx v\u0102\u00a0 LibreOffice export PDF. \u00c4\u0090\u0102\u00a2y l\u0102\u00a0 b\u00e1\u00ba\u00b1ng ch\u00e1\u00bb\u00a9ng package,",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "Native playback/editability exact-file v\u00e1\u00ba\u00abn pending; M1 ch\u00c6\u00b0a \u00c4\u2018\u00e1\u00ba\u00a1t.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "## Ch\u00e1\u00bb\u2030 th\u00e1\u00bb\u2039 m\u00e1\u00bb\u203ai \u00e2\u20ac\u201d resource-local motion packing",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "Ng\u00c6\u00b0\u00e1\u00bb\u009di d\u0102\u00b9ng y\u0102\u00aau c\u00e1\u00ba\u00a7u \u00c4\u2018\u00e1\u00bb\u2022i ki\u00e1\u00ba\u00bfn tr\u0102\u00bac: kh\u0102\u00b4ng coi m\u00e1\u00bb\u2014i chuy\u00e1\u00bb\u0192n \u00c4\u2018\u00e1\u00bb\u2122ng/state l\u0102\u00a0 m\u00e1\u00bb\u2122t slide.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "Khi c\u0102\u00a1c action d\u0102\u00b9ng chung resource set v\u0102\u00a0 c\u0102\u00b9ng semantic scene, \u00c6\u00b0u ti\u0102\u00aan gom t\u00e1\u00bb\u2018i \u00c4\u2018a",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "v\u0102\u00a0o m\u00e1\u00bb\u2122t native slide timeline. T\u0102\u00a0i li\u00e1\u00bb\u2021u chu\u00e1\u00ba\u00a9n: `docs/MOTION_PACKING.md`.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "T005 12-state Morph gi\u00e1\u00bb\u00af nguy\u0102\u00aan l\u0102\u00a0m baseline l\u00e1\u00bb\u2039ch s\u00e1\u00bb\u00ad. N\u0102\u00b3 kh\u0102\u00b4ng c\u0102\u00b2n l\u0102\u00a0 m\u00e1\u00ba\u00abu ki\u00e1\u00ba\u00bfn",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "tr\u0102\u00bac m\u00e1\u00bb\u00a5c ti\u0102\u00aau. T006 ph\u00e1\u00ba\u00a3i c\u00e1\u00bb\u2018 g\u00e1\u00ba\u00afng t\u0102\u00a1i hi\u00e1\u00bb\u2021n burst \u00e2\u2020\u2019 orbit \u00e2\u2020\u2019 focus \u00e2\u2020\u2019 split \u00e2\u2020\u2019",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "reassemble \u00e2\u2020\u2019 restore trong 1 slide v\u00e1\u00bb\u203ai nhi\u00e1\u00bb\u0081u track/timing/trigger native; n\u00e1\u00ba\u00bfu",
+      "reason": "damage not reproducible from this line",
+      "candidate": "reassemble \u2192 restore trong 1 slide v\u1edbi nhi\u1ec1u track/timing/trigger native; n\u1ebfu"
+    },
+    {
+      "damaged": "PowerPoint/backend bu\u00e1\u00bb\u2122c t\u0102\u00a1ch, ghi blocker v\u0102\u00a0 d\u0102\u00b9ng s\u00e1\u00bb\u2018 slide t\u00e1\u00bb\u2018i thi\u00e1\u00bb\u0192u. C\u0102\u00a1c model",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "sau ph\u00e1\u00ba\u00a3i \u00c4\u2018\u00e1\u00bb\u008dc rule n\u0102\u00a0y tr\u00c6\u00b0\u00e1\u00bb\u203ac khi thi\u00e1\u00ba\u00bft k\u00e1\u00ba\u00bf choreography.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "## K\u00e1\u00ba\u00bft qu\u00e1\u00ba\u00a3 m\u00e1\u00bb\u203ai nh\u00e1\u00ba\u00a5t \u00e2\u20ac\u201d T005",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "\u00c6\u00afu ti\u0102\u00aan m\u00e1\u00bb\u203ai c\u00e1\u00bb\u00a7a ng\u00c6\u00b0\u00e1\u00bb\u009di d\u0102\u00b9ng l\u0102\u00a0 hi\u00e1\u00bb\u2021u \u00e1\u00bb\u00a9ng ph\u00e1\u00bb\u00a9c t\u00e1\u00ba\u00a1p t\u00e1\u00bb\u00ab m\u00e1\u00bb\u2122t c\u0102\u00a2u l\u00e1\u00bb\u2021nh ng\u00e1\u00ba\u00afn, gi\u00e1\u00bb\u00af \u00c4\u2018\u0102\u00bang \u0102\u00bd \u00c4\u2018\u00e1\u00bb\u2039nh. PR #3 v\u0102\u00a0 `experiments/T005-20261004-codex-choreography/REPORT.md` c\u0102\u00b3 compiler intent nghi\u0102\u00aam ng\u00e1\u00ba\u00b7t cho chu\u00e1\u00bb\u2014i bung n\u0102\u00bat, xoay v\u0102\u00b2ng, ph\u0102\u00b3ng \u00c4\u2018\u00e1\u00bb\u2018i t\u00c6\u00b0\u00e1\u00bb\u00a3ng, t\u0102\u00a1ch l\u00e1\u00bb\u203ap, gh\u0102\u00a9p l\u00e1\u00ba\u00a1i v\u0102\u00a0 tr\u00e1\u00bb\u0178 v\u00e1\u00bb\u0081. AI di\u00e1\u00bb\u2026n gi\u00e1\u00ba\u00a3i prompt; compiler ch\u00e1\u00bb\u2030 nh\u00e1\u00ba\u00adn d\u00e1\u00bb\u00af li\u00e1\u00bb\u2021u c\u0102\u00b3 c\u00e1\u00ba\u00a5u tr\u0102\u00bac, kh\u0102\u00b4ng ph\u00e1\u00ba\u00a3i NLP t\u00e1\u00bb\u2022ng qu\u0102\u00a1t.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "Hai PPTX native: candidate 12 tr\u00e1\u00ba\u00a1ng th\u0102\u00a1i/31 \u00c4\u2018\u00e1\u00bb\u2018i t\u00c6\u00b0\u00e1\u00bb\u00a3ng, transfer 10 tr\u00e1\u00ba\u00a1ng th\u0102\u00a1i/22 \u00c4\u2018\u00e1\u00bb\u2018i t\u00c6\u00b0\u00e1\u00bb\u00a3ng. 7 nh\u0102\u00b3m ki\u00e1\u00bb\u0192m tra geometry v\u0102\u00a0 package parity \u00c4\u2018\u00e1\u00bb\u0081u \u00c4\u2018\u00e1\u00ba\u00a1t tr\u0102\u00aan m\u00e1\u00bb\u2014i file. \u00c4\u0090\u0102\u00a3 xem ri\u0102\u00aang \u00c4\u2018\u00e1\u00bb\u00a7 22 \u00e1\u00ba\u00a3nh cu\u00e1\u00bb\u2018i. 41 unit tests \u00c4\u2018\u00e1\u00ba\u00a1t. \u00c4\u0090\u00e1\u00bb\u2018i ch\u00e1\u00bb\u00a9ng c\u00e1\u00bb\u2018 \u0102\u00bd b\u00e1\u00bb\u008f waypoint cho sai l\u00e1\u00bb\u2021ch b\u0102\u00a1n k\u0102\u00adnh tuy\u00e1\u00ba\u00bfn t\u0102\u00adnh 65,608 px; candidate c\u0102\u00b2n 1,916 px. Kh\u0102\u00b4ng coi s\u00e1\u00bb\u2018 n\u0102\u00a0y l\u0102\u00a0 \u00c4\u2018\u00e1\u00bb\u2122 m\u00c6\u00b0\u00e1\u00bb\u00a3t ph\u0102\u00a1t th\u00e1\u00bb\u00b1c t\u00e1\u00ba\u00bf.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "L\u00e1\u00bb\u2014i c\u0102\u00b3 \u0102\u00adch: t\u00e1\u00bb\u2022ng g\u0102\u00b3c xoay \u00c4\u2018\u0102\u00bang v\u00e1\u00ba\u00abn c\u0102\u00b3 th\u00e1\u00bb\u0192 che waypoint sai; \u00c4\u2018\u0102\u00a3 gi\u00e1\u00bb\u00af test \u00c4\u2018\u00e1\u00bb\u2122t bi\u00e1\u00ba\u00bfn v\u0102\u00a0 s\u00e1\u00bb\u00ada ki\u00e1\u00bb\u0192m tra t\u00e1\u00bb\u00abng waypoint/r\u0102\u00a0ng bu\u00e1\u00bb\u2122c nh\u0102\u00a3n. Agent m\u00e1\u00bb\u203ai t\u00e1\u00ba\u00a1o b\u0102\u00a0i h\u00e1\u00bb\u008dc t\u00e1\u00ba\u00adp 8 n\u0102\u00bat, ng\u00c6\u00b0\u00e1\u00bb\u00a3c chi\u00e1\u00bb\u0081u 60\u00c2\u00b0, n\u0102\u00bat 6, 3 l\u00e1\u00bb\u203ap; parent xu\u00e1\u00ba\u00a5t file. Agent \u00c4\u2018\u0102\u00a3 \u00c4\u2018\u00e1\u00bb\u008dc brief do AGENTS y\u0102\u00aau c\u00e1\u00ba\u00a7u n\u0102\u00aan kh\u0102\u00b4ng g\u00e1\u00bb\u008di \u00c4\u2018\u0102\u00a2y l\u0102\u00a0 ki\u00e1\u00bb\u0192m th\u00e1\u00bb\u00ad m\u0102\u00b9 ho\u0102\u00a0n to\u0102\u00a0n.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "Gi\u00e1\u00bb\u203ai h\u00e1\u00ba\u00a1n quan tr\u00e1\u00bb\u008dng: v\u00e1\u00ba\u00abn l\u0102\u00a0 2D Morph theo t\u00e1\u00bb\u00abng l\u00e1\u00ba\u00a7n b\u00e1\u00ba\u00a5m, m\u00e1\u00bb\u2122t recipe h\u00e1\u00ba\u00a1n ch\u00e1\u00ba\u00bf, h\u0102\u00acnh h\u00e1\u00bb\u008dc c\u0102\u00b2n \u00c4\u2018\u00c6\u00a1n gi\u00e1\u00ba\u00a3n; ch\u00c6\u00b0a c\u0102\u00b3 b\u00e1\u00ba\u00b1ng ch\u00e1\u00bb\u00a9ng hi\u00e1\u00bb\u2021u \u00e1\u00bb\u00a9ng \u00e1\u00ba\u00a5n t\u00c6\u00b0\u00e1\u00bb\u00a3ng ho\u00e1\u00ba\u00b7c playback PowerPoint. Kh\u0102\u00b4ng ph\u00e1\u00ba\u00a3i skill ho\u0102\u00a0n ch\u00e1\u00bb\u2030nh hi\u00e1\u00bb\u0192u m\u00e1\u00bb\u008di \u0102\u00bd t\u00c6\u00b0\u00e1\u00bb\u0178ng ph\u00e1\u00bb\u00a9c t\u00e1\u00ba\u00a1p, ch\u00c6\u00b0a c\u0102\u00a0i personal skill. B\u00c6\u00b0\u00e1\u00bb\u203ac ti\u00e1\u00ba\u00bfp \u00c6\u00b0u ti\u0102\u00aan T006 native timeline/path v\u0102\u00a0 T001 playback exact-hash; gi\u00e1\u00bb\u00af nguy\u0102\u00aan T005 l\u0102\u00a0m \u00c4\u2018\u00e1\u00bb\u2018i ch\u00e1\u00bb\u00a9ng.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "## K\u00e1\u00ba\u00bft qu\u00e1\u00ba\u00a3 m\u00e1\u00bb\u203ai nh\u00e1\u00ba\u00a5t \u00e2\u20ac\u201d T002",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "PR #2, `experiments/T002-20261004-codex-tight-carriers/REPORT.md` gi\u00e1\u00bb\u00af E004 b\u00e1\u00ba\u00a5t bi\u00e1\u00ba\u00bfn v\u0102\u00a0 ch\u00e1\u00bb\u2030 si\u00e1\u00ba\u00bft carrier quanh label. Trong c\u0102\u00b9ng proxy tuy\u00e1\u00ba\u00bfn t\u0102\u00adnh, label gi\u00e1\u00bb\u00af 0/6 c\u00e1\u00ba\u00b7p ch\u00e1\u00bb\u201cng v\u0102\u00a0 carrier gi\u00e1\u00ba\u00a3m 6/6\u00e2\u2020\u20190/6. Candidate c\u0102\u00b3 3 slide, 8 \u00c4\u2018\u00e1\u00bb\u2018i t\u00c6\u00b0\u00e1\u00bb\u00a3ng native/slide, 5 textbox/slide, 2 Morph 1100 ms; 3/3 \u00e1\u00ba\u00a3nh cu\u00e1\u00bb\u2018i \u00c4\u2018\u0102\u00a3 xem v\u0102\u00a0 34 tests \u00c4\u2018\u00e1\u00ba\u00a1t. SHA-256 `c41f2289bfd662f2642ea611b119d8aeaf35678425cba4cf4b7ffe0640922186`.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "Tradeoff: focus emphasis t\u00c4\u00a9nh ch\u00e1\u00bb\u00a7 quan gi\u00e1\u00ba\u00a3m 4/5\u00e2\u2020\u20193/5; creative v\u00e1\u00ba\u00abn 2/5. \u00c4\u0090\u0102\u00a2y l\u0102\u00a0 s\u00e1\u00bb\u00ada r\u00e1\u00bb\u00a7i ro geometry, kh\u0102\u00b4ng ch\u00e1\u00bb\u00a9ng minh motion \u00c4\u2018\u00e1\u00ba\u00b9p ho\u00e1\u00ba\u00b7c playback \u00c4\u2018\u0102\u00bang. Native motion/editing null. Ngu\u00e1\u00bb\u201cn v0.6 ch\u00c6\u00b0a c\u0102\u00a0i personal skill. B\u00c6\u00b0\u00e1\u00bb\u203ac ti\u00e1\u00ba\u00bfp: exact-hash PowerPoint playback so E004/T002, ho\u00e1\u00ba\u00b7c T004 portable backend; T002 ti\u00e1\u00ba\u00bfp theo ph\u00e1\u00ba\u00a3i c\u0102\u00b3 gi\u00e1\u00ba\u00a3 thuy\u00e1\u00ba\u00bft m\u00e1\u00bb\u203ai v\u00e1\u00bb\u0081 emphasis/z-order.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "## K\u00e1\u00ba\u00bft qu\u00e1\u00ba\u00a3 m\u00e1\u00bb\u203ai nh\u00e1\u00ba\u00a5t \u00e2\u20ac\u201d T003",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "\u00c4\u0090\u00e1\u00bb\u008dc `experiments/T003-20261004-codex-layer01/REPORT.md` tr\u00c6\u00b0\u00e1\u00bb\u203ac khi ti\u00e1\u00ba\u00bfp t\u00e1\u00bb\u00a5c. Nh\u0102\u00a1nh `work/T003-codex-20261004`, PR #1 c\u0102\u00b3 generator 3\u00e2\u20ac\u201c5 l\u00e1\u00bb\u203ap, ngu\u00e1\u00bb\u201cn v\u0102\u00a0 rubric \u00c4\u2018\u0102\u00a3 \u00c4\u2018\u0102\u00b3ng b\u00c4\u0192ng, hai ch\u00e1\u00bb\u00a7 \u00c4\u2018\u00e1\u00bb\u0081 (QUANTA 5 l\u00e1\u00bb\u203ap; h\u00e1\u00bb\u008dc tr\u00e1\u00bb\u00b1c tuy\u00e1\u00ba\u00bfn 4 l\u00e1\u00bb\u203ap), 5 PPTX gi\u00e1\u00bb\u00af c\u00e1\u00ba\u00a3 th\u00e1\u00ba\u00a5t b\u00e1\u00ba\u00a1i v\u0102\u00a0 15 \u00e1\u00ba\u00a3nh cu\u00e1\u00bb\u2018i \u00c4\u2018\u0102\u00a3 xem. Native parity \u00c4\u2018\u00e1\u00ba\u00a1t tr\u0102\u00aan c\u00e1\u00ba\u00a3 5 file; repo c\u0102\u00b3 34 tests \u00c4\u2018\u00e1\u00ba\u00a1t. Backend c\u00c5\u00a9 v\u0102\u00a0 c\u0102\u00a1c baseline E001\u00e2\u20ac\u201cE004/H001\u00e2\u20ac\u201cH003 gi\u00e1\u00bb\u00af nguy\u0102\u00aan.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "Ph\u0102\u00a9p \u00c4\u2018o fixture r\u0102\u00a0ng bu\u00e1\u00bb\u2122c: 16/60 child-state l\u00e1\u00bb\u2021ch \u00e2\u2020\u2019 0/60, max 64 \u00e2\u2020\u2019 0 px; \u00c4\u2018\u0102\u00a2y l\u0102\u00a0 l\u00e1\u00bb\u2014i c\u00e1\u00bb\u2018 \u0102\u00bd \u00c4\u2018\u00e1\u00bb\u0192 th\u00e1\u00bb\u00ad quy t\u00e1\u00ba\u00afc, kh\u0102\u00b4ng ph\u00e1\u00ba\u00a3i benchmark \u00c4\u2018\u00e1\u00bb\u2122c l\u00e1\u00ba\u00adp. L\u00e1\u00bb\u2014i s\u00e1\u00bb\u2018 th\u00e1\u00ba\u00adt \u00c4\u2018\u00c6\u00b0\u00e1\u00bb\u00a3c ph\u0102\u00a1t hi\u00e1\u00bb\u2021n b\u00e1\u00ba\u00b1ng render: \u0102\u00b4 42 px l\u0102\u00a0m hai ch\u00e1\u00bb\u00af s\u00e1\u00bb\u2018 xu\u00e1\u00bb\u2018ng d\u0102\u00b2ng. Ch\u00e1\u00bb\u2030 m\u00e1\u00bb\u0178 r\u00e1\u00bb\u2122ng th\u0102\u00a0nh 60 px, s\u00e1\u00bb\u2018 l\u00e1\u00bb\u2014i quan s\u0102\u00a1t QUANTA 15\u00e2\u2020\u20190 v\u0102\u00a0 b\u0102\u00a0i m\u00e1\u00bb\u203ai 12\u00e2\u2020\u20190. B\u0102\u00a0i m\u00e1\u00bb\u203ai do agent ng\u00e1\u00bb\u00af c\u00e1\u00ba\u00a3nh ri\u0102\u00aang l\u00e1\u00ba\u00adp plan; parent xu\u00e1\u00ba\u00a5t PPTX v\u0102\u00a0 s\u00e1\u00bb\u00ada, kh\u0102\u00b4ng g\u00e1\u00bb\u008di l\u0102\u00a0 benchmark t\u00e1\u00bb\u00b1 h\u0102\u00a0nh end-to-end. B\u00e1\u00ba\u00a3n n\u0102\u00aan d\u0102\u00b9ng: `output/T003_layer_candidate_v2.pptx`, `output/T003_transfer_v2.pptx`.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "T003 m\u00e1\u00bb\u203ai \u00c4\u2018\u00e1\u00ba\u00a1t ph\u00e1\u00ba\u00a7n recipe 2D v\u0102\u00a0 transfer c\u00e1\u00ba\u00a5u tr\u0102\u00bac/\u00e1\u00ba\u00a3nh t\u00c4\u00a9nh. Ch\u00e1\u00bb\u2030 \u00c4\u2018\u00e1\u00bb\u008dc tutorial ngu\u00e1\u00bb\u201cn, ch\u00c6\u00b0a xem choreography ngu\u00e1\u00bb\u201cn; kh\u0102\u00b4ng t\u0102\u00a1i hi\u00e1\u00bb\u2021n 3D extrusion. Native playback, s\u00e1\u00bb\u00ada th\u00e1\u00ba\u00adt trong PowerPoint, M1 v\u00e1\u00ba\u00abn pending; \u00c4\u2018i\u00e1\u00bb\u0192m motion/editing null. \u00c4\u0090i\u00e1\u00bb\u0192m s\u0102\u00a1ng t\u00e1\u00ba\u00a1o t\u00c4\u00a9nh 3/5 l\u0102\u00a0 ch\u00e1\u00bb\u00a7 quan, kh\u0102\u00b4ng ph\u00e1\u00ba\u00a3i \u00c4\u2018\u00e1\u00ba\u00a1t m\u00e1\u00bb\u00a5c ti\u0102\u00aau chuy\u00e1\u00bb\u0192n \u00c4\u2018\u00e1\u00bb\u2122ng \u00e1\u00ba\u00a5n t\u00c6\u00b0\u00e1\u00bb\u00a3ng. Ngu\u00e1\u00bb\u201cn v0.5 ch\u00c6\u00b0a c\u0102\u00a0i th\u0102\u00a0nh personal skill.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "B\u00c6\u00b0\u00e1\u00bb\u203ac c\u0102\u00b3 gi\u0102\u00a1 tr\u00e1\u00bb\u2039 ti\u00e1\u00ba\u00bfp: T001 ph\u0102\u00a1t exact-hash hai file v2; ho\u00e1\u00ba\u00b7c ph\u00e1\u00ba\u00a7n ti\u00e1\u00ba\u00bfp T003 xem animation ngu\u00e1\u00bb\u201cn th\u00e1\u00bb\u00b1c r\u00e1\u00bb\u201ci l\u00e1\u00ba\u00adp gi\u00e1\u00ba\u00a3 thuy\u00e1\u00ba\u00bft choreography m\u00e1\u00bb\u203ai; ho\u00e1\u00ba\u00b7c T002 x\u00e1\u00bb\u00ad l\u0102\u00bd carrier crossing c\u00c5\u00a9. Claim \u00c4\u2018\u00e1\u00ba\u00a7u ti\u0102\u00aan \u00c4\u2018\u0102\u00a3 xong ph\u00e1\u00ba\u00a1m vi nghi\u0102\u00aan c\u00e1\u00bb\u00a9u n\u0102\u00a0y; ki\u00e1\u00bb\u0192m tra nh\u0102\u00a1nh/PR m\u00e1\u00bb\u203ai nh\u00e1\u00ba\u00a5t tr\u00c6\u00b0\u00e1\u00bb\u203ac khi nh\u00e1\u00ba\u00adn ph\u00e1\u00ba\u00a7n ti\u00e1\u00ba\u00bfp, kh\u0102\u00b4ng l\u00e1\u00ba\u00b7p v1/v2.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "## Tr\u00e1\u00ba\u00a1ng th\u0102\u00a1i th\u00e1\u00bb\u00b1c t\u00e1\u00ba\u00bf",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "M0 \u00c4\u2018\u0102\u00a3 c\u0102\u00b3 b\u00e1\u00bb\u2122 th\u00e1\u00bb\u00b1c thi th\u00e1\u00bb\u00ad nghi\u00e1\u00bb\u2021m v\u0102\u00a0 b\u00e1\u00ba\u00b1ng ch\u00e1\u00bb\u00a9ng c\u00e1\u00ba\u00a5u tr\u0102\u00bac/b\u00e1\u00bb\u2018 c\u00e1\u00bb\u00a5c E001, H001. M1 ch\u00c6\u00b0a \u00c4\u2018\u00e1\u00ba\u00a1t v\u0102\u00ac thi\u00e1\u00ba\u00bfu ph\u0102\u00a1t th\u00e1\u00bb\u00ad PowerPoint. \u00c4\u0090\u0102\u00a2y l\u0102\u00a0 nh\u0102\u00a1nh d\u00e1\u00bb\u00b1ng m\u00e1\u00ba\u00abu v\u0102\u00a0 ki\u00e1\u00bb\u0192m tra ph\u00e1\u00ba\u00a7n m\u00e1\u00bb\u0081m trong l\u0102\u00bac ch\u00e1\u00bb\u009d c\u00e1\u00bb\u2022ng native; kh\u0102\u00b4ng h\u00e1\u00ba\u00a1 ti\u0102\u00aau chu\u00e1\u00ba\u00a9n nghi\u00e1\u00bb\u2021m thu M1. Ngu\u00e1\u00bb\u201cn skill l\u0102\u00a0 b\u00e1\u00ba\u00a3n nghi\u0102\u00aan c\u00e1\u00bb\u00a9u trong d\u00e1\u00bb\u00b1 \u0102\u00a1n, ch\u00c6\u00b0a c\u0102\u00a0i v\u0102\u00a0o t\u0102\u00a0i kho\u00e1\u00ba\u00a3n.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "Repo ch\u0102\u00adnh \u00c4\u2018\u0102\u00a3 x\u0102\u00a1c minh: `https://github.com/togcoder/skill-for-pptx`, private, owner `togcoder`, quy\u00e1\u00bb\u0081n push. Ch\u00e1\u00bb\u00a7 repo t\u00e1\u00ba\u00a1o README kh\u00e1\u00bb\u0178i t\u00e1\u00ba\u00a1o ng\u0102\u00a0y 04/10/2026. B\u00e1\u00ba\u00a3n handoff nh\u00e1\u00ba\u00adp snapshot v0.4 c\u0102\u00b9ng ngu\u00e1\u00bb\u201cn, demo v\u0102\u00a0 b\u00e1\u00ba\u00b1ng ch\u00e1\u00bb\u00a9ng v\u0102\u00a0o repo n\u0102\u00a0y; l\u00e1\u00bb\u2039ch s\u00e1\u00bb\u00ad c\u00c5\u00a9 nguy\u0102\u00aan v\u00e1\u00ba\u00b9n t\u00e1\u00ba\u00a1i `archive/pre-github-v0.4.bundle`. \u00c4\u0090\u00e1\u00bb\u008dc `HANDOFF.md`, `docs/COLLABORATION.md` v\u0102\u00a0 c\u0102\u00a1c nh\u0102\u00a1nh/PR tr\u00c6\u00b0\u00e1\u00bb\u203ac khi nh\u00e1\u00ba\u00adn vi\u00e1\u00bb\u2021c. Kh\u0102\u00b4ng d\u0102\u00b9ng t\u0102\u00aan d\u00e1\u00bb\u00b1 ki\u00e1\u00ba\u00bfn `pptx-motion-lab` l\u0102\u00a0m repo GitHub n\u00e1\u00bb\u00afa.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "## \u00c4\u0090\u0102\u00a3 ho\u0102\u00a0n t\u00e1\u00ba\u00a5t",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "1. Kh\u0102\u00b4i ph\u00e1\u00bb\u00a5c scaffold t\u00e1\u00bb\u00ab phi\u0102\u00aan tr\u00c6\u00b0\u00e1\u00bb\u203ac, gi\u00e1\u00bb\u00af snapshot g\u00e1\u00bb\u2018c. Ph\u0102\u00a1t hi\u00e1\u00bb\u2021n ngu\u00e1\u00bb\u201cn SKILL.md c\u0102\u00b2n template TODO v\u0102\u00a0 \u00c4\u2018\u00c6\u00b0\u00e1\u00bb\u009dng d\u00e1\u00bb\u00b1ng ch\u00c6\u00b0a ho\u0102\u00a0n t\u00e1\u00ba\u00a5t.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "2. Ho\u0102\u00a0n thi\u00e1\u00bb\u2021n \u00c4\u2018\u00c6\u00b0\u00e1\u00bb\u009dng d\u00e1\u00bb\u00b1ng h\u00e1\u00ba\u00a1n ch\u00e1\u00ba\u00bf b\u00e1\u00ba\u00b1ng artifact-tool, k\u00e1\u00ba\u00bf ho\u00e1\u00ba\u00a1ch JSON, ch\u0102\u00a8n Morph v\u0102\u00a0 ki\u00e1\u00bb\u0192m tra file cu\u00e1\u00bb\u2018i.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "3. D\u00e1\u00bb\u00b1ng E001 ba c\u00e1\u00ba\u00a3nh v\u00e1\u00bb\u203ai 13 \u00c4\u2018\u00e1\u00bb\u2018i t\u00c6\u00b0\u00e1\u00bb\u00a3ng native m\u00e1\u00bb\u2014i slide; hai khai b\u0102\u00a1o Morph 1.200 ms. Render v\u0102\u00a0 xem to\u0102\u00a0n b\u00e1\u00bb\u2122 file cu\u00e1\u00bb\u2018i.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "4. S\u00e1\u00bb\u00ada b\u00e1\u00bb\u2122 ch\u0102\u00a8n Morph: \u00c4\u2018\u00e1\u00bb\u008dc \u00c4\u2018\u0102\u00bang th\u00e1\u00bb\u00a9 t\u00e1\u00bb\u00b1 slide, ki\u00e1\u00bb\u0192m tra s\u00e1\u00bb\u2018 c\u00e1\u00ba\u00a3nh v\u0102\u00a0 t\u0102\u00aan, b\u00e1\u00ba\u00a3o v\u00e1\u00bb\u2021 file c\u0102\u00b3 timing, t\u00e1\u00bb\u00ab ch\u00e1\u00bb\u2018i duration l\u00e1\u00ba\u00bb, kh\u0102\u00b4ng \u00c4\u2018\u00e1\u00bb\u0192 l\u00e1\u00ba\u00a1i file d\u00e1\u00bb\u0178 v\u0102\u00a0 kh\u0102\u00b4ng ghi \u00c4\u2018\u0102\u00a8.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "5. C\u0102\u00b9ng b\u00e1\u00bb\u2122 7 l\u00e1\u00bb\u2014i m\u00e1\u00bb\u00a5c ti\u0102\u00aau: baseline 1/7, candidate 7/7. To\u0102\u00a0n b\u00e1\u00bb\u2122 19 unit tests hi\u00e1\u00bb\u2021n c\u0102\u00b3 pass. Kh\u0102\u00b4ng coi \u00c4\u2018\u0102\u00b3 l\u0102\u00a0 \u00c4\u2018i\u00e1\u00bb\u0192m ch\u00e1\u00ba\u00a5t l\u00c6\u00b0\u00e1\u00bb\u00a3ng chuy\u00e1\u00bb\u0192n \u00c4\u2018\u00e1\u00bb\u2122ng hay benchmark \u00c4\u2018\u00e1\u00bb\u2122c l\u00e1\u00ba\u00adp.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "6. Vi\u00e1\u00ba\u00bft ngu\u00e1\u00bb\u201cn skill v0.2 c\u0102\u00b9ng h\u00e1\u00bb\u00a3p \u00c4\u2018\u00e1\u00bb\u201cng, c\u0102\u00b4ng th\u00e1\u00bb\u00a9c, rubric v\u0102\u00a0 h\u00c6\u00b0\u00e1\u00bb\u203ang d\u00e1\u00ba\u00abn th\u00e1\u00bb\u00b1c thi c\u0102\u00b3 th\u00e1\u00bb\u0192 g\u00e1\u00bb\u008di l\u00e1\u00ba\u00a1i.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "7. D\u0102\u00b9ng m\u00e1\u00bb\u2122t agent v\u00e1\u00bb\u203ai ng\u00e1\u00bb\u00af c\u00e1\u00ba\u00a3nh t\u00e1\u00bb\u2018i thi\u00e1\u00bb\u0192u \u00c4\u2018\u00e1\u00bb\u0192 \u0102\u00a1p d\u00e1\u00bb\u00a5ng skill v\u0102\u00a0o H001: hai c\u00e1\u00ba\u00a3nh Collect/Inspect/Decide, ph\u0102\u00b3ng l\u00e1\u00bb\u203an Inspect v\u0102\u00a0 gi\u00e1\u00bb\u00af b\u00e1\u00bb\u2018i c\u00e1\u00ba\u00a3nh hai b\u0102\u00aan. \u00c4\u0090\u0102\u00a3 t\u00e1\u00ba\u00a1o PPTX v\u0102\u00a0 xem hai slide cu\u00e1\u00bb\u2018i. Kh\u0102\u00b4ng ti\u00e1\u00ba\u00bft l\u00e1\u00bb\u2122 \u00c4\u2018\u0102\u00a1p \u0102\u00a1n/ch\u00e1\u00ba\u00a9n \u00c4\u2018o\u0102\u00a1n E001 cho agent \u00c4\u2018\u0102\u00b3.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "8. H001 ph\u0102\u00a1t hi\u00e1\u00bb\u2021n ngu\u00e1\u00bb\u201cn tham kh\u00e1\u00ba\u00a3o E001 b\u00e1\u00bb\u2039 g\u00e1\u00ba\u00afn c\u00e1\u00bb\u00a9ng trong speaker notes; \u00c4\u2018\u0102\u00a3 s\u00e1\u00bb\u00ada renderer \u00c4\u2018\u00e1\u00bb\u0192 d\u0102\u00b9ng ngu\u00e1\u00bb\u201cn th\u00e1\u00bb\u00b1c s\u00e1\u00bb\u00b1 trong k\u00e1\u00ba\u00bf ho\u00e1\u00ba\u00a1ch.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "9. H001 c\u00c5\u00a9ng ph\u0102\u00a1t hi\u00e1\u00bb\u2021n planned textbox xu\u00e1\u00ba\u00a5t th\u0102\u00a0nh native shape c\u0102\u00b3 p:txBody nh\u00c6\u00b0ng kh\u0102\u00b4ng c\u0102\u00b3 txBox=1. Gi\u00e1\u00bb\u00af ki\u00e1\u00bb\u0192m tra nghi\u0102\u00aam ng\u00e1\u00ba\u00b7t th\u00e1\u00ba\u00a5t b\u00e1\u00ba\u00a1i, ghi ranh gi\u00e1\u00bb\u203ai trong skill; kh\u0102\u00b4ng s\u00e1\u00bb\u00ada rubric \u00c4\u2018\u00e1\u00bb\u0192 che l\u00e1\u00bb\u2014i.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "10. E002 s\u00e1\u00bb\u00ada \u00c4\u2018\u0102\u00bang 14 khai b\u0102\u00a1o textbox c\u00e1\u00bb\u00a7a H001 theo k\u00e1\u00ba\u00bf ho\u00e1\u00ba\u00a1ch. B\u00e1\u00bb\u2122 ki\u00e1\u00bb\u0192m tra H001 gi\u00e1\u00bb\u00af nguy\u0102\u00aan: t\u00e1\u00bb\u00ab 14 l\u00e1\u00bb\u2014i c\u0102\u00b2n 0 l\u00e1\u00bb\u2014i, 93/93 ki\u00e1\u00bb\u0192m tra \u00c4\u2018\u00e1\u00ba\u00a1t. Ch\u00e1\u00bb\u2030 hai slide XML thay \u00c4\u2018\u00e1\u00bb\u2022i b\u00e1\u00bb\u0178i txBox; m\u00e1\u00bb\u008di ph\u00e1\u00ba\u00a7n kh\u0102\u00a1c gi\u00e1\u00bb\u00af nguy\u0102\u00aan byte. Hai \u00e1\u00ba\u00a3nh cu\u00e1\u00bb\u2018i gi\u00e1\u00bb\u2018ng H001 t\u00e1\u00bb\u00abng pixel. 25 unit tests \u00c4\u2018\u00e1\u00ba\u00a1t. Ngu\u00e1\u00bb\u201cn skill/b\u00e1\u00bb\u2122 d\u00e1\u00bb\u00b1ng \u00c4\u2018\u0102\u00a3 d\u0102\u00b9ng b\u00c6\u00b0\u00e1\u00bb\u203ac chu\u00e1\u00ba\u00a9n h\u0102\u00b3a n\u0102\u00a0y.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "11. H002 \u00c4\u2018\u0102\u00a3 ho\u0102\u00a0n t\u00e1\u00ba\u00a5t t\u00e1\u00bb\u00ab \u00c4\u2018\u00e1\u00bb\u0081 \u00c4\u2018\u00e1\u00bb\u2122c l\u00e1\u00ba\u00adp v\u00e1\u00bb\u0081 \u00c4\u2018\u0102\u00a8n ORBIT: 3 slide, 11 \u00c4\u2018\u00e1\u00bb\u2018i t\u00c6\u00b0\u00e1\u00bb\u00a3ng native m\u00e1\u00bb\u2014i slide, 6 textbox/slide \u00c4\u2018\u0102\u00bang khai b\u0102\u00a1o, 2 Morph 1.100 ms. Agent v\u0102\u00a0 parent \u00c4\u2018\u0102\u00a3 xem \u00c4\u2018\u00e1\u00bb\u00a7 \u00e1\u00ba\u00a3nh cu\u00e1\u00bb\u2018i. Agent kh\u0102\u00b4ng \u00c4\u2018\u00e1\u00bb\u008dc plan/artifact c\u00c5\u00a9, nh\u00c6\u00b0ng \u00c4\u2018\u00c6\u00b0\u00e1\u00bb\u00a3c thu g\u00e1\u00bb\u008dn ph\u00e1\u00ba\u00a7n vi\u00e1\u00bb\u2021c sau giai \u00c4\u2018o\u00e1\u00ba\u00a1n \u00c4\u2018\u00e1\u00bb\u008dc h\u00c6\u00b0\u00e1\u00bb\u203ang d\u00e1\u00ba\u00abn; kh\u0102\u00b4ng coi \u00c4\u2018\u0102\u00a2y l\u0102\u00a0 benchmark t\u00e1\u00bb\u00b1 h\u0102\u00a0nh c\u0102\u00b3 \u00c4\u2018o th\u00e1\u00bb\u009di gian.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "12. H002 l\u00e1\u00bb\u2122 nguy c\u00c6\u00a1 nh\u0102\u00a3n g\u00e1\u00ba\u00b7p nhau khi \u00c4\u2018\u00e1\u00bb\u2022i ch\u00e1\u00bb\u2014 \u00c4\u2018\u00e1\u00bb\u2018i \u00e1\u00bb\u00a9ng. E003 gi\u00e1\u00bb\u00af baseline v\u0102\u00a0 c\u0102\u00b9ng ph\u0102\u00a9p \u00c4\u2018o h\u0102\u00acnh h\u00e1\u00bb\u008dc tuy\u00e1\u00ba\u00bfn t\u0102\u00adnh li\u0102\u00aan t\u00e1\u00bb\u00a5c: t\u00e1\u00bb\u00ab 2 c\u00e1\u00ba\u00b7p nh\u0102\u00a3n c\u0102\u00b3 kho\u00e1\u00ba\u00a3ng ch\u00e1\u00bb\u201cng xu\u00e1\u00bb\u2018ng 0 tr\u0102\u00aan 6 c\u00e1\u00ba\u00b7p/chuy\u00e1\u00bb\u0192n c\u00e1\u00ba\u00a3nh. Ch\u00e1\u00bb\u2030 \u00c4\u2018\u00e1\u00bb\u2022i b\u00e1\u00bb\u2018 tr\u0102\u00ad/\u00c4\u2018\u00c6\u00b0\u00e1\u00bb\u009dng \u00c4\u2018i th\u0102\u00a0nh chu k\u00e1\u00bb\u00b3 qua ba \u00c4\u2018\u00e1\u00bb\u2030nh tam gi\u0102\u00a1c; gi\u00e1\u00bb\u00af 3 slide, ch\u00e1\u00bb\u00af, lo\u00e1\u00ba\u00a1i/k\u0102\u00adch th\u00c6\u00b0\u00e1\u00bb\u203ac \u00c4\u2018\u00e1\u00bb\u2018i t\u00c6\u00b0\u00e1\u00bb\u00a3ng v\u0102\u00a0 th\u00e1\u00bb\u009di l\u00c6\u00b0\u00e1\u00bb\u00a3ng. File cu\u00e1\u00bb\u2018i \u00c4\u2018\u00e1\u00ba\u00a1t c\u00e1\u00ba\u00a5u tr\u0102\u00bac, render/xem \u00c4\u2018\u00e1\u00bb\u00a7 3 slide. \u00c4\u0090\u0102\u00a2y l\u0102\u00a0 c\u00e1\u00ba\u00a3i thi\u00e1\u00bb\u2021n trong m\u0102\u00b4 h\u0102\u00acnh gi\u00e1\u00ba\u00a3 \u00c4\u2018\u00e1\u00bb\u2039nh, ch\u00c6\u00b0a ph\u00e1\u00ba\u00a3i playback PowerPoint.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "13. H003 th\u00e1\u00bb\u00ad \u00c4\u2018\u00e1\u00bb\u0081 m\u00e1\u00bb\u203ai v\u00e1\u00bb\u203ai ba nh\u0102\u00a3n ti\u00e1\u00ba\u00bfng Vi\u00e1\u00bb\u2021t d\u0102\u00a0i 360\u0102\u201496 px. Gi\u00e1\u00bb\u00af rubric v\u0102\u00a0 ch\u00e1\u00ba\u00a9n \u00c4\u2018o\u0102\u00a1n E003: 4/6 c\u00e1\u00ba\u00b7p nh\u0102\u00a3n c\u0102\u00b3 kho\u00e1\u00ba\u00a3ng ch\u00e1\u00bb\u201cng theo m\u0102\u00b4 h\u0102\u00acnh. E004 ch\u00e1\u00bb\u2030 \u00c4\u2018\u00e1\u00bb\u2022i y c\u00e1\u00bb\u00a7a kh\u00e1\u00bb\u2018i/nh\u0102\u00a3n, t\u00c4\u0192ng kho\u00e1\u00ba\u00a3ng c\u0102\u00a1ch hai t\u00e1\u00ba\u00a7ng t\u00e1\u00bb\u00ab 200 l\u0102\u00aan 300 px, s\u00e1\u00bb\u2018 c\u00e1\u00ba\u00b7p nh\u0102\u00a3n ch\u00e1\u00bb\u201cng v\u00e1\u00bb\u0081 0. C\u00e1\u00ba\u00a3 hai v\u00e1\u00ba\u00abn 6/6 c\u00e1\u00ba\u00b7p kh\u00e1\u00bb\u2018i c\u0102\u00b3 kho\u00e1\u00ba\u00a3ng ch\u00e1\u00bb\u201cng. File cu\u00e1\u00bb\u2018i c\u0102\u00b3 3\u0102\u20148 \u00c4\u2018\u00e1\u00bb\u2018i t\u00c6\u00b0\u00e1\u00bb\u00a3ng native, 5 textbox/slide v\u0102\u00a0 hai Morph 1.100 ms; ki\u00e1\u00bb\u0192m tra v\u0102\u00a0 xem \u00c4\u2018\u00e1\u00bb\u00a7 6 \u00e1\u00ba\u00a3nh cu\u00e1\u00bb\u2018i.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "14. B\u00e1\u00bb\u2022 sung scripts/cyclic_label_clearance.py v\u00e1\u00bb\u203ai ng\u00c6\u00b0\u00e1\u00bb\u00a1ng H >= 3*d*h/(2*d-w) cho ba nh\u0102\u00a3n \u00c4\u2018\u00e1\u00bb\u0081u, ba v\u00e1\u00bb\u2039 tr\u0102\u00ad \u00c4\u2018\u00e1\u00bb\u2018i x\u00e1\u00bb\u00a9ng, n\u00e1\u00bb\u2122i suy \u00c4\u2018\u00e1\u00bb\u201cng b\u00e1\u00bb\u2122 tuy\u00e1\u00ba\u00bfn t\u0102\u00adnh; c\u0102\u00b3 mi\u00e1\u00bb\u0081n \u0102\u00a1p d\u00e1\u00bb\u00a5ng r\u0102\u00b5. B\u00e1\u00bb\u2018n test m\u00e1\u00bb\u203ai \u00c4\u2018\u00e1\u00bb\u2018i chi\u00e1\u00ba\u00bfu ch\u00e1\u00ba\u00a9n \u00c4\u2018o\u0102\u00a1n c\u00c5\u00a9, t\u00e1\u00bb\u2022ng 29 unit tests \u00c4\u2018\u00e1\u00ba\u00a1t. \u00c4\u0090\u0102\u00a3 c\u00e1\u00ba\u00adp nh\u00e1\u00ba\u00adt ngu\u00e1\u00bb\u201cn skill v\u00e1\u00bb\u203ai b\u0102\u00a0i h\u00e1\u00bb\u008dc v\u0102\u00a0 gi\u00e1\u00bb\u00af l\u00e1\u00bb\u2014i plan/preflight ban \u00c4\u2018\u00e1\u00ba\u00a7u.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "T\u00e1\u00ba\u00a1i m\u00e1\u00bb\u2018c b\u0102\u00a0n giao v0.4 ch\u00c6\u00b0a c\u0102\u00b3 claim nghi\u0102\u00aan c\u00e1\u00bb\u00a9u m\u00e1\u00bb\u203ai; T003 sau \u00c4\u2018\u0102\u00b3 \u00c4\u2018\u00c6\u00b0\u00e1\u00bb\u00a3c nh\u00e1\u00ba\u00adn t\u00e1\u00ba\u00a1i PR #1 nh\u00c6\u00b0 m\u00e1\u00bb\u00a5c m\u00e1\u00bb\u203ai nh\u00e1\u00ba\u00a5t ph\u0102\u00ada tr\u0102\u00aan. Lu\u0102\u00b4n ki\u00e1\u00bb\u0192m tra nh\u0102\u00a1nh v\u0102\u00a0 PR m\u00e1\u00bb\u0178 \u00c4\u2018\u00e1\u00bb\u0192 bi\u00e1\u00ba\u00bft c\u0102\u00b4ng vi\u00e1\u00bb\u2021c \u00c4\u2018ang ch\u00e1\u00ba\u00a1y. Ngu\u00e1\u00bb\u201cn skill b\u00e1\u00bb\u2022 sung c\u0102\u00b4ng th\u00e1\u00bb\u00a9c cyclic focus v\u0102\u00a0 ph\u0102\u00a2n bi\u00e1\u00bb\u2021t s\u00e1\u00bb\u2018 tr\u00e1\u00ba\u00a1ng th\u0102\u00a1i v\u00e1\u00bb\u203ai s\u00e1\u00bb\u2018 chuy\u00e1\u00bb\u0192n c\u00e1\u00ba\u00a3nh. Read c\u00e1\u00bb\u00a7a H002/E003 m\u00e1\u00bb\u0178 \u00e1\u00bb\u0178 t\u00c6\u00b0 th\u00e1\u00ba\u00bf l\u00e1\u00bb\u203an; kh\u0102\u00b4ng c\u0102\u00b3 \u00c4\u2018o\u00e1\u00ba\u00a1n ph\u0102\u00b3ng l\u00e1\u00bb\u203an ri\u0102\u00aang tr\u0102\u00aan slide \u00c4\u2018\u00e1\u00ba\u00a7u.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "## B\u00e1\u00ba\u00b1ng ch\u00e1\u00bb\u00a9ng c\u00e1\u00ba\u00a7n \u00c4\u2018\u00e1\u00bb\u008dc",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "- `experiments/H001/`: k\u00e1\u00ba\u00bf ho\u00e1\u00ba\u00a1ch \u00c4\u2018\u00e1\u00bb\u2122c l\u00e1\u00ba\u00adp, rubric, b\u0102\u00a1o c\u0102\u00a1o v\u0102\u00a0 b\u00e1\u00ba\u00b1ng ch\u00e1\u00bb\u00a9ng file cu\u00e1\u00bb\u2018i.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "- `experiments/H002/`: \u00c4\u2018\u00e1\u00bb\u0081, plan, rubric, qa v\u0102\u00a0 b\u00e1\u00ba\u00a3n sao b\u00e1\u00ba\u00b1ng ch\u00e1\u00bb\u00a9ng t\u00e1\u00ba\u00a1i `evidence/`.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "- `experiments/E003/REPORT.md`: H002 v\u0102\u00a0 E003, ch\u00e1\u00ba\u00a9n \u00c4\u2018o\u0102\u00a1n \u00c4\u2018\u00c6\u00b0\u00e1\u00bb\u009dng \u00c4\u2018i, ki\u00e1\u00bb\u0192m tra c\u00e1\u00ba\u00a5u tr\u0102\u00bac v\u0102\u00a0 \u00c4\u2018i\u00e1\u00bb\u0192m t\u00c4\u00a9nh ch\u00e1\u00bb\u00a7 quan. Native motion/editability v\u00e1\u00ba\u00abn null; kh\u0102\u00b4ng t\u0102\u00adnh \u00c4\u2018i\u00e1\u00bb\u0192m t\u00e1\u00bb\u2022ng.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "- `research/skill-source-validation.json`: ki\u00e1\u00bb\u0192m tra ngu\u00e1\u00bb\u201cn th\u00e1\u00bb\u00ad nghi\u00e1\u00bb\u2021m, kh\u0102\u00b4ng ph\u00e1\u00ba\u00a3i ch\u00e1\u00bb\u00a9ng nh\u00e1\u00ba\u00adn c\u0102\u00a0i \u00c4\u2018\u00e1\u00ba\u00b7t skill.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "- `docs/POWERPOINT_QA.md`: y\u0102\u00aau c\u00e1\u00ba\u00a7u b\u00e1\u00ba\u00b1ng ch\u00e1\u00bb\u00a9ng native.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "\u00c4\u0090i\u00e1\u00bb\u0192m E001: \u00c4\u2018\u0102\u00a1p \u00e1\u00bb\u00a9ng \u00c4\u2018\u00e1\u00bb\u0081 4/5, c\u00e1\u00ba\u00a5u tr\u0102\u00bac ch\u00e1\u00bb\u2030nh s\u00e1\u00bb\u00ada 4/5, \u00c4\u2018\u00e1\u00bb\u2039nh danh 4/5, d\u00e1\u00bb\u2026 \u00c4\u2018\u00e1\u00bb\u008dc t\u00c4\u00a9nh 4/5, b\u00e1\u00bb\u2018 c\u00e1\u00bb\u00a5c s\u0102\u00a1ng t\u00e1\u00ba\u00a1o t\u00c4\u00a9nh 3/5. \u00c4\u0090\u0102\u00a2y l\u0102\u00a0 nh\u00e1\u00ba\u00adn x\u0102\u00a9t kh\u0102\u00b4ng m\u0102\u00b9 c\u00e1\u00bb\u00a7a ng\u00c6\u00b0\u00e1\u00bb\u009di l\u0102\u00a0m. Chuy\u00e1\u00bb\u0192n \u00c4\u2018\u00e1\u00bb\u2122ng ch\u00c6\u00b0a ch\u00e1\u00ba\u00a5m, kh\u0102\u00b4ng c\u0102\u00b3 \u00c4\u2018i\u00e1\u00bb\u0192m t\u00e1\u00bb\u2022ng.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "## Vi\u00e1\u00bb\u2021c ti\u00e1\u00ba\u00bfp theo theo gi\u0102\u00a1 tr\u00e1\u00bb\u2039",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "1. Hai \u00c4\u2018\u00c6\u00b0\u00e1\u00bb\u009dng \u00c6\u00b0u ti\u0102\u00aan: (a) d\u0102\u00b9ng `output/T006_packed_candidate.pptx` \u00c4\u2018\u0102\u00a3 freeze hash trong b\u0102\u00a1o c\u0102\u00a1o packed-validation \u00c4\u2018\u00e1\u00bb\u0192 ki\u00e1\u00bb\u0192m playback PowerPoint v\u0102\u00a0 \u00c4\u2018\u00e1\u00bb\u2018i chi\u00e1\u00ba\u00bfu fixture hai ch\u00e1\u00ba\u00b7ng v\u00e1\u00bb\u0081 origin/fill/trigger; (b) T007 l\u00e1\u00ba\u00a5y m\u00e1\u00bb\u2122t deck th\u00e1\u00ba\u00adt 3\u00e2\u20ac\u201c10 slide, inventory \u00e2\u2020\u2019 script/infer \u00e2\u2020\u2019 motion-direct m\u00e1\u00bb\u2122t slide b\u00e1\u00ba\u00b1ng resource c\u0102\u00b3 s\u00e1\u00ba\u00b5n, t\u00e1\u00bb\u2018i \u00c4\u2018a m\u00e1\u00bb\u2122t helper component, kh\u0102\u00b4ng \u00c4\u2018\u00e1\u00bb\u2022i slide count. Kh\u0102\u00b4ng d\u00e1\u00bb\u00b1ng l\u00e1\u00ba\u00a1i candidate c\u00c5\u00a9 n\u00e1\u00ba\u00bfu ch\u00c6\u00b0a c\u0102\u00b3 gi\u00e1\u00ba\u00a3 thuy\u00e1\u00ba\u00bft m\u00e1\u00bb\u203ai. Kh\u0102\u00b4ng quay l\u00e1\u00ba\u00a1i waypoint slides n\u00e1\u00ba\u00bfu playback l\u00e1\u00bb\u2014i; s\u00e1\u00bb\u00ada trong c\u0102\u00b9ng slide v\u0102\u00a0 gi\u00e1\u00bb\u00af baseline. T001/native exact-hash v\u00e1\u00ba\u00abn l\u0102\u00a0 c\u00e1\u00bb\u2022ng nghi\u00e1\u00bb\u2021m thu; M1 pending.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "2. N\u00e1\u00ba\u00bfu ch\u00c6\u00b0a c\u0102\u00b3 PowerPoint, kh\u0102\u00b4ng l\u00e1\u00ba\u00b7p ma tr\u00e1\u00ba\u00adn origin/fill v\u00e1\u00bb\u00aba t\u00e1\u00ba\u00a1o. Ch\u00e1\u00bb\u008dn T007/T008 ho\u00e1\u00ba\u00b7c chu\u00e1\u00ba\u00a9n b\u00e1\u00bb\u2039 m\u00e1\u00bb\u2122t fixture native kh\u0102\u00a1c ch\u00e1\u00bb\u2030 khi c\u0102\u00b3 bi\u00e1\u00ba\u00bfn s\u00e1\u00bb\u2018 m\u00e1\u00bb\u203ai r\u0102\u00b5 r\u0102\u00a0ng. Kh\u0102\u00b4ng g\u00e1\u00bb\u008di m\u0102\u00b4 ph\u00e1\u00bb\u008fng l\u0102\u00a0 playback ho\u00e1\u00ba\u00b7c t\u00c4\u0192ng s\u00e1\u00bb\u2018 \u00c4\u2018\u00e1\u00bb\u2018i t\u00c6\u00b0\u00e1\u00bb\u00a3ng l\u0102\u00a0 t\u00c4\u0192ng ch\u00e1\u00ba\u00a5t l\u00c6\u00b0\u00e1\u00bb\u00a3ng hi\u00e1\u00bb\u2021u \u00e1\u00bb\u00a9ng.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "3. Chia ph\u00e1\u00ba\u00a7n vi\u00e1\u00bb\u2021c theo task trong `research/tasks/`. Nh\u00e1\u00ba\u00adn claim/nh\u0102\u00a1nh ri\u0102\u00aang tr\u00c6\u00b0\u00e1\u00bb\u203ac khi l\u0102\u00a0m \u00c4\u2018\u00e1\u00bb\u0192 tr\u0102\u00a1nh tr\u0102\u00b9ng. Skill v\u0102\u00a0 renderer hi\u00e1\u00bb\u2021n v\u00e1\u00ba\u00abn ph\u00e1\u00bb\u00a5 thu\u00e1\u00bb\u2122c m\u0102\u00b4i tr\u00c6\u00b0\u00e1\u00bb\u009dng Work nh\u00c6\u00b0 `docs/ENVIRONMENT.md`.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "4. Chu\u00e1\u00ba\u00a9n b\u00e1\u00bb\u2039 c\u0102\u00b4ng c\u00e1\u00bb\u00a5 thu b\u00e1\u00ba\u00b1ng ch\u00e1\u00bb\u00a9ng tr\u0102\u00aan PowerPoint Windows khi ph\u0102\u00b9 h\u00e1\u00bb\u00a3p, kh\u0102\u00b4ng gi\u00e1\u00ba\u00a3 l\u00e1\u00ba\u00adp k\u00e1\u00ba\u00bft qu\u00e1\u00ba\u00a3. Benchmark 18 l\u00c6\u00b0\u00e1\u00bb\u00a3t ch\u00c6\u00b0a th\u00e1\u00bb\u00b1c hi\u00e1\u00bb\u2021n.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "## Kh\u0102\u00b4i ph\u00e1\u00bb\u00a5c v\u0102\u00a0 l\u00c6\u00b0u ti\u00e1\u00ba\u00bfp",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "GitHub `togcoder/skill-for-pptx` l\u0102\u00a0 ngu\u00e1\u00bb\u201cn l\u0102\u00a0m vi\u00e1\u00bb\u2021c ch\u0102\u00adnh. Clone/fetch main m\u00e1\u00bb\u203ai nh\u00e1\u00ba\u00a5t, ki\u00e1\u00bb\u0192m tra nh\u0102\u00a1nh/PR v\u0102\u00a0 \u00c4\u2018\u00e1\u00bb\u008dc HANDOFF.md. \u00c4\u0090\u00e1\u00bb\u008dc docs/RECOVERY.md \u00c4\u2018\u00e1\u00bb\u0192 tra l\u00e1\u00bb\u2039ch s\u00e1\u00bb\u00ad tr\u00c6\u00b0\u00e1\u00bb\u203ac khi nh\u00e1\u00ba\u00adp GitHub. Bundle v\u0102\u00a0 c\u0102\u00a1c checkpoint cloud c\u00c5\u00a9 l\u0102\u00a0 snapshot ph\u00e1\u00bb\u00a5c h\u00e1\u00bb\u201ci l\u00e1\u00bb\u2039ch s\u00e1\u00bb\u00ad; kh\u0102\u00b4ng ghi ch\u0102\u00bang \u00c4\u2018\u0102\u00a8 l\u0102\u00aan repo m\u00e1\u00bb\u203ai h\u00c6\u00a1n. Code v\u0102\u00a0 k\u00e1\u00ba\u00bft qu\u00e1\u00ba\u00a3 \u00c4\u2018\u0102\u00a3 g\u00e1\u00ba\u00afn GitHub \u00c4\u2018\u00c6\u00b0\u00e1\u00bb\u00a3c commit/push v\u00e1\u00bb\u0081 \u00c4\u2018\u0102\u00bang repo, kh\u0102\u00b4ng t\u00e1\u00ba\u00a1o b\u00e1\u00ba\u00a3n sao code m\u00e1\u00bb\u203ai song song trong Library.",
+      "reason": "no close line in the good blob"
+    }
+  ]
+}
