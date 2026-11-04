@@ -1,0 +1,1 @@
+Karl Marx 001.jpg, Wikimedia Commons, public domain, downloaded 2026-11-04; background removed with rembg 2.0.86 (U2Net); cropped, graded and masked by inputs/prepare_assets.py

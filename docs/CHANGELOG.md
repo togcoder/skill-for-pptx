@@ -7,6 +7,122 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T067 [pptx] Synthesis: direction before layout, state before effect — 2026-11-04
+
+- **Why.** Four parallel streams audited the owner's critique of T066. The
+  umbrella finding is that T066 did not lack effects; it lacked direction. No
+  artifact said what the audience must see or believe at each moment, so layout
+  finished first and motion only picked a click index.
+- **Base state.** 3 slides opened with no readable claim, 9/10 titles were
+  click-gated, 4/4 pictures arrived on the last click, and 51 clicks contained
+  0 object lifecycles. The directed copy reaches 27 beats, 116 effects, a
+  readable `t=0`, no picture on the last click and at most two movers.
+- **Images.** One image is one block (face + ring + ground + caption) and enters
+  on the sentence that names it, never after the last sentence. Identity images
+  sit at `t=0`; evidence images enter on their naming beat; a coda image is
+  banned. A wins the cover, B wins the argument slide.
+- **Style.** `VisualStyle/1` plus five presets replaces "theme = palette +
+  fonts" with geometry, material, depth, texture, image treatment, motion
+  language and density; 5/5 specimens built native.
+- **Motion.** Removing all nine decorative Morphs was a reset, not the target.
+  The target is 3–4 semantic state-pair Morphs, each continuing one object or
+  idea; no background/thread Morph.
+- **Direction artefact.** `brief → script → beat sheet → shot list → motion
+  plan`, where every shot declares `base_state` before `state_after`. Draft
+  skill: `skills/deck-director/SKILL.md` (not wired).
+- **Still missing.** `deck_state_critic` is specified but not implemented; no
+  combined deck yet; no human review (rung 6). T068 is the directed build.
+  `experiments/T067-20261104-opencode-deck-director/SYNTHESIS.md`.
+
+## T067 [pptx] Visual style system — 2026-11-04
+
+- **Why.** The owner asked for style, not only background and type: cartoon,
+  liquid glass, clay, minimal, maximalist. The `theme` object had palette,
+  fonts and layout only, so two decks could share a palette and still feel like
+  different products.
+- **Schema.** `VisualStyle/1` (`inputs/visual_style.py`): 9 colour roles; 3 type
+  roles with a 5-step scale; geometry (sharp/rounded/blob/diagonal/mixed);
+  material (flat/paper/glass/clay/collage/chrome); depth (flat/layered/2.5D/3D);
+  texture (none/grain/halftone/paper/pattern); image treatment + mask + grade +
+  area cap; motion language with five durations; density. The resolver emits build
+  tokens; a linter audits a PPTX against its declared preset (palette, fonts,
+  native share, raster share, effect vocabulary).
+- **Presets.** `editorial-crimson` (T066), `liquid-glass`, `clay-cartoon`,
+  `swiss-minimal`, `maximalist-collage`; all five validate, all five built as
+  native specimens with one content unit (claim + portrait + two facts).
+- **Measured.** 631,684 B, 5 slides, 165 words, 4–6 type sizes, native share
+  90.0–94.7 %, raster 8.8–30.9 %, 49 native effects with durations exactly
+  0.25/0.26/0.30/0.42/0.62/0.90 s; PowerPoint COM opens in 152 ms, PDF 5 pages.
+- **Hardest native style.** Liquid glass: no backdrop blur, blend mode or
+  refraction in DrawingML; the pane is an illusion of alpha + rim + specular +
+  shadow. Clay is second (custGeom squircle + matte `sp3d` per object).
+- **Finding.** A `gradFill` appended after `a:ln` is ignored and PowerPoint falls
+  back to the theme fill; inserting it before the outline makes per-stop alpha
+  work. Radial gradients ring at the ellipse unless alpha reaches 0 by ~78 % of
+  radius. Both reproduced and documented.
+- **Limits.** No human eye (rung 6); no Morph in the specimen; easing is
+  plan-level, not frame-verified; clay rims are baked into the PNG; Swiss
+  title/body 3.0 is outside the band. No product path changed.
+  `experiments/T067-20261104-opencode-visual-style/style-system.md`.
+
+## T067 [pptx] Image choreography (parallel stream) — 2026-11-04
+
+- **Why.** The owner's first complaint about T066 was the image order: the
+  portraits arrive last and mean nothing. This stream audited all seven image
+  placements and wrote the timing law the deck was missing.
+- **Audit.** Cover: 3/3 portraits on click 4/4, with three empty gold rings
+  visible from t=0. Slide 2: the largest image in the deck (60.7 % of slide
+  height) on click 7/7, while its red disc **and its “statue” credit** are on
+  screen for six clicks. Slide 7: portraits 2–4, timeline 5, and the 1848 dot
+  sits under the portrait captioned “Tư bản · 1867”. `image-audit.md`.
+- **Rules.** 25 rules in five groups: role → legal beat (anchor at t=0,
+  evidence on its naming beat, never after), one image focus, order = argument,
+  grouping = argument, size/crop/cut-out, naming sentence. Two machine checks
+  (`empty_frame_states`, `image_lag`). `image-rules.md`.
+- **Variants.** Same layout, one variable: A = anchors at t=0; B = each image on
+  its naming beat. Built on T066's assets; 2 slides each, 19/37 native effects;
+  32 click states rendered by PowerPoint COM. A wins the cover, B wins the
+  argument slide; the recommendation is A-cover + B-body.
+- **Limits.** State renders are reconstructed, not played; no human eye; the
+  variants are excerpts; the Plato fix is proposed but not built.
+  `REPORT-image-choreography.md`.
+
+## T067 [pptx] Skill audit and deck-direction draft — 2026-11-04
+
+- **Why.** The owner judged T066: crop, palette and fonts good; motion has no
+  *gu*; images appear last with no meaning; the deck was generated before a script
+  existed. The brief was to find the cause in the skills, research it, and rewrite
+  if necessary.
+- **Audit.** Four root causes, each traced to code: (1) no causal artifact — Forge
+  compiles layout first and passes only the deck title to `md.draft()`, so motion
+  is a function of geometry; (2) intent is unrepresentable — the plan's `script`
+  block is generated from slide titles and the validator only counts the strings;
+  (3) style is a token list — `THEMES` + two fonts, while `theme_engine`'s seven
+  archetypes sit orphaned; (4) the critic has no narrative dimension, identifies
+  titles by placeholder only, and averages 153 per-effect checks so structure cannot
+  move the score.
+- **Control deck.** The lab's own reference example (`vi_chuyen_doi_so.json`, built
+  by the default pipeline) scores 5.0 design / 5.0 motion / 4.88 overall with zero
+  warnings and still opens its section and closing slides blank, and reveals its
+  only picture on the cover's last click.
+- **Measured.** T066: 51 click groups, 0 lifecycles, 9/10 titles animated, 4/4
+  pictures on the last click, three slides with no base state. Probe and JSONs in
+  `experiments/T067-20261104-opencode-deck-director/artifacts/measurements/`.
+- **Proposal (draft only).** A `deck-director` layer: brief → script → beat sheet
+  (9 jobs) → shot list (`base_state` first, `state_after` per click) → motion plan
+  → build; `direction.json` compiles to `deck.json` + `director.json`; Forge needs
+  one `plan` parameter and already has the `md.apply` seam. A style layer with
+  palette/type, grain, image treatment and six motion figures. Critic additions:
+  `narrative` dimension, `MOT-LIFECYCLE`, `MOT-FIGURE-REPEAT`, `DEN-VIEW`,
+  `PLAN-DRIFT`, and rule-level scoring.
+- **Limits.** No human eye and no PowerPoint render of either probe deck; the
+  post-fix numbers are one measured parallel rebuild (51 → 27 clicks, no empty
+  base state) plus untested predictions; the job vocabulary is a reasoned
+  taxonomy, not measured; no compiler exists.
+- **Status.** EXPERIMENTAL; review requested. Report:
+  `experiments/T067-20261104-opencode-deck-director/REPORT.md`; skill draft
+  `skills/deck-director/SKILL.md`.
+
 ## T066 [pptx] Triết học Mác – Lênin, Chương 1: native red editorial deck — 2026-11-04
 
 - **Why.** The owner asked for a real Chapter 1 deck, not a template demo:

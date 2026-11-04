@@ -1,0 +1,401 @@
+{
+  "deck": "T066-Triet-hoc-Mac-Lenin-Chuong-1.pptx",
+  "slide_size_in": [
+    13.333,
+    7.5
+  ],
+  "slides": [
+    {
+      "index": 1,
+      "shapes": 15,
+      "click_groups": 4,
+      "images": [
+        {
+          "name": "!!marx",
+          "x_in": 8.95,
+          "y_in": 0.55,
+          "w_in": 2.9,
+          "h_in": 2.9,
+          "height_pct_of_slide": 38.7,
+          "crop_lrtb": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "entry_click": 4,
+          "entry_nodes_in_click": 3,
+          "entry_preset": "53",
+          "entry_ms": 700,
+          "hidden_at_start": true,
+          "nearest_text": [
+            {
+              "text": "TRIẾT HỌC / MÁC – LÊNIN",
+              "dx_in": -5.87,
+              "dy_in": 0.6
+            },
+            {
+              "text": "CHƯƠNG 1  ·  KHÁI LUẬN",
+              "dx_in": -6.15,
+              "dy_in": -1.18
+            },
+            {
+              "text": "Từ thế giới quan / đến phương pháp luận",
+              "dx_in": -6.15,
+              "dy_in": 3.13
+            }
+          ]
+        },
+        {
+          "name": "!!engels",
+          "x_in": 11.05,
+          "y_in": 2.25,
+          "w_in": 2.25,
+          "h_in": 2.25,
+          "height_pct_of_slide": 30.0,
+          "crop_lrtb": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "entry_click": 4,
+          "entry_nodes_in_click": 3,
+          "entry_preset": "53",
+          "entry_ms": 600,
+          "hidden_at_start": true,
+          "nearest_text": [
+            {
+              "text": "TRIẾT HỌC / MÁC – LÊNIN",
+              "dx_in": -7.65,
+              "dy_in": -0.77
+            },
+            {
+              "text": "Từ thế giới quan / đến phương pháp luận",
+              "dx_in": -7.93,
+              "dy_in": 1.75
+            },
+            {
+              "text": "CHƯƠNG 1  ·  KHÁI LUẬN",
+              "dx_in": -7.93,
+              "dy_in": -2.55
+            }
+          ]
+        },
+        {
+          "name": "!!lenin",
+          "x_in": 9.15,
+          "y_in": 3.95,
+          "w_in": 2.75,
+          "h_in": 2.75,
+          "height_pct_of_slide": 36.7,
+          "crop_lrtb": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "entry_click": 4,
+          "entry_nodes_in_click": 3,
+          "entry_preset": "53",
+          "entry_ms": 600,
+          "hidden_at_start": true,
+          "nearest_text": [
+            {
+              "text": "Từ thế giới quan / đến phương pháp luận",
+              "dx_in": -6.28,
+              "dy_in": -0.2
+            },
+            {
+              "text": "Giáo trình Triết học Mác – Lênin  ·  Chương 1",
+              "dx_in": -6.28,
+              "dy_in": 1.42
+            },
+            {
+              "text": "TRIẾT HỌC / MÁC – LÊNIN",
+              "dx_in": -6.0,
+              "dy_in": -2.73
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "shapes": 22,
+      "click_groups": 7,
+      "images": [
+        {
+          "name": "plato",
+          "x_in": 8.95,
+          "y_in": 1.58,
+          "w_in": 3.75,
+          "h_in": 4.55,
+          "height_pct_of_slide": 60.7,
+          "crop_lrtb": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "entry_click": 7,
+          "entry_nodes_in_click": 1,
+          "entry_preset": "42",
+          "entry_ms": 700,
+          "hidden_at_start": true,
+          "nearest_text": [
+            {
+              "text": "Tượng triết gia Hy Lạp · CC0",
+              "dx_in": 0.05,
+              "dy_in": 2.67
+            },
+            {
+              "text": "Một hệ thống tri thức lý luận chung nhất về thế giới và vị trí c",
+              "dx_in": -6.85,
+              "dy_in": 0.15
+            },
+            {
+              "text": "LOGIC BIỆN CHỨNG",
+              "dx_in": -5.18,
+              "dy_in": 2.3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "shapes": 16,
+      "click_groups": 5,
+      "images": []
+    },
+    {
+      "index": 4,
+      "shapes": 20,
+      "click_groups": 5,
+      "images": []
+    },
+    {
+      "index": 5,
+      "shapes": 21,
+      "click_groups": 6,
+      "images": []
+    },
+    {
+      "index": 6,
+      "shapes": 21,
+      "click_groups": 5,
+      "images": []
+    },
+    {
+      "index": 7,
+      "shapes": 28,
+      "click_groups": 5,
+      "images": [
+        {
+          "name": "!!marx",
+          "x_in": 1.0,
+          "y_in": 2.35,
+          "w_in": 2.3,
+          "h_in": 2.3,
+          "height_pct_of_slide": 30.7,
+          "crop_lrtb": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "entry_click": 2,
+          "entry_nodes_in_click": 4,
+          "entry_preset": "53",
+          "entry_ms": 700,
+          "hidden_at_start": true,
+          "nearest_text": [
+            {
+              "text": "1818 – 1883",
+              "dx_in": 0.0,
+              "dy_in": 1.4
+            },
+            {
+              "text": "C. MÁC",
+              "dx_in": 0.0,
+              "dy_in": 1.71
+            },
+            {
+              "text": "Tư bản · 1867",
+              "dx_in": 0.0,
+              "dy_in": 1.96
+            }
+          ]
+        },
+        {
+          "name": "!!engels",
+          "x_in": 5.45,
+          "y_in": 2.35,
+          "w_in": 2.3,
+          "h_in": 2.3,
+          "height_pct_of_slide": 30.7,
+          "crop_lrtb": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "entry_click": 3,
+          "entry_nodes_in_click": 4,
+          "entry_preset": "53",
+          "entry_ms": 700,
+          "hidden_at_start": true,
+          "nearest_text": [
+            {
+              "text": "1820 – 1895",
+              "dx_in": 0.0,
+              "dy_in": 1.4
+            },
+            {
+              "text": "PH. ĂNGGHEN",
+              "dx_in": 0.0,
+              "dy_in": 1.71
+            },
+            {
+              "text": "Tuyên ngôn · 1848",
+              "dx_in": 0.0,
+              "dy_in": 1.96
+            }
+          ]
+        },
+        {
+          "name": "!!lenin",
+          "x_in": 9.9,
+          "y_in": 2.35,
+          "w_in": 2.3,
+          "h_in": 2.3,
+          "height_pct_of_slide": 30.7,
+          "crop_lrtb": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "entry_click": 4,
+          "entry_nodes_in_click": 4,
+          "entry_preset": "53",
+          "entry_ms": 700,
+          "hidden_at_start": true,
+          "nearest_text": [
+            {
+              "text": "1870 – 1924",
+              "dx_in": -0.0,
+              "dy_in": 1.4
+            },
+            {
+              "text": "V.I. LÊNIN",
+              "dx_in": -0.0,
+              "dy_in": 1.71
+            },
+            {
+              "text": "Cách mạng · 1917",
+              "dx_in": -0.0,
+              "dy_in": 1.96
+            }
+          ]
+        }
+      ],
+      "timeline_anchors": [
+        {
+          "name": "!!marx-date",
+          "x_center": 2.15,
+          "text": "1818 – 1883"
+        },
+        {
+          "name": "!!marx-name",
+          "x_center": 2.15,
+          "text": "C. MÁC"
+        },
+        {
+          "name": "!!marx-desc",
+          "x_center": 2.15,
+          "text": "Tư bản · 1867"
+        },
+        {
+          "name": "!!engels-date",
+          "x_center": 6.6,
+          "text": "1820 – 1895"
+        },
+        {
+          "name": "!!engels-name",
+          "x_center": 6.6,
+          "text": "PH. ĂNGGHEN"
+        },
+        {
+          "name": "!!engels-desc",
+          "x_center": 6.6,
+          "text": "Tuyên ngôn · 1848"
+        },
+        {
+          "name": "!!lenin-date",
+          "x_center": 11.05,
+          "text": "1870 – 1924"
+        },
+        {
+          "name": "!!lenin-name",
+          "x_center": 11.05,
+          "text": "V.I. LÊNIN"
+        },
+        {
+          "name": "!!lenin-desc",
+          "x_center": 11.05,
+          "text": "Cách mạng · 1917"
+        },
+        {
+          "name": "tl-1848",
+          "x_center": 2.2,
+          "text": ""
+        },
+        {
+          "name": "tl-1848-t",
+          "x_center": 2.2,
+          "text": "1848"
+        },
+        {
+          "name": "tl-1867",
+          "x_center": 6.4,
+          "text": ""
+        },
+        {
+          "name": "tl-1867-t",
+          "x_center": 6.4,
+          "text": "1867"
+        },
+        {
+          "name": "tl-1917",
+          "x_center": 10.9,
+          "text": ""
+        },
+        {
+          "name": "tl-1917-t",
+          "x_center": 10.9,
+          "text": "1917"
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "shapes": 21,
+      "click_groups": 5,
+      "images": []
+    },
+    {
+      "index": 9,
+      "shapes": 10,
+      "click_groups": 4,
+      "images": []
+    },
+    {
+      "index": 10,
+      "shapes": 19,
+      "click_groups": 5,
+      "images": []
+    }
+  ]
+}

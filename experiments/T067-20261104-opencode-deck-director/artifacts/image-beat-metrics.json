@@ -1,0 +1,156 @@
+[
+  {
+    "deck": "T066",
+    "slide": 1,
+    "clicks": 4,
+    "image_lead": 3,
+    "image_lag": 1,
+    "coda_images": [
+      "!!marx",
+      "!!engels",
+      "!!lenin"
+    ],
+    "empty_frame_states": 4,
+    "empty_frame_instances": 12,
+    "images_per_click": [
+      0,
+      0,
+      0,
+      3
+    ],
+    "image_entry_clicks": [
+      4,
+      4,
+      4
+    ]
+  },
+  {
+    "deck": "T066",
+    "slide": 2,
+    "clicks": 7,
+    "image_lead": 7,
+    "image_lag": 1,
+    "coda_images": [
+      "plato"
+    ],
+    "empty_frame_states": 7,
+    "empty_frame_instances": 7,
+    "images_per_click": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+    ],
+    "image_entry_clicks": [
+      7
+    ]
+  },
+  {
+    "deck": "T066",
+    "slide": 7,
+    "clicks": 5,
+    "image_lead": 2,
+    "image_lag": 0,
+    "coda_images": [],
+    "empty_frame_states": 4,
+    "empty_frame_instances": 9,
+    "images_per_click": [
+      0,
+      1,
+      1,
+      1,
+      0
+    ],
+    "image_entry_clicks": [
+      2,
+      3,
+      4
+    ]
+  },
+  {
+    "deck": "A",
+    "slide": 1,
+    "clicks": 3,
+    "image_lead": 0,
+    "image_lag": 0,
+    "coda_images": [],
+    "empty_frame_states": 0,
+    "empty_frame_instances": 0,
+    "images_per_click": [
+      0,
+      0,
+      0
+    ],
+    "image_entry_clicks": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "deck": "A",
+    "slide": 2,
+    "clicks": 4,
+    "image_lead": 0,
+    "image_lag": 0,
+    "coda_images": [],
+    "empty_frame_states": 0,
+    "empty_frame_instances": 0,
+    "images_per_click": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "image_entry_clicks": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "deck": "B",
+    "slide": 1,
+    "clicks": 3,
+    "image_lead": 1,
+    "image_lag": 0,
+    "coda_images": [],
+    "empty_frame_states": 0,
+    "empty_frame_instances": 0,
+    "images_per_click": [
+      0,
+      3,
+      0
+    ],
+    "image_entry_clicks": [
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "deck": "B",
+    "slide": 2,
+    "clicks": 5,
+    "image_lead": 2,
+    "image_lag": 0,
+    "coda_images": [],
+    "empty_frame_states": 0,
+    "empty_frame_instances": 0,
+    "images_per_click": [
+      0,
+      0,
+      2,
+      0,
+      1
+    ],
+    "image_entry_clicks": [
+      3,
+      3,
+      5
+    ]
+  }
+]

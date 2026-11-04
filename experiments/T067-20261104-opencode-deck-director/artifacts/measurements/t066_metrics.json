@@ -1,0 +1,288 @@
+﻿[
+ {
+  "deck": "T066-Triet-hoc-Mac-Lenin-Chuong-1.pptx",
+  "slides": 10,
+  "clicks": 51,
+  "clicks_per_slide": [
+   4,
+   7,
+   5,
+   5,
+   6,
+   5,
+   5,
+   5,
+   4,
+   5
+  ],
+  "empty_base_slides": [
+   1,
+   3,
+   5
+  ],
+  "pictures_on_last_click": [
+   {
+    "slide": 1,
+    "picture": "!!marx"
+   },
+   {
+    "slide": 1,
+    "picture": "!!engels"
+   },
+   {
+    "slide": 1,
+    "picture": "!!lenin"
+   },
+   {
+    "slide": 2,
+    "picture": "plato"
+   }
+  ],
+  "titles_animated_slides": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   10
+  ],
+  "lifecycles": 0,
+  "effects": 144,
+  "max_view_words": 80,
+  "slide_words": 535,
+  "rows": [
+   {
+    "slide": 1,
+    "clicks": 4,
+    "base_objects": 0,
+    "base_words": 0,
+    "slide_words": 28,
+    "max_view_words": 28,
+    "words_per_view": [
+     0,
+     5,
+     10,
+     28,
+     28
+    ],
+    "pictures": {
+     "!!marx": 4,
+     "!!engels": 4,
+     "!!lenin": 4
+    },
+    "titles_animated": [
+     "title"
+    ],
+    "lifecycles": 0,
+    "effects": 10
+   },
+   {
+    "slide": 2,
+    "clicks": 7,
+    "base_objects": 1,
+    "base_words": 7,
+    "slide_words": 74,
+    "max_view_words": 74,
+    "words_per_view": [
+     7,
+     10,
+     14,
+     52,
+     60,
+     67,
+     74,
+     74
+    ],
+    "pictures": {
+     "plato": 7
+    },
+    "titles_animated": [
+     "title"
+    ],
+    "lifecycles": 0,
+    "effects": 17
+   },
+   {
+    "slide": 3,
+    "clicks": 5,
+    "base_objects": 0,
+    "base_words": 0,
+    "slide_words": 37,
+    "max_view_words": 37,
+    "words_per_view": [
+     0,
+     4,
+     9,
+     21,
+     33,
+     37
+    ],
+    "pictures": {},
+    "titles_animated": [
+     "title"
+    ],
+    "lifecycles": 0,
+    "effects": 13
+   },
+   {
+    "slide": 4,
+    "clicks": 5,
+    "base_objects": 1,
+    "base_words": 3,
+    "slide_words": 41,
+    "max_view_words": 41,
+    "words_per_view": [
+     3,
+     8,
+     8,
+     27,
+     31,
+     41
+    ],
+    "pictures": {},
+    "titles_animated": [
+     "title"
+    ],
+    "lifecycles": 0,
+    "effects": 13
+   },
+   {
+    "slide": 5,
+    "clicks": 6,
+    "base_objects": 0,
+    "base_words": 0,
+    "slide_words": 60,
+    "max_view_words": 60,
+    "words_per_view": [
+     0,
+     2,
+     12,
+     28,
+     43,
+     53,
+     60
+    ],
+    "pictures": {},
+    "titles_animated": [
+     "title"
+    ],
+    "lifecycles": 0,
+    "effects": 18
+   },
+   {
+    "slide": 6,
+    "clicks": 5,
+    "base_objects": 1,
+    "base_words": 2,
+    "slide_words": 78,
+    "max_view_words": 78,
+    "words_per_view": [
+     2,
+     12,
+     24,
+     36,
+     50,
+     78
+    ],
+    "pictures": {},
+    "titles_animated": [
+     "title"
+    ],
+    "lifecycles": 0,
+    "effects": 17
+   },
+   {
+    "slide": 7,
+    "clicks": 5,
+    "base_objects": 4,
+    "base_words": 5,
+    "slide_words": 41,
+    "max_view_words": 41,
+    "words_per_view": [
+     5,
+     14,
+     23,
+     32,
+     41,
+     41
+    ],
+    "pictures": {
+     "!!marx": 2,
+     "!!engels": 3,
+     "!!lenin": 4
+    },
+    "titles_animated": [
+     "title"
+    ],
+    "lifecycles": 0,
+    "effects": 18
+   },
+   {
+    "slide": 8,
+    "clicks": 5,
+    "base_objects": 1,
+    "base_words": 2,
+    "slide_words": 64,
+    "max_view_words": 64,
+    "words_per_view": [
+     2,
+     7,
+     21,
+     35,
+     50,
+     64
+    ],
+    "pictures": {},
+    "titles_animated": [
+     "title"
+    ],
+    "lifecycles": 0,
+    "effects": 17
+   },
+   {
+    "slide": 9,
+    "clicks": 4,
+    "base_objects": 1,
+    "base_words": 2,
+    "slide_words": 32,
+    "max_view_words": 32,
+    "words_per_view": [
+     2,
+     3,
+     10,
+     17,
+     32
+    ],
+    "pictures": {},
+    "titles_animated": [],
+    "lifecycles": 0,
+    "effects": 6
+   },
+   {
+    "slide": 10,
+    "clicks": 5,
+    "base_objects": 1,
+    "base_words": 1,
+    "slide_words": 80,
+    "max_view_words": 80,
+    "words_per_view": [
+     1,
+     3,
+     17,
+     31,
+     46,
+     80
+    ],
+    "pictures": {},
+    "titles_animated": [
+     "title"
+    ],
+    "lifecycles": 0,
+    "effects": 15
+   }
+  ]
+ }
+]

@@ -1,0 +1,151 @@
+﻿{
+    "file":  "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T067\\experiments\\T067-20261104-opencode-deck-director\\artifacts\\T067-variant-A-cover-flow.pptx",
+    "powerpoint":  "16.0",
+    "slides":  [
+                   {
+                       "index":  1,
+                       "effects":  7,
+                       "animation":  [
+                                         {
+                                             "shape":  "kicker",
+                                             "effect_type":  10,
+                                             "trigger":  1,
+                                             "duration_s":  0.40000000596046448,
+                                             "delay_s":  0
+                                         },
+                                         {
+                                             "shape":  "title",
+                                             "effect_type":  22,
+                                             "trigger":  1,
+                                             "duration_s":  0.699999988079071,
+                                             "delay_s":  0
+                                         },
+                                         {
+                                             "shape":  "rule",
+                                             "effect_type":  22,
+                                             "trigger":  2,
+                                             "duration_s":  0.699999988079071,
+                                             "delay_s":  0
+                                         },
+                                         {
+                                             "shape":  "subtitle",
+                                             "effect_type":  10,
+                                             "trigger":  1,
+                                             "duration_s":  0.60000002384185791,
+                                             "delay_s":  0
+                                         },
+                                         {
+                                             "shape":  "caption",
+                                             "effect_type":  10,
+                                             "trigger":  2,
+                                             "duration_s":  0.5,
+                                             "delay_s":  0
+                                         },
+                                         {
+                                             "shape":  "!!thread",
+                                             "effect_type":  22,
+                                             "trigger":  2,
+                                             "duration_s":  0.699999988079071,
+                                             "delay_s":  0
+                                         },
+                                         {
+                                             "shape":  "!!dot",
+                                             "effect_type":  48,
+                                             "trigger":  2,
+                                             "duration_s":  0.5,
+                                             "delay_s":  0
+                                         }
+                                     ]
+                   },
+                   {
+                       "index":  2,
+                       "effects":  12,
+                       "animation":  [
+                                         {
+                                             "shape":  "kicker",
+                                             "effect_type":  10,
+                                             "trigger":  1,
+                                             "duration_s":  0.40000000596046448,
+                                             "delay_s":  0
+                                         },
+                                         {
+                                             "shape":  "title",
+                                             "effect_type":  22,
+                                             "trigger":  2,
+                                             "duration_s":  0.699999988079071,
+                                             "delay_s":  0
+                                         },
+                                         {
+                                             "shape":  "sub",
+                                             "effect_type":  10,
+                                             "trigger":  2,
+                                             "duration_s":  0.60000002384185791,
+                                             "delay_s":  0
+                                         },
+                                         {
+                                             "shape":  "stop-1848-work",
+                                             "effect_type":  10,
+                                             "trigger":  1,
+                                             "duration_s":  0.44999998807907104,
+                                             "delay_s":  0
+                                         },
+                                         {
+                                             "shape":  "stop-1848",
+                                             "effect_type":  59,
+                                             "trigger":  2,
+                                             "duration_s":  0.89999997615814209,
+                                             "delay_s":  0
+                                         },
+                                         {
+                                             "shape":  "stop-1848-date",
+                                             "effect_type":  59,
+                                             "trigger":  2,
+                                             "duration_s":  0.89999997615814209,
+                                             "delay_s":  0
+                                         },
+                                         {
+                                             "shape":  "stop-1867-work",
+                                             "effect_type":  10,
+                                             "trigger":  1,
+                                             "duration_s":  0.44999998807907104,
+                                             "delay_s":  0
+                                         },
+                                         {
+                                             "shape":  "stop-1867",
+                                             "effect_type":  59,
+                                             "trigger":  2,
+                                             "duration_s":  0.89999997615814209,
+                                             "delay_s":  0
+                                         },
+                                         {
+                                             "shape":  "stop-1867-date",
+                                             "effect_type":  59,
+                                             "trigger":  2,
+                                             "duration_s":  0.89999997615814209,
+                                             "delay_s":  0
+                                         },
+                                         {
+                                             "shape":  "stop-1917-work",
+                                             "effect_type":  10,
+                                             "trigger":  1,
+                                             "duration_s":  0.44999998807907104,
+                                             "delay_s":  0
+                                         },
+                                         {
+                                             "shape":  "stop-1917",
+                                             "effect_type":  59,
+                                             "trigger":  2,
+                                             "duration_s":  0.89999997615814209,
+                                             "delay_s":  0
+                                         },
+                                         {
+                                             "shape":  "stop-1917-date",
+                                             "effect_type":  59,
+                                             "trigger":  2,
+                                             "duration_s":  0.89999997615814209,
+                                             "delay_s":  0
+                                         }
+                                     ]
+                   }
+               ]
+}

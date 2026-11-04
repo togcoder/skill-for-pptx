@@ -1,0 +1,497 @@
+{
+  "file": "styles.pptx",
+  "bytes": 631684,
+  "sha256": "c226dfc943a6314f85ef934816c5be67ce5bc22abe6d47a286be1a2c11c0ebb6",
+  "slides": 5,
+  "words": 165,
+  "zoom": "16:9 960x540 pt",
+  "pdf_pages": 5,
+  "pdf_bytes": 1147519,
+  "previews": [
+    "slide-01.png",
+    "slide-02.png",
+    "slide-03.png",
+    "slide-04.png",
+    "slide-05.png"
+  ],
+  "per_slide": [
+    {
+      "index": 1,
+      "style": "editorial-crimson",
+      "shapes": 14,
+      "pictures": 1,
+      "text_shapes": 7,
+      "native_share": 0.929,
+      "words": 31,
+      "type_sizes": [
+        39.0,
+        34.0,
+        12.0,
+        10.0
+      ],
+      "type_size_count": 4,
+      "fonts": [
+        "Arial",
+        "Palatino Linotype"
+      ],
+      "custgeom": 0,
+      "effect_lists": 0,
+      "sp3d": 0,
+      "gradient_fills": 0,
+      "pattern_fills": 0,
+      "soft_edges": 0
+    },
+    {
+      "index": 2,
+      "style": "liquid-glass",
+      "shapes": 19,
+      "pictures": 1,
+      "text_shapes": 8,
+      "native_share": 0.947,
+      "words": 34,
+      "type_sizes": [
+        40.0,
+        27.0,
+        11.0,
+        10.0,
+        9.5,
+        9.0
+      ],
+      "type_size_count": 6,
+      "fonts": [
+        "Segoe UI",
+        "Segoe UI Light",
+        "Segoe UI Semibold"
+      ],
+      "custgeom": 0,
+      "effect_lists": 8,
+      "sp3d": 0,
+      "gradient_fills": 4,
+      "pattern_fills": 0,
+      "soft_edges": 4
+    },
+    {
+      "index": 3,
+      "style": "clay-cartoon",
+      "shapes": 18,
+      "pictures": 1,
+      "text_shapes": 9,
+      "native_share": 0.944,
+      "words": 33,
+      "type_sizes": [
+        42.0,
+        32.0,
+        13.0,
+        10.0
+      ],
+      "type_size_count": 4,
+      "fonts": [
+        "Segoe UI",
+        "Segoe UI Black",
+        "Segoe UI Semibold"
+      ],
+      "custgeom": 2,
+      "effect_lists": 7,
+      "sp3d": 5,
+      "gradient_fills": 0,
+      "pattern_fills": 0,
+      "soft_edges": 0
+    },
+    {
+      "index": 4,
+      "style": "swiss-minimal",
+      "shapes": 16,
+      "pictures": 1,
+      "text_shapes": 9,
+      "native_share": 0.938,
+      "words": 34,
+      "type_sizes": [
+        54.0,
+        36.0,
+        10.0,
+        9.0
+      ],
+      "type_size_count": 4,
+      "fonts": [
+        "Arial"
+      ],
+      "custgeom": 0,
+      "effect_lists": 0,
+      "sp3d": 0,
+      "gradient_fills": 0,
+      "pattern_fills": 0,
+      "soft_edges": 0
+    },
+    {
+      "index": 5,
+      "style": "maximalist-collage",
+      "shapes": 20,
+      "pictures": 2,
+      "text_shapes": 8,
+      "native_share": 0.9,
+      "words": 33,
+      "type_sizes": [
+        92.0,
+        36.0,
+        30.0,
+        12.0,
+        10.0,
+        8.0
+      ],
+      "type_size_count": 6,
+      "fonts": [
+        "Arial"
+      ],
+      "custgeom": 0,
+      "effect_lists": 8,
+      "sp3d": 0,
+      "gradient_fills": 0,
+      "pattern_fills": 1,
+      "soft_edges": 0
+    }
+  ],
+  "powerpoint": {
+    "file": "styles.pptx",
+    "bytes": 631684,
+    "slides": 5,
+    "open_ms": 152,
+    "read_only": -1,
+    "app": "16.0",
+    "detail": [
+      {
+        "index": 1,
+        "shapes": 14,
+        "effects": 9,
+        "effect_detail": [
+          {
+            "shape": "eyebrow",
+            "type": 10,
+            "duration": 0.42,
+            "trigger": 1
+          },
+          {
+            "shape": "title-claim",
+            "type": 22,
+            "duration": 0.62,
+            "trigger": 2
+          },
+          {
+            "shape": "portrait",
+            "type": 48,
+            "duration": 0.42,
+            "trigger": 1
+          },
+          {
+            "shape": "portrait-ring",
+            "type": 10,
+            "duration": 0.42,
+            "trigger": 2
+          },
+          {
+            "shape": "rule",
+            "type": 22,
+            "duration": 0.62,
+            "trigger": 1
+          },
+          {
+            "shape": "fact-0-value",
+            "type": 10,
+            "duration": 0.42,
+            "trigger": 2
+          },
+          {
+            "shape": "fact-0-label",
+            "type": 10,
+            "duration": 0.42,
+            "trigger": 2
+          },
+          {
+            "shape": "fact-1-value",
+            "type": 10,
+            "duration": 0.42,
+            "trigger": 2
+          },
+          {
+            "shape": "fact-1-label",
+            "type": 10,
+            "duration": 0.42,
+            "trigger": 2
+          }
+        ],
+        "transition": 0
+      },
+      {
+        "index": 2,
+        "shapes": 19,
+        "effects": 11,
+        "effect_detail": [
+          {
+            "shape": "pane",
+            "type": 10,
+            "duration": 0.62,
+            "trigger": 1
+          },
+          {
+            "shape": "portrait",
+            "type": 10,
+            "duration": 0.9,
+            "trigger": 2
+          },
+          {
+            "shape": "sheen",
+            "type": 10,
+            "duration": 0.9,
+            "trigger": 2
+          },
+          {
+            "shape": "eyebrow",
+            "type": 10,
+            "duration": 0.62,
+            "trigger": 1
+          },
+          {
+            "shape": "title-claim",
+            "type": 39,
+            "duration": 0.9,
+            "trigger": 2
+          },
+          {
+            "shape": "chip-1",
+            "type": 39,
+            "duration": 0.62,
+            "trigger": 1
+          },
+          {
+            "shape": "chip-1-value",
+            "type": 10,
+            "duration": 0.62,
+            "trigger": 2
+          },
+          {
+            "shape": "chip-1-label",
+            "type": 10,
+            "duration": 0.62,
+            "trigger": 2
+          },
+          {
+            "shape": "chip-2",
+            "type": 39,
+            "duration": 0.62,
+            "trigger": 2
+          },
+          {
+            "shape": "chip-2-value",
+            "type": 10,
+            "duration": 0.62,
+            "trigger": 2
+          },
+          {
+            "shape": "chip-2-label",
+            "type": 10,
+            "duration": 0.62,
+            "trigger": 2
+          }
+        ],
+        "transition": 0
+      },
+      {
+        "index": 3,
+        "shapes": 18,
+        "effects": 12,
+        "effect_detail": [
+          {
+            "shape": "eyebrow-pill",
+            "type": 48,
+            "duration": 0.3,
+            "trigger": 1
+          },
+          {
+            "shape": "title-1",
+            "type": 48,
+            "duration": 0.3,
+            "trigger": 2
+          },
+          {
+            "shape": "title-2",
+            "type": 48,
+            "duration": 0.3,
+            "trigger": 2
+          },
+          {
+            "shape": "portrait",
+            "type": 48,
+            "duration": 0.3,
+            "trigger": 1
+          },
+          {
+            "shape": "badge",
+            "type": 48,
+            "duration": 0.3,
+            "trigger": 2
+          },
+          {
+            "shape": "badge-text",
+            "type": 10,
+            "duration": 0.3,
+            "trigger": 2
+          },
+          {
+            "shape": "tile-1",
+            "type": 48,
+            "duration": 0.3,
+            "trigger": 1
+          },
+          {
+            "shape": "tile-1-value",
+            "type": 10,
+            "duration": 0.3,
+            "trigger": 2
+          },
+          {
+            "shape": "tile-1-label",
+            "type": 10,
+            "duration": 0.3,
+            "trigger": 2
+          },
+          {
+            "shape": "tile-2",
+            "type": 48,
+            "duration": 0.3,
+            "trigger": 1
+          },
+          {
+            "shape": "tile-2-value",
+            "type": 10,
+            "duration": 0.3,
+            "trigger": 2
+          },
+          {
+            "shape": "tile-2-label",
+            "type": 10,
+            "duration": 0.3,
+            "trigger": 2
+          }
+        ],
+        "transition": 0
+      },
+      {
+        "index": 4,
+        "shapes": 16,
+        "effects": 9,
+        "effect_detail": [
+          {
+            "shape": "title-1",
+            "type": 10,
+            "duration": 0.25,
+            "trigger": 1
+          },
+          {
+            "shape": "title-2",
+            "type": 10,
+            "duration": 0.25,
+            "trigger": 2
+          },
+          {
+            "shape": "rule-top",
+            "type": 22,
+            "duration": 0.4,
+            "trigger": 2
+          },
+          {
+            "shape": "portrait",
+            "type": 10,
+            "duration": 0.25,
+            "trigger": 1
+          },
+          {
+            "shape": "caption",
+            "type": 10,
+            "duration": 0.25,
+            "trigger": 2
+          },
+          {
+            "shape": "fact-0-value",
+            "type": 10,
+            "duration": 0.25,
+            "trigger": 1
+          },
+          {
+            "shape": "fact-0-label",
+            "type": 10,
+            "duration": 0.25,
+            "trigger": 2
+          },
+          {
+            "shape": "fact-1-value",
+            "type": 10,
+            "duration": 0.25,
+            "trigger": 2
+          },
+          {
+            "shape": "fact-1-label",
+            "type": 10,
+            "duration": 0.25,
+            "trigger": 2
+          }
+        ],
+        "transition": 0
+      },
+      {
+        "index": 5,
+        "shapes": 20,
+        "effects": 8,
+        "effect_detail": [
+          {
+            "shape": "strip",
+            "type": 22,
+            "duration": 0.26,
+            "trigger": 1
+          },
+          {
+            "shape": "title-1",
+            "type": 48,
+            "duration": 0.26,
+            "trigger": 2
+          },
+          {
+            "shape": "title-2",
+            "type": 48,
+            "duration": 0.26,
+            "trigger": 2
+          },
+          {
+            "shape": "portrait",
+            "type": 48,
+            "duration": 0.26,
+            "trigger": 1
+          },
+          {
+            "shape": "tape",
+            "type": 10,
+            "duration": 0.26,
+            "trigger": 2
+          },
+          {
+            "shape": "badge",
+            "type": 48,
+            "duration": 0.26,
+            "trigger": 1
+          },
+          {
+            "shape": "fact-1",
+            "type": 10,
+            "duration": 0.26,
+            "trigger": 2
+          },
+          {
+            "shape": "fact-2",
+            "type": 10,
+            "duration": 0.26,
+            "trigger": 2
+          }
+        ],
+        "transition": 0
+      }
+    ]
+  }
+}

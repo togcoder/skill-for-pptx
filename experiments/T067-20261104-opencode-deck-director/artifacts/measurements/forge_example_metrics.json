@@ -1,0 +1,209 @@
+﻿[
+ {
+  "deck": "forge_probe.pptx",
+  "slides": 9,
+  "clicks": 30,
+  "clicks_per_slide": [
+   1,
+   2,
+   5,
+   3,
+   6,
+   3,
+   4,
+   3,
+   3
+  ],
+  "empty_base_slides": [
+   2,
+   9
+  ],
+  "pictures_on_last_click": [
+   {
+    "slide": 1,
+    "picture": "Hero picture"
+   }
+  ],
+  "titles_animated_slides": [
+   2,
+   9
+  ],
+  "lifecycles": 26,
+  "effects": 99,
+  "max_view_words": 47,
+  "slide_words": 221,
+  "rows": [
+   {
+    "slide": 1,
+    "clicks": 1,
+    "base_objects": 3,
+    "base_words": 19,
+    "slide_words": 19,
+    "max_view_words": 19,
+    "words_per_view": [
+     19,
+     19
+    ],
+    "pictures": {
+     "Hero picture": 1
+    },
+    "titles_animated": [],
+    "lifecycles": 1,
+    "effects": 3
+   },
+   {
+    "slide": 2,
+    "clicks": 2,
+    "base_objects": 0,
+    "base_words": 0,
+    "slide_words": 6,
+    "max_view_words": 6,
+    "words_per_view": [
+     0,
+     0,
+     6
+    ],
+    "pictures": {},
+    "titles_animated": [
+     "Title"
+    ],
+    "lifecycles": 0,
+    "effects": 4
+   },
+   {
+    "slide": 3,
+    "clicks": 5,
+    "base_objects": 1,
+    "base_words": 4,
+    "slide_words": 47,
+    "max_view_words": 47,
+    "words_per_view": [
+     4,
+     4,
+     16,
+     20,
+     35,
+     47
+    ],
+    "pictures": {},
+    "titles_animated": [],
+    "lifecycles": 23,
+    "effects": 59
+   },
+   {
+    "slide": 4,
+    "clicks": 3,
+    "base_objects": 1,
+    "base_words": 6,
+    "slide_words": 16,
+    "max_view_words": 16,
+    "words_per_view": [
+     6,
+     6,
+     6,
+     16
+    ],
+    "pictures": {},
+    "titles_animated": [],
+    "lifecycles": 1,
+    "effects": 6
+   },
+   {
+    "slide": 5,
+    "clicks": 6,
+    "base_objects": 1,
+    "base_words": 4,
+    "slide_words": 19,
+    "max_view_words": 19,
+    "words_per_view": [
+     4,
+     4,
+     6,
+     8,
+     10,
+     12,
+     19
+    ],
+    "pictures": {},
+    "titles_animated": [],
+    "lifecycles": 0,
+    "effects": 10
+   },
+   {
+    "slide": 6,
+    "clicks": 3,
+    "base_objects": 1,
+    "base_words": 5,
+    "slide_words": 39,
+    "max_view_words": 39,
+    "words_per_view": [
+     5,
+     5,
+     21,
+     39
+    ],
+    "pictures": {},
+    "titles_animated": [],
+    "lifecycles": 0,
+    "effects": 7
+   },
+   {
+    "slide": 7,
+    "clicks": 4,
+    "base_objects": 1,
+    "base_words": 5,
+    "slide_words": 36,
+    "max_view_words": 36,
+    "words_per_view": [
+     5,
+     5,
+     36,
+     36,
+     36
+    ],
+    "pictures": {},
+    "titles_animated": [],
+    "lifecycles": 1,
+    "effects": 4
+   },
+   {
+    "slide": 8,
+    "clicks": 3,
+    "base_objects": 1,
+    "base_words": 1,
+    "slide_words": 26,
+    "max_view_words": 26,
+    "words_per_view": [
+     1,
+     1,
+     18,
+     26
+    ],
+    "pictures": {},
+    "titles_animated": [],
+    "lifecycles": 0,
+    "effects": 3
+   },
+   {
+    "slide": 9,
+    "clicks": 3,
+    "base_objects": 0,
+    "base_words": 0,
+    "slide_words": 13,
+    "max_view_words": 13,
+    "words_per_view": [
+     0,
+     0,
+     5,
+     13
+    ],
+    "pictures": {},
+    "titles_animated": [
+     "Title"
+    ],
+    "lifecycles": 0,
+    "effects": 3
+   }
+  ]
+ }
+]
