@@ -1,0 +1,75 @@
+{
+  "glb": {
+    "path": "experiments/T064-20261104-opencode-native-3d/inputs/quickmill-blockout.glb",
+    "sha256": "fd252d7c6e2470b9809766d9dcba0bbd546c8169209b7426ea6ceb363f959143",
+    "bytes": 56544
+  },
+  "views": [
+    {
+      "slide": 1,
+      "label": "A_left_three_quarter",
+      "shape": "Product3D",
+      "type": 30,
+      "id": 2,
+      "camera": [
+        -1.2,
+        0.45,
+        2.2
+      ],
+      "look_at": [
+        0.0,
+        0.28,
+        0.0
+      ],
+      "rotation": [
+        6.0,
+        0.0,
+        0.0
+      ],
+      "fov": 40.0
+    },
+    {
+      "slide": 2,
+      "label": "B_right_three_quarter",
+      "shape": "Product3D",
+      "type": 30,
+      "id": 2,
+      "camera": [
+        1.2,
+        0.45,
+        2.2
+      ],
+      "look_at": [
+        0.0,
+        0.28,
+        0.0
+      ],
+      "rotation": [
+        6.0,
+        0.0,
+        0.0
+      ],
+      "fov": 40.0
+    }
+  ],
+  "probe_square": [
+    {
+      "slide": 1,
+      "name": "ProbeSquare",
+      "left": 300.0,
+      "top": 26.0,
+      "width": 60.0,
+      "height": 60.0
+    },
+    {
+      "slide": 2,
+      "name": "ProbeSquare",
+      "left": 860.0,
+      "top": 26.0,
+      "width": 60.0,
+      "height": 60.0
+    }
+  ],
+  "pptx": "experiments/T064-20261104-opencode-native-3d/artifacts/camera-morph-base.pptx",
+  "bytes": 464725
+}

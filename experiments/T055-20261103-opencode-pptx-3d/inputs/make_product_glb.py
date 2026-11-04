@@ -1,11 +1,17 @@
 #!/usr/bin/env python3
-"""Build the T055 product GLB from the T054 SolidCraft blockout definition.
+"""Build the T055 product GLB from the frozen SolidCraft blockout definition.
 
 Why this file exists
 --------------------
 The SolidCraft OBJ export merges bodies that lack a `usemtl` line (for example
 `group_housing` disappears into `chrome_top`), so the GLB is rebuilt from the
 canonical `blockout.json` command stream: boxes, cylinders and two boolean cuts.
+
+The blockout is a *frozen input artifact*: `inputs/blockout.json` is a byte
+copy of `experiments/T054-20261102-opencode-vector-match/artifacts/blockout.json`
+at commit `b387146`, SHA-256 `86bf30f8fe649a261c8aeb0ee0cc359c0b3e16d6a2bed86126de371342cd389b`.
+T055 therefore does not need the unmerged T054 branch; the geometry travels as
+data (T064 decoupling).
 
 PowerPoint's native 3D renderer has two hard constraints learned in the T055
 spike:
@@ -17,10 +23,10 @@ into separate meshes with their own material (body / yellow tower / dark bay).
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import struct
 from pathlib import Path
-
 import numpy as np
 import trimesh
 from trimesh.creation import box, cylinder
@@ -30,11 +36,10 @@ from trimesh.visual.material import PBRMaterial
 HERE = Path(__file__).resolve().parent
 EXP = HERE.parent
 ART = EXP / "artifacts"
-T054 = Path(r"C:\Users\COMPUTER\AppData\Local\Temp\opencode\skill-for-pptx-T054"
-            r"\experiments\T054-20261102-opencode-vector-match\artifacts\blockout.json")
+BLOCKOUT = HERE / "blockout.json"
 
 ART.mkdir(parents=True, exist_ok=True)
-commands = json.loads(T054.read_text(encoding="utf-8"))["commands"]
+commands = json.loads(BLOCKOUT.read_text(encoding="utf-8"))["commands"]
 
 # ---------------------------------------------------------------- geometry
 bodies: dict[str, trimesh.Trimesh] = {}
@@ -251,9 +256,15 @@ data = glb.read_bytes()
 jlen = struct.unpack("<I", data[12:16])[0]
 gltf = json.loads(data[20:20 + jlen])
 manifest = {
-    "source": str(T054),
+    "source": {
+        "origin": "experiments/T054-20261102-opencode-vector-match/artifacts/blockout.json",
+        "origin_commit": "b387146",
+        "frozen_copy": str(BLOCKOUT.relative_to(EXP.parents[1])).replace("\\", "/"),
+        "sha256": hashlib.sha256(BLOCKOUT.read_bytes()).hexdigest(),
+        "note": "byte copy; T055 builds from this file, not from the T054 branch",
+    },
     "source_commands": len(commands),
-    "glb": str(glb),
+    "glb": "artifacts/quickmill-blockout.glb",
     "bytes": glb.stat().st_size,
     "bounds_m": np.round(scene.bounds, 4).tolist(),
     "meshes": len(gltf.get("meshes", [])),

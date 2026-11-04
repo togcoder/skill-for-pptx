@@ -1,0 +1,675 @@
+{
+  "commands": [
+    {
+      "command": "solid.box",
+      "params": {
+        "length": 400.0,
+        "width": 320.0,
+        "height": 70.0,
+        "corner": [
+          -10,
+          -10,
+          0
+        ],
+        "body_name": "base"
+      }
+    },
+    {
+      "command": "solid.box",
+      "params": {
+        "length": 380.0,
+        "width": 300.0,
+        "height": 140.0,
+        "corner": [
+          0,
+          0,
+          70.0
+        ],
+        "body_name": "lower_body"
+      }
+    },
+    {
+      "command": "solid.box",
+      "params": {
+        "length": 380.0,
+        "width": 300.0,
+        "height": 210.0,
+        "corner": [
+          0,
+          0,
+          210.0
+        ],
+        "body_name": "upper_core"
+      }
+    },
+    {
+      "command": "solid.box",
+      "params": {
+        "length": 229.0,
+        "width": 121.0,
+        "height": 211.0,
+        "corner": [
+          152.0,
+          -1,
+          210.0
+        ],
+        "body_name": "bay_cut"
+      }
+    },
+    {
+      "command": "solid.combine",
+      "params": {
+        "target": "upper_core",
+        "tools": [
+          "bay_cut"
+        ],
+        "operation": "cut"
+      }
+    },
+    {
+      "command": "solid.box",
+      "params": {
+        "length": 340.0,
+        "width": 240.0,
+        "height": 31.0,
+        "corner": [
+          20,
+          20,
+          180.0
+        ],
+        "body_name": "tray_cut"
+      }
+    },
+    {
+      "command": "solid.combine",
+      "params": {
+        "target": "lower_body",
+        "tools": [
+          "tray_cut"
+        ],
+        "operation": "cut"
+      }
+    },
+    {
+      "command": "solid.box",
+      "params": {
+        "length": 340.0,
+        "width": 240.0,
+        "height": 5.0,
+        "corner": [
+          20,
+          20,
+          180.0
+        ],
+        "body_name": "tray_grate"
+      }
+    },
+    {
+      "command": "solid.box",
+      "params": {
+        "length": 340.0,
+        "width": 22,
+        "height": 16.0,
+        "corner": [
+          20,
+          -2,
+          188.0
+        ],
+        "body_name": "tray_front_lip"
+      }
+    },
+    {
+      "command": "solid.box",
+      "params": {
+        "length": 380.0,
+        "width": 300.0,
+        "height": 80.0,
+        "corner": [
+          0,
+          0,
+          420.0
+        ],
+        "body_name": "top_housing"
+      }
+    },
+    {
+      "command": "solid.box",
+      "params": {
+        "length": 152.0,
+        "width": 2,
+        "height": 80.0,
+        "corner": [
+          0,
+          -2,
+          420.0
+        ],
+        "body_name": "top_chrome_left"
+      }
+    },
+    {
+      "command": "solid.box",
+      "params": {
+        "length": 390.0,
+        "width": 320.0,
+        "height": 15.0,
+        "corner": [
+          -5,
+          -10,
+          500.0
+        ],
+        "body_name": "chrome_top"
+      }
+    },
+    {
+      "command": "solid.box",
+      "params": {
+        "length": 100,
+        "width": 80.0,
+        "height": 90.0,
+        "corner": [
+          216,
+          40,
+          330
+        ],
+        "body_name": "group_housing"
+      }
+    },
+    {
+      "command": "solid.cylinder",
+      "params": {
+        "radius": 50,
+        "height": 60,
+        "base": [
+          266,
+          80,
+          270
+        ],
+        "axis": "Z",
+        "body_name": "group_head"
+      }
+    },
+    {
+      "command": "solid.cylinder",
+      "params": {
+        "radius": 55,
+        "height": 12,
+        "base": [
+          266,
+          80,
+          258
+        ],
+        "axis": "Z",
+        "body_name": "group_collar"
+      }
+    },
+    {
+      "command": "solid.cylinder",
+      "params": {
+        "radius": 44,
+        "height": 14,
+        "base": [
+          266,
+          80,
+          244
+        ],
+        "axis": "Z",
+        "body_name": "basket"
+      }
+    },
+    {
+      "command": "solid.cylinder",
+      "params": {
+        "radius": 16,
+        "height": 130,
+        "base": [
+          266,
+          80,
+          292
+        ],
+        "axis": [
+          0.7,
+          -0.42,
+          -0.45
+        ],
+        "body_name": "portafilter_handle"
+      }
+    },
+    {
+      "command": "solid.cylinder",
+      "params": {
+        "radius": 4,
+        "height": 120,
+        "base": [
+          345,
+          60,
+          332
+        ],
+        "axis": [
+          0.0,
+          -0.55,
+          -0.84
+        ],
+        "body_name": "steam_wand"
+      }
+    },
+    {
+      "command": "solid.cylinder",
+      "params": {
+        "radius": 7,
+        "height": 38,
+        "base": [
+          345,
+          6,
+          205
+        ],
+        "axis": [
+          0.0,
+          -0.2,
+          -0.98
+        ],
+        "body_name": "steam_grip"
+      }
+    },
+    {
+      "command": "solid.cylinder",
+      "params": {
+        "radius": 26,
+        "height": 38.0,
+        "base": [
+          120,
+          80,
+          515.0
+        ],
+        "axis": "Z",
+        "body_name": "knob_l"
+      }
+    },
+    {
+      "command": "solid.cylinder",
+      "params": {
+        "radius": 26,
+        "height": 38.0,
+        "base": [
+          240,
+          80,
+          515.0
+        ],
+        "axis": "Z",
+        "body_name": "knob_r"
+      }
+    },
+    {
+      "command": "solid.cylinder",
+      "params": {
+        "radius": 44,
+        "height": 4,
+        "base": [
+          280,
+          -2,
+          460
+        ],
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "body_name": "badge"
+      }
+    },
+    {
+      "command": "solid.box",
+      "params": {
+        "length": 120,
+        "width": 4,
+        "height": 82,
+        "corner": [
+          28,
+          -4,
+          90
+        ],
+        "body_name": "switch_plate"
+      }
+    },
+    {
+      "command": "solid.box",
+      "params": {
+        "length": 18,
+        "width": 4,
+        "height": 50,
+        "corner": [
+          42,
+          -7,
+          104
+        ],
+        "body_name": "switch_1"
+      }
+    },
+    {
+      "command": "solid.box",
+      "params": {
+        "length": 18,
+        "width": 4,
+        "height": 50,
+        "corner": [
+          72,
+          -7,
+          104
+        ],
+        "body_name": "switch_2"
+      }
+    },
+    {
+      "command": "solid.box",
+      "params": {
+        "length": 18,
+        "width": 4,
+        "height": 50,
+        "corner": [
+          102,
+          -7,
+          104
+        ],
+        "body_name": "switch_3"
+      }
+    },
+    {
+      "command": "solid.cylinder",
+      "params": {
+        "radius": 9,
+        "height": 4,
+        "base": [
+          182,
+          -4,
+          128
+        ],
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "body_name": "red_light"
+      }
+    },
+    {
+      "command": "solid.cylinder",
+      "params": {
+        "radius": 10,
+        "height": 16,
+        "base": [
+          342,
+          -6,
+          128
+        ],
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "body_name": "steam_valve"
+      }
+    },
+    {
+      "command": "appearance.assign",
+      "params": {
+        "bodies": [
+          "base"
+        ],
+        "color": "#17191C"
+      }
+    },
+    {
+      "command": "appearance.assign",
+      "params": {
+        "bodies": [
+          "lower_body"
+        ],
+        "color": "#C9C6BC"
+      }
+    },
+    {
+      "command": "appearance.assign",
+      "params": {
+        "bodies": [
+          "upper_core"
+        ],
+        "color": "#C9C6BC"
+      }
+    },
+    {
+      "command": "appearance.assign",
+      "params": {
+        "bodies": [
+          "top_housing"
+        ],
+        "color": "#16181B"
+      }
+    },
+    {
+      "command": "appearance.assign",
+      "params": {
+        "bodies": [
+          "top_chrome_left"
+        ],
+        "color": "#C9C6BC"
+      }
+    },
+    {
+      "command": "appearance.assign",
+      "params": {
+        "bodies": [
+          "chrome_top"
+        ],
+        "color": "#E8E6DE"
+      }
+    },
+    {
+      "command": "appearance.assign",
+      "params": {
+        "bodies": [
+          "group_head"
+        ],
+        "color": "#B8B6AD"
+      }
+    },
+    {
+      "command": "appearance.assign",
+      "params": {
+        "bodies": [
+          "group_collar"
+        ],
+        "color": "#9E9C93"
+      }
+    },
+    {
+      "command": "appearance.assign",
+      "params": {
+        "bodies": [
+          "basket"
+        ],
+        "color": "#8E8C84"
+      }
+    },
+    {
+      "command": "appearance.assign",
+      "params": {
+        "bodies": [
+          "portafilter_handle"
+        ],
+        "color": "#111315"
+      }
+    },
+    {
+      "command": "appearance.assign",
+      "params": {
+        "bodies": [
+          "steam_wand"
+        ],
+        "color": "#E8E6DE"
+      }
+    },
+    {
+      "command": "appearance.assign",
+      "params": {
+        "bodies": [
+          "steam_grip"
+        ],
+        "color": "#111315"
+      }
+    },
+    {
+      "command": "appearance.assign",
+      "params": {
+        "bodies": [
+          "knob_l"
+        ],
+        "color": "#D9A21B"
+      }
+    },
+    {
+      "command": "appearance.assign",
+      "params": {
+        "bodies": [
+          "knob_r"
+        ],
+        "color": "#D9A21B"
+      }
+    },
+    {
+      "command": "appearance.assign",
+      "params": {
+        "bodies": [
+          "badge"
+        ],
+        "color": "#EDE4CF"
+      }
+    },
+    {
+      "command": "appearance.assign",
+      "params": {
+        "bodies": [
+          "switch_plate"
+        ],
+        "color": "#1B1D20"
+      }
+    },
+    {
+      "command": "appearance.assign",
+      "params": {
+        "bodies": [
+          "tray_grate"
+        ],
+        "color": "#0C0E10"
+      }
+    },
+    {
+      "command": "appearance.assign",
+      "params": {
+        "bodies": [
+          "tray_front_lip"
+        ],
+        "color": "#C9C6BC"
+      }
+    },
+    {
+      "command": "appearance.assign",
+      "params": {
+        "bodies": [
+          "switch_1"
+        ],
+        "color": "#EDE4CF"
+      }
+    },
+    {
+      "command": "appearance.assign",
+      "params": {
+        "bodies": [
+          "switch_2"
+        ],
+        "color": "#EDE4CF"
+      }
+    },
+    {
+      "command": "appearance.assign",
+      "params": {
+        "bodies": [
+          "switch_3"
+        ],
+        "color": "#EDE4CF"
+      }
+    },
+    {
+      "command": "appearance.assign",
+      "params": {
+        "bodies": [
+          "red_light"
+        ],
+        "color": "#B5322A"
+      }
+    },
+    {
+      "command": "appearance.assign",
+      "params": {
+        "bodies": [
+          "steam_valve"
+        ],
+        "color": "#C9C6BC"
+      }
+    },
+    {
+      "command": "appearance.assign",
+      "params": {
+        "body": "lower_body",
+        "faces": [
+          [
+            0,
+            150,
+            140
+          ]
+        ],
+        "color": "#E0AE2E"
+      }
+    },
+    {
+      "command": "appearance.assign",
+      "params": {
+        "body": "upper_core",
+        "faces": [
+          [
+            0,
+            150,
+            320
+          ]
+        ],
+        "color": "#E0AE2E"
+      }
+    },
+    {
+      "command": "appearance.assign",
+      "params": {
+        "body": "upper_core",
+        "faces": [
+          [
+            266,
+            120.0,
+            320
+          ]
+        ],
+        "color": "#16181B"
+      }
+    },
+    {
+      "command": "appearance.assign",
+      "params": {
+        "body": "top_housing",
+        "faces": [
+          [
+            0,
+            150,
+            460
+          ]
+        ],
+        "color": "#E0AE2E"
+      }
+    }
+  ]
+}

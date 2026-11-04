@@ -35,7 +35,10 @@ Lab đa lĩnh vực (docx, xlsx, vector…) phục vụ mục tiêu đó. Nó kh
   Phần lớn do OpenCode/DeepSeek và Antigravity làm, và chỉ Argon review.
 - **Còn treo, chưa gộp:**
   - `work/T054-opencode-vector-match`;
-  - `work/T055-opencode-pptx-3d`. Nhánh này xếp chồng trên T054 và sẽ được tách ra ở T064.
+  - `work/T055-opencode-pptx-3d`. T064 đã tách khỏi T054: blockout là input
+    artifact đóng băng, nhánh rebase trên `main`, review `accept-with-fixes`.
+  - `work/T064-opencode-native-3d`. Review T055, tách T054 và bằng chứng Morph
+    giữa hai camera của cùng một model 3D (rung 5).
 
 ## Khó khăn chính (chi tiết trong báo cáo T057)
 

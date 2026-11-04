@@ -19,17 +19,25 @@
 - **Transfers:** the geometry is the T054 SolidCraft CSG blockout (24 bodies,
   53.96 × 10⁶ mm³). The GLB is rebuilt from the blockout's command stream, not
   from its OBJ, because the OBJ export merges `group_housing` into
-  `chrome_top`. No vector asset is used in the deck.
+  `chrome_top`. The blockout travels as a **frozen input artifact**
+  (`inputs/blockout.json`, a byte copy pinned by SHA-256); no vector asset and
+  no T054 commit is used in the deck. Decoupling: T064.
 
 ## Frozen input
 
 - **Task/claim:** T055 [pptx], OpenCode (DeepSeek V4.1 Flash), branch
-  `work/T055-opencode-pptx-3d`, claim commit `64d6d47`, based on T054
-  `b387146` (T054 is review-requested and unmerged; T055 is stacked on it).
+  `work/T055-opencode-pptx-3d`, claim commit `64d6d47`. Rebased onto `main`
+  `ac5b45e` by T064: the branch no longer contains T054 commits and no longer
+  needs T054 to be merged first.
 - **Request/date:** 2026-11-03. The owner asked for a capability that current
   AI models do not have, after repeated SVG/vector disappointment.
-- **Geometry source:** `experiments/T054-20261102-opencode-vector-match/artifacts/blockout.json`,
-  24 visible bodies, 196 edges, 118 faces, 53.96 × 10⁶ mm³.
+- **Geometry source (frozen):** `inputs/blockout.json`, a byte copy of
+  `experiments/T054-20261102-opencode-vector-match/artifacts/blockout.json` at
+  T054 commit `b387146`, SHA-256
+  `86bf30f8fe649a261c8aeb0ee0cc359c0b3e16d6a2bed86126de371342cd389b`;
+  24 visible bodies, 196 edges, 118 faces, 53.96 × 10⁶ mm³. Rebuilding the GLB
+  from this copy reproduces `artifacts/quickmill-blockout.glb` byte for byte
+  (SHA-256 `fd252d7c…f959143`), so decoupling changed no evidence.
 - **Photo reference (not redistributed):** Wikimedia Commons, *File:Quick Mill
   Omre Espresso Machine.jpg*, **CC0**,
   <https://commons.wikimedia.org/wiki/File:Quick_Mill_Omre_Espresso_Machine.jpg>,
@@ -145,6 +153,11 @@ sheet; `camera-study.json` records the cameras.
   a save (`preview/morph-3d.json`). The 3D camera interpolation itself was not
   observed: `CreateVideo` produced a 52 × 28 clip, and a screen-capture attempt
   captured the wrong foreground window. **No Morph claim is made.**
+  *T064 correction:* the 52 × 28 clip was an argument-order bug in
+  `inputs/morph_video.py` (`CreateVideo(path, 3, 3, 30, 85)` sets the height to
+  30 px); the documented order `CreateVideo(path, True, 4, 1080, 30, 95)`
+  renders 1920 × 1080. T064 then showed that this deck's per-slide embeds make
+  Morph fade the model instead of moving the camera.
 - **The first 3D product render washed out** because of metallic materials; the
   v2 deck was discarded rather than shipped. `preview/product-spike.png` keeps
   the failure.
@@ -154,8 +167,14 @@ sheet; `camera-study.json` records the cameras.
   overlays.
 - **No human review.** The owner has not yet accepted the deck as "mỹ mãn".
   Rung 6 is missing.
-- T054 and T055 are not merged. T054 remains review-requested; T055 is stacked
-  on it.
+- T054 and T055 are independent after the T064 rebase: T055 builds from the
+  frozen `inputs/blockout.json`, so it can merge without T054.
+- **Morph was undecided in this report and is now answered by T064:** with
+  `Shapes.Add3DModel` on each slide (this deck), the model is a separate media
+  part per slide and Morph does not animate the camera — it fades the model out
+  and in. With one shared `model3d` part (duplicate the slide, then change the
+  camera) Morph does sweep the camera, verified at rung 5. See
+  `experiments/T064-20261104-opencode-native-3d/REPORT.md`.
 
 ## Next
 
@@ -166,8 +185,13 @@ sheet; `camera-study.json` records the cameras.
 3. Add a fourth "rotate me" slide or a short screen recording that shows the
    model responding to drag, so the native interaction is visible without a
    narrator.
-4. Send the deck and this report to review; do not merge T055 before T054.
+4. Send the deck and this report to review; T064 already reviewed it and
+   decoupled it from T054, so it no longer waits for the T054 merge.
 
 ## Review response
 
-Pending. No reviewer has accepted this report yet.
+Reviewed in `research/reviews/T055-opencode-20261104.md` (T064, OpenCode). The
+verdict, the findings R1–R9 and the fixes applied in the T064 rebase are there;
+this section stays the author's to fill. No reviewer has accepted the report
+yet. T064 answered the open Morph question and left the remaining findings to
+the T055 author.

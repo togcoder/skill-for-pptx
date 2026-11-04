@@ -1,7 +1,13 @@
 {
-  "source": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T054\\experiments\\T054-20261102-opencode-vector-match\\artifacts\\blockout.json",
+  "source": {
+    "origin": "experiments/T054-20261102-opencode-vector-match/artifacts/blockout.json",
+    "origin_commit": "b387146",
+    "frozen_copy": "experiments/T055-20261103-opencode-pptx-3d/inputs/blockout.json",
+    "sha256": "86bf30f8fe649a261c8aeb0ee0cc359c0b3e16d6a2bed86126de371342cd389b",
+    "note": "byte copy; T055 builds from this file, not from the T054 branch"
+  },
   "source_commands": 55,
-  "glb": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T055\\experiments\\T055-20261103-opencode-pptx-3d\\artifacts\\quickmill-blockout.glb",
+  "glb": "artifacts/quickmill-blockout.glb",
   "bytes": 56544,
   "bounds_m": [
     [

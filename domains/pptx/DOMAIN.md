@@ -67,21 +67,33 @@ Skills: `skills/pptx-motion-director`, `skills/slide-forge`.
   with sources. Run `design_critic.py` on outputs.
 - **Non-Linear Navigation Law (T048):** Decks with branching narrative (Hub & Spoke, auxiliary popups, mini-games) must provide dynamic return actions (`lastslideviewed`), and must lock blank slide clicks (`advClick="0"`) or enable Kiosk mode (`p:kiosk`) to prevent accidental slide skips.
 - **Advanced Interactivity Law (T049):** For auxiliary drill-downs, detail dialogs, and multi-perspective views, agents MUST prefer In-Slide Lightbox Modals and In-Slide Tabbed Switchers (via native `<p:cTn nodeType="interactiveSeq">`) over creating duplicate slides. In-slide triggers preserve visual context, eliminate disruptive screen cuts, and keep the presentation compact. Tactile sound effects (`<a:snd>` in `<a:hlinkClick>`/`<a:hlinkHover>`) and Morph transitions (`p14:morph`) should be integrated for high-polish interactivity.
+- **3D Camera Morph Law (T064):** A Morph between two camera views of one `am3d:model3d` animates the camera **only if every slide references the same model part**. Insert the model once, duplicate the slide, then change `Shape.Model3D` on the copy. One `Shapes.Add3DModel` per slide creates separate `ppt/media/model3dN.glb` parts and Morph degrades to a fade-out/fade-in with a 0.40 s blank. Verified at rung 5, PowerPoint 16.0 build 17932; see `experiments/T064-20261104-opencode-native-3d/REPORT.md`.
 
-## State (2026-11-03)
-- **Tests:** 469 run, OK, 8 skipped; `lab/tools/check_layout.py` passes.
-- **Native 3D (T055):** `Shapes.Add3DModel` + embedded GLB + editable callouts.
-  3-slide deck, one Type-30 model per slide, three embedded `model3d*.glb`,
-  cameras/rotation/FOV preserved after save/reopen, PDF export. Source GLB is
-  Y-up metres, 400 × 553 × 326 mm, 34 non-metallic material regions. Report:
-  `experiments/T055-20261103-opencode-pptx-3d/REPORT.md`; branch
-  `work/T055-opencode-pptx-3d`; **review requested**, stacked on T054.
+## State (2026-11-04)
+
+- **Tests:** 471 run, 8 skipped, 100 % pass on the T064 branch with
+  `PYTHONUTF8=1` (the host's cp1258 locale otherwise breaks 12 tests that call
+  `Path.read_text()` without an encoding — a lab defect for T065). `main` after
+  T057: 461 tests.
+- **Native 3D (T055, rebased by T064):** `Shapes.Add3DModel` + embedded GLB +
+  editable callouts. 3-slide deck, one Type-30 model per slide, three embedded
+  `model3d*.glb`, cameras/rotation/FOV preserved after save/reopen, PDF export.
+  Source GLB is Y-up metres, 400 × 553 × 326 mm, 34 non-metallic material
+  regions. The blockout is frozen in `inputs/blockout.json`, so T055 no longer
+  depends on T054. Report:
+  `experiments/T055-20261103-opencode-pptx-3d/REPORT.md`; review
+  `accept-with-fixes`: `research/reviews/T055-opencode-20261104.md`.
+- **Morph over a 3D camera (T064):** verified at rung 5 with CreateVideo frames.
+  Morph interpolates `am3d:camera` **only when consecutive slides share one
+  `model3d` part**; with one `Add3DModel` embed per slide it fades the model out
+  and in (0.40 s blank) and never moves the camera. Authoring rule: insert the
+  model once, **duplicate the slide**, then change the camera. Report:
+  `experiments/T064-20261104-opencode-native-3d/REPORT.md`.
 - **Navigation & Interactivity:** T048 added Slide Navigator (`slide_navigator.py`) establishing full non-linear branching, dynamic return paths, custom shows with return, and mini-game state machine compilation. T049 added Advanced Presentation Interactivity (`advanced_interactivity.py`) establishing native in-slide lightbox modals, multi-tab switchers, pure-Python synthetic sound FX (click/chime/buzz), hover actions, and twin-morph visual flow.
-- **Evidence:** Rungs 0–5 established across PPTX, DOCX, XLSX, and Cross. PowerPoint 16.0 COM verified.
+- **Evidence:** Rungs 0–5 established across PPTX, DOCX, XLSX, and Cross. PowerPoint 16.0 COM verified; 3D camera Morph at rung 5 on build 16.0.17932.
 - **3D limits:** native lighting is fixed (black horizontal faces render grey);
   metallic PBR renders as a white mirror; `COLOR_0` is ignored when a material
-  exists; Morph on the 3D camera is not visually verified. The T055 model is a
-  massing study, not final product fidelity.
+  exists. The T055 model is a massing study, not final product fidelity.
 
 ## Open questions / dissent
 - **T038 numbers.** Several T038 values (golden 61.8 %, Duarte breaks at

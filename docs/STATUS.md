@@ -15,8 +15,11 @@ the reserved next tasks (T058–T065) are in
   (`python -m unittest discover -s tests`, 4 skipped).
 - **Unmerged:**
   - `work/T054-opencode-vector-match` (vector).
-  - `work/T055-opencode-pptx-3d` (native 3D deck), which is stacked on T054.
-    T064 decouples it.
+  - `work/T055-opencode-pptx-3d` (native 3D deck): **no longer stacked on
+    T054.** T064 froze the blockout as an input artifact and rebased the task
+    onto `main`; review verdict `accept-with-fixes`.
+  - `work/T064-opencode-native-3d`: the T055 review, the rebase and the Morph
+    camera evidence; not merged.
   - The Codex T009/T021 branches are historical.
 - **pptx modules added since T034:**
   - `theme_engine.py` (T043): not wired into Forge.

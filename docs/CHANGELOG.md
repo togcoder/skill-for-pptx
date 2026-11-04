@@ -7,6 +7,34 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T064 [pptx] Review and decoupling of T055, Morph between two 3D camera views — 2026-11-04
+
+- **Why.** T055 (native 3D product deck) was stacked on the unmerged T054
+  branch, and its Morph question ("does the camera interpolate?") was open at
+  rung 4. T064 was asked to decouple it, review it and answer the Morph
+  question with `CreateVideo` frames.
+- **Dependency.** One file: `make_product_glb.py` read the T054 worktree at an
+  absolute path. The blockout is now a frozen input (`inputs/blockout.json`,
+  SHA-256 `86bf30f8…cd389b`); the rebuilt GLB is byte-identical
+  (`fd252d7c…f959143`), so no T055 evidence changed. The five T055 commits are
+  rebased onto `ac5b45e` without the five T054 commits.
+- **Review.** `accept-with-fixes`, findings R1–R10 in
+  `research/reviews/T055-opencode-20261104.md`. R1 (dependency) and R5
+  (absolute evidence paths) fixed in the rebase; R2 was a `CreateVideo`
+  argument-order bug that had produced a 52 × 28 clip, not a PowerPoint limit.
+- **Morph.** Two probe decks, a Fade control, a 25-rung camera ladder and a
+  moving control square, rendered by PowerPoint at 1920 × 1080. Morph
+  **does** interpolate the `am3d:camera` when both slides share one `model3d`
+  part (camera x −1.0 → +1.2 over 1.7 s at constant brightness); with one
+  `Add3DModel` embed per slide (T055's construction) the model fades out, is
+  blank for 0.40 s and fades in at the new view. Duplicating the slide before
+  changing the camera produces the shared part.
+- **Evidence.** Rung 5 (CreateVideo frames) for the Morph claims; rung 4 for
+  the package and camera parse; rung 6 missing. Report:
+  `experiments/T064-20261104-opencode-native-3d/REPORT.md`.
+- **Not done.** No push, no merge, no INDEX edit. HANDOFF and STATUS updated
+  only where the T055 merge order was stated.
+
 ## T057 [cross] Lead review, DeckCraft evaluation and next programme — 2026-11-04
 
 - **Why.** After 22 tasks in four days (T035–T056) the owner asked Claude to

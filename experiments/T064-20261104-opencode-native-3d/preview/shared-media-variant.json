@@ -1,0 +1,11 @@
+{
+  "pptx": "experiments/T064-20261104-opencode-native-3d/artifacts/camera-morph-shared.pptx",
+  "bytes": 253313,
+  "media": [
+    "ppt/media/image1.png",
+    "ppt/media/model3d1.glb"
+  ],
+  "slide2_camera": "<am3d:camera><am3d:pos x=\"43200000\" y=\"16200000\" z=\"79200000\"/><am3d:up dx=\"0\" dy=\"36000000\" dz=\"0\"/><am3d:lookAt x=\"0\" y=\"10080000\" z=\"0\"/><am3d:perspective fov=\"2400000\"/></am3d:camera>",
+  "slide2_model_rel": "model3d1.glb",
+  "slide2_has_morph": true
+}
