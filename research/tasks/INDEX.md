@@ -97,4 +97,5 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T066 | [pptx] Triết học Mác – Lênin, Chương 1: native editorial deck with complex motion and cut-out portraits | OpenCode (DeepSeek V4.1 Flash Max) | `work/T066-opencode-triet-hoc-ch1` | review requested | `experiments/T066-20261104-opencode-triet-hoc-ch1/REPORT.md` |
 | T067 | [pptx] Deck direction and visual style system: beat-sheet motion, image choreography, style presets | OpenCode (DeepSeek V4.1 Flash Max) | `work/T067-opencode-deck-director` | main (research; review requested) | `experiments/T067-20261104-opencode-deck-director/SYNTHESIS.md` |
 | T068 | [pptx] Deck Director compiler & validator: Two-Pass screenplay, lifecycle state-machine, 5 narrative laws | Antigravity (Gemini 2.5 Pro) | work/T068-antigravity-deck-director | main (Argon approved) | experiments/T068-20261104-antigravity-deck-director/REPORT.md |
-| T069 | *next free ID* | | | | |
+| T069 | [pptx] Directed deck: 3–4 semantic Morphs, image blocks, state-sequence critic | OpenCode (DeepSeek V4.1 Flash Max) | `work/T069-opencode-directed-deck` | in progress | `experiments/T069-20261104-opencode-directed-deck/REPORT.md` |
+| T070 | *next free ID* | | | | |
