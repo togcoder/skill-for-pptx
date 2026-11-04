@@ -915,7 +915,7 @@ def _shape_text(b,shape,text,color,level="small"):
 # Pipeline
 
 
-def build(spec,out,work=None):
+def build(spec,out,work=None,plan=None):
     """spec -> static deck -> Motion Director -> QA. Returns the verdict."""
     import forge_qa
     import motion_director as md
@@ -928,8 +928,17 @@ def build(spec,out,work=None):
     b=Builder(spec)
     b.build(spec,static)
     model=md.deck_model(static)
-    plan=md.draft(model,goal=spec.get("title",""),style=b.motion["style"],counters=bool(b.motion["counters"]),
-                  morph=bool(b.motion["morph"]))
+    if plan is None:
+        plan=md.draft(model,goal=spec.get("title",""),style=b.motion["style"],counters=bool(b.motion["counters"]),
+                      morph=bool(b.motion["morph"]))
+    else:
+        # Stamp the static deck's hash and inventory into the director plan
+        inv = model["inventory"]
+        plan["target_slide_count"] = plan.get("target_slide_count", len(model["slides"]))
+        plan.setdefault("source", {})
+        plan["source"]["pptx_sha256"] = inv["source_sha256"]
+        plan["source"]["inventory_version"] = inv["version"]
+        plan["source"]["source_slide_count"] = len(model["slides"])
     if not plan.get("slides"):
         import shutil
         shutil.copyfile(static,out)
@@ -956,7 +965,7 @@ def build(spec,out,work=None):
     verdict["icons"]=b.icons
     verdict["static_pptx"]=str(static)
     verdict["output"]=str(out)
-    verdict["director_notes"]=plan["research_metadata"]["draft_notes"]
+    verdict["director_notes"]=plan.get("research_metadata", {}).get("draft_notes", {})
     # T034: the same design system the generators read, graded on the output
     # (advisory: QA errors decide ok; the critique says what to polish).
     try:
@@ -1007,6 +1016,7 @@ def main(argv=None):
     b=sub.add_parser("build")
     b.add_argument("spec",type=Path)
     b.add_argument("-o","--output",type=Path,required=True)
+    b.add_argument("--plan",type=Path,default=None,help="Custom Motion Director plan JSON to apply")
     q=sub.add_parser("qa")
     q.add_argument("pptx",type=Path)
     r=sub.add_parser("render")
@@ -1017,7 +1027,8 @@ def main(argv=None):
     if a.cmd=="schema":
         result=schema()
     elif a.cmd=="build":
-        result=build(json.loads(a.spec.read_text(encoding="utf-8")),a.output)
+        plan_data=json.loads(a.plan.read_text(encoding="utf-8")) if a.plan else None
+        result=build(json.loads(a.spec.read_text(encoding="utf-8")),a.output,plan=plan_data)
     elif a.cmd=="render":
         result=render(a.pptx,a.dir,a.seconds)
     else:

@@ -1,0 +1,39 @@
+{
+  "title": "Triết học Mác – Lênin là vũ khí lý luận sắc bén giải phóng giai cấp và nhân loại.",
+  "theme": {
+    "seed": "#C1121F",
+    "mode": "dark"
+  },
+  "slides": [
+    {
+      "title": "Triết học Mác – Lênin: Chương 1",
+      "layout": "title",
+      "base_state": [
+        "art:portraits"
+      ],
+      "subtitle": "Khái luận về triết học và vai trò trong đời sống xã hội",
+      "image": "experiments/T066-20261104-opencode-triet-hoc-ch1/inputs/assets/marx-circle.png"
+    },
+    {
+      "title": "Triết học là hệ thống tri thức lý luận chung nhất về thế giới",
+      "layout": "asymmetric",
+      "base_state": [
+        "art:plato"
+      ],
+      "major": "Quy luật Tự nhiên",
+      "minor": "Quan hệ Xã hội\n\nQuy luật Tư duy"
+    },
+    {
+      "title": "Ba bộ phận cấu thành chủ nghĩa Mác – Lênin gắn kết hữu cơ",
+      "layout": "bullets",
+      "base_state": [
+        "bullet:sys1"
+      ],
+      "bullets": [
+        "Triết học Mác – Lênin (Thế giới quan và phương pháp luận)",
+        "Kinh tế chính trị Mác – Lênin (Quy luật phát triển kinh tế)",
+        "Chủ nghĩa xã hội khoa học (Sứ mệnh giải phóng giai cấp)"
+      ]
+    }
+  ]
+}

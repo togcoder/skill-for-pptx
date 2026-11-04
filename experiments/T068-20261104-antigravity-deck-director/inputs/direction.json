@@ -1,0 +1,148 @@
+{
+  "brief": {
+    "audience": "Sinh viên đại học & Giảng viên lý luận chính trị",
+    "minutes": 15,
+    "room": "Hội trường 150 người",
+    "decision": "Hiểu rõ bước chuyển cách mạng và ba bộ phận cấu thành của chủ nghĩa Mác – Lênin",
+    "one_sentence": "Triết học Mác – Lênin là vũ khí lý luận sắc bén giải phóng giai cấp và nhân loại.",
+    "register": "editorial_teaching"
+  },
+  "style": {
+    "preset": "editorial-crimson",
+    "base_state": "poster_first",
+    "image_role": "evidence"
+  },
+  "beats": [
+    {
+      "id": "b1",
+      "job": "hook",
+      "claim": "Khái luận về triết học Mác – Lênin",
+      "carrier": "art:portraits",
+      "attention": "art:portraits",
+      "figure": "arrive",
+      "t0_says": "Ngay từ trang bìa, hình ảnh ba nhà tư tưởng vĩ đại đã định vị toàn bộ linh hồn của học thuyết.",
+      "clicks": [
+        {
+          "id": "b1.1",
+          "lead_in": "Để mở đầu chương trình hôm nay,",
+          "state": "Tiêu đề chính xuất hiện khẳng định chủ đề chương một",
+          "post_click_says": "chúng ta cùng bước vào hành trình khai phá nguồn gốc và bản chất của triết học Mác – Lênin.",
+          "target_refs": ["title:main"]
+        }
+      ]
+    },
+    {
+      "id": "b2",
+      "job": "define",
+      "claim": "Triết học là hệ thống tri thức lý luận chung nhất về thế giới",
+      "carrier": "art:plato",
+      "attention": "art:plato",
+      "figure": "build",
+      "t0_says": "Bức tượng triết gia cổ đại nhắc nhở chúng ta rằng: triết học bắt đầu từ những câu hỏi ngây ngô nhất của con người.",
+      "clicks": [
+        {
+          "id": "b2.1",
+          "lead_in": "Tuy nhiên, để trở thành một hệ thống khoa học,",
+          "state": "Hai trụ cột đầu tiên hiện rõ cấu trúc nhận thức",
+          "post_click_says": "giáo trình phân lập nó thành hai lĩnh vực bao quát: quy luật tự nhiên và đời sống xã hội.",
+          "target_refs": ["card:def1", "card:def2"]
+        },
+        {
+          "id": "b2.2",
+          "lead_in": "Và đỉnh cao của sự khái quát hóa —",
+          "state": "Trụ cột xã hội mờ đi để nhường toàn bộ tiêu điểm cho quy luật tư duy",
+          "post_click_says": "chính là quy luật vận động của tư duy nhận thức con người.",
+          "target_refs": ["card:def3"]
+        }
+      ]
+    },
+    {
+      "id": "b3",
+      "job": "mechanism",
+      "claim": "Ba bộ phận cấu thành chủ nghĩa Mác – Lênin gắn kết hữu cơ",
+      "carrier": "bullet:sys1",
+      "attention": "bullet:sys1",
+      "figure": "assemble",
+      "t0_says": "Toàn bộ học thuyết Mác không phải là những mảnh ghép rời rạc, mà là một khối kim cương thống nhất.",
+      "clicks": [
+        {
+          "id": "b3.1",
+          "lead_in": "Khi nhìn vào cấu trúc bên dưới,",
+          "state": "Hai trụ cột kinh tế chính trị và chủ nghĩa xã hội khoa học đồng thời xuất hiện",
+          "post_click_says": "chúng ta thấy triết học làm thế giới quan, kinh tế chính trị chỉ ra quy luật, và chủ nghĩa xã hội chỉ đường đấu tranh.",
+          "target_refs": ["bullet:sys2", "bullet:sys3"]
+        }
+      ]
+    }
+  ],
+  "shots": [
+    {
+      "id": "sh1",
+      "beat": "b1",
+      "layout": "title",
+      "objects": [
+        {"id": "art:portraits", "role": "hero", "asset": {"file": "experiments/T066-20261104-opencode-triet-hoc-ch1/inputs/assets/marx-circle.png"}},
+        {"id": "title:main", "role": "title", "text": "Triết học Mác – Lênin: Chương 1"},
+        {"id": "sub:main", "role": "subtitle", "text": "Khái luận về triết học và vai trò trong đời sống xã hội"}
+      ],
+      "base_state": ["art:portraits"],
+      "state_after": {
+        "b1.1": {
+          "enter": ["title:main", "sub:main"],
+          "dim": [],
+          "highlight": [],
+          "exit": [],
+          "action": null
+        }
+      }
+    },
+    {
+      "id": "sh2",
+      "beat": "b2",
+      "layout": "asymmetric",
+      "objects": [
+        {"id": "art:plato", "role": "anchor", "asset": {"file": "experiments/T066-20261104-opencode-triet-hoc-ch1/inputs/assets/plato-bust.png"}},
+        {"id": "card:def1", "role": "card", "text": "Quy luật Tự nhiên"},
+        {"id": "card:def2", "role": "card", "text": "Quan hệ Xã hội"},
+        {"id": "card:def3", "role": "card", "text": "Quy luật Tư duy"}
+      ],
+      "base_state": ["art:plato"],
+      "state_after": {
+        "b2.1": {
+          "enter": ["card:def1", "card:def2"],
+          "dim": [],
+          "highlight": [],
+          "exit": [],
+          "action": null
+        },
+        "b2.2": {
+          "enter": ["card:def3"],
+          "dim": ["card:def2"],
+          "highlight": ["card:def3"],
+          "exit": [],
+          "action": null
+        }
+      }
+    },
+    {
+      "id": "sh3",
+      "beat": "b3",
+      "layout": "bullets",
+      "objects": [
+        {"id": "bullet:sys1", "role": "bullet", "text": "Triết học Mác – Lênin (Thế giới quan và phương pháp luận)"},
+        {"id": "bullet:sys2", "role": "bullet", "text": "Kinh tế chính trị Mác – Lênin (Quy luật phát triển kinh tế)"},
+        {"id": "bullet:sys3", "role": "bullet", "text": "Chủ nghĩa xã hội khoa học (Sứ mệnh giải phóng giai cấp)"}
+      ],
+      "base_state": ["bullet:sys1"],
+      "state_after": {
+        "b3.1": {
+          "enter": ["bullet:sys2", "bullet:sys3"],
+          "dim": [],
+          "highlight": ["bullet:sys1"],
+          "exit": [],
+          "action": null
+        }
+      }
+    }
+  ]
+}

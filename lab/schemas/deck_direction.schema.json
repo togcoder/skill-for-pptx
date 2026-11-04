@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lab.local/schemas/deck_direction.schema.json",
+  "title": "DeckDirection",
+  "description": "Two-Pass Screenplay and State-Machine Direction for Presentation Decks (T068 v2).",
+  "type": "object",
+  "required": ["brief", "style", "beats", "shots"],
+  "properties": {
+    "brief": {
+      "type": "object",
+      "required": ["audience", "minutes", "room", "decision", "one_sentence", "register"],
+      "properties": {
+        "audience": { "type": "string" },
+        "minutes": { "type": "number", "minimum": 1 },
+        "room": { "type": "string" },
+        "decision": { "type": "string" },
+        "one_sentence": { "type": "string", "description": "The spine: repeatable takeaway in <= 20 words" },
+        "register": {
+          "type": "string",
+          "enum": ["editorial_teaching", "technical", "executive", "editorial_culture"]
+        },
+        "intent": { "type": "object" }
+      }
+    },
+    "style": {
+      "type": "object",
+      "required": ["preset", "base_state", "image_role"],
+      "properties": {
+        "preset": { "type": "string" },
+        "base_state": { "type": "string", "enum": ["poster_first", "build_first"] },
+        "image_role": { "type": "string", "enum": ["evidence", "atmosphere", "punctuation"] }
+      }
+    },
+    "beats": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "job", "claim", "carrier", "attention", "figure", "t0_says", "clicks"],
+        "properties": {
+          "id": { "type": "string" },
+          "job": {
+            "type": "string",
+            "enum": ["hook", "name", "define", "contrast", "prove", "mechanism", "turn", "land", "ask"]
+          },
+          "claim": { "type": "string", "description": "Claim in <= 25 words" },
+          "carrier": { "type": "string", "description": "Object id that embodies the claim" },
+          "attention": { "type": "string" },
+          "figure": {
+            "type": "string",
+            "enum": ["arrive", "join", "build", "both", "assemble", "clear", "drill"]
+          },
+          "t0_says": { "type": "string", "description": "Spoken line while viewing resting base_state at t=0" },
+          "clicks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["id", "state", "post_click_says"],
+              "properties": {
+                "id": { "type": "string" },
+                "lead_in": { "type": "string", "description": "Pre-click split sentence bridge cue" },
+                "state": { "type": "string", "description": "What audience knows after click" },
+                "post_click_says": { "type": "string", "description": "Spoken explanation after click landed" },
+                "target_refs": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                },
+                "seconds": { "type": "number", "minimum": 0 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "shots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "beat", "layout", "objects", "base_state", "state_after"],
+        "properties": {
+          "id": { "type": "string" },
+          "beat": { "type": "string" },
+          "layout": { "type": "string" },
+          "objects": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["id", "role"],
+              "properties": {
+                "id": { "type": "string" },
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "title", "subtitle", "anchor", "card", "bullet",
+                    "step", "badge", "quote", "rule", "stat", "label",
+                    "hero", "zoom", "chart"
+                  ]
+                },
+                "text": { "type": "string" },
+                "asset": {
+                  "type": "object",
+                  "properties": {
+                    "file": { "type": "string" },
+                    "search": { "type": "string" },
+                    "treatment": { "type": "string" },
+                    "crop": { "type": "string" }
+                  }
+                },
+                "zoom_spec": {
+                  "type": "object",
+                  "properties": {
+                    "kind": { "type": "string", "enum": ["slide", "section", "summary"] },
+                    "slides": { "type": "array", "items": { "type": "integer" } },
+                    "sections": { "type": "array", "items": { "type": "integer" } },
+                    "returnToZoom": { "type": "boolean" }
+                  }
+                }
+              }
+            }
+          },
+          "base_state": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "state_after": {
+            "type": "object",
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "type": "array",
+                  "items": { "type": "string" }
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "enter": { "type": "array", "items": { "type": "string" } },
+                    "dim": { "type": "array", "items": { "type": "string" } },
+                    "highlight": { "type": "array", "items": { "type": "string" } },
+                    "exit": { "type": "array", "items": { "type": "string" } },
+                    "action": { "type": ["string", "null"] }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
