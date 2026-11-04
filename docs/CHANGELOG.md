@@ -7,6 +7,33 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T067 [pptx] Synthesis: direction before layout, state before effect — 2026-11-04
+
+- **Why.** Four parallel streams audited the owner's critique of T066. The
+  umbrella finding is that T066 did not lack effects; it lacked direction. No
+  artifact said what the audience must see or believe at each moment, so layout
+  finished first and motion only picked a click index.
+- **Base state.** 3 slides opened with no readable claim, 9/10 titles were
+  click-gated, 4/4 pictures arrived on the last click, and 51 clicks contained
+  0 object lifecycles. The directed copy reaches 27 beats, 116 effects, a
+  readable `t=0`, no picture on the last click and at most two movers.
+- **Images.** One image is one block (face + ring + ground + caption) and enters
+  on the sentence that names it, never after the last sentence. Identity images
+  sit at `t=0`; evidence images enter on their naming beat; a coda image is
+  banned. A wins the cover, B wins the argument slide.
+- **Style.** `VisualStyle/1` plus five presets replaces "theme = palette +
+  fonts" with geometry, material, depth, texture, image treatment, motion
+  language and density; 5/5 specimens built native.
+- **Motion.** Removing all nine decorative Morphs was a reset, not the target.
+  The target is 3–4 semantic state-pair Morphs, each continuing one object or
+  idea; no background/thread Morph.
+- **Direction artefact.** `brief → script → beat sheet → shot list → motion
+  plan`, where every shot declares `base_state` before `state_after`. Draft
+  skill: `skills/deck-director/SKILL.md` (not wired).
+- **Still missing.** `deck_state_critic` is specified but not implemented; no
+  combined deck yet; no human review (rung 6). T068 is the directed build.
+  `experiments/T067-20261104-opencode-deck-director/SYNTHESIS.md`.
+
 ## T067 [pptx] Visual style system — 2026-11-04
 
 - **Why.** The owner asked for style, not only background and type: cartoon,
