@@ -106,6 +106,29 @@ were true at the time. Task IDs and their branches are listed in
   EXPERIMENTAL, not wired into `slide_forge.py`.
 - **Report.** `experiments/T062-20261104-opencode-asset-factory/REPORT.md`.
 
+## T060 [pptx] DeckCraft source study: in-slide animation frames — 2026-11-04
+
+- **Why.** T057 found DeckCraft has no in-slide animation renderer and proposed
+  a source study: find the timing-tree player, estimate
+  `render-animation --slide N --click K --t ms`, and test the Forge `dynamic`
+  deck against PowerPoint CreateVideo.
+- **Source.** `storytold/deckcraft` @ `23ac4f7` (0.15.0, MIT/Apache-2.0). The
+  player is `deckcraft-anim` (pure Rust): `Timeline` builds click steps and
+  per-shape `AnimState`; `ShowState` adds navigation; `effects.rs` evaluates
+  entrance/exit/emphasis/path; `render_slide` already accepts a per-shape state
+  closure. No CLI animation command exists at HEAD.
+- **Prototype.** A 151-line patch adds `render::shape_state` and
+  `deckcraft-cli render-animation ... [--plan]`; it builds and renders the
+  Forge deck. 98 `deckcraft-anim` tests and 20 CLI tests pass.
+- **Fidelity.** 118/118 effects match PowerPoint's trigger; 106/106 finite
+  durations match; 37/37 step counts; 29/37 step durations exact and 6 explained
+  by after-previous chains. Path probe within 10 px at 1280. Preset coverage:
+  102/198 map (51.5%), but at most 67/198 (33.8%) are exact/path; 96 missing, 27
+  approximated, 8 identity-shifted. A probe found behaviour-level
+  `repeatCount` is dropped (3.000 s PowerPoint vs 1.000 s DeckCraft).
+- **Status.** Experiment only; no upstream push/PR. Patch plan in the report.
+- **Report.** `experiments/T060-20261104-opencode-deckcraft-source/REPORT.md`.
+
 ## T057 [cross] Lead review, DeckCraft evaluation and next programme — 2026-11-04
 
 - **Why.** After 22 tasks in four days (T035–T056) the owner asked Claude to

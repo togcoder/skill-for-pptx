@@ -1,0 +1,199 @@
+class,name,preset_id,subtype,deckcraft_effect,deckcraft_label,fidelity,why
+entr,appear,1,0,appear,Appear,exact,dedicated evaluator branch
+exit,appear-out,1,0,disappear,Disappear,exact,dedicated evaluator branch
+entr,fly,2,4,fly,Fly In,exact,dedicated evaluator branch
+exit,fly-out,2,4,flyOut,Fly Out,exact,dedicated evaluator branch
+entr,blinds,3,10,blinds,Blinds,approximate,"opacity fade, not blinds"
+exit,blinds-out,3,10,blindsOut,Blinds,approximate,"opacity fade, not blinds"
+entr,box,4,16,box,Box,approximate,"centre rectangle clip, not a box outline"
+exit,box-out,4,16,boxOut,Box,approximate,"centre rectangle clip, not a box outline"
+entr,checkerboard,5,10,checkerboard,Checkerboard,approximate,"opacity fade, not checkerboard"
+exit,checkerboard-out,5,10,checkerboardOut,Checkerboard,approximate,"opacity fade, not checkerboard"
+entr,circle,6,16,shape,Shape,approximate,"centre rectangle clip, not the PowerPoint shape"
+exit,circle-out,6,16,shapeOut,Shape,approximate,"centre rectangle clip, not the PowerPoint shape"
+entr,crawl,7,4,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+exit,crawl-out,7,4,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+entr,diamond,8,16,diamond,Diamond,approximate,"centre rectangle clip, not a diamond"
+exit,diamond-out,8,16,diamondOut,Diamond,approximate,"centre rectangle clip, not a diamond"
+entr,dissolve,9,0,dissolve,Dissolve In,approximate,"opacity fade, not pixel dissolve"
+exit,dissolve-out,9,0,dissolveOut,Dissolve Out,approximate,"opacity fade, not pixel dissolve"
+entr,fade,10,0,fade,Fade,exact,dedicated evaluator branch
+exit,fade-out,10,0,fadeOut,Fade,exact,dedicated evaluator branch
+entr,flash-once,11,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+exit,flash-once-out,11,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+entr,peek,12,4,peek,Peek In,exact,dedicated evaluator branch
+exit,peek-out,12,4,peekOut,Peek Out,exact,dedicated evaluator branch
+entr,plus,13,16,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+exit,plus-out,13,16,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+entr,random-bars,14,10,randomBars,Random Bars,approximate,"opacity fade, not random bars"
+exit,random-bars-out,14,10,randomBarsOut,Random Bars,approximate,"opacity fade, not random bars"
+entr,spiral,15,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+exit,spiral-out,15,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+entr,split,16,21,split,Split,approximate,centre clip; PowerPoint splits from the edges
+exit,split-out,16,21,splitOut,Split,approximate,centre clip; PowerPoint splits from the edges
+entr,stretch,17,10,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+exit,stretch-out,17,10,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+entr,strips,18,12,strips,Strips,approximate,"rectangle clip, not strips"
+exit,strips-out,18,12,stripsOut,Strips,approximate,"rectangle clip, not strips"
+entr,swivel,19,10,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+exit,swivel-out,19,10,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+entr,wedge,20,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+exit,wedge-out,20,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+entr,wheel,21,1,wheel,Wheel,approximate,"opacity fade, not spokes"
+exit,wheel-out,21,1,wheelOut,Wheel,approximate,"opacity fade, not spokes"
+entr,wipe,22,4,wipe,Wipe,exact,dedicated evaluator branch
+exit,wipe-out,22,4,wipeOut,Wipe,exact,dedicated evaluator branch
+entr,zoom,23,16,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+exit,zoom-out,23,16,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+entr,random-effects,24,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+exit,random-effects-out,24,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+entr,boomerang,25,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+exit,boomerang-out,25,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+entr,bounce,26,0,bounce,Bounce,exact,dedicated evaluator branch
+exit,bounce-out,26,0,bounceOut,Bounce,exact,dedicated evaluator branch
+entr,color-reveal,27,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+exit,color-reveal-out,27,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+entr,credits,28,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+exit,credits-out,28,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+entr,ease-in,29,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+exit,ease-in-out,29,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+entr,float,30,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+exit,float-out,30,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+entr,grow-and-turn,31,0,grow,Grow & Turn,exact,dedicated evaluator branch
+exit,grow-and-turn-out,31,0,shrinkTurn,Shrink & Turn,exact,dedicated evaluator branch
+entr,light-speed,34,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+exit,light-speed-out,34,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+entr,pinwheel,35,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+exit,pinwheel-out,35,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+entr,rise-up,37,0,rise,Rise Up,exact,dedicated evaluator branch
+exit,rise-up-out,37,0,sinkDown,Sink Down,exact,dedicated evaluator branch
+entr,swish,38,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+exit,swish-out,38,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+entr,thin-line,39,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+exit,thin-line-out,39,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+entr,unfold,40,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+exit,unfold-out,40,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+entr,whip,41,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+exit,whip-out,41,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+entr,ascend,42,0,float,Float In,id-shift,Ascend (DeckCraft calls id 42 Float In)
+exit,ascend-out,42,0,floatOut,Float Out,id-shift,Ascend (DeckCraft calls id 42 Float Out)
+entr,center-revolve,43,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+exit,center-revolve-out,43,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+entr,faded-swivel,45,0,swivel,Swivel,id-shift,Faded Swivel (DeckCraft calls id 45 Swivel)
+exit,faded-swivel-out,45,0,swivelOut,Swivel,id-shift,Faded Swivel (DeckCraft calls id 45 Swivel)
+entr,descend,47,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+exit,descend-out,47,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+entr,sling,48,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+exit,sling-out,48,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+entr,spinner,49,0,spinner,Spinner,exact,dedicated evaluator branch
+exit,spinner-out,49,0,spinnerOut,Spinner,exact,dedicated evaluator branch
+entr,stretchy,50,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+exit,stretchy-out,50,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+entr,zip,51,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+exit,zip-out,51,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+entr,arc-up,52,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+exit,arc-up-out,52,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+entr,faded-zoom,53,16,zoom,Zoom,id-shift,Faded Zoom (DeckCraft calls id 53 Zoom)
+exit,faded-zoom-out,53,32,zoomOut,Zoom,id-shift,Faded Zoom (DeckCraft calls id 53 Zoom)
+entr,glide,54,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+exit,glide-out,54,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+entr,expand,55,0,expand,Expand,exact,dedicated evaluator branch
+exit,expand-out,55,0,contract,Contract,exact,dedicated evaluator branch
+entr,flip,56,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+exit,flip-out,56,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+emph,shimmer,36,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+entr,fold,58,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+exit,fold-out,58,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+emph,change-fill-color,1,2,fillColor,Fill Color,approximate,"whole-shape tint, PowerPoint changes the fill"
+emph,change-font,2,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+emph,change-font-color,3,2,fontColor,Font Color,approximate,"whole-shape tint, PowerPoint changes the font"
+emph,change-font-size,4,2,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+emph,change-font-style,5,1,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+emph,grow-shrink,6,0,growShrink,Grow/Shrink,exact,dedicated evaluator branch
+emph,change-line-color,7,2,lineColor,Line Color,approximate,"whole-shape tint, PowerPoint changes the line"
+emph,spin,8,0,spin,Spin,exact,dedicated evaluator branch
+emph,transparency,9,0,transparency,Transparency,exact,dedicated evaluator branch
+emph,bold-flash,10,0,boldFlash,Bold Flash,approximate,"shape scale + tint, PowerPoint bolds text"
+emph,blast,14,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+emph,bold-reveal,15,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+emph,brush-on-color,16,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+emph,brush-on-underline,18,0,underline,Underline,approximate,"shape scale, PowerPoint underlines text"
+emph,color-blend,19,0,objectColor,Object Color,approximate,"whole-shape tint, PowerPoint changes fill/line/font scope"
+emph,color-wave,20,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+emph,complementary-color,21,0,complementaryColor,Complementary Color,exact,dedicated evaluator branch
+emph,complementary-color2,22,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+emph,contrasting-color,23,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+emph,darken,24,0,darken,Darken,exact,dedicated evaluator branch
+emph,desaturate,25,0,desaturate,Desaturate,exact,dedicated evaluator branch
+emph,flash-bulb,26,0,pulse,Pulse,id-shift,Flash Bulb (DeckCraft calls id 26 Pulse)
+emph,flicker,27,0,colorPulse,Color Pulse,id-shift,Flicker (DeckCraft calls id 27 Color Pulse)
+emph,grow-with-color,28,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+emph,lighten,30,0,lighten,Lighten,exact,dedicated evaluator branch
+emph,style-emphasis,31,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+emph,teeter,32,0,teeter,Teeter,exact,dedicated evaluator branch
+emph,vertical-grow,33,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+emph,wave,34,0,wave,Wave,approximate,shape offset/scale; PowerPoint waves text
+path,path-circle,1,0,shapes,Shapes,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-right-triangle,2,0,rightTriangle,Right Triangle,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-diamond,3,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+path,path-hexagon,4,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+path,path5-point-star,5,0,star5,5 Point Star,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-crescent-moon,6,0,crescentMoon,Crescent Moon,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-square,7,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+path,path-trapezoid,8,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+path,path-heart,9,0,heart,Heart,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-octagon,10,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+path,path6-point-star,11,0,star6,6 Point Star,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-football,12,0,football,Football,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-equal-triangle,13,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+path,path-parallelogram,14,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+path,path-pentagon,15,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+path,path4-point-star,16,0,star4,4 Point Star,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path8-point-star,17,0,star8,8 Point Star,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-teardrop,18,0,teardrop,Teardrop,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-pointy-star,19,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+path,path-curved-square,20,0,curvedSquare,Curved Square,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-curved-x,21,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+path,path-vertical-figure8,22,0,figure8Vertical,Vertical Figure 8,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-curvy-star,23,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+path,path-loopde-loop,24,0,loopDeLoop,Loop de Loop,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-buzzsaw,25,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+path,path-horizontal-figure8,26,0,figure8Horizontal,Horizontal Figure 8,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-peanut,27,0,peanut,Peanut,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-figure8-four,28,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+path,path-neutron,29,0,neutron,Neutron,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-swoosh,30,0,swoosh,Swoosh,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-bean,31,0,bean,Bean,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-plus,32,0,plusPath,Plus,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-inverted-triangle,33,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+path,path-inverted-square,34,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+path,path-left,35,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+path,path-turn-right,36,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+path,path-arc-down,37,0,arcs,Arcs,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-zigzag,38,0,zigzag,Zigzag,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-s-curve2,39,0,sCurve2,S Curve 2,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-sine-wave,40,0,sineWave,Sine Wave,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-bounce-left,41,0,bounceLeft,Bounce Left,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-down,42,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+path,path-turn-up,43,0,turns,Turns,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-arc-up,44,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+path,path-heartbeat,45,0,heartbeat,Heartbeat,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-spiral-right,46,0,spiralRight,Spiral Right,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-wave,47,0,pathWave,Wave,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-curvy-left,48,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+path,path-diagonal-down-right,49,0,diagonalDownRight,Diagonal Down Right,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-turn-down,50,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+path,path-arc-left,51,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+path,path-funnel,52,0,funnel,Funnel,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-spring,53,0,spring,Spring,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-bounce-right,54,0,bounceRight,Bounce Right,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-spiral-left,55,0,spiralLeft,Spiral Left,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-diagonal-up-right,56,0,diagonalUpRight,Diagonal Up Right,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-turn-up-right,57,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+path,path-arc-right,58,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
+path,path-s-curve1,59,0,sCurve1,S Curve 1,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-decaying-wave,60,0,decayingWave,Decaying Wave,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-curvy-right,61,0,loops,Loops,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-stairs-down,62,0,stairsDown,Stairs Down,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-up,64,0,lines,Lines,path,"motion runs; the file's animMotion path is used, else the preset geometry"
+path,path-right,63,0,,,missing,no DeckCraft animation with this class and preset id; fallback effect
