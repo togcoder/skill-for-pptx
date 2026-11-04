@@ -3,7 +3,7 @@
 Since T040: every new title starts with its domain in brackets: `[pptx]`, `[docx]`, `[xlsx]`, `[svg]` or `[cross]` (see `domains/README.md`). Lifecycle: `lab/PROTOCOL.md`. A row may carry `review requested` / `reviewed: <verdict>`.
 
 This file is the one place to take a task ID. Before starting, add a row with
-status `claimed`, using the next free ID (**T070**). Push the row before you do
+status `claimed`, using the next free ID (**T078**). Push the row before you do
 expensive work. IDs are never reused. T024 was taken three times in parallel,
 so those rows carry a suffix. The experiment folders keep the names they were
 created with.
@@ -99,4 +99,12 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T068 | [pptx] Deck Director compiler & validator: Two-Pass screenplay, lifecycle state-machine, 5 narrative laws | Antigravity (Gemini 2.5 Pro) | work/T068-antigravity-deck-director | main (Argon approved) | experiments/T068-20261104-antigravity-deck-director/REPORT.md |
 | T069a | [pptx] Directed deck: 3–4 semantic Morphs, image blocks, state-sequence critic | OpenCode (DeepSeek V4.1 Flash Max) | `work/T069-opencode-directed-deck` | main (research; review requested) | `experiments/T069-20261104-opencode-directed-deck/REPORT.md` |
 | T069b | [pptx] Narrative Critic & Two-Pass Screenplay Scaffold: speaker notes compiler, 6th dimension narrative critic, exit lifecycles | Antigravity (Gemini 2.5 Pro) | `work/T069-antigravity-narrative-critic` | main (Argon approved) | `experiments/T069-20261104-antigravity-narrative-critic/REPORT.md` |
-| T070 | *next free ID* | | | | |
+| T070 | [cross] Lead synthesis of T001–T069, critique and PPTX roadmap | Claude (Opus 5.5, desktop) | `work/T070-claude-lead-synthesis` | done | `experiments/T070-20261104-claude-lead-synthesis/REPORT.md` |
+| T071 | [pptx] Golden benchmark (8 briefs) + owner A/B review page + critic calibration | *open, suggested Claude → critic OpenCode* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |
+| T072 | [pptx] Visual defect gates on rendered frames (clipped, empty card, placeholder, tiny, style drop, collide) | *open, suggested OpenCode → critic Claude* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |
+| T073 | [pptx] Fast motion viewer: DeckCraft render-animation build vs harness-recorded slide show, both vs CreateVideo | *open, suggested Claude desktop → critic OpenCode* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |
+| T074 | [pptx] Morph matching rulebook from a ≥30-cell PowerPoint probe matrix | *open, suggested OpenCode → critic Claude* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |
+| T075 | [pptx] scene.json + scene compiler (actors/states → in-slide effects and Morph) | *open, after T071–T072; suggested Claude → critic Antigravity* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |
+| T076 | [pptx] Library of 10 Morph moves with PowerPoint golden strips | *open, after T074; suggested OpenCode → critic Claude* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |
+| T077 | [pptx] Deck Director emits scene.json; remove substring mapping and invented content | *open, after T075; suggested Antigravity → critic Claude* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |
+| T078 | *next free ID* | | | | |
