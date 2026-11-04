@@ -1,0 +1,379 @@
+{
+  "crop_1080p": [
+    150,
+    230,
+    800,
+    880
+  ],
+  "ladder_step": 0.1,
+  "frames": {
+    "morph": [
+      {
+        "t": 4.2,
+        "camera_x": -1.2,
+        "scale": 0.788,
+        "residual": 3.346,
+        "between": [
+          -1.2,
+          -1.1
+        ]
+      },
+      {
+        "t": 4.4,
+        "camera_x": -1.185,
+        "scale": 0.341,
+        "residual": 10.383,
+        "between": [
+          -1.2,
+          -1.1
+        ]
+      },
+      {
+        "t": 5.0,
+        "camera_x": 1.185,
+        "scale": 0.321,
+        "residual": 10.91,
+        "between": [
+          1.1,
+          1.2
+        ]
+      },
+      {
+        "t": 5.2,
+        "camera_x": 1.195,
+        "scale": 0.594,
+        "residual": 6.263,
+        "between": [
+          1.1,
+          1.2
+        ]
+      },
+      {
+        "t": 5.4,
+        "camera_x": 1.2,
+        "scale": 0.786,
+        "residual": 3.257,
+        "between": [
+          1.1,
+          1.2
+        ]
+      },
+      {
+        "t": 5.6,
+        "camera_x": 1.2,
+        "scale": 0.907,
+        "residual": 1.916,
+        "between": [
+          1.1,
+          1.2
+        ]
+      },
+      {
+        "t": 6.0,
+        "camera_x": 1.2,
+        "scale": 0.993,
+        "residual": 1.576,
+        "between": [
+          1.1,
+          1.2
+        ]
+      }
+    ],
+    "fade": [
+      {
+        "t": 4.4,
+        "camera_x": -1.185,
+        "scale": 0.918,
+        "residual": 21.887,
+        "between": [
+          -1.2,
+          -1.1
+        ]
+      },
+      {
+        "t": 4.5,
+        "camera_x": -1.175,
+        "scale": 0.883,
+        "residual": 31.763,
+        "between": [
+          -1.2,
+          -1.1
+        ]
+      },
+      {
+        "t": 4.6,
+        "camera_x": 1.185,
+        "scale": 0.951,
+        "residual": 24.63,
+        "between": [
+          1.1,
+          1.2
+        ]
+      },
+      {
+        "t": 4.7,
+        "camera_x": 1.19,
+        "scale": 0.968,
+        "residual": 14.994,
+        "between": [
+          1.1,
+          1.2
+        ]
+      },
+      {
+        "t": 5.0,
+        "camera_x": 1.2,
+        "scale": 0.994,
+        "residual": 1.58,
+        "between": [
+          1.1,
+          1.2
+        ]
+      }
+    ],
+    "shared": [
+      {
+        "t": 4.2,
+        "camera_x": -1.01,
+        "scale": 0.995,
+        "residual": 6.937,
+        "between": [
+          -1.1,
+          -1.0
+        ]
+      },
+      {
+        "t": 4.4,
+        "camera_x": -0.605,
+        "scale": 0.996,
+        "residual": 5.572,
+        "between": [
+          -0.7,
+          -0.6
+        ]
+      },
+      {
+        "t": 5.0,
+        "camera_x": 0.585,
+        "scale": 0.996,
+        "residual": 9.424,
+        "between": [
+          0.5,
+          0.6
+        ]
+      },
+      {
+        "t": 5.1,
+        "camera_x": 0.72,
+        "scale": 0.996,
+        "residual": 11.198,
+        "between": [
+          0.7,
+          0.8
+        ]
+      },
+      {
+        "t": 5.2,
+        "camera_x": 0.835,
+        "scale": 0.996,
+        "residual": 14.065,
+        "between": [
+          0.8,
+          0.9
+        ]
+      },
+      {
+        "t": 5.3,
+        "camera_x": 0.93,
+        "scale": 0.995,
+        "residual": 13.684,
+        "between": [
+          0.9,
+          1.0
+        ]
+      },
+      {
+        "t": 5.4,
+        "camera_x": 1.01,
+        "scale": 0.995,
+        "residual": 7.734,
+        "between": [
+          1.0,
+          1.1
+        ]
+      },
+      {
+        "t": 5.5,
+        "camera_x": 1.075,
+        "scale": 0.996,
+        "residual": 12.85,
+        "between": [
+          1.0,
+          1.1
+        ]
+      },
+      {
+        "t": 5.6,
+        "camera_x": 1.12,
+        "scale": 0.996,
+        "residual": 11.501,
+        "between": [
+          1.1,
+          1.2
+        ]
+      },
+      {
+        "t": 5.7,
+        "camera_x": 1.155,
+        "scale": 0.995,
+        "residual": 14.848,
+        "between": [
+          1.1,
+          1.2
+        ]
+      },
+      {
+        "t": 5.8,
+        "camera_x": 1.185,
+        "scale": 0.996,
+        "residual": 11.032,
+        "between": [
+          1.1,
+          1.2
+        ]
+      },
+      {
+        "t": 6.0,
+        "camera_x": 1.2,
+        "scale": 0.995,
+        "residual": 1.986,
+        "between": [
+          1.1,
+          1.2
+        ]
+      }
+    ],
+    "dup": [
+      {
+        "t": 4.2,
+        "camera_x": -1.01,
+        "scale": 0.995,
+        "residual": 6.937,
+        "between": [
+          -1.1,
+          -1.0
+        ]
+      },
+      {
+        "t": 4.4,
+        "camera_x": -0.605,
+        "scale": 0.996,
+        "residual": 5.572,
+        "between": [
+          -0.7,
+          -0.6
+        ]
+      },
+      {
+        "t": 5.0,
+        "camera_x": 0.585,
+        "scale": 0.996,
+        "residual": 9.424,
+        "between": [
+          0.5,
+          0.6
+        ]
+      },
+      {
+        "t": 5.1,
+        "camera_x": 0.72,
+        "scale": 0.996,
+        "residual": 11.198,
+        "between": [
+          0.7,
+          0.8
+        ]
+      },
+      {
+        "t": 5.2,
+        "camera_x": 0.835,
+        "scale": 0.996,
+        "residual": 14.065,
+        "between": [
+          0.8,
+          0.9
+        ]
+      },
+      {
+        "t": 5.3,
+        "camera_x": 0.93,
+        "scale": 0.995,
+        "residual": 13.684,
+        "between": [
+          0.9,
+          1.0
+        ]
+      },
+      {
+        "t": 5.4,
+        "camera_x": 1.01,
+        "scale": 0.995,
+        "residual": 7.734,
+        "between": [
+          1.0,
+          1.1
+        ]
+      },
+      {
+        "t": 5.5,
+        "camera_x": 1.075,
+        "scale": 0.996,
+        "residual": 12.85,
+        "between": [
+          1.0,
+          1.1
+        ]
+      },
+      {
+        "t": 5.6,
+        "camera_x": 1.12,
+        "scale": 0.996,
+        "residual": 11.501,
+        "between": [
+          1.1,
+          1.2
+        ]
+      },
+      {
+        "t": 5.7,
+        "camera_x": 1.155,
+        "scale": 0.995,
+        "residual": 14.848,
+        "between": [
+          1.1,
+          1.2
+        ]
+      },
+      {
+        "t": 5.8,
+        "camera_x": 1.185,
+        "scale": 0.996,
+        "residual": 11.032,
+        "between": [
+          1.1,
+          1.2
+        ]
+      },
+      {
+        "t": 6.0,
+        "camera_x": 1.2,
+        "scale": 0.995,
+        "residual": 1.986,
+        "between": [
+          1.1,
+          1.2
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,314 @@
+{
+  "box_1080p": [
+    170,
+    240,
+    760,
+    860
+  ],
+  "decks": {
+    "morph": {
+      "mp4": "experiments/T064-20261104-opencode-native-3d/preview/camera-morph.mp4",
+      "ref1_t": 3.0,
+      "ref2_t": 9.0,
+      "frames": [
+        {
+          "t": 3.6,
+          "alpha": 0.0,
+          "rmse_end1": 0.206,
+          "rmse_end2": 76.706,
+          "rmse_blend": 0.206,
+          "ghost_pixels_gt30": 0.0,
+          "match": "end1"
+        },
+        {
+          "t": 3.9,
+          "alpha": 0.0,
+          "rmse_end1": 0.042,
+          "rmse_end2": 76.705,
+          "rmse_blend": 0.042,
+          "ghost_pixels_gt30": 0.0,
+          "match": "end1"
+        },
+        {
+          "t": 4.0,
+          "alpha": 0.0,
+          "rmse_end1": 0.206,
+          "rmse_end2": 76.706,
+          "rmse_blend": 0.206,
+          "ghost_pixels_gt30": 0.0,
+          "match": "end1"
+        },
+        {
+          "t": 4.2,
+          "alpha": 0.1522,
+          "rmse_end1": 27.109,
+          "rmse_end2": 69.483,
+          "rmse_blend": 24.467,
+          "ghost_pixels_gt30": 0.2988,
+          "match": "neither"
+        },
+        {
+          "t": 4.4,
+          "alpha": 0.4821,
+          "rmse_end1": 85.841,
+          "rmse_end2": 87.059,
+          "rmse_blend": 77.467,
+          "ghost_pixels_gt30": 0.5433,
+          "match": "neither"
+        },
+        {
+          "t": 4.6,
+          "alpha": 0.6523,
+          "rmse_end1": 116.017,
+          "rmse_end2": 108.022,
+          "rmse_blend": 104.676,
+          "ghost_pixels_gt30": 0.5604,
+          "match": "neither"
+        },
+        {
+          "t": 4.8,
+          "alpha": 0.6523,
+          "rmse_end1": 116.017,
+          "rmse_end2": 108.022,
+          "rmse_blend": 104.676,
+          "ghost_pixels_gt30": 0.5604,
+          "match": "neither"
+        },
+        {
+          "t": 5.0,
+          "alpha": 0.733,
+          "rmse_end1": 98.292,
+          "rmse_end2": 83.184,
+          "rmse_blend": 80.623,
+          "ghost_pixels_gt30": 0.5449,
+          "match": "neither"
+        },
+        {
+          "t": 5.2,
+          "alpha": 0.8426,
+          "rmse_end1": 80.471,
+          "rmse_end2": 49.448,
+          "rmse_blend": 47.949,
+          "ghost_pixels_gt30": 0.4951,
+          "match": "neither"
+        },
+        {
+          "t": 5.4,
+          "alpha": 0.9179,
+          "rmse_end1": 74.68,
+          "rmse_end2": 25.689,
+          "rmse_blend": 24.905,
+          "ghost_pixels_gt30": 0.2994,
+          "match": "neither"
+        },
+        {
+          "t": 5.6,
+          "alpha": 0.9655,
+          "rmse_end1": 74.79,
+          "rmse_end2": 10.815,
+          "rmse_blend": 10.485,
+          "ghost_pixels_gt30": 0.0001,
+          "match": "neither"
+        },
+        {
+          "t": 5.8,
+          "alpha": 0.991,
+          "rmse_end1": 76.075,
+          "rmse_end2": 3.25,
+          "rmse_blend": 3.174,
+          "ghost_pixels_gt30": 0.0,
+          "match": "neither"
+        },
+        {
+          "t": 6.0,
+          "alpha": 0.9995,
+          "rmse_end1": 76.666,
+          "rmse_end2": 0.711,
+          "rmse_blend": 0.71,
+          "ghost_pixels_gt30": 0.0,
+          "match": "end2"
+        },
+        {
+          "t": 6.2,
+          "alpha": 0.9995,
+          "rmse_end1": 76.666,
+          "rmse_end2": 0.711,
+          "rmse_blend": 0.71,
+          "ghost_pixels_gt30": 0.0,
+          "match": "end2"
+        },
+        {
+          "t": 6.6,
+          "alpha": 0.9995,
+          "rmse_end1": 76.666,
+          "rmse_end2": 0.711,
+          "rmse_blend": 0.71,
+          "ghost_pixels_gt30": 0.0,
+          "match": "end2"
+        },
+        {
+          "t": 7.0,
+          "alpha": 1.0,
+          "rmse_end1": 76.705,
+          "rmse_end2": 0.0,
+          "rmse_blend": 0.0,
+          "ghost_pixels_gt30": 0.0,
+          "match": "end2"
+        }
+      ],
+      "verdict": "neither end state nor a cross-fade: two silhouettes are never superimposed, the model leaves the stage instead"
+    },
+    "fade": {
+      "mp4": "experiments/T064-20261104-opencode-native-3d/preview/camera-fade.mp4",
+      "ref1_t": 3.0,
+      "ref2_t": 8.0,
+      "frames": [
+        {
+          "t": 3.6,
+          "alpha": 0.0,
+          "rmse_end1": 0.206,
+          "rmse_end2": 76.706,
+          "rmse_blend": 0.206,
+          "ghost_pixels_gt30": 0.0,
+          "match": "end1"
+        },
+        {
+          "t": 3.9,
+          "alpha": 0.0,
+          "rmse_end1": 0.042,
+          "rmse_end2": 76.705,
+          "rmse_blend": 0.042,
+          "ghost_pixels_gt30": 0.0,
+          "match": "end1"
+        },
+        {
+          "t": 4.0,
+          "alpha": 0.0,
+          "rmse_end1": 0.206,
+          "rmse_end2": 76.706,
+          "rmse_blend": 0.206,
+          "ghost_pixels_gt30": 0.0,
+          "match": "end1"
+        },
+        {
+          "t": 4.2,
+          "alpha": 0.0915,
+          "rmse_end1": 7.106,
+          "rmse_end2": 69.694,
+          "rmse_blend": 1.106,
+          "ghost_pixels_gt30": 0.0001,
+          "match": "blend"
+        },
+        {
+          "t": 4.4,
+          "alpha": 0.3379,
+          "rmse_end1": 25.952,
+          "rmse_end2": 50.804,
+          "rmse_blend": 1.317,
+          "ghost_pixels_gt30": 0.0,
+          "match": "blend"
+        },
+        {
+          "t": 4.6,
+          "alpha": 0.6432,
+          "rmse_end1": 49.357,
+          "rmse_end2": 27.407,
+          "rmse_blend": 1.428,
+          "ghost_pixels_gt30": 0.0,
+          "match": "blend"
+        },
+        {
+          "t": 4.8,
+          "alpha": 0.8944,
+          "rmse_end1": 68.615,
+          "rmse_end2": 8.241,
+          "rmse_blend": 1.485,
+          "ghost_pixels_gt30": 0.0,
+          "match": "blend"
+        },
+        {
+          "t": 5.0,
+          "alpha": 0.9986,
+          "rmse_end1": 76.599,
+          "rmse_end2": 0.856,
+          "rmse_blend": 0.849,
+          "ghost_pixels_gt30": 0.0,
+          "match": "end2"
+        },
+        {
+          "t": 5.2,
+          "alpha": 0.9986,
+          "rmse_end1": 76.599,
+          "rmse_end2": 0.848,
+          "rmse_blend": 0.841,
+          "ghost_pixels_gt30": 0.0,
+          "match": "end2"
+        },
+        {
+          "t": 5.4,
+          "alpha": 0.9986,
+          "rmse_end1": 76.599,
+          "rmse_end2": 0.848,
+          "rmse_blend": 0.841,
+          "ghost_pixels_gt30": 0.0,
+          "match": "end2"
+        },
+        {
+          "t": 5.6,
+          "alpha": 0.9986,
+          "rmse_end1": 76.599,
+          "rmse_end2": 0.848,
+          "rmse_blend": 0.841,
+          "ghost_pixels_gt30": 0.0,
+          "match": "end2"
+        },
+        {
+          "t": 5.8,
+          "alpha": 0.9986,
+          "rmse_end1": 76.599,
+          "rmse_end2": 0.848,
+          "rmse_blend": 0.841,
+          "ghost_pixels_gt30": 0.0,
+          "match": "end2"
+        },
+        {
+          "t": 6.0,
+          "alpha": 1.0,
+          "rmse_end1": 76.706,
+          "rmse_end2": 0.211,
+          "rmse_blend": 0.211,
+          "ghost_pixels_gt30": 0.0,
+          "match": "end2"
+        },
+        {
+          "t": 6.2,
+          "alpha": 1.0,
+          "rmse_end1": 76.706,
+          "rmse_end2": 0.211,
+          "rmse_blend": 0.211,
+          "ghost_pixels_gt30": 0.0,
+          "match": "end2"
+        },
+        {
+          "t": 6.6,
+          "alpha": 1.0,
+          "rmse_end1": 76.706,
+          "rmse_end2": 0.211,
+          "rmse_blend": 0.211,
+          "ghost_pixels_gt30": 0.0,
+          "match": "end2"
+        },
+        {
+          "t": 7.0,
+          "alpha": 1.0,
+          "rmse_end1": 76.705,
+          "rmse_end2": 0.0,
+          "rmse_blend": 0.0,
+          "ghost_pixels_gt30": 0.0,
+          "match": "end2"
+        }
+      ],
+      "verdict": "cross-fade: every frame is an end state or their blend"
+    }
+  }
+}

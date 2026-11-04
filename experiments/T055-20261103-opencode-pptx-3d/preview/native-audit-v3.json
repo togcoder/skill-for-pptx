@@ -1,0 +1,236 @@
+{
+  "pptx": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T055\\experiments\\T055-20261103-opencode-pptx-3d\\artifacts\\quickmill_native_product_tour_v3.pptx",
+  "slides": [
+    {
+      "index": 1,
+      "shapes": 33,
+      "models": [
+        {
+          "name": "Product3D",
+          "type": 30,
+          "id": 4,
+          "camera": [
+            -0.85,
+            0.45,
+            2.1
+          ],
+          "look_at": [
+            0.0,
+            0.28,
+            0.0
+          ],
+          "rotation": [
+            6.0,
+            0.0,
+            0.0
+          ],
+          "fov": 40.0,
+          "alt_text": "Embedded 3D model of the Quick Mill Omre massing study. Drag to rotate in PowerPoint."
+        }
+      ],
+      "texts": [
+        "01",
+        "QUICK MILL",
+        "OMRE  /  MASSING STUDY",
+        "01 / STRUCTURE",
+        "A black bay,\na chrome lid.",
+        "The black housing wraps the brewing bay. The chrome lid overhangs it; the left tower is the only yellow volume.",
+        "HEIGHT",
+        "553 mm",
+        "WIDTH",
+        "400 mm",
+        "DEPTH",
+        "326 mm",
+        "01",
+        "TOP HOUSING",
+        "80 mm black massing. The bay soffit is part of the same volume.",
+        "01",
+        "NATIVE 3D  \u00b7  EMBEDDED GLB  \u00b7  EDITABLE CALLOUTS",
+        "ROTATE IN POWERPOINT"
+      ]
+    },
+    {
+      "index": 2,
+      "shapes": 33,
+      "models": [
+        {
+          "name": "Product3D",
+          "type": 30,
+          "id": 4,
+          "camera": [
+            -0.85,
+            0.45,
+            2.1
+          ],
+          "look_at": [
+            0.0,
+            0.28,
+            0.0
+          ],
+          "rotation": [
+            6.0,
+            0.0,
+            0.0
+          ],
+          "fov": 40.0,
+          "alt_text": "Embedded 3D model of the Quick Mill Omre massing study. Drag to rotate in PowerPoint."
+        }
+      ],
+      "texts": [
+        "02",
+        "QUICK MILL",
+        "OMRE  /  MASSING STUDY",
+        "02 / BREWING BAY",
+        "The group sits\ninside the mass.",
+        "A 229 \u00d7 121 \u00d7 211 mm recess holds the group head and portafilter. The steam wand enters from the right.",
+        "BAY",
+        "229 \u00d7 121 \u00d7 211 mm",
+        "GROUP HEAD",
+        "\u00d8100 mm",
+        "BASKET",
+        "\u00d888 mm",
+        "02",
+        "GROUP HEAD",
+        "\u00d8100 mm, 60 mm deep. The portafilter projects into the bay.",
+        "02",
+        "NATIVE 3D  \u00b7  EMBEDDED GLB  \u00b7  EDITABLE CALLOUTS",
+        "ROTATE IN POWERPOINT"
+      ]
+    },
+    {
+      "index": 3,
+      "shapes": 33,
+      "models": [
+        {
+          "name": "Product3D",
+          "type": 30,
+          "id": 4,
+          "camera": [
+            -0.85,
+            0.45,
+            2.1
+          ],
+          "look_at": [
+            0.0,
+            0.28,
+            0.0
+          ],
+          "rotation": [
+            6.0,
+            0.0,
+            0.0
+          ],
+          "fov": 40.0,
+          "alt_text": "Embedded 3D model of the Quick Mill Omre massing study. Drag to rotate in PowerPoint."
+        }
+      ],
+      "texts": [
+        "03",
+        "QUICK MILL",
+        "OMRE  /  MASSING STUDY",
+        "03 / CONTROLS",
+        "Three switches,\none cast base.",
+        "The switch plate sits on the lower front-left. The tray is a 31 mm recess under a black grate; the base is a single dark casting.",
+        "TRAY",
+        "340 \u00d7 240 mm",
+        "SWITCH PLATE",
+        "120 \u00d7 82 mm",
+        "BASE",
+        "400 \u00d7 320 mm",
+        "03",
+        "SWITCH PLATE",
+        "Three 18 \u00d7 50 mm rockers on a 120 \u00d7 82 mm plate.",
+        "03",
+        "NATIVE 3D  \u00b7  EMBEDDED GLB  \u00b7  EDITABLE CALLOUTS",
+        "ROTATE IN POWERPOINT"
+      ]
+    }
+  ],
+  "package": {
+    "media": [
+      "ppt/media/image1.png",
+      "ppt/media/model3d2.glb",
+      "ppt/media/model3d3.glb",
+      "ppt/media/model3d1.glb"
+    ],
+    "model_glb": [
+      "ppt/media/model3d2.glb",
+      "ppt/media/model3d3.glb",
+      "ppt/media/model3d1.glb"
+    ],
+    "slides": [
+      "ppt/slides/slide1.xml",
+      "ppt/slides/slide2.xml",
+      "ppt/slides/slide3.xml"
+    ]
+  },
+  "glb": [
+    {
+      "name": "ppt/media/model3d2.glb",
+      "bytes": 93876,
+      "meshes": 34,
+      "materials": 34,
+      "metallic": [
+        0.0
+      ],
+      "bounds_m": [
+        [
+          -0.2,
+          0.0,
+          -0.163
+        ],
+        [
+          0.2,
+          0.553,
+          0.163
+        ]
+      ]
+    },
+    {
+      "name": "ppt/media/model3d3.glb",
+      "bytes": 93876,
+      "meshes": 34,
+      "materials": 34,
+      "metallic": [
+        0.0
+      ],
+      "bounds_m": [
+        [
+          -0.2,
+          0.0,
+          -0.163
+        ],
+        [
+          0.2,
+          0.553,
+          0.163
+        ]
+      ]
+    },
+    {
+      "name": "ppt/media/model3d1.glb",
+      "bytes": 93876,
+      "meshes": 34,
+      "materials": 34,
+      "metallic": [
+        0.0
+      ],
+      "bounds_m": [
+        [
+          -0.2,
+          0.0,
+          -0.163
+        ],
+        [
+          0.2,
+          0.553,
+          0.163
+        ]
+      ]
+    }
+  ],
+  "slide_count": 3,
+  "slide_width": 960.0,
+  "slide_height": 540.0,
+  "pdf": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T055\\experiments\\T055-20261103-opencode-pptx-3d\\preview\\quickmill_native_product_tour_v3.pdf"
+}

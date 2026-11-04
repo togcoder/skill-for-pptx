@@ -1,0 +1,190 @@
+{
+  "params": {
+    "seconds_per_slide": 4,
+    "vert_resolution": 1080,
+    "fps": 30,
+    "quality": 95
+  },
+  "decks": {
+    "morph": {
+      "source": "experiments/T064-20261104-opencode-native-3d/artifacts/camera-morph.pptx",
+      "mp4": "experiments/T064-20261104-opencode-native-3d/preview/camera-morph.mp4",
+      "slide_count": 2,
+      "entry_effect": [
+        0,
+        3954
+      ],
+      "advance": [
+        [
+          true,
+          4.0
+        ],
+        [
+          true,
+          4.0
+        ]
+      ],
+      "create_video_status": 3,
+      "mp4_bytes": 1144545,
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "width": 1920,
+            "height": 1080,
+            "avg_frame_rate": "183600/6059",
+            "nb_frames": "306"
+          }
+        ],
+        "format": {
+          "duration": "10.098300"
+        }
+      }
+    },
+    "fade": {
+      "source": "experiments/T064-20261104-opencode-native-3d/artifacts/camera-fade.pptx",
+      "mp4": "experiments/T064-20261104-opencode-native-3d/preview/camera-fade.mp4",
+      "slide_count": 2,
+      "entry_effect": [
+        0,
+        3849
+      ],
+      "advance": [
+        [
+          true,
+          4.0
+        ],
+        [
+          true,
+          4.0
+        ]
+      ],
+      "create_video_status": 3,
+      "mp4_bytes": 961039,
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "width": 1920,
+            "height": 1080,
+            "avg_frame_rate": "33120/1093",
+            "nb_frames": "276"
+          }
+        ],
+        "format": {
+          "duration": "9.108300"
+        }
+      }
+    },
+    "shared": {
+      "source": "experiments/T064-20261104-opencode-native-3d/artifacts/camera-morph-shared.pptx",
+      "mp4": "experiments/T064-20261104-opencode-native-3d/preview/camera-shared.mp4",
+      "slide_count": 2,
+      "entry_effect": [
+        0,
+        3954
+      ],
+      "advance": [
+        [
+          true,
+          4.0
+        ],
+        [
+          true,
+          4.0
+        ]
+      ],
+      "create_video_status": 3,
+      "mp4_bytes": 1416493,
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "width": 1920,
+            "height": 1080,
+            "avg_frame_rate": "183600/6059",
+            "nb_frames": "306"
+          }
+        ],
+        "format": {
+          "duration": "10.098300"
+        }
+      }
+    },
+    "modelonly": {
+      "source": "experiments/T064-20261104-opencode-native-3d/artifacts/camera-morph-modelonly.pptx",
+      "mp4": "experiments/T064-20261104-opencode-native-3d/preview/camera-modelonly.mp4",
+      "slide_count": 2,
+      "entry_effect": [
+        0,
+        3954
+      ],
+      "advance": [
+        [
+          true,
+          4.0
+        ],
+        [
+          true,
+          4.0
+        ]
+      ],
+      "create_video_status": 3,
+      "mp4_bytes": 1416493,
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "width": 1920,
+            "height": 1080,
+            "avg_frame_rate": "183600/6059",
+            "nb_frames": "306"
+          }
+        ],
+        "format": {
+          "duration": "10.098300"
+        }
+      }
+    },
+    "dup": {
+      "source": "experiments/T064-20261104-opencode-native-3d/artifacts/camera-morph-duplicated.pptx",
+      "mp4": "experiments/T064-20261104-opencode-native-3d/preview/camera-dup.mp4",
+      "slide_count": 2,
+      "entry_effect": [
+        0,
+        3954
+      ],
+      "advance": [
+        [
+          true,
+          4.0
+        ],
+        [
+          true,
+          4.0
+        ]
+      ],
+      "create_video_status": 3,
+      "mp4_bytes": 1152677,
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "width": 1920,
+            "height": 1080,
+            "avg_frame_rate": "183600/6059",
+            "nb_frames": "306"
+          }
+        ],
+        "format": {
+          "duration": "10.098300"
+        }
+      }
+    }
+  }
+}

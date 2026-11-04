@@ -1,0 +1,14 @@
+{
+  "camera-morph.pptx": {
+    "bytes": 462374,
+    "has_morph": true,
+    "has_fade_fallback": true,
+    "transition": "<mc:AlternateContent xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\" xmlns:p159=\"http://schemas.microsoft.com/office/powerpoint/2015/09/main\" xmlns:p14=\"http://schemas.microsoft.com/office/powerpoint/2010/main\"><mc:Choice Requires=\"p159 p14\"><p:transition spd=\"slow\" p14:dur=\"2000\"><p159:morph option=\"byObject\"/></p:transition></mc:Choice><mc:Fallback><p:transition spd=\"slow\"><p:fade/></p:transition></mc:Fallback></mc:AlternateContent"
+  },
+  "camera-fade.pptx": {
+    "bytes": 462307,
+    "has_morph": false,
+    "has_fade_fallback": false,
+    "transition": "<p:transition spd=\"slow\"><p:fade/></p:transition>"
+  }
+}

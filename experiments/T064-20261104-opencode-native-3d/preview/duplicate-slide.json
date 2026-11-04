@@ -1,0 +1,16 @@
+{
+  "copy_camera": [
+    1.2000000476837158,
+    0.44999998807907104,
+    2.200000047683716
+  ],
+  "raw_bytes": 367121,
+  "media": [
+    "ppt/media/image1.png",
+    "ppt/media/image2.png",
+    "ppt/media/model3d1.glb"
+  ],
+  "slide1_model": true,
+  "slide2_model": true,
+  "shared_model_part": true
+}

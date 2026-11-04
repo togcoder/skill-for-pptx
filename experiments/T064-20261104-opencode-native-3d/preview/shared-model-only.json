@@ -1,0 +1,13 @@
+{
+  "pptx": "experiments/T064-20261104-opencode-native-3d/artifacts/camera-morph-modelonly.pptx",
+  "bytes": 462374,
+  "media": [
+    "ppt/media/image1.png",
+    "ppt/media/image2.png",
+    "ppt/media/model3d2.glb",
+    "ppt/media/model3d1.glb"
+  ],
+  "slide2_model_rel": "model3d1.glb",
+  "slide2_raster_rel": "image2.png",
+  "slide2_has_morph": true
+}
