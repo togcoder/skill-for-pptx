@@ -7,6 +7,30 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T068 [pptx] Deck Director compiler: Two-Pass screenplay, lifecycle state machine, five narrative laws — 2026-11-04
+
+- **Why.** T067 named the missing artifact; T068 made it executable. The
+  failure was an inverted pipeline: conversational prose was written before the
+  spatial-temporal state machine existed.
+- **Two passes.** Pass 1 locks stage inventory, `t=0` base state and lifecycle
+  transitions (`enter`, `dim`, `highlight`, `exit`); Pass 2 weaves the spoken
+  line with split-sentence bridging at causality pivots and implicit deictic
+  anchoring.
+- **Implemented.** `scripts/deck_director.py` validates, compiles and reports a
+  ledger; `lab/schemas/deck_direction.schema.json` is the canonical schema;
+  `slide_forge.py build --plan` consumes `director.json`.
+- **Five laws (validator codes).** `NAR-CODA-TRAP` (no empty click; `t0_says`
+  ≤ 35 words), `NAR-KARAOKE` (text/speech overlap ≤ 45 %), `NAR-UNANCHORED`
+  (`post_click_says` must reference a target), `NAR-COLLISION` (cinematic figure
+  or ≥ 3 movers needs a `lead_in`), `DEN-ACTIVE-VIEW` (≤ 45 active words).
+- **Measured.** 3-slide directed build, QA 0 errors, critic 4.99/5.0, **6 object
+  lifecycles**, **0 empty base states**; 7/7 unit tests. Previews are DeckCraft
+  renders (rung 2), not PowerPoint playback.
+- **Limits.** 3 slides is a proof, not a deck; complex custom layouts still need
+  `inspect` tokens read back; `drill` zoom falls back to hyperlinks outside
+  PowerPoint/DeckCraft; no human rung 6.
+  `experiments/T068-20261104-antigravity-deck-director/REPORT.md`.
+
 ## T067 [pptx] Synthesis: direction before layout, state before effect — 2026-11-04
 
 - **Why.** Four parallel streams audited the owner's critique of T066. The
