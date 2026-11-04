@@ -86,12 +86,12 @@ python lab/tools/check_layout.py
 | Camera, look-at, rotation and FOV survive save/reopen | `preview/native-audit-v3.json`; values `(-0.85, 0.45, 2.1)`, `(0, 0.28, 0)`, `(6, 0, 0)`, FOV 40 | 4 |
 | The deck has three slides, one native model each | 3 slides × 33 shapes; one `am3d:model3d` per slide; `native-audit-v3.json` | 4 |
 | The model is embedded, not linked | 3 `ppt/media/model3d*.glb`; slide relationships type `.../2017/06/relationships/model3d`; no external link | 1/4 |
-| The three embedded GLBs are the same model | semantic fingerprint (mesh names, node names, material colours) identical; each 93,832 bytes after PowerPoint re-encode | 1 |
+| The three embedded GLBs are the same model | semantic fingerprint (mesh names, node names, material colours) identical; each 93,876 bytes after PowerPoint re-encode | 1 |
 | The GLB is Y-up, metres, 400 × 553 × 326 mm | source GLB bounds `[-0.2, 0, -0.163] … [0.2, 0.553, 0.163]`; `glb-manifest.json` | 1 |
 | Materials are non-metallic | all 34 materials `metallicFactor = 0`; `native-audit-v3.json` `metallic = [0.0]` | 1/4 |
 | Callouts are editable PowerPoint text | `TOP HOUSING`, `GROUP HEAD`, `SWITCH PLATE`, captions and `ROTATE IN POWERPOINT` are `<a:t>` runs; test `test_callouts_are_editable_powerpoint_text` | 1/4 |
 | The focus boxes are native shapes, not images | 20 `p:sp` + 12 `p:cxnSp` + 1 `p:graphicFrame` per slide; test `test_focus_boxes_are_native_shapes` | 1 |
-| PowerPoint opens the exact file and exports it | `preview/quickmill_native_product_tour_v3.pdf`, 252,051 bytes; `native-audit-v3.json` | 5 |
+| PowerPoint opens the exact file and exports it | `preview/quickmill_native_product_tour_v3.pdf`, 252,060 bytes; `native-audit-v3.json` | 5 |
 | The deck is internally consistent | 469 tests, OK, 8 skipped (after this REPORT was added); `check_layout.py` passes | 1 |
 | Human "mỹ mãn" approval | not obtained | 6 (missing) |
 
@@ -99,10 +99,10 @@ Artifacts and hashes (SHA-256):
 
 | File | Bytes | SHA-256 |
 |---|---:|---|
-| `artifacts/quickmill_native_product_tour_v3.pptx` | 456,861 | `c4c8c18c7fc00149aa6a4e488132748fcc9693c54b7754db501c65413c1d0027` |
-| `artifacts/quickmill-blockout.glb` | 56,500 | `68fa27b558fd26dac7ab22a6b68270090ab528b1dc8cf804c211ca909a3d8ea0` |
-| `preview/quickmill_native_product_tour_v3.pdf` | 252,051 | `ac45beeec238953c5fabd46b029fb65a3ac7d8ce390b88d18a5de049ab40bfe4` |
-| `preview/contact-sheet-v3.png` | 156,841 | `30cbbccc9b4c5f7a119bbb10c1425a2af2756bcb6d3e020d49b5afac853ab966` |
+| `artifacts/quickmill_native_product_tour_v3.pptx` | 459,597 | `fc4f2c0d8937c20eff012f26e69b170b665c2e5f1a8299ea7d37241c8a4efaf7` |
+| `artifacts/quickmill-blockout.glb` | 56,544 | `fd252d7c6e2470b9809766d9dcba0bbd546c8169209b7426ea6ceb363f959143` |
+| `preview/quickmill_native_product_tour_v3.pdf` | 252,060 | `87066501bbea21f9427aaf433dc34c11a9e804644dbdaa50dc67fb3b47fcbdfa` |
+| `preview/contact-sheet-v3.png` | 157,459 | `08e3feaaa0fafac0b18f6f136a342f7bf2334be8c6fa85542eeae8b269f208ef` |
 
 ### What the native renderer does to materials
 

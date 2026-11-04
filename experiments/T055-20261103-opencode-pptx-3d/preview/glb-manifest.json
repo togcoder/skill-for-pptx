@@ -2,7 +2,7 @@
   "source": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T054\\experiments\\T054-20261102-opencode-vector-match\\artifacts\\blockout.json",
   "source_commands": 55,
   "glb": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T055\\experiments\\T055-20261103-opencode-pptx-3d\\artifacts\\quickmill-blockout.glb",
-  "bytes": 56500,
+  "bytes": 56544,
   "bounds_m": [
     [
       -0.2,
@@ -53,9 +53,9 @@
     {
       "name": "lower_body_yellow",
       "baseColorFactor": [
-        0.8784313725490196,
-        0.6823529411764706,
-        0.1803921568627451,
+        0.7529411764705882,
+        0.5411764705882353,
+        0.07058823529411765,
         1.0
       ],
       "roughnessFactor": 0.34,
@@ -86,9 +86,9 @@
     {
       "name": "upper_core_yellow",
       "baseColorFactor": [
-        0.8784313725490196,
-        0.6823529411764706,
-        0.1803921568627451,
+        0.7529411764705882,
+        0.5411764705882353,
+        0.07058823529411765,
         1.0
       ],
       "roughnessFactor": 0.36,
@@ -130,9 +130,9 @@
     {
       "name": "top_housing_yellow",
       "baseColorFactor": [
-        0.8784313725490196,
-        0.6823529411764706,
-        0.1803921568627451,
+        0.7529411764705882,
+        0.5411764705882353,
+        0.07058823529411765,
         1.0
       ],
       "roughnessFactor": 0.82,
@@ -238,22 +238,22 @@
       "metallicFactor": 0.0
     },
     {
-      "name": "knob_l",
+      "name": "knob_l_yellow",
       "baseColorFactor": [
-        0.8509803921568627,
-        0.6352941176470588,
-        0.10588235294117647,
+        0.7529411764705882,
+        0.5411764705882353,
+        0.07058823529411765,
         1.0
       ],
       "roughnessFactor": 0.42,
       "metallicFactor": 0.0
     },
     {
-      "name": "knob_r",
+      "name": "knob_r_yellow",
       "baseColorFactor": [
-        0.8509803921568627,
-        0.6352941176470588,
-        0.10588235294117647,
+        0.7529411764705882,
+        0.5411764705882353,
+        0.07058823529411765,
         1.0
       ],
       "roughnessFactor": 0.42,
@@ -425,7 +425,7 @@
       "source": "lower_body",
       "region": "yellow",
       "faces": 2,
-      "color": "#E0AE2E",
+      "color": "#C08A12",
       "metallic": 0.0,
       "roughness": 0.34
     },
@@ -452,7 +452,7 @@
       "source": "upper_core",
       "region": "yellow",
       "faces": 2,
-      "color": "#E0AE2E",
+      "color": "#C08A12",
       "metallic": 0.0,
       "roughness": 0.36
     },
@@ -488,7 +488,7 @@
       "source": "top_housing",
       "region": "yellow",
       "faces": 2,
-      "color": "#E0AE2E",
+      "color": "#C08A12",
       "metallic": 0.0,
       "roughness": 0.82
     },
@@ -574,20 +574,20 @@
       "roughness": 0.82
     },
     {
-      "name": "knob_l",
+      "name": "knob_l_yellow",
       "source": "knob_l",
-      "region": "body",
+      "region": "yellow",
       "faces": 256,
-      "color": "#D9A21B",
+      "color": "#C08A12",
       "metallic": 0.0,
       "roughness": 0.42
     },
     {
-      "name": "knob_r",
+      "name": "knob_r_yellow",
       "source": "knob_r",
-      "region": "body",
+      "region": "yellow",
       "faces": 256,
-      "color": "#D9A21B",
+      "color": "#C08A12",
       "metallic": 0.0,
       "roughness": 0.42
     },

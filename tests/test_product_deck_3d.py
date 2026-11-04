@@ -136,7 +136,7 @@ class ProductDeck3DTests(unittest.TestCase):
                      "tower_trim", "tray_grate"):
             self.assertIn(name, regions)
             self.assertEqual(regions[name]["metallic"], 0.0)
-        self.assertEqual(regions["lower_body_yellow"]["color"], "#E0AE2E")
+        self.assertEqual(regions["lower_body_yellow"]["color"], "#C08A12")
         self.assertEqual(regions["chrome_top"]["color"], "#D5D2C8")
 
     def test_callouts_are_editable_powerpoint_text(self):
