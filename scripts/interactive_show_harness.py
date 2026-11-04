@@ -1,4 +1,4 @@
-﻿"""Interactive PowerPoint slide-show harness (T058). EXPERIMENTAL.
+"""Interactive PowerPoint slide-show harness (T058). EXPERIMENTAL.
 
 Antigravity multi-domain design research lab.
 
