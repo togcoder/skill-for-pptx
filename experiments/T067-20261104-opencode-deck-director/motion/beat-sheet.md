@@ -5,8 +5,9 @@
 - **Purpose:** the spoken line, the visual beat and the click are one unit.
   Nothing on screen moves unless the sentence needs it.
 - **Evidence:** the shape-level state of every beat is in
-  `motion-plan.json`; the before/after frames are in `motion/before/`,
-  `motion/after/` and `motion/evidence-sheet.png`.
+  `motion-plan.json`; the settled before/after frames are consolidated in
+  `motion/evidence-sheet.png` and `motion/slide4-states.png` (individual PNGs
+  were trimmed to meet the 10 MB experiment cap).
 
 ## 0. The motion grammar
 

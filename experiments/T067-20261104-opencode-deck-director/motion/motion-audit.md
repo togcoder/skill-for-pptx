@@ -8,6 +8,11 @@
   python-pptx, lxml, Pillow, pywin32.
 - **Evidence rung:** **4** for the file/COM counts, **5** for the stable-state
   renders. No human review: rung 6 is not reached.
+- **Trim note (2026-11-04):** the individual before/after frames were removed to
+  keep the T067 experiment under the 10 MB cap. The frames cited below are kept
+  in two contact sheets: `motion/evidence-sheet.png` (five before/after
+  base-state pairs) and `motion/slide4-states.png` (all click states of slide
+  4). Frame filenames are retained as labels inside those sheets.
 
 ## 1. How the audit was measured
 

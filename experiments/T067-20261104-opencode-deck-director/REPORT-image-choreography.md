@@ -221,10 +221,10 @@ same final frame — one click later.
   catalogue.
 - `artifacts/T067-variant-A-cover-flow.pptx` — 2 slides, 19 effects.
 - `artifacts/T067-variant-B-cover-flow.pptx` — 2 slides, 37 effects.
-- `preview/final-A/`, `preview/final-B/` — PowerPoint PNG + PDF.
-- `preview/states/` — nine key PowerPoint state renders at 1280 × 720.
-- `preview/sheets/` — contact sheets for all 32 states, incl. the T066 evidence
-  sheets.
+- `preview/final-B/` — PowerPoint PNG + PDF (variant A's individual frames were
+  trimmed for the 10 MB cap; its decision frame is in `preview/sheets/`).
+- `preview/sheets/` — contact sheets for all 32 states (both variants + the T066
+  evidence), each state labelled.
 - `artifacts/image-audit.json`, `image-beat-metrics.json`, `probe-A/B.json`.
 - `inputs/` — audit, metrics, builder, state renderer, sheets, probes.
 

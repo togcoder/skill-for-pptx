@@ -6,7 +6,8 @@
 - **Measured with:** `inputs/audit_images.py` (shape geometry + `pptx_animator.read_main_sequence`),
   `inputs/measure_choreography.py` (beat metrics), PowerPoint 16.0 COM
   (`probe_variants.ps1` for the variants; T066 was parsed by the same reader).
-- **States:** `preview/states/t066-*.png`, reconstructed from the deck's own
+- **States:** `preview/sheets/sheet-t066-*.png` contact sheets (individual state
+  PNGs were trimmed for the 10 MB experiment cap), reconstructed from the deck's own
   timing tree and exported by PowerPoint (`inputs/render_states.py`). Rung 4:
   the pixels are PowerPoint's, the *order* is the timing model — this is not a
   slideshow-playback claim.
@@ -53,7 +54,7 @@ From `image-beat-metrics.json`:
 - **Role intended:** identity anchor. The chapter is *about* these three; the
   title is their name.
 - **Role performed:** decoration, coda. The three faces are the last click.
-- **What the audience sees at t = 0** (`preview/states/t066-s1-c0.png`): a red
+- **What the audience sees at t = 0** (`preview/sheets/sheet-t066-cover.png`): a red
   field, a dark panel, and **three empty gold rings**. No text, no faces.
 - **What it sees after three clicks** (`t066-s1-c3.png`): kicker, title,
   subtitle, footer — and still three empty rings. The whole verbal argument is
@@ -75,7 +76,7 @@ From `image-beat-metrics.json`:
 - **Role intended:** scene / mood. A Greek philosopher bust to place the
   question in a tradition.
 - **Role performed:** decoration that contradicts its own caption.
-- **What the audience sees at t = 0** (`preview/states/t066-s2-c0.png`): a
+- **What the audience sees at t = 0** (`preview/sheets/sheet-t066-plato.png`): a
   **giant empty red disc** (60.7 % of the slide height, 34 % of its width) with
   the caption **“Tượng triết gia Hy Lạp · CC0”** already on screen. The slide
   labels an empty circle as a statue for six clicks.

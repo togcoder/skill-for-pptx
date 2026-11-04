@@ -134,15 +134,15 @@ critic measures activity, not direction; the owner's eye is the gate.
    title; slide 7 on empty rings and floating dates; slide 9 on an empty deep
    red field. **Fix:** title, kicker, key image and margin rule are static on
    every slide; the first click adds evidence, never the claim.
-   Evidence: `motion/evidence-sheet.png`, `motion/before/s0*-00-base.png`.
+   Evidence: `motion/evidence-sheet.png` (frames retained as labelled panels;
+   the individual PNGs were trimmed for the 10 MB experiment cap).
 2. **Images arrived as the finale.** Slide 1's three portraits appeared on the
    last of four clicks; slide 2's Plato appeared on the seventh of seven
    clicks and the notes never mention it. **Fix:** all portraits and Plato are
    on the base plate; the clicks name them (slide 1: 0 clicks; slide 2: the
    definitions build in front of a present image; slide 7: names/dates build
-   under present faces). Evidence: `before/s01-04-click4.png`,
-   `before/s02-07-click7.png`, `after/s01-00-base.png`,
-   `after/s02-00-base.png`, `after/s07-00-base.png`.
+   under present faces). Evidence: `motion/evidence-sheet.png` panels
+   `s01-04`, `s02-07`, `s01-00`, `s02-00`, `s07-00`.
 3. **Quantity replaced direction.** 51 clicks and 144 effects, up to four
    movers at once, and nine 1.5 s Morphs whose only continuous objects were
    the background/thread. **Fix:** 27 beats, 116 effects, ≤2 movers, one hero
