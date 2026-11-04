@@ -1,0 +1,6 @@
+deck,slide,frames,baseline,peak_frame,peak_mean,changed_frames,first_changed,last_changed,settled_mean,same_end_state,strip
+coffee_office_dynamic,3,81,0.0,79,2.371,0,,,1.335,True,artifacts/morph/roundtrip-anim-coffee_office_dynamic-s03.jpg
+coffee_office_dynamic,4,58,6.155,13,14.31,13,11,23,1.852,True,artifacts/morph/roundtrip-anim-coffee_office_dynamic-s04.jpg
+coffee_report,7,108,0.0,77,1.581,0,,,0.129,True,artifacts/morph/roundtrip-anim-coffee_report-s07.jpg
+control (same deck twice),4,59,0.0,0,0.0,0,,,0.0,True,
+vi_chuyen_doi_so,7,49,0.0,0,0.0,0,,,0.0,True,artifacts/morph/roundtrip-anim-vi_chuyen_doi_so-s07.jpg

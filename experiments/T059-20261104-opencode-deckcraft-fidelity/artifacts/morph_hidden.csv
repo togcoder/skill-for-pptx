@@ -1,0 +1,538 @@
+deck,slide,shape,spid,entrance_effects,box,t,pp_state,pp_diff_prev,pp_diff_final,dc_state,dc_diff_prev,dc_diff_final,pp_alpha,dc_alpha
+T028_report_pro,2,Content Placeholder 2,3,16,36x126x684x482,0.25,other,10.356,11.243,other,7.831,10.012,0.973,0.173
+T028_report_pro,2,Content Placeholder 2,3,16,36x126x684x482,0.5,other,7.593,8.558,mostly-final,10.133,6.586,0.973,0.537
+T028_report_pro,2,Content Placeholder 2,3,16,36x126x684x482,0.75,other,7.52,8.478,mostly-final,10.59,1.634,0.976,0.878
+T028_report_pro,6,Step 1,3,4,58x216x230x317,0.25,mostly-previous,34.755,216.519,mostly-previous,48.586,171.177,0.005,0.155
+T028_report_pro,6,Step 2,4,4,288x216x461x317,0.25,mostly-previous,75.262,216.745,mostly-previous,38.166,156.879,0.004,0.154
+T028_report_pro,6,Arrow 1,5,2,230x266x288x266,0.25,empty,,,empty,,,,
+T028_report_pro,6,Step 3,6,4,518x216x691x317,0.25,mostly-previous,71.944,215.709,mostly-previous,41.012,170.613,0.0,0.107
+T028_report_pro,6,Arrow 2,7,2,461x266x518x266,0.25,empty,,,empty,,,,
+T028_report_pro,6,Step 4,8,4,749x216x922x317,0.25,mostly-previous,24.15,231.538,mostly-previous,32.23,194.241,0.0,0.149
+T028_report_pro,6,Arrow 3,9,2,691x266x749x266,0.25,empty,,,empty,,,,
+T028_report_pro,6,Result,10,1,58x360x907x418,0.25,mostly-final,58.704,24.723,other,33.431,40.655,0.987,0.214
+T028_report_pro,6,__gen_track-line_track,14,2,144x180x835x187,0.25,mostly-previous,16.681,71.634,previous,8.204,68.846,0.014,0.0
+T028_report_pro,6,__gen_token_token,15,2,24x171x48x196,0.25,previous,2.0,174.223,mostly-previous,26.817,148.022,0.005,0.155
+T028_report_pro,6,__gen_highlight_marker3,16,2,61x363x495x395,0.25,other,88.561,75.834,mostly-previous,32.626,88.324,0.272,0.189
+T028_report_pro,6,Step 1,3,4,58x216x230x317,0.5,mostly-previous,34.755,216.519,other,101.997,103.638,0.005,0.502
+T028_report_pro,6,Step 2,4,4,288x216x461x317,0.5,mostly-previous,75.466,216.916,other,90.484,98.416,0.004,0.501
+T028_report_pro,6,Arrow 1,5,2,230x266x288x266,0.5,empty,,,empty,,,,
+T028_report_pro,6,Step 3,6,4,518x216x691x317,0.5,mostly-previous,72.484,216.994,other,95.858,99.34,0.0,0.502
+T028_report_pro,6,Arrow 2,7,2,461x266x518x266,0.5,empty,,,empty,,,,
+T028_report_pro,6,Step 4,8,4,749x216x922x317,0.5,mostly-previous,26.869,232.728,other,112.459,110.314,0.0,0.506
+T028_report_pro,6,Arrow 3,9,2,691x266x749x266,0.5,empty,,,empty,,,,
+T028_report_pro,6,Result,10,1,58x360x907x418,0.5,mostly-final,59.514,24.768,mostly-final,46.054,25.71,0.967,0.655
+T028_report_pro,6,__gen_track-line_track,14,2,144x180x835x187,0.5,mostly-previous,16.681,71.634,mostly-previous,19.585,56.367,0.014,0.17
+T028_report_pro,6,__gen_token_token,15,2,24x171x48x196,0.5,previous,2.0,174.223,other,85.787,89.095,0.005,0.502
+T028_report_pro,6,__gen_highlight_marker3,16,2,61x363x495x395,0.5,other,89.328,74.001,other,60.376,57.614,0.167,0.594
+T028_report_pro,6,Step 1,3,4,58x216x230x317,0.75,mostly-previous,34.883,216.654,mostly-final,164.904,34.929,0.005,0.84
+T028_report_pro,6,Step 2,4,4,288x216x461x317,0.75,mostly-previous,75.707,217.166,mostly-final,149.661,34.282,0.005,0.839
+T028_report_pro,6,Arrow 1,5,2,230x266x288x266,0.75,empty,,,empty,,,,
+T028_report_pro,6,Step 3,6,4,518x216x691x317,0.75,mostly-previous,72.724,217.234,mostly-final,155.267,34.795,0.0,0.825
+T028_report_pro,6,Arrow 2,7,2,461x266x518x266,0.75,empty,,,empty,,,,
+T028_report_pro,6,Step 4,8,4,749x216x922x317,0.75,mostly-previous,26.909,232.767,mostly-final,184.335,37.092,0.0,0.824
+T028_report_pro,6,Arrow 3,9,2,691x266x749x266,0.75,empty,,,empty,,,,
+T028_report_pro,6,Result,10,1,58x360x907x418,0.75,mostly-final,59.724,22.993,final,56.877,13.011,0.993,0.909
+T028_report_pro,6,__gen_track-line_track,14,2,144x180x835x187,0.75,mostly-previous,16.724,71.687,mostly-final,49.836,27.243,0.014,0.727
+T028_report_pro,6,__gen_token_token,15,2,24x171x48x196,0.75,previous,2.0,174.223,mostly-final,144.037,31.055,0.005,0.84
+T028_report_pro,6,__gen_highlight_marker3,16,2,61x363x495x395,0.75,other,88.678,76.469,mostly-final,87.53,29.684,0.03,0.907
+T028_showcase_pro,2,Hub,3,4,408x241x552x385,0.25,previous,6.801,172.627,mostly-previous,26.225,143.199,0.005,0.155
+T028_showcase_pro,2,Stage Plan,4,2,423x104x538x220,0.25,mostly-previous,25.98,182.656,mostly-previous,55.616,155.723,0.007,0.204
+T028_showcase_pro,2,Stage Do,5,2,574x256x689x371,0.25,previous,3.234,188.295,mostly-previous,29.175,158.911,0.007,0.154
+T028_showcase_pro,2,Stage Check,6,2,423x407x538x522,0.25,previous,2.0,186.604,mostly-previous,28.993,158.142,0.007,0.154
+T028_showcase_pro,2,Stage Act,7,2,271x256x387x371,0.25,previous,8.098,186.524,mostly-previous,27.964,153.825,0.007,0.154
+T028_showcase_pro,2,__gen_orbit-ring_orbit,8,2,329x162x631x464,0.25,previous,14.613,98.632,mostly-previous,24.98,83.425,0.007,0.155
+T028_showcase_pro,2,__gen_halo_halo,9,2,388x70x572x254,0.25,mostly-previous,23.869,99.835,mostly-previous,36.663,86.907,0.016,0.2
+T028_showcase_pro,2,Hub,3,4,408x241x552x385,0.5,previous,6.801,172.627,other,83.549,85.621,0.005,0.502
+T028_showcase_pro,2,Stage Plan,4,2,423x104x538x220,0.5,mostly-previous,21.442,195.078,mostly-final,125.205,77.185,0.007,0.585
+T028_showcase_pro,2,Stage Do,5,2,574x256x689x371,0.5,previous,3.234,188.295,other,93.91,94.072,0.007,0.501
+T028_showcase_pro,2,Stage Check,6,2,423x407x538x522,0.5,previous,2.0,186.604,other,93.71,93.525,0.007,0.501
+T028_showcase_pro,2,Stage Act,7,2,271x256x387x371,0.5,previous,8.098,186.524,other,89.516,91.883,0.007,0.501
+T028_showcase_pro,2,__gen_orbit-ring_orbit,8,2,329x162x631x464,0.5,previous,9.418,98.67,other,54.203,48.126,0.007,0.502
+T028_showcase_pro,2,__gen_halo_halo,9,2,388x70x572x254,0.5,mostly-previous,23.603,106.446,other,70.38,49.569,0.007,0.58
+T028_showcase_pro,2,Hub,3,4,408x241x552x385,0.75,previous,6.8,172.641,mostly-final,141.203,28.343,0.005,0.84
+T028_showcase_pro,2,Stage Plan,4,2,423x104x538x220,0.75,previous,7.005,196.775,mostly-final,178.127,24.875,0.007,0.888
+T028_showcase_pro,2,Stage Do,5,2,574x256x689x371,0.75,previous,3.233,188.299,mostly-final,157.861,30.243,0.007,0.844
+T028_showcase_pro,2,Stage Check,6,2,423x407x538x522,0.75,previous,2.0,186.604,mostly-final,157.413,30.188,0.007,0.844
+T028_showcase_pro,2,Stage Act,7,2,271x256x387x371,0.75,previous,8.094,186.555,mostly-final,151.229,29.711,0.007,0.844
+T028_showcase_pro,2,__gen_orbit-ring_orbit,8,2,329x162x631x464,0.75,previous,9.417,98.673,mostly-final,86.105,16.118,0.007,0.844
+T028_showcase_pro,2,__gen_halo_halo,9,2,388x70x572x254,0.75,mostly-previous,21.833,105.664,mostly-final,102.289,27.99,0.007,0.886
+coffee_office_dynamic,4,Title accent,5,2,58x99x158x104,0.25,other,172.512,173.068,other,9.056,8.152,,
+coffee_office_dynamic,4,Chart,6,4,50x130x595x504,0.25,mostly-previous,20.194,54.426,previous,14.646,54.497,0.0,0.153
+coffee_office_dynamic,4,Takeaway bar,7,2,617x166x622x353,0.25,previous,3.0,185.021,mostly-previous,29.78,154.242,0.0,0.165
+coffee_office_dynamic,4,Takeaway,8,5,635x158x910x367,0.25,other,23.578,26.897,previous,3.688,35.844,0.0,0.0
+coffee_office_dynamic,4,Title accent,5,2,58x99x158x104,0.5,other,155.436,155.992,other,9.056,8.152,,
+coffee_office_dynamic,4,Chart,6,4,50x130x595x504,0.5,mostly-previous,20.726,53.846,other,30.842,41.383,0.0,0.486
+coffee_office_dynamic,4,Takeaway bar,7,2,617x166x622x353,0.5,previous,3.0,185.021,other,95.49,88.532,0.0,0.502
+coffee_office_dynamic,4,Takeaway,8,5,635x158x910x367,0.5,other,23.853,25.632,mostly-previous,19.072,38.188,0.0,0.0
+coffee_office_dynamic,4,Title accent,5,2,58x99x158x104,0.75,other,159.988,160.544,other,11.256,10.268,,
+coffee_office_dynamic,4,Chart,6,4,50x130x595x504,0.75,mostly-previous,21.125,53.603,mostly-final,47.595,25.455,0.0,0.837
+coffee_office_dynamic,4,Takeaway bar,7,2,617x166x622x353,0.75,previous,3.0,185.021,mostly-final,161.235,30.96,0.0,0.86
+coffee_office_dynamic,4,Takeaway,8,5,635x158x910x367,0.75,other,24.621,25.779,other,30.078,36.181,0.0,0.0
+coffee_report,4,Title accent,5,2,58x99x158x104,0.25,other,186.628,187.718,other,9.676,8.298,,
+coffee_report,4,Chart,6,4,50x130x595x504,0.25,mostly-previous,21.963,54.333,mostly-previous,15.345,58.477,0.0,0.151
+coffee_report,4,Takeaway bar,7,2,617x166x622x353,0.25,previous,0.0,202.385,mostly-previous,32.774,169.611,0.0,0.171
+coffee_report,4,Takeaway,8,4,635x158x910x367,0.25,other,25.709,20.42,previous,3.752,35.577,0.0,0.0
+coffee_report,4,Title accent,5,2,58x99x158x104,0.5,other,167.708,168.798,other,9.48,8.102,,
+coffee_report,4,Chart,6,4,50x130x595x504,0.5,mostly-previous,22.481,53.435,other,33.141,43.281,0.0,0.476
+coffee_report,4,Takeaway bar,7,2,617x166x622x353,0.5,previous,0.0,202.385,other,104.789,100.471,0.0,0.502
+coffee_report,4,Takeaway,8,4,635x158x910x367,0.5,other,25.879,18.542,mostly-previous,18.503,35.491,0.0,0.0
+coffee_report,4,Title accent,5,2,58x99x158x104,0.75,other,172.17,173.26,other,11.542,10.256,,
+coffee_report,4,Chart,6,4,50x130x595x504,0.75,mostly-previous,22.375,52.557,mostly-final,52.306,25.351,0.0,0.829
+coffee_report,4,Takeaway bar,7,2,617x166x622x353,0.75,previous,0.0,202.385,mostly-final,170.849,42.55,0.0,0.844
+coffee_report,4,Takeaway,8,4,635x158x910x367,0.75,mostly-final,26.041,17.958,other,27.749,31.208,0.0,0.0
+coffee_report_photos,3,Title accent,5,2,58x99x158x104,0.25,mostly-previous,46.9,186.548,previous,10.592,153.362,0.0,0.007
+coffee_report_photos,3,KPI card 1,6,4,50x146x320x401,0.25,other,29.507,28.344,mostly-previous,24.034,40.408,1.076,0.298
+coffee_report_photos,3,KPI icon 1,7,4,164x162x207x205,0.25,mostly-previous,30.13,44.804,previous,12.834,57.568,0.0,0.065
+coffee_report_photos,3,KPI value 1,8,1,65x208x306x294,0.25,other,40.455,46.497,mostly-previous,38.312,56.359,1.072,0.303
+coffee_report_photos,3,KPI label 1,9,4,65x312x306x369,0.25,mostly-final,39.855,24.088,mostly-previous,22.939,41.777,1.076,0.295
+coffee_report_photos,3,KPI card 2,10,4,345x146x615x401,0.25,mostly-previous,23.713,34.439,mostly-previous,17.967,33.564,1.07,0.302
+coffee_report_photos,3,KPI icon 2,11,4,458x162x502x205,0.25,other,37.903,54.06,previous,14.437,60.76,0.389,0.121
+coffee_report_photos,3,KPI value 2,12,1,360x208x600x294,0.25,other,48.322,66.169,mostly-previous,39.942,58.27,0.168,0.355
+coffee_report_photos,3,KPI label 2,13,4,360x312x600x369,0.25,previous,0.0,23.683,previous,6.026,17.674,0.0,0.188
+coffee_report_photos,3,KPI card 3,14,4,640x146x910x401,0.25,previous,13.003,26.907,previous,9.959,27.201,0.533,0.252
+coffee_report_photos,3,KPI icon 3,15,4,753x162x796x205,0.25,previous,0.0,73.672,previous,5.0,68.777,0.0,0.034
+coffee_report_photos,3,KPI value 3,16,4,654x208x895x294,0.25,other,31.285,39.773,mostly-previous,17.528,46.028,1.071,0.261
+coffee_report_photos,3,KPI label 3,17,4,654x312x895x369,0.25,previous,0.0,22.933,previous,5.895,17.06,0.0,0.188
+coffee_report_photos,3,Takeaway,18,4,50x427x910x484,0.25,previous,7.993,24.775,previous,8.201,23.397,0.0,0.169
+coffee_report_photos,3,__counter_8_08,19,1,65x208x306x294,0.25,other,40.455,46.497,mostly-previous,38.312,56.359,1.072,0.303
+coffee_report_photos,3,__counter_8_07,20,1,65x208x306x294,0.25,other,40.455,46.497,mostly-previous,38.312,56.359,1.072,0.303
+coffee_report_photos,3,__counter_8_06,21,1,65x208x306x294,0.25,other,40.455,46.497,mostly-previous,38.312,56.359,1.072,0.303
+coffee_report_photos,3,__counter_8_05,22,1,65x208x306x294,0.25,other,40.455,46.497,mostly-previous,38.312,56.359,1.072,0.303
+coffee_report_photos,3,__counter_8_04,23,1,65x208x306x294,0.25,other,40.455,46.497,mostly-previous,38.312,56.359,1.072,0.303
+coffee_report_photos,3,__counter_8_03,24,1,65x208x306x294,0.25,other,40.455,46.497,mostly-previous,38.312,56.359,1.072,0.303
+coffee_report_photos,3,__counter_8_02,25,1,65x208x306x294,0.25,other,40.455,46.497,mostly-previous,38.312,56.359,1.072,0.303
+coffee_report_photos,3,__counter_8_01,26,1,65x208x306x294,0.25,other,40.455,46.497,mostly-previous,38.312,56.359,1.072,0.303
+coffee_report_photos,3,__counter_12_11,27,1,360x208x600x294,0.25,other,48.322,66.169,mostly-previous,39.942,58.27,0.168,0.355
+coffee_report_photos,3,__counter_12_10,28,1,360x208x600x294,0.25,other,48.322,66.169,mostly-previous,39.942,58.27,0.168,0.355
+coffee_report_photos,3,__counter_12_09,29,1,360x208x600x294,0.25,other,48.322,66.169,mostly-previous,39.942,58.27,0.168,0.355
+coffee_report_photos,3,__counter_12_08,30,1,360x208x600x294,0.25,other,48.322,66.169,mostly-previous,39.942,58.27,0.168,0.355
+coffee_report_photos,3,__counter_12_07,31,1,360x208x600x294,0.25,other,48.322,66.169,mostly-previous,39.942,58.27,0.168,0.355
+coffee_report_photos,3,__counter_12_06,32,1,360x208x600x294,0.25,other,48.322,66.169,mostly-previous,39.942,58.27,0.168,0.355
+coffee_report_photos,3,__counter_12_05,33,1,360x208x600x294,0.25,other,48.322,66.169,mostly-previous,39.942,58.27,0.168,0.355
+coffee_report_photos,3,__counter_12_04,34,1,360x208x600x294,0.25,other,48.322,66.169,mostly-previous,39.942,58.27,0.168,0.355
+coffee_report_photos,3,__counter_12_03,35,1,360x208x600x294,0.25,other,48.322,66.169,mostly-previous,39.942,58.27,0.168,0.355
+coffee_report_photos,3,__counter_12_02,36,1,360x208x600x294,0.25,other,48.322,66.169,mostly-previous,39.942,58.27,0.168,0.355
+coffee_report_photos,3,__counter_12_01,37,1,360x208x600x294,0.25,other,48.322,66.169,mostly-previous,39.942,58.27,0.168,0.355
+coffee_report_photos,3,Title accent,5,2,58x99x158x104,0.5,mostly-previous,46.9,186.548,mostly-previous,23.622,164.068,0.0,0.005
+coffee_report_photos,3,KPI card 1,6,4,50x146x320x401,0.5,other,29.624,28.328,mostly-final,42.843,21.032,1.077,0.769
+coffee_report_photos,3,KPI icon 1,7,4,164x162x207x205,0.5,mostly-previous,30.157,44.825,other,29.778,40.468,0.0,0.158
+coffee_report_photos,3,KPI value 1,8,1,65x208x306x294,0.5,other,40.466,46.505,mostly-final,66.478,25.929,1.072,0.772
+coffee_report_photos,3,KPI label 1,9,4,65x312x306x369,0.5,mostly-final,39.879,24.125,mostly-final,38.52,15.766,1.079,0.768
+coffee_report_photos,3,KPI card 2,10,4,345x146x615x401,0.5,mostly-previous,23.716,34.451,final,37.221,14.473,1.071,0.77
+coffee_report_photos,3,KPI icon 2,11,4,458x162x502x205,0.5,other,37.908,54.089,other,34.801,46.073,0.389,0.521
+coffee_report_photos,3,KPI value 2,12,1,360x208x600x294,0.5,other,48.336,66.2,mostly-final,78.676,19.428,0.168,0.793
+coffee_report_photos,3,KPI label 2,13,4,360x312x600x369,0.5,previous,0.0,23.683,other,13.045,11.022,0.0,0.51
+coffee_report_photos,3,KPI card 3,14,4,640x146x910x401,0.5,previous,12.946,26.905,mostly-final,22.002,15.01,0.533,0.714
+coffee_report_photos,3,KPI icon 3,15,4,753x162x796x205,0.5,previous,0.0,73.672,previous,10.0,64.38,0.0,0.066
+coffee_report_photos,3,KPI value 3,16,4,654x208x895x294,0.5,other,31.289,39.778,mostly-final,40.546,22.693,1.072,0.743
+coffee_report_photos,3,KPI label 3,17,4,654x312x895x369,0.5,previous,0.0,22.933,other,12.645,10.602,0.0,0.523
+coffee_report_photos,3,Takeaway,18,4,50x427x910x484,0.5,previous,7.997,25.043,other,17.385,16.939,0.0,0.524
+coffee_report_photos,3,__counter_8_08,19,1,65x208x306x294,0.5,other,40.466,46.505,mostly-final,66.478,25.929,1.072,0.772
+coffee_report_photos,3,__counter_8_07,20,1,65x208x306x294,0.5,other,40.466,46.505,mostly-final,66.478,25.929,1.072,0.772
+coffee_report_photos,3,__counter_8_06,21,1,65x208x306x294,0.5,other,40.466,46.505,mostly-final,66.478,25.929,1.072,0.772
+coffee_report_photos,3,__counter_8_05,22,1,65x208x306x294,0.5,other,40.466,46.505,mostly-final,66.478,25.929,1.072,0.772
+coffee_report_photos,3,__counter_8_04,23,1,65x208x306x294,0.5,other,40.466,46.505,mostly-final,66.478,25.929,1.072,0.772
+coffee_report_photos,3,__counter_8_03,24,1,65x208x306x294,0.5,other,40.466,46.505,mostly-final,66.478,25.929,1.072,0.772
+coffee_report_photos,3,__counter_8_02,25,1,65x208x306x294,0.5,other,40.466,46.505,mostly-final,66.478,25.929,1.072,0.772
+coffee_report_photos,3,__counter_8_01,26,1,65x208x306x294,0.5,other,40.466,46.505,mostly-final,66.478,25.929,1.072,0.772
+coffee_report_photos,3,__counter_12_11,27,1,360x208x600x294,0.5,other,48.336,66.2,mostly-final,78.676,19.428,0.168,0.793
+coffee_report_photos,3,__counter_12_10,28,1,360x208x600x294,0.5,other,48.336,66.2,mostly-final,78.676,19.428,0.168,0.793
+coffee_report_photos,3,__counter_12_09,29,1,360x208x600x294,0.5,other,48.336,66.2,mostly-final,78.676,19.428,0.168,0.793
+coffee_report_photos,3,__counter_12_08,30,1,360x208x600x294,0.5,other,48.336,66.2,mostly-final,78.676,19.428,0.168,0.793
+coffee_report_photos,3,__counter_12_07,31,1,360x208x600x294,0.5,other,48.336,66.2,mostly-final,78.676,19.428,0.168,0.793
+coffee_report_photos,3,__counter_12_06,32,1,360x208x600x294,0.5,other,48.336,66.2,mostly-final,78.676,19.428,0.168,0.793
+coffee_report_photos,3,__counter_12_05,33,1,360x208x600x294,0.5,other,48.336,66.2,mostly-final,78.676,19.428,0.168,0.793
+coffee_report_photos,3,__counter_12_04,34,1,360x208x600x294,0.5,other,48.336,66.2,mostly-final,78.676,19.428,0.168,0.793
+coffee_report_photos,3,__counter_12_03,35,1,360x208x600x294,0.5,other,48.336,66.2,mostly-final,78.676,19.428,0.168,0.793
+coffee_report_photos,3,__counter_12_02,36,1,360x208x600x294,0.5,other,48.336,66.2,mostly-final,78.676,19.428,0.168,0.793
+coffee_report_photos,3,__counter_12_01,37,1,360x208x600x294,0.5,other,48.336,66.2,mostly-final,78.676,19.428,0.168,0.793
+coffee_report_photos,3,Title accent,5,2,58x99x158x104,0.75,mostly-previous,46.94,186.628,mostly-previous,40.626,177.056,0.0,0.007
+coffee_report_photos,3,KPI card 1,6,4,50x146x320x401,0.75,other,29.656,28.518,final,47.225,3.763,1.081,0.98
+coffee_report_photos,3,KPI icon 1,7,4,164x162x207x205,0.75,mostly-previous,30.201,44.903,other,40.585,29.945,0.0,0.261
+coffee_report_photos,3,KPI value 1,8,1,65x208x306x294,0.75,other,40.59,46.725,final,71.423,3.478,1.079,0.981
+coffee_report_photos,3,KPI label 1,9,4,65x312x306x369,0.75,mostly-final,40.007,24.329,final,50.228,3.953,1.081,0.979
+coffee_report_photos,3,KPI card 2,10,4,345x146x615x401,0.75,mostly-previous,23.783,34.545,final,48.008,4.039,1.079,0.98
+coffee_report_photos,3,KPI icon 2,11,4,458x162x502x205,0.75,other,38.023,54.25,other,46.968,39.147,0.336,0.735
+coffee_report_photos,3,KPI value 2,12,1,360x208x600x294,0.75,other,48.49,66.417,final,94.654,3.377,0.163,0.986
+coffee_report_photos,3,KPI label 2,13,4,360x312x600x369,0.75,previous,0.0,23.683,final,20.88,4.568,0.0,0.825
+coffee_report_photos,3,KPI card 3,14,4,640x146x910x401,0.75,previous,12.965,26.932,final,32.031,5.088,0.505,0.976
+coffee_report_photos,3,KPI icon 3,15,4,753x162x796x205,0.75,previous,0.0,73.672,mostly-previous,16.0,59.182,0.0,0.11
+coffee_report_photos,3,KPI value 3,16,4,654x208x895x294,0.75,other,31.328,39.839,final,57.14,5.667,1.079,0.978
+coffee_report_photos,3,KPI label 3,17,4,654x312x895x369,0.75,previous,0.0,22.933,final,20.242,4.083,0.0,0.84
+coffee_report_photos,3,Takeaway,18,4,50x427x910x484,0.75,previous,4.886,19.295,final,23.686,8.645,0.0,0.856
+coffee_report_photos,3,__counter_8_08,19,1,65x208x306x294,0.75,other,40.59,46.725,final,71.423,3.478,1.079,0.981
+coffee_report_photos,3,__counter_8_07,20,1,65x208x306x294,0.75,other,40.59,46.725,final,71.423,3.478,1.079,0.981
+coffee_report_photos,3,__counter_8_06,21,1,65x208x306x294,0.75,other,40.59,46.725,final,71.423,3.478,1.079,0.981
+coffee_report_photos,3,__counter_8_05,22,1,65x208x306x294,0.75,other,40.59,46.725,final,71.423,3.478,1.079,0.981
+coffee_report_photos,3,__counter_8_04,23,1,65x208x306x294,0.75,other,40.59,46.725,final,71.423,3.478,1.079,0.981
+coffee_report_photos,3,__counter_8_03,24,1,65x208x306x294,0.75,other,40.59,46.725,final,71.423,3.478,1.079,0.981
+coffee_report_photos,3,__counter_8_02,25,1,65x208x306x294,0.75,other,40.59,46.725,final,71.423,3.478,1.079,0.981
+coffee_report_photos,3,__counter_8_01,26,1,65x208x306x294,0.75,other,40.59,46.725,final,71.423,3.478,1.079,0.981
+coffee_report_photos,3,__counter_12_11,27,1,360x208x600x294,0.75,other,48.49,66.417,final,94.654,3.377,0.163,0.986
+coffee_report_photos,3,__counter_12_10,28,1,360x208x600x294,0.75,other,48.49,66.417,final,94.654,3.377,0.163,0.986
+coffee_report_photos,3,__counter_12_09,29,1,360x208x600x294,0.75,other,48.49,66.417,final,94.654,3.377,0.163,0.986
+coffee_report_photos,3,__counter_12_08,30,1,360x208x600x294,0.75,other,48.49,66.417,final,94.654,3.377,0.163,0.986
+coffee_report_photos,3,__counter_12_07,31,1,360x208x600x294,0.75,other,48.49,66.417,final,94.654,3.377,0.163,0.986
+coffee_report_photos,3,__counter_12_06,32,1,360x208x600x294,0.75,other,48.49,66.417,final,94.654,3.377,0.163,0.986
+coffee_report_photos,3,__counter_12_05,33,1,360x208x600x294,0.75,other,48.49,66.417,final,94.654,3.377,0.163,0.986
+coffee_report_photos,3,__counter_12_04,34,1,360x208x600x294,0.75,other,48.49,66.417,final,94.654,3.377,0.163,0.986
+coffee_report_photos,3,__counter_12_03,35,1,360x208x600x294,0.75,other,48.49,66.417,final,94.654,3.377,0.163,0.986
+coffee_report_photos,3,__counter_12_02,36,1,360x208x600x294,0.75,other,48.49,66.417,final,94.654,3.377,0.163,0.986
+coffee_report_photos,3,__counter_12_01,37,1,360x208x600x294,0.75,other,48.49,66.417,final,94.654,3.377,0.163,0.986
+coffee_report_photos,5,Title accent,5,2,58x99x158x104,0.25,other,187.718,186.23,other,10.598,12.282,,
+coffee_report_photos,5,Step 1,6,2,50x234x191x392,0.25,mostly-final,51.822,21.041,other,31.075,40.125,1.126,0.3
+coffee_report_photos,5,Step 2,7,2,230x234x370x392,0.25,mostly-final,84.367,20.865,mostly-previous,31.668,68.252,1.117,0.3
+coffee_report_photos,5,Link 1,8,2,196x313x224x313,0.25,empty,,,empty,,,,
+coffee_report_photos,5,Step 3,9,2,410x234x550x392,0.25,mostly-final,119.521,20.086,mostly-previous,55.697,81.619,1.112,0.301
+coffee_report_photos,5,Link 2,10,2,376x313x404x313,0.25,empty,,,empty,,,,
+coffee_report_photos,5,Step 4,11,2,590x234x730x392,0.25,other,21.541,20.51,previous,10.975,27.572,1.082,0.283
+coffee_report_photos,5,Link 3,12,2,556x313x584x313,0.25,empty,,,empty,,,,
+coffee_report_photos,5,Step 5,13,2,769x234x910x392,0.25,previous,10.747,200.55,mostly-previous,34.395,164.937,0.0,0.169
+coffee_report_photos,5,Link 4,14,2,736x313x764x313,0.25,empty,,,empty,,,,
+coffee_report_photos,5,Title accent,5,2,58x99x158x104,0.5,other,187.718,186.23,other,8.102,9.878,,
+coffee_report_photos,5,Step 1,6,2,50x234x191x392,0.5,mostly-final,51.873,21.027,mostly-final,48.985,17.174,1.127,0.78
+coffee_report_photos,5,Step 2,7,2,230x234x370x392,0.5,mostly-final,84.544,20.852,mostly-final,68.26,25.909,1.117,0.774
+coffee_report_photos,5,Link 1,8,2,196x313x224x313,0.5,empty,,,empty,,,,
+coffee_report_photos,5,Step 3,9,2,410x234x550x392,0.5,mostly-final,120.424,20.56,mostly-final,96.176,29.562,1.122,0.774
+coffee_report_photos,5,Link 2,10,2,376x313x404x313,0.5,empty,,,empty,,,,
+coffee_report_photos,5,Step 4,11,2,590x234x730x392,0.5,other,21.628,20.635,final,25.127,13.224,1.084,0.763
+coffee_report_photos,5,Link 3,12,2,556x313x584x313,0.5,empty,,,empty,,,,
+coffee_report_photos,5,Step 5,13,2,769x234x910x392,0.5,previous,10.746,200.549,other,101.742,97.938,0.0,0.504
+coffee_report_photos,5,Link 4,14,2,736x313x764x313,0.5,empty,,,empty,,,,
+coffee_report_photos,5,Title accent,5,2,58x99x158x104,0.75,other,187.718,186.23,other,8.298,10.074,,
+coffee_report_photos,5,Step 1,6,2,50x234x191x392,0.75,mostly-final,52.006,21.166,final,60.371,3.395,1.132,0.984
+coffee_report_photos,5,Step 2,7,2,230x234x370x392,0.75,mostly-final,84.931,21.262,final,87.645,4.04,1.125,0.978
+coffee_report_photos,5,Link 1,8,2,196x313x224x313,0.75,empty,,,empty,,,,
+coffee_report_photos,5,Step 3,9,2,410x234x550x392,0.75,mostly-final,120.424,20.56,final,116.564,4.068,1.122,0.98
+coffee_report_photos,5,Link 2,10,2,376x313x404x313,0.75,empty,,,empty,,,,
+coffee_report_photos,5,Step 4,11,2,590x234x730x392,0.75,other,21.628,20.635,final,35.436,3.04,1.084,0.978
+coffee_report_photos,5,Link 3,12,2,556x313x584x313,0.75,empty,,,empty,,,,
+coffee_report_photos,5,Step 5,13,2,769x234x910x392,0.75,previous,10.751,200.56,mostly-final,169.124,30.844,0.0,0.847
+coffee_report_photos,5,Link 4,14,2,736x313x764x313,0.75,empty,,,empty,,,,
+coffee_report_photos,10,Title,4,4,50x173x910x288,0.25,other,17.835,20.173,previous,6.291,24.179,0.041,0.164
+coffee_report_photos,10,Closing accent,5,2,408x299x552x305,0.25,mostly-previous,19.722,187.678,previous,4.925,183.752,0.0,0.007
+coffee_report_photos,10,Subtitle,6,4,122x320x838x407,0.25,other,3.356,2.843,mostly-previous,4.122,6.482,0.972,0.175
+coffee_report_photos,10,Title,4,4,50x173x910x288,0.5,other,15.666,18.005,other,18.297,18.381,0.04,0.499
+coffee_report_photos,10,Closing accent,5,2,408x299x552x305,0.5,mostly-previous,19.722,187.678,previous,10.63,180.944,0.0,0.005
+coffee_report_photos,10,Subtitle,6,4,122x320x838x407,0.5,other,3.785,3.272,other,6.25,5.328,0.972,0.518
+coffee_report_photos,10,Title,4,4,50x173x910x288,0.75,other,15.3,17.574,final,23.71,5.913,0.039,0.837
+coffee_report_photos,10,Closing accent,5,2,408x299x552x305,0.75,mostly-previous,19.764,187.734,mostly-previous,17.27,183.905,0.0,0.007
+coffee_report_photos,10,Subtitle,6,4,122x320x838x407,0.75,other,3.362,2.835,mostly-final,6.306,2.179,1.0,0.841
+vi_brand_seed,3,Title accent,5,2,58x99x158x104,0.25,previous,1.0,209.532,previous,2.188,209.352,0.002,0.0
+vi_brand_seed,3,KPI card 1,6,4,50x205x246x421,0.25,mostly-previous,18.745,32.085,other,28.162,33.646,0.009,0.415
+vi_brand_seed,3,KPI value 1,7,1,65x227x232x313,0.25,mostly-previous,28.651,60.561,other,49.629,44.718,0.002,0.536
+vi_brand_seed,3,KPI label 1,8,4,65x331x232x403,0.25,previous,1.055,22.244,previous,3.445,19.829,0.003,0.163
+vi_brand_seed,3,KPI card 2,9,4,272x205x467x421,0.25,previous,8.923,24.609,mostly-previous,16.13,26.373,0.004,0.178
+vi_brand_seed,3,KPI value 2,10,4,286x227x453x313,0.25,mostly-previous,22.03,40.31,other,28.942,38.663,0.008,0.181
+vi_brand_seed,3,KPI label 2,11,4,286x331x453x403,0.25,previous,1.0,19.933,previous,3.023,17.913,0.003,0.162
+vi_brand_seed,3,KPI card 3,12,4,493x205x688x421,0.25,previous,2.763,38.227,previous,13.385,25.95,0.002,0.408
+vi_brand_seed,3,KPI value 3,13,1,507x227x674x313,0.25,previous,1.0,76.823,other,33.92,43.976,0.002,0.489
+vi_brand_seed,3,KPI label 3,14,4,507x331x674x403,0.25,previous,1.948,24.249,previous,3.786,21.56,0.003,0.162
+vi_brand_seed,3,KPI card 4,15,4,714x205x910x421,0.25,previous,1.169,29.637,previous,10.165,22.032,0.002,0.29
+vi_brand_seed,3,KPI value 4,16,1,728x227x895x313,0.25,previous,1.0,55.494,mostly-previous,20.524,36.079,0.002,0.404
+vi_brand_seed,3,KPI label 4,17,4,728x331x895x403,0.25,previous,1.0,19.813,previous,3.78,17.75,0.003,0.162
+vi_brand_seed,3,__counter_7_07,18,1,65x227x232x313,0.25,mostly-previous,28.651,60.561,other,49.629,44.718,0.002,0.536
+vi_brand_seed,3,__counter_7_06,19,1,65x227x232x313,0.25,mostly-previous,28.651,60.561,other,49.629,44.718,0.002,0.536
+vi_brand_seed,3,__counter_7_05,20,1,65x227x232x313,0.25,mostly-previous,28.651,60.561,other,49.629,44.718,0.002,0.536
+vi_brand_seed,3,__counter_7_04,21,1,65x227x232x313,0.25,mostly-previous,28.651,60.561,other,49.629,44.718,0.002,0.536
+vi_brand_seed,3,__counter_7_03,22,1,65x227x232x313,0.25,mostly-previous,28.651,60.561,other,49.629,44.718,0.002,0.536
+vi_brand_seed,3,__counter_7_02,23,1,65x227x232x313,0.25,mostly-previous,28.651,60.561,other,49.629,44.718,0.002,0.536
+vi_brand_seed,3,__counter_7_01,24,1,65x227x232x313,0.25,mostly-previous,28.651,60.561,other,49.629,44.718,0.002,0.536
+vi_brand_seed,3,__counter_13_09,25,1,507x227x674x313,0.25,previous,1.0,76.823,other,33.92,43.976,0.002,0.489
+vi_brand_seed,3,__counter_13_08,26,1,507x227x674x313,0.25,previous,1.0,76.823,other,33.92,43.976,0.002,0.489
+vi_brand_seed,3,__counter_13_07,27,1,507x227x674x313,0.25,previous,1.0,76.823,other,33.92,43.976,0.002,0.489
+vi_brand_seed,3,__counter_13_06,28,1,507x227x674x313,0.25,previous,1.0,76.823,other,33.92,43.976,0.002,0.489
+vi_brand_seed,3,__counter_13_05,29,1,507x227x674x313,0.25,previous,1.0,76.823,other,33.92,43.976,0.002,0.489
+vi_brand_seed,3,__counter_13_04,30,1,507x227x674x313,0.25,previous,1.0,76.823,other,33.92,43.976,0.002,0.489
+vi_brand_seed,3,__counter_13_03,31,1,507x227x674x313,0.25,previous,1.0,76.823,other,33.92,43.976,0.002,0.489
+vi_brand_seed,3,__counter_13_02,32,1,507x227x674x313,0.25,previous,1.0,76.823,other,33.92,43.976,0.002,0.489
+vi_brand_seed,3,__counter_13_01,33,1,507x227x674x313,0.25,previous,1.0,76.823,other,33.92,43.976,0.002,0.489
+vi_brand_seed,3,__counter_16_07,34,1,728x227x895x313,0.25,previous,1.0,55.494,mostly-previous,20.524,36.079,0.002,0.404
+vi_brand_seed,3,__counter_16_06,35,1,728x227x895x313,0.25,previous,1.0,55.494,mostly-previous,20.524,36.079,0.002,0.404
+vi_brand_seed,3,__counter_16_05,36,1,728x227x895x313,0.25,previous,1.0,55.494,mostly-previous,20.524,36.079,0.002,0.404
+vi_brand_seed,3,__counter_16_04,37,1,728x227x895x313,0.25,previous,1.0,55.494,mostly-previous,20.524,36.079,0.002,0.404
+vi_brand_seed,3,__counter_16_03,38,1,728x227x895x313,0.25,previous,1.0,55.494,mostly-previous,20.524,36.079,0.002,0.404
+vi_brand_seed,3,__counter_16_02,39,1,728x227x895x313,0.25,previous,1.0,55.494,mostly-previous,20.524,36.079,0.002,0.404
+vi_brand_seed,3,__counter_16_01,40,1,728x227x895x313,0.25,previous,1.0,55.494,mostly-previous,20.524,36.079,0.002,0.404
+vi_brand_seed,3,Title accent,5,2,58x99x158x104,0.5,previous,1.0,209.532,previous,0.0,210.516,0.002,0.0
+vi_brand_seed,3,KPI card 1,6,4,50x205x246x421,0.5,mostly-previous,19.821,32.05,final,34.926,11.71,0.009,0.89
+vi_brand_seed,3,KPI value 1,7,1,65x227x232x313,0.5,mostly-previous,28.651,60.561,final,65.403,14.617,0.002,0.961
+vi_brand_seed,3,KPI label 1,8,4,65x331x232x403,0.5,previous,1.512,22.183,other,12.325,11.041,0.003,0.508
+vi_brand_seed,3,KPI card 2,9,4,272x205x467x421,0.5,previous,9.232,24.619,final,20.253,12.195,0.004,0.548
+vi_brand_seed,3,KPI value 2,10,4,286x227x453x313,0.5,mostly-previous,22.03,40.31,mostly-final,38.444,19.741,0.008,0.557
+vi_brand_seed,3,KPI label 2,11,4,286x331x453x403,0.5,previous,1.004,19.938,other,11.13,9.951,0.003,0.508
+vi_brand_seed,3,KPI card 3,12,4,493x205x688x421,0.5,previous,1.003,38.32,final,29.151,10.604,0.002,0.88
+vi_brand_seed,3,KPI value 3,13,1,507x227x674x313,0.5,previous,1.0,76.823,final,64.636,13.341,0.002,0.937
+vi_brand_seed,3,KPI label 3,14,4,507x331x674x403,0.5,previous,1.001,24.349,other,13.44,12.037,0.003,0.508
+vi_brand_seed,3,KPI card 4,15,4,714x205x910x421,0.5,previous,1.169,29.637,final,20.533,10.277,0.002,0.759
+vi_brand_seed,3,KPI value 4,16,1,728x227x895x313,0.5,previous,1.0,55.494,final,42.307,14.361,0.002,0.848
+vi_brand_seed,3,KPI label 4,17,4,728x331x895x403,0.5,previous,1.0,19.813,other,11.028,9.892,0.003,0.509
+vi_brand_seed,3,__counter_7_07,18,1,65x227x232x313,0.5,mostly-previous,28.651,60.561,final,65.403,14.617,0.002,0.961
+vi_brand_seed,3,__counter_7_06,19,1,65x227x232x313,0.5,mostly-previous,28.651,60.561,final,65.403,14.617,0.002,0.961
+vi_brand_seed,3,__counter_7_05,20,1,65x227x232x313,0.5,mostly-previous,28.651,60.561,final,65.403,14.617,0.002,0.961
+vi_brand_seed,3,__counter_7_04,21,1,65x227x232x313,0.5,mostly-previous,28.651,60.561,final,65.403,14.617,0.002,0.961
+vi_brand_seed,3,__counter_7_03,22,1,65x227x232x313,0.5,mostly-previous,28.651,60.561,final,65.403,14.617,0.002,0.961
+vi_brand_seed,3,__counter_7_02,23,1,65x227x232x313,0.5,mostly-previous,28.651,60.561,final,65.403,14.617,0.002,0.961
+vi_brand_seed,3,__counter_7_01,24,1,65x227x232x313,0.5,mostly-previous,28.651,60.561,final,65.403,14.617,0.002,0.961
+vi_brand_seed,3,__counter_13_09,25,1,507x227x674x313,0.5,previous,1.0,76.823,final,64.636,13.341,0.002,0.937
+vi_brand_seed,3,__counter_13_08,26,1,507x227x674x313,0.5,previous,1.0,76.823,final,64.636,13.341,0.002,0.937
+vi_brand_seed,3,__counter_13_07,27,1,507x227x674x313,0.5,previous,1.0,76.823,final,64.636,13.341,0.002,0.937
+vi_brand_seed,3,__counter_13_06,28,1,507x227x674x313,0.5,previous,1.0,76.823,final,64.636,13.341,0.002,0.937
+vi_brand_seed,3,__counter_13_05,29,1,507x227x674x313,0.5,previous,1.0,76.823,final,64.636,13.341,0.002,0.937
+vi_brand_seed,3,__counter_13_04,30,1,507x227x674x313,0.5,previous,1.0,76.823,final,64.636,13.341,0.002,0.937
+vi_brand_seed,3,__counter_13_03,31,1,507x227x674x313,0.5,previous,1.0,76.823,final,64.636,13.341,0.002,0.937
+vi_brand_seed,3,__counter_13_02,32,1,507x227x674x313,0.5,previous,1.0,76.823,final,64.636,13.341,0.002,0.937
+vi_brand_seed,3,__counter_13_01,33,1,507x227x674x313,0.5,previous,1.0,76.823,final,64.636,13.341,0.002,0.937
+vi_brand_seed,3,__counter_16_07,34,1,728x227x895x313,0.5,previous,1.0,55.494,final,42.307,14.361,0.002,0.848
+vi_brand_seed,3,__counter_16_06,35,1,728x227x895x313,0.5,previous,1.0,55.494,final,42.307,14.361,0.002,0.848
+vi_brand_seed,3,__counter_16_05,36,1,728x227x895x313,0.5,previous,1.0,55.494,final,42.307,14.361,0.002,0.848
+vi_brand_seed,3,__counter_16_04,37,1,728x227x895x313,0.5,previous,1.0,55.494,final,42.307,14.361,0.002,0.848
+vi_brand_seed,3,__counter_16_03,38,1,728x227x895x313,0.5,previous,1.0,55.494,final,42.307,14.361,0.002,0.848
+vi_brand_seed,3,__counter_16_02,39,1,728x227x895x313,0.5,previous,1.0,55.494,final,42.307,14.361,0.002,0.848
+vi_brand_seed,3,__counter_16_01,40,1,728x227x895x313,0.5,previous,1.0,55.494,final,42.307,14.361,0.002,0.848
+vi_brand_seed,3,Title accent,5,2,58x99x158x104,0.75,previous,1.0,209.532,mostly-previous,32.502,185.334,0.002,0.075
+vi_brand_seed,3,KPI card 1,6,4,50x205x246x421,0.75,mostly-previous,19.463,32.019,final,42.881,3.309,0.009,0.992
+vi_brand_seed,3,KPI value 1,7,1,65x227x232x313,0.75,mostly-previous,28.647,60.566,final,74.046,4.06,0.002,0.994
+vi_brand_seed,3,KPI label 1,8,4,65x331x232x403,0.75,previous,1.187,22.241,final,20.122,3.954,0.003,0.837
+vi_brand_seed,3,KPI card 2,9,4,272x205x467x421,0.75,previous,8.924,24.613,final,27.633,3.975,0.004,0.899
+vi_brand_seed,3,KPI value 2,10,4,286x227x453x313,0.75,mostly-previous,22.031,40.32,final,49.978,6.471,0.008,0.907
+vi_brand_seed,3,KPI label 2,11,4,286x331x453x403,0.75,previous,1.0,19.933,final,17.995,3.599,0.003,0.838
+vi_brand_seed,3,KPI card 3,12,4,493x205x688x421,0.75,previous,1.0,38.32,final,36.441,3.233,0.002,0.992
+vi_brand_seed,3,KPI value 3,13,1,507x227x674x313,0.75,previous,1.0,76.823,final,74.601,3.709,0.002,0.994
+vi_brand_seed,3,KPI label 3,14,4,507x331x674x403,0.75,previous,1.0,24.349,final,21.737,4.3,0.003,0.835
+vi_brand_seed,3,KPI card 4,15,4,714x205x910x421,0.75,previous,1.169,29.637,final,27.765,3.182,0.002,0.968
+vi_brand_seed,3,KPI value 4,16,1,728x227x895x313,0.75,previous,1.0,55.494,final,52.573,4.172,0.002,0.98
+vi_brand_seed,3,KPI label 4,17,4,728x331x895x403,0.75,previous,1.0,19.813,final,17.896,3.594,0.003,0.837
+vi_brand_seed,3,__counter_7_07,18,1,65x227x232x313,0.75,mostly-previous,28.647,60.566,final,74.046,4.06,0.002,0.994
+vi_brand_seed,3,__counter_7_06,19,1,65x227x232x313,0.75,mostly-previous,28.647,60.566,final,74.046,4.06,0.002,0.994
+vi_brand_seed,3,__counter_7_05,20,1,65x227x232x313,0.75,mostly-previous,28.647,60.566,final,74.046,4.06,0.002,0.994
+vi_brand_seed,3,__counter_7_04,21,1,65x227x232x313,0.75,mostly-previous,28.647,60.566,final,74.046,4.06,0.002,0.994
+vi_brand_seed,3,__counter_7_03,22,1,65x227x232x313,0.75,mostly-previous,28.647,60.566,final,74.046,4.06,0.002,0.994
+vi_brand_seed,3,__counter_7_02,23,1,65x227x232x313,0.75,mostly-previous,28.647,60.566,final,74.046,4.06,0.002,0.994
+vi_brand_seed,3,__counter_7_01,24,1,65x227x232x313,0.75,mostly-previous,28.647,60.566,final,74.046,4.06,0.002,0.994
+vi_brand_seed,3,__counter_13_09,25,1,507x227x674x313,0.75,previous,1.0,76.823,final,74.601,3.709,0.002,0.994
+vi_brand_seed,3,__counter_13_08,26,1,507x227x674x313,0.75,previous,1.0,76.823,final,74.601,3.709,0.002,0.994
+vi_brand_seed,3,__counter_13_07,27,1,507x227x674x313,0.75,previous,1.0,76.823,final,74.601,3.709,0.002,0.994
+vi_brand_seed,3,__counter_13_06,28,1,507x227x674x313,0.75,previous,1.0,76.823,final,74.601,3.709,0.002,0.994
+vi_brand_seed,3,__counter_13_05,29,1,507x227x674x313,0.75,previous,1.0,76.823,final,74.601,3.709,0.002,0.994
+vi_brand_seed,3,__counter_13_04,30,1,507x227x674x313,0.75,previous,1.0,76.823,final,74.601,3.709,0.002,0.994
+vi_brand_seed,3,__counter_13_03,31,1,507x227x674x313,0.75,previous,1.0,76.823,final,74.601,3.709,0.002,0.994
+vi_brand_seed,3,__counter_13_02,32,1,507x227x674x313,0.75,previous,1.0,76.823,final,74.601,3.709,0.002,0.994
+vi_brand_seed,3,__counter_13_01,33,1,507x227x674x313,0.75,previous,1.0,76.823,final,74.601,3.709,0.002,0.994
+vi_brand_seed,3,__counter_16_07,34,1,728x227x895x313,0.75,previous,1.0,55.494,final,52.573,4.172,0.002,0.98
+vi_brand_seed,3,__counter_16_06,35,1,728x227x895x313,0.75,previous,1.0,55.494,final,52.573,4.172,0.002,0.98
+vi_brand_seed,3,__counter_16_05,36,1,728x227x895x313,0.75,previous,1.0,55.494,final,52.573,4.172,0.002,0.98
+vi_brand_seed,3,__counter_16_04,37,1,728x227x895x313,0.75,previous,1.0,55.494,final,52.573,4.172,0.002,0.98
+vi_brand_seed,3,__counter_16_03,38,1,728x227x895x313,0.75,previous,1.0,55.494,final,52.573,4.172,0.002,0.98
+vi_brand_seed,3,__counter_16_02,39,1,728x227x895x313,0.75,previous,1.0,55.494,final,52.573,4.172,0.002,0.98
+vi_brand_seed,3,__counter_16_01,40,1,728x227x895x313,0.75,previous,1.0,55.494,final,52.573,4.172,0.002,0.98
+vi_chuyen_doi_so,2,Kicker,4,4,50x180x910x216,0.25,final,56.223,7.24,previous,11.528,53.398,0.993,0.161
+vi_chuyen_doi_so,2,Title,5,4,50x216x910x317,0.25,final,74.686,14.172,mostly-previous,21.272,70.918,0.993,0.161
+vi_chuyen_doi_so,2,Section accent,6,2,58x324x230x330,0.25,previous,7.677,187.12,other,107.829,84.595,0.005,0.697
+vi_chuyen_doi_so,2,__gen_underline_rule1,7,2,56x215x119x219,0.25,previous,2.0,187.548,mostly-previous,15.393,178.06,0.005,0.027
+vi_chuyen_doi_so,2,Kicker,4,4,50x180x910x216,0.5,final,60.002,4.991,other,30.141,33.883,0.993,0.5
+vi_chuyen_doi_so,2,Title,5,4,50x216x910x317,0.5,final,76.411,12.572,other,52.343,50.177,0.993,0.5
+vi_chuyen_doi_so,2,Section accent,6,2,58x324x230x330,0.5,previous,1.997,190.469,other,93.994,98.417,0.005,0.5
+vi_chuyen_doi_so,2,__gen_underline_rule1,7,2,56x215x119x219,0.5,previous,8.571,183.683,mostly-previous,42.0,158.833,0.005,0.138
+vi_chuyen_doi_so,2,Kicker,4,4,50x180x910x216,0.75,final,58.881,4.276,final,50.802,12.363,0.993,0.844
+vi_chuyen_doi_so,2,Title,5,4,50x216x910x317,0.75,final,76.709,11.829,mostly-final,72.385,22.155,0.993,0.843
+vi_chuyen_doi_so,2,Section accent,6,2,58x324x230x330,0.75,previous,1.997,190.469,mostly-final,156.517,35.893,0.005,0.838
+vi_chuyen_doi_so,2,__gen_underline_rule1,7,2,56x215x119x219,0.75,previous,2.0,187.548,previous,0.0,189.548,0.005,0.0
+vi_chuyen_doi_so,3,Title accent,5,2,58x99x158x104,0.25,previous,1.98,178.624,previous,2.196,179.47,0.005,0.0
+vi_chuyen_doi_so,3,KPI card 1,6,4,50x205x246x421,0.25,mostly-previous,18.338,30.091,other,26.508,31.099,0.043,0.434
+vi_chuyen_doi_so,3,KPI value 1,7,1,65x227x232x313,0.25,mostly-previous,28.856,53.553,other,46.382,39.28,0.006,0.552
+vi_chuyen_doi_so,3,KPI label 1,8,4,65x331x232x403,0.25,previous,2.022,22.367,previous,3.313,17.285,0.007,0.151
+vi_chuyen_doi_so,3,KPI card 2,9,4,272x205x467x421,0.25,previous,9.688,23.791,mostly-previous,15.55,23.551,0.011,0.172
+vi_chuyen_doi_so,3,KPI value 2,10,4,286x227x453x313,0.25,mostly-previous,22.423,36.505,other,27.805,33.732,0.04,0.184
+vi_chuyen_doi_so,3,KPI label 2,11,4,286x331x453x403,0.25,previous,1.976,20.335,previous,2.969,15.563,0.006,0.149
+vi_chuyen_doi_so,3,KPI card 3,12,4,493x205x688x421,0.25,previous,3.494,36.887,previous,11.633,22.277,0.005,0.417
+vi_chuyen_doi_so,3,KPI value 3,13,1,507x227x674x313,0.25,previous,2.0,67.258,other,28.935,37.604,0.005,0.485
+vi_chuyen_doi_so,3,KPI label 3,14,4,507x331x674x403,0.25,previous,2.738,24.996,previous,3.617,18.91,0.006,0.151
+vi_chuyen_doi_so,3,KPI card 4,15,4,714x205x910x421,0.25,previous,2.125,27.995,previous,8.668,20.14,0.005,0.295
+vi_chuyen_doi_so,3,KPI value 4,16,1,728x227x895x313,0.25,previous,2.0,49.278,mostly-previous,17.519,30.665,0.005,0.417
+vi_chuyen_doi_so,3,KPI label 4,17,4,728x331x895x403,0.25,previous,2.0,20.184,previous,3.451,16.113,0.007,0.15
+vi_chuyen_doi_so,3,__counter_7_07,18,1,65x227x232x313,0.25,mostly-previous,28.856,53.553,other,46.382,39.28,0.006,0.552
+vi_chuyen_doi_so,3,__counter_7_06,19,1,65x227x232x313,0.25,mostly-previous,28.856,53.553,other,46.382,39.28,0.006,0.552
+vi_chuyen_doi_so,3,__counter_7_05,20,1,65x227x232x313,0.25,mostly-previous,28.856,53.553,other,46.382,39.28,0.006,0.552
+vi_chuyen_doi_so,3,__counter_7_04,21,1,65x227x232x313,0.25,mostly-previous,28.856,53.553,other,46.382,39.28,0.006,0.552
+vi_chuyen_doi_so,3,__counter_7_03,22,1,65x227x232x313,0.25,mostly-previous,28.856,53.553,other,46.382,39.28,0.006,0.552
+vi_chuyen_doi_so,3,__counter_7_02,23,1,65x227x232x313,0.25,mostly-previous,28.856,53.553,other,46.382,39.28,0.006,0.552
+vi_chuyen_doi_so,3,__counter_7_01,24,1,65x227x232x313,0.25,mostly-previous,28.856,53.553,other,46.382,39.28,0.006,0.552
+vi_chuyen_doi_so,3,__counter_13_09,25,1,507x227x674x313,0.25,previous,2.0,67.258,other,28.935,37.604,0.005,0.485
+vi_chuyen_doi_so,3,__counter_13_08,26,1,507x227x674x313,0.25,previous,2.0,67.258,other,28.935,37.604,0.005,0.485
+vi_chuyen_doi_so,3,__counter_13_07,27,1,507x227x674x313,0.25,previous,2.0,67.258,other,28.935,37.604,0.005,0.485
+vi_chuyen_doi_so,3,__counter_13_06,28,1,507x227x674x313,0.25,previous,2.0,67.258,other,28.935,37.604,0.005,0.485
+vi_chuyen_doi_so,3,__counter_13_05,29,1,507x227x674x313,0.25,previous,2.0,67.258,other,28.935,37.604,0.005,0.485
+vi_chuyen_doi_so,3,__counter_13_04,30,1,507x227x674x313,0.25,previous,2.0,67.258,other,28.935,37.604,0.005,0.485
+vi_chuyen_doi_so,3,__counter_13_03,31,1,507x227x674x313,0.25,previous,2.0,67.258,other,28.935,37.604,0.005,0.485
+vi_chuyen_doi_so,3,__counter_13_02,32,1,507x227x674x313,0.25,previous,2.0,67.258,other,28.935,37.604,0.005,0.485
+vi_chuyen_doi_so,3,__counter_13_01,33,1,507x227x674x313,0.25,previous,2.0,67.258,other,28.935,37.604,0.005,0.485
+vi_chuyen_doi_so,3,__counter_16_07,34,1,728x227x895x313,0.25,previous,2.0,49.278,mostly-previous,17.519,30.665,0.005,0.417
+vi_chuyen_doi_so,3,__counter_16_06,35,1,728x227x895x313,0.25,previous,2.0,49.278,mostly-previous,17.519,30.665,0.005,0.417
+vi_chuyen_doi_so,3,__counter_16_05,36,1,728x227x895x313,0.25,previous,2.0,49.278,mostly-previous,17.519,30.665,0.005,0.417
+vi_chuyen_doi_so,3,__counter_16_04,37,1,728x227x895x313,0.25,previous,2.0,49.278,mostly-previous,17.519,30.665,0.005,0.417
+vi_chuyen_doi_so,3,__counter_16_03,38,1,728x227x895x313,0.25,previous,2.0,49.278,mostly-previous,17.519,30.665,0.005,0.417
+vi_chuyen_doi_so,3,__counter_16_02,39,1,728x227x895x313,0.25,previous,2.0,49.278,mostly-previous,17.519,30.665,0.005,0.417
+vi_chuyen_doi_so,3,__counter_16_01,40,1,728x227x895x313,0.25,previous,2.0,49.278,mostly-previous,17.519,30.665,0.005,0.417
+vi_chuyen_doi_so,3,Title accent,5,2,58x99x158x104,0.5,previous,1.98,178.624,previous,0.06,180.624,0.005,0.0
+vi_chuyen_doi_so,3,KPI card 1,6,4,50x205x246x421,0.5,mostly-previous,19.255,31.005,final,31.935,10.601,0.043,0.893
+vi_chuyen_doi_so,3,KPI value 1,7,1,65x227x232x313,0.5,mostly-previous,28.856,53.553,final,59.268,12.958,0.006,0.95
+vi_chuyen_doi_so,3,KPI label 1,8,4,65x331x232x403,0.5,previous,2.384,22.724,other,10.774,9.906,0.007,0.48
+vi_chuyen_doi_so,3,KPI card 2,9,4,272x205x467x421,0.5,previous,9.956,24.055,final,18.169,11.018,0.011,0.531
+vi_chuyen_doi_so,3,KPI value 2,10,4,286x227x453x313,0.5,mostly-previous,22.423,36.505,mostly-final,35.438,17.484,0.04,0.545
+vi_chuyen_doi_so,3,KPI label 2,11,4,286x331x453x403,0.5,previous,1.976,20.332,other,9.773,8.911,0.006,0.474
+vi_chuyen_doi_so,3,KPI card 3,12,4,493x205x688x421,0.5,previous,2.0,35.4,final,24.582,9.699,0.005,0.88
+vi_chuyen_doi_so,3,KPI value 3,13,1,507x227x674x313,0.5,previous,2.0,67.258,final,54.703,11.925,0.005,0.93
+vi_chuyen_doi_so,3,KPI label 3,14,4,507x331x674x403,0.5,previous,2.0,24.278,other,11.753,10.916,0.006,0.48
+vi_chuyen_doi_so,3,KPI card 4,15,4,714x205x910x421,0.5,previous,2.125,27.995,final,17.565,8.986,0.005,0.749
+vi_chuyen_doi_so,3,KPI value 4,16,1,728x227x895x313,0.5,previous,2.0,49.278,final,35.63,12.627,0.005,0.86
+vi_chuyen_doi_so,3,KPI label 4,17,4,728x331x895x403,0.5,previous,2.0,20.184,other,9.666,8.775,0.007,0.478
+vi_chuyen_doi_so,3,__counter_7_07,18,1,65x227x232x313,0.5,mostly-previous,28.856,53.553,final,59.268,12.958,0.006,0.95
+vi_chuyen_doi_so,3,__counter_7_06,19,1,65x227x232x313,0.5,mostly-previous,28.856,53.553,final,59.268,12.958,0.006,0.95
+vi_chuyen_doi_so,3,__counter_7_05,20,1,65x227x232x313,0.5,mostly-previous,28.856,53.553,final,59.268,12.958,0.006,0.95
+vi_chuyen_doi_so,3,__counter_7_04,21,1,65x227x232x313,0.5,mostly-previous,28.856,53.553,final,59.268,12.958,0.006,0.95
+vi_chuyen_doi_so,3,__counter_7_03,22,1,65x227x232x313,0.5,mostly-previous,28.856,53.553,final,59.268,12.958,0.006,0.95
+vi_chuyen_doi_so,3,__counter_7_02,23,1,65x227x232x313,0.5,mostly-previous,28.856,53.553,final,59.268,12.958,0.006,0.95
+vi_chuyen_doi_so,3,__counter_7_01,24,1,65x227x232x313,0.5,mostly-previous,28.856,53.553,final,59.268,12.958,0.006,0.95
+vi_chuyen_doi_so,3,__counter_13_09,25,1,507x227x674x313,0.5,previous,2.0,67.258,final,54.703,11.925,0.005,0.93
+vi_chuyen_doi_so,3,__counter_13_08,26,1,507x227x674x313,0.5,previous,2.0,67.258,final,54.703,11.925,0.005,0.93
+vi_chuyen_doi_so,3,__counter_13_07,27,1,507x227x674x313,0.5,previous,2.0,67.258,final,54.703,11.925,0.005,0.93
+vi_chuyen_doi_so,3,__counter_13_06,28,1,507x227x674x313,0.5,previous,2.0,67.258,final,54.703,11.925,0.005,0.93
+vi_chuyen_doi_so,3,__counter_13_05,29,1,507x227x674x313,0.5,previous,2.0,67.258,final,54.703,11.925,0.005,0.93
+vi_chuyen_doi_so,3,__counter_13_04,30,1,507x227x674x313,0.5,previous,2.0,67.258,final,54.703,11.925,0.005,0.93
+vi_chuyen_doi_so,3,__counter_13_03,31,1,507x227x674x313,0.5,previous,2.0,67.258,final,54.703,11.925,0.005,0.93
+vi_chuyen_doi_so,3,__counter_13_02,32,1,507x227x674x313,0.5,previous,2.0,67.258,final,54.703,11.925,0.005,0.93
+vi_chuyen_doi_so,3,__counter_13_01,33,1,507x227x674x313,0.5,previous,2.0,67.258,final,54.703,11.925,0.005,0.93
+vi_chuyen_doi_so,3,__counter_16_07,34,1,728x227x895x313,0.5,previous,2.0,49.278,final,35.63,12.627,0.005,0.86
+vi_chuyen_doi_so,3,__counter_16_06,35,1,728x227x895x313,0.5,previous,2.0,49.278,final,35.63,12.627,0.005,0.86
+vi_chuyen_doi_so,3,__counter_16_05,36,1,728x227x895x313,0.5,previous,2.0,49.278,final,35.63,12.627,0.005,0.86
+vi_chuyen_doi_so,3,__counter_16_04,37,1,728x227x895x313,0.5,previous,2.0,49.278,final,35.63,12.627,0.005,0.86
+vi_chuyen_doi_so,3,__counter_16_03,38,1,728x227x895x313,0.5,previous,2.0,49.278,final,35.63,12.627,0.005,0.86
+vi_chuyen_doi_so,3,__counter_16_02,39,1,728x227x895x313,0.5,previous,2.0,49.278,final,35.63,12.627,0.005,0.86
+vi_chuyen_doi_so,3,__counter_16_01,40,1,728x227x895x313,0.5,previous,2.0,49.278,final,35.63,12.627,0.005,0.86
+vi_chuyen_doi_so,3,Title accent,5,2,58x99x158x104,0.75,previous,1.98,178.624,mostly-previous,31.912,160.514,0.005,0.076
+vi_chuyen_doi_so,3,KPI card 1,6,4,50x205x246x421,0.75,mostly-previous,18.996,30.672,final,38.773,3.452,0.044,0.99
+vi_chuyen_doi_so,3,KPI value 1,7,1,65x227x232x313,0.75,mostly-previous,28.906,53.575,final,67.11,3.824,0.005,0.993
+vi_chuyen_doi_so,3,KPI label 1,8,4,65x331x232x403,0.75,previous,2.123,22.459,final,17.225,3.966,0.007,0.823
+vi_chuyen_doi_so,3,KPI card 2,9,4,272x205x467x421,0.75,previous,9.696,23.792,final,24.739,3.82,0.011,0.906
+vi_chuyen_doi_so,3,KPI value 2,10,4,286x227x453x313,0.75,mostly-previous,22.445,36.516,final,45.504,6.122,0.04,0.924
+vi_chuyen_doi_so,3,KPI label 2,11,4,286x331x453x403,0.75,previous,1.976,20.335,final,15.625,3.509,0.006,0.812
+vi_chuyen_doi_so,3,KPI card 3,12,4,493x205x688x421,0.75,previous,2.0,35.4,final,31.117,3.119,0.005,0.991
+vi_chuyen_doi_so,3,KPI value 3,13,1,507x227x674x313,0.75,previous,2.0,67.258,final,63.468,3.516,0.005,0.993
+vi_chuyen_doi_so,3,KPI label 3,14,4,507x331x674x403,0.75,previous,2.0,24.278,final,18.967,4.169,0.006,0.824
+vi_chuyen_doi_so,3,KPI card 4,15,4,714x205x910x421,0.75,previous,2.125,27.995,final,23.679,3.06,0.005,0.97
+vi_chuyen_doi_so,3,KPI value 4,16,1,728x227x895x313,0.75,previous,2.0,49.278,final,44.442,3.928,0.005,0.981
+vi_chuyen_doi_so,3,KPI label 4,17,4,728x331x895x403,0.75,previous,2.0,20.184,final,15.458,3.507,0.007,0.82
+vi_chuyen_doi_so,3,__counter_7_07,18,1,65x227x232x313,0.75,mostly-previous,28.906,53.575,final,67.11,3.824,0.005,0.993
+vi_chuyen_doi_so,3,__counter_7_06,19,1,65x227x232x313,0.75,mostly-previous,28.906,53.575,final,67.11,3.824,0.005,0.993
+vi_chuyen_doi_so,3,__counter_7_05,20,1,65x227x232x313,0.75,mostly-previous,28.906,53.575,final,67.11,3.824,0.005,0.993
+vi_chuyen_doi_so,3,__counter_7_04,21,1,65x227x232x313,0.75,mostly-previous,28.906,53.575,final,67.11,3.824,0.005,0.993
+vi_chuyen_doi_so,3,__counter_7_03,22,1,65x227x232x313,0.75,mostly-previous,28.906,53.575,final,67.11,3.824,0.005,0.993
+vi_chuyen_doi_so,3,__counter_7_02,23,1,65x227x232x313,0.75,mostly-previous,28.906,53.575,final,67.11,3.824,0.005,0.993
+vi_chuyen_doi_so,3,__counter_7_01,24,1,65x227x232x313,0.75,mostly-previous,28.906,53.575,final,67.11,3.824,0.005,0.993
+vi_chuyen_doi_so,3,__counter_13_09,25,1,507x227x674x313,0.75,previous,2.0,67.258,final,63.468,3.516,0.005,0.993
+vi_chuyen_doi_so,3,__counter_13_08,26,1,507x227x674x313,0.75,previous,2.0,67.258,final,63.468,3.516,0.005,0.993
+vi_chuyen_doi_so,3,__counter_13_07,27,1,507x227x674x313,0.75,previous,2.0,67.258,final,63.468,3.516,0.005,0.993
+vi_chuyen_doi_so,3,__counter_13_06,28,1,507x227x674x313,0.75,previous,2.0,67.258,final,63.468,3.516,0.005,0.993
+vi_chuyen_doi_so,3,__counter_13_05,29,1,507x227x674x313,0.75,previous,2.0,67.258,final,63.468,3.516,0.005,0.993
+vi_chuyen_doi_so,3,__counter_13_04,30,1,507x227x674x313,0.75,previous,2.0,67.258,final,63.468,3.516,0.005,0.993
+vi_chuyen_doi_so,3,__counter_13_03,31,1,507x227x674x313,0.75,previous,2.0,67.258,final,63.468,3.516,0.005,0.993
+vi_chuyen_doi_so,3,__counter_13_02,32,1,507x227x674x313,0.75,previous,2.0,67.258,final,63.468,3.516,0.005,0.993
+vi_chuyen_doi_so,3,__counter_13_01,33,1,507x227x674x313,0.75,previous,2.0,67.258,final,63.468,3.516,0.005,0.993
+vi_chuyen_doi_so,3,__counter_16_07,34,1,728x227x895x313,0.75,previous,2.0,49.278,final,44.442,3.928,0.005,0.981
+vi_chuyen_doi_so,3,__counter_16_06,35,1,728x227x895x313,0.75,previous,2.0,49.278,final,44.442,3.928,0.005,0.981
+vi_chuyen_doi_so,3,__counter_16_05,36,1,728x227x895x313,0.75,previous,2.0,49.278,final,44.442,3.928,0.005,0.981
+vi_chuyen_doi_so,3,__counter_16_04,37,1,728x227x895x313,0.75,previous,2.0,49.278,final,44.442,3.928,0.005,0.981
+vi_chuyen_doi_so,3,__counter_16_03,38,1,728x227x895x313,0.75,previous,2.0,49.278,final,44.442,3.928,0.005,0.981
+vi_chuyen_doi_so,3,__counter_16_02,39,1,728x227x895x313,0.75,previous,2.0,49.278,final,44.442,3.928,0.005,0.981
+vi_chuyen_doi_so,3,__counter_16_01,40,1,728x227x895x313,0.75,previous,2.0,49.278,final,44.442,3.928,0.005,0.981
+vi_chuyen_doi_so,4,Title accent,5,2,58x99x158x104,0.25,other,178.624,179.36,other,9.264,7.878,,
+vi_chuyen_doi_so,4,Chart,6,4,50x130x595x504,0.25,final,17.478,8.872,previous,3.423,18.404,0.879,0.012
+vi_chuyen_doi_so,4,Takeaway bar,7,2,617x166x622x353,0.25,mostly-previous,50.443,190.49,mostly-previous,25.614,134.812,0.054,0.158
+vi_chuyen_doi_so,4,Takeaway,8,4,635x158x910x367,0.25,mostly-previous,24.962,47.127,previous,9.545,51.663,0.187,0.142
+vi_chuyen_doi_so,4,__gen_highlight_marker1,9,2,639x189x906x337,0.25,mostly-previous,28.89,66.23,previous,12.729,70.11,0.187,0.142
+vi_chuyen_doi_so,4,Title accent,5,2,58x99x158x104,0.5,other,159.048,159.784,other,9.264,7.878,,
+vi_chuyen_doi_so,4,Chart,6,4,50x130x595x504,0.5,final,17.056,7.886,previous,9.87,15.94,0.99,0.137
+vi_chuyen_doi_so,4,Takeaway bar,7,2,617x166x622x353,0.5,mostly-previous,50.443,190.49,other,81.516,82.168,0.054,0.509
+vi_chuyen_doi_so,4,Takeaway,8,4,635x158x910x367,0.5,mostly-previous,23.334,47.647,other,30.943,30.852,0.187,0.507
+vi_chuyen_doi_so,4,__gen_highlight_marker1,9,2,639x189x906x337,0.5,mostly-previous,27.218,67.481,other,41.893,41.12,0.187,0.507
+vi_chuyen_doi_so,4,Title accent,5,2,58x99x158x104,0.75,other,163.844,164.58,other,11.31,9.936,,
+vi_chuyen_doi_so,4,Chart,6,4,50x130x595x504,0.75,final,16.392,7.269,final,15.152,11.377,0.99,0.513
+vi_chuyen_doi_so,4,Takeaway bar,7,2,617x166x622x353,0.75,mostly-previous,50.913,190.019,mostly-final,134.978,31.539,0.061,0.841
+vi_chuyen_doi_so,4,Takeaway,8,4,635x158x910x367,0.75,mostly-previous,23.357,46.9,final,49.045,12.303,0.209,0.851
+vi_chuyen_doi_so,4,__gen_highlight_marker1,9,2,639x189x906x337,0.75,mostly-previous,27.665,67.036,mostly-final,66.801,16.686,0.209,0.851
+vi_chuyen_doi_so,5,Title accent,5,2,58x99x158x104,0.25,other,178.992,178.256,other,10.31,11.684,,
+vi_chuyen_doi_so,5,Step 1,6,4,50x191x235x349,0.25,previous,4.969,18.655,previous,6.117,15.247,0.748,0.239
+vi_chuyen_doi_so,5,Step 2,7,4,275x191x460x349,0.25,previous,7.419,18.759,previous,9.931,17.569,0.807,0.206
+vi_chuyen_doi_so,5,Link 1,8,2,241x270x269x270,0.25,empty,,,empty,,,,
+vi_chuyen_doi_so,5,Step 3,9,4,500x191x685x349,0.25,other,24.908,18.472,other,40.722,52.535,0.791,0.119
+vi_chuyen_doi_so,5,Link 2,10,2,466x270x494x270,0.25,empty,,,empty,,,,
+vi_chuyen_doi_so,5,Step 4,11,4,725x191x910x349,0.25,mostly-previous,59.225,187.888,mostly-previous,46.385,138.665,0.0,0.153
+vi_chuyen_doi_so,5,Link 3,12,2,691x270x719x270,0.25,empty,,,empty,,,,
+vi_chuyen_doi_so,5,Takeaway,13,4,50x385x910x443,0.25,previous,4.695,24.817,previous,4.242,25.538,0.019,0.0
+vi_chuyen_doi_so,5,__gen_highlight_marker1,14,2,54x387x477x420,0.25,previous,2.756,62.698,previous,0.971,64.519,0.019,0.0
+vi_chuyen_doi_so,5,Title accent,5,2,58x99x158x104,0.5,other,178.992,178.256,other,7.878,9.264,,
+vi_chuyen_doi_so,5,Step 1,6,4,50x191x235x349,0.5,previous,4.969,18.655,other,11.66,8.29,0.748,0.728
+vi_chuyen_doi_so,5,Step 2,7,4,275x191x460x349,0.5,previous,7.419,18.759,other,24.123,23.187,0.807,0.542
+vi_chuyen_doi_so,5,Link 1,8,2,241x270x269x270,0.5,empty,,,empty,,,,
+vi_chuyen_doi_so,5,Step 3,9,4,500x191x685x349,0.5,other,24.937,18.432,other,45.016,35.88,0.791,0.906
+vi_chuyen_doi_so,5,Link 2,10,2,466x270x494x270,0.5,empty,,,empty,,,,
+vi_chuyen_doi_so,5,Step 4,11,4,725x191x910x349,0.5,mostly-previous,59.262,187.906,other,66.807,93.342,0.0,0.33
+vi_chuyen_doi_so,5,Link 3,12,2,691x270x719x270,0.5,empty,,,empty,,,,
+vi_chuyen_doi_so,5,Takeaway,13,4,50x385x910x443,0.5,previous,4.697,24.818,previous,3.634,24.919,0.019,0.0
+vi_chuyen_doi_so,5,__gen_highlight_marker1,14,2,54x387x477x420,0.5,previous,2.756,62.698,previous,0.895,64.446,0.019,0.0
+vi_chuyen_doi_so,5,Title accent,5,2,58x99x158x104,0.75,other,179.36,178.624,other,7.878,9.264,,
+vi_chuyen_doi_so,5,Step 1,6,4,50x191x235x349,0.75,previous,4.971,18.657,final,16.654,2.852,0.748,0.979
+vi_chuyen_doi_so,5,Step 2,7,4,275x191x460x349,0.75,previous,7.432,18.748,final,19.331,3.087,0.81,0.974
+vi_chuyen_doi_so,5,Link 1,8,2,241x270x269x270,0.75,empty,,,empty,,,,
+vi_chuyen_doi_so,5,Step 3,9,4,500x191x685x349,0.75,other,24.94,18.429,final,37.116,3.013,0.791,0.978
+vi_chuyen_doi_so,5,Link 2,10,2,466x270x494x270,0.75,empty,,,empty,,,,
+vi_chuyen_doi_so,5,Step 4,11,4,725x191x910x349,0.75,mostly-previous,59.277,187.92,mostly-final,119.87,30.256,0.0,0.785
+vi_chuyen_doi_so,5,Link 3,12,2,691x270x719x270,0.75,empty,,,empty,,,,
+vi_chuyen_doi_so,5,Takeaway,13,4,50x385x910x443,0.75,previous,4.635,24.756,previous,13.896,22.191,0.019,0.137
+vi_chuyen_doi_so,5,__gen_highlight_marker1,14,2,54x387x477x420,0.75,previous,2.756,62.698,mostly-previous,26.814,47.46,0.019,0.0
+vi_chuyen_doi_so,6,Title accent,5,2,58x99x158x104,0.25,other,178.624,178.964,other,9.264,8.92,,
+vi_chuyen_doi_so,6,Left card,6,4,50x130x462x497,0.25,previous,14.597,19.679,previous,5.446,17.195,0.791,0.269
+vi_chuyen_doi_so,6,Left heading,7,4,76x151x437x209,0.25,previous,5.406,19.29,mostly-previous,2.69,12.398,0.005,0.151
+vi_chuyen_doi_so,6,Left points,8,4,76x220x437x479,0.25,other,18.106,21.019,previous,6.698,20.484,0.791,0.269
+vi_chuyen_doi_so,6,Right card,9,4,498x130x910x497,0.25,mostly-final,41.992,21.654,previous,14.58,40.802,0.938,0.286
+vi_chuyen_doi_so,6,Right heading,10,4,523x151x884x209,0.25,other,30.946,23.015,previous,11.561,33.397,0.835,0.286
+vi_chuyen_doi_so,6,Right points,11,4,523x220x884x479,0.25,mostly-final,47.965,22.341,mostly-previous,16.187,45.468,0.938,0.286
+vi_chuyen_doi_so,6,Title accent,5,2,58x99x158x104,0.5,other,172.446,172.786,other,9.264,8.92,,
+vi_chuyen_doi_so,6,Left card,6,4,50x130x462x497,0.5,previous,14.44,19.299,other,13.808,9.92,0.791,0.701
+vi_chuyen_doi_so,6,Left heading,7,4,76x151x437x209,0.5,previous,6.238,19.734,other,8.096,7.586,0.005,0.483
+vi_chuyen_doi_so,6,Left points,8,4,76x220x437x479,0.5,other,17.638,20.591,final,16.665,11.565,0.791,0.701
+vi_chuyen_doi_so,6,Right card,9,4,498x130x910x497,0.5,mostly-final,44.121,21.692,mostly-final,36.661,18.579,0.938,0.716
+vi_chuyen_doi_so,6,Right heading,10,4,523x151x884x209,0.5,mostly-final,29.6,18.79,mostly-final,27.751,15.161,0.938,0.736
+vi_chuyen_doi_so,6,Right points,11,4,523x220x884x479,0.5,mostly-final,50.568,23.66,mostly-final,41.783,20.729,0.938,0.736
+vi_chuyen_doi_so,6,Title accent,5,2,58x99x158x104,0.75,other,177.97,178.31,other,9.922,9.578,,
+vi_chuyen_doi_so,6,Left card,6,4,50x130x462x497,0.75,previous,14.205,19.172,final,18.429,3.791,0.791,0.955
+vi_chuyen_doi_so,6,Left heading,7,4,76x151x437x209,0.75,previous,5.547,19.431,mostly-final,12.025,2.705,0.005,0.831
+vi_chuyen_doi_so,6,Left points,8,4,76x220x437x479,0.75,other,18.024,20.902,final,22.67,4.766,0.791,0.955
+vi_chuyen_doi_so,6,Right card,9,4,498x130x910x497,0.75,mostly-final,44.107,20.439,final,50.121,4.694,0.938,0.971
+vi_chuyen_doi_so,6,Right heading,10,4,523x151x884x209,0.75,mostly-final,29.668,18.858,final,38.734,3.143,0.938,0.971
+vi_chuyen_doi_so,6,Right points,11,4,523x220x884x479,0.75,mostly-final,50.144,22.127,final,56.889,5.739,0.938,0.971
+vi_chuyen_doi_so,7,Title accent,5,2,58x99x158x104,0.25,other,98.378,98.724,other,8.986,9.33,,
+vi_chuyen_doi_so,7,Points,6,12,50x130x910x490,0.25,mostly-final,32.179,22.507,previous,6.029,19.266,0.136,0.161
+vi_chuyen_doi_so,7,Title accent,5,2,58x99x158x104,0.5,other,152.48,152.14,other,8.92,9.264,,
+vi_chuyen_doi_so,7,Points,6,12,50x130x910x490,0.5,other,42.978,32.319,other,12.561,12.997,0.469,0.511
+vi_chuyen_doi_so,7,Title accent,5,2,58x99x158x104,0.75,other,175.94,175.6,other,8.92,9.264,,
+vi_chuyen_doi_so,7,Points,6,12,50x130x910x490,0.75,mostly-final,27.568,16.455,final,20.123,5.4,0.327,0.846
+vi_chuyen_doi_so,8,Quote,5,4,115x162x845x374,0.25,previous,13.174,20.936,previous,6.581,23.389,0.008,0.158
+vi_chuyen_doi_so,8,Author rule,6,2,122x392x187x396,0.25,previous,5.927,164.642,previous,3.004,167.512,0.005,0.0
+vi_chuyen_doi_so,8,Author,7,4,198x374x841x418,0.25,mostly-previous,2.271,8.586,mostly-previous,1.247,6.048,0.007,0.154
+vi_chuyen_doi_so,8,Quote,5,4,115x162x845x374,0.5,previous,12.985,20.697,final,15.406,14.874,0.007,0.501
+vi_chuyen_doi_so,8,Author rule,6,2,122x392x187x396,0.5,previous,2.0,168.485,previous,0.0,170.485,0.005,0.0
+vi_chuyen_doi_so,8,Author,7,4,198x374x841x418,0.5,mostly-previous,2.271,8.586,other,3.577,3.988,0.007,0.488
+vi_chuyen_doi_so,8,Quote,5,4,115x162x845x374,0.75,previous,12.866,20.567,final,23.841,5.688,0.007,0.839
+vi_chuyen_doi_so,8,Author rule,6,2,122x392x187x396,0.75,previous,2.0,168.485,previous,0.0,170.485,0.005,0.0
+vi_chuyen_doi_so,8,Author,7,4,198x374x841x418,0.75,mostly-previous,2.272,8.588,mostly-final,5.898,2.54,0.007,0.821
+vi_chuyen_doi_so,9,Title,4,4,50x173x910x288,0.25,final,18.03,12.811,previous,4.489,19.501,0.99,0.159
+vi_chuyen_doi_so,9,Closing accent,5,2,408x299x552x305,0.25,mostly-previous,81.476,177.88,mostly-previous,16.383,156.178,0.009,0.002
+vi_chuyen_doi_so,9,Subtitle,6,4,122x320x838x407,0.25,other,5.711,6.833,mostly-previous,3.638,7.806,0.013,0.16
+vi_chuyen_doi_so,9,Title,4,4,50x173x910x288,0.5,final,18.052,12.838,other,11.95,12.003,0.991,0.5
+vi_chuyen_doi_so,9,Closing accent,5,2,408x299x552x305,0.5,mostly-previous,81.698,177.159,mostly-previous,41.352,152.507,0.009,0.0
+vi_chuyen_doi_so,9,Subtitle,6,4,122x320x838x407,0.5,other,5.711,6.833,other,6.391,5.603,0.013,0.507
+vi_chuyen_doi_so,9,Title,4,4,50x173x910x288,0.75,final,18.069,12.833,final,19.447,4.371,0.993,0.842
+vi_chuyen_doi_so,9,Closing accent,5,2,408x299x552x305,0.75,mostly-previous,81.926,177.394,mostly-previous,68.33,169.644,0.009,0.0
+vi_chuyen_doi_so,9,Subtitle,6,4,122x320x838x407,0.75,other,5.711,6.834,mostly-final,7.485,2.146,0.013,0.844

@@ -1,0 +1,225 @@
+deck,slide,status,count,spid,shape,class,preset,node,dur,delay,children,props
+T028_report_pro,2,added,4,3,Content Placeholder 2,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+T028_report_pro,2,lost,4,3,Content Placeholder 2,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+T028_report_pro,8,added,3,3,Content Placeholder 2,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+T028_report_pro,8,lost,3,3,Content Placeholder 2,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+T028_showcase_pro,2,added,1,4,Stage Plan,emph,9,withEffect,,0,set,style.opacity
+T028_showcase_pro,2,added,1,4,Stage Plan,emph,9,clickEffect,,0,set,style.opacity
+T028_showcase_pro,2,added,3,5,Stage Do,emph,9,withEffect,,0,set,style.opacity
+T028_showcase_pro,2,added,1,5,Stage Do,emph,9,clickEffect,,0,set,style.opacity
+T028_showcase_pro,2,added,3,6,Stage Check,emph,9,withEffect,,0,set,style.opacity
+T028_showcase_pro,2,added,1,6,Stage Check,emph,9,clickEffect,,0,set,style.opacity
+T028_showcase_pro,2,added,1,7,Stage Act,emph,9,withEffect,,0,set,style.opacity
+T028_showcase_pro,2,added,1,7,Stage Act,emph,9,clickEffect,,0,set,style.opacity
+T028_showcase_pro,2,lost,1,4,Stage Plan,emph,9,withEffect,,0,animEffect+set,style.opacity
+T028_showcase_pro,2,lost,1,4,Stage Plan,emph,9,clickEffect,,0,animEffect+set,style.opacity
+T028_showcase_pro,2,lost,3,5,Stage Do,emph,9,withEffect,,0,animEffect+set,style.opacity
+T028_showcase_pro,2,lost,1,5,Stage Do,emph,9,clickEffect,,0,animEffect+set,style.opacity
+T028_showcase_pro,2,lost,3,6,Stage Check,emph,9,withEffect,,0,animEffect+set,style.opacity
+T028_showcase_pro,2,lost,1,6,Stage Check,emph,9,clickEffect,,0,animEffect+set,style.opacity
+T028_showcase_pro,2,lost,1,7,Stage Act,emph,9,withEffect,,0,animEffect+set,style.opacity
+T028_showcase_pro,2,lost,1,7,Stage Act,emph,9,clickEffect,,0,animEffect+set,style.opacity
+T028_showcase_pro,6,added,2,3,!!cam6-3,emph,9,withEffect,,0,set,style.opacity
+T028_showcase_pro,6,added,1,4,!!cam6-4,emph,9,withEffect,,0,set,style.opacity
+T028_showcase_pro,6,added,1,4,!!cam6-4,emph,9,clickEffect,,0,set,style.opacity
+T028_showcase_pro,6,added,1,5,!!cam6-5,emph,9,withEffect,,0,set,style.opacity
+T028_showcase_pro,6,added,1,5,!!cam6-5,emph,9,clickEffect,,0,set,style.opacity
+T028_showcase_pro,6,added,2,6,!!cam6-6,emph,9,withEffect,,0,set,style.opacity
+T028_showcase_pro,6,lost,2,3,!!cam6-3,emph,9,withEffect,,0,animEffect+set,style.opacity
+T028_showcase_pro,6,lost,1,4,!!cam6-4,emph,9,withEffect,,0,animEffect+set,style.opacity
+T028_showcase_pro,6,lost,1,4,!!cam6-4,emph,9,clickEffect,,0,animEffect+set,style.opacity
+T028_showcase_pro,6,lost,1,5,!!cam6-5,emph,9,withEffect,,0,animEffect+set,style.opacity
+T028_showcase_pro,6,lost,1,5,!!cam6-5,emph,9,clickEffect,,0,animEffect+set,style.opacity
+T028_showcase_pro,6,lost,2,6,!!cam6-6,emph,9,withEffect,,0,animEffect+set,style.opacity
+coffee_office_dynamic,3,added,1,15,Takeaway,entr,31,clickEffect,,0,anim+anim+animEffect+set,ppt_h+ppt_w+style.visibility
+coffee_office_dynamic,3,lost,1,15,Takeaway,entr,31,clickEffect,,0,anim+anim+anim+animEffect+set,ppt_h+ppt_w+style.rotation+style.visibility
+coffee_office_dynamic,4,added,1,8,Takeaway,entr,31,clickEffect,,0,anim+anim+animEffect+set,ppt_h+ppt_w+style.visibility
+coffee_office_dynamic,4,lost,1,8,Takeaway,entr,31,clickEffect,,0,anim+anim+anim+animEffect+set,ppt_h+ppt_w+style.rotation+style.visibility
+coffee_office_dynamic,6,added,3,7,Points,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_office_dynamic,6,lost,3,7,Points,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_office_dynamic,7,added,1,7,Stage 1,emph,9,withEffect,,0,set,style.opacity
+coffee_office_dynamic,7,added,1,7,Stage 1,emph,9,clickEffect,,0,set,style.opacity
+coffee_office_dynamic,7,added,3,8,Stage 2,emph,9,withEffect,,0,set,style.opacity
+coffee_office_dynamic,7,added,1,8,Stage 2,emph,9,clickEffect,,0,set,style.opacity
+coffee_office_dynamic,7,added,3,9,Stage 3,emph,9,withEffect,,0,set,style.opacity
+coffee_office_dynamic,7,added,1,9,Stage 3,emph,9,clickEffect,,0,set,style.opacity
+coffee_office_dynamic,7,added,1,10,Stage 4,emph,9,withEffect,,0,set,style.opacity
+coffee_office_dynamic,7,added,1,10,Stage 4,emph,9,clickEffect,,0,set,style.opacity
+coffee_office_dynamic,7,lost,1,7,Stage 1,emph,9,withEffect,,0,animEffect+set,style.opacity
+coffee_office_dynamic,7,lost,1,7,Stage 1,emph,9,clickEffect,,0,animEffect+set,style.opacity
+coffee_office_dynamic,7,lost,3,8,Stage 2,emph,9,withEffect,,0,animEffect+set,style.opacity
+coffee_office_dynamic,7,lost,1,8,Stage 2,emph,9,clickEffect,,0,animEffect+set,style.opacity
+coffee_office_dynamic,7,lost,3,9,Stage 3,emph,9,withEffect,,0,animEffect+set,style.opacity
+coffee_office_dynamic,7,lost,1,9,Stage 3,emph,9,clickEffect,,0,animEffect+set,style.opacity
+coffee_office_dynamic,7,lost,1,10,Stage 4,emph,9,withEffect,,0,animEffect+set,style.opacity
+coffee_office_dynamic,7,lost,1,10,Stage 4,emph,9,clickEffect,,0,animEffect+set,style.opacity
+coffee_office_dynamic,9,added,1,5,Quote,entr,37,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_office_dynamic,9,added,1,7,Author,entr,37,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_office_dynamic,9,lost,1,5,Quote,entr,37,clickEffect,,0,anim+anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_office_dynamic,9,lost,1,7,Author,entr,37,clickEffect,,0,anim+anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_office_dynamic,10,added,1,4,Title,entr,37,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_office_dynamic,10,added,1,6,Subtitle,entr,37,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_office_dynamic,10,lost,1,4,Title,entr,37,clickEffect,,0,anim+anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_office_dynamic,10,lost,1,6,Subtitle,entr,37,clickEffect,,0,anim+anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report,3,added,1,6,KPI card 1,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_report,3,added,1,8,KPI label 1,entr,42,withEffect,,80,anim+animEffect+set,ppt_y+style.visibility
+coffee_report,3,added,1,9,KPI card 2,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_report,3,added,1,11,KPI label 2,entr,42,withEffect,,80,anim+animEffect+set,ppt_y+style.visibility
+coffee_report,3,added,1,12,KPI card 3,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_report,3,added,1,13,KPI value 3,entr,42,withEffect,,80,anim+animEffect+set,ppt_y+style.visibility
+coffee_report,3,added,1,14,KPI label 3,entr,42,withEffect,,160,anim+animEffect+set,ppt_y+style.visibility
+coffee_report,3,added,1,15,Takeaway,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_report,3,lost,1,6,KPI card 1,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report,3,lost,1,8,KPI label 1,entr,42,withEffect,,80,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report,3,lost,1,9,KPI card 2,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report,3,lost,1,11,KPI label 2,entr,42,withEffect,,80,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report,3,lost,1,12,KPI card 3,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report,3,lost,1,13,KPI value 3,entr,42,withEffect,,80,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report,3,lost,1,14,KPI label 3,entr,42,withEffect,,160,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report,3,lost,1,15,Takeaway,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report,4,added,1,8,Takeaway,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_report,4,lost,1,8,Takeaway,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report,6,added,3,7,Points,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_report,6,lost,3,7,Points,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report,7,added,1,6,Hub,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_report,7,added,1,7,Stage 1,emph,9,withEffect,,0,set,style.opacity
+coffee_report,7,added,1,7,Stage 1,emph,9,clickEffect,,0,set,style.opacity
+coffee_report,7,added,3,8,Stage 2,emph,9,withEffect,,0,set,style.opacity
+coffee_report,7,added,1,8,Stage 2,emph,9,clickEffect,,0,set,style.opacity
+coffee_report,7,added,3,9,Stage 3,emph,9,withEffect,,0,set,style.opacity
+coffee_report,7,added,1,9,Stage 3,emph,9,clickEffect,,0,set,style.opacity
+coffee_report,7,added,1,10,Stage 4,emph,9,withEffect,,0,set,style.opacity
+coffee_report,7,added,1,10,Stage 4,emph,9,clickEffect,,0,set,style.opacity
+coffee_report,7,lost,1,6,Hub,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report,7,lost,1,7,Stage 1,emph,9,withEffect,,0,animEffect+set,style.opacity
+coffee_report,7,lost,1,7,Stage 1,emph,9,clickEffect,,0,animEffect+set,style.opacity
+coffee_report,7,lost,3,8,Stage 2,emph,9,withEffect,,0,animEffect+set,style.opacity
+coffee_report,7,lost,1,8,Stage 2,emph,9,clickEffect,,0,animEffect+set,style.opacity
+coffee_report,7,lost,3,9,Stage 3,emph,9,withEffect,,0,animEffect+set,style.opacity
+coffee_report,7,lost,1,9,Stage 3,emph,9,clickEffect,,0,animEffect+set,style.opacity
+coffee_report,7,lost,1,10,Stage 4,emph,9,withEffect,,0,animEffect+set,style.opacity
+coffee_report,7,lost,1,10,Stage 4,emph,9,clickEffect,,0,animEffect+set,style.opacity
+coffee_report,8,added,1,6,Left card,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_report,8,added,1,7,Left heading,entr,42,withEffect,,80,anim+animEffect+set,ppt_y+style.visibility
+coffee_report,8,added,1,8,Left points,entr,42,withEffect,,160,anim+animEffect+set,ppt_y+style.visibility
+coffee_report,8,added,1,9,Right card,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_report,8,added,1,10,Right heading,entr,42,withEffect,,80,anim+animEffect+set,ppt_y+style.visibility
+coffee_report,8,added,1,11,Right points,entr,42,withEffect,,160,anim+animEffect+set,ppt_y+style.visibility
+coffee_report,8,lost,1,6,Left card,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report,8,lost,1,7,Left heading,entr,42,withEffect,,80,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report,8,lost,1,8,Left points,entr,42,withEffect,,160,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report,8,lost,1,9,Right card,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report,8,lost,1,10,Right heading,entr,42,withEffect,,80,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report,8,lost,1,11,Right points,entr,42,withEffect,,160,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report,9,added,1,5,Quote,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_report,9,added,1,7,Author,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_report,9,lost,1,5,Quote,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report,9,lost,1,7,Author,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report,10,added,1,4,Title,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_report,10,added,1,6,Subtitle,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_report,10,lost,1,4,Title,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report,10,lost,1,6,Subtitle,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report_photos,3,added,1,6,KPI card 1,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_report_photos,3,added,1,7,KPI icon 1,entr,42,withEffect,,80,anim+animEffect+set,ppt_y+style.visibility
+coffee_report_photos,3,added,1,9,KPI label 1,entr,42,withEffect,,160,anim+animEffect+set,ppt_y+style.visibility
+coffee_report_photos,3,added,1,10,KPI card 2,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_report_photos,3,added,1,11,KPI icon 2,entr,42,withEffect,,80,anim+animEffect+set,ppt_y+style.visibility
+coffee_report_photos,3,added,1,13,KPI label 2,entr,42,withEffect,,160,anim+animEffect+set,ppt_y+style.visibility
+coffee_report_photos,3,added,1,14,KPI card 3,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_report_photos,3,added,1,15,KPI icon 3,entr,42,withEffect,,80,anim+animEffect+set,ppt_y+style.visibility
+coffee_report_photos,3,added,1,16,KPI value 3,entr,42,withEffect,,160,anim+animEffect+set,ppt_y+style.visibility
+coffee_report_photos,3,added,1,17,KPI label 3,entr,42,withEffect,,240,anim+animEffect+set,ppt_y+style.visibility
+coffee_report_photos,3,added,1,18,Takeaway,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_report_photos,3,lost,1,6,KPI card 1,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report_photos,3,lost,1,7,KPI icon 1,entr,42,withEffect,,80,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report_photos,3,lost,1,9,KPI label 1,entr,42,withEffect,,160,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report_photos,3,lost,1,10,KPI card 2,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report_photos,3,lost,1,11,KPI icon 2,entr,42,withEffect,,80,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report_photos,3,lost,1,13,KPI label 2,entr,42,withEffect,,160,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report_photos,3,lost,1,14,KPI card 3,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report_photos,3,lost,1,15,KPI icon 3,entr,42,withEffect,,80,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report_photos,3,lost,1,16,KPI value 3,entr,42,withEffect,,160,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report_photos,3,lost,1,17,KPI label 3,entr,42,withEffect,,240,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report_photos,3,lost,1,18,Takeaway,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report_photos,4,added,1,8,Takeaway,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_report_photos,4,lost,1,8,Takeaway,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report_photos,6,added,3,7,Points,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_report_photos,6,lost,3,7,Points,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report_photos,7,added,1,6,Hub,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_report_photos,7,added,1,7,Stage 1,emph,9,withEffect,,0,set,style.opacity
+coffee_report_photos,7,added,1,7,Stage 1,emph,9,clickEffect,,0,set,style.opacity
+coffee_report_photos,7,added,3,8,Stage 2,emph,9,withEffect,,0,set,style.opacity
+coffee_report_photos,7,added,1,8,Stage 2,emph,9,clickEffect,,0,set,style.opacity
+coffee_report_photos,7,added,3,9,Stage 3,emph,9,withEffect,,0,set,style.opacity
+coffee_report_photos,7,added,1,9,Stage 3,emph,9,clickEffect,,0,set,style.opacity
+coffee_report_photos,7,added,1,10,Stage 4,emph,9,withEffect,,0,set,style.opacity
+coffee_report_photos,7,added,1,10,Stage 4,emph,9,clickEffect,,0,set,style.opacity
+coffee_report_photos,7,lost,1,6,Hub,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report_photos,7,lost,1,7,Stage 1,emph,9,withEffect,,0,animEffect+set,style.opacity
+coffee_report_photos,7,lost,1,7,Stage 1,emph,9,clickEffect,,0,animEffect+set,style.opacity
+coffee_report_photos,7,lost,3,8,Stage 2,emph,9,withEffect,,0,animEffect+set,style.opacity
+coffee_report_photos,7,lost,1,8,Stage 2,emph,9,clickEffect,,0,animEffect+set,style.opacity
+coffee_report_photos,7,lost,3,9,Stage 3,emph,9,withEffect,,0,animEffect+set,style.opacity
+coffee_report_photos,7,lost,1,9,Stage 3,emph,9,clickEffect,,0,animEffect+set,style.opacity
+coffee_report_photos,7,lost,1,10,Stage 4,emph,9,withEffect,,0,animEffect+set,style.opacity
+coffee_report_photos,7,lost,1,10,Stage 4,emph,9,clickEffect,,0,animEffect+set,style.opacity
+coffee_report_photos,8,added,1,6,Left card,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_report_photos,8,added,1,7,Left icon,entr,42,withEffect,,160,anim+animEffect+set,ppt_y+style.visibility
+coffee_report_photos,8,added,1,8,Left heading,entr,42,withEffect,,80,anim+animEffect+set,ppt_y+style.visibility
+coffee_report_photos,8,added,1,9,Left points,entr,42,withEffect,,240,anim+animEffect+set,ppt_y+style.visibility
+coffee_report_photos,8,added,1,10,Right card,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_report_photos,8,added,1,11,Right icon,entr,42,withEffect,,160,anim+animEffect+set,ppt_y+style.visibility
+coffee_report_photos,8,added,1,12,Right heading,entr,42,withEffect,,80,anim+animEffect+set,ppt_y+style.visibility
+coffee_report_photos,8,added,1,13,Right points,entr,42,withEffect,,240,anim+animEffect+set,ppt_y+style.visibility
+coffee_report_photos,8,lost,1,6,Left card,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report_photos,8,lost,1,7,Left icon,entr,42,withEffect,,160,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report_photos,8,lost,1,8,Left heading,entr,42,withEffect,,80,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report_photos,8,lost,1,9,Left points,entr,42,withEffect,,240,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report_photos,8,lost,1,10,Right card,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report_photos,8,lost,1,11,Right icon,entr,42,withEffect,,160,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report_photos,8,lost,1,12,Right heading,entr,42,withEffect,,80,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report_photos,8,lost,1,13,Right points,entr,42,withEffect,,240,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report_photos,9,added,1,5,Quote,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_report_photos,9,added,1,7,Author,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_report_photos,9,lost,1,5,Quote,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report_photos,9,lost,1,7,Author,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report_photos,10,added,1,4,Title,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_report_photos,10,added,1,6,Subtitle,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+coffee_report_photos,10,lost,1,4,Title,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+coffee_report_photos,10,lost,1,6,Subtitle,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+vi_brand_seed,2,added,1,4,Kicker,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+vi_brand_seed,2,added,1,5,Title,entr,42,afterEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+vi_brand_seed,2,lost,1,4,Kicker,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+vi_brand_seed,2,lost,1,5,Title,entr,42,afterEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+vi_brand_seed,4,added,1,8,Takeaway,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+vi_brand_seed,4,lost,1,8,Takeaway,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+vi_brand_seed,5,added,1,13,Takeaway,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+vi_brand_seed,5,lost,1,13,Takeaway,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+vi_brand_seed,7,added,3,6,Points,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+vi_brand_seed,7,lost,3,6,Points,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+vi_brand_seed,8,added,1,5,Quote,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+vi_brand_seed,8,added,1,7,Author,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+vi_brand_seed,8,lost,1,5,Quote,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+vi_brand_seed,8,lost,1,7,Author,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+vi_brand_seed,9,added,1,4,Title,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+vi_brand_seed,9,added,1,6,Subtitle,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+vi_brand_seed,9,lost,1,4,Title,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+vi_brand_seed,9,lost,1,6,Subtitle,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+vi_chuyen_doi_so,2,added,1,4,Kicker,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+vi_chuyen_doi_so,2,added,1,5,Title,entr,42,afterEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+vi_chuyen_doi_so,2,lost,1,4,Kicker,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+vi_chuyen_doi_so,2,lost,1,5,Title,entr,42,afterEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+vi_chuyen_doi_so,4,added,1,8,Takeaway,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+vi_chuyen_doi_so,4,lost,1,8,Takeaway,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+vi_chuyen_doi_so,5,added,1,13,Takeaway,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+vi_chuyen_doi_so,5,lost,1,13,Takeaway,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+vi_chuyen_doi_so,7,added,3,6,Points,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+vi_chuyen_doi_so,7,lost,3,6,Points,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+vi_chuyen_doi_so,8,added,1,5,Quote,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+vi_chuyen_doi_so,8,added,1,7,Author,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+vi_chuyen_doi_so,8,lost,1,5,Quote,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+vi_chuyen_doi_so,8,lost,1,7,Author,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+vi_chuyen_doi_so,9,added,1,4,Title,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+vi_chuyen_doi_so,9,added,1,6,Subtitle,entr,42,clickEffect,,0,anim+animEffect+set,ppt_y+style.visibility
+vi_chuyen_doi_so,9,lost,1,4,Title,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility
+vi_chuyen_doi_so,9,lost,1,6,Subtitle,entr,42,clickEffect,,0,anim+anim+animEffect+set,ppt_x+ppt_y+style.visibility

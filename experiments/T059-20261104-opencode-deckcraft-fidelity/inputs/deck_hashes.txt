@@ -1,0 +1,11 @@
+# T059 frozen decks (built from examples/pptx/forge or copied from T028 output)
+# sha256  bytes  file  source
+
+6a6329e20326893b9636d1914d3e675bdd01e90a6e898c817f6a6665de543c2d    636538  coffee_office_dynamic.pptx  examples/pptx/forge/coffee_office_dynamic.json
+4283926297c992fd2c184fb8c249778c57978f43e2cc8d0baedc11b61edcc906    671013  coffee_report.pptx  examples/pptx/forge/coffee_report.json
+00110e27a0991244263c8fdb45e4ce3a73473b323bf792fbe8e5af629b09d03c   1794145  coffee_report_photos.pptx  examples/pptx/forge/coffee_report_photos.json
+cb5d99b2c9a3415572066968deea8d53d16cffb8dfd07b64543827a05d096619     37640  kind_probe.pptx  workspace/build_kind_probe.py (synthetic)
+6debf60a709189f6db2337c51f0aa80545ec8e549729fbfc22fb8ad573a0add1     60021  T028_report_pro.pptx  experiments/T028-20261008-claude-morph-studio/output/T028_report_pro.pptx
+8d09f0e7b5f7b0607be4423aabbf5928501f9498de855ed55b403877a5d70a80     56698  T028_showcase_pro.pptx  experiments/T028-20261008-claude-morph-studio/output/T028_showcase_pro.pptx
+d6e7bba8f6cbcb783898bd7b9adcd1537d91771b83229af8c7e9442c354fe6eb    435131  vi_brand_seed.pptx  examples/pptx/forge/vi_brand_seed.json
+5dbd8465c40f36f9859ef011931b3408bc2cdefd5f014bb5a744592ae4c34ccc    422973  vi_chuyen_doi_so.pptx  examples/pptx/forge/vi_chuyen_doi_so.json
