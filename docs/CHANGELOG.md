@@ -7,6 +7,69 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T078 [pptx] Script track: diagnosis, method and the first gold script — 2026-11-04
+
+- **Why.** The owner pushed back on T070: motion thinking is driven by the
+  script, the agents' script skill is weak, and weak models may not manage
+  this part. T070 had treated the script as an input the agent "just writes".
+- **Diagnosis.**
+  - The deck-director skill teaches a form and prohibitions, not a way to think.
+  - It has no gold example.
+  - The T069a script starts from the textbook outline and restates
+    definitions.
+  - There is no bridge from sentences to motion.
+  - Scripts are never read as text before building.
+- **Method.** Direction lives in `docs/SCRIPT_TRACK.md`:
+  - a table of what a weak model can and cannot do;
+  - a 6-step method (ask, intent, shifts, scene sheet, verb → motion,
+    read-aloud and approval);
+  - a library of 8 narrative frames;
+  - an 18-row verb → motion table (hypotheses);
+  - a division of labour: a strong model or the owner approves scripts as
+    text.
+- **Gold script.** `experiments/T078-…/gold-script-triet-hoc-ch1.md`: 13 scenes for
+  the T066/T069a deck. It opens with two proverbs, uses a persistent lens
+  metaphor as the Morph actor, and derives motion from verbs: gather, tip,
+  flip, merge, become, pan through time, swap weight. It is compared with
+  T069a.
+- **Reserved.** T079 weak-model experiment, T080 verb-table validation, T081
+  `script-writer` skill, T082 gold scripts 2–5. Next free ID T083. The ROADMAP
+  principle 2 and architecture now put the script first.
+
+## T070 [cross] Lead synthesis of T001–T069, critique and PPTX roadmap — 2026-11-04
+
+- **Why.** The owner saw a lot of activity but no clearly better deck, noticed
+  that mixing feedback and new requests in one session confused the agents,
+  and found Morph hard. They asked the lead to synthesise all research,
+  criticise it and set the path.
+- **Synthesis.** Six phases (timing language, existing-deck director, new
+  decks and knowledge, breadth, gates, story direction). Rung-5 assets: canonical
+  timing writer and presets, picture motion, print-safe count-ups, live trigger
+  clicks (T058), one interaction writer (T061), 3D camera Morph with a shared
+  model part (T064), native part-addressable art (T062).
+- **Critique.**
+  - The critic is saturated: T068/T069b decks with empty cards, a clipped
+    title and scaffold text score 4.99, and T066's "tasteless" motion scores
+    4.99.
+  - The best deck (T066) is a 524-line bespoke script, so taste never reaches
+    the product.
+  - `deck_director.py` maps actors by substring and invents content ("100%",
+    "Bước hoàn thiện").
+  - Names outrun evidence.
+  - Same-family reviews, 12 tasks in a day and a duplicate ID (T069a/b).
+  - Morph is hard because the lab thinks per slide instead of per scene, and
+    its matching rules are scattered.
+- **Roadmap.** New living `docs/ROADMAP.md`: six principles (owner's eye is
+  the ground truth; intelligence goes into tools; Morph is a scene-compiler
+  output; taste becomes verified recipes; one source of truth per capability;
+  never invent). Stage 1 reserved: T071 golden benchmark + A/B page, T072
+  visual defect gates, T073 fast motion viewer, T074 Morph rulebook. Stage 2
+  reserved: T075 scene compiler, T076 ten Morph moves, T077 Director emits
+  scenes. Next free ID T078.
+- **Process.** New owner feedback ledger `research/feedback/` (seeded with
+  F1–F8); one brief per agent session; builder and critic from different
+  model families; at most three open pptx tasks. `HANDOFF.md` rewritten.
+
 ## T069b [pptx] Narrative Critic, speaker notes compiler and two-pass scaffold — 2026-11-04
 
 - **Why.** `deck_director.py` could compile a screenplay, but `design_critic.py`

@@ -1,25 +1,49 @@
 # Handoff — Design Research Lab
 
-Cập nhật: 04/11/2026, sau chương trình **T058–T069** (T058–T065 nền tảng; T066 deck bị chủ dự án phê bình; T067 direction + style; T068 compiler; T069a directed deck với 4 Morph; T069b narrative critic + speaker notes). Tệp này được **viết lại** mỗi lần bàn giao, không ghi nối thêm. Lịch sử nằm ở [docs/CHANGELOG.md](docs/CHANGELOG.md). Chương trình và đề bài gốc: [experiments/T057-20261104-claude-leader-review/REPORT.md](experiments/T057-20261104-claude-leader-review/REPORT.md).
+Cập nhật: 04/11/2026 tối, sau **T070** (Claude, trưởng nhóm: tổng hợp T001–T069, phản biện, lộ
+trình). Tệp này được **viết lại** mỗi lần bàn giao, không ghi nối thêm. Lịch sử nằm ở
+[docs/CHANGELOG.md](docs/CHANGELOG.md).
 
-> Lưu tệp văn bản bằng **UTF-8 không BOM**. `lab/tools/check_layout.py` giờ chặn mojibake, BOM, ký tự điều khiển và mã task trùng.
+**Đọc theo thứ tự:**
+1. tệp này;
+2. [docs/ROADMAP.md](docs/ROADMAP.md): đích đến, 6 nguyên tắc, các chặng và đề bài; [docs/SCRIPT_TRACK.md](docs/SCRIPT_TRACK.md) cho trục kịch bản;
+3. [T070 REPORT](experiments/T070-20261104-claude-lead-synthesis/REPORT.md): tổng hợp và phản
+   biện;
+4. `AGENTS.md`, `lab/PROTOCOL.md`, `domains/pptx/DOMAIN.md`.
+
+> Lưu tệp văn bản bằng **UTF-8 không BOM**. `lab/tools/check_layout.py` chặn mojibake, BOM, ký
+> tự điều khiển và mã task trùng.
 
 Repo: https://github.com/togcoder/skill-for-pptx (private). Chủ dự án: togcoder.
 
 ## Mục tiêu không đổi
 
-Một công cụ dành cho AI để tạo file **PPTX có độ hoàn thiện cao nhất, với chuyển động thật**:
-- ảnh chuyển động;
-- motion graphic;
-- vũ đạo theo nội dung;
-- Morph.
+Một công cụ dành cho AI để tạo file **PPTX có độ hoàn thiện cao nhất, với chuyển động thật**: ảnh
+chuyển động, motion graphic, vũ đạo theo nội dung, Morph. Chất lượng phải đủ để chủ dự án chọn nó
+thay vì deck làm tay. Lab đa lĩnh vực phục vụ mục tiêu đó và đang **đóng băng**.
 
-Lab đa lĩnh vực (docx, xlsx, vector…) phục vụ mục tiêu đó, không thay thế mục tiêu đó.
+## Bốn điều trưởng nhóm muốn mọi agent biết (T070, T078)
+
+1. **Điểm critic không phải chất lượng.** Deck T068/T069b có thẻ trống, tiêu đề bị cắt và chữ
+   giữ chỗ nhưng vẫn được 4,99/5 (`experiments/T070-…/preview/critic-499-vs-eye.jpg`). Muốn nói
+   "tốt hơn" thì phải có chấm A/B của chủ dự án (T071).
+2. **Gu phải nằm trong công cụ, không nằm trong script riêng.** Deck đẹp nhất (T066) là script
+   viết tay 524 dòng. Đừng viết thêm deck kiểu đó làm sản phẩm. Hãy đưa phần gu vào công cụ (chặng
+   2–3).
+3. **Kịch bản đi trước, chuyển động là động từ của kịch bản** (T078). Không dựng deck mới khi
+   kịch bản chưa được duyệt dạng chữ. Đọc [docs/SCRIPT_TRACK.md](docs/SCRIPT_TRACK.md) và kịch bản
+   mẫu `experiments/T078-…/gold-script-triet-hoc-ch1.md`.
+4. **Morph = danh tính vật thể giữa hai trạng thái.** Đừng chọn Morph bằng tay; hãy mô tả trạng
+   thái (chặng 2). Các luật đã biết:
+   - tên `!!` ép ghép;
+   - vật thể có entrance bị ẩn trong lúc Morph (T059);
+   - model 3D phải chung part (T064).
 
 ## Chúng ta đang ở đâu
 
-- `main` sau T058–T069: **556 test qua, 6 skipped**, cả khi đặt `PYTHONUTF8=1` và khi không đặt (máy Windows tiếng Việt, locale cp1258). `lab/tools/check_layout.py` OK.
-- **T058–T065 đã đóng một chu kỳ gate:**
+- `main` sau T069a: **556 test qua, 6 skipped**. `check_layout.py` OK.
+- Kết quả từng task T058–T069b (do agent ghi; điểm critic trong bảng **chưa được hiệu chỉnh**,
+  xem T070 P1):
 
 | Task | Kết quả thật |
 |---|---|
@@ -41,17 +65,33 @@ Lab đa lĩnh vực (docx, xlsx, vector…) phục vụ mục tiêu đó, không
 - **T055 giờ nằm trên `main` nhưng là EXPERIMENTAL**, review `accept-with-fixes`; R3/R4/R6/R7/R8 còn mở. R3 là claim “named camera views + Morph” chưa đúng với deck gốc.
 - **T054 vector vẫn chưa merge.** T055 không còn phụ thuộc T054.
 
-## Việc còn mở (ưu tiên)
+## Việc tiếp theo: đề bài đã giữ chỗ (chi tiết trong ROADMAP)
 
-1. **T070: join the four state pairs to `deck_director.py`.** Author the pairs as `direction.json` shots, compile, and compare the hand timing with the compiler's; add a short PowerPoint `CreateVideo` excerpt so Morph interpolation is frame evidence.
-2. **Promote `deck_state_critic`.** It exists (`scripts/deck_state_critic.py`, experimental) and separates T066 from T069; review it, add tests, then wire it as a post-build gate in `slide_forge build`.
-3. **T055 fixes** R3/R4/R6/R7/R8: camera views/Morph claim, evidence paths, review cùng họ model, v.v. Đọc `research/reviews/T055-opencode-20261104.md`.
-4. **T059/T060 wiring:** T059 mới là hàm fallback + test, chưa nối `slide_forge.render`; T060 mới là prototype, chưa upstream `storytold/deckcraft`.
-5. **Rung 6:** chưa ai review toàn bộ ảnh click/Morph; T058 chỉ đạt 5b, T068 mới có preview tĩnh.
-6. **Template contract + generic patch** (từ T057): vẫn là khoảng trống lớn nhất so với `CxyZyr/PPTX-Template-Skills`, `pptx-style`, `OfficeCLI`, `hands-on-deck`.
-7. **4:3 / 40 slide / font thiếu:** 57/57 deck tracked là 16:9, ≤12 slide; Forge vẫn hard-code 16:9.
-8. **Design context:** cỡ chữ theo góc nhìn, WCAG + room lift, 134 codepoint tiếng Việt, `fontScale` — chưa thành checker.
-9. **Repo weight:** T055/T059 thêm vài MB; size cap mới chỉ cảnh báo, Git LFS vẫn là quyết định mở.
+| Mã | Việc | Người làm → phản biện | Điều kiện bắt đầu |
+|---|---|---|---|
+| **T078** | **Trục kịch bản: phương pháp + kịch bản mẫu Triết học ch. 1** ([SCRIPT_TRACK](docs/SCRIPT_TRACK.md)) | Claude | **xong, chờ chủ dự án đọc** |
+| T079 | Model yếu + phương pháp có viết được kịch bản tốt? (A/B mù bản chữ) | OpenCode → Claude | sau khi T078 được duyệt |
+| T080 | Kiểm chứng bảng động từ → chuyển động | OpenCode → Claude | cần T073 |
+| T081 | Skill `script-writer` (phiếu + khung + bảng động từ + ví dụ vàng) | Claude → OpenCode | sau khi T078 được duyệt |
+| T082 | Ví dụ vàng 2–5 (báo cáo, pitch, quy trình, so sánh) | Claude → chủ dự án duyệt | sau T081 |
+| T071 | Bộ đề vàng 8 đề + trang chấm A/B + hiệu chỉnh critic | Claude → OpenCode | ngay |
+| T072 | Cổng lỗi thị giác trên khung hình (cắt chữ, thẻ trống, chữ giữ chỗ, chữ nhỏ, mất style, va chạm) | OpenCode → Claude | ngay |
+| T073 | Máy xem chuyển động nhanh: DeckCraft `render-animation` vs ghi slideshow bằng harness | Claude desktop → OpenCode | ngay |
+| T074 | Bộ luật ghép Morph từ ma trận ≥ 30 thí nghiệm PowerPoint | OpenCode → Claude | ngay |
+| T075 | `scene.json` + trình biên dịch cảnh | Claude → Antigravity | sau T071–T072 |
+| T076 | Thư viện 10 nước Morph có khung hình mẫu | OpenCode → Claude | sau T074 |
+| T077 | Deck Director xuất cảnh; bỏ ánh xạ chuỗi con và giá trị bịa | Antigravity → Claude | sau T075 |
+
+Mã trống kế tiếp cho việc ngoài danh sách: **T083**.
+
+**Dừng ngay:**
+- vá thêm luật chuỗi con trong `deck_director.py`;
+- báo điểm narrative hoặc overall như bằng chứng chất lượng;
+- mở domain mới;
+- viết deck "đẹp nhất" bằng script riêng rồi gọi đó là sản phẩm.
+
+**Phản hồi của chủ dự án** nằm ở `research/feedback/`. Mỗi đề bài phải ghi nó xử lý mục nào
+(F1, F2…). Chỉ chủ dự án được đóng mục.
 
 ## DeckCraft (ArtCraft, `D:\artcraft\DeckCraft`, v0.13.1, MIT/Apache)
 
@@ -63,22 +103,36 @@ Lab đa lĩnh vực (docx, xlsx, vector…) phục vụ mục tiêu đó, không
 
 ## Quy tắc bắt buộc
 
-- **Mọi thay đổi product path pptx phải qua PR + review** của agent khác họ model. Product path gồm `motion_director`, `pptx_animator`, `motion_engine`, `slide_forge`, `morph_studio`, `design_critic`, `slide_navigator`, `advanced_interactivity`, `interactive_triggers`, `theme_engine` và `knowledge/design_system.json`.
-- **Không tự review bài của mình. Không dùng lại mã task.** Mã trống kế tiếp: **T066**.
-- **Ghi đúng rung:** mở được = 4; render/play có máy assert = 5/5b; người review = 6. Không gọi simulation là PowerPoint.
-- **UTF-8 không BOM**, `encoding="utf-8"` cho mọi `read_text`.
-- **Artifact ≤2 MB/file, ≤10 MB/task**; file lớn hơn giữ local và ghi hash.
+- **Một phiên agent làm một đề bài.** Không nhận việc mới giữa chừng; phản hồi mới thì ghi vào
+  sổ phản hồi.
+- **Mọi thay đổi product path PPTX phải qua PR và có review** của agent khác họ model (Claude /
+  Gemini / DeepSeek). Product path gồm `motion_director`, `pptx_animator`, `motion_engine`,
+  `slide_forge`, `morph_studio`, `design_critic`, `deck_director`, `slide_navigator`,
+  `advanced_interactivity`, `interactive_triggers`, `theme_engine` và
+  `knowledge/design_system.json`.
+- **Không tự review bài của mình. Không dùng lại mã task.** Tối đa 3 task PPTX mở cùng lúc.
+- **Ghi đúng rung:**
+  - đếm XML là rung 1;
+  - DeckCraft là rung 2;
+  - PowerPoint mở được là rung 4;
+  - khung hình PowerPoint là rung 5 hoặc 5b;
+  - người xem là rung 6.
+- **Không bịa nội dung hoặc số liệu.** Thiếu thì trả mã lỗi.
+- **Không làm việc trong checkout của người khác;** dùng `git worktree`.
+- **UTF-8 không BOM,** `encoding="utf-8"` cho mọi `read_text`. Artifact ≤ 2 MB mỗi file, ≤ 10 MB
+  mỗi task.
 
 ## Prompt giao việc
 
 ```text
 Join the design research lab at https://github.com/togcoder/skill-for-pptx, branch main.
-Read HANDOFF.md, AGENTS.md, lab/PROTOCOL.md, domains/pptx/DOMAIN.md and
-experiments/T057-20261104-claude-leader-review/REPORT.md.
+Read HANDOFF.md, docs/ROADMAP.md, experiments/T070-20261104-claude-lead-synthesis/REPORT.md,
+AGENTS.md, lab/PROTOCOL.md and domains/pptx/DOMAIN.md.
 Run `python -m unittest discover -s tests` and `python lab/tools/check_layout.py`.
-Take the next free ID (T066) or one of the open items above; change its INDEX row to claimed
-with your agent and branch, push, then work on that branch.
-Try the falsifiers yourself; tag every claim with its evidence rung. Open a PR; do not push
-product code to main. Ask a critic from a different model family to review in research/reviews/.
-Save every text file as UTF-8 without BOM.
+Take ONE reserved brief from the HANDOFF table whose start condition is met. Change its INDEX
+row to claimed with your agent and branch, push, then work in your own git worktree on that
+branch. Do only that brief in this session. Try its falsifiers yourself; tag every claim with
+its evidence rung; never use critic scores as proof of quality. Open a PR; do not push product
+code to main. Ask the critic named in the brief (a different model family) to review in
+research/reviews/. Save every text file as UTF-8 without BOM.
 ```
