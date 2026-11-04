@@ -1,0 +1,19 @@
+{
+  "name": "t049_slide1_treasure_chests",
+  "deck": "../../T049-20261101-antigravity-advanced-interactivity/artifacts/one_slide_games_suite.pptx",
+  "notes": "T049 one-slide game 1. Cover_1..3 are exit triggers; Reset is an entrance trigger for all three.",
+  "steps": [
+    {"action": "goto_slide", "slide": 1},
+    {"action": "goto_click", "click": 1, "expect": {"kind": "noop", "max_pct": 0.2}},
+    {"action": "click_shape", "shape": "Cover_1",
+     "expect": {"kind": "pixel_change", "min_pct": 4.0, "min_share": 0.6}},
+    {"action": "click_shape", "shape": "Cover_2",
+     "expect": {"kind": "pixel_change", "min_pct": 4.0, "min_share": 0.6}},
+    {"action": "click_shape", "shape": "Cover_3",
+     "expect": {"kind": "pixel_change", "min_pct": 4.0, "min_share": 0.6}},
+    {"action": "click_shape", "shape": "Reset_Button_S1",
+     "observe": ["Cover_1", "Cover_2", "Cover_3"],
+     "expect": {"kind": "pixel_change", "min_pct": 5.0, "min_share": 0.5,
+                "max_outside_pct": 8.0}}
+  ]
+}

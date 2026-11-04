@@ -1,0 +1,125 @@
+{
+  "fixtures": [
+    {
+      "path": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T058\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\t032_trigger_fixture.pptx",
+      "bytes": 29376,
+      "inspect": {
+        "ok": true,
+        "path": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T058\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\t032_trigger_fixture.pptx",
+        "total_slides": 1,
+        "interactive_sequences_count": 1,
+        "slides": [
+          {
+            "file": "ppt/slides/slide1.xml",
+            "interactive_sequences": [
+              {
+                "trigger_spid": "6",
+                "animated_spids": [
+                  "4"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "path": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T058\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\animator_trigger_fixture.pptx",
+      "bytes": 29310,
+      "inspect": {
+        "ok": true,
+        "path": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T058\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\animator_trigger_fixture.pptx",
+        "total_slides": 1,
+        "interactive_sequences_count": 1,
+        "slides": [
+          {
+            "file": "ppt/slides/slide1.xml",
+            "interactive_sequences": [
+              {
+                "trigger_spid": "6",
+                "animated_spids": [
+                  "4"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "path": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T058\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\t049_main_control.pptx",
+      "bytes": 43742,
+      "inspect": {
+        "ok": true,
+        "path": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T058\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\t049_main_control.pptx",
+        "total_slides": 2,
+        "interactive_sequences_count": 8,
+        "slides": [
+          {
+            "file": "ppt/slides/slide1.xml",
+            "interactive_sequences": [
+              {
+                "trigger_spid": "6",
+                "animated_spids": []
+              },
+              {
+                "trigger_spid": "8",
+                "animated_spids": []
+              },
+              {
+                "trigger_spid": "10",
+                "animated_spids": []
+              },
+              {
+                "trigger_spid": "11",
+                "animated_spids": [
+                  "10",
+                  "6",
+                  "8"
+                ]
+              }
+            ]
+          },
+          {
+            "file": "ppt/slides/slide2.xml",
+            "interactive_sequences": [
+              {
+                "trigger_spid": "5",
+                "animated_spids": [
+                  "6"
+                ]
+              },
+              {
+                "trigger_spid": "7",
+                "animated_spids": [
+                  "8"
+                ]
+              },
+              {
+                "trigger_spid": "9",
+                "animated_spids": [
+                  "10"
+                ]
+              },
+              {
+                "trigger_spid": "11",
+                "animated_spids": [
+                  "10",
+                  "6",
+                  "8"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "main_sequence_groups": 1,
+      "interactive_sequences": 4
+    }
+  ],
+  "provenance": {
+    "t032_trigger_fixture.pptx": "scripts/interactive_triggers.apply_interactive_triggers (T032/T033 writer). PowerPoint 16.0 refuses to open it.",
+    "animator_trigger_fixture.pptx": "scripts/pptx_animator.apply_timeline(trigger_spid=...). Opens, but the interactiveSeq has no p:stCondLst and the exit runs at slide start.",
+    "t049_main_control.pptx": "Byte copy of the T049 one_slide_games_suite.pptx plus one main-sequence click on slide 1 (pptx_animator.apply_timeline, mode=extend)."
+  }
+}

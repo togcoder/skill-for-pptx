@@ -34,7 +34,8 @@ per click). Design numbers are shared by the generators and the critic
 since T061 a thin compatibility shim over `pptx_animator.apply_interactive_actions`,
 no XML of its own). `advanced_interactivity.py` (T049) keeps the PowerPoint COM
 1-slide game builder and WAV synthesis; its timing builder/parser delegate to
-`pptx_animator`.
+`pptx_animator`. `interactive_show_harness.py` (T058; Windows interactive
+desktop only, EXPERIMENTAL until reviewed).
 
 **Frozen:** the E001–T018 research paths (`docs/ARCHITECTURE.md`).
 
@@ -86,12 +87,13 @@ Skills: `skills/pptx-motion-director`, `skills/slide-forge`.
     reached `main` unreviewed (T057 review, finding 3).
 
 ## State (2026-11-04)
-- **Tests:** 500 run, 8 skipped, 100 % pass across all domains (after T061 + T063 + T062; T060 adds no repo tests).
+- **Tests:** 536 run, 8 skipped, 100 % pass across all domains (after T061 + T063 + T062 + T058; final count in the programme summary).
 - **Forge (T063):** type sizes come from the Office kit `type_scale_pt` (3–6 per deck); count-up stacks are print/PDF/Morph-safe (final value topmost and opaque, proxies below); highlight markers follow centred/right-aligned text; Ken Burns ends on the authored frame and generated process tokens use T034's author-at-destination fix. All five example decks have no `TYP-SIZES` or `MOT-SETTLE` warning.
-- **Navigation & Interactivity:** T048 added Slide Navigator (`slide_navigator.py`) establishing full non-linear branching, dynamic return paths, custom shows with return, and mini-game state machine compilation. T049 added Advanced Presentation Interactivity (`advanced_interactivity.py`) establishing native in-slide lightbox modals, multi-tab switchers, pure-Python synthetic sound FX (click/chime/buzz), hover actions, and twin-morph visual flow. **T061** consolidated every `interactiveSeq`/trigger/hyperlink writer into `pptx_animator.py`; T048b/T049 artifacts rebuild byte-identically (T048) or are unchanged and parse to the same counts (T049). Playback still waits for T058.
+- **Navigation & Interactivity:** T048 added Slide Navigator (`slide_navigator.py`) establishing full non-linear branching, dynamic return paths, custom shows with return, and mini-game state machine compilation. T049 added Advanced Presentation Interactivity (`advanced_interactivity.py`) establishing native in-slide lightbox modals, multi-tab switchers, pure-Python synthetic sound FX (click/chime/buzz), hover actions, and twin-morph visual flow. **T061** consolidated every `interactiveSeq`/trigger/hyperlink writer into `pptx_animator.py`; T048b/T049 artifacts rebuild byte-identically (T048) or are unchanged and parse to the same counts (T049).
+- **Interactive playback (T058):** `scripts/interactive_show_harness.py` drives a windowed show with Win32 input and asserts pixels. T049 slide 1/2 and the T048b hub reach **rung 5b** (COM-driven, machine-asserted, not human-reviewed): cover clicks 100 % of the target box, hub 9/9 edges including `lastslideviewed` 5→3. `GotoClick` is useless for triggers (0.000 %); on a main sequence it moves the index without rendering. T058 also found two pre-T061 defects: T032's writer produces a file PowerPoint rejects, and the old `pptx_animator._interactive_sequence` omitted `p:stCondLst`. Re-check both against T061 before closing them.
 - **Native illustration (T062):** DeckCraft commands compile a named, part-editable asset (20/20 parts addressable, 21 animations) where SVG and GLB give one object each. The `{"native_art": …}` Forge field and its compiler are EXPERIMENTAL in `experiments/T062-*/inputs/`, not wired into `slide_forge.py`. Merge Shapes re-ids its result and DeckCraft accepts animation on a dead id, so compilers must re-inspect; `design_critic.py` needs an `art-*` exemption before native art scores honestly.
 - **DeckCraft (T060, research):** the timing-tree player exists in `deckcraft-anim` (Rust: `Timeline`, `ShowState`, effect evaluation) but has no headless command. A local 151-line prototype adds `render-animation --slide N --click K --t ms` and renders main-sequence frames. Coverage is the limit: 102/198 lab presets map, at most 67/198 exact/path, behaviour-level repeat is dropped. Treat DeckCraft frames as rung 2 (`DeckCraft render`), never PowerPoint.
-- **Evidence:** Rungs 0–4 established across PPTX, DOCX, XLSX and Cross; PowerPoint 16.0 COM is used for parse/render checks. T062 used COM at rung 4/5; T063 inspected PowerPoint PDF/PNG/CreateVideo frames (rung 5). Rung 6 (a human playing every click) has not been reached; the T057 audit retired the earlier "rungs 0–5 / COM verified" wording.
+- **Evidence:** Rungs 0–5b established across PPTX, DOCX, XLSX and Cross; PowerPoint 16.0 COM is used for parse/render/click checks. T062 used COM at rung 4/5; T063 inspected PowerPoint PDF/PNG/CreateVideo frames (rung 5). Rung 6 (a human reviewing every click) has not been reached; the T057 audit retired the earlier "rungs 0–5 / COM verified" wording.
 
 ## Open questions / dissent
 - **T038 numbers.** Several T038 values (golden 61.8 %, Duarte breaks at

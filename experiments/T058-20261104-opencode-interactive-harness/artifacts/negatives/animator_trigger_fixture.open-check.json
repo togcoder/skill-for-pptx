@@ -1,0 +1,21 @@
+{
+  "schema": "pptx-open-check/1",
+  "deck": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T058\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\animator_trigger_fixture.pptx",
+  "sha256": "4e04152666a9065a14dc31c6f56b5c507cfed5545a8dea9f56d574c56b790b3b",
+  "bytes": 29310,
+  "version": "16.0",
+  "build": "17932",
+  "opened": true,
+  "slides": 1,
+  "slide_width_pt": 960.0,
+  "slide_height_pt": 540.0,
+  "slides_detail": [
+    {
+      "slide": 1,
+      "main_effects": 0,
+      "interactive_sequences": 1
+    }
+  ],
+  "main_effects_total": 0,
+  "interactive_sequences_total": 1
+}

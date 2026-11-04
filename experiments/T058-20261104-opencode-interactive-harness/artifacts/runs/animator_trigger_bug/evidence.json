@@ -1,0 +1,592 @@
+{
+  "schema": "pptx-interactive-show/1",
+  "task": "T058",
+  "deck": {
+    "path": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T058\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\animator_trigger_fixture.pptx",
+    "sha256": "930aab4897d69abd4f9ff81657027cc04e2d792aef47c7c99e9ee4fb5c24bb17",
+    "bytes": 29310
+  },
+  "plan": "animator_trigger_bug",
+  "run": {
+    "started_utc": "2026-11-04T07:11:42Z",
+    "harness": "scripts/interactive_show_harness.py",
+    "duration_ms": 2250
+  },
+  "powerpoint": {
+    "com_instance_created_ms": 388,
+    "pids_before": [],
+    "open_ms": 172,
+    "slide_count": 1,
+    "slide_width_pt": 960.0,
+    "slide_height_pt": 540.0,
+    "version": "16.0",
+    "build": "17932",
+    "application": "Microsoft PowerPoint",
+    "application_path": "C:\\Program Files\\Microsoft Office\\Root\\Office16",
+    "pid": 33108,
+    "run_attempts": [
+      {
+        "attempt": 0,
+        "ok": true,
+        "show_windows": 1
+      }
+    ],
+    "run_ms": 958,
+    "show_windows_count": 1,
+    "show_window": {
+      "window": {
+        "hwnd": 10357600,
+        "class": "PPTFrameClass",
+        "title": "PowerPoint Slide Show - [animator_trigger_fixture.pptx [Read-Only]]:2 - PowerPoint Preview",
+        "pid": 33108,
+        "rect": [
+          344.0,
+          64.0,
+          1784.0,
+          811.0
+        ],
+        "visible": true,
+        "minimized": false,
+        "dpi": 120
+      },
+      "candidates": [
+        {
+          "hwnd": 10357600,
+          "class": "PPTFrameClass",
+          "title": "PowerPoint Slide Show - [animator_trigger_fixture.pptx [Read-Only]]:2 - PowerPoint Preview",
+          "pid": 33108,
+          "rect": [
+            344.0,
+            64.0,
+            1784.0,
+            811.0
+          ],
+          "visible": true,
+          "minimized": false,
+          "dpi": 120
+        }
+      ],
+      "waited_ms": 1
+    },
+    "show_com_geometry": {
+      "left_pt": 206.39999389648438,
+      "top_pt": 38.400001525878906,
+      "width_pt": 864.0,
+      "height_pt": 448.20001220703125
+    },
+    "focus": {
+      "attempts": [
+        {
+          "foreground_before": 985814,
+          "attached_to": [
+            32592
+          ],
+          "attach_target": false,
+          "attach_foreground": true,
+          "topmost_nudge": false,
+          "alt_nudge": false,
+          "cursor_probe": {
+            "ok": true,
+            "error": 0,
+            "point": [
+              1064,
+              452
+            ]
+          },
+          "foreground_after": 10357600,
+          "n": 0,
+          "strategy": "attach_foreground"
+        }
+      ],
+      "ok": true,
+      "strategy": "attach_foreground",
+      "cursor_ok": true,
+      "foreground_final": {
+        "hwnd": 10357600,
+        "class": "PPTFrameClass",
+        "title": "PowerPoint Slide Show - [animator_trigger_fixture.pptx [Read-Only]]:2 - PowerPoint Preview",
+        "pid": 33108
+      }
+    },
+    "placement": {
+      "before": {
+        "window": [
+          344.0,
+          64.0,
+          1784.0,
+          811.0
+        ],
+        "client": [
+          353,
+          102,
+          1775,
+          802
+        ]
+      },
+      "after": {
+        "window": [
+          100.0,
+          8.0,
+          1819.0,
+          1012.0
+        ],
+        "client": [
+          109,
+          46,
+          1810,
+          1003
+        ]
+      },
+      "monitor": [
+        0.0,
+        0.0,
+        1920.0,
+        1080.0
+      ],
+      "work_area": [
+        0.0,
+        0.0,
+        1920.0,
+        1020.0
+      ],
+      "frame_px": [
+        18,
+        47
+      ],
+      "target_client_px": [
+        1701,
+        957
+      ],
+      "fully_inside_work_area": true
+    },
+    "focus_after_place": {
+      "attempts": [
+        {
+          "n": 0,
+          "already_foreground": true,
+          "foreground_before": 10357600
+        }
+      ],
+      "ok": true,
+      "cursor_ok": false,
+      "foreground_final": {
+        "hwnd": 10357600,
+        "class": "PPTFrameClass",
+        "title": "PowerPoint Slide Show - [animator_trigger_fixture.pptx [Read-Only]]:2 - PowerPoint Preview",
+        "pid": 33108
+      }
+    },
+    "show_client_rect": [
+      109,
+      46,
+      1810,
+      1003
+    ],
+    "show_window_rect": [
+      100.0,
+      8.0,
+      1819.0,
+      1012.0
+    ],
+    "scrollbars": [
+      {
+        "hwnd": 18549052,
+        "class": "NUIScrollbar",
+        "title": "Vertical",
+        "rect": [
+          1810.0,
+          46.0,
+          1810.0,
+          1003.0
+        ],
+        "visible": true
+      }
+    ],
+    "obstruction": {
+      "sampled_points": 9,
+      "bad": [],
+      "clean": true
+    }
+  },
+  "steps": [
+    {
+      "index": 0,
+      "action": "goto_slide",
+      "slide_before": 1,
+      "ok": true,
+      "slide_after": 1,
+      "assert": {
+        "pass": true,
+        "reason": "moved"
+      }
+    },
+    {
+      "index": 1,
+      "action": "goto_click",
+      "slide_before": 1,
+      "goto_click": {
+        "before": {
+          "count": 0,
+          "index": 0
+        },
+        "error": null
+      },
+      "click_state_after": {
+        "count": 0,
+        "index": 0
+      },
+      "diff": {
+        "whole": {
+          "area_px": 1627857,
+          "changed_px": 0,
+          "pct_changed": 0.0,
+          "mean_abs": 1.442,
+          "changed_bbox": null
+        },
+        "inside": {
+          "area_px": 1627857,
+          "changed_px": 0,
+          "pct_changed": 0.0,
+          "mean_abs": 1.442,
+          "changed_bbox": null
+        },
+        "outside": null,
+        "share_inside": 1.0
+      },
+      "settled": true,
+      "assert": {
+        "pass": true,
+        "reason": "index 0->0, pixels 0.000%",
+        "index_unchanged": true,
+        "pixels_unchanged": true
+      },
+      "ok": true,
+      "frames": {
+        "before": {
+          "path": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T058\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\runs\\animator_trigger_bug\\frames\\01-gotoclick-before.png",
+          "sha256": "9b2f4e8c655d811472f272ae71eab61fff697468d5b3e15291d789f87f1e5932",
+          "size": [
+            1200,
+            675
+          ],
+          "original_size": [
+            1701,
+            957
+          ]
+        },
+        "after": {
+          "path": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T058\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\runs\\animator_trigger_bug\\frames\\01-gotoclick-after.png",
+          "sha256": "c9ebe623c772eaafc07f66459f3697b85f63765ebafe6a422dcc7f14afc7248c",
+          "size": [
+            1200,
+            675
+          ],
+          "original_size": [
+            1701,
+            957
+          ]
+        }
+      }
+    },
+    {
+      "index": 2,
+      "action": "click_shape",
+      "slide_before": 1,
+      "shape": {
+        "name": "TriggerBtn",
+        "id": 6,
+        "type": 1,
+        "left_pt": 388.79998779296875,
+        "top_pt": 309.6000061035156,
+        "width_pt": 230.39999389648438,
+        "height_pt": 72.0,
+        "rotation": 0.0
+      },
+      "observe": [
+        "TargetCard"
+      ],
+      "observe_infos": [
+        {
+          "name": "TargetCard",
+          "id": 4,
+          "type": 1,
+          "left_pt": 57.599998474121094,
+          "top_pt": 144.0,
+          "width_pt": 288.0,
+          "height_pt": 187.1999969482422,
+          "rotation": 0.0
+        }
+      ],
+      "target_box_px": [
+        211.06,
+        301.24,
+        721.36,
+        632.94
+      ],
+      "target_box_frame": [
+        102.06,
+        255.24,
+        612.36,
+        586.94
+      ],
+      "click_point_px": [
+        1002.02,
+        658.45
+      ],
+      "click_point_frame": [
+        893.02,
+        612.45
+      ],
+      "click": {
+        "requested": [
+          1002.02,
+          658.45
+        ],
+        "cursor_before": [
+          1064,
+          452
+        ],
+        "cursor_after": [
+          1002,
+          658
+        ]
+      },
+      "diff": {
+        "whole": {
+          "area_px": 1627857,
+          "changed_px": 0,
+          "pct_changed": 0.0,
+          "mean_abs": 0.0,
+          "changed_bbox": null
+        },
+        "inside": {
+          "area_px": 168810,
+          "changed_px": 0,
+          "pct_changed": 0.0,
+          "mean_abs": 0.0,
+          "changed_bbox": null
+        },
+        "outside": {
+          "area_px": 1459047,
+          "changed_px": 0,
+          "pct_changed": 0.0
+        },
+        "share_inside": 0.0
+      },
+      "expect": {
+        "kind": "noop",
+        "max_pct": 0.2
+      },
+      "observed": {
+        "slide_after": 1,
+        "click_count": 0,
+        "click_index": 0
+      },
+      "settled": true,
+      "stability": [
+        {
+          "t_ms": 183,
+          "pct": 0.0,
+          "mean": 0.0
+        },
+        {
+          "t_ms": 343,
+          "pct": 0.0,
+          "mean": 0.0
+        }
+      ],
+      "assert": {
+        "pass": true,
+        "reason": "whole 0.000% <= 0.2%"
+      },
+      "ok": true,
+      "frames": {
+        "before": {
+          "path": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T058\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\runs\\animator_trigger_bug\\frames\\02-TriggerBtn-before.png",
+          "sha256": "c9ebe623c772eaafc07f66459f3697b85f63765ebafe6a422dcc7f14afc7248c",
+          "size": [
+            1200,
+            675
+          ],
+          "original_size": [
+            1701,
+            957
+          ]
+        },
+        "after": {
+          "path": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T058\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\runs\\animator_trigger_bug\\frames\\02-TriggerBtn-after.png",
+          "sha256": "c9ebe623c772eaafc07f66459f3697b85f63765ebafe6a422dcc7f14afc7248c",
+          "size": [
+            1200,
+            675
+          ],
+          "original_size": [
+            1701,
+            957
+          ]
+        },
+        "crop_before": {
+          "path": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T058\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\runs\\animator_trigger_bug\\frames\\02-TriggerBtn-crop-before.png",
+          "sha256": "669c60299bdc34744350968c3f0cbde1d2c4a9e4133e33c94276cb0b3a0674dc",
+          "size": [
+            558,
+            379
+          ],
+          "original_size": [
+            558,
+            379
+          ]
+        },
+        "crop_after": {
+          "path": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T058\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\runs\\animator_trigger_bug\\frames\\02-TriggerBtn-crop-after.png",
+          "sha256": "669c60299bdc34744350968c3f0cbde1d2c4a9e4133e33c94276cb0b3a0674dc",
+          "size": [
+            558,
+            379
+          ],
+          "original_size": [
+            558,
+            379
+          ]
+        }
+      }
+    }
+  ],
+  "negatives": [],
+  "show": {
+    "pid": 33108,
+    "hwnd": 10357600,
+    "class": "PPTFrameClass",
+    "title": "PowerPoint Slide Show - [animator_trigger_fixture.pptx [Read-Only]]:2 - PowerPoint Preview",
+    "window_rect": [
+      100.0,
+      8.0,
+      1819.0,
+      1012.0
+    ],
+    "client_rect": [
+      109,
+      46,
+      1810,
+      1003
+    ],
+    "dpi": 120,
+    "obstruction": {
+      "sampled_points": 9,
+      "bad": [],
+      "clean": true
+    },
+    "scrollbars": [
+      {
+        "hwnd": 18549052,
+        "class": "NUIScrollbar",
+        "title": "Vertical",
+        "rect": [
+          1810.0,
+          46.0,
+          1810.0,
+          1003.0
+        ],
+        "visible": true
+      }
+    ]
+  },
+  "mapping": {
+    "predicted": {
+      "scale": 1.771875,
+      "content": [
+        109.0,
+        46.09,
+        1810.0,
+        1002.91
+      ],
+      "scrollbar_width_px": 0
+    },
+    "calibration": {
+      "predicted_offset_px": [
+        0,
+        0
+      ],
+      "shift_px": [
+        0,
+        0
+      ],
+      "mae": 11.861,
+      "mae_predicted": 11.861,
+      "improved_mae": 0.0,
+      "search_boundary": false,
+      "content_size_px": [
+        1701,
+        957
+      ],
+      "ignored_right_px": 0,
+      "calibrated_content": [
+        109.0,
+        46.09,
+        1810.0,
+        1002.91
+      ]
+    },
+    "used": {
+      "scale": 1.771875,
+      "content": [
+        109.0,
+        46.09,
+        1810.0,
+        1002.91
+      ]
+    }
+  },
+  "desktop": {
+    "pid": 25608,
+    "session_id": 1,
+    "window_station": "WinSta0",
+    "desktop": "Default",
+    "input_desktop_openable": true,
+    "input_desktop_error": 0,
+    "interactive_desktop": true,
+    "foreground": {
+      "hwnd": 10357600,
+      "class": "PPTFrameClass",
+      "title": "PowerPoint Slide Show - [animator_trigger_fixture.pptx [Read-Only]]:2 - PowerPoint Preview",
+      "pid": 33108
+    },
+    "screen_px": [
+      1920,
+      1080
+    ],
+    "system_dpi": 120
+  },
+  "dpi": {
+    "applied": "per_monitor_v2",
+    "system_dpi": 120,
+    "screen_px": [
+      1920,
+      1080
+    ]
+  },
+  "claims": {
+    "interactive_show_window_found": true,
+    "show_window_class": "PPTFrameClass",
+    "dpi_aware": true,
+    "mapping_calibrated": true,
+    "win32_click_sent": true,
+    "trigger_pixel_change_verified": false,
+    "gotoclick_noop_verified": true,
+    "slide_navigation_verified": false,
+    "all_steps_passed": true
+  },
+  "claim_boundary": {
+    "rung": "5b",
+    "human_reviewed": false,
+    "powerpoint_playback_verified": false,
+    "note": "COM-driven windowed playback with machine pixel assertions; rung 6 still requires a person to review the captures."
+  },
+  "teardown": {
+    "show_exited": true,
+    "presentation_closed": true,
+    "quit_called": true,
+    "killed_pid": 33108,
+    "remaining_powerpnt_pids": []
+  }
+}

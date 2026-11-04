@@ -1,0 +1,11 @@
+{
+  "name": "animator_trigger_bug",
+  "deck": "../artifacts/animator_trigger_fixture.pptx",
+  "notes": "Negative control: pptx_animator's interactiveSeq has no p:stCondLst, so the exit is applied when the slide starts and the click changes nothing.",
+  "steps": [
+    {"action": "goto_slide", "slide": 1},
+    {"action": "goto_click", "click": 1, "expect": {"kind": "noop", "max_pct": 0.2}},
+    {"action": "click_shape", "shape": "TriggerBtn", "observe": ["TargetCard"],
+     "expect": {"kind": "noop", "max_pct": 0.2}}
+  ]
+}
