@@ -1,0 +1,756 @@
+{
+ "spec": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T062\\experiments\\T062-20261104-opencode-asset-factory\\inputs\\native_art_spec.json",
+ "art_parts_declared": 20,
+ "routes": {
+  "A_native": {
+   "pptx": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T062\\experiments\\T062-20261104-opencode-asset-factory\\artifacts\\field-terminal.pptx",
+   "bytes": 25126,
+   "sha256": "d09720dc28a4af1abd1e3b8c9d233d6fe7126f252da22b33e751295d8ad10137",
+   "ooxml": {
+    "slides": 1,
+    "shapes": 25,
+    "pictures": 0,
+    "graphic_frames": 0,
+    "groups": 0,
+    "custom_geometry": 2,
+    "scene3d": 0,
+    "sp3d": 0,
+    "model3d": 0,
+    "timing_nodes": 80,
+    "media": []
+   },
+   "powerpoint": {
+    "shapes": [
+     {
+      "name": "art-shadow",
+      "type": 1,
+      "box": [
+       590.0,
+       452.0,
+       214.0,
+       24.0
+      ]
+     },
+     {
+      "name": "art-back",
+      "type": 1,
+      "box": [
+       612.0,
+       84.0,
+       186.0,
+       376.0
+      ]
+     },
+     {
+      "name": "art-body",
+      "type": 1,
+      "box": [
+       596.0,
+       72.0,
+       186.0,
+       376.0
+      ]
+     },
+     {
+      "name": "art-screen",
+      "type": 1,
+      "box": [
+       605.0,
+       81.0,
+       168.0,
+       358.0
+      ]
+     },
+     {
+      "name": "art-notch",
+      "type": 1,
+      "box": [
+       662.0,
+       88.0,
+       54.0,
+       7.0
+      ]
+     },
+     {
+      "name": "art-topbar",
+      "type": 1,
+      "box": [
+       615.0,
+       100.0,
+       148.0,
+       28.0
+      ]
+     },
+     {
+      "name": "art-ui-title",
+      "type": 17,
+      "box": [
+       623.0,
+       108.0,
+       132.0,
+       12.0
+      ]
+     },
+     {
+      "name": "art-ui-value",
+      "type": 17,
+      "box": [
+       614.0,
+       136.0,
+       96.0,
+       60.0
+      ]
+     },
+     {
+      "name": "art-ui-unit",
+      "type": 17,
+      "box": [
+       672.0,
+       160.0,
+       44.0,
+       24.0
+      ]
+     },
+     {
+      "name": "art-ui-caption",
+      "type": 17,
+      "box": [
+       615.0,
+       198.0,
+       148.0,
+       10.0
+      ]
+     },
+     {
+      "name": "art-bar-1",
+      "type": 1,
+      "box": [
+       617.0,
+       348.0,
+       16.0,
+       52.0
+      ]
+     },
+     {
+      "name": "art-bar-2",
+      "type": 1,
+      "box": [
+       646.0,
+       326.0,
+       16.0,
+       74.0
+      ]
+     },
+     {
+      "name": "art-bar-3",
+      "type": 1,
+      "box": [
+       675.0,
+       338.0,
+       16.0,
+       62.0
+      ]
+     },
+     {
+      "name": "art-bar-4",
+      "type": 1,
+      "box": [
+       704.0,
+       298.0,
+       16.0,
+       102.0
+      ]
+     },
+     {
+      "name": "art-bar-5",
+      "type": 1,
+      "box": [
+       733.0,
+       272.0,
+       16.0,
+       128.0
+      ]
+     },
+     {
+      "name": "art-baseline",
+      "type": 1,
+      "box": [
+       615.0,
+       400.0,
+       148.0,
+       1.5
+      ]
+     },
+     {
+      "name": "art-ui-footer",
+      "type": 17,
+      "box": [
+       615.0,
+       410.0,
+       148.0,
+       10.0
+      ]
+     },
+     {
+      "name": "art-badge-glow",
+      "type": 1,
+      "box": [
+       764.0,
+       24.0,
+       124.0,
+       124.0
+      ]
+     },
+     {
+      "name": "art-badge-ring",
+      "type": 5,
+      "box": [
+       780.0,
+       40.0,
+       92.0,
+       92.0
+      ]
+     },
+     {
+      "name": "art-badge-bolt",
+      "type": 5,
+      "box": [
+       812.0,
+       62.0,
+       28.0,
+       48.0
+      ]
+     },
+     {
+      "name": "copy-rule",
+      "type": 1,
+      "box": [
+       88.0,
+       150.0,
+       44.0,
+       4.0
+      ]
+     },
+     {
+      "name": "copy-kicker",
+      "type": 17,
+      "box": [
+       88.0,
+       166.0,
+       320.0,
+       16.0
+      ]
+     },
+     {
+      "name": "copy-title",
+      "type": 17,
+      "box": [
+       88.0,
+       194.0,
+       430.0,
+       104.0
+      ]
+     },
+     {
+      "name": "copy-caption",
+      "type": 17,
+      "box": [
+       88.0,
+       318.0,
+       380.0,
+       44.0
+      ]
+     },
+     {
+      "name": "copy-footer",
+      "type": 17,
+      "box": [
+       88.0,
+       494.0,
+       460.0,
+       12.0
+      ]
+     }
+    ],
+    "animations": [
+     {
+      "shape": "art-shadow",
+      "effect": 10,
+      "duration_ms": 300,
+      "delay_ms": 0
+     },
+     {
+      "shape": "art-back",
+      "effect": 42,
+      "duration_ms": 500,
+      "delay_ms": 60
+     },
+     {
+      "shape": "art-body",
+      "effect": 42,
+      "duration_ms": 500,
+      "delay_ms": 120
+     },
+     {
+      "shape": "art-screen",
+      "effect": 22,
+      "duration_ms": 400,
+      "delay_ms": 200
+     },
+     {
+      "shape": "art-notch",
+      "effect": 10,
+      "duration_ms": 300,
+      "delay_ms": 300
+     },
+     {
+      "shape": "art-topbar",
+      "effect": 22,
+      "duration_ms": 400,
+      "delay_ms": 0
+     },
+     {
+      "shape": "art-ui-title",
+      "effect": 10,
+      "duration_ms": 300,
+      "delay_ms": 120
+     },
+     {
+      "shape": "art-ui-value",
+      "effect": 48,
+      "duration_ms": 450,
+      "delay_ms": 180
+     },
+     {
+      "shape": "art-ui-unit",
+      "effect": 10,
+      "duration_ms": 300,
+      "delay_ms": 300
+     },
+     {
+      "shape": "art-ui-caption",
+      "effect": 10,
+      "duration_ms": 300,
+      "delay_ms": 300
+     },
+     {
+      "shape": "art-baseline",
+      "effect": 22,
+      "duration_ms": 350,
+      "delay_ms": 240
+     },
+     {
+      "shape": "art-ui-footer",
+      "effect": 10,
+      "duration_ms": 300,
+      "delay_ms": 360
+     },
+     {
+      "shape": "art-bar-1",
+      "effect": 22,
+      "duration_ms": 380,
+      "delay_ms": 0
+     },
+     {
+      "shape": "art-bar-2",
+      "effect": 22,
+      "duration_ms": 380,
+      "delay_ms": 70
+     },
+     {
+      "shape": "art-bar-3",
+      "effect": 22,
+      "duration_ms": 380,
+      "delay_ms": 140
+     },
+     {
+      "shape": "art-bar-4",
+      "effect": 22,
+      "duration_ms": 380,
+      "delay_ms": 210
+     },
+     {
+      "shape": "art-bar-5",
+      "effect": 22,
+      "duration_ms": 380,
+      "delay_ms": 280
+     },
+     {
+      "shape": "art-badge-glow",
+      "effect": 10,
+      "duration_ms": 400,
+      "delay_ms": 0
+     },
+     {
+      "shape": "art-badge-ring",
+      "effect": 48,
+      "duration_ms": 450,
+      "delay_ms": 80
+     },
+     {
+      "shape": "art-badge-bolt",
+      "effect": 48,
+      "duration_ms": 400,
+      "delay_ms": 200
+     },
+     {
+      "shape": "art-badge-ring",
+      "effect": 75,
+      "duration_ms": 600,
+      "delay_ms": 300
+     }
+    ],
+    "slides": 1,
+    "slide_size": [
+     960.0,
+     540.0
+    ]
+   },
+   "render": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T062\\experiments\\T062-20261104-opencode-asset-factory\\artifacts\\render-a.png",
+   "art_parts_addressable": 20,
+   "art_parts_missing": [],
+   "named_shapes": [
+    "art-back",
+    "art-badge-bolt",
+    "art-badge-glow",
+    "art-badge-ring",
+    "art-bar-1",
+    "art-bar-2",
+    "art-bar-3",
+    "art-bar-4",
+    "art-bar-5",
+    "art-baseline",
+    "art-body",
+    "art-notch",
+    "art-screen",
+    "art-shadow",
+    "art-topbar",
+    "art-ui-caption",
+    "art-ui-footer",
+    "art-ui-title",
+    "art-ui-unit",
+    "art-ui-value",
+    "copy-caption",
+    "copy-footer",
+    "copy-kicker",
+    "copy-rule",
+    "copy-title"
+   ]
+  },
+  "B_svg": {
+   "pptx": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T062\\experiments\\T062-20261104-opencode-asset-factory\\artifacts\\field-terminal-routeB.pptx",
+   "bytes": 101678,
+   "sha256": "7c0bf87122ddece3b983113d33e991fd0e7680daeef920e3f6aad491ed640f2b",
+   "ooxml": {
+    "slides": 1,
+    "shapes": 5,
+    "pictures": 1,
+    "graphic_frames": 0,
+    "groups": 0,
+    "custom_geometry": 0,
+    "scene3d": 0,
+    "sp3d": 0,
+    "model3d": 0,
+    "timing_nodes": 0,
+    "media": [
+     "ppt/media/image1.png",
+     "ppt/media/image2.svg"
+    ]
+   },
+   "powerpoint": {
+    "shapes": [
+     {
+      "name": "copy-rule",
+      "type": 1,
+      "box": [
+       88.0,
+       150.0,
+       44.0,
+       4.0
+      ]
+     },
+     {
+      "name": "copy-kicker",
+      "type": 17,
+      "box": [
+       88.0,
+       166.0,
+       320.0,
+       16.0
+      ]
+     },
+     {
+      "name": "copy-title",
+      "type": 17,
+      "box": [
+       88.0,
+       194.0,
+       430.0,
+       104.0
+      ]
+     },
+     {
+      "name": "copy-caption",
+      "type": 17,
+      "box": [
+       88.0,
+       318.0,
+       380.0,
+       44.0
+      ]
+     },
+     {
+      "name": "copy-footer",
+      "type": 17,
+      "box": [
+       88.0,
+       494.0,
+       460.0,
+       12.0
+      ]
+     },
+     {
+      "name": "art-field-terminal",
+      "type": 28,
+      "box": [
+       0.0,
+       0.0,
+       960.0,
+       540.0
+      ]
+     }
+    ],
+    "animations": [],
+    "slides": 1,
+    "slide_size": [
+     960.0,
+     540.0
+    ]
+   },
+   "render": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T062\\experiments\\T062-20261104-opencode-asset-factory\\artifacts\\render-b.png",
+   "art_parts_addressable": 0,
+   "art_parts_missing": [
+    "art-shadow",
+    "art-back",
+    "art-body",
+    "art-screen",
+    "art-notch",
+    "art-topbar",
+    "art-ui-title",
+    "art-ui-value",
+    "art-ui-unit",
+    "art-ui-caption",
+    "art-bar-1",
+    "art-bar-2",
+    "art-bar-3",
+    "art-bar-4",
+    "art-bar-5",
+    "art-baseline",
+    "art-ui-footer",
+    "art-badge-glow",
+    "art-badge-ring",
+    "art-badge-bolt"
+   ],
+   "named_shapes": [
+    "art-field-terminal",
+    "copy-caption",
+    "copy-footer",
+    "copy-kicker",
+    "copy-rule",
+    "copy-title"
+   ]
+  },
+  "C_glb": {
+   "pptx": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T062\\experiments\\T062-20261104-opencode-asset-factory\\artifacts\\field-terminal-routeC.pptx",
+   "bytes": 223995,
+   "sha256": "224f2cc0cca6efe6d21d4f84a0db5620652d81dcbbca3661eab9650f1745f0d3",
+   "ooxml": {
+    "slides": 1,
+    "shapes": 5,
+    "pictures": 1,
+    "graphic_frames": 1,
+    "groups": 0,
+    "custom_geometry": 0,
+    "scene3d": 0,
+    "sp3d": 0,
+    "model3d": 4,
+    "timing_nodes": 0,
+    "media": [
+     "ppt/media/image1.png",
+     "ppt/media/model3d1.glb"
+    ]
+   },
+   "powerpoint": {
+    "shapes": [
+     {
+      "name": "copy-rule",
+      "type": 1,
+      "box": [
+       88.0,
+       150.0,
+       44.0,
+       4.0
+      ]
+     },
+     {
+      "name": "copy-kicker",
+      "type": 17,
+      "box": [
+       88.0,
+       166.0,
+       320.0,
+       16.0
+      ]
+     },
+     {
+      "name": "copy-title",
+      "type": 17,
+      "box": [
+       88.0,
+       194.0,
+       430.0,
+       104.0
+      ]
+     },
+     {
+      "name": "copy-caption",
+      "type": 17,
+      "box": [
+       88.0,
+       318.0,
+       380.0,
+       44.0
+      ]
+     },
+     {
+      "name": "copy-footer",
+      "type": 17,
+      "box": [
+       88.0,
+       494.0,
+       460.0,
+       12.0
+      ]
+     },
+     {
+      "name": "art-field-terminal-3d",
+      "type": 30,
+      "box": [
+       596.0,
+       40.0,
+       276.0,
+       420.0
+      ]
+     }
+    ],
+    "animations": [],
+    "slides": 1,
+    "slide_size": [
+     960.0,
+     540.0
+    ]
+   },
+   "render": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T062\\experiments\\T062-20261104-opencode-asset-factory\\artifacts\\render-c.png",
+   "art_parts_addressable": 0,
+   "art_parts_missing": [
+    "art-shadow",
+    "art-back",
+    "art-body",
+    "art-screen",
+    "art-notch",
+    "art-topbar",
+    "art-ui-title",
+    "art-ui-value",
+    "art-ui-unit",
+    "art-ui-caption",
+    "art-bar-1",
+    "art-bar-2",
+    "art-bar-3",
+    "art-bar-4",
+    "art-bar-5",
+    "art-baseline",
+    "art-ui-footer",
+    "art-badge-glow",
+    "art-badge-ring",
+    "art-badge-bolt"
+   ],
+   "named_shapes": [
+    "art-field-terminal-3d",
+    "copy-caption",
+    "copy-footer",
+    "copy-kicker",
+    "copy-rule",
+    "copy-title"
+   ]
+  }
+ },
+ "metrics": {
+  "A_native": {
+   "reference_render": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T062\\experiments\\T062-20261104-opencode-asset-factory\\artifacts\\native-deckcraft-render.png",
+   "renderer_delta": {
+    "mean_abs": 0.27,
+    "pct_over_24": 0.23,
+    "pct_over_64": 0.07
+   }
+  },
+  "B_svg": {
+   "reference_render": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T062\\experiments\\T062-20261104-opencode-asset-factory\\artifacts\\reference-b.png",
+   "renderer_delta": {
+    "mean_abs": 0.34,
+    "pct_over_24": 0.31,
+    "pct_over_64": 0.17
+   },
+   "vs_native": {
+    "iou": 0.7581,
+    "mean_rgb_error_on_native": 6.41,
+    "art_coverage_pct": [
+     13.39,
+     16.93
+    ],
+    "native_silhouette_recall": 0.9761,
+    "bbox_pt": [
+     [
+      36.0,
+      39.5,
+      277.0,
+      408.0
+     ],
+     [
+      36.0,
+      21.5,
+      294.5,
+      450.5
+     ]
+    ]
+   }
+  },
+  "C_glb": {
+   "reference_render": null,
+   "renderer_delta": null,
+   "note": "no independent glTF render was produced; PowerPoint is the only renderer",
+   "vs_native": {
+    "iou": 0.2929,
+    "mean_rgb_error_on_native": 60.29,
+    "art_coverage_pct": [
+     13.39,
+     37.03
+    ],
+    "native_silhouette_recall": 0.8527,
+    "bbox_pt": [
+     [
+      36.0,
+      39.5,
+      277.0,
+      408.0
+     ],
+     [
+      36.0,
+      40.0,
+      275.5,
+      419.5
+     ]
+    ]
+   }
+  }
+ }
+}
