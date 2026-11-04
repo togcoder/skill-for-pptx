@@ -140,7 +140,7 @@ class EngineTests(unittest.TestCase):
         self.assertEqual(root.find(".//p:animScale/p:by",NS).get("x"),"125000")
 
     def test_xml_reader_round_trips_compiled_schedule(self):
-        plan=json.loads(DIRECTED.read_text())
+        plan=json.loads(DIRECTED.read_text(encoding="utf-8"))
         with tempfile.TemporaryDirectory() as td:
             out=Path(td)/"o.pptx"
             md.apply(SHOWCASE,plan,out)
@@ -161,7 +161,7 @@ class DirectorCompoundTests(unittest.TestCase):
         cls.by={s["source_index"]:s for s in cls.auto["slides"]}
         cls.tmp=tempfile.TemporaryDirectory()
         cls.out=Path(cls.tmp.name)/"directed.pptx"
-        cls.report=md.apply(SHOWCASE,json.loads(DIRECTED.read_text()),cls.out)
+        cls.report=md.apply(SHOWCASE,json.loads(DIRECTED.read_text(encoding="utf-8")),cls.out)
 
     @classmethod
     def tearDownClass(cls):
@@ -197,7 +197,7 @@ class DirectorCompoundTests(unittest.TestCase):
         self.assertLess(children.index("AlternateContent"),children.index("timing"))
 
     def test_validator_checks_recipes_and_transitions(self):
-        plan=json.loads(DIRECTED.read_text())
+        plan=json.loads(DIRECTED.read_text(encoding="utf-8"))
         bad=copy.deepcopy(plan)
         swap=[b for s in bad["slides"] for b in s["beats"] if b.get("recipe")=="swap"][0]
         swap["targets"]=swap["targets"][:1]
@@ -209,7 +209,7 @@ class DirectorCompoundTests(unittest.TestCase):
         self.assertTrue(any("v0.6" in e for e in validate_director(bad,self.model["inventory"])))
 
     def test_conflicting_choreography_blocks_the_slide(self):
-        plan=json.loads(DIRECTED.read_text())
+        plan=json.loads(DIRECTED.read_text(encoding="utf-8"))
         s4=[s for s in plan["slides"] if s["source_index"]==4][0]
         s4["beats"].append({"id":"clash","purpose":"Second move on the same object.","operation":"choreography",
                             "targets":["Priority Cost"],"reuse_existing":True,"same_slide":True,

@@ -210,7 +210,7 @@ class CriticTests(unittest.TestCase):
         self.assertNotIn("MOT-EASING",outs["eased"])
 
     def test_highlighter_does_not_hide_the_result(self):
-        plan=json.loads((ROOT/"experiments/T028-20261008-claude-morph-studio/report-director.json").read_text())
+        plan=json.loads((ROOT/"experiments/T028-20261008-claude-morph-studio/report-director.json").read_text(encoding="utf-8"))
         with tempfile.TemporaryDirectory() as td:
             out=Path(td)/"o.pptx"
             self.assertTrue(md.apply(REPORT,plan,out)["ok"])

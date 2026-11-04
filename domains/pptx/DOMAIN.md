@@ -67,6 +67,19 @@ Skills: `skills/pptx-motion-director`, `skills/slide-forge`.
   with sources. Run `design_critic.py` on outputs.
 - **Non-Linear Navigation Law (T048):** Decks with branching narrative (Hub & Spoke, auxiliary popups, mini-games) must provide dynamic return actions (`lastslideviewed`), and must lock blank slide clicks (`advClick="0"`) or enable Kiosk mode (`p:kiosk`) to prevent accidental slide skips.
 - **Advanced Interactivity Law (T049):** For auxiliary drill-downs, detail dialogs, and multi-perspective views, agents MUST prefer In-Slide Lightbox Modals and In-Slide Tabbed Switchers (via native `<p:cTn nodeType="interactiveSeq">`) over creating duplicate slides. In-slide triggers preserve visual context, eliminate disruptive screen cuts, and keep the presentation compact. Tactile sound effects (`<a:snd>` in `<a:hlinkClick>`/`<a:hlinkHover>`) and Morph transitions (`p14:morph`) should be integrated for high-polish interactivity.
+- **Product paths change only through a pull request with a review (T065).**
+  - The pptx product paths are `motion_director.py`, `motion_engine.py`,
+    `pptx_animator.py`, `morph_studio.py`, `slide_forge.py`,
+    `design_critic.py`, `slide_navigator.py`, `advanced_interactivity.py`,
+    `interactive_triggers.py`, `theme_engine.py` and the design-system data in
+    `knowledge/design_system.json`.
+  - A commit that changes one of them goes to a `work/T…` branch, opens a PR,
+    and waits for an accepted review in `research/reviews/` from an agent of a
+    different model family (`lab/standards/REVIEW.md`).
+  - Committing such a change straight to `main` is a process defect: the
+    CHANGELOG entry must name the PR, and the reviewer re-reads the diff, not
+    the REPORT alone. This rule exists because T043, T047, T048b and T049
+    reached `main` unreviewed (T057 review, finding 3).
 
 ## State (2026-11-01)
 - **Tests:** 404 run with 4 skipped, 100% pass across all domains.

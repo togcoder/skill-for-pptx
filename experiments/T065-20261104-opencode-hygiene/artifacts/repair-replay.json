@@ -1,0 +1,30 @@
+{
+  "rows": [
+    {
+      "path": "docs/CHANGELOG.md",
+      "source": "ac5b45e",
+      "sequences": 1811
+    },
+    {
+      "path": "domains/README.md",
+      "source": "ac5b45e",
+      "sequences": 3
+    },
+    {
+      "path": "experiments/T045-20261101-opencode-advanced-docx/REPORT.md",
+      "source": "ac5b45e",
+      "sequences": 8
+    },
+    {
+      "path": "experiments/T046-20261101-opencode-advanced-xlsx/REPORT.md",
+      "source": "ac5b45e",
+      "sequences": 39
+    },
+    {
+      "path": "research/claims/T050-opencode-20261102.md",
+      "source": "ac5b45e",
+      "sequences": 1
+    }
+  ],
+  "total": 1862
+}

@@ -1,10 +1,10 @@
-﻿# T045 [docx] â€” Advanced report craft: side-by-side media, equations, rich tables
+# T045 [docx] — Advanced report craft: side-by-side media, equations, rich tables
 
 ## Frame
 
 - **Question:** can the T039 DocumentCraft builder produce a report that feels
-  authored rather than generated â€” image beside text, native equations, a
-  designed cover, and a multi-level table with merged cells and image cells â€”
+  authored rather than generated — image beside text, native equations, a
+  designed cover, and a multi-level table with merged cells and image cells —
   while keeping Word fields, accessibility and editability intact?
 - **Hypothesis:** yes, if advanced blocks are expressed as semantic spec
   entries and emitted as native OOXML (`m:oMath`, `w:tbl` with `gridSpan`/
@@ -73,7 +73,7 @@ third-party media is redistributed.
 |---|---|---|
 | Advanced blocks are native OOXML | 1 | `audit.json`: `ok: true`, no errors/warnings; 20 fields, 15 bookmarks, 6 tables, 6 drawings, 3 sections, 2 equations, 5 merged cells, 5 images in cells, language `vi-VN` |
 | Equations are real OMML | 1 + 4 | `word_math.omml_from_latex`; `m:oMath`, `m:f`, `m:sSup`, `m:nary`; audit counts 2 equations / 1 `SEQ Equation`; Word PDF page 7 shows the growth fraction and the weighted sum |
-| Side-by-side image/text is a real table, not a screenshot | 1 + 4 | borderless 2-cell `w:tbl`, inline `w:drawing`, caption `HĂ¬nh 1 â€” â€¦`; Word PDF page 7 |
+| Side-by-side image/text is a real table, not a screenshot | 1 + 4 | borderless 2-cell `w:tbl`, inline `w:drawing`, caption `Hình 1 — …`; Word PDF page 7 |
 | Rich table has multi-row header, merges and image cells | 1 + 4 | `header_rows`, `gridSpan`, `vMerge`, `w:drawing` in `w:tc`, row heights; audit checks row/column counts; Word PDF page 8 |
 | Callouts and KPI strip are editable | 1 + 4 | `w:tbl` with shading/left border; `key_values` borderless table; Word PDF page 6 |
 | Cover hero is a designed asset, title still a paragraph | 1 + 4 | inline hero image + `wp:docPr@descr`; title remains `Title` style; Word PDF page 1 |
@@ -122,7 +122,7 @@ Preview: `preview/cover.png`, `kpi-callout.png`, `side-equations.png`,
 
 ## Next
 
-- Add matrix/cases/aligned equations and a MathMLâ†’OMML fallback.
+- Add matrix/cases/aligned equations and a MathML→OMML fallback.
 - Add a PDF/UA tag-tree check for merged tables and equations.
 - Test header repetition on a 30+ page table and landscape sections.
 - Add a print/full-bleed cover variant with trim/bleed guidance.
@@ -135,7 +135,7 @@ Argon review 2026-11-01 (chat `0:cf4bb6173adaaa34`), verdict **revise** in
 round 1 and **approve T045** in round 2 (0 blockers). Full record:
 `research/reviews/T045-argon-20261101.md`.
 
-| Finding | Response (fixed / disputed / deferred â†’ task) |
+| Finding | Response (fixed / disputed / deferred → task) |
 |---|---|
 | B1: rung 1 over-claimed; `audit.json` did not count `m:oMath`, `gridSpan`/`vMerge`, `w:tblHeader`, `w:trHeight` or `wp:docPr@descr` | **Fixed.** `audit_docx` now reports `equations`, `equation_numbers`, `merged_cells`, `images_in_cells`, `languages`, and validates each table's effective row columns vs `tblGrid`, `vMerge` origin, image-width vs `tcW`, empty equation parts, and alt text. Evidence rungs changed to 1 + 4, with Excel/Word COM called out. |
 | M1: table-repair / accessibility risk for merged and layout tables; missing `w:lang` | **Fixed.** Grid integrity and orphan `vMerge` are errors now; all named styles and `docDefaults` are set to `vi-VN`; `audit.json` reports only `vi-VN`. PDF/UA tag-tree remains deferred. |

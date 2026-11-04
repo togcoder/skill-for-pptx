@@ -1,0 +1,19 @@
+docs/CHANGELOG.md:191: mojibake: â€
+docs/CHANGELOG.md:227: mojibake: â€
+docs/CHANGELOG.md:253: mojibake: â€
+docs/CHANGELOG.md:257: mojibake: á»Ä‘
+docs/CHANGELOG.md:273: mojibake: â€
+domains/README.md:21: mojibake: â€
+domains/README.md:35: mojibake: â€
+experiments/T045-20261101-opencode-advanced-docx/REPORT.md:1: bom: file starts with a byte-order mark
+experiments/T045-20261101-opencode-advanced-docx/REPORT.md:1: mojibake: â€
+experiments/T045-20261101-opencode-advanced-docx/REPORT.md:6: mojibake: â€
+experiments/T045-20261101-opencode-advanced-docx/REPORT.md:7: mojibake: â€
+experiments/T045-20261101-opencode-advanced-docx/REPORT.md:76: mojibake: â€
+experiments/T046-20261101-opencode-advanced-xlsx/REPORT.md:1: bom: file starts with a byte-order mark
+experiments/T046-20261101-opencode-advanced-xlsx/REPORT.md:1: mojibake: â€
+experiments/T046-20261101-opencode-advanced-xlsx/REPORT.md:5: mojibake: â€
+experiments/T046-20261101-opencode-advanced-xlsx/REPORT.md:6: mojibake: â€
+experiments/T046-20261101-opencode-advanced-xlsx/REPORT.md:8: mojibake: â€
+research/claims/T050-opencode-20261102.md:1: mojibake: â€
+18 finding(s) in 286 Markdown file(s) at ac5b45e

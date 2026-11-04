@@ -278,7 +278,7 @@ class TextTrickTests(unittest.TestCase):
         self.assertEqual(me.text_block(card),(card["geometry"]["x"],card["geometry"]["y"],
                                               card["geometry"]["x"]+card["geometry"]["w"],
                                               card["geometry"]["y"]+card["geometry"]["h"]))
-        plan=json.loads((ROOT/"experiments/T028-20261008-claude-morph-studio/report-director.json").read_text())
+        plan=json.loads((ROOT/"experiments/T028-20261008-claude-morph-studio/report-director.json").read_text(encoding="utf-8"))
         with tempfile.TemporaryDirectory() as td:
             out=Path(td)/"o.pptx"
             report=md.apply(REPORT,plan,out)

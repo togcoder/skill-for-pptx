@@ -14,7 +14,7 @@ checks=importlib.util.module_from_spec(spec);spec.loader.exec_module(checks)
 
 
 class ChoreographyTests(unittest.TestCase):
-    def config(self):return json.loads((EXPERIMENT/"candidate.intent.json").read_text())
+    def config(self):return json.loads((EXPERIMENT/"candidate.intent.json").read_text(encoding="utf-8"))
 
     def test_candidate_semantics_and_plan(self):
         c=self.config();p=compile_intent(c)

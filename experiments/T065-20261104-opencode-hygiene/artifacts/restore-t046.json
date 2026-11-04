@@ -1,0 +1,104 @@
+{
+  "file": "experiments/T046-20261101-opencode-advanced-xlsx/REPORT.md",
+  "good_rev": "3955abac1f3a541129c402e5d1d0b21e49c3991a",
+  "bad_rev": "459852d",
+  "changed": 0,
+  "pairs": [
+    {
+      "damaged": "\ufeff# T046 [xlsx] \u00e2\u20ac\u201d Advanced workbook: image table, Gantt, relationship matrix, pivot, VBA and dashboard",
+      "restored": "# T046 [xlsx] \u2014 Advanced workbook: image table, Gantt, relationship matrix, pivot, VBA and dashboard",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "- **Question:** can the SheetCraft pipeline produce a professional workbook \u00e2\u20ac\u201d",
+      "restored": "- **Question:** can the SheetCraft pipeline produce a professional workbook \u2014",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "  not a chart demo \u00e2\u20ac\u201d where the data table, cross-sheet model, image table,",
+      "restored": "  not a chart demo \u2014 where the data table, cross-sheet model, image table,",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "  all agree, and the dashboard still looks designed rather than \u00e2\u20ac\u0153everything the",
+      "restored": "  all agree, and the dashboard still looks designed rather than \u201ceverything the",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "  tools) was tested and rejected \u00e2\u20ac\u201d see negative results.",
+      "restored": "  tools) was tested and rejected \u2014 see negative results.",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "  dashboard: \u00e2\u20ac\u0153a huge database does not mean it is good; it needs intelligent",
+      "restored": "  dashboard: \u201ca huge database does not mean it is good; it needs intelligent",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "| Image table is a real table with pictures | 1 + 4 | `Team` has 6 `Picture` shapes with alt text (`\u00e1\u00ba\u00a2nh Lan Nguy\u00e1\u00bb\u2026n` \u00e2\u20ac\u00a6), 32 pt rows, print A1:D7 on 1 page; package has 6 `xdr:pic` in a two-cell anchor |",
+      "restored": "| Image table is a real table with pictures | 1 + 4 | `Team` has 6 `Picture` shapes with alt text (`\u1ea2nh Lan Nguy\u1ec5n` \u2026), 32 pt rows, print A1:D7 on 1 page; package has 6 `xdr:pic` in a two-cell anchor |",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "| Dashboard is designed, formula-driven and fixed | 1 + 4 | 4 KPI cards (formulas to `TaskCount`/`TotalCost`/`TotalBenefit`/`COUNTIF`), 2 charts, matrix, source note; print area 29.21 \u0102\u2014 20.39 cm (\u00e2\u2030\u02c693% of A4 landscape); 2 `xdr:oneCellAnchor`; 1-page PDF; audit clean |",
+      "restored": "| Dashboard is designed, formula-driven and fixed | 1 + 4 | 4 KPI cards (formulas to `TaskCount`/`TotalCost`/`TotalBenefit`/`COUNTIF`), 2 charts, matrix, source note; print area 29.21 \u00d7 20.39 cm (\u224893% of A4 landscape); 2 `xdr:oneCellAnchor`; 1-page PDF; audit clean |",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "1. **Node-link scatter rejected \u00e2\u20ac\u201d structural reason first.** The matrix is",
+      "restored": "1. **Node-link scatter rejected \u2014 structural reason first.** The matrix is",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "| B2: dashboard/Gantt print areas exceed A4; charts overlap | **Partly fixed, partly disputed.** Print areas are now Dashboard 29.21 \u0102\u2014 20.39 cm and Gantt 28.55 \u0102\u2014 14.29 cm (\u00e2\u2030\u02c693% scale) \u00e2\u20ac\u201d down from 29.21 \u0102\u2014 26.21 and 40.4 \u0102\u2014 10.58. The claimed chart2/chart3 x-overlap ignored their y bands; the rendered page and rects (`y=5.15..12.15` vs `13.09..19.69`) show no overlap. A label-collision audit remains open. |",
+      "restored": "| B2: dashboard/Gantt print areas exceed A4; charts overlap | **Partly fixed, partly disputed.** Print areas are now Dashboard 29.21 \u00d7 20.39 cm and Gantt 28.55 \u00d7 14.29 cm (\u224893% scale) \u2014 down from 29.21 \u00d7 26.21 and 40.4 \u00d7 10.58. The claimed chart2/chart3 x-overlap ignored their y bands; the rendered page and rects (`y=5.15..12.15` vs `13.09..19.69`) show no overlap. A label-collision audit remains open. |",
+      "codec": "cp1258",
+      "applied": 0
+    },
+    {
+      "damaged": "| M3: KPI cards were typed strings and inconsistent with the data | **Fixed.** Cards are formulas: `=TaskCount`, `=SUBSTITUTE(TEXT(TotalCost/1000,\"0.00\"),\".\",\",\")&\" t\u00e1\u00bb\u00b7\"`, `=SUBSTITUTE(TEXT(TotalBenefit/1000,\"0.0\"),\".\",\",\")&\" t\u00e1\u00bb\u00b7\"`, `=COUNTIF(Data!$J$2:$J$61,\"At risk\")`; cached values keep the page readable. The synthetic values now agree with the model (9.45 / 15.1 t\u00e1\u00bb\u00b7, 15 at risk). |",
+      "restored": "| M3: KPI cards were typed strings and inconsistent with the data | **Fixed.** Cards are formulas: `=TaskCount`, `=SUBSTITUTE(TEXT(TotalCost/1000,\"0.00\"),\".\",\",\")&\" t\u1ef7\"`, `=SUBSTITUTE(TEXT(TotalBenefit/1000,\"0.0\"),\".\",\",\")&\" t\u1ef7\"`, `=COUNTIF(Data!$J$2:$J$61,\"At risk\")`; cached values keep the page readable. The synthetic values now agree with the model (9.45 / 15.1 t\u1ef7, 15 at risk). |",
+      "codec": "cp1258",
+      "applied": 0
+    }
+  ],
+  "rejected": [
+    {
+      "damaged": "  data can draw\u00e2\u20ac\u009d?",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "  is a stacked bar with visible start; a \u00e2\u20ac\u0153relationship chart\u00e2\u20ac\u009d that does not",
+      "reason": "damage not reproducible from this line",
+      "candidate": "  is a stacked bar with visible start; a \u201crelationship chart\u201d that does not"
+    },
+    {
+      "damaged": "  management\u00e2\u20ac\u009d.",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "| Cross-sheet formulas calculate | 4 | `Model!B2:E5` = 15 / 2,460 / 3,930 / 0.51 for \u00e2\u20ac\u0153D\u00e1\u00bb\u00af li\u00e1\u00bb\u2021u\u00e2\u20ac\u009d; `SUMIF`, `COUNTIF`, `AVERAGEIF`, `INDEX` recalculated by Excel |",
+      "reason": "damage not reproducible from this line",
+      "candidate": "| Cross-sheet formulas calculate | 4 | `Model!B2:E5` = 15 / 2,460 / 3,930 / 0.51 for \u201cD\u1eef li\u1ec7u\u201d; `SUMIF`, `COUNTIF`, `AVERAGEIF`, `INDEX` recalculated by Excel |"
+    },
+    {
+      "damaged": "   check. Never rewrite the workbook with xlsxwriter to \u00e2\u20ac\u0153add\u00e2\u20ac\u009d a fallback \u00e2\u20ac\u201d that",
+      "reason": "damage not reproducible from this line",
+      "candidate": "   check. Never rewrite the workbook with xlsxwriter to \u201cadd\u201d a fallback \u2014 that"
+    },
+    {
+      "damaged": "   host, ship the `.xlsx` + `.bas` and say \u00e2\u20ac\u0153not injected\u00e2\u20ac\u009d. The module guards a",
+      "reason": "damage not reproducible from this line",
+      "candidate": "   host, ship the `.xlsx` + `.bas` and say \u201cnot injected\u201d. The module guards a"
+    }
+  ]
+}

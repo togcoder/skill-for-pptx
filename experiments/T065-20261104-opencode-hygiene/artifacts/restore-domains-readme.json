@@ -1,0 +1,22 @@
+{
+  "file": "domains/README.md",
+  "good_rev": "c3b467b",
+  "bad_rev": "dbd17d1",
+  "changed": 0,
+  "pairs": [],
+  "rejected": [
+    {
+      "damaged": "| `pptx` | PowerPoint (OOXML presentation) | [pptx/DOMAIN.md](pptx/DOMAIN.md) | Mature: T001\u00e2\u20ac\u201cT038, T043, 350+ tests | `motion_director.py`, `morph_studio.py`, `slide_forge.py`, `theme_engine.py`, `design_critic.py` |",
+      "reason": "damage not reproducible from this line",
+      "candidate": "| `pptx` | PowerPoint (OOXML presentation) | [pptx/DOMAIN.md](pptx/DOMAIN.md) | Mature: T001\u2013T038, 300+ tests | `motion_director.py`, `morph_studio.py`, `slide_forge.py`, `design_critic.py` |"
+    },
+    {
+      "damaged": "| `svg` | Vector graphics (SVG, print, icon grids) | [svg/DOMAIN.md](svg/DOMAIN.md) | Foundational: T042 canon tokens, stroke scaling, B\u0102\u00a9zier math | `multi_domain_canons.py`, `vectorcraft_bridge.py` |",
+      "reason": "no close line in the good blob"
+    },
+    {
+      "damaged": "| `cross` | Orchestration across applications: intent briefs, delegation, capability registry, pre-processing pipelines | [cross/DOMAIN.md](cross/DOMAIN.md) | Protocols 00\u00e2\u20ac\u201c04 (T036\u00e2\u20ac\u201cT037, T044) | `intent_decoder.py`, `artcraft_hub.py`, `cross_pipeline.py`, `validate_handoff.py`, `lab/protocols/` |",
+      "reason": "no close line in the good blob"
+    }
+  ]
+}

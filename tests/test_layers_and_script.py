@@ -218,7 +218,7 @@ class ScriptTests(unittest.TestCase):
         self.assertTrue(all(c.get("narration") for s in plan["slides"] for c in s["click_beats"]))
 
     def test_human_script_drives_the_cycle_tour(self):
-        plan,report=ms.plan_from_script(self.showcase,(FX/"showcase_script.md").read_text(),style="cinematic")
+        plan,report=ms.plan_from_script(self.showcase,(FX/"showcase_script.md").read_text(encoding="utf-8"),style="cinematic")
         self.assertEqual(validate_director(plan,self.showcase["inventory"]),[])
         s2=next(s for s in plan["slides"] if s["source_index"]==2)
         beats={b["id"]:b for b in s2["beats"]}
@@ -243,7 +243,7 @@ class ScriptTests(unittest.TestCase):
 
     def test_vietnamese_paraphrase_and_gap_callout(self):
         model=md.deck_model(ESSAY)
-        plan,report=ms.plan_from_script(model,(FX/"essay_script_vi.md").read_text(),fill_gaps=True)
+        plan,report=ms.plan_from_script(model,(FX/"essay_script_vi.md").read_text(encoding="utf-8"),fill_gaps=True)
         self.assertEqual(validate_director(plan,model["inventory"]),[])
         by={s["source_index"]:s for s in plan["slides"]}
         self.assertEqual(len(by[2]["click_beats"]),2)
@@ -264,7 +264,7 @@ class ScriptTests(unittest.TestCase):
             self.assertTrue(md.verify(ESSAY,out,allow_notes=True)["ok"])
 
     def test_notes_are_appended_or_created(self):
-        plan,_=ms.plan_from_script(self.showcase,(FX/"showcase_script.md").read_text(),style="cinematic")
+        plan,_=ms.plan_from_script(self.showcase,(FX/"showcase_script.md").read_text(encoding="utf-8"),style="cinematic")
         with tempfile.TemporaryDirectory() as td:
             out=Path(td)/"n.pptx"
             md.apply(SHOWCASE,plan,out)

@@ -1,0 +1,267 @@
+python : .......EEEEEEEE.......E.......................................................................................
+.......................................................................E..................s.....................s......
+.....................................sss..s............................................................................
+..............................................s..........E.E............C:\Users\COMPUTER\AppData\Local\Temp\opencode\s
+kill-for-pptx-T065\scripts\theme_engine.py:336: DeprecationWarning: Image.Image.getdata is deprecated and will be 
+removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+At line:1 char:1
++ python -m unittest discover -s tests > workspace\baseline-tests.txt 2 ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (.......EEEEEEEE...d_data instead.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  for px in im_small.getdata():
+....................................
+======================================================================
+ERROR: test_boundaries_and_reverse_full_orbit 
+(test_choreography.ChoreographyTests.test_boundaries_and_reverse_full_orbit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\COMPUTER\AppData\Local\Temp\opencode\skill-for-pptx-T065\tests\test_choreography.py", line 52, in 
+test_boundaries_and_reverse_full_orbit
+    c=self.config();c.update(node_count=n,focus_node=n,layer_count=layers,
+      ~~~~~~~~~~~^^
+  File "C:\Users\COMPUTER\AppData\Local\Temp\opencode\skill-for-pptx-T065\tests\test_choreography.py", line 17, in 
+config
+    def config(self):return json.loads((EXPERIMENT/"candidate.intent.json").read_text())
+                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\pathlib\_local.py", line 546, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\pathlib\_abc.py", line 633, in read_text
+    return f.read()
+           ~~~~~~^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\encodings\cp1258.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x8d in position 731: character maps to <undefined>
+
+======================================================================
+ERROR: test_candidate_semantics_and_plan (test_choreography.ChoreographyTests.test_candidate_semantics_and_plan)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\COMPUTER\AppData\Local\Temp\opencode\skill-for-pptx-T065\tests\test_choreography.py", line 20, in 
+test_candidate_semantics_and_plan
+    c=self.config();p=compile_intent(c)
+  File "C:\Users\COMPUTER\AppData\Local\Temp\opencode\skill-for-pptx-T065\tests\test_choreography.py", line 17, in 
+config
+    def config(self):return json.loads((EXPERIMENT/"candidate.intent.json").read_text())
+                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\pathlib\_local.py", line 546, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\pathlib\_abc.py", line 633, in read_text
+    return f.read()
+           ~~~~~~^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\encodings\cp1258.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x8d in position 731: character maps to <undefined>
+
+======================================================================
+ERROR: test_deterministic_nonmutating (test_choreography.ChoreographyTests.test_deterministic_nonmutating)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\COMPUTER\AppData\Local\Temp\opencode\skill-for-pptx-T065\tests\test_choreography.py", line 59, in 
+test_deterministic_nonmutating
+    c=self.config();saved=copy.deepcopy(c)
+  File "C:\Users\COMPUTER\AppData\Local\Temp\opencode\skill-for-pptx-T065\tests\test_choreography.py", line 17, in 
+config
+    def config(self):return json.loads((EXPERIMENT/"candidate.intent.json").read_text())
+                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\pathlib\_local.py", line 546, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\pathlib\_abc.py", line 633, in read_text
+    return f.read()
+           ~~~~~~^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\encodings\cp1258.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x8d in position 731: character maps to <undefined>
+
+======================================================================
+ERROR: test_full_revolution_cannot_collapse_to_same_endpoint 
+(test_choreography.ChoreographyTests.test_full_revolution_cannot_collapse_to_same_endpoint)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\COMPUTER\AppData\Local\Temp\opencode\skill-for-pptx-T065\tests\test_choreography.py", line 63, in 
+test_full_revolution_cannot_collapse_to_same_endpoint
+    c=self.config();c.update(orbit_degrees=360,orbit_segments=1)
+  File "C:\Users\COMPUTER\AppData\Local\Temp\opencode\skill-for-pptx-T065\tests\test_choreography.py", line 17, in 
+config
+    def config(self):return json.loads((EXPERIMENT/"candidate.intent.json").read_text())
+                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\pathlib\_local.py", line 546, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\pathlib\_abc.py", line 633, in read_text
+    return f.read()
+           ~~~~~~^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\encodings\cp1258.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x8d in position 731: character maps to <undefined>
+
+======================================================================
+ERROR: test_geometry_mutations_are_detected (test_choreography.ChoreographyTests.test_geometry_mutations_are_detected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\COMPUTER\AppData\Local\Temp\opencode\skill-for-pptx-T065\tests\test_choreography.py", line 34, in 
+test_geometry_mutations_are_detected
+    c=self.config();p=compile_intent(c)
+  File "C:\Users\COMPUTER\AppData\Local\Temp\opencode\skill-for-pptx-T065\tests\test_choreography.py", line 17, in 
+config
+    def config(self):return json.loads((EXPERIMENT/"candidate.intent.json").read_text())
+                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\pathlib\_local.py", line 546, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\pathlib\_abc.py", line 633, in read_text
+    return f.read()
+           ~~~~~~^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\encodings\cp1258.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x8d in position 731: character maps to <undefined>
+
+======================================================================
+ERROR: test_unknown_unsupported_and_invalid_rejected 
+(test_choreography.ChoreographyTests.test_unknown_unsupported_and_invalid_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\COMPUTER\AppData\Local\Temp\opencode\skill-for-pptx-T065\tests\test_choreography.py", line 46, in 
+test_unknown_unsupported_and_invalid_rejected
+    c=self.config();c[k]=v
+  File "C:\Users\COMPUTER\AppData\Local\Temp\opencode\skill-for-pptx-T065\tests\test_choreography.py", line 17, in 
+config
+    def config(self):return json.loads((EXPERIMENT/"candidate.intent.json").read_text())
+                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\pathlib\_local.py", line 546, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\pathlib\_abc.py", line 633, in read_text
+    return f.read()
+           ~~~~~~^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\encodings\cp1258.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x8d in position 731: character maps to <undefined>
+
+======================================================================
+ERROR: test_waypoints_reduce_proxy_error (test_choreography.ChoreographyTests.test_waypoints_reduce_proxy_error)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\COMPUTER\AppData\Local\Temp\opencode\skill-for-pptx-T065\tests\test_choreography.py", line 67, in 
+test_waypoints_reduce_proxy_error
+    c=self.config();fine=checks.check(c,compile_intent(c))
+  File "C:\Users\COMPUTER\AppData\Local\Temp\opencode\skill-for-pptx-T065\tests\test_choreography.py", line 17, in 
+config
+    def config(self):return json.loads((EXPERIMENT/"candidate.intent.json").read_text())
+                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\pathlib\_local.py", line 546, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\pathlib\_abc.py", line 633, in read_text
+    return f.read()
+           ~~~~~~^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\encodings\cp1258.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x8d in position 731: character maps to <undefined>
+
+======================================================================
+ERROR: setUpClass (test_compound_motion.DirectorCompoundTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\COMPUTER\AppData\Local\Temp\opencode\skill-for-pptx-T065\tests\test_compound_motion.py", line 164, in 
+setUpClass
+    cls.report=md.apply(SHOWCASE,json.loads(DIRECTED.read_text()),cls.out)
+               ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\COMPUTER\AppData\Local\Temp\opencode\skill-for-pptx-T065\scripts\motion_director.py", line 1327, in 
+apply
+    raise ValueError("Invalid director plan:\n  - "+"\n  - ".join(errors))
+ValueError: Invalid director plan:
+  - slide 3: beat assemble-2 unknown targets ['Partner CafÄ‚Â©s']
+  - slide 3: beat direct unknown targets ['Partner CafÄ‚Â©s']
+
+======================================================================
+ERROR: test_xml_reader_round_trips_compiled_schedule 
+(test_compound_motion.EngineTests.test_xml_reader_round_trips_compiled_schedule)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\COMPUTER\AppData\Local\Temp\opencode\skill-for-pptx-T065\tests\test_compound_motion.py", line 146, in 
+test_xml_reader_round_trips_compiled_schedule
+    md.apply(SHOWCASE,plan,out)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\COMPUTER\AppData\Local\Temp\opencode\skill-for-pptx-T065\scripts\motion_director.py", line 1327, in 
+apply
+    raise ValueError("Invalid director plan:\n  - "+"\n  - ".join(errors))
+ValueError: Invalid director plan:
+  - slide 3: beat assemble-2 unknown targets ['Partner CafÄ‚Â©s']
+  - slide 3: beat direct unknown targets ['Partner CafÄ‚Â©s']
+
+======================================================================
+ERROR: test_vietnamese_paraphrase_and_gap_callout 
+(test_layers_and_script.ScriptTests.test_vietnamese_paraphrase_and_gap_callout)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\COMPUTER\AppData\Local\Temp\opencode\skill-for-pptx-T065\tests\test_layers_and_script.py", line 246, 
+in test_vietnamese_paraphrase_and_gap_callout
+    plan,report=ms.plan_from_script(model,(FX/"essay_script_vi.md").read_text(),fill_gaps=True)
+                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\pathlib\_local.py", line 546, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\pathlib\_abc.py", line 633, in read_text
+    return f.read()
+           ~~~~~~^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\encodings\cp1258.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x81 in position 52: character maps to <undefined>
+
+======================================================================
+ERROR: test_identity_mismatch_rejected 
+(test_textbox_normalization.TextboxNormalizationTests.test_identity_mismatch_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\COMPUTER\AppData\Local\Temp\opencode\skill-for-pptx-T065\tests\test_textbox_normalization.py", line 
+73, in test_identity_mismatch_rejected
+    plan = json.loads(PLAN.read_text())
+                      ~~~~~~~~~~~~~~^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\pathlib\_local.py", line 546, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\pathlib\_abc.py", line 633, in read_text
+    return f.read()
+           ~~~~~~^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\encodings\cp1258.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x9d in position 326: character maps to <undefined>
+
+======================================================================
+ERROR: test_text_in_carrier_is_not_reclassified 
+(test_textbox_normalization.TextboxNormalizationTests.test_text_in_carrier_is_not_reclassified)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\COMPUTER\AppData\Local\Temp\opencode\skill-for-pptx-T065\tests\test_textbox_normalization.py", line 
+48, in test_text_in_carrier_is_not_reclassified
+    plan = json.loads(PLAN.read_text())
+                      ~~~~~~~~~~~~~~^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\pathlib\_local.py", line 546, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\pathlib\_abc.py", line 633, in read_text
+    return f.read()
+           ~~~~~~^^
+  File "C:\Users\COMPUTER\miniconda3\Lib\encodings\cp1258.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x9d in position 326: character maps to <undefined>
+
+----------------------------------------------------------------------
+Ran 455 tests in 23.578s
+
+FAILED (errors=12, skipped=7)
