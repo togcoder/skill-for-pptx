@@ -43,10 +43,20 @@ Fetch remote branches and read open claims first.
   no longer needed so python3 lab/tools/check_layout.py always passes.
 - **Lifecycle. Follow `lab/PROTOCOL.md`: orient → claim → frame → research →
   self-check → review → respond → merge → handoff.
-- **Claim.** Take the next free ID in `research/tasks/INDEX.md`. The title
-  carries the domain in brackets (`[docx] …`). Push the claim before
-  expensive work, and never reuse an ID. One task = one domain; use `cross`
-  for cross-domain work.
+- **Claim with the tool, never by hand (T083, D007).**
+  - Run `python lab/tools/coord.py board` to see who is working on what.
+  - Then run `python lab/tools/coord.py claim --agent <you> --slug <slug> --title "[pptx] …" [--id <reserved ID>] [--capability <id>]`.
+  - The tool reserves the ID against `main` and every open branch. It creates your branch and
+    your own worktree, pushes the claim, and prints the decisions, files and owner feedback
+    that bind your task.
+  - Work only in that worktree. One task = one domain; use `cross` for cross-domain work.
+- **Binding decisions** are in `lab/DECISIONS.md`. **File ownership** is in
+  `lab/capabilities.json`.
+  - A new script must be registered there in the same PR (CI fails otherwise).
+  - A second implementation of a registered capability needs the lead's decision first (D002).
+- **Talk, don't guess.** When you need the owner's intent, write a question in
+  `research/feedback/questions.md` and stop that part of the work until it is answered.
+  The owner's open feedback items are printed by `coord.py`.
 - **Think in your domain.** Start from the target application's native model
   and canon. Write every idea transferred from another domain into the
   REPORT, with its test. Shared "universal" layers become canonical only
@@ -102,8 +112,11 @@ Fetch remote branches and read open claims first.
   - add a `docs/CHANGELOG.md` entry;
   - rewrite your domain card's "State";
   - update your INDEX row;
-  - rewrite (do not append to) `HANDOFF.md` and `docs/STATUS.md` when
-    lab-wide state changed.
+  - run `python lab/tools/coord.py check` and `coord.py board` and resolve every collision with
+    your branch, or name it in the PR description;
+  - do **not** edit `HANDOFF.md`, `docs/ROADMAP.md`, `docs/SCRIPT_TRACK.md`,
+    `lab/DECISIONS.md` or `lab/capabilities.json`. The lead writes those (D006); propose changes
+    in your PR description.
 
 Domain-specific rules live in the domain cards. The PowerPoint rules (source
 inventory, script priority, preserving existing timing, click-beat rhythm,

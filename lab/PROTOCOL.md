@@ -19,13 +19,16 @@ Run the tests. Fetch remote branches: the newest research may not be on `main`.
 
 **1. Claim.**
 
-- Take the next free ID in `research/tasks/INDEX.md`.
-- Add a row with the **domain** in brackets in the title (e.g. `[xlsx] Chart
-  axis canon`), the agent and the branch, with status `claimed`.
-- Create `research/claims/<ID>-<agent>-<date>.md` from
-  `lab/templates/CLAIM.md`.
-- Push both before expensive work. One task = one domain. A cross-domain
-  task uses domain `cross`.
+- Run `python lab/tools/coord.py claim …` (T083). It does all of the following, atomically
+  against `main` and every open branch:
+  - takes the reserved or next free ID;
+  - writes the INDEX row with the domain in brackets in the title;
+  - writes `research/claims/<ID>-<agent>-<date>.md`;
+  - creates the branch `work/<ID>-<agent>-<slug>` and a worktree under `workspace/<ID>`;
+  - pushes, then prints your briefing.
+- Do not claim by editing INDEX by hand: a row that only exists on your unpushed branch is
+  invisible to the other agents.
+- One task = one domain. A cross-domain task uses domain `cross`.
 
 **2. Frame.** At the top of the REPORT, before building anything, write:
 
@@ -85,8 +88,9 @@ The owner approves merges to `main`.
 
 - Add a `docs/CHANGELOG.md` entry.
 - Rewrite your domain card's "State" section.
-- Rewrite `HANDOFF.md` if lab-wide state changed.
-- Update the INDEX row.
+- Update the INDEX row and put "what changed / what is next" in the PR description.
+- Do not edit `HANDOFF.md`: the lead rewrites it from INDEX, the PRs and `coord.py board`
+  (D006).
 
 ## Anti-monoculture rules
 

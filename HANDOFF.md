@@ -65,6 +65,21 @@ thay vì deck làm tay. Lab đa lĩnh vực phục vụ mục tiêu đó và đa
 - **T055 giờ nằm trên `main` nhưng là EXPERIMENTAL**, review `accept-with-fixes`; R3/R4/R6/R7/R8 còn mở. R3 là claim “named camera views + Morph” chưa đúng với deck gốc.
 - **T054 vector vẫn chưa merge.** T055 không còn phụ thuộc T054.
 
+## Điều phối: bắt đầu và kết thúc mọi task như thế nào (T083)
+
+- **Bắt đầu:**
+  - `python lab/tools/coord.py board` để xem ai đang làm gì và chỗ nào chồng nhau;
+  - rồi `python lab/tools/coord.py claim --agent <tên> --slug <slug> --title "[pptx] …" --id <mã giữ chỗ> --capability <id>`.
+
+  Công cụ giữ mã (nhìn cả `main` lẫn mọi nhánh đang mở), tạo nhánh và **worktree riêng**,
+  rồi in ra các quyết định ràng buộc, file thuộc năng lực đó và phản hồi của chủ dự án.
+- **Ai sở hữu file nào:** `lab/capabilities.json`. Thêm script mới mà không đăng ký thì CI fail.
+  Muốn làm bản thứ hai của một năng lực đã có thì phải hỏi trưởng nhóm trước.
+- **Quyết định ràng buộc:** `lab/DECISIONS.md`, từ D001 đến D008.
+- **Hỏi chủ dự án:** ghi vào `research/feedback/questions.md`. Đừng đoán.
+- **Kết thúc:** cập nhật hàng INDEX, REPORT, CHANGELOG và mô tả PR. **Không sửa HANDOFF hay
+  ROADMAP**: trưởng nhóm viết các file đó (D006), và CI sẽ chặn.
+
 ## Việc tiếp theo: đề bài đã giữ chỗ (chi tiết trong ROADMAP)
 
 | Mã | Việc | Người làm → phản biện | Điều kiện bắt đầu |
@@ -82,7 +97,7 @@ thay vì deck làm tay. Lab đa lĩnh vực phục vụ mục tiêu đó và đa
 | T076 | Thư viện 10 nước Morph có khung hình mẫu | OpenCode → Claude | sau T074 |
 | T077 | Deck Director xuất cảnh; bỏ ánh xạ chuỗi con và giá trị bịa | Antigravity → Claude | sau T075 |
 
-Mã trống kế tiếp cho việc ngoài danh sách: **T083**.
+Mã trống kế tiếp: do `coord.py claim` tính (hiện là **T084**).
 
 **Dừng ngay:**
 - vá thêm luật chuỗi con trong `deck_director.py`;
@@ -129,9 +144,11 @@ Join the design research lab at https://github.com/togcoder/skill-for-pptx, bran
 Read HANDOFF.md, docs/ROADMAP.md, experiments/T070-20261104-claude-lead-synthesis/REPORT.md,
 AGENTS.md, lab/PROTOCOL.md and domains/pptx/DOMAIN.md.
 Run `python -m unittest discover -s tests` and `python lab/tools/check_layout.py`.
-Take ONE reserved brief from the HANDOFF table whose start condition is met. Change its INDEX
-row to claimed with your agent and branch, push, then work in your own git worktree on that
-branch. Do only that brief in this session. Try its falsifiers yourself; tag every claim with
+Run `python lab/tools/coord.py board`, then take ONE reserved brief whose start condition is
+met with `python lab/tools/coord.py claim --agent <you> --slug <slug> --title "<title>" --id <ID>
+--capability <id>`. Work only in the worktree it creates. Do only that brief in this session.
+Read lab/DECISIONS.md; ask the owner in research/feedback/questions.md instead of guessing.
+Do not edit HANDOFF.md or docs/ROADMAP.md. Try its falsifiers yourself; tag every claim with
 its evidence rung; never use critic scores as proof of quality. Open a PR; do not push product
 code to main. Ask the critic named in the brief (a different model family) to review in
 research/reviews/. Save every text file as UTF-8 without BOM.
