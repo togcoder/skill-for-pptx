@@ -149,7 +149,8 @@ were true at the time. Task IDs and their branches are listed in
 - **Defects found.** `interactive_triggers.apply_interactive_triggers` (T032)
   writes a file PowerPoint 16.0 refuses to open (`0x80004005`).
   `pptx_animator._interactive_sequence` omits `p:stCondLst`, so its trigger
-  effect runs at slide load. Both are inputs to T061.
+  effect runs at slide load. Both were pre-T061; after merging T061, the rebuilt
+  fixtures open and contain `stCondLst`/`onClick`.
 - **Tests.** `tests/test_interactive_show_harness.py`: 36 tests (2 skipped; a
   native integration test is opt-in with `T058_NATIVE=1`).
 - Report: `experiments/T058-20261104-opencode-interactive-harness/REPORT.md`.

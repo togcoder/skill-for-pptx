@@ -348,6 +348,22 @@ PNG hashes, diff stats, stability series, COM click state, and teardown.
    document `PPTFrameClass`, DPI awareness, the scrollbar overlay and the
    calibration step.
 
+## Post-merge integration check (2026-11-04)
+
+T058 was built on `ac5b45e`, before T061. After merging T061 into `main`, the two
+defects recorded above were re-tested on the merged tree:
+
+- `make_fixtures.py` rebuilt `artifacts/t032_trigger_fixture.pptx`.
+  `interactive_show_harness.py open-check` now reports **`opened: true`**, one
+  interactive sequence. The branch's `0x80004005` failure no longer reproduces.
+- `animator_trigger_fixture.pptx` now opens, and `ppt/slides/slide1.xml` contains
+  `p:stCondLst`, `evt="onClick"` and `interactiveSeq`. The missing-condition
+  defect no longer reproduces.
+
+Both findings were **pre-T061**; T061's canonical writer fixes them. The rung 5b
+playback evidence and the harness itself are unaffected. Re-run the fixtures
+after any future change to `pptx_animator.py`.
+
 ## Review response
 
 | Finding | Response |
