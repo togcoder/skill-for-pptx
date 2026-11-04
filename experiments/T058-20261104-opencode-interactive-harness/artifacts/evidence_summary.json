@@ -1,0 +1,651 @@
+{
+  "schema": "pptx-interactive-show-summary/1",
+  "task": "T058",
+  "runs": [
+    {
+      "run": "animator_trigger_bug",
+      "evidence": "artifacts\\runs\\animator_trigger_bug\\evidence.json",
+      "evidence_sha256": "344edb03e61d0ef5d67f5b49a267fc873cebb0967e8865f5b8b2ce2a24c67b10",
+      "deck": {
+        "path": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T058\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\animator_trigger_fixture.pptx",
+        "sha256": "930aab4897d69abd4f9ff81657027cc04e2d792aef47c7c99e9ee4fb5c24bb17",
+        "bytes": 29310
+      },
+      "powerpoint": {
+        "version": "16.0",
+        "build": "17932",
+        "slide_count": 1,
+        "slide_width_pt": 960.0,
+        "slide_height_pt": 540.0
+      },
+      "show": {
+        "class": "PPTFrameClass",
+        "hwnd": 10357600,
+        "dpi": 120
+      },
+      "mapping": {
+        "predicted_offset_px": [
+          0,
+          0
+        ],
+        "shift_px": [
+          0,
+          0
+        ],
+        "mae": 11.861,
+        "mae_predicted": 11.861,
+        "improved_mae": 0.0,
+        "search_boundary": false,
+        "content_size_px": [
+          1701,
+          957
+        ],
+        "ignored_right_px": 0,
+        "calibrated_content": [
+          109.0,
+          46.09,
+          1810.0,
+          1002.91
+        ]
+      },
+      "claims": {
+        "interactive_show_window_found": true,
+        "show_window_class": "PPTFrameClass",
+        "dpi_aware": true,
+        "mapping_calibrated": true,
+        "win32_click_sent": true,
+        "trigger_pixel_change_verified": false,
+        "gotoclick_noop_verified": true,
+        "slide_navigation_verified": false,
+        "all_steps_passed": true
+      },
+      "steps": [
+        {
+          "index": 0,
+          "action": "goto_slide",
+          "shape": null,
+          "ok": true,
+          "reason": "moved"
+        },
+        {
+          "index": 1,
+          "action": "goto_click",
+          "shape": null,
+          "ok": true,
+          "reason": "index 0->0, pixels 0.000%",
+          "inside_pct": 0.0,
+          "share_inside": 1.0,
+          "outside_pct": null,
+          "whole_pct": 0.0
+        },
+        {
+          "index": 2,
+          "action": "click_shape",
+          "shape": "TriggerBtn",
+          "ok": true,
+          "reason": "whole 0.000% <= 0.2%",
+          "inside_pct": 0.0,
+          "share_inside": 0.0,
+          "outside_pct": 0.0,
+          "whole_pct": 0.0
+        }
+      ],
+      "passed": 3,
+      "total": 3,
+      "error": null,
+      "teardown": {
+        "show_exited": true,
+        "presentation_closed": true,
+        "quit_called": true,
+        "killed_pid": 33108,
+        "remaining_powerpnt_pids": []
+      }
+    },
+    {
+      "run": "t048b_hub",
+      "evidence": "artifacts\\runs\\t048b_hub\\evidence.json",
+      "evidence_sha256": "f310662091068378feb4f07b7090cb67018b505e26c645e804a0c0ac3b6136b3",
+      "deck": {
+        "path": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T058\\experiments\\T048-20261101-antigravity-slide-branching\\artifacts\\executive_interactive_hub.pptx",
+        "sha256": "c924c3b7e373a013de19a1d3c530f55d00eb924bb01e5c29048c806f5a7f4cf9",
+        "bytes": 35336
+      },
+      "powerpoint": {
+        "version": "16.0",
+        "build": "17932",
+        "slide_count": 5,
+        "slide_width_pt": 960.0,
+        "slide_height_pt": 540.0
+      },
+      "show": {
+        "class": "PPTFrameClass",
+        "hwnd": 1510732,
+        "dpi": 120
+      },
+      "mapping": {
+        "predicted_offset_px": [
+          0,
+          6
+        ],
+        "shift_px": [
+          0,
+          0
+        ],
+        "mae": 0.709,
+        "mae_predicted": 0.709,
+        "improved_mae": 0.0,
+        "search_boundary": false,
+        "content_size_px": [
+          1680,
+          945
+        ],
+        "ignored_right_px": 21,
+        "calibrated_content": [
+          109.0,
+          52.0,
+          1789.0,
+          997.0
+        ]
+      },
+      "claims": {
+        "interactive_show_window_found": true,
+        "show_window_class": "PPTFrameClass",
+        "dpi_aware": true,
+        "mapping_calibrated": true,
+        "win32_click_sent": true,
+        "trigger_pixel_change_verified": false,
+        "gotoclick_noop_verified": false,
+        "slide_navigation_verified": true,
+        "all_steps_passed": true
+      },
+      "steps": [
+        {
+          "index": 0,
+          "action": "goto_slide",
+          "shape": null,
+          "ok": true,
+          "reason": "moved"
+        },
+        {
+          "index": 1,
+          "action": "click_shape",
+          "shape": "btn_hub_strategy",
+          "ok": true,
+          "reason": "slide 2 -> expected 2",
+          "inside_pct": 15.0171,
+          "share_inside": 0.2174,
+          "outside_pct": 8.0625,
+          "whole_pct": 8.965
+        },
+        {
+          "index": 2,
+          "action": "click_shape",
+          "shape": "btn_return_hub_1",
+          "ok": true,
+          "reason": "slide 1 -> expected 1",
+          "inside_pct": 96.8816,
+          "share_inside": 0.2836,
+          "outside_pct": 6.5959,
+          "whole_pct": 8.965
+        },
+        {
+          "index": 3,
+          "action": "click_shape",
+          "shape": "btn_hub_finance",
+          "ok": true,
+          "reason": "slide 3 -> expected 3",
+          "inside_pct": 11.3748,
+          "share_inside": 0.1135,
+          "outside_pct": 13.2521,
+          "whole_pct": 13.0085
+        },
+        {
+          "index": 4,
+          "action": "click_shape",
+          "shape": "btn_goto_deepdive",
+          "ok": true,
+          "reason": "slide 5 -> expected 5",
+          "inside_pct": 99.7392,
+          "share_inside": 0.345,
+          "outside_pct": 8.286,
+          "whole_pct": 12.1204
+        },
+        {
+          "index": 5,
+          "action": "click_shape",
+          "shape": "btn_back_to_caller",
+          "ok": true,
+          "reason": "slide 3 -> expected 3",
+          "inside_pct": 97.4076,
+          "share_inside": 0.3163,
+          "outside_pct": 8.6261,
+          "whole_pct": 12.1204
+        },
+        {
+          "index": 6,
+          "action": "click_shape",
+          "shape": "btn_return_hub_2",
+          "ok": true,
+          "reason": "slide 1 -> expected 1",
+          "inside_pct": 96.8816,
+          "share_inside": 0.1954,
+          "outside_pct": 10.7484,
+          "whole_pct": 13.0085
+        },
+        {
+          "index": 7,
+          "action": "click_shape",
+          "shape": "btn_hub_risk",
+          "ok": true,
+          "reason": "slide 4 -> expected 4",
+          "inside_pct": 6.504,
+          "share_inside": 0.0954,
+          "outside_pct": 9.1946,
+          "whole_pct": 8.8454
+        },
+        {
+          "index": 8,
+          "action": "click_shape",
+          "shape": "btn_return_hub_3",
+          "ok": true,
+          "reason": "slide 1 -> expected 1",
+          "inside_pct": 96.8816,
+          "share_inside": 0.2874,
+          "outside_pct": 6.4732,
+          "whole_pct": 8.8454
+        }
+      ],
+      "passed": 9,
+      "total": 9,
+      "error": null,
+      "teardown": {
+        "show_exited": true,
+        "presentation_closed": true,
+        "quit_called": true,
+        "killed_pid": 28252,
+        "remaining_powerpnt_pids": []
+      }
+    },
+    {
+      "run": "t049_main_control",
+      "evidence": "artifacts\\runs\\t049_main_control\\evidence.json",
+      "evidence_sha256": "79066ce36e8e82e5bcfd811c184deba0e06b1c0b015182428055571e5eed002c",
+      "deck": {
+        "path": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T058\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\t049_main_control.pptx",
+        "sha256": "111effc1b7e06dd80e825c533e1aeb5a880fb9792d145c1db288f4df28d8d06e",
+        "bytes": 43742
+      },
+      "powerpoint": {
+        "version": "16.0",
+        "build": "17932",
+        "slide_count": 2,
+        "slide_width_pt": 960.0,
+        "slide_height_pt": 540.0
+      },
+      "show": {
+        "class": "PPTFrameClass",
+        "hwnd": 24840554,
+        "dpi": 120
+      },
+      "mapping": {
+        "predicted_offset_px": [
+          0,
+          6
+        ],
+        "shift_px": [
+          0,
+          0
+        ],
+        "mae": 0.684,
+        "mae_predicted": 0.684,
+        "improved_mae": 0.0,
+        "search_boundary": false,
+        "content_size_px": [
+          1680,
+          945
+        ],
+        "ignored_right_px": 21,
+        "calibrated_content": [
+          109.0,
+          52.0,
+          1789.0,
+          997.0
+        ]
+      },
+      "claims": {
+        "interactive_show_window_found": true,
+        "show_window_class": "PPTFrameClass",
+        "dpi_aware": true,
+        "mapping_calibrated": true,
+        "win32_click_sent": true,
+        "trigger_pixel_change_verified": true,
+        "gotoclick_noop_verified": true,
+        "slide_navigation_verified": false,
+        "all_steps_passed": true
+      },
+      "steps": [
+        {
+          "index": 0,
+          "action": "goto_slide",
+          "shape": null,
+          "ok": true,
+          "reason": "moved"
+        },
+        {
+          "index": 1,
+          "action": "goto_click",
+          "shape": null,
+          "ok": true,
+          "reason": "index 0->1 (want 1); rendered=False; boxes {'TextBox 2': {'expected': 'unchanged', 'pct': 0.0, 'pass': True}, 'Cover_1': {'expected': 'unchanged', 'pct': 0.0, 'pass': True}}",
+          "inside_pct": 0.0,
+          "share_inside": 1.0,
+          "outside_pct": null,
+          "whole_pct": 0.0
+        },
+        {
+          "index": 2,
+          "action": "click_shape",
+          "shape": "Cover_1",
+          "ok": true,
+          "reason": "changed inside target",
+          "inside_pct": 100.0,
+          "share_inside": 0.9121,
+          "outside_pct": 1.3948,
+          "whole_pct": 13.8609
+        }
+      ],
+      "passed": 3,
+      "total": 3,
+      "error": null,
+      "teardown": {
+        "show_exited": true,
+        "presentation_closed": true,
+        "quit_called": true,
+        "killed_pid": 31264,
+        "remaining_powerpnt_pids": []
+      }
+    },
+    {
+      "run": "t049_slide1",
+      "evidence": "artifacts\\runs\\t049_slide1\\evidence.json",
+      "evidence_sha256": "9b905b4742517182e7d597a1b496dda2e4bf945cb550cbd706c1d5170a8d2de2",
+      "deck": {
+        "path": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T058\\experiments\\T049-20261101-antigravity-advanced-interactivity\\artifacts\\one_slide_games_suite.pptx",
+        "sha256": "f91531f87e381fa2f84a02a1bb14f918ddf4d9d3c816098a223a3d22211bab3f",
+        "bytes": 46080
+      },
+      "powerpoint": {
+        "version": "16.0",
+        "build": "17932",
+        "slide_count": 2,
+        "slide_width_pt": 960.0,
+        "slide_height_pt": 540.0
+      },
+      "show": {
+        "class": "PPTFrameClass",
+        "hwnd": 9571442,
+        "dpi": 120
+      },
+      "mapping": {
+        "predicted_offset_px": [
+          0,
+          6
+        ],
+        "shift_px": [
+          0,
+          0
+        ],
+        "mae": 0.684,
+        "mae_predicted": 0.684,
+        "improved_mae": 0.0,
+        "search_boundary": false,
+        "content_size_px": [
+          1680,
+          945
+        ],
+        "ignored_right_px": 21,
+        "calibrated_content": [
+          109.0,
+          52.0,
+          1789.0,
+          997.0
+        ]
+      },
+      "claims": {
+        "interactive_show_window_found": true,
+        "show_window_class": "PPTFrameClass",
+        "dpi_aware": true,
+        "mapping_calibrated": true,
+        "win32_click_sent": true,
+        "trigger_pixel_change_verified": true,
+        "gotoclick_noop_verified": true,
+        "slide_navigation_verified": false,
+        "all_steps_passed": true
+      },
+      "steps": [
+        {
+          "index": 0,
+          "action": "goto_slide",
+          "shape": null,
+          "ok": true,
+          "reason": "moved"
+        },
+        {
+          "index": 1,
+          "action": "goto_click",
+          "shape": null,
+          "ok": true,
+          "reason": "index 0->0, pixels 0.000%",
+          "inside_pct": 0.0,
+          "share_inside": 1.0,
+          "outside_pct": null,
+          "whole_pct": 0.0
+        },
+        {
+          "index": 2,
+          "action": "click_shape",
+          "shape": "Cover_1",
+          "ok": true,
+          "reason": "changed inside target",
+          "inside_pct": 100.0,
+          "share_inside": 0.9783,
+          "outside_pct": 0.3217,
+          "whole_pct": 12.9234
+        },
+        {
+          "index": 3,
+          "action": "click_shape",
+          "shape": "Cover_2",
+          "ok": true,
+          "reason": "changed inside target",
+          "inside_pct": 100.0,
+          "share_inside": 0.9783,
+          "outside_pct": 0.3217,
+          "whole_pct": 12.9234
+        },
+        {
+          "index": 4,
+          "action": "click_shape",
+          "shape": "Cover_3",
+          "ok": true,
+          "reason": "changed inside target",
+          "inside_pct": 99.9976,
+          "share_inside": 0.9783,
+          "outside_pct": 0.3217,
+          "whole_pct": 12.9231
+        },
+        {
+          "index": 5,
+          "action": "click_shape",
+          "shape": "Reset_Button_S1",
+          "ok": true,
+          "reason": "changed inside target",
+          "inside_pct": 86.3939,
+          "share_inside": 0.982,
+          "outside_pct": 1.2534,
+          "whole_pct": 38.9266
+        }
+      ],
+      "passed": 6,
+      "total": 6,
+      "error": null,
+      "teardown": {
+        "show_exited": true,
+        "presentation_closed": true,
+        "quit_called": true,
+        "killed_pid": 3648,
+        "remaining_powerpnt_pids": []
+      }
+    },
+    {
+      "run": "t049_slide2",
+      "evidence": "artifacts\\runs\\t049_slide2\\evidence.json",
+      "evidence_sha256": "d974e549fd3c28c13da0f9ebc13aaf9dc7cda53e51fcbcfd5e7a6790cf3306f3",
+      "deck": {
+        "path": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T058\\experiments\\T049-20261101-antigravity-advanced-interactivity\\artifacts\\one_slide_games_suite.pptx",
+        "sha256": "f91531f87e381fa2f84a02a1bb14f918ddf4d9d3c816098a223a3d22211bab3f",
+        "bytes": 46080
+      },
+      "powerpoint": {
+        "version": "16.0",
+        "build": "17932",
+        "slide_count": 2,
+        "slide_width_pt": 960.0,
+        "slide_height_pt": 540.0
+      },
+      "show": {
+        "class": "PPTFrameClass",
+        "hwnd": 1772886,
+        "dpi": 120
+      },
+      "mapping": {
+        "predicted_offset_px": [
+          0,
+          6
+        ],
+        "shift_px": [
+          0,
+          0
+        ],
+        "mae": 0.684,
+        "mae_predicted": 0.684,
+        "improved_mae": 0.0,
+        "search_boundary": false,
+        "content_size_px": [
+          1680,
+          945
+        ],
+        "ignored_right_px": 21,
+        "calibrated_content": [
+          109.0,
+          52.0,
+          1789.0,
+          997.0
+        ]
+      },
+      "claims": {
+        "interactive_show_window_found": true,
+        "show_window_class": "PPTFrameClass",
+        "dpi_aware": true,
+        "mapping_calibrated": true,
+        "win32_click_sent": true,
+        "trigger_pixel_change_verified": true,
+        "gotoclick_noop_verified": false,
+        "slide_navigation_verified": false,
+        "all_steps_passed": true
+      },
+      "steps": [
+        {
+          "index": 0,
+          "action": "goto_slide",
+          "shape": null,
+          "ok": true,
+          "reason": "moved"
+        },
+        {
+          "index": 1,
+          "action": "click_shape",
+          "shape": "Choice_B",
+          "ok": true,
+          "reason": "changed inside target",
+          "inside_pct": 100.0,
+          "share_inside": 0.9719,
+          "outside_pct": 0.1646,
+          "whole_pct": 5.5481
+        },
+        {
+          "index": 2,
+          "action": "click_shape",
+          "shape": "Reset_Button_S2",
+          "ok": true,
+          "reason": "changed inside target",
+          "inside_pct": 29.0948,
+          "share_inside": 0.994,
+          "outside_pct": 0.0409,
+          "whole_pct": 5.5481
+        },
+        {
+          "index": 3,
+          "action": "click_shape",
+          "shape": "Choice_A",
+          "ok": true,
+          "reason": "changed inside target",
+          "inside_pct": 100.0,
+          "share_inside": 0.9646,
+          "outside_pct": 0.2077,
+          "whole_pct": 5.5481
+        }
+      ],
+      "passed": 4,
+      "total": 4,
+      "error": null,
+      "teardown": {
+        "show_exited": true,
+        "presentation_closed": true,
+        "quit_called": true,
+        "killed_pid": 25824,
+        "remaining_powerpnt_pids": []
+      }
+    }
+  ],
+  "totals": {
+    "runs": 5,
+    "steps": 25,
+    "passed": 25,
+    "failed": 0
+  },
+  "open_checks": [
+    {
+      "deck": "animator_trigger_fixture.pptx",
+      "sha256": "4e04152666a9065a14dc31c6f56b5c507cfed5545a8dea9f56d574c56b790b3b",
+      "opened": true,
+      "main_effects_total": 0,
+      "interactive_sequences_total": 1,
+      "error": null
+    },
+    {
+      "deck": "t032_trigger_fixture.pptx",
+      "sha256": "a1571518828efbad90feaddd9858fe6fe2a2c3822dc8080b5170f62ecce88777",
+      "opened": false,
+      "main_effects_total": null,
+      "interactive_sequences_total": null,
+      "error": "com_error: (-2147352567, 'Exception occurred.', (0, None, None, None, 0, -2147467259), None)"
+    },
+    {
+      "deck": "t049_main_control.pptx",
+      "sha256": "d04d8302a2ec61ff0105bca98613cfb598e975480960af65d266dfb6b5cf99bb",
+      "opened": true,
+      "main_effects_total": 1,
+      "interactive_sequences_total": 8,
+      "error": null
+    },
+    {
+      "deck": "t049_plus_t032_writer.pptx",
+      "sha256": "e1e521ec4e88db4080ffca3ce23a98ca29990216baf341dc13ac12a1350f1335",
+      "opened": false,
+      "main_effects_total": null,
+      "interactive_sequences_total": null,
+      "error": "com_error: (-2147352567, 'Exception occurred.', (0, None, None, None, 0, -2147467259), None)"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "name": "t048b_executive_hub",
+  "deck": "../../T048-20261101-antigravity-slide-branching/artifacts/executive_interactive_hub.pptx",
+  "notes": "T048b hub. Three top buttons jump to detail slides; return buttons jump home; slide 5 returns to the last viewed slide (3).",
+  "steps": [
+    {"action": "goto_slide", "slide": 1},
+    {"action": "click_shape", "shape": "btn_hub_strategy",
+     "expect": {"kind": "slide_change", "to": 2}},
+    {"action": "click_shape", "shape": "btn_return_hub_1",
+     "expect": {"kind": "slide_change", "to": 1}},
+    {"action": "click_shape", "shape": "btn_hub_finance",
+     "expect": {"kind": "slide_change", "to": 3}},
+    {"action": "click_shape", "shape": "btn_goto_deepdive",
+     "expect": {"kind": "slide_change", "to": 5}},
+    {"action": "click_shape", "shape": "btn_back_to_caller",
+     "expect": {"kind": "slide_change", "to": 3}},
+    {"action": "click_shape", "shape": "btn_return_hub_2",
+     "expect": {"kind": "slide_change", "to": 1}},
+    {"action": "click_shape", "shape": "btn_hub_risk",
+     "expect": {"kind": "slide_change", "to": 4}},
+    {"action": "click_shape", "shape": "btn_return_hub_3",
+     "expect": {"kind": "slide_change", "to": 1}}
+  ]
+}

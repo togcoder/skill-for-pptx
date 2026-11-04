@@ -1,0 +1,23 @@
+{
+  "schema": "pptx-open-check/1",
+  "deck": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T058\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\t032_trigger_fixture.pptx",
+  "sha256": "a1571518828efbad90feaddd9858fe6fe2a2c3822dc8080b5170f62ecce88777",
+  "bytes": 29376,
+  "version": "16.0",
+  "build": "17932",
+  "opened": false,
+  "error": "com_error: (-2147352567, 'Exception occurred.', (0, None, None, None, 0, -2147467259), None)",
+  "com_error_args": [
+    -2147352567,
+    "Exception occurred.",
+    [
+      0,
+      null,
+      null,
+      null,
+      0,
+      -2147467259
+    ],
+    null
+  ]
+}

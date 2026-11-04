@@ -1,0 +1,25 @@
+{
+  "schema": "pptx-open-check/1",
+  "deck": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T058\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\negatives\\t049_plus_t032_writer.pptx",
+  "sha256": "e1e521ec4e88db4080ffca3ce23a98ca29990216baf341dc13ac12a1350f1335",
+  "bytes": 43779,
+  "version": "16.0",
+  "build": "17932",
+  "application": "Microsoft PowerPoint",
+  "application_path": "C:\\Program Files\\Microsoft Office\\Root\\Office16",
+  "opened": false,
+  "error": "com_error: (-2147352567, 'Exception occurred.', (0, None, None, None, 0, -2147467259), None)",
+  "com_error_args": [
+    -2147352567,
+    "Exception occurred.",
+    [
+      0,
+      null,
+      null,
+      null,
+      0,
+      -2147467259
+    ],
+    null
+  ]
+}

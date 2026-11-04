@@ -1,0 +1,26 @@
+{
+  "schema": "pptx-open-check/1",
+  "deck": "C:\\Users\\COMPUTER\\AppData\\Local\\Temp\\opencode\\skill-for-pptx-T058\\experiments\\T058-20261104-opencode-interactive-harness\\artifacts\\t049_main_control.pptx",
+  "sha256": "d04d8302a2ec61ff0105bca98613cfb598e975480960af65d266dfb6b5cf99bb",
+  "bytes": 43742,
+  "version": "16.0",
+  "build": "17932",
+  "opened": true,
+  "slides": 2,
+  "slide_width_pt": 960.0,
+  "slide_height_pt": 540.0,
+  "slides_detail": [
+    {
+      "slide": 1,
+      "main_effects": 1,
+      "interactive_sequences": 4
+    },
+    {
+      "slide": 2,
+      "main_effects": 0,
+      "interactive_sequences": 4
+    }
+  ],
+  "main_effects_total": 1,
+  "interactive_sequences_total": 8
+}

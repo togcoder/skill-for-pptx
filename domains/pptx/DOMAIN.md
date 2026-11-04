@@ -30,7 +30,9 @@ per click). Design numbers are shared by the generators and the critic
 | Navigation | `slide_navigator.py` (T048; Non-linear branching, Hub & Spoke, auxiliary popup return via last_viewed, Custom Show Show-and-Return, kiosk mode, mini-game state machine) |
 
 **Experimental** (quarantined, kept out of product paths):
-`morph_playbook.py`, `cognitive_pacing.py`, `interactive_triggers.py` (T033).
+`morph_playbook.py`, `cognitive_pacing.py`, `interactive_triggers.py` (T033),
+`interactive_show_harness.py` (T058; Windows interactive desktop only,
+EXPERIMENTAL until reviewed).
 
 **Frozen:** the E001–T018 research paths (`docs/ARCHITECTURE.md`).
 
@@ -68,10 +70,19 @@ Skills: `skills/pptx-motion-director`, `skills/slide-forge`.
 - **Non-Linear Navigation Law (T048):** Decks with branching narrative (Hub & Spoke, auxiliary popups, mini-games) must provide dynamic return actions (`lastslideviewed`), and must lock blank slide clicks (`advClick="0"`) or enable Kiosk mode (`p:kiosk`) to prevent accidental slide skips.
 - **Advanced Interactivity Law (T049):** For auxiliary drill-downs, detail dialogs, and multi-perspective views, agents MUST prefer In-Slide Lightbox Modals and In-Slide Tabbed Switchers (via native `<p:cTn nodeType="interactiveSeq">`) over creating duplicate slides. In-slide triggers preserve visual context, eliminate disruptive screen cuts, and keep the presentation compact. Tactile sound effects (`<a:snd>` in `<a:hlinkClick>`/`<a:hlinkHover>`) and Morph transitions (`p14:morph`) should be integrated for high-polish interactivity.
 
-## State (2026-11-01)
-- **Tests:** 404 run with 4 skipped, 100% pass across all domains.
+## State (2026-11-04)
+- **Tests:** 497 run with 10 skipped, 100% pass across all domains.
+- **Interactive playback (T058):** `scripts/interactive_show_harness.py` drives a
+  windowed show with Win32 input and asserts pixels. T049 slide 1/2 and the
+  T048b hub reach **rung 5b** (COM-driven, machine-asserted, not human-reviewed:
+  cover clicks 100 % of the target box, hub 9/9 edges including `lastslideviewed`).
+  `GotoClick` is proven useless for triggers (0.000 %); on a main sequence it
+  moves the index without rendering. T032's `interactive_triggers.py` output is
+  rejected by PowerPoint, and `pptx_animator._interactive_sequence` omits
+  `p:stCondLst` (effect fires at slide load). Rung 6 is still open.
 - **Navigation & Interactivity:** T048 added Slide Navigator (`slide_navigator.py`) establishing full non-linear branching, dynamic return paths, custom shows with return, and mini-game state machine compilation. T049 added Advanced Presentation Interactivity (`advanced_interactivity.py`) establishing native in-slide lightbox modals, multi-tab switchers, pure-Python synthetic sound FX (click/chime/buzz), hover actions, and twin-morph visual flow.
-- **Evidence:** Rungs 0–5 established across PPTX, DOCX, XLSX, and Cross. PowerPoint 16.0 COM verified.
+- **Evidence:** Rungs 0–5 established across PPTX, DOCX, XLSX, and Cross; rung 5b
+  for T049/T048b interactivity. PowerPoint 16.0 build 17932 COM verified.
 
 ## Open questions / dissent
 - **T038 numbers.** Several T038 values (golden 61.8 %, Duarte breaks at

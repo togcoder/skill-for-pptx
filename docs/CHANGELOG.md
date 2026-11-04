@@ -7,6 +7,31 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T058 [pptx] Interactive slide-show harness — 2026-11-04
+
+- **Why.** T057 found that every interactive claim stopped at rung 4: nobody
+  had clicked a shape trigger in a live show. `GotoClick` does not fire
+  `interactiveSeq`.
+- **Module.** `scripts/interactive_show_harness.py` starts a windowed show,
+  finds the `PPTFrameClass` window by PowerPoint PID, becomes per-monitor DPI
+  aware, places the window in the work area, calibrates slide→screen mapping
+  against `Slide.Export`, sends `SetCursorPos`/`mouse_event` clicks, waits for
+  stable frames and asserts pixel change inside the target box.
+- **Evidence.** 5 runs / 25 steps, all passing on the T049 one-slide games and
+  the T048b hub (9/9 edges including `lastslideviewed` 5→3). T049 cover clicks:
+  100 % of the target box changed, 97.8 % of changed pixels inside the box.
+  `GotoClick(1)` on the same deck: index 0→0, 0.000 % pixels. With a main
+  sequence added, `GotoClick(1)` moves the index 0→1 but renders nothing
+  (0.000 %). COM `GetClickCount/Index` stay 0 after a successful trigger click.
+  Rung 5b; rung 6 still needs human review of the captures.
+- **Defects found.** `interactive_triggers.apply_interactive_triggers` (T032)
+  writes a file PowerPoint 16.0 refuses to open (`0x80004005`).
+  `pptx_animator._interactive_sequence` omits `p:stCondLst`, so its trigger
+  effect runs at slide load. Both are inputs to T061.
+- **Tests.** `tests/test_interactive_show_harness.py`: 36 tests (2 skipped; a
+  native integration test is opt-in with `T058_NATIVE=1`).
+- Report: `experiments/T058-20261104-opencode-interactive-harness/REPORT.md`.
+
 ## T057 [cross] Lead review, DeckCraft evaluation and next programme — 2026-11-04
 
 - **Why.** After 22 tasks in four days (T035–T056) the owner asked Claude to

@@ -1,0 +1,14 @@
+{
+  "name": "t049_main_control",
+  "deck": "../artifacts/t049_main_control.pptx",
+  "notes": "T049 deck copy with one main-sequence click (title fade-out). GotoClick(1) advances the main-sequence index but renders nothing (recorded with allow_no_render); the shape trigger must still fire afterwards.",
+  "steps": [
+    {"action": "goto_slide", "slide": 1},
+    {"action": "goto_click", "click": 1,
+     "expect": {"kind": "main_advance", "index": 1,
+                "changes": [], "unchanged": ["TextBox 2", "Cover_1"],
+                "allow_no_render": true, "max_pct": 0.2}},
+    {"action": "click_shape", "shape": "Cover_1",
+     "expect": {"kind": "pixel_change", "min_pct": 4.0, "min_share": 0.6}}
+  ]
+}

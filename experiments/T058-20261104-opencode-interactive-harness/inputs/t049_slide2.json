@@ -1,0 +1,16 @@
+{
+  "name": "t049_slide2_quiz_battle",
+  "deck": "../../T049-20261101-antigravity-advanced-interactivity/artifacts/one_slide_games_suite.pptx",
+  "notes": "T049 one-slide game 2. Choice_B is the correct answer and reveals Feedback_2; Reset hides all feedback.",
+  "steps": [
+    {"action": "goto_slide", "slide": 2},
+    {"action": "click_shape", "shape": "Choice_B", "observe": ["Feedback_2"],
+     "expect": {"kind": "pixel_change", "min_pct": 2.0, "min_share": 0.5}},
+    {"action": "click_shape", "shape": "Reset_Button_S2",
+     "observe": ["Feedback_1", "Feedback_2", "Feedback_3"],
+     "expect": {"kind": "pixel_change", "min_pct": 2.0, "min_share": 0.4,
+                "max_outside_pct": 8.0}},
+    {"action": "click_shape", "shape": "Choice_A", "observe": ["Feedback_1"],
+     "expect": {"kind": "pixel_change", "min_pct": 2.0, "min_share": 0.5}}
+  ]
+}
