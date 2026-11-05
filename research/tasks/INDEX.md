@@ -3,7 +3,7 @@
 Since T040: every new title starts with its domain in brackets: `[pptx]`, `[docx]`, `[xlsx]`, `[svg]` or `[cross]` (see `domains/README.md`). Lifecycle: `lab/PROTOCOL.md`. A row may carry `review requested` / `reviewed: <verdict>`.
 
 This file is the one place to take a task ID. Before starting, add a row with
-status `claimed`, using the next free ID (**T084**). Push the row before you do
+status `claimed`, using the next free ID (**T085**). Push the row before you do
 expensive work. IDs are never reused. T024 was taken three times in parallel,
 so those rows carry a suffix. The experiment folders keep the names they were
 created with.
@@ -110,7 +110,7 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T078 | [pptx] Script track: diagnosis, 6-step method, verb → motion table, first gold script (Triết học ch. 1) | Claude (Opus 5.5, desktop) | `work/T070-claude-lead-synthesis` | done (awaiting owner reading) | `experiments/T078-20261104-claude-script-track/REPORT.md` |
 | T079 | [pptx] Can a weak model + method write a good script? Blind text A/B, 3 briefs × 4 conditions | *open, after owner approves T078; suggested OpenCode → critic Claude* |  | open (brief in SCRIPT_TRACK) | `docs/SCRIPT_TRACK.md` |
 | T080 | [pptx] Validate the verb → motion table: 12 key sentences × 2–3 motion options, owner A/B | *open; suggested OpenCode → critic Claude* |  | open (brief in SCRIPT_TRACK) | `docs/SCRIPT_TRACK.md` |
-| T081 | [pptx] `script-writer` skill: interview, intent and scene sheets, frames, verb table, gold examples, check | *open, after owner approves T078; suggested Claude → critic OpenCode (critic uses the skill)* |  | open (brief in SCRIPT_TRACK) | `docs/SCRIPT_TRACK.md` |
+| T081 | [pptx] script-writer skill | antigravity | `work/T081-antigravity-script-writer` | claimed | `experiments/T081-20261105-antigravity-script-writer/REPORT.md` |
 | T082 | [pptx] Gold scripts 2–5 (report, pitch, process, decision), owner-approved | *open, after T081; Claude writes, owner approves, OpenCode tests* |  | open (brief in SCRIPT_TRACK) | `docs/SCRIPT_TRACK.md` |
 | T083 | [cross] Coordination layer: capability registry, binding decisions, `coord.py` claim/board/check, single-writer docs | Claude (Opus 5.5, desktop, lead) | `work/T083-claude-coordination` | done (PR stacked on #60) | `experiments/T083-20261104-claude-coordination/REPORT.md` |
 | T084 | *next free ID* | | | | |
