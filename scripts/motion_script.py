@@ -394,6 +394,7 @@ def compile_to_scene(text):
             "title": s["title"],
             "turn": s.get("turn", {}),
             "morph_from": f"s{s['morph_from']}" if s.get("morph_from") else None,
+            "morph_text": s.get("morph_text", ""),
             "base_state": s.get("base_state", ""),
             "speech": s.get("speech", ""),
             "clicks": clicks,

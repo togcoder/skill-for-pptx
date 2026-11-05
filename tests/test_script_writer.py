@@ -11,6 +11,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import motion_script as ms
 
 GOLD_PATH = ROOT / "experiments" / "T078-20261104-claude-script-track" / "gold-script-triet-hoc-ch1.md"
+PITCH_GOLD_PATH = ROOT / "experiments" / "T081-20261105-antigravity-script-writer" / "artifacts" / "gold-script-pitch-deck-series-a.md"
 
 
 class ScriptWriterTests(unittest.TestCase):
@@ -41,6 +42,15 @@ class ScriptWriterTests(unittest.TestCase):
         self.assertEqual(res["scenes_count"], 13)
         # Verify advisory warning for spine length
         self.assertTrue(any("SCRIPT-SPINE-RECOMMENDATION" in w for w in res["warnings"]))
+
+    def test_check_pitch_deck_gold_script_passes(self):
+        self.assertTrue(PITCH_GOLD_PATH.is_file(), f"Pitch deck gold script not found at {PITCH_GOLD_PATH}")
+        text = PITCH_GOLD_PATH.read_text(encoding="utf-8")
+        res = ms.check_script(text)
+        self.assertTrue(res["ok"], f"Pitch deck check failed: {res['errors']}")
+        self.assertEqual(res["scenes_count"], 8)
+        self.assertEqual(len(res["errors"]), 0)
+        self.assertEqual(len(res["warnings"]), 0)  # Zero warnings: zero morph fracture, perfect 16:9 aspect!
 
     def test_check_catches_banned_placeholder(self):
         bad_text = (

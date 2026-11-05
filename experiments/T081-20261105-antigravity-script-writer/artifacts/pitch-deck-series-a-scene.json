@@ -129,6 +129,7 @@
         "raw": "\"Lại một startup AI đến xin tiền\" → \"Họ đang chỉ ra một điểm gãy cấu trúc của toàn ngành phần mềm.\""
       },
       "morph_from": null,
+      "morph_text": "",
       "base_state": "- Ba vòng tròn đồng tâm chuẩn tỉ lệ 16:9 (tâm chung tại $x_c=0.50, y_c=0.28$, hình học gốc `roundRect` với `corner_radius=1.0` kèm viền nét đứt gạch cơ khí `dash_style: dash_dot`):\n    - `!!ring_obs`: Vòng ngoài cùng `(x=0.41, y=0.12, w=0.18, h=0.32)`, viền xanh lơ `#06B6D4` dày 2.0pt, nền rỗng.\n    - `!!ring_reason`: Vòng ở giữa `(x=0.43, y=0.16, w=0.14, h=0.24)`, viền tím `#8B5CF6` dày 1.5pt, nền rỗng.\n    - `!!ring_exec`: Vòng lõi `(x=0.45, y=0.20, w=0.10, h=0.16)`, viền vàng kim `#EAB308` dày 2.5pt, nền rỗng.\n  - Tiêu đề chính `AETHER COGNITION` (font Sans Bold, 44pt, màu trắng `#FFFFFF`) tại `(x=0.20, y=0.54, w=0.60, h=0.10)`.\n  - Phụ đề: *\"The Autonomous Cognitive OS for Enterprise Work\"* tại `(x=0.25, y=0.66, w=0.50, h=0.06)` ở trạng thái ẩn (`opacity: 0.00`).",
       "speech": "Thưa các anh chị, trong suốt hai mươi năm qua, toàn bộ ngành công nghệ đã hứa với các tập đoàn rằng: cứ mua thêm phần mềm thì năng suất sẽ tự động tăng lên. **[CLICK]** Nhưng thực tế hôm nay lại hoàn toàn ngược lại.",
       "clicks": [
@@ -155,6 +156,7 @@
         "raw": "\"Doanh nghiệp chỉ cần đào tạo nhân viên dùng tool tốt hơn\" → \"Vấn đề nằm ở cấu trúc: con người đang phải làm keo dán thủ công giữa 130 hệ thống.\""
       },
       "morph_from": "s1",
+      "morph_text": "- Ba diễn viên độc lập `!!ring_obs`, `!!ring_reason`, `!!ring_exec` đồng tâm cùng trượt mượt mà theo phương chéo lên góc trên bên trái màn hình (tâm chung tại $x_c=0.10, y_c=0.10$, chuẩn tỉ lệ 16:9):\n    - `!!ring_obs`: `(x=0.065, y=0.04, w=0.07, h=0.12)`.\n    - `!!ring_reason`: `(x=0.0775, y=0.06, w=0.045, h=0.08)`.\n    - `!!ring_exec`: `(x=0.085, y=0.075, w=0.03, h=0.05)`.\n    - Cả 3 vòng giảm độ mờ xuống `opacity: 0.40` (`morph: 800ms`), đóng vai trò mỏ neo nhận thức nền.",
       "base_state": "- Ma trận `!!silos_matrix` gồm 130 ô vuông nhỏ xếp thành lưới 13 hàng × 10 cột tại `(x=0.18, y=0.22, w=0.68, h=0.60)`. Toàn bộ 130 ô có màu xám chì `#334155` (`opacity: 0.35`).",
       "speech": "Một tập đoàn quy mô trung bình hiện nay phải duy trì tới 130 công cụ SaaS độc lập. Hàng nghìn nhân viên tri thức không còn thời gian để sáng tạo, **[CLICK]** mà mất tới 4.2 giờ mỗi ngày chỉ để copy paste dữ liệu thủ công giữa các ô cửa sổ. Doanh nghiệp không hề thiếu công cụ; **[CLICK]** thứ họ thiếu là một bộ não trung tâm để vận hành đồng bộ các công cụ đó.",
       "clicks": [
@@ -190,6 +192,7 @@
         "raw": "\"Sao không dùng Microsoft Copilot hay ChatGPT Enterprise?\" → \"Chatbot dạng hộp thoại không bao giờ giải quyết được bài toán tự hành trong doanh nghiệp.\""
       },
       "morph_from": "s2",
+      "morph_text": "- Không để diễn viên biến mất! Ba vòng nhận thức từ góc trái trên trượt vào khu vực trung tâm nhưng **ở trạng thái bị phân rã, ngắt kết nối (Disarticulated State)** để phản chiếu sự bất lực của mô hình Chatbot (tất cả chuẩn tỉ lệ 16:9 $w = 0.5625 \\times h$):\n    - Vòng ngoài `!!ring_obs` trượt đến vị trí khung chatbox bên trái `(x=0.21, y=0.28, w=0.11, h=0.20)`, viền chuyển sang nét đứt mờ đục xám tro `#64748B` (`opacity: 0.30`).\n    - Vòng giữa `!!ring_reason` trượt đến vị trí trung gian `(x=0.45, y=0.34, w=0.09, h=0.16)`, viền chuyển sang cam cảnh báo `#F97316`.\n    - Vòng lõi `!!ring_exec` trượt đến vị trí bên phải `(x=0.73, y=0.38, w=0.07, h=0.12)`, viền chuyển thành xám khóa chặt `#475569`.",
       "base_state": "- Nửa trái: Khung minh họa hộp chat `!!chatbox_mockup` tại `(x=0.08, y=0.24, w=0.38, h=0.58)` lồng quanh `!!ring_obs` mờ đứt nét.\n  - Nửa phải: Sơ đồ quy trình nghiệp vụ `!!process_tree` tại `(x=0.58, y=0.24, w=0.38, h=0.58)` lồng quanh `!!ring_exec` bị khóa.",
       "speech": "Phản xạ đầu tiên của cả thị trường là đưa chatbot vào từng ứng dụng. Nhưng chatbot chỉ biết nói chuyện khi con người hỏi; **[CLICK]** nó mù ngữ cảnh quy trình nội bộ, tư duy ảo giác, và không thể bấm nút thực thi. **[CLICK]** Doanh nghiệp không cần thêm một trợ lý để chat; họ cần một hệ điều hành nhận thức biết nhìn, biết nghĩ và tự làm việc.",
       "clicks": [
@@ -225,6 +228,7 @@
         "raw": "\"Họ làm cách nào khả thi về mặt kỹ thuật?\" → \"Kiến trúc tách rời nhận thức thành Quan sát, Suy luận và Thực thi có bảo đảm an toàn tuyệt đối.\""
       },
       "morph_from": "s3",
+      "morph_text": "- Ba vòng `!!ring_obs`, `!!ring_reason`, `!!ring_exec` từ 3 vị trí phân rã bị hút mạnh về lại trung tâm màn hình, lồng khít vào nhau thành một hệ thống đồng tâm thống nhất (tâm chung tại $x_c=0.50, y_c=0.36$, chuẩn 16:9 $w = 0.5625 \\times h$, thời lượng `morph: 1.0s`):\n    - `!!ring_obs` (Vòng Quan sát): Khôi phục vị trí `(x=0.375, y=0.14, w=0.25, h=0.44)`, viền xanh lơ sáng `#06B6D4` dày 2.5pt nét gạch cơ khí.\n    - `!!ring_reason` (Vòng Suy luận): Khôi phục vị trí `(x=0.415, y=0.21, w=0.17, h=0.30)`, viền tím điện `#8B5CF6` dày 2.0pt.\n    - `!!ring_exec` (Vòng Lõi Thực thi): Khôi phục vị trí `(x=0.455, y=0.28, w=0.09, h=0.16)`, viền vàng kim `#EAB308` dày 2.5pt.",
       "base_state": "- Ba vòng đồng tâm đứng yên vững chãi, tiêu đề trên đỉnh: *Kiến Trúc 3 Tầng Nhận Thức Tự Hành*.",
       "speech": "Đây là kiến trúc của Aether. Vòng ngoài cùng liên tục quan sát thao tác để hiểu quy trình thực tế. **[CLICK]** Vòng giữa phân rã công việc cho mạng lưới Agent chuyên biệt suy luận. **[CLICK]** Nhưng mấu chốt nằm ở vòng lõi: chúng tôi không dùng LLM để đoán mò, mà biên dịch trực tiếp sang các lệnh API quyết định luận, có kiểm toán và chính xác 100%.",
       "clicks": [
@@ -260,6 +264,7 @@
         "raw": "\"Sản phẩm nghe hay nhưng đã bán được chưa?\" → \"Tốc độ tăng trưởng và độ bám khách hàng chứng minh Product-Market Fit cực mạnh.\""
       },
       "morph_from": "s4",
+      "morph_text": "- Ba vòng nhận thức `!!ring_obs`, `!!ring_reason`, `!!ring_exec` giữ nguyên cấu trúc đồng tâm, cùng thu nhỏ mượt mà xuống làm động cơ bệ đỡ tăng trưởng tại $(x_c=0.14, y_c=0.58)$:\n    - `!!ring_obs`: `(x=0.105, y=0.52, w=0.07, h=0.12)`.\n    - `!!ring_reason`: `(x=0.1175, y=0.54, w=0.045, h=0.08)`.\n    - `!!ring_exec`: `(x=0.126, y=0.555, w=0.028, h=0.05)`.",
       "base_state": "- Trục tọa độ tài chính: Tiêu đề *Minh Chứng Thực Tế: Tăng Trưởng & Độ Bám Khách Hàng*.\n  - Mốc khởi điểm: *Q1/2025: $1.1M ARR* tại `(x=0.20, y=0.62, w=0.16, h=0.08)`.\n  - Cột doanh thu `!!metric_arr` nằm ở mức chân đế tại `(x=0.42, y=0.76, w=0.18, h=0.04)`, màu xám xanh nhạt `#475569`.",
       "speech": "Chúng tôi không nói về lời hứa tương lai; chúng tôi nói về kết quả đã kiểm chứng. Trong 14 tháng qua, Aether đã cán mốc **[CLICK]** 4.2 triệu USD ARR từ 38 tập đoàn lớn. **[CLICK]** Và quan trọng hơn cả: tỷ lệ mở rộng doanh thu thuần (Net Retention Rate) đạt 148% — một khi doanh nghiệp đã đưa Aether vào vận hành, họ không bao giờ rút ra.",
       "clicks": [
@@ -295,6 +300,7 @@
         "raw": "\"Chi phí token suy luận có ăn hết biên lợi nhuận không?\" → \"Kiến trúc phân tầng nén chi phí GPU xuống 3.6 lần, bảo đảm biên lợi nhuận 82%.\""
       },
       "morph_from": "s5",
+      "morph_text": "- Chuyển tiếp mượt mà sang State 6A. Ba vòng nhận thức `!!ring_obs`, `!!ring_reason`, `!!ring_exec` từ Cảnh 5 trượt vào nằm gọn bên trong đỉnh Cột 2 `(Gross Margin)` tại $(x_c=0.53, y_c=0.36)$ đóng vai trò bộ lọc phân tầng SLM cục bộ:\n    - `!!ring_obs`: `(x=0.5075, y=0.32, w=0.045, h=0.08)`.\n    - `!!ring_reason`: `(x=0.516, y=0.335, w=0.028, h=0.05)`.\n    - `!!ring_exec`: `(x=0.5215, y=0.345, w=0.017, h=0.03)`.",
       "base_state": "- Màn hình chia làm 3 cột số liệu có độ cao tương đương nhau (thế cân bằng):\n    - Cột 1 `!!col_gpu`: Chi phí GPU thông thường tại `(x=0.14, y=0.30, w=0.22, h=0.52)`, màu đỏ cam `#EA580C`.\n    - Cột 2 `!!col_margin`: Gross Margin của Aether tại `(x=0.42, y=0.30, w=0.22, h=0.52)`, màu xám xanh `#64748B`.\n    - Cột 3 `!!col_cac`: Thời gian hoàn vốn CAC tại `(x=0.70, y=0.30, w=0.22, h=0.52)`, màu xám xanh `#64748B`.",
       "speech": "Nỗi lo lớn nhất với các công ty AI là chi phí suy luận GPU ăn mòn toàn bộ lợi nhuận. Aether giải quyết điều này bằng kiến trúc phân tầng: 80% tác vụ lặp lại được xử lý bằng các mô hình nhỏ chạy cục bộ. **[CLICK]** Nhờ đó, chi phí GPU sụp đổ và biên lợi nhuận gộp của chúng tôi đạt 82%. **[CLICK]** Với hợp đồng trung bình 120,000 USD mỗi năm, chúng tôi thu hồi toàn bộ chi phí bán hàng chỉ sau 4.5 tháng.",
       "clicks": [
@@ -330,6 +336,7 @@
         "raw": "\"Nếu OpenAI hay Big Tech sao chép tính năng này thì sao?\" → \"Hào lũy không nằm ở model mà nằm ở đồ thị quy trình độc quyền không thể cào từ internet.\""
       },
       "morph_from": "s6",
+      "morph_text": "- Chuyển tiếp mượt mà sang State 7A. Ba vòng nhận thức `!!ring_obs`, `!!ring_reason`, `!!ring_exec` từ đỉnh Cột 2 của Cảnh 6 trượt sang phải làm hạt nhân trung tâm bên trong khối `(Đồ thị quy trình độc quyền)` tại $(x_c=0.71, y_c=0.50)$:\n    - `!!ring_obs`: `(x=0.67, y=0.43, w=0.08, h=0.14)`.\n    - `!!ring_reason`: `(x=0.685, y=0.455, w=0.05, h=0.09)`.\n    - `!!ring_exec`: `(x=0.696, y=0.475, w=0.03, h=0.05)`.",
       "base_state": "- Hai khối nội dung lớn đặt đối xứng nhau ngang bằng trên màn hình:\n    - Nửa trái: Khối `!!card_models` đại diện cho *Mô hình nền tảng (Foundation Models)* tại `(x=0.10, y=0.24, w=0.38, h=0.58)`, màu xanh lam `#1E293B`.\n    - Nửa phải: Khối `!!card_graph` đại diện cho *Đồ thị quy trình độc quyền của Aether* tại `(x=0.52, y=0.24, w=0.38, h=0.58)`, màu tím than `#1E1B4B` chứa 3 vòng nhận thức ở lõi.",
       "speech": "Các mô hình nền tảng như GPT hay Claude sẽ ngày càng thông minh hơn và rẻ hơn, nhưng chúng chỉ được huấn luyện từ dữ liệu công khai trên web. **[CLICK]** Aether nắm giữ thứ mà không web crawler nào chạm tới được: Đồ thị hành vi và quy trình vận hành thực tế của từng ngành. Càng vận hành, Aether càng hiểu sâu đặc thù doanh nghiệp, **[CLICK]** tạo ra một rào cản chuyển đổi mà không đối thủ nào có thể vượt qua.",
       "clicks": [
@@ -365,6 +372,7 @@
         "raw": "\"Tại sao tôi phải giải ngân cho họ ngay hôm nay?\" → \"Đây là cơ hội sở hữu hạ tầng nền tảng định hình tương lai của công việc tự hành.\""
       },
       "morph_from": "s7",
+      "morph_text": "- Chuyển tiếp mượt mà sang State 8A. Ba vòng nhận thức `!!ring_obs`, `!!ring_reason`, `!!ring_exec` từ tâm khối `!!card_graph` của Cảnh 7 trượt lên vị trí vương miện trên đỉnh màn hình tại $(x_c=0.50, y_c=0.20)$ (vẫn giữ nguyên hình học gốc `roundRect` với `corner_radius=1.0`):\n    - `!!ring_obs`: `(x=0.4435, y=0.10, w=0.113, h=0.20)`, viền xanh lơ `#06B6D4`.\n    - `!!ring_reason`: `(x=0.4605, y=0.13, w=0.079, h=0.14)`, viền tím `#8B5CF6`.\n    - `!!ring_exec`: `(x=0.4775, y=0.16, w=0.045, h=0.08)`, viền xanh lục `#10B981`.",
       "base_state": "- Khối kêu gọi đầu tư `!!ask_card` nằm ngay bên dưới 3 vòng tại `(x=0.25, y=0.36, w=0.50, h=0.18)` với con số vàng lớn: **$12,000,000 USD Series A**.",
       "speech": "Chúng tôi đang kêu gọi 12 triệu USD cho vòng Series A để nhân rộng đội ngũ kỹ sư lõi và mở rộng thị phần tại 100 tập đoàn tài chính lớn nhất. **[CLICK]** Chúng tôi không tạo ra một phần mềm phụ trợ; chúng tôi đang xây dựng hệ điều hành nhận thức cho mười năm tới. Xin mời các anh chị cùng tham gia.",
       "clicks": [
