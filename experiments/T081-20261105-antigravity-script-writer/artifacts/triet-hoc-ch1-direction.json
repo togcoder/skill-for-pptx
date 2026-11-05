@@ -1,0 +1,589 @@
+{
+  "brief": {
+    "title": "Bạn đã làm triết học sáng nay",
+    "one_sentence": "Ai cũng đang nhìn thế giới qua một cặp kính; triết học giúp ta thấy và mài sắc cặp kính ấy.",
+    "audience": "Sinh viên năm nhất, học bắt buộc. Phần đông nghĩ triết học khô, xa đời, học để thi.",
+    "duration": "15–18 phút, 13 cảnh, khoảng 24 click"
+  },
+  "style": {
+    "theme": "editorial",
+    "register": "Nói, không đọc giáo trình. Trên màn hình chỉ có từ khóa và câu then chốt; lời nói mang phần lý giải."
+  },
+  "beats": [
+    {
+      "id": "b1",
+      "scene": "s1",
+      "job": "define",
+      "claim": "Bạn đã làm triết học sáng nay",
+      "clicks": [
+        {
+          "id": "b1.1",
+          "says": "Hai câu này chắc ai cũng từng nghe. Một câu nói: cố gắng thì đổi được. Câu kia nói: mọi thứ đã được định sẵn. Bạn tin câu nào hơn? … (dừng 3 giây) Dù bạn chọn câu nào, bạn vừa trả lời một câu hỏi triết học.",
+          "lead_in": "Hai câu này chắc ai cũng từng nghe. Một câu nói: cố gắng thì đổi được. Câu kia nói: mọi thứ đã được định sẵn. Bạn tin câu nào hơn? … (dừng 3 giây) Dù bạn chọn câu nào,",
+          "post_click_says": "bạn vừa trả lời một câu hỏi triết học."
+        }
+      ]
+    },
+    {
+      "id": "b2",
+      "scene": "s2",
+      "job": "define",
+      "claim": "Từ những mảnh rời đến một hệ thống",
+      "clicks": [
+        {
+          "id": "b2.1",
+          "says": "Mỗi người mang theo hàng chục niềm tin như thế, rời rạc, tự phát, ít khi nghĩ đến nơi đến chốn. Gộp lại, đó là thế giới quan: cách ta nhìn thế giới và chỗ của mình trong đó. Khi những mảnh ấy được nghĩ cho đến nơi, có lý lẽ, thành một hệ thống, ta có triết học.",
+          "lead_in": "Mỗi người mang theo hàng chục niềm tin như thế, rời rạc, tự phát, ít khi nghĩ đến nơi đến chốn. Gộp lại, đó là thế giới quan: cách ta nhìn thế giới và chỗ của mình trong đó. Khi những mảnh ấy được",
+          "post_click_says": "nghĩ cho đến nơi, có lý lẽ, thành một hệ thống, ta có triết học."
+        }
+      ]
+    },
+    {
+      "id": "b3",
+      "scene": "s3",
+      "job": "define",
+      "claim": "Câu hỏi mà triết học nào cũng phải trả lời",
+      "clicks": []
+    },
+    {
+      "id": "b4",
+      "scene": "s4",
+      "job": "define",
+      "claim": "Hai câu trả lời chia đôi lịch sử triết học",
+      "clicks": [
+        {
+          "id": "b4.1",
+          "says": "Ai trả lời vật chất có trước và quyết định ý thức đứng về phía chủ nghĩa duy vật. Ai cho rằng ý thức có trước",
+          "lead_in": "Ai trả lời vật chất có trước và quyết định ý thức",
+          "post_click_says": "đứng về phía chủ nghĩa duy vật. Ai cho rằng ý thức có trước"
+        },
+        {
+          "id": "b4.2",
+          "says": "đứng về phía chủ nghĩa duy tâm. Câu hỏi còn một mặt nữa: con người có nhận thức được thế giới hay không?",
+          "lead_in": "",
+          "post_click_says": "đứng về phía chủ nghĩa duy tâm. Câu hỏi còn một mặt nữa: con người có nhận thức được thế giới hay không?"
+        },
+        {
+          "id": "b4.3",
+          "says": "Phần lớn các nhà triết học trả lời là có; một số thì hoài nghi hoặc phủ nhận.",
+          "lead_in": "",
+          "post_click_says": "Phần lớn các nhà triết học trả lời là có; một số thì hoài nghi hoặc phủ nhận."
+        }
+      ]
+    },
+    {
+      "id": "b5",
+      "scene": "s5",
+      "job": "define",
+      "claim": "Nhìn sự vật: từng mảnh, hay một dòng chảy?",
+      "clicks": [
+        {
+          "id": "b5.1",
+          "says": "Trả lời xong câu hỏi gốc, còn chuyện ta nhìn sự vật thế nào. Cách nhìn siêu hình thấy từng trạng thái đứng riêng: hạt là hạt, cây là cây. Cách nhìn biện chứng thấy chúng trong liên hệ và vận động: hạt mất đi để thành cây, cây lại cho ra hạt mới.",
+          "lead_in": "Trả lời xong câu hỏi gốc, còn chuyện ta nhìn sự vật thế nào. Cách nhìn siêu hình thấy từng trạng thái đứng riêng: hạt là hạt, cây là cây.",
+          "post_click_says": "Cách nhìn biện chứng thấy chúng trong liên hệ và vận động: hạt mất đi để thành cây, cây lại cho ra hạt mới."
+        }
+      ]
+    },
+    {
+      "id": "b6",
+      "scene": "s6",
+      "job": "define",
+      "claim": "Bốn ô của lịch sử triết học",
+      "clicks": [
+        {
+          "id": "b6.1",
+          "says": "Ghép hai câu trả lời, ta có bốn ô. Hêghen đứng ở ô biện chứng nhưng duy tâm: ông thấy thế giới vận động, nhưng cho rằng thứ vận động trước hết là ý niệm.",
+          "lead_in": "Ghép hai câu trả lời, ta có bốn ô.",
+          "post_click_says": "Hêghen đứng ở ô biện chứng nhưng duy tâm: ông thấy thế giới vận động, nhưng cho rằng thứ vận động trước hết là ý niệm."
+        },
+        {
+          "id": "b6.2",
+          "says": "Phoiơbắc đứng ở ô duy vật nhưng siêu hình: ông đặt vật chất lên trước, nhưng nhìn nó trong trạng thái đứng yên.",
+          "lead_in": "",
+          "post_click_says": "Phoiơbắc đứng ở ô duy vật nhưng siêu hình: ông đặt vật chất lên trước, nhưng nhìn nó trong trạng thái đứng yên."
+        },
+        {
+          "id": "b6.3",
+          "says": "Còn một ô trống: duy vật *và* biện chứng.",
+          "lead_in": "",
+          "post_click_says": "Còn một ô trống: duy vật *và* biện chứng."
+        }
+      ]
+    },
+    {
+      "id": "b7",
+      "scene": "s7",
+      "job": "define",
+      "claim": "Dựng phép biện chứng đứng lại trên chân",
+      "clicks": [
+        {
+          "id": "b7.1",
+          "says": "Mác và Ăngghen bước vào ô trống đó. Từ Hêghen, các ông giữ lại cái mà giáo trình gọi là \"hạt nhân hợp lý\": phép biện chứng. Nhưng như Mác viết, ở Hêghen phép biện chứng đang lộn ngược, đi bằng đầu; phải dựng nó đứng lại trên chân. Ghép với chủ nghĩa duy vật mà Phoiơbắc đã khôi phục,",
+          "lead_in": "Mác và Ăngghen bước vào ô trống đó. Từ Hêghen, các ông giữ lại cái mà giáo trình gọi là \"hạt nhân hợp lý\": phép biện chứng. Nhưng như Mác viết, ở Hêghen phép biện chứng đang",
+          "post_click_says": "lộn ngược, đi bằng đầu; phải dựng nó đứng lại trên chân. Ghép với chủ nghĩa duy vật mà Phoiơbắc đã khôi phục,"
+        },
+        {
+          "id": "b7.2",
+          "says": "ra đời chủ nghĩa duy vật biện chứng.",
+          "lead_in": "",
+          "post_click_says": "ra đời chủ nghĩa duy vật biện chứng."
+        }
+      ]
+    },
+    {
+      "id": "b8",
+      "scene": "s8",
+      "job": "define",
+      "claim": "Vì sao lại là những năm 1840?",
+      "clicks": [
+        {
+          "id": "b8.1",
+          "says": "Tư tưởng lớn không rơi từ trên trời xuống. Giữa thế kỷ XIX, ba dòng chảy cùng dâng lên. Kinh tế, xã hội.",
+          "lead_in": "Tư tưởng lớn không rơi từ trên trời xuống. Giữa thế kỷ XIX, ba dòng chảy cùng dâng lên.",
+          "post_click_says": "Kinh tế, xã hội."
+        },
+        {
+          "id": "b8.2",
+          "says": "Lý luận.",
+          "lead_in": "",
+          "post_click_says": "Lý luận."
+        },
+        {
+          "id": "b8.3",
+          "says": "Khoa học tự nhiên.",
+          "lead_in": "",
+          "post_click_says": "Khoa học tự nhiên."
+        },
+        {
+          "id": "b8.4",
+          "says": "Ba dòng gặp nhau, và năm 1848, Tuyên ngôn của Đảng Cộng sản ra đời.",
+          "lead_in": "",
+          "post_click_says": "Ba dòng gặp nhau, và năm 1848, Tuyên ngôn của Đảng Cộng sản ra đời."
+        }
+      ]
+    },
+    {
+      "id": "b9",
+      "scene": "s9",
+      "job": "define",
+      "claim": "Ba nguồn gốc, ba bộ phận",
+      "clicks": [
+        {
+          "id": "b9.1",
+          "says": "Lênin tóm gọn điều này: ba nguồn gốc, ba bộ phận cấu thành. Triết học cổ điển Đức trở thành triết học Mác – Lênin, kinh tế chính trị cổ điển Anh trở thành kinh tế chính trị Mác – Lênin, chủ nghĩa xã hội không tưởng Pháp trở thành chủ nghĩa xã hội khoa học.",
+          "lead_in": "Lênin tóm gọn điều này: ba nguồn gốc, ba bộ phận cấu thành.",
+          "post_click_says": "Triết học cổ điển Đức trở thành triết học Mác – Lênin, kinh tế chính trị cổ điển Anh trở thành kinh tế chính trị Mác – Lênin, chủ nghĩa xã hội không tưởng Pháp trở thành chủ nghĩa xã hội khoa học."
+        },
+        {
+          "id": "b9.2",
+          "says": "Ba bộ phận, một học thuyết thống nhất, và triết học là nền móng phương pháp cho cả hai bộ phận kia.",
+          "lead_in": "",
+          "post_click_says": "Ba bộ phận, một học thuyết thống nhất, và triết học là nền móng phương pháp cho cả hai bộ phận kia."
+        }
+      ]
+    },
+    {
+      "id": "b10",
+      "scene": "s10",
+      "job": "define",
+      "claim": "Từ trang sách đến đời sống",
+      "clicks": [
+        {
+          "id": "b10.1",
+          "says": "Lý luận ấy không đứng yên trên trang sách. 1848, Mác và Ăngghen viết Tuyên ngôn. 1867, Mác công bố tập I bộ Tư bản.",
+          "lead_in": "Lý luận ấy không đứng yên trên trang sách. 1848, Mác và Ăngghen viết Tuyên ngôn.",
+          "post_click_says": "1867, Mác công bố tập I bộ Tư bản."
+        },
+        {
+          "id": "b10.2",
+          "says": "Và 1917, Lênin đưa lý luận thành cách mạng Tháng Mười, đồng thời phát triển nó trong thời đại mới.",
+          "lead_in": "",
+          "post_click_says": "Và 1917, Lênin đưa lý luận thành cách mạng Tháng Mười, đồng thời phát triển nó trong thời đại mới."
+        }
+      ]
+    },
+    {
+      "id": "b11",
+      "scene": "s11",
+      "job": "define",
+      "claim": "Chiếc kính quay lại",
+      "clicks": [
+        {
+          "id": "b11.1",
+          "says": "Quay lại chiếc kính lúc đầu. Triết học Mác – Lênin làm hai việc. Nó cho ta một thế giới quan: nhìn thế giới như nó là, vật chất và trong vận động.",
+          "lead_in": "Quay lại chiếc kính lúc đầu. Triết học Mác – Lênin làm hai việc.",
+          "post_click_says": "Nó cho ta một thế giới quan: nhìn thế giới như nó là, vật chất và trong vận động."
+        },
+        {
+          "id": "b11.2",
+          "says": "Và nó cho ta phương pháp luận: những nguyên tắc để hành động đúng với cách nhìn ấy.",
+          "lead_in": "",
+          "post_click_says": "Và nó cho ta phương pháp luận: những nguyên tắc để hành động đúng với cách nhìn ấy."
+        }
+      ]
+    },
+    {
+      "id": "b12",
+      "scene": "s12",
+      "job": "define",
+      "claim": "Giải thích, song vấn đề là cải tạo",
+      "clicks": [
+        {
+          "id": "b12.1",
+          "says": "Năm 1845, Mác viết một câu sau này được khắc trên mộ ông: \"Các nhà triết học đã chỉ giải thích thế giới bằng nhiều cách khác nhau, song vấn đề là cải tạo thế giới.\"",
+          "lead_in": "Năm 1845, Mác viết một câu sau này được khắc trên mộ ông: \"Các nhà triết học đã chỉ giải thích thế giới bằng nhiều cách khác nhau,",
+          "post_click_says": "song vấn đề là cải tạo thế giới.\""
+        }
+      ]
+    },
+    {
+      "id": "b13",
+      "scene": "s13",
+      "job": "define",
+      "claim": "Hai câu tục ngữ, nhìn lại",
+      "clicks": [
+        {
+          "id": "b13.1",
+          "says": "Giờ nhìn lại hai câu lúc đầu. Câu nào nghiêng về duy vật, câu nào nghiêng về duy tâm? Câu nào nhìn sự vật trong vận động? … (để người nghe trả lời) Bạn vừa dùng chiếc kính của môn học này. Chương sau, ta mài nó sắc hơn.",
+          "lead_in": "Giờ nhìn lại hai câu lúc đầu. Câu nào nghiêng về duy vật, câu nào nghiêng về duy tâm? Câu nào nhìn sự vật trong vận động? … (để người nghe trả lời)",
+          "post_click_says": "Bạn vừa dùng chiếc kính của môn học này. Chương sau, ta mài nó sắc hơn."
+        }
+      ]
+    }
+  ],
+  "shots": [
+    {
+      "id": "sh1",
+      "beat_id": "b1",
+      "layout": "title",
+      "t0_says": "Hai câu này chắc ai cũng từng nghe. Một câu nói: cố gắng thì đổi được. Câu kia nói: mọi thứ đã được định sẵn. Bạn tin câu nào hơn? … (dừng 3 giây) Dù bạn chọn câu nào,",
+      "base_objects": [
+        {
+          "id": "Title",
+          "role": "title",
+          "text": "Bạn đã làm triết học sáng nay"
+        }
+      ],
+      "clicks": [
+        {
+          "beat_click_id": "b1.1",
+          "enter": [
+            "Points"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sh2",
+      "beat_id": "b2",
+      "layout": "asymmetric",
+      "t0_says": "Mỗi người mang theo hàng chục niềm tin như thế, rời rạc, tự phát, ít khi nghĩ đến nơi đến chốn. Gộp lại, đó là thế giới quan: cách ta nhìn thế giới và chỗ của mình trong đó. Khi những mảnh ấy được",
+      "base_objects": [
+        {
+          "id": "Title",
+          "role": "title",
+          "text": "Từ những mảnh rời đến một hệ thống"
+        }
+      ],
+      "clicks": [
+        {
+          "beat_click_id": "b2.1",
+          "enter": [
+            "Points"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sh3",
+      "beat_id": "b3",
+      "layout": "asymmetric",
+      "t0_says": "Mọi hệ thống triết học, dù muốn hay không, đều phải trả lời trước một câu hỏi: giữa vật chất và ý thức, cái nào có trước, cái nào quyết định cái nào? Ăngghen gọi đây là vấn đề cơ bản lớn của mọi triết học.",
+      "base_objects": [
+        {
+          "id": "Title",
+          "role": "title",
+          "text": "Câu hỏi mà triết học nào cũng phải trả lời"
+        }
+      ],
+      "clicks": []
+    },
+    {
+      "id": "sh4",
+      "beat_id": "b4",
+      "layout": "asymmetric",
+      "t0_says": "Ai trả lời vật chất có trước và quyết định ý thức",
+      "base_objects": [
+        {
+          "id": "Title",
+          "role": "title",
+          "text": "Hai câu trả lời chia đôi lịch sử triết học"
+        }
+      ],
+      "clicks": [
+        {
+          "beat_click_id": "b4.1",
+          "enter": [
+            "Points"
+          ]
+        },
+        {
+          "beat_click_id": "b4.2",
+          "enter": [
+            "Points"
+          ]
+        },
+        {
+          "beat_click_id": "b4.3",
+          "enter": [
+            "Points"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sh5",
+      "beat_id": "b5",
+      "layout": "asymmetric",
+      "t0_says": "Trả lời xong câu hỏi gốc, còn chuyện ta nhìn sự vật thế nào. Cách nhìn siêu hình thấy từng trạng thái đứng riêng: hạt là hạt, cây là cây.",
+      "base_objects": [
+        {
+          "id": "Title",
+          "role": "title",
+          "text": "Nhìn sự vật: từng mảnh, hay một dòng chảy?"
+        }
+      ],
+      "clicks": [
+        {
+          "beat_click_id": "b5.1",
+          "enter": [
+            "Points"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sh6",
+      "beat_id": "b6",
+      "layout": "asymmetric",
+      "t0_says": "Ghép hai câu trả lời, ta có bốn ô.",
+      "base_objects": [
+        {
+          "id": "Title",
+          "role": "title",
+          "text": "Bốn ô của lịch sử triết học"
+        }
+      ],
+      "clicks": [
+        {
+          "beat_click_id": "b6.1",
+          "enter": [
+            "Points"
+          ]
+        },
+        {
+          "beat_click_id": "b6.2",
+          "enter": [
+            "Points"
+          ]
+        },
+        {
+          "beat_click_id": "b6.3",
+          "enter": [
+            "Points"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sh7",
+      "beat_id": "b7",
+      "layout": "asymmetric",
+      "t0_says": "Mác và Ăngghen bước vào ô trống đó. Từ Hêghen, các ông giữ lại cái mà giáo trình gọi là \"hạt nhân hợp lý\": phép biện chứng. Nhưng như Mác viết, ở Hêghen phép biện chứng đang",
+      "base_objects": [
+        {
+          "id": "Title",
+          "role": "title",
+          "text": "Dựng phép biện chứng đứng lại trên chân"
+        }
+      ],
+      "clicks": [
+        {
+          "beat_click_id": "b7.1",
+          "enter": [
+            "Points"
+          ]
+        },
+        {
+          "beat_click_id": "b7.2",
+          "enter": [
+            "Points"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sh8",
+      "beat_id": "b8",
+      "layout": "asymmetric",
+      "t0_says": "Tư tưởng lớn không rơi từ trên trời xuống. Giữa thế kỷ XIX, ba dòng chảy cùng dâng lên.",
+      "base_objects": [
+        {
+          "id": "Title",
+          "role": "title",
+          "text": "Vì sao lại là những năm 1840?"
+        }
+      ],
+      "clicks": [
+        {
+          "beat_click_id": "b8.1",
+          "enter": [
+            "Points"
+          ]
+        },
+        {
+          "beat_click_id": "b8.2",
+          "enter": [
+            "Points"
+          ]
+        },
+        {
+          "beat_click_id": "b8.3",
+          "enter": [
+            "Points"
+          ]
+        },
+        {
+          "beat_click_id": "b8.4",
+          "enter": [
+            "Points"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sh9",
+      "beat_id": "b9",
+      "layout": "asymmetric",
+      "t0_says": "Lênin tóm gọn điều này: ba nguồn gốc, ba bộ phận cấu thành.",
+      "base_objects": [
+        {
+          "id": "Title",
+          "role": "title",
+          "text": "Ba nguồn gốc, ba bộ phận"
+        }
+      ],
+      "clicks": [
+        {
+          "beat_click_id": "b9.1",
+          "enter": [
+            "Points"
+          ]
+        },
+        {
+          "beat_click_id": "b9.2",
+          "enter": [
+            "Points"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sh10",
+      "beat_id": "b10",
+      "layout": "asymmetric",
+      "t0_says": "Lý luận ấy không đứng yên trên trang sách. 1848, Mác và Ăngghen viết Tuyên ngôn.",
+      "base_objects": [
+        {
+          "id": "Title",
+          "role": "title",
+          "text": "Từ trang sách đến đời sống"
+        }
+      ],
+      "clicks": [
+        {
+          "beat_click_id": "b10.1",
+          "enter": [
+            "Points"
+          ]
+        },
+        {
+          "beat_click_id": "b10.2",
+          "enter": [
+            "Points"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sh11",
+      "beat_id": "b11",
+      "layout": "asymmetric",
+      "t0_says": "Quay lại chiếc kính lúc đầu. Triết học Mác – Lênin làm hai việc.",
+      "base_objects": [
+        {
+          "id": "Title",
+          "role": "title",
+          "text": "Chiếc kính quay lại"
+        }
+      ],
+      "clicks": [
+        {
+          "beat_click_id": "b11.1",
+          "enter": [
+            "Points"
+          ]
+        },
+        {
+          "beat_click_id": "b11.2",
+          "enter": [
+            "Points"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sh12",
+      "beat_id": "b12",
+      "layout": "asymmetric",
+      "t0_says": "Năm 1845, Mác viết một câu sau này được khắc trên mộ ông: \"Các nhà triết học đã chỉ giải thích thế giới bằng nhiều cách khác nhau,",
+      "base_objects": [
+        {
+          "id": "Title",
+          "role": "title",
+          "text": "Giải thích, song vấn đề là cải tạo"
+        }
+      ],
+      "clicks": [
+        {
+          "beat_click_id": "b12.1",
+          "enter": [
+            "Points"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sh13",
+      "beat_id": "b13",
+      "layout": "asymmetric",
+      "t0_says": "Giờ nhìn lại hai câu lúc đầu. Câu nào nghiêng về duy vật, câu nào nghiêng về duy tâm? Câu nào nhìn sự vật trong vận động? … (để người nghe trả lời)",
+      "base_objects": [
+        {
+          "id": "Title",
+          "role": "title",
+          "text": "Hai câu tục ngữ, nhìn lại"
+        }
+      ],
+      "clicks": [
+        {
+          "beat_click_id": "b13.1",
+          "enter": [
+            "Points"
+          ]
+        }
+      ]
+    }
+  ]
+}

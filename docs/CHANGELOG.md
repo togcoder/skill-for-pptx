@@ -7,6 +7,29 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T081 [pptx] Script-writer skill and unified screenplay compiler — 2026-11-05
+
+- **Why.** The owner approved the first gold script (T078, F9) and instructed
+  to build the script capability. Previously, kịch bản was fragmented between
+  `motion_script.py` and `deck_director.py`, and `scaffold` emitted canned filler
+  prose that polluted decks and critic scores (D004, D005).
+- **Built.**
+  - Standalone skill in `skills/script-writer/SKILL.md` (6-step method from audience
+    intent to approved text, 15 verified verbs, do/don't rules).
+  - Extended canonical `scripts/motion_script.py` (capability `pptx.script`):
+    - `VERB_TABLE`: 15 action verbs + natural synonyms mapped to motion/Morph categories;
+    - `parse_intent`, `parse_gold_script`, `parse_script_full`: unified parser for both
+      structured screenplay (`## Phần 0. Ý đồ`, `## Cảnh N.`) and legacy slide markdown;
+    - `check_script`: automated quality gates (`SCRIPT-SPINE-LONG`, `SCRIPT-CLAIM-LONG`,
+      `SCRIPT-NO-CLICK`, `SCRIPT-PLACEHOLDER`, `SCRIPT-BASE-UNSTATED`, `SCRIPT-VERB-UNVERIFIED`);
+    - `compile_to_scene`: compiles screenplay Markdown to `scene.json` draft for T075;
+    - `compile_to_direction`: compiles to `direction.json` format for backward compatibility;
+    - `scaffold_script`: emits empty slots with guiding questions, zero canned filler prose.
+    - CLI commands: `scaffold`, `check`, `compile-scene`, `compile-direction`.
+  - 11 unit tests in `tests/test_script_writer.py` (100% pass; 575/575 tests pass across repo).
+  - Compiled gold artifacts in `experiments/T081-20261105-antigravity-script-writer/artifacts/`.
+- **Review.** Handed off to OpenCode (DeepSeek) for review per D008.
+
 ## T083 [cross] Coordination layer: registry, binding decisions, claim/board/check — 2026-11-04
 
 - **Why.** The owner: skills grow in parallel across agents, so "the last

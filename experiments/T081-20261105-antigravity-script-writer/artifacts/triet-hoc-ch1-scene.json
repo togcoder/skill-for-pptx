@@ -1,0 +1,514 @@
+{
+  "version": 1,
+  "generator": "motion_script.compile_to_scene (T081)",
+  "intent": {
+    "audience": "Sinh viên năm nhất, học bắt buộc. Phần đông nghĩ triết học khô, xa đời, học để thi.",
+    "belief_before": "\"Triết học là học thuộc định nghĩa. Nó không liên quan đến tôi.\"",
+    "belief_after": "\"Tôi đã có sẵn một cách nhìn thế giới. Môn này cho tôi thấy nó, gọi được tên nó và nhìn sắc hơn.\"",
+    "spine": "Ai cũng đang nhìn thế giới qua một cặp kính; triết học giúp ta thấy và mài sắc cặp kính ấy.",
+    "metaphor": "**Thấu kính**: một vòng tròn viền vàng. Thế giới quan là cái kính ta nhìn qua.",
+    "actors_raw": "`!!kinh` thấu kính; `!!cau1`, `!!cau2` hai câu tục ngữ; `!!vatchat`, `!!ythuc` hai thẻ; `!!truc-*` các trục; `!!hegel`, `!!feuerbach` hai thẻ triết gia; `!!nguon-1..3` ba nguồn → `!!bophan-1..3` ba bộ phận; `!!moc` chấm trên dòng thời gian",
+    "persistent_actors": [
+      "!!kinh",
+      "!!cau1",
+      "!!cau2",
+      "!!vatchat",
+      "!!ythuc",
+      "!!truc-*",
+      "!!hegel",
+      "!!feuerbach",
+      "!!nguon-1..3",
+      "!!bophan-1..3",
+      "!!moc"
+    ],
+    "frame": "**Câu hỏi → công cụ → áp dụng ngược lại câu hỏi.** Mở bằng một lựa chọn của chính người nghe, đóng bằng việc họ tự trả lời lại lựa chọn đó.",
+    "duration": "15–18 phút, 13 cảnh, khoảng 24 click",
+    "tone": "Nói, không đọc giáo trình. Trên màn hình chỉ có từ khóa và câu then chốt; lời nói mang phần lý giải."
+  },
+  "actors": [
+    {
+      "id": "!!kinh",
+      "role": "persistent",
+      "desc": ""
+    },
+    {
+      "id": "!!cau1",
+      "role": "persistent",
+      "desc": ""
+    },
+    {
+      "id": "!!cau2",
+      "role": "persistent",
+      "desc": ""
+    },
+    {
+      "id": "!!vatchat",
+      "role": "persistent",
+      "desc": ""
+    },
+    {
+      "id": "!!ythuc",
+      "role": "persistent",
+      "desc": ""
+    },
+    {
+      "id": "!!truc-*",
+      "role": "persistent",
+      "desc": ""
+    },
+    {
+      "id": "!!hegel",
+      "role": "persistent",
+      "desc": ""
+    },
+    {
+      "id": "!!feuerbach",
+      "role": "persistent",
+      "desc": ""
+    },
+    {
+      "id": "!!nguon-1..3",
+      "role": "persistent",
+      "desc": ""
+    },
+    {
+      "id": "!!bophan-1..3",
+      "role": "persistent",
+      "desc": ""
+    },
+    {
+      "id": "!!moc",
+      "role": "persistent",
+      "desc": ""
+    }
+  ],
+  "scenes": [
+    {
+      "id": "s1",
+      "index": 1,
+      "title": "Bạn đã làm triết học sáng nay",
+      "turn": {
+        "from": "Triết học là chuyện của người khác",
+        "to": "Mình vừa trả lời một câu hỏi triết học.",
+        "raw": "\"Triết học là chuyện của người khác\" → \"Mình vừa trả lời một câu hỏi triết học.\""
+      },
+      "morph_from": null,
+      "base_state": "hai câu tục ngữ thật lớn, xếp trên dưới: *\"Có công mài sắt, có ngày\n  nên kim.\"* / *\"Sống chết có mệnh, giàu sang do trời.\"* Dòng nhỏ trên cùng: \"Chương 1 · Khái luận\n  về triết học\".",
+      "speech": "Hai câu này chắc ai cũng từng nghe. Một câu nói: cố gắng thì đổi được. Câu kia nói: mọi thứ đã được định sẵn. Bạn tin câu nào hơn? … (dừng 3 giây) Dù bạn chọn câu nào, **[CLICK]** bạn vừa trả lời một câu hỏi triết học.",
+      "clicks": [
+        {
+          "id": "c1.1",
+          "index": 1,
+          "cue": "[CLICK]",
+          "lead_in": "Hai câu này chắc ai cũng từng nghe. Một câu nói: cố gắng thì đổi được. Câu kia nói: mọi thứ đã được định sẵn. Bạn tin câu nào hơn? … (dừng 3 giây) Dù bạn chọn câu nào,",
+          "post_click": "bạn vừa trả lời một câu hỏi triết học.",
+          "verb": "soi",
+          "action": "spotlight"
+        }
+      ],
+      "verb_motion": "*soi* → thấu kính `!!kinh` bay vào, lướt qua câu 1 rồi câu 2 và\n  dừng giữa hai câu. Tên bài \"Triết học Mác – Lênin\" hiện dưới kính.",
+      "reason": "mở bằng niềm tin của người nghe, không mở bằng định nghĩa. Chân dung ba nhà kinh\n  điển **không** đặt ở bìa. Họ xuất hiện ở cảnh họ hành động (cảnh 7, 10), như vậy ảnh có lý do\n  (phản hồi F3)."
+    },
+    {
+      "id": "s2",
+      "index": 2,
+      "title": "Từ những mảnh rời đến một hệ thống",
+      "turn": {
+        "from": "Định nghĩa triết học khó nhớ",
+        "to": "À, triết học là những niềm tin rời rạc được\n  nghĩ cho đến nơi.",
+        "raw": "\"Định nghĩa triết học khó nhớ\" → \"À, triết học là những niềm tin rời rạc được\n  nghĩ cho đến nơi.\""
+      },
+      "morph_from": "s1",
+      "base_state": "6 mảnh chữ nhỏ rải rác quanh khung tròn: hai câu tục ngữ, *\"Có thực\n  mới vực được đạo\"*, *\"Nước chảy đá mòn\"*, *\"Trời sinh voi, trời sinh cỏ\"*, *\"Gieo gió gặt\n  bão\"*.",
+      "speech": "Mỗi người mang theo hàng chục niềm tin như thế, rời rạc, tự phát, ít khi nghĩ đến nơi đến chốn. Gộp lại, đó là thế giới quan: cách ta nhìn thế giới và chỗ của mình trong đó. Khi những mảnh ấy được **[CLICK]** nghĩ cho đến nơi, có lý lẽ, thành một hệ thống, ta có triết học.",
+      "clicks": [
+        {
+          "id": "c2.1",
+          "index": 1,
+          "cue": "[CLICK]",
+          "lead_in": "Mỗi người mang theo hàng chục niềm tin như thế, rời rạc, tự phát, ít khi nghĩ đến nơi đến chốn. Gộp lại, đó là thế giới quan: cách ta nhìn thế giới và chỗ của mình trong đó. Khi những mảnh ấy được",
+          "post_click": "nghĩ cho đến nơi, có lý lẽ, thành một hệ thống, ta có triết học.",
+          "verb": "gom thành hệ thống",
+          "action": "converge"
+        }
+      ],
+      "verb_motion": "*gom thành hệ thống* → 6 mảnh bay vào trong khung tròn và tự xếp\n  thẳng hàng. Bên dưới hiện định nghĩa giáo trình: *\"Hệ thống tri thức lý luận chung nhất về thế\n  giới và về vị trí của con người trong thế giới đó.\"*",
+      "reason": "định nghĩa là điểm hạ cánh, không phải điểm xuất phát. Chuyển động \"gom lại\" chính\n  là nội dung của định nghĩa (\"hệ thống\"), nên nó không phải trang trí."
+    },
+    {
+      "id": "s3",
+      "index": 3,
+      "title": "Câu hỏi mà triết học nào cũng phải trả lời",
+      "turn": {
+        "from": "Triết học có nhiều trường phái rối rắm",
+        "to": "Tất cả bắt đầu từ một câu hỏi.",
+        "raw": "\"Triết học có nhiều trường phái rối rắm\" → \"Tất cả bắt đầu từ một câu hỏi.\""
+      },
+      "morph_from": "s2",
+      "base_state": "chiếc cân thăng bằng. Thẻ **Vật chất** bên trái, thẻ **Ý thức** bên\n  phải, dấu **?** trên điểm tựa.",
+      "speech": "Mọi hệ thống triết học, dù muốn hay không, đều phải trả lời trước một câu hỏi: giữa vật chất và ý thức, cái nào có trước, cái nào quyết định cái nào? Ăngghen gọi đây là vấn đề cơ bản lớn của mọi triết học.",
+      "clicks": [],
+      "verb_motion": "*cân nhắc* → không click. Cảnh này là một khoảng **lặng có căng\n  thẳng**: cân đứng yên khi câu hỏi được nói ra.",
+      "reason": "sự căng thẳng nằm ở trạng thái chưa được giải quyết. Đừng trả lời trên cùng một\n  slide; câu trả lời là sự *thay đổi trạng thái* ở cảnh sau."
+    },
+    {
+      "id": "s4",
+      "index": 4,
+      "title": "Hai câu trả lời chia đôi lịch sử triết học",
+      "turn": {
+        "from": "Câu hỏi trừu tượng",
+        "to": "Câu trả lời của mình xếp mình vào một phía.",
+        "raw": "\"Câu hỏi trừu tượng\" → \"Câu trả lời của mình xếp mình vào một phía.\""
+      },
+      "morph_from": "s3",
+      "base_state": "",
+      "speech": "Ai trả lời vật chất có trước và quyết định ý thức **[CLICK]** đứng về phía chủ nghĩa duy vật. Ai cho rằng ý thức có trước **[CLICK]** đứng về phía chủ nghĩa duy tâm. Câu hỏi còn một mặt nữa: con người có nhận thức được thế giới hay không? **[CLICK]** Phần lớn các nhà triết học trả lời là có; một số thì hoài nghi hoặc phủ nhận.",
+      "clicks": [
+        {
+          "id": "c4.1",
+          "index": 1,
+          "cue": "[CLICK]",
+          "lead_in": "Ai trả lời vật chất có trước và quyết định ý thức",
+          "post_click": "đứng về phía chủ nghĩa duy vật. Ai cho rằng ý thức có trước",
+          "verb": "nghiêng về",
+          "action": "tilt"
+        },
+        {
+          "id": "c4.2",
+          "index": 2,
+          "cue": "[CLICK]",
+          "lead_in": "",
+          "post_click": "đứng về phía chủ nghĩa duy tâm. Câu hỏi còn một mặt nữa: con người có nhận thức được thế giới hay không?",
+          "verb": "nghiêng về",
+          "action": "tilt"
+        },
+        {
+          "id": "c4.3",
+          "index": 3,
+          "cue": "[CLICK]",
+          "lead_in": "",
+          "post_click": "Phần lớn các nhà triết học trả lời là có; một số thì hoài nghi hoặc phủ nhận.",
+          "verb": "nghiêng về",
+          "action": "tilt"
+        }
+      ],
+      "verb_motion": "- *nghiêng về* → click 1: cân nghiêng sang Vật chất, nhãn \"Duy vật\" trượt vào dưới;\n  - click 2: cân nghiêng ngược sang Ý thức, nhãn \"Duy tâm\" trượt vào;\n  - click 3: cân về thăng bằng, dòng \"Khả tri · Bất khả tri\" hiện ở đáy.",
+      "reason": "- \"Quyết định\" và \"nặng hơn\" được diễn bằng chính chiếc cân. Một động từ, một chuyển động.\n  - Cân nghiêng cả hai phía để trình bày công bằng trước khi giáo trình chọn phía (cảnh 7).\n  - Hai nhãn \"Duy vật / Duy tâm\" là diễn viên bền vững: chúng sẽ thành **trục dọc** ở cảnh 6."
+    },
+    {
+      "id": "s5",
+      "index": 5,
+      "title": "Nhìn sự vật: từng mảnh, hay một dòng chảy?",
+      "turn": {
+        "from": "Biện chứng là từ khó",
+        "to": "Biện chứng là nhìn sự vật trong liên hệ và vận động.",
+        "raw": "\"Biện chứng là từ khó\" → \"Biện chứng là nhìn sự vật trong liên hệ và vận động.\""
+      },
+      "morph_from": null,
+      "base_state": "bốn ô vuông tách rời, mỗi ô một hình đơn giản: hạt thóc → mầm → cây\n  lúa → bông lúa. Các ô đứng yên, cách nhau, có viền.",
+      "speech": "Trả lời xong câu hỏi gốc, còn chuyện ta nhìn sự vật thế nào. Cách nhìn siêu hình thấy từng trạng thái đứng riêng: hạt là hạt, cây là cây. **[CLICK]** Cách nhìn biện chứng thấy chúng trong liên hệ và vận động: hạt mất đi để thành cây, cây lại cho ra hạt mới.",
+      "clicks": [
+        {
+          "id": "c5.1",
+          "index": 1,
+          "cue": "[CLICK]",
+          "lead_in": "Trả lời xong câu hỏi gốc, còn chuyện ta nhìn sự vật thế nào. Cách nhìn siêu hình thấy từng trạng thái đứng riêng: hạt là hạt, cây là cây.",
+          "post_click": "Cách nhìn biện chứng thấy chúng trong liên hệ và vận động: hạt mất đi để thành cây, cây lại cho ra hạt mới.",
+          "verb": "nối lại, vận động",
+          "action": "connect-cycle"
+        }
+      ],
+      "verb_motion": "*nối lại, vận động* → viền các ô mờ đi, bốn hình trượt lên một vòng\n  tròn, mũi tên vẽ dần nối hình này sang hình kia, cả vòng xoay rất chậm một vòng.",
+      "reason": "- Ở đây đề tài *chính là* chuyển động, nên chuyển động mang trọn ý nghĩa.\n  - Ví dụ đi trước thuật ngữ.\n  - Hai nhãn \"Siêu hình / Biện chứng\" sẽ thành **trục ngang** ở cảnh 6."
+    },
+    {
+      "id": "s6",
+      "index": 6,
+      "title": "Bốn ô của lịch sử triết học",
+      "turn": {
+        "from": "Hai câu hỏi rời nhau",
+        "to": "Ghép lại, chúng thành một tấm bản đồ.",
+        "raw": "\"Hai câu hỏi rời nhau\" → \"Ghép lại, chúng thành một tấm bản đồ.\""
+      },
+      "morph_from": "s5",
+      "base_state": "ma trận 2×2, các ô còn trống.",
+      "speech": "Ghép hai câu trả lời, ta có bốn ô. **[CLICK]** Hêghen đứng ở ô biện chứng nhưng duy tâm: ông thấy thế giới vận động, nhưng cho rằng thứ vận động trước hết là ý niệm. **[CLICK]** Phoiơbắc đứng ở ô duy vật nhưng siêu hình: ông đặt vật chất lên trước, nhưng nhìn nó trong trạng thái đứng yên. **[CLICK]** Còn một ô trống: duy vật *và* biện chứng.",
+      "clicks": [
+        {
+          "id": "c6.1",
+          "index": 1,
+          "cue": "[CLICK]",
+          "lead_in": "Ghép hai câu trả lời, ta có bốn ô.",
+          "post_click": "Hêghen đứng ở ô biện chứng nhưng duy tâm: ông thấy thế giới vận động, nhưng cho rằng thứ vận động trước hết là ý niệm.",
+          "verb": "đứng ở",
+          "action": "slot-in"
+        },
+        {
+          "id": "c6.2",
+          "index": 2,
+          "cue": "[CLICK]",
+          "lead_in": "",
+          "post_click": "Phoiơbắc đứng ở ô duy vật nhưng siêu hình: ông đặt vật chất lên trước, nhưng nhìn nó trong trạng thái đứng yên.",
+          "verb": "đứng ở",
+          "action": "slot-in"
+        },
+        {
+          "id": "c6.3",
+          "index": 3,
+          "cue": "[CLICK]",
+          "lead_in": "",
+          "post_click": "Còn một ô trống: duy vật *và* biện chứng.",
+          "verb": "đứng ở",
+          "action": "slot-in"
+        }
+      ],
+      "verb_motion": "- *đứng ở* → thẻ `!!hegel` (có chân dung nhỏ) vào ô biện chứng – duy tâm;\n  - thẻ `!!feuerbach` vào ô duy vật – siêu hình;\n  - *còn trống* → ô duy vật – biện chứng nhấp nháy viền một lần rồi giữ viền sáng.",
+      "reason": "- Đây là cảnh bản lề của cả chương.\n  - Ma trận không phải layout chọn sẵn: nó *sinh ra* từ hai cảnh trước (Morph hai trục).\n  - Ô trống tạo câu hỏi cho cảnh sau."
+    },
+    {
+      "id": "s7",
+      "index": 7,
+      "title": "Dựng phép biện chứng đứng lại trên chân",
+      "turn": {
+        "from": "Mác chỉ là một trường phái nữa",
+        "to": "Mác ghép hai nửa đúng của hai người đi\n  trước.",
+        "raw": "\"Mác chỉ là một trường phái nữa\" → \"Mác ghép hai nửa đúng của hai người đi\n  trước.\""
+      },
+      "morph_from": "s6",
+      "base_state": "",
+      "speech": "Mác và Ăngghen bước vào ô trống đó. Từ Hêghen, các ông giữ lại cái mà giáo trình gọi là \"hạt nhân hợp lý\": phép biện chứng. Nhưng như Mác viết, ở Hêghen phép biện chứng đang **[CLICK]** lộn ngược, đi bằng đầu; phải dựng nó đứng lại trên chân. Ghép với chủ nghĩa duy vật mà Phoiơbắc đã khôi phục, **[CLICK]** ra đời chủ nghĩa duy vật biện chứng.",
+      "clicks": [
+        {
+          "id": "c7.1",
+          "index": 1,
+          "cue": "[CLICK]",
+          "lead_in": "Mác và Ăngghen bước vào ô trống đó. Từ Hêghen, các ông giữ lại cái mà giáo trình gọi là \"hạt nhân hợp lý\": phép biện chứng. Nhưng như Mác viết, ở Hêghen phép biện chứng đang",
+          "post_click": "lộn ngược, đi bằng đầu; phải dựng nó đứng lại trên chân. Ghép với chủ nghĩa duy vật mà Phoiơbắc đã khôi phục,",
+          "verb": "lộn ngược",
+          "action": "flip-merge"
+        },
+        {
+          "id": "c7.2",
+          "index": 2,
+          "cue": "[CLICK]",
+          "lead_in": "",
+          "post_click": "ra đời chủ nghĩa duy vật biện chứng.",
+          "verb": "lộn ngược",
+          "action": "flip-merge"
+        }
+      ],
+      "verb_motion": "- *lộn ngược / dựng lại* → nửa \"biện chứng\" của thẻ Hêghen xoay 180° rồi xoay về;\n  - *ghép* → nửa \"biện chứng\" (từ Hêghen) và nửa \"duy vật\" (từ Phoiơbắc) bay vào ô trống, gộp\n    thành thẻ đỏ **\"Chủ nghĩa duy vật biện chứng\"**;\n  - chân dung Mác và Ăngghen hiện cùng thẻ.",
+      "reason": "- \"Lật ngược\" là hình ảnh của chính Mác. Khi kịch bản dùng hình ảnh đó, chuyển động đã có sẵn.\n  - Chân dung Mác và Ăngghen ra mắt đúng lúc họ làm việc của mình trong câu chuyện."
+    },
+    {
+      "id": "s8",
+      "index": 8,
+      "title": "Vì sao lại là những năm 1840?",
+      "turn": {
+        "from": "Học thuyết do thiên tài nghĩ ra",
+        "to": "Nó là con của thời đại.",
+        "raw": "\"Học thuyết do thiên tài nghĩ ra\" → \"Nó là con của thời đại.\""
+      },
+      "morph_from": null,
+      "base_state": "ba dòng chảy nằm ngang ở mép trái, đều đang mờ:\n  - **Kinh tế – xã hội:** chủ nghĩa tư bản công nghiệp; giai cấp công nhân bước lên vũ đài;\n  - **Lý luận:** triết học cổ điển Đức · kinh tế chính trị cổ điển Anh · chủ nghĩa xã hội không\n    tưởng Pháp;\n  - **Khoa học tự nhiên:** bảo toàn và chuyển hóa năng lượng · thuyết tế bào · thuyết tiến hóa.",
+      "speech": "Tư tưởng lớn không rơi từ trên trời xuống. Giữa thế kỷ XIX, ba dòng chảy cùng dâng lên. **[CLICK]** Kinh tế, xã hội. **[CLICK]** Lý luận. **[CLICK]** Khoa học tự nhiên. **[CLICK]** Ba dòng gặp nhau, và năm 1848, Tuyên ngôn của Đảng Cộng sản ra đời.",
+      "clicks": [
+        {
+          "id": "c8.1",
+          "index": 1,
+          "cue": "[CLICK]",
+          "lead_in": "Tư tưởng lớn không rơi từ trên trời xuống. Giữa thế kỷ XIX, ba dòng chảy cùng dâng lên.",
+          "post_click": "Kinh tế, xã hội.",
+          "verb": "dâng lên",
+          "action": "converge-rise"
+        },
+        {
+          "id": "c8.2",
+          "index": 2,
+          "cue": "[CLICK]",
+          "lead_in": "",
+          "post_click": "Lý luận.",
+          "verb": "dâng lên",
+          "action": "converge-rise"
+        },
+        {
+          "id": "c8.3",
+          "index": 3,
+          "cue": "[CLICK]",
+          "lead_in": "",
+          "post_click": "Khoa học tự nhiên.",
+          "verb": "dâng lên",
+          "action": "converge-rise"
+        },
+        {
+          "id": "c8.4",
+          "index": 4,
+          "cue": "[CLICK]",
+          "lead_in": "",
+          "post_click": "Ba dòng gặp nhau, và năm 1848, Tuyên ngôn của Đảng Cộng sản ra đời.",
+          "verb": "dâng lên",
+          "action": "converge-rise"
+        }
+      ],
+      "verb_motion": "- *dâng lên* → mỗi click làm một dòng sáng lên và kéo dài sang phải; dòng trước dịu xuống,\n    đây là vòng đời \"dim\";\n  - *gặp nhau* → click 4: ba đường đi hội tụ về một điểm, chấm `!!moc` \"1848\" hiện tại đó.",
+      "reason": "\"hội tụ\" là động từ của cả cảnh. Mỗi dòng sáng lên đúng lúc được gọi tên rồi dịu\n  xuống, nên chữ trên màn hình không chồng chất."
+    },
+    {
+      "id": "s9",
+      "index": 9,
+      "title": "Ba nguồn gốc, ba bộ phận",
+      "turn": {
+        "from": "Ba bộ phận là ba môn rời",
+        "to": "Mỗi bộ phận kế thừa một nguồn, và cả ba là một\n  khối.",
+        "raw": "\"Ba bộ phận là ba môn rời\" → \"Mỗi bộ phận kế thừa một nguồn, và cả ba là một\n  khối.\""
+      },
+      "morph_from": "s8",
+      "base_state": "",
+      "speech": "Lênin tóm gọn điều này: ba nguồn gốc, ba bộ phận cấu thành. **[CLICK]** Triết học cổ điển Đức trở thành triết học Mác – Lênin, kinh tế chính trị cổ điển Anh trở thành kinh tế chính trị Mác – Lênin, chủ nghĩa xã hội không tưởng Pháp trở thành chủ nghĩa xã hội khoa học. **[CLICK]** Ba bộ phận, một học thuyết thống nhất, và triết học là nền móng phương pháp cho cả hai bộ phận kia.",
+      "clicks": [
+        {
+          "id": "c9.1",
+          "index": 1,
+          "cue": "[CLICK]",
+          "lead_in": "Lênin tóm gọn điều này: ba nguồn gốc, ba bộ phận cấu thành.",
+          "post_click": "Triết học cổ điển Đức trở thành triết học Mác – Lênin, kinh tế chính trị cổ điển Anh trở thành kinh tế chính trị Mác – Lênin, chủ nghĩa xã hội không tưởng Pháp trở thành chủ nghĩa xã hội khoa học.",
+          "verb": "trở thành",
+          "action": "transform-unify"
+        },
+        {
+          "id": "c9.2",
+          "index": 2,
+          "cue": "[CLICK]",
+          "lead_in": "",
+          "post_click": "Ba bộ phận, một học thuyết thống nhất, và triết học là nền móng phương pháp cho cả hai bộ phận kia.",
+          "verb": "trở thành",
+          "action": "transform-unify"
+        }
+      ],
+      "verb_motion": "- *trở thành* → mỗi thẻ nguồn biến thành thẻ bộ phận: cùng một vật thể, đổi chữ và màu. Đây\n    là Morph sang một slide trạng thái sau;\n  - *thống nhất, nền móng* → thẻ \"Triết học\" trượt xuống làm thanh nền nằm ngang, hai thẻ kia\n    đứng lên trên như hai cột, một khung mái vẽ dần bao lại.",
+      "reason": "\"kế thừa\" được diễn bằng *cùng một vật thể đổi trạng thái*. Đó là đúng bản chất\n  của Morph. \"Nền móng\" được diễn bằng vị trí (nằm dưới), không cần chữ \"quan trọng nhất\"."
+    },
+    {
+      "id": "s10",
+      "index": 10,
+      "title": "Từ trang sách đến đời sống",
+      "turn": {
+        "from": "Lý luận nằm trên giấy",
+        "to": "Lý luận đã đi vào lịch sử.",
+        "raw": "\"Lý luận nằm trên giấy\" → \"Lý luận đã đi vào lịch sử.\""
+      },
+      "morph_from": "s9",
+      "base_state": "",
+      "speech": "Lý luận ấy không đứng yên trên trang sách. 1848, Mác và Ăngghen viết Tuyên ngôn. **[CLICK]** 1867, Mác công bố tập I bộ Tư bản. **[CLICK]** Và 1917, Lênin đưa lý luận thành cách mạng Tháng Mười, đồng thời phát triển nó trong thời đại mới.",
+      "clicks": [
+        {
+          "id": "c10.1",
+          "index": 1,
+          "cue": "[CLICK]",
+          "lead_in": "Lý luận ấy không đứng yên trên trang sách. 1848, Mác và Ăngghen viết Tuyên ngôn.",
+          "post_click": "1867, Mác công bố tập I bộ Tư bản.",
+          "verb": "đi vào lịch sử",
+          "action": "timeline-pan"
+        },
+        {
+          "id": "c10.2",
+          "index": 2,
+          "cue": "[CLICK]",
+          "lead_in": "",
+          "post_click": "Và 1917, Lênin đưa lý luận thành cách mạng Tháng Mười, đồng thời phát triển nó trong thời đại mới.",
+          "verb": "đi vào lịch sử",
+          "action": "timeline-pan"
+        }
+      ],
+      "verb_motion": "- *đi vào lịch sử* → camera trượt dọc dòng thời gian (Morph pan): chấm `!!moc` chạy theo, mỗi\n    mốc dừng lại;\n  - chân dung hiện **cùng lúc** với năm của mình: Mác và Ăngghen ở 1848, bìa Tư bản ở 1867,\n    Lênin ở 1917.",
+      "reason": "ảnh là bằng chứng gắn với một mốc, không phải trang trí cuối slide. Morph kiểu\n  camera cho cảm giác *đi* qua thời gian, đúng với động từ."
+    },
+    {
+      "id": "s11",
+      "index": 11,
+      "title": "Chiếc kính quay lại",
+      "turn": {
+        "from": "Học xong thì để làm gì?",
+        "to": "Nó cho tôi cách nhìn và cách làm.",
+        "raw": "\"Học xong thì để làm gì?\" → \"Nó cho tôi cách nhìn và cách làm.\""
+      },
+      "morph_from": null,
+      "base_state": "thấu kính `!!kinh` trở lại giữa slide (cùng vị trí và cỡ với cảnh 2,\n  để người nghe nhận ra).",
+      "speech": "Quay lại chiếc kính lúc đầu. Triết học Mác – Lênin làm hai việc. **[CLICK]** Nó cho ta một thế giới quan: nhìn thế giới như nó là, vật chất và trong vận động. **[CLICK]** Và nó cho ta phương pháp luận: những nguyên tắc để hành động đúng với cách nhìn ấy.",
+      "clicks": [
+        {
+          "id": "c11.1",
+          "index": 1,
+          "cue": "[CLICK]",
+          "lead_in": "Quay lại chiếc kính lúc đầu. Triết học Mác – Lênin làm hai việc.",
+          "post_click": "Nó cho ta một thế giới quan: nhìn thế giới như nó là, vật chất và trong vận động.",
+          "verb": "nhìn",
+          "action": "spotlight"
+        },
+        {
+          "id": "c11.2",
+          "index": 2,
+          "cue": "[CLICK]",
+          "lead_in": "",
+          "post_click": "Và nó cho ta phương pháp luận: những nguyên tắc để hành động đúng với cách nhìn ấy.",
+          "verb": "nhìn",
+          "action": "spotlight"
+        }
+      ],
+      "verb_motion": "- *nhìn* → nhãn \"Thế giới quan\" hiện *trong* thấu kính;\n  - *hành động* → thấu kính trượt sang trái, nhãn \"Phương pháp luận\" hiện bên phải kèm mũi tên\n    hướng ra ngoài.",
+      "reason": "callback ẩn dụ giúp người nghe gom cả bài vào một hình. Hai chức năng được diễn\n  bằng hai hướng: nhìn vào trong kính, làm hướng ra ngoài."
+    },
+    {
+      "id": "s12",
+      "index": 12,
+      "title": "Giải thích, song vấn đề là cải tạo",
+      "turn": {
+        "from": "Triết học là để hiểu",
+        "to": "Triết học Mác là để thay đổi.",
+        "raw": "\"Triết học là để hiểu\" → \"Triết học Mác là để thay đổi.\""
+      },
+      "morph_from": null,
+      "base_state": "nửa đầu câu, chữ lớn: *\"Các nhà triết học đã chỉ giải thích thế giới\n  bằng nhiều cách khác nhau,\"*",
+      "speech": "Năm 1845, Mác viết một câu sau này được khắc trên mộ ông: \"Các nhà triết học đã chỉ giải thích thế giới bằng nhiều cách khác nhau, **[CLICK]** song vấn đề là cải tạo thế giới.\"",
+      "clicks": [
+        {
+          "id": "c12.1",
+          "index": 1,
+          "cue": "[CLICK]",
+          "lead_in": "Năm 1845, Mác viết một câu sau này được khắc trên mộ ông: \"Các nhà triết học đã chỉ giải thích thế giới bằng nhiều cách khác nhau,",
+          "post_click": "song vấn đề là cải tạo thế giới.\"",
+          "verb": "song",
+          "action": "swap-weights"
+        }
+      ],
+      "verb_motion": "*song* (bản lề) → nửa đầu co lại, mờ đi và lên góc trên như một trích\n  dẫn; nửa sau *\"song vấn đề là cải tạo thế giới\"* lớn dần vào giữa, màu đỏ.",
+      "reason": "- Click đặt đúng chữ \"song\". Chuyển động là *hoán đổi trọng lượng* giữa hai vế, đúng logic của\n    câu.\n  - Ghi công: ý chia câu ở chữ bản lề có từ T068; trạng thái co lại thành trích dẫn có từ T069a,\n    cặp D.\n  - Cần kiểm chứng: thông tin câu này được khắc trên mộ Mác ở Highgate là phổ biến, nhưng người\n    soát nội dung nên xác nhận."
+    },
+    {
+      "id": "s13",
+      "index": 13,
+      "title": "Hai câu tục ngữ, nhìn lại",
+      "turn": {
+        "from": "Tôi đã nghe một bài giảng",
+        "to": "Tôi tự phân tích được niềm tin của mình.",
+        "raw": "\"Tôi đã nghe một bài giảng\" → \"Tôi tự phân tích được niềm tin của mình.\""
+      },
+      "morph_from": null,
+      "base_state": "đúng bố cục cảnh 1: hai câu tục ngữ, thấu kính ở giữa.",
+      "speech": "Giờ nhìn lại hai câu lúc đầu. Câu nào nghiêng về duy vật, câu nào nghiêng về duy tâm? Câu nào nhìn sự vật trong vận động? … (để người nghe trả lời) **[CLICK]** Bạn vừa dùng chiếc kính của môn học này. Chương sau, ta mài nó sắc hơn.",
+      "clicks": [
+        {
+          "id": "c13.1",
+          "index": 1,
+          "cue": "[CLICK]",
+          "lead_in": "Giờ nhìn lại hai câu lúc đầu. Câu nào nghiêng về duy vật, câu nào nghiêng về duy tâm? Câu nào nhìn sự vật trong vận động? … (để người nghe trả lời)",
+          "post_click": "Bạn vừa dùng chiếc kính của môn học này. Chương sau, ta mài nó sắc hơn.",
+          "verb": "nghiêng về",
+          "action": "tilt"
+        }
+      ],
+      "verb_motion": "*nhìn lại* → bố cục y hệt cảnh 1, nên người nghe tự nhận ra vòng\n  lặp. Click: dưới mỗi câu hiện một thẻ nhỏ: \"nghiêng về: thực tiễn, vận động\" và \"nghiêng về:\n  định mệnh, bất biến\".",
+      "reason": "kết bằng việc người nghe tự *áp dụng*. Đó là bằng chứng họ đã học, và là lý do bố\n  cục phải lặp lại cảnh mở."
+    }
+  ]
+}
