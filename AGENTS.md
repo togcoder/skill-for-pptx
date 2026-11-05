@@ -54,6 +54,8 @@ Fetch remote branches and read open claims first.
   `lab/capabilities.json`.
   - A new script must be registered there in the same PR (CI fails otherwise).
   - A second implementation of a registered capability needs the lead's decision first (D002).
+- **Skill = guidance, code = toolbox (D011).** Improve a skill by improving its written guidance and examples first. Write code only for what words cannot do, and say why in the REPORT.
+- **Talk to the owner in plain words.** Lead with the `.pptx` to open and what to look for when flipping through it. No JSON, gate codes or task IDs in messages to the owner.
 - **Talk, don't guess.** When you need the owner's intent, write a question in
   `research/feedback/questions.md` and stop that part of the work until it is answered.
   The owner's open feedback items are printed by `coord.py`.

@@ -42,3 +42,21 @@
   - the weekly release is reviewed by flipping through `.pptx` files.
 - HANDOFF: T086 added to the next-task table.
 - INDEX: T086 reserved; the next free ID is T087.
+
+## Follow-up: F15, "a skill is not necessarily code"
+
+The owner is right, and the lab's own numbers show it:
+
+- **The lab is code-first.** It has 103 scripts. The 8 skills (2,055 lines) are mostly command
+  manuals for those scripts (for example `pptx-motion`: "run `inspect_existing_deck.py`, validate
+  with `validate_director_plan.py`"). They say almost nothing about how to design.
+- **The best deck came from judgement.** T066 was made with taste and a bespoke script, not
+  through the tool chain.
+
+Changes:
+
+- D011: a skill is written guidance; code is only its toolbox.
+- New brief T087: one PPTX skill written as plain-language design guidance.
+- T075 and T077 paused.
+- T086 now outputs guidance text, not JSON.
+- AGENTS.md: two new rules, "skill = guidance" and "talk to the owner in plain words".

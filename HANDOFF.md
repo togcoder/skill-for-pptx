@@ -85,6 +85,7 @@ thay vì deck làm tay. Lab đa lĩnh vực phục vụ mục tiêu đó và đa
 
 | Mã | Việc | Người làm → phản biện | Điều kiện bắt đầu |
 |---|---|---|---|
+| **T087** | **Viết lại skill PPTX thành lời chỉ dẫn như một người thầy thiết kế; code chỉ là hộp công cụ (D011)** ([ROADMAP](docs/ROADMAP.md)) | Claude → model khác họ dựng thử | **ngay, ưu tiên số một** |
 | **T086** | **Nghiên cứu gu đám đông đa lĩnh vực → luật gu, mỗi luật kiểm chứng bằng một cặp `.pptx` chấm mù** ([ROADMAP](docs/ROADMAP.md)) | Claude hoặc Gemini → model khác họ | **ngay, song song** |
 | **T078** | **Trục kịch bản: phương pháp + kịch bản mẫu Triết học ch. 1** ([SCRIPT_TRACK](docs/SCRIPT_TRACK.md)) | Claude | **xong, chờ chủ dự án đọc** |
 | T079 | Model yếu + phương pháp có viết được kịch bản tốt? (A/B mù bản chữ) | OpenCode → Claude | sau khi T078 được duyệt |
@@ -95,11 +96,11 @@ thay vì deck làm tay. Lab đa lĩnh vực phục vụ mục tiêu đó và đa
 | T072 | Cổng lỗi thị giác trên khung hình (cắt chữ, thẻ trống, chữ giữ chỗ, chữ nhỏ, mất style, va chạm) | OpenCode → Claude | ngay |
 | T073 | Máy xem chuyển động nhanh: DeckCraft `render-animation` vs ghi slideshow bằng harness | Claude desktop → OpenCode | ngay |
 | T074 | Bộ luật ghép Morph từ ma trận ≥ 30 thí nghiệm PowerPoint | OpenCode → Claude | ngay |
-| T075 | `scene.json` + trình biên dịch cảnh | Claude → Antigravity | sau T071–T072 |
+| T075 | `scene.json` + trình biên dịch cảnh | Claude → Antigravity | **tạm dừng (D011)** |
 | T076 | Thư viện 10 nước Morph có khung hình mẫu | OpenCode → Claude | sau T074 |
-| T077 | Deck Director xuất cảnh; bỏ ánh xạ chuỗi con và giá trị bịa | Antigravity → Claude | sau T075 |
+| T077 | Deck Director xuất cảnh; bỏ ánh xạ chuỗi con và giá trị bịa | Antigravity → Claude | **tạm dừng (D011)** |
 
-Mã trống kế tiếp: do `coord.py claim` tính (hiện là **T087**).
+Mã trống kế tiếp: do `coord.py claim` tính (hiện là **T088**).
 
 **Dừng ngay:**
 - vá thêm luật chuỗi con trong `deck_director.py`;

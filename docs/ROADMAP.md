@@ -144,8 +144,9 @@ sao chép (F10, D010).
 - **Đầu ra:**
   - `experiments/T086-…/sources.md`: bảng nguồn theo lĩnh vực.
   - `experiments/T086-…/artifacts/pairs/*.pptx`: các cặp thử.
-  - `knowledge/taste/rules.json`: mỗi luật có id, nội dung, các lĩnh vực ủng hộ, nguồn, tính năng
-    PPTX và kết quả chấm mù.
+  - Các luật viết thành **văn bản chỉ dẫn** (D011), không phải JSON: mỗi luật có lời, lĩnh vực ủng hộ,
+    nguồn, cách làm trong PowerPoint, ví dụ đúng/sai, và kết quả chấm mù. Đây là nguyên liệu cho
+    T087.
   - Không sửa code sản phẩm. Đưa luật vào Forge và Director là việc của chặng 3.
 - **Nghiệm thu:** ≥ 8 lĩnh vực, ≥ 60 nguồn có ghi giấy phép, ≥ 15 luật có cặp `.pptx` đã chấm mù.
 - **Bác bỏ nếu:** bản "sau" không thắng quá 2/3 số cặp. Khi đó các luật còn quá chung chung. Phải
@@ -156,6 +157,33 @@ sao chép (F10, D010).
 - **Người làm → người phản biện:** một model mạnh (Claude hoặc Gemini) → model khác họ.
 - **Cỡ:** 3–4 ngày. Có thể chia theo lĩnh vực cho nhiều phiên, mỗi phiên một nhánh (`T086a`,
   `T086b`…), cùng ghi vào một bảng nguồn.
+
+## Skill là lời chỉ dẫn (D011, T087): ưu tiên số một
+
+Chủ dự án (F15): skill không nhất thiết là code. Ở baoyu-design và nhiều dự án khác, skill là lời
+chỉ dẫn; model đọc và tự làm. Lab này đã đi ngược: 103 script, còn 8 skill chủ yếu là sách lệnh
+"chạy X, kiểm Y". Deck đẹp nhất (T066) đến từ phán đoán, không từ chuỗi công cụ.
+
+### T087 [pptx] Skill PPTX viết như một người thầy thiết kế
+
+- **Câu hỏi:** một model (kể cả model yếu) chỉ đọc lời chỉ dẫn và dùng vài công cụ nhỏ có làm ra
+  deck đẹp hơn chuỗi công cụ hiện tại không?
+- **Việc cần làm:** một skill duy nhất `skills/pptx/`:
+  - `SKILL.md` ngắn: thứ tự suy nghĩ (người nghe → kịch bản → dàn ý tiêu đề → từng slide →
+    chuyển động → tự mở file kiểm tra), và khi nào đọc hướng dẫn nào.
+  - Các hướng dẫn ngắn, bằng lời thường, có con số và ví dụ đúng/sai: kịch bản, bố cục, chữ, ảnh,
+    màu, chuyển động trong slide, Morph giữa các slide, tự kiểm tra.
+  - Kiến thức đã chứng minh trong lab được viết lại thành lời (luật Morph T059/T064/T074, nhịp
+    click, giới hạn PowerPoint), cùng luật gu từ T086 khi có.
+  - Một hộp công cụ nhỏ: chỉ giữ những gì lời không làm được (ghi Morph và hiệu ứng vào file, đo
+    chữ, mở file trong PowerPoint để chụp kiểm tra). Mọi script khác không còn là lối vào.
+- **Nghiệm thu:** đưa skill cho một model khác họ với người viết (ví dụ DeepSeek). Model đó dựng
+  lại bộ Triết học chương 1 và đề pitch T081. Chủ dự án mở và lật cặp `.pptx` đổi tên, so với
+  T066 và với Forge hiện tại.
+- **Bác bỏ nếu:** bản dựng từ lời chỉ dẫn thua Forge hiện tại. Khi đó phải ghi phần nào lời chỉ dẫn
+  không truyền được, rồi mới thêm công cụ cho đúng phần đó.
+- **Người làm → người phản biện:** Claude (trưởng nhóm) viết → model khác họ dùng skill để dựng.
+  **Cỡ:** 2–3 ngày. Có thể bắt đầu ngay, rồi nạp luật T086 khi xong.
 
 ## Chặng 1: thước đo thật (đề bài đã giữ chỗ T071–T074)
 
@@ -259,6 +287,8 @@ tiến bộ hay không.
 
 ### T075 [pptx] `scene.json` và trình biên dịch cảnh
 
+> **Tạm dừng (D011).** Chỉ mở lại nếu T087 cho thấy lời chỉ dẫn không đủ để làm Morph giữa các cảnh.
+
 - **Câu hỏi:** agent có thể chỉ mô tả trạng thái mà vẫn ra Morph và chuyển động đúng không?
 - **`scene.json`:**
   - `actors`: id, loại (text, picture, shape, native-art, chart, model3d), nội dung, style role;
@@ -300,6 +330,8 @@ tiến bộ hay không.
 
 ### T077 [pptx] Deck Director xuất ra cảnh
 
+> **Tạm dừng (D011).** Cùng lý do với T075.
+
 - **Giữ** phần đầu của `deck_director.py`: brief, beat, lời nói, speaker notes.
 - **Thay** phần sau: ánh xạ chuỗi con vào 14 layout được thay bằng xuất `scene.json` và chọn nước
   từ T076.
@@ -311,7 +343,7 @@ tiến bộ hay không.
 
 ## Chặng 3: gu vào sản phẩm (chưa giữ chỗ; trưởng nhóm mở sau chặng 2)
 
-Luật gu của chặng này lấy từ `knowledge/taste/rules.json` (T086), và chỉ lấy luật đã thắng chấm mù.
+Luật gu của chặng này lấy từ kết quả T086, và chỉ lấy luật đã thắng chấm mù.
 
 - **Style preset:**
   - Chuyển công thức editorial của T066 và 5 style của T067 (VisualStyle/1) vào làm *một* hệ

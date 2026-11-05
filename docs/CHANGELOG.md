@@ -22,6 +22,10 @@ were true at the time. Task IDs and their branches are listed in
     rules.
   - T071 now outputs `.pptx` pairs instead of clips.
   - T073 is marked as a tool for agents only.
+- **F15, D011: a skill is written guidance; code is its toolbox.**
+  - New brief T087: one PPTX skill written like a design mentor.
+  - T075 and T077 paused.
+  - AGENTS.md: agents talk to the owner in plain words and lead with the `.pptx`.
 
 ## T084 [cross] Green CI — 2026-11-04
 
