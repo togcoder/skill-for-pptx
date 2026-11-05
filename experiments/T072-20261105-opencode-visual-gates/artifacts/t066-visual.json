@@ -1,0 +1,3707 @@
+{
+ "design_system": "1.1.0",
+ "scores": {
+  "design": 2.87,
+  "motion": 4.99,
+  "rhythm": 4.48,
+  "coherence": 3.67,
+  "narrative": 2.7,
+  "overall": 3.74
+ },
+ "checks": 536,
+ "evaluations": [
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "DEN-WORDS",
+   "good",
+   false
+  ],
+  [
+   "MOT-CLICKS",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "NAR-BASE-STATE",
+   "warn",
+   false
+  ],
+  [
+   "DEN-ACTIVE-WORDS",
+   "good",
+   false
+  ],
+  [
+   "NAR-LIFECYCLE",
+   "warn",
+   false
+  ],
+  [
+   "NAR-ALIGN",
+   "note",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "DEN-WORDS",
+   "note",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-CLICKS",
+   "note",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-MOVERS",
+   "good",
+   false
+  ],
+  [
+   "NAR-BASE-STATE",
+   "good",
+   false
+  ],
+  [
+   "DEN-ACTIVE-WORDS",
+   "warn",
+   false
+  ],
+  [
+   "NAR-LIFECYCLE",
+   "warn",
+   false
+  ],
+  [
+   "NAR-ALIGN",
+   "note",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "DEN-WORDS",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-CLICKS",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "NAR-BASE-STATE",
+   "warn",
+   false
+  ],
+  [
+   "DEN-ACTIVE-WORDS",
+   "good",
+   false
+  ],
+  [
+   "NAR-LIFECYCLE",
+   "warn",
+   false
+  ],
+  [
+   "NAR-ALIGN",
+   "note",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "DEN-WORDS",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-CLICKS",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "note",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-MOVERS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "NAR-BASE-STATE",
+   "good",
+   false
+  ],
+  [
+   "DEN-ACTIVE-WORDS",
+   "good",
+   false
+  ],
+  [
+   "NAR-LIFECYCLE",
+   "warn",
+   false
+  ],
+  [
+   "NAR-ALIGN",
+   "note",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "DEN-WORDS",
+   "note",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-CLICKS",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-MOVERS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-MOVERS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-MOVERS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "NAR-BASE-STATE",
+   "warn",
+   false
+  ],
+  [
+   "DEN-ACTIVE-WORDS",
+   "warn",
+   false
+  ],
+  [
+   "NAR-LIFECYCLE",
+   "warn",
+   false
+  ],
+  [
+   "NAR-ALIGN",
+   "note",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "DEN-WORDS",
+   "note",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-CLICKS",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "NAR-BASE-STATE",
+   "good",
+   false
+  ],
+  [
+   "DEN-ACTIVE-WORDS",
+   "warn",
+   false
+  ],
+  [
+   "NAR-LIFECYCLE",
+   "warn",
+   false
+  ],
+  [
+   "NAR-ALIGN",
+   "note",
+   false
+  ],
+  [
+   "VIS-TINY",
+   "warn",
+   false
+  ],
+  [
+   "VIS-TINY",
+   "warn",
+   false
+  ],
+  [
+   "VIS-TINY",
+   "warn",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "DEN-WORDS",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-CLICKS",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "NAR-BASE-STATE",
+   "good",
+   false
+  ],
+  [
+   "DEN-ACTIVE-WORDS",
+   "good",
+   false
+  ],
+  [
+   "NAR-LIFECYCLE",
+   "warn",
+   false
+  ],
+  [
+   "NAR-ALIGN",
+   "note",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "DEN-WORDS",
+   "note",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-CLICKS",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "NAR-BASE-STATE",
+   "good",
+   false
+  ],
+  [
+   "DEN-ACTIVE-WORDS",
+   "warn",
+   false
+  ],
+  [
+   "NAR-LIFECYCLE",
+   "warn",
+   false
+  ],
+  [
+   "NAR-ALIGN",
+   "note",
+   false
+  ],
+  [
+   "VIS-TINY",
+   "warn",
+   false
+  ],
+  [
+   "VIS-TINY",
+   "warn",
+   false
+  ],
+  [
+   "VIS-TINY",
+   "warn",
+   false
+  ],
+  [
+   "VIS-TINY",
+   "warn",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "DEN-WORDS",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-CLICKS",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "NAR-BASE-STATE",
+   "good",
+   false
+  ],
+  [
+   "DEN-ACTIVE-WORDS",
+   "good",
+   false
+  ],
+  [
+   "NAR-LIFECYCLE",
+   "warn",
+   false
+  ],
+  [
+   "NAR-ALIGN",
+   "note",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "DEN-WORDS",
+   "note",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-CLICKS",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "NAR-BASE-STATE",
+   "good",
+   false
+  ],
+  [
+   "DEN-ACTIVE-WORDS",
+   "warn",
+   false
+  ],
+  [
+   "NAR-LIFECYCLE",
+   "warn",
+   false
+  ],
+  [
+   "NAR-ALIGN",
+   "note",
+   false
+  ],
+  [
+   "VIS-TINY",
+   "warn",
+   false
+  ],
+  [
+   "VIS-TINY",
+   "warn",
+   false
+  ],
+  [
+   "VIS-TINY",
+   "warn",
+   false
+  ],
+  [
+   "MOT-STATIC",
+   "good",
+   true
+  ],
+  [
+   "DUA-BREAK",
+   "note",
+   true
+  ],
+  [
+   "MOT-VOCAB",
+   "good",
+   true
+  ],
+  [
+   "TYP-SIZES",
+   "warn",
+   true
+  ],
+  [
+   "TYP-SMALL",
+   "warn",
+   true
+  ],
+  [
+   "TYP-SMALL",
+   "warn",
+   true
+  ],
+  [
+   "TYP-FAMILIES",
+   "good",
+   true
+  ],
+  [
+   "LAY-DENSITY",
+   "note",
+   false
+  ],
+  [
+   "LAY-BALANCE",
+   "warn",
+   false
+  ],
+  [
+   "COL-COLOURFUL",
+   "note",
+   false
+  ],
+  [
+   "LAY-DENSITY",
+   "good",
+   false
+  ],
+  [
+   "LAY-BALANCE",
+   "good",
+   false
+  ],
+  [
+   "COL-COLOURFUL",
+   "good",
+   false
+  ],
+  [
+   "LAY-DENSITY",
+   "good",
+   false
+  ],
+  [
+   "LAY-BALANCE",
+   "good",
+   false
+  ],
+  [
+   "COL-COLOURFUL",
+   "warn",
+   false
+  ],
+  [
+   "LAY-DENSITY",
+   "good",
+   false
+  ],
+  [
+   "LAY-BALANCE",
+   "note",
+   false
+  ],
+  [
+   "COL-COLOURFUL",
+   "good",
+   false
+  ],
+  [
+   "LAY-DENSITY",
+   "good",
+   false
+  ],
+  [
+   "LAY-BALANCE",
+   "good",
+   false
+  ],
+  [
+   "COL-COLOURFUL",
+   "note",
+   false
+  ],
+  [
+   "LAY-DENSITY",
+   "good",
+   false
+  ],
+  [
+   "LAY-BALANCE",
+   "good",
+   false
+  ],
+  [
+   "COL-COLOURFUL",
+   "note",
+   false
+  ],
+  [
+   "LAY-DENSITY",
+   "good",
+   false
+  ],
+  [
+   "LAY-BALANCE",
+   "good",
+   false
+  ],
+  [
+   "COL-COLOURFUL",
+   "note",
+   false
+  ],
+  [
+   "LAY-DENSITY",
+   "good",
+   false
+  ],
+  [
+   "LAY-BALANCE",
+   "good",
+   false
+  ],
+  [
+   "COL-COLOURFUL",
+   "good",
+   false
+  ],
+  [
+   "LAY-DENSITY",
+   "good",
+   false
+  ],
+  [
+   "LAY-BALANCE",
+   "good",
+   false
+  ],
+  [
+   "COL-COLOURFUL",
+   "good",
+   false
+  ],
+  [
+   "LAY-DENSITY",
+   "good",
+   false
+  ],
+  [
+   "LAY-BALANCE",
+   "note",
+   false
+  ],
+  [
+   "COL-COLOURFUL",
+   "good",
+   false
+  ]
+ ],
+ "issues_by_severity": {
+  "warn": 33,
+  "note": 25
+ },
+ "issues_by_code": {
+  "NAR-BASE-STATE": 3,
+  "NAR-LIFECYCLE": 10,
+  "DEN-ACTIVE-WORDS": 5,
+  "VIS-TINY": 10,
+  "TYP-SIZES": 1,
+  "TYP-SMALL": 2,
+  "LAY-BALANCE": 1,
+  "COL-COLOURFUL": 1
+ },
+ "issues": [
+  {
+   "code": "NAR-BASE-STATE",
+   "dimension": "narrative",
+   "severity": "warn",
+   "slide": 1,
+   "object": null,
+   "measured": 0,
+   "expected": ">= 1 visible anchor at t=0",
+   "detail": "slide opens blank before first click",
+   "fix": "keep at least one visual anchor or title visible at t=0 before the first click",
+   "tool": "deck_director base_state"
+  },
+  {
+   "code": "NAR-LIFECYCLE",
+   "dimension": "narrative",
+   "severity": "warn",
+   "slide": 1,
+   "object": null,
+   "measured": 0,
+   "expected": ">= 1 object lifecycle (enter -> dim/exit)",
+   "detail": "purely additive clicks without dimming or exiting prior elements",
+   "fix": "add dim or exit transitions across clicks instead of purely additive entrances",
+   "tool": "deck_director state_after"
+  },
+  {
+   "code": "NAR-ALIGN",
+   "dimension": "narrative",
+   "severity": "note",
+   "slide": 1,
+   "object": null,
+   "measured": "no screenplay cues",
+   "expected": "[T=0] and [CLICK] cues in speaker notes",
+   "detail": "animated slide lacks choreographed speaker notes",
+   "fix": "compile screenplay cues ([T=0], [CLICK]) into speaker notes matching slide click count",
+   "tool": "deck_director compile"
+  },
+  {
+   "code": "DEN-WORDS",
+   "dimension": "design",
+   "severity": "note",
+   "slide": 2,
+   "object": null,
+   "measured": 74,
+   "expected": [
+    0,
+    45
+   ],
+   "detail": "",
+   "fix": "cut to the claim and its evidence, or split the slide",
+   "tool": "slide_forge spec / author"
+  },
+  {
+   "code": "MOT-CLICKS",
+   "dimension": "rhythm",
+   "severity": "note",
+   "slide": 2,
+   "object": null,
+   "measured": 7,
+   "expected": [
+    0,
+    6
+   ],
+   "detail": "",
+   "fix": "merge reveals into fewer beats or split the slide",
+   "tool": "motion_director plan"
+  },
+  {
+   "code": "DEN-ACTIVE-WORDS",
+   "dimension": "narrative",
+   "severity": "warn",
+   "slide": 2,
+   "object": null,
+   "measured": 74,
+   "expected": "<= 45 active words",
+   "detail": "",
+   "fix": "dim or exit prior cards/points so active on-screen words stay <= 45 per click state",
+   "tool": "deck_director state_after.dim/exit"
+  },
+  {
+   "code": "NAR-LIFECYCLE",
+   "dimension": "narrative",
+   "severity": "warn",
+   "slide": 2,
+   "object": null,
+   "measured": 0,
+   "expected": ">= 1 object lifecycle (enter -> dim/exit)",
+   "detail": "purely additive clicks without dimming or exiting prior elements",
+   "fix": "add dim or exit transitions across clicks instead of purely additive entrances",
+   "tool": "deck_director state_after"
+  },
+  {
+   "code": "NAR-ALIGN",
+   "dimension": "narrative",
+   "severity": "note",
+   "slide": 2,
+   "object": null,
+   "measured": "no screenplay cues",
+   "expected": "[T=0] and [CLICK] cues in speaker notes",
+   "detail": "animated slide lacks choreographed speaker notes",
+   "fix": "compile screenplay cues ([T=0], [CLICK]) into speaker notes matching slide click count",
+   "tool": "deck_director compile"
+  },
+  {
+   "code": "NAR-BASE-STATE",
+   "dimension": "narrative",
+   "severity": "warn",
+   "slide": 3,
+   "object": null,
+   "measured": 0,
+   "expected": ">= 1 visible anchor at t=0",
+   "detail": "slide opens blank before first click",
+   "fix": "keep at least one visual anchor or title visible at t=0 before the first click",
+   "tool": "deck_director base_state"
+  },
+  {
+   "code": "NAR-LIFECYCLE",
+   "dimension": "narrative",
+   "severity": "warn",
+   "slide": 3,
+   "object": null,
+   "measured": 0,
+   "expected": ">= 1 object lifecycle (enter -> dim/exit)",
+   "detail": "purely additive clicks without dimming or exiting prior elements",
+   "fix": "add dim or exit transitions across clicks instead of purely additive entrances",
+   "tool": "deck_director state_after"
+  },
+  {
+   "code": "NAR-ALIGN",
+   "dimension": "narrative",
+   "severity": "note",
+   "slide": 3,
+   "object": null,
+   "measured": "no screenplay cues",
+   "expected": "[T=0] and [CLICK] cues in speaker notes",
+   "detail": "animated slide lacks choreographed speaker notes",
+   "fix": "compile screenplay cues ([T=0], [CLICK]) into speaker notes matching slide click count",
+   "tool": "deck_director compile"
+  },
+  {
+   "code": "MOT-DURATION",
+   "dimension": "motion",
+   "severity": "note",
+   "slide": 4,
+   "object": "dialectic-arrow",
+   "measured": 1200,
+   "expected": [
+    250,
+    600
+   ],
+   "detail": "emphasis",
+   "fix": "set duration_ms in the role band",
+   "tool": "motion_director plan / design_system defaults"
+  },
+  {
+   "code": "NAR-LIFECYCLE",
+   "dimension": "narrative",
+   "severity": "warn",
+   "slide": 4,
+   "object": null,
+   "measured": 0,
+   "expected": ">= 1 object lifecycle (enter -> dim/exit)",
+   "detail": "purely additive clicks without dimming or exiting prior elements",
+   "fix": "add dim or exit transitions across clicks instead of purely additive entrances",
+   "tool": "deck_director state_after"
+  },
+  {
+   "code": "NAR-ALIGN",
+   "dimension": "narrative",
+   "severity": "note",
+   "slide": 4,
+   "object": null,
+   "measured": "no screenplay cues",
+   "expected": "[T=0] and [CLICK] cues in speaker notes",
+   "detail": "animated slide lacks choreographed speaker notes",
+   "fix": "compile screenplay cues ([T=0], [CLICK]) into speaker notes matching slide click count",
+   "tool": "deck_director compile"
+  },
+  {
+   "code": "DEN-WORDS",
+   "dimension": "design",
+   "severity": "note",
+   "slide": 5,
+   "object": null,
+   "measured": 60,
+   "expected": [
+    0,
+    45
+   ],
+   "detail": "",
+   "fix": "cut to the claim and its evidence, or split the slide",
+   "tool": "slide_forge spec / author"
+  },
+  {
+   "code": "NAR-BASE-STATE",
+   "dimension": "narrative",
+   "severity": "warn",
+   "slide": 5,
+   "object": null,
+   "measured": 0,
+   "expected": ">= 1 visible anchor at t=0",
+   "detail": "slide opens blank before first click",
+   "fix": "keep at least one visual anchor or title visible at t=0 before the first click",
+   "tool": "deck_director base_state"
+  },
+  {
+   "code": "DEN-ACTIVE-WORDS",
+   "dimension": "narrative",
+   "severity": "warn",
+   "slide": 5,
+   "object": null,
+   "measured": 60,
+   "expected": "<= 45 active words",
+   "detail": "",
+   "fix": "dim or exit prior cards/points so active on-screen words stay <= 45 per click state",
+   "tool": "deck_director state_after.dim/exit"
+  },
+  {
+   "code": "NAR-LIFECYCLE",
+   "dimension": "narrative",
+   "severity": "warn",
+   "slide": 5,
+   "object": null,
+   "measured": 0,
+   "expected": ">= 1 object lifecycle (enter -> dim/exit)",
+   "detail": "purely additive clicks without dimming or exiting prior elements",
+   "fix": "add dim or exit transitions across clicks instead of purely additive entrances",
+   "tool": "deck_director state_after"
+  },
+  {
+   "code": "NAR-ALIGN",
+   "dimension": "narrative",
+   "severity": "note",
+   "slide": 5,
+   "object": null,
+   "measured": "no screenplay cues",
+   "expected": "[T=0] and [CLICK] cues in speaker notes",
+   "detail": "animated slide lacks choreographed speaker notes",
+   "fix": "compile screenplay cues ([T=0], [CLICK]) into speaker notes matching slide click count",
+   "tool": "deck_director compile"
+  },
+  {
+   "code": "DEN-WORDS",
+   "dimension": "design",
+   "severity": "note",
+   "slide": 6,
+   "object": null,
+   "measured": 78,
+   "expected": [
+    0,
+    45
+   ],
+   "detail": "",
+   "fix": "cut to the claim and its evidence, or split the slide",
+   "tool": "slide_forge spec / author"
+  },
+  {
+   "code": "DEN-ACTIVE-WORDS",
+   "dimension": "narrative",
+   "severity": "warn",
+   "slide": 6,
+   "object": null,
+   "measured": 78,
+   "expected": "<= 45 active words",
+   "detail": "",
+   "fix": "dim or exit prior cards/points so active on-screen words stay <= 45 per click state",
+   "tool": "deck_director state_after.dim/exit"
+  },
+  {
+   "code": "NAR-LIFECYCLE",
+   "dimension": "narrative",
+   "severity": "warn",
+   "slide": 6,
+   "object": null,
+   "measured": 0,
+   "expected": ">= 1 object lifecycle (enter -> dim/exit)",
+   "detail": "purely additive clicks without dimming or exiting prior elements",
+   "fix": "add dim or exit transitions across clicks instead of purely additive entrances",
+   "tool": "deck_director state_after"
+  },
+  {
+   "code": "NAR-ALIGN",
+   "dimension": "narrative",
+   "severity": "note",
+   "slide": 6,
+   "object": null,
+   "measured": "no screenplay cues",
+   "expected": "[T=0] and [CLICK] cues in speaker notes",
+   "detail": "animated slide lacks choreographed speaker notes",
+   "fix": "compile screenplay cues ([T=0], [CLICK]) into speaker notes matching slide click count",
+   "tool": "deck_director compile"
+  },
+  {
+   "code": "VIS-TINY",
+   "dimension": "design",
+   "severity": "warn",
+   "slide": 6,
+   "object": "part0-b",
+   "measured": 10.5,
+   "expected": ">= 12 pt",
+   "detail": "body text below the presentation body minimum",
+   "fix": "raise the size to the room-appropriate body minimum (design_system.body_min_pt)",
+   "tool": "slide_forge type scale"
+  },
+  {
+   "code": "VIS-TINY",
+   "dimension": "design",
+   "severity": "warn",
+   "slide": 6,
+   "object": "part1-b",
+   "measured": 10.5,
+   "expected": ">= 12 pt",
+   "detail": "body text below the presentation body minimum",
+   "fix": "raise the size to the room-appropriate body minimum (design_system.body_min_pt)",
+   "tool": "slide_forge type scale"
+  },
+  {
+   "code": "VIS-TINY",
+   "dimension": "design",
+   "severity": "warn",
+   "slide": 6,
+   "object": "part2-b",
+   "measured": 10.5,
+   "expected": ">= 12 pt",
+   "detail": "body text below the presentation body minimum",
+   "fix": "raise the size to the room-appropriate body minimum (design_system.body_min_pt)",
+   "tool": "slide_forge type scale"
+  },
+  {
+   "code": "NAR-LIFECYCLE",
+   "dimension": "narrative",
+   "severity": "warn",
+   "slide": 7,
+   "object": null,
+   "measured": 0,
+   "expected": ">= 1 object lifecycle (enter -> dim/exit)",
+   "detail": "purely additive clicks without dimming or exiting prior elements",
+   "fix": "add dim or exit transitions across clicks instead of purely additive entrances",
+   "tool": "deck_director state_after"
+  },
+  {
+   "code": "NAR-ALIGN",
+   "dimension": "narrative",
+   "severity": "note",
+   "slide": 7,
+   "object": null,
+   "measured": "no screenplay cues",
+   "expected": "[T=0] and [CLICK] cues in speaker notes",
+   "detail": "animated slide lacks choreographed speaker notes",
+   "fix": "compile screenplay cues ([T=0], [CLICK]) into speaker notes matching slide click count",
+   "tool": "deck_director compile"
+  },
+  {
+   "code": "DEN-WORDS",
+   "dimension": "design",
+   "severity": "note",
+   "slide": 8,
+   "object": null,
+   "measured": 64,
+   "expected": [
+    0,
+    45
+   ],
+   "detail": "",
+   "fix": "cut to the claim and its evidence, or split the slide",
+   "tool": "slide_forge spec / author"
+  },
+  {
+   "code": "DEN-ACTIVE-WORDS",
+   "dimension": "narrative",
+   "severity": "warn",
+   "slide": 8,
+   "object": null,
+   "measured": 64,
+   "expected": "<= 45 active words",
+   "detail": "",
+   "fix": "dim or exit prior cards/points so active on-screen words stay <= 45 per click state",
+   "tool": "deck_director state_after.dim/exit"
+  },
+  {
+   "code": "NAR-LIFECYCLE",
+   "dimension": "narrative",
+   "severity": "warn",
+   "slide": 8,
+   "object": null,
+   "measured": 0,
+   "expected": ">= 1 object lifecycle (enter -> dim/exit)",
+   "detail": "purely additive clicks without dimming or exiting prior elements",
+   "fix": "add dim or exit transitions across clicks instead of purely additive entrances",
+   "tool": "deck_director state_after"
+  },
+  {
+   "code": "NAR-ALIGN",
+   "dimension": "narrative",
+   "severity": "note",
+   "slide": 8,
+   "object": null,
+   "measured": "no screenplay cues",
+   "expected": "[T=0] and [CLICK] cues in speaker notes",
+   "detail": "animated slide lacks choreographed speaker notes",
+   "fix": "compile screenplay cues ([T=0], [CLICK]) into speaker notes matching slide click count",
+   "tool": "deck_director compile"
+  },
+  {
+   "code": "VIS-TINY",
+   "dimension": "design",
+   "severity": "warn",
+   "slide": 8,
+   "object": "tile0-b",
+   "measured": 10.5,
+   "expected": ">= 12 pt",
+   "detail": "body text below the presentation body minimum",
+   "fix": "raise the size to the room-appropriate body minimum (design_system.body_min_pt)",
+   "tool": "slide_forge type scale"
+  },
+  {
+   "code": "VIS-TINY",
+   "dimension": "design",
+   "severity": "warn",
+   "slide": 8,
+   "object": "tile1-b",
+   "measured": 10.5,
+   "expected": ">= 12 pt",
+   "detail": "body text below the presentation body minimum",
+   "fix": "raise the size to the room-appropriate body minimum (design_system.body_min_pt)",
+   "tool": "slide_forge type scale"
+  },
+  {
+   "code": "VIS-TINY",
+   "dimension": "design",
+   "severity": "warn",
+   "slide": 8,
+   "object": "tile2-b",
+   "measured": 10.5,
+   "expected": ">= 12 pt",
+   "detail": "body text below the presentation body minimum",
+   "fix": "raise the size to the room-appropriate body minimum (design_system.body_min_pt)",
+   "tool": "slide_forge type scale"
+  },
+  {
+   "code": "VIS-TINY",
+   "dimension": "design",
+   "severity": "warn",
+   "slide": 8,
+   "object": "tile3-b",
+   "measured": 10.5,
+   "expected": ">= 12 pt",
+   "detail": "body text below the presentation body minimum",
+   "fix": "raise the size to the room-appropriate body minimum (design_system.body_min_pt)",
+   "tool": "slide_forge type scale"
+  },
+  {
+   "code": "NAR-LIFECYCLE",
+   "dimension": "narrative",
+   "severity": "warn",
+   "slide": 9,
+   "object": null,
+   "measured": 0,
+   "expected": ">= 1 object lifecycle (enter -> dim/exit)",
+   "detail": "purely additive clicks without dimming or exiting prior elements",
+   "fix": "add dim or exit transitions across clicks instead of purely additive entrances",
+   "tool": "deck_director state_after"
+  },
+  {
+   "code": "NAR-ALIGN",
+   "dimension": "narrative",
+   "severity": "note",
+   "slide": 9,
+   "object": null,
+   "measured": "no screenplay cues",
+   "expected": "[T=0] and [CLICK] cues in speaker notes",
+   "detail": "animated slide lacks choreographed speaker notes",
+   "fix": "compile screenplay cues ([T=0], [CLICK]) into speaker notes matching slide click count",
+   "tool": "deck_director compile"
+  },
+  {
+   "code": "DEN-WORDS",
+   "dimension": "design",
+   "severity": "note",
+   "slide": 10,
+   "object": null,
+   "measured": 80,
+   "expected": [
+    0,
+    45
+   ],
+   "detail": "",
+   "fix": "cut to the claim and its evidence, or split the slide",
+   "tool": "slide_forge spec / author"
+  },
+  {
+   "code": "DEN-ACTIVE-WORDS",
+   "dimension": "narrative",
+   "severity": "warn",
+   "slide": 10,
+   "object": null,
+   "measured": 80,
+   "expected": "<= 45 active words",
+   "detail": "",
+   "fix": "dim or exit prior cards/points so active on-screen words stay <= 45 per click state",
+   "tool": "deck_director state_after.dim/exit"
+  },
+  {
+   "code": "NAR-LIFECYCLE",
+   "dimension": "narrative",
+   "severity": "warn",
+   "slide": 10,
+   "object": null,
+   "measured": 0,
+   "expected": ">= 1 object lifecycle (enter -> dim/exit)",
+   "detail": "purely additive clicks without dimming or exiting prior elements",
+   "fix": "add dim or exit transitions across clicks instead of purely additive entrances",
+   "tool": "deck_director state_after"
+  },
+  {
+   "code": "NAR-ALIGN",
+   "dimension": "narrative",
+   "severity": "note",
+   "slide": 10,
+   "object": null,
+   "measured": "no screenplay cues",
+   "expected": "[T=0] and [CLICK] cues in speaker notes",
+   "detail": "animated slide lacks choreographed speaker notes",
+   "fix": "compile screenplay cues ([T=0], [CLICK]) into speaker notes matching slide click count",
+   "tool": "deck_director compile"
+  },
+  {
+   "code": "VIS-TINY",
+   "dimension": "design",
+   "severity": "warn",
+   "slide": 10,
+   "object": "take0-b",
+   "measured": 11.5,
+   "expected": ">= 12 pt",
+   "detail": "body text below the presentation body minimum",
+   "fix": "raise the size to the room-appropriate body minimum (design_system.body_min_pt)",
+   "tool": "slide_forge type scale"
+  },
+  {
+   "code": "VIS-TINY",
+   "dimension": "design",
+   "severity": "warn",
+   "slide": 10,
+   "object": "take1-b",
+   "measured": 11.5,
+   "expected": ">= 12 pt",
+   "detail": "body text below the presentation body minimum",
+   "fix": "raise the size to the room-appropriate body minimum (design_system.body_min_pt)",
+   "tool": "slide_forge type scale"
+  },
+  {
+   "code": "VIS-TINY",
+   "dimension": "design",
+   "severity": "warn",
+   "slide": 10,
+   "object": "take2-b",
+   "measured": 11.5,
+   "expected": ">= 12 pt",
+   "detail": "body text below the presentation body minimum",
+   "fix": "raise the size to the room-appropriate body minimum (design_system.body_min_pt)",
+   "tool": "slide_forge type scale"
+  },
+  {
+   "code": "DUA-BREAK",
+   "dimension": "rhythm",
+   "severity": "note",
+   "slide": null,
+   "object": null,
+   "measured": 0,
+   "expected": ">= 1 pattern break for 5+ slide decks",
+   "detail": "monotonous rhythm: insert a pattern break near 1/3 or 2/3 deck position",
+   "fix": "insert high-whitespace pattern break slides near 1/3 and 2/3 deck milestones to prevent audience fatigue",
+   "tool": "cognitive_pacing / slide_forge duarte_break"
+  },
+  {
+   "code": "TYP-SIZES",
+   "dimension": "coherence",
+   "severity": "warn",
+   "slide": null,
+   "object": null,
+   "measured": 21,
+   "expected": [
+    3,
+    6
+   ],
+   "detail": "sizes [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 21, 22, 32, 33, 36, 38, 40, 52, 63, 92, 180]",
+   "fix": "use the theme scale: 3-6 sizes per deck",
+   "tool": "slide_forge type scale"
+  },
+  {
+   "code": "TYP-SMALL",
+   "dimension": "design",
+   "severity": "warn",
+   "slide": null,
+   "object": null,
+   "measured": 10,
+   "expected": [
+    18,
+    40
+   ],
+   "detail": "most used body size",
+   "fix": "raise the size: body text >= 18 pt in a presentation, never below 12",
+   "tool": "slide_forge spec / manual"
+  },
+  {
+   "code": "TYP-SMALL",
+   "dimension": "design",
+   "severity": "warn",
+   "slide": null,
+   "object": null,
+   "measured": 8,
+   "expected": ">= 12",
+   "detail": "smallest text",
+   "fix": "raise the size: body text >= 18 pt in a presentation, never below 12",
+   "tool": "slide_forge spec / manual"
+  },
+  {
+   "code": "LAY-DENSITY",
+   "dimension": "design",
+   "severity": "note",
+   "slide": 1,
+   "object": null,
+   "measured": 0.584,
+   "expected": [
+    0.6,
+    0.95
+   ],
+   "detail": "background share of the settled frame",
+   "fix": "too crowded: split the slide; nearly empty: enlarge or merge",
+   "tool": "author / slide_forge"
+  },
+  {
+   "code": "LAY-BALANCE",
+   "dimension": "design",
+   "severity": "warn",
+   "slide": 1,
+   "object": null,
+   "measured": 0.238,
+   "expected": [
+    0.0,
+    0.15
+   ],
+   "detail": "",
+   "fix": "move or enlarge the lighter side",
+   "tool": "author"
+  },
+  {
+   "code": "COL-COLOURFUL",
+   "dimension": "design",
+   "severity": "note",
+   "slide": 1,
+   "object": null,
+   "measured": 101.5,
+   "expected": [
+    15,
+    80
+   ],
+   "detail": "Hasler-Suesstrunk",
+   "fix": "grey decks read as unfinished, garish ones as noisy: use the palette's accent roles",
+   "tool": "slide_forge theme"
+  },
+  {
+   "code": "COL-COLOURFUL",
+   "dimension": "design",
+   "severity": "warn",
+   "slide": 3,
+   "object": null,
+   "measured": 110.1,
+   "expected": [
+    15,
+    80
+   ],
+   "detail": "Hasler-Suesstrunk",
+   "fix": "grey decks read as unfinished, garish ones as noisy: use the palette's accent roles",
+   "tool": "slide_forge theme"
+  },
+  {
+   "code": "LAY-BALANCE",
+   "dimension": "design",
+   "severity": "note",
+   "slide": 4,
+   "object": null,
+   "measured": 0.22,
+   "expected": [
+    0.0,
+    0.15
+   ],
+   "detail": "",
+   "fix": "move or enlarge the lighter side",
+   "tool": "author"
+  },
+  {
+   "code": "COL-COLOURFUL",
+   "dimension": "design",
+   "severity": "note",
+   "slide": 5,
+   "object": null,
+   "measured": 104.8,
+   "expected": [
+    15,
+    80
+   ],
+   "detail": "Hasler-Suesstrunk",
+   "fix": "grey decks read as unfinished, garish ones as noisy: use the palette's accent roles",
+   "tool": "slide_forge theme"
+  },
+  {
+   "code": "COL-COLOURFUL",
+   "dimension": "design",
+   "severity": "note",
+   "slide": 6,
+   "object": null,
+   "measured": 81.0,
+   "expected": [
+    15,
+    80
+   ],
+   "detail": "Hasler-Suesstrunk",
+   "fix": "grey decks read as unfinished, garish ones as noisy: use the palette's accent roles",
+   "tool": "slide_forge theme"
+  },
+  {
+   "code": "COL-COLOURFUL",
+   "dimension": "design",
+   "severity": "note",
+   "slide": 7,
+   "object": null,
+   "measured": 99.1,
+   "expected": [
+    15,
+    80
+   ],
+   "detail": "Hasler-Suesstrunk",
+   "fix": "grey decks read as unfinished, garish ones as noisy: use the palette's accent roles",
+   "tool": "slide_forge theme"
+  },
+  {
+   "code": "LAY-BALANCE",
+   "dimension": "design",
+   "severity": "note",
+   "slide": 10,
+   "object": null,
+   "measured": 0.201,
+   "expected": [
+    0.0,
+    0.15
+   ],
+   "detail": "",
+   "fix": "move or enlarge the lighter side",
+   "tool": "author"
+  }
+ ],
+ "slides": [
+  {
+   "slide": 1,
+   "words": 28,
+   "sizes": [
+    9.5,
+    10.5,
+    21.0,
+    63.0
+   ],
+   "effects": 10,
+   "clicks": 4,
+   "max_movers": 0
+  },
+  {
+   "slide": 2,
+   "words": 74,
+   "sizes": [
+    8.0,
+    8.5,
+    9.0,
+    9.5,
+    10.5,
+    15.0,
+    17.0,
+    52.0
+   ],
+   "effects": 17,
+   "clicks": 7,
+   "max_movers": 1
+  },
+  {
+   "slide": 3,
+   "words": 37,
+   "sizes": [
+    8.0,
+    9.0,
+    10.5,
+    16.0,
+    32.0,
+    40.0,
+    92.0
+   ],
+   "effects": 13,
+   "clicks": 5,
+   "max_movers": 0
+  },
+  {
+   "slide": 4,
+   "words": 41,
+   "sizes": [
+    8.0,
+    10.5,
+    12.0,
+    15.0,
+    38.0
+   ],
+   "effects": 13,
+   "clicks": 5,
+   "max_movers": 1
+  },
+  {
+   "slide": 5,
+   "words": 60,
+   "sizes": [
+    9.0,
+    10.5,
+    11.0,
+    12.0,
+    13.0,
+    14.0,
+    40.0
+   ],
+   "effects": 18,
+   "clicks": 6,
+   "max_movers": 1
+  },
+  {
+   "slide": 6,
+   "words": 78,
+   "sizes": [
+    10.0,
+    10.5,
+    12.0,
+    13.0,
+    15.0,
+    40.0
+   ],
+   "effects": 17,
+   "clicks": 5,
+   "max_movers": 0
+  },
+  {
+   "slide": 7,
+   "words": 41,
+   "sizes": [
+    8.0,
+    8.5,
+    10.5,
+    11.0,
+    13.0,
+    40.0
+   ],
+   "effects": 18,
+   "clicks": 5,
+   "max_movers": 0
+  },
+  {
+   "slide": 8,
+   "words": 64,
+   "sizes": [
+    9.0,
+    10.5,
+    13.0,
+    36.0
+   ],
+   "effects": 17,
+   "clicks": 5,
+   "max_movers": 0
+  },
+  {
+   "slide": 9,
+   "words": 32,
+   "sizes": [
+    10.5,
+    12.0,
+    33.0,
+    180.0
+   ],
+   "effects": 6,
+   "clicks": 4,
+   "max_movers": 0
+  },
+  {
+   "slide": 10,
+   "words": 80,
+   "sizes": [
+    8.0,
+    9.0,
+    10.5,
+    11.5,
+    14.0,
+    22.0,
+    40.0
+   ],
+   "effects": 15,
+   "clicks": 5,
+   "max_movers": 0
+  }
+ ],
+ "frames": [
+  {
+   "background_share": 0.584,
+   "balance_offset": 0.238,
+   "colourfulness": 101.5,
+   "slide": 1
+  },
+  {
+   "background_share": 0.746,
+   "balance_offset": 0.147,
+   "colourfulness": 52.0,
+   "slide": 2
+  },
+  {
+   "background_share": 0.67,
+   "balance_offset": 0.057,
+   "colourfulness": 110.1,
+   "slide": 3
+  },
+  {
+   "background_share": 0.829,
+   "balance_offset": 0.22,
+   "colourfulness": 57.6,
+   "slide": 4
+  },
+  {
+   "background_share": 0.61,
+   "balance_offset": 0.042,
+   "colourfulness": 104.8,
+   "slide": 5
+  },
+  {
+   "background_share": 0.646,
+   "balance_offset": 0.044,
+   "colourfulness": 81.0,
+   "slide": 6
+  },
+  {
+   "background_share": 0.838,
+   "balance_offset": 0.08,
+   "colourfulness": 99.1,
+   "slide": 7
+  },
+  {
+   "background_share": 0.88,
+   "balance_offset": 0.079,
+   "colourfulness": 23.2,
+   "slide": 8
+  },
+  {
+   "background_share": 0.934,
+   "balance_offset": 0.116,
+   "colourfulness": 48.0,
+   "slide": 9
+  },
+  {
+   "background_share": 0.936,
+   "balance_offset": 0.201,
+   "colourfulness": 19.3,
+   "slide": 10
+  }
+ ],
+ "deck": {
+  "slides": 10,
+  "content_slides": 10,
+  "static_slides": [],
+  "lifecycles": 0,
+  "effect_kinds": 5,
+  "type_sizes": [
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   21,
+   22,
+   32,
+   33,
+   36,
+   38,
+   40,
+   52,
+   63,
+   92,
+   180
+  ],
+  "families": {
+   "Arial": 109,
+   "Palatino Linotype": 20
+  }
+ },
+ "path": "C:\\Users\\COMPUTER\\Desktop\\làm chung với ai\\skill-for-pptx\\workspace\\T072\\experiments\\T066-20261104-opencode-triet-hoc-ch1\\artifacts\\T066-Triet-hoc-Mac-Lenin-Chuong-1.pptx"
+}

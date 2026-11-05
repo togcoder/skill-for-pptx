@@ -49,6 +49,7 @@ import morph_studio as mstu  # noqa: E402
 import motion_components as mc  # noqa: E402
 import motion_director as md  # noqa: E402
 import pptx_animator as anim  # noqa: E402
+import text_metrics as tm  # noqa: E402
 
 NS=anim.NS
 P=anim.P
@@ -69,12 +70,20 @@ DIMENSION={"COL-TEXT":"design","COL-GRAPHIC":"design","TYP-SMALL":"design","TYP-
            "MOT-SETTLE":"rhythm","DUA-BREAK":"rhythm",
            "TYP-SIZES":"coherence","TYP-FAMILIES":"coherence","MOT-VOCAB":"coherence",
            "TEC-SCHEMA":"technique",
-           "NAR-BASE-STATE":"narrative","DEN-ACTIVE-WORDS":"narrative","NAR-LIFECYCLE":"narrative","NAR-ALIGN":"narrative"}
+           "NAR-BASE-STATE":"narrative","DEN-ACTIVE-WORDS":"narrative","NAR-LIFECYCLE":"narrative","NAR-ALIGN":"narrative",
+           "VIS-CLIPPED":"design","VIS-EMPTY-CARD":"design","VIS-PLACEHOLDER":"design",
+           "VIS-TINY":"design","VIS-STYLE-DROP":"design","VIS-COLLIDE":"motion"}
 FIX={
     "NAR-BASE-STATE":("keep at least one visual anchor or title visible at t=0 before the first click","deck_director base_state"),
     "DEN-ACTIVE-WORDS":("dim or exit prior cards/points so active on-screen words stay <= 45 per click state","deck_director state_after.dim/exit"),
     "NAR-LIFECYCLE":("add dim or exit transitions across clicks instead of purely additive entrances","deck_director state_after"),
     "NAR-ALIGN":("compile screenplay cues ([T=0], [CLICK]) into speaker notes matching slide click count","deck_director compile"),
+    "VIS-CLIPPED":("shorten the text, enlarge the box or turn on autofit; keep ink inside the 3% safe margin","author / slide_forge layout"),
+    "VIS-EMPTY-CARD":("fill the card or remove it; an empty card is a promise the deck does not keep","author / scene.json"),
+    "VIS-PLACEHOLDER":("replace scaffold text with real content, or return CONTENT_MISSING to the author","D005"),
+    "VIS-TINY":("raise the size to the room-appropriate body minimum (design_system.body_min_pt)","slide_forge type scale"),
+    "VIS-STYLE-DROP":("apply the declared style tokens, or stop declaring the preset","visual_style resolver"),
+    "VIS-COLLIDE":("stagger the two movers or move one out of the other's path","motion_director / scene.json"),
     "COL-TEXT":("use the theme text colour or a palette colour that reaches the contrast","slide_forge theme / brand_palette"),
     "COL-GRAPHIC":("re-apply: helpers take a deck colour that reaches 3:1 (motion_components.deck_style), or set components[].generate.color","motion_director"),
     "CHROME-SAFE":("place logo at top-right (w<=72pt, h<=24pt, y=20pt) and suppress on cover/closing slides; progress bar at bottom edge","slide_forge chrome / layout_engine"),
@@ -492,7 +501,182 @@ def render_lo(pptx,out_dir):
     return pngs
 
 
-def critique(path,render=None,xsd=None):
+PLACEHOLDER_PATTERNS = (
+    "chuyển đổi số toàn diện",
+    "bước hoàn thiện",
+    "chỉ số 1",
+    "lorem ipsum",
+    "placeholder",
+    "nội dung mẫu",
+    "mẫu nội dung",
+    "điền vào",
+    "todo",
+    "click to add",
+    "nhấp để",
+    "your text",
+)
+
+
+def _visual_text(o):
+    return " ".join((o.get("text") or "").split()).lower()
+
+
+def _visual_area(o):
+    g = o.get("geometry")
+    return (g["w"] * g["h"]) if g else 0.0
+
+
+def _visual_overlap(a, b):
+    ga, gb = a.get("geometry"), b.get("geometry")
+    if not ga or not gb:
+        return 0.0
+    x1 = max(ga["x"], gb["x"])
+    y1 = max(ga["y"], gb["y"])
+    x2 = min(ga["x"] + ga["w"], gb["x"] + gb["w"])
+    y2 = min(ga["y"] + ga["h"], gb["y"] + gb["h"])
+    inter = max(0.0, x2 - x1) * max(0.0, y2 - y1)
+    smaller = min(_visual_area(a), _visual_area(b))
+    return inter / smaller if smaller else 0.0
+
+
+def _visual_contains(outer, inner):
+    go, gi = outer.get("geometry"), inner.get("geometry")
+    if not go or not gi:
+        return False
+    return (go["x"] <= gi["x"] + 1e-6 and go["y"] <= gi["y"] + 1e-6
+            and go["x"] + go["w"] >= gi["x"] + gi["w"] - 1e-6
+            and go["y"] + go["h"] >= gi["y"] + gi["h"] - 1e-6)
+
+
+def _text_need_in(o, slide_w=13.333):
+    """Estimated required height (in) for a text object at its current width."""
+    g = o.get("geometry")
+    if not g:
+        return 0.0
+    width_in = max(0.1, g["w"] * slide_w)
+    need_pt = 0.0
+    paragraphs = o.get("paragraphs") or []
+    if not paragraphs and (o.get("text") or "").strip():
+        paragraphs = [{"text": o["text"], "font": "Arial",
+                       "size_pt": o.get("max_font_pt") or 12, "bold": False}]
+    for para in paragraphs:
+        text = (para.get("text") or "").strip()
+        if not text:
+            continue
+        pt = para.get("size_pt") or o.get("max_font_pt") or 12
+        lines = tm.wrap_lines(text, para.get("font"), pt, width_in, bool(para.get("bold")))
+        if lines == math.inf:
+            return math.inf
+        need_pt += lines * pt * 0.95
+    return need_pt / 72
+
+
+def visual_findings(slide, groups=None, style=None, theme_fonts=None, slide_w=13.333):
+    """Visual-error gates (T072): clipped text, empty cards, scaffold text, tiny type.
+
+    Structural checks run on the native model; ``VIS-COLLIDE`` uses the click
+    groups, not rendered motion frames (T073 owns the frame sampler).
+    """
+    out = []
+
+    def add(code, obj, measured, expected, detail=""):
+        out.append({"code": code, "object": obj.get("name") if obj else None,
+                    "measured": measured, "expected": expected, "detail": detail})
+
+    for o in slide.get("objects", []):
+        name = (o.get("name") or "")
+        low = name.lower()
+        text = _visual_text(o)
+        g = o.get("geometry")
+        area = _visual_area(o)
+
+        # Decorations are not content; they never carry a text promise.
+        decorative = (low.startswith("!!") or low in ("bg", "panel")
+                      or low.endswith(("-ring", "-disc", "-rule", "-dot", "-line"))
+                      or low.startswith(("margin", "chrome")))
+
+        if text:
+            tiny = o.get("max_font_pt")
+            metadata = (any(k in low for k in ("kicker", "caption", "credit", "footer",
+                                               "foot", "date", "name", "label", "qcap",
+                                               "cap", "desc", "timeline"))
+                        or re.search(r"[-_]n$", low) is not None
+                        or re.match(r"l[0-9]-", low) is not None
+                        or low.startswith("tl-"))
+            if tiny and tiny < 12 and not metadata:
+                add("VIS-TINY", o, round(tiny, 1), ">= 12 pt",
+                    "body text below the presentation body minimum")
+
+            for pattern in PLACEHOLDER_PATTERNS:
+                if pattern in text:
+                    add("VIS-PLACEHOLDER", o, pattern, "real authored text",
+                        "scaffold/placeholder phrase found on the slide")
+                    break
+
+            if g and any(ch.isalnum() for ch in text):
+                need = _text_need_in(o, slide_w)
+                box_h = g["h"] * 7.5
+                if need == math.inf or need > box_h * 1.15:
+                    add("VIS-CLIPPED", o,
+                        "inf" if need == math.inf else round(need, 2),
+                        round(box_h, 2), "text needs more height than its box")
+                safe = 0.03
+                if (g["x"] < safe or g["y"] < safe
+                        or g["x"] + g["w"] > 1 - safe or g["y"] + g["h"] > 1 - safe):
+                    add("VIS-CLIPPED", o,
+                        [round(g["x"], 3), round(g["y"], 3),
+                         round(g["x"] + g["w"], 3), round(g["y"] + g["h"], 3)],
+                        f"inside {int(safe * 100)}% safe margin",
+                        "text box touches or crosses the slide edge")
+
+        # A card is a promise: a large filled surface must carry content.
+        text_children = [t for t in slide.get("objects", [])
+                         if t is not o and (t.get("text") or "").strip()
+                         and _visual_contains(o, t)]
+        if (not decorative and o.get("filled") and g and area >= 0.05
+                and any(k in low for k in ("card", "tile", "box", "panel"))):
+            if not text_children and not text:
+                add("VIS-EMPTY-CARD", o, 0, ">= 1 word or an image",
+                    "large filled card with no text")
+        # A large content field with only a label reads as an empty card too.
+        if (not decorative and g and area >= 0.12
+                and any(k in low for k in ("content", "body", "desc"))
+                and 0 < len(text.split()) <= 7):
+            add("VIS-EMPTY-CARD", o, len(text.split()), ">= 8 words or an image",
+                "large content field holds only a label")
+
+    # VIS-COLLIDE needs rendered motion frames (T073); it is exposed by
+    # collision_findings() for that gate and intentionally not guessed here.
+
+    # Declared style vs the fonts actually in the theme.
+    if style and theme_fonts:
+        expected = style.get("fonts") or []
+        if isinstance(expected, str):
+            expected = [expected]
+        actual = {str(v).lower() for v in theme_fonts.values() if v}
+        missing = [f for f in expected if str(f).lower() not in actual]
+        if missing:
+            out.append({"code": "VIS-STYLE-DROP", "object": None,
+                        "measured": ", ".join(missing), "expected": "theme font",
+                        "detail": "declared style font is not in the deck theme"})
+    return out
+
+
+def collision_findings(pairs):
+    """VIS-COLLIDE for T073 frame pairs: ``{slide, a, b, click}``."""
+    out = []
+    for p in pairs:
+        a, b = p.get("a") or {}, p.get("b") or {}
+        share = _visual_overlap(a, b)
+        if share >= 0.55:
+            out.append({"code": "VIS-COLLIDE", "slide": p.get("slide"),
+                        "object": a.get("name"), "measured": round(share, 2),
+                        "expected": "< 0.55 overlap",
+                        "detail": f"overlaps '{b.get('name')}' in click {p.get('click')}"})
+    return out
+
+
+def critique(path, render=None, xsd=None, style=None):
     path=Path(path)
     model=md.deck_model(path)
     pkg=mstu.Package(path)
@@ -789,6 +973,10 @@ def critique(path,render=None,xsd=None):
             check("NAR-ALIGN", "note", idx, None, "no screenplay cues", "[T=0] and [CLICK] cues in speaker notes",
                   "animated slide lacks choreographed speaker notes")
 
+        for finding in visual_findings(s, groups=click_groups, style=style, theme_fonts=fonts):
+            check(finding["code"], "warn", idx, finding.get("object"),
+                  finding.get("measured"), finding.get("expected"), finding.get("detail", ""))
+
         slides.append(info)
 
     # ---- deck level
@@ -912,11 +1100,13 @@ def main():
     ap=argparse.ArgumentParser(description=__doc__,formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("pptx",type=Path)
     ap.add_argument("--render",help="'deckcraft'/'dc' (native ArtCraft), 'lo' (LibreOffice), or a directory of slide-NN.png")
+    ap.add_argument("--style",type=Path,help="optional VisualStyle/1 JSON to check for VIS-STYLE-DROP")
     ap.add_argument("--xsd",type=Path,default=os.environ.get("PPTX_PML_XSD"))
     ap.add_argument("--md",type=Path)
     ap.add_argument("-o","--output",type=Path)
     a=ap.parse_args()
-    v=critique(a.pptx,a.render,a.xsd)
+    style=json.loads(a.style.read_text(encoding="utf-8")) if a.style else None
+    v=critique(a.pptx,a.render,a.xsd,style)
     text=json.dumps(v,indent=1,ensure_ascii=False,default=list)
     if a.output:
         a.output.write_text(text+"\n",encoding="utf-8")
