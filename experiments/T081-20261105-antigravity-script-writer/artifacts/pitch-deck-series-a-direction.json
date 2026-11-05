@@ -1,0 +1,368 @@
+{
+  "brief": {
+    "title": "Mở màn & Cú đặt cược vào cấu trúc",
+    "one_sentence": "Aether thay thế phần mềm rời rạc bằng hệ điều hành nhận thức tự hành cho doanh nghiệp.",
+    "audience": "Các General Partners tại các quỹ đầu tư mạo hiểm hàng đầu (Top-tier VCs). Họ nghe hàng chục pitch mỗi tháng, cực kỳ hoài nghi các lời hứa viển vông về AI, dị ứng với các biểu đồ hockey-stick không có cơ sở, và luôn cảnh giác trước nguy cơ bị Big Tech đè bẹp.",
+    "duration": "8–10 phút, 8 cảnh, 14 click."
+  },
+  "style": {
+    "theme": "editorial",
+    "register": "Sắc bén, đối thoại ngang hàng, đi thẳng vào số liệu và cơ chế nguyên tử; tuyệt đối không dùng buzzword ca tụng viển vông."
+  },
+  "beats": [
+    {
+      "id": "b1",
+      "scene": "s1",
+      "job": "define",
+      "claim": "Mở màn & Cú đặt cược vào cấu trúc",
+      "clicks": [
+        {
+          "id": "b1.1",
+          "says": "Thưa các anh chị, trong suốt hai mươi năm qua, toàn bộ ngành công nghệ đã hứa với các tập đoàn rằng: cứ mua thêm phần mềm thì năng suất sẽ tự động tăng lên. Nhưng thực tế hôm nay lại hoàn toàn ngược lại.",
+          "lead_in": "Thưa các anh chị, trong suốt hai mươi năm qua, toàn bộ ngành công nghệ đã hứa với các tập đoàn rằng: cứ mua thêm phần mềm thì năng suất sẽ tự động tăng lên.",
+          "post_click_says": "Nhưng thực tế hôm nay lại hoàn toàn ngược lại."
+        }
+      ]
+    },
+    {
+      "id": "b2",
+      "scene": "s2",
+      "job": "define",
+      "claim": "Nỗi đau thực tế: Khủng hoảng 130 công cụ SaaS",
+      "clicks": [
+        {
+          "id": "b2.1",
+          "says": "Một tập đoàn quy mô trung bình hiện nay phải duy trì tới 130 công cụ SaaS độc lập. Hàng nghìn nhân viên tri thức không còn thời gian để sáng tạo, mà mất tới 4.2 giờ mỗi ngày chỉ để copy paste dữ liệu thủ công giữa các ô cửa sổ. Doanh nghiệp không hề thiếu công cụ;",
+          "lead_in": "Một tập đoàn quy mô trung bình hiện nay phải duy trì tới 130 công cụ SaaS độc lập. Hàng nghìn nhân viên tri thức không còn thời gian để sáng tạo,",
+          "post_click_says": "mà mất tới 4.2 giờ mỗi ngày chỉ để copy paste dữ liệu thủ công giữa các ô cửa sổ. Doanh nghiệp không hề thiếu công cụ;"
+        },
+        {
+          "id": "b2.2",
+          "says": "thứ họ thiếu là một bộ não trung tâm để vận hành đồng bộ các công cụ đó.",
+          "lead_in": "",
+          "post_click_says": "thứ họ thiếu là một bộ não trung tâm để vận hành đồng bộ các công cụ đó."
+        }
+      ]
+    },
+    {
+      "id": "b3",
+      "scene": "s3",
+      "job": "define",
+      "claim": "Xung đột bản chất: Vì sao Chatbot LLM thất bại",
+      "clicks": [
+        {
+          "id": "b3.1",
+          "says": "Phản xạ đầu tiên của cả thị trường là đưa chatbot vào từng ứng dụng. Nhưng chatbot chỉ biết nói chuyện khi con người hỏi; nó không có ngữ cảnh sâu về quy trình nội bộ, và nguy hiểm nhất: nó không thể chịu trách nhiệm bấm nút thực thi.",
+          "lead_in": "Phản xạ đầu tiên của cả thị trường là đưa chatbot vào từng ứng dụng. Nhưng chatbot chỉ biết nói chuyện khi con người hỏi;",
+          "post_click_says": "nó không có ngữ cảnh sâu về quy trình nội bộ, và nguy hiểm nhất: nó không thể chịu trách nhiệm bấm nút thực thi."
+        },
+        {
+          "id": "b3.2",
+          "says": "Doanh nghiệp không cần thêm một người trợ lý để chat; họ cần một hệ thống tự hành biết nhìn, biết nghĩ và tự làm việc.",
+          "lead_in": "",
+          "post_click_says": "Doanh nghiệp không cần thêm một người trợ lý để chat; họ cần một hệ thống tự hành biết nhìn, biết nghĩ và tự làm việc."
+        }
+      ]
+    },
+    {
+      "id": "b4",
+      "scene": "s4",
+      "job": "define",
+      "claim": "Giải pháp Aether: Kiến trúc 3 tầng nhận thức",
+      "clicks": [
+        {
+          "id": "b4.1",
+          "says": "Đây là kiến trúc của Aether. Vòng ngoài cùng liên tục quan sát màn hình làm việc của nhân sự để hiểu quy trình thực tế. Vòng giữa phân rã công việc thành các tác vụ nhỏ cho mạng lưới Agent chuyên biệt giải quyết.",
+          "lead_in": "Đây là kiến trúc của Aether. Vòng ngoài cùng liên tục quan sát màn hình làm việc của nhân sự để hiểu quy trình thực tế.",
+          "post_click_says": "Vòng giữa phân rã công việc thành các tác vụ nhỏ cho mạng lưới Agent chuyên biệt giải quyết."
+        },
+        {
+          "id": "b4.2",
+          "says": "Nhưng mấu chốt nằm ở vòng lõi: chúng tôi không dùng LLM để đoán mò, mà biên dịch trực tiếp sang các API an toàn, có kiểm toán và bảo đảm chính xác 100%.",
+          "lead_in": "",
+          "post_click_says": "Nhưng mấu chốt nằm ở vòng lõi: chúng tôi không dùng LLM để đoán mò, mà biên dịch trực tiếp sang các API an toàn, có kiểm toán và bảo đảm chính xác 100%."
+        }
+      ]
+    },
+    {
+      "id": "b5",
+      "scene": "s5",
+      "job": "define",
+      "claim": "Minh chứng thị trường: $4.2M ARR & 148% NRR",
+      "clicks": [
+        {
+          "id": "b5.1",
+          "says": "Chúng tôi không nói về lời hứa tương lai; chúng tôi nói về kết quả đã kiểm chứng. Trong 14 tháng qua, Aether đã cán mốc 4.2 triệu USD ARR từ 38 tập đoàn lớn.",
+          "lead_in": "Chúng tôi không nói về lời hứa tương lai; chúng tôi nói về kết quả đã kiểm chứng. Trong 14 tháng qua, Aether đã cán mốc",
+          "post_click_says": "4.2 triệu USD ARR từ 38 tập đoàn lớn."
+        },
+        {
+          "id": "b5.2",
+          "says": "Và quan trọng hơn cả: tỷ lệ mở rộng doanh thu thuần (Net Retention Rate) đạt 148% — một khi doanh nghiệp đã đưa Aether vào vận hành, họ không bao giờ rút ra.",
+          "lead_in": "",
+          "post_click_says": "Và quan trọng hơn cả: tỷ lệ mở rộng doanh thu thuần (Net Retention Rate) đạt 148% — một khi doanh nghiệp đã đưa Aether vào vận hành, họ không bao giờ rút ra."
+        }
+      ]
+    },
+    {
+      "id": "b6",
+      "scene": "s6",
+      "job": "define",
+      "claim": "Đơn vị kinh tế: Biên lợi nhuận gộp 82%",
+      "clicks": [
+        {
+          "id": "b6.1",
+          "says": "Nỗi lo lớn nhất với các công ty AI là chi phí suy luận GPU ăn mòn toàn bộ lợi nhuận. Aether giải quyết điều này bằng kiến trúc suy luận phân tầng: 80% tác vụ lặp lại được xử lý bằng mô hình nhỏ chạy cục bộ. Nhờ đó, biên lợi nhuận gộp của chúng tôi đạt 82%.",
+          "lead_in": "Nỗi lo lớn nhất với các công ty AI là chi phí suy luận GPU ăn mòn toàn bộ lợi nhuận. Aether giải quyết điều này bằng kiến trúc suy luận phân tầng: 80% tác vụ lặp lại được xử lý bằng mô hình nhỏ chạy cục bộ.",
+          "post_click_says": "Nhờ đó, biên lợi nhuận gộp của chúng tôi đạt 82%."
+        },
+        {
+          "id": "b6.2",
+          "says": "Với hợp đồng trung bình 120,000 USD mỗi năm, chúng tôi thu hồi toàn bộ chi phí bán hàng chỉ sau 4.5 tháng.",
+          "lead_in": "",
+          "post_click_says": "Với hợp đồng trung bình 120,000 USD mỗi năm, chúng tôi thu hồi toàn bộ chi phí bán hàng chỉ sau 4.5 tháng."
+        }
+      ]
+    },
+    {
+      "id": "b7",
+      "scene": "s7",
+      "job": "define",
+      "claim": "Hào lũy cạnh tranh: Đồ thị quy trình độc quyền",
+      "clicks": [
+        {
+          "id": "b7.1",
+          "says": "Các mô hình nền tảng như GPT hay Claude sẽ ngày càng thông minh hơn và rẻ hơn, nhưng chúng chỉ được huấn luyện từ dữ liệu công khai trên web. Aether nắm giữ thứ mà không web crawler nào chạm tới được: Đồ thị hành vi và quy trình vận hành thực tế của từng ngành. Càng vận hành, Aether càng hiểu sâu đặc thù doanh nghiệp,",
+          "lead_in": "Các mô hình nền tảng như GPT hay Claude sẽ ngày càng thông minh hơn và rẻ hơn, nhưng chúng chỉ được huấn luyện từ dữ liệu công khai trên web.",
+          "post_click_says": "Aether nắm giữ thứ mà không web crawler nào chạm tới được: Đồ thị hành vi và quy trình vận hành thực tế của từng ngành. Càng vận hành, Aether càng hiểu sâu đặc thù doanh nghiệp,"
+        },
+        {
+          "id": "b7.2",
+          "says": "tạo ra một rào cản chuyển đổi mà không đối thủ nào có thể vượt qua.",
+          "lead_in": "",
+          "post_click_says": "tạo ra một rào cản chuyển đổi mà không đối thủ nào có thể vượt qua."
+        }
+      ]
+    },
+    {
+      "id": "b8",
+      "scene": "s8",
+      "job": "define",
+      "claim": "Lời kêu gọi: $12M Series A",
+      "clicks": [
+        {
+          "id": "b8.1",
+          "says": "Chúng tôi đang kêu gọi 12 triệu USD cho vòng Series A để nhân rộng đội ngũ kỹ sư lõi và mở rộng thị phần tại 100 tập đoàn tài chính lớn nhất. Chúng tôi không tạo ra một phần mềm phụ trợ; chúng tôi đang xây dựng hệ điều hành nhận thức cho mười năm tới. Xin mời các anh chị cùng tham gia.",
+          "lead_in": "Chúng tôi đang kêu gọi 12 triệu USD cho vòng Series A để nhân rộng đội ngũ kỹ sư lõi và mở rộng thị phần tại 100 tập đoàn tài chính lớn nhất.",
+          "post_click_says": "Chúng tôi không tạo ra một phần mềm phụ trợ; chúng tôi đang xây dựng hệ điều hành nhận thức cho mười năm tới. Xin mời các anh chị cùng tham gia."
+        }
+      ]
+    }
+  ],
+  "shots": [
+    {
+      "id": "sh1",
+      "beat_id": "b1",
+      "layout": "title",
+      "t0_says": "Thưa các anh chị, trong suốt hai mươi năm qua, toàn bộ ngành công nghệ đã hứa với các tập đoàn rằng: cứ mua thêm phần mềm thì năng suất sẽ tự động tăng lên.",
+      "base_objects": [
+        {
+          "id": "Title",
+          "role": "title",
+          "text": "Mở màn & Cú đặt cược vào cấu trúc"
+        }
+      ],
+      "clicks": [
+        {
+          "beat_click_id": "b1.1",
+          "enter": [
+            "Points"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sh2",
+      "beat_id": "b2",
+      "layout": "asymmetric",
+      "t0_says": "Một tập đoàn quy mô trung bình hiện nay phải duy trì tới 130 công cụ SaaS độc lập. Hàng nghìn nhân viên tri thức không còn thời gian để sáng tạo,",
+      "base_objects": [
+        {
+          "id": "Title",
+          "role": "title",
+          "text": "Nỗi đau thực tế: Khủng hoảng 130 công cụ SaaS"
+        }
+      ],
+      "clicks": [
+        {
+          "beat_click_id": "b2.1",
+          "enter": [
+            "Points"
+          ]
+        },
+        {
+          "beat_click_id": "b2.2",
+          "enter": [
+            "Points"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sh3",
+      "beat_id": "b3",
+      "layout": "asymmetric",
+      "t0_says": "Phản xạ đầu tiên của cả thị trường là đưa chatbot vào từng ứng dụng. Nhưng chatbot chỉ biết nói chuyện khi con người hỏi;",
+      "base_objects": [
+        {
+          "id": "Title",
+          "role": "title",
+          "text": "Xung đột bản chất: Vì sao Chatbot LLM thất bại"
+        }
+      ],
+      "clicks": [
+        {
+          "beat_click_id": "b3.1",
+          "enter": [
+            "Points"
+          ]
+        },
+        {
+          "beat_click_id": "b3.2",
+          "enter": [
+            "Points"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sh4",
+      "beat_id": "b4",
+      "layout": "asymmetric",
+      "t0_says": "Đây là kiến trúc của Aether. Vòng ngoài cùng liên tục quan sát màn hình làm việc của nhân sự để hiểu quy trình thực tế.",
+      "base_objects": [
+        {
+          "id": "Title",
+          "role": "title",
+          "text": "Giải pháp Aether: Kiến trúc 3 tầng nhận thức"
+        }
+      ],
+      "clicks": [
+        {
+          "beat_click_id": "b4.1",
+          "enter": [
+            "Points"
+          ]
+        },
+        {
+          "beat_click_id": "b4.2",
+          "enter": [
+            "Points"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sh5",
+      "beat_id": "b5",
+      "layout": "asymmetric",
+      "t0_says": "Chúng tôi không nói về lời hứa tương lai; chúng tôi nói về kết quả đã kiểm chứng. Trong 14 tháng qua, Aether đã cán mốc",
+      "base_objects": [
+        {
+          "id": "Title",
+          "role": "title",
+          "text": "Minh chứng thị trường: $4.2M ARR & 148% NRR"
+        }
+      ],
+      "clicks": [
+        {
+          "beat_click_id": "b5.1",
+          "enter": [
+            "Points"
+          ]
+        },
+        {
+          "beat_click_id": "b5.2",
+          "enter": [
+            "Points"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sh6",
+      "beat_id": "b6",
+      "layout": "asymmetric",
+      "t0_says": "Nỗi lo lớn nhất với các công ty AI là chi phí suy luận GPU ăn mòn toàn bộ lợi nhuận. Aether giải quyết điều này bằng kiến trúc suy luận phân tầng: 80% tác vụ lặp lại được xử lý bằng mô hình nhỏ chạy cục bộ.",
+      "base_objects": [
+        {
+          "id": "Title",
+          "role": "title",
+          "text": "Đơn vị kinh tế: Biên lợi nhuận gộp 82%"
+        }
+      ],
+      "clicks": [
+        {
+          "beat_click_id": "b6.1",
+          "enter": [
+            "Points"
+          ]
+        },
+        {
+          "beat_click_id": "b6.2",
+          "enter": [
+            "Points"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sh7",
+      "beat_id": "b7",
+      "layout": "asymmetric",
+      "t0_says": "Các mô hình nền tảng như GPT hay Claude sẽ ngày càng thông minh hơn và rẻ hơn, nhưng chúng chỉ được huấn luyện từ dữ liệu công khai trên web.",
+      "base_objects": [
+        {
+          "id": "Title",
+          "role": "title",
+          "text": "Hào lũy cạnh tranh: Đồ thị quy trình độc quyền"
+        }
+      ],
+      "clicks": [
+        {
+          "beat_click_id": "b7.1",
+          "enter": [
+            "Points"
+          ]
+        },
+        {
+          "beat_click_id": "b7.2",
+          "enter": [
+            "Points"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sh8",
+      "beat_id": "b8",
+      "layout": "asymmetric",
+      "t0_says": "Chúng tôi đang kêu gọi 12 triệu USD cho vòng Series A để nhân rộng đội ngũ kỹ sư lõi và mở rộng thị phần tại 100 tập đoàn tài chính lớn nhất.",
+      "base_objects": [
+        {
+          "id": "Title",
+          "role": "title",
+          "text": "Lời kêu gọi: $12M Series A"
+        }
+      ],
+      "clicks": [
+        {
+          "beat_click_id": "b8.1",
+          "enter": [
+            "Points"
+          ]
+        }
+      ]
+    }
+  ]
+}
