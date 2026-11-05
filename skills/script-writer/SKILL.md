@@ -63,7 +63,24 @@ Chọn động từ hành động diễn tả đúng bản chất của cảnh v
 ## 3. Bảng 15 Động Từ Hành Động Chuẩn Hóa
 
 | Động từ kịch bản | Chuyển động tương ứng | Kiểu | Mô tả hành động thị giác |
-|---|---|---|---|
+|
+### 3.1 Tiêu Chuẩn Phân Cảnh Đạo Diễn Chi Tiết (Detailed Choreography Specification)
+
+> [!IMPORTANT]
+> **Chống mô tả cảm tính (4/10):** Một kịch bản chỉ ghi *"bánh đà phát sáng rực rỡ"* hay *"dữ liệu trượt vào"* sẽ khiến compiler/animator bị lạc đường ngay lập tức khi gặp chuyển động phức tạp.
+> Một phân cảnh đạo diễn chuẩn mực phải ghi rõ **5 thành tố kỹ thuật nguyên tử**:
+
+1. **Định danh vật thể tác động (Target Actor ID):** Chỉ rõ tên chính xác của phần tử (sử dụng tiền tố `!!id` nếu là diễn viên Morph bền vững xuyên slide, ví dụ: `!!flywheel`, `!!metric-arr`, `!!card_nrr`).
+2. **Biến thiên trạng thái nguyên tử (Atomic State Delta):**
+   - *Hình học & Tọa độ:* Vị trí tương đối `(x, y, w, h)`, tỉ lệ phóng to/thu nhỏ (`scale: 115%` hoặc `scale: 40%`), góc xoay (`spin: 60 deg clockwise`).
+   - *Thị giác & Vật liệu:* Độ mờ (`opacity: 100% → 20%` để dim), màu viền/nền (`#EF4444`, `#10B981`, `#F59E0B`).
+3. **Cơ chế thực thi kỹ thuật (Execution Mechanism):**
+   - *Chuyển động trong slide:* Tên hiệu ứng preset cụ thể (`Wipe`, `Fade`, `Grow/Shrink`, `Color Pulse`, `Spin`, `Descend`, `Fly In/Out`).
+   - *Chuyển động Morph liên slide:* Tuân thủ nghiêm ngặt 11 luật Morph của T074 (giữ nguyên shape type theo luật M-02, **không đặt entrance effect ở slide đích** theo luật M-07, không ungroup nhóm theo luật M-05).
+4. **Thời lượng & Nhịp điệu (Timing & Easing):** Ghi rõ thời gian tính bằng mili-giây (ví dụ: `duration: 400ms`, `duration: 700ms`, `morph: 1.2s`), độ trễ phân tầng giữa các phần tử (`stagger: 100ms`), và đường cong gia tốc (`ease-out`, `smooth-step`).
+5. **Dồn tiêu điểm thị giác (Eye Gaze & Dimming):** Khi một phần tử trọng tâm được kích hoạt, các phần tử xung quanh phải chủ động lùi mờ (`dim: opacity 20–40%`) để khán giả không bị phân tán mắt nhìn.
+
+---|---|---|---|
 | **soi** | Spotlight / Focus | Trong slide / Morph | Thấu kính hoặc quầng sáng lướt qua các đối tượng rồi dừng lại ở trọng tâm |
 | **gom thành hệ thống** | Converge | Morph | Các mảnh rời rạc bay vào khung tròn/hộp và tự động xếp thẳng hàng |
 | **cân nhắc** | Hold (Lặng căng thẳng) | Trong slide | Đứng yên hoàn toàn; cân thăng bằng khi câu hỏi lớn được nêu ra |

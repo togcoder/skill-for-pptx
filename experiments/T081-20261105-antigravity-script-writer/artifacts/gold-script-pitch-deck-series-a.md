@@ -1,9 +1,9 @@
 # Kịch bản Mẫu Vàng: Pitch Deck Gọi Vốn Series A ($12M)
 ## Aether Cognition — The Autonomous Cognitive OS for Enterprise Work
 
-- **Tác giả:** Antigravity (Gemini 2.5 Pro), thực hiện theo chuẩn `script-writer` (T081/T082), 2026-11-05.
-- **Mục đích:** Kịch bản mẫu vàng cho thể loại **Pitch Deck Gọi Vốn Công Nghệ (Series A)** để chủ dự án chấm bản chữ, làm chuẩn mực cho bài test A/B mù (T079).
-- **Trạng thái:** Bản chữ, **chờ chủ dự án duyệt** trước khi dựng slide.
+- **Tác giả:** Antigravity (Gemini 2.5 Pro), thực hiện theo chuẩn `script-writer` v1.1 (T081/T082), 2026-11-05.
+- **Mục đích:** Kịch bản mẫu vàng cho thể loại **Pitch Deck Gọi Vốn Công Nghệ (Series A)** với **Phân Cảnh Đạo Diễn Chi Tiết (Detailed Choreography)** đạt chuẩn công nghiệp, không để compiler hay animator bị lạc đường.
+- **Trạng thái:** Bản chữ nâng cấp toàn diện phần Động từ Chuyển động, **chờ chủ dự án duyệt**.
 
 ---
 
@@ -11,7 +11,7 @@
 
 | Ô | Nội dung |
 |---|---|
-| Người nghe | Các General Partners tại các quỹ đầu tư mạo hiểm hàng đầu (Top-tier VCs). Họ nghe hàng chục pitch mỗi tháng, cực kỳ hoài nghi các lời hứa viển vông về AI, dị ứng với các biểu đồ hockey-stick không có cơ sở, và luôn cảnh giác trước nguy cơ bị Big Tech đè bẹp. |
+| Người nghe | Các General Partners tại các quỹ đầu tư mạo hiểm hàng đầu (Top-tier VCs). Họ nghe hàng chục bài pitch mỗi tháng, cực kỳ hoài nghi các lời hứa viển vông về AI, dị ứng với biểu đồ hockey-stick không có cơ sở, và luôn cảnh giác trước nguy cơ bị Microsoft/Google đè bẹp. |
 | Họ đang tin | "Lại thêm một startup làm vỏ bọc (wrapper) cho OpenAI; công ty này sẽ bị Microsoft Copilot nghiền nát khi họ cập nhật tính năng mới." |
 | Sau buổi họ phải tin | "Aether không phải chatbot mà là hệ điều hành nhận thức tự hành; họ sở hữu rào cản độc quyền về dữ liệu quy trình và đã chứng minh bằng 4.2 triệu USD ARR thực tế." |
 | Câu xương sống (≤ 20 từ) | Aether thay thế phần mềm rời rạc bằng hệ điều hành nhận thức tự hành cho doanh nghiệp. |
@@ -26,10 +26,17 @@
 ## Cảnh 1. Mở màn & Cú đặt cược vào cấu trúc
 
 - **Chuyển dịch:** "Lại một startup AI đến xin tiền" → "Họ đang chỉ ra một điểm gãy cấu trúc của toàn ngành phần mềm."
-- **Trên màn hình lúc mở:** Tiêu đề lớn `AETHER COGNITION` với biểu tượng bánh đà nhận thức `!!flywheel` tĩnh, viền xanh tím sâu. Dòng phụ đề: *"The Autonomous Cognitive OS for Enterprise Work"*.
+- **Trên màn hình lúc mở:**
+  - `!!flywheel` (nhóm 3 vòng tròn đồng tâm, đường kính 2.5 inch, viền xanh tím `#3B82F6` dày 1.5pt, nền rỗng `#0F172A`) đặt tĩnh tại trung tâm màn hình `(x=0.41, y=0.28)`.
+  - Tiêu đề chính `AETHER COGNITION` (font Neue Haas / Arial Bold, 44pt, màu trắng `#FFFFFF`) đặt bên dưới bánh đà tại `(x=0.20, y=0.55, w=0.60, h=0.12)`.
+  - Dòng phụ đề: *"The Autonomous Cognitive OS for Enterprise Work"* đặt tại `(x=0.25, y=0.68, w=0.50, h=0.08)` nhưng ở trạng thái ẩn hoàn toàn (`opacity: 0%`).
 - **Lời nói:**
   > Thưa các anh chị, trong suốt hai mươi năm qua, toàn bộ ngành công nghệ đã hứa với các tập đoàn rằng: cứ mua thêm phần mềm thì năng suất sẽ tự động tăng lên. **[CLICK]** Nhưng thực tế hôm nay lại hoàn toàn ngược lại.
-- **Động từ → chuyển động:** *soi* → bánh đà `!!flywheel` phát sáng một xung nhịp xanh điện, quầng sáng lướt qua tiêu đề và dừng lại, rọi sáng dòng phụ đề định danh bản chất.
+- **Động từ → chuyển động:**
+  - *soi* → Tại click 1:
+    - **Vật thể `!!flywheel`:** Kích hoạt hiệu ứng `Grow/Shrink` nở nhẹ 105% (duration 400ms, ease-out), đồng thời viền đổi màu nhấp nháy từ xanh tím `#3B82F6` sang xanh điện rực rỡ `#60A5FA` (`Color Pulse`, duration 400ms).
+    - **Dòng phụ đề:** Xuất hiện bằng hiệu ứng `Float Up / Fade In` (dịch chuyển `dy = -0.03`, duration 500ms, delay 150ms sau pulse của bánh đà), độ mờ chuyển từ `0%` → `100%`, màu vàng kim nhạt `#FDE047` để dồn toàn bộ tiêu điểm thị giác vào cụm từ định danh *"Hệ điều hành nhận thức tự hành"*.
+    - **Tiêu đề chính:** Giữ nguyên 100% độ sáng, không đổi tọa độ.
 - **Vì sao:** Đánh thẳng vào mâu thuẫn lớn nhất của ngành phần mềm doanh nghiệp, không chào hỏi dài dòng hay giới thiệu lý lịch người sáng lập.
 
 ---
@@ -37,13 +44,16 @@
 ## Cảnh 2. Nỗi đau thực tế: Khủng hoảng 130 công cụ SaaS
 
 - **Chuyển dịch:** "Doanh nghiệp chỉ cần đào tạo nhân viên dùng tool tốt hơn" → "Vấn đề nằm ở cấu trúc: con người đang phải làm keo dán thủ công giữa 130 hệ thống."
-- **Morph từ cảnh 1:** Bánh đà `!!flywheel` thu nhỏ lại thành biểu tượng hạt nhân ở góc trái; trên màn hình bung ra ma trận 130 khối hộp rời rạc `!!silos`.
-- **Trên màn hình lúc mở:** Ma trận 130 khối hộp màu xám mờ tượng trưng cho Salesforce, Workday, SAP, Jira.
+- **Morph từ cảnh 1:**
+  - Diễn viên bền vững `!!flywheel` giữ nguyên nhóm 3 vòng tròn (cùng shape type theo luật M-02, KHÔNG mang entrance effect theo luật M-07) trượt mượt mà từ trung tâm sang góc trên bên trái `(x=0.06, y=0.08)`, thu nhỏ tỉ lệ từ 2.5 inch xuống 1.0 inch (`scale: 40%`, duration 1.2s), độ mờ giảm xuống 60% làm biểu tượng hạt nhân nền.
+- **Trên màn hình lúc mở:**
+  - Ma trận `!!silos` gồm 130 ô vuông nhỏ (kích thước mỗi ô 0.12×0.12 inch xếp thành lưới 13 hàng × 10 cột tại khu vực `(x=0.15, y=0.25, w=0.70, h=0.60)`). Toàn bộ 130 ô có màu xám mờ `#334155` (độ mờ 40%), mô phỏng các silo rời rạc (Salesforce, Workday, SAP, Jira).
 - **Lời nói:**
   > Một tập đoàn quy mô trung bình hiện nay phải duy trì tới 130 công cụ SaaS độc lập. Hàng nghìn nhân viên tri thức không còn thời gian để sáng tạo, **[CLICK]** mà mất tới 4.2 giờ mỗi ngày chỉ để copy paste dữ liệu thủ công giữa các ô cửa sổ. Doanh nghiệp không hề thiếu công cụ; **[CLICK]** thứ họ thiếu là một bộ não trung tâm để vận hành đồng bộ các công cụ đó.
 - **Động từ → chuyển động:**
-  - *nghiêng về* → click 1: các đường nối thủ công giữa các hộp `!!silos` chuyển đỏ rực, bật lên con số thiệt hại: *4.2h/ngày/nhân sự*;
-  - click 2: toàn bộ 130 hộp lùi mờ (dim 70%), ở giữa hiện lên khoảng trống nhức nhối: *The Missing Cognitive Layer*.
+  - *nghiêng về* →
+    - **Click 1 (Làm nổi bật tổn thất):** 60 ô ngẫu nhiên trong lưới `!!silos` chuyển viền sang đỏ cảnh báo `#EF4444` (`Color Pulse`, duration 300ms), đồng thời các đường nối chằng chịt màu đỏ giữa các ô xuất hiện (`Wipe from Left`, duration 400ms) mô phỏng dòng copy thủ công. Thẻ thiệt hại `!!card_loss` hiện lên ở trung tâm `(x=0.35, y=0.40, w=0.30, h=0.25)` bằng hiệu ứng `Zoom In` (duration 400ms) với con số đỏ lớn **4.2 Giờ/Ngày** (font 36pt màu `#EF4444`) và phụ đề *"Copy-paste thủ công giữa 130 ứng dụng"*.
+    - **Click 2 (Khoảng trống cấu trúc):** Toàn bộ 130 ô `!!silos` và thẻ thiệt hại `!!card_loss` bị làm mờ đồng loạt (`dim: opacity 20%`, duration 400ms). Tại trung tâm hiện ra khung viền nét đứt màu xanh dương rực rỡ `#38BDF8` (`Fade In`, duration 500ms) với dòng chữ: **"THE MISSING COGNITIVE LAYER"** (font 28pt) — xác lập chính xác khoảng trống thị trường mà Aether giải quyết.
 - **Vì sao:** Nêu con số định lượng chính xác (130 công cụ, 4.2 giờ), vạch trần bản chất của sự lãng phí thay vì nói chung chung về chuyển đổi số.
 
 ---
@@ -51,12 +61,18 @@
 ## Cảnh 3. Xung đột bản chất: Vì sao Chatbot LLM thất bại
 
 - **Chuyển dịch:** "Sao không dùng Microsoft Copilot hay ChatGPT Enterprise?" → "Chatbot dạng hộp thoại không bao giờ giải quyết được bài toán tự hành trong doanh nghiệp."
-- **Trên màn hình lúc mở:** Hình ảnh một khung chatbox nhỏ bé đứng cô độc trước quy trình vận hành chằng chịt của doanh nghiệp.
+- **Trên màn hình lúc mở:**
+  - Nửa trái màn hình `(x=0.10, y=0.25, w=0.35, h=0.60)` đặt khung minh họa `!!chatbox_mockup` (hộp chatbox trắng với bong bóng chat xanh quen thuộc).
+  - Nửa phải `(x=0.50, y=0.25, w=0.42, h=0.60)` đặt sơ đồ quy trình nghiệp vụ phức tạp của doanh nghiệp (`!!process_tree`) với hàng chục nhánh điều kiện rẽ nhánh.
 - **Lời nói:**
   > Phản xạ đầu tiên của cả thị trường là đưa chatbot vào từng ứng dụng. Nhưng chatbot chỉ biết nói chuyện khi con người hỏi; **[CLICK]** nó không có ngữ cảnh sâu về quy trình nội bộ, và nguy hiểm nhất: nó không thể chịu trách nhiệm bấm nút thực thi. **[CLICK]** Doanh nghiệp không cần thêm một người trợ lý để chat; họ cần một hệ thống tự hành biết nhìn, biết nghĩ và tự làm việc.
 - **Động từ → chuyển động:**
-  - *loại bỏ, phủ định* $\rightarrow$ click 1: khung chatbox thu nhỏ, xuất hiện dấu gạch chéo đỏ và mờ dần ra khỏi màn hình;
-  - click 2: hiển thị 3 rào cản nguyên tử: *Zero Workflow Context · Hallucination Risk · Passive Waiting*.
+  - *loại bỏ, phủ định* →
+    - **Click 1 (Chỉ rõ 3 giới hạn tử huyệt):** Khung chatbox `!!chatbox_mockup` rung lắc nhẹ (`Teeter`, duration 300ms) biểu thị sự bối rối, sau đó 3 thẻ lỗi màu cam đỏ rơi xuống tuần tự (`Descend / Fly In`, duration 400ms, stagger 100ms):
+      1. *Zero Workflow Context* (Mù ngữ cảnh nghiệp vụ).
+      2. *Hallucination Risk* (Nguy cơ bịa đặt thông tin).
+      3. *Passive Waiting* (Bị động, chỉ chờ người dùng gõ lệnh).
+    - **Click 2 (Phủ định & Loại bỏ):** Một dấu gạch chéo đỏ lớn `#DC2626` (độ dày 4pt) vẽ chéo qua khung `!!chatbox_mockup` (`Wipe`, duration 300ms). Ngay sau đó, toàn bộ cụm `!!chatbox_mockup` mờ dần và trượt ra khỏi màn hình về bên trái (`Exit / Fly Out to Left`, `dx = -0.25`, `opacity: 0%`, duration 500ms). Khối sơ đồ quy trình bên phải `!!process_tree` sáng rực lên chuyển sang màu xanh dương, mở đường cho giải pháp tự hành thực thụ.
 - **Vì sao:** Trả lời trực diện hoài nghi lớn nhất của các nhà đầu tư: "Tại sao Big Tech Copilot không giải quyết được việc này?"
 
 ---
@@ -64,13 +80,24 @@
 ## Cảnh 4. Giải pháp Aether: Kiến trúc 3 tầng nhận thức
 
 - **Chuyển dịch:** "Họ làm cách nào khả thi về mặt kỹ thuật?" → "Kiến trúc tách rời nhận thức thành Quan sát, Suy luận và Thực thi có bảo đảm an toàn tuyệt đối."
-- **Morph từ cảnh 3:** Khung hình mở rộng, bánh đà `!!flywheel` phóng to trở lại trung tâm, phân rã thành 3 vòng tròn đồng tâm ăn khớp cơ học.
-- **Trên màn hình lúc mở:** Bánh đà 3 vòng: Vòng ngoài (Observation Layer), Vòng giữa (Multi-Agent Reasoning), Vòng lõi (Deterministic Execution Engine).
+- **Morph từ cảnh 3:**
+  - Diễn viên `!!flywheel` từ góc trái slide 2/3 phóng to trở lại vị trí trung tâm `(x=0.25, y=0.18, w=0.50, h=0.65)` (thời lượng Morph 1.2s), bung tách thành 3 vòng tròn đồng tâm có nhãn rõ ràng:
+    - Vòng ngoài cùng (`!!ring_obs`): Đường kính 5.5 inch, viền xanh lơ `#06B6D4` dày 2pt.
+    - Vòng ở giữa (`!!ring_reason`): Đường kính 4.0 inch, viền tím `#8B5CF6` dày 2pt.
+    - Vòng lõi trong cùng (`!!ring_exec`): Đường kính 2.5 inch, viền vàng kim `#EAB308` dày 2.5pt.
+- **Trên màn hình lúc mở:**
+  - Ba vòng tròn đồng tâm đứng yên, hiển thị nhãn 3 tầng. Tiêu đề: *Kiến Trúc 3 Tầng Nhận Thức Tự Hành*.
 - **Lời nói:**
   > Đây là kiến trúc của Aether. Vòng ngoài cùng liên tục quan sát màn hình làm việc của nhân sự để hiểu quy trình thực tế. **[CLICK]** Vòng giữa phân rã công việc thành các tác vụ nhỏ cho mạng lưới Agent chuyên biệt giải quyết. **[CLICK]** Nhưng mấu chốt nằm ở vòng lõi: chúng tôi không dùng LLM để đoán mò, mà biên dịch trực tiếp sang các API an toàn, có kiểm toán và bảo đảm chính xác 100%.
 - **Động từ → chuyển động:**
-  - *nối lại, vận động* $\rightarrow$ click 1: luồng dữ liệu trượt vào vòng Quan sát, kích hoạt mạng lưới Agent ở vòng giữa phát sáng;
-  - click 2: vòng lõi Thực thi quay và khóa cứng lại bằng màu vàng kim, các mũi tên API bắn thẳng vào các hệ thống đích.
+  - *nối lại, vận động* →
+    - **Click 1 (Vận hành Tầng Quan sát & Suy luận):**
+      - Vòng ngoài `!!ring_obs` xoay theo chiều kim đồng hồ 60° (`Spin`, duration 800ms, ease-in-out), phát xung ánh sáng xanh mô phỏng việc ghi nhận liên tục luồng thao tác màn hình.
+      - 4 nút biểu tượng Agent chuyên biệt (Finance, HR, Ops, Legal) trên vòng giữa `!!ring_reason` bật sáng tuần tự (`Zoom In`, stagger 120ms, duration 300ms), các đường nối quang học chạy ziczac giữa các Agent mô phỏng quá trình đa tác tử phản biện và phân rã nghiệp vụ.
+    - **Click 2 (Khóa cứng Tầng Thực thi Quyết định luận):**
+      - Vòng lõi `!!ring_exec` xoay ngược chiều kim đồng hồ 90° (`Spin`, duration 600ms), sau đó dừng khựng lại bằng hiệu ứng cơ học và chuyển màu từ vàng kim sang xanh lục bảo `#10B981` (biểu tượng an toàn tuyệt đối).
+      - Từ vòng lõi, 3 mũi tên API thẳng tắp bắn tỏa ra 3 hướng màn hình (`Wipe Outward`, duration 400ms) cắm thẳng vào các hệ thống ERP/CRM với nhãn: *Deterministic API Calls · Audit Log Verifiable*.
+      - Hai vòng ngoài tự động giảm độ sáng 40% (dim) để dồn toàn bộ sự chú ý của nhà đầu tư vào tính cam kết an toàn 100% của tầng lõi.
 - **Vì sao:** Phân tách rõ ràng giữa LLM suy luận (xác suất) và API thực thi chuẩn xác (toán học) — luận điểm kỹ thuật đắt giá nhất thuyết phục các VC công nghệ.
 
 ---
@@ -78,13 +105,17 @@
 ## Cảnh 5. Minh chứng thị trường: $4.2M ARR & 148% NRR
 
 - **Chuyển dịch:** "Sản phẩm nghe hay nhưng đã bán được chưa?" → "Tốc độ tăng trưởng và độ bám khách hàng chứng minh Product-Market Fit cực mạnh."
-- **Morph từ cảnh 4:** Bánh đà `!!flywheel` lùi xuống làm bệ đỡ phía dưới; phía trên vút lên cột mốc số liệu `!!metric-arr`.
-- **Trên màn hình lúc mở:** Ba chỉ số nền tảng: *38 Doanh nghiệp Khách hàng · $4.2M ARR*.
+- **Morph từ cảnh 4:**
+  - Bánh đà `!!flywheel` co nhỏ xuống góc dưới bên trái `(x=0.08, y=0.82, w=0.15, h=0.12)` làm bệ đỡ động lực.
+- **Trên màn hình lúc mở:**
+  - Trục tọa độ tăng trưởng và tiêu đề: *Minh Chứng Thực Tế: Tăng Trưởng & Độ Bám Khách Hàng*.
+  - Thẻ mốc ban đầu: *Q1/2025: $1.1M ARR* đặt tại tọa độ `(x=0.15, y=0.60)`.
 - **Lời nói:**
   > Chúng tôi không nói về lời hứa tương lai; chúng tôi nói về kết quả đã kiểm chứng. Trong 14 tháng qua, Aether đã cán mốc **[CLICK]** 4.2 triệu USD ARR từ 38 tập đoàn lớn. **[CLICK]** Và quan trọng hơn cả: tỷ lệ mở rộng doanh thu thuần (Net Retention Rate) đạt 148% — một khi doanh nghiệp đã đưa Aether vào vận hành, họ không bao giờ rút ra.
 - **Động từ → chuyển động:**
-  - *dâng lên, gặp nhau* $\rightarrow$ click 1: cột mốc $4.2M ARR dâng lên kèm đường cong tăng trưởng 3.8x năm-qua-năm;
-  - click 2: thẻ *NRR 148%* sáng bừng, làm mờ các chỉ số phụ để dồn toàn bộ tiêu điểm vào độ gắn kết khách hàng.
+  - *dâng lên, gặp nhau* →
+    - **Click 1 (Dâng trào Doanh thu $4.2M):** Cột biểu đồ doanh thu `!!metric-arr` vút dâng lên từ đáy theo phương thẳng đứng (`Wipe Up`, duration 700ms, ease-out) đạt mốc đỉnh `(x=0.45, y=0.25, w=0.25, h=0.55)`. Một đường cong tăng trưởng mượt mà nối từ $1.1M → $4.2M ARR vẽ dần theo bước dâng của cột (`Wipe`, duration 700ms). Thẻ số liệu lớn **$4.2M ARR** (font 48pt màu xanh lục `#10B981`) bung nở tại đỉnh cột (`Grow`, tỉ lệ 110% rồi trả về 100%, duration 350ms).
+    - **Click 2 (Tách thẻ NRR 148% dồn tiêu điểm):** Thẻ chỉ số **148% NRR** (`!!card_nrr`) tách ra từ cột doanh thu trượt sang bên phải `(x=0.62, y=0.35, w=0.30, h=0.38)` (`Fly In from Left`, duration 450ms). Viền thẻ NRR phát sáng vàng kim rực rỡ, toàn bộ phần biểu đồ bên trái lùi mờ (`dim: opacity 40%`). Dưới thẻ NRR hiện dòng phụ đề đắt giá: *"Net Negative Churn — Khách hàng cũ chi tiêu thêm 48% mỗi năm"*.
 - **Vì sao:** NRR 148% là con số "vàng" của SaaS doanh nghiệp, chứng minh khách hàng cũ liên tục chi thêm tiền mua thêm agent.
 
 ---
@@ -92,12 +123,23 @@
 ## Cảnh 6. Đơn vị kinh tế: Biên lợi nhuận gộp 82%
 
 - **Chuyển dịch:** "Chi phí token suy luận có ăn hết biên lợi nhuận không?" → "Biên lợi nhuận gộp 82% và thu hồi vốn 4.5 tháng chứng minh mô hình kinh doanh siêu bền vững."
-- **Trên màn hình lúc mở:** Hai thẻ số liệu lớn: *Gross Margin 82%* (`!!metric-margin`) và *CAC Payback 4.5 tháng*.
+- **Trên màn hình lúc mở:**
+  - Màn hình chia làm 3 cột số liệu tương đương:
+    - Cột 1: *Chi phí suy luận GPU thông thường* (chiếm 65% doanh thu của các app AI).
+    - Cột 2: *Gross Margin của Aether* (`!!metric-margin`, 82%).
+    - Cột 3: *CAC Payback* (4.5 tháng).
+  - Cả 3 cột đều có độ sáng đồng đều 80%.
 - **Lời nói:**
   > Nỗi lo lớn nhất với các công ty AI là chi phí suy luận GPU ăn mòn toàn bộ lợi nhuận. Aether giải quyết điều này bằng kiến trúc suy luận phân tầng: 80% tác vụ lặp lại được xử lý bằng mô hình nhỏ chạy cục bộ. **[CLICK]** Nhờ đó, biên lợi nhuận gộp của chúng tôi đạt 82%. **[CLICK]** Với hợp đồng trung bình 120,000 USD mỗi năm, chúng tôi thu hồi toàn bộ chi phí bán hàng chỉ sau 4.5 tháng.
 - **Động từ → chuyển động:**
-  - *nhấn một trong nhiều* $\rightarrow$ click 1: chi phí suy luận thu hẹp 75%, thẻ `!!metric-margin` phóng to nổi bật;
-  - click 2: thước đo thời gian thu hồi vốn co lại về mốc *4.5 tháng*, bật sáng nhãn *Cash-Flow Positive Unit*.
+  - *nhấn một trong nhiều* →
+    - **Click 1 (Nhấn Biên lợi nhuận gộp 82%):**
+      - Cột 1 (Chi phí GPU) co rút chiều cao từ 65% xuống còn 18% (`Wipe Down`, duration 500ms) kèm chú thích: *"80% tác vụ dùng SLM chạy tại chỗ, chi phí token giảm 3.6 lần"*.
+      - Cột 2 (`!!metric-margin`) phóng to (scale 115%, duration 400ms, dịch chuyển vào vị trí trung tâm `(x=0.32, y=0.22, w=0.36, h=0.62)`), nền chuyển sang xanh lục bảo đậm `#064E3B`, viền sáng xanh lá, con số **82% Gross Margin** nhấp nháy sáng một nhịp.
+      - Cột 1 và Cột 3 bị làm mờ sâu (`dim: opacity 25%`).
+    - **Click 2 (Kích hoạt Tốc độ Thu hồi vốn):**
+      - Cột 3 (CAC Payback) bừng sáng trở lại (`opacity: 100%`, scale 110%, duration 400ms), thước đo thời gian co ngắn từ mốc 14 tháng (trung bình ngành) về con số sắc lẹm: **4.5 Tháng**.
+      - Bên dưới xuất hiện con dấu phê duyệt màu xanh: *"LTV / CAC = 6.8x · Cash-Flow Positive Per Account"*.
 - **Vì sao:** Đập tan định kiến "AI margin squeeze" của nhà đầu tư bằng giải pháp kỹ thuật cụ thể (SLM chạy cục bộ cho 80% tác vụ lặp lại).
 
 ---
@@ -105,12 +147,20 @@
 ## Cảnh 7. Hào lũy cạnh tranh: Đồ thị quy trình độc quyền
 
 - **Chuyển dịch:** "Nếu OpenAI hay Big Tech sao chép tính năng này thì sao?" → "Hào lũy không nằm ở model mà nằm ở đồ thị quy trình độc quyền không thể cào từ internet."
-- **Trên màn hình lúc mở:** Sơ đồ đối sánh: *Foundation Models (Hàng hóa đại trà)* đối đầu với *Proprietary Process Graph (Hào lũy dữ liệu quy trình)*.
+- **Trên màn hình lúc mở:**
+  - Bố cục đối xứng 2 nửa màn hình cân bằng:
+    - Nửa trái: Khối `!!card_models` đại diện cho *Foundation Models (OpenAI, Anthropic, Google)* với các logo model, kích thước lớn `(x=0.08, y=0.25, w=0.40, h=0.55)`.
+    - Nửa phải: Khối `!!card_graph` đại diện cho *Proprietary Process Graph của Aether*, kích thước tương đương `(x=0.52, y=0.25, w=0.40, h=0.55)`.
 - **Lời nói:**
   > Các mô hình nền tảng như GPT hay Claude sẽ ngày càng thông minh hơn và rẻ hơn, nhưng chúng chỉ được huấn luyện từ dữ liệu công khai trên web. **[CLICK]** Aether nắm giữ thứ mà không web crawler nào chạm tới được: Đồ thị hành vi và quy trình vận hành thực tế của từng ngành. Càng vận hành, Aether càng hiểu sâu đặc thù doanh nghiệp, **[CLICK]** tạo ra một rào cản chuyển đổi mà không đối thủ nào có thể vượt qua.
 - **Động từ → chuyển động:**
-  - *song* $\rightarrow$ click 1: hoán đổi trọng lượng thị giác — khối Foundation Model thu nhỏ thành linh kiện phía dưới, khối *Process Graph* lớn mạnh vươn lên thành bức tường bảo vệ kiên cố;
-  - click 2: đồ thị quy trình vẽ mạng lưới liên kết bao bọc lấy 38 tập đoàn khách hàng, khóa chặt rào cản chuyển dịch.
+  - *song* →
+    - **Click 1 (Cơ chế Hoán đổi Trọng lượng Thị giác — Swap Weights):**
+      - Khối `!!card_models` bên trái thu nhỏ tỉ lệ xuống 60% (`scale: 0.60`), hạ thấp xuống đáy `(x=0.08, y=0.55, w=0.30, h=0.30)`, màu sắc chuyển thành xám chì `#475569`, độ mờ hạ xuống 35% kèm nhãn: *"Commoditized Infrastructure (Hạ tầng hàng hóa giá rẻ)"*.
+      - Khối `!!card_graph` bên phải vươn lớn, phóng to tỉ lệ 125% (`scale: 1.25`) trượt chiếm lĩnh trung tâm `(x=0.42, y=0.20, w=0.52, h=0.65)`, viền sáng vàng kim `#F59E0B` dày 2.5pt, bên trong hiển thị mạng lưới đồ thị tri thức quy trình dạng mạng nhện nối kết chặt chẽ.
+    - **Click 2 (Khóa chặt Hào lũy Độc quyền):**
+      - Từ khối `!!card_graph`, các sợi dây liên kết màu vàng kim phóng ra bao quanh 38 biểu tượng tập đoàn khách hàng (`Wipe`, duration 600ms), tạo thành một chiếc khiên bảo vệ khép kín (Shield animation).
+      - Dòng chữ hào lũy bật sáng: *"High Switching Cost — Quy trình đã học không thể xuất khẩu sang đối thủ"*.
 - **Vì sao:** Chữ bản lề "Aether nắm giữ..." là điểm ngắt tư duy then chốt, biến rủi ro Big Tech thành lợi thế chi phí của chính Aether.
 
 ---
@@ -118,10 +168,19 @@
 ## Cảnh 8. Lời kêu gọi: $12M Series A
 
 - **Chuyển dịch:** "Tại sao tôi phải giải ngân cho họ ngay hôm nay?" → "Đây là cơ hội sở hữu hạ tầng nền tảng định hình tương lai của công việc tự hành."
-- **Morph từ cảnh 7:** Bức tường hào lũy mở ra, tái hiện lại bánh đà `!!flywheel` ở trạng thái hoàn thiện cực đại, kết nối trực tiếp với thẻ huy động vốn `!!ask`.
-- **Trên màn hình lúc mở:** Bánh đà nhận thức `!!flywheel` quay mượt mà. Thẻ lớn ở giữa: *$12M Series A*.
+- **Morph từ cảnh 7:**
+  - Khiên bảo vệ của Cảnh 7 co tròn lại và biến chuyển trực tiếp thành Bánh đà nhận thức `!!flywheel` ở trạng thái hoàn hảo nhất (3 tầng quay đồng tốc êm ả tại trung tâm `(x=0.38, y=0.15, w=0.24, h=0.24)`).
+- **Trên màn hình lúc mở:**
+  - Bánh đà nhận thức `!!flywheel` quay mượt mà. Khối `!!ask` nằm ở trung tâm màn hình `(x=0.25, y=0.42, w=0.50, h=0.22)` với con số vàng nổi bật: **$12,000,000 USD**.
 - **Lời nói:**
   > Chúng tôi đang kêu gọi 12 triệu USD cho vòng Series A để nhân rộng đội ngũ kỹ sư lõi và mở rộng thị phần tại 100 tập đoàn tài chính lớn nhất. **[CLICK]** Chúng tôi không tạo ra một phần mềm phụ trợ; chúng tôi đang xây dựng hệ điều hành nhận thức cho mười năm tới. Xin mời các anh chị cùng tham gia.
 - **Động từ → chuyển động:**
-  - *trở thành, thống nhất* $\rightarrow$ click 1: khối `!!ask` gắn kết vào trung tâm bánh đà, bung nở ra 3 trụ cột đầu tư (*60% R&D Core Engine · 30% Enterprise GTM · 10% Trust & Security*).
+  - *trở thành, thống nhất* →
+    - **Click 1 (Thống nhất & Bung nở Phân bổ Vốn):**
+      - Khối `!!ask` phát sáng một luồng hào quang xanh ngọc (`Grow/Pulse`, duration 400ms).
+      - Từ khối $12M bung nở ra 3 trụ cột đầu tư chiến lược xếp thẳng hàng bên dưới `(y=0.68)` (`Fly In from Top`, duration 500ms, stagger 120ms):
+        1. **Trụ cột 1 (60% — $7.2M):** *R&D Autonomous Cognitive Core & On-Premise SLMs*.
+        2. **Trụ cột 2 (30% — $3.6M):** *Enterprise GTM & Phủ sóng 100 định chế tài chính*.
+        3. **Trụ cột 3 (10% — $1.2M):** *Trust, Security & Regulatory Compliance (SOC2/ISO)*.
+      - Bánh đà phía trên tăng tốc quay rực rỡ, toàn bộ 3 khối phía dưới khóa vào một thanh đế màu xanh đậm (`!!pedestal`), tạo thành một cấu trúc kim tự tháp vững chãi — hình ảnh đọng lại cuối cùng trong tâm trí nhà đầu tư trước khi chuyển sang phần hỏi đáp.
 - **Vì sao:** Kết thúc bằng phân bổ vốn rõ ràng và tầm nhìn 10 năm, đĩnh đạc và thuyết phục, không nài nỉ.
