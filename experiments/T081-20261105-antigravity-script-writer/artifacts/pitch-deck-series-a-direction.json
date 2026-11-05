@@ -3,11 +3,11 @@
     "title": "Mở màn & Cú đặt cược vào cấu trúc",
     "one_sentence": "Aether thay thế phần mềm rời rạc bằng hệ điều hành nhận thức tự hành cho doanh nghiệp.",
     "audience": "Các General Partners tại các quỹ đầu tư mạo hiểm hàng đầu (Top-tier VCs). Họ nghe hàng chục bài pitch mỗi tháng, cực kỳ hoài nghi các lời hứa viển vông về AI, dị ứng với biểu đồ hockey-stick không có cơ sở, và luôn cảnh giác trước nguy cơ bị Microsoft/Google đè bẹp.",
-    "duration": "8–10 phút, 8 cảnh, 14 click."
+    "duration": "8–10 phút, 8 cảnh (12 slide trạng thái Morph), 14 click."
   },
   "style": {
     "theme": "editorial",
-    "register": "Sắc bén, đối thoại ngang hàng, đi thẳng vào số liệu và cơ chế nguyên tử; tuyệt đối không dùng buzzword ca tụng viển vông."
+    "register": "Sắc bén, đối thoại ngang hàng, đi thẳng vào cơ chế nguyên tử và số liệu kiểm chứng; không dùng buzzword ca tụng viển vông."
   },
   "beats": [
     {
@@ -52,15 +52,15 @@
       "clicks": [
         {
           "id": "b3.1",
-          "says": "Phản xạ đầu tiên của cả thị trường là đưa chatbot vào từng ứng dụng. Nhưng chatbot chỉ biết nói chuyện khi con người hỏi; nó không có ngữ cảnh sâu về quy trình nội bộ, và nguy hiểm nhất: nó không thể chịu trách nhiệm bấm nút thực thi.",
+          "says": "Phản xạ đầu tiên của cả thị trường là đưa chatbot vào từng ứng dụng. Nhưng chatbot chỉ biết nói chuyện khi con người hỏi; nó mù ngữ cảnh quy trình nội bộ, tư duy ảo giác, và không thể bấm nút thực thi.",
           "lead_in": "Phản xạ đầu tiên của cả thị trường là đưa chatbot vào từng ứng dụng. Nhưng chatbot chỉ biết nói chuyện khi con người hỏi;",
-          "post_click_says": "nó không có ngữ cảnh sâu về quy trình nội bộ, và nguy hiểm nhất: nó không thể chịu trách nhiệm bấm nút thực thi."
+          "post_click_says": "nó mù ngữ cảnh quy trình nội bộ, tư duy ảo giác, và không thể bấm nút thực thi."
         },
         {
           "id": "b3.2",
-          "says": "Doanh nghiệp không cần thêm một người trợ lý để chat; họ cần một hệ thống tự hành biết nhìn, biết nghĩ và tự làm việc.",
+          "says": "Doanh nghiệp không cần thêm một trợ lý để chat; họ cần một hệ điều hành nhận thức biết nhìn, biết nghĩ và tự làm việc.",
           "lead_in": "",
-          "post_click_says": "Doanh nghiệp không cần thêm một người trợ lý để chat; họ cần một hệ thống tự hành biết nhìn, biết nghĩ và tự làm việc."
+          "post_click_says": "Doanh nghiệp không cần thêm một trợ lý để chat; họ cần một hệ điều hành nhận thức biết nhìn, biết nghĩ và tự làm việc."
         }
       ]
     },
@@ -68,19 +68,19 @@
       "id": "b4",
       "scene": "s4",
       "job": "define",
-      "claim": "Giải pháp Aether: Kiến trúc 3 tầng nhận thức",
+      "claim": "Giải pháp Aether: Tái lập Bánh đà Nhận thức 3 Tầng",
       "clicks": [
         {
           "id": "b4.1",
-          "says": "Đây là kiến trúc của Aether. Vòng ngoài cùng liên tục quan sát màn hình làm việc của nhân sự để hiểu quy trình thực tế. Vòng giữa phân rã công việc thành các tác vụ nhỏ cho mạng lưới Agent chuyên biệt giải quyết.",
-          "lead_in": "Đây là kiến trúc của Aether. Vòng ngoài cùng liên tục quan sát màn hình làm việc của nhân sự để hiểu quy trình thực tế.",
-          "post_click_says": "Vòng giữa phân rã công việc thành các tác vụ nhỏ cho mạng lưới Agent chuyên biệt giải quyết."
+          "says": "Đây là kiến trúc của Aether. Vòng ngoài cùng liên tục quan sát thao tác để hiểu quy trình thực tế. Vòng giữa phân rã công việc cho mạng lưới Agent chuyên biệt suy luận.",
+          "lead_in": "Đây là kiến trúc của Aether. Vòng ngoài cùng liên tục quan sát thao tác để hiểu quy trình thực tế.",
+          "post_click_says": "Vòng giữa phân rã công việc cho mạng lưới Agent chuyên biệt suy luận."
         },
         {
           "id": "b4.2",
-          "says": "Nhưng mấu chốt nằm ở vòng lõi: chúng tôi không dùng LLM để đoán mò, mà biên dịch trực tiếp sang các API an toàn, có kiểm toán và bảo đảm chính xác 100%.",
+          "says": "Nhưng mấu chốt nằm ở vòng lõi: chúng tôi không dùng LLM để đoán mò, mà biên dịch trực tiếp sang các lệnh API quyết định luận, có kiểm toán và chính xác 100%.",
           "lead_in": "",
-          "post_click_says": "Nhưng mấu chốt nằm ở vòng lõi: chúng tôi không dùng LLM để đoán mò, mà biên dịch trực tiếp sang các API an toàn, có kiểm toán và bảo đảm chính xác 100%."
+          "post_click_says": "Nhưng mấu chốt nằm ở vòng lõi: chúng tôi không dùng LLM để đoán mò, mà biên dịch trực tiếp sang các lệnh API quyết định luận, có kiểm toán và chính xác 100%."
         }
       ]
     },
@@ -112,9 +112,9 @@
       "clicks": [
         {
           "id": "b6.1",
-          "says": "Nỗi lo lớn nhất với các công ty AI là chi phí suy luận GPU ăn mòn toàn bộ lợi nhuận. Aether giải quyết điều này bằng kiến trúc suy luận phân tầng: 80% tác vụ lặp lại được xử lý bằng mô hình nhỏ chạy cục bộ. Nhờ đó, biên lợi nhuận gộp của chúng tôi đạt 82%.",
-          "lead_in": "Nỗi lo lớn nhất với các công ty AI là chi phí suy luận GPU ăn mòn toàn bộ lợi nhuận. Aether giải quyết điều này bằng kiến trúc suy luận phân tầng: 80% tác vụ lặp lại được xử lý bằng mô hình nhỏ chạy cục bộ.",
-          "post_click_says": "Nhờ đó, biên lợi nhuận gộp của chúng tôi đạt 82%."
+          "says": "Nỗi lo lớn nhất với các công ty AI là chi phí suy luận GPU ăn mòn toàn bộ lợi nhuận. Aether giải quyết điều này bằng kiến trúc phân tầng: 80% tác vụ lặp lại được xử lý bằng các mô hình nhỏ chạy cục bộ. Nhờ đó, chi phí GPU sụp đổ và biên lợi nhuận gộp của chúng tôi đạt 82%.",
+          "lead_in": "Nỗi lo lớn nhất với các công ty AI là chi phí suy luận GPU ăn mòn toàn bộ lợi nhuận. Aether giải quyết điều này bằng kiến trúc phân tầng: 80% tác vụ lặp lại được xử lý bằng các mô hình nhỏ chạy cục bộ.",
+          "post_click_says": "Nhờ đó, chi phí GPU sụp đổ và biên lợi nhuận gộp của chúng tôi đạt 82%."
         },
         {
           "id": "b6.2",
@@ -148,7 +148,7 @@
       "id": "b8",
       "scene": "s8",
       "job": "define",
-      "claim": "Lời kêu gọi: $12M Series A",
+      "claim": "Lời kêu gọi: $12M Series A & Ba Trụ Cột Nền Móng",
       "clicks": [
         {
           "id": "b8.1",
@@ -239,12 +239,12 @@
       "id": "sh4",
       "beat_id": "b4",
       "layout": "asymmetric",
-      "t0_says": "Đây là kiến trúc của Aether. Vòng ngoài cùng liên tục quan sát màn hình làm việc của nhân sự để hiểu quy trình thực tế.",
+      "t0_says": "Đây là kiến trúc của Aether. Vòng ngoài cùng liên tục quan sát thao tác để hiểu quy trình thực tế.",
       "base_objects": [
         {
           "id": "Title",
           "role": "title",
-          "text": "Giải pháp Aether: Kiến trúc 3 tầng nhận thức"
+          "text": "Giải pháp Aether: Tái lập Bánh đà Nhận thức 3 Tầng"
         }
       ],
       "clicks": [
@@ -293,7 +293,7 @@
       "id": "sh6",
       "beat_id": "b6",
       "layout": "asymmetric",
-      "t0_says": "Nỗi lo lớn nhất với các công ty AI là chi phí suy luận GPU ăn mòn toàn bộ lợi nhuận. Aether giải quyết điều này bằng kiến trúc suy luận phân tầng: 80% tác vụ lặp lại được xử lý bằng mô hình nhỏ chạy cục bộ.",
+      "t0_says": "Nỗi lo lớn nhất với các công ty AI là chi phí suy luận GPU ăn mòn toàn bộ lợi nhuận. Aether giải quyết điều này bằng kiến trúc phân tầng: 80% tác vụ lặp lại được xử lý bằng các mô hình nhỏ chạy cục bộ.",
       "base_objects": [
         {
           "id": "Title",
@@ -352,7 +352,7 @@
         {
           "id": "Title",
           "role": "title",
-          "text": "Lời kêu gọi: $12M Series A"
+          "text": "Lời kêu gọi: $12M Series A & Ba Trụ Cột Nền Móng"
         }
       ],
       "clicks": [

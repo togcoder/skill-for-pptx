@@ -63,24 +63,7 @@ Chọn động từ hành động diễn tả đúng bản chất của cảnh v
 ## 3. Bảng 15 Động Từ Hành Động Chuẩn Hóa
 
 | Động từ kịch bản | Chuyển động tương ứng | Kiểu | Mô tả hành động thị giác |
-|
-### 3.1 Tiêu Chuẩn Phân Cảnh Đạo Diễn Chi Tiết (Detailed Choreography Specification)
-
-> [!IMPORTANT]
-> **Chống mô tả cảm tính (4/10):** Một kịch bản chỉ ghi *"bánh đà phát sáng rực rỡ"* hay *"dữ liệu trượt vào"* sẽ khiến compiler/animator bị lạc đường ngay lập tức khi gặp chuyển động phức tạp.
-> Một phân cảnh đạo diễn chuẩn mực phải ghi rõ **5 thành tố kỹ thuật nguyên tử**:
-
-1. **Định danh vật thể tác động (Target Actor ID):** Chỉ rõ tên chính xác của phần tử (sử dụng tiền tố `!!id` nếu là diễn viên Morph bền vững xuyên slide, ví dụ: `!!flywheel`, `!!metric-arr`, `!!card_nrr`).
-2. **Biến thiên trạng thái nguyên tử (Atomic State Delta):**
-   - *Hình học & Tọa độ:* Vị trí tương đối `(x, y, w, h)`, tỉ lệ phóng to/thu nhỏ (`scale: 115%` hoặc `scale: 40%`), góc xoay (`spin: 60 deg clockwise`).
-   - *Thị giác & Vật liệu:* Độ mờ (`opacity: 100% → 20%` để dim), màu viền/nền (`#EF4444`, `#10B981`, `#F59E0B`).
-3. **Cơ chế thực thi kỹ thuật (Execution Mechanism):**
-   - *Chuyển động trong slide:* Tên hiệu ứng preset cụ thể (`Wipe`, `Fade`, `Grow/Shrink`, `Color Pulse`, `Spin`, `Descend`, `Fly In/Out`).
-   - *Chuyển động Morph liên slide:* Tuân thủ nghiêm ngặt 11 luật Morph của T074 (giữ nguyên shape type theo luật M-02, **không đặt entrance effect ở slide đích** theo luật M-07, không ungroup nhóm theo luật M-05).
-4. **Thời lượng & Nhịp điệu (Timing & Easing):** Ghi rõ thời gian tính bằng mili-giây (ví dụ: `duration: 400ms`, `duration: 700ms`, `morph: 1.2s`), độ trễ phân tầng giữa các phần tử (`stagger: 100ms`), và đường cong gia tốc (`ease-out`, `smooth-step`).
-5. **Dồn tiêu điểm thị giác (Eye Gaze & Dimming):** Khi một phần tử trọng tâm được kích hoạt, các phần tử xung quanh phải chủ động lùi mờ (`dim: opacity 20–40%`) để khán giả không bị phân tán mắt nhìn.
-
----|---|---|---|
+|---|---|---|---|
 | **soi** | Spotlight / Focus | Trong slide / Morph | Thấu kính hoặc quầng sáng lướt qua các đối tượng rồi dừng lại ở trọng tâm |
 | **gom thành hệ thống** | Converge | Morph | Các mảnh rời rạc bay vào khung tròn/hộp và tự động xếp thẳng hàng |
 | **cân nhắc** | Hold (Lặng căng thẳng) | Trong slide | Đứng yên hoàn toàn; cân thăng bằng khi câu hỏi lớn được nêu ra |
@@ -96,6 +79,25 @@ Chọn động từ hành động diễn tả đúng bản chất của cảnh v
 | **quay lại, nhớ lại** | Revisit Layout | Morph | Bố cục tái lập lại y hệt cảnh mở đầu để người nghe tự nhận ra vòng lặp |
 | **loại bỏ, phủ định** | Dim & Exit | Trong slide | Đối tượng thu nhỏ, mờ dần hoặc gạch bỏ rồi biến mất khỏi màn hình |
 | **nhấn một trong nhiều** | Dim Others | Trong slide | Giữ sáng đối tượng được chọn, làm mờ (dim 50-70%) tất cả các đối tượng còn lại |
+
+### 3.1 Tiêu Chuẩn Phân Cảnh Đạo Diễn Chi Tiết (Detailed Choreography Specification)
+
+> [!IMPORTANT]
+> **Chống mô tả cảm tính (4/10) & Chống bẫy hiệu ứng rời rạc:**
+> Một kịch bản chỉ ghi *"bánh đà phát sáng rực rỡ"* hoặc liệt kê tên preset PowerPoint có sẵn (`Teeter`, `Wipe`, `Fly Out`) sẽ khiến compiler/animator bị lạc đường. Thay vào đó, kịch bản phải mô tả quỹ đạo mắt nhìn, nhịp lật slide, và **vật thể nào biến thành vật thể nào** (*which object becomes which*).
+> 
+> Một phân cảnh đạo diễn chuẩn mực phải ghi rõ **5 thành tố kỹ thuật nguyên tử**:
+> 
+> 1. **Định danh vật thể tác động (Target Actor ID):** Chỉ rõ tên chính xác của phần tử (dùng tiền tố `!!id` xuyên suốt nếu là diễn viên Morph bền vững, ví dụ: `!!ring_obs`, `!!ring_reason`, `!!ring_exec`). Giữ nguyên cấu trúc nhóm và shape type theo luật M-02 và M-05.
+> 2. **Biến thiên trạng thái nguyên tử (Atomic State Delta):**
+>    - *Hình học & Tọa độ:* Tọa độ tỉ lệ chuẩn hóa `0.00–1.00` `(x, y, w, h)`, tỉ lệ phóng to/thu nhỏ (`scale: 115%` hoặc `scale: 40%`), góc xoay (`spin: 60 deg clockwise`).
+>    - *Thị giác & Vật liệu:* Độ mờ (`opacity: 100% → 20%` để dim), màu viền/nền hex (`#EF4444`, `#10B981`, `#F59E0B`).
+> 3. **Cơ chế thực thi kỹ thuật (Execution Mechanism - Morph First):**
+>    - *Ưu tiên State-to-State Morph qua slide phụ:* Khi có biến đổi lớn về bố cục, kích thước hoặc hoán đổi trọng lượng (Swap Weights), ưu tiên tách thành phân cảnh nối bằng Morph Transition thay vì nhồi nhiều hiệu ứng In-Slide giật cục.
+>    - *Chuyển động trong slide:* Chỉ dùng cho vi biến đổi (dim, highlight viền, xuất hiện chữ theo dòng).
+>    - *Tuân thủ 11 luật Morph của T074:* Không đặt entrance effect ở slide đích (M-07), giữ nguyên shape type (M-02), không ungroup (M-05).
+> 4. **Kỷ luật thị giác một chủ thể (Single Focal Velocity):** Tại một thời điểm, chỉ đúng một chủ thể chính được di chuyển; các phần tử phụ đứng yên hoặc lùi mờ (`dim 20–30%`). Sau một biến đổi bố cục lớn, cần có nhịp dừng (*Settle Buffer*) để mắt kịp định vị.
+> 5. **Thời lượng & Nhịp phân tầng (Timing & Stagger):** Ghi rõ thời gian ms (ví dụ: `duration: 400ms`, `morph: 1.2s`), độ trễ phân tầng giữa các phần tử liên quan (`stagger: 80–120ms` theo chiều đọc).
 
 ---
 
