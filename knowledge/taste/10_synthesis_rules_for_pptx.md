@@ -157,3 +157,55 @@ Formulated in accordance with **D010** (researched crowd taste, written in our o
     $$\Delta x = x_{\min}(T) - x_{\max}(P) \ge 0.35" \quad (320,040\text{ EMU})$$
   - **Exception for Watermarks:** If $P$ is an atmospheric background watermark, its opacity MUST be set to `<a:alpha val="12000"/>` ($\le 12\%$) and text contrast against the watermark background must satisfy WCAG AAA $\ge 7:1$.
 - **Anti-Pattern:** Placing a text box starting at $x=0.8"$ directly over an emblem whose right boundary extends to $x=1.7"$.
+
+
+---
+
+### Rule R17: Text-Fit Capacity & Font-to-Span Coupling Law (The Slide 3 Fix)
+- **The Physical Problem:** Narrow columns squeezing body text into short lines (as seen in Slide 3) occurs when cards are created without checking typographic capacity against font size.
+- **Font-to-Span Coupling Invariant:**
+  To guarantee readability and prevent awkward 2-word line wraps, every column layout must enforce strict font size and text density limits:
+  $$\mathbf{W}_{\text{usable\_text}} = W_{\text{shape}} - (lIns + rIns)$$
+  - **Span 6 to 12 (1-2 Cards, $W_{\text{text}} \ge 5.24''$):** Body font $18\text{pt} - 20\text{pt}$. Narrative paragraphs allowed ($45-75\text{ch}$ measure).
+  - **Span 4 (3 Cards, $W_{\text{text}} \approx 3.24''$):** Body font **$14\text{pt} - 15\text{pt}$** (yields $32-40\text{ch}$, satisfying $W_{\text{text}} \ge 16 \times \text{FontSize}$). Maximum 3 lines per card; narrative sentences banned.
+  - **Span 3 (4 Cards, $W_{\text{text}} \approx 2.25'' - 2.35''$):** Font $18\text{pt}$ is **strictly banned** ($20\text{ch}$ measure failure). Structure must be **KPI / Stat Card**: Hero metric $36-44\text{pt}$ Bold (1 line) + micro-label $13-14\text{pt}$ ($\le 2$ lines, $\le 22\text{ch}$/line, $\le 12$ words total).
+- **Anti-Pattern:** Placing cards with width $w \le 2.60''$ containing 25-word narrative sentences at $18\text{pt}$ font, forcing awkward 2-word line wraps.
+
+---
+
+### Rule R18: APCA Suprathreshold Visual Contrast Standard (APCA-W3 0.0.98G-4g)
+- **The Physical Problem:** Legacy WCAG 2 contrast ratios fail in dark mode, passing low-contrast grey text that is unreadable at conference room projection distances.
+- **APCA Contrast Invariant:**
+  Every text run must be evaluated using the Accessible Perceptual Contrast Algorithm (APCA) with soft black clamp:
+  $$Y' = \begin{cases} Y + (0.022 - Y)^{1.414} & \text{if } Y < 0.022 \\ Y & \text{if } Y \ge 0.022 \end{cases}$$
+  $$\begin{aligned}
+  \text{Normal Polarity (Dark on Light, } Y'_{\text{bg}} > Y'_{\text{txt}}\text{):} \quad & L_c = \left( (Y'_{\text{bg}})^{0.56} - (Y'_{\text{txt}})^{0.57} \right) \times 1.14 \times 100 \ge \mathbf{+75.0} \\
+  \text{Reverse Polarity (Light on Dark, } Y'_{\text{txt}} > Y'_{\text{bg}}\text{):} \quad & L_c = \left( (Y'_{\text{bg}})^{0.65} - (Y'_{\text{txt}})^{0.62} \right) \times 1.14 \times 100 \implies \mathbf{|L_c| \ge 80.0}
+  \end{aligned}$$
+- **Anti-Pattern:** Using dark blue text `#1E3A8A` on dark slate background `#0F172A`, or muted grey `#475569` on black, yielding $|L_c| < 40$.
+
+---
+
+### Rule R19: Oklch Uniform Gradient & OpenXML 5-Stop Baking
+- **The Physical Problem:** PowerPoint internally interpolates `<a:gradFill>` in gamma-encoded sRGB, creating a muddy grey-brown "dead zone" across complementary hues.
+- **Oklab Invariant & OpenXML 5-Stop Bake:**
+  1. All palettes must be generated in cylindrical **OKLCH space** with binary-search gamut reduction to prevent out-of-gamut sRGB clipping.
+  2. Peer comparison cards must maintain Chroma difference $\Delta C \le 0.04$ to avoid the Helmholtz-Kohlrausch brightness illusion.
+  3. All DrawingML gradients must **bake at least 5 stops** (`pos="0"`, `25000`, `50000`, `75000`, `100000`) calculated via Oklab space into the DrawingML XML to bypass Office's gamma blending.
+- **Anti-Pattern:** Defining a 2-stop gradient between cyan and orange in PowerPoint without intermediate baked stops.
+
+---
+
+### Rule R20: 1D/2D Box-Packing & Gutter Equalization
+- **The Physical Problem:** Placing multiple cards on a canvas with unequal gutters creates accidental visual groupings and cognitive confusion.
+- **Equidistant Gutter Invariant:**
+  In any multi-element layout, gutters between adjacent cards must match to the exact EMU:
+  $$x_{i+1} = x_i + w_i + G \quad (\forall i \in [1, N-1])$$
+  $$G = 0.250'' = 228,600\text{ EMU} \quad (\text{Standard enterprise gutter})$$
+  Canvas outer margins must be symmetric:
+  $$M_{\text{left}} = M_{\text{right}} = 0.800'' = 731,520\text{ EMU}$$
+- **Standard 12-Column Spans:**
+  - 2 Cards: Span 6 ($w = 5.741'' = 5,249,520\text{ EMU}$)
+  - 3 Cards: Span 4 ($w = 3.744'' = 3,423,480\text{ EMU}$)
+  - 4 Cards: Span 3 ($w = 2.746'' = 2,510,460\text{ EMU}$)
+- **Anti-Pattern:** Placing Card 1 at $x=1.0''$ with width $3.0''$, and Card 2 at $x=4.5''$ with width $3.2''$, creating an uneven, unaligned layout.

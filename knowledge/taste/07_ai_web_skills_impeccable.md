@@ -1,68 +1,138 @@
-# Domain 7: AI Web Design Skills & Anti-Slop Guidelines
+# Domain 7: Web AI Design Skills, Modern Frontend & Anti-Slop Craftsmanship
 
 ## 1. Overview & Cultural Authority
-Over 2024–2026, the proliferation of LLM code generation gave rise to a ubiquitous visual phenomenon: "AI slop"—generic, cookie-cutter UI templates characterized by purple-blue neon glows, identical rounded card grids, oversized hero text, gradient text headers, and fake vanity metrics.
+Modern digital interface taste (`pbakaus/impeccable`, `anthropics/skills` `frontend-design`, `bergside/awesome-design-skills`, `shadcn/ui`, and Linear/Stripe design systems) has established a fierce counter-reaction against **"AI Slop"**.
 
-In response, open-source engineering leaders and AI design pioneers created rigorous counter-guidelines:
-- Paul Bakaus’s **`pbakaus/impeccable`** (Apache-2.0)
-- Anthropic’s **`frontend-design`** skill in `anthropics/skills`
-- Bergside’s **`awesome-design-skills`** registry
-- Jim Liu’s **`baoyu-design`** local design engine
-- Shadcn's semantic three-tier design tokens.
+"AI Slop" is the generic, unopinionated visual noise produced by AI models that have ingested millions of mediocre SaaS templates: purple-to-cyan gradient borders, floating glossy 3D spheres, centered generic hero copy, neon pill kickers, and nested rectangular card grids with no clear visual hierarchy. Professional craftsmanship enforces an uncompromising aesthetic floor.
 
-These systems establish a strict "craft floor" that actively identifies, intercepts, and eliminates generic AI design defaults before code or slides ship.
+---
 
-## 2. Core Principles & Anti-Patterns
+## 2. GitHub Repositories & Engine References
 
-### 2.1. The 7 Deadliest AI Design Tells (To Strictly Ban)
-1. **The SaaS-Card Kit:** Content arbitrarily chopped into 3 identical rounded cards, each with a centered icon, bold header, 2 lines of text, and a soft grey shadow (`rgba(0,0,0,0.1)`).
-2. **The Kicker / Eyebrow Reflex:** An all-caps, tracked-out label above every heading (`SYSTEM // 2024` or `FEATURES`). The heading carries its own weight; delete the kicker.
-3. **The Neon Glow & Purple Gradient:** Purple/cyan outer glows, neon drop shadows, and linear-gradient text across headers. Emphasis comes from weight, size, or contrast—never rainbow fills.
-4. **The "Ghost Card" Elevation Bug:** Declaring BOTH a 1px border and a wide soft drop shadow on the same card. Declare elevation ONCE: either a clean 1px border OR a soft diffused shadow, never both stacked together.
-5. **Fabricated Metrics & Vanity Claims:** Inventing fake numbers (`99.99% UPTIME`, `124ms RESPONSE TIME`, `10x FASTER`) or AI marketing buzzwords (*"Elevate"*, *"Seamless"*, *"Unleash"*, *"Next-Gen"*).
-6. **The Unexamined Dark Theme:** Defaulting to pure black (`#000000`) with acid-green or lime-yellow accents, or warm cream (`#F4F1EA`) with terracotta (`#D97757`) regardless of the brief's real domain.
-7. **The Trapped Hero Card:** Stacking elements with absolute positioning until text overlaps emblems or icons get clipped into narrow margins.
-
-### 2.2. Proximity Before Containers
-Containers (boxes, cards, background panels) are the lazy designer's crutch.
-- **Rule:** Before drawing a box around a group of elements, test whether **whitespace proximity alone** makes the group recognizable:
-  $$\text{Gap}_{\text{within group}} \le \frac{1}{3} \times \text{Gap}_{\text{between groups}}$$
-- If items within a group are separated by $12\text{px}$, the space separating that group from the next section must be $\ge 36\text{px}$. When proximity holds, delete the card container.
-
-### 2.3. The Squint Test for Hierarchy
-- **Procedure:** Squint at the screen (or apply a 10px Gaussian blur to a screenshot of the slide).
-- **Passing Criteria:**
-  1. The primary focal element (Hero metric or main conclusion) stands out unmistakably.
-  2. The secondary tier (section titles, supporting data series) is clearly distinguished from the background.
-  3. Tertiary detail (captions, source notes) recedes into the background.
-  If everything blurs into an undifferentiated grey soup, the layout has failed hierarchy.
-
-### 2.4. Single Elevation Discipline
-In both web and presentation design, an element exists on exactly one elevation tier:
-- Tier 0: Canvas base surface.
-- Tier 1: Grounded card or structural column (1px border, 0px shadow).
-- Tier 2: Raised interactive card or modal focus (soft ambient shadow, 0px border).
-- Never combine Tier 1 borders with Tier 2 shadows on the same element.
-
-### 2.5. Motion Thesis & Settling Time
-- Every slide or view has at most **one authored focal moment**.
-- Motion must never be applied to every element simultaneously.
-- When an element enters or transforms:
-  - Exit faster than entrance ($60\% - 70\%$ duration).
-  - Use exponential ease-out: `cubic-bezier(0.16, 1, 0.3, 1)`.
-  - Provide $0.6 - 1.0\text{s}$ of settling time before triggering subsequent beats.
-
-## 3. DOs and DON'Ts
-
-| Aspect | DO | DON'T |
+| Repository / Project | Focus & Ethos | Core Invariant Extracted |
 |---|---|---|
-| **Layout Topology** | Asymmetric layouts: split screens, 2-column zig-zag, horizontal timelines | Repetitive 3-column equal card grids on every slide |
-| **Color Base** | Neutral chromatic bases: Zinc (`#09090b`), Slate (`#0f172a`), or Off-White (`#f8fafc`) | Pure black (`#000000`) or default PowerPoint bright blue |
-| **Accents** | Exactly 1 accent color with saturation $< 80\%$; reserved for the focal point | Rainbow gradients and colorful icons competing for attention |
-| **Writing** | Direct, functional verbs: *"Cut deployment time by 4 minutes"* | AI clichés: *"Seamlessly elevate your workflows"* |
-| **Data Honesty** | Label illustrative data clearly as `[ILLUSTRATIVE]` or use supplied real data | Inventing fake statistics and presenting them as facts |
+| [`pbakaus/impeccable`](https://github.com/pbakaus/impeccable) | Philosophy and strict craft floor for AI-generated design | The Squint Test; "Design begins with subtraction"; ban on ornamental AI tells; intentional whitespace. |
+| [`anthropics/skills` (frontend-design)](https://github.com/anthropics/skills) | Anthropic's official frontend design skill | Rejection of generic SaaS templates; purposeful typography; layout variation; high-contrast minimalism. |
+| [`shadcn/ui`](https://github.com/shadcn-ui/ui) | Radix UI + Tailwind design system standard | Strict semantic token layering (background, foreground, muted, accent, card, border); radical simplicity. |
+| [`tailwindlabs/tailwindcss`](https://github.com/tailwindlabs/tailwindcss) | Utility-first CSS framework | Numeric spatial spacing scale (powers of 4px/8px); predictable layout math. |
 
-## 4. Translation to PowerPoint (OOXML)
-- Avoid native WordArt gradient text fills (`a:gradFill` inside text runs); use solid color fills `<a:solidFill><a:srgbClr val="..."/></a:solidFill>`.
-- Replace heavy 3D bevels with flat 1px subtle borders `<a:ln w="9525"><a:solidFill><a:srgbClr val="334155"/></a:solidFill></a:ln>` ($0.75\text{pt}$ border in slate-700).
-- Sanitize all visible text: run automated regex checks to ensure internal developer tokens (`!!err_`, `[TODO]`, `NaN%`) never leak onto user-facing slides.
+---
+
+## 3. Mathematical Foundations: Spatial Gestalt & The Squint Test
+
+### 3.1. The Squint Test (Gaussian Blur Spatial Low-Pass Filter)
+Apply a 2D Gaussian blur filter to the slide layout with standard deviation $\sigma = 12\text{px}$:
+$$I_{\text{blurred}}(x, y) = I(x, y) * G_\sigma(x, y) \quad \text{where } G_\sigma(x, y) = \frac{1}{2\pi \sigma^2} e^{-\frac{x^2 + y^2}{2\sigma^2}}$$
+
+*The Gestalt Invariant:*
+When fine text and sharp borders are blurred away, the slide must resolve into **exactly 3 distinct luminous masses**:
+1. **Primary Mass ($40 - 50\%$ luminance):** The focal hero headline, primary KPI, or core architectural flow.
+2. **Secondary Mass ($20 - 30\%$ luminance):** The 2-3 supporting context cards or comparative data nodes.
+3. **Background Ground ($0 - 10\%$ luminance):** The ambient void.
+
+If the blurred image looks like a uniform grey soup or a speckled array of 8 identical boxes, the layout has failed the Squint Test.
+
+---
+
+### 3.2. Proximity Over Containers (Gestalt Law of Grouping)
+Amateur AI designs enclose every related pair of text elements inside a card with a border and a background fill. This creates visual clutter through unnecessary structural lines.
+
+*The Mathematical Proximity Ratio:*
+$$\frac{D_{\text{between\_groups}}}{D_{\text{within\_group}}} \ge 2.5$$
+Where:
+- $D_{\text{within\_group}}$ is the distance between a title and its descriptive body paragraph ($8\text{pt} - 12\text{pt}$).
+- $D_{\text{between\_groups}}$ is the whitespace separating distinct thematic sections ($28\text{pt} - 40\text{pt}$).
+
+By enforcing a $2.5\times$ distance ratio, the human visual system groups related elements automatically through negative space, making bounding boxes, outlines, and tinted backgrounds redundant.
+
+---
+
+### 3.3. The Single Elevation Law
+A UI shape may communicate elevation and layer hierarchy through **one mechanism only**:
+$$\text{Elevation Representation} \in \{ \text{Border}, \text{Drop Shadow}, \text{Background Tint} \} \quad (\text{Select Exactly One})$$
+
+- **Pattern A (Flat / Architectural):** Background tint `#1E293B`, $0\text{pt}$ border, $0\text{pt}$ shadow.
+- **Pattern B (Outlined / Minimalist):** Background transparent, $1\text{pt}$ subtle border `#334155`, $0\text{pt}$ shadow.
+- **Pattern C (Elevated / Tactile):** Background `#1E293B`, $0\text{pt}$ border, soft $16\text{pt}$ ambient shadow.
+
+*The AI Tell Defect (Slide 3 Analysis):*
+The defective card in Slide 3 had a bright cyan border, a solid blue background, and an opaque black shadow simultaneously. This "triple elevation" looks cheap and unnatural.
+
+---
+
+## 4. The 8 Banned AI Tell Signatures
+
+Any slide containing one of these signatures is immediately flagged as amateur AI-generated:
+
+1. **The Ghost Card:** A card with a dark background, a glowing $1\text{pt}$ bright border, and an aggressive drop shadow.
+2. **The Generic Kicker:** Uppercase micro-labels like `// REVOLUTIONIZING THE FUTURE` or `/// EMPOWERING NEXT-GEN`.
+3. **The Unanchored Pill Badge:** Random floating capsules with icons and text scattered without grid alignment.
+4. **The Neon Glow Overdose:** Cyan `#00FFFF` and Magenta `#FF00FF` drop shadows placed on non-focal text.
+5. **The Cliché Metric Triptych:** Exactly 3 identical cards with arbitrary percentages ($+40\%$, $+25\%$, $+85\%$) that carry no authentic enterprise meaning.
+6. **The Centered Bullet Block:** Large cards containing center-aligned bullet points with checkmark emojis.
+7. **The Rainbow Gradient Text:** Hero headlines masked with 4-stop linear gradients across contrasting hues.
+8. **The Decorative Floating Sphere:** Unconnected 3D orbs and geometric shapes floating in slide corners to fill whitespace.
+
+---
+
+## 5. Python Squint Test & Elevation Auditor
+
+```python
+"""
+Anti-Slop & Single Elevation Auditor for PPTX Shapes
+Ensures cards do not violate the Single Elevation Law and bans AI tell gradients.
+"""
+def audit_shape_anti_slop(shape_element):
+    has_border = False
+    has_shadow = False
+    has_fill = False
+    has_glow = False
+    
+    spPr = shape_element.find('{http://schemas.openxmlformats.org/presentationml/2006/main}spPr')
+    if spPr is None:
+        return {"passed": True}
+        
+    # Check border
+    ln = spPr.find('{http://schemas.openxmlformats.org/drawingml/2006/main}ln')
+    if ln is not None and ln.find('{http://schemas.openxmlformats.org/drawingml/2006/main}solidFill') is not None:
+        has_border = True
+        
+    # Check fill
+    solidFill = spPr.find('{http://schemas.openxmlformats.org/drawingml/2006/main}solidFill')
+    if solidFill is not None:
+        has_fill = True
+        
+    # Check shadow & glow in effectLst
+    effectLst = spPr.find('{http://schemas.openxmlformats.org/drawingml/2006/main}effectLst')
+    if effectLst is not None:
+        if effectLst.find('{http://schemas.openxmlformats.org/drawingml/2006/main}outerShdw') is not None:
+            has_shadow = True
+        if effectLst.find('{http://schemas.openxmlformats.org/drawingml/2006/main}glow') is not None:
+            has_glow = True
+            
+    violations = []
+    if has_border and has_shadow:
+        violations.append("DUAL_ELEVATION_DETECTED: Shape has both a solid border AND a drop shadow.")
+    if has_glow:
+        violations.append("BANNED_AI_TELL: Neon glow effect detected on shape.")
+        
+    return {
+        "passed": len(violations) == 0,
+        "violations": violations
+    }
+```
+
+---
+
+## 6. Comprehensive DOs and DON'Ts
+
+### DO:
+1. **Embrace negative space.** If a slide feels sparse after placing the core insight, resist the urge to add decorative containers. Let the emptiness emphasize the message.
+2. **Follow the Single Elevation Law.** Choose border OR shadow; never combine both on the same card.
+3. **Use whitespace for grouping before adding card containers.** A $32\text{pt}$ margin separates topics more cleanly than a tinted box.
+4. **Use authentic enterprise nomenclature.** Replace marketing hype with concrete technical metrics (e.g. `p99 Latency: 14ms`, `Gross Margin: 74.2%`).
+
+### DON'T:
+1. **Never use neon glow filters on corporate presentations.** Glowing text belongs in arcade games, not boardrooms.
+2. **Never wrap every text element in a card.** When everything is inside a card, nothing stands out.
+3. **Never apply multi-color gradients across text headlines.** Keep text solid and readable.

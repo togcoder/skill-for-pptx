@@ -1,69 +1,131 @@
-# Domain 8: Data Visualization & Infographics
+# Domain 8: Data Visualization & Quantitative Craftsmanship
 
 ## 1. Overview & Cultural Authority
-Data visualization transforms quantitative numbers into visual insights. Grounded in Edward R. Tufte’s *The Visual Display of Quantitative Information*, Claus O. Wilke’s *Fundamentals of Data Visualization*, and the Financial Times Graphics Team’s *Visual Vocabulary*, world-class data graphics prioritize intellectual integrity, graphical honesty, and high data density.
+Data visualization taste (Edward Tufte's *The Visual Display of Quantitative Information*, Claus Wilke's *Fundamentals of Data Visualization*, Stephen Few's *Show Me the Numbers*, the Financial Times Visual Vocabulary, and Cynthia Brewer's ColorBrewer) is founded on **intellectual honesty, geometric precision, and high data density**.
 
-Amateur chart design is notorious for chartjunk: fake 3D cylinders, truncated bar baselines, garish rainbow colormaps, dark competing gridlines, and detached legends that force the reader's eye to travel endlessly back and forth.
+In business and technical presentations, charts are the ultimate arbiters of credibility. Distorted baselines, 3D extruded pie charts, fluorescent color palettes, and detached legends that force eye saccades instantly destroy audience trust.
 
-## 2. Core Principles & Formulas
+---
 
-### 2.1. Tufte’s Data-Ink Ratio
-The foundational formula of data graphics:
-$$\mathbf{\text{Data-Ink Ratio} = \frac{\text{Data-Ink}}{\text{Total Ink in Graphic}} = 1 - \text{Erasable Non-Data-Ink}}$$
-- **Data-Ink (Preserve):** The bars representing values, points on a scatterplot, trendlines, and direct data labels.
-- **Non-Data-Ink (Erase / Minimize):**
-  - Dark, heavy background fills $\to$ Erase.
-  - Dark prominent gridlines $\to$ Desaturate to $15\%-20\%$ opacity or remove.
-  - Heavy outer chart borders $\to$ Erase.
-  - Redundant axis tick marks $\to$ Simplify.
-  - Fake 3D depth / bevels $\to$ Erase completely.
+## 2. GitHub Repositories & Engine References
 
-### 2.2. Wilke’s Principle of Proportional Ink
-The fundamental rule of geometric honesty:
-$$\frac{\text{Visual Area of Graphical Element } A}{\text{Visual Area of Graphical Element } B} = \frac{\text{Data Value } A}{\text{Data Value } B}$$
-- **The Zero-Baseline Rule for Bars:**
-  Bar charts MUST always begin at a baseline of **zero** ($y = 0$). If a bar chart comparing 98 vs 100 truncates the y-axis to start at 95, the visual bar for 100 appears $2.5\times$ taller than 98, creating a deceptive optical lie.
-- **Dots / Points for Non-Zero Baselines:**
-  If showing fine-grained variance (e.g. temperature fluctuations from 36.5°C to 37.5°C), do NOT use bar charts. Use a **dot plot or line chart**, where position along a common scale encodes value without visual ink area distortion.
-- **Bubble / Circle Chart Scaling:**
-  When encoding values into circles, scale by **Area**, NOT Radius or Diameter:
-  $$\text{Radius } r \propto \sqrt{\text{Data Value } V}$$
-  Scaling radius directly makes a $2\times$ value appear $4\times$ larger in area!
-
-### 2.3. Direct Labeling vs. Detached Legends
-- **The Detached Legend Anti-Pattern:** Placing a separate color legend box in the top-right corner or below the chart forces the reader into "ping-pong scanning" (looking at a bar $\to$ looking at legend $\to$ looking back at bar).
-- **The Direct Labeling Rule:** Place the series name or value label directly adjacent to the end of the line or above the bar:
-  ```
-  Revenue  ───────────────────────────────● $4.2M (2026)
-  Cost     ──────────────● $1.8M (2026)
-  ```
-  Direct labeling eliminates eye fatigue and reduces comprehension time from 8 seconds to under 2 seconds.
-
-### 2.4. Subtle Desaturated Gridlines
-Gridlines exist solely to guide the eye across long distances. They must never compete with data lines:
-- Gridline color: Light gray (`#e2e8f0` on light backgrounds, `#334155` on dark backgrounds).
-- Stroke width: $0.5\text{pt} - 0.75\text{pt}$ (never $> 1\text{pt}$).
-- Dash style: Lightly dotted or dashed.
-- Gridline opacity: $\le 20\%$ relative to data series ink.
-
-### 2.5. Data Motion Choreography
-When animating charts across slide transitions or on click:
-1. **Time-series Line Charts:** Animate from **left to right**, matching the chronological flow of time.
-2. **Bar Charts:** Animate bars rising or extending sequentially by category or sorted by magnitude, never all popping in simultaneously.
-3. **Data Annotations & Callouts:** Fade in callout cards $150-250\text{ms}$ *after* the chart geometry has finished drawing, ensuring the data establishes context before the commentary lands.
-
-## 3. DOs and DON'Ts
-
-| Aspect | DO | DON'T |
+| Repository / Project | Architecture & Focus | Core Invariant Extracted |
 |---|---|---|
-| **Baselines** | Start bar charts at $0$; use dot plots when zooming into non-zero scales | Truncating bar chart y-axes to exaggerate micro differences |
-| **Chart Types** | Match chart type to analytical intent (Trend $\to$ Line, Comparison $\to$ Bar, Part-to-whole $\to$ 100% Stacked Bar) | Using 3D Pie charts with $> 5$ slices |
-| **Colormaps** | Use perceptually uniform palettes (Viridis, ColorBrewer) or single-hue ramps | Rainbow spectrum palettes where yellow visually explodes over blue |
-| **Gridlines** | Faint, subtle horizontal-only gridlines behind data | Dense dark black gridlines criss-crossing the chart |
-| **Formatting** | Format numbers clearly with units: `\$4.2M`, `+18%`, `320ms` | Raw unformatted database floats: `4218942.1283` |
+| [`d3/d3`](https://github.com/d3/d3) | Low-level grammar of graphics in JavaScript | Declarative data-binding; monotone cubic spline interpolators; quantitative scale transformations. |
+| [`Financial-Times/chart-doctor`](https://github.com/Financial-Times/chart-doctor) | The FT Visual Vocabulary repository | 9 distinct communication intents (Deviation, Correlation, Ranking, Distribution, Time, Magnitude, Part-to-Whole, Spatial, Flow). |
+| [`clauswilke/dataviz`](https://github.com/clauswilke/dataviz) | Companion codebase for *Fundamentals of Data Visualization* | Principle of Proportional Ink validation; color perception scales; aspect ratio bank-to-$45^\circ$ calculations. |
+| [`vega/vega-lite`](https://github.com/vega/vega-lite) | High-level declarative grammar of graphics | Automated unit-spec composition; facet layering; perceptual channel mapping rules. |
 
-## 4. Translation to PowerPoint (OOXML)
-- In PPTX charts (`ppt/charts/chart{N}.xml`):
-  - Strip outer plot area borders: `<c:spPr><a:ln><a:noFill/></a:ln></c:spPr>`.
-  - Gridlines: `<c:majorGridlines><c:spPr><a:ln w="4762"><a:solidFill><a:srgbClr val="334155"/></a:solidFill><a:prstDash val="sysDot"/></a:ln></c:spPr></c:majorGridlines>`.
-  - Data series animation: In `<p:cTn>`, configure chart animation type `byCategory` or `bySeries` instead of animating the entire chart box as a single opaque block.
+---
+
+## 3. Mathematical Foundations & Perceptual Laws
+
+### 3.1. Edward Tufte's Data-Ink Ratio
+Tufte defined the fundamental efficiency metric of any quantitative graphic:
+$$\text{Data-Ink Ratio} = \frac{\text{Data-Ink}}{\text{Total Ink Used to Print / Render Graphic}}$$
+$$\text{Data-Ink Ratio} = 1.0 - \text{Proportion of Graphic that can be Erased Without Loss of Data}$$
+
+*Prescription for Slides:*
+Maximize the Data-Ink Ratio to $\approx 1.0$ by systematically erasing:
+1. Outer chart bounding box borders (4 lines erased).
+2. Heavy dark background fills.
+3. Vertical gridlines on time-series charts.
+4. Redundant axis tick marks and decorative drop shadows.
+
+---
+
+### 3.2. Claus Wilke's Principle of Proportional Ink
+The visual area or length of a graphic element must scale in direct linear proportion to the physical data value it represents:
+$$\frac{\text{Visual Area}_i}{\sum_{k} \text{Visual Area}_k} = \frac{\text{Data Value}_i}{\sum_{k} \text{Data Value}_k}$$
+
+#### The Non-Zero Baseline Distortion Proof (Why Bar Charts MUST Start at Zero)
+Consider two quarterly revenue numbers: $V_1 = \$95\text{M}$ and $V_2 = \$100\text{M}$. The true growth is:
+$$\text{True Relative Growth} = \frac{100 - 95}{95} = +5.26\%$$
+
+If an analyst truncates the y-axis baseline to $B = \$90\text{M}$:
+$$\begin{aligned}
+h_1 &= V_1 - B = 95 - 90 = 5 \\
+h_2 &= V_2 - B = 100 - 90 = 10 \\
+\text{Visual Perceived Ratio} &= \frac{h_2}{h_1} = \frac{10}{5} = 2.00 \quad (+100\% \text{ visual increase!})
+\end{aligned}$$
+*Verdict:* Truncating the baseline of a bar chart introduces a **$19\times$ perceptual lie factor**. Bar charts must always start at $0$. If small variations in a high-baseline range must be highlighted, use a **dot plot or connected line chart**, where baseline truncation is mathematically legitimate.
+
+---
+
+### 3.3. Stephen Few's Perceptual Channel Accuracy Hierarchy
+Human vision decodes quantitative properties with varying degrees of neurological accuracy (Cleveland & McGill psychophysical experiments):
+
+$$\begin{aligned}
+\text{Rank 1 (Most Accurate)} &: \text{Position along a common aligned scale (Dot plot, standard bar chart)} \\
+\text{Rank 2} &: \text{Length / Distance (Horizontal / Vertical bars)} \\
+\text{Rank 3} &: \text{Direction / Slope (Line charts, trend vectors)} \\
+\text{Rank 4} &: \text{Angle / Tilt (Pie chart slices — error rate } \pm 18-25\%) \\
+\text{Rank 5} &: \text{Area (Bubble charts, treemaps — error rate } \pm 20-35\%) \\
+\text{Rank 6} &: \text{Volume / 3D Extrusion (Banned entirely)} \\
+\text{Rank 7 (Least Accurate)} &: \text{Color Saturation / Lightness (Heatmaps, choropleths)}
+\end{aligned}$$
+
+---
+
+### 3.4. Direct Labeling vs. Detached Legends (Eye Saccade Reduction)
+A detached legend box positioned in the top-right corner forces the audience's fovea to oscillate repeatedly between the data lines and the legend key (saccadic eye strain).
+
+*Mathematical Law of Direct Labeling:*
+$$\text{Label Coordinates } (x_L, y_L) = (x_{\text{last\_data\_point}} + \Delta x, y_{\text{last\_data\_point}})$$
+Place the category label directly next to the final point of each data curve, rendered in the exact same color hue as the line. Eliminate the legend box completely.
+
+---
+
+### 3.5. Gridline Attenuation
+$$\text{Gridline Opacity } \alpha_{\text{grid}} \le 15\% \quad (\text{DrawingML: } \text{alpha}=\text{"15000"})$$
+Gridlines exist solely to guide interpolation; they must sit quietly beneath the data layer, never competing with data marks.
+
+---
+
+## 4. Python Data-Ink & Baseline Auditor
+
+```python
+"""
+Data Visualization Integrity Auditor
+Validates baseline zero-anchoring and data-ink optimization on PPTX chart elements.
+"""
+def audit_chart_integrity(chart):
+    violations = []
+    
+    # 1. Bar Chart Baseline Check
+    if chart.has_category_axis and chart.chart_type in [
+        # Bar/Column chart types
+        2, 3, 4, 5, 51, 52, 53, 54, 55, 56
+    ]:
+        val_axis = chart.value_axis
+        if val_axis.has_minimum_scale:
+            if val_axis.minimum_scale != 0.0:
+                violations.append(
+                    f"PROPORTIONAL_INK_VIOLATION: Bar chart value axis starts at {val_axis.minimum_scale} instead of 0.0."
+                )
+                
+    # 2. Banned 3D Chart Types Check
+    chart_name = str(chart.chart_type)
+    if "3D" in chart_name or chart.chart_type in [6, 7, 8, 9, 10, 11, 12, 13, 14, 15]:
+        violations.append("BANNED_3D_CHART: 3D perspective charts distort quantitative angles and are strictly prohibited.")
+        
+    return {
+        "passed": len(violations) == 0,
+        "violations": violations
+    }
+```
+
+---
+
+## 5. Comprehensive DOs and DON'Ts
+
+### DO:
+1. **Always anchor bar and column charts at zero.** Never truncate the baseline on bar charts.
+2. **Label data series directly at their endpoints.** Erase detached legend boxes to reduce visual saccades.
+3. **Mute gridlines to $\le 15\%$ opacity.** Gridlines should be barely visible guides, never heavy black lines.
+4. **Highlight the single critical data series with color.** Keep 4 comparison lines in muted slate grey (`#64748B`), and color the hero metric in vibrant cyan (`#0EA5E9`).
+
+### DON'T:
+1. **Never use 3D charts.** 3D bar, pie, and ribbon charts distort angles and violate the Cleveland-McGill perceptual scale.
+2. **Never use pie charts with more than 3 slices.** Use a horizontal ranked bar chart instead.
+3. **Never place vertical gridlines on time-series charts.** Time naturally flows left-to-right; vertical lines create visual stutter.
