@@ -27,6 +27,7 @@ In accordance with Decisions **D001**, **D009**, **D010**, and **D011**:
 | [`10_synthesis_rules_for_pptx.md`](10_synthesis_rules_for_pptx.md) | **20 Core Verified PPTX Rules** | Direct OOXML translations of multi-domain principles, with mathematical parameters, DOs, DON'Ts, and anti-patterns. |
 | [`11_color_science_oklab_apca.md`](11_color_science_oklab_apca.md) | Color Science & Modern Contrast | Oklab / OKLCH perceptual lightness uniformity (Björn Ottosson), cube-root LMS compression, Andrew Somers' APCA polarity-dependent contrast ($|Lc| \ge 75$ for body), failure of legacy WCAG 2. |
 | [`12_layout_geometry_spatial_physics.md`](12_layout_geometry_spatial_physics.md) | Spatial Geometry & Collision Physics | 2D AABB collision detection, Minkowski sum safe-zone buffer expansion ($\delta \ge 0.35''$), Lloyd's relaxation on Voronoi cells for equidistant card breathing room. |
+| [`13_critical_dialectic_synthesis.md`](13_critical_dialectic_synthesis.md) | **Critical Dialectic Synthesis** | Deconstruction of external skills, conflict resolution matrix (Duarte vs Tufte vs Tailwind), consensus invariants, and multi-language technology architecture (Python vs TS vs C++/Rust vs OpenXML). |
 
 ## Source Citations & Licenses
 Full source catalogue with 85+ authoritative references, URLs, licenses, and peer authority metrics is maintained at:
