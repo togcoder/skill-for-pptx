@@ -7,6 +7,16 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T084 [cross] Green CI — 2026-11-04
+
+- **Test dependencies.** CI now installs `python-docx`, `openpyxl`, `numpy` and
+  `pytest`; seven test modules failed to import without them.
+- **Host-only tests skip on CI.** The PowerPoint COM games suite and ArtCraft CLI
+  discovery skip when the tool is absent. The online photo example in
+  `test_forge_debt` skips when Openverse cannot be reached.
+- **Logo box fit (`slide_forge`).** The chrome logo box is sized from the measured
+  text instead of a fixed 1.3 in, so a wider fallback font no longer breaks the word.
+
 ## T083 [cross] Coordination layer: registry, binding decisions, claim/board/check — 2026-11-04
 
 - **Why.** The owner: skills grow in parallel across agents, so "the last

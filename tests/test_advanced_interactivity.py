@@ -66,6 +66,10 @@ class TestAdvancedInteractivity(unittest.TestCase):
 
     def test_compile_one_slide_games_suite(self):
         """Verify compilation of the 2-slide autonomous 1-slide games suite."""
+        try:
+            import win32com.client  # noqa: F401
+        except ImportError:
+            self.skipTest("needs PowerPoint COM (pywin32 + PowerPoint)")
         with tempfile.TemporaryDirectory() as td:
             out_deck = Path(td) / "one_slide_games_suite.pptx"
             res = compile_one_slide_games_suite(out_deck)
