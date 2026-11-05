@@ -1,0 +1,308 @@
+{
+ "scan_fps": 10,
+ "a_center_px": 60.0,
+ "b_center_px": 252.0,
+ "rows": [
+  {
+   "case": "same-bang",
+   "verdict": "continuous",
+   "frames": [
+    0,
+    52
+   ],
+   "start_center": 59.5,
+   "end_center": 251.5,
+   "mid_frame": 24,
+   "mid": {
+    "blobs": 1,
+    "center": 163.5,
+    "width": 45,
+    "group_widths": [
+     45
+    ],
+    "pixels": 2119
+   }
+  },
+  {
+   "case": "same-name",
+   "verdict": "continuous",
+   "frames": [
+    73,
+    125
+   ],
+   "start_center": 59.5,
+   "end_center": 251.5,
+   "mid_frame": 97,
+   "mid": {
+    "blobs": 1,
+    "center": 163.5,
+    "width": 45,
+    "group_widths": [
+     45
+    ],
+    "pixels": 2118
+   }
+  },
+  {
+   "case": "diff-name",
+   "verdict": "continuous",
+   "frames": [
+    146,
+    198
+   ],
+   "start_center": 59.5,
+   "end_center": 251.5,
+   "mid_frame": 170,
+   "mid": {
+    "blobs": 1,
+    "center": 163.5,
+    "width": 45,
+    "group_widths": [
+     45
+    ],
+    "pixels": 2116
+   }
+  },
+  {
+   "case": "rect-ellipse",
+   "verdict": "two-blobs",
+   "frames": [
+    219,
+    271
+   ],
+   "start_center": 64.2,
+   "end_center": 205.9,
+   "mid_frame": 243,
+   "mid": {
+    "blobs": 2,
+    "center": 141.9,
+    "width": null,
+    "group_widths": [
+     29,
+     47
+    ],
+    "pixels": 1778
+   }
+  },
+  {
+   "case": "text-same",
+   "verdict": "continuous",
+   "frames": [
+    292,
+    344
+   ],
+   "start_center": 83.0,
+   "end_center": 275.0,
+   "mid_frame": 315,
+   "mid": {
+    "blobs": 1,
+    "center": 168.5,
+    "width": 56,
+    "group_widths": [
+     56
+    ],
+    "pixels": 263
+   }
+  },
+  {
+   "case": "text-diff",
+   "verdict": "continuous",
+   "frames": [
+    365,
+    416
+   ],
+   "start_center": 83.1,
+   "end_center": 275.4,
+   "mid_frame": 388,
+   "mid": {
+    "blobs": 1,
+    "center": 169.4,
+    "width": 56,
+    "group_widths": [
+     56
+    ],
+    "pixels": 102
+   }
+  },
+  {
+   "case": "picture-same",
+   "verdict": "continuous",
+   "frames": [
+    438,
+    489
+   ],
+   "start_center": 59.5,
+   "end_center": 251.5,
+   "mid_frame": 461,
+   "mid": {
+    "blobs": 1,
+    "center": 144.5,
+    "width": 45,
+    "group_widths": [
+     45
+    ],
+    "pixels": 1778
+   }
+  },
+  {
+   "case": "picture-diff",
+   "verdict": "continuous",
+   "frames": [
+    535,
+    562
+   ],
+   "start_center": 214.0,
+   "end_center": 251.5,
+   "mid_frame": 538,
+   "mid": {
+    "blobs": 1,
+    "center": 228.5,
+    "width": 47,
+    "group_widths": [
+     47
+    ],
+    "pixels": 2205
+   }
+  },
+  {
+   "case": "group-same",
+   "verdict": "continuous",
+   "frames": [
+    583,
+    635
+   ],
+   "start_center": 57.0,
+   "end_center": 249.0,
+   "mid_frame": 607,
+   "mid": {
+    "blobs": 1,
+    "center": 143.0,
+    "width": 42,
+    "group_widths": [
+     42
+    ],
+    "pixels": 1364
+   }
+  },
+  {
+   "case": "rotate90",
+   "verdict": "continuous",
+   "frames": [
+    656,
+    708
+   ],
+   "start_center": 59.5,
+   "end_center": 251.5,
+   "mid_frame": 680,
+   "mid": {
+    "blobs": 1,
+    "center": 154.5,
+    "width": 65,
+    "group_widths": [
+     65
+    ],
+    "pixels": 2155
+   }
+  },
+  {
+   "case": "entrance",
+   "verdict": "static/no-match",
+   "frames": [
+    729,
+    750
+   ],
+   "start_center": 59.5,
+   "end_center": 59.5,
+   "mid_frame": 729,
+   "mid": {
+    "blobs": 1,
+    "center": 59.5,
+    "width": 47,
+    "group_widths": [
+     47
+    ],
+    "pixels": 2255
+   }
+  },
+  {
+   "case": "byword",
+   "verdict": "continuous",
+   "frames": [
+    802,
+    854
+   ],
+   "start_center": 82.2,
+   "end_center": 265.6,
+   "mid_frame": 826,
+   "mid": {
+    "blobs": 1,
+    "center": 176.5,
+    "width": 114,
+    "group_widths": [
+     114
+    ],
+    "pixels": 294
+   }
+  },
+  {
+   "case": "bychar",
+   "verdict": "continuous",
+   "frames": [
+    875,
+    927
+   ],
+   "start_center": 83.0,
+   "end_center": 275.2,
+   "mid_frame": 899,
+   "mid": {
+    "blobs": 1,
+    "center": 177.7,
+    "width": 55,
+    "group_widths": [
+     55
+    ],
+    "pixels": 243
+   }
+  },
+  {
+   "case": "zorder",
+   "verdict": "continuous",
+   "frames": [
+    219,
+    271
+   ],
+   "start_center": 59.5,
+   "end_center": 251.5,
+   "mid_frame": 243,
+   "mid": {
+    "blobs": 1,
+    "center": 161.8,
+    "width": 47,
+    "group_widths": [
+     47
+    ],
+    "pixels": 11
+   }
+  },
+  {
+   "case": "offslide",
+   "verdict": "continuous",
+   "frames": [
+    438,
+    489
+   ],
+   "start_center": 59.5,
+   "end_center": 251.5,
+   "mid_frame": 461,
+   "mid": {
+    "blobs": 1,
+    "center": 145.5,
+    "width": 45,
+    "group_widths": [
+     45
+    ],
+    "pixels": 253
+   }
+  }
+ ]
+}

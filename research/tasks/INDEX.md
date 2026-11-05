@@ -103,7 +103,7 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T071 | [pptx] Golden benchmark (8 briefs) + owner A/B review page + critic calibration | *open, suggested Claude → critic OpenCode* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |
 | T072 | [pptx] Visual defect gates on rendered frames (clipped, empty card, placeholder, tiny, style drop, collide) | *open, suggested OpenCode → critic Claude* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |
 | T073 | [pptx] Fast motion viewer: DeckCraft render-animation build vs harness-recorded slide show, both vs CreateVideo | *open, suggested Claude desktop → critic OpenCode* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |
-| T074 | [pptx] Morph matching rules, verified by experiment matrix | opencode | `work/T074-opencode-morph-rules` | claimed | `experiments/T074-20261105-opencode-morph-rules/REPORT.md` |
+| T074 | [pptx] Morph matching rules, verified by experiment matrix | opencode | `work/T074-opencode-morph-rules` | review requested | `experiments/T074-20261105-opencode-morph-rules/REPORT.md` |
 | T075 | [pptx] scene.json + scene compiler (actors/states → in-slide effects and Morph) | *open, after T071–T072; suggested Claude → critic Antigravity* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |
 | T076 | [pptx] Library of 10 Morph moves with PowerPoint golden strips | *open, after T074; suggested OpenCode → critic Claude* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |
 | T077 | [pptx] Deck Director emits scene.json; remove substring mapping and invented content | *open, after T075; suggested Antigravity → critic Claude* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |
