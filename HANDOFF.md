@@ -26,7 +26,8 @@ thay vì deck làm tay. Lab đa lĩnh vực phục vụ mục tiêu đó và đa
 
 1. **Điểm critic không phải chất lượng.** Deck T068/T069b có thẻ trống, tiêu đề bị cắt và chữ
    giữ chỗ nhưng vẫn được 4,99/5 (`experiments/T070-…/preview/critic-499-vs-eye.jpg`). Muốn nói
-   "tốt hơn" thì phải có chấm A/B của chủ dự án (T071).
+   "tốt hơn" thì phải có chấm A/B mù trên file `.pptx` (T071). Chủ dự án tự mở và lật slide,
+   không cần video (D009). Gu học từ tác phẩm tốt của nhiều lĩnh vực, không chép (D010, T086).
 2. **Gu phải nằm trong công cụ, không nằm trong script riêng.** Deck đẹp nhất (T066) là script
    viết tay 524 dòng. Đừng viết thêm deck kiểu đó làm sản phẩm. Hãy đưa phần gu vào công cụ (chặng
    2–3).
@@ -84,6 +85,7 @@ thay vì deck làm tay. Lab đa lĩnh vực phục vụ mục tiêu đó và đa
 
 | Mã | Việc | Người làm → phản biện | Điều kiện bắt đầu |
 |---|---|---|---|
+| **T086** | **Nghiên cứu gu đám đông đa lĩnh vực → luật gu, mỗi luật kiểm chứng bằng một cặp `.pptx` chấm mù** ([ROADMAP](docs/ROADMAP.md)) | Claude hoặc Gemini → model khác họ | **ngay, song song** |
 | **T078** | **Trục kịch bản: phương pháp + kịch bản mẫu Triết học ch. 1** ([SCRIPT_TRACK](docs/SCRIPT_TRACK.md)) | Claude | **xong, chờ chủ dự án đọc** |
 | T079 | Model yếu + phương pháp có viết được kịch bản tốt? (A/B mù bản chữ) | OpenCode → Claude | sau khi T078 được duyệt |
 | T080 | Kiểm chứng bảng động từ → chuyển động | OpenCode → Claude | cần T073 |
@@ -97,7 +99,7 @@ thay vì deck làm tay. Lab đa lĩnh vực phục vụ mục tiêu đó và đa
 | T076 | Thư viện 10 nước Morph có khung hình mẫu | OpenCode → Claude | sau T074 |
 | T077 | Deck Director xuất cảnh; bỏ ánh xạ chuỗi con và giá trị bịa | Antigravity → Claude | sau T075 |
 
-Mã trống kế tiếp: do `coord.py claim` tính (hiện là **T084**).
+Mã trống kế tiếp: do `coord.py claim` tính (hiện là **T087**).
 
 **Dừng ngay:**
 - vá thêm luật chuỗi con trong `deck_director.py`;

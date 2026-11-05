@@ -98,6 +98,65 @@ Những thứ bị thay:
 Chi tiết trong [SCRIPT_TRACK.md](SCRIPT_TRACK.md). Việc đầu tiên: chủ dự án đọc kịch bản mẫu T078
 và so với beat sheet T069a. Mọi deck mới ở chặng 2 phải có kịch bản đã được duyệt dạng chữ.
 
+## Trục gu (T086): nghiên cứu gu đám đông từ nhiều lĩnh vực, chạy song song ngay
+
+Chủ dự án (F11, F13): skill này cho mọi người, nên gu phải học từ những tác phẩm được nhiều người
+công nhận ở nhiều lĩnh vực, không chỉ PPTX và không chỉ mắt một người. Học, thử, cải thiện; không
+sao chép (F10, D010).
+
+### T086 [cross] Nghiên cứu gu đám đông đa lĩnh vực → luật gu kiểm chứng trên PPTX
+
+- **Câu hỏi:** những tác phẩm được đông người khen ở nhiều lĩnh vực có chung những luật nào? Luật
+  nào viết được để model yếu áp dụng trên PPTX? Luật nào còn đứng sau khi thử trong PowerPoint?
+- **Lĩnh vực (tối thiểu 8), mỗi lĩnh vực 5–10 nguồn tốt:**
+  1. thuyết trình và keynote (keynote ra mắt sản phẩm, TED, sách và blog của các studio thiết kế
+     thuyết trình);
+  2. dàn trang editorial và in ấn, typography kiểu Swiss;
+  3. thư viện "gu cho AI" về web:
+     - `pbakaus/impeccable` (Apache-2.0);
+     - skill frontend-design trong `anthropics/skills`;
+     - `bergside/awesome-design-skills`;
+     - `jimliu/baoyu-design`: chỉ học ý, vì tài liệu luật của nó không có giấy phép;
+  4. motion design và motion graphic:
+     - `motion-canvas`, Remotion;
+     - reveal.js auto-animate, rất gần Morph;
+     - 12 nguyên tắc hoạt hình;
+     - hướng dẫn motion của Apple HIG và Material;
+  5. thiết kế title phim và video giải thích;
+  6. trực quan hóa dữ liệu và infographic;
+  7. nhiếp ảnh và bố cục điện ảnh: khung hình, điểm nhìn, nhịp cắt;
+  8. các bộ sưu tập được bình chọn (giải thưởng thiết kế, trang tuyển chọn có lượt thích hoặc
+     sao), dùng làm thước đo "đám đông".
+- **Phương pháp:**
+  - **Ghi nguồn.** Với mỗi nguồn ghi: URL, ngày truy cập, giấy phép, và lý do nó được coi là tốt
+    (giải, sao, lượt dùng).
+  - **Rút luật bằng lời của mình.** Mỗi luật có: nội dung, con số nếu có, lý do, một phản ví dụ.
+  - **Dịch sang PPTX.** Ghi tính năng gốc nào làm được luật đó: Morph và tên `!!`, motion path,
+    crop, mặt nạ, nhịp click, chuyển slide. Ghi cả điều PPTX không làm được.
+  - **Gu đám đông = luật được nhiều lĩnh vực đồng ý.**
+    - Xếp hạng luật theo số lĩnh vực độc lập cùng nói.
+    - Ghi rõ các luật mâu thuẫn và giữ cả hai.
+  - **Kiểm chứng.**
+    - Chọn 15 luật đứng đầu. Mỗi luật có một cặp `.pptx` trước/sau, **cùng nội dung**, chỉ khác
+      đúng luật đó. Nội dung lấy từ T066 Triết học và đề pitch T081.
+    - Ít nhất 5 luật là luật chuyển động, vì đây là điểm yếu nhất (F2, F14).
+    - Chủ dự án lật từng cặp (đã đổi tên) và chọn mù.
+- **Đầu ra:**
+  - `experiments/T086-…/sources.md`: bảng nguồn theo lĩnh vực.
+  - `experiments/T086-…/artifacts/pairs/*.pptx`: các cặp thử.
+  - `knowledge/taste/rules.json`: mỗi luật có id, nội dung, các lĩnh vực ủng hộ, nguồn, tính năng
+    PPTX và kết quả chấm mù.
+  - Không sửa code sản phẩm. Đưa luật vào Forge và Director là việc của chặng 3.
+- **Nghiệm thu:** ≥ 8 lĩnh vực, ≥ 60 nguồn có ghi giấy phép, ≥ 15 luật có cặp `.pptx` đã chấm mù.
+- **Bác bỏ nếu:** bản "sau" không thắng quá 2/3 số cặp. Khi đó các luật còn quá chung chung. Phải
+  viết lại cụ thể hơn (có con số, gắn với vật thể) rồi thử lại.
+- **Cấm:**
+  - chép nguyên văn tài liệu không có giấy phép;
+  - đưa ảnh hoặc font có bản quyền vào repo (để trong `local-media/`).
+- **Người làm → người phản biện:** một model mạnh (Claude hoặc Gemini) → model khác họ.
+- **Cỡ:** 3–4 ngày. Có thể chia theo lĩnh vực cho nhiều phiên, mỗi phiên một nhánh (`T086a`,
+  `T086b`…), cùng ghi vào một bảng nguồn.
+
 ## Chặng 1: thước đo thật (đề bài đã giữ chỗ T071–T074)
 
 Không ai làm chặng 2 khi T071 và T072 chưa xong. Không có thước đo thì không biết chặng 2 có
@@ -116,10 +175,11 @@ tiến bộ hay không.
     - dòng thời gian lịch sử;
     - so sánh để ra quyết định;
     - quiz tương tác.
-  - Lệnh `bench build <tag>`: dựng cả 8 đề bằng đúng lối vào sản phẩm (cấm script riêng), xuất
-    PNG và clip chuyển động 10 giây mỗi slide quan trọng.
-  - Trang HTML tĩnh `bench review A B`: đặt hai phiên bản cạnh nhau. Chủ dự án chọn A, B hoặc
-    ngang nhau, kèm một dòng nhận xét. Kết quả lưu vào `knowledge/bench/votes.jsonl`.
+  - Lệnh `bench build <tag>`: dựng cả 8 đề bằng đúng lối vào sản phẩm (cấm script riêng). Đầu
+    ra là **8 file `.pptx`** (D009); không cần video.
+  - Lệnh `bench review A B`: đưa cặp `.pptx` A và B (đổi tên ngẫu nhiên để chấm mù) cho chủ dự án
+    tự mở và lật trong PowerPoint. Chủ dự án chọn A, B hoặc ngang nhau, kèm một dòng nhận xét. Kết
+    quả lưu vào `knowledge/bench/votes.jsonl`.
   - Mục tiêu dưới 10 phút cho một lượt chấm.
   - Hiệu chỉnh critic: đo tỷ lệ critic dự đoán đúng lựa chọn của chủ dự án.
 - **Nghiệm thu:**
@@ -150,6 +210,9 @@ tiến bộ hay không.
 - **Người làm → người phản biện:** OpenCode → Claude. **Cỡ:** 1–2 ngày.
 
 ### T073 [pptx] Máy xem chuyển động nhanh
+
+> Công cụ này để **agent** tự xem chuyển động, vì agent không lật slide được như người. Chủ dự án
+> không cần video (D009).
 
 - **Câu hỏi:** có thể xem khung hình chuyển động trong slide trong vài giây thay vì vài phút
   (CreateVideo) không?
@@ -248,6 +311,8 @@ tiến bộ hay không.
 
 ## Chặng 3: gu vào sản phẩm (chưa giữ chỗ; trưởng nhóm mở sau chặng 2)
 
+Luật gu của chặng này lấy từ `knowledge/taste/rules.json` (T086), và chỉ lấy luật đã thắng chấm mù.
+
 - **Style preset:**
   - Chuyển công thức editorial của T066 và 5 style của T067 (VisualStyle/1) vào làm *một* hệ
     style duy nhất.
@@ -278,8 +343,8 @@ tiến bộ hay không.
      `research/feedback/<YYYY-MM-DD>-<chủ-đề>.md`, theo từng mục đánh số F1, F2, …
    - Đừng giao việc mới trong cùng phiên đó.
    - Trưởng nhóm biến các mục phản hồi thành đề bài. Một mục chỉ đóng khi chủ dự án đánh dấu.
-2. **Mỗi tuần một bản phát hành.** Dựng lại bộ đề vàng và chấm A/B với tuần trước, khoảng 10 phút.
-   Đây là chỗ chủ dự án *nhìn thấy* tiến bộ.
+2. **Mỗi tuần một bản phát hành.** Dựng lại bộ đề vàng. Chủ dự án mở các file `.pptx` và lật so
+   với bản tuần trước, khoảng 10 phút, không cần video (D009). Đây là chỗ chủ dự án *thấy* tiến bộ.
 3. **Giao việc bằng đề bài đã giữ chỗ,** không giao bằng mô tả tự do. Một phiên agent chỉ làm một
    đề bài.
 

@@ -7,6 +7,22 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T085 [cross] Lead: owner's 2026-11-05 direction — 2026-11-05
+
+- **Feedback ledger.** New file `research/feedback/2026-11-05-taste-and-review.md` with
+  items F10–F14.
+- **Decisions.**
+  - D001 amended: quality is judged by flipping through the `.pptx`; the owner is the final
+    viewer, not the only source of taste.
+  - New D009: the deliverable is the `.pptx`, and the owner needs no video.
+  - New D010: taste comes from researched good work across fields, written in our own words,
+    with sources, and tested blind in `.pptx`; never copied.
+- **ROADMAP.**
+  - New brief T086: crowd taste research across at least 8 fields, ending in tested PPTX taste
+    rules.
+  - T071 now outputs `.pptx` pairs instead of clips.
+  - T073 is marked as a tool for agents only.
+
 ## T083 [cross] Coordination layer: registry, binding decisions, claim/board/check — 2026-11-04
 
 - **Why.** The owner: skills grow in parallel across agents, so "the last
