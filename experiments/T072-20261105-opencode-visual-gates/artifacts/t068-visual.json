@@ -1,0 +1,511 @@
+{
+ "design_system": "1.1.0",
+ "scores": {
+  "design": 4.62,
+  "motion": 5.0,
+  "rhythm": 5.0,
+  "coherence": 5.0,
+  "narrative": 5.0,
+  "overall": 4.92
+ },
+ "checks": 60,
+ "evaluations": [
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "DEN-WORDS",
+   "good",
+   false
+  ],
+  [
+   "MOT-CLICKS",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "NAR-BASE-STATE",
+   "good",
+   false
+  ],
+  [
+   "DEN-ACTIVE-WORDS",
+   "good",
+   false
+  ],
+  [
+   "NAR-ALIGN",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "DEN-WORDS",
+   "good",
+   false
+  ],
+  [
+   "LAY-BENTO",
+   "good",
+   false
+  ],
+  [
+   "MOT-CLICKS",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-MOVERS",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "MOT-MOVERS",
+   "good",
+   false
+  ],
+  [
+   "NAR-BASE-STATE",
+   "good",
+   false
+  ],
+  [
+   "DEN-ACTIVE-WORDS",
+   "good",
+   false
+  ],
+  [
+   "NAR-LIFECYCLE",
+   "good",
+   false
+  ],
+  [
+   "NAR-ALIGN",
+   "good",
+   false
+  ],
+  [
+   "VIS-EMPTY-CARD",
+   "warn",
+   false
+  ],
+  [
+   "VIS-EMPTY-CARD",
+   "warn",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "COL-TEXT",
+   "good",
+   false
+  ],
+  [
+   "LAY-SAFE",
+   "good",
+   false
+  ],
+  [
+   "DEN-WORDS",
+   "note",
+   false
+  ],
+  [
+   "MOT-CLICKS",
+   "good",
+   false
+  ],
+  [
+   "MOT-DURATION",
+   "good",
+   false
+  ],
+  [
+   "MOT-EFFECTS",
+   "good",
+   false
+  ],
+  [
+   "NAR-BASE-STATE",
+   "good",
+   false
+  ],
+  [
+   "DEN-ACTIVE-WORDS",
+   "good",
+   false
+  ],
+  [
+   "NAR-LIFECYCLE",
+   "good",
+   false
+  ],
+  [
+   "NAR-ALIGN",
+   "good",
+   false
+  ],
+  [
+   "MOT-STATIC",
+   "good",
+   true
+  ],
+  [
+   "MOT-VOCAB",
+   "good",
+   true
+  ],
+  [
+   "TYP-SIZES",
+   "good",
+   true
+  ],
+  [
+   "TYP-SMALL",
+   "good",
+   true
+  ],
+  [
+   "TYP-FAMILIES",
+   "good",
+   true
+  ],
+  [
+   "LAY-DENSITY",
+   "good",
+   false
+  ],
+  [
+   "LAY-BALANCE",
+   "note",
+   false
+  ],
+  [
+   "COL-COLOURFUL",
+   "good",
+   false
+  ],
+  [
+   "LAY-DENSITY",
+   "note",
+   false
+  ],
+  [
+   "LAY-BALANCE",
+   "warn",
+   false
+  ],
+  [
+   "COL-COLOURFUL",
+   "note",
+   false
+  ],
+  [
+   "LAY-DENSITY",
+   "good",
+   false
+  ],
+  [
+   "LAY-BALANCE",
+   "good",
+   false
+  ],
+  [
+   "COL-COLOURFUL",
+   "note",
+   false
+  ]
+ ],
+ "issues_by_severity": {
+  "warn": 3,
+  "note": 5
+ },
+ "issues_by_code": {
+  "VIS-EMPTY-CARD": 2,
+  "LAY-BALANCE": 1
+ },
+ "issues": [
+  {
+   "code": "VIS-EMPTY-CARD",
+   "dimension": "design",
+   "severity": "warn",
+   "slide": 2,
+   "object": "Major Content",
+   "measured": 4,
+   "expected": ">= 8 words or an image",
+   "detail": "large content field holds only a label",
+   "fix": "fill the card or remove it; an empty card is a promise the deck does not keep",
+   "tool": "author / scene.json"
+  },
+  {
+   "code": "VIS-EMPTY-CARD",
+   "dimension": "design",
+   "severity": "warn",
+   "slide": 2,
+   "object": "Minor Content",
+   "measured": 7,
+   "expected": ">= 8 words or an image",
+   "detail": "large content field holds only a label",
+   "fix": "fill the card or remove it; an empty card is a promise the deck does not keep",
+   "tool": "author / scene.json"
+  },
+  {
+   "code": "DEN-WORDS",
+   "dimension": "design",
+   "severity": "note",
+   "slide": 3,
+   "object": null,
+   "measured": 54,
+   "expected": [
+    0,
+    45
+   ],
+   "detail": "",
+   "fix": "cut to the claim and its evidence, or split the slide",
+   "tool": "slide_forge spec / author"
+  },
+  {
+   "code": "LAY-BALANCE",
+   "dimension": "design",
+   "severity": "note",
+   "slide": 1,
+   "object": null,
+   "measured": 0.186,
+   "expected": [
+    0.0,
+    0.15
+   ],
+   "detail": "",
+   "fix": "move or enlarge the lighter side",
+   "tool": "author"
+  },
+  {
+   "code": "LAY-DENSITY",
+   "dimension": "design",
+   "severity": "note",
+   "slide": 2,
+   "object": null,
+   "measured": 0.959,
+   "expected": [
+    0.6,
+    0.95
+   ],
+   "detail": "background share of the settled frame",
+   "fix": "too crowded: split the slide; nearly empty: enlarge or merge",
+   "tool": "author / slide_forge"
+  },
+  {
+   "code": "LAY-BALANCE",
+   "dimension": "design",
+   "severity": "warn",
+   "slide": 2,
+   "object": null,
+   "measured": 0.325,
+   "expected": [
+    0.0,
+    0.15
+   ],
+   "detail": "",
+   "fix": "move or enlarge the lighter side",
+   "tool": "author"
+  },
+  {
+   "code": "COL-COLOURFUL",
+   "dimension": "design",
+   "severity": "note",
+   "slide": 2,
+   "object": null,
+   "measured": 13.1,
+   "expected": [
+    15,
+    80
+   ],
+   "detail": "Hasler-Suesstrunk",
+   "fix": "grey decks read as unfinished, garish ones as noisy: use the palette's accent roles",
+   "tool": "slide_forge theme"
+  },
+  {
+   "code": "COL-COLOURFUL",
+   "dimension": "design",
+   "severity": "note",
+   "slide": 3,
+   "object": null,
+   "measured": 12.4,
+   "expected": [
+    15,
+    80
+   ],
+   "detail": "Hasler-Suesstrunk",
+   "fix": "grey decks read as unfinished, garish ones as noisy: use the palette's accent roles",
+   "tool": "slide_forge theme"
+  }
+ ],
+ "slides": [
+  {
+   "slide": 1,
+   "words": 20,
+   "sizes": [
+    20.0,
+    44.0
+   ],
+   "effects": 2,
+   "clicks": 1,
+   "max_movers": 0
+  },
+  {
+   "slide": 2,
+   "words": 25,
+   "sizes": [
+    20.0,
+    24.0,
+    28.0
+   ],
+   "effects": 4,
+   "clicks": 2,
+   "max_movers": 2
+  },
+  {
+   "slide": 3,
+   "words": 54,
+   "sizes": [
+    24.0,
+    28.0
+   ],
+   "effects": 2,
+   "clicks": 1,
+   "max_movers": 0
+  }
+ ],
+ "frames": [
+  {
+   "background_share": 0.688,
+   "balance_offset": 0.186,
+   "colourfulness": 39.1,
+   "slide": 1
+  },
+  {
+   "background_share": 0.959,
+   "balance_offset": 0.325,
+   "colourfulness": 13.1,
+   "slide": 2
+  },
+  {
+   "background_share": 0.917,
+   "balance_offset": 0.134,
+   "colourfulness": 12.4,
+   "slide": 3
+  }
+ ],
+ "deck": {
+  "slides": 3,
+  "content_slides": 3,
+  "static_slides": [],
+  "lifecycles": 2,
+  "effect_kinds": 4,
+  "type_sizes": [
+   20,
+   24,
+   28,
+   44
+  ],
+  "families": {
+   "Segoe UI": 10
+  }
+ },
+ "path": "C:\\Users\\COMPUTER\\Desktop\\làm chung với ai\\skill-for-pptx\\workspace\\T072\\experiments\\T068-20261104-antigravity-deck-director\\artifacts\\T068_directed.pptx"
+}

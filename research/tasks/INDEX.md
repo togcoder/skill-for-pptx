@@ -101,7 +101,7 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T069b | [pptx] Narrative Critic & Two-Pass Screenplay Scaffold: speaker notes compiler, 6th dimension narrative critic, exit lifecycles | Antigravity (Gemini 2.5 Pro) | `work/T069-antigravity-narrative-critic` | main (Argon approved) | `experiments/T069-20261104-antigravity-narrative-critic/REPORT.md` |
 | T070 | [cross] Lead synthesis of T001–T069, critique and PPTX roadmap | Claude (Opus 5.5, desktop) | `work/T070-claude-lead-synthesis` | done | `experiments/T070-20261104-claude-lead-synthesis/REPORT.md` |
 | T071 | [pptx] Golden benchmark (8 briefs) + owner A/B review page + critic calibration | *open, suggested Claude → critic OpenCode* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |
-| T072 | [pptx] Visual defect gates on rendered frames (clipped, empty card, placeholder, tiny, style drop, collide) | *open, suggested OpenCode → critic Claude* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |
+| T072 | [pptx] Visual error gates on rendered frames | opencode | `work/T072-opencode-visual-gates` | review requested | `experiments/T072-20261105-opencode-visual-gates/REPORT.md` |
 | T073 | [pptx] Fast motion viewer: DeckCraft render-animation build vs harness-recorded slide show, both vs CreateVideo | *open, suggested Claude desktop → critic OpenCode* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |
 | T074 | [pptx] Morph matching rulebook from a ≥30-cell PowerPoint probe matrix | *open, suggested OpenCode → critic Claude* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |
 | T075 | [pptx] scene.json + scene compiler (actors/states → in-slide effects and Morph) | *open, after T071–T072; suggested Claude → critic Antigravity* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |

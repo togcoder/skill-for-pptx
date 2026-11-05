@@ -114,6 +114,26 @@ were true at the time. Task IDs and their branches are listed in
   F1–F8); one brief per agent session; builder and critic from different
   model families; at most three open pptx tasks. `HANDOFF.md` rewritten.
 
+## T072 [pptx] Visual error gates on rendered frames — 2026-11-05
+
+- **Why.** T070 showed a deck scoring 4.99 with empty cards and scaffold text.
+  The critic measured geometry, contrast and timing but not the errors a human
+  sees in the frame.
+- **Added.** Six `VIS-*` codes in the canonical `scripts/design_critic.py`:
+  `VIS-CLIPPED`, `VIS-EMPTY-CARD`, `VIS-PLACEHOLDER`, `VIS-TINY`,
+  `VIS-STYLE-DROP`, `VIS-COLLIDE`; `--style` for a `VisualStyle/1` manifest;
+  `collision_findings()` for T073 frame pairs. No new script, so no registry
+  entry; `pptx.critic` is extended, not duplicated.
+- **Measured.** T068 directed deck: **2 `VIS-EMPTY-CARD`** (Major Content,
+  Minor Content) while the critic still scores **4.92** (D001). T066 control:
+  **10 `VIS-TINY`** body labels at 10–11 pt, no clipped/empty/placeholder false
+  positive. T069a: **0 visual gates**. `tests/test_visual_gates.py`: **9/9**;
+  full suite **573 pass, 10 skipped**; `check_layout.py` OK.
+- **Limits.** `VIS-COLLIDE` is a tested function, not wired to a frame sampler
+  until T073; `VIS-CLIPPED` is a font-metric estimate, not OCR; metadata
+  exemptions (kicker/caption/date) are a rule choice; no human rung 6.
+  `experiments/T072-20261105-opencode-visual-gates/REPORT.md`.
+
 ## T069b [pptx] Narrative Critic, speaker notes compiler and two-pass scaffold — 2026-11-04
 
 - **Why.** `deck_director.py` could compile a screenplay, but `design_critic.py`
