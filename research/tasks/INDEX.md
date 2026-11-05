@@ -3,7 +3,7 @@
 Since T040: every new title starts with its domain in brackets: `[pptx]`, `[docx]`, `[xlsx]`, `[svg]` or `[cross]` (see `domains/README.md`). Lifecycle: `lab/PROTOCOL.md`. A row may carry `review requested` / `reviewed: <verdict>`.
 
 This file is the one place to take a task ID. Before starting, add a row with
-status `claimed`, using the next free ID (**T085**). Push the row before you do
+status `claimed`, using the next free ID (**T088**). Push the row before you do
 expensive work. IDs are never reused. T024 was taken three times in parallel,
 so those rows carry a suffix. The experiment folders keep the names they were
 created with.
@@ -114,4 +114,5 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T082 | [pptx] Gold scripts 2–5 (report, pitch, process, decision), owner-approved | *open, after T081; Claude writes, owner approves, OpenCode tests* |  | open (brief in SCRIPT_TRACK) | `docs/SCRIPT_TRACK.md` |
 | T083 | [cross] Coordination layer: capability registry, binding decisions, `coord.py` claim/board/check, single-writer docs | Claude (Opus 5.5, desktop, lead) | `work/T083-claude-coordination` | done (PR stacked on #60) | `experiments/T083-20261104-claude-coordination/REPORT.md` |
 | T084 | [cross] Green CI: test deps, host-only and network tests, logo box fit | claude | `work/T084-claude-ci-green` | done | `experiments/T084-20261104-claude-ci-green/REPORT.md` |
-| T085 | *next free ID* | | | | |
+| T086 | [cross] Multi-domain crowd taste research into verified PPTX rules | antigravity | `work/T086-antigravity-taste-research` | claimed | `experiments/T086-20261105-antigravity-taste-research/REPORT.md` |
+| T088 | *next free ID* | | | | |
