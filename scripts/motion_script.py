@@ -208,12 +208,12 @@ def parse_gold_script(text):
         end = splits[i+1].start() if i+1 < len(splits) else len(text)
         chunk = text[start:end]
 
-        turn_m = re.search(r"-\s*\*\*Chuyển dịch:\*\*\s*(.*?)(?=\n-\s*\*\*|\Z)", chunk, re.S)
-        morph_m = re.search(r"-\s*\*\*Morph từ cảnh\s*(\d+):\*\*\s*(.*?)(?=\n-\s*\*\*|\Z)", chunk, re.S)
-        base_m = re.search(r"-\s*\*\*Trên màn hình lúc mở:\*\*\s*(.*?)(?=\n-\s*\*\*|\Z)", chunk, re.S)
-        speech_m = re.search(r"-\s*\*\*Lời nói:\*\*\s*(.*?)(?=\n-\s*\*\*|\Z)", chunk, re.S)
-        verb_m = re.search(r"-\s*\*\*Động từ(?: → chuyển động)?:\*\*\s*(.*?)(?=\n-\s*\*\*|\Z)", chunk, re.S)
-        why_m = re.search(r"-\s*\*\*Vì sao:\*\*\s*(.*?)(?=\n-\s*\*\*|\n##|\Z)", chunk, re.S)
+        turn_m = re.search(r"-\s*\*\*Chuyển dịch[^*]*:\*\*\s*(.*?)(?=\n-\s*\*\*|\Z)", chunk, re.S)
+        morph_m = re.search(r"-\s*\*\*Morph từ [Cc]ảnh\s*(\d+)[^*]*:\*\*\s*(.*?)(?=\n-\s*\*\*|\Z)", chunk, re.S)
+        base_m = re.search(r"-\s*\*\*Trên màn hình lúc mở[^*]*:\*\*\s*(.*?)(?=\n-\s*\*\*|\Z)", chunk, re.S)
+        speech_m = re.search(r"-\s*\*\*Lời nói[^*]*:\*\*\s*(.*?)(?=\n-\s*\*\*|\Z)", chunk, re.S)
+        verb_m = re.search(r"-\s*\*\*Động từ(?: → chuyển động)?[^*]*:\*\*\s*(.*?)(?=\n-\s*\*\*|\Z)", chunk, re.S)
+        why_m = re.search(r"-\s*\*\*Vì sao[^*]*:\*\*\s*(.*?)(?=\n-\s*\*\*|\n##|\Z)", chunk, re.S)
         claim_m = re.search(r"^\s*claim:\s*(.*)$", chunk, re.M | re.I)
 
         speech = speech_m.group(1).strip() if speech_m else ""
@@ -249,6 +249,7 @@ def parse_gold_script(text):
             "title": title,
             "turn": {"from": turn_from, "to": turn_to, "raw": turn_text},
             "morph_from": int(morph_m.group(1)) if morph_m else None,
+            "morph_text": morph_m.group(2).strip() if morph_m else "",
             "base_state": base_m.group(1).strip() if base_m else "",
             "speech": speech_clean,
             "clicks": clicks,
@@ -328,6 +329,28 @@ def check_script(text):
 
         if s.get("verb_motion") and not s.get("matched_verbs"):
             warnings.append(f"[SCRIPT-VERB-UNVERIFIED] {s_id}: Verb in '{s['verb_motion'][:40]}' is not in the 15 verified verbs")
+
+        # [SCRIPT-MORPH-CONTINUITY] Ensure actors morphing from previous scene exist in that previous scene
+        if s.get("morph_from"):
+            src_idx = s["morph_from"]
+            src_scene = next((prev for prev in scenes if prev["index"] == src_idx), None)
+            morph_text = s.get("morph_text", "")
+            morph_actors = re.findall(r"!![a-zA-Z0-9_\-]+", morph_text)
+            if src_scene:
+                src_content = (src_scene.get("morph_text", "") + " " + src_scene.get("base_state", "") + " " +
+                               src_scene.get("speech", "") + " " +
+                               src_scene.get("verb_motion", ""))
+                for actor in morph_actors:
+                    if actor not in src_content:
+                        warnings.append(f"[SCRIPT-MORPH-CONTINUITY] {s_id}: Actor '{actor}' declared morphing from Scene {src_idx} was not found in Scene {src_idx}")
+
+        # [SCRIPT-ASPECT-16x9] Warn if circle is defined with w == h in normalized coords on 16:9 canvas
+        full_scene_text = base + " " + s.get("verb_motion", "") + " " + s.get("morph_text", "")
+        circle_matches = re.finditer(r"(?:vòng tròn|hình tròn|đồng tâm|circle)[^.]*?w\s*=\s*([0-9.]+)[^.]*?h\s*=\s*([0-9.]+)", full_scene_text, re.I)
+        for cm in circle_matches:
+            w_val, h_val = float(cm.group(1)), float(cm.group(2))
+            if abs(w_val - h_val) < 0.02 and h_val > 0.05:
+                warnings.append(f"[SCRIPT-ASPECT-16x9] {s_id}: Circle defined with w={w_val} == h={h_val} in normalized coords will distort on 16:9 canvas (recommended w ~= 0.5625 * h)")
 
     ok = len(errors) == 0
     return {
@@ -465,24 +488,24 @@ def scaffold_script():
 
 ## Cảnh 1. [Tiêu đề Cảnh Mở Đầu]
 
-- **Chuyển dịch:** [Khán giả nghĩ gì] → [Sau cảnh này khán giả thấy gì]
-- **Trên màn hình lúc mở:** [Mô tả trạng thái t=0; TUYỆT ĐỐI KHÔNG ĐỂ MÀN HÌNH TRỐNG]
-- **Lời nói:**
+- **Chuyển dịch[^*]*:** [Khán giả nghĩ gì] → [Sau cảnh này khán giả thấy gì]
+- **Trên màn hình lúc mở[^*]*:** [Mô tả trạng thái t=0; TUYỆT ĐỐI KHÔNG ĐỂ MÀN HÌNH TRỐNG]
+- **Lời nói[^*]*:**
   > [Đoạn mở đầu lời nói...] **[CLICK]** [tiếp tục câu nói, đặt đúng chữ bản lề]
 - **Động từ → chuyển động:** [Chọn từ bảng động từ: soi, nghiêng về, gom thành hệ thống, lộn ngược, hoán đổi trọng lượng...] → [Mô tả chuyển động tương ứng của vật thể mang `!!id`]
-- **Vì sao:** [Lý do sư phạm / lý luận kể chuyện cho cảnh này]
+- **Vì sao[^*]*:** [Lý do sư phạm / lý luận kể chuyện cho cảnh này]
 
 ---
 
 ## Cảnh 2. [Tiêu đề Cảnh Tiếp Theo]
 
-- **Chuyển dịch:** [Chuyển dịch nhận thức]
+- **Chuyển dịch[^*]*:** [Chuyển dịch nhận thức]
 - **Morph từ cảnh 1:** [Mô tả diễn viên mang `!!id` chuyển trạng thái thế nào từ cảnh trước]
-- **Trên màn hình lúc mở:** [Mô tả trạng thái t=0]
-- **Lời nói:**
+- **Trên màn hình lúc mở[^*]*:** [Mô tả trạng thái t=0]
+- **Lời nói[^*]*:**
   > [Lời thoại có chứa mốc] **[CLICK]** [đoạn nói sau click]
 - **Động từ → chuyển động:** [Động từ hành động] → [Chuyển động]
-- **Vì sao:** [Lý do]
+- **Vì sao[^*]*:** [Lý do]
 """
 
 

@@ -167,6 +167,8 @@ Tự động quét các lỗi cấu trúc:
 - `[SCRIPT-PLACEHOLDER]`: Bắt các cụm từ sáo rỗng bị cấm ("tất yếu khách quan", "chuyển đổi số toàn diện", "bước hoàn thiện", "chỉ số 1", "hành động quyết liệt là chìa khóa").
 - `[SCRIPT-BASE-UNSTATED]`: Cảnh thiếu mô tả trạng thái tĩnh ban đầu lúc mở màn ($t=0$).
 - `[SCRIPT-VERB-UNVERIFIED]`: Động từ sử dụng không nằm trong bảng 15 động từ hành động chuẩn hóa.
+- `[SCRIPT-MORPH-CONTINUITY]`: Báo lỗi nếu diễn viên `!!id` khai báo Morph từ cảnh trước nhưng không hề tồn tại ở cảnh trước, hoặc bị đổi tên `!!id` trong pha chuyển cảnh.
+- `[SCRIPT-ASPECT-16x9]`: Cảnh báo nếu khai báo hình tròn có `w == h` trong hệ tọa độ chuẩn hóa tỉ lệ mà không nhân hệ số hiệu chỉnh $9/16 = 0.5625$ cho khung hình 16:9.
 
 ### 3. Biên dịch sang `scene.json` (Chuẩn bị cho T075)
 ```bash
