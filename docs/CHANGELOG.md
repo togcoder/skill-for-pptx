@@ -7,6 +7,33 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T074 [pptx] Morph matching rules, verified by experiment matrix — 2026-11-05
+
+- **Why.** T069a's four Morphs worked, but the rules that made them work were
+  implicit. The owner's F8 ("Morph seems very hard") needs a measured rulebook,
+  not another hand-built deck.
+- **Matrix.** 15 two-slide cases (45 slides) rendered by PowerPoint 16.0 at
+  720p/30 fps. Video **109.4 s** for 45×2 s slides because 15 Morphs add 1.2 s
+  each.
+- **Result.** Headline rule **M-02**: `!!` is a name hint, not a type override —
+  rect→ellipse with the same `!!track` is **two blobs**, a cross-fade.
+  **M-07**: an entrance on the destination blocks the Morph. **M-08**: an
+  off-slide B object is absent, not staged. `diff-name` still pairs, so names
+  are not required for simple same-type shapes.
+- **Audit.** `scripts/morph_studio.py audit` reports `MORPH-TYPE-MISMATCH`,
+  `MORPH-ENTRANCE`, `MORPH-OFFSLIDE` and `MORPH-UNNAMED-PAIR`; on the matrix it
+  finds exactly the three planted errors, on T069a it is clean. Two structural
+  tests; full suite **566 pass**.
+- **Deliverables.** `morph-rules.md` (11 rules + do/don't),
+  `artifacts/matrix-final.json`, 15 evidence frames, 45-slide matrix deck, and
+  `scripts/morph_studio.py audit` with `MORPH-TYPE-MISMATCH`,
+  `MORPH-ENTRANCE`, `MORPH-OFFSLIDE`, `MORPH-UNNAMED-PAIR`; 2 structural tests
+  (matrix catches 3 planted errors, T069a is clean); full suite 566 pass.
+  `picture-diff` is explicitly **not measured**; charts/tables/SmartArt/3D/
+  connectors/flips/rotation >180° are open. No `knowledge/morph_rules.json` yet
+  (needs review).
+  `experiments/T074-20261105-opencode-morph-rules/REPORT.md`.
+
 ## T084 [cross] Green CI — 2026-11-04
 
 - **Test dependencies.** CI now installs `python-docx`, `openpyxl`, `numpy` and
