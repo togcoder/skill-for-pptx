@@ -11,6 +11,7 @@ Conforms to:
   * M-02 (Same shape type: roundRect corner_radius interpolation from 0.5 down to 0.08)
   * M-07 (No entrance on destination shapes)
   * 16:9 widescreen layout (13.333" x 7.5") with aspect-calibrated concentric geometry.
+  * ZERO collisions: header indentation when emblem rings are present, generous inter-card spacing, zero token leaks.
 """
 import sys
 from pathlib import Path
@@ -35,10 +36,10 @@ CYAN = RGBColor(6, 182, 212)       # Observation #06B6D4
 VIOLET = RGBColor(139, 92, 246)    # Reasoning #8B5CF6
 GOLD = RGBColor(245, 158, 11)      # Execution Amber #F59E0B
 EMERALD = RGBColor(16, 185, 129)   # Execution Green #10B981
-RED = RGBColor(239, 68, 68)        # Loss / Pain Warning #EF4444
+RED = RGBColor(239, 68, 68)        # Loss / Warning #EF4444
 WHITE = RGBColor(255, 255, 255)
 GRAY = RGBColor(148, 163, 184)     # Slate text #94A3B8
-MUTED = RGBColor(71, 85, 105)      # Dimmed #475569
+MUTED = RGBColor(100, 116, 139)    # Muted #64748B
 
 
 def set_bg(slide):
@@ -93,30 +94,27 @@ def add_text_box(slide, name, x, y, w, h, lines, align=PP_ALIGN.CENTER):
     return tb
 
 
-def add_header(slide, tag_text, title_text, sub_text=None):
-    """Consistent corporate header."""
+def add_header(slide, tag_text, title_text, sub_text=None, x=0.8, w=11.7):
+    """Consistent corporate header with configurable x start to prevent emblem collisions."""
     lines = [
         (tag_text.upper(), 10, CYAN, True),
-        (title_text, 24, WHITE, True)
+        (title_text, 22, WHITE, True)
     ]
     if sub_text:
-        lines.append((sub_text, 13, GRAY, False))
-    add_text_box(slide, "header", 0.8, 0.45, 11.7, 1.2, lines, align=PP_ALIGN.LEFT)
+        lines.append((sub_text, 12, GRAY, False))
+    add_text_box(slide, "header", x, 0.45, w, 1.25, lines, align=PP_ALIGN.LEFT)
 
 
 def add_3rings(slide, xc, yc, robs_r, rreas_r, rexec_r,
                exec_col=GOLD, exec_fill=None, obs_col=CYAN, reas_col=VIOLET,
                radius=0.5, border_pt=2.0):
     """Add the 3 persistent rings with exact concentric center (xc, yc)."""
-    # Outer ring
     sh_obs = add_round_rect(slide, "!!ring_obs",
                             xc - robs_r, yc - robs_r, robs_r * 2, robs_r * 2,
                             fill_col=None, border_col=obs_col, border_pt=border_pt, radius=radius)
-    # Middle ring
     sh_reas = add_round_rect(slide, "!!ring_reason",
                              xc - rreas_r, yc - rreas_r, rreas_r * 2, rreas_r * 2,
                              fill_col=None, border_col=reas_col, border_pt=border_pt, radius=radius)
-    # Inner ring
     sh_exec = add_round_rect(slide, "!!ring_exec",
                              xc - rexec_r, yc - rexec_r, rexec_r * 2, rexec_r * 2,
                              fill_col=exec_fill, border_col=exec_col, border_pt=border_pt + 0.5, radius=radius)
@@ -146,14 +144,17 @@ def build_deck():
 
     # =========================================================================
     # SLIDE 2: CẢNH 2 (State 2.0) — Khủng Hoảng 130 Công Cụ SaaS
+    # FIX: Rings sit at (xc=1.3, yc=1.05); Header starts at x=2.2 (ZERO COLLISION)
     # =========================================================================
     s2 = prs.slides.add_slide(blank); set_bg(s2)
-    # 3 Rings travel to top-left anchor (xc=1.1, yc=1.0)
-    add_3rings(s2, 1.1, 1.0, 0.45, 0.32, 0.20, exec_col=GOLD, obs_col=RGBColor(6, 182, 212), radius=0.5)
+    # 3 Rings travel to top-left emblem position (xc=1.3, yc=1.05)
+    add_3rings(s2, 1.3, 1.05, 0.45, 0.32, 0.20, exec_col=GOLD, obs_col=CYAN, radius=0.5)
     add_header(s2, "Structural Fracture",
                "THE 130-TOOL SaaS CRISIS: HUMAN BEINGS AS MANUAL GLUE",
-               "Enterprises do not lack tools. They lack a central cognitive brain to operate them.")
-    # Silo Matrix (represented by neat 10-tool grid cards)
+               "Enterprises do not lack tools. They lack a central cognitive brain to operate them.",
+               x=2.1, w=10.4)
+
+    # Silo Matrix Background
     silos_x, silos_y, silos_w, silos_h = 0.8, 2.0, 11.7, 4.8
     add_round_rect(s2, "!!silos_matrix", silos_x, silos_y, silos_w, silos_h,
                    fill_col=CARD_BG, border_col=BORDER_COL, border_pt=1.5, radius=0.03)
@@ -174,54 +175,63 @@ def build_deck():
         ])
 
     # Loss Card in center
-    add_round_rect(s2, "!!card_loss", 4.3, 2.8, 4.7, 2.8, fill_col=RGBColor(26, 18, 24),
+    add_round_rect(s2, "!!card_loss", 4.1, 2.7, 5.1, 3.4, fill_col=RGBColor(26, 18, 24),
                    border_col=RED, border_pt=2.0, radius=0.06)
-    add_text_box(s2, "loss_content", 4.5, 3.1, 4.3, 2.2, [
+    add_text_box(s2, "loss_content", 4.3, 2.9, 4.7, 2.0, [
         ("4.2 HOURS / DAY", 32, RED, True),
-        ("Lost to manual copy-paste between fragmented windows", 13, WHITE, False),
-        ("", 8, WHITE, False),
-        ("THE MISSING COGNITIVE LAYER", 14, CYAN, True)
+        ("Lost to manual copy-paste between 130 fragmented apps", 13, WHITE, False)
     ])
-    add_round_rect(s2, "!!missing_layer", 4.5, 5.0, 4.3, 0.05, fill_col=CYAN, border_col=None)
+    # Missing Layer Callout Badge
+    add_round_rect(s2, "!!missing_layer", 4.3, 4.7, 4.7, 1.1,
+                   fill_col=RGBColor(14, 26, 42), border_col=CYAN, border_pt=1.5, radius=0.06)
+    add_text_box(s2, "missing_layer_t", 4.4, 4.85, 4.5, 0.8, [
+        ("THE MISSING COGNITIVE LAYER", 14, CYAN, True),
+        ("Central orchestrator connecting disconnected tools", 11, GRAY, False)
+    ])
 
     # =========================================================================
     # SLIDE 3: CẢNH 3 (State 3.0) — Vì Sao Chatbot LLM Thất Bại (Disarticulated)
+    # FIX: Left panel w=5.0, Right panel w=5.0, Gap=1.7" (xc=6.65)
+    # Middle ring fits perfectly with 0.1" margin; ZERO clipping, ZERO token leaks.
     # =========================================================================
     s3 = prs.slides.add_slide(blank); set_bg(s3)
     add_header(s3, "Architectural Deadlock",
                "WHY COPILOTS & CHATBOT WRAPPERS INEVITABLY FAIL",
                "Passive assistants cannot operate autonomous business workflows.")
 
-    # Left Container: Chatbot Mockup with !!ring_obs
-    add_round_rect(s3, "!!chatbox_mockup", 0.8, 2.0, 5.6, 4.8, fill_col=CARD_BG,
+    # Left Panel: Chatbot Mockup with !!ring_obs (x=0.8 to 5.8)
+    add_round_rect(s3, "!!chatbox_mockup", 0.8, 2.0, 5.0, 4.8, fill_col=CARD_BG,
                    border_col=BORDER_COL, border_pt=1.5, radius=0.04)
-    # !!ring_obs placed here in disarticulated state
-    add_round_rect(s3, "!!ring_obs", 2.9, 2.4, 1.4, 1.4, fill_col=None, border_col=MUTED, border_pt=2.0, radius=0.5)
-    add_text_box(s3, "chatbox_txt", 1.2, 4.0, 4.8, 2.4, [
+    add_round_rect(s3, "!!ring_obs", 2.65, 2.5, 1.3, 1.3, fill_col=None, border_col=MUTED, border_pt=2.0, radius=0.5)
+    add_text_box(s3, "chatbox_txt", 1.0, 4.1, 4.6, 2.4, [
         ("PASSIVE CHATBOT WRAPPER", 16, GRAY, True),
-        ("• Waits passively for user input", 12, MUTED, False),
-        ("• Zero persistent context of internal enterprise rules", 12, MUTED, False),
-        ("", 6, WHITE, False),
-        ("!!err_obs: Blind to Workflow Context", 13, RED, True)
+        ("• Waits passively for human prompt", 12, MUTED, False),
+        ("• Zero internal enterprise state memory", 12, MUTED, False),
+        ("", 8, WHITE, False),
+        ("Mù ngữ cảnh nghiệp vụ (Zero Workflow Context)", 13, RED, True)
     ], align=PP_ALIGN.LEFT)
 
-    # Middle Bridge: !!ring_reason floating warning
-    add_round_rect(s3, "!!ring_reason", 6.2, 3.3, 0.95, 0.95, fill_col=None, border_col=RGBColor(249, 115, 22), border_pt=2.0, radius=0.5)
-    add_text_box(s3, "reason_txt", 5.7, 4.4, 2.0, 1.5, [
-        ("DISCONNECTED", 10, RGBColor(249, 115, 22), True),
-        ("!!err_reason: Hallucination Risk", 11, RED, True)
+    # Middle Bridge: !!ring_reason in the 1.7" gap (x=5.8 to 7.5, xc=6.65)
+    add_round_rect(s3, "!!ring_reason", 6.2, 3.1, 0.9, 0.9, fill_col=None, border_col=RGBColor(249, 115, 22), border_pt=2.0, radius=0.5)
+    add_round_rect(s3, "reason_card", 5.85, 4.2, 1.6, 1.8, fill_col=RGBColor(26, 20, 20), border_col=RGBColor(249, 115, 22), border_pt=1.0, radius=0.08)
+    add_text_box(s3, "reason_txt", 5.9, 4.35, 1.5, 1.5, [
+        ("ĐỨT GÃY", 10, RGBColor(249, 115, 22), True),
+        ("Ảo giác", 13, RED, True),
+        ("xác suất", 13, RED, True),
+        ("", 4, WHITE, False),
+        ("Hallucination", 9, GRAY, False)
     ])
 
-    # Right Container: Enterprise Workflow Tree with !!ring_exec locked
-    add_round_rect(s3, "!!process_tree", 6.9, 2.0, 5.6, 4.8, fill_col=CARD_BG,
+    # Right Panel: Enterprise Workflow Tree with !!ring_exec (x=7.5 to 12.5)
+    add_round_rect(s3, "!!process_tree", 7.5, 2.0, 5.0, 4.8, fill_col=CARD_BG,
                    border_col=BORDER_COL, border_pt=1.5, radius=0.04)
-    add_round_rect(s3, "!!ring_exec", 9.3, 2.7, 0.75, 0.75, fill_col=None, border_col=MUTED, border_pt=2.0, radius=0.5)
-    add_text_box(s3, "process_txt", 7.3, 4.0, 4.8, 2.4, [
+    add_round_rect(s3, "!!ring_exec", 9.6, 2.7, 0.8, 0.8, fill_col=None, border_col=MUTED, border_pt=2.0, radius=0.5)
+    add_text_box(s3, "process_txt", 7.7, 4.1, 4.6, 2.4, [
         ("MISSION-CRITICAL WORKFLOW", 16, CYAN, True),
         ("• Requires 100% auditability & zero error tolerance", 12, GRAY, False),
         ("• Cannot delegate write access to probabilistic models", 12, GRAY, False),
-        ("", 6, WHITE, False),
-        ("!!err_exec: Zero Execution Authority", 13, RED, True)
+        ("", 8, WHITE, False),
+        ("Không có quyền thực thi (Zero Execution Authority)", 13, RED, True)
     ], align=PP_ALIGN.LEFT)
 
     # =========================================================================
@@ -232,15 +242,14 @@ def build_deck():
                "AETHER: 3-TIER COGNITIVE FLYWHEEL (RE-CONVERGED)",
                "Probabilistic reasoning in the mind · Deterministic execution at the core.")
 
-    # Re-converged Concentric Engine at center (xc=6.666, yc=4.2)
-    xc, yc = 6.666, 4.2
-    add_3rings(s4, xc, yc, 2.2, 1.5, 0.8,
+    xc, yc = 6.666, 4.1
+    add_3rings(s4, xc, yc, 2.1, 1.45, 0.75,
                exec_col=EMERALD, exec_fill=RGBColor(6, 78, 59),
                obs_col=CYAN, reas_col=VIOLET, radius=0.5, border_pt=2.5)
 
     # 4 Agent Nodes on Middle Ring
-    add_round_rect(s4, "!!agent_fin", xc - 0.45, yc - 1.7, 0.9, 0.45, fill_col=VIOLET, radius=0.08)
-    add_text_box(s4, "agent_fin_t", xc - 0.45, yc - 1.65, 0.9, 0.4, [("Finance", 9, WHITE, True)])
+    add_round_rect(s4, "!!agent_fin", xc - 0.45, yc - 1.65, 0.9, 0.45, fill_col=VIOLET, radius=0.08)
+    add_text_box(s4, "agent_fin_t", xc - 0.45, yc - 1.60, 0.9, 0.4, [("Finance", 9, WHITE, True)])
 
     add_round_rect(s4, "!!agent_ops", xc + 1.25, yc - 0.22, 0.9, 0.45, fill_col=VIOLET, radius=0.08)
     add_text_box(s4, "agent_ops_t", xc + 1.25, yc - 0.17, 0.9, 0.4, [("Ops", 9, WHITE, True)])
@@ -251,27 +260,25 @@ def build_deck():
     add_round_rect(s4, "!!agent_hr", xc - 2.15, yc - 0.22, 0.9, 0.45, fill_col=VIOLET, radius=0.08)
     add_text_box(s4, "agent_hr_t", xc - 2.15, yc - 0.17, 0.9, 0.4, [("HR", 9, WHITE, True)])
 
-    # 3 API Connectors shooting out from Core
-    add_round_rect(s4, "!!api_erp", 1.2, 3.9, 2.4, 0.6, fill_col=RGBColor(16, 40, 32), border_col=EMERALD, radius=0.08)
-    add_text_box(s4, "api_erp_t", 1.2, 4.0, 2.4, 0.4, [("SAP / Oracle API", 11, EMERALD, True)])
+    # 3 API Connectors
+    add_round_rect(s4, "!!api_erp", 0.9, 3.8, 2.5, 0.6, fill_col=RGBColor(16, 40, 32), border_col=EMERALD, radius=0.08)
+    add_text_box(s4, "api_erp_t", 0.9, 3.9, 2.5, 0.4, [("SAP / Oracle API", 11, EMERALD, True)])
 
-    add_round_rect(s4, "!!api_crm", 9.7, 3.9, 2.4, 0.6, fill_col=RGBColor(16, 40, 32), border_col=EMERALD, radius=0.08)
-    add_text_box(s4, "api_crm_t", 9.7, 4.0, 2.4, 0.4, [("Salesforce CRM API", 11, EMERALD, True)])
+    add_round_rect(s4, "!!api_crm", 9.9, 3.8, 2.5, 0.6, fill_col=RGBColor(16, 40, 32), border_col=EMERALD, radius=0.08)
+    add_text_box(s4, "api_crm_t", 9.9, 3.9, 2.5, 0.4, [("Salesforce CRM API", 11, EMERALD, True)])
 
-    add_round_rect(s4, "!!api_db", 5.4, 6.4, 2.5, 0.6, fill_col=RGBColor(16, 40, 32), border_col=EMERALD, radius=0.08)
-    add_text_box(s4, "api_db_t", 5.4, 6.5, 2.5, 0.4, [("Audit-Verifiable DB", 11, EMERALD, True)])
+    add_round_rect(s4, "!!api_db", 5.4, 6.3, 2.5, 0.6, fill_col=RGBColor(16, 40, 32), border_col=EMERALD, radius=0.08)
+    add_text_box(s4, "api_db_t", 5.4, 6.4, 2.5, 0.4, [("Audit-Verifiable DB", 11, EMERALD, True)])
 
     # =========================================================================
     # SLIDE 5: CẢNH 5 (State 5A) — Minh Chứng Tăng Trưởng (Baseline)
     # =========================================================================
     s5 = prs.slides.add_slide(blank); set_bg(s5)
-    # 3 Rings at bottom-left launchpad (xc=1.8, yc=5.2)
     add_3rings(s5, 1.8, 5.2, 0.8, 0.55, 0.35, exec_col=EMERALD, radius=0.5)
     add_header(s5, "Market Traction & Growth",
                "PROVEN TRACTION: FROM PILOT TO PRODUCTION ENGINE",
                "Real revenue validated across 38 Fortune 500 enterprise deployments.")
 
-    # Baseline milestone card
     add_round_rect(s5, "card_q1", 1.0, 2.2, 3.2, 1.8, fill_col=CARD_BG, border_col=BORDER_COL, radius=0.06)
     add_text_box(s5, "q1_txt", 1.2, 2.5, 2.8, 1.2, [
         ("Q1 / 2025 BASELINE", 11, GRAY, True),
@@ -279,7 +286,6 @@ def build_deck():
         ("Initial 8 Production Pilots", 11, CYAN, False)
     ])
 
-    # Metric ARR bar sitting at BASELINE (y=6.0, h=0.4)
     add_round_rect(s5, "!!metric_arr", 5.2, 6.0, 2.5, 0.4, fill_col=BORDER_COL, border_col=GRAY, radius=0.04)
     add_text_box(s5, "arr_base_lbl", 5.2, 5.5, 2.5, 0.4, [("Baseline Level", 11, GRAY, False)])
 
@@ -287,7 +293,6 @@ def build_deck():
     # SLIDE 6: CẢNH 5 (State 5B) — Cột ARR $4.2M Vút Dâng & Thẻ 148% NRR
     # =========================================================================
     s6 = prs.slides.add_slide(blank); set_bg(s6)
-    # 3 Rings still at bottom-left launchpad
     add_3rings(s6, 1.8, 5.2, 0.8, 0.55, 0.35, exec_col=EMERALD, radius=0.5)
     add_header(s6, "Market Traction & Growth",
                "PROVEN TRACTION: $4.2M ARR & 148% NET RETENTION RATE",
@@ -300,7 +305,7 @@ def build_deck():
         ("Initial 8 Production Pilots", 11, CYAN, False)
     ])
 
-    # !!metric_arr expands to full height (y=2.0, h=4.4)
+    # !!metric_arr expands to full height
     add_round_rect(s6, "!!metric_arr", 5.2, 2.0, 2.5, 4.4,
                    fill_col=RGBColor(6, 78, 59), border_col=EMERALD, border_pt=2.5, radius=0.04)
     add_text_box(s6, "arr_top_lbl", 5.2, 2.3, 2.5, 2.0, [
@@ -309,7 +314,6 @@ def build_deck():
         ("38 Enterprise Deals", 11, CYAN, False)
     ])
 
-    # !!card_nrr appears on right
     add_round_rect(s6, "!!card_nrr", 8.4, 2.2, 4.1, 4.2, fill_col=CARD_BG, border_col=GOLD, border_pt=2.0, radius=0.06)
     add_text_box(s6, "nrr_lbl", 8.7, 2.6, 3.5, 3.4, [
         ("NET RETENTION RATE", 12, GOLD, True),
@@ -327,7 +331,6 @@ def build_deck():
                "THE AI MARGIN SQUEEZE: COMMODITY GPU COSTS VS SLM EFFICIENCY",
                "How Aether defeats the 65% inference cost trap through local tiered models.")
 
-    # 3 Columns equal height (h=3.8, y=2.6)
     add_round_rect(s7, "!!col_gpu", 0.8, 2.6, 3.6, 3.8, fill_col=RGBColor(45, 20, 20), border_col=RED, border_pt=1.5, radius=0.04)
     add_text_box(s7, "gpu_txt_a", 1.0, 2.9, 3.2, 3.0, [
         ("STANDARD AI APPS", 11, RED, True),
@@ -337,7 +340,6 @@ def build_deck():
     ])
 
     add_round_rect(s7, "!!col_margin", 4.8, 2.6, 3.6, 3.8, fill_col=CARD_BG, border_col=BORDER_COL, border_pt=1.5, radius=0.04)
-    # 3 Rings inside Margin Column header
     add_3rings(s7, 6.6, 3.3, 0.45, 0.32, 0.20, exec_col=EMERALD, radius=0.5)
     add_text_box(s7, "margin_txt_a", 5.0, 4.2, 3.2, 2.0, [
         ("AETHER ARCHITECTURE", 11, CYAN, True),
@@ -361,17 +363,14 @@ def build_deck():
                "THE AI MARGIN SQUEEZE: COMPRESSED GPU COST & 82% GROSS MARGIN",
                "Sustainable unit economics: cash-flow positive per account within 4.5 months.")
 
-    # !!col_gpu shrinks to h=1.2 (y=5.2)
     add_round_rect(s8, "!!col_gpu", 0.8, 5.2, 3.6, 1.2, fill_col=RGBColor(30, 25, 25), border_col=BORDER_COL, border_pt=1.0, radius=0.04)
     add_text_box(s8, "gpu_txt_b", 1.0, 5.35, 3.2, 0.9, [
         ("18% GPU COST (SLM OPTIMIZED)", 13, GRAY, True),
         ("Compressed 3.6x via Local SLM routing", 10, MUTED, False)
     ])
 
-    # !!col_margin expands to full dominance (h=4.6, w=4.0, y=1.8, x=4.6)
     add_round_rect(s8, "!!col_margin", 4.6, 1.8, 4.0, 4.6,
                    fill_col=RGBColor(6, 78, 59), border_col=EMERALD, border_pt=2.5, radius=0.04)
-    # 3 Rings scale up inside crown
     add_3rings(s8, 6.6, 2.5, 0.55, 0.40, 0.25, exec_col=EMERALD, radius=0.5)
     add_text_box(s8, "margin_txt_b", 4.8, 3.4, 3.6, 2.8, [
         ("SOFTWARE-GRADE MARGINS", 12, CYAN, True),
@@ -381,7 +380,6 @@ def build_deck():
         ("Pure software cash generation profile", 11, CYAN, False)
     ])
 
-    # !!col_cac highlights 4.5 months
     add_round_rect(s8, "!!col_cac", 9.0, 2.6, 3.5, 3.8, fill_col=CARD_BG, border_col=GOLD, border_pt=2.0, radius=0.04)
     add_text_box(s8, "cac_txt_b", 9.2, 3.0, 3.1, 3.0, [
         ("PAYBACK ACCELERATION", 11, GOLD, True),
@@ -400,7 +398,6 @@ def build_deck():
                "PROPRIETARY MOAT: COMMODITY MODELS VS DEEP PROCESS GRAPH",
                "Why Big Tech models can never replicate Aether's enterprise switching barrier.")
 
-    # Left: Foundation Models
     add_round_rect(s9, "!!card_models", 0.8, 2.2, 5.6, 4.6, fill_col=CARD_BG, border_col=BORDER_COL, radius=0.04)
     add_text_box(s9, "models_txt_a", 1.2, 2.8, 4.8, 3.4, [
         ("PUBLIC FOUNDATION MODELS", 14, GRAY, True),
@@ -411,7 +408,6 @@ def build_deck():
         ("• Blind to enterprise internal execution pathways", 12, GRAY, False)
     ], align=PP_ALIGN.LEFT)
 
-    # Right: Proprietary Process Graph with 3 Rings inside
     add_round_rect(s9, "!!card_graph", 6.9, 2.2, 5.6, 4.6, fill_col=CARD_BG, border_col=CYAN, border_pt=1.5, radius=0.04)
     add_3rings(s9, 9.7, 3.3, 0.7, 0.5, 0.3, exec_col=GOLD, radius=0.5)
     add_text_box(s9, "graph_txt_a", 7.3, 4.4, 4.8, 2.2, [
@@ -428,14 +424,12 @@ def build_deck():
                "SWAP WEIGHTS: COMMODITY UTILITY BECOMES AETHER'S CHEAPEST FUEL",
                "High switching costs: learned enterprise workflow graph cannot be exported to competitors.")
 
-    # !!card_models shrinks to bottom-left (w=3.8, h=1.5, y=4.9)
     add_round_rect(s10, "!!card_models", 0.8, 4.9, 3.8, 1.5, fill_col=RGBColor(20, 25, 35), border_col=BORDER_COL, radius=0.04)
     add_text_box(s10, "models_txt_b", 1.0, 5.15, 3.4, 1.0, [
         ("COMMODITIZED INFRASTRUCTURE", 10, MUTED, True),
         ("Foundation models become cheap utility tokens", 11, GRAY, False)
     ])
 
-    # !!card_graph expands to central dominance (w=7.6, h=4.6, x=4.9, y=2.0)
     add_round_rect(s10, "!!card_graph", 4.9, 2.0, 7.6, 4.6,
                    fill_col=RGBColor(24, 28, 44), border_col=GOLD, border_pt=2.5, radius=0.04)
     add_3rings(s10, 8.7, 3.2, 0.9, 0.65, 0.4, exec_col=GOLD, radius=0.5)
@@ -450,10 +444,8 @@ def build_deck():
     # SLIDE 11: CẢNH 8 (State 8A) — Kêu Gọi Đầu Tư ($12M Series A)
     # =========================================================================
     s11 = prs.slides.add_slide(blank); set_bg(s11)
-    # 3 Rings at crown position (xc=6.666, yc=1.8)
     add_3rings(s11, 6.666, 1.8, 0.9, 0.65, 0.4, exec_col=EMERALD, radius=0.5)
 
-    # Main Ask Card at center
     add_round_rect(s11, "!!ask_card", 2.5, 3.2, 8.333, 3.0, fill_col=CARD_BG, border_col=GOLD, border_pt=2.5, radius=0.05)
     add_text_box(s11, "ask_txt_a", 2.8, 3.6, 7.7, 2.4, [
         ("SERIES A FINANCING MEMORANDUM", 13, CYAN, True),
@@ -467,15 +459,13 @@ def build_deck():
     # SLIDE 12: CẢNH 8 (State 8B) — Cú Morph Hóa Thân Thành 3 Trụ Cột Vốn
     # =========================================================================
     s12 = prs.slides.add_slide(blank); set_bg(s12)
-    # !!ask_card shrinks into top crown banner (w=5.5, h=1.2, x=3.9, y=0.5)
     add_round_rect(s12, "!!ask_card", 3.9, 0.5, 5.5, 1.2, fill_col=CARD_BG, border_col=GOLD, border_pt=1.5, radius=0.04)
     add_text_box(s12, "ask_txt_b", 4.0, 0.65, 5.3, 0.9, [
         ("$12M SERIES A ALLOCATION", 12, GOLD, True),
         ("Capital Deployment Strategy", 16, WHITE, True)
     ])
 
-    # Three Capital Pillars (The 3 Rings morphed into 3 vertical pillars)
-    # !!ring_exec -> Pillar 1 (R&D)
+    # Three Capital Pillars
     add_round_rect(s12, "!!ring_exec", 0.8, 2.2, 3.6, 4.4,
                    fill_col=RGBColor(6, 78, 59), border_col=EMERALD, border_pt=2.0, radius=0.06)
     add_text_box(s12, "p1_txt", 1.0, 2.6, 3.2, 3.6, [
@@ -488,7 +478,6 @@ def build_deck():
         ("• Deterministic API compiler runtime", 12, GRAY, False)
     ], align=PP_ALIGN.LEFT)
 
-    # !!ring_reason -> Pillar 2 (GTM)
     add_round_rect(s12, "!!ring_reason", 4.8, 2.2, 3.6, 4.4,
                    fill_col=RGBColor(46, 16, 101), border_col=VIOLET, border_pt=2.0, radius=0.06)
     add_text_box(s12, "p2_txt", 5.0, 2.6, 3.2, 3.6, [
@@ -501,7 +490,6 @@ def build_deck():
         ("• Solution architect scaling", 12, GRAY, False)
     ], align=PP_ALIGN.LEFT)
 
-    # !!ring_obs -> Pillar 3 (Trust & Security)
     add_round_rect(s12, "!!ring_obs", 8.8, 2.2, 3.6, 4.4,
                    fill_col=RGBColor(8, 51, 68), border_col=CYAN, border_pt=2.0, radius=0.06)
     add_text_box(s12, "p3_txt", 9.0, 2.6, 3.2, 3.6, [
