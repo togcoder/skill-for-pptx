@@ -7,6 +7,15 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T086 [cross] Multi-domain crowd taste research into verified PPTX rules — 2026-11-05
+
+- **Why.** The owner explicitly required a deep, non-cheated, multi-domain research into visual taste and craftsmanship (PPTX, vector, 3D, CAD, video/motion, Swiss typography, web AI skills, dataviz, cinematography), synthesized into persistent knowledge, stress-tested with Argon, and verified with real PowerPoint pairs and geometry audits.
+- **Corpus & Knowledge.** Cloned and catalogued 68 authoritative sources across 9 design domains in experiments/T086-20261105-antigravity-taste-research/sources.md. Built 10 persistent knowledge modules in knowledge/taste/ (01 to 10), culminating in 17 mathematically verified OOXML/PPTX synthesis rules.
+- **Argon Stress-Testing.** Deep reasoning with Argon (chat_id: 0:a678334cf280babe) caught 3 critical real-world blind spots: lack of text/shape AABB collision protection (which broke Slide 2 in testing), lack of text-fit capacity & measure floor (which broke Slide 3), and invalid OpenXML easing/radius assumptions. Rules R16 and R17 were formulated and added.
+- **Verification & Pairs.** 4 before/after canonical .pptx pairs (8 decks, 10 rendered PNGs via PowerPoint COM) in experiments/T086-.../artifacts/pairs/.
+- **Taste Geometry Auditor.** experiments/T086-.../artifacts/scripts/audit_taste_geometry.py executed across all 8 decks: 4/4 Before decks failed with precise physical defects (AABB overlap, pinched line-length, ghost card/bad shadow, morph shape mismatch), while 4/4 After decks scored 100% clean pass.
+- **Deliverables.** knowledge/taste/ (10 markdown files), experiments/T086-20261105-antigravity-taste-research/ (sources.md, REPORT.md, 8 test decks, 10 PNGs, audit script & results).
+
 ## T074 [pptx] Morph matching rules, verified by experiment matrix — 2026-11-05
 
 - **Why.** T069a's four Morphs worked, but the rules that made them work were

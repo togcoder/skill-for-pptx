@@ -114,5 +114,5 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T082 | [pptx] Gold scripts 2–5 (report, pitch, process, decision), owner-approved | *open, after T081; Claude writes, owner approves, OpenCode tests* |  | open (brief in SCRIPT_TRACK) | `docs/SCRIPT_TRACK.md` |
 | T083 | [cross] Coordination layer: capability registry, binding decisions, `coord.py` claim/board/check, single-writer docs | Claude (Opus 5.5, desktop, lead) | `work/T083-claude-coordination` | done (PR stacked on #60) | `experiments/T083-20261104-claude-coordination/REPORT.md` |
 | T084 | [cross] Green CI: test deps, host-only and network tests, logo box fit | claude | `work/T084-claude-ci-green` | done | `experiments/T084-20261104-claude-ci-green/REPORT.md` |
-| T086 | [cross] Multi-domain crowd taste research into verified PPTX rules | antigravity | `work/T086-antigravity-taste-research` | claimed | `experiments/T086-20261105-antigravity-taste-research/REPORT.md` |
+| T086 | [cross] Multi-domain crowd taste research into verified PPTX rules | antigravity | `work/T086-antigravity-taste-research` | review requested | `experiments/T086-20261105-antigravity-taste-research/REPORT.md` |
 | T088 | *next free ID* | | | | |
