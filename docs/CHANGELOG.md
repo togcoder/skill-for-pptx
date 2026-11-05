@@ -25,7 +25,10 @@ were true at the time. Task IDs and their branches are listed in
   finds exactly the three planted errors, on T069a it is clean. Two structural
   tests; full suite **566 pass**.
 - **Deliverables.** `morph-rules.md` (11 rules + do/don't),
-  `artifacts/matrix-final.json`, 15 evidence frames, 45-slide matrix deck.
+  `artifacts/matrix-final.json`, 15 evidence frames, 45-slide matrix deck, and
+  `scripts/morph_studio.py audit` with `MORPH-TYPE-MISMATCH`,
+  `MORPH-ENTRANCE`, `MORPH-OFFSLIDE`, `MORPH-UNNAMED-PAIR`; 2 structural tests
+  (matrix catches 3 planted errors, T069a is clean); full suite 566 pass.
   `picture-diff` is explicitly **not measured**; charts/tables/SmartArt/3D/
   connectors/flips/rotation >180° are open. No `knowledge/morph_rules.json` yet
   (needs review).

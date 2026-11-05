@@ -76,9 +76,24 @@ rectangle with `!!track` and an ellipse with `!!track` still cross-fade into two
 blobs. That is why T069a kept the same two cards and morphed their geometry,
 rather than changing a card into a circle.
 
+**The rule became an audit.** `scripts/morph_studio.py audit DECK.pptx` reports
+`MORPH-TYPE-MISMATCH`, `MORPH-ENTRANCE`, `MORPH-OFFSLIDE` and
+`MORPH-UNNAMED-PAIR` on every Morph pair. On the matrix it finds exactly the
+three planted errors (slides 10→11, 31→32, 43→44); on T069a it is clean. The
+audit is structural (rung 4), not a playback substitute.
+
 **M-07 confirms T067:** an entrance effect on the destination actor blocks the
 Morph completely. **M-08** says an off-slide B object is absent, not staged; a
 fly-in must be authored, not assumed.
+
+## Checks
+
+- Full suite: **566 pass, 10 skipped** (includes `tests/test_morph_audit.py`).
+- `python scripts/morph_studio.py audit morph-matrix.pptx` → exactly the three
+  planted errors: `MORPH-TYPE-MISMATCH` 10→11, `MORPH-ENTRANCE` 31→32,
+  `MORPH-OFFSLIDE` 43→44.
+- The same audit on T069a → **0 errors**.
+- `lab/tools/check_layout.py`: OK; `coord.py check`: OK.
 
 ## Negative results and limits
 
@@ -95,9 +110,10 @@ fly-in must be authored, not assumed.
 5. **The product file is a proposal.** `knowledge/morph_rules.json` is not
    created because data entering `knowledge/` needs an accepted review. The
    proposal lives in this experiment and is ready to move after review.
-6. **No automated structural test yet.** The matrix builder and scanner are
-   experiment inputs, not a product path. T075 (`scene.json`) should consume the
-   rules and add the test.
+6. **The audit is structural.** `morph_studio.py audit` catches the three
+   high-risk cases, but `MORPH-UNNAMED-PAIR` is a heuristic; it can miss a pair
+   that PowerPoint makes by a rule not in the matrix. The rendered video remains
+   the rung-5 check.
 
 ## Files
 
@@ -109,6 +125,8 @@ fly-in must be authored, not assumed.
 - `preview/states/*.png` — full-resolution evidence frames.
 - `inputs/build_matrix.py`, `create_video.py`, `analyze_scan.py`,
   `finalize_matrix.py`.
+- `artifacts/matrix-audit.json`, `artifacts/t069a-audit.json`,
+  `scripts/morph_studio.py audit`, `tests/test_morph_audit.py`.
 - `morph-rules.md` — human do/don't sheet.
 
 ## Next

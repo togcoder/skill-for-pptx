@@ -997,6 +997,99 @@ def render_morph(pptx,slide_index,out_gif,steps=10,sheet=None):
 # CLI
 
 
+def audit_morph_pairs(pkg):
+    """Structural audit of every Morph pair in ``pkg`` (T074).
+
+    Returns findings for:
+      MORPH-TYPE-MISMATCH  same ``!!`` name on both slides, different shape kind/type
+      MORPH-ENTRANCE       destination actor has an entrance effect
+      MORPH-OFFSLIDE       destination actor is completely outside the slide
+      MORPH-UNNAMED-PAIR   same-type objects that PowerPoint may pair by geometry
+    """
+    model = _deck(pkg)
+    parts = pkg.slides()
+    findings = []
+    for i in range(1, len(model["slides"])):
+        prev, cur = model["slides"][i - 1], model["slides"][i]
+        root = pkg.xml(parts[i])
+        if root.find(f".//{{{anim.P159}}}morph") is None:
+            continue
+        prev_by_name = {o["name"]: o for o in prev["objects"]
+                        if (o["name"] or "").startswith("!!")}
+        cur_by_name = {o["name"]: o for o in cur["objects"]
+                       if (o["name"] or "").startswith("!!")}
+        groups = anim.read_main_sequence(root)
+        entered = {e["spid"] for g in groups for e in g.get("effects", [])
+                   if e.get("cls", e.get("class")) == "entr" and e.get("spid")}
+
+        def sig(o):
+            return (o.get("kind"), o.get("preset_geometry"), bool(o.get("image")),
+                    bool(o.get("text")))
+
+        for name in sorted(set(prev_by_name) & set(cur_by_name)):
+            a, b = prev_by_name[name], cur_by_name[name]
+            if sig(a) != sig(b):
+                findings.append({
+                    "code": "MORPH-TYPE-MISMATCH", "from_slide": prev["index"],
+                    "to_slide": cur["index"], "object": name,
+                    "detail": f"{sig(a)} -> {sig(b)}",
+                })
+            if b["id"] in entered:
+                findings.append({
+                    "code": "MORPH-ENTRANCE", "from_slide": prev["index"],
+                    "to_slide": cur["index"], "object": name,
+                    "detail": "destination has an entrance effect",
+                })
+            g = b.get("geometry")
+            if g and (g["x"] + g["w"] <= 0.001 or g["x"] >= 0.999
+                      or g["y"] + g["h"] <= 0.001 or g["y"] >= 0.999):
+                findings.append({
+                    "code": "MORPH-OFFSLIDE", "from_slide": prev["index"],
+                    "to_slide": cur["index"], "object": name,
+                    "detail": [round(g["x"], 3), round(g["y"], 3),
+                               round(g["w"], 3), round(g["h"], 3)],
+                })
+
+        # Same-type objects with no shared name can still pair by geometry.
+        named_prev = {o["id"] for o in prev["objects"]
+                      if (o["name"] or "").startswith("!!")}
+        named_cur = {o["id"] for o in cur["objects"]
+                     if (o["name"] or "").startswith("!!")}
+        for b in cur["objects"]:
+            if b["id"] in named_cur or not b.get("geometry"):
+                continue
+            low_b = (b.get("name") or "").lower()
+            if low_b in ("bg", "panel") or low_b.startswith(("case-label", "margin", "chrome")):
+                continue
+            for a in prev["objects"]:
+                if a["id"] in named_prev or not a.get("geometry"):
+                    continue
+                low_a = (a.get("name") or "").lower()
+                if low_a in ("bg", "panel") or low_a.startswith(("case-label", "margin", "chrome")):
+                    continue
+                if sig(a) != sig(b):
+                    continue
+                area_a = a["geometry"]["w"] * a["geometry"]["h"]
+                area_b = b["geometry"]["w"] * b["geometry"]["h"]
+                if min(area_a, area_b) <= 0:
+                    continue
+                ratio = area_b / area_a
+                ca = (a["geometry"]["x"] + a["geometry"]["w"] / 2,
+                      a["geometry"]["y"] + a["geometry"]["h"] / 2)
+                cb = (b["geometry"]["x"] + b["geometry"]["w"] / 2,
+                      b["geometry"]["y"] + b["geometry"]["h"] / 2)
+                dist = ((ca[0] - cb[0]) ** 2 + (ca[1] - cb[1]) ** 2) ** 0.5
+                if 0.75 <= ratio <= 1.33 and dist < 0.08:
+                    findings.append({
+                        "code": "MORPH-UNNAMED-PAIR", "from_slide": prev["index"],
+                        "to_slide": cur["index"], "object": b.get("name"),
+                        "detail": f"may pair with '{a.get('name')}' (distance {dist:.3f})",
+                    })
+                    break
+    return {"findings": findings,
+            "errors": [f for f in findings if f["code"] != "MORPH-UNNAMED-PAIR"]}
+
+
 def main(argv=None):
     ap=argparse.ArgumentParser(description=__doc__,formatter_class=argparse.RawDescriptionHelpFormatter)
     sp=ap.add_subparsers(dest="cmd",required=True)
@@ -1012,6 +1105,9 @@ def main(argv=None):
     a.add_argument("--slide",type=int,required=True,help="slide that is entered by Morph")
     a.add_argument("-o","--output",required=True)
     a.add_argument("--sheet")
+    a=sp.add_parser("audit")
+    a.add_argument("deck")
+    a.add_argument("-o","--output")
     args=ap.parse_args(argv)
     if args.cmd=="propose":
         plan=propose(md.deck_model(args.deck))
@@ -1023,6 +1119,14 @@ def main(argv=None):
         print(json.dumps({k:v for k,v in report.items() if k!="receipt"},ensure_ascii=False,indent=2))
         Path(args.output).with_suffix(".morph.json").write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
         return 0 if report["ok"] else 1
+    elif args.cmd=="audit":
+        report=audit_morph_pairs(Package(args.deck))
+        text=json.dumps(report,ensure_ascii=False,indent=2)
+        if args.output:
+            Path(args.output).write_text(text+"\n",encoding="utf-8")
+        else:
+            print(text)
+        return 0 if not report["errors"] else 1
     else:
         print(render_morph(args.deck,args.slide,args.output,sheet=args.sheet))
     return 0

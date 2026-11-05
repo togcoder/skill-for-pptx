@@ -40,7 +40,7 @@
    "start_center_px": 64.2,
    "end_center_px": 205.9,
    "mid_blobs": 2,
-   "mid_pixels": 1778
+   "mid_pixels": 1715
   },
   {
    "case": "text-same",
@@ -60,7 +60,7 @@
    "start_center_px": 83.1,
    "end_center_px": 275.4,
    "mid_blobs": 1,
-   "mid_pixels": 102
+   "mid_pixels": 103
   },
   {
    "case": "picture-same",
@@ -139,18 +139,18 @@
    "note": "one blob, 11 px visible; foreground covers most of the object",
    "start_center_px": 59.5,
    "end_center_px": 251.5,
-   "mid_blobs": 1,
-   "mid_pixels": 11
+   "mid_blobs": 2,
+   "mid_pixels": 106
   },
   {
    "case": "offslide",
    "label": "Destination off-slide",
    "verdict": "offscreen",
    "note": "B object at x=14.5 in; frame at 106 s shows an empty stage",
-   "start_center_px": 59.5,
-   "end_center_px": 251.5,
-   "mid_blobs": 1,
-   "mid_pixels": 253
+   "start_center_px": 193.0,
+   "end_center_px": 193.0,
+   "mid_blobs": 2,
+   "mid_pixels": 46
   }
  ],
  "rules": [

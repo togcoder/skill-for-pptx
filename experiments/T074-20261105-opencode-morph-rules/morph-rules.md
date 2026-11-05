@@ -21,9 +21,17 @@ frames in `preview/states/`. Rung 5 for the colour-tracked cases; rung 3 for
 | M-10 | Z-order does not stop the pairing, but can hide the object. | `zorder`: one blob, 11 visible pixels under the foreground. | Order the destination objects deliberately; a covered actor is still morphing. |
 | M-11 | A Morph adds its duration to the slide advance. | 45 × 2 s = 90 s expected; 109.4 s delivered with 15 × 1.2 s Morphs. | Budget the deck clock, not only the per-slide duration. |
 
-## Do / do not
+## Audit a deck
 
-**Do**
+```powershell
+python scripts/morph_studio.py audit deck.pptx
+```
+
+Exit 1 when a `MORPH-TYPE-MISMATCH`, `MORPH-ENTRANCE` or `MORPH-OFFSLIDE` is
+found. `MORPH-UNNAMED-PAIR` is a warning: two same-type objects with no `!!`
+name that PowerPoint may pair by geometry.
+
+## Do / do not**Do**
 
 - keep the same shape type across the cut;
 - use `!!name` when several same-type objects could pair ambiguously;

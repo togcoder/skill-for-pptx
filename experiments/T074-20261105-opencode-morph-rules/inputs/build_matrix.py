@@ -29,7 +29,7 @@ CASES = [
     ("same-bang", "rect", "byObject", "!!track", "!!track", "", "", {}),
     ("same-name", "rect", "byObject", "track", "track", "", "", {}),
     ("diff-name", "rect", "byObject", "trackA", "trackB", "", "", {}),
-    ("rect-ellipse", "ellipse", "byObject", "!!track", "!!track", "", "", {}),
+    ("rect-ellipse", "rect-ellipse", "byObject", "!!track", "!!track", "", "", {}),
     ("text-same", "text", "byObject", "!!track", "!!track", "MORPH", "MORPH", {}),
     ("text-diff", "text", "byObject", "!!track", "!!track", "MORPH", "CHANGE", {}),
     ("picture-same", "picture", "byObject", "!!track", "!!track", "amber", "amber", {}),
@@ -138,14 +138,16 @@ def build():
         color = RGBColor(*PALETTE[i])
         a = prs.slides.add_slide(blank); set_bg(a)
         add_text(a, "case-label", RGBColor(0x88, 0x88, 0x88), cid, 0.5, 0.4, 6, 0.5, 18)
-        a_obj = add_track(a, kind, name_a, color, 1.5, text_a, extra)
+        a_obj = add_track(a, "rect" if kind == "rect-ellipse" else kind,
+                          name_a, color, 1.5, text_a, extra)
         if extra.get("zorder"):
             add_rect(a, "foreground", RGBColor(0x44, 0x44, 0x44), 1.3, 2.6, 2.4, 2.4)
 
         b = prs.slides.add_slide(blank); set_bg(b)
         add_text(b, "case-label", RGBColor(0x88, 0x88, 0x88), cid, 0.5, 0.4, 6, 0.5, 18)
         bx = 9.5 if not extra.get("offslide") else 14.5
-        b_obj = add_track(b, kind, name_b, color, bx, text_b, extra)
+        b_obj = add_track(b, "ellipse" if kind == "rect-ellipse" else kind,
+                          name_b, color, bx, text_b, extra)
         if extra.get("zorder"):
             add_rect(b, "foreground", RGBColor(0x44, 0x44, 0x44), 9.3, 2.6, 2.4, 2.4)
         if extra.get("rotate"):
