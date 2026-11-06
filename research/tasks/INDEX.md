@@ -116,6 +116,6 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T084 | [cross] Green CI: test deps, host-only and network tests, logo box fit | claude | `work/T084-claude-ci-green` | done | `experiments/T084-20261104-claude-ci-green/REPORT.md` |
 | T085 | [cross] Lead: owner's 2026-11-05 direction — pptx-first review, crowd taste research | claude | `work/T085-claude-taste-direction` | done | `experiments/T085-20261105-claude-taste-direction/REPORT.md` |
 | T086 | [cross] Crowd taste across fields → PPTX taste rules | antigravity | `work/T086-antigravity-taste-research` | reviewed: research notes merged via T088; rules not accepted, work continues in T087 | `experiments/T086-20261105-antigravity-taste-research/REPORT.md` |
-| T087 | [pptx] One PPTX skill written as design guidance (SKILL.md + plain-language guides); code only as a small toolbox (D011) | *open; Claude (lead) writes → another family builds with it* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |
+| T087 | [pptx] One PPTX skill written as design guidance; code only as a small toolbox | claude | `work/T087-claude-pptx-guidance-skill` | claimed | `experiments/T087-20261106-claude-pptx-guidance-skill/REPORT.md` |
 | T088 | [cross] Lead review of T081 and T086 (Antigravity): merge the useful parts | claude | `work/T088-claude-ag-salvage` | done | `experiments/T088-20261106-claude-ag-salvage/REPORT.md` |
 | T089 | *next free ID* | | | | |
