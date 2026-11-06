@@ -7,6 +7,21 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T088 [cross] Lead review of Antigravity's T081 and T086 — 2026-11-06
+
+- **T081, accepted in part.**
+  - Kept: `skills/script-writer/SKILL.md`, the `motion_script.py` `check` command and 12 tests.
+  - The skill now carries a lead note: the "atomic spec" section and the compilers are on hold
+    (D011), and the pitch script is not a gold example (owner: motion 6/10).
+  - Not kept: the bespoke `build_*.py` scripts at the repository root and the compiled JSON.
+- **T086, accepted as research notes.**
+  - `sources.md` (85 sources, 12 fields) and the 13 domain notes now live under
+    `experiments/T086-…/notes/`, not `knowledge/`.
+  - They are written as formulas, only 4 pairs were tested, and nothing was voted. The rules
+    still need restating in plain words (T087).
+- **Model check.** Antigravity's logs show `gemini-3.8-flash`; its reports said "2.5 Pro".
+- **Owner feedback.** F16–F19 recorded. The cross-model bench is dropped (F18).
+
 ## T085 [cross] Lead: owner's 2026-11-05 direction — 2026-11-05
 
 - **Feedback ledger.** New file `research/feedback/2026-11-05-taste-and-review.md` with

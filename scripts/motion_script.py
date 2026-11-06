@@ -44,6 +44,54 @@ va la cua cac nhung mot trong cho voi de duoc co khong nay do thi ma se da khi t
 chung ta toi ban minh day roi nen vi neu tai theo sau truoc nua moi nhieu it""".split())
 NUM=re.compile(r"\d+(?:[.,]\d+)?")
 
+# T081: Canonical 15-verb table linking pedagogical story verbs to motion/Morph categories
+VERB_TABLE = {
+    "soi": {"action": "spotlight", "type": "in-slide/morph", "desc": "thấu kính lướt rồi dừng"},
+    "gom thành hệ thống": {"action": "converge", "type": "morph", "desc": "mảnh hội tụ, xếp hàng"},
+    "cân nhắc": {"action": "hold", "type": "in-slide", "desc": "đứng yên (lặng)"},
+    "nghiêng về": {"action": "tilt", "type": "in-slide", "desc": "cân nghiêng hai phía"},
+    "nối lại, vận động": {"action": "connect-cycle", "type": "morph", "desc": "ô tan, hình lên vòng tròn, xoay"},
+    "đứng ở / còn trống": {"action": "slot-in", "type": "in-slide", "desc": "thẻ vào ô, ô trống sáng viền"},
+    "đứng ở": {"action": "slot-in", "type": "in-slide", "desc": "thẻ vào ô"},
+    "còn trống": {"action": "slot-in", "type": "in-slide", "desc": "ô trống sáng viền"},
+    "lộn ngược, ghép": {"action": "flip-merge", "type": "morph", "desc": "xoay 180°, hai nửa gộp"},
+    "lộn ngược": {"action": "flip-merge", "type": "morph", "desc": "xoay 180°"},
+    "dựng lại": {"action": "flip-merge", "type": "morph", "desc": "dựng lại trên chân"},
+    "dâng lên, gặp nhau": {"action": "converge-rise", "type": "in-slide", "desc": "dòng sáng rồi dịu, hội tụ"},
+    "dâng lên": {"action": "converge-rise", "type": "in-slide", "desc": "dòng sáng rồi dịu"},
+    "gặp nhau": {"action": "converge-rise", "type": "in-slide", "desc": "hội tụ gặp nhau"},
+    "trở thành, thống nhất": {"action": "transform-unify", "type": "morph", "desc": "cùng vật thể đổi trạng thái"},
+    "trở thành": {"action": "transform-unify", "type": "morph", "desc": "vật thể đổi trạng thái"},
+    "thống nhất": {"action": "transform-unify", "type": "morph", "desc": "thanh nền + mái khóa lại"},
+    "đi qua thời gian": {"action": "timeline-pan", "type": "morph", "desc": "camera trượt dọc dòng thời gian"},
+    "đi vào lịch sử": {"action": "timeline-pan", "type": "morph", "desc": "camera trượt theo dòng thời gian"},
+    "từ… đến…": {"action": "timeline-pan", "type": "morph", "desc": "camera trượt dọc dòng thời gian"},
+    "đi sâu, phóng to chi tiết": {"action": "zoom-in", "type": "morph", "desc": "camera zoom vào"},
+    "phóng to": {"action": "zoom-in", "type": "morph", "desc": "camera zoom vào"},
+    "nhưng": {"action": "swap-weights", "type": "in-slide/morph", "desc": "hoán đổi trọng lượng"},
+    "song": {"action": "swap-weights", "type": "in-slide/morph", "desc": "hoán đổi trọng lượng"},
+    "bản lề": {"action": "swap-weights", "type": "in-slide/morph", "desc": "hoán đổi trọng lượng"},
+    "quay lại, nhớ lại": {"action": "revisit-layout", "type": "morph", "desc": "lặp bố cục cảnh trước"},
+    "nhìn lại": {"action": "revisit-layout", "type": "morph", "desc": "lặp bố cục cảnh trước"},
+    "loại bỏ, phủ định": {"action": "dim-exit", "type": "in-slide", "desc": "thu nhỏ, mờ hoặc gạch bỏ rồi ra"},
+    "nhấn một trong nhiều": {"action": "dim-others", "type": "in-slide", "desc": "các mục khác mờ đi (vòng đời dim)"},
+    "nhìn": {"action": "spotlight", "type": "in-slide", "desc": "nhìn qua kính"},
+}
+
+# T081 (D004, D005): Cliché placeholder phrases banned across screenplay text
+BANNED_PLACEHOLDERS = [
+    "tất yếu khách quan",
+    "chuyển đổi số toàn diện",
+    "hành động quyết liệt là chìa khóa",
+    "bước hoàn thiện",
+    "chỉ số 1",
+    "chỉ số 2",
+    "chỉ số 3",
+    "chỉ số 4",
+    "lorem ipsum",
+    "{title}"
+]
+
 
 def fold(text):
     t=unicodedata.normalize("NFD",(text or "").lower()).replace("đ","d")
@@ -109,6 +157,357 @@ def parse_script(text):
         for s in sec["segments"]:
             s.pop("closed",None)
     return sections
+
+
+
+
+def parse_intent(text):
+    """Extract Section 0 (Intent) key-value pairs from Markdown table or bullets."""
+    intent = {}
+    table_m = re.search(r"##\s*(?:Phần 0[.:\s]+Ý đồ|Intent|Phần Ý đồ)(.*?)(?=[\r\n]+##|\Z)", text, re.S | re.I)
+    if table_m:
+        sec = table_m.group(1)
+        for line in sec.splitlines():
+            row = [c.strip() for c in line.strip().split("|") if c.strip()]
+            if len(row) >= 2 and not all(c.startswith("-") for c in row):
+                k, v = row[0].lower(), row[1]
+                if any(x in k for x in ("người nghe", "audience")):
+                    intent["audience"] = v
+                elif any(x in k for x in ("họ đang tin", "tin trước", "belief_before")):
+                    intent["belief_before"] = v
+                elif any(x in k for x in ("sau buổi", "tin sau", "belief_after")):
+                    intent["belief_after"] = v
+                elif any(x in k for x in ("xương sống", "spine", "one_sentence")):
+                    intent["spine"] = re.sub(r"\*+", "", v).strip()
+                elif any(x in k for x in ("ẩn dụ", "metaphor")):
+                    intent["metaphor"] = v
+                elif any(x in k for x in ("diễn viên", "actor")):
+                    intent["actors_raw"] = v
+                    actors = re.findall(r"`(!![a-zA-Z0-9_\-\.\*]+)`", v)
+                    intent["persistent_actors"] = [a for a in actors if a.startswith("!!")]
+                elif any(x in k for x in ("khung", "frame")):
+                    intent["frame"] = v
+                elif any(x in k for x in ("thời lượng", "duration", "minutes")):
+                    intent["duration"] = v
+                elif any(x in k for x in ("giọng", "tone", "register")):
+                    intent["tone"] = v
+    return intent
+
+
+def parse_gold_script(text):
+    """Parse structured screenplay scenes (T078/T081 gold format)."""
+    SCENE_HEAD = re.compile(r"^##\s*(?:Cảnh|Slide)\s*(\d+)[\.:\s\-–—]*(.*)$", re.M | re.I)
+    splits = list(SCENE_HEAD.finditer(text))
+    if not splits:
+        return []
+    scenes = []
+    for i, m in enumerate(splits):
+        idx = int(m.group(1))
+        title = m.group(2).strip()
+        start = m.end()
+        end = splits[i+1].start() if i+1 < len(splits) else len(text)
+        chunk = text[start:end]
+
+        turn_m = re.search(r"-\s*\*\*Chuyển dịch[^*]*:\*\*\s*(.*?)(?=\n-\s*\*\*|\Z)", chunk, re.S)
+        morph_m = re.search(r"-\s*\*\*Morph từ [Cc]ảnh\s*(\d+)[^*]*:\*\*\s*(.*?)(?=\n-\s*\*\*|\Z)", chunk, re.S)
+        base_m = re.search(r"-\s*\*\*Trên màn hình lúc mở[^*]*:\*\*\s*(.*?)(?=\n-\s*\*\*|\Z)", chunk, re.S)
+        speech_m = re.search(r"-\s*\*\*Lời nói[^*]*:\*\*\s*(.*?)(?=\n-\s*\*\*|\Z)", chunk, re.S)
+        verb_m = re.search(r"-\s*\*\*Động từ(?: → chuyển động)?[^*]*:\*\*\s*(.*?)(?=\n-\s*\*\*|\Z)", chunk, re.S)
+        why_m = re.search(r"-\s*\*\*Vì sao[^*]*:\*\*\s*(.*?)(?=\n-\s*\*\*|\n##|\Z)", chunk, re.S)
+        claim_m = re.search(r"^\s*claim:\s*(.*)$", chunk, re.M | re.I)
+
+        speech = speech_m.group(1).strip() if speech_m else ""
+        speech_clean = re.sub(r"^\s*>\s*", "", speech, flags=re.M)
+        speech_clean = re.sub(r"\s+", " ", speech_clean).strip()
+
+        cue_pattern = re.compile(r"(\*{0,2}\[(?:CLICK|nhấp|nhap|bấm|bam|next)\]\*{0,2})", re.I)
+        parts = cue_pattern.split(speech_clean)
+        clicks = []
+        lead_in = parts[0].strip() if parts else ""
+        for c_idx in range(1, len(parts), 2):
+            cue = parts[c_idx]
+            post = parts[c_idx+1].strip() if c_idx+1 < len(parts) else ""
+            clicks.append({
+                "index": (c_idx + 1) // 2,
+                "cue": "[CLICK]",
+                "lead_in": parts[c_idx-1].strip() if c_idx == 1 else "",
+                "post_click": post
+            })
+
+        # Match verbs from VERB_TABLE
+        vm_text = verb_m.group(1).strip() if verb_m else ""
+        matched_verbs = [v for v in VERB_TABLE if v in vm_text.lower()]
+
+        turn_text = turn_m.group(1).strip() if turn_m else ""
+        turn_from, turn_to = "", ""
+        if "→" in turn_text:
+            t_parts = turn_text.split("→", 1)
+            turn_from, turn_to = t_parts[0].strip().strip('"'), t_parts[1].strip().strip('"')
+
+        scenes.append({
+            "index": idx,
+            "title": title,
+            "turn": {"from": turn_from, "to": turn_to, "raw": turn_text},
+            "morph_from": int(morph_m.group(1)) if morph_m else None,
+            "morph_text": morph_m.group(2).strip() if morph_m else "",
+            "base_state": base_m.group(1).strip() if base_m else "",
+            "speech": speech_clean,
+            "clicks": clicks,
+            "verb_motion": vm_text,
+            "matched_verbs": matched_verbs,
+            "why": why_m.group(1).strip() if why_m else "",
+            "claim": claim_m.group(1).strip() if claim_m else ""
+        })
+    return scenes
+
+
+def parse_script_full(text):
+    """Unified entry point: returns intent + scenes (gold format) or legacy sections."""
+    intent = parse_intent(text)
+    gold_scenes = parse_gold_script(text)
+    if gold_scenes:
+        return {"format": "gold", "intent": intent, "scenes": gold_scenes}
+    return {"format": "legacy", "intent": intent, "sections": parse_script(text)}
+
+
+def check_script(text):
+    """Automated quality gate for presentation screenplay (T081).
+    Enforces D003, D004, D005 without requiring an LLM.
+    """
+    errors = []
+    warnings = []
+
+    intent = parse_intent(text)
+    if not intent:
+        errors.append("[SCRIPT-NO-INTENT] Missing Section 0 / Intent table (## Phần 0. Ý đồ)")
+    else:
+        spine = intent.get("spine", "")
+        if not spine:
+            errors.append("[SCRIPT-SPINE-MISSING] Missing spine sentence (Câu xương sống)")
+        else:
+            w_count = len(spine.split())
+            if w_count > 22:
+                errors.append(f"[SCRIPT-SPINE-LONG] Spine exceeds maximum 22 words ({w_count} words): '{spine}'")
+            elif w_count > 20:
+                warnings.append(f"[SCRIPT-SPINE-RECOMMENDATION] Spine has {w_count} words (recommended <= 20 words): '{spine}'")
+
+    scenes = parse_gold_script(text)
+    if not scenes:
+        simple_secs = parse_script(text)
+        if not simple_secs:
+            errors.append("[SCRIPT-NO-SCENES] No scenes or slides found in script")
+        else:
+            scenes = [{"index": s["slide"] or i+1, "title": s["title"], "clicks": s["segments"],
+                       "speech": " ".join(x["text"] for x in s["segments"]), "base_state": s["intro"],
+                       "why": "", "claim": "", "verb_motion": "", "matched_verbs": []} for i, s in enumerate(simple_secs)]
+
+    for phrase in BANNED_PLACEHOLDERS:
+        if phrase.lower() in text.lower():
+            errors.append(f"[SCRIPT-PLACEHOLDER] Banned placeholder / filler phrase found: '{phrase}'")
+
+    for s in scenes:
+        s_id = f"Cảnh {s['index']} ({s['title']})"
+        speech = s.get("speech", "")
+        base = s.get("base_state", "")
+        clicks = s.get("clicks", [])
+        claim = s.get("claim", "")
+
+        if claim and len(claim.split()) > 25:
+            errors.append(f"[SCRIPT-CLAIM-LONG] {s_id}: Claim exceeds 25 words ({len(claim.split())} words)")
+
+        if not speech and not clicks:
+            errors.append(f"[SCRIPT-EMPTY-SCENE] {s_id}: Scene has no speech or narration")
+
+        verb_motion = s.get("verb_motion", "").lower()
+        is_intentional_hold = any(w in verb_motion or w in speech.lower() for w in ("không click", "lặng", "pause", "hold"))
+
+        if speech and not clicks and not is_intentional_hold:
+            errors.append(f"[SCRIPT-NO-CLICK] {s_id}: Speech exists but no [CLICK] cue was placed")
+
+        if not base and not s.get("morph_from"):
+            warnings.append(f"[SCRIPT-BASE-UNSTATED] {s_id}: Opening base state (t=0) is unstated")
+
+        if s.get("verb_motion") and not s.get("matched_verbs"):
+            warnings.append(f"[SCRIPT-VERB-UNVERIFIED] {s_id}: Verb in '{s['verb_motion'][:40]}' is not in the 15 verified verbs")
+
+        # [SCRIPT-MORPH-CONTINUITY] Ensure actors morphing from previous scene exist in that previous scene
+        if s.get("morph_from"):
+            src_idx = s["morph_from"]
+            src_scene = next((prev for prev in scenes if prev["index"] == src_idx), None)
+            morph_text = s.get("morph_text", "")
+            morph_actors = re.findall(r"!![a-zA-Z0-9_\-]+", morph_text)
+            if src_scene:
+                src_content = (src_scene.get("morph_text", "") + " " + src_scene.get("base_state", "") + " " +
+                               src_scene.get("speech", "") + " " +
+                               src_scene.get("verb_motion", ""))
+                for actor in morph_actors:
+                    if actor not in src_content:
+                        warnings.append(f"[SCRIPT-MORPH-CONTINUITY] {s_id}: Actor '{actor}' declared morphing from Scene {src_idx} was not found in Scene {src_idx}")
+
+        # [SCRIPT-ASPECT-16x9] Warn if circle is defined with w == h in normalized coords on 16:9 canvas
+        full_scene_text = base + " " + s.get("verb_motion", "") + " " + s.get("morph_text", "")
+        circle_matches = re.finditer(r"(?:vòng tròn|hình tròn|đồng tâm|circle)[^.]*?w\s*=\s*([0-9.]+)[^.]*?h\s*=\s*([0-9.]+)", full_scene_text, re.I)
+        for cm in circle_matches:
+            w_val, h_val = float(cm.group(1)), float(cm.group(2))
+            if abs(w_val - h_val) < 0.02 and h_val > 0.05:
+                warnings.append(f"[SCRIPT-ASPECT-16x9] {s_id}: Circle defined with w={w_val} == h={h_val} in normalized coords will distort on 16:9 canvas (recommended w ~= 0.5625 * h)")
+
+    ok = len(errors) == 0
+    return {
+        "ok": ok,
+        "errors": errors,
+        "warnings": warnings,
+        "intent": intent,
+        "scenes_count": len(scenes)
+    }
+
+
+def compile_to_scene(text):
+    """Compile script.md into scene.json draft for T075 scene compiler."""
+    parsed = parse_script_full(text)
+    intent = parsed.get("intent", {})
+    raw_scenes = parsed.get("scenes") or []
+
+    actors = []
+    p_actors = intent.get("persistent_actors", [])
+    for a in p_actors:
+        actors.append({"id": a, "role": "persistent", "desc": ""})
+
+    scenes = []
+    for s in raw_scenes:
+        clicks = []
+        for c in s.get("clicks", []):
+            verb = s["matched_verbs"][0] if s.get("matched_verbs") else ""
+            clicks.append({
+                "id": f"c{s['index']}.{c['index']}",
+                "index": c["index"],
+                "cue": c["cue"],
+                "lead_in": c["lead_in"],
+                "post_click": c["post_click"],
+                "verb": verb,
+                "action": VERB_TABLE.get(verb, {}).get("action", "reveal")
+            })
+
+        scenes.append({
+            "id": f"s{s['index']}",
+            "index": s["index"],
+            "title": s["title"],
+            "turn": s.get("turn", {}),
+            "morph_from": f"s{s['morph_from']}" if s.get("morph_from") else None,
+            "morph_text": s.get("morph_text", ""),
+            "base_state": s.get("base_state", ""),
+            "speech": s.get("speech", ""),
+            "clicks": clicks,
+            "verb_motion": s.get("verb_motion", ""),
+            "reason": s.get("why", "")
+        })
+
+    return {
+        "version": 1,
+        "generator": "motion_script.compile_to_scene (T081)",
+        "intent": intent,
+        "actors": actors,
+        "scenes": scenes
+    }
+
+
+def compile_to_direction(text):
+    """Compile script.md into direction.json format for backward compatibility with deck_director.py."""
+    parsed = parse_script_full(text)
+    intent = parsed.get("intent", {})
+    raw_scenes = parsed.get("scenes") or []
+
+    brief = {
+        "title": raw_scenes[0]["title"] if raw_scenes else "Deck",
+        "one_sentence": intent.get("spine", ""),
+        "audience": intent.get("audience", ""),
+        "duration": intent.get("duration", "15 phút")
+    }
+
+    beats = []
+    shots = []
+    for s in raw_scenes:
+        b_id = f"b{s['index']}"
+        sh_id = f"sh{s['index']}"
+
+        clicks = []
+        for c in s.get("clicks", []):
+            clicks.append({
+                "id": f"{b_id}.{c['index']}",
+                "says": (c["lead_in"] + " " + c["post_click"]).strip(),
+                "lead_in": c["lead_in"],
+                "post_click_says": c["post_click"]
+            })
+
+        beats.append({
+            "id": b_id,
+            "scene": f"s{s['index']}",
+            "job": "define",
+            "claim": s.get("claim") or s["title"],
+            "clicks": clicks
+        })
+
+        shots.append({
+            "id": sh_id,
+            "beat_id": b_id,
+            "layout": "asymmetric" if s["index"] > 1 else "title",
+            "t0_says": s.get("clicks", [{}])[0].get("lead_in", "") if s.get("clicks") else s.get("speech", ""),
+            "base_objects": [{"id": "Title", "role": "title", "text": s["title"]}],
+            "clicks": [{"beat_click_id": f"{b_id}.{c['index']}", "enter": ["Points"]} for c in s.get("clicks", [])]
+        })
+
+    return {
+        "brief": brief,
+        "style": {
+            "theme": "editorial",
+            "register": intent.get("tone", "editorial_teaching")
+        },
+        "beats": beats,
+        "shots": shots
+    }
+
+
+def scaffold_script():
+    """Emit an empty script.md template with guiding questions and zero filler prose (D004, D005)."""
+    return """# Kịch bản Thuyết trình: [Tên Đề Tài]
+
+## Phần 0. Ý đồ
+
+| Ô | Nội dung |
+|---|---|
+| Người nghe | <!-- Ai đang nghe? Trình độ? Họ đang nghĩ gì khi bước vào phòng? --> |
+| Họ đang tin | <!-- Niềm tin hiện tại của họ trước khi nghe buổi này? --> |
+| Sau buổi họ phải tin | <!-- Niềm tin hoặc nhận thức cốt lõi họ mang về? --> |
+| Câu xương sống (≤ 20 từ) | <!-- 1 câu duy nhất <= 20 từ định hình toàn bộ bài thuyết trình --> |
+| Ẩn dụ chủ đạo | <!-- Hình tượng thị giác xuyên suốt kết nối các cảnh (vd: thấu kính, cán cân...) --> |
+| Diễn viên bền vững (cho Morph) | <!-- Danh sách vật thể mang định danh xuyên slide: `!!kinh`, `!!the1`, `!!the2` --> |
+| Khung kể | <!-- Khung dẫn dắt: Câu hỏi -> Công cụ -> Áp dụng, hoặc Nỗi đau -> Giải pháp -> Minh chứng --> |
+| Thời lượng | <!-- Số phút dự kiến và số cảnh --> |
+| Giọng | <!-- Giọng điệu: đối thoại, hùng biện, giảng giải hay phản biện --> |
+
+---
+
+## Cảnh 1. [Tiêu đề Cảnh Mở Đầu]
+
+- **Chuyển dịch[^*]*:** [Khán giả nghĩ gì] → [Sau cảnh này khán giả thấy gì]
+- **Trên màn hình lúc mở[^*]*:** [Mô tả trạng thái t=0; TUYỆT ĐỐI KHÔNG ĐỂ MÀN HÌNH TRỐNG]
+- **Lời nói[^*]*:**
+  > [Đoạn mở đầu lời nói...] **[CLICK]** [tiếp tục câu nói, đặt đúng chữ bản lề]
+- **Động từ → chuyển động:** [Chọn từ bảng động từ: soi, nghiêng về, gom thành hệ thống, lộn ngược, hoán đổi trọng lượng...] → [Mô tả chuyển động tương ứng của vật thể mang `!!id`]
+- **Vì sao[^*]*:** [Lý do sư phạm / lý luận kể chuyện cho cảnh này]
+
+---
+
+## Cảnh 2. [Tiêu đề Cảnh Tiếp Theo]
+
+- **Chuyển dịch[^*]*:** [Chuyển dịch nhận thức]
+- **Morph từ cảnh 1:** [Mô tả diễn viên mang `!!id` chuyển trạng thái thế nào từ cảnh trước]
+- **Trên màn hình lúc mở[^*]*:** [Mô tả trạng thái t=0]
+- **Lời nói[^*]*:**
+  > [Lời thoại có chứa mốc] **[CLICK]** [đoạn nói sau click]
+- **Động từ → chuyển động:** [Động từ hành động] → [Chuyển động]
+- **Vì sao[^*]*:** [Lý do]
+"""
 
 
 def match_sections(sections,model):
@@ -666,6 +1065,16 @@ def write_notes(pptx_in,plan,pptx_out):
 def main(argv=None):
     ap=argparse.ArgumentParser(description=__doc__,formatter_class=argparse.RawDescriptionHelpFormatter)
     sp=ap.add_subparsers(dest="cmd",required=True)
+    a=sp.add_parser("scaffold",help="emit an empty script.md template with guiding questions and zero prose (D004)")
+    a.add_argument("-o","--output",default="script.md")
+    a=sp.add_parser("check",help="check script for spine length, banned placeholders, cues, and verb alignment")
+    a.add_argument("script")
+    a=sp.add_parser("compile-scene",help="compile script.md to scene.json draft for T075 scene compiler")
+    a.add_argument("script")
+    a.add_argument("-o","--output",required=True)
+    a=sp.add_parser("compile-direction",help="compile script.md to direction.json for backward compatibility")
+    a.add_argument("script")
+    a.add_argument("-o","--output",required=True)
     a=sp.add_parser("draft",help="write a complete presenter script (with click cues) for a deck")
     a.add_argument("deck")
     a.add_argument("-o","--output",required=True)
@@ -679,6 +1088,33 @@ def main(argv=None):
     a.add_argument("--fill-gaps",action="store_true",help="generate callouts for clicks the slide cannot show")
     a.add_argument("--goal",default="")
     args=ap.parse_args(argv)
+    if args.cmd=="scaffold":
+        Path(args.output).write_text(scaffold_script(),encoding="utf-8")
+        print(f"wrote empty script template to {args.output}")
+        return 0
+    if args.cmd=="check":
+        res=check_script(Path(args.script).read_text(encoding="utf-8"))
+        if res["ok"]:
+            print(f"PASS: script {args.script} OK ({res['scenes_count']} scenes, spine: {len(res['intent'].get('spine','').split())} words)")
+            if res["warnings"]:
+                for w in res["warnings"]:
+                    print(f"  warning: {w}")
+            return 0
+        else:
+            print(f"FAIL: script {args.script} has {len(res['errors'])} error(s):")
+            for e in res["errors"]:
+                print(f"  {e}")
+            return 1
+    if args.cmd=="compile-scene":
+        scene_data=compile_to_scene(Path(args.script).read_text(encoding="utf-8"))
+        Path(args.output).write_text(json.dumps(scene_data,ensure_ascii=False,indent=2),encoding="utf-8")
+        print(f"compiled {args.script} -> {args.output} ({len(scene_data['scenes'])} scenes, {len(scene_data['actors'])} persistent actors)")
+        return 0
+    if args.cmd=="compile-direction":
+        dir_data=compile_to_direction(Path(args.script).read_text(encoding="utf-8"))
+        Path(args.output).write_text(json.dumps(dir_data,ensure_ascii=False,indent=2),encoding="utf-8")
+        print(f"compiled {args.script} -> {args.output} ({len(dir_data['beats'])} beats, {len(dir_data['shots'])} shots)")
+        return 0
     model=md.deck_model(args.deck)
     if args.cmd=="draft":
         plan=md.draft(model,style=args.style)
