@@ -3,7 +3,7 @@
 Since T040: every new title starts with its domain in brackets: `[pptx]`, `[docx]`, `[xlsx]`, `[svg]` or `[cross]` (see `domains/README.md`). Lifecycle: `lab/PROTOCOL.md`. A row may carry `review requested` / `reviewed: <verdict>`.
 
 This file is the one place to take a task ID. Before starting, add a row with
-status `claimed`, using the next free ID (**T089**). Push the row before you do
+status `claimed`, using the next free ID (**T091**). Push the row before you do
 expensive work. IDs are never reused. T024 was taken three times in parallel,
 so those rows carry a suffix. The experiment folders keep the names they were
 created with.
@@ -116,6 +116,8 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T084 | [cross] Green CI: test deps, host-only and network tests, logo box fit | claude | `work/T084-claude-ci-green` | done | `experiments/T084-20261104-claude-ci-green/REPORT.md` |
 | T085 | [cross] Lead: owner's 2026-11-05 direction — pptx-first review, crowd taste research | claude | `work/T085-claude-taste-direction` | done | `experiments/T085-20261105-claude-taste-direction/REPORT.md` |
 | T086 | [cross] Crowd taste across fields → PPTX taste rules | antigravity | `work/T086-antigravity-taste-research` | reviewed: research notes merged via T088; rules not accepted, work continues in T087 | `experiments/T086-20261105-antigravity-taste-research/REPORT.md` |
-| T087 | [pptx] One PPTX skill written as design guidance; code only as a small toolbox | claude | `work/T087-claude-pptx-guidance-skill` | claimed | `experiments/T087-20261106-claude-pptx-guidance-skill/REPORT.md` |
+| T087 | [pptx] One PPTX skill written as design guidance; code only as a small toolbox | claude | `work/T087-claude-pptx-guidance-skill` | done | `experiments/T087-20261106-claude-pptx-guidance-skill/REPORT.md` |
 | T088 | [cross] Lead review of T081 and T086 (Antigravity): merge the useful parts | claude | `work/T088-claude-ag-salvage` | done | `experiments/T088-20261106-claude-ag-salvage/REPORT.md` |
-| T089 | *next free ID* | | | | |
+| T089 | [pptx] Fix harmful defaults: Forge (KPI 0, 14 pt shrink, hard-coded chrome, `!!orb` Morph), Director (cover clicks, Morph everywhere), overflow false positive without the font | *open; suggested OpenCode → critic Claude* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |
+| T090 | [pptx] Small model uses `skills/pptx`: adapt an approved example to new content; owner opens and scores | *open after the owner approves the T087 demo; suggested Antigravity → critic Claude* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |
+| T091 | *next free ID* | | | | |

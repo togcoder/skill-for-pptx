@@ -7,6 +7,27 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T087 [pptx] One PPTX skill written as design guidance — 2026-11-06
+
+- **`skills/pptx/`.**
+  - `SKILL.md`: the working order, ten don'ts from real failures, the narrow path for small
+    models, and how to hand over.
+  - Nine guides in plain Vietnamese: audience and outline, identity, layout, type and colour,
+    images and diagrams (QCC: steps bar, fishbone, FTA, Gantt, before/after, PDCA), in-slide
+    motion, Morph, self-check, toolbox.
+  - `examples.md` lists which T066 slides to copy and which not to.
+- **`scripts/pptx_tools.py`** (registered as `pptx.skill`):
+  - `look` exports PNGs and a contact sheet with PowerPoint.
+  - `motion` writes clicks and Morph/Fade/none transitions from a plan that names shapes.
+  - 4 tests. PowerPoint parses its output.
+- **Demo.** A 5-slide deck built by following the skill. One Morph (portraits from the cover to
+  the timeline), checked in a PowerPoint video. Its two real critic findings were fixed: gold on
+  cream, and 12 type sizes.
+- **Root cause of "Morph everywhere" found.** Forge's decorative `!!orb` shapes on every slide
+  made the Director add a Morph to every transition. Fix briefed as T089.
+- **New briefs.** T089 (OpenCode: harmful defaults) and T090 (Antigravity: small model uses the
+  skill).
+
 ## T088 [cross] Lead review of Antigravity's T081 and T086 — 2026-11-06
 
 - **T081, accepted in part.**
