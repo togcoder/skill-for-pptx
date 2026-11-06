@@ -1,0 +1,199 @@
+[
+  {
+    "deck": "01A_collision_before.pptx",
+    "slide_count": 1,
+    "checks": {
+      "aabb_collision": {
+        "pass": false,
+        "violations": [
+          "Slide 1: Text 'STRUCTURAL FRACTURE THE 130-TO...' collides directly with emblem (overlap 1097280x1645920 EMU)",
+          "Slide 1: Text 'STRUCTURAL FRACTURE THE 130-TO...' collides directly with emblem (overlap 868680x1188720 EMU)",
+          "Slide 1: Text 'STRUCTURAL FRACTURE THE 130-TO...' collides directly with emblem (overlap 640080x731520 EMU)"
+        ]
+      },
+      "text_fit_capacity": {
+        "pass": true,
+        "violations": []
+      },
+      "elevation_and_radii": {
+        "pass": true,
+        "violations": []
+      },
+      "morph_continuity": {
+        "pass": true,
+        "violations": []
+      }
+    },
+    "overall_pass": false
+  },
+  {
+    "deck": "01B_safezone_after.pptx",
+    "slide_count": 1,
+    "checks": {
+      "aabb_collision": {
+        "pass": true,
+        "violations": []
+      },
+      "text_fit_capacity": {
+        "pass": true,
+        "violations": []
+      },
+      "elevation_and_radii": {
+        "pass": true,
+        "violations": []
+      },
+      "morph_continuity": {
+        "pass": true,
+        "violations": []
+      }
+    },
+    "overall_pass": true
+  },
+  {
+    "deck": "02A_pinched_before.pptx",
+    "slide_count": 1,
+    "checks": {
+      "aabb_collision": {
+        "pass": true,
+        "violations": []
+      },
+      "text_fit_capacity": {
+        "pass": false,
+        "violations": [
+          "Slide 1: Column width 3.10\" only holds 24.6 chars/line (< 35ch floor)",
+          "Slide 1: Column width 3.10\" only holds 24.6 chars/line (< 35ch floor)"
+        ]
+      },
+      "elevation_and_radii": {
+        "pass": true,
+        "violations": []
+      },
+      "morph_continuity": {
+        "pass": true,
+        "violations": []
+      }
+    },
+    "overall_pass": false
+  },
+  {
+    "deck": "02B_measure_after.pptx",
+    "slide_count": 1,
+    "checks": {
+      "aabb_collision": {
+        "pass": true,
+        "violations": []
+      },
+      "text_fit_capacity": {
+        "pass": true,
+        "violations": []
+      },
+      "elevation_and_radii": {
+        "pass": true,
+        "violations": []
+      },
+      "morph_continuity": {
+        "pass": true,
+        "violations": []
+      }
+    },
+    "overall_pass": true
+  },
+  {
+    "deck": "03A_ghostcard_before.pptx",
+    "slide_count": 1,
+    "checks": {
+      "aabb_collision": {
+        "pass": true,
+        "violations": []
+      },
+      "text_fit_capacity": {
+        "pass": true,
+        "violations": []
+      },
+      "elevation_and_radii": {
+        "pass": false,
+        "violations": [
+          "Slide 1: Ghost card defect on 'Rounded Rectangle 3' - possesses both border (w=31750) and outerShadow",
+          "Slide 1: Harsh shadow opacity 50.0% exceeds 25% diffuse threshold"
+        ]
+      },
+      "morph_continuity": {
+        "pass": true,
+        "violations": []
+      }
+    },
+    "overall_pass": false
+  },
+  {
+    "deck": "03B_elevation_after.pptx",
+    "slide_count": 1,
+    "checks": {
+      "aabb_collision": {
+        "pass": true,
+        "violations": []
+      },
+      "text_fit_capacity": {
+        "pass": true,
+        "violations": []
+      },
+      "elevation_and_radii": {
+        "pass": true,
+        "violations": []
+      },
+      "morph_continuity": {
+        "pass": true,
+        "violations": []
+      }
+    },
+    "overall_pass": true
+  },
+  {
+    "deck": "04A_morph_deformed_before.pptx",
+    "slide_count": 2,
+    "checks": {
+      "aabb_collision": {
+        "pass": true,
+        "violations": []
+      },
+      "text_fit_capacity": {
+        "pass": true,
+        "violations": []
+      },
+      "elevation_and_radii": {
+        "pass": true,
+        "violations": []
+      },
+      "morph_continuity": {
+        "pass": false,
+        "violations": [
+          "Morph break on '!!hero_actor': State 1 is 'ellipse' but State 2 is 'roundRect' (cross-fade defect)",
+          "Morph font warp risk on '!!hero_actor': Dense text inside morphing shape instead of decoupled overlay frame"
+        ]
+      }
+    },
+    "overall_pass": false
+  },
+  {
+    "deck": "04B_morph_clean_after.pptx",
+    "slide_count": 2,
+    "checks": {
+      "aabb_collision": {
+        "pass": true,
+        "violations": []
+      },
+      "text_fit_capacity": {
+        "pass": true,
+        "violations": []
+      },
+      "elevation_and_radii": {
+        "pass": true,
+        "violations": []
+      },
+      "morph_continuity": {
+        "pass": true,
+        "violations": []
+      }
+    },
+    "overall_pass": true
+  }
+]

@@ -352,8 +352,8 @@ Luật gu của chặng này lấy từ kết quả T086, và chỉ lấy luật
   - Loại bỏ hoặc gộp `theme_engine.py`.
 - **Dàn trang theo lưới:** dùng lưới 12 cột, baseline và thang chữ, cùng các mẫu bố cục rút từ
   corpus deck đẹp (T027). Bố cục được *sinh*, không chọn từ 14 mẫu.
-- **Đánh giá chéo model:** cùng 3 đề, DeepSeek, Gemini và Claude chạy qua cùng công cụ, rồi chấm
-  A/B. Khoảng cách nhỏ dần qua các bản phát hành là bằng chứng công cụ đang mang gu thay cho agent.
+- ~~Đánh giá chéo model~~: **bỏ** (F18: chủ dự án không có hạn mức chạy 3 model). Thay bằng: khi một
+  agent yếu dùng skill, chủ dự án mở đúng file đó.
 - **Tương tác qua cảnh:** quiz và điều hướng dùng `scene.json` cộng writer T061, rồi bấm thử bằng
   T058.
 

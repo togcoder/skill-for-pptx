@@ -3,7 +3,7 @@
 Since T040: every new title starts with its domain in brackets: `[pptx]`, `[docx]`, `[xlsx]`, `[svg]` or `[cross]` (see `domains/README.md`). Lifecycle: `lab/PROTOCOL.md`. A row may carry `review requested` / `reviewed: <verdict>`.
 
 This file is the one place to take a task ID. Before starting, add a row with
-status `claimed`, using the next free ID (**T088**). Push the row before you do
+status `claimed`, using the next free ID (**T089**). Push the row before you do
 expensive work. IDs are never reused. T024 was taken three times in parallel,
 so those rows carry a suffix. The experiment folders keep the names they were
 created with.
@@ -110,11 +110,12 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T078 | [pptx] Script track: diagnosis, 6-step method, verb → motion table, first gold script (Triết học ch. 1) | Claude (Opus 5.5, desktop) | `work/T070-claude-lead-synthesis` | done (awaiting owner reading) | `experiments/T078-20261104-claude-script-track/REPORT.md` |
 | T079 | [pptx] Can a weak model + method write a good script? Blind text A/B, 3 briefs × 4 conditions | *open, after owner approves T078; suggested OpenCode → critic Claude* |  | open (brief in SCRIPT_TRACK) | `docs/SCRIPT_TRACK.md` |
 | T080 | [pptx] Validate the verb → motion table: 12 key sentences × 2–3 motion options, owner A/B | *open; suggested OpenCode → critic Claude* |  | open (brief in SCRIPT_TRACK) | `docs/SCRIPT_TRACK.md` |
-| T081 | [pptx] `script-writer` skill: interview, intent and scene sheets, frames, verb table, gold examples, check | *open, after owner approves T078; suggested Claude → critic OpenCode (critic uses the skill)* |  | open (brief in SCRIPT_TRACK) | `docs/SCRIPT_TRACK.md` |
+| T081 | [pptx] script-writer skill | antigravity | `work/T081-antigravity-script-writer` | reviewed: accept in part (merged via T088) | `experiments/T081-20261105-antigravity-script-writer/REPORT.md` |
 | T082 | [pptx] Gold scripts 2–5 (report, pitch, process, decision), owner-approved | *open, after T081; Claude writes, owner approves, OpenCode tests* |  | open (brief in SCRIPT_TRACK) | `docs/SCRIPT_TRACK.md` |
 | T083 | [cross] Coordination layer: capability registry, binding decisions, `coord.py` claim/board/check, single-writer docs | Claude (Opus 5.5, desktop, lead) | `work/T083-claude-coordination` | done (PR stacked on #60) | `experiments/T083-20261104-claude-coordination/REPORT.md` |
 | T084 | [cross] Green CI: test deps, host-only and network tests, logo box fit | claude | `work/T084-claude-ci-green` | done | `experiments/T084-20261104-claude-ci-green/REPORT.md` |
 | T085 | [cross] Lead: owner's 2026-11-05 direction — pptx-first review, crowd taste research | claude | `work/T085-claude-taste-direction` | done | `experiments/T085-20261105-claude-taste-direction/REPORT.md` |
-| T086 | [cross] Crowd taste across ≥ 8 fields → PPTX taste rules, each tested by a blind before/after `.pptx` pair | *open; suggested Claude or Gemini → critic from another family* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |
+| T086 | [cross] Crowd taste across fields → PPTX taste rules | antigravity | `work/T086-antigravity-taste-research` | reviewed: research notes merged via T088; rules not accepted, work continues in T087 | `experiments/T086-20261105-antigravity-taste-research/REPORT.md` |
 | T087 | [pptx] One PPTX skill written as design guidance (SKILL.md + plain-language guides); code only as a small toolbox (D011) | *open; Claude (lead) writes → another family builds with it* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |
-| T088 | *next free ID* | | | | |
+| T088 | [cross] Lead review of T081 and T086 (Antigravity): merge the useful parts | claude | `work/T088-claude-ag-salvage` | done | `experiments/T088-20261106-claude-ag-salvage/REPORT.md` |
+| T089 | *next free ID* | | | | |
