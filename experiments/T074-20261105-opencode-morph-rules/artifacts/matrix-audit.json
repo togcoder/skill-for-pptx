@@ -1,0 +1,58 @@
+{
+  "findings": [
+    {
+      "code": "MORPH-TYPE-MISMATCH",
+      "from_slide": 10,
+      "to_slide": 11,
+      "object": "!!track",
+      "detail": "('shape', 'rect', False, False) -> ('shape', 'ellipse', False, False)"
+    },
+    {
+      "code": "MORPH-ENTRANCE",
+      "from_slide": 31,
+      "to_slide": 32,
+      "object": "!!track",
+      "detail": "destination has an entrance effect"
+    },
+    {
+      "code": "MORPH-OFFSLIDE",
+      "from_slide": 43,
+      "to_slide": 44,
+      "object": "!!track",
+      "detail": [
+        1.088,
+        0.373,
+        0.15,
+        0.267
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": "MORPH-TYPE-MISMATCH",
+      "from_slide": 10,
+      "to_slide": 11,
+      "object": "!!track",
+      "detail": "('shape', 'rect', False, False) -> ('shape', 'ellipse', False, False)"
+    },
+    {
+      "code": "MORPH-ENTRANCE",
+      "from_slide": 31,
+      "to_slide": 32,
+      "object": "!!track",
+      "detail": "destination has an entrance effect"
+    },
+    {
+      "code": "MORPH-OFFSLIDE",
+      "from_slide": 43,
+      "to_slide": 44,
+      "object": "!!track",
+      "detail": [
+        1.088,
+        0.373,
+        0.15,
+        0.267
+      ]
+    }
+  ]
+}

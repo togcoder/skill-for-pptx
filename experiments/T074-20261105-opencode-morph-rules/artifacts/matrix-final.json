@@ -1,0 +1,260 @@
+{
+ "video": "preview/morph-matrix.mp4",
+ "video_seconds": 109.395,
+ "cases": [
+  {
+   "case": "same-bang",
+   "label": "Same `!!track`, same rect",
+   "verdict": "continuous",
+   "note": "",
+   "start_center_px": 59.5,
+   "end_center_px": 251.5,
+   "mid_blobs": 1,
+   "mid_pixels": 2119
+  },
+  {
+   "case": "same-name",
+   "label": "Same plain name, same rect",
+   "verdict": "continuous",
+   "note": "",
+   "start_center_px": 59.5,
+   "end_center_px": 251.5,
+   "mid_blobs": 1,
+   "mid_pixels": 2118
+  },
+  {
+   "case": "diff-name",
+   "label": "Different names, same rect",
+   "verdict": "continuous",
+   "note": "",
+   "start_center_px": 59.5,
+   "end_center_px": 251.5,
+   "mid_blobs": 1,
+   "mid_pixels": 2116
+  },
+  {
+   "case": "rect-ellipse",
+   "label": "Same `!!track`, rect\u2192ellipse",
+   "verdict": "two-blobs",
+   "note": "",
+   "start_center_px": 64.2,
+   "end_center_px": 205.9,
+   "mid_blobs": 2,
+   "mid_pixels": 1715
+  },
+  {
+   "case": "text-same",
+   "label": "Same text",
+   "verdict": "continuous",
+   "note": "",
+   "start_center_px": 83.0,
+   "end_center_px": 275.0,
+   "mid_blobs": 1,
+   "mid_pixels": 263
+  },
+  {
+   "case": "text-diff",
+   "label": "Different text",
+   "verdict": "continuous",
+   "note": "",
+   "start_center_px": 83.1,
+   "end_center_px": 275.4,
+   "mid_blobs": 1,
+   "mid_pixels": 103
+  },
+  {
+   "case": "picture-same",
+   "label": "Same picture",
+   "verdict": "continuous",
+   "note": "",
+   "start_center_px": 59.5,
+   "end_center_px": 251.5,
+   "mid_blobs": 1,
+   "mid_pixels": 1778
+  },
+  {
+   "case": "picture-diff",
+   "label": "Different picture media",
+   "verdict": "not-measured",
+   "note": "different media colour; frame pairing not colour-tracked",
+   "start_center_px": 214.0,
+   "end_center_px": 251.5,
+   "mid_blobs": 1,
+   "mid_pixels": 2205
+  },
+  {
+   "case": "group-same",
+   "label": "Group moves",
+   "verdict": "continuous",
+   "note": "",
+   "start_center_px": 57.0,
+   "end_center_px": 249.0,
+   "mid_blobs": 1,
+   "mid_pixels": 1364
+  },
+  {
+   "case": "rotate90",
+   "label": "90\u00b0 rotation",
+   "verdict": "continuous",
+   "note": "",
+   "start_center_px": 59.5,
+   "end_center_px": 251.5,
+   "mid_blobs": 1,
+   "mid_pixels": 2155
+  },
+  {
+   "case": "entrance",
+   "label": "Destination has entrance",
+   "verdict": "static/no-match",
+   "note": "",
+   "start_center_px": 59.5,
+   "end_center_px": 59.5,
+   "mid_blobs": 1,
+   "mid_pixels": 2255
+  },
+  {
+   "case": "byword",
+   "label": "Morph byWord",
+   "verdict": "continuous",
+   "note": "",
+   "start_center_px": 82.2,
+   "end_center_px": 265.6,
+   "mid_blobs": 1,
+   "mid_pixels": 294
+  },
+  {
+   "case": "bychar",
+   "label": "Morph byChar",
+   "verdict": "continuous",
+   "note": "",
+   "start_center_px": 83.0,
+   "end_center_px": 275.2,
+   "mid_blobs": 1,
+   "mid_pixels": 243
+  },
+  {
+   "case": "zorder",
+   "label": "Z-order change",
+   "verdict": "continuous-occluded",
+   "note": "one blob, 11 px visible; foreground covers most of the object",
+   "start_center_px": 59.5,
+   "end_center_px": 251.5,
+   "mid_blobs": 2,
+   "mid_pixels": 106
+  },
+  {
+   "case": "offslide",
+   "label": "Destination off-slide",
+   "verdict": "offscreen",
+   "note": "B object at x=14.5 in; frame at 106 s shows an empty stage",
+   "start_center_px": 193.0,
+   "end_center_px": 193.0,
+   "mid_blobs": 2,
+   "mid_pixels": 46
+  }
+ ],
+ "rules": [
+  {
+   "id": "M-01",
+   "rule": "Same shape type + similar geometry pairs even when the names differ.",
+   "evidence": [
+    "diff-name",
+    "same-name"
+   ],
+   "rung": 5,
+   "meaning": "PowerPoint's default byObject match is not name-only; `!!` is a hint, not a requirement, for simple shapes."
+  },
+  {
+   "id": "M-02",
+   "rule": "`!!` cannot force a pair across shape types.",
+   "evidence": [
+    "rect-ellipse"
+   ],
+   "rung": 5,
+   "meaning": "rect\u2192ellipse with the same `!!track` shows two blobs in the middle: a cross-fade, not one object."
+  },
+  {
+   "id": "M-03",
+   "rule": "Text boxes pair as shapes; different text does not break geometry.",
+   "evidence": [
+    "text-same",
+    "text-diff"
+   ],
+   "rung": 5,
+   "meaning": "Both moved continuously; the text content itself was not measured word-by-word."
+  },
+  {
+   "id": "M-04",
+   "rule": "A picture frame pairs with a picture of the same frame; media change is not proven.",
+   "evidence": [
+    "picture-same"
+   ],
+   "rung": 5,
+   "meaning": "Same picture moved continuously. Different media was not colour-tracked and stays open."
+  },
+  {
+   "id": "M-05",
+   "rule": "Groups pair as groups when the group name/geometry matches.",
+   "evidence": [
+    "group-same"
+   ],
+   "rung": 5,
+   "meaning": "The group moved as one blob; ungrouping was not tested."
+  },
+  {
+   "id": "M-06",
+   "rule": "90\u00b0 rotation still pairs.",
+   "evidence": [
+    "rotate90"
+   ],
+   "rung": 5,
+   "meaning": "One blob crossed the frame; >180\u00b0 and flips stay open."
+  },
+  {
+   "id": "M-07",
+   "rule": "An entrance effect on the destination object blocks the Morph.",
+   "evidence": [
+    "entrance"
+   ],
+   "rung": 5,
+   "meaning": "The destination stayed hidden for the whole video; no object crossed."
+  },
+  {
+   "id": "M-08",
+   "rule": "An off-slide destination is absent, not staged.",
+   "evidence": [
+    "offslide"
+   ],
+   "rung": 5,
+   "meaning": "B object at x=14.5 in produced an empty stage; Morph does not fly it in by itself."
+  },
+  {
+   "id": "M-09",
+   "rule": "byWord and byChar keep the frame continuous.",
+   "evidence": [
+    "byword",
+    "bychar"
+   ],
+   "rung": 3,
+   "meaning": "Geometry is continuous; the word/character interpolation was not verified frame-by-frame."
+  },
+  {
+   "id": "M-10",
+   "rule": "Z-order does not stop the pairing but can hide the object.",
+   "evidence": [
+    "zorder"
+   ],
+   "rung": 4,
+   "meaning": "One small blob remained under the foreground; use the object order deliberately."
+  },
+  {
+   "id": "M-11",
+   "rule": "A Morph adds its duration to the slide advance.",
+   "evidence": [
+    "video"
+   ],
+   "rung": 5,
+   "meaning": "45 slides \u00d7 2 s = 90 s expected; PowerPoint produced 109.4 s with 15 \u00d7 1.2 s Morphs."
+  }
+ ]
+}
