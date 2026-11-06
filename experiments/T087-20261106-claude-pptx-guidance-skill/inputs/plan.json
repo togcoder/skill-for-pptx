@@ -1,0 +1,11 @@
+{
+  "transitions": {"default": "fade", "1": "none", "2": "morph"},
+  "clicks": {
+    "2": [["Moc 1848", "Nam 1848", "Ghi 1848"],
+          ["Moc 1878", "Nam 1878", "Ghi 1878"],
+          ["Moc 1909", "Nam 1909", "Ghi 1909"]],
+    "3": [["Duy vat y:rise", "Duy tam y:rise"],
+          ["Gach chon:wipe", "Ket luan:rise"]],
+    "5": [["So 1", "Y 1:rise"], ["So 2", "Y 2:rise"], ["So 3", "Y 3:rise"]]
+  }
+}
