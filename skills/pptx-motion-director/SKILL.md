@@ -5,6 +5,9 @@ description: Add presenter-paced native PowerPoint animation — from simple bui
 
 # PPTX Motion Director
 
+> **D011:** lối vào PPTX là `skills/pptx/`. Tệp này là sổ lệnh cũ cho công cụ nó mô tả; đọc
+> `skills/pptx/SKILL.md` trước.
+
 You are the motion director. The user may give only a deck and a vague goal; do
 not ask them to specify each animation. Read the deck, decide the story and the
 click rhythm yourself, and deliver an editable PPTX with native PowerPoint

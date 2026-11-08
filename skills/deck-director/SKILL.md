@@ -5,6 +5,9 @@ description: Direct a new deck before it is laid out — turn a topic, outline, 
 
 # Deck Director
 
+> **D011:** lối vào PPTX là `skills/pptx/`. Tệp này là sổ lệnh cũ cho công cụ nó mô tả; đọc
+> `skills/pptx/SKILL.md` trước.
+
 > **Status: v0.3 (T067 + T068 merge).** Two-pass compiler and validator live in
 > `scripts/deck_director.py`; `slide_forge.py build --plan` consumes its output.
 > The five narrative laws are implemented and unit-tested. The image rules and

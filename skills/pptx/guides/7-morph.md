@@ -55,6 +55,9 @@ Một bộ 15 slide thường chỉ có 2–5 Morph. Morph ở mọi slide sẽ 
    hiện sau.
 7. **Mỗi Morph cộng thêm khoảng 1,4 giây** vào thời gian trình chiếu.
 8. **Lớp trên che lớp dưới.** Thứ tự lớp ở slide B quyết định cái gì nằm trên trong lúc chuyển.
+9. **Chữ mang Morph phải ngắt dòng y hệt ở hai slide.** Khác số dòng thì PowerPoint chồng hai bản
+   chữ lên nhau giữa lúc chuyển — thấy "bóng ma" trên khung hình. Muốn thu nhỏ chữ vào một cột thì
+   ngắt dòng sẵn ở cả hai slide, chỉ đổi cỡ và vị trí.
 
 ## Kiểm tra
 
@@ -64,7 +67,9 @@ python scripts/morph_studio.py audit OUT.pptx
 
 Lệnh này báo các lỗi: khác loại hình, vật mang Morph có hiệu ứng xuất hiện, vật đích nằm ngoài khung.
 Mục cảnh báo "UNNAMED-PAIR" nghĩa là có hai hình cùng loại không đặt tên, PowerPoint có thể ghép nhầm:
-đặt tên `!!` hoặc đổi chỗ chúng.
+đặt tên `!!` hoặc đổi chỗ chúng. Riêng **tiêu đề, eyebrow, khung đặt cùng một chỗ** ở hai slide
+(guide 3 bắt vậy) cũng bị báo `UNNAMED-PAIR` — đó là bình thường: PowerPoint ghép và chuyển mờ,
+không phải lỗi cần đổi bố cục.
 
 Audit chỉ kiểm tra cấu trúc: loại hình, tên, hiệu ứng vào, vị trí ngoài khung.
 Nó **không** biết cú cắt có đọc như một ý hay không. Câu đó phải trả lời bằng

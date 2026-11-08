@@ -41,3 +41,5 @@ Cả bộ slide dùng từ 3 đến 6 cỡ chữ. Thang gợi ý cho slide 16:9:
   hai. Không đổ bóng cho chữ, trừ khi chữ trắng đặt trên ảnh không có lớp phủ.
 - Không phát sáng (glow), không phản chiếu, không chữ 3D, không clip-art.
 - Biểu tượng (icon): cùng một bộ, cùng nét, cùng cỡ (0,4–0,6 in). Không dùng emoji làm biểu tượng.
+- **Đồ trang trí bằng chữ** (dấu ngoặc kép, dấu chấm, số lớn) phải dùng một cỡ **trong thang** của bộ
+  (ví dụ 64 pt), không thêm cỡ mới — `TYP-SIZES` đếm mọi cỡ chữ, kể cả đồ trang trí.
