@@ -1,0 +1,106 @@
+{
+  "transitions": {
+    "default": "fade",
+    "1": "none"
+  },
+  "clicks": {
+    "1": [],
+    "2": [
+      [
+        "Cham 1",
+        "Y 1",
+        "Cham 2",
+        "Y 2",
+        "Cham 3",
+        "Y 3"
+      ],
+      [
+        "Muc tieu nhan",
+        "Muc tieu text"
+      ]
+    ],
+    "3": [
+      [
+        "Thong diep 3"
+      ]
+    ],
+    "4": [
+      [
+        "4M Con nguoi",
+        "NN Con nguoi 1",
+        "NN Con nguoi 2"
+      ],
+      [
+        "4M May moc",
+        "NN May moc 1",
+        "NN May moc 2"
+      ],
+      [
+        "4M Phuong phap",
+        "NN Phuong phap 1",
+        "NN Phuong phap 2"
+      ],
+      [
+        "4M Vat lieu",
+        "NN Vat lieu 1",
+        "NN Vat lieu 2"
+      ]
+    ],
+    "5": [
+      [
+        "Thong diep 5"
+      ]
+    ],
+    "6": [
+      [
+        "So 6",
+        "Nhan 6"
+      ],
+      [
+        "Bieu do tuan",
+        "Thong diep 6"
+      ]
+    ],
+    "7": [
+      [
+        "Buoc 1 tron",
+        "Buoc 1 so",
+        "Buoc 1 nhan"
+      ],
+      [
+        "Buoc 2 tron",
+        "Buoc 2 so",
+        "Buoc 2 nhan"
+      ],
+      [
+        "Buoc 3 tron",
+        "Buoc 3 so",
+        "Buoc 3 nhan"
+      ],
+      [
+        "Buoc 4 tron",
+        "Buoc 4 so",
+        "Buoc 4 nhan"
+      ],
+      [
+        "Buoc 5 tron",
+        "Buoc 5 so",
+        "Buoc 5 nhan"
+      ]
+    ],
+    "8": [
+      [
+        "Anh sau",
+        "Nhan sau"
+      ]
+    ],
+    "9": [
+      [
+        "So sau",
+        "Nhan so sau",
+        "Ket luan"
+      ]
+    ],
+    "10": []
+  }
+}
