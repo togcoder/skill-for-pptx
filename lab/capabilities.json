@@ -1,254 +1,314 @@
 {
-  "version": 1,
-  "about": "One owner per file. Every script in scripts/ belongs to exactly one capability, with one role. A new script must be registered here in the same PR; check_layout.py fails otherwise. Roles: canonical (the one implementation product paths use), support (helpers of the canonical modules), experimental (research; product paths must not import it), shim (compatibility entry point that delegates), tool (lab tooling, harvesters), fixture (builds test/experiment inputs), frozen (kept only to reproduce old experiments; do not build on it). Written by the lead (T083); agents propose changes in their PR description, the lead applies them.",
-  "lead": ["claude"],
-  "owner": "togcoder",
-  "single_writer": [
-    "HANDOFF.md",
-    "docs/ROADMAP.md",
-    "docs/SCRIPT_TRACK.md",
-    "lab/DECISIONS.md",
-    "lab/capabilities.json"
-  ],
-  "capabilities": [
+ "version": 1,
+ "about": "One owner per file. Every script in scripts/ belongs to exactly one capability, with one role. A new script must be registered here in the same PR; check_layout.py fails otherwise. Roles: canonical (the one implementation product paths use), support (helpers of the canonical modules), experimental (research; product paths must not import it), shim (compatibility entry point that delegates), tool (lab tooling, harvesters), fixture (builds test/experiment inputs), frozen (kept only to reproduce old experiments; do not build on it). Written by the lead (T083); agents propose changes in their PR description, the lead applies them.",
+ "lead": [
+  "claude"
+ ],
+ "owner": "togcoder",
+ "single_writer": [
+  "HANDOFF.md",
+  "docs/ROADMAP.md",
+  "docs/SCRIPT_TRACK.md",
+  "lab/DECISIONS.md",
+  "lab/capabilities.json"
+ ],
+ "capabilities": [
+  {
+   "id": "pptx.skill",
+   "title": "The PPTX guidance skill (skills/pptx) and its small toolbox: look, motion by shape name",
+   "files": {
+    "scripts/pptx_tools.py": "canonical"
+   },
+   "decisions": [
+    "D009",
+    "D011"
+   ],
+   "notes": "T087. skills/pptx/SKILL.md is the entry point for PPTX work. pptx_tools writes timing through pptx_animator (pptx.timing) and must not grow design decisions: those live in the guides."
+  },
+  {
+   "id": "pptx.timing",
+   "title": "Native PowerPoint timing: effects, click groups, presets, interactiveSeq, triggers",
+   "files": {
+    "scripts/pptx_animator.py": "canonical",
+    "scripts/chart_native_timing.py": "support",
+    "scripts/counter_component.py": "support",
+    "scripts/extract_presets.py": "tool",
+    "scripts/harvest_presets.ps1": "tool",
+    "scripts/interactive_triggers.py": "shim"
+   },
+   "decisions": [
+    "D002"
+   ],
+   "notes": "T061 made pptx_animator the only interactiveSeq writer; a test enforces it."
+  },
+  {
+   "id": "pptx.director",
+   "title": "Motion Director for existing decks (inspect, draft, apply, preview, verify)",
+   "files": {
+    "scripts/motion_director.py": "canonical",
+    "scripts/motion_engine.py": "canonical",
+    "scripts/motion_components.py": "canonical",
+    "scripts/validate_director_plan.py": "canonical",
+    "scripts/motion_preview.py": "canonical",
+    "scripts/inspect_existing_deck.py": "canonical",
+    "scripts/data_motion_recipes.py": "support",
+    "scripts/generic_motion_recipes.py": "support",
+    "scripts/text_metrics.py": "support",
+    "scripts/compile_data_motion_patch.py": "frozen",
+    "scripts/compile_director_patch.py": "frozen",
+    "scripts/patch_existing_timeline.py": "frozen",
+    "scripts/add_timeline.py": "frozen",
+    "scripts/pack_timeline.py": "frozen",
+    "scripts/validate_timeline.py": "frozen",
+    "scripts/choreography.py": "frozen",
+    "scripts/layer_separation.py": "frozen",
+    "scripts/cyclic_label_clearance.py": "frozen",
+    "scripts/validate_plan.py": "frozen",
+    "scripts/normalize_textboxes.py": "frozen",
+    "scripts/normalize_timeline_textboxes.py": "frozen",
+    "scripts/render_plan.mjs": "frozen",
+    "scripts/render_timeline.mjs": "frozen",
+    "scripts/run_experiment.sh": "frozen",
+    "scripts/run_timeline_experiment.sh": "frozen",
+    "scripts/make_motion_semantics_matrix.py": "frozen",
+    "scripts/audit_motion_semantics_matrix.py": "frozen",
+    "scripts/finalize_motion_semantics_matrix.mjs": "frozen",
+    "scripts/audit_packed_candidate.py": "frozen"
+   },
+   "decisions": [
+    "D002"
+   ],
+   "notes": "Frozen paths are the E001-T018 research writers (docs/ARCHITECTURE.md)."
+  },
+  {
+   "id": "pptx.script",
+   "title": "Presentation script: Markdown with [click] cues, aligned to objects, written to speaker notes",
+   "files": {
+    "scripts/motion_script.py": "canonical"
+   },
+   "decisions": [
+    "D003",
+    "D004"
+   ],
+   "overlaps": [
     {
-      "id": "pptx.timing",
-      "title": "Native PowerPoint timing: effects, click groups, presets, interactiveSeq, triggers",
-      "files": {
-        "scripts/pptx_animator.py": "canonical",
-        "scripts/chart_native_timing.py": "support",
-        "scripts/counter_component.py": "support",
-        "scripts/extract_presets.py": "tool",
-        "scripts/harvest_presets.ps1": "tool",
-        "scripts/interactive_triggers.py": "shim"
-      },
-      "decisions": ["D002"],
-      "notes": "T061 made pptx_animator the only interactiveSeq writer; a test enforces it."
-    },
-    {
-      "id": "pptx.director",
-      "title": "Motion Director for existing decks (inspect, draft, apply, preview, verify)",
-      "files": {
-        "scripts/motion_director.py": "canonical",
-        "scripts/motion_engine.py": "canonical",
-        "scripts/motion_components.py": "canonical",
-        "scripts/validate_director_plan.py": "canonical",
-        "scripts/motion_preview.py": "canonical",
-        "scripts/inspect_existing_deck.py": "canonical",
-        "scripts/data_motion_recipes.py": "support",
-        "scripts/generic_motion_recipes.py": "support",
-        "scripts/text_metrics.py": "support",
-        "scripts/compile_data_motion_patch.py": "frozen",
-        "scripts/compile_director_patch.py": "frozen",
-        "scripts/patch_existing_timeline.py": "frozen",
-        "scripts/add_timeline.py": "frozen",
-        "scripts/pack_timeline.py": "frozen",
-        "scripts/validate_timeline.py": "frozen",
-        "scripts/choreography.py": "frozen",
-        "scripts/layer_separation.py": "frozen",
-        "scripts/cyclic_label_clearance.py": "frozen",
-        "scripts/validate_plan.py": "frozen",
-        "scripts/normalize_textboxes.py": "frozen",
-        "scripts/normalize_timeline_textboxes.py": "frozen",
-        "scripts/render_plan.mjs": "frozen",
-        "scripts/render_timeline.mjs": "frozen",
-        "scripts/run_experiment.sh": "frozen",
-        "scripts/run_timeline_experiment.sh": "frozen",
-        "scripts/make_motion_semantics_matrix.py": "frozen",
-        "scripts/audit_motion_semantics_matrix.py": "frozen",
-        "scripts/finalize_motion_semantics_matrix.mjs": "frozen",
-        "scripts/audit_packed_candidate.py": "frozen"
-      },
-      "decisions": ["D002"],
-      "notes": "Frozen paths are the E001-T018 research writers (docs/ARCHITECTURE.md)."
-    },
-    {
-      "id": "pptx.script",
-      "title": "Presentation script: Markdown with [click] cues, aligned to objects, written to speaker notes",
-      "files": {
-        "scripts/motion_script.py": "canonical"
-      },
-      "decisions": ["D003", "D004"],
-      "overlaps": [
-        {"with": "pptx.direction", "note": "deck_director.py has its own script fields (t0_says, lead_in, post_click_says). D004: one format; T081 merges them."}
-      ],
-      "open_tasks": ["T081"]
-    },
-    {
-      "id": "pptx.direction",
-      "title": "Deck direction for new decks: brief, beats, shots, compile to Forge/Director",
-      "files": {
-        "scripts/deck_director.py": "experimental"
-      },
-      "decisions": ["D003", "D004", "D005"],
-      "notes": "T068/T069b. Its actor mapping by substring and its scaffold prose are frozen (D004, D005); T077 replaces the back half with scene.json.",
-      "open_tasks": ["T075", "T077", "T081"]
-    },
-    {
-      "id": "pptx.forge",
-      "title": "Slide Forge: semantic spec to finished deck with QA",
-      "files": {
-        "scripts/slide_forge.py": "canonical",
-        "scripts/forge_qa.py": "canonical",
-        "scripts/forge_assets.py": "canonical",
-        "scripts/forge_critique.py": "shim"
-      },
-      "decisions": ["D002", "D005"]
-    },
-    {
-      "id": "pptx.morph",
-      "title": "Cross-slide Morph: !! continuity, staging, camera",
-      "files": {
-        "scripts/morph_studio.py": "canonical",
-        "scripts/morph_playbook.py": "experimental",
-        "scripts/add_morph.py": "experimental"
-      },
-      "decisions": ["D002"],
-      "notes": "Morph matching rules are being measured in T074; scene compiler is T075.",
-      "open_tasks": ["T074", "T075", "T076"]
-    },
-    {
-      "id": "pptx.style",
-      "title": "Design system, motion tokens, themes and brand palettes",
-      "files": {
-        "scripts/design_system.py": "canonical",
-        "scripts/motion_tokens.py": "canonical",
-        "scripts/brand_palette.py": "canonical",
-        "scripts/theme_engine.py": "experimental"
-      },
-      "decisions": ["D002"],
-      "overlaps": [
-        {"with": "pptx.style", "note": "theme_engine.py (T043) and VisualStyle/1 (experiments/T067-…-visual-style) are two unwired style systems. ROADMAP stage 3 picks one; until then neither is product."}
-      ]
-    },
-    {
-      "id": "pptx.critic",
-      "title": "Measurable critique and gates on built decks",
-      "files": {
-        "scripts/design_critic.py": "canonical",
-        "scripts/deck_state_critic.py": "experimental"
-      },
-      "decisions": ["D001"],
-      "overlaps": [
-        {"with": "pptx.critic", "note": "deck_state_critic.py (T069a) and the narrative dimension of design_critic.py (T069b) check overlapping things. T072 folds the useful gates into one place."}
-      ],
-      "open_tasks": ["T071", "T072"]
-    },
-    {
-      "id": "pptx.interaction",
-      "title": "Interactive decks: navigation, branching, one-slide games (timing XML comes from pptx.timing)",
-      "files": {
-        "scripts/slide_navigator.py": "canonical",
-        "scripts/advanced_interactivity.py": "experimental",
-        "scripts/cognitive_pacing.py": "experimental"
-      },
-      "decisions": ["D002"]
-    },
-    {
-      "id": "pptx.native-qa",
-      "title": "Evidence in real PowerPoint: render, probe, click harness",
-      "files": {
-        "scripts/powerpoint_render.ps1": "canonical",
-        "scripts/powerpoint_native_probe.ps1": "canonical",
-        "scripts/verify_powerpoint_qa.py": "canonical",
-        "scripts/lo_timing_crosscheck.py": "support",
-        "scripts/render_identity.py": "support",
-        "scripts/interactive_show_harness.py": "experimental",
-        "scripts/build_powerpoint_qa_fixture.py": "fixture",
-        "scripts/make_powerpoint_qa_manifest.py": "fixture"
-      },
-      "open_tasks": ["T073"]
-    },
-    {
-      "id": "pptx.deckcraft",
-      "title": "DeckCraft bridge: static renders, native shape commands (not a PowerPoint verifier)",
-      "files": {
-        "scripts/deckcraft_bridge.py": "experimental",
-        "scripts/deckcraft_fidelity.py": "experimental"
-      },
-      "notes": "T059: static close, Morph and round trip not faithful. T062: native asset factory route."
-    },
-    {
-      "id": "pptx.knowledge",
-      "title": "Design and motion knowledge harvested from decks and Office kits",
-      "files": {
-        "scripts/deck_dna.py": "canonical",
-        "scripts/corpus_scan.py": "tool",
-        "scripts/knowledge_build.py": "tool",
-        "scripts/phrase_scan.py": "tool",
-        "scripts/office_design_dna.py": "tool"
-      }
-    },
-    {
-      "id": "lab.fixtures",
-      "title": "Synthetic fixtures and read-only inspection used by tests and experiments",
-      "files": {
-        "scripts/make_report_fixture.py": "fixture",
-        "scripts/make_essay_fixture.py": "fixture",
-        "scripts/make_motion_fixture.py": "fixture",
-        "scripts/make_picture_deck_fixture.py": "fixture",
-        "scripts/make_data_motion_fixture.py": "fixture",
-        "scripts/inspect_pptx.py": "tool",
-        "scripts/check_environment.py": "tool"
-      }
-    },
-    {
-      "id": "docx",
-      "title": "Word documents (domains/docx/DOMAIN.md)",
-      "files": {
-        "scripts/document_forge.py": "canonical",
-        "scripts/docx_profiles.py": "canonical",
-        "scripts/word_field_kit.py": "canonical",
-        "scripts/word_math.py": "canonical",
-        "scripts/document_audit.py": "shim",
-        "scripts/wordcraft_bridge.py": "experimental"
-      }
-    },
-    {
-      "id": "xlsx",
-      "title": "Excel workbooks and charts (domains/xlsx/DOMAIN.md)",
-      "files": {
-        "scripts/chart_forge.py": "canonical",
-        "scripts/chart_patch.py": "canonical",
-        "scripts/chart_audit.py": "canonical",
-        "scripts/sheet_forge.py": "canonical",
-        "scripts/dashboard_forge.py": "canonical",
-        "scripts/vba_forge.py": "canonical",
-        "scripts/userform_forge.py": "canonical",
-        "scripts/gridcraft_bridge.py": "experimental"
-      }
-    },
-    {
-      "id": "svg",
-      "title": "Vector graphics (domains/svg/DOMAIN.md)",
-      "files": {
-        "scripts/vector_reconstruct.py": "canonical",
-        "scripts/photo_vector.py": "experimental",
-        "scripts/vectorcraft_bridge.py": "experimental"
-      }
-    },
-    {
-      "id": "cross",
-      "title": "Orchestration across applications (domains/cross/DOMAIN.md)",
-      "files": {
-        "scripts/artcraft_hub.py": "experimental",
-        "scripts/sync_artcraft_capabilities.py": "tool",
-        "scripts/intent_decoder.py": "experimental",
-        "scripts/validate_handoff.py": "experimental",
-        "scripts/cross_pipeline.py": "experimental",
-        "scripts/office_link_bridge.py": "experimental",
-        "scripts/multi_domain_canons.py": "experimental"
-      }
-    },
-    {
-      "id": "frozen-domains",
-      "title": "3d, video, cad bridges: frozen with their domains (ROADMAP)",
-      "files": {
-        "scripts/solidcraft_bridge.py": "frozen",
-        "scripts/filmcraft_bridge.py": "frozen",
-        "scripts/soundcraft_bridge.py": "frozen",
-        "scripts/cadcraft_bridge.py": "frozen"
-      }
+     "with": "pptx.direction",
+     "note": "deck_director.py has its own script fields (t0_says, lead_in, post_click_says). D004: one format; T081 merges them."
     }
-  ]
+   ],
+   "open_tasks": [
+    "T081"
+   ]
+  },
+  {
+   "id": "pptx.direction",
+   "title": "Deck direction for new decks: brief, beats, shots, compile to Forge/Director",
+   "files": {
+    "scripts/deck_director.py": "experimental"
+   },
+   "decisions": [
+    "D003",
+    "D004",
+    "D005"
+   ],
+   "notes": "T068/T069b. Its actor mapping by substring and its scaffold prose are frozen (D004, D005); T077 replaces the back half with scene.json.",
+   "open_tasks": [
+    "T075",
+    "T077",
+    "T081"
+   ]
+  },
+  {
+   "id": "pptx.forge",
+   "title": "Slide Forge: semantic spec to finished deck with QA",
+   "files": {
+    "scripts/slide_forge.py": "canonical",
+    "scripts/forge_qa.py": "canonical",
+    "scripts/forge_assets.py": "canonical",
+    "scripts/forge_critique.py": "shim"
+   },
+   "decisions": [
+    "D002",
+    "D005"
+   ]
+  },
+  {
+   "id": "pptx.morph",
+   "title": "Cross-slide Morph: !! continuity, staging, camera",
+   "files": {
+    "scripts/morph_studio.py": "canonical",
+    "scripts/morph_playbook.py": "experimental",
+    "scripts/add_morph.py": "experimental"
+   },
+   "decisions": [
+    "D002"
+   ],
+   "notes": "Morph matching rules are being measured in T074; scene compiler is T075.",
+   "open_tasks": [
+    "T074",
+    "T075",
+    "T076"
+   ]
+  },
+  {
+   "id": "pptx.style",
+   "title": "Design system, motion tokens, themes and brand palettes",
+   "files": {
+    "scripts/design_system.py": "canonical",
+    "scripts/motion_tokens.py": "canonical",
+    "scripts/brand_palette.py": "canonical",
+    "scripts/theme_engine.py": "experimental"
+   },
+   "decisions": [
+    "D002"
+   ],
+   "overlaps": [
+    {
+     "with": "pptx.style",
+     "note": "theme_engine.py (T043) and VisualStyle/1 (experiments/T067-…-visual-style) are two unwired style systems. ROADMAP stage 3 picks one; until then neither is product."
+    }
+   ]
+  },
+  {
+   "id": "pptx.critic",
+   "title": "Measurable critique and gates on built decks",
+   "files": {
+    "scripts/design_critic.py": "canonical",
+    "scripts/deck_state_critic.py": "experimental"
+   },
+   "decisions": [
+    "D001"
+   ],
+   "overlaps": [
+    {
+     "with": "pptx.critic",
+     "note": "deck_state_critic.py (T069a) and the narrative dimension of design_critic.py (T069b) check overlapping things. T072 folds the useful gates into one place."
+    }
+   ],
+   "open_tasks": [
+    "T071",
+    "T072"
+   ]
+  },
+  {
+   "id": "pptx.interaction",
+   "title": "Interactive decks: navigation, branching, one-slide games (timing XML comes from pptx.timing)",
+   "files": {
+    "scripts/slide_navigator.py": "canonical",
+    "scripts/advanced_interactivity.py": "experimental",
+    "scripts/cognitive_pacing.py": "experimental"
+   },
+   "decisions": [
+    "D002"
+   ]
+  },
+  {
+   "id": "pptx.native-qa",
+   "title": "Evidence in real PowerPoint: render, probe, click harness",
+   "files": {
+    "scripts/powerpoint_render.ps1": "canonical",
+    "scripts/powerpoint_native_probe.ps1": "canonical",
+    "scripts/verify_powerpoint_qa.py": "canonical",
+    "scripts/lo_timing_crosscheck.py": "support",
+    "scripts/render_identity.py": "support",
+    "scripts/interactive_show_harness.py": "experimental",
+    "scripts/build_powerpoint_qa_fixture.py": "fixture",
+    "scripts/make_powerpoint_qa_manifest.py": "fixture"
+   },
+   "open_tasks": [
+    "T073"
+   ]
+  },
+  {
+   "id": "pptx.deckcraft",
+   "title": "DeckCraft bridge: static renders, native shape commands (not a PowerPoint verifier)",
+   "files": {
+    "scripts/deckcraft_bridge.py": "experimental",
+    "scripts/deckcraft_fidelity.py": "experimental"
+   },
+   "notes": "T059: static close, Morph and round trip not faithful. T062: native asset factory route."
+  },
+  {
+   "id": "pptx.knowledge",
+   "title": "Design and motion knowledge harvested from decks and Office kits",
+   "files": {
+    "scripts/deck_dna.py": "canonical",
+    "scripts/corpus_scan.py": "tool",
+    "scripts/knowledge_build.py": "tool",
+    "scripts/phrase_scan.py": "tool",
+    "scripts/office_design_dna.py": "tool"
+   }
+  },
+  {
+   "id": "lab.fixtures",
+   "title": "Synthetic fixtures and read-only inspection used by tests and experiments",
+   "files": {
+    "scripts/make_report_fixture.py": "fixture",
+    "scripts/make_essay_fixture.py": "fixture",
+    "scripts/make_motion_fixture.py": "fixture",
+    "scripts/make_picture_deck_fixture.py": "fixture",
+    "scripts/make_data_motion_fixture.py": "fixture",
+    "scripts/inspect_pptx.py": "tool",
+    "scripts/check_environment.py": "tool"
+   }
+  },
+  {
+   "id": "docx",
+   "title": "Word documents (domains/docx/DOMAIN.md)",
+   "files": {
+    "scripts/document_forge.py": "canonical",
+    "scripts/docx_profiles.py": "canonical",
+    "scripts/word_field_kit.py": "canonical",
+    "scripts/word_math.py": "canonical",
+    "scripts/document_audit.py": "shim",
+    "scripts/wordcraft_bridge.py": "experimental"
+   }
+  },
+  {
+   "id": "xlsx",
+   "title": "Excel workbooks and charts (domains/xlsx/DOMAIN.md)",
+   "files": {
+    "scripts/chart_forge.py": "canonical",
+    "scripts/chart_patch.py": "canonical",
+    "scripts/chart_audit.py": "canonical",
+    "scripts/sheet_forge.py": "canonical",
+    "scripts/dashboard_forge.py": "canonical",
+    "scripts/vba_forge.py": "canonical",
+    "scripts/userform_forge.py": "canonical",
+    "scripts/gridcraft_bridge.py": "experimental"
+   }
+  },
+  {
+   "id": "svg",
+   "title": "Vector graphics (domains/svg/DOMAIN.md)",
+   "files": {
+    "scripts/vector_reconstruct.py": "canonical",
+    "scripts/photo_vector.py": "experimental",
+    "scripts/vectorcraft_bridge.py": "experimental"
+   }
+  },
+  {
+   "id": "cross",
+   "title": "Orchestration across applications (domains/cross/DOMAIN.md)",
+   "files": {
+    "scripts/artcraft_hub.py": "experimental",
+    "scripts/sync_artcraft_capabilities.py": "tool",
+    "scripts/intent_decoder.py": "experimental",
+    "scripts/validate_handoff.py": "experimental",
+    "scripts/cross_pipeline.py": "experimental",
+    "scripts/office_link_bridge.py": "experimental",
+    "scripts/multi_domain_canons.py": "experimental"
+   }
+  },
+  {
+   "id": "frozen-domains",
+   "title": "3d, video, cad bridges: frozen with their domains (ROADMAP)",
+   "files": {
+    "scripts/solidcraft_bridge.py": "frozen",
+    "scripts/filmcraft_bridge.py": "frozen",
+    "scripts/soundcraft_bridge.py": "frozen",
+    "scripts/cadcraft_bridge.py": "frozen"
+   }
+  }
+ ]
 }

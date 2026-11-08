@@ -1,5 +1,7 @@
 # Domain: pptx (PowerPoint)
 
+> **Entry point since T087: [`skills/pptx/SKILL.md`](../../skills/pptx/SKILL.md).** It is written guidance (D011); the modules below are its toolbox. `slide-forge`, `pptx-motion-director` and `deck-director` are older skills: use them only as the guide's section 9 says.
+
 ## Scope
 - **Existing decks:** motion direction that preserves the source. Script →
   click rhythm → compound and layered motion → Morph.
