@@ -25,7 +25,7 @@ def log(s):
 
 # ---------------------------------------------------------------- A. rechart keeps animation targets
 plan = {"transitions": {"default": "fade"}, "clicks": {"3": [["Bieu do loi"]]}}
-tmp = ART / "rechart-test-motion.pptx"
+tmp = Path(tempfile.mkdtemp(prefix="t094-evidence-")) / "rechart-test-motion.pptx"
 tools.apply_motion(str(SRC), plan, str(tmp))
 before = Presentation(str(tmp))
 slide = before.slides[2]
@@ -34,7 +34,7 @@ timing_ids = {int(n.get("spid")) for n in slide._element.iter(qn("p:spTgt"))}
 log(f"A1 animation before rechart: chart id {chart_id}, timing targets {sorted(timing_ids)}")
 assert chart_id in timing_ids, "test setup: the chart should carry the click effect"
 
-tmp2 = ART / "rechart-test-after.pptx"
+tmp2 = tmp.parent / "rechart-test-after.pptx"
 info = tools.rechart(str(tmp), 3, "Bieu do loi", "line", str(tmp2), color="1F4E79", font="Century Gothic", size=14)
 after = Presentation(str(tmp2))
 slide = after.slides[2]
@@ -95,7 +95,7 @@ except ImportError:
 # ---------------------------------------------------------------- D. scale: what the guide's fallback protects
 slide_no = 4
 names = [sh.name for sh in Presentation(str(SRC)).slides[slide_no - 1].shapes if sh.name != "Title 1"]
-tmp3 = ART / "scale-test.pptx"
+tmp3 = Path(tempfile.mkdtemp(prefix="t094-scale-")) / "scale-test.pptx"
 low = tools.scale(str(SRC), slide_no, names, 0.72, str(tmp3), at=(0.55, 1.55))
 log(f"D1 scale {len(names)} shapes by 0.72: smallest text becomes {low:g} pt (guide 4 minimum is 18)")
 log("D2 CONCLUSION: the guide's 'rework instead of shrinking' fallback is the right call for this cluster")

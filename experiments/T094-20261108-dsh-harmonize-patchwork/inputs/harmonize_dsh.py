@@ -13,6 +13,7 @@ usage: python experiments/T094-.../inputs/harmonize_dsh.py
 import copy
 import json
 import sys
+import tempfile
 from pathlib import Path
 
 from lxml import etree
@@ -150,10 +151,11 @@ def notes(slide, text):
 
 
 # ---------------------------------------------------------------- step A: toolbox passes
-tmp1 = ART / "step1-line.pptx"
-tmp2 = ART / "step2-bar.pptx"
-tmp3 = ART / "step3-pic1.pptx"
-tmp4 = ART / "step4-pic2.pptx"
+WORK = Path(tempfile.mkdtemp(prefix="t094-work-"))
+tmp1 = WORK / "step1-line.pptx"
+tmp2 = WORK / "step2-bar.pptx"
+tmp3 = WORK / "step3-pic1.pptx"
+tmp4 = WORK / "step4-pic2.pptx"
 tools.rechart(SRC, 3, "Bieu do loi", "line", tmp1, color=PRIMARY, muted=GREY, font=FONT, size=14)
 tools.rechart(tmp1, 5, "Bieu do tron", "bar", tmp2, sort=True, color=PRIMARY, accent="Que hàn ẩm",
               font=FONT, size=14)
