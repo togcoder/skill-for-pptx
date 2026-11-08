@@ -54,3 +54,8 @@ nói. Mắt thấy "sống" mà không bị phân tâm. Chỉ dùng cho **một*
 
 Dùng `pptx_tools.py motion` với một kế hoạch liệt kê lần bấm theo **tên vật thể** (mục 9). Sau khi
 ghi, xem lại từng slide có lần bấm và tự hỏi: lúc mở slide còn lại những gì, và có đọc được không?
+
+`pptx_tools` hiện chỉ ghi **entrance** (hiện ra), không ghi dim/exit. Vì vậy deck dựng bằng nó sẽ bị
+critic cảnh báo `NAR-LIFECYCLE`; đó là giới hạn đã biết của đồ nghề, không phải lỗi slide. Đừng thêm
+hiệu ứng rời rạc chỉ để tắt cảnh báo; muốn qua cổng đó thì phải bổ sung dim/exit (đang chờ quyết
+định của trưởng nhóm).

@@ -5,6 +5,9 @@ description: Build a finished, motion-directed PowerPoint deck from a topic, bri
 
 # Slide Forge
 
+> **D011:** lối vào PPTX là `skills/pptx/`. Tệp này là sổ lệnh cũ cho công cụ nó mô tả; đọc
+> `skills/pptx/SKILL.md` trước.
+
 You are the deck author and the art director. Forge is the compiler: you write
 a semantic spec, it does layout, typography, art, motion and checks. You never
 place coordinates or pick animation effects by hand.

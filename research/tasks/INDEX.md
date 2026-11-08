@@ -120,5 +120,5 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T088 | [cross] Lead review of T081 and T086 (Antigravity): merge the useful parts | claude | `work/T088-claude-ag-salvage` | done | `experiments/T088-20261106-claude-ag-salvage/REPORT.md` |
 | T089 | [pptx] Fix harmful defaults: Forge (KPI 0, 14 pt shrink, hard-coded chrome, `!!orb` Morph), Director (cover clicks, Morph everywhere), overflow false positive without the font | *open; suggested OpenCode → critic Claude* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |
 | T090 | [pptx] Small model uses `skills/pptx`: adapt an approved example to new content; owner opens and scores | dsh | `work/T090-dsh-skill-triet-hoc` | review requested; owner scoring pending | `experiments/T090-20261108-dsh-skill-triet-hoc/REPORT.md` |
-| T092 | [pptx] Apply the T090 review fixes to the skills/pptx guidance | dsh | `work/T092-dsh-skill-guidance-fixes` | claimed | `experiments/T092-20261108-dsh-skill-guidance-fixes/REPORT.md` |
+| T092 | [pptx] Apply the T090 review fixes to the skills/pptx guidance | dsh | `work/T092-dsh-skill-guidance-fixes` | review requested (guidance-only patch; R2 code decision left to the lead) | `experiments/T092-20261108-dsh-skill-guidance-fixes/REPORT.md` |
 | T093 | *next free ID* | | | | |

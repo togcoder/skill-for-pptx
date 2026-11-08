@@ -7,6 +7,21 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T092 [pptx] Guidance fixes from the T090 cross-family review — 2026-11-08
+
+- Applied every finding of `research/reviews/T087-dsh-20261108.md` that is pure guidance text, after
+  T087 merged: guide 7 gains rule 9 (**a Morph actor must break its text lines identically on both
+  slides**; a mismatched wrap ghosts the text) and explains that `UNNAMED-PAIR` on same-position
+  titles is normal; guide 4 says decorative type glyphs must use a size from the deck scale; guide 8
+  adds the t=0 check before writing motion and documents the `DEN-WORDS` / `NAR-LIFECYCLE` limits;
+  guide 9 carries the speaker-notes template `[T=0]` / `[CLICK n]` that `NAR-ALIGN` checks; guide 6
+  states that the toolbox writes entrances only.
+- The legacy skills `slide-forge`, `pptx-motion-director` and `deck-director` now open with a D011
+  banner pointing at `skills/pptx/` as the entry point.
+- Deliberately not changed: R2 (needs a decision between adding dim/exit to `pptx_tools` or
+  exempting entrance-only decks in the critic) and R9/R10 (image-export overlap, zoom test) stay in
+  the review for the lead. No code or product path changed; 582 tests pass, `check_layout` OK.
+
 ## T090 [pptx] A different model family builds with `skills/pptx` — 2026-11-08
 
 - **Deck.** `experiments/T090-20261108-dsh-skill-triet-hoc/artifacts/T090-triet-hoc-ch1.pptx`:

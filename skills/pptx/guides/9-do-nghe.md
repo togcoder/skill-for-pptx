@@ -65,6 +65,10 @@ python scripts/pptx_tools.py look deck.pptx
 Gõ sai tên vật thể thì công cụ liệt kê các tên có thật trên slide. Nếu bạn cho một vật `!!` xuất
 hiện bằng lần bấm trên một slide vào bằng Morph, công cụ báo lỗi (mục 7, luật 3).
 
+**Speaker notes.** Viết notes cho từng slide theo mẫu: `[T=0]` một câu mở; sau đó `[CLICK 1]`,
+`[CLICK 2]` … mỗi lần bấm một câu. Số `[CLICK n]` phải bằng số lần bấm của slide; `design_critic.py`
+kiểm đúng số này (`NAR-ALIGN`) và dùng notes để chấm narrative.
+
 ## Công cụ cũ: dùng có điều kiện
 
 - **Slide Forge** (`slide_forge.py`): dựng nhanh từ một bản mô tả, nhưng bố cục chung chung. Nếu

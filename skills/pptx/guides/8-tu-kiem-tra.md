@@ -15,6 +15,10 @@ Lưu ý: ảnh xuất ra là slide **đã hiện đủ mọi thứ**. Để ki�
 sách vật thể của slide trừ đi những vật nằm trong các lần bấm, rồi xem phần còn lại có đứng được một
 mình không.
 
+**Trước khi ghi chuyển động, làm bước t=0:** tự trừ các vật trong kế hoạch bấm rồi trả lời "slide
+còn đứng được một mình không?". Lỗi hay gặp nhất là slide mở ra chỉ có tiêu đề và một khung trống;
+sửa bố cục lúc này rẻ hơn sửa sau khi đã ghi hiệu ứng.
+
 ## Câu hỏi cho từng slide
 
 - Nheo mắt nhìn: điểm nhấn có phải thứ quan trọng nhất không?
@@ -44,6 +48,10 @@ python scripts/motion_script.py check script.md   # nếu có kịch bản: câu
 ```
 
 - Điểm số tổng của `design_critic` **không** nói slide đẹp. Chỉ đọc danh sách lỗi.
+- `DEN-WORDS` (45 từ/slide) là ngưỡng cho slide kể chuyện; slide bảng/đối chiếu có thể vượt — ghi là
+  đã biết, đừng cắt nội dung cho vừa số.
+- `NAR-LIFECYCLE` chỉ có nghĩa khi deck có khai báo dim/exit; deck dựng bằng `pptx_tools` (chỉ
+  entrance) sẽ bị cảnh báo — đó là giới hạn đồ nghề, không phải lỗi slide.
 - Nếu máy thiếu font mà deck đang dùng, báo lỗi tràn chữ có thể sai. Khi đó tin vào ảnh `look` của
   PowerPoint.
 - Lỗi do công cụ gây ra (công cụ tự thu chữ, tự thêm trang trí, dừng khi gặp giá trị 0) thì sửa trong

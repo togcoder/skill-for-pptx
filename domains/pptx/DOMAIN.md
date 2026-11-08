@@ -123,6 +123,12 @@ unwired) `skills/deck-director`.
   wraps differently on the two slides (identical explicit line breaks fix it), and the toolbox's
   entrance-only writer cannot satisfy `NAR-LIFECYCLE`. Eight guidance fixes are in the REPORT.
   Owner scoring pending. `experiments/T090-20261108-dsh-skill-triet-hoc/REPORT.md`.
+- **Guidance patched (T092):** after T087 merged, the T090 cross-family review's guidance-only
+  findings are applied: Morph text-wrap rule (identical line breaks on both slides), the
+  `UNNAMED-PAIR` explanation for same-position titles, the decorative-glyph type rule, the t=0 check
+  before motion, the speaker-notes `[T=0]`/`[CLICK n]` template, `DEN-WORDS`/`NAR-LIFECYCLE` limits,
+  and D011 banners on the three legacy PPTX skills. R2 (dim/exit vs critic exemption) is left for
+  the lead. No code changed. `experiments/T092-20261108-dsh-skill-guidance-fixes/REPORT.md`.
 
 ## Open questions / dissent
 - **T067 job vocabulary.** The nine beat jobs (`hook`, `name`, `define`, `contrast`,
