@@ -3,7 +3,7 @@
 Since T040: every new title starts with its domain in brackets: `[pptx]`, `[docx]`, `[xlsx]`, `[svg]` or `[cross]` (see `domains/README.md`). Lifecycle: `lab/PROTOCOL.md`. A row may carry `review requested` / `reviewed: <verdict>`.
 
 This file is the one place to take a task ID. Before starting, add a row with
-status `claimed`, using the next free ID (**T089**). Push the row before you do
+status `claimed`, using the next free ID (**T091**). Push the row before you do
 expensive work. IDs are never reused. T024 was taken three times in parallel,
 so those rows carry a suffix. The experiment folders keep the names they were
 created with.
@@ -118,4 +118,5 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T086 | [cross] Crowd taste across fields → PPTX taste rules | antigravity | `work/T086-antigravity-taste-research` | reviewed: research notes merged via T088; rules not accepted, work continues in T087 | `experiments/T086-20261105-antigravity-taste-research/REPORT.md` |
 | T087 | [pptx] One PPTX skill written as design guidance (SKILL.md + plain-language guides); code only as a small toolbox (D011) | *open; Claude (lead) writes → another family builds with it* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |
 | T088 | [cross] Lead review of T081 and T086 (Antigravity): merge the useful parts | claude | `work/T088-claude-ag-salvage` | done | `experiments/T088-20261106-claude-ag-salvage/REPORT.md` |
-| T089 | *next free ID* | | | | |
+| T090 | [pptx] Small model uses skills/pptx: adapt an approved example to new content; owner opens and scores | dsh | `work/T090-dsh-skill-triet-hoc` | claimed | `experiments/T090-20261108-dsh-skill-triet-hoc/REPORT.md` |
+| T091 | *next free ID* | | | | |
