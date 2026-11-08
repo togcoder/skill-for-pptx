@@ -67,7 +67,8 @@ hiện bằng lần bấm trên một slide vào bằng Morph, công cụ báo l
 
 **Speaker notes.** Viết notes cho từng slide theo mẫu: `[T=0]` một câu mở; sau đó `[CLICK 1]`,
 `[CLICK 2]` … mỗi lần bấm một câu. Số `[CLICK n]` phải bằng số lần bấm của slide; `design_critic.py`
-kiểm đúng số này (`NAR-ALIGN`) và dùng notes để chấm narrative.
+kiểm đúng số này (`NAR-ALIGN`) và dùng notes để chấm narrative. Với bộ slide **có sẵn** (mục 10),
+notes là lời của tác giả: giữ nguyên câu, chỉ thêm nhãn `[T=0]` / `[CLICK n]` vào đầu câu.
 
 ## Bộ slide có sẵn (mục 10)
 

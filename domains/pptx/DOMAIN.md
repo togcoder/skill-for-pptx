@@ -145,6 +145,12 @@ unwired) `skills/deck-director`.
   5 fonts → 1, 14 sizes → 6, 0 numbers lost, all 36 effects resolve in PowerPoint (rung 4), owner
   grade pending; blind re-run by another family is T094.
   `experiments/T093-20261108-claude-harmonize-deck/REPORT.md`.
+- **Guide 10 after the blind run (T094 → T095):** DSH reached the same system from the guide alone
+  (1 family, 6 sizes, 0 numbers lost) but redrew the fishbone into another form and rewrote the
+  author's notes. T095 makes a standard diagram's form and the author's notes content, forbids blank
+  openings, and teaches `inventory` theme font names, fills and blank-opening detection, and `numbers`
+  percent-vs-count and occurrence counts. Owner grades of both rehearsal decks pending.
+  `experiments/T095-20261109-claude-guide10-fixes/REPORT.md`.
 
 ## Open questions / dissent
 - **T067 job vocabulary.** The nine beat jobs (`hook`, `name`, `define`, `contrast`,

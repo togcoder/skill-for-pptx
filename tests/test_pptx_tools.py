@@ -168,6 +168,43 @@ class ExistingDeckTests(unittest.TestCase):
         prs.save(self.out)
         self.assertEqual(tools.missing_numbers(self.src, self.out), {1: ["2", "3.8", "4.5"]})
 
+    # T095: what T094's review and the owner found
+    def test_inventory_names_theme_fonts_counts_fills_and_flags_a_blank_opening(self):
+        prs = Presentation(self.src)
+        tools.theme_fonts(prs, "Segoe UI", "Segoe UI")
+        for slide in prs.slides:
+            tools.follow_theme(slide._element)
+        prs.slides[1].background.fill.solid()
+        prs.slides[1].background.fill.fore_color.rgb = tools.RGBColor.from_string("1F4E79")
+        prs.save(self.out)
+        report = tools.inventory(self.out)
+        self.assertIn("fonts (1): Segoe UI", report)
+        self.assertIn("1F4E79 (background) x1", report)
+        slide1 = report.split("slide 2:")[0]  # the chart enters on the first click: nothing at the start
+        self.assertIn("opens with only the title visible", slide1)
+
+    def test_numbers_tells_a_percentage_from_a_count_and_counts_occurrences(self):
+        def deck(path, *texts):
+            prs = Presentation()
+            for words in texts:
+                prs.slides.add_slide(prs.slide_layouts[6]).shapes.add_textbox(0, 0, Inches(4), Inches(1)).text_frame.text = words
+            prs.save(path)
+        a, b = Path(self.tmp.name) / "a.pptx", Path(self.tmp.name) / "b.pptx"
+        deck(a, "Tỉ lệ 4,1%, mục tiêu 2%", "Đạt 2%")
+        deck(b, "Tỉ lệ 4,1% và 2 lần phản hồi", "Đạt 2%")
+        self.assertEqual(tools.missing_numbers(a, b), {})  # "2%" is still on slide 2 ...
+        self.assertEqual(tools.fewer_numbers(a, b), {"2%": (2, 1)})  # ... but once, not twice
+
+    def test_unstretch_respects_an_existing_crop(self):
+        prs = Presentation(self.src)
+        pic = prs.slides[1].shapes[0]
+        pic.crop_left = 0.1  # visible 360 x 300 in a 6 x 3 frame
+        prs.save(self.out)
+        tools.unstretch(self.out, 2, "Photo", self.out)
+        pic = Presentation(self.out).slides[1].shapes[0]
+        self.assertAlmostEqual(tools._stretch(pic), 1, places=3)
+        self.assertAlmostEqual(pic.crop_left, 0.1, places=3)
+
 
 if __name__ == "__main__":
     unittest.main()

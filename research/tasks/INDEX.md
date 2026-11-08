@@ -3,7 +3,7 @@
 Since T040: every new title starts with its domain in brackets: `[pptx]`, `[docx]`, `[xlsx]`, `[svg]` or `[cross]` (see `domains/README.md`). Lifecycle: `lab/PROTOCOL.md`. A row may carry `review requested` / `reviewed: <verdict>`.
 
 This file is the one place to take a task ID. Before starting, add a row with
-status `claimed`, using the next free ID (**T095**). Push the row before you do
+status `claimed`, using the next free ID (**T096**). Push the row before you do
 expensive work. IDs are never reused. T024 was taken three times in parallel,
 so those rows carry a suffix. The experiment folders keep the names they were
 created with.
@@ -124,4 +124,5 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T092 | [pptx] Apply the T090 review fixes to the skills/pptx guidance | dsh | `work/T092-dsh-skill-guidance-fixes` | main (lead review: accept; R2 decided in T093) | `experiments/T092-20261108-dsh-skill-guidance-fixes/REPORT.md` |
 | T093 | [pptx] Harmonise a patchwork deck: guide 10, group-scale and chart-data tools, mock-deck rehearsal | claude | `work/T093-claude-harmonize-deck` | review requested (owner opens before/after) | `experiments/T093-20261108-claude-harmonize-deck/REPORT.md` |
 | T094 | [pptx] Blind rehearsal: another family harmonises the T093 patchwork deck from guide 10 only; reviews the T093 tools | dsh | `work/T094-dsh-harmonize-patchwork` | main (lead review: accept as an experiment; fishbone redrawn into another form, see T095) | `experiments/T094-20261108-dsh-harmonize-patchwork/REPORT.md` |
-| T095 | *next free ID* | | | | |
+| T095 | [pptx] Guide 10 fixes from T094: diagram form and notes are content, no blank opening; inventory theme fonts and fills; numbers per slide | claude | `work/T095-claude-guide10-fixes` | review requested | `experiments/T095-20261109-claude-guide10-fixes/REPORT.md` |
+| T096 | *next free ID* | | | | |
