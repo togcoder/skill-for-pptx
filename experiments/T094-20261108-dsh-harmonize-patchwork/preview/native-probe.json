@@ -1,0 +1,94 @@
+{
+ "powerpoint": "16.0 build 17932",
+ "deck": "C:\\Users\\COMPUTER\\Desktop\\làm chung với ai\\skill-for-pptx\\workspace\\T094\\experiments\\T094-20261108-dsh-harmonize-patchwork\\artifacts\\qcc-dong-bo-dsh.pptx",
+ "slides": [
+  {
+   "index": 1,
+   "entry_effect": 0,
+   "entry_is_morph": false,
+   "entry_is_fade": false,
+   "duration_s": 2.0,
+   "effects": 0
+  },
+  {
+   "index": 2,
+   "entry_effect": 3849,
+   "entry_is_morph": false,
+   "entry_is_fade": true,
+   "duration_s": 0.75,
+   "effects": 8
+  },
+  {
+   "index": 3,
+   "entry_effect": 3849,
+   "entry_is_morph": false,
+   "entry_is_fade": true,
+   "duration_s": 0.75,
+   "effects": 1
+  },
+  {
+   "index": 4,
+   "entry_effect": 3849,
+   "entry_is_morph": false,
+   "entry_is_fade": true,
+   "duration_s": 0.75,
+   "effects": 12
+  },
+  {
+   "index": 5,
+   "entry_effect": 3849,
+   "entry_is_morph": false,
+   "entry_is_fade": true,
+   "duration_s": 0.75,
+   "effects": 1
+  },
+  {
+   "index": 6,
+   "entry_effect": 3849,
+   "entry_is_morph": false,
+   "entry_is_fade": true,
+   "duration_s": 0.75,
+   "effects": 4
+  },
+  {
+   "index": 7,
+   "entry_effect": 3849,
+   "entry_is_morph": false,
+   "entry_is_fade": true,
+   "duration_s": 0.75,
+   "effects": 15
+  },
+  {
+   "index": 8,
+   "entry_effect": 3849,
+   "entry_is_morph": false,
+   "entry_is_fade": true,
+   "duration_s": 0.75,
+   "effects": 2
+  },
+  {
+   "index": 9,
+   "entry_effect": 3849,
+   "entry_is_morph": false,
+   "entry_is_fade": true,
+   "duration_s": 0.75,
+   "effects": 3
+  },
+  {
+   "index": 10,
+   "entry_effect": 3849,
+   "entry_is_morph": false,
+   "entry_is_fade": true,
+   "duration_s": 0.75,
+   "effects": 0
+  },
+  {
+   "index": 11,
+   "entry_effect": 3849,
+   "entry_is_morph": false,
+   "entry_is_fade": true,
+   "duration_s": 0.75,
+   "effects": 0
+  }
+ ]
+}
