@@ -231,35 +231,6 @@ chỉ dẫn; model đọc và tự làm. Lab này đã đi ngược: 103 script,
   sửa code, rồi chạy lại một lần.
 - **Người làm → người phản biện:** Antigravity → Claude. **Cỡ:** nửa ngày.
 
-**Kết quả T090 (2026-11-08):** DSH (DeepSeek) dựng 7 slide Triết học chỉ từ `skills/pptx/`; Morph
-kiểm bằng PowerPoint. Skill truyền được sang model khác họ. Những gì nó tìm ra đã vào hướng dẫn (T092).
-
-### T093 [pptx] Đồng bộ một bộ slide chắp vá (xong, chờ chủ dự án mở)
-
-- Câu hỏi của chủ dự án (2026-11-08): nhận bộ slide đủ nội dung nhưng chắp vá từ đồng nghiệp, làm sao
-  cho đồng điệu mà không mất nội dung và chủ đích?
-- Kết quả: hướng dẫn mục 10 (giữ ruột, thay vỏ; 7 bước), 5 lệnh mới trong `pptx_tools.py`, và một lần
-  diễn tập trên bộ QCC giả do trưởng nhóm làm. Hai file trước/sau ở
-  `experiments/T093-20261108-claude-harmonize-deck/artifacts/`.
-- R2 đã quyết: `pptx_tools` chỉ ghi entrance.
-
-### T094 [pptx] Diễn tập mù: model khác họ đồng bộ bộ chắp vá chỉ bằng mục 10
-
-- **Câu hỏi:** một model khác họ (DSH hoặc OpenCode), chỉ đọc `skills/pptx/` và mục 10, có làm ra một
-  bản đồng bộ dùng được từ cùng bộ chắp vá không? Chỗ nào hướng dẫn chưa đủ rõ?
-- **Đầu vào:** `experiments/T093-20261108-claude-harmonize-deck/artifacts/qcc-chap-va.pptx`.
-- **Cấm:** mở `qcc-dong-bo*.pptx`, `harmonize.py`, `plan.json` hay REPORT của T093 trước khi xong.
-  Làm như thể chỉ có file gốc và skill.
-- **Việc cần làm:** đi đủ 7 bước mục 10: viết bảng ý và phân loại trước, rồi đồng bộ, rồi kiểm
-  (`numbers` phải về 0, `look`, mục 8). Script dựng để trong `inputs/` của task.
-- **Đầu ra:** `.pptx` mới, bảng ý, danh sách thay đổi theo slide, câu hỏi cho người dùng, và **mỗi chỗ
-  hướng dẫn mơ hồ hoặc thiếu** kèm câu bạn đã phải tự đoán.
-- **Nghiệm thu:** chủ dự án mở ba file (gốc, bản T093, bản T094) và chấm. Trưởng nhóm sửa **lời chỉ
-  dẫn** theo những chỗ mơ hồ, không thêm code nếu lời làm được.
-- **Kèm theo:** review năm lệnh mới của T093 (`inventory`, `rechart`, `scale`, `unstretch`, `numbers`)
-  vào `research/reviews/T093-<agent>-<ngày>.md`; T093 đã merge trước review, như T087.
-- **Người làm → người phản biện:** DSH → Claude. **Cỡ:** nửa ngày.
-
 ## Chặng 1: thước đo thật (đề bài đã giữ chỗ T071–T074)
 
 Không ai làm chặng 2 khi T071 và T072 chưa xong. Không có thước đo thì không biết chặng 2 có
