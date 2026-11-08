@@ -1,0 +1,102 @@
+== qcc-chap-va.pptx
+deck: 10 slides, 13.33 x 7.50 in
+fonts (4): Arial x65, Tahoma x14, Calibri x6, Times New Roman x4
+sizes (14; guide 4 wants 3-6): 12, 13, 20, 22, 24, 26, 30, 32, 34, 36, 40, 44, 48, 54
+text colours (11): 000000 x11, C00000 x6, 262626 x5, 00B050 x3, FFFFFF x2, FFC000 x1, DDEBF7 x1, 1F4E79 x1
+fills (5): FFC000 x4, 2E75B6 (background) x2, F2F2F2 (background) x1, C00000 x1, FFF2CC (background) x1
+slide 1: 4 shapes, 28 words, transition split, 3 clicks, 3 effects
+  ! decorative effects: emph:spin, entr:bounce, entr:fly
+  ! text under 18 pt in 'TextBox 3' (12 pt): fine for a source or caption only
+  ! opens with only the title visible: show the frame (labels, axes) at the start, let clicks add data and conclusions
+slide 2: 2 shapes, 111 words, transition push, 2 clicks, 2 effects
+  ! decorative effects: entr:fly
+  ! opens with only the title visible: show the frame (labels, axes) at the start, let clicks add data and conclusions
+slide 3: 2 shapes, 7 words, transition cover, 0 clicks, 0 effects
+  ! chart 'Bieu do loi': bar3DChart  <- 3D: rechart
+slide 4: 20 shapes, 56 words, transition wipe, 6 clicks, 18 effects
+  ! 'Connector 2' runs 0.40 in off the slide
+  ! 'Pentagon 3' runs 0.57 in off the slide
+  ! 'Connector 12' runs 0.10 in off the slide
+  ! 'TextBox 13' runs 0.75 in off the slide
+  ! 'Connector 16' runs 0.10 in off the slide
+  ! 'TextBox 17' runs 0.75 in off the slide
+  ! opens with only the title visible: show the frame (labels, axes) at the start, let clicks add data and conclusions
+slide 5: 2 shapes, 7 words, transition zoom, 0 clicks, 0 effects
+  ! chart 'Bieu do tron': pie3DChart  <- 3D: rechart
+slide 6: 2 shapes, 86 words, transition push, 0 clicks, 0 effects
+  ! table 'Bang theo doi': 7 rows x 8 cols
+  ! text under 18 pt in 'Bang theo doi' (13 pt): fine for a source or caption only
+slide 7: 2 shapes, 56 words, transition split, 2 clicks, 2 effects
+  ! decorative effects: emph:teeter, entr:bounce
+  ! opens with only the title visible: show the frame (labels, axes) at the start, let clicks add data and conclusions
+slide 8: 5 shapes, 9 words, transition cover, 0 clicks, 0 effects
+  ! picture 'Anh truoc' stretched 50% wider than the photo  <- unstretch
+  ! picture 'Anh sau' stretched 34% taller than the photo  <- unstretch
+slide 9: 5 shapes, 14 words, transition zoom, 4 clicks, 4 effects
+  ! decorative effects: emph:spin, emph:teeter, entr:fly
+slide 10: 2 shapes, 5 words, transition split, 2 clicks, 2 effects
+  ! decorative effects: emph:spin, entr:bounce
+  ! opens with only the title visible: show the frame (labels, axes) at the start, let clicks add data and conclusions
+
+every number kept
+this is a necessary check, not proof: read every new slide against the idea table
+
+== qcc-dong-bo.pptx
+deck: 11 slides, 13.33 x 7.50 in
+fonts (1): Segoe UI x109
+sizes (6; guide 4 wants 3-6): 16, 18, 22, 32, 40, 72
+text colours (6): 262626 x63, 1F4E79 x17, FFFFFF x16, 6B6B6B x6, C55A11 x5, BDD7EE x2
+fills (7): FFFFFF x12, FFFFFF (background) x9, 1F4E79 x6, 1F4E79 (background) x2, EEF3F8 x1, C55A11 x1, C9C9C9 x1
+slide 1: 4 shapes, 28 words, transition none, 0 clicks, 0 effects
+  ! text under 18 pt in 'Ghi chu' (16 pt): fine for a source or caption only
+slide 2: 9 shapes, 91 words, transition fade, 1 clicks, 2 effects
+slide 3: 3 shapes, 18 words, transition fade, 0 clicks, 0 effects
+  ! chart 'Bieu do loi': lineChart
+slide 4: 20 shapes, 56 words, transition fade, 6 clicks, 18 effects
+  ! opens with only the title visible: show the frame (labels, axes) at the start, let clicks add data and conclusions
+slide 5: 3 shapes, 16 words, transition fade, 0 clicks, 0 effects
+  ! chart 'Bieu do tron': barChart
+slide 6: 5 shapes, 28 words, transition fade, 0 clicks, 0 effects
+  ! chart 'Duong tuan': lineChart
+  ! text under 18 pt in 'Nguon' (16 pt): fine for a source or caption only
+slide 7: 12 shapes, 46 words, transition fade, 5 clicks, 10 effects
+  ! opens with only the title visible: show the frame (labels, axes) at the start, let clicks add data and conclusions
+slide 8: 5 shapes, 9 words, transition fade, 1 clicks, 2 effects
+slide 9: 7 shapes, 13 words, transition fade, 2 clicks, 4 effects
+slide 10: 2 shapes, 5 words, transition fade, 0 clicks, 0 effects
+slide 11: 2 shapes, 88 words, transition fade, 0 clicks, 0 effects
+  ! table 'Bang theo doi': 7 rows x 8 cols
+  ! text under 18 pt in 'Bang theo doi' (16 pt): fine for a source or caption only
+
+every number kept
+this is a necessary check, not proof: read every new slide against the idea table
+
+== t094-dsh.pptx
+deck: 11 slides, 13.33 x 7.50 in
+fonts (1): Century Gothic x109
+sizes (6; guide 4 wants 3-6): 16, 18, 20, 32, 44, 54
+text colours (6): 262626 x65, 1F4E79 x21, FFFFFF x16, DCE6F1 x3, C00000 x3, A6A6A6 x1
+fills (4): FFFFFF (background) x9, 1F4E79 x6, C00000 x3, 1F4E79 (background) x2
+slide 1: 3 shapes, 28 words, transition none, 0 clicks, 0 effects
+slide 2: 9 shapes, 93 words, transition fade, 2 clicks, 8 effects
+  ! opens with only the title visible: show the frame (labels, axes) at the start, let clicks add data and conclusions
+slide 3: 3 shapes, 19 words, transition fade, 1 clicks, 1 effects
+  ! chart 'Bieu do loi': lineChart
+slide 4: 19 shapes, 64 words, transition fade, 4 clicks, 12 effects
+slide 5: 3 shapes, 16 words, transition fade, 1 clicks, 1 effects
+  ! chart 'Bieu do tron': barChart
+slide 6: 5 shapes, 32 words, transition fade, 2 clicks, 4 effects
+  ! chart 'Bieu do tuan': lineChart
+  ! opens with only the title visible: show the frame (labels, axes) at the start, let clicks add data and conclusions
+slide 7: 17 shapes, 46 words, transition fade, 5 clicks, 15 effects
+  ! opens with only the title visible: show the frame (labels, axes) at the start, let clicks add data and conclusions
+slide 8: 5 shapes, 9 words, transition fade, 1 clicks, 2 effects
+slide 9: 7 shapes, 23 words, transition fade, 1 clicks, 3 effects
+slide 10: 2 shapes, 11 words, transition fade, 0 clicks, 0 effects
+slide 11: 2 shapes, 88 words, transition fade, 0 clicks, 0 effects
+  ! table 'Bang phu luc': 7 rows x 8 cols
+  ! text under 18 pt in 'Bang phu luc' (16 pt): fine for a source or caption only
+
+every number kept
+this is a necessary check, not proof: read every new slide against the idea table
+

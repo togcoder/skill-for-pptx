@@ -11,10 +11,11 @@ commands only do what written guidance cannot:
 
 For a deck someone else made (skills/pptx/guides/10-dong-bo-slide-co-san.md):
 
-    inventory DECK              fonts, sizes, colours, and per-slide problems a
-                                person cannot measure by eye (3D charts,
-                                stretched pictures, shapes off the slide, small
-                                text, decorative animation)
+    inventory DECK              fonts (theme fonts by name), sizes, text colours,
+                                fills, and per-slide problems a person cannot
+                                measure by eye (3D charts, stretched pictures,
+                                shapes off the slide, small text, decorative
+                                animation, a slide that opens with only its title)
     scale DECK SLIDE NAME... --by F -o OUT
                                 shrink or grow a set of shapes as one block:
                                 places, sizes, font sizes, line widths, table
@@ -27,7 +28,8 @@ For a deck someone else made (skills/pptx/guides/10-dong-bo-slide-co-san.md):
                                 undo a stretched picture: crop it to its frame,
                                 or with --box resize the frame to the picture
     numbers BEFORE AFTER        every number in the original (text, tables,
-                                charts, notes) that the new deck no longer has
+                                charts, notes) that the new deck no longer has,
+                                or has fewer times; "2%" and "2" differ
 
 Plan (JSON), slide numbers start at 1:
 
