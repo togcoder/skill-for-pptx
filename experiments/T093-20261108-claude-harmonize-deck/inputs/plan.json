@@ -1,0 +1,13 @@
+{
+  "transitions": {"default": "fade", "1": "none"},
+  "clicks": {
+    "1": [],
+    "2": [["Nen muc tieu", "Muc tieu"]],
+    "3": [], "5": [], "6": [],
+    "7": [["Vong 1", "Buoc 1:rise"], ["Vong 2", "Buoc 2:rise"], ["Vong 3", "Buoc 3:rise"],
+          ["Vong 4", "Buoc 4:rise"], ["Vong 5", "Buoc 5:rise"]],
+    "8": [["Anh sau", "Chu sau"]],
+    "9": [["Mui ten:wipe", "So sau", "Nhan sau"], ["Dat muc tieu:rise"]],
+    "10": [], "11": []
+  }
+}

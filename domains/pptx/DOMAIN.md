@@ -130,6 +130,13 @@ unwired) `skills/deck-director`.
   before motion, the speaker-notes `[T=0]`/`[CLICK n]` template, `DEN-WORDS`/`NAR-LIFECYCLE` limits,
   and D011 banners on the three legacy PPTX skills. R2 (dim/exit vs critic exemption) is left for
   the lead. No code changed. `experiments/T092-20261108-dsh-skill-guidance-fixes/REPORT.md`.
+- **Existing decks (T093):** guide 10 tells an agent how to harmonise a colleague's patchwork deck
+  without losing content: keep numbers, terms, titles, evidence photos and notes; change fonts,
+  colours, layout, chart type and motion; triage each slide as keep / reshell / rebuild. Toolbox:
+  `pptx_tools.py inventory|rechart|scale|unstretch|numbers`. Rehearsal on a synthetic QCC deck:
+  5 fonts → 1, 14 sizes → 6, 0 numbers lost, all 36 effects resolve in PowerPoint (rung 4), owner
+  grade pending; blind re-run by another family is T094.
+  `experiments/T093-20261108-claude-harmonize-deck/REPORT.md`.
 
 ## Open questions / dissent
 - **T067 job vocabulary.** The nine beat jobs (`hook`, `name`, `define`, `contrast`,

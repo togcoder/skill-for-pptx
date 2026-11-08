@@ -122,5 +122,6 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T090 | [pptx] Small model uses `skills/pptx`: adapt an approved example to new content; owner opens and scores | dsh | `work/T090-dsh-skill-triet-hoc` | review requested; owner scoring pending | `experiments/T090-20261108-dsh-skill-triet-hoc/REPORT.md` |
 | T091 | [pptx] Rung-6 owner grades: simple-but-fit motion law and composition-first check | OpenCode (DeepSeek V4.1 Flash) | `work/T091-opencode-rung6-motion-law` | main | `experiments/T091-20261108-opencode-rung6-motion-law/REPORT.md` |
 | T092 | [pptx] Apply the T090 review fixes to the skills/pptx guidance | dsh | `work/T092-dsh-skill-guidance-fixes` | main (lead review: accept; R2 decided in T093) | `experiments/T092-20261108-dsh-skill-guidance-fixes/REPORT.md` |
-| T094 | [pptx] Blind rehearsal: another family harmonises the T093 patchwork deck from guide 10 only | dsh | `work/T094-dsh-harmonize-patchwork` | claimed | `experiments/T094-20261108-dsh-harmonize-patchwork/REPORT.md` |
+| T093 | [pptx] Harmonise a patchwork deck: guide 10, group-scale and chart-data tools, mock-deck rehearsal | claude | `work/T093-claude-harmonize-deck` | review requested (owner opens before/after) | `experiments/T093-20261108-claude-harmonize-deck/REPORT.md` |
+| T094 | [pptx] Blind rehearsal: another family harmonises the T093 patchwork deck from guide 10 only; reviews the T093 tools | dsh | `work/T094-dsh-harmonize-patchwork` | claimed | `experiments/T094-20261108-dsh-harmonize-patchwork/REPORT.md` |
 | T095 | *next free ID* | | | | |
