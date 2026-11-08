@@ -185,6 +185,52 @@ chỉ dẫn; model đọc và tự làm. Lab này đã đi ngược: 103 script,
 - **Người làm → người phản biện:** Claude (trưởng nhóm) viết → model khác họ dùng skill để dựng.
   **Cỡ:** 2–3 ngày. Có thể bắt đầu ngay, rồi nạp luật T086 khi xong.
 
+**Kết quả T087 (2026-11-06):**
+- `skills/pptx/`: một `SKILL.md` ngắn, 9 hướng dẫn bằng lời thường, bộ mẫu đã duyệt.
+- Đồ nghề `scripts/pptx_tools.py` có hai lệnh: `look` để xuất ảnh slide bằng PowerPoint, và
+  `motion` để ghi lần bấm và chuyển slide theo tên vật thể.
+- Bản demo 5 slide do chính trưởng nhóm dựng theo skill.
+- Còn chờ: một model khác họ dùng skill để dựng (T090).
+
+### T089 [pptx] Sửa các mặc định gây hại trong Forge, Director và critic
+
+- **Câu hỏi:** công cụ cũ còn tự quyết những gì thay người thiết kế? Phải sửa sao cho mặc định là
+  "không làm gì" thay vì "làm sai".
+- **Lỗi đã thấy thật (đánh giá của Opus khi làm theme QCC):**
+  - Slide Forge:
+    - giá trị KPI bằng 0 làm dừng bản dựng;
+    - tiêu đề thẻ ở bố cục asymmetric và bento bị thu xuống 14 pt, kể cả khi chữ ngắn;
+    - thanh tiến độ và logo bằng chữ bị gắn cứng;
+    - `motion.morph` mặc định bật, nên thêm hình tròn `!!orb` vào mọi slide.
+  - Motion Director:
+    - bìa bị chia thành 6 lần bấm;
+    - Morph được gắn cho mọi lần chuyển slide chỉ vì có hình trang trí lặp lại.
+  - Kiểm tra chữ tràn báo lỗi sai khi máy thiếu font của deck.
+- **Việc cần làm:**
+  - Mỗi lỗi có một test, test này hỏng trước khi sửa.
+  - Mặc định mới:
+    - Forge: không trang trí (chrome tắt, logo chỉ là ảnh), `morph=false`.
+    - Director: bìa không có lần bấm; Morph chỉ khi có vật không trang trí đi tiếp; vật có mặt ở
+      mọi slide không tính.
+  - Thiếu font thì báo "thiếu font, số đo gần đúng", không báo tràn chữ.
+- **Nghiệm thu:** các test mới qua, toàn bộ test qua; dựng lại spec theme QCC không còn lỗi nào ở trên.
+- **Người làm → người phản biện:** OpenCode → Claude. **Cỡ:** 1 ngày.
+
+### T090 [pptx] Model nhỏ dùng skill: sửa theo mẫu đã duyệt
+
+- **Câu hỏi:** một model nhỏ (Antigravity, Gemini Flash) chỉ đọc `skills/pptx/` và đi đúng "đường
+  hẹp" cho model nhỏ thì có làm ra bộ slide dùng được không?
+- **Việc cần làm:**
+  - Chủ dự án đưa một nội dung ngắn (5–7 slide), có số liệu thật.
+  - Agent mở bộ mẫu đã duyệt (`skills/pptx/examples.md`), giữ bố cục, thay nội dung.
+  - Thêm chuyển động bằng `pptx_tools.py motion` theo mục 6–7.
+  - Chạy `look`, `design_critic`, `morph_studio audit`, sửa tối đa 3 vòng.
+- **Cấm:** viết script dựng riêng ở thư mục gốc; tự duyệt; tự khai model; báo cáo bằng JSON.
+- **Đầu ra:** file `.pptx` cùng ảnh `look`; báo cáo bằng lời thường, theo đúng mục "Bàn giao" của skill.
+- **Nghiệm thu:** chủ dự án mở file và chấm. Chỗ nào hỏng thì trưởng nhóm sửa **lời chỉ dẫn**, không
+  sửa code, rồi chạy lại một lần.
+- **Người làm → người phản biện:** Antigravity → Claude. **Cỡ:** nửa ngày.
+
 ## Chặng 1: thước đo thật (đề bài đã giữ chỗ T071–T074)
 
 Không ai làm chặng 2 khi T071 và T072 chưa xong. Không có thước đo thì không biết chặng 2 có
