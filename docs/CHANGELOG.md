@@ -21,6 +21,11 @@ were true at the time. Task IDs and their branches are listed in
   guidance fixes are listed in the REPORT for the lead to apply to `skills/pptx/`.
 - **No product path changed.** The static-deck builder, the motion plan and two check scripts live
   in the experiment's `inputs/`; no `scripts/` file and no capability was added.
+- **Cross-family review of T087** added: `research/reviews/T087-dsh-20261108.md` — verdict
+  `accept-with-fixes`, 10 findings (3 major: Morph ghosts text that wraps differently on the two
+  slides; the entrance-only toolbox cannot pass `NAR-LIFECYCLE`; the legacy PPTX skills still
+  advertise themselves as the entry point, contradicting D011). T087's main claims reproduce at
+  rungs 1/4/5.
 
 ## T087 [pptx] One PPTX skill written as design guidance — 2026-11-06
 

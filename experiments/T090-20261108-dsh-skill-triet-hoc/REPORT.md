@@ -189,6 +189,8 @@ python scripts/slide_forge.py render `
   `scripts/`, không sửa `lab/capabilities.json`.
 - INDEX: hàng T090 chuyển `claimed → review requested`. CHANGELOG: một mục T090. Domain card:
   một dòng ở "State". Không đụng `HANDOFF.md`, `docs/ROADMAP.md`, `lab/DECISIONS.md` (D006).
+- Thêm `research/reviews/T087-dsh-20261108.md`: review khác họ model cho skill T087
+  (`accept-with-fixes`, 10 finding, 3 major) — cùng bằng chứng dùng thử với deck ở đây.
 
 ## 8. Tiếp theo
 
