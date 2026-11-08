@@ -31,6 +31,19 @@ Exit 1 when a `MORPH-TYPE-MISMATCH`, `MORPH-ENTRANCE` or `MORPH-OFFSLIDE` is
 found. `MORPH-UNNAMED-PAIR` is a warning: two same-type objects with no `!!`
 name that PowerPoint may pair by geometry.
 
+## What the audit cannot see
+
+T069a passes this audit with **0 findings**, yet the owner read its four Morphs
+as *"quá gượng gạo"* (forced) and scored the motion 6/10 on 2026-11-08, naming
+the composition as well. The audit checks type, name, entrance and off-slide
+position; it cannot check whether the two frames compose or whether the cut
+carries one idea. A clean audit is necessary, not sufficient.
+
+The human tests are in
+`experiments/T091-20261108-opencode-rung6-motion-law/skill-patch.md`: a poster
+test on both endpoints, and four questions for a forced cut. Until those pass,
+a structurally valid Morph is still a proposal.
+
 ## Do / do not**Do**
 
 - keep the same shape type across the cut;

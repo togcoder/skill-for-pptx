@@ -7,6 +7,19 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T091 [pptx] Rung-6 grades: fit beats cleverness, composition before motion — 2026-11-08
+
+- **Owner grades (rung 6).** T087's 5-slide demo **7/10**: simple effects, but
+  they fit a classroom. T069a's four-Morph deck **6/10**: "quá gượng gạo", with
+  the composition also named. T069a passes `morph_studio audit` with 0 findings,
+  so structural validity is not readability.
+- **Law proposed.** The right amount of motion is set by the idea and the room,
+  not by a quota. A Morph is justified only when both endpoints stand as posters
+  and one visible object continues. Four forced-cut questions + a poster test.
+- **Patch applied.** Six text blocks in `skills/pptx`: room scale, poster test,
+  four forced-cut questions, audit limit. T074's rulebook gains the audit limit.
+  `research/feedback/2026-11-08-motion-grades.md` (F20/F21).
+
 ## T090 [pptx] A different model family builds with `skills/pptx` — 2026-11-08
 
 - **Deck.** `experiments/T090-20261108-dsh-skill-triet-hoc/artifacts/T090-triet-hoc-ch1.pptx`:
