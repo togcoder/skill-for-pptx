@@ -1,0 +1,20 @@
+A1 animation before rechart: chart id 3, timing targets [3]
+A2 after rechart: chart id(s) [3], timing targets [3]
+A3 PASS: rechart keeps id/name and the animation still points at the rebuilt chart
+B1 target really lost: {1: ['2']} (correct: 2 is reported missing)
+B2 value 2 kept only as '2 lần', the '2%' target is gone: {} <- no report
+B3 CONCLUSION: numbers is necessary, not sufficient: it compares value sets, not occurrences.
+C1 PowerPoint 16.0 opened the deck: 11 slides
+C2 slide 2: transition 3849, effects 8, targets ok 8
+C2 slide 3: transition 3849, effects 1, targets ok 1
+C2 slide 4: transition 3849, effects 12, targets ok 12
+C2 slide 5: transition 3849, effects 1, targets ok 1
+C2 slide 6: transition 3849, effects 4, targets ok 4
+C2 slide 7: transition 3849, effects 15, targets ok 15
+C2 slide 8: transition 3849, effects 2, targets ok 2
+C2 slide 9: transition 3849, effects 3, targets ok 3
+C2 slide 10: transition 3849, effects 0, targets ok 0
+C2 slide 11: transition 3849, effects 0, targets ok 0
+C3 PASS: every effect resolves to a shape
+D1 scale 19 shapes by 0.72: smallest text becomes 17.28 pt (guide 4 minimum is 18)
+D2 CONCLUSION: the guide's 'rework instead of shrinking' fallback is the right call for this cluster

@@ -7,6 +7,52 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+
+## T095 [pptx] Guide 10 and toolbox fixes from the T094 rehearsal — 2026-11-09
+
+- **Why:** the owner opened DSH's T094 deck: motion as good or slightly better than T093, but the
+  fishbone was redrawn until it was no longer a fishbone (one side only, causes floating off the bones,
+  the author's travelling arrow gone). Root causes were in the guide and the toolbox: guide 10 listed
+  layout as changeable without protecting a standard diagram's form; `scale`'s warning said "rework the
+  layout"; guide 9 taught a notes template while guide 10 called notes the author's.
+- **Guide 10:** a standard diagram's form (fishbone, PDCA, Pareto, Gantt, fault tree, flow chart),
+  the author's notes and everything they mention, and the slide size are content; case is shell. Too
+  much text after `scale`: keep the form, text back to 18 pt, wider boxes, or split over two slides,
+  never redraw as another diagram (DSH's gap 3 not adopted). No slide may open with only its title.
+  Eleven of DSH's twelve gaps answered in the text, plus a hand-over question template.
+- **Toolbox:** `inventory` names theme fonts, reports fills (backgrounds and shapes) and flags a slide
+  that opens with only its title; `numbers` tells "2%" from "2" and reports numbers that appear fewer
+  times; clearer `scale` warning and placeholder error. 3 new tests (12/12). DSH's R3 (group children
+  off the slide) not changed: a group's frame encloses its children.
+- Run on the three rehearsal decks: both T093 (slides 4, 7) and T094 (2, 6, 7) open blank somewhere;
+  0 numbers lost in both. `experiments/T095-20261109-claude-guide10-fixes/REPORT.md`.
+
+## T094 [pptx] Blind rehearsal: another family harmonises the T093 patchwork deck — 2026-11-08
+
+- **The rehearsal:** DSH (DeepSeek) read only the original patchwork deck and guide 10 (did not open
+  `qcc-dong-bo*.pptx`, `harmonize.py` or `plan.json` before finishing) and produced
+  `experiments/T094-20261108-dsh-harmonize-patchwork/artifacts/qcc-dong-bo-dsh.pptx`: 11 slides,
+  **1 font family (Century Gothic), 6 sizes, 6 text colours**, no 3D charts, no stretched photos, no
+  off-slide shapes, no decorative effects, Fade on 2–11, **13 click groups / 46 effects**, **0 numbers
+  lost**. PowerPoint 16.0 opens it; every effect resolves to a shape (rung 4). Owner scores pending.
+- **What the guide still leaves to the reader:** 12 concrete gaps listed in the REPORT "Chỗ mục 10 mơ
+  hồ/thiếu" — slide size, title case/numbering, when to stop scaling, appendix table size, how to find
+  the leading colour (`inventory` reports text colours only), theme fonts not printable by `inventory`,
+  appendix title ownership, re-adding effects on rebuilt slides, `numbers` being necessary-not-sufficient,
+  notes numbers when rewriting speaker notes, renumbering the motion plan after an added appendix slide,
+  and a hand-off question template. These are the lead's input for the next guide-10 revision.
+- **Review of the T093 tools:** `research/reviews/T093-dsh-20261108.md`, verdict
+  **accept-with-fixes**. Reproduced: rechart keeps the shape id/name and the animation target; numbers
+  = 0 on both outputs; unstretch fixes both photos; scale warns at 17.28 pt. Two guide-level findings:
+  (R1) `numbers` compares value sets, so 0 missing is necessary, not sufficient (demo in the review);
+  (R2) `inventory` cannot print real font names when fonts come from the theme and does not count fills/
+  backgrounds, while guide 10 step 4 asks for the most-used colour. Minor: off-slide check ignores
+  group children; scale's placeholder error lacks the workaround; rechart sort/title limits; unstretch
+  crop edge case untested.
+- **Honesty note:** the "blind" condition was only partial — the PR description and T093 REPORT were read
+  before starting (the PR is the task handoff). Recorded in the REPORT; future blind runs should receive
+  only the original deck plus guide 10.
+
 ## T093 [pptx] Harmonise a colleague's patchwork deck — 2026-11-08
 
 - **Guide 10** `skills/pptx/guides/10-dong-bo-slide-co-san.md`: keep the content ("ruột": numbers,

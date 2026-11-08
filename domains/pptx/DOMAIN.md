@@ -99,6 +99,14 @@ unwired) `skills/deck-director`.
   see `experiments/T064-20261104-opencode-native-3d/REPORT.md`.
 
 ## State (2026-11-08)
+- **Patchwork harmonisation (T094, guide 10):** DSH rehearsed T093's guide on the 10-slide patchwork
+  deck and produced an 11-slide deck with 1 font family, 6 sizes, 6 text colours, flat charts,
+  unstretched evidence photos, the 8-column table in an appendix, Fade on 2–11, **13 click groups /
+  46 effects, 0 numbers lost**; PowerPoint 16.0 opens it and every effect resolves (rung 4). Review of
+  the T093 tools: `research/reviews/T093-dsh-20261108.md`, **accept-with-fixes** — `numbers` compares
+  value sets (necessary, not sufficient; demo given) and `inventory` cannot name theme fonts or count
+  fills/backgrounds, which guide 10 step 4 needs. Twelve guide-10 wording gaps for the lead are listed
+  in `experiments/T094-20261108-dsh-harmonize-patchwork/REPORT.md`; owner scoring pending.
 - **Tests:** 556 run, 6 skipped, 100 % pass across all domains (after T066–T068).
 - **Forge (T063):** type sizes come from the Office kit `type_scale_pt` (3–6 per deck); count-up stacks are print/PDF/Morph-safe (final value topmost and opaque, proxies below); highlight markers follow centred/right-aligned text; Ken Burns ends on the authored frame and generated process tokens use T034's author-at-destination fix. All five example decks have no `TYP-SIZES` or `MOT-SETTLE` warning.
 - **Navigation & Interactivity:** T048 added Slide Navigator (`slide_navigator.py`) establishing full non-linear branching, dynamic return paths, custom shows with return, and mini-game state machine compilation. T049 added Advanced Presentation Interactivity (`advanced_interactivity.py`) establishing native in-slide lightbox modals, multi-tab switchers, pure-Python synthetic sound FX (click/chime/buzz), hover actions, and twin-morph visual flow. **T061** consolidated every `interactiveSeq`/trigger/hyperlink writer into `pptx_animator.py`; T048b/T049 artifacts rebuild byte-identically (T048) or are unchanged and parse to the same counts (T049).
@@ -137,6 +145,12 @@ unwired) `skills/deck-director`.
   5 fonts → 1, 14 sizes → 6, 0 numbers lost, all 36 effects resolve in PowerPoint (rung 4), owner
   grade pending; blind re-run by another family is T094.
   `experiments/T093-20261108-claude-harmonize-deck/REPORT.md`.
+- **Guide 10 after the blind run (T094 → T095):** DSH reached the same system from the guide alone
+  (1 family, 6 sizes, 0 numbers lost) but redrew the fishbone into another form and rewrote the
+  author's notes. T095 makes a standard diagram's form and the author's notes content, forbids blank
+  openings, and teaches `inventory` theme font names, fills and blank-opening detection, and `numbers`
+  percent-vs-count and occurrence counts. Owner grades of both rehearsal decks pending.
+  `experiments/T095-20261109-claude-guide10-fixes/REPORT.md`.
 
 ## Open questions / dissent
 - **T067 job vocabulary.** The nine beat jobs (`hook`, `name`, `define`, `contrast`,

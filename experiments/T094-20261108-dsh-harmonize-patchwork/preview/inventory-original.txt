@@ -1,0 +1,32 @@
+deck: 10 slides, 13.33 x 7.50 in
+fonts (5): Arial x65, Tahoma x14, Times New Roman x4, Calibri x3, (theme body) x3
+sizes (14; guide 4 wants 3-6): 12, 13, 20, 22, 24, 26, 30, 32, 34, 36, 40, 44, 48, 54
+text colours (11): 000000 x11, C00000 x6, 262626 x5, 00B050 x3, FFFFFF x2, FFC000 x1, DDEBF7 x1, 1F4E79 x1
+slide 1: 4 shapes, 28 words, transition split, 3 clicks, 3 effects
+  ! decorative effects: emph:spin, entr:bounce, entr:fly
+  ! text under 18 pt in 'TextBox 3' (12 pt): fine for a source or caption only
+slide 2: 2 shapes, 111 words, transition push, 2 clicks, 2 effects
+  ! decorative effects: entr:fly
+slide 3: 2 shapes, 7 words, transition cover, 0 clicks, 0 effects
+  ! chart 'Bieu do loi': bar3DChart  <- 3D: rechart
+slide 4: 20 shapes, 56 words, transition wipe, 6 clicks, 18 effects
+  ! 'Connector 2' runs 0.40 in off the slide
+  ! 'Pentagon 3' runs 0.57 in off the slide
+  ! 'Connector 12' runs 0.10 in off the slide
+  ! 'TextBox 13' runs 0.75 in off the slide
+  ! 'Connector 16' runs 0.10 in off the slide
+  ! 'TextBox 17' runs 0.75 in off the slide
+slide 5: 2 shapes, 7 words, transition zoom, 0 clicks, 0 effects
+  ! chart 'Bieu do tron': pie3DChart  <- 3D: rechart
+slide 6: 2 shapes, 86 words, transition push, 0 clicks, 0 effects
+  ! table 'Bang theo doi': 7 rows x 8 cols
+  ! text under 18 pt in 'Bang theo doi' (13 pt): fine for a source or caption only
+slide 7: 2 shapes, 56 words, transition split, 2 clicks, 2 effects
+  ! decorative effects: emph:teeter, entr:bounce
+slide 8: 5 shapes, 9 words, transition cover, 0 clicks, 0 effects
+  ! picture 'Anh truoc' stretched 50% wider than the photo  <- unstretch
+  ! picture 'Anh sau' stretched 34% taller than the photo  <- unstretch
+slide 9: 5 shapes, 14 words, transition zoom, 4 clicks, 4 effects
+  ! decorative effects: emph:spin, emph:teeter, entr:fly
+slide 10: 2 shapes, 5 words, transition split, 2 clicks, 2 effects
+  ! decorative effects: emph:spin, entr:bounce

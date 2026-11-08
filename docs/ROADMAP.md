@@ -260,6 +260,11 @@ kiểm bằng PowerPoint. Skill truyền được sang model khác họ. Những
   vào `research/reviews/T093-<agent>-<ngày>.md`; T093 đã merge trước review, như T087.
 - **Người làm → người phản biện:** DSH → Claude. **Cỡ:** nửa ngày.
 
+**Kết quả T094 → T095 (2026-11-09):** DSH làm theo mục 10 ra cùng một hệ thống như T093, chuyển động
+được chủ dự án khen ngang hoặc hơn, nhưng vẽ lại xương cá sang dạng khác và viết lại notes của tác giả.
+T095 sửa lời chỉ dẫn (hình sơ đồ chuẩn và notes là ruột; slide không mở ra trắng) và đồ nghề
+(`inventory`, `numbers`). Lần dùng tiếp theo là bộ slide thật của đồng nghiệp.
+
 ## Chặng 1: thước đo thật (đề bài đã giữ chỗ T071–T074)
 
 Không ai làm chặng 2 khi T071 và T072 chưa xong. Không có thước đo thì không biết chặng 2 có
