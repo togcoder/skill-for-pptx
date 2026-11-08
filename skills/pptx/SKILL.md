@@ -27,6 +27,10 @@ kiểm tra chỉ để bắt lỗi, không chứng minh slide đẹp.
 
 Chuyển động thêm vào một bố cục xấu không làm nó đẹp lên. Vì vậy bản tĩnh phải đẹp trước.
 
+**Nhận một bộ slide có sẵn để làm cho đồng bộ** (đủ nội dung, chắp vá về hình thức): đi theo
+[guides/10-dong-bo-slide-co-san.md](guides/10-dong-bo-slide-co-san.md). Giữ ruột (số, chữ, ý, ảnh bằng
+chứng), thay vỏ (font, màu, bố cục, kiểu biểu đồ, chuyển động). Lập bảng ý trước khi sửa.
+
 Chọn **mức** chuyển động theo phòng, không theo số hiệu ứng: một lớp học cần ít
 hơn một sân khấu hội nghị. Đơn giản mà vừa tốt hơn phức tạp mà gượng (guide 6).
 
@@ -73,3 +77,8 @@ Viết ngắn, bằng lời thường, theo thứ tự:
 | Bắt lỗi chữ tràn, chữ nhỏ, thẻ rỗng, tương phản | `python scripts/design_critic.py OUT.pptx` |
 | Tìm ảnh có giấy phép, kèm nguồn | `python scripts/forge_assets.py photos "từ khóa"` |
 | Kiểm tra kịch bản | `python scripts/motion_script.py check script.md` |
+| Bộ có sẵn: kiểm kê font, cỡ, màu, biểu đồ 3D, ảnh méo, vật tràn, hiệu ứng trang trí | `python scripts/pptx_tools.py inventory GOC.pptx` |
+| Bộ có sẵn: dựng lại biểu đồ phẳng từ chính số của nó | `python scripts/pptx_tools.py rechart DECK 5 "Ten" --kind bar -o OUT` |
+| Bộ có sẵn: thu một cụm hình như một khối (chữ, nét, đường bay đi theo) | `python scripts/pptx_tools.py scale DECK 4 "A" "B" --by 0.7 -o OUT` |
+| Bộ có sẵn: sửa ảnh bị kéo méo | `python scripts/pptx_tools.py unstretch DECK 8 "Anh" [--box] -o OUT` |
+| Bộ có sẵn: số nào của bản gốc đã mất | `python scripts/pptx_tools.py numbers GOC.pptx MOI.pptx` |

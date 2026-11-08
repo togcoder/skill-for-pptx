@@ -69,6 +69,37 @@ hiện bằng lần bấm trên một slide vào bằng Morph, công cụ báo l
 `[CLICK 2]` … mỗi lần bấm một câu. Số `[CLICK n]` phải bằng số lần bấm của slide; `design_critic.py`
 kiểm đúng số này (`NAR-ALIGN`) và dùng notes để chấm narrative.
 
+## Bộ slide có sẵn (mục 10)
+
+Các lệnh `inventory`, `rechart`, `scale`, `unstretch`, `numbers` đọc và ghi file; xem `python
+scripts/pptx_tools.py -h`. Ba việc còn lại làm bằng `python-pptx`, gọi hàm của đồ nghề:
+
+```python
+import sys; sys.path.insert(0, "scripts")
+import pptx_tools as tools
+from pptx import Presentation
+
+prs = Presentation("goc.pptx")
+tools.theme_fonts(prs, "Segoe UI", "Segoe UI")   # hai font vào theme
+for slide in prs.slides:
+    tools.follow_theme(slide._element)           # xóa font gõ tay, chữ ăn theo theme
+# chữ tiêu đề: run.font.name = "+mj-lt" (font tiêu đề của theme)
+
+# đổi tên vật thể trước khi viết kế hoạch chuyển động
+for shape in prs.slides[3].shapes:
+    print(shape.shape_id, shape.name, shape.has_text_frame and shape.text_frame.text[:30])
+prs.slides[3].shapes[2].name = "Nhanh may moc"
+
+# biểu đồ mới (ví dụ dựng từ số trong một bảng) cùng kiểu với rechart
+tools.add_chart(slide, "line", (left, top, width, height), ["Tuần 1", "Tuần 2"],
+                [("Tỉ lệ lỗi (%)", [3.8, 3.0])], "0.0", color="1F4E79")
+prs.save("moi.static.pptx")
+```
+
+Chuyển một bảng lớn xuống phụ lục mà không mất số: thêm slide cuối, chép phần tử của bảng sang
+(`copy.deepcopy(table._element)` rồi `slide.shapes._spTree.append(...)`), xóa bảng ở slide cũ.
+Ví dụ đầy đủ: `experiments/T093-20261108-claude-harmonize-deck/inputs/harmonize.py`.
+
 ## Công cụ cũ: dùng có điều kiện
 
 - **Slide Forge** (`slide_forge.py`): dựng nhanh từ một bản mô tả, nhưng bố cục chung chung. Nếu

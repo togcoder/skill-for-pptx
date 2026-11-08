@@ -88,5 +88,6 @@ ghi, xem lại từng slide có lần bấm và tự hỏi: lúc mở slide còn
 
 `pptx_tools` hiện chỉ ghi **entrance** (hiện ra), không ghi dim/exit. Vì vậy deck dựng bằng nó sẽ bị
 critic cảnh báo `NAR-LIFECYCLE`; đó là giới hạn đã biết của đồ nghề, không phải lỗi slide. Đừng thêm
-hiệu ứng rời rạc chỉ để tắt cảnh báo; muốn qua cổng đó thì phải bổ sung dim/exit (đang chờ quyết
-định của trưởng nhóm).
+hiệu ứng rời rạc chỉ để tắt cảnh báo. Trưởng nhóm đã quyết (T093): đồ nghề giữ chỉ ghi entrance, vì
+bài nói thường ngày hiếm khi cần làm mờ hay cho vật biến mất; với deck dựng bằng `pptx_tools`, đọc
+cảnh báo này như một lời nhắc, không phải lỗi.
