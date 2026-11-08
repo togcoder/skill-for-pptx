@@ -149,3 +149,26 @@ clicks and reads better at `t=0`.
    after review.
 4. Human review of the 9 clicks (rung 6) and a `liquid-glass` variant of the
    same content to test `VisualStyle/1` beyond specimens.
+
+## Rung 6 owner review (2026-11-08)
+
+The owner watched the four Morphs in PowerPoint and scored the motion **6/10**:
+*"gu của motion này hơi bị đơn giản và quá gượng gạo kèm thêm bố cục sắp xếp
+có phần hơi không ổn."*
+
+This is the rung-6 result the report was missing, and it is negative. It does
+not overturn the structural findings — the four pairs do share objects, the
+base states are readable, `morph_studio audit` is clean — it says those
+findings are not enough. Two causes, in the owner's order:
+
+1. **Composition.** The B states were designed to demonstrate a state change,
+   not to stand as posters. The design critic had already hinted at this:
+   design 3.99 trails T066's 4.03. A Morph between two weak frames reads as two
+   layouts swapping.
+2. **Forced motion.** The cuts ask the audience to decode which shape became
+   which. "Semantic" in the plan did not become "obvious" on screen.
+
+Consequence: T067's "3–4 semantic Morphs" remains a hypothesis, but this deck
+does not prove it at rung 6. The next attempt must pass the poster test on both
+endpoints and the four forced-cut questions (T091) before a Morph is added.
+Feedback: `research/feedback/2026-11-08-motion-grades.md` (F21).

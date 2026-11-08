@@ -18,6 +18,10 @@ Mặc định cho một bộ slide:
 | Những cặp slide kể "trước → sau", "phóng to", "mở thẻ" (xem dưới) | Morph |
 | Mọi chỗ khác | none hoặc Fade |
 
+**Morph không sửa bố cục.** Cả hai đầu của cú Morph phải là hai poster đứng
+được một mình (guide 3). Nếu đầu B chỉ đẹp khi đang chuyển, cú cắt đang che một
+bố cục yếu.
+
 Một bộ 15 slide thường chỉ có 2–5 Morph. Morph ở mọi slide sẽ khiến bộ slide trông loạn và mất hết
 ý nghĩa.
 
@@ -66,3 +70,7 @@ Mục cảnh báo "UNNAMED-PAIR" nghĩa là có hai hình cùng loại không đ
 đặt tên `!!` hoặc đổi chỗ chúng. Riêng **tiêu đề, eyebrow, khung đặt cùng một chỗ** ở hai slide
 (guide 3 bắt vậy) cũng bị báo `UNNAMED-PAIR` — đó là bình thường: PowerPoint ghép và chuyển mờ,
 không phải lỗi cần đổi bố cục.
+
+Audit chỉ kiểm tra cấu trúc: loại hình, tên, hiệu ứng vào, vị trí ngoài khung.
+Nó **không** biết cú cắt có đọc như một ý hay không. Câu đó phải trả lời bằng
+mắt, bằng bốn câu hỏi ở guide 6.

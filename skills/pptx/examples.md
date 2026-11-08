@@ -3,11 +3,13 @@
 Model nhỏ nên **sửa theo mẫu** thay vì vẽ từ trang trắng: mở mẫu, giữ bố cục, thay nội dung. Chỉ những
 slide được ghi "dùng làm mẫu" ở đây mới là mẫu.
 
-## Demo của skill (T087), chờ chủ dự án duyệt
+## Demo của skill (T087), đã được chủ dự án duyệt — 7/10
 
 File: `experiments/T087-20261106-claude-pptx-guidance-skill/artifacts/demo-triet-hoc.pptx`, 5 slide
 dựng theo đúng các bước của skill. Có 1 Morph: ba chân dung trượt từ bìa xuống trục thời gian.
-Chưa được duyệt nên chưa dùng làm mẫu.
+Chủ dự án chấm **7/10** ngày 2026-11-08: *"nội dung ổn, hiệu ứng dù đơn giản nhưng rất phù hợp với
+môi trường 1 bài thuyết trình trên trường đơn giản."* Dùng làm mẫu cho một bài nói ngắn ở lớp:
+bìa, timeline, ba ý, kết. Đây là mẫu cho **lớp học**, không phải cho sân khấu hội nghị (guide 6).
 
 ## Triết học Mác – Lênin, chương 1 (T066)
 

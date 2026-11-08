@@ -27,6 +27,9 @@ kiểm tra chỉ để bắt lỗi, không chứng minh slide đẹp.
 
 Chuyển động thêm vào một bố cục xấu không làm nó đẹp lên. Vì vậy bản tĩnh phải đẹp trước.
 
+Chọn **mức** chuyển động theo phòng, không theo số hiệu ứng: một lớp học cần ít
+hơn một sân khấu hội nghị. Đơn giản mà vừa tốt hơn phức tạp mà gượng (guide 6).
+
 ## Mười điều không làm (lỗi đã gặp thật trong dự án)
 
 1. **Bịa nội dung.** Không tự điền "100%", "Bước hoàn thiện", "Chỉ số 1" hay một con số không có
