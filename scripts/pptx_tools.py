@@ -55,7 +55,8 @@ from pptx import Presentation
 from pptx.chart.data import CategoryChartData
 from pptx.dml.color import RGBColor
 from pptx.enum.chart import XL_CHART_TYPE, XL_LABEL_POSITION, XL_LEGEND_POSITION
-from pptx.enum.shapes import MSO_SHAPE_TYPE
+from pptx.enum.dml import MSO_FILL
+from pptx.enum.shapes import MSO_SHAPE_TYPE, PP_PLACEHOLDER
 from pptx.oxml.ns import qn
 from pptx.util import Pt
 
@@ -240,15 +241,58 @@ def _transition(slide):
     return None
 
 
+def _theme_faces(slide):
+    """(heading, body) latin fonts of the theme behind this slide."""
+    from pptx.opc.constants import RELATIONSHIP_TYPE as RT
+    root = E.fromstring(slide.slide_layout.slide_master.part.part_related_by(RT.THEME).blob)
+    return tuple(root.find(f".//a:{tag}/a:latin", NS).get("typeface") for tag in ("majorFont", "minorFont"))
+
+
+def _is_title(shape):
+    return shape.is_placeholder and shape.placeholder_format.type in (PP_PLACEHOLDER.TITLE,
+                                                                      PP_PLACEHOLDER.CENTER_TITLE)
+
+
+def _fill(fill):
+    try:
+        return str(fill.fore_color.rgb) if fill.type == MSO_FILL.SOLID else None
+    except (AttributeError, TypeError):  # theme colour
+        return None
+
+
+def _opening(slide):
+    """Top-level shapes a viewer sees when the slide opens, lines and empty boxes left out."""
+    entering = {t.get("spid") for ctn in slide._element.iter(qn("p:cTn")) if ctn.get("presetClass") == "entr"
+                for t in ctn.iter(qn("p:spTgt"))}
+    seen = []
+    for s in slide.shapes:
+        if str(s.shape_id) in entering or s.shape_type in (MSO_SHAPE_TYPE.LINE, None):
+            continue
+        has_text = s.has_text_frame and s.text_frame.text.strip()
+        if has_text or s.shape_type in (MSO_SHAPE_TYPE.PICTURE, MSO_SHAPE_TYPE.GROUP) or \
+                getattr(s, "has_chart", False) or getattr(s, "has_table", False):
+            seen.append(s)
+    return seen
+
+
 def inventory(deck):
     """Plain-text report: what the deck uses, and where it breaks the guides."""
     prs = Presentation(deck)
     sw, sh = prs.slide_width, prs.slide_height
-    fonts, sizes, colours = Counter(), Counter(), Counter()
+    fonts, sizes, colours, fills = Counter(), Counter(), Counter(), Counter()
     lines = []
     for i, slide in enumerate(prs.slides, 1):
         words, flags, small = 0, [], {}
+        head, body = _theme_faces(slide)
+        bg = _fill(slide.background.fill) if slide._element.find(".//p:bg", NS) is not None else None
+        if bg:
+            fills[f"{bg} (background)"] += 1
         for shape in _walk(slide.shapes):
+            if shape.shape_type not in (MSO_SHAPE_TYPE.PICTURE, MSO_SHAPE_TYPE.GROUP, MSO_SHAPE_TYPE.LINE) \
+                    and not getattr(shape, "has_chart", False) and not getattr(shape, "has_table", False):
+                colour = _fill(shape.fill)
+                if colour:
+                    fills[colour] += 1
             frames = [shape.text_frame] if shape.has_text_frame else []
             if getattr(shape, "has_table", False):
                 frames += [cell.text_frame for row in shape.table.rows for cell in row.cells]
@@ -256,7 +300,10 @@ def inventory(deck):
                 for para in frame.paragraphs:
                     for run in para.runs:
                         words += len(run.text.split())
-                        fonts[{None: "(theme body)", "+mn-lt": "(theme body)", "+mj-lt": "(theme heading)"}.get(run.font.name, run.font.name)] += 1
+                        face = run.font.name
+                        if face in (None, "+mn-lt", "+mj-lt"):
+                            face = head if face == "+mj-lt" or (face is None and _is_title(shape)) else body
+                        fonts[face] += 1
                         if run.font.size:
                             sizes[run.font.size.pt] += 1
                             if run.font.size.pt < MIN_BODY_PT and run.text.strip():
@@ -286,6 +333,9 @@ def inventory(deck):
         flags += [f"text under {MIN_BODY_PT} pt in {n!r} ({pt:g} pt): fine for a source or caption only"
                   for n, pt in small.items()]
         effects, clicks = _slide_effects(slide)
+        if clicks and len(_opening(slide)) <= 1:
+            flags.append("opens with only the title visible: show the frame (labels, axes) at the start, "
+                         "let clicks add data and conclusions")
         loud = sorted({n for n in effects if n.split(":", 1)[1] not in CALM})
         lines.append(f"slide {i}: {len(slide.shapes)} shapes, {words} words, transition "
                      f"{_transition(slide) or 'none'}, {clicks} clicks, {sum(effects.values())} effects")
@@ -295,7 +345,8 @@ def inventory(deck):
     top = [f"deck: {len(prs.slides)} slides, {sw / 914400:.2f} x {sh / 914400:.2f} in",
            f"fonts ({len(fonts)}): " + ", ".join(f"{k} x{v}" for k, v in fonts.most_common()),
            f"sizes ({len(sizes)}; guide 4 wants 3-6): " + ", ".join(f"{k:g}" for k in sorted(sizes)),
-           f"text colours ({len(colours)}): " + ", ".join(f"{k} x{v}" for k, v in colours.most_common(8))]
+           f"text colours ({len(colours)}): " + ", ".join(f"{k} x{v}" for k, v in colours.most_common(8)),
+           f"fills ({len(fills)}): " + ", ".join(f"{k} x{v}" for k, v in fills.most_common(8))]
     return "\n".join(top + lines)
 
 
@@ -371,7 +422,8 @@ def scale(deck, slide_no, names, factor, output, at=None):
     slide = prs.slides[slide_no - 1]
     targets = _top_shapes(slide, names)
     if any(s.is_placeholder for s in targets):
-        raise ValueError("a placeholder inherits its text size from the layout; copy its text to a text box first")
+        raise ValueError("a placeholder inherits its text size from the layout. Leave it out of the block, "
+                         "or copy its text to a text box (same place, same words) and scale that")
     x0, y0 = min(s.left for s in targets), min(s.top for s in targets)
     inside, low = set(), []
     for s in targets:
@@ -413,11 +465,11 @@ def scale(deck, slide_no, names, factor, output, at=None):
     return min(low) if low else None
 
 
-NUMBER = re.compile(r"\d+(?:[.,]\d+)*")
+NUMBER = re.compile(r"(\d+(?:[.,]\d+)*)(\s?%)?")  # "2%" and "2 lần" are different numbers
 
 
 def _numbers(prs):
-    """Every number a viewer can read, per slide: text, tables, chart data, notes."""
+    """Every number a viewer can read, per slide, with how often: text, tables, chart data, notes."""
     out = []
     for slide in prs.slides:
         texts = [n.text or "" for n in slide._element.iter(qn("a:t"))]
@@ -426,12 +478,12 @@ def _numbers(prs):
                 texts += [v.text or "" for v in shape.chart._chartSpace.iter(f"{{{C_NS}}}v")]
         if slide.has_notes_slide:
             texts.append(slide.notes_slide.notes_text_frame.text)
-        found = set()
+        found = Counter()
         for t in texts:
-            for m in NUMBER.findall(t):
+            for m, pct in NUMBER.findall(t):
                 v = m.replace(".", "").replace(",", ".") if re.fullmatch(r"\d{1,3}(\.\d{3})+", m) else m.replace(",", ".")
                 try:
-                    found.add(f"{float(v):g}")
+                    found[f"{float(v):g}" + ("%" if pct else "")] += 1
                 except ValueError:
                     pass
         out.append(found)
@@ -441,8 +493,22 @@ def _numbers(prs):
 def missing_numbers(before, after):
     """Numbers in BEFORE that appear nowhere in AFTER: {slide no: [numbers]}."""
     kept = set().union(*_numbers(Presentation(after)))
-    return {i: sorted(nums - kept, key=float) for i, nums in enumerate(_numbers(Presentation(before)), 1)
-            if nums - kept}
+    return {i: sorted(set(nums) - kept, key=_num_key) for i, nums in enumerate(_numbers(Presentation(before)), 1)
+            if set(nums) - kept}
+
+
+def fewer_numbers(before, after):
+    """Numbers AFTER still has, but fewer times than BEFORE: {number: (before, after)}.
+
+    A number that vanished from one slide can hide behind the same value on
+    another ("mục tiêu 2%" gone, "2 lần" kept). A lower count is that warning.
+    """
+    b, a = sum(_numbers(Presentation(before)), Counter()), sum(_numbers(Presentation(after)), Counter())
+    return {n: (b[n], a[n]) for n in sorted(b, key=_num_key) if 0 < a[n] < b[n]}
+
+
+def _num_key(n):
+    return float(n.rstrip("%")), n
 
 
 def _chart_numbers(chart):
@@ -660,15 +726,20 @@ def main(argv=None):
             lost = missing_numbers(args.before, args.after)
             for i, nums in lost.items():
                 print(f"slide {i} of the original: {', '.join(nums)} not found anywhere in the new deck")
+            fewer = fewer_numbers(args.before, args.after)
+            for n, (was, now) in fewer.items():
+                print(f"{n} appears {now} times, was {was}: check no slide lost it")
             print("every number kept" if not lost else "check each one: moved to notes or an appendix is fine, gone is not")
+            print("this is a necessary check, not proof: read every new slide against the idea table")
             return 1 if lost else 0
         if args.cmd == "scale":
             at = tuple(float(v) for v in args.at.split(",")) if args.at else None
             low = scale(args.deck, args.slide, args.names, args.by, args.output, at)
             print(f"scaled {len(args.names)} shapes by {args.by} -> {args.output}")
             if low is not None and low < MIN_BODY_PT:
-                print(f"warning: smallest text is now {low:g} pt (guide 4 wants {MIN_BODY_PT}). "
-                      "Too much text for this size: rework the layout instead of shrinking it.")
+                print(f"warning: smallest text is now {low:g} pt (guide 4 wants {MIN_BODY_PT}). Keep the "
+                      f"diagram's form: set its text back to {MIN_BODY_PT} pt and widen the text boxes. If it "
+                      "still does not fit, split it over two slides. Never redraw it as another kind of diagram.")
             return 0
         if args.cmd == "rechart":
             info = rechart(args.deck, args.slide, args.name, args.kind, args.output, args.sort, color=args.color,
