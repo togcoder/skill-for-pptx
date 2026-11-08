@@ -76,5 +76,98 @@ class MotionTests(unittest.TestCase):
         self.assertIn("Morph", str(cm.exception))
 
 
+def _messy(path, img):
+    """One slide each: a 3D chart, a stretched picture, two animated shapes with a path."""
+    from PIL import Image
+    from pptx.chart.data import CategoryChartData
+    from pptx.enum.chart import XL_CHART_TYPE
+    from pptx.util import Pt
+    import pptx_animator as anim
+    Image.new("RGB", (400, 300), (90, 90, 90)).save(img)
+    prs = Presentation()
+    prs.slide_width, prs.slide_height = Inches(13.333), Inches(7.5)
+    blank = prs.slide_layouts[6]
+    s = prs.slides.add_slide(blank)
+    data = CategoryChartData(number_format="0.0")
+    data.categories = ["A", "B", "C"]
+    data.add_series("Rate", (3.8, 4.5, 2.0))
+    data.add_series("Goal", (2, 2, 2))
+    chart = s.shapes.add_chart(XL_CHART_TYPE.COLUMN_CLUSTERED, Inches(1), Inches(1), Inches(8), Inches(5), data)
+    chart.name = "Chart"
+    bar = chart.chart._chartSpace.find(f".//{{{tools.C_NS}}}barChart")
+    bar.tag = f"{{{tools.C_NS}}}bar3DChart"
+    anim.apply_timeline(s._element, [{"id": "c1", "start": "click", "effects": [
+        {"preset": "fade", "spid": str(chart.shape_id), "trigger": "click", "duration_ms": 500}]}])
+    s = prs.slides.add_slide(blank)
+    pic = s.shapes.add_picture(str(img), Inches(1), Inches(1), Inches(6), Inches(3))  # photo is 4:3
+    pic.name = "Photo"
+    s = prs.slides.add_slide(blank)
+    a = s.shapes.add_textbox(Inches(2), Inches(2), Inches(4), Inches(1))
+    a.name, a.text_frame.text = "Big", "Label 24"
+    a.text_frame.paragraphs[0].runs[0].font.size = Pt(24)
+    b = s.shapes.add_textbox(Inches(10), Inches(4), Inches(4), Inches(1))  # runs off the slide
+    b.name, b.text_frame.text = "Plain", "inherits its size"
+    anim.apply_timeline(s._element, [{"id": "c1", "start": "click", "effects": [
+        {"preset": "path", "spid": str(b.shape_id), "trigger": "click", "duration_ms": 800,
+         "points": [{"x": 0, "y": 0}, {"x": 0.4, "y": 0}]}]}])
+    prs.save(path)
+
+
+class ExistingDeckTests(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        d = Path(self.tmp.name)
+        self.src, self.out = d / "in.pptx", d / "out.pptx"
+        _messy(self.src, d / "photo.png")
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def test_inventory_names_what_the_eye_cannot_measure(self):
+        report = tools.inventory(self.src)
+        self.assertIn("bar3DChart  <- 3D: rechart", report)
+        self.assertIn("'Photo' stretched 50% wider", report)
+        self.assertIn("'Plain' runs 0.67 in off the slide", report)
+
+    def test_rechart_keeps_identity_numbers_and_animation(self):
+        before = Presentation(self.src).slides[0].shapes[0].shape_id
+        info = tools.rechart(self.src, 1, "Chart", "line", self.out)
+        self.assertEqual(info["categories"], ["A", "B", "C"])
+        shape = Presentation(self.out).slides[0].shapes[0]
+        self.assertEqual((shape.shape_id, shape.name), (before, "Chart"))
+        self.assertEqual(tools._plot_kinds(shape.chart), ["lineChart"])
+        self.assertEqual(list(shape.chart.plots[0].series[0].values), [3.8, 4.5, 2.0])
+        self.assertIn(f'spid="{before}"', _xml(self.out, 1))  # its click still points at it
+        with ZipFile(self.out) as z:  # the old 3D chart part is gone
+            self.assertEqual(len([n for n in z.namelist() if n.startswith("ppt/charts/chart")]), 1)
+
+    def test_scale_shrinks_text_strokes_and_inner_paths_and_keeps_ids(self):
+        low = tools.scale(self.src, 3, ["Big", "Plain"], 0.5, self.out, at=(1, 1))
+        s = Presentation(self.out).slides[2]
+        big, plain = s.shapes
+        self.assertEqual((big.left, big.top, big.width), (Inches(1), Inches(1), Inches(2)))
+        self.assertEqual(plain.left, Inches(5))  # 8 in to the right of Big, halved
+        self.assertEqual(big.text_frame.paragraphs[0].runs[0].font.size.pt, 12)
+        self.assertEqual(plain.text_frame.paragraphs[0].runs[0].font.size.pt, 9)  # 18 pt inherited
+        self.assertEqual(low, 9)
+        self.assertIn('path="M 0 0 L 0.2 0 E"', _xml(self.out, 3))
+
+    def test_unstretch_crops_or_refits_the_frame(self):
+        tools.unstretch(self.src, 2, "Photo", self.out)
+        self.assertAlmostEqual(tools._stretch(Presentation(self.out).slides[1].shapes[0]), 1, places=3)
+        tools.unstretch(self.src, 2, "Photo", self.out, box=True)
+        pic = Presentation(self.out).slides[1].shapes[0]
+        self.assertEqual((round(pic.width / 914400, 2), pic.crop_top), (4.0, 0))
+
+    def test_numbers_reports_what_the_new_deck_lost(self):
+        tools.rechart(self.src, 1, "Chart", "column", self.out)
+        self.assertEqual(tools.missing_numbers(self.src, self.out), {})
+        prs = Presentation(self.out)
+        sp = prs.slides[0].shapes[0]._element
+        sp.getparent().remove(sp)
+        prs.save(self.out)
+        self.assertEqual(tools.missing_numbers(self.src, self.out), {1: ["2", "3.8", "4.5"]})
+
+
 if __name__ == "__main__":
     unittest.main()

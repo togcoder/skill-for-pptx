@@ -7,6 +7,25 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T093 [pptx] Harmonise a colleague's patchwork deck — 2026-11-08
+
+- **Guide 10** `skills/pptx/guides/10-dong-bo-slide-co-san.md`: keep the content ("ruột": numbers,
+  terms, argument order, author's titles, evidence photos, notes), change the shell ("vỏ"). Seven
+  steps: idea table before touching the file, inventory, triage into keep / reshell / rebuild with a
+  table of common form changes, one system set once in the theme, per-object rules (charts, photos,
+  oversized shape clusters, tables), motion "clean first, add after", and a content check.
+- **Toolbox** `scripts/pptx_tools.py`: `inventory`, `rechart` (flat native chart from the chart's own
+  numbers, same id so its animation survives), `scale` (a block of loose shapes with text sizes,
+  strokes, table cells and inner motion paths), `unstretch` (crop or refit the frame), `numbers`
+  (every number of the original missing from the new deck); helpers `add_chart`, `theme_fonts`,
+  `follow_theme`. 5 new tests, 9/9.
+- **Rehearsal:** a synthetic 10-slide QCC patchwork deck (5 fonts, 14 sizes, 3D column and pie, a
+  111-word paragraph, an 8-column table, an oversized animated fishbone, two stretched photos,
+  bounce/spin/fly) harmonised by following guide 10: 1 font family, 6 sizes, 0 numbers lost,
+  PowerPoint resolves all 36 effects including the scaled fishbone's 18 (rung 4). Owner grade pending.
+- **R2 decided:** `pptx_tools` stays entrance-only; `NAR-LIFECYCLE` on its decks is a reminder.
+  `experiments/T093-20261108-claude-harmonize-deck/REPORT.md`.
+
 ## T092 [pptx] Guidance fixes from the T090 cross-family review — 2026-11-08
 
 - Applied every finding of `research/reviews/T087-dsh-20261108.md` that is pure guidance text, after
