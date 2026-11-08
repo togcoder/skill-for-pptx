@@ -1,0 +1,86 @@
+{
+ "design_system": "1.1.0",
+ "scores": {
+  "design": 4.98,
+  "motion": 5.0,
+  "rhythm": 4.5,
+  "coherence": 4.33,
+  "narrative": 4.45,
+  "overall": 4.65
+ },
+ "checks": 182,
+ "issues": [
+  {
+   "code": "DEN-WORDS",
+   "severity": "note",
+   "slide": 3,
+   "object": null,
+   "measured": 57,
+   "expected": [
+    0,
+    45
+   ],
+   "fix": "cut to the claim and its evidence, or split the slide"
+  },
+  {
+   "code": "NAR-LIFECYCLE",
+   "severity": "warn",
+   "slide": 3,
+   "object": null,
+   "measured": 0,
+   "expected": ">= 1 object lifecycle (enter -> dim/exit)",
+   "fix": "add dim or exit transitions across clicks instead of purely additive entrances"
+  },
+  {
+   "code": "DEN-WORDS",
+   "severity": "note",
+   "slide": 5,
+   "object": null,
+   "measured": 64,
+   "expected": [
+    0,
+    45
+   ],
+   "fix": "cut to the claim and its evidence, or split the slide"
+  },
+  {
+   "code": "DEN-ACTIVE-WORDS",
+   "severity": "warn",
+   "slide": 5,
+   "object": null,
+   "measured": 64,
+   "expected": "<= 45 active words",
+   "fix": "dim or exit prior cards/points so active on-screen words stay <= 45 per click state"
+  },
+  {
+   "code": "NAR-LIFECYCLE",
+   "severity": "warn",
+   "slide": 6,
+   "object": null,
+   "measured": 0,
+   "expected": ">= 1 object lifecycle (enter -> dim/exit)",
+   "fix": "add dim or exit transitions across clicks instead of purely additive entrances"
+  },
+  {
+   "code": "DUA-BREAK",
+   "severity": "note",
+   "slide": null,
+   "object": null,
+   "measured": 0,
+   "expected": ">= 1 pattern break for 5+ slide decks",
+   "fix": "insert high-whitespace pattern break slides near 1/3 and 2/3 deck milestones to prevent audience fatigue"
+  },
+  {
+   "code": "MOT-VOCAB",
+   "severity": "note",
+   "slide": null,
+   "object": null,
+   "measured": 2,
+   "expected": [
+    3,
+    10
+   ],
+   "fix": "one motion language: a style with 3-10 effect kinds"
+  }
+ ]
+}

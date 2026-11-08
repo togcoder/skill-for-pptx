@@ -7,6 +7,26 @@ kept verbatim: older ones mention test counts, versions and "next steps" that
 were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
+## T090 [pptx] A different model family builds with `skills/pptx` — 2026-11-08
+
+- **Deck.** `experiments/T090-20261108-dsh-skill-triet-hoc/artifacts/T090-triet-hoc-ch1.pptx`:
+  a 7-slide short version of Triết học chương 1, built by DeepSeek V4.1 Flash (DSH) after reading
+  `skills/pptx/` only — the skill's author is Claude, so this is the cross-family run T087's
+  acceptance asked for. 9 click groups, 28 entrance effects, one 1.4 s Morph (two proverbs become
+  the two stances), 6 type sizes, PowerPoint 16.0 build 17932 parses the Morph as `EntryEffect
+  3954` and renders it through `CreateVideo` (rung 4/5). Owner scoring is still pending.
+- **Two guidance bugs measured and reported, not patched.** A Morph ghosts its text when the two
+  slides wrap it differently (fixed here by identical explicit line breaks); `pptx_tools.motion`
+  has no dim/exit, so a strict entrance-only build can never pass `NAR-LIFECYCLE`. Eight concrete
+  guidance fixes are listed in the REPORT for the lead to apply to `skills/pptx/`.
+- **No product path changed.** The static-deck builder, the motion plan and two check scripts live
+  in the experiment's `inputs/`; no `scripts/` file and no capability was added.
+- **Cross-family review of T087** added: `research/reviews/T087-dsh-20261108.md` — verdict
+  `accept-with-fixes`, 10 findings (3 major: Morph ghosts text that wraps differently on the two
+  slides; the entrance-only toolbox cannot pass `NAR-LIFECYCLE`; the legacy PPTX skills still
+  advertise themselves as the entry point, contradicting D011). T087's main claims reproduce at
+  rungs 1/4/5.
+
 ## T087 [pptx] One PPTX skill written as design guidance — 2026-11-06
 
 - **`skills/pptx/`.**

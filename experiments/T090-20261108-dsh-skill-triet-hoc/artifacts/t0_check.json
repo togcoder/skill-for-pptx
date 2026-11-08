@@ -1,0 +1,130 @@
+{
+ "slides": [
+  {
+   "index": 1,
+   "transition": "none",
+   "clicks": 0,
+   "visible_at_t0": [
+    "Nen phai",
+    "Duong vang",
+    "Diem vang",
+    "Eyebrow",
+    "Tieu de",
+    "Gach vang",
+    "Phu de",
+    "Chan trang",
+    "Chan dung Mac",
+    "Chan dung Engels",
+    "Chan dung Lenin"
+   ],
+   "words_at_t0": 31
+  },
+  {
+   "index": 2,
+   "transition": "fade",
+   "clicks": 1,
+   "visible_at_t0": [
+    "Eyebrow",
+    "Tieu de",
+    "Gach tieu de",
+    "!!cau1",
+    "!!cau2"
+   ],
+   "words_at_t0": 24
+  },
+  {
+   "index": 3,
+   "transition": "morph",
+   "clicks": 2,
+   "visible_at_t0": [
+    "Eyebrow",
+    "Tieu de",
+    "Gach tieu de",
+    "Duong chia",
+    "!!cau1",
+    "!!cau2"
+   ],
+   "words_at_t0": 32
+  },
+  {
+   "index": 4,
+   "transition": "fade",
+   "clicks": 1,
+   "visible_at_t0": [
+    "Eyebrow",
+    "Tieu de",
+    "Gach tieu de",
+    "Trang thai Hat",
+    "Trang thai Mam",
+    "Trang thai Cay",
+    "Trang thai Bong",
+    "Cach nhin A"
+   ],
+   "words_at_t0": 23
+  },
+  {
+   "index": 5,
+   "transition": "fade",
+   "clicks": 1,
+   "visible_at_t0": [
+    "Eyebrow",
+    "Tieu de",
+    "Gach tieu de",
+    "Nguon 1",
+    "Mui ten 1",
+    "Bo phan 1",
+    "Nguon 2",
+    "Mui ten 2",
+    "Bo phan 2",
+    "Nguon 3",
+    "Mui ten 3",
+    "Bo phan 3"
+   ],
+   "words_at_t0": 46
+  },
+  {
+   "index": 6,
+   "transition": "fade",
+   "clicks": 3,
+   "visible_at_t0": [
+    "Eyebrow",
+    "Tieu de",
+    "Gach tieu de",
+    "Truc",
+    "Moc 1848",
+    "Nam 1848",
+    "Moc 1867",
+    "Nam 1867",
+    "Moc 1917",
+    "Nam 1917"
+   ],
+   "words_at_t0": 14
+  },
+  {
+   "index": 7,
+   "transition": "fade",
+   "clicks": 1,
+   "visible_at_t0": [
+    "Ngoac kep",
+    "Trich dan 1",
+    "Gach vang",
+    "Nguon"
+   ],
+   "words_at_t0": 24
+  }
+ ],
+ "problems": [],
+ "morph": {
+  "pair": [
+   2,
+   3
+  ],
+  "actors_in_both": [
+   "!!cau1",
+   "!!cau2"
+  ],
+  "actors_missing_destination": [],
+  "destination_actors_with_entrance": []
+ },
+ "ok": true
+}

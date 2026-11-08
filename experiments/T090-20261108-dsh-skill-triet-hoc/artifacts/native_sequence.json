@@ -1,0 +1,283 @@
+{
+ "powerpoint_version": "16.0",
+ "build": "17932",
+ "pptx": "C:\\Users\\COMPUTER\\Desktop\\làm chung với ai\\skill-for-pptx\\workspace\\T090\\experiments\\T090-20261108-dsh-skill-triet-hoc\\artifacts\\T090-triet-hoc-ch1.pptx",
+ "slides": [
+  {
+   "index": 1,
+   "effects": []
+  },
+  {
+   "index": 2,
+   "effects": [
+    {
+     "shape": "Ket luan",
+     "effect_type": 39,
+     "exit": 0,
+     "trigger": 1,
+     "delay_s": 0,
+     "duration_s": 0.6000000238418579,
+     "repeat_count": 1,
+     "until_end_of_slide": 0,
+     "auto_reverse": 0
+    }
+   ]
+  },
+  {
+   "index": 3,
+   "effects": [
+    {
+     "shape": "Chu de vat chat",
+     "effect_type": 39,
+     "exit": 0,
+     "trigger": 1,
+     "delay_s": 0,
+     "duration_s": 0.6000000238418579,
+     "repeat_count": 1,
+     "until_end_of_slide": 0,
+     "auto_reverse": 0
+    },
+    {
+     "shape": "Nhan duy vat",
+     "effect_type": 39,
+     "exit": 0,
+     "trigger": 2,
+     "delay_s": 0.11999999731779099,
+     "duration_s": 0.6000000238418579,
+     "repeat_count": 1,
+     "until_end_of_slide": 0,
+     "auto_reverse": 0
+    },
+    {
+     "shape": "Chu de y thuc",
+     "effect_type": 39,
+     "exit": 0,
+     "trigger": 2,
+     "delay_s": 0.23999999463558197,
+     "duration_s": 0.6000000238418579,
+     "repeat_count": 1,
+     "until_end_of_slide": 0,
+     "auto_reverse": 0
+    },
+    {
+     "shape": "Nhan duy tam",
+     "effect_type": 39,
+     "exit": 0,
+     "trigger": 2,
+     "delay_s": 0.36000001430511475,
+     "duration_s": 0.6000000238418579,
+     "repeat_count": 1,
+     "until_end_of_slide": 0,
+     "auto_reverse": 0
+    },
+    {
+     "shape": "Gach chon",
+     "effect_type": 22,
+     "exit": 0,
+     "trigger": 1,
+     "delay_s": 0,
+     "duration_s": 0.5,
+     "repeat_count": 1,
+     "until_end_of_slide": 0,
+     "auto_reverse": 0
+    },
+    {
+     "shape": "Ket luan",
+     "effect_type": 39,
+     "exit": 0,
+     "trigger": 2,
+     "delay_s": 0.11999999731779099,
+     "duration_s": 0.6000000238418579,
+     "repeat_count": 1,
+     "until_end_of_slide": 0,
+     "auto_reverse": 0
+    }
+   ]
+  },
+  {
+   "index": 4,
+   "effects": [
+    {
+     "shape": "Mui ten 1",
+     "effect_type": 22,
+     "exit": 0,
+     "trigger": 1,
+     "delay_s": 0,
+     "duration_s": 0.5,
+     "repeat_count": 1,
+     "until_end_of_slide": 0,
+     "auto_reverse": 0
+    },
+    {
+     "shape": "Mui ten 2",
+     "effect_type": 22,
+     "exit": 0,
+     "trigger": 2,
+     "delay_s": 0.11999999731779099,
+     "duration_s": 0.5,
+     "repeat_count": 1,
+     "until_end_of_slide": 0,
+     "auto_reverse": 0
+    },
+    {
+     "shape": "Mui ten 3",
+     "effect_type": 22,
+     "exit": 0,
+     "trigger": 2,
+     "delay_s": 0.23999999463558197,
+     "duration_s": 0.5,
+     "repeat_count": 1,
+     "until_end_of_slide": 0,
+     "auto_reverse": 0
+    },
+    {
+     "shape": "Ket luan",
+     "effect_type": 39,
+     "exit": 0,
+     "trigger": 2,
+     "delay_s": 0.36000001430511475,
+     "duration_s": 0.6000000238418579,
+     "repeat_count": 1,
+     "until_end_of_slide": 0,
+     "auto_reverse": 0
+    }
+   ]
+  },
+  {
+   "index": 5,
+   "effects": [
+    {
+     "shape": "Ket luan",
+     "effect_type": 39,
+     "exit": 0,
+     "trigger": 1,
+     "delay_s": 0,
+     "duration_s": 0.6000000238418579,
+     "repeat_count": 1,
+     "until_end_of_slide": 0,
+     "auto_reverse": 0
+    }
+   ]
+  },
+  {
+   "index": 6,
+   "effects": [
+    {
+     "shape": "Chan dung Mac",
+     "effect_type": 39,
+     "exit": 0,
+     "trigger": 1,
+     "delay_s": 0,
+     "duration_s": 0.6000000238418579,
+     "repeat_count": 1,
+     "until_end_of_slide": 0,
+     "auto_reverse": 0
+    },
+    {
+     "shape": "Chan dung Engels",
+     "effect_type": 39,
+     "exit": 0,
+     "trigger": 2,
+     "delay_s": 0.11999999731779099,
+     "duration_s": 0.6000000238418579,
+     "repeat_count": 1,
+     "until_end_of_slide": 0,
+     "auto_reverse": 0
+    },
+    {
+     "shape": "Viec 1848",
+     "effect_type": 39,
+     "exit": 0,
+     "trigger": 2,
+     "delay_s": 0.23999999463558197,
+     "duration_s": 0.6000000238418579,
+     "repeat_count": 1,
+     "until_end_of_slide": 0,
+     "auto_reverse": 0
+    },
+    {
+     "shape": "Sach",
+     "effect_type": 39,
+     "exit": 0,
+     "trigger": 1,
+     "delay_s": 0,
+     "duration_s": 0.6000000238418579,
+     "repeat_count": 1,
+     "until_end_of_slide": 0,
+     "auto_reverse": 0
+    },
+    {
+     "shape": "Sach ghim",
+     "effect_type": 39,
+     "exit": 0,
+     "trigger": 2,
+     "delay_s": 0.11999999731779099,
+     "duration_s": 0.6000000238418579,
+     "repeat_count": 1,
+     "until_end_of_slide": 0,
+     "auto_reverse": 0
+    },
+    {
+     "shape": "Sach chu",
+     "effect_type": 39,
+     "exit": 0,
+     "trigger": 2,
+     "delay_s": 0.23999999463558197,
+     "duration_s": 0.6000000238418579,
+     "repeat_count": 1,
+     "until_end_of_slide": 0,
+     "auto_reverse": 0
+    },
+    {
+     "shape": "Viec 1867",
+     "effect_type": 39,
+     "exit": 0,
+     "trigger": 2,
+     "delay_s": 0.36000001430511475,
+     "duration_s": 0.6000000238418579,
+     "repeat_count": 1,
+     "until_end_of_slide": 0,
+     "auto_reverse": 0
+    },
+    {
+     "shape": "Chan dung Lenin",
+     "effect_type": 39,
+     "exit": 0,
+     "trigger": 1,
+     "delay_s": 0,
+     "duration_s": 0.6000000238418579,
+     "repeat_count": 1,
+     "until_end_of_slide": 0,
+     "auto_reverse": 0
+    },
+    {
+     "shape": "Viec 1917",
+     "effect_type": 39,
+     "exit": 0,
+     "trigger": 2,
+     "delay_s": 0.11999999731779099,
+     "duration_s": 0.6000000238418579,
+     "repeat_count": 1,
+     "until_end_of_slide": 0,
+     "auto_reverse": 0
+    }
+   ]
+  },
+  {
+   "index": 7,
+   "effects": [
+    {
+     "shape": "Trich dan 2",
+     "effect_type": 39,
+     "exit": 0,
+     "trigger": 1,
+     "delay_s": 0,
+     "duration_s": 0.6000000238418579,
+     "repeat_count": 1,
+     "until_end_of_slide": 0,
+     "auto_reverse": 0
+    }
+   ]
+  }
+ ]
+}
