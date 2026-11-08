@@ -18,6 +18,8 @@ mình không.
 ## Câu hỏi cho từng slide
 
 - Nheo mắt nhìn: điểm nhấn có phải thứ quan trọng nhất không?
+- Nếu chỉ nhìn khung hình đầy đủ như một poster, bố cục có cân và có một điểm
+  nhấn không?
 - Có chữ nào bị cắt, tràn khung, gãy giữa từ, hoặc sai dấu tiếng Việt không?
 - Có chữ nội dung nào dưới 18 pt không? Có gì dưới 12 pt không?
 - Có thẻ, khung hay ô nào rỗng không? Có chữ mẫu, chữ giữ chỗ nào sót lại không?
@@ -33,6 +35,9 @@ mình không.
 - Chỉ đọc các tiêu đề, có hiểu câu chuyện không?
 - Nhịp có xen kẽ giữa dày và thưa, sáng và tối không?
 - Morph có đúng chỗ không, có quá 5 cái trong 15 slide không?
+- Bỏ hết chuyển động, từng slide có đứng được một mình không?
+- Cú Morph nào cần giải thích mới hiểu? Đó là cú gượng (xem guide 6).
+- Mức chuyển động có vừa với phòng không? (xem bảng trong guide 6)
 - Bìa có lần bấm nào không? (Bìa phải không có lần bấm nào.)
 
 ## Công cụ bắt lỗi

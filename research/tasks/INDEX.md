@@ -3,7 +3,7 @@
 Since T040: every new title starts with its domain in brackets: `[pptx]`, `[docx]`, `[xlsx]`, `[svg]` or `[cross]` (see `domains/README.md`). Lifecycle: `lab/PROTOCOL.md`. A row may carry `review requested` / `reviewed: <verdict>`.
 
 This file is the one place to take a task ID. Before starting, add a row with
-status `claimed`, using the next free ID (**T091**). Push the row before you do
+status `claimed`, using the next free ID (**T092**). Push the row before you do
 expensive work. IDs are never reused. T024 was taken three times in parallel,
 so those rows carry a suffix. The experiment folders keep the names they were
 created with.
@@ -120,4 +120,5 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T088 | [cross] Lead review of T081 and T086 (Antigravity): merge the useful parts | claude | `work/T088-claude-ag-salvage` | done | `experiments/T088-20261106-claude-ag-salvage/REPORT.md` |
 | T089 | [pptx] Fix harmful defaults: Forge (KPI 0, 14 pt shrink, hard-coded chrome, `!!orb` Morph), Director (cover clicks, Morph everywhere), overflow false positive without the font | *open; suggested OpenCode → critic Claude* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |
 | T090 | [pptx] Small model uses `skills/pptx`: adapt an approved example to new content; owner opens and scores | dsh | `work/T090-dsh-skill-triet-hoc` | review requested; owner scoring pending | `experiments/T090-20261108-dsh-skill-triet-hoc/REPORT.md` |
-| T091 | *next free ID* | | | | |
+| T091 | [pptx] Rung-6 owner grades: simple-but-fit motion law and composition-first check | OpenCode (DeepSeek V4.1 Flash) | `work/T091-opencode-rung6-motion-law` | review requested | `experiments/T091-20261108-opencode-rung6-motion-law/REPORT.md` |
+| T092 | *next free ID* | | | | |

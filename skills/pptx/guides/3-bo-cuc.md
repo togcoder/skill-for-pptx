@@ -41,6 +41,20 @@ Một bộ slide thường chỉ gồm chừng mười vai trò. Chọn vai trò
 Trong cùng một vai trò, hãy **biến tấu**: đổi bên ảnh, đổi tỷ lệ chia (1/2, 1/3, 2/3), đổi nền sáng
 và tối. Không đặt ba slide liền nhau cùng một kiểu "ba thẻ ngang".
 
+## Bài kiểm tra poster (làm trước khi thêm chuyển động)
+
+Xuất slide **đã hiện đủ mọi thứ** ra ảnh, thu nhỏ bằng cửa sổ đang xem, rồi
+nhìn như một tấm poster:
+
+- Có đúng một điểm nhấn không? Nheo mắt vẫn thấy nó trước.
+- Hai bên trái/phải, trên/dưới có cân không? Có khối nào treo lơ lửng một mình
+  không?
+- Nếu đây là tấm áp phích dán ở hành lang, người đi qua có hiểu ý chính trong
+  ba giây không?
+
+Chưa đạt thì sửa bố cục, đừng thêm chuyển động. Một cú Morph nối hai bố cục yếu
+sẽ đọc thành hai bố cục đổi chỗ, không thành một ý đang lớn lên.
+
 ## Nhịp của cả bộ
 
 - Xen kẽ slide dày và slide thưa, sáng và tối, ảnh và chữ và sơ đồ.

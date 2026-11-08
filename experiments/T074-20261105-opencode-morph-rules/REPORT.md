@@ -115,6 +115,17 @@ fly-in must be authored, not assumed.
    that PowerPoint makes by a rule not in the matrix. The rendered video remains
    the rung-5 check.
 
+## Rung 6: the owner watched T069a (2026-11-08)
+
+The owner scored T069a's motion **6/10**: *"hơi bị đơn giản và quá gượng gạo"*,
+with the composition also named. T069a passes this audit with **0 findings**.
+So the matrix rules are necessary but not sufficient: they predict whether
+PowerPoint will interpolate, not whether the cut reads as one idea. No rule in
+the 11 was contradicted; the missing dimension is composition and intent, which
+the audit cannot measure. The rulebook now carries that limit explicitly
+(`morph-rules.md`, "What the audit cannot see"). T091 records the grade and the
+human tests.
+
 ## Files
 
 - `artifacts/morph-matrix.pptx` — 45-slide matrix deck.

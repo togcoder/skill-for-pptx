@@ -1,0 +1,37 @@
+{
+  "task": "T091",
+  "date": "2026-11-08",
+  "reviewer": "owner",
+  "rung": 6,
+  "method": "Owner opened both .pptx files in PowerPoint and watched the named cuts.",
+  "decks": [
+    {
+      "id": "T087-demo",
+      "path": "workspace/T087/experiments/T087-20261106-claude-pptx-guidance-skill/artifacts/demo-triet-hoc.pptx",
+      "sha256": "D1A05FF6E1FE9945FD1CDE7303C657A056985C8CE1AF8B509FF31E6EA03D2DE8",
+      "slides": 5,
+      "score": 7,
+      "scale": 10,
+      "verdict": "pass",
+      "owner_quote": "nội dung ổn, hiệu ứng dù đơn giản nhưng rất phù hợp với môi trường 1 bài thuyết trình trên trường đơn giản",
+      "reading": "Simple fades/rise and one cover-to-timeline Morph fit a classroom. Simplicity is not the defect."
+    },
+    {
+      "id": "T069a",
+      "path": "experiments/T069-20261104-opencode-directed-deck/artifacts/T069-directed-morph.pptx",
+      "sha256": "7A3D45890FDEAC380A468C2E0CD5D8F043619241245285048ECF27CB27C6948D",
+      "slides": 14,
+      "score": 6,
+      "scale": 10,
+      "verdict": "fail",
+      "owner_quote": "gu của motion này hơi bị đơn giản và quá gượng gạo kèm thêm bố cục sắp xếp có phần hơi không ổn",
+      "reading": "Forced cuts and weak composition. The four Morphs are structurally valid but do not read as one idea."
+    }
+  ],
+  "structural_checks": {
+    "T069a_morph_audit": "0 findings (T074)",
+    "T069a_design_critic": 3.99,
+    "T066_design_critic": 4.03,
+    "T069a_narrative": 4.92
+  }
+}
