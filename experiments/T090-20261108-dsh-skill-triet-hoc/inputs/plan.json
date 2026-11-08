@@ -1,0 +1,27 @@
+{
+  "transitions": {
+    "default": "fade",
+    "1": "none",
+    "2": "fade",
+    "3": "morph",
+    "4": "fade",
+    "5": "fade",
+    "6": "fade",
+    "7": "fade"
+  },
+  "clicks": {
+    "2": [["Ket luan:rise"]],
+    "3": [
+      ["Chu de vat chat:rise", "Nhan duy vat:rise", "Chu de y thuc:rise", "Nhan duy tam:rise"],
+      ["Gach chon:wipe", "Ket luan:rise"]
+    ],
+    "4": [["Mui ten 1:wipe", "Mui ten 2:wipe", "Mui ten 3:wipe", "Ket luan:rise"]],
+    "5": [["Ket luan:rise"]],
+    "6": [
+      ["Chan dung Mac:rise", "Chan dung Engels:rise", "Viec 1848:rise"],
+      ["Sach:rise", "Sach ghim:rise", "Sach chu:rise", "Viec 1867:rise"],
+      ["Chan dung Lenin:rise", "Viec 1917:rise"]
+    ],
+    "7": [["Trich dan 2:rise"]]
+  }
+}

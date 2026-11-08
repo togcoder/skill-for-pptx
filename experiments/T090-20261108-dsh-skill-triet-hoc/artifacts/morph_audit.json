@@ -1,0 +1,26 @@
+{
+  "findings": [
+    {
+      "code": "MORPH-UNNAMED-PAIR",
+      "from_slide": 2,
+      "to_slide": 3,
+      "object": "Eyebrow",
+      "detail": "may pair with 'Eyebrow' (distance 0.000)"
+    },
+    {
+      "code": "MORPH-UNNAMED-PAIR",
+      "from_slide": 2,
+      "to_slide": 3,
+      "object": "Tieu de",
+      "detail": "may pair with 'Tieu de' (distance 0.000)"
+    },
+    {
+      "code": "MORPH-UNNAMED-PAIR",
+      "from_slide": 2,
+      "to_slide": 3,
+      "object": "Ket luan",
+      "detail": "may pair with 'Ket luan' (distance 0.033)"
+    }
+  ],
+  "errors": []
+}
