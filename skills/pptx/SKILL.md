@@ -37,6 +37,10 @@ slide rẻ hơn sửa 30.
 chứng, hiệu ứng kể cơ chế, video), thay vỏ (font, màu, bố cục, kiểu biểu đồ, hiệu ứng trang trí). Lập
 bảng ý trước khi sửa.
 
+**Tái cơ cấu cả một bộ** (đổi câu chuyện, gộp tách slide, nhiều phiên hay nhiều agent): thêm
+[guides/11-dung-lai-ca-bo.md](guides/11-dung-lai-ca-bo.md): bảy chặng có cổng, dựng trên bản sao bộ gốc,
+một agent khác chấm theo hai tầng (cổng máy, rồi mắt).
+
 Chọn **mức** chuyển động theo phòng, không theo số hiệu ứng: một lớp học cần ít
 hơn một sân khấu hội nghị. Đơn giản mà vừa tốt hơn phức tạp mà gượng (guide 6).
 
@@ -89,3 +93,5 @@ Viết ngắn, bằng lời thường, theo thứ tự:
 | Bộ có sẵn: thu một cụm hình như một khối (chữ, nét, đường bay đi theo) | `python scripts/pptx_tools.py scale DECK 4 "A" "B" --by 0.7 -o OUT` |
 | Bộ có sẵn: sửa ảnh bị kéo méo | `python scripts/pptx_tools.py unstretch DECK 8 "Anh" [--box] -o OUT` |
 | Bộ có sẵn: số nào của bản gốc đã mất | `python scripts/pptx_tools.py numbers GOC.pptx MOI.pptx` |
+| Dựng lại cả bộ: ảnh, video gốc thành file, và `manifest.json` của từng slide | `python scripts/pptx_tools.py extract GOC.pptx -o DIR` |
+| Dựng lại cả bộ: cổng giữ ruột (chuyển slide, hiệu ứng, video, số, ảnh gốc) | `python scripts/pptx_tools.py check GOC.pptx MOI.pptx --map map.json` |

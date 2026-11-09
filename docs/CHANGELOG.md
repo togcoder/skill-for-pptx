@@ -9,6 +9,23 @@ were true at the time. Task IDs and their branches are listed in
 
 
 
+## T097 [pptx] Rebuild an existing deck with agents: extract, score, staged pipeline — 2026-11-09
+
+- **Why:** after DSH's rejected Ver4 rebuild of the QCC deck, the owner asked for research on how to
+  score a rebuild, how to take the original apart, and how agents can restructure a deck end to end.
+  Sources skimmed: PPTAgent (edit reference slides; analysis then generation with execution feedback;
+  PPTEval content/design/coherence), SlidesBench, Auto-Slides and DeepPresenter (separate critic).
+- **Toolbox:** `extract DECK -o DIR` (original pictures and videos as files, `manifest.json` per slide:
+  text, notes, chart data, tables, media boxes, visible share, animated or not, transition, effects);
+  `check BEFORE AFTER [--map]` (8 pass/fail gates: transitions, dangling effects, videos kept, videos
+  full-slide, numbers, pictures cut tighter, keep slides keep their effects, source pictures on their
+  slide minus a `drop` list). Pictures match by look (64-bit dHash), since a rebuild re-saves them.
+- **Guide 11 (new):** seven stages with gates, one short card per stage instead of one long brief, build
+  on a copy, `map.json`, two-tier scoring (machine gates, then 4 eye scores 1-5 with anchors and the 3
+  worst slides; no single total, D001). SKILL.md and guide 9 point to it. 2 new tests (599 pass).
+- **Evidence:** Ver3-4 against itself 6/8 (its own old transitions and small videos); Ver3-4 to Ver4
+  2/8, the same faults the owner named. `experiments/T097-20261109-claude-rebuild-pipeline/REPORT.md`.
+
 ## T096 [pptx] Following a reference PDF; small-text floor scaled to slide height — 2026-11-09
 
 - **Why:** the owner tested the skill on an outside job: restyle the QCC theme (20 x 11.25 in) after a

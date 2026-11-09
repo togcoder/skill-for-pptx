@@ -112,6 +112,17 @@ Chuyển một bảng lớn xuống phụ lục mà không mất số: thêm sli
 (`copy.deepcopy(table._element)` rồi `slide.shapes._spTree.append(...)`), xóa bảng ở slide cũ.
 Ví dụ đầy đủ: `experiments/T093-20261108-claude-harmonize-deck/inputs/harmonize.py`.
 
+## Dựng lại cả bộ (mục 11)
+
+`extract GOC.pptx -o DIR` chép mọi ảnh và video gốc ra `DIR/media` (mỗi file một lần, tên theo nội dung)
+và ghi `DIR/manifest.json`: mỗi slide có chữ, notes, số của biểu đồ, bảng, ảnh và video (tên, file, vị trí
+theo % slide, phần ảnh còn thấy, có hiệu ứng không), kiểu chuyển slide, số hiệu ứng. Slide dựng lại lấy ảnh
+từ đây, không từ ảnh chụp màn hình.
+
+`check GOC.pptx MOI.pptx --map map.json` in từng cổng `PASS`/`FAIL` và trả mã lỗi 1 khi còn cổng trượt.
+Ảnh lưu lại hay thu nhỏ vẫn được nhận là ảnh gốc (so theo hình, không theo byte); ảnh bị cắt bớt trong
+file, hay cắt từ ảnh chụp màn hình, thì không, và nằm trong danh sách "not from the original".
+
 ## Công cụ cũ: dùng có điều kiện
 
 - **Slide Forge** (`slide_forge.py`): dựng nhanh từ một bản mô tả, nhưng bố cục chung chung. Nếu
