@@ -28,12 +28,14 @@ kiểm tra chỉ để bắt lỗi, không chứng minh slide đẹp.
 Chuyển động thêm vào một bố cục xấu không làm nó đẹp lên. Vì vậy bản tĩnh phải đẹp trước.
 
 **Phong cách mới, hay dựng lại cả một bộ:** trước tiên làm **3 slide mẫu**: một slide số liệu, một slide
-so sánh, và slide dày nhất của bộ. Đưa người dùng duyệt 3 slide đó rồi mới làm cả bộ. Sửa 3 slide rẻ hơn
-sửa 30.
+so sánh, và slide dày nhất của bộ. Dựng lại một bộ có sẵn thì một trong 3 slide là slide **khó giữ nhất**:
+sơ đồ chuẩn, hoặc slide có hiệu ứng mô phỏng. Đưa người dùng duyệt 3 slide đó rồi mới làm cả bộ. Sửa 3
+slide rẻ hơn sửa 30.
 
 **Nhận một bộ slide có sẵn để làm cho đồng bộ** (đủ nội dung, chắp vá về hình thức): đi theo
 [guides/10-dong-bo-slide-co-san.md](guides/10-dong-bo-slide-co-san.md). Giữ ruột (số, chữ, ý, ảnh bằng
-chứng), thay vỏ (font, màu, bố cục, kiểu biểu đồ, chuyển động). Lập bảng ý trước khi sửa.
+chứng, hiệu ứng kể cơ chế, video), thay vỏ (font, màu, bố cục, kiểu biểu đồ, hiệu ứng trang trí). Lập
+bảng ý trước khi sửa.
 
 Chọn **mức** chuyển động theo phòng, không theo số hiệu ứng: một lớp học cần ít
 hơn một sân khấu hội nghị. Đơn giản mà vừa tốt hơn phức tạp mà gượng (guide 6).

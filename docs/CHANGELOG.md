@@ -30,6 +30,15 @@ were true at the time. Task IDs and their branches are listed in
   number has one home slide" (`inventory` lists numbers on 4+ slides); guide 2 takes a sample's system,
   not its print accessories; SKILL.md asks presented-or-read and builds 3 sample slides before a whole
   restyle. A left-edge count was tried and dropped: it did not separate gridded from ungridded decks.
+- **From DSH's Ver4 rebuild of the 37-slide QCC deck (rejected by the owner):** `inventory` crashed on
+  any deck with a video (`'Movie' object has no attribute 'fill'`, a T095 bug), so the agent never saw
+  the old transitions or the effect counts. Fixed; `inventory` now also prints a `transitions` line,
+  flags old-style ones (glitter, checker, peelOff…), and flags effects that point to deleted shapes.
+  On the real decks: Ver3-4 had 1,042 effects (648 on one machine simulation), Ver4 had 0. Guide 10:
+  effects that tell a mechanism, and video, are content; a "Slide có hiệu ứng" recipe (reskin in place
+  on a copy, never swap for a picture); video fills the slide by default; clear old transitions with
+  `"default": "none"` as soon as the copy is made. Guide 3: the cover title says what the talk is
+  about; a Video row. SKILL.md: one of the 3 sample slides is the hardest one to keep. 1 new test.
 
 ## T095 [pptx] Guide 10 and toolbox fixes from the T094 rehearsal — 2026-11-09
 

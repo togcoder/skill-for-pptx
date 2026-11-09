@@ -252,6 +252,26 @@ class SizeAndSampleTests(unittest.TestCase):
         self.assertNotIn("422 on", report)   # part of a code
         self.assertNotIn("2026 on", report)
 
+    def test_inventory_reads_a_rebuilt_deck_with_video_old_transitions_and_lost_targets(self):
+        from lxml import etree
+        src, mid = self.dir / "v.pptx", self.dir / "v2.pptx"
+        _deck(src)
+        tools.apply_motion(src, {"clicks": {"1": [["Card A"]]}}, mid)
+        prs = Presentation(mid)
+        clip = self.dir / "clip.mp4"
+        clip.write_bytes(b"\x00" * 64)
+        prs.slides[1].shapes.add_movie(str(clip), 0, 0, Inches(4), Inches(3), mime_type="video/mp4")
+        card = next(s for s in prs.slides[0].shapes if s.name == "Card A")
+        card._element.getparent().remove(card._element)    # its click effect stays behind
+        prs.slides[2]._element.append(etree.fromstring(
+            '<p:transition xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main">'
+            '<p:checker/></p:transition>'))
+        prs.save(mid)
+        report = tools.inventory(mid)                       # used to crash on the video
+        self.assertIn("transitions: none x2, checker x1", report)
+        self.assertIn("old-style transition 'checker'", report)
+        self.assertIn("effects point to 1 shapes that are gone", report)
+
     @unittest.skipUnless(__import__("importlib").util.find_spec("fitz"), "PyMuPDF not installed")
     def test_sample_reads_fonts_sizes_and_colours_of_a_pdf(self):
         import fitz

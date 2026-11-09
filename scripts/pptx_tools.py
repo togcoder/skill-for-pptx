@@ -249,8 +249,10 @@ def _slide_effects(slide):
 
 def _transition(slide):
     for node in slide._element.iter(qn("p:transition")):
-        kids = [E.QName(k).localname for k in node]
-        return kids[0] if kids else "cut"
+        if not len(node):
+            return "cut"
+        kind = E.QName(node[0]).localname
+        return node[0].get("prst", kind) if kind == "prstTrans" else kind  # p15 names: peelOff, curtains…
     return None
 
 
@@ -294,7 +296,7 @@ def inventory(deck):
     sw, sh = prs.slide_width, prs.slide_height
     floor = _floor(prs)
     fonts, sizes, colours, fills = Counter(), Counter(), Counter(), Counter()
-    on_slides = Counter()
+    on_slides, transitions = Counter(), Counter()
     lines = []
     for i, slide in enumerate(prs.slides, 1):
         words, flags, small = 0, [], {}
@@ -306,7 +308,7 @@ def inventory(deck):
         for shape in _walk(slide.shapes):
             if shape.shape_type not in (MSO_SHAPE_TYPE.PICTURE, MSO_SHAPE_TYPE.GROUP, MSO_SHAPE_TYPE.LINE) \
                     and not getattr(shape, "has_chart", False) and not getattr(shape, "has_table", False):
-                colour = _fill(shape.fill)
+                colour = _fill(getattr(shape, "fill", None))  # a video has no fill
                 if colour:
                     fills[colour] += 1
             frames = [shape.text_frame] if shape.has_text_frame else []
@@ -356,18 +358,28 @@ def inventory(deck):
         if clicks and len(_opening(slide)) <= 1:
             flags.append("opens with only the title visible: show the frame (labels, axes) at the start, "
                          "let clicks add data and conclusions")
+        ids = {n.get("id") for n in slide._element.iter(qn("p:cNvPr"))}
+        lost = {t.get("spid") for t in slide._element.iter(qn("p:spTgt"))} - ids
+        if lost:
+            flags.append(f"effects point to {len(lost)} shapes that are gone: PowerPoint repairs the file and "
+                         "drops them. Delete a shape and its effects together, or keep the shape")
         loud = sorted({n for n in effects if n.split(":", 1)[1] not in CALM})
+        kind = _transition(slide) or "none"
+        transitions[kind] += 1
         lines.append(f"slide {i}: {len(slide.shapes)} shapes, {words} words, transition "
-                     f"{_transition(slide) or 'none'}, {clicks} clicks, {sum(effects.values())} effects")
+                     f"{kind}, {clicks} clicks, {sum(effects.values())} effects")
         if loud:
             lines.append("  ! decorative effects: " + ", ".join(loud))
+        if kind not in ("none", "cut", "fade", "morph"):
+            lines.append(f"  ! old-style transition {kind!r}: guide 6 uses fade, Morph or none")
         lines += ["  ! " + f for f in flags]
     size_note = "" if floor == MIN_BODY_PT else f" (text floor {floor:g} pt at this height, guide 4)"
     top = [f"deck: {len(prs.slides)} slides, {sw / 914400:.2f} x {sh / 914400:.2f} in{size_note}",
            f"fonts ({len(fonts)}): " + ", ".join(f"{k} x{v}" for k, v in fonts.most_common()),
            f"sizes ({len(sizes)}; guide 4 wants 3-6): " + ", ".join(f"{k:g}" for k in sorted(sizes)),
            f"text colours ({len(colours)}): " + ", ".join(f"{k} x{v}" for k, v in colours.most_common(8)),
-           f"fills ({len(fills)}): " + ", ".join(f"{k} x{v}" for k, v in fills.most_common(8))]
+           f"fills ({len(fills)}): " + ", ".join(f"{k} x{v}" for k, v in fills.most_common(8)),
+           "transitions: " + ", ".join(f"{k} x{v}" for k, v in transitions.most_common())]
     many = [f"{n} on {c} slides" for n, c in on_slides.most_common() if c >= 4]
     if many:
         top.append("numbers on 4+ slides (guide 3: each key number has one home slide): " + ", ".join(many[:6]))

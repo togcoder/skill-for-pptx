@@ -31,7 +31,8 @@ Một bộ slide thường chỉ gồm chừng mười vai trò. Chọn vai trò
 
 | Vai trò | Bố cục hợp |
 |---|---|
-| Bìa | Tiêu đề lớn bên trái, ảnh lớn bên phải hoặc tràn nền. Không gạch đầu dòng. |
+| Bìa | Tiêu đề lớn bên trái, ảnh lớn bên phải hoặc tràn nền. Không gạch đầu dòng. Tiêu đề nói bài về việc gì (vấn đề hoặc kết quả); tên đội, ảnh thành viên là phụ. |
+| Video | Tràn slide (quay dọc thì cao bằng slide). Tiêu đề là dải mỏng ở mép hoặc ở slide trước. |
 | Mục (sang phần mới) | Nền màu đậm hoặc màu nhấn, số thứ tự và tên mục thật lớn. |
 | Một câu hoặc một con số | Chữ hoặc số rất lớn (72–120 pt) ở giữa hoặc lệch về 1/3 trái; một dòng giải thích nhỏ. |
 | Ảnh và ý | Ảnh chiếm từ 1/2 đến toàn slide; chữ đặt ở phần trống của ảnh hoặc trên một dải màu. |

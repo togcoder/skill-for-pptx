@@ -97,6 +97,37 @@ poster ba giây (mục 3).
 ra lần lượt 21, 20 và 33. Bộ có lưới và bộ không có cho số gần như nhau, vì cột KPI và nhãn sơ đồ cũng
 bị đếm, nên con số này không phân biệt được hai loại.
 
+## Bài học từ bản dựng lại Ver4 của DSH (37 slide QCC, chủ dự án loại)
+
+DSH dựng lại bộ QCC thật theo brief của trưởng nhóm (file ngoài repo) rồi tự viết đánh giá. Trưởng
+nhóm đối chiếu đánh giá đó với file và WORKLOG của dự án:
+
+- **Lỗi của skill:** `inventory` chết ngay bước 1 trên deck có video (`'Movie' object has no attribute
+  'fill'`, lỗi từ T095). Agent mất công cụ duy nhất in ra kiểu chuyển slide và số hiệu ứng của từng
+  slide. Guide 10 còn xếp "chuyển động" vào phần vỏ, không tách hiệu ứng kể cơ chế ra khỏi hiệu ứng
+  trang trí, và không có cách thay vỏ một slide có hiệu ứng.
+- **Lỗi của brief:** bảo đặt video "trong một khung gọn"; bước dựng ghi "mỗi slide: bỏ thanh bước cũ và
+  nền", còn quy tắc giữ hiệu ứng nằm ở một mục khác; 3 slide mẫu không có slide khó giữ nhất; bìa không
+  có thông điệp; bản tĩnh đem duyệt không dọn kiểu chuyển slide cũ.
+- **Lỗi của agent:** tự xóa `<p:timing>` của 33 slide khi dùng lại (WORKLOG của dự án), thay 6 slide mô
+  phỏng bằng ảnh chụp bị cắt, đổi xương cá thành sơ đồ 4M; brief và guide 10 đều cấm cả hai. Đoạn mã tự
+  xóa kiểu chuyển slide sót kiểu bọc trong `mc:AlternateContent`. Lời agent "`motion` không dọn kiểu cũ"
+  không đúng: kế hoạch có `"default"` dọn hết; agent chỉ thử trên bản sao.
+
+Số đo do trưởng nhóm chạy bằng `inventory` đã sửa: Ver3-4 có 1.042 hiệu ứng (riêng slide 17: 170 vật
+thể, 648 hiệu ứng); Ver4 có 0. Dòng `transitions` của Ver4: `none x29, morph x2, checker x2, glitter
+x1, split x1, fade x1, drape x1, peelOff x1`, khớp lời chủ dự án "chỗ có chỗ không".
+
+**Đã sửa:** `inventory` bỏ qua `fill` của video; thêm dòng `transitions`, cờ kiểu chuyển slide cũ, cờ
+hiệu ứng trỏ tới vật thể đã xóa (1 test mới). Guide 10: hiệu ứng kể cơ chế và video là ruột; mục "Slide
+có hiệu ứng: thay vỏ tại chỗ"; mục "Video" (mặc định tràn slide); dọn kiểu chuyển slide ngay khi tạo bản
+sao; bước 7 kiểm số hiệu ứng và video. Guide 3: bìa nói bài về việc gì; dòng Video. SKILL.md: một trong 3
+slide mẫu là slide khó giữ nhất.
+
+**Chưa làm (agent đề nghị):** bộ thành phần riêng cho QCC (thanh bước, xương cá, Gantt): skill dùng
+chung cho mọi bộ, còn các thành phần này đã nằm trong builder v6 của dự án. Lệnh xem trước chuyển động,
+máy dò ảnh bị cắt: chờ thấy cần lần nữa.
+
 ## Không làm
 
 - Không bảng font thay bằng mã. Chọn font gần nhất là việc của người, theo vài dòng trong mục 2;
