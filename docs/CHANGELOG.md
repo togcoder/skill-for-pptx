@@ -27,7 +27,11 @@ were true at the time. Task IDs and their branches are listed in
   asks until it understands. **Guide 1** gains "ask until you understand" for big jobs: read first, rounds
   of 3-5 questions with a recommendation, show options for taste, offer ideas beyond the request as
   choices, restate as a one-page intent brief, stop when nothing is marked "?" and the user says yes.
-  SKILL.md step 1 splits small and big jobs. 2 new tests (599 pass).
+  SKILL.md step 1 splits small and big jobs. Guide 1 also gains "after you understand: when to ask
+  again": two self-checks before any question, six kinds of feedback (owner's real words as examples:
+  small and clear, taste, vague, touches the intent, "go on anyway", misunderstood), targeted re-asking
+  when understanding was wrong, and a correction log so the user never says a thing twice. 2 new tests
+  (599 pass).
 - **Evidence:** Ver3-4 against itself 6/8 (its own old transitions and small videos); Ver3-4 to Ver4
   2/8, the same faults the owner named. `experiments/T097-20261109-claude-rebuild-pipeline/REPORT.md`.
 

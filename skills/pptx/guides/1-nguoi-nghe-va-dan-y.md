@@ -94,3 +94,49 @@ nói "đúng".
 
 Lời nói không chở hết được gu. Vì vậy bản hiểu ý chưa phải phép thử cuối: ba slide mẫu mới là phép thử
 cuối (mục 11). Người dùng gật bản hiểu ý mà lắc đầu với mẫu thì hỏi tiếp, từ chính những chỗ họ lắc đầu.
+
+## Sau khi đã hiểu: khi nào hỏi lại, khi nào cứ làm
+
+Bản hiểu ý đã được duyệt là một thỏa thuận. Đừng mở lại cả cuộc hỏi chỉ vì người dùng xin sửa một chỗ:
+điều đó làm phiền họ và cho thấy bạn không nhớ. Ngược lại, khi kết quả bị chê nặng thì cứ sửa vá tiếp là
+sai: chỗ hỏng nằm ở bản hiểu ý, không nằm ở slide.
+
+**Trước mỗi câu hỏi, tự hỏi hai điều:**
+
+1. Người dùng đã nói điều này chưa? Xem bản hiểu ý và sổ sửa (dưới đây).
+2. Câu trả lời có làm mình làm khác đi không?
+
+Nếu đã nói rồi, hoặc trả lời kiểu nào mình cũng làm như nhau, thì đừng hỏi. Hỏi nhiều hay ít tùy vào
+cái giá của việc hiểu sai: sửa sai một chữ thì rẻ, cứ làm; hiểu sai câu chuyện hay gu thì đắt, phải hỏi.
+
+**Đọc lời góp ý, xếp vào một trong sáu loại** (ví dụ là lời thật của một chủ dự án):
+
+| Người dùng nói | Loại | Làm gì |
+|---|---|---|
+| "Week point sửa thành Weak point" | Nhỏ, rõ | Sửa luôn. Báo một dòng: đã sửa gì, ở slide nào. |
+| "Ảnh con hàng để chỗ này vô duyên" | Nhỏ, nhưng là **gu** | Gu về một loại vật thể thường là luật cho mọi slide cùng loại. Sửa slide đó, sửa các slide cùng loại, rồi báo danh sách. Chỉ khi không rõ đó có phải luật chung không thì hỏi một câu: "Áp cho mọi slide có ảnh sản phẩm chứ?" |
+| "Slide 10 lù mù quá" | Mơ hồ, một chỗ | Đừng hỏi "lù mù là sao?". Nhìn chính slide đó để đoán: tiêu đề không nói kết luận? nhiều thứ ngang hàng, không có điểm nhấn? chữ nhỏ? Một nguyên nhân rõ thì sửa luôn, đưa ảnh trước/sau. Hai nguyên nhân ngang nhau thì dựng 2 phương án cho người dùng chọn. |
+| "Bỏ phần này, thêm phần kia vào câu chuyện" | Chạm vào bản hiểu ý | Sửa đúng mục đó của bản hiểu ý, liệt kê các slide bị ảnh hưởng. Chỉ hỏi về phần mới, không hỏi lại phần đã chốt. |
+| "Chưa ổn, nhưng làm cho hết đi rồi tôi sửa một thể" | Người dùng chọn đi tiếp | Nói rủi ro trong một câu: lỗi của mẫu sẽ lặp lại ở mọi slide cùng kiểu, nên sửa đúng lỗi đó trước sẽ rẻ hơn. Người dùng vẫn bảo đi tiếp thì đi, và ghi lỗi đó vào sổ. |
+| "Thất vọng", "không phải ý tôi", chê nhiều slide một lúc, hoặc **cùng một lời chê lần thứ hai** | Hiểu sai | Dừng dựng (xem dưới). |
+
+**Khi hiểu sai: hỏi lại, nhưng có trọng tâm.**
+
+1. Đặt từng lời chê cạnh bản hiểu ý. Tìm dòng nào sai, dòng nào thiếu, hoặc dòng nào đúng mà mình làm
+   ngược.
+2. Nói lại với người dùng bằng một câu: "Tôi đã hiểu X, nhưng bạn muốn Y, đúng không?"
+3. Brainstorm lại **chỉ phần đó**, với 2–3 phương án nhìn được trên chính slide bị chê.
+4. Sửa bản hiểu ý, sửa một slide mẫu theo hướng mới, cho người dùng gật, rồi mới sửa các slide khác.
+
+Lời chê lặp lại lần thứ hai nghĩa là lần sửa trước đã sửa đúng chỗ người dùng chỉ, nhưng sai cái họ cần.
+Đừng sửa lần thứ ba theo cùng cách.
+
+**Sổ sửa.** Bản hiểu ý có một mục cuối tên "Lời người dùng đã sửa". Mỗi lời sửa ghi một dòng:
+
+- ngày;
+- lời nguyên văn;
+- mình hiểu là gì;
+- áp cho đâu: một slide, mọi slide cùng loại, hay cả bộ.
+
+Đọc lại sổ trước mỗi đợt dựng. Người dùng không bao giờ phải nói một điều hai lần, kể cả khi phiên sau do
+agent khác làm.

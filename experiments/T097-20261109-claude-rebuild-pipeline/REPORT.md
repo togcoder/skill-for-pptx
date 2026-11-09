@@ -75,6 +75,13 @@ Ba điều rút ra, khớp với lỗi của Ver4:
     dấu lại; 3 slide mẫu là phép thử cuối.
 - SKILL.md bước 1: việc nhỏ hỏi tối đa 2 câu, việc lớn hỏi theo vòng. SKILL.md trỏ tới guide 11 và hai lệnh
   mới; guide 9 có mục cho `extract` và `check`.
+- **Guide 1, phần "Sau khi đã hiểu: khi nào hỏi lại, khi nào cứ làm".** Chủ dự án nói hỏi trước là hay,
+  nhưng sửa một chỗ nhỏ mà cũng hỏi lại từ đầu thì kỳ; còn slide quá tệ thì phải hỏi lại. Phần này gồm:
+  - hai câu tự hỏi trước mỗi câu hỏi: người dùng đã nói chưa; câu trả lời có làm mình làm khác đi không;
+  - bảng 6 loại góp ý, lấy lời thật của chủ dự án làm ví dụ;
+  - khi hiểu sai: tìm dòng sai trong bản hiểu ý, chỉ hỏi lại phần đó;
+  - lời chê lặp lại lần hai là dấu hiệu hiểu sai;
+  - sổ sửa, để người dùng không phải nói một điều hai lần.
 - **Vòng sửa theo chủ dự án:** bản đầu có 7 chặng. Chủ dự án thấy chặt chẽ nhưng quá dài, và đề nghị để
   agent hỏi cho tới khi chắc chắn hiểu ý. Rút còn 3 bước; các cổng giữ nguyên, nằm bên trong từng bước.
 
