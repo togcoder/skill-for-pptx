@@ -821,11 +821,13 @@ def critique(path,render=None,xsd=None):
         check("TYP-SIZES",ds.grade(len(distinct),typ["sizes_per_deck"]),None,None,len(distinct),typ["sizes_per_deck"]["band"],
               f"sizes {distinct}")
         body=max((sz for sz in sizes_all if not title_sizes or sz<max(title_sizes)),key=lambda sz:sizes_all[sz],default=None)
+        k=6858000/H  # the bands are for a slide 7.5 in tall; a taller slide is shown smaller
         if body:
-            check("TYP-SMALL",ds.grade(body,typ["body_min_pt"]),None,None,body,typ["body_min_pt"]["band"],"most used body size")
+            check("TYP-SMALL",ds.grade(round(body*k,1),typ["body_min_pt"]),None,None,body,typ["body_min_pt"]["band"],
+                  "most used body size" + ("" if k==1 else f" (= {body*k:.1f} pt on a 7.5 in slide)"))
             small=min(distinct)
-            if small<typ["body_min_pt"]["limit"][0]:
-                check("TYP-SMALL","warn",None,None,small,f">= {typ['body_min_pt']['limit'][0]}","smallest text")
+            if small*k<typ["body_min_pt"]["limit"][0]:
+                check("TYP-SMALL","warn",None,None,small,f">= {typ['body_min_pt']['limit'][0]/k:g}","smallest text")
             if title_sizes:
                 ratio=round(statistics.median(title_sizes)/body,2)
                 check("TYP-RATIO",ds.grade(ratio,typ["title_to_body"]),None,None,ratio,typ["title_to_body"]["band"],"title / body")

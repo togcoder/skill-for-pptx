@@ -70,6 +70,17 @@ hiện bằng lần bấm trên một slide vào bằng Morph, công cụ báo l
 kiểm đúng số này (`NAR-ALIGN`) và dùng notes để chấm narrative. Với bộ slide **có sẵn** (mục 10),
 notes là lời của tác giả: giữ nguyên câu, chỉ thêm nhãn `[T=0]` / `[CLICK n]` vào đầu câu.
 
+## Tài liệu mẫu để theo (mục 2)
+
+```
+python scripts/pptx_tools.py sample mau.pdf --pages 5,11 -o workspace/mau
+```
+
+Lệnh in ra font của mẫu, theo tỉ lệ số ký tự, và cho biết máy này có font đó không. Kèm theo là các cỡ
+chữ và màu chữ hay dùng, màu các khối theo diện tích, ảnh ghép mọi trang (20 trang một tấm), và ảnh lớn
+của các trang ghi trong `--pages`. Lệnh cần PyMuPDF (`pip install pymupdf`). Dùng các con số này để
+chọn font thay và màu; còn giọng của mẫu thì phải xem ảnh các trang mới thấy.
+
 ## Bộ slide có sẵn (mục 10)
 
 Các lệnh `inventory`, `rechart`, `scale`, `unstretch`, `numbers` đọc và ghi file; xem `python
