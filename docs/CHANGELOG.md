@@ -20,9 +20,14 @@ were true at the time. Task IDs and their branches are listed in
   `check BEFORE AFTER [--map]` (8 pass/fail gates: transitions, dangling effects, videos kept, videos
   full-slide, numbers, pictures cut tighter, keep slides keep their effects, source pictures on their
   slide minus a `drop` list). Pictures match by look (64-bit dHash), since a rebuild re-saves them.
-- **Guide 11 (new):** seven stages with gates, one short card per stage instead of one long brief, build
-  on a copy, `map.json`, two-tier scoring (machine gates, then 4 eye scores 1-5 with anchors and the 3
-  worst slides; no single total, D001). SKILL.md and guide 9 point to it. 2 new tests (599 pass).
+- **Guide 11 (new):** three steps, Understand -> Build -> Check, one agent end to end, machine gates run by
+  the agent, three owner stops (intent brief, 3 sample slides, final); build on a copy, `map.json`,
+  two-tier scoring (machine gates, then 4 eye scores 1-5 with anchors and the 3 worst slides; no single
+  total, D001). A first draft had seven stages; the owner found it too long and asked for an agent that
+  asks until it understands. **Guide 1** gains "ask until you understand" for big jobs: read first, rounds
+  of 3-5 questions with a recommendation, show options for taste, offer ideas beyond the request as
+  choices, restate as a one-page intent brief, stop when nothing is marked "?" and the user says yes.
+  SKILL.md step 1 splits small and big jobs. 2 new tests (599 pass).
 - **Evidence:** Ver3-4 against itself 6/8 (its own old transitions and small videos); Ver3-4 to Ver4
   2/8, the same faults the owner named. `experiments/T097-20261109-claude-rebuild-pipeline/REPORT.md`.
 

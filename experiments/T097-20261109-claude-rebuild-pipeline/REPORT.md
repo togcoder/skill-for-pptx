@@ -60,13 +60,23 @@ Ba điều rút ra, khớp với lỗi của Ver4:
 **Lời hướng dẫn:**
 
 - **Guide 11 mới** (`11-dung-lai-ca-bo.md`):
-  - bảy chặng, mỗi chặng có đầu ra và cổng;
-  - thẻ việc một trang mỗi chặng, thay cho một bản giao việc dài;
+  - ba bước Hiểu → Làm → Kiểm; một agent làm được từ đầu đến cuối; các cổng máy agent tự chạy; chỉ dừng
+    hỏi người dùng ở ba chỗ (bản hiểu ý, 3 slide mẫu, bản cuối);
   - dựng trên bản sao bộ gốc, kèm đoạn mã sắp lại thứ tự slide;
   - cách viết `map.json`;
   - chấm hai tầng: cổng máy trước, rồi mắt (4 phần, mỗi phần 1–5 điểm, có mốc 1/3/5, kèm 3 slide tệ
     nhất). Không cộng thành một con số, vì Giữ ruột 1 điểm thì bộ slide không dùng được (D001).
-- SKILL.md trỏ tới guide 11 và hai lệnh mới; guide 9 có mục cho `extract` và `check`.
+- **Guide 1, phần mới "Việc lớn: hỏi cho tới khi hiểu":** 7 điều.
+  - Đọc hết trước khi hỏi. Mỗi vòng 3–5 câu, câu nào cũng có đề xuất.
+  - Hỏi ý và gu, không hỏi kỹ thuật. Gu thì cho xem 2–3 phương án.
+  - Đưa cả ý người dùng chưa nghĩ tới, nhưng chỉ như một lựa chọn.
+  - Kể lại thành bản hiểu ý một trang.
+  - Dừng khi không còn dấu "?" và người dùng nói "đúng". Ba vòng vẫn chưa rõ thì chọn theo đề xuất và đánh
+    dấu lại; 3 slide mẫu là phép thử cuối.
+- SKILL.md bước 1: việc nhỏ hỏi tối đa 2 câu, việc lớn hỏi theo vòng. SKILL.md trỏ tới guide 11 và hai lệnh
+  mới; guide 9 có mục cho `extract` và `check`.
+- **Vòng sửa theo chủ dự án:** bản đầu có 7 chặng. Chủ dự án thấy chặt chẽ nhưng quá dài, và đề nghị để
+  agent hỏi cho tới khi chắc chắn hiểu ý. Rút còn 3 bước; các cổng giữ nguyên, nằm bên trong từng bước.
 
 ## Bằng chứng (bậc 1: lệnh chạy trên file thật, giữ ngoài repo)
 
@@ -90,7 +100,7 @@ Ba điều rút ra, khớp với lỗi của Ver4:
 ## Áp vào dự án QCC (ngoài repo)
 
 - Chặng 0 đã làm: thư mục extract, bảng tổng quan từng slide.
-- Thẻ việc từng chặng cho Ver5, kèm mốc so sánh Ver4. Chặng 1 chờ câu chuyện sếp chốt.
+- Quy trình Ver5 theo 3 bước, có sẵn 5 câu hỏi vòng 1 và mốc so sánh Ver4. Bước 1 chờ câu chuyện sếp chốt.
 
 ## Không làm
 
@@ -101,5 +111,5 @@ Ba điều rút ra, khớp với lỗi của Ver4:
 
 ## Việc tiếp theo
 
-Khi có câu chuyện sếp chốt: chạy chặng 1 theo thẻ việc. Lần chạy đó là bài thử đầu tiên của guide 11. Chủ
+Khi có câu chuyện sếp chốt: chạy bước 1 (Hiểu). Lần chạy đó là bài thử đầu tiên của guide 11. Chủ
 dự án chấm ở chặng 2 và 6.
