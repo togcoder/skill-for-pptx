@@ -19,6 +19,12 @@ tắc dưới đây.
 5. **Khoảng trống là có chủ ý.** Phần nội dung chiếm khoảng 60–80% slide. Một khối chữ nhỏ treo trên
    nền trống mênh mông là lỗi. Hãy phóng to khối đó, hoặc trải nội dung xuống phần còn lại của slide.
 
+**Slide vừa rối vừa trống.** Hai lỗi này thường đi cùng nhau. Slide có nhiều khối nhỏ ngang hàng nhau
+(nhãn, chú thích, số, thẻ, dải màu) mà không khối nào đủ lớn để mắt bám vào. Cắt bớt chữ không sửa được,
+vì chỉ làm khoảng trống lộ ra. Lấp khoảng trống bằng ảnh tràn hay dải màu thì lại thêm khối tranh nhau.
+Sửa từ gốc: viết cho slide một dòng (người xem phải nhớ gì, bằng chứng chính là gì, cái gì là phụ). Sau
+đó phóng to bằng chứng chính thành điểm neo, thu nhỏ hoặc bỏ phần phụ.
+
 ## Vai trò của slide và bố cục hợp với nó
 
 Một bộ slide thường chỉ gồm chừng mười vai trò. Chọn vai trò trước, bố cục theo sau:
@@ -60,3 +66,6 @@ sẽ đọc thành hai bố cục đổi chỗ, không thành một ý đang l�
 - Xen kẽ slide dày và slide thưa, sáng và tối, ảnh và chữ và sơ đồ.
 - Bìa, slide mục và slide kết dùng một nền khác với slide nội dung.
 - Những gì lặp lại phải nằm đúng một chỗ: tiêu đề, logo, số trang (nếu có).
+- **Mỗi con số chính có một slide chủ**: số được hiện lớn nhất ở slide đó. Các slide khác chỉ nhắc khi
+  câu chuyện cần, và chỉ một slide tổng kết gom lại tất cả. Một con số xuất hiện khắp nơi thì không
+  còn là điểm nhấn. `inventory` báo những số nằm trên từ 4 slide trở lên.

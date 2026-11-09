@@ -70,6 +70,33 @@ chữ của báo cáo, giữ nền của theme cũ. Bộ slide ra đời: 13 sli
 Bậc bằng chứng: 1 (cấu trúc và lệnh chạy trên file thật). Bộ theme QCC v6 làm theo mục 2 mới chờ chủ
 dự án và sếp chấm.
 
+## Bài học từ bản tự kiểm của DSH (theme QCC v7, v8, cả hai bị chấm 4/10)
+
+DSH làm hai bản theme theo cùng báo cáo mẫu nhưng không dùng skill, rồi tự viết bản tìm lỗi (file
+nằm ngoài repo). Chủ dự án nhờ trưởng nhóm rút ra những gì repo cần học. Những số đo dưới đây do
+trưởng nhóm chạy lại bằng `inventory` trên bản v8:
+
+- 10 cỡ chữ, nhỏ nhất 8,25 pt, trên slide 20 × 11,25 in. Đây là chữ in A4 đem lên slide.
+- 156,179 nằm trên 6 slide.
+
+**Đã có sẵn trong skill, chỉ cần dùng đúng:** một slide một ý; một điểm nhấn; lưới 12 cột; bài kiểm
+poster ba giây (mục 3).
+
+**Đã thêm:**
+
+- Mục 3: đoạn "Slide vừa rối vừa trống". Cắt chữ không sửa được; lấp khoảng trống bằng ảnh tràn làm
+  slide rối hơn. Sửa từ gốc bằng một dòng cho mỗi slide: nhớ gì, bằng chứng chính, cái gì là phụ.
+- Mục 3: "Mỗi con số chính có một slide chủ". `inventory` báo số nằm trên từ 4 slide trở lên, bỏ qua
+  số nằm trong mã (H422) và số năm.
+- Mục 2: lấy hệ thống của mẫu (lưới, thứ bậc, khoảng trắng), không lấy phụ kiện của bản in.
+- SKILL.md:
+  - bước 1 hỏi bộ slide để trình chiếu hay để gửi đọc;
+  - phong cách mới hay dựng lại cả bộ thì làm 3 slide mẫu cho người dùng duyệt trước.
+
+**Thử rồi bỏ:** đếm số mép trái của chữ để xem slide có bám lưới không. Trên ba bộ v6, v7, v8 số đếm
+ra lần lượt 21, 20 và 33. Bộ có lưới và bộ không có cho số gần như nhau, vì cột KPI và nhãn sơ đồ cũng
+bị đếm, nên con số này không phân biệt được hai loại.
+
 ## Không làm
 
 - Không bảng font thay bằng mã. Chọn font gần nhất là việc của người, theo vài dòng trong mục 2;

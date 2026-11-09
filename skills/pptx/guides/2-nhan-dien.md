@@ -27,6 +27,9 @@ của tài liệu đó: chữ, biểu đồ, bảng, cách trình bày số. H�
 2. **Xem ảnh các trang. Ghi lại những gì lặp lại trên nhiều trang.** Thường là: tiêu đề trang; biểu đồ
    (nền, kiểu cột hay đường, nhãn số, lưới, chú giải, đơn vị); con số lớn và đơn vị đi kèm; bảng; trang
    mở chương; chân trang. Đó là giọng của mẫu. Một chi tiết chỉ có trên một trang thì không phải giọng.
+   Lấy **hệ thống** của mẫu: lưới, thứ bậc, khoảng trắng, cách dựng một biểu đồ. Đừng lấy **phụ kiện**
+   của bản in như dòng chữ đầu trang, chú thích hình có đánh số, chữ 8 pt. Mang phụ kiện lên slide mà
+   không có hệ thống thì được một slide vừa rối vừa trống (mục 3).
 3. **Hỏi lấy gì của mẫu, giữ gì của bộ đang có.** Câu "lấy biểu đồ, font chữ…, không phải toàn bộ"
    có nghĩa là chỉ lấy những thứ đó. Nền, ảnh và chuyển động của bộ đang có thì giữ lại.
 4. **Font không có trên máy thì thay bằng font gần nhất có sẵn trên mọi máy, và nói cho người dùng

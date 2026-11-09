@@ -25,6 +25,11 @@ were true at the time. Task IDs and their branches are listed in
   repeats across pages, ask what to take and what to keep, nearest installed font, print ratios not
   sizes, data colours by convention, never copy). **Guide 4:** the type scale is for a 7.5 in tall
   slide; scale by height. `experiments/T096-20261109-claude-sample-style-and-scaled-floor/REPORT.md`.
+- **From DSH's self-review of QCC theme v7/v8 (both 4/10, made without the skill):** guide 3 gains
+  "busy and empty at once" (fix the root with one line per slide, not by cutting text) and "each key
+  number has one home slide" (`inventory` lists numbers on 4+ slides); guide 2 takes a sample's system,
+  not its print accessories; SKILL.md asks presented-or-read and builds 3 sample slides before a whole
+  restyle. A left-edge count was tried and dropped: it did not separate gridded from ungridded decks.
 
 ## T095 [pptx] Guide 10 and toolbox fixes from the T094 rehearsal — 2026-11-09
 

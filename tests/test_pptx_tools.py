@@ -240,6 +240,18 @@ class SizeAndSampleTests(unittest.TestCase):
         self.assertEqual(small(self._deck(13.333, 7.5, 20)), set())
         self.assertTrue(small(self._deck(20, 11.25, 20)))
 
+    def test_inventory_names_numbers_repeated_on_many_slides(self):
+        prs = Presentation()
+        for k in range(5):
+            box = prs.slides.add_slide(prs.slide_layouts[6]).shapes.add_textbox(0, 0, Inches(6), Inches(1))
+            box.text_frame.text = f"H422 step {k + 1}: 156,179 PPM" if k < 4 else "0 PPM in 2026"
+        path = self.dir / "repeat.pptx"
+        prs.save(path)
+        report = tools.inventory(path)
+        self.assertIn("156179 on 4 slides", report)
+        self.assertNotIn("422 on", report)   # part of a code
+        self.assertNotIn("2026 on", report)
+
     @unittest.skipUnless(__import__("importlib").util.find_spec("fitz"), "PyMuPDF not installed")
     def test_sample_reads_fonts_sizes_and_colours_of_a_pdf(self):
         import fitz

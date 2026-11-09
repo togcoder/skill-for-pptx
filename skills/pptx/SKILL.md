@@ -16,7 +16,7 @@ kiểm tra chỉ để bắt lỗi, không chứng minh slide đẹp.
 
 | Bước | Việc | Đọc |
 |---|---|---|
-| 1 | Hiểu người nghe, mục đích, thời lượng. Thiếu thì hỏi tối đa 2 câu. Không bịa số liệu. | [guides/1-nguoi-nghe-va-dan-y.md](guides/1-nguoi-nghe-va-dan-y.md) |
+| 1 | Hiểu người nghe, mục đích, thời lượng; bộ này để **trình chiếu** (có người nói) hay để **gửi đọc**. Thiếu thì hỏi tối đa 2 câu. Không bịa số liệu. | [guides/1-nguoi-nghe-va-dan-y.md](guides/1-nguoi-nghe-va-dan-y.md) |
 | 2 | Viết **dàn ý tiêu đề**. Chỉ đọc tiêu đề phải hiểu câu chuyện. Bài nói có chuyển động phức tạp thì viết kịch bản trước (skill `script-writer`). | như trên |
 | 3 | Chọn nhận diện: lấy từ file, logo hoặc màu người dùng có, hoặc theo một tài liệu mẫu (PDF) họ đưa. Không có thì chọn một phong cách. | [guides/2-nhan-dien.md](guides/2-nhan-dien.md) |
 | 4 | **Phác từng slide bằng một dòng chữ**: ý chính, vật chính, bố cục. | [guides/3-bo-cuc.md](guides/3-bo-cuc.md), [4-chu-va-mau.md](guides/4-chu-va-mau.md), [5-anh-so-do-bieu-do.md](guides/5-anh-so-do-bieu-do.md) |
@@ -26,6 +26,10 @@ kiểm tra chỉ để bắt lỗi, không chứng minh slide đẹp.
 | 8 | Kiểm tra lần cuối, rồi bàn giao. | [guides/8-tu-kiem-tra.md](guides/8-tu-kiem-tra.md) |
 
 Chuyển động thêm vào một bố cục xấu không làm nó đẹp lên. Vì vậy bản tĩnh phải đẹp trước.
+
+**Phong cách mới, hay dựng lại cả một bộ:** trước tiên làm **3 slide mẫu**: một slide số liệu, một slide
+so sánh, và slide dày nhất của bộ. Đưa người dùng duyệt 3 slide đó rồi mới làm cả bộ. Sửa 3 slide rẻ hơn
+sửa 30.
 
 **Nhận một bộ slide có sẵn để làm cho đồng bộ** (đủ nội dung, chắp vá về hình thức): đi theo
 [guides/10-dong-bo-slide-co-san.md](guides/10-dong-bo-slide-co-san.md). Giữ ruột (số, chữ, ý, ảnh bằng

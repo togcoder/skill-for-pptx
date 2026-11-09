@@ -294,9 +294,11 @@ def inventory(deck):
     sw, sh = prs.slide_width, prs.slide_height
     floor = _floor(prs)
     fonts, sizes, colours, fills = Counter(), Counter(), Counter(), Counter()
+    on_slides = Counter()
     lines = []
     for i, slide in enumerate(prs.slides, 1):
         words, flags, small = 0, [], {}
+        on_slides.update(_key_numbers(" ".join(n.text or "" for n in slide._element.iter(qn("a:t")))))
         head, body = _theme_faces(slide)
         bg = _fill(slide.background.fill) if slide._element.find(".//p:bg", NS) is not None else None
         if bg:
@@ -366,7 +368,27 @@ def inventory(deck):
            f"sizes ({len(sizes)}; guide 4 wants 3-6): " + ", ".join(f"{k:g}" for k in sorted(sizes)),
            f"text colours ({len(colours)}): " + ", ".join(f"{k} x{v}" for k, v in colours.most_common(8)),
            f"fills ({len(fills)}): " + ", ".join(f"{k} x{v}" for k, v in fills.most_common(8))]
+    many = [f"{n} on {c} slides" for n, c in on_slides.most_common() if c >= 4]
+    if many:
+        top.append("numbers on 4+ slides (guide 3: each key number has one home slide): " + ", ".join(many[:6]))
     return "\n".join(top + lines)
+
+
+def _key_numbers(text):
+    """Numbers worth tracking across slides: >= 100, decimals or percentages; not years or step numbers."""
+    keys = set()
+    for found in NUMBER.finditer(text):
+        m, pct = found.groups()
+        if found.start() and text[found.start() - 1].isalpha():  # part of a code: H422, T35
+            continue
+        v = m.replace(",", "") if re.fullmatch(r"\d{1,3}(,\d{3})+", m) else m.replace(",", ".")
+        try:
+            f = float(v)
+        except ValueError:
+            continue
+        if pct or "." in v or (f >= 100 and not (1900 <= f <= 2100 and len(m) == 4)):
+            keys.add(f"{f:g}" + ("%" if pct else ""))
+    return keys
 
 
 def _top_shapes(slide, names):
