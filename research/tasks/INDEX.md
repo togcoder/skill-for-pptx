@@ -131,5 +131,5 @@ status `claimed`, using the next free ID (**T101**). Push the row before you do
 
 | T098 | [pptx] Extract reusable components from an existing deck: vector groups, ungroup, background removal, component library | dsh | \work/T098-dsh-component-extraction\ | main (lead review: accept; owner-authorized merge) | \experiments/T098-20261110-dsh-component-extraction/REPORT.md\ |
 | T099 | [pptx] Apply actionable review findings: number parsing, sample errors, table fills, image API | lead | \work/T099-lead-followup-review-fixes\ | review requested (PR #82) | \experiments/T099-20261110-lead-followup-review-fixes/REPORT.md\ |
-| T100 | [pptx] Putting an existing deck into a theme: glance faults, old/new pairs, the middle operation (issue 83) | claude | `work/T100-claude-glance-faults-into-theme` | claimed | `experiments/T100-20261111-claude-glance-faults-into-theme/REPORT.md` |
+| T100 | [pptx] Putting an existing deck into a theme: glance faults, old/new pairs, the middle operation (issue 83) | claude | `work/T100-claude-glance-faults-into-theme` | merged without review at the owner's word (issue 83) | `experiments/T100-20261111-claude-glance-faults-into-theme/REPORT.md` |
 | T101 | *next free ID* | | | | |

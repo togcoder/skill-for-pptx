@@ -9,6 +9,30 @@ were true at the time. Task IDs and their branches are listed in
 
 
 
+
+## T100 [pptx] Putting an existing deck into a theme: glance, shell, fit, compare — 2026-11-11
+
+- **Why (issue #83):** an agent put a 37-slide deck into a theme four times and reported "checked" each
+  time; the owner saw two logos on 36 slides, titles across tables and text hidden under a video. Read from
+  the files: the old logo and dark panel live on the slide master, so a builder that walks slide shapes
+  never removes them; there was no operation between "redraw every slide" and "leave it alone"; the critic
+  and inventory gave 639 lines on the worst deck and none about these faults; guide 8 told agents to look
+  at the contact sheet.
+- **Toolbox:** `glance DECK` asks PowerPoint where every text really is, its colour and size as drawn, and
+  the master's shapes, and reports twelve kinds of fault a viewer sees at once, boxed on a picture of the
+  slide (exit 1 while any is left; `--ink` recolours unreadable text, chart text included). `shell DECK`
+  lists the old shell in the master, the layouts and repeated slide shapes; `--strip` removes it.
+  `fit DECK --into X,Y,W,H` scales each slide's content as one block into the theme's free area, text never
+  under the minimum. `compare OLD NEW` writes one large old-above-new picture per slide.
+- **Guidance:** new guide 13 (three levels per slide: leave, into the theme, re-lay out; six steps in one
+  build script from the original; three checks before anyone sees it; never patch a patched file). Guide 8
+  starts with `glance` and wants every slide opened at full size. SKILL.md rules 11 and 12.
+- **Evidence:** rules tuned on four real decks until they separate them: original 16/37 slides with
+  faults (its own small and low-contrast text), theme 8/13, the pasted-shell rebuild 36/37, the redrawn
+  rebuild 23/39 on the slides the owner had marked. The middle operation on the real deck: 37 slides in
+  2 min 14 s, 13 slides with faults left and listed, every effect, video, number and picture kept.
+  `experiments/T100-20261111-claude-glance-faults-into-theme/REPORT.md`.
+
 ## T073 [pptx] Motion eyes: `watch` photographs the real slide show — 2026-11-10
 
 - **Why:** agents could not see motion. `look` exports the finished slide only, so the open state, each

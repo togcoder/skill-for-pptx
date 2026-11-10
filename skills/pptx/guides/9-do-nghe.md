@@ -135,6 +135,21 @@ Chuyển một bảng lớn xuống phụ lục mà không mất số: thêm sli
 (`copy.deepcopy(table._element)` rồi `slide.shapes._spTree.append(...)`), xóa bảng ở slide cũ.
 Ví dụ đầy đủ: `experiments/T093-20261108-claude-harmonize-deck/inputs/harmonize.py`.
 
+## Lỗi thấy ngay, và đưa một bộ vào theme (mục 8, mục 13)
+
+```
+python scripts/pptx_tools.py glance deck.pptx                      # lỗi người xem thấy ngay, khoanh đỏ
+python scripts/pptx_tools.py compare goc.pptx moi.pptx             # cũ ở trên, mới ở dưới, mỗi slide một ảnh
+python scripts/pptx_tools.py shell goc.pptx                        # vỏ cũ nằm ở đâu: master, layout, vật lặp lại
+python scripts/pptx_tools.py shell goc.pptx --strip m1,m2,r1 --background F6F2EA -o tran.pptx
+python scripts/pptx_tools.py fit tran.pptx --into 0.67,2.2,18.67,8.3 --slides 2-36 -o vua.pptx
+python scripts/pptx_tools.py glance vo.pptx --ink 1D2433 xong.pptx # chữ không đọc được nhận mực của theme
+```
+
+`glance` và `compare` cần PowerPoint trên Windows; `shell` và `fit` thì không. `glance` trả mã thoát 1 khi
+còn lỗi. Trong script dựng, gọi thẳng các hàm: `tools.unshell`, `tools.fit`, `tools.glance`, `tools.reink`,
+`tools.compare`. Thứ tự và cách đọc kết quả ở mục 13.
+
 ## Dựng lại cả bộ (mục 11)
 
 `extract GOC.pptx -o DIR` chép mọi ảnh và video gốc ra `DIR/media` (mỗi file một lần, tên theo nội dung)

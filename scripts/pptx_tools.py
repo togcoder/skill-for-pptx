@@ -13,6 +13,15 @@ commands only do what written guidance cannot:
                                 photograph what a viewer sees: each slide as it
                                 opens, after every click, and three frames inside
                                 every Morph; names clicks that change nothing
+    glance DECK [--slides 3,6] [--ink HEX OUT.pptx] [-o DIR]
+                                the faults a viewer sees in the first second, from
+                                PowerPoint's own facts (where the text really is,
+                                its colour and size as drawn, the master's shapes):
+                                text on text, text nobody can read, a logo on the
+                                master's logo, hidden text, content under the
+                                shell, tiny text, a slide missing its title; each
+                                boxed on a picture of the slide. Exit code 1 while
+                                any is left. --ink recolours the unreadable text
     sample DOC.pdf [--pages 5,11] [-o DIR]
                                 a reference to follow (a report, a brochure): its real
                                 font names and whether this machine has them, the
@@ -60,6 +69,19 @@ For taking reusable parts out of a deck (skills/pptx/guides/12-tach-thanh-phan.m
     place COMPONENT DECK --slide N -o OUT
                                 put the component back onto a slide, pictures and
                                 text still editable
+
+For putting an existing deck into a theme (skills/pptx/guides/13-dua-bo-co-san-vao-theme.md):
+
+    shell DECK [--strip m1,r1] [--background HEX] [-o OUT]
+                                where the old shell lives: shapes of the master and
+                                the layouts, and shapes at the same place on many
+                                slides; --strip takes them off (animated ones stay)
+    fit DECK --into X,Y,W,H [--slides 2-36] [--skip NAME] -o OUT
+                                scale each slide's content as one block into the
+                                area the theme leaves free; arrangement, ids and
+                                animation kept; text never under the minimum
+    compare BEFORE AFTER [--map MAP.json] [-o DIR]
+                                one large picture per slide: old above, new below
 
 For rebuilding a whole deck (skills/pptx/guides/11-dung-lai-ca-bo.md):
 
