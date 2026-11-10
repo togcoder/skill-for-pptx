@@ -65,7 +65,8 @@ tràn ra ngoài slide, chữ dưới 18 pt, hiệu ứng trang trí (nảy, xoay
 tiêu đề; các kiểu chuyển slide đang dùng và số hiệu ứng của từng slide. Tên vật thể nó in ra là tên bạn
 dùng ở các bước sau. `look` cho bạn nhìn từng slide.
 
-Slide nào có nhiều hiệu ứng (vài chục trở lên), mở ra trình chiếu xem chúng kể gì. Nếu là cơ chế, ghi
+Slide nào có nhiều hiệu ứng (vài chục trở lên), chạy `pptx_tools.py watch goc.pptx --slides N` và nhìn dải
+ảnh xem chúng kể gì (mục 8). Nếu là cơ chế, ghi
 số hiệu ứng vào bảng ý: bản mới phải còn đúng số đó.
 
 ## Bước 3. Chia mỗi slide vào một nhóm
