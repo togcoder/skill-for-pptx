@@ -24,6 +24,9 @@ were true at the time. Task IDs and their branches are listed in
   a cover and gets **one auto-start group**, not 4–6 clicks; `shared_objects` separates "rides
   along" from "justifies the cut": decoration and chrome never cause a Morph, names present on
   every slide are ignored, and a real content object that travels still does.
+- **Guide:** guide 6 adds the rule the owner's screenshot exposed: a number never stands alone before
+  its card. If the card is an idea still to be spoken, the whole card waits for the click; a `0` has
+  nothing to count, so it enters with the card.
 - **Tests:** 12 new regression tests in `tests/test_harmful_defaults.py`. The first nine were
   written before the fix; eight failed on the old code, and the ninth guards that a real content
   object still gets its Morph. A tenth covers the explicit `morph: true` path. After the owner

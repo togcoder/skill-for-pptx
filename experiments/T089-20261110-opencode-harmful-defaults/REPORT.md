@@ -294,6 +294,7 @@ now over a mask that matches the card.
 | `scripts/forge_qa.py` | `FONT_MISSING` before any overflow verdict |
 | `scripts/data_motion_recipes.py` | counter target 0 returns no recipe |
 | `skills/pptx/guides/9-do-nghe.md` | old-tool paragraph now describes the fixed defaults |
+| `skills/pptx/guides/6-chuyen-dong.md` | a number never stands alone before its card; a `0` enters with the card |
 | `tests/test_harmful_defaults.py` | 12 new regression tests |
 | `tests/test_slide_forge.py` | example deck expects 0 Morph (it has no travelling object) |
 | `tests/test_pptx_design_canon.py` | chrome test uses a real logo image |
