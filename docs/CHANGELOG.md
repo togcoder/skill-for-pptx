@@ -9,6 +9,26 @@ were true at the time. Task IDs and their branches are listed in
 
 
 
+## T098 [pptx] Taking reusable components out of an existing deck — 2026-11-10
+
+- **Why:** the QCC owner asked why the fishbone in the rebuilt deck was redrawn instead of lifted from the old
+  deck. Answer: `extract` (T097) only exports original pictures/videos plus a manifest; the Ver3-4 fishbone is
+  **37 free shapes** on a full-slide background picture (slide 29: 40 top-level shapes, no group), and `cutout`
+  only handles one picture with a plain background. There was no tool to select shapes, ungroup, drop the
+  background and write a component, so the Ver5 samples redrew it.
+- **Toolbox (`scripts/pptx_tools.py`):** `components` (what on a slide could be a component: groups, tables,
+  charts, backgrounds, chrome), `ungroup` (flatten groups with child-space → slide geometry; refuses groups with
+  animation and non-representable transforms), `component` (one-slide component trimmed to bounds, background
+  dropped, picture rels re-pointed, `--freeze` bakes theme colours/fonts, PNG preview at the component's own
+  aspect, JSON manifest), `place` (put a component back on a slide, text editable, unique ids).
+- **Guide 12** `skills/pptx/guides/12-tach-thanh-phan.md`: group vs free shapes vs picture, extraction flow,
+  component library (`assets/components/` + manifest + preview), reuse and limits; linked from SKILL.md and
+  guides 9/10/11.
+- **Real evidence (outside the repo):** Ver3-4 slide 29 → `fishbone_ver34.pptx` (37 shapes, 16.09 × 9.03 in,
+  theme frozen); Ver5 sample slide 2 → `fishbone_ver5.pptx` (64 shapes, 15.54 × 9.19 in) and
+  `stepbar_ver5.pptx` (10 shapes, 9.16 × 1.0 in); `place` of the fishbone onto a dark slide verified in
+  PowerPoint 16.0. `tests/test_components.py`: 9 tests. Full suite green after this entry.
+
 ## T097 [pptx] Rebuild an existing deck with agents: extract, score, staged pipeline — 2026-11-09
 
 - **Why:** after DSH's rejected Ver4 rebuild of the QCC deck, the owner asked for research on how to

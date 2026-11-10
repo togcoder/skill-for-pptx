@@ -42,6 +42,20 @@ For a deck someone else made (skills/pptx/guides/10-dong-bo-slide-co-san.md):
                                 charts, notes) that the new deck no longer has,
                                 or has fewer times; "2%" and "2" differ
 
+For taking reusable parts out of a deck (skills/pptx/guides/12-tach-thanh-phan.md):
+
+    components DECK [--slide N]
+                                what on a slide could become a component: groups,
+                                tables, charts, pictures, and full-slide backgrounds
+    ungroup DECK SLIDE [--all-groups] -o OUT
+                                flatten groups into separate, correctly placed shapes
+    component DECK SLIDE [--name N] [--exclude N] --freeze -o OUT.pptx
+                                one-slide component, trimmed to the shapes, theme
+                                frozen (optional); --png renders a preview
+    place COMPONENT DECK --slide N -o OUT
+                                put the component back onto a slide, pictures and
+                                text still editable
+
 For rebuilding a whole deck (skills/pptx/guides/11-dung-lai-ca-bo.md):
 
     extract DECK [-o DIR]       the original pictures and videos as files (never
@@ -70,6 +84,8 @@ A slide named in "clicks" gets its old animation replaced (an empty list only
 removes it); every other slide keeps its animation. Shape names are the names in PowerPoint's Selection Pane.
 """
 import argparse
+import copy
+import io
 import json
 import re
 import sys
@@ -1130,6 +1146,485 @@ def check(before, after, mapping=None):
     return gates, passed, note
 
 
+# --------------------------------------------------------------- components another agent can reuse
+# Cut a diagram frame, a step bar, a Gantt or an icon out of a finished deck so another agent can
+# paste it into a new one. Written as code because PowerPoint's own XML keeps groups and pictures
+# reachable only through relationship ids; words cannot move them safely (D011).
+
+_A = "http://schemas.openxmlformats.org/drawingml/2006/main"
+_P = "http://schemas.openxmlformats.org/presentationml/2006/main"
+
+
+def _xfrm_of(el):
+    tag = E.QName(el).localname
+    if tag == "grpSp":
+        return el.find(f"{{{_P}}}grpSpPr/{{{_A}}}xfrm")
+    if tag == "graphicFrame":
+        return el.find(f"{{{_P}}}xfrm")
+    return el.find(f"{{{_P}}}spPr/{{{_A}}}xfrm")
+
+
+def _vals(x):
+    if x is None:
+        return None
+    out = {"rot": float(x.get("rot", 0)) / 60000.0, "flipH": x.get("flipH") == "1",
+           "flipV": x.get("flipV") == "1", "off": None, "ext": None, "choff": None, "chext": None}
+    for key, tag in (("off", "off"), ("ext", "ext"), ("choff", "chOff"), ("chext", "chExt")):
+        n = x.find(f"{{{_A}}}{tag}")
+        if n is not None:
+            out[key] = (int(n.get("x", 0)), int(n.get("y", 0))) if tag in ("off", "chOff") else \
+                (int(n.get("cx", 0)), int(n.get("cy", 0)))
+    return out
+
+
+class _Mat:
+    """2x3 affine transform; composition is parent @ child (child runs first)."""
+
+    __slots__ = ("a", "b", "c", "d", "e", "f")
+
+    def __init__(self, a=1.0, b=0.0, c=0.0, d=1.0, e=0.0, f=0.0):
+        self.a, self.b, self.c, self.d, self.e, self.f = a, b, c, d, e, f
+
+    def __matmul__(self, o):
+        return _Mat(self.a * o.a + self.c * o.b, self.b * o.a + self.d * o.b,
+                    self.a * o.c + self.c * o.d, self.b * o.c + self.d * o.d,
+                    self.a * o.e + self.c * o.f + self.e, self.b * o.e + self.d * o.f + self.f)
+
+    def apply(self, x, y):
+        return self.a * x + self.c * y + self.e, self.b * x + self.d * y + self.f
+
+    def decompose(self):
+        """Scale, clockwise rotation and the two flips; refuses what a shape cannot represent."""
+        import math
+        det = self.a * self.d - self.b * self.c
+        a, b, c, d = self.a, self.b, self.c, self.d
+        flipH = flipV = False
+        if det < 0:
+            if abs(b) < 1e-6 and abs(c) < 1e-6:
+                flipH, flipV = a < 0, d < 0
+                a, d = abs(a), abs(d)
+            else:
+                raise ValueError("a group that is mirrored and rotated cannot be flattened into shapes; "
+                                 "ungroup it in PowerPoint, or copy the whole group as a component")
+        su, sv = math.hypot(a, b), math.hypot(c, d)
+        if su == 0 or sv == 0:
+            raise ValueError("a group is scaled to zero")
+        if abs(a * c + b * d) / (su * sv) > 1e-3:
+            raise ValueError("a group combines rotation and unequal scaling (it skews its children); "
+                             "ungroup it in PowerPoint, or copy the whole group as a component")
+        return su, sv, math.degrees(math.atan2(b, a)), flipH, flipV
+
+
+def _xform_mat(x):
+    """Matrix mapping a group's child coordinate space to the slide."""
+    import math
+    v = _vals(x)
+    ox, oy = v["off"]
+    ecx, ecy = v["ext"]
+    if v["choff"] and v["chext"]:
+        cx, cy = v["choff"]
+        cex, cey = v["chext"]
+        sx, sy = ecx / cex, ecy / cey
+        m = _Mat(sx, 0, 0, sy, ox - cx * sx, oy - cy * sy)
+    else:
+        m = _Mat(1, 0, 0, 1, ox, oy)
+    cxm, cym = ox + ecx / 2, oy + ecy / 2
+    if v["flipH"] or v["flipV"]:
+        fx = -1 if v["flipH"] else 1
+        fy = -1 if v["flipV"] else 1
+        m = _Mat(fx, 0, 0, fy, cxm * (1 - fx), cym * (1 - fy)) @ m
+    if v["rot"]:
+        th = math.radians(v["rot"])
+        cos, sin = math.cos(th), math.sin(th)
+        rot = _Mat(cos, sin, -sin, cos, cxm - (cos * cxm - sin * cym), cym - (sin * cxm + cos * cym))
+        m = rot @ m
+    return m
+
+
+def _apply_to_leaf(el, m):
+    """Write the composed transform back into one child's xfrm (position, size, rotation, flip)."""
+    x = _xfrm_of(el)
+    if x is None:
+        return
+    v = _vals(x)
+    if not v["off"] or not v["ext"]:
+        return
+    ox, oy = v["off"]
+    ecx, ecy = v["ext"]
+    su, sv, ang, fh, fv = m.decompose()
+    if abs(su - sv) > 1e-3 and abs(v["rot"]) > 1e-6:
+        raise ValueError("a rotated child sits inside an unequally scaled group (skew); "
+                         "ungroup in PowerPoint")
+    cx, cy = ox + ecx / 2, oy + ecy / 2
+    ncx, ncy = m.apply(cx, cy)
+    off = x.find(f"{{{_A}}}off")
+    ext = x.find(f"{{{_A}}}ext")
+    off.set("x", str(int(round(ncx - ecx * su / 2))))
+    off.set("y", str(int(round(ncy - ecy * sv / 2))))
+    ext.set("cx", str(int(round(ecx * su))))
+    ext.set("cy", str(int(round(ecy * sv))))
+    rot = (v["rot"] + ang) % 360
+    if rot:
+        x.set("rot", str(int(round(rot * 60000))))
+    elif "rot" in x.attrib:
+        del x.attrib["rot"]
+    for attr, flag, old in (("flipH", fh, v["flipH"]), ("flipV", fv, v["flipV"])):
+        new = bool(flag) ^ bool(old)
+        if new:
+            x.set(attr, "1")
+        elif attr in x.attrib:
+            del x.attrib[attr]
+
+
+def _timing_group_ids(slide):
+    ids = set()
+    for node in slide._element.iter(f"{{{_P}}}spTgt"):
+        if node.get("spid"):
+            ids.add(node.get("spid"))
+    return ids
+
+
+def _unique_top_names(slide):
+    seen = Counter()
+    for sh in slide.shapes:
+        seen[sh.name] += 1
+        if seen[sh.name] > 1:
+            sh.name = f"{sh.name} ({seen[sh.name]})"
+
+
+def ungroup(deck, slide_no, names=None, output=None, all_groups=False, force=False):
+    """Flatten groups into separate top-level shapes, keeping the slide's geometry.
+
+    PowerPoint stores a child's position in the group's child coordinate space; this maps it back to
+    the slide with scale, rotation and flip. Groups that carry animation are left alone unless
+    force=True, because the timing points at the group id."""
+    prs = Presentation(deck)
+    slide = prs.slides[slide_no - 1]
+    groups = [sh for sh in slide.shapes if sh.shape_type == MSO_SHAPE_TYPE.GROUP]
+    if names:
+        wanted = _top_shapes(slide, names)
+        groups = [s for s in wanted if s.shape_type == MSO_SHAPE_TYPE.GROUP]
+    elif not all_groups:
+        raise ValueError("name the groups to flatten, or pass --all-groups")
+    if not groups:
+        raise ValueError("no groups to flatten: nothing on this slide is a group")
+    timed = _timing_group_ids(slide)
+    blocked = []
+    for g in groups:
+        if str(g.shape_id) in timed and not force:
+            blocked.append(g.name)
+    if blocked:
+        raise ValueError(f"these groups carry animation: {', '.join(blocked)}. Copy the group whole, or "
+                         f"pass --force to flatten and break its animation")
+    identity = _Mat()
+    for g in groups:
+        leaves = []
+        _flatten_children(g._element, identity, leaves)
+        for el, mat in leaves:
+            _apply_to_leaf(el, mat)
+        for el, _ in leaves:
+            g._element.addprevious(el)
+        g._element.getparent().remove(g._element)
+    _unique_top_names(slide)
+    if output:
+        prs.save(output)
+    return f"flattened {len(groups)} group(s) on slide {slide_no} -> {output or '(not saved)'}"
+
+
+def _flatten_children(group_el, parent, leaves):
+    """Recursively collect leaf shapes with the transform from the leaf's local space to the slide."""
+    gx = group_el.find(f"{{{_P}}}grpSpPr/{{{_A}}}xfrm")
+    m = parent @ _xform_mat(gx) if gx is not None else parent
+    for child in list(group_el):
+        tag = E.QName(child).localname
+        if tag == "grpSp":
+            _flatten_children(child, m, leaves)
+        elif tag in ("sp", "pic", "graphicFrame", "cxnSp"):
+            leaves.append((child, m))
+
+
+def _shape_bbox(shapes):
+    xs0, ys0, xs1, ys1 = [], [], [], []
+    for sh in shapes:
+        try:
+            xs0.append(sh.left); ys0.append(sh.top)
+            xs1.append(sh.left + sh.width); ys1.append(sh.top + sh.height)
+        except (AttributeError, TypeError):
+            continue
+    if not xs0:
+        raise ValueError("the selected shapes have no size (is one a placeholder?)")
+    return min(xs0), min(ys0), max(xs1), max(ys1)
+
+
+def _shift_el(el, dx, dy):
+    x = _xfrm_of(el)
+    if x is None:
+        return
+    off = x.find(f"{{{_A}}}off")
+    if off is not None:
+        off.set("x", str(int(off.get("x", 0)) + int(dx)))
+        off.set("y", str(int(off.get("y", 0)) + int(dy)))
+
+
+def _reject_non_shape(el, sh):
+    if getattr(sh, "has_chart", False) and sh.has_chart:
+        raise ValueError(f"{sh.name!r} is a chart: rebuild it with rechart, or copy the whole slide")
+    for node in el.iter():
+        tag = E.QName(node).localname
+        if tag in ("videoFile", "audioFile", "wavAudioFile"):
+            raise ValueError(f"{sh.name!r} carries video/audio: copy the slide, the media cannot become a component")
+        if tag == "graphicData" and "diagram" in (node.get("uri") or ""):
+            raise ValueError(f"{sh.name!r} is SmartArt: copy the slide, SmartArt has its own data parts")
+
+
+def _remap_rels(src_slide, dest_slide, el):
+    from pptx.opc.constants import RELATIONSHIP_TYPE as RT
+    for node in el.iter():
+        for attr in (qn("r:id"), qn("r:embed"), qn("r:link")):
+            old = node.get(attr)
+            if not old:
+                continue
+            rel = src_slide.part.rels[old]
+            if rel.is_external:
+                new = dest_slide.part.relate_to(rel.target_ref, rel.reltype, is_external=True)
+            elif rel.reltype == RT.IMAGE:
+                _part, new = dest_slide.part.get_or_add_image_part(io.BytesIO(rel.target_part.blob))
+            else:
+                raise ValueError(f"shape uses a {rel.reltype.split('/')[-1]} relationship; "
+                                 f"only pictures can move into a component — copy the slide instead")
+            node.set(attr, new)
+
+
+def _freeze_theme(src_prs, dest_slide):
+    """Bake theme colours and theme fonts into the copied shapes so they keep their look in a deck with
+    another theme."""
+    from pptx.opc.constants import RELATIONSHIP_TYPE as RT
+    tp = src_prs.slide_master.part.part_related_by(RT.THEME)
+    root = E.fromstring(tp.blob)
+    scheme = root.find(f".//{{{_A}}}clrScheme")
+    colours = {}
+    for child in list(scheme):
+        hexa = None
+        for c in child:
+            if E.QName(c).localname == "srgbClr":
+                hexa = c.get("val")
+            elif E.QName(c).localname == "sysClr":
+                hexa = c.get("lastClr")
+        if hexa:
+            colours[E.QName(child).localname] = hexa
+    fonts = {}
+    for tag in ("majorFont", "minorFont"):
+        node = root.find(f".//{{{_A}}}{tag}/{{{_A}}}latin")
+        if node is not None:
+            fonts["+mj-lt" if tag == "majorFont" else "+mn-lt"] = node.get("typeface") or "Arial"
+    for el in list(dest_slide._element.iter()):
+        ln = E.QName(el).localname
+        if ln == "schemeClr":
+            hexa = colours.get(el.get("val"))
+            if hexa:
+                new = E.Element(f"{{{_A}}}srgbClr")
+                new.set("val", hexa)
+                for child in list(el):
+                    new.append(child)
+                el.getparent().replace(el, new)
+        elif ln in ("latin", "ea", "cs"):
+            face = el.get("typeface", "")
+            if face.startswith("+mj"):
+                el.set("typeface", fonts.get("+mj-lt", "Arial"))
+            elif face.startswith("+mn"):
+                el.set("typeface", fonts.get("+mn-lt", "Arial"))
+    return colours, fonts
+
+
+def _png_of(deck_path, png_path):
+    """A PNG preview of the one-slide component, at the component's own aspect (a thin step bar must not
+    be rendered as a 16:9 screenshot)."""
+    try:
+        import win32com.client as win32
+        out = Path(png_path)
+        out.parent.mkdir(parents=True, exist_ok=True)
+        app = win32.Dispatch("PowerPoint.Application")
+        was_open = app.Presentations.Count
+        pres = app.Presentations.Open(str(Path(deck_path).resolve()), True, False, False)
+        try:
+            w = pres.PageSetup.SlideWidth
+            h = pres.PageSetup.SlideHeight
+            px = 1600
+            py = max(1, round(px * h / w))
+            pres.Slides(1).Export(str(out.resolve()), "PNG", px, py)
+        finally:
+            pres.Close()
+            if not was_open:
+                app.Quit()
+        return f"preview -> {png_path}"
+    except Exception as exc:  # PowerPoint is optional
+        return f"no PNG preview: {exc}"
+
+
+def component(deck, slide_no, output, names=None, exclude=None, drop_bg=True, flatten=False,
+              margin=24, freeze=False, png=None, manifest=None, exclude_chrome=False):
+    """Extract selected shapes as a one-slide component deck, trimmed to their bounds.
+
+    names: top-level shape names to take; default all. exclude: top-level names to drop. drop_bg also
+    drops pictures/rectangles covering most of the slide (backgrounds). flatten ungroups the copies."""
+    prs = Presentation(deck)
+    slide = prs.slides[slide_no - 1]
+    W, H = prs.slide_width, prs.slide_height
+    chosen = []
+    if names:
+        chosen = _top_shapes(slide, names)
+    else:
+        chosen = [sh for sh in slide.shapes]
+    excluded = set(exclude or [])
+    chrome = {"Logo", "Title", "Footer", "Footer rule", "Page number"}
+    kept = []
+    dropped = []
+    for sh in chosen:
+        if sh.name in excluded or (exclude_chrome and (sh.name.startswith("!!") or sh.name in chrome)):
+            dropped.append(sh.name)
+            continue
+        if drop_bg:
+            try:
+                area = sh.width * sh.height
+                covers = area >= 0.85 * W * H and sh.left <= 0.03 * W and sh.top <= 0.03 * H
+            except (AttributeError, TypeError):
+                covers = False
+            if covers or sh.name == "!!bg":
+                dropped.append(sh.name)
+                continue
+        kept.append(sh)
+    if not kept:
+        raise ValueError("nothing kept: every selected shape looks like a background or was excluded")
+    for sh in kept:
+        _reject_non_shape(sh._element, sh)
+    margin = int(margin * 9525)  # CLI margin is in pixels of a 96 dpi slide
+    dest = Presentation()
+    dest.slide_width, dest.slide_height = prs.slide_width, prs.slide_height
+    ds = dest.slides.add_slide(dest.slide_layouts[6])
+    copied = []
+    for sh in kept:
+        el = copy.deepcopy(sh._element)
+        _remap_rels(slide, ds, el)
+        ds.shapes._spTree.append(el)
+        copied.append(el)
+    shapes = list(ds.shapes)
+    if flatten:
+        groups = [g for g in shapes if g.shape_type == MSO_SHAPE_TYPE.GROUP]
+        if groups:
+            for g in groups:
+                leaves = []
+                _flatten_children(g._element, _Mat(), leaves)
+                for el, mat in leaves:
+                    _apply_to_leaf(el, mat)
+                for el, _ in leaves:
+                    g._element.addprevious(el)
+                g._element.getparent().remove(g._element)
+    shapes = list(ds.shapes)
+    x0, y0, x1, y1 = _shape_bbox(shapes)
+    dx, dy = margin - x0, margin - y0
+    for sh in shapes:
+        _shift_el(sh._element, dx, dy)
+    # PowerPoint refuses a slide under 1 in; a thin bar component still needs a real page
+    dest.slide_width = max(int(x1 - x0 + 2 * margin), 914400)
+    dest.slide_height = max(int(y1 - y0 + 2 * margin), 914400)
+    ds.background.fill.background()
+    if freeze:
+        _freeze_theme(prs, ds)
+    dest.save(output)
+    meta = {
+        "component": Path(output).stem,
+        "source_deck": Path(deck).name,
+        "source_slide": slide_no,
+        "shapes": [sh.name for sh in kept],
+        "kept": len(shapes),
+        "dropped": dropped,
+        "frozen_theme": bool(freeze),
+        "size_in": [round(dest.slide_width / 914400, 2), round(dest.slide_height / 914400, 2)],
+        "note": "one slide; copy its shapes into the target deck (place), or open it and copy-paste in "
+                "PowerPoint. Pictures keep their crop and name; text stays editable.",
+    }
+    if manifest:
+        Path(manifest).write_text(json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
+    summary = (f"{len(shapes)} shape(s) from slide {slide_no} -> {output} "
+               f"({meta['size_in'][0]} x {meta['size_in'][1]} in); dropped {len(dropped)} "
+               f"(background/excluded); {'theme frozen' if freeze else 'theme NOT frozen'}.")
+    if manifest:
+        summary += f" manifest -> {manifest}"
+    if png:
+        summary += " | " + _png_of(output, png)
+    return summary
+
+
+def place(component_deck, target_deck, slide_no, output, at=None):
+    """Put a component deck's one slide onto a slide of another deck (pictures and text stay editable)."""
+    src = Presentation(component_deck)
+    comp = src.slides[0]
+    prs = Presentation(target_deck)
+    if slide_no < 1 or slide_no > len(prs.slides):
+        raise ValueError(f"the target deck has {len(prs.slides)} slide(s); slide {slide_no} does not exist")
+    slide = prs.slides[slide_no - 1]
+    els = []
+    for sh in comp.shapes:
+        el = copy.deepcopy(sh._element)
+        _remap_rels(comp, slide, el)
+        slide.shapes._spTree.append(el)
+        els.append(el)
+    x0, y0, _x1, _y1 = _shape_bbox([sh for sh in slide.shapes if sh._element in els])
+    at = at or (0, 0)
+    for el in els:
+        _shift_el(el, at[0] * 914400 - x0, at[1] * 914400 - y0)
+    # PowerPoint needs one unique shape id per slide
+    ids = [int(sh.shape_id) for sh in slide.shapes]
+    nxt = max(ids or [1]) + 1
+    seen = set()
+    for sh in slide.shapes:
+        i = int(sh.shape_id)
+        if i in seen:
+            sh._element.find(".//" + qn("p:cNvPr")).set("id", str(nxt))  # type: ignore[union-attr]
+            nxt += 1
+        seen.add(i)
+    prs.save(output)
+    note = f"at {at[0]},{at[1]} in" if at else "at the slide's top-left"
+    return f"placed {len(els)} shape(s) from {Path(component_deck).name} on slide {slide_no} {note} -> {output}"
+
+
+def components(deck, slide_no=None):
+    """List what could become a reusable component on a slide: groups, diagram clusters, charts, tables,
+    pictures, and the full-slide pictures that are only backgrounds."""
+    prs = Presentation(deck)
+    W, H = prs.slide_width, prs.slide_height
+    out = []
+    slides = [prs.slides[slide_no - 1]] if slide_no else list(prs.slides)
+    for n, s in enumerate(slides, start=slide_no or 1):
+        out.append(f"slide {n}: {len(s.shapes)} top-level shape(s)")
+        chrome = []
+        for sh in s.shapes:
+            try:
+                x, y, w, h = (round(v / 9525) for v in (sh.left, sh.top, sh.width, sh.height))
+                flags = []
+                if sh.shape_type == MSO_SHAPE_TYPE.GROUP:
+                    flags.append(f"group of {len(sh.shapes)}")
+                if getattr(sh, "has_chart", False) and sh.has_chart:
+                    flags.append("chart: rebuild with rechart")
+                if getattr(sh, "has_table", False) and sh.has_table:
+                    flags.append("table")
+                if sh.shape_type == MSO_SHAPE_TYPE.MEDIA:
+                    flags.append("video/audio: copy the slide")
+                if sh.width * sh.height >= 0.85 * W * H and sh.left <= 0.03 * W and sh.top <= 0.03 * H:
+                    flags.append("covers the slide: background")
+                out.append(f"  {sh.shape_type}  {sh.name!r}  ({x},{y},{w},{h})  " + ", ".join(flags))
+            except (AttributeError, TypeError):
+                out.append(f"  {sh.shape_type}  {sh.name!r}  (no box)")
+            if sh.name.startswith("!!") or sh.name in ("Logo", "Title", "Footer", "Footer rule", "Page number"):
+                chrome.append(sh.name)
+        if chrome:
+            out.append("  chrome (usually excluded): " + ", ".join(sorted(set(chrome))))
+    out.append("")
+    out.append("pick names, then: component DECK SLIDE --name A --name B -o out.pptx"
+               "   (or --exclude chrome/background names)")
+    return "\n".join(out)
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sp = ap.add_subparsers(dest="cmd", required=True)
@@ -1202,6 +1697,35 @@ def main(argv=None):
     a.add_argument("name")
     a.add_argument("--box", action="store_true", help="resize the frame instead of cropping the photo")
     a.add_argument("-o", "--output", required=True)
+    a = sp.add_parser("components", help="list what could become a reusable component on a slide")
+    a.add_argument("deck")
+    a.add_argument("--slide", type=int, help="one slide; default every slide")
+    a = sp.add_parser("ungroup", help="flatten groups into separate top-level shapes")
+    a.add_argument("deck")
+    a.add_argument("slide", type=int)
+    a.add_argument("names", nargs="*")
+    a.add_argument("--all-groups", action="store_true")
+    a.add_argument("--force", action="store_true", help="also flatten groups that carry animation")
+    a.add_argument("-o", "--output", required=True)
+    a = sp.add_parser("component", help="extract selected shapes as a one-slide component deck")
+    a.add_argument("deck")
+    a.add_argument("slide", type=int)
+    a.add_argument("--name", action="append", default=[], help="top-level shape to take; repeat")
+    a.add_argument("--exclude", action="append", default=[], help="top-level shape to drop; repeat")
+    a.add_argument("--no-drop-bg", action="store_true", help="keep full-slide background pictures")
+    a.add_argument("--exclude-chrome", action="store_true", help="drop !! shapes, Logo, Title, Footer, page number")
+    a.add_argument("--ungroup", action="store_true", help="flatten groups inside the component")
+    a.add_argument("--margin", type=int, default=24, help="padding around the shapes, pixels (24)")
+    a.add_argument("--freeze", action="store_true", help="bake theme colours and fonts into the component")
+    a.add_argument("--png", help="also render a PNG preview (needs PowerPoint)")
+    a.add_argument("--manifest", help="write a JSON manifest (default: none)")
+    a.add_argument("-o", "--output", required=True)
+    a = sp.add_parser("place", help="put a component deck back onto a slide")
+    a.add_argument("component")
+    a.add_argument("deck")
+    a.add_argument("--slide", type=int, required=True)
+    a.add_argument("--at", help="top-left in inches, e.g. 1,2; default 0,0")
+    a.add_argument("-o", "--output", required=True)
     args = ap.parse_args(argv)
     try:
         if args.cmd == "inventory":
@@ -1222,6 +1746,23 @@ def main(argv=None):
             lo, hi = (float(v) for v in args.range.split(","))
             print(cutout(args.image, args.output, lo, hi))
             print("look at it on a dark and a light background before using it")
+            return 0
+        if args.cmd == "components":
+            print(components(args.deck, args.slide))
+            return 0
+        if args.cmd == "ungroup":
+            print(ungroup(args.deck, args.slide, args.names or None, args.output,
+                          all_groups=args.all_groups, force=args.force))
+            return 0
+        if args.cmd == "component":
+            print(component(args.deck, args.slide, args.output, names=args.name or None,
+                            exclude=args.exclude or None, drop_bg=not args.no_drop_bg,
+                            flatten=args.ungroup, margin=args.margin, freeze=args.freeze,
+                            png=args.png, manifest=args.manifest, exclude_chrome=args.exclude_chrome))
+            return 0
+        if args.cmd == "place":
+            at = tuple(float(v) for v in args.at.split(",")) if args.at else None
+            print(place(args.component, args.deck, args.slide, args.output, at))
             return 0
         if args.cmd == "extract":
             print(extract(args.deck, args.output or str(Path(args.deck).with_suffix("")) + "-extract"))
