@@ -23,7 +23,7 @@ kiểm tra chỉ để bắt lỗi, không chứng minh slide đẹp.
 | 5 | Dựng **bản tĩnh** trước. Đặt tên cho mọi vật thể. | [guides/9-do-nghe.md](guides/9-do-nghe.md) |
 | 6 | **Mở ra xem** và sửa, cho tới khi bản tĩnh đã đẹp. | [guides/8-tu-kiem-tra.md](guides/8-tu-kiem-tra.md) |
 | 7 | Mới thêm chuyển động: trong slide trước, Morph giữa các slide sau. | [guides/6-chuyen-dong.md](guides/6-chuyen-dong.md), [guides/7-morph.md](guides/7-morph.md) |
-| 8 | Kiểm tra lần cuối, rồi bàn giao. | [guides/8-tu-kiem-tra.md](guides/8-tu-kiem-tra.md) |
+| 8 | **Xem nó chuyển động** (`watch`): lúc slide vừa mở, sau từng lần bấm, giữa cú Morph. Sửa, kiểm tra lần cuối, rồi bàn giao. | [guides/8-tu-kiem-tra.md](guides/8-tu-kiem-tra.md) |
 
 Chuyển động thêm vào một bố cục xấu không làm nó đẹp lên. Vì vậy bản tĩnh phải đẹp trước.
 
@@ -72,7 +72,8 @@ hơn một sân khấu hội nghị. Đơn giản mà vừa tốt hơn phức t�
   của người dùng, giữ bố cục và thay nội dung.
 - Làm **từng slide một**: dựng, mở ra xem, sửa, rồi mới sang slide tiếp.
 - Khi phân vân, chọn cách đơn giản hơn. Ít chuyển động mà đúng tốt hơn nhiều chuyển động mà sai.
-- Không được tuyên bố "đã kiểm tra" nếu chưa chạy `look` và chưa thực sự nhìn ảnh.
+- Không được tuyên bố "đã kiểm tra" nếu chưa chạy `look` và chưa thực sự nhìn ảnh. Có chuyển động thì
+  thêm `watch`: nhìn dải ảnh của từng slide có lần bấm hoặc Morph.
 
 ## Bàn giao cho người dùng
 
@@ -88,6 +89,7 @@ Viết ngắn, bằng lời thường, theo thứ tự:
 |---|---|
 | Mở ra xem: ảnh từng slide + một tấm ảnh ghép | `python scripts/pptx_tools.py look DECK.pptx` |
 | Ghi lần bấm và chuyển slide theo tên vật thể | `python scripts/pptx_tools.py motion DECK.pptx plan.json -o OUT.pptx` |
+| Xem chuyển động: mỗi slide một dải ảnh (vừa mở, từng lần bấm, giữa cú Morph) | `python scripts/pptx_tools.py watch OUT.pptx [--slides 3,6]` |
 | Kiểm tra Morph | `python scripts/morph_studio.py audit OUT.pptx` |
 | Bắt lỗi chữ tràn, chữ nhỏ, thẻ rỗng, tương phản | `python scripts/design_critic.py OUT.pptx` |
 | Tìm ảnh có giấy phép, kèm nguồn | `python scripts/forge_assets.py photos "từ khóa"` |

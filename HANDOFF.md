@@ -89,24 +89,25 @@ thay vì deck làm tay. Lab đa lĩnh vực phục vụ mục tiêu đó và đa
 | **T093** | **Đồng bộ bộ slide chắp vá của người khác: [mục 10](skills/pptx/guides/10-dong-bo-slide-co-san.md)** + diễn tập trên bộ QCC giả | Claude | **xong; chờ chủ dự án mở cặp trước/sau** |
 | **T094** | Diễn tập mù: model khác họ đồng bộ cùng bộ chắp vá chỉ bằng mục 10 | DSH → Claude | **xong; chuyển động tốt, xương cá bị vẽ sang dạng khác** |
 | **T095** | Sửa mục 10 và đồ nghề theo T094: giữ hình sơ đồ chuẩn và notes của tác giả, slide không mở ra trắng | Claude → DSH | **xong; chờ dùng trên bộ slide thật** |
-| **T096** | Theo một tài liệu mẫu (PDF): lệnh `sample` + mục 2; mốc chữ nhỏ tính theo chiều cao slide (`inventory`, `design_critic`) | Claude → DSH | **xong; rút ra từ việc đổi theme QCC theo báo cáo mẫu của sếp** |
+| **T096** | Theo một tài liệu mẫu (PDF): lệnh `sample` + mục 2; mốc chữ nhỏ tính theo chiều cao slide (`inventory`, `design_critic`) | Claude → Claude (cùng họ, theo yêu cầu chủ dự án) | **đã gộp 10/11; phản biện `research/reviews/T096-claude-20261110.md`** |
+| **T097** | Dựng lại cả một bộ: `extract`, `check` (9 cổng), `retable`, `cutout`; mục 11; mục 1 "hỏi cho tới khi hiểu" | Claude → Claude (cùng họ, theo yêu cầu chủ dự án) | **đã gộp 10/11; phản biện `research/reviews/T097-claude-20261110.md`** |
 | **T089** | Sửa mặc định gây hại: Forge (KPI 0, thu chữ 14 pt, trang trí cứng, `!!orb`), Director (bìa 6 lần bấm, Morph khắp nơi), báo tràn chữ sai khi thiếu font | OpenCode → Claude | **ngay** |
 | **T090** | Model nhỏ dùng skill: sửa theo mẫu đã duyệt, chủ dự án mở và chấm | DSH → Claude | **xong (merge #70); chủ dự án chấm** |
 | **T086** | **Nghiên cứu gu đám đông đa lĩnh vực → luật gu, mỗi luật kiểm chứng bằng một cặp `.pptx` chấm mù** ([ROADMAP](docs/ROADMAP.md)) | Claude hoặc Gemini → model khác họ | **ngay, song song** |
 | **T078** | **Trục kịch bản: phương pháp + kịch bản mẫu Triết học ch. 1** ([SCRIPT_TRACK](docs/SCRIPT_TRACK.md)) | Claude | **xong, chờ chủ dự án đọc** |
 | T079 | Model yếu + phương pháp có viết được kịch bản tốt? (A/B mù bản chữ) | OpenCode → Claude | sau khi T078 được duyệt |
-| T080 | Kiểm chứng bảng động từ → chuyển động | OpenCode → Claude | cần T073 |
+| T080 | Kiểm chứng bảng động từ → chuyển động | OpenCode → Claude | ngay (T073 đã có) |
 | T081 | Skill `script-writer` (phiếu + khung + bảng động từ + ví dụ vàng) | Claude → OpenCode | sau khi T078 được duyệt |
 | T082 | Ví dụ vàng 2–5 (báo cáo, pitch, quy trình, so sánh) | Claude → chủ dự án duyệt | sau T081 |
 | T071 | Bộ đề vàng 8 đề + trang chấm A/B + hiệu chỉnh critic | Claude → OpenCode | ngay |
 | T072 | Cổng lỗi thị giác trên khung hình (cắt chữ, thẻ trống, chữ giữ chỗ, chữ nhỏ, mất style, va chạm) | OpenCode → Claude | ngay |
-| T073 | Máy xem chuyển động nhanh: DeckCraft `render-animation` vs ghi slideshow bằng harness | Claude desktop → OpenCode | ngay |
+| T073 | Mắt xem chuyển động: `pptx_tools.py watch` chụp trình chiếu thật (lúc mở, từng lần bấm, giữa cú Morph); tuyến DeckCraft bỏ | Claude → DSH | **xong; chờ phản biện và một lần model nhỏ dùng thử** |
 | T074 | Bộ luật ghép Morph từ ma trận ≥ 30 thí nghiệm PowerPoint | OpenCode → Claude | ngay |
 | T075 | `scene.json` + trình biên dịch cảnh | Claude → Antigravity | **tạm dừng (D011)** |
 | T076 | Thư viện 10 nước Morph có khung hình mẫu | OpenCode → Claude | sau T074 |
 | T077 | Deck Director xuất cảnh; bỏ ánh xạ chuỗi con và giá trị bịa | Antigravity → Claude | **tạm dừng (D011)** |
 
-Mã trống kế tiếp: do `coord.py claim` tính (hiện là **T097**).
+Mã trống kế tiếp: do `coord.py claim` tính (hiện là **T098**).
 
 **Dừng ngay:**
 - vá thêm luật chuỗi con trong `deck_director.py`;

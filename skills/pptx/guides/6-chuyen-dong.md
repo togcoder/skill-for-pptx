@@ -84,7 +84,8 @@ nói. Mắt thấy "sống" mà không bị phân tâm. Chỉ dùng cho **một*
 ## Ghi chuyển động vào file
 
 Dùng `pptx_tools.py motion` với một kế hoạch liệt kê lần bấm theo **tên vật thể** (mục 9). Sau khi
-ghi, xem lại từng slide có lần bấm và tự hỏi: lúc mở slide còn lại những gì, và có đọc được không?
+ghi, chạy `pptx_tools.py watch` và nhìn dải ảnh của từng slide có chuyển động (mục 8): lúc mở slide
+còn lại những gì, mỗi lần bấm đưa mắt tới đâu, giữa cú Morph có gì đè lên nhau không.
 
 `pptx_tools` hiện chỉ ghi **entrance** (hiện ra), không ghi dim/exit. Vì vậy deck dựng bằng nó sẽ bị
 critic cảnh báo `NAR-LIFECYCLE`; đó là giới hạn đã biết của đồ nghề, không phải lỗi slide. Đừng thêm

@@ -9,6 +9,21 @@ were true at the time. Task IDs and their branches are listed in
 
 
 
+## T073 [pptx] Motion eyes: `watch` photographs the real slide show — 2026-11-10
+
+- **Why:** agents could not see motion. `look` exports the finished slide only, so the open state, each
+  click and the inside of a Morph were invisible to the builder; T069a passed the Morph audit with 0
+  findings and the owner still called it strained.
+- **Toolbox:** `pptx_tools.py watch DECK [--slides 3,6]` runs PowerPoint's own windowed slide show,
+  clicks through it and writes one strip per slide: three frames inside a Morph, the slide as it opens,
+  one frame per click, three more inside any click that moves longer than 2 s. It prints clicks that
+  change nothing. A step ends when nothing has moved for 0.8 s. 23–34 s for decks of 5–14 slides.
+- **Guidance:** guide 8 has a new section on reading the strips; guides 6, 7, 9, 11 and SKILL.md point
+  to it. "Motion is fine" may not be said before the strips were looked at.
+- **Negative result:** a show window fully off screen stops painting mid-effect now and then (12 of 16
+  runs differed from the on-screen show, two false dead clicks); with 40 px left on screen, 0 of 16.
+- **Evidence:** rung 5b on T069a, T090, the T087 demo and two slides of the real QCC deck.
+  `experiments/T073-20261110-claude-motion-eyes/REPORT.md`.
 ## T099 [pptx] Follow-up fixes from T096/T097 review findings — 2026-11-10
 
 - Fixed six concrete toolbox hazards from the merged reviews: Vietnamese thousands-dot parsing (`1.200`), clear

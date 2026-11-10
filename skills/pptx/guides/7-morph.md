@@ -63,6 +63,7 @@ Một bộ 15 slide thường chỉ có 2–5 Morph. Morph ở mọi slide sẽ 
 
 ```
 python scripts/morph_studio.py audit OUT.pptx
+python scripts/pptx_tools.py watch OUT.pptx --slides 3   # ba khung giữa cú Morph vào slide 3
 ```
 
 Lệnh này báo các lỗi: khác loại hình, vật mang Morph có hiệu ứng xuất hiện, vật đích nằm ngoài khung.
@@ -73,4 +74,5 @@ không phải lỗi cần đổi bố cục.
 
 Audit chỉ kiểm tra cấu trúc: loại hình, tên, hiệu ứng vào, vị trí ngoài khung.
 Nó **không** biết cú cắt có đọc như một ý hay không. Câu đó phải trả lời bằng
-mắt, bằng bốn câu hỏi ở guide 6.
+mắt: nhìn ba khung Morph của `watch` (mục 8) và hỏi bốn câu ở guide 6. Chữ cũ và chữ mới đè lên
+nhau, hay vật bay xuyên qua chữ, đều chỉ thấy được trên các khung này.

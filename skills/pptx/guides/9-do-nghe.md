@@ -60,7 +60,12 @@ Viết một kế hoạch ngắn (JSON), gọi vật thể bằng tên:
 python scripts/pptx_tools.py motion deck.static.pptx plan.json -o deck.pptx
 python scripts/morph_studio.py audit deck.pptx
 python scripts/pptx_tools.py look deck.pptx
+python scripts/pptx_tools.py watch deck.pptx
 ```
+
+`watch` chạy trình chiếu thật và chụp mỗi slide một dải ảnh: giữa cú Morph, lúc vừa mở, sau mỗi lần
+bấm; nó in ra lần bấm nào không làm đổi gì trên màn hình. Cách đọc dải ảnh ở mục 8. Lệnh cần
+PowerPoint trên Windows và một phiên desktop đang đăng nhập; mỗi slide mất khoảng 2–4 giây.
 
 Gõ sai tên vật thể thì công cụ liệt kê các tên có thật trên slide. Nếu bạn cho một vật `!!` xuất
 hiện bằng lần bấm trên một slide vào bằng Morph, công cụ báo lỗi (mục 7, luật 3).

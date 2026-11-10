@@ -485,5 +485,53 @@ def E_local(node):
     return etree.QName(node).localname
 
 
+
+class WatchTest(unittest.TestCase):
+    """T073: reading the pictures of a slide show. The show itself needs PowerPoint."""
+
+    def _frame(self, *boxes):
+        from PIL import Image, ImageDraw
+        image = Image.new("RGB", (320, 180), (250, 250, 250))
+        for box in boxes:
+            ImageDraw.Draw(image).rectangle(box, fill=(180, 20, 20))
+        return image
+
+    def test_slide_box_beside_the_scrollbar(self):
+        self.assertEqual(tools._slide_box(1422, 700, 22, 16 / 9), (78, 0, 1322, 700))  # bars left and right
+        self.assertEqual(tools._slide_box(1482, 833, 21, 16 / 9), (0, 5, 1461, 827))   # bars above and below
+
+    def test_a_click_is_dead_passing_or_a_change(self):
+        empty, card = self._frame(), self._frame((40, 40, 120, 90))
+        self.assertEqual(tools._read_step(empty, [(0.1, empty), (0.9, empty)])[0], "dead")
+        kind, picture = tools._read_step(empty, [(0.1, empty), (0.4, card), (0.9, empty)])
+        self.assertEqual(kind, "passing")
+        self.assertIs(picture, card)
+        kind, picture = tools._read_step(empty, [(0.1, empty), (0.4, card)])
+        self.assertEqual(kind, "change")
+        self.assertIs(picture, card)
+
+    def test_report_names_the_wasted_click(self):
+        lines = tools.watch_lines([{"slide": 2, "enter": "morph 1.2 s", "strip": "slide-02.jpg", "clicks": [
+            {"click": 1, "kind": "change", "seconds": 0.4}, {"click": 2, "kind": "dead", "seconds": 0.0}]}])
+        self.assertIn("morph 1.2 s, 2 clicks", lines[0])
+        self.assertIn("NOTHING CHANGES", lines[2])
+
+    @unittest.skipUnless(__import__("os").environ.get("PPTX_NATIVE") == "1", "set PPTX_NATIVE=1 on a desktop with PowerPoint")
+    def test_watch_the_real_show(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            deck, moving = Path(tmp) / "deck.pptx", Path(tmp) / "moving.pptx"
+            _deck(deck)
+            prs = Presentation(deck)
+            prs.slides[2].shapes.add_textbox(Inches(1), Inches(4), Inches(2), Inches(1)).name = "Ghost"  # no text
+            prs.save(deck)
+            plan = {"transitions": {"2": "morph"}, "clicks": {"1": [["Card A"], ["Card B"]], "3": [["Ghost"]]}}
+            tools.apply_motion(str(deck), plan, str(moving))
+            report = tools.watch(str(moving), Path(tmp) / "watch")
+            self.assertEqual([[c["kind"] for c in row["clicks"]] for row in report],
+                             [["change", "change"], [], ["dead"]])
+            self.assertTrue(report[1]["enter"].startswith("morph"))
+            self.assertTrue(Path(report[0]["strip"]).exists())
+
+
 if __name__ == "__main__":
     unittest.main()
