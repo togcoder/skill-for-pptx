@@ -41,6 +41,11 @@ bảng ý trước khi sửa.
 [guides/11-dung-lai-ca-bo.md](guides/11-dung-lai-ca-bo.md): ba bước Hiểu → Làm → Kiểm, chỉ dừng hỏi người
 dùng ở ba chỗ; dựng trên bản sao bộ gốc; chấm hai tầng (cổng máy, rồi mắt).
 
+**Đưa một bộ có sẵn vào một theme** (người dùng có bộ slide và có theme, muốn bộ slide mang theme đó):
+đi theo [guides/13-dua-bo-co-san-vao-theme.md](guides/13-dua-bo-co-san-vao-theme.md). Mỗi slide một mức: để
+nguyên, **vào theme** (mặc định: đổi vỏ, giữ cách sắp xếp của tác giả), hoặc dựng lại bố cục (phải được
+duyệt). Vỏ cũ nằm cả trong slide master. "Đừng làm hỏng nội dung" không có nghĩa là để nguyên bản gốc.
+
 **Tách thành phần dùng lại** (khung xương cá, thanh bước, Gantt, icon trong bộ cũ): đừng chụp ảnh và đừng
 vẽ lại. `extract` chỉ lấy ảnh/video gốc + manifest, **không** lấy hình vector; `cutout` chỉ dành cho một ảnh
 có nền đơn giản. Dùng `components` → `ungroup` / `component` để tách ra một file một-slide, rồi `place` để
@@ -49,7 +54,7 @@ dán lại: [guides/12-tach-thanh-phan.md](guides/12-tach-thanh-phan.md).
 Chọn **mức** chuyển động theo phòng, không theo số hiệu ứng: một lớp học cần ít
 hơn một sân khấu hội nghị. Đơn giản mà vừa tốt hơn phức tạp mà gượng (guide 6).
 
-## Mười điều không làm (lỗi đã gặp thật trong dự án)
+## Mười hai điều không làm (lỗi đã gặp thật trong dự án)
 
 1. **Bịa nội dung.** Không tự điền "100%", "Bước hoàn thiện", "Chỉ số 1" hay một con số không có
    nguồn. Thiếu thì hỏi.
@@ -65,6 +70,11 @@ hơn một sân khấu hội nghị. Đơn giản mà vừa tốt hơn phức t�
 8. **Slide thành trang tài liệu:** đoạn văn dài, 8 gạch đầu dòng. Phần giải thích thuộc về lời nói.
 9. **Tự khen.** Chỉ file mở ra mới tính. Chưa làm được gì thì nói rõ.
 10. **Nói với người dùng bằng JSON, mã lỗi, số hiệu task.** Nói bằng lời thường.
+11. **Đưa slide cho người dùng khi chưa nhìn.** Trước mỗi lần giao: chạy `glance`, mở **từng** slide ở cỡ
+    lớn (không phải ảnh ghép thu nhỏ), và với bộ có sẵn thì đặt cũ cạnh mới bằng `compare`. Người dùng không
+    phải là người tìm ra hai logo chồng nhau.
+12. **Vá chồng lên vá.** Lỗi thì sửa trong script dựng và dựng lại từ bản gốc. Không lấy một bản lỗi làm nền
+    cho bản sau.
 
 ## Nếu bạn là model nhỏ hoặc nhanh
 
@@ -72,7 +82,7 @@ hơn một sân khấu hội nghị. Đơn giản mà vừa tốt hơn phức t�
   của người dùng, giữ bố cục và thay nội dung.
 - Làm **từng slide một**: dựng, mở ra xem, sửa, rồi mới sang slide tiếp.
 - Khi phân vân, chọn cách đơn giản hơn. Ít chuyển động mà đúng tốt hơn nhiều chuyển động mà sai.
-- Không được tuyên bố "đã kiểm tra" nếu chưa chạy `look` và chưa thực sự nhìn ảnh. Có chuyển động thì
+- Không được tuyên bố "đã kiểm tra" nếu chưa chạy `glance` và chưa thực sự mở ảnh **từng** slide. Có chuyển động thì
   thêm `watch`: nhìn dải ảnh của từng slide có lần bấm hoặc Morph.
 
 ## Bàn giao cho người dùng
@@ -88,6 +98,11 @@ Viết ngắn, bằng lời thường, theo thứ tự:
 | Việc | Lệnh |
 |---|---|
 | Mở ra xem: ảnh từng slide + một tấm ảnh ghép | `python scripts/pptx_tools.py look DECK.pptx` |
+| **Lỗi người xem thấy ngay** (chữ đè chữ, chữ không đọc được, hai logo, chữ bị che, tràn, chữ quá nhỏ), khoanh đỏ trên ảnh từng slide | `python scripts/pptx_tools.py glance DECK.pptx` |
+| Bộ có sẵn: slide cũ ở trên, slide mới ở dưới, mỗi slide một ảnh lớn | `python scripts/pptx_tools.py compare GOC.pptx MOI.pptx` |
+| Vào theme: vỏ cũ nằm ở đâu (master, layout, vật lặp lại), và gỡ nó | `python scripts/pptx_tools.py shell GOC.pptx [--strip m1,r1 --background F6F2EA -o OUT]` |
+| Vào theme: co cả khối nội dung vào vùng theme để trống | `python scripts/pptx_tools.py fit DECK --into 0.67,2.2,18.67,8.3 -o OUT` |
+| Vào theme: đổi mực cho chữ không còn đọc được trên nền mới | `python scripts/pptx_tools.py glance DECK --ink 1D2433 OUT.pptx` |
 | Ghi lần bấm và chuyển slide theo tên vật thể | `python scripts/pptx_tools.py motion DECK.pptx plan.json -o OUT.pptx` |
 | Xem chuyển động: mỗi slide một dải ảnh (vừa mở, từng lần bấm, giữa cú Morph) | `python scripts/pptx_tools.py watch OUT.pptx [--slides 3,6]` |
 | Kiểm tra Morph | `python scripts/morph_studio.py audit OUT.pptx` |

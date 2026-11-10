@@ -98,7 +98,14 @@ unwired) `skills/deck-director`.
   fade-in with a 0.40 s blank. Verified at rung 5, PowerPoint 16.0 build 17932;
   see `experiments/T064-20261104-opencode-native-3d/REPORT.md`.
 
-## State (2026-11-10)
+## State (2026-11-11)
+- **Into a theme (T100, issue 83):** `glance` reports the faults a viewer sees at once from PowerPoint's own
+  facts (drawn text bounds, drawn colours, the master's shapes) and boxes them on the slide; `shell` finds
+  and strips the old shell where it lives (master, layouts, repeated shapes); `fit` scales a slide's content
+  as one block into the theme's free area; `compare` pairs old and new at full size. Guide 13 defines the
+  middle operation and the three checks before a deck is shown. Measured on four real decks; the real
+  37-slide trial keeps every effect, video, number and picture and leaves 13 slides with listed faults.
+  `glance` does not judge taste, and does not read text inside tables.
 - **Motion eyes (T073):** `pptx_tools.py watch` runs PowerPoint's own slide show and writes one strip
   per slide: inside each Morph, the slide as it opens, after every click, inside long clicks; it names
   clicks that change nothing. Rung 5b on T069a, T090, the T087 demo and the real QCC deck; 16 of 16

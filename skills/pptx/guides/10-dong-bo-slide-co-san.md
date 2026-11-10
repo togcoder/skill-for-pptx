@@ -1,3 +1,6 @@
+> Người dùng đưa kèm một **theme** để bộ slide mang theo? Thao tác đổi vỏ nằm ở
+> [mục 13](13-dua-bo-co-san-vao-theme.md); luật giữ ruột vẫn là mục này.
+
 # 10. Đồng bộ một bộ slide có sẵn
 
 Dùng mục này khi bạn nhận một bộ slide **đã đủ nội dung** nhưng chắp vá về hình thức: nhiều người

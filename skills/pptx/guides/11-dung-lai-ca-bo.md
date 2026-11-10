@@ -34,7 +34,7 @@ dùng ở **ba chỗ** (cột cuối).
 |---|---|---|
 | **1. Hiểu** | (1) Bóc tách: `extract`, `inventory`, `look`; chạy `watch --slides` cho mọi slide có từ 20 hiệu ứng và nhìn dải ảnh, ghi mỗi slide kể cơ chế gì. (2) Hỏi cho tới khi hiểu (mục 1, phần cuối), viết **bản hiểu ý** và `map.json`. (3) Dựng **3 slide mẫu**, trong đó có slide khó giữ nhất (sơ đồ chuẩn, mô phỏng); `check` đạt trên 3 slide đó. | Duyệt bản hiểu ý. Duyệt 3 slide mẫu: chưa ổn thì sửa mẫu, không làm tiếp. |
 | **2. Làm** | Dựng trên bản sao bộ gốc, mỗi đợt một phần câu chuyện (không quá 8 slide). Sau mỗi đợt: `check --map`, `inventory`, `look`, và nhìn **từng** slide của đợt. Xong cả bộ thì làm chuyển động (mục 6, 7). | Không dừng, trừ khi gặp điều bản hiểu ý chưa nói: khi đó hỏi, đừng đoán. Người dùng góp ý giữa chừng: xếp loại theo mục 1, "Sau khi đã hiểu"; sửa nhỏ thì làm luôn, hiểu sai thì hỏi lại đúng phần sai. |
-| **3. Kiểm** | `check` đạt 12/12 khi có `--map` (6/6 khi chưa có map), rồi chấm tầng 2 (dưới đây). Tốt nhất là một phiên khác, model khác, chưa đọc báo cáo của người dựng. Không có thì agent tự chấm và ghi rõ "tự chấm". | Người dùng mở file, đọc bảng điểm. |
+| **3. Kiểm** | `glance` không còn lỗi, từng slide đã mở ở cỡ lớn, từng cặp `compare` đã xem (mục 13). Rồi `check` đạt 12/12 khi có `--map` (6/6 khi chưa có map), rồi chấm tầng 2 (dưới đây). Tốt nhất là một phiên khác, model khác, chưa đọc báo cáo của người dựng. Không có thì agent tự chấm và ghi rõ "tự chấm". | Người dùng mở file, đọc bảng điểm. |
 
 Mỗi bước ghi kết quả ra file (bản hiểu ý, map, mẫu, bộ slide, bảng điểm). Vì vậy một phiên khác hoặc một
 agent khác đọc file là làm tiếp được, không cần nhớ phiên trước.

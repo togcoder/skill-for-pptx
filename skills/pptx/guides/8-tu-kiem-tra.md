@@ -1,12 +1,17 @@
 # 8. Tự kiểm tra: mở ra xem rồi sửa
 
-Bạn không được nói "xong" trước khi **nhìn thấy** từng slide.
+Bạn không được nói "xong" trước khi **nhìn thấy** từng slide. "Đã kiểm" là một danh sách: slide nào,
+đã thấy gì, đã sửa gì. Một câu "đã kiểm, ổn" không có danh sách là chưa kiểm.
 
 ## Vòng xem và sửa
 
-1. `python scripts/pptx_tools.py look DECK.pptx`. Lệnh này xuất ảnh từng slide bằng PowerPoint thật,
-   cộng một tấm ảnh ghép `sheet.jpg`.
-2. **Mở và nhìn** `sheet.jpg` (đọc file ảnh). Slide nào đáng ngờ thì mở ảnh riêng của slide đó.
+1. `python scripts/pptx_tools.py glance DECK.pptx`. Lệnh xuất ảnh từng slide bằng PowerPoint thật
+   (`slide-NN.png`) và báo những lỗi người xem thấy ngay: chữ đè chữ, chữ không đọc được trên nền của nó,
+   chữ bị ảnh che, hai logo chồng nhau, tràn khung, chữ quá nhỏ, slide thiếu tiêu đề. Slide có lỗi có thêm
+   ảnh `faults-NN.png` khoanh đỏ từng chỗ. Sửa hết các lỗi này trước.
+2. **Mở và nhìn ảnh của từng slide, ở cỡ lớn.** Ảnh ghép thu nhỏ (`look` → `sheet.jpg`) chỉ để xem nhịp cả
+   bộ; ở cỡ đó hai logo chồng nhau hay một dòng chữ bị che trông vẫn ổn. Đã có bộ slide bị giao bốn lần
+   với lỗi rõ như vậy vì agent chỉ nhìn ảnh ghép.
 3. Trả lời bảng câu hỏi dưới đây cho từng slide. Sửa, rồi quay lại bước 1.
 4. Tối đa ba vòng. Sau ba vòng còn chỗ chưa ổn thì **báo cho người dùng chỗ đó**, đừng tuyên bố đã
    đạt.
