@@ -16,7 +16,7 @@ kiểm tra chỉ để bắt lỗi, không chứng minh slide đẹp.
 
 | Bước | Việc | Đọc |
 |---|---|---|
-| 1 | Hiểu người nghe, mục đích, thời lượng; bộ này để **trình chiếu** (có người nói) hay để **gửi đọc**. Thiếu thì hỏi tối đa 2 câu. Không bịa số liệu. | [guides/1-nguoi-nghe-va-dan-y.md](guides/1-nguoi-nghe-va-dan-y.md) |
+| 1 | Hiểu người nghe, mục đích, thời lượng; bộ này để **trình chiếu** (có người nói) hay để **gửi đọc**. Việc nhỏ: thiếu thì hỏi tối đa 2 câu. Việc lớn (dựng lại cả bộ, phong cách mới): hỏi theo vòng cho tới khi kể lại được ý người dùng (guide 1, mục cuối). Không bịa số liệu. | [guides/1-nguoi-nghe-va-dan-y.md](guides/1-nguoi-nghe-va-dan-y.md) |
 | 2 | Viết **dàn ý tiêu đề**. Chỉ đọc tiêu đề phải hiểu câu chuyện. Bài nói có chuyển động phức tạp thì viết kịch bản trước (skill `script-writer`). | như trên |
 | 3 | Chọn nhận diện: lấy từ file, logo hoặc màu người dùng có, hoặc theo một tài liệu mẫu (PDF) họ đưa. Không có thì chọn một phong cách. | [guides/2-nhan-dien.md](guides/2-nhan-dien.md) |
 | 4 | **Phác từng slide bằng một dòng chữ**: ý chính, vật chính, bố cục. | [guides/3-bo-cuc.md](guides/3-bo-cuc.md), [4-chu-va-mau.md](guides/4-chu-va-mau.md), [5-anh-so-do-bieu-do.md](guides/5-anh-so-do-bieu-do.md) |
@@ -36,6 +36,10 @@ slide rẻ hơn sửa 30.
 [guides/10-dong-bo-slide-co-san.md](guides/10-dong-bo-slide-co-san.md). Giữ ruột (số, chữ, ý, ảnh bằng
 chứng, hiệu ứng kể cơ chế, video), thay vỏ (font, màu, bố cục, kiểu biểu đồ, hiệu ứng trang trí). Lập
 bảng ý trước khi sửa.
+
+**Tái cơ cấu cả một bộ** (đổi câu chuyện, gộp tách slide, nhiều phiên hay nhiều agent): thêm
+[guides/11-dung-lai-ca-bo.md](guides/11-dung-lai-ca-bo.md): ba bước Hiểu → Làm → Kiểm, chỉ dừng hỏi người
+dùng ở ba chỗ; dựng trên bản sao bộ gốc; chấm hai tầng (cổng máy, rồi mắt).
 
 Chọn **mức** chuyển động theo phòng, không theo số hiệu ứng: một lớp học cần ít
 hơn một sân khấu hội nghị. Đơn giản mà vừa tốt hơn phức tạp mà gượng (guide 6).
@@ -88,4 +92,8 @@ Viết ngắn, bằng lời thường, theo thứ tự:
 | Bộ có sẵn: dựng lại biểu đồ phẳng từ chính số của nó | `python scripts/pptx_tools.py rechart DECK 5 "Ten" --kind bar -o OUT` |
 | Bộ có sẵn: thu một cụm hình như một khối (chữ, nét, đường bay đi theo) | `python scripts/pptx_tools.py scale DECK 4 "A" "B" --by 0.7 -o OUT` |
 | Bộ có sẵn: sửa ảnh bị kéo méo | `python scripts/pptx_tools.py unstretch DECK 8 "Anh" [--box] -o OUT` |
+| Bộ có sẵn: đổi vỏ một bảng thật tại chỗ (Gantt, bảng kiểm), giữ chữ và ô gộp | `python scripts/pptx_tools.py retable DECK 8 "Table 4" --fill FFFF00=0062AC -o OUT` |
+| Tách nền dính liền khỏi ảnh (khung sơ đồ, logo, icon) | `python scripts/pptx_tools.py cutout ANH.png -o TACH.png` |
 | Bộ có sẵn: số nào của bản gốc đã mất | `python scripts/pptx_tools.py numbers GOC.pptx MOI.pptx` |
+| Dựng lại cả bộ: ảnh, video gốc thành file, và `manifest.json` của từng slide | `python scripts/pptx_tools.py extract GOC.pptx -o DIR` |
+| Dựng lại cả bộ: cổng giữ ruột (chuyển slide, hiệu ứng, video, số, ảnh gốc) | `python scripts/pptx_tools.py check GOC.pptx MOI.pptx --map map.json` |

@@ -91,6 +91,11 @@ Bảng đổi dạng thường gặp:
 | Đoạn văn | vài lý do | ba ý ngắn, câu gốc vào notes |
 | "Trước: X – Sau: Y" | sự thay đổi | hai số lớn cạnh nhau, số "sau" màu nhấn |
 
+**Xem vật thể gốc trước khi xếp một slide vào nhóm Làm lại.** Bảng gốc là bảng PowerPoint thật, biểu đồ
+gốc là biểu đồ thật, sơ đồ là nhóm hình có hiệu ứng: những thứ này sửa tại chỗ được (`retable`,
+`rechart`, `scale`, `cutout`), nên slide đó là **Sửa vỏ**. Dựng lại từ đầu thì mất dữ liệu, mất ô gộp,
+mất hiệu ứng, và tốn công. `inventory` và `extract` cho biết slide nào có bảng thật, biểu đồ thật.
+
 Người dùng duyệt danh sách slide **Làm lại** trước khi bạn làm.
 
 ## Bước 4. Đồng bộ chung, một lần cho cả bộ
@@ -134,6 +139,23 @@ Người dùng duyệt danh sách slide **Làm lại** trước khi bạn làm.
 - Ảnh trước/sau: cùng cỡ khung, cùng hàng, cùng cách cắt.
 - Không bao giờ kéo giãn ảnh.
 
+**Ảnh có nền dính liền** (khung xương cá vẽ sẵn trên nền nhà máy, logo trên nền trắng, icon tải về):
+
+```
+python scripts/pptx_tools.py cutout khung.png -o khung_tach.png
+```
+
+- Lệnh lấy màu nền từ viền ảnh, giữ trọn vật chính kể cả phần sáng bên trong (mắt cá, vệt bóng), bỏ nét vẽ
+  mờ phía sau, viền mềm, không còn quầng sáng.
+- Đặt ảnh đã tách vào **đúng hình cũ** bằng `replace_picture` (mục 9): cùng chỗ, cùng cỡ, cùng mã, nên
+  hiệu ứng vẫn chạy.
+- Xem ảnh tách trên nền tối **và** nền sáng trước khi dùng. Vật chính có phần nhạt gần màu nền thì hạ
+  ngưỡng: `--range 30,90`.
+- **Không tách bằng ngưỡng màu cứng và các ô chữ nhật cắt tay.** Cách đó chém mất phần vật chính (hàm cá,
+  đuôi cá), đục lỗ chỗ sáng, và để lại viền.
+- Nền là ảnh chụp nhiều chi tiết thì `cutout` không làm được. Xin tác giả file gốc, hoặc vẽ lại khung bằng
+  hình PowerPoint với **đúng dạng** cũ (mục "Sơ đồ chuẩn").
+
 ### Tổ hợp hình quá to
 
 Một sơ đồ ghép từ nhiều hình (xương cá, quy trình, sơ đồ tổ chức) tràn ra ngoài hoặc đè lên tiêu đề:
@@ -175,6 +197,25 @@ tiết; muốn đặt nhỏ thì hỏi.
 
 ### Bảng
 
+**Bảng là bảng PowerPoint thật**, không ghép từ hộp chữ và đường kẻ. Ghép tay thì đường kẻ cắt ngang
+chữ, hàng lệch nhau, ô gộp phải che bằng hộp trắng, và người dùng không sửa được trong PowerPoint.
+
+- Bảng gốc đã là bảng thật (Gantt, bảng kiểm, bảng so sánh): đổi vỏ **tại chỗ**, chữ và ô gộp giữ
+  nguyên:
+
+  ```
+  python scripts/pptx_tools.py retable vao.pptx 8 "Table 4" --font Arial --head-rows 2 --fill FFFF00=7DB3E0 -o ra.pptx
+  ```
+
+  `--fill CU=MOI` đổi màu các ô theo màu cũ (thanh Gantt vàng thành xanh). Mọi ô khác thành nền trắng,
+  viền mảnh; `--lines rows` chỉ kẻ ngang. Bảng quá to cho khung thì thu bằng `scale` (lệnh thu cả cột và
+  hàng).
+- Bảng mới: `shapes.add_table`, gộp ô bằng `cell.merge`, rồi gọi `style_table` (mục 9).
+- **Gantt là một bảng:**
+  - cột trái: số thứ tự, việc, chi tiết, người làm;
+  - mỗi việc hai hàng Plan và Actual, các cột trái gộp qua hai hàng đó;
+  - thanh tiến độ là **ô tô màu**, không phải hình đặt đè lên. Nhờ vậy thanh luôn thẳng cột;
+  - mốc (milestone) là một hình nhỏ đặt theo mép cột tính từ độ rộng cột.
 - Bảng nhỏ (khoảng 4×4 trở xuống) giữ dạng bảng: chữ từ 18 pt, chỉ kẻ ngang mảnh, cột số canh phải.
 - Bảng lớn: hỏi "bảng này để nói điều gì?", đưa điều đó lên slide (bước 3), còn bảng đủ chuyển xuống
   slide phụ lục ở cuối bộ. Số liệu không mất, người hỏi lại vẫn tìm thấy.

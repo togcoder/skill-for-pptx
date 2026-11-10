@@ -28,12 +28,32 @@ For a deck someone else made (skills/pptx/guides/10-dong-bo-slide-co-san.md):
     rechart DECK SLIDE NAME --kind column|bar|line|pie -o OUT
                                 rebuild a chart (3D included) as a flat native
                                 chart from its own numbers, same place, same id
+    retable DECK SLIDE NAME [--fill FFFF00=0062AC] -o OUT
+                                restyle a native table in place (a Gantt, a
+                                check sheet): text, merges and size kept;
+                                borders, fills and type follow the deck
+    cutout IMAGE -o OUT.png     take a plain background off a picture (a
+                                diagram frame, a logo): soft edges, inner
+                                parts kept, faint marks dropped, no fringe
     unstretch DECK SLIDE NAME [--box] -o OUT
                                 undo a stretched picture: crop it to its frame,
                                 or with --box resize the frame to the picture
     numbers BEFORE AFTER        every number in the original (text, tables,
                                 charts, notes) that the new deck no longer has,
                                 or has fewer times; "2%" and "2" differ
+
+For rebuilding a whole deck (skills/pptx/guides/11-dung-lai-ca-bo.md):
+
+    extract DECK [-o DIR]       the original pictures and videos as files (never
+                                screenshots) and manifest.json: per slide its
+                                text, notes, chart data, tables, media boxes,
+                                transition and effect count
+    check BEFORE AFTER [--map MAP.json]
+                                pass/fail gates: transitions, effects pointing
+                                to deleted shapes, videos kept and full-slide,
+                                numbers, pictures cut tighter than the original;
+                                with the map, keep slides keep their effects
+                                and every slide keeps its source pictures
 
 Plan (JSON), slide numbers start at 1:
 
@@ -729,6 +749,112 @@ def unstretch(deck, slide_no, name, output, box=False):
     return r
 
 
+def _line(tag, colour, width_pt):
+    ln = E.SubElement(E.Element("dummy"), qn(f"a:{tag}"), w=str(round(width_pt * 12700)) if colour else "0")
+    if colour:
+        E.SubElement(E.SubElement(ln, qn("a:solidFill")), qn("a:srgbClr"), val=colour)
+    else:
+        E.SubElement(ln, qn("a:noFill"))
+    return ln
+
+
+def style_table(table, font=None, size=None, ink="1D2433", head_rows=1, head_fill="0062AC", head_ink="FFFFFF",
+                rule="C9D2DE", lines="grid", fill_map=None, body_fill="FFFFFF"):
+    """Restyle a native PowerPoint table in place: every cell keeps its text and merges; borders, fills and
+    type change. fill_map {"FFFF00": "0062AC"} recolours cells by their old fill (Gantt bars); every other
+    body fill becomes body_fill (None: no fill, the slide shows through). lines: "grid" or "rows" (horizontal rules only)."""
+    fill_map = {k.upper(): v for k, v in (fill_map or {}).items()}
+    tbl = table._tbl
+    tbl_pr = tbl.find(qn("a:tblPr"))
+    for attr in ("firstRow", "bandRow", "firstCol", "lastRow", "lastCol", "bandCol"):
+        tbl_pr.attrib.pop(attr, None)
+    for node in tbl_pr.findall(qn("a:tableStyleId")):
+        tbl_pr.remove(node)
+    fills = {qn(f"a:{t}") for t in ("noFill", "solidFill", "gradFill", "blipFill", "pattFill", "grpFill")}
+    for r, row in enumerate(table.rows):
+        head = r < head_rows
+        for cell in row.cells:
+            pr = cell._tc.get_or_add_tcPr()
+            old = pr.find("a:solidFill/a:srgbClr", NS)
+            old = old.get("val").upper() if old is not None else None
+            for node in list(pr):
+                if node.tag in fills or E.QName(node).localname in ("lnL", "lnR", "lnT", "lnB"):
+                    pr.remove(node)
+            side = rule if lines == "grid" else None
+            for k, (tag, colour) in enumerate((("lnL", side), ("lnR", side), ("lnT", rule), ("lnB", rule))):
+                pr.insert(k, _line(tag, colour, 0.75))
+            colour = head_fill if head else fill_map.get(old, body_fill)
+            if colour:
+                E.SubElement(E.SubElement(pr, qn("a:solidFill")), qn("a:srgbClr"), val=colour)
+                pr.insert(4, pr[-1])  # a fill comes right after the four borders
+            else:
+                pr.insert(4, E.Element(qn("a:noFill")))
+            pr.set("anchor", "ctr")
+            for para in cell.text_frame.paragraphs:
+                for run in para.runs:
+                    if font:
+                        run.font.name = font
+                    if size:
+                        run.font.size = Pt(size)
+                    run.font.color.rgb = RGBColor.from_string(head_ink if head else ink)
+                    if head:
+                        run.font.bold = True
+
+
+def retable(deck, slide_no, name, output, **style):
+    """style_table on one table of a deck, saved to output. Returns (rows, columns)."""
+    prs = Presentation(deck)
+    (frame,) = _top_shapes(prs.slides[slide_no - 1], [name])
+    if not getattr(frame, "has_table", False):
+        raise ValueError(f"{name!r} is not a table")
+    style_table(frame.table, **style)
+    prs.save(output)
+    return len(frame.table.rows), len(frame.table.columns)
+
+
+def cutout(src, out, lo=60, hi=140):
+    """Take a plain background off a picture (a diagram frame, a logo, an icon): soft edges, the subject's
+    inner parts kept (an eye, a highlight), faint marks in the background dropped, no light fringe.
+
+    The background colour is read from the picture's border. A pixel's colour distance from it decides:
+    below lo is background, above hi is subject, between is the soft edge."""
+    import numpy as np
+    from PIL import Image
+    try:
+        from scipy import ndimage as ndi
+    except ImportError:
+        raise ValueError("cutout needs scipy: pip install scipy") from None
+    im = np.asarray(Image.open(src).convert("RGB")).astype(np.float32)
+    ring = np.concatenate([im[:8].reshape(-1, 3), im[-8:].reshape(-1, 3),
+                           im[:, :8].reshape(-1, 3), im[:, -8:].reshape(-1, 3)])
+    bg = np.median(ring, axis=0)
+    soft = np.clip((np.sqrt(((im - bg) ** 2).sum(-1)) - lo) / (hi - lo), 0, 1)
+    core = ndi.binary_opening(soft > 0.5, iterations=3)  # thin lines and specks of the background go
+    lab, n = ndi.label(core)
+    if not n:
+        raise ValueError("nothing differs enough from the background: lower the range, e.g. --range 30,90")
+    sizes = ndi.sum(core, lab, range(1, n + 1))
+    big = 1 + np.flatnonzero(sizes >= 0.02 * sizes.max())  # ponytail: parts under 2% of the largest go
+    body = ndi.binary_fill_holes(np.isin(lab, big))
+    inner = ndi.binary_erosion(body, iterations=2)
+    edge = ndi.binary_dilation(body, iterations=4) & ~inner
+    alpha = np.where(inner, 1.0, np.where(edge, soft, 0.0))
+    rgb = np.clip((im - (1 - alpha[..., None]) * bg) / np.maximum(alpha, 1e-3)[..., None], 0, 255)
+    Image.fromarray(np.dstack([rgb, alpha * 255]).astype(np.uint8), "RGBA").save(out)
+    share = float((alpha > 0.5).mean())
+    note = "  <- most of the picture is kept: is the background plain?" if share > 0.8 else ""
+    return (f"background #{''.join(f'{round(v):02X}' for v in bg)}; kept {len(big)} part(s), dropped "
+            f"{n - len(big)} small mark(s); subject is {share:.0%} of the picture{note} -> {out}")
+
+
+def replace_picture(slide, name, image):
+    """Put a new image file into an existing picture: same place, size, crop, name and id, so its
+    animation still runs (e.g. the cutout of a diagram frame)."""
+    (pic,) = _top_shapes(slide, [name])
+    _, rid = slide.part.get_or_add_image_part(image)
+    pic._element.blipFill.blip.rEmbed = rid
+
+
 # ------------------------------------------------------------ a reference document to follow
 
 def _font_key(name):
@@ -827,6 +953,200 @@ def sample(pdf, out_dir, pages=()):
     return "\n".join(lines)
 
 
+def _media(slide):
+    """(shape, kind, blob, ext) for every picture and video on a slide, groups included."""
+    for shape in _walk(slide.shapes):
+        if shape.shape_type == MSO_SHAPE_TYPE.MEDIA:
+            link = shape._element.find(".//a:videoFile", NS)
+            rid = link.get(qn("r:link")) if link is not None else None
+            if rid:
+                part = slide.part.related_part(rid)
+                yield shape, "video", part.blob, part.partname.ext
+        elif shape.shape_type == MSO_SHAPE_TYPE.PICTURE:
+            try:
+                yield shape, "picture", shape.image.blob, shape.image.ext
+            except (AttributeError, KeyError, ValueError):  # linked, not embedded
+                continue
+
+
+def _sha(blob):
+    import hashlib
+    return hashlib.sha1(blob).hexdigest()[:12]
+
+
+def _dhash(blob):
+    """64-bit difference hash: the same photo re-saved or resized keeps it; a crop or a screenshot does not."""
+    import io
+    from PIL import Image
+    try:
+        px = list(Image.open(io.BytesIO(blob)).convert("L").resize((9, 8)).getdata())
+    except Exception:  # noqa: BLE001  (EMF, WMF, broken files: no match)
+        return None
+    return sum(1 << i for i in range(64) if px[i // 8 * 9 + i % 8] > px[i // 8 * 9 + i % 8 + 1])
+
+
+def _visible(pic):
+    return (1 - pic.crop_left - pic.crop_right) * (1 - pic.crop_top - pic.crop_bottom)
+
+
+def extract(deck, out_dir):
+    """Take a deck apart for a rebuild: original media files (not screenshots) and one manifest of what each
+    slide says, shows and animates. Returns a short summary."""
+    prs = Presentation(deck)
+    sw, sh = prs.slide_width, prs.slide_height
+    out = Path(out_dir)
+    (out / "media").mkdir(parents=True, exist_ok=True)
+    slides, files = [], set()
+    for i, slide in enumerate(prs.slides, 1):
+        animated = {t.get("spid") for t in slide._element.iter(qn("p:spTgt"))}
+        effects, clicks = _slide_effects(slide)
+        row = {"slide": i, "transition": _transition(slide) or "none", "effects": sum(effects.values()),
+               "clicks": clicks, "text": [], "media": [], "charts": [], "tables": [],
+               "notes": slide.notes_slide.notes_text_frame.text if slide.has_notes_slide else ""}
+        for shape in sorted(_walk(slide.shapes), key=lambda s: (s.top or 0, s.left or 0)):
+            if shape.has_text_frame and shape.text_frame.text.strip():
+                row["text"].append({"name": shape.name, "text": shape.text_frame.text.strip()})
+            if getattr(shape, "has_chart", False):
+                try:
+                    cats, series, _ = _chart_numbers(shape.chart)
+                    row["charts"].append({"name": shape.name, "kinds": _plot_kinds(shape.chart),
+                                          "categories": cats, "series": dict(series)})
+                except ValueError:
+                    pass
+            if getattr(shape, "has_table", False):
+                row["tables"].append({"name": shape.name, "rows": [[c.text for c in r.cells]
+                                                                   for r in shape.table.rows]})
+        for shape, kind, blob, ext in _media(slide):
+            name = f"{_sha(blob)}.{ext}"
+            if name not in files:
+                (out / "media" / name).write_bytes(blob)
+                files.add(name)
+            item = {"name": shape.name, "kind": kind, "file": f"media/{name}",
+                    "box_pct": [round(100 * v / d) for v, d in
+                                ((shape.left, sw), (shape.top, sh), (shape.width, sw), (shape.height, sh))],
+                    "animated": str(shape.shape_id) in animated}
+            if kind == "picture":
+                item["pixels"] = list(shape.image.size)
+                item["visible_pct"] = round(100 * _visible(shape))
+            row["media"].append(item)
+        slides.append(row)
+    manifest = {"deck": Path(deck).name, "slides": len(slides),
+                "size_in": [round(sw / 914400, 2), round(sh / 914400, 2)], "slide_list": slides}
+    (out / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=1), encoding="utf-8")
+    count = Counter(m["kind"] for s in slides for m in s["media"])
+    busy = [f"{s['slide']} ({s['effects']})" for s in slides if s["effects"] >= 20]
+    return (f"{len(slides)} slides; {count['picture']} pictures and {count['video']} videos placed, "
+            f"{len(files)} distinct files -> {out / 'media'}\n"
+            f"charts with data: {sum(len(s['charts']) for s in slides)}; tables: "
+            f"{sum(len(s['tables']) for s in slides)}; slides with notes: {sum(bool(s['notes']) for s in slides)}\n"
+            f"slides with 20+ effects (watch them, guide 10 'Slide có hiệu ứng'): {', '.join(busy) or 'none'}\n"
+            f"manifest: {out / 'manifest.json'}")
+
+
+def check(before, after, mapping=None):
+    """Gates for a rebuilt deck: did the content survive? [(passed, gate, detail)]. mapping: {new slide:
+    {"old": [old slides], "group": "keep" | "reskin" | "rebuild", "drop": [old picture names left out on
+    purpose], "video": "small" (the user agreed to a video that does not fill the slide)},
+    "dropped": [old slides left out on purpose]} from the idea table."""
+    old, new = Presentation(before), Presentation(after)
+    sw, sh = new.slide_width, new.slide_height
+    gates = []
+    rows = {int(k): v for k, v in (mapping or {}).items() if k != "dropped"}
+    small_agreed = {n for n, row in rows.items() if row.get("video") == "small"}
+
+    def gate(ok, name, detail):
+        gates.append((ok, name, detail))
+
+    odd = [f"{i}:{t}" for i, s in enumerate(new.slides, 1)
+           if (t := _transition(s) or "none") not in ("none", "cut", "fade", "morph")]
+    gate(not odd, "transitions", "only fade, Morph or none" if not odd else "old-style: " + ", ".join(odd))
+    lost = [i for i, s in enumerate(new.slides, 1)
+            if {t.get("spid") for t in s._element.iter(qn("p:spTgt"))} - {n.get("id") for n in
+                                                                          s._element.iter(qn("p:cNvPr"))}]
+    gate(not lost, "effects intact", "no effect points to a deleted shape" if not lost
+         else "effects point to deleted shapes on slides " + ", ".join(map(str, lost)))
+    old_media = [{_sha(b): (sh_, k) for sh_, k, b, _ in _media(s)} for s in old.slides]
+    looks = {}  # dhash -> old sha, so a re-saved original still counts as the original
+    for s in old.slides:
+        for _, k, b, _ in _media(s):
+            if k == "picture" and (d := _dhash(b)) is not None:
+                looks.setdefault(d, _sha(b))
+
+    def source(blob, kind):
+        h = _sha(blob)
+        if kind == "video" or any(h in m for m in old_media):
+            return h
+        d = _dhash(blob)
+        near = min(looks, key=lambda o: bin(o ^ d).count("1"), default=None) if d is not None else None
+        # ponytail: 6 of 64 bits; plain or blank images can match each other
+        return looks[near] if near is not None and bin(near ^ d).count("1") <= 6 else "new:" + h
+
+    new_media = [{source(b, k): (sh_, k) for sh_, k, b, _ in _media(s)} for s in new.slides]
+    old_vids = {h for m in old_media for h, (_, k) in m.items() if k == "video"}
+    new_all = {h for m in new_media for h in m}
+    gone = old_vids - new_all
+    gate(not gone, "videos kept", f"{len(old_vids)} of {len(old_vids)}" if not gone
+         else f"{len(gone)} of {len(old_vids)} videos missing")
+    small = [f"{i}: {max(s.width / sw, s.height / sh):.0%}" for i, m in enumerate(new_media, 1)
+             for s, k in m.values() if k == "video" and max(s.width / sw, s.height / sh) < 0.9
+             and i not in small_agreed]
+    gate(not small, "videos fill the slide", "every video >= 90% of the slide's width or height" if not small
+         else "smaller: slide " + "; ".join(small))
+    numbers_gone = missing_numbers(before, after)
+    gate(not numbers_gone, "numbers kept", "every number of the original is still in the deck" if not numbers_gone
+         else f"{sum(map(len, numbers_gone.values()))} numbers gone (run `numbers` for the list)")
+    best = {}
+    for m in old_media:
+        for h, (s, k) in m.items():
+            if k == "picture":
+                best[h] = max(best.get(h, 0), _visible(s))
+    cut = [f"{i}: {s.name!r}" for i, m in enumerate(new_media, 1) for h, (s, k) in m.items()
+           if k == "picture" and h in best and _visible(s) < best[h] - 0.05]
+    gate(not cut, "pictures not cut", "no source picture is cropped more than in the original" if not cut
+         else "cropped more than the original: " + "; ".join(cut))
+    spread = Counter(h for m in new_media for h in m)  # theme art repeats on many slides
+    foreign = [f"{i}: {s.name!r}" for i, m in enumerate(new_media, 1) for h, (s, k) in m.items()
+               if k == "picture" and h.startswith("new:") and spread[h] < 3]
+    if mapping:
+        weak, missing, holes = [], [], []
+        old_spread = Counter(h for m in old_media for h in m)  # the old theme's art, logos
+        for n, row in sorted(rows.items()):
+            group, olds = row.get("group", "reskin"), row.get("old", [])
+            wrong = [o for o in olds if not 1 <= o <= len(old.slides)]
+            if n > len(new.slides):
+                holes.append(f"the map has new slide {n}, the deck has {len(new.slides)}")
+            if wrong:
+                holes.append(f"new slide {n} names old slide {wrong[0]}, the original has {len(old.slides)}")
+            if not olds or group == "rebuild" or n > len(new.slides) or wrong:
+                continue
+            had = sum(sum(_slide_effects(old.slides[o - 1])[0].values()) for o in olds)
+            has = sum(_slide_effects(new.slides[n - 1])[0].values())
+            if group == "keep" and has < had:
+                weak.append(f"{n} (old {'+'.join(map(str, olds))}): {has} of {had}")
+            drop = set(row.get("drop", []))
+            pics = {h: sh_.name for o in olds for h, (sh_, k) in old_media[o - 1].items()
+                    if k == "picture" and old_spread[h] < 3 and sh_.name not in drop}
+            short = [pics[h] for h in pics if h not in new_media[n - 1]]
+            if short:
+                missing.append(f"{n} (old {'+'.join(map(str, olds))}): {', '.join(map(repr, short))}")
+        used = {o for row in rows.values() for o in row.get("old", [])} | set(mapping.get("dropped", []))
+        unlisted = sorted(set(range(1, len(old.slides) + 1)) - used)
+        if unlisted:  # or a hard slide passes every gate by not being in the map
+            holes.append("old slides in no row: " + ", ".join(map(str, unlisted))
+                         + " (give each a row, or list it under \"dropped\")")
+        gate(not holes, "every slide accounted for", "each old slide has a row or is dropped on purpose"
+             if not holes else "; ".join(holes))
+        gate(not weak, "keep slides keep their effects", "all there" if not weak else "; ".join(weak))
+        gate(not missing, "source pictures on their slide",
+             "every picture of the old slide is on the new one" if not missing
+             else "missing (put back, or list under \"drop\" in the map if left out on purpose): "
+             + "; ".join(missing))
+    passed = sum(ok for ok, _, _ in gates)
+    note = ("pictures not from the original (look at each: a new icon or photo is fine; a cut-out of a "
+            "screenshot, or a photo cut down in an image editor, is not): " + "; ".join(foreign) if foreign else "")
+    return gates, passed, note
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sp = ap.add_subparsers(dest="cmd", required=True)
@@ -853,6 +1173,33 @@ def main(argv=None):
     a = sp.add_parser("numbers", help="numbers in the original that the new deck lost")
     a.add_argument("before")
     a.add_argument("after")
+    a = sp.add_parser("extract", help="original media files and a manifest of every slide, for a rebuild")
+    a.add_argument("deck")
+    a.add_argument("-o", "--output", default=None, help="folder (default: <deck>-extract)")
+    a = sp.add_parser("check", help="gates for a rebuilt deck: what of the original survived")
+    a.add_argument("before")
+    a.add_argument("after")
+    a.add_argument("--map", help='JSON: {"17": {"old": [15, 16], "group": "keep|reskin|rebuild", '
+                                 '"drop": ["Picture 65"]}, "dropped": [9]}')
+    a = sp.add_parser("retable", help="restyle a native table in place: text and merges kept")
+    a.add_argument("deck")
+    a.add_argument("slide", type=int)
+    a.add_argument("name")
+    a.add_argument("--font")
+    a.add_argument("--size", type=float, help="pt; default keeps each run's size")
+    a.add_argument("--ink", default="1D2433", help="body text colour, hex")
+    a.add_argument("--head-rows", type=int, default=1)
+    a.add_argument("--head", default="0062AC", help="header fill, hex")
+    a.add_argument("--head-ink", default="FFFFFF")
+    a.add_argument("--rule", default="C9D2DE", help="border colour, hex")
+    a.add_argument("--lines", choices=("grid", "rows"), default="grid")
+    a.add_argument("--fill", action="append", default=[], help="recolour a cell fill: OLD=NEW, e.g. FFFF00=0062AC")
+    a.add_argument("--body", default="FFFFFF", help="fill for every other body cell, hex, or none")
+    a.add_argument("-o", "--output", required=True)
+    a = sp.add_parser("cutout", help="take a plain background off a picture: soft edges, no fringe")
+    a.add_argument("image")
+    a.add_argument("--range", default="60,140", help="colour distance from the background: LOW,HIGH")
+    a.add_argument("-o", "--output", required=True, help="PNG")
     a = sp.add_parser("rechart", help="rebuild a chart flat from its own numbers")
     a.add_argument("deck")
     a.add_argument("slide", type=int)
@@ -881,6 +1228,31 @@ def main(argv=None):
             out = args.output or str(Path(args.pdf).with_suffix("")) + "-sample"
             print(sample(args.pdf, out, [int(p) for p in args.pages.split(",") if p]))
             return 0
+        if args.cmd == "retable":
+            n = retable(args.deck, args.slide, args.name, args.output, font=args.font, size=args.size, ink=args.ink,
+                        head_rows=args.head_rows, head_fill=args.head, head_ink=args.head_ink, rule=args.rule,
+                        lines=args.lines, fill_map=dict(f.split("=", 1) for f in args.fill),
+                        body_fill=None if args.body.lower() == "none" else args.body)
+            print(f"restyled a {n[0]} x {n[1]} table -> {args.output}; render it and look at it")
+            return 0
+        if args.cmd == "cutout":
+            lo, hi = (float(v) for v in args.range.split(","))
+            print(cutout(args.image, args.output, lo, hi))
+            print("look at it on a dark and a light background before using it")
+            return 0
+        if args.cmd == "extract":
+            print(extract(args.deck, args.output or str(Path(args.deck).with_suffix("")) + "-extract"))
+            return 0
+        if args.cmd == "check":
+            mapping = json.loads(Path(args.map).read_text(encoding="utf-8")) if args.map else None
+            gates, passed, note = check(args.before, args.after, mapping)
+            for ok, name, detail in gates:
+                print(f"{'PASS' if ok else 'FAIL'}  {name}: {detail}")
+            print(f"{passed}/{len(gates)} gates pass" + ("" if mapping else " (no --map: slide-level gates skipped)"))
+            if note:
+                print(note)
+            print("gates check that content survived; they do not say the deck is good (guide 11)")
+            return 0 if passed == len(gates) else 1
         if args.cmd == "numbers":
             lost = missing_numbers(args.before, args.after)
             for i, nums in lost.items():

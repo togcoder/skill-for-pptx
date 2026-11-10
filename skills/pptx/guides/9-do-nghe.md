@@ -83,7 +83,7 @@ chọn font thay và màu; còn giọng của mẫu thì phải xem ảnh các t
 
 ## Bộ slide có sẵn (mục 10)
 
-Các lệnh `inventory`, `rechart`, `scale`, `unstretch`, `numbers` đọc và ghi file; xem `python
+Các lệnh `inventory`, `rechart`, `retable`, `scale`, `unstretch`, `cutout`, `numbers` đọc và ghi file; xem `python
 scripts/pptx_tools.py -h`. Ba việc còn lại làm bằng `python-pptx`, gọi hàm của đồ nghề:
 
 ```python
@@ -108,9 +108,37 @@ tools.add_chart(slide, "line", (left, top, width, height), ["Tuần 1", "Tuần 
 prs.save("moi.static.pptx")
 ```
 
+Bảng mới cùng kiểu với `retable`, và đặt ảnh đã tách nền vào hình cũ:
+
+```python
+from pptx.dml.color import RGBColor
+
+frame = slide.shapes.add_table(len(rows), len(rows[0]), left, top, width, height)
+for r, row in enumerate(rows):
+    for c, text in enumerate(row):
+        frame.table.cell(r, c).text = text
+frame.table.cell(1, 0).merge(frame.table.cell(2, 0))        # việc gộp qua hai hàng Plan / Actual
+frame.table.cell(1, 5).fill.solid()                          # ô tô màu = thanh Gantt
+frame.table.cell(1, 5).fill.fore_color.rgb = RGBColor.from_string("FFFF00")
+tools.style_table(frame.table, font="Arial", size=14, head_rows=1, fill_map={"FFFF00": "0062AC"})
+
+tools.replace_picture(slide, "Picture 4", "khung_tach.png")  # cùng chỗ, cùng mã: hiệu ứng vẫn chạy
+```
+
 Chuyển một bảng lớn xuống phụ lục mà không mất số: thêm slide cuối, chép phần tử của bảng sang
 (`copy.deepcopy(table._element)` rồi `slide.shapes._spTree.append(...)`), xóa bảng ở slide cũ.
 Ví dụ đầy đủ: `experiments/T093-20261108-claude-harmonize-deck/inputs/harmonize.py`.
+
+## Dựng lại cả bộ (mục 11)
+
+`extract GOC.pptx -o DIR` chép mọi ảnh và video gốc ra `DIR/media` (mỗi file một lần, tên theo nội dung)
+và ghi `DIR/manifest.json`: mỗi slide có chữ, notes, số của biểu đồ, bảng, ảnh và video (tên, file, vị trí
+theo % slide, phần ảnh còn thấy, có hiệu ứng không), kiểu chuyển slide, số hiệu ứng. Slide dựng lại lấy ảnh
+từ đây, không từ ảnh chụp màn hình.
+
+`check GOC.pptx MOI.pptx --map map.json` in từng cổng `PASS`/`FAIL` và trả mã lỗi 1 khi còn cổng trượt.
+Ảnh lưu lại hay thu nhỏ vẫn được nhận là ảnh gốc (so theo hình, không theo byte); ảnh bị cắt bớt trong
+file, hay cắt từ ảnh chụp màn hình, thì không, và nằm trong danh sách "not from the original".
 
 ## Công cụ cũ: dùng có điều kiện
 
