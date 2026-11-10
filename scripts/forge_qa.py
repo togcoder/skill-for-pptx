@@ -15,6 +15,7 @@ from pptx import Presentation
 sys.path.insert(0,str(Path(__file__).resolve().parent))
 import design_system as _ds  # noqa: E402
 import pptx_animator as anim  # noqa: E402
+import text_metrics  # noqa: E402
 from slide_forge import text_lines  # noqa: E402
 
 NS=anim.NS
@@ -61,6 +62,7 @@ def qa(path,theme=None):
     sw,shh=prs.slide_width,prs.slide_height
     errors=[]
     warnings=[]
+    missing_fonts=set()
     metrics={"slides":len(prs.slides),"effects":0,"morph_transitions":0,"pictures":0,"pictures_moving":0,
              "slides_with_motion":0}
 
@@ -125,7 +127,15 @@ def qa(path,theme=None):
                     lines=sum(text_lines(t,family,max(sizes),sh.width/EMU_IN*k-inset,bold) for t in paras)
                 need=(lines*max(sizes)*1.18+6*(len(paras)-1))/72+0.1
                 have=sh.height/EMU_IN*k
-                if lines==float("inf"):
+                if text_metrics.font_path(family) is None:
+                    # Without the font file the width is a 0.55 em estimate, so
+                    # an overflow verdict would be a guess (T089).
+                    if (family or "").lower() not in missing_fonts:
+                        missing_fonts.add((family or "").lower())
+                        find("FONT_MISSING",idx,name,
+                             f"font {family!r} is not installed; text measurements are approximate",
+                             "install the deck font to judge fit exactly",error=False)
+                elif lines==float("inf"):
                     find("WORD_BREAK",idx,name,"a word is wider than its box; PowerPoint breaks it mid-word",
                          "shorten the word, widen the box or lower the size")
                 elif need>have*1.08:

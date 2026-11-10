@@ -145,6 +145,10 @@ def number_counter_recipe(number_semantics):
     target=number_semantics.get("numeric_value")
     if not isinstance(target,(int,float)):
         return None
+    if target==0:
+        # Nothing to count up to: a zero reveals as text instead of building
+        # an empty proxy stack (T089).
+        return None
     magnitude=abs(target)
     if magnitude < 100:
         duration=900

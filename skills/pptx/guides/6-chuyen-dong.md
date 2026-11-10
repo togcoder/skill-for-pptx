@@ -28,6 +28,9 @@ hãy làm cho cú cắt trở nên hiển nhiên.
 
 1. **Slide mở ra phải đọc được ngay.** Tiêu đề, khung, trục biểu đồ, ảnh nền đều có mặt từ đầu. Chỉ
    những thứ người nói **sắp nói tới** mới chờ lần bấm.
+   - **Một con số không đứng một mình trước thẻ của nó.** Nếu cả thẻ (nền, số, nhãn) là một ý sẽ
+     nói tới, cả thẻ chờ lần bấm. Số `0` không có gì để đếm, nên nó hiện cùng thẻ — không tách ra
+     trước để rồi lộ một số trơ trọi ở góc slide.
 2. **Một lần bấm là một ý người nói nói ra.** Không chia một câu thành ba lần bấm. Không bắt bấm sáu
    lần ở slide bìa: bìa không có lần bấm nào.
 3. **Mỗi lúc chỉ một thứ chuyển động.** Những thứ cùng nhóm thì xuất hiện cùng một lần bấm, cách nhau

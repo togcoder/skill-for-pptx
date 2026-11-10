@@ -8,6 +8,42 @@ were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
 
+## T089 [pptx] Harmful defaults cut at the source — 2026-11-10
+
+- **Why:** the owner's QCC theme build exposed defaults that made Forge and the Director act
+  without being asked: a KPI of 0 stopped the build, card titles fell to 14 pt, every slide got
+  decorative `!!orb` circles and a Morph, a word passed as `logo` became a watermark, a cover was
+  split into clicks, decoration alone justified a Morph, and a deck font missing on this machine
+  was reported as overflowing text.
+- **Forge:** `motion.morph` defaults to **false**; the background draws no orbs; a `card` type
+  level snapped from the design system's `card_title` (18 pt) keeps card titles at 20–28 pt in
+  this deck; the logo accepts only an image file and a word is skipped with one `LOGO_SKIPPED`
+  note; a missing font is a `FONT_MISSING` note, not an overflow error; a KPI target of 0 returns
+  no counter recipe and reveals as text.
+- **Director:** a text-box cover (kicker, title, subtitle, presenter, date, rule) is recognised as
+  a cover and gets **one auto-start group**, not 4–6 clicks; `shared_objects` separates "rides
+  along" from "justifies the cut": decoration and chrome never cause a Morph, names present on
+  every slide are ignored, and a real content object that travels still does.
+- **Guide:** guide 6 adds the rule the owner's screenshot exposed: a number never stands alone before
+  its card. If the card is an idea still to be spoken, the whole card waits for the click; a `0` has
+  nothing to count, so it enters with the card.
+- **Tests:** 12 new regression tests in `tests/test_harmful_defaults.py`. The first nine were
+  written before the fix; eight failed on the old code, and the ninth guards that a real content
+  object still gets its Morph. A tenth covers the explicit `morph: true` path. After the owner
+  opened the first acceptance build, two more tests were written and both failed on that build: a
+  KPI of 0 must enter with its card (it had no entrance effect at all and sat alone at `t=0`), and
+  a counter mask must paint a translucent card as seen, not its raw colour (a lighter band showed
+  behind `12%`). Full suite **602 run, 10 skipped, OK**. Two old tests were encoding the defect
+  (example deck expected a Morph per transition; the chrome test passed a word as a logo) and were
+  corrected.
+- **Acceptance:** `experiments/T089-20261110-opencode-harmful-defaults/inputs/qcc-theme.json`
+  rebuilds as a 7-slide deck, 94 effects, motion coverage 1.0, **0 Morph**, no decoration, no word
+  logo, card titles 28/20, cover one auto-start group; slide 4 opens with only its title and the
+  `0` enters with its card; PowerPoint 16.0 renders all seven slides with no mask band.
+- **Limits:** Forge still opens 4 of 7 slides with only the title visible and its bento/asymmetric
+  cards hold large empty areas (T095's rule catching Forge; follow-up task needed). No owner score
+  yet. Review requested from Claude (different family).
+
 ## T095 [pptx] Guide 10 and toolbox fixes from the T094 rehearsal — 2026-11-09
 
 - **Why:** the owner opened DSH's T094 deck: motion as good or slightly better than T093, but the
