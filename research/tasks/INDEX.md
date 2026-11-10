@@ -3,7 +3,7 @@
 Since T040: every new title starts with its domain in brackets: `[pptx]`, `[docx]`, `[xlsx]`, `[svg]` or `[cross]` (see `domains/README.md`). Lifecycle: `lab/PROTOCOL.md`. A row may carry `review requested` / `reviewed: <verdict>`.
 
 This file is the one place to take a task ID. Before starting, add a row with
-status `claimed`, using the next free ID (**T096**). Push the row before you do
+status `claimed`, using the next free ID (**T098**). Push the row before you do
 expensive work. IDs are never reused. T024 was taken three times in parallel,
 so those rows carry a suffix. The experiment folders keep the names they were
 created with.
@@ -118,7 +118,7 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T086 | [cross] Crowd taste across fields → PPTX taste rules | antigravity | `work/T086-antigravity-taste-research` | reviewed: research notes merged via T088; rules not accepted, work continues in T087 | `experiments/T086-20261105-antigravity-taste-research/REPORT.md` |
 | T087 | [pptx] One PPTX skill written as design guidance; code only as a small toolbox | claude | `work/T087-claude-pptx-guidance-skill` | done; **reviewed: accept-with-fixes (dsh, 2026-11-08)** — 10 findings, 3 major (Morph text-wrap ghosting, entrance-only toolbox vs `NAR-LIFECYCLE`, legacy skills still advertise the entry role) | `experiments/T087-20261106-claude-pptx-guidance-skill/REPORT.md` |
 | T088 | [cross] Lead review of T081 and T086 (Antigravity): merge the useful parts | claude | `work/T088-claude-ag-salvage` | done | `experiments/T088-20261106-claude-ag-salvage/REPORT.md` |
-| T089 | [pptx] Fix harmful defaults: Forge (KPI 0, 14 pt shrink, hard-coded chrome, `!!orb` Morph), Director (cover clicks, Morph everywhere), overflow false positive without the font | *open; suggested OpenCode → critic Claude* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |
+| T089 | [pptx] Fix harmful defaults: Forge decoration and Morph, Director cover clicks, QA missing font | opencode | `work/T089-opencode-harmful-defaults` | claimed | `experiments/T089-20261110-opencode-harmful-defaults/REPORT.md` |
 | T090 | [pptx] Small model uses `skills/pptx`: adapt an approved example to new content; owner opens and scores | dsh | `work/T090-dsh-skill-triet-hoc` | review requested; owner scoring pending | `experiments/T090-20261108-dsh-skill-triet-hoc/REPORT.md` |
 | T091 | [pptx] Rung-6 owner grades: simple-but-fit motion law and composition-first check | OpenCode (DeepSeek V4.1 Flash) | `work/T091-opencode-rung6-motion-law` | main | `experiments/T091-20261108-opencode-rung6-motion-law/REPORT.md` |
 | T092 | [pptx] Apply the T090 review fixes to the skills/pptx guidance | dsh | `work/T092-dsh-skill-guidance-fixes` | main (lead review: accept; R2 decided in T093) | `experiments/T092-20261108-dsh-skill-guidance-fixes/REPORT.md` |
