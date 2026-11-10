@@ -98,7 +98,12 @@ unwired) `skills/deck-director`.
   fade-in with a 0.40 s blank. Verified at rung 5, PowerPoint 16.0 build 17932;
   see `experiments/T064-20261104-opencode-native-3d/REPORT.md`.
 
-## State (2026-11-08)
+## State (2026-11-10)
+- **Motion eyes (T073):** `pptx_tools.py watch` runs PowerPoint's own slide show and writes one strip
+  per slide: inside each Morph, the slide as it opens, after every click, inside long clicks; it names
+  clicks that change nothing. Rung 5b on T069a, T090, the T087 demo and the real QCC deck; 16 of 16
+  runs identical to the on-screen show. Guide 8 tells agents how to read the strips. Not yet tried by
+  a small model.
 - **Patchwork harmonisation (T094, guide 10):** DSH rehearsed T093's guide on the 10-slide patchwork
   deck and produced an 11-slide deck with 1 font family, 6 sizes, 6 text colours, flat charts,
   unstretched evidence photos, the 8-column table in an appendix, Fade on 2–11, **13 click groups /

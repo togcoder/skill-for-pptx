@@ -8,6 +8,11 @@ commands only do what written guidance cannot:
                                 contact sheet, so the agent can see what it built
     motion DECK PLAN -o OUT     write click reveals and slide transitions from a
                                 short plan that names shapes, not ids
+    watch DECK [--slides 3,6] [-o DIR]
+                                play the deck in PowerPoint's own slide show and
+                                photograph what a viewer sees: each slide as it
+                                opens, after every click, and three frames inside
+                                every Morph; names clicks that change nothing
     sample DOC.pdf [--pages 5,11] [-o DIR]
                                 a reference to follow (a report, a brochure): its real
                                 font names and whether this machine has them, the
@@ -215,6 +220,232 @@ def look(deck, out_dir):
         draw.text((x + 6, y + 5), str(n + 1), fill=(255, 255, 255))
     sheet.save(out_dir / "sheet.jpg", quality=85)
     return paths, out_dir / "sheet.jpg"
+
+
+# ------------------------------------------------------------ watching the deck move
+
+MORPH_EFFECTS = {3954, 3955, 3956}  # ppEffectMorphByObject / ByWord / ByChar
+STILL_S = 0.8     # nothing moved for this long: the step has settled
+LONG_S = 2.0      # a click that moves longer than this tells a mechanism: show it on the way too
+GIVE_UP_S = 10.0  # a loop or a video never settles
+
+
+def _slide_box(width, height, bar, aspect):
+    """Where the slide sits in the show window: centred beside the scrollbar, letterboxed."""
+    room = width - bar
+    w, h = (round(height * aspect), height) if room / height > aspect else (room, round(room / aspect))
+    left, top = (room - w) // 2, (height - h) // 2
+    return left, top, left + w, top + h
+
+
+def _changed(a, b):
+    """Share of the frame that differs between two pictures of the slide."""
+    from PIL import ImageChops
+    mask = ImageChops.difference(a, b).convert("L").point(lambda v: 255 if v > 12 else 0)
+    return mask.histogram()[255] / (a.width * a.height)
+
+
+def _read_step(before, frames):
+    """What one click did, from the settled picture before it and the pictures taken after it.
+
+    -> (kind, picture to show). kind: "dead" nothing moved; "passing" something moved and the slide
+    ended as it began (a pulse, a path that returns), shown at its widest; "change" otherwise."""
+    shares = [_changed(before, image) for _, image in frames]
+    peak = max(range(len(shares)), key=shares.__getitem__)
+    if shares[peak] < 0.0005:
+        return "dead", frames[-1][1]
+    if shares[-1] < 0.0005:
+        return "passing", frames[peak][1]
+    return "change", frames[-1][1]
+
+
+def _strip(shots, path, cols=3):
+    from PIL import Image, ImageDraw
+    w, h = shots[0][1].size
+    rows = (len(shots) + cols - 1) // cols
+    sheet = Image.new("RGB", (cols * (w + 8) + 8, rows * (h + 8) + 8), (40, 40, 40))
+    draw = ImageDraw.Draw(sheet)
+    for n, (label, image) in enumerate(shots):
+        x, y = 8 + (n % cols) * (w + 8), 8 + (n // cols) * (h + 8)
+        sheet.paste(image, (x, y))
+        draw.rectangle([x, y, x + 12 + 6 * len(label), y + 20], fill=(0, 0, 0))
+        draw.text((x + 6, y + 4), label, fill=(255, 255, 255))
+    sheet.save(path, quality=88)
+
+
+def watch(deck, out_dir, slides=None, cell=640):
+    """Play the deck in PowerPoint's own slide show and photograph every state a viewer sees."""
+    try:
+        import win32com.client as win32
+        import win32gui
+        import win32ui
+    except ImportError:
+        sys.exit("watch needs PowerPoint on Windows (pywin32)")
+    import ctypes
+    import time
+    from PIL import Image
+    ctypes.windll.shcore.SetProcessDpiAwareness(2)  # real pixels, not a scaled-down copy
+    out_dir = Path(out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    def frames_open(parent=None):
+        found = []
+
+        def each(handle, _):
+            if win32gui.IsWindowVisible(handle):
+                found.append((handle, win32gui.GetClassName(handle)))
+            return True
+        try:
+            win32gui.EnumChildWindows(parent, each, None) if parent else win32gui.EnumWindows(each, None)
+        except win32gui.error:
+            pass
+        return found
+
+    app = win32.Dispatch("PowerPoint.Application")
+    was_open = app.Presentations.Count
+    pres = app.Presentations.Open(str(Path(deck).resolve()), True, False, False)
+    report, tools = [], []
+    try:
+        aspect = pres.PageSetup.SlideWidth / pres.PageSetup.SlideHeight
+        settings = pres.SlideShowSettings
+        settings.ShowType, settings.AdvanceMode, settings.ShowWithAnimation = 2, 1, True  # window, manual
+        front = win32gui.GetForegroundWindow()
+        before = {h for h, _ in frames_open()}
+        view = settings.Run().View
+        new, waited = [], time.time()
+        while not new and time.time() - waited < 15:  # a cold PowerPoint shows its window late
+            time.sleep(0.5)
+            new = [h for h, name in frames_open() if h not in before and name == "PPTFrameClass"]
+        if not new:
+            sys.exit("watch: no slide-show window appeared (it needs a logged-in desktop session)")
+        hwnd = new[0]
+        # Pushed off the right edge so the person at the machine is not covered; PrintWindow still
+        # reads it. 40 px stay on screen: fully off screen PowerPoint stops painting mid-effect now
+        # and then (T073: 12 of 16 runs differed from the on-screen show; with the sliver, 0 of 16).
+        metric = ctypes.windll.user32.GetSystemMetrics
+        win32gui.SetWindowPos(hwnd, 0, metric(76) + metric(78) - 40, 0, 1500, int(1460 / aspect) + 60, 0x0014)
+        try:
+            win32gui.SetForegroundWindow(front)
+        except win32gui.error:
+            pass
+        time.sleep(0.5)
+        _, _, width, height = win32gui.GetClientRect(hwnd)
+        bar = max([win32gui.GetClientRect(h)[2] for h, name in frames_open(hwnd) if name == "NUIScrollbar"],
+                  default=0)
+        box = _slide_box(width, height, bar, aspect)
+        size = (cell, round(cell / aspect))
+        window_dc = win32gui.GetDC(hwnd)
+        source = win32ui.CreateDCFromHandle(window_dc)
+        memory = source.CreateCompatibleDC()
+        bitmap = win32ui.CreateBitmap()
+        bitmap.CreateCompatibleBitmap(source, width, height)
+        memory.SelectObject(bitmap)
+        tools = [lambda: win32gui.DeleteObject(bitmap.GetHandle()), memory.DeleteDC, source.DeleteDC,
+                 lambda: win32gui.ReleaseDC(hwnd, window_dc)]
+
+        def grab():
+            ctypes.windll.user32.PrintWindow(hwnd, memory.GetSafeHdc(), 3)  # client area, full content
+            image = Image.frombuffer("RGB", (width, height), bitmap.GetBitmapBits(True), "raw", "BGRX", 0, 1)
+            return image.crop(box).resize(size)
+
+        def burst(action):
+            """Do one step, then photograph until the slide has stood still. -> frames, seconds moving, settled"""
+            start = time.time()
+            action()
+            frames, still, moved = [], None, 0.0
+            while True:
+                image, t = grab(), time.time() - start
+                if still is None:
+                    still = image
+                elif _changed(image, still) >= 0.0005:
+                    # ponytail: compared with the last still frame, so slow drift adds up; a pause
+                    # longer than STILL_S inside one click is read as the end of that click
+                    still, moved = image, t
+                frames.append((t, image))
+                if t - moved > STILL_S or t > GIVE_UP_S:
+                    return frames, moved, t <= GIVE_UP_S
+                time.sleep(0.03)
+
+        count = pres.Slides.Count
+        shown = [i for i in range(1, count + 1) if not pres.Slides(i).SlideShowTransition.Hidden]
+        finished = None  # the slide whose every click has been played
+        for number in [i for i in (slides or shown) if i in shown]:
+            earlier = shown[shown.index(number) - 1] if shown.index(number) else None
+            if earlier is None:
+                frames, moved, _ = burst(lambda: view.GotoSlide(number))
+            else:
+                if finished != earlier:
+                    burst(lambda: view.GotoSlide(earlier))
+                    for _ in range(view.GetClickCount()):
+                        burst(view.Next)
+                frames, moved, _ = burst(view.Next)
+            if view.Slide.SlideIndex != number:
+                report.append({"slide": number, "error": f"the show went to slide {view.Slide.SlideIndex}"})
+                finished = None
+                continue
+            entry = pres.Slides(number).SlideShowTransition
+            row = {"slide": number, "enter": "cut", "clicks": []}
+            shots = []
+            def on_the_way(label, span):
+                for part in (0.25, 0.5, 0.75):
+                    _, image = min(frames, key=lambda f: abs(f[0] - span * part))
+                    shots.append((f"{label} {part:.0%}", image))
+
+            if earlier is not None and entry.EntryEffect in MORPH_EFFECTS:
+                span = min(moved, entry.Duration) or entry.Duration
+                row["enter"] = f"morph {span:.1f} s"
+                on_the_way("morph", span)
+            elif earlier is not None and entry.EntryEffect:
+                row["enter"] = f"transition {min(moved, entry.Duration):.1f} s"
+            still = frames[-1][1]
+            shots.append(("open", still))
+            for click in range(1, view.GetClickCount() + 1):
+                frames, moved, settled = burst(view.Next)
+                if view.Slide.SlideIndex != number:
+                    break
+                kind, picture = _read_step(still, frames)
+                still = frames[-1][1]
+                row["clicks"].append({"click": click, "kind": kind if settled else "moving",
+                                      "seconds": round(moved, 1)})
+                if moved > LONG_S:
+                    on_the_way(f"click {click}", moved)
+                shots.append((f"click {click}" + {"dead": " DEAD", "passing": " passing"}.get(kind, ""), picture))
+            else:
+                finished = number
+            row["strip"] = str(out_dir / f"slide-{number:02d}.jpg")
+            _strip(shots, row["strip"])
+            report.append(row)
+        try:
+            view.Exit()
+        except Exception:  # the show may already be gone
+            pass
+    finally:
+        for release in tools:
+            release()
+        try:
+            pres.Close()
+        except Exception:  # a deck opened without a window closes with its show
+            pass
+        if not was_open:
+            app.Quit()
+    return report
+
+
+def watch_lines(report):
+    lines = []
+    for row in report:
+        if "error" in row:
+            lines.append(f"slide {row['slide']}: could not watch, {row['error']}")
+            continue
+        lines.append(f"slide {row['slide']}: enters by {row['enter']}, {len(row['clicks'])} clicks")
+        for c in row["clicks"]:
+            what = {"dead": "NOTHING CHANGES (a wasted click)",
+                    "passing": f"something moves for {c['seconds']} s and the slide ends as it was",
+                    "moving": f"still moving after {GIVE_UP_S:.0f} s (a loop or a video)",
+                    "change": f"{c['seconds']} s"}[c["kind"]]
+            lines.append(f"  click {c['click']}: {what}")
+        lines.append(f"  {row['strip']}")
+    return lines
 
 
 # ------------------------------------------------------------ decks made by others
@@ -1136,6 +1367,10 @@ def main(argv=None):
     a = sp.add_parser("look", help="export slides as PNG + contact sheet (PowerPoint)")
     a.add_argument("deck")
     a.add_argument("-o", "--output", default=None, help="folder (default: <deck>-look)")
+    a = sp.add_parser("watch", help="photograph the real slide show: open, every click, inside each Morph")
+    a.add_argument("deck")
+    a.add_argument("--slides", default=None, help="slide numbers, e.g. 3,6 (default: all)")
+    a.add_argument("-o", "--output", default=None, help="folder (default: <deck>-watch)")
     a = sp.add_parser("motion", help="write clicks and transitions from a plan")
     a.add_argument("deck")
     a.add_argument("plan")
@@ -1267,7 +1502,11 @@ def main(argv=None):
             return 0
     except ValueError as exc:
         sys.exit(f"error: {exc}")
-    if args.cmd == "look":
+    if args.cmd == "watch":
+        out = args.output or str(Path(args.deck).with_suffix("")) + "-watch"
+        picked = [int(n) for n in args.slides.split(",")] if args.slides else None
+        print("\n".join(watch_lines(watch(args.deck, out, picked))))
+    elif args.cmd == "look":
         out = args.output or str(Path(args.deck).with_suffix("")) + "-look"
         paths, sheet = look(args.deck, out)
         print(f"{len(paths)} slides -> {out}\ncontact sheet: {sheet}")

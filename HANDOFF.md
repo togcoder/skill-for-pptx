@@ -95,12 +95,12 @@ thay vì deck làm tay. Lab đa lĩnh vực phục vụ mục tiêu đó và đa
 | **T086** | **Nghiên cứu gu đám đông đa lĩnh vực → luật gu, mỗi luật kiểm chứng bằng một cặp `.pptx` chấm mù** ([ROADMAP](docs/ROADMAP.md)) | Claude hoặc Gemini → model khác họ | **ngay, song song** |
 | **T078** | **Trục kịch bản: phương pháp + kịch bản mẫu Triết học ch. 1** ([SCRIPT_TRACK](docs/SCRIPT_TRACK.md)) | Claude | **xong, chờ chủ dự án đọc** |
 | T079 | Model yếu + phương pháp có viết được kịch bản tốt? (A/B mù bản chữ) | OpenCode → Claude | sau khi T078 được duyệt |
-| T080 | Kiểm chứng bảng động từ → chuyển động | OpenCode → Claude | cần T073 |
+| T080 | Kiểm chứng bảng động từ → chuyển động | OpenCode → Claude | ngay (T073 đã có) |
 | T081 | Skill `script-writer` (phiếu + khung + bảng động từ + ví dụ vàng) | Claude → OpenCode | sau khi T078 được duyệt |
 | T082 | Ví dụ vàng 2–5 (báo cáo, pitch, quy trình, so sánh) | Claude → chủ dự án duyệt | sau T081 |
 | T071 | Bộ đề vàng 8 đề + trang chấm A/B + hiệu chỉnh critic | Claude → OpenCode | ngay |
 | T072 | Cổng lỗi thị giác trên khung hình (cắt chữ, thẻ trống, chữ giữ chỗ, chữ nhỏ, mất style, va chạm) | OpenCode → Claude | ngay |
-| T073 | Máy xem chuyển động nhanh: DeckCraft `render-animation` vs ghi slideshow bằng harness | Claude desktop → OpenCode | ngay |
+| T073 | Mắt xem chuyển động: `pptx_tools.py watch` chụp trình chiếu thật (lúc mở, từng lần bấm, giữa cú Morph); tuyến DeckCraft bỏ | Claude → DSH | **xong; chờ phản biện và một lần model nhỏ dùng thử** |
 | T074 | Bộ luật ghép Morph từ ma trận ≥ 30 thí nghiệm PowerPoint | OpenCode → Claude | ngay |
 | T075 | `scene.json` + trình biên dịch cảnh | Claude → Antigravity | **tạm dừng (D011)** |
 | T076 | Thư viện 10 nước Morph có khung hình mẫu | OpenCode → Claude | sau T074 |

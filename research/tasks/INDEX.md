@@ -102,7 +102,7 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T070 | [cross] Lead synthesis of T001–T069, critique and PPTX roadmap | Claude (Opus 5.5, desktop) | `work/T070-claude-lead-synthesis` | done | `experiments/T070-20261104-claude-lead-synthesis/REPORT.md` |
 | T071 | [pptx] Golden benchmark (8 briefs) + owner A/B review page + critic calibration | *open, suggested Claude → critic OpenCode* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |
 | T072 | [pptx] Visual defect gates on rendered frames (clipped, empty card, placeholder, tiny, style drop, collide) | *open, suggested OpenCode → critic Claude* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |
-| T073 | [pptx] Motion eyes: watch every click and mid-Morph frame in the real slide show | claude | `work/T073-claude-motion-eyes` | claimed | `experiments/T073-20261110-claude-motion-eyes/REPORT.md` |
+| T073 | [pptx] Motion eyes: watch every click and mid-Morph frame in the real slide show | claude | `work/T073-claude-motion-eyes` | review requested (stacked on T097) | `experiments/T073-20261110-claude-motion-eyes/REPORT.md` |
 | T074 | [pptx] Morph matching rules, verified by experiment matrix | opencode | `work/T074-opencode-morph-rules` | review requested | `experiments/T074-20261105-opencode-morph-rules/REPORT.md` |
 | T075 | [pptx] scene.json + scene compiler (actors/states → in-slide effects and Morph) | *open, after T071–T072; suggested Claude → critic Antigravity* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |
 | T076 | [pptx] Library of 10 Morph moves with PowerPoint golden strips | *open, after T074; suggested OpenCode → critic Claude* |  | open (brief in ROADMAP) | `docs/ROADMAP.md` |

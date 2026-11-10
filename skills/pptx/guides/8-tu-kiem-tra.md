@@ -11,13 +11,43 @@ Bạn không được nói "xong" trước khi **nhìn thấy** từng slide.
 4. Tối đa ba vòng. Sau ba vòng còn chỗ chưa ổn thì **báo cho người dùng chỗ đó**, đừng tuyên bố đã
    đạt.
 
-Lưu ý: ảnh xuất ra là slide **đã hiện đủ mọi thứ**. Để kiểm tra lúc slide vừa mở, hãy tự lấy danh
-sách vật thể của slide trừ đi những vật nằm trong các lần bấm, rồi xem phần còn lại có đứng được một
-mình không.
+Lưu ý: ảnh `look` là slide **đã hiện đủ mọi thứ**. Nó không cho thấy lúc slide vừa mở, từng lần
+bấm, hay giữa một cú Morph. Muốn thấy những lúc đó thì dùng `watch` (phần dưới).
+
+## Xem chuyển động: `watch`
+
+Sau khi ghi chuyển động, bạn phải **nhìn** nó chạy, như người ngồi dưới sẽ nhìn:
+
+```
+python scripts/pptx_tools.py watch DECK.pptx              # cả bộ, khoảng 2–4 giây mỗi slide
+python scripts/pptx_tools.py watch DECK.pptx --slides 3,6 # chỉ vài slide vừa sửa
+```
+
+Lệnh chạy trình chiếu thật của PowerPoint, tự bấm, và chụp cho mỗi slide một dải ảnh
+`slide-NN.jpg`: ba khung giữa cú Morph (25%, 50%, 75%) nếu slide vào bằng Morph, khung `open` lúc
+slide vừa mở, rồi một khung sau mỗi lần bấm. Lần bấm nào chạy lâu hơn 2 giây (một mô phỏng, một
+chuỗi hiệu ứng) có thêm ba khung giữa chừng. **Mở và nhìn từng dải ảnh**, trả lời:
+
+- **Khung `open`:** slide vừa mở đã đứng được một mình chưa (có tiêu đề và khung chính), hay còn
+  trống một nửa?
+- **Mỗi lần bấm:** so với khung trước, cái gì vừa hiện? Mắt có biết nhìn vào đâu không? Thứ vừa hiện
+  có đúng là thứ câu nói lúc đó cần không?
+- **Lần bấm ghi `DEAD`** (lệnh in `NOTHING CHANGES`): người nói bấm mà màn hình không đổi gì. Bỏ lần
+  bấm đó, hoặc tìm vì sao vật không hiện (vật rỗng, bị che, nằm ngoài slide).
+- **Ba khung Morph:** có chữ cũ và chữ mới đè lên nhau thành "bóng ma" không? Có vật bay xuyên qua
+  chữ hay qua vật khác không? Chỉ nhìn khung 50%, có hiểu **cái gì đang biến thành cái gì** không?
+  Không hiểu thì đó là cú Morph gượng (mục 6, bốn câu hỏi).
+
+Sửa rồi chạy lại `watch --slides` cho các slide vừa sửa. Chưa chạy `watch` và chưa nhìn dải ảnh thì
+không được nói "chuyển động ổn".
+
+Khi lệnh đang chạy, cửa sổ trình chiếu nằm gần hết ngoài mép phải màn hình (ló ra một dải mỏng).
+Đừng thu nhỏ hay đóng nó.
 
 **Trước khi ghi chuyển động, làm bước t=0:** tự trừ các vật trong kế hoạch bấm rồi trả lời "slide
 còn đứng được một mình không?". Lỗi hay gặp nhất là slide mở ra chỉ có tiêu đề và một khung trống;
-sửa bố cục lúc này rẻ hơn sửa sau khi đã ghi hiệu ứng.
+sửa bố cục lúc này rẻ hơn sửa sau khi đã ghi hiệu ứng. Ghi xong thì khung `open` của `watch` cho bạn
+thấy đúng lúc đó, không phải đoán.
 
 ## Câu hỏi cho từng slide
 
