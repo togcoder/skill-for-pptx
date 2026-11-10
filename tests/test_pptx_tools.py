@@ -362,5 +362,81 @@ class RebuildTests(unittest.TestCase):
         self.assertEqual(failed, set())
 
 
+class TableAndCutoutTests(unittest.TestCase):
+    """A native table restyled in place; a plain background taken off a picture."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.dir = Path(self.tmp.name)
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def test_retable_keeps_text_and_merges_and_recolours_bars(self):
+        from pptx.dml.color import RGBColor
+        prs = Presentation()
+        frame = prs.slides.add_slide(prs.slide_layouts[6]).shapes.add_table(3, 3, 0, 0, Inches(6), Inches(2))
+        frame.name = "Gantt"
+        t = frame.table
+        t.cell(0, 0).text, t.cell(1, 0).text = "Activity", "Teardown"
+        t.cell(1, 0).merge(t.cell(2, 0))
+        for r, c, colour in ((1, 1, "FFFF00"), (1, 2, "F8CBAD")):
+            t.cell(r, c).fill.solid()
+            t.cell(r, c).fill.fore_color.rgb = RGBColor.from_string(colour)
+        src, out = self.dir / "t.pptx", self.dir / "t2.pptx"
+        prs.save(src)
+        self.assertEqual(tools.retable(src, 1, "Gantt", out, font="Arial", fill_map={"ffff00": "0062AC"}), (3, 3))
+        t = Presentation(out).slides[0].shapes[0].table
+        self.assertEqual((t.cell(1, 0).text, t.cell(1, 0).is_merge_origin), ("Teardown", True))
+        fill = lambda r, c: t.cell(r, c)._tc.tcPr.find("a:solidFill/a:srgbClr", tools.NS).get("val")
+        self.assertEqual((fill(0, 0), fill(1, 1), fill(1, 2)), ("0062AC", "0062AC", "FFFFFF"))
+        pr = t.cell(1, 1)._tc.tcPr
+        self.assertEqual([E_local(n) for n in pr][:5], ["lnL", "lnR", "lnT", "lnB", "solidFill"])  # schema order
+        self.assertEqual(t.cell(0, 0).text_frame.paragraphs[0].runs[0].font.name, "Arial")
+
+    @unittest.skipUnless(__import__("importlib").util.find_spec("scipy"), "scipy not installed")
+    def test_cutout_keeps_the_whole_subject_and_drops_the_background(self):
+        from PIL import Image, ImageDraw
+        im = Image.new("RGB", (400, 240), (244, 237, 245))
+        d = ImageDraw.Draw(im)
+        d.line((10, 200, 390, 20), fill=(215, 205, 225), width=3)       # a faint sketch in the background
+        d.ellipse((100, 60, 260, 200), fill=(30, 60, 210))                # the subject
+        d.ellipse((150, 100, 180, 130), fill=(235, 235, 235))             # its pale eye, inside
+        src, out = self.dir / "fish.png", self.dir / "cut.png"
+        im.save(src)
+        summary = tools.cutout(src, out)
+        self.assertIn("kept 1 part", summary)
+        a = Image.open(out).getchannel("A")
+        self.assertEqual(a.getpixel((180, 180)), 255)   # body
+        self.assertEqual(a.getpixel((165, 115)), 255)   # the eye stays
+        self.assertEqual(a.getpixel((20, 20)), 0)       # background
+        self.assertEqual(a.getpixel((200, 110)), 255)
+        self.assertEqual(a.getpixel((330, 60)), 0)      # the sketch line is gone
+
+    def test_replace_picture_keeps_id_and_place(self):
+        from PIL import Image
+        a, b = self.dir / "a.png", self.dir / "b.png"
+        Image.new("RGB", (40, 20), (200, 0, 0)).save(a)
+        Image.new("RGBA", (40, 20), (0, 0, 200, 128)).save(b)
+        prs = Presentation()
+        slide = prs.slides.add_slide(prs.slide_layouts[6])
+        pic = slide.shapes.add_picture(str(a), Inches(1), Inches(1), Inches(4))
+        pic.name = "Fish frame"
+        before = (pic.shape_id, pic.left, pic.width)
+        tools.replace_picture(slide, "Fish frame", str(b))
+        out = self.dir / "p.pptx"
+        prs.save(out)
+        pic = Presentation(out).slides[0].shapes[0]
+        self.assertEqual((pic.shape_id, pic.left, pic.width), before)
+        self.assertEqual(pic.image.ext, "png")
+        self.assertEqual(pic.image.size, (40, 20))
+        self.assertEqual(Image.open(__import__("io").BytesIO(pic.image.blob)).mode, "RGBA")
+
+
+def E_local(node):
+    from lxml import etree
+    return etree.QName(node).localname
+
+
 if __name__ == "__main__":
     unittest.main()

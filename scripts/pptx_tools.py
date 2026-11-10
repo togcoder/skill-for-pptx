@@ -28,6 +28,13 @@ For a deck someone else made (skills/pptx/guides/10-dong-bo-slide-co-san.md):
     rechart DECK SLIDE NAME --kind column|bar|line|pie -o OUT
                                 rebuild a chart (3D included) as a flat native
                                 chart from its own numbers, same place, same id
+    retable DECK SLIDE NAME [--fill FFFF00=0062AC] -o OUT
+                                restyle a native table in place (a Gantt, a
+                                check sheet): text, merges and size kept;
+                                borders, fills and type follow the deck
+    cutout IMAGE -o OUT.png     take a plain background off a picture (a
+                                diagram frame, a logo): soft edges, inner
+                                parts kept, faint marks dropped, no fringe
     unstretch DECK SLIDE NAME [--box] -o OUT
                                 undo a stretched picture: crop it to its frame,
                                 or with --box resize the frame to the picture
@@ -742,6 +749,112 @@ def unstretch(deck, slide_no, name, output, box=False):
     return r
 
 
+def _line(tag, colour, width_pt):
+    ln = E.SubElement(E.Element("dummy"), qn(f"a:{tag}"), w=str(round(width_pt * 12700)) if colour else "0")
+    if colour:
+        E.SubElement(E.SubElement(ln, qn("a:solidFill")), qn("a:srgbClr"), val=colour)
+    else:
+        E.SubElement(ln, qn("a:noFill"))
+    return ln
+
+
+def style_table(table, font=None, size=None, ink="1D2433", head_rows=1, head_fill="0062AC", head_ink="FFFFFF",
+                rule="C9D2DE", lines="grid", fill_map=None, body_fill="FFFFFF"):
+    """Restyle a native PowerPoint table in place: every cell keeps its text and merges; borders, fills and
+    type change. fill_map {"FFFF00": "0062AC"} recolours cells by their old fill (Gantt bars); every other
+    body fill becomes body_fill (None: no fill, the slide shows through). lines: "grid" or "rows" (horizontal rules only)."""
+    fill_map = {k.upper(): v for k, v in (fill_map or {}).items()}
+    tbl = table._tbl
+    tbl_pr = tbl.find(qn("a:tblPr"))
+    for attr in ("firstRow", "bandRow", "firstCol", "lastRow", "lastCol", "bandCol"):
+        tbl_pr.attrib.pop(attr, None)
+    for node in tbl_pr.findall(qn("a:tableStyleId")):
+        tbl_pr.remove(node)
+    fills = {qn(f"a:{t}") for t in ("noFill", "solidFill", "gradFill", "blipFill", "pattFill", "grpFill")}
+    for r, row in enumerate(table.rows):
+        head = r < head_rows
+        for cell in row.cells:
+            pr = cell._tc.get_or_add_tcPr()
+            old = pr.find("a:solidFill/a:srgbClr", NS)
+            old = old.get("val").upper() if old is not None else None
+            for node in list(pr):
+                if node.tag in fills or E.QName(node).localname in ("lnL", "lnR", "lnT", "lnB"):
+                    pr.remove(node)
+            side = rule if lines == "grid" else None
+            for k, (tag, colour) in enumerate((("lnL", side), ("lnR", side), ("lnT", rule), ("lnB", rule))):
+                pr.insert(k, _line(tag, colour, 0.75))
+            colour = head_fill if head else fill_map.get(old, body_fill)
+            if colour:
+                E.SubElement(E.SubElement(pr, qn("a:solidFill")), qn("a:srgbClr"), val=colour)
+                pr.insert(4, pr[-1])  # a fill comes right after the four borders
+            else:
+                pr.insert(4, E.Element(qn("a:noFill")))
+            pr.set("anchor", "ctr")
+            for para in cell.text_frame.paragraphs:
+                for run in para.runs:
+                    if font:
+                        run.font.name = font
+                    if size:
+                        run.font.size = Pt(size)
+                    run.font.color.rgb = RGBColor.from_string(head_ink if head else ink)
+                    if head:
+                        run.font.bold = True
+
+
+def retable(deck, slide_no, name, output, **style):
+    """style_table on one table of a deck, saved to output. Returns (rows, columns)."""
+    prs = Presentation(deck)
+    (frame,) = _top_shapes(prs.slides[slide_no - 1], [name])
+    if not getattr(frame, "has_table", False):
+        raise ValueError(f"{name!r} is not a table")
+    style_table(frame.table, **style)
+    prs.save(output)
+    return len(frame.table.rows), len(frame.table.columns)
+
+
+def cutout(src, out, lo=60, hi=140):
+    """Take a plain background off a picture (a diagram frame, a logo, an icon): soft edges, the subject's
+    inner parts kept (an eye, a highlight), faint marks in the background dropped, no light fringe.
+
+    The background colour is read from the picture's border. A pixel's colour distance from it decides:
+    below lo is background, above hi is subject, between is the soft edge."""
+    import numpy as np
+    from PIL import Image
+    try:
+        from scipy import ndimage as ndi
+    except ImportError:
+        raise ValueError("cutout needs scipy: pip install scipy") from None
+    im = np.asarray(Image.open(src).convert("RGB")).astype(np.float32)
+    ring = np.concatenate([im[:8].reshape(-1, 3), im[-8:].reshape(-1, 3),
+                           im[:, :8].reshape(-1, 3), im[:, -8:].reshape(-1, 3)])
+    bg = np.median(ring, axis=0)
+    soft = np.clip((np.sqrt(((im - bg) ** 2).sum(-1)) - lo) / (hi - lo), 0, 1)
+    core = ndi.binary_opening(soft > 0.5, iterations=3)  # thin lines and specks of the background go
+    lab, n = ndi.label(core)
+    if not n:
+        raise ValueError("nothing differs enough from the background: lower the range, e.g. --range 30,90")
+    sizes = ndi.sum(core, lab, range(1, n + 1))
+    big = 1 + np.flatnonzero(sizes >= 0.02 * sizes.max())  # ponytail: parts under 2% of the largest go
+    body = ndi.binary_fill_holes(np.isin(lab, big))
+    inner = ndi.binary_erosion(body, iterations=2)
+    edge = ndi.binary_dilation(body, iterations=4) & ~inner
+    alpha = np.where(inner, 1.0, np.where(edge, soft, 0.0))
+    rgb = np.clip((im - (1 - alpha[..., None]) * bg) / np.maximum(alpha, 1e-3)[..., None], 0, 255)
+    Image.fromarray(np.dstack([rgb, alpha * 255]).astype(np.uint8), "RGBA").save(out)
+    share = float((alpha > 0.5).mean())
+    note = "  <- most of the picture is kept: is the background plain?" if share > 0.8 else ""
+    return (f"background #{''.join(f'{round(v):02X}' for v in bg)}; kept {len(big)} part(s), dropped "
+            f"{n - len(big)} small mark(s); subject is {share:.0%} of the picture{note} -> {out}")
+
+
+def replace_picture(slide, name, image):
+    """Put a new image file into an existing picture: same place, size, crop, name and id, so its
+    animation still runs (e.g. the cutout of a diagram frame)."""
+    (pic,) = _top_shapes(slide, [name])
+    _, rid = slide.part.get_or_add_image_part(image)
+    pic._element.blipFill.blip.rEmbed = rid
+
+
 # ------------------------------------------------------------ a reference document to follow
 
 def _font_key(name):
@@ -1051,6 +1164,25 @@ def main(argv=None):
     a.add_argument("after")
     a.add_argument("--map", help='JSON: {"17": {"old": [15, 16], "group": "keep|reskin|rebuild", '
                                  '"drop": ["Picture 65"]}}')
+    a = sp.add_parser("retable", help="restyle a native table in place: text and merges kept")
+    a.add_argument("deck")
+    a.add_argument("slide", type=int)
+    a.add_argument("name")
+    a.add_argument("--font")
+    a.add_argument("--size", type=float, help="pt; default keeps each run's size")
+    a.add_argument("--ink", default="1D2433", help="body text colour, hex")
+    a.add_argument("--head-rows", type=int, default=1)
+    a.add_argument("--head", default="0062AC", help="header fill, hex")
+    a.add_argument("--head-ink", default="FFFFFF")
+    a.add_argument("--rule", default="C9D2DE", help="border colour, hex")
+    a.add_argument("--lines", choices=("grid", "rows"), default="grid")
+    a.add_argument("--fill", action="append", default=[], help="recolour a cell fill: OLD=NEW, e.g. FFFF00=0062AC")
+    a.add_argument("--body", default="FFFFFF", help="fill for every other body cell, hex, or none")
+    a.add_argument("-o", "--output", required=True)
+    a = sp.add_parser("cutout", help="take a plain background off a picture: soft edges, no fringe")
+    a.add_argument("image")
+    a.add_argument("--range", default="60,140", help="colour distance from the background: LOW,HIGH")
+    a.add_argument("-o", "--output", required=True, help="PNG")
     a = sp.add_parser("rechart", help="rebuild a chart flat from its own numbers")
     a.add_argument("deck")
     a.add_argument("slide", type=int)
@@ -1078,6 +1210,18 @@ def main(argv=None):
         if args.cmd == "sample":
             out = args.output or str(Path(args.pdf).with_suffix("")) + "-sample"
             print(sample(args.pdf, out, [int(p) for p in args.pages.split(",") if p]))
+            return 0
+        if args.cmd == "retable":
+            n = retable(args.deck, args.slide, args.name, args.output, font=args.font, size=args.size, ink=args.ink,
+                        head_rows=args.head_rows, head_fill=args.head, head_ink=args.head_ink, rule=args.rule,
+                        lines=args.lines, fill_map=dict(f.split("=", 1) for f in args.fill),
+                        body_fill=None if args.body.lower() == "none" else args.body)
+            print(f"restyled a {n[0]} x {n[1]} table -> {args.output}; render it and look at it")
+            return 0
+        if args.cmd == "cutout":
+            lo, hi = (float(v) for v in args.range.split(","))
+            print(cutout(args.image, args.output, lo, hi))
+            print("look at it on a dark and a light background before using it")
             return 0
         if args.cmd == "extract":
             print(extract(args.deck, args.output or str(Path(args.deck).with_suffix("")) + "-extract"))

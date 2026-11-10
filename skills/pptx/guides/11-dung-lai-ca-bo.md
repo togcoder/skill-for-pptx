@@ -43,6 +43,8 @@ agent khác đọc file là làm tiếp được, không cần nhớ phiên trư
 
 - Tạo bản sao, rồi dọn ngay mọi kiểu chuyển slide cũ: `motion` với `{"transitions": {"default": "none"}}`.
 - Slide **Giữ** và **Sửa vỏ** là chính slide cũ, thay vỏ tại chỗ (mục 10, "Slide có hiệu ứng").
+- Bảng thật, biểu đồ thật, khung sơ đồ là ảnh: sửa tại chỗ bằng `retable`, `rechart`, `cutout` (mục 10,
+  bước 3 và 5), đừng dựng lại từ đầu.
 - Slide **Làm lại** và slide mới thì thêm vào cuối, rồi dời tới đúng chỗ. Ảnh và video lấy từ thư mục
   `extract/media`, **không bao giờ** cắt từ ảnh chụp màn hình slide cũ: ảnh chụp mờ, mất chữ, và mô
   phỏng trong đó không còn chạy.

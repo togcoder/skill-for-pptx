@@ -83,7 +83,7 @@ chọn font thay và màu; còn giọng của mẫu thì phải xem ảnh các t
 
 ## Bộ slide có sẵn (mục 10)
 
-Các lệnh `inventory`, `rechart`, `scale`, `unstretch`, `numbers` đọc và ghi file; xem `python
+Các lệnh `inventory`, `rechart`, `retable`, `scale`, `unstretch`, `cutout`, `numbers` đọc và ghi file; xem `python
 scripts/pptx_tools.py -h`. Ba việc còn lại làm bằng `python-pptx`, gọi hàm của đồ nghề:
 
 ```python
@@ -106,6 +106,23 @@ prs.slides[3].shapes[2].name = "Nhanh may moc"
 tools.add_chart(slide, "line", (left, top, width, height), ["Tuần 1", "Tuần 2"],
                 [("Tỉ lệ lỗi (%)", [3.8, 3.0])], "0.0", color="1F4E79")
 prs.save("moi.static.pptx")
+```
+
+Bảng mới cùng kiểu với `retable`, và đặt ảnh đã tách nền vào hình cũ:
+
+```python
+from pptx.dml.color import RGBColor
+
+frame = slide.shapes.add_table(len(rows), len(rows[0]), left, top, width, height)
+for r, row in enumerate(rows):
+    for c, text in enumerate(row):
+        frame.table.cell(r, c).text = text
+frame.table.cell(1, 0).merge(frame.table.cell(2, 0))        # việc gộp qua hai hàng Plan / Actual
+frame.table.cell(1, 5).fill.solid()                          # ô tô màu = thanh Gantt
+frame.table.cell(1, 5).fill.fore_color.rgb = RGBColor.from_string("FFFF00")
+tools.style_table(frame.table, font="Arial", size=14, head_rows=1, fill_map={"FFFF00": "0062AC"})
+
+tools.replace_picture(slide, "Picture 4", "khung_tach.png")  # cùng chỗ, cùng mã: hiệu ứng vẫn chạy
 ```
 
 Chuyển một bảng lớn xuống phụ lục mà không mất số: thêm slide cuối, chép phần tử của bảng sang

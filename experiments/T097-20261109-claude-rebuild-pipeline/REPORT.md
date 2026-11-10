@@ -109,6 +109,50 @@ Ba điều rút ra, khớp với lỗi của Ver4:
 - Chặng 0 đã làm: thư mục extract, bảng tổng quan từng slide.
 - Quy trình Ver5 theo 3 bước, có sẵn 5 câu hỏi vòng 1 và mốc so sánh Ver4. Bước 1 chờ câu chuyện sếp chốt.
 
+## Vòng sau: bảng và xương cá trong 3 slide mẫu Ver5 (2026-11-10)
+
+DSH chạy bước 1 của quy trình trên bộ QCC thật. Chủ dự án chê bảng "lóng ngóng" và xương cá "cắt không ra"
+qua bốn vòng sửa mẫu. Trưởng nhóm đọc WORKLOG, mã dựng và file của DSH:
+
+- **Xương cá.**
+  - Khung (đầu, xương sống, đuôi) trong Ver3-4 là **một ảnh** vẽ liền với nền nhà máy, không có lớp trong
+    suốt. Chủ dự án muốn giữ con cá nhưng bỏ nền.
+  - DSH tách bằng ngưỡng màu cứng và các ô chữ nhật cắt tay (`mask[880:, :] = False`,
+    `mask[790:, 1200:2600] = False`). Kết quả: nửa dưới đầu cá, hàm dưới và vây đuôi dưới bị chém phẳng,
+    xương sống thành bậc, mắt thủng lỗ, viền sáng.
+  - Skill không có công cụ nào, cũng không có lời nào về việc tách nền.
+- **Bảng.**
+  - Gantt của Ver3-4 là bảng PowerPoint thật (32 × 21, 57 ô gộp, hàng Plan/Actual, thanh là ô tô màu).
+  - DSH xếp nó vào nhóm Làm lại và vẽ lại bằng khoảng 100 đường kẻ và hộp chữ. Chủ dự án chê ba lần liền:
+    không thấy ô, chữ bị gạch ngang, chật. Mỗi lần DSH vá triệu chứng (che đường kẻ bằng ô trắng) thay vì
+    đổi cách làm.
+  - Skill không nói bảng phải là bảng thật, không có cách đổi vỏ một bảng tại chỗ, và không bảo xem vật
+    thể gốc trước khi xếp Làm lại.
+
+**Đã sửa:**
+
+- **`cutout IMAGE -o OUT.png`** (cần scipy; CI cài thêm). Lệnh:
+  - lấy màu nền từ viền ảnh;
+  - dùng ngưỡng mềm theo khoảng cách màu tới nền;
+  - bỏ nét mảnh và vết nhỏ;
+  - lấp lỗ bên trong vật chính (mắt cá, vệt bóng);
+  - làm viền mềm và khử quầng sáng.
+
+  Trên ảnh cá thật, lệnh cắt trọn con cá trong khoảng 2 giây.
+- **`replace_picture(slide, name, image)`**: đặt ảnh mới vào hình cũ, giữ chỗ, cỡ, mã, nên hiệu ứng vẫn
+  chạy.
+- **`retable DECK SLIDE NAME [--fill OLD=NEW] -o OUT`** và hàm `style_table`: đổi vỏ một bảng thật tại
+  chỗ. Chữ, ô gộp và kích thước giữ nguyên; viền mảnh, nền trắng, đầu bảng màu chính; ô màu cũ đổi theo
+  `--fill`. Trên Gantt thật của Ver3-4: một lệnh, giữ đủ 57 ô gộp, không đường kẻ nào cắt chữ.
+- **Guide 10:**
+  - bước 3: xem vật thể gốc trước khi xếp Làm lại;
+  - phần Ảnh: ảnh có nền dính liền;
+  - phần Bảng: bảng là bảng thật, `retable`, Gantt là một bảng (hai hàng Plan/Actual, thanh là ô tô màu).
+- **Guide 9:** mã mẫu cho bảng mới và `replace_picture`. **Guide 11:** sửa tại chỗ thay vì dựng lại.
+  **SKILL.md:** hai dòng đồ nghề.
+- 3 test mới. Lời in ra của `retable` bỏ chữ có dấu: màn hình Windows cp1252 làm lệnh báo lỗi dù file đã
+  lưu.
+
 ## Không làm
 
 - Không dùng model nhìn ảnh để chấm thiết kế bằng máy. Tầng 2 là mắt người hoặc agent khác (D001, D008).

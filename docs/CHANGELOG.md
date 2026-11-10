@@ -32,6 +32,14 @@ were true at the time. Task IDs and their branches are listed in
   small and clear, taste, vague, touches the intent, "go on anyway", misunderstood), targeted re-asking
   when understanding was wrong, and a correction log so the user never says a thing twice. 2 new tests
   (599 pass).
+- **From DSH's Ver5 sample slides (tables "clumsy", fishbone "would not cut out"):** the fishbone frame
+  was one picture baked onto a factory background, cut by DSH with hard colour thresholds and hand
+  rectangles (jaw, lower tail and spine chopped, eye holed, fringe); the Gantt was a native 32 x 21
+  table that DSH redrew from ~100 lines and text boxes. New `cutout` (soft matte from the border colour,
+  specks dropped, inner holes filled, edge colour decontaminated; needs scipy, now in CI),
+  `replace_picture`, `retable` / `style_table` (restyle a native table in place: text, merges and size
+  kept; old fills mapped, e.g. Gantt bars). Guide 10: look at the original object before choosing
+  Rebuild; tables are native tables; a Gantt is a table; pictures with a baked background. 3 new tests.
 - **Evidence:** Ver3-4 against itself 6/8 (its own old transitions and small videos); Ver3-4 to Ver4
   2/8, the same faults the owner named. `experiments/T097-20261109-claude-rebuild-pipeline/REPORT.md`.
 

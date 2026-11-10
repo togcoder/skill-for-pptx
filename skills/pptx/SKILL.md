@@ -92,6 +92,8 @@ Viết ngắn, bằng lời thường, theo thứ tự:
 | Bộ có sẵn: dựng lại biểu đồ phẳng từ chính số của nó | `python scripts/pptx_tools.py rechart DECK 5 "Ten" --kind bar -o OUT` |
 | Bộ có sẵn: thu một cụm hình như một khối (chữ, nét, đường bay đi theo) | `python scripts/pptx_tools.py scale DECK 4 "A" "B" --by 0.7 -o OUT` |
 | Bộ có sẵn: sửa ảnh bị kéo méo | `python scripts/pptx_tools.py unstretch DECK 8 "Anh" [--box] -o OUT` |
+| Bộ có sẵn: đổi vỏ một bảng thật tại chỗ (Gantt, bảng kiểm), giữ chữ và ô gộp | `python scripts/pptx_tools.py retable DECK 8 "Table 4" --fill FFFF00=0062AC -o OUT` |
+| Tách nền dính liền khỏi ảnh (khung sơ đồ, logo, icon) | `python scripts/pptx_tools.py cutout ANH.png -o TACH.png` |
 | Bộ có sẵn: số nào của bản gốc đã mất | `python scripts/pptx_tools.py numbers GOC.pptx MOI.pptx` |
 | Dựng lại cả bộ: ảnh, video gốc thành file, và `manifest.json` của từng slide | `python scripts/pptx_tools.py extract GOC.pptx -o DIR` |
 | Dựng lại cả bộ: cổng giữ ruột (chuyển slide, hiệu ứng, video, số, ảnh gốc) | `python scripts/pptx_tools.py check GOC.pptx MOI.pptx --map map.json` |
