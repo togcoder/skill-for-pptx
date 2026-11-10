@@ -98,7 +98,19 @@ unwired) `skills/deck-director`.
   fade-in with a 0.40 s blank. Verified at rung 5, PowerPoint 16.0 build 17932;
   see `experiments/T064-20261104-opencode-native-3d/REPORT.md`.
 
-## State (2026-11-08)
+## State (2026-11-10)
+- **Harmful defaults (T089):** the tools now do nothing when they do not know what to do. Forge
+  defaults to **no decoration and no Morph**; card titles keep the design system's `card_title`
+  size (20–28 pt here, not 14); a logo must be an image file (a word is skipped with one note);
+  a missing font is a `FONT_MISSING` note, not an overflow error; a KPI of 0 reveals as text
+  instead of stopping the build. The Director recognises a text-box cover and gives it **one
+  auto-start group**; decoration and objects present on every slide no longer justify a Morph,
+  while a real content object that travels still does. Acceptance: a QCC-style 7-slide spec builds
+  clean with 92 effects, motion coverage 1.0, **0 Morph**, no decoration, card titles 28/20;
+  PowerPoint 16.0 renders it. 10 new regression tests (8 of the first 9 failed before the fix; the
+  ninth guards a real Morph); full suite **600 run, 10 skipped, OK**. Review requested from Claude. Limits: Forge still opens 4 of 7
+  slides with only the title visible and leaves large empty card areas — a follow-up task, not a
+  T089 fix. `experiments/T089-20261110-opencode-harmful-defaults/REPORT.md`.
 - **Patchwork harmonisation (T094, guide 10):** DSH rehearsed T093's guide on the 10-slide patchwork
   deck and produced an 11-slide deck with 1 font family, 6 sizes, 6 text colours, flat charts,
   unstretched evidence photos, the 8-column table in an appendix, Fade on 2–11, **13 click groups /
@@ -107,7 +119,7 @@ unwired) `skills/deck-director`.
   value sets (necessary, not sufficient; demo given) and `inventory` cannot name theme fonts or count
   fills/backgrounds, which guide 10 step 4 needs. Twelve guide-10 wording gaps for the lead are listed
   in `experiments/T094-20261108-dsh-harmonize-patchwork/REPORT.md`; owner scoring pending.
-- **Tests:** 556 run, 6 skipped, 100 % pass across all domains (after T066–T068).
+- **Tests:** 600 run, 10 skipped, OK across all domains (after T089).
 - **Forge (T063):** type sizes come from the Office kit `type_scale_pt` (3–6 per deck); count-up stacks are print/PDF/Morph-safe (final value topmost and opaque, proxies below); highlight markers follow centred/right-aligned text; Ken Burns ends on the authored frame and generated process tokens use T034's author-at-destination fix. All five example decks have no `TYP-SIZES` or `MOT-SETTLE` warning.
 - **Navigation & Interactivity:** T048 added Slide Navigator (`slide_navigator.py`) establishing full non-linear branching, dynamic return paths, custom shows with return, and mini-game state machine compilation. T049 added Advanced Presentation Interactivity (`advanced_interactivity.py`) establishing native in-slide lightbox modals, multi-tab switchers, pure-Python synthetic sound FX (click/chime/buzz), hover actions, and twin-morph visual flow. **T061** consolidated every `interactiveSeq`/trigger/hyperlink writer into `pptx_animator.py`; T048b/T049 artifacts rebuild byte-identically (T048) or are unchanged and parse to the same counts (T049).
 - **Interactive playback (T058):** `scripts/interactive_show_harness.py` drives a windowed show with Win32 input and asserts pixels. T049 slide 1/2 and the T048b hub reach **rung 5b** (COM-driven, machine-asserted, not human-reviewed): cover clicks 100 % of the target box, hub 9/9 edges including `lastslideviewed` 5→3. `GotoClick` is useless for triggers (0.000 %); on a main sequence it moves the index without rendering. T058's two pre-T061 defects (T032 writer rejected; missing `stCondLst`) were fixed by T061 and re-tested on `main`.

@@ -1,0 +1,27 @@
+{
+ "title": "QCC — cải tiến chất lượng (dữ liệu tổng hợp)",
+ "theme": {"seed": "#8C1D18", "mode": "light"},
+ "logo": "QCC",
+ "slides": [
+  {"layout": "title", "kicker": "Báo cáo nội bộ", "title": "Giảm lỗi in tại xưởng 2",
+   "subtitle": "Nhóm cải tiến QCC · quý 3/2026 · dữ liệu tổng hợp"},
+  {"layout": "section", "kicker": "Phần 1", "title": "Vấn đề nằm ở khâu kiểm tra"},
+  {"layout": "asymmetric", "title": "Một nguyên nhân, không phải ba",
+   "major": {"heading": "Mực khô", "text": "Độ ẩm phòng in xuống dưới 35% trong ca đêm."},
+   "minor": {"heading": "Hệ quả", "text": "Mực khô làm lệch màu ở 12% số tờ."}},
+  {"layout": "bento", "title": "Bốn điểm cần nhìn",
+   "hero": {"title": "Ca đêm", "text": "Tập trung 68% số tờ lỗi."},
+   "top_right": {"title": "Độ ẩm", "text": "Thấp hơn ngưỡng 8%."},
+   "bottom_right_1": {"kpi": "0", "label": "lần bảo trì trễ"},
+   "bottom_right_2": {"kpi": "12%", "label": "tờ lỗi"}},
+  {"layout": "kpis", "title": "Kết quả sau hai tuần",
+   "items": [{"value": "0", "label": "tờ lỗi trong ca đêm"},
+             {"value": "98.5%", "label": "tờ đạt màu"},
+             {"value": "2.1", "label": "ngày bảo trì định kỳ"}],
+   "takeaway": "Giữ độ ẩm 45–55% là đủ; không cần mua thiết bị mới."},
+  {"layout": "process", "title": "Cách làm",
+   "steps": ["Đo độ ẩm mỗi ca", "Bù ẩm khi dưới 40%", "Kiểm màu 30 tờ đầu", "Ghi nhật ký bảo trì"]},
+  {"layout": "closing", "title": "Việc tiếp theo: mở rộng sang xưởng 1",
+   "subtitle": "Đo lại sau bốn tuần."}
+ ]
+}
