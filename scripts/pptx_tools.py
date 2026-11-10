@@ -570,20 +570,42 @@ def _numbers(prs):
         found = Counter()
         for t in texts:
             for m, pct in NUMBER.findall(t):
-                v = m.replace(".", "").replace(",", ".") if re.fullmatch(r"\d{1,3}(\.\d{3})+", m) else m.replace(",", ".")
+                raw = m.replace(",", ".")
                 try:
-                    found[f"{float(v):g}" + ("%" if pct else "")] += 1
+                    found[f"{float(raw):g}" + ("%" if pct else "")] += 1
                 except ValueError:
                     pass
         out.append(found)
     return out
 
 
+def _number_variants(token):
+    """Both readings of an ambiguous grouped number: "156.179" and "156179" are the same number here.
+
+    A deck may print 1.200 as a European thousands group while another prints 1200; the gate must not
+    call that a lost number. Only dot groups of three digits are expanded; "1.2" stays a decimal.
+    """
+    pct = "%" if token.endswith("%") else ""
+    core = token.rstrip("%")
+    variants = {token}
+    if re.fullmatch(r"\d{1,3}(?:\.\d{3})+", core):
+        variants.add(core.replace(".", "") + pct)
+    return variants
+
+
 def missing_numbers(before, after):
-    """Numbers in BEFORE that appear nowhere in AFTER: {slide no: [numbers]}."""
+    """Numbers in BEFORE that appear nowhere in AFTER: {slide no: [numbers]}.
+
+    Both readings of an ambiguous grouped number count as the same value, so a formatting change is not
+    reported as a lost number; a number that is genuinely gone still fails.
+    """
     kept = set().union(*_numbers(Presentation(after)))
-    return {i: sorted(set(nums) - kept, key=_num_key) for i, nums in enumerate(_numbers(Presentation(before)), 1)
-            if set(nums) - kept}
+    out = {}
+    for i, nums in enumerate(_numbers(Presentation(before)), 1):
+        gone = sorted([n for n in nums if not (_number_variants(n) & kept)], key=_num_key)
+        if gone:
+            out[i] = gone
+    return out
 
 
 def fewer_numbers(before, after):
@@ -593,7 +615,9 @@ def fewer_numbers(before, after):
     another ("mục tiêu 2%" gone, "2 lần" kept). A lower count is that warning.
     """
     b, a = sum(_numbers(Presentation(before)), Counter()), sum(_numbers(Presentation(after)), Counter())
-    return {n: (b[n], a[n]) for n in sorted(b, key=_num_key) if 0 < a[n] < b[n]}
+    return {n: (b[n], sum(a.get(v, 0) for v in _number_variants(n)))
+            for n in sorted(b, key=_num_key)
+            if 0 < sum(a.get(v, 0) for v in _number_variants(n)) < b[n]}
 
 
 def _num_key(n):
@@ -1059,6 +1083,27 @@ def extract(deck, out_dir):
             f"manifest: {out / 'manifest.json'}")
 
 
+def _chart_kind(shape):
+    """'pieChart', 'pie3DChart', 'barChart'... from the XML, so a 3D/unsupported chart does not raise."""
+    for el in shape.chart._chartSpace.iter():
+        local = E.QName(el).localname
+        if local.endswith("Chart") and local not in ("chart", "chartSpace"):
+            return local
+    return "unknown"
+
+
+def _chart_signature(shape):
+    """Values a chart shows: (kind, categories, sorted series value tuples). None when unreadable."""
+    try:
+        cats, series, _fmt = _chart_numbers(shape.chart)
+    except (ValueError, KeyError, TypeError):
+        return None
+    values = []
+    for _name, vals in series:
+        values.append(tuple(None if v is None else round(float(v), 6) for v in vals))
+    return (_chart_kind(shape), tuple(cats), tuple(sorted(values)))
+
+
 def check(before, after, mapping=None):
     """Gates for a rebuilt deck: did the content survive? [(passed, gate, detail)]. mapping: {new slide:
     {"old": [old slides], "group": "keep" | "reskin" | "rebuild", "drop": [old picture names left out on
@@ -1124,7 +1169,7 @@ def check(before, after, mapping=None):
     foreign = [f"{i}: {s.name!r}" for i, m in enumerate(new_media, 1) for h, (s, k) in m.items()
                if k == "picture" and h.startswith("new:") and spread[h] < 3]
     if mapping:
-        weak, missing, holes = [], [], []
+        weak, missing, charts_missing, charts_data_missing, tables_missing, holes = [], [], [], [], [], []
         old_spread = Counter(h for m in old_media for h in m)  # the old theme's art, logos
         for n, row in sorted(rows.items()):
             group, olds = row.get("group", "reskin"), row.get("old", [])
@@ -1133,7 +1178,7 @@ def check(before, after, mapping=None):
                 holes.append(f"the map has new slide {n}, the deck has {len(new.slides)}")
             if wrong:
                 holes.append(f"new slide {n} names old slide {wrong[0]}, the original has {len(old.slides)}")
-            if not olds or group == "rebuild" or n > len(new.slides) or wrong:
+            if not olds or n > len(new.slides) or wrong:
                 continue
             had = sum(sum(_slide_effects(old.slides[o - 1])[0].values()) for o in olds)
             has = sum(_slide_effects(new.slides[n - 1])[0].values())
@@ -1145,6 +1190,25 @@ def check(before, after, mapping=None):
             short = [pics[h] for h in pics if h not in new_media[n - 1]]
             if short:
                 missing.append(f"{n} (old {'+'.join(map(str, olds))}): {', '.join(map(repr, short))}")
+            old_shapes = [sh_ for o in olds for sh_ in _walk(old.slides[o - 1].shapes)]
+            new_shapes = list(_walk(new.slides[n - 1].shapes))
+            old_charts = [_chart_kind(sh_) for sh_ in old_shapes if getattr(sh_, "has_chart", False)]
+            new_charts = [_chart_kind(sh_) for sh_ in new_shapes if getattr(sh_, "has_chart", False)]
+            for ct in set(old_charts):
+                if new_charts.count(ct) < old_charts.count(ct):
+                    charts_missing.append(f"{n} (old {'+'.join(map(str, olds))}): {ct}")
+            old_sigs = Counter(_chart_signature(sh_) for sh_ in old_shapes if getattr(sh_, "has_chart", False))
+            old_sigs.pop(None, None)
+            new_sigs = Counter(_chart_signature(sh_) for sh_ in new_shapes if getattr(sh_, "has_chart", False))
+            for sig, have in old_sigs.items():
+                if new_sigs.get(sig, 0) < have:
+                    charts_data_missing.append(
+                        f"{n} (old {'+'.join(map(str, olds))}): {sig[0]} data changed or gone")
+            old_tables = [sh_.name for sh_ in old_shapes if getattr(sh_, "has_table", False)
+                          and sh_.name not in drop]
+            new_tables = [sh_ for sh_ in new_shapes if getattr(sh_, "has_table", False)]
+            if len(new_tables) < len(old_tables):
+                tables_missing.append(f"{n} (old {'+'.join(map(str, olds))}): {len(old_tables)} table(s)")
         used = {o for row in rows.values() for o in row.get("old", [])} | set(mapping.get("dropped", []))
         unlisted = sorted(set(range(1, len(old.slides) + 1)) - used)
         if unlisted:  # or a hard slide passes every gate by not being in the map
@@ -1157,6 +1221,14 @@ def check(before, after, mapping=None):
              "every picture of the old slide is on the new one" if not missing
              else "missing (put back, or list under \"drop\" in the map if left out on purpose): "
              + "; ".join(missing))
+        gate(not charts_missing, "charts kept", "every source chart is still on its slide" if not charts_missing
+             else "missing/changed chart type (put back, or list under \"drop\"): " + "; ".join(charts_missing))
+        gate(not charts_data_missing, "chart data kept",
+             "every source chart still shows its original categories and values" if not charts_data_missing
+             else "data changed (restore from the source chart, do not redraw with invented values): "
+             + "; ".join(charts_data_missing))
+        gate(not tables_missing, "tables kept", "every source table is still on its slide" if not tables_missing
+             else "missing table (put back, or list under \"drop\"): " + "; ".join(tables_missing))
     passed = sum(ok for ok, _, _ in gates)
     note = ("pictures not from the original (look at each: a new icon or photo is fine; a cut-out of a "
             "screenshot, or a photo cut down in an image editor, is not): " + "; ".join(foreign) if foreign else "")

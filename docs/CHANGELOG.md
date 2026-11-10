@@ -9,6 +9,26 @@ were true at the time. Task IDs and their branches are listed in
 
 
 
+## T098 follow-up [pptx] Fidelity gates after QCC Ver5 failure - 2026-11-10
+
+- **Why:** QCC Ver5 passed the old `check` 8/9 but the owner's `problem.docx` found missing evidence pictures,
+  wrong/missing charts, tables without borders, a monochrome Gantt without Actual, split video pairs,
+  white-on-ivory text and invented slogans. The old gates could not see any of these.
+- **`check`:** a `rebuild` row no longer skips the source-picture gate; it must carry the pictures or name them
+  in `drop`. Added `charts kept` (chart kind from chart XML, safe for 3D/unsupported types) and `tables kept`
+  gates for every mapped slide.
+- **`numbers`:** a dot group such as `814.332` is compared under both readings (literal decimal and hundreds
+  group); a formatting change is no longer reported as a lost number, while a real value change still is.
+- **Guide 11:** added 12 hard rules after the Ver5 lesson: the previous rebuild is not a source; asset table per
+  slide; `rebuild` cannot bypass picture/chart/table gates; evidence pictures, chart kind/data, native visible
+  tables, video pairs and source words are mandatory; `check` is not the quality bar; review 5-8 slides at a
+  time with old/new full-size images.
+- **Tests:** `tests/test_fidelity_gates.py` (2 tests) + existing `test_pptx_tools.py`: **25 passed**.
+- **Proof on failed Ver5:** new gates go from 8/9 to **7/12**, listing 27 slides with missing source pictures,
+  7 lost/changed chart types, 16 charts whose data changed, and 7 lost tables - matching the owner's document.
+  The faithful Ver6 reskin scores **11/12** (only the original small videos fail), showing the gates separate a
+  safe reskin from a broken rebuild.
+
 ## T098 [pptx] Taking reusable components out of an existing deck — 2026-11-10
 
 - **Why:** the QCC owner asked why the fishbone in the rebuilt deck was redrawn instead of lifted from the old
