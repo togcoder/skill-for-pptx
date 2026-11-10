@@ -788,10 +788,13 @@ def _moving(prs, data):
 
 
 def _chart_inks(space, ink=None, failing=()):
-    """Hex colours a chart writes its text in ("FFFFFF" for the theme's light colour). With `ink`, the
+    """Hex colours a chart writes its titles, axes and legend in ("FFFFFF" for the theme's light colour;
+    data labels are left out). With `ink`, the
     colours in `failing` are replaced by it; returns how many."""
     found, changed = set(), 0
     for holder in space.iter(qn("c:txPr"), qn("c:rich")):
+        if any(E.QName(up).localname in ("dLbls", "dLbl") for up in holder.iterancestors()):
+            continue   # a label may sit inside its bar: white on a dark bar is fine, and unknowable here
         for fill in holder.iter(qn("a:solidFill")):
             if not len(fill):
                 continue
