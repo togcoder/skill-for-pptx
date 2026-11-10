@@ -519,7 +519,8 @@ def _behind(image, box, ink, k):
 
 def _slots(slides, size):
     """(slide, id) of every slide shape that sits at the same place on many slides: the title slot, the
-    step bar, the logo. `slides` is the list from _facts."""
+    step bar, the logo; and what at least 70% of the slides have: [(name, box, slides that have it)].
+    `slides` is the list from _facts."""
     tol = (0.04 * size[0], 0.04 * size[1])
     groups = []  # [first box, type, [(slide, id)]]
     for s in slides:
@@ -530,21 +531,26 @@ def _slots(slides, size):
                 if g[1] == r["type"] and all(abs(a - b) <= tol[j % 2] for j, (a, b) in enumerate(zip(g[0], r["box"]))):
                     g[2].append((s["slide"], r["id"]))
                     break
-            else:
-                groups.append([r["box"], r["type"], [(s["slide"], r["id"])]])
+            else:   # the label is kept for what a viewer would miss: words or a picture
+                label = r["name"] if r.get("text") or SOLID.get(r["type"]) == "picture" else None
+                groups.append([r["box"], r["type"], [(s["slide"], r["id"])], label])
     need = max(3, 0.3 * len(slides))
-    return {key for _, _, members in groups if len({m[0] for m in members}) >= need for key in members}
+    keys = {key for _, _, members, _ in groups if len({m[0] for m in members}) >= need for key in members}
+    usual = [(label, box, {m[0] for m in members}) for box, _, members, label in groups
+             if label and len({m[0] for m in members}) >= 0.7 * len(slides)]
+    return keys, usual
 
 
-def _glance_slide(s, size, slots, moving, image):
-    """Faults on one slide: [(kind, sentence, [boxes])]. Pure: rows from _facts, a PIL image of the slide."""
+def _glance_slide(s, size, slots, moving, image, chart_inks=None):
+    """Faults on one slide: [(kind, sentence, [boxes])], and [(shape id, text colour)] of the text nobody
+    can read. Pure: rows from _facts, a PIL image of the slide."""
     width, height = size
     k = image.width / width
     floor = MIN_PT * height / 540
     rows = [r for r in s["shapes"] if r["visible"] and r["type"] != GROUP]
     still = [r for r in rows if not (r["layer"] == "slide" and r["id"] in moving)]
     texts = [r for r in still if r.get("text") and _area(r["text"]["box"]) > 0]
-    faults = []
+    faults, unreadable = [], []
 
     def name(r):
         return repr(r["text"]["sample"]) if r.get("text") else repr(r["name"])
@@ -561,14 +567,23 @@ def _glance_slide(s, size, slots, moving, image):
             runs[rgb] += chars
         if not runs:
             continue
+        lost = []
+        for rgb, chars in runs.most_common():
+            if chars < 3 and lost:
+                continue
+            ink = (rgb & 255, rgb >> 8 & 255, rgb >> 16 & 255)   # PowerPoint gives BGR
+            colour, spread = _behind(image, r["text"]["box"], ink, k)
+            if colour is not None and _contrast(ink, colour) < UNREADABLE:
+                lost.append(("%02X%02X%02X" % ink, "%02X%02X%02X" % colour))
         rgb = runs.most_common(1)[0][0]
-        ink = (rgb & 255, rgb >> 8 & 255, rgb >> 16 & 255)   # PowerPoint gives BGR
+        ink = (rgb & 255, rgb >> 8 & 255, rgb >> 16 & 255)
         colour, spread = _behind(image, r["text"]["box"], ink, k)
         if colour is None:
             continue
-        if _contrast(ink, colour) < UNREADABLE:
-            faults.append(("cannot read", f"{name(r)}: text {'%02X%02X%02X' % ink} on {'%02X%02X%02X' % colour}",
-                           [r["text"]["box"]]))
+        if lost:
+            faults.append(("cannot read", f"{name(r)}: text {lost[0][0]} on {lost[0][1]}", [r["text"]["box"]]))
+            if r["layer"] == "slide":
+                unreadable += [(r["id"], was) for was, _ in lost]
         elif r["layer"] == "slide" and (s["slide"], r["id"]) in slots and spread > BUSY:
             under = [o for o in still if o is not r and o["type"] in SOLID and _area(o["box"]) < 0.5 * width * height
                      and not (o["layer"] == "slide" and (s["slide"], o["id"]) in slots)
@@ -579,6 +594,47 @@ def _glance_slide(s, size, slots, moving, image):
         left, top, right, bottom = _box(r["text"]["box"])
         if left < -2 or top < -2 or right > width + 2 or bottom > height + 2:
             faults.append(("text off the slide", f"{name(r)} runs past the edge of the slide", [r["text"]["box"]]))
+    for r in still:
+        if r["layer"] != "slide" or SOLID.get(r["type"]) != "chart":
+            continue
+        for was in sorted((chart_inks or {}).get(r["id"], ())):
+            ink = tuple(int(was[j:j + 2], 16) for j in (0, 2, 4))
+            colour, _ = _behind(image, r["box"], ink, k)
+            if colour is not None and _contrast(ink, colour) < UNREADABLE:
+                faults.append(("cannot read", f"the chart {r['name']!r}: its text {was} on {'%02X%02X%02X' % colour}",
+                               [r["box"]]))
+                unreadable.append((r["id"], was))
+    shell_marks = [o for o in still if o["layer"] == "slide" and (s["slide"], o["id"]) in slots
+                   and (o.get("text") or (SOLID.get(o["type"]) == "picture" and _area(o["box"]) < 0.03 * width * height))]
+    for r in still:
+        if r["layer"] != "slide" or r["type"] not in SOLID or (s["slide"], r["id"]) in slots \
+                or r["name"].startswith("!!")                 or (SOLID[r["type"]] in ("picture", "video") and _area(r["box"]) >= 0.5 * width * height):
+            continue   # a full-slide photo or video is a ground, not content that strayed
+        under = [o for o in shell_marks if _shared(r["box"], o["box"]) >= 0.3 * _area(o["box"])]
+        if under:
+            faults.append(("content under the shell", f"the {SOLID[r['type']]} {r['name']!r} runs under "
+                           f"{under[0]['name']!r}: content belongs in the area the theme leaves free",
+                           [r["box"], under[0]["box"]]))
+        elif SOLID[r["type"]] in ("chart", "table"):
+            left, top, right, bottom = _box(r["box"])
+            if left < -0.02 * width or top < -0.02 * height or right > 1.02 * width or bottom > 1.02 * height:
+                faults.append((f"{SOLID[r['type']]} off the slide", f"{r['name']!r} is larger than the slide shows",
+                               [r["box"]]))
+    for r in texts:
+        words, own = r["text"]["box"], r["box"]
+        if _area(words) - _shared(words, own) < 0.15 * _area(words):
+            continue   # the words stay inside their own box
+        left, top = max(words[0], own[0]), max(words[1], own[1])
+        inside = [left, top, max(0.0, min(_box(words)[2], _box(own)[2]) - left),
+                  max(0.0, min(_box(words)[3], _box(own)[3]) - top)]
+        for o in still:
+            if o is r or not (o.get("text") or o["type"] in SOLID) or _area(o["box"]) >= 0.5 * width * height \
+                    or o["name"].startswith("!!"):
+                continue
+            if _shared(words, o["box"]) - _shared(inside, o["box"]) >= 0.05 * _area(words):
+                faults.append(("text spills", f"{name(r)} is too long for its box and runs onto {o['name']!r}",
+                               [words, o["box"]]))
+                break
     order = {id(r): n for n, r in enumerate(s["shapes"])}   # PowerPoint lists shapes from the back to the front
     for r in texts:
         if r["layer"] != "slide":
@@ -617,7 +673,7 @@ def _glance_slide(s, size, slots, moving, image):
         faults.append(("tiny text", f"{tiny / chars:.0%} of the text is under {floor:g} pt (smallest "
                        f"{smallest[0][0]:g} pt, e.g. {name(smallest[0][1])}): nobody in the room reads it",
                        [r["text"]["box"] for _, r in smallest[:6]]))
-    return faults
+    return faults, unreadable
 
 
 def _facts(deck, out_dir, slides=None, width=1600):
@@ -709,18 +765,52 @@ def _moving(prs, data):
     return out
 
 
+def _chart_inks(space, ink=None, failing=()):
+    """Hex colours a chart writes its text in ("FFFFFF" for the theme's light colour). With `ink`, the
+    colours in `failing` are replaced by it; returns how many."""
+    found, changed = set(), 0
+    for holder in space.iter(qn("c:txPr"), qn("c:rich")):
+        for fill in holder.iter(qn("a:solidFill")):
+            if not len(fill):
+                continue
+            node = fill[0]
+            kind = E.QName(node).localname
+            was = node.get("val", "").upper() if kind == "srgbClr" else \
+                "FFFFFF" if kind == "schemeClr" and node.get("val") in ("bg1", "lt1") else None
+            if was is None:
+                continue
+            found.add(was)
+            if ink and was in failing:
+                fill.remove(node)
+                E.SubElement(fill, qn("a:srgbClr"), val=ink.upper())
+                changed += 1
+    return changed if ink else found
+
+
 def glance(deck, out_dir, slides=None, data=None):
     """The faults a person sees in the first second, slide by slide, from PowerPoint's own drawing.
     -> [{"slide", "png", "faults": [(kind, sentence)], "marked": png with the faults boxed}]"""
     from PIL import Image, ImageDraw
     data = data or _facts(deck, out_dir, slides)
-    moving = _moving(Presentation(deck), data)
-    slots = _slots(data["slides"], data["size"])
+    prs = Presentation(deck)
+    moving = _moving(prs, data)
+    slots, usual = _slots(data["slides"], data["size"])
+    numbers = [s["slide"] for s in data["slides"]]
     report = []
     for s in data["slides"]:
         image = Image.open(s["png"]).convert("RGB")
-        faults = _glance_slide(s, data["size"], slots, moving[s["slide"]], image)
-        row = {"slide": s["slide"], "png": s["png"], "faults": [(kind, text) for kind, text, _ in faults]}
+        inks = {}
+        for shape in _walk(prs.slides[s["slide"] - 1].shapes):
+            if getattr(shape, "has_chart", False) and shape.has_chart:
+                inks[shape.shape_id] = _chart_inks(shape.chart._chartSpace)
+        faults, unreadable = _glance_slide(s, data["size"], slots, moving[s["slide"]], image, inks)
+        if s["slide"] not in (numbers[0], numbers[-1]):   # a cover and a closing slide may differ
+            gone = [(label, box) for label, box, on in usual if s["slide"] not in on]
+            if gone:
+                faults.append(("missing", "most slides have " + ", ".join(repr(label) for label, _ in gone)
+                               + " here; this one does not", [box for _, box in gone]))
+        row = {"slide": s["slide"], "png": s["png"], "faults": [(kind, text) for kind, text, _ in faults],
+               "unreadable": unreadable}
         if faults:
             k = image.width / data["size"][0]
             draw = ImageDraw.Draw(image)
@@ -734,6 +824,42 @@ def glance(deck, out_dir, slides=None, data=None):
             image.save(row["marked"])
         report.append(row)
     return report
+
+
+def reink(deck, output, report, ink):
+    """Give the text `glance` could not read a colour that can be read (the theme's ink). Only runs in the
+    failing colour change; a run with a colour of its own (a red figure) keeps it. -> runs changed"""
+    prs = Presentation(deck)
+    changed = 0
+    for row in report:
+        failing = {}
+        for shape_id, was in row.get("unreadable", []):
+            failing.setdefault(shape_id, set()).add(was)
+        if not failing:
+            continue
+        for shape in _walk(prs.slides[row["slide"] - 1].shapes):
+            if shape.shape_id in failing and getattr(shape, "has_chart", False) and shape.has_chart:
+                changed += _chart_inks(shape.chart._chartSpace, ink, failing[shape.shape_id])
+        for node in prs.slides[row["slide"] - 1]._element.iter(qn("p:cNvPr")):
+            if not node.get("id", "").isdigit() or int(node.get("id")) not in failing:
+                continue
+            was = failing[int(node.get("id"))]
+            for run in node.getparent().getparent().iter(qn("a:r")):
+                pr = run.find(qn("a:rPr"))
+                if pr is None:
+                    pr = E.Element(qn("a:rPr"))
+                    run.insert(0, pr)
+                own = pr.find("a:solidFill/a:srgbClr", NS)
+                if own is not None and own.get("val", "").upper() not in was:
+                    continue
+                for old in [c for c in pr if E.QName(c).localname in ("solidFill", "gradFill", "noFill", "pattFill")]:
+                    pr.remove(old)
+                fill = E.Element(qn("a:solidFill"))
+                E.SubElement(fill, qn("a:srgbClr"), val=ink.upper())
+                pr.insert(1 if len(pr) and E.QName(pr[0]).localname == "ln" else 0, fill)
+                changed += 1
+    prs.save(output)
+    return changed
 
 
 def glance_lines(report):
@@ -994,8 +1120,9 @@ def _inherited_sz(prs, slide, shape_el, lvl):
     return 1800
 
 
-def _scale_text(prs, slide, el, factor):
-    """Give every run an explicit size, then scale all sizes. Returns smallest pt shown."""
+def _scale_text(prs, slide, el, factor, floor=None):
+    """Give every run an explicit size, then scale all sizes. With `floor` (pt) no text is shrunk below
+    it, and text already under it is left as it is. Returns smallest pt shown."""
     for para in el.iter(qn("a:p")):
         ppr = para.find(qn("a:pPr"))
         lvl = int(ppr.get("lvl", 0)) if ppr is not None else 0
@@ -1016,7 +1143,8 @@ def _scale_text(prs, slide, el, factor):
     smallest = None
     for node in el.iter(qn("a:rPr"), qn("a:defRPr"), qn("a:endParaRPr")):
         if node.get("sz"):
-            node.set("sz", str(max(100, round(int(node.get("sz")) * factor))))
+            was = int(node.get("sz"))
+            node.set("sz", str(max(100, round(was * factor), min(was, round(floor * 100)) if floor else 0)))
             if E.QName(node).localname == "rPr" and (node.getparent().findtext(qn("a:t")) or "").strip():
                 pt = int(node.get("sz")) / 100
                 smallest = pt if smallest is None else min(smallest, pt)
@@ -1041,11 +1169,19 @@ def scale(deck, slide_no, names, factor, output, at=None):
     if any(s.is_placeholder for s in targets):
         raise ValueError("a placeholder inherits its text size from the layout. Leave it out of the block, "
                          "or copy its text to a text box (same place, same words) and scale that")
+    low = _scale_block(prs, slide, targets, factor, at and (round(at[0] * 914400), round(at[1] * 914400)))
+    prs.save(output)
+    return low
+
+
+def _scale_block(prs, slide, targets, factor, at=None, floor=None):
+    """Scale shapes of one slide as one block about its top-left corner, then move that corner to `at`
+    (EMU). `floor`: see _scale_text. Returns the smallest text size left, in pt, or None."""
     x0, y0 = min(s.left for s in targets), min(s.top for s in targets)
     inside, low = set(), []
     for s in targets:
         el = s._element
-        pt = _scale_text(prs, slide, el, factor)
+        pt = _scale_text(prs, slide, el, factor, floor)
         if pt is not None:
             low.append(pt)
         for node in el.iter(qn("a:ln")):
@@ -1075,10 +1211,9 @@ def scale(deck, slide_no, names, factor, output, at=None):
         if tgt is not None and tgt.get("spid") in inside and motion.get("path"):
             motion.set("path", num.sub(lambda m: f"{float(m.group()) * factor:.6g}", motion.get("path")))
     if at is not None:
-        dx, dy = round(at[0] * 914400) - x0, round(at[1] * 914400) - y0
+        dx, dy = at[0] - x0, at[1] - y0
         for s in targets:
             s.left, s.top = s.left + dx, s.top + dy
-    prs.save(output)
     return min(low) if low else None
 
 
@@ -1424,6 +1559,202 @@ def replace_picture(slide, name, image):
     (pic,) = _top_shapes(slide, [name])
     _, rid = slide.part.get_or_add_image_part(image)
     pic._element.blipFill.blip.rEmbed = rid
+
+
+# ------------------------------------------------------------ putting a deck into a theme
+
+def _shell_parts(prs):
+    """The parts of a deck that are shell, not content: [{"key", "where", "what", "slides", "shapes"}].
+    m*: shapes on a slide master. l*: shapes on a layout. r*: top-level shapes of the same kind at the
+    same place on many slides (a step bar, a logo, a title slot)."""
+    parts = []
+    for master in prs.slide_masters:
+        for shape in master.shapes:
+            if not shape.is_placeholder:
+                parts.append({"key": f"m{sum(p['key'][0] == 'm' for p in parts) + 1}", "where": "master",
+                              "what": f"{shape.shape_type} {shape.name!r}", "slides": None, "shapes": [(None, shape)]})
+        for layout in master.slide_layouts:
+            used = [n for n, slide in enumerate(prs.slides, 1) if slide.slide_layout == layout]
+            for shape in layout.shapes:
+                if used and not shape.is_placeholder:
+                    parts.append({"key": f"l{sum(p['key'][0] == 'l' for p in parts) + 1}",
+                                  "where": f"layout {layout.name!r}", "what": f"{shape.shape_type} {shape.name!r}",
+                                  "slides": used, "shapes": [(None, shape)]})
+    tol = (0.04 * prs.slide_width, 0.04 * prs.slide_height)
+    groups = []
+    for n, slide in enumerate(prs.slides, 1):
+        for shape in slide.shapes:
+            if shape.is_placeholder or shape.width is None or shape.left is None:
+                continue
+            box = (shape.left, shape.top, shape.width, shape.height)
+            for g in groups:
+                if g[1] == shape.shape_type and all(abs(a - b) <= tol[j % 2] for j, (a, b) in enumerate(zip(g[0], box))):
+                    g[2].append((n, shape))
+                    break
+            else:
+                groups.append([box, shape.shape_type, [(n, shape)]])
+    need = max(3, 0.3 * len(prs.slides))
+    for box, kind, members in groups:
+        on = sorted({n for n, _ in members})
+        if len(on) >= need:
+            parts.append({"key": f"r{sum(p['key'][0] == 'r' for p in parts) + 1}", "where": "slides",
+                          "what": f"{kind}", "slides": on, "shapes": members, "box": box})
+    return parts
+
+
+def _span(numbers):
+    """[1, 2, 3, 7] -> '1-3, 7'."""
+    out, start, last = [], None, None
+    for n in numbers + [None]:
+        if start is None:
+            start = last = n
+        elif n is not None and n == last + 1:
+            last = n
+        else:
+            out.append(str(start) if start == last else f"{start}-{last}")
+            start = last = n
+    return ", ".join(out)
+
+
+def _words(shape):
+    if shape.shape_type == MSO_SHAPE_TYPE.GROUP:
+        return " ".join(filter(None, (_words(child) for child in shape.shapes)))
+    return shape.text_frame.text.strip().replace("\n", " ") if shape.has_text_frame else ""
+
+
+def shell(deck):
+    """Plain-text list of where a deck's shell lives, so all of it can be taken off before a theme goes on."""
+    prs = Presentation(deck)
+    px = lambda v: round(v / 9525)   # noqa: E731
+    lines = [f"deck: {len(prs.slides)} slides. The shell is what repeats: take all of it off before the new "
+             "theme goes on, or the old one shows through (guide 13)."]
+    for master in prs.slide_masters:
+        bg = master._element.find(".//" + qn("p:bg"))
+        kinds = [E.QName(node).localname for node in bg.iter()] if bg is not None else []
+        fill = next((k for k in kinds if k in ("solidFill", "gradFill", "blipFill", "pattFill")), "none")
+        lines.append(f"master background: {fill}   (key: bg)")
+    own = [n for n, slide in enumerate(prs.slides, 1) if slide._element.find(qn("p:cSld")).find(qn("p:bg")) is not None]
+    if own:
+        lines.append(f"slides with a background of their own: {_span(own)}")
+    for part in _shell_parts(prs):
+        _, first = part["shapes"][0]
+        box = part.get("box") or (first.left, first.top, first.width, first.height)
+        place = "at ({},{}) size {}x{} px".format(*(px(v) for v in box))
+        if part["where"] != "slides":
+            lines.append(f"{part['key']}  on the {part['where']}: {part['what']} {place}"
+                         + (f", shows on slides {_span(part['slides'])}" if part["slides"] else ", shows on every slide"))
+            continue
+        ids = {slide_no: {t.get("spid") for t in prs.slides[slide_no - 1]._element.iter(qn("p:spTgt"))}
+               for slide_no in part["slides"]}
+        moving = sum(str(shape.shape_id) in ids[n] for n, shape in part["shapes"])
+        texts = [w for w in (_words(shape) for _, shape in part["shapes"]) if w]
+        lines.append(f"{part['key']}  on {len(part['slides'])} slides ({_span(part['slides'])}): {part['what']} {place}"
+                     + (f"; {moving} animated (kept by --strip)" if moving else ""))
+        if texts:
+            same = len(set(texts)) == 1
+            lines.append(f"      text {'is the same everywhere' if same else 'differs per slide: its words are content'}"
+                         f": {texts[0][:60]!r}" + ("" if same else f" ... {texts[-1][:60]!r}"))
+    lines.append("then: shell DECK --strip m1,m2,r1 [--background F6F2EA] -o OUT.pptx   (writes OUT.shell.json: the "
+                 "words of what it removed, per slide)")
+    return "\n".join(lines)
+
+
+def unshell(deck, output, keys, background=None):
+    """Take shell parts off a deck (keys from `shell`). Animated shapes stay. `background`: a hex colour for
+    the master, which also removes every slide's own background. Returns {slide: [words removed]} and a note."""
+    prs = Presentation(deck)
+    parts = {part["key"]: part for part in _shell_parts(prs)}
+    unknown = [k for k in keys if k not in parts]
+    if unknown:
+        raise ValueError(f"no shell part {', '.join(unknown)}; run `shell DECK` for the keys: {', '.join(parts)}")
+    words, removed, kept = {}, 0, 0
+    for key in keys:
+        for slide_no, shape in parts[key]["shapes"]:
+            if slide_no is not None:
+                slide = prs.slides[slide_no - 1]
+                if str(shape.shape_id) in {t.get("spid") for t in slide._element.iter(qn("p:spTgt"))}:
+                    kept += 1
+                    continue
+                if _words(shape):
+                    words.setdefault(slide_no, []).append({"part": key, "text": _words(shape)})
+            shape._element.getparent().remove(shape._element)
+            removed += 1
+    if background:
+        for holder in [m._element for m in prs.slide_masters] + [s._element for s in prs.slides]:
+            c_sld = holder.find(qn("p:cSld"))
+            old = c_sld.find(qn("p:bg"))
+            if old is not None:
+                c_sld.remove(old)
+        for master in prs.slide_masters:
+            bg = E.SubElement(master._element.find(qn("p:cSld")), qn("p:bg"))
+            master._element.find(qn("p:cSld")).insert(0, bg)
+            pr = E.SubElement(bg, qn("p:bgPr"))
+            E.SubElement(E.SubElement(pr, qn("a:solidFill")), qn("a:srgbClr"), val=background.upper())
+            E.SubElement(pr, qn("a:effectLst"))
+    prs.save(output)
+    Path(output).with_suffix(".shell.json").write_text(json.dumps(words, ensure_ascii=False, indent=1),
+                                                       encoding="utf-8")
+    return words, (f"removed {removed} shapes" + (f", kept {kept} that are animated" if kept else "")
+                   + (f", background {background.upper()}" if background else ""))
+
+
+def fit(deck, output, into, slides=None, skip=(), grow=1.0):
+    """Scale each slide's content as one block so it sits inside `into` (x, y, width, height in inches):
+    the content area the theme leaves free. Content is only made smaller unless `grow` is above 1 (a
+    table is often taller on screen than its frame says, so growing one is a guess). Shapes named in `skip`, shapes whose name starts with "!!",
+    placeholders and full-slide backgrounds stay where they are. Arrangement, ids and animation are kept.
+    Text is never shrunk below guide 4's minimum (12 pt on a slide 7.5 in tall); a box may then be a
+    little small for its words, which `glance` and your eyes catch.
+    -> [(slide, factor, smallest text pt or None)]"""
+    prs = Presentation(deck)
+    least = MIN_PT * prs.slide_height / REF_HEIGHT
+    left, top, width, height = (round(v * 914400) for v in into)
+    out = []
+    for n, slide in enumerate(prs.slides, 1):
+        if slides and n not in slides:
+            continue
+        targets = [s for s in slide.shapes if s.width and s.height and s.name not in skip
+                   and not s.name.startswith("!!") and not s.is_placeholder
+                   and s.width * s.height < 0.85 * prs.slide_width * prs.slide_height]
+        if not targets:
+            continue
+        x0, y0 = min(s.left for s in targets), min(s.top for s in targets)
+        x1, y1 = max(s.left + s.width for s in targets), max(s.top + s.height for s in targets)
+        factor = min(width / (x1 - x0), height / (y1 - y0), grow)
+        at = (left + (width - (x1 - x0) * factor) / 2, top + (height - (y1 - y0) * factor) / 2)
+        low = _scale_block(prs, slide, targets, factor, tuple(round(v) for v in at), least)
+        out.append((n, factor, low))
+    prs.save(output)
+    return out
+
+
+def compare(before, after, out_dir, mapping=None):
+    """One picture per new slide: the old slide (or slides) above, the new one below, both as wide as the
+    picture. For looking, one pair at a time. mapping: the map of `check` ({new: {"old": [...]}});
+    without it slide n is paired with slide n. -> [(new slide, [old slides], path)]"""
+    from PIL import Image, ImageDraw
+    out_dir = Path(out_dir)
+    old, _ = look(before, out_dir / "old")
+    new, _ = look(after, out_dir / "new")
+    rows = {int(k): v for k, v in (mapping or {}).items() if k != "dropped"}
+    pairs = []
+    for n, path in enumerate(new, 1):
+        olds = [o for o in (rows[n].get("old", []) if n in rows else [n] if not mapping else []) if 1 <= o <= len(old)]
+        below = Image.open(path).convert("RGB")
+        w, h = below.size
+        sheet = Image.new("RGB", (w, 2 * h + 60), (28, 28, 28))
+        draw = ImageDraw.Draw(sheet)
+        for k, o in enumerate(olds):
+            cell = Image.open(old[o - 1]).convert("RGB").resize((w // len(olds), h // len(olds)))
+            sheet.paste(cell, (k * (w // len(olds)), 30 + (h - cell.height) // 2))
+        draw.text((10, 9), "OLD " + (", ".join(f"slide {o}" for o in olds) if olds else "(nothing: a new slide)"),
+                  fill=(255, 255, 255))
+        draw.text((10, h + 39), f"NEW slide {n}", fill=(255, 255, 255))
+        sheet.paste(below, (0, h + 60))
+        target = out_dir / f"pair-{n:02d}.jpg"
+        sheet.save(target, quality=88)
+        pairs.append((n, olds, target))
+    return pairs
 
 
 # ------------------------------------------------------------ a reference document to follow
@@ -2274,6 +2605,24 @@ def main(argv=None):
     a.add_argument("deck")
     a.add_argument("--slides", default=None, help="slide numbers, e.g. 3,6 (default: all)")
     a.add_argument("-o", "--output", default=None, help="folder (default: <deck>-glance)")
+    a.add_argument("--ink", nargs=2, metavar=("HEX", "OUT.pptx"),
+                   help="also write OUT.pptx with the text nobody can read set to this colour")
+    a = sp.add_parser("compare", help="old slide above, new slide below, one large picture per slide")
+    a.add_argument("before")
+    a.add_argument("after")
+    a.add_argument("--map", help="the map of `check`; without it slide n is paired with slide n")
+    a.add_argument("-o", "--output", default=None, help="folder (default: <after>-compare)")
+    a = sp.add_parser("shell", help="where the old shell lives (master, layouts, repeated shapes); --strip takes it off")
+    a.add_argument("deck")
+    a.add_argument("--strip", help="keys from the listing, e.g. m1,m2,r1")
+    a.add_argument("--background", help="hex colour for the master background; slides lose their own")
+    a.add_argument("-o", "--output", help="with --strip or --background")
+    a = sp.add_parser("fit", help="scale each slide's content as one block into the theme's content area")
+    a.add_argument("deck")
+    a.add_argument("--into", required=True, help="the content area, inches: X,Y,WIDTH,HEIGHT")
+    a.add_argument("--slides", default=None, help="e.g. 2,3,5-9 (default: all)")
+    a.add_argument("--skip", action="append", default=[], help="a shape name to leave alone (repeatable)")
+    a.add_argument("-o", "--output", required=True)
     a = sp.add_parser("motion", help="write clicks and transitions from a plan")
     a.add_argument("deck")
     a.add_argument("plan")
@@ -2455,7 +2804,47 @@ def main(argv=None):
         out = args.output or str(Path(args.deck).with_suffix("")) + "-glance"
         report = glance(args.deck, out, [int(n) for n in args.slides.split(",")] if args.slides else None)
         print("\n".join(glance_lines(report)))
+        if args.ink:
+            print(f"{reink(args.deck, args.ink[1], report, args.ink[0])} runs of unreadable text set to "
+                  f"{args.ink[0].upper()} -> {args.ink[1]}; run glance on it and look")
         return 1 if any(row["faults"] for row in report) else 0
+    if args.cmd == "compare":
+        out = args.output or str(Path(args.after).with_suffix("")) + "-compare"
+        mapping = json.loads(Path(args.map).read_text(encoding="utf-8")) if args.map else None
+        pairs = compare(args.before, args.after, out, mapping)
+        print(f"{len(pairs)} pairs -> {out}. Open them one at a time, old above and new below, and ask of each: "
+              "what did the old slide have that the new one lost, and what on the new one is worse? (guide 13)")
+        for n, olds, path in pairs:
+            print(f"  new {n} <- old {', '.join(map(str, olds)) or '-'}: {path}")
+        return 0
+    if args.cmd == "shell":
+        try:
+            if args.strip or args.background:
+                if not args.output:
+                    sys.exit("error: --strip and --background need -o OUT.pptx")
+                _, note = unshell(args.deck, args.output, [k for k in (args.strip or "").split(",") if k],
+                                  args.background)
+                print(f"{note} -> {args.output}; the words removed are in {Path(args.output).with_suffix('.shell.json')}")
+            else:
+                print(shell(args.deck))
+        except ValueError as exc:
+            sys.exit(f"error: {exc}")
+        return 0
+    if args.cmd == "fit":
+        picked = set()
+        for part in (args.slides or "").split(","):
+            if part:
+                first, _, last = part.partition("-")
+                picked |= set(range(int(first), int(last or first) + 1))
+        into = tuple(float(v) for v in args.into.split(","))
+        done = fit(args.deck, args.output, into, picked or None, set(args.skip))
+        floor = _floor(Presentation(args.output))
+        for n, factor, low in done:
+            small = f"; smallest text now {low:g} pt, under {floor:g}: raise it or split the slide" \
+                if low is not None and factor < 1 and low < floor else ""
+            print(f"slide {n}: x{factor:.2f}{small}")
+        print(f"{len(done)} slides fitted -> {args.output}. Now glance, then look at every slide.")
+        return 0
     if args.cmd == "watch":
         out = args.output or str(Path(args.deck).with_suffix("")) + "-watch"
         picked = [int(n) for n in args.slides.split(",")] if args.slides else None
