@@ -8,6 +8,38 @@ were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
 
+
+## T096 [pptx] Following a reference PDF; small-text floor scaled to slide height — 2026-11-09
+
+- **Why:** the owner tested the skill on an outside job: restyle the QCC theme (20 x 11.25 in) after a
+  78-page printed report the boss called "plain". Three findings: `inventory` and `design_critic`
+  judged small text against a fixed 18 pt, so on a 20 x 11.25 in slide (shown at two thirds the size)
+  19.5 pt body text passed; the 3-6 sizes rule worked (21 sizes found, 7 after a type scale); the skill
+  had no way to read a sample's real fonts and colours.
+- **Toolbox:** `inventory` floor = 18 pt x slide height / 7.5 in, stated in the header, and more than 3
+  small shapes on a slide fold into one line; `scale` uses the same floor; `design_critic` `TYP-SMALL`
+  grades sizes normalised to a 7.5 in slide. New `sample DOC.pdf [--pages] [-o]`: fonts by share of
+  characters and whether installed here, text sizes, text colours, fill colours by area, page sheets.
+  Needs PyMuPDF (already used by chart_forge and document_forge; CI now installs it). 3 new tests (15/15).
+- **Guide 2:** new section "Khi có một tài liệu mẫu để theo" (7 steps: read with `sample`, note what
+  repeats across pages, ask what to take and what to keep, nearest installed font, print ratios not
+  sizes, data colours by convention, never copy). **Guide 4:** the type scale is for a 7.5 in tall
+  slide; scale by height. `experiments/T096-20261109-claude-sample-style-and-scaled-floor/REPORT.md`.
+- **From DSH's self-review of QCC theme v7/v8 (both 4/10, made without the skill):** guide 3 gains
+  "busy and empty at once" (fix the root with one line per slide, not by cutting text) and "each key
+  number has one home slide" (`inventory` lists numbers on 4+ slides); guide 2 takes a sample's system,
+  not its print accessories; SKILL.md asks presented-or-read and builds 3 sample slides before a whole
+  restyle. A left-edge count was tried and dropped: it did not separate gridded from ungridded decks.
+- **From DSH's Ver4 rebuild of the 37-slide QCC deck (rejected by the owner):** `inventory` crashed on
+  any deck with a video (`'Movie' object has no attribute 'fill'`, a T095 bug), so the agent never saw
+  the old transitions or the effect counts. Fixed; `inventory` now also prints a `transitions` line,
+  flags old-style ones (glitter, checker, peelOff…), and flags effects that point to deleted shapes.
+  On the real decks: Ver3-4 had 1,042 effects (648 on one machine simulation), Ver4 had 0. Guide 10:
+  effects that tell a mechanism, and video, are content; a "Slide có hiệu ứng" recipe (reskin in place
+  on a copy, never swap for a picture); video fills the slide by default; clear old transitions with
+  `"default": "none"` as soon as the copy is made. Guide 3: the cover title says what the talk is
+  about; a Video row. SKILL.md: one of the 3 sample slides is the hardest one to keep. 1 new test.
+
 ## T095 [pptx] Guide 10 and toolbox fixes from the T094 rehearsal — 2026-11-09
 
 - **Why:** the owner opened DSH's T094 deck: motion as good or slightly better than T093, but the

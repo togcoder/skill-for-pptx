@@ -14,6 +14,10 @@ Cả bộ slide dùng từ 3 đến 6 cỡ chữ. Thang gợi ý cho slide 16:9:
 
 - **Nội dung không bao giờ dưới 18 pt. Không có gì dưới 12 pt.** Chữ không vừa khung thì bớt chữ hoặc
   tách slide. Đừng thu nhỏ chữ.
+- **Thang trên viết cho slide cao 7,5 in (13,33 × 7,5 in).** Khổ khác thì nhân mọi cỡ với *chiều cao
+  slide ÷ 7,5 in*. Ví dụ slide 20 × 11,25 in (1920 × 1080 px): nội dung ít nhất 27 pt, nhãn nhỏ ít
+  nhất 18 pt. Lý do: khi chiếu, slide nào cũng được thu cho vừa màn hình, nên slide càng lớn thì chữ
+  hiện ra càng nhỏ. `inventory` và `design_critic.py` đã tự tính theo chiều cao này.
 - Đừng để công cụ tự thu chữ cho vừa hộp. Một tiêu đề ngắn bị thu xuống 14 pt là lỗi.
 - Tiêu đề lớn ít nhất gấp 1,5–2,5 lần chữ nội dung. Chênh lệch quá ít thì không còn thứ bậc.
 - Một dòng chữ không quá khoảng 60 ký tự. Khối chữ rộng quá thì chia cột hoặc hẹp khung lại.

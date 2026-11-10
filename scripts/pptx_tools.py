@@ -8,6 +8,10 @@ commands only do what written guidance cannot:
                                 contact sheet, so the agent can see what it built
     motion DECK PLAN -o OUT     write click reveals and slide transitions from a
                                 short plan that names shapes, not ids
+    sample DOC.pdf [--pages 5,11] [-o DIR]
+                                a reference to follow (a report, a brochure): its real
+                                font names and whether this machine has them, the
+                                sizes and colours it uses most, pictures of its pages
 
 For a deck someone else made (skills/pptx/guides/10-dong-bo-slide-co-san.md):
 
@@ -196,12 +200,19 @@ def look(deck, out_dir):
 # ------------------------------------------------------------ decks made by others
 
 C_NS = "http://schemas.openxmlformats.org/drawingml/2006/chart"
-MIN_BODY_PT = 18  # guide 4: content text
+MIN_BODY_PT = 18  # guide 4: content text, on a slide 7.5 in tall
+REF_HEIGHT = 6858000  # 7.5 in
 NAMES_BY_PRESET = {}
 for _name, (_cls, _pid, _sub, _ms) in anim.PRESETS.items():
     NAMES_BY_PRESET.setdefault((_cls, str(_pid)), _name.removeprefix("ppt:"))
 CALM = {"appear", "fade", "float-in", "zoom", "wipe", "wipe-up", "wipe-down", "wipe-left", "wipe-right",
         "rise-up", "dim", "disappear", "fade-out", "path"}
+
+
+def _floor(prs):
+    """Guide 4's 18 pt, scaled to this slide's height: a 20 x 11.25 in slide is shown no larger than a
+    13.33 x 7.5 in one, so its text needs 27 pt to read the same."""
+    return round(MIN_BODY_PT * prs.slide_height / REF_HEIGHT, 1)
 
 
 def _walk(shapes):
@@ -238,8 +249,10 @@ def _slide_effects(slide):
 
 def _transition(slide):
     for node in slide._element.iter(qn("p:transition")):
-        kids = [E.QName(k).localname for k in node]
-        return kids[0] if kids else "cut"
+        if not len(node):
+            return "cut"
+        kind = E.QName(node[0]).localname
+        return node[0].get("prst", kind) if kind == "prstTrans" else kind  # p15 names: peelOff, curtains…
     return None
 
 
@@ -281,10 +294,13 @@ def inventory(deck):
     """Plain-text report: what the deck uses, and where it breaks the guides."""
     prs = Presentation(deck)
     sw, sh = prs.slide_width, prs.slide_height
+    floor = _floor(prs)
     fonts, sizes, colours, fills = Counter(), Counter(), Counter(), Counter()
+    on_slides, transitions = Counter(), Counter()
     lines = []
     for i, slide in enumerate(prs.slides, 1):
         words, flags, small = 0, [], {}
+        on_slides.update(_key_numbers(" ".join(n.text or "" for n in slide._element.iter(qn("a:t")))))
         head, body = _theme_faces(slide)
         bg = _fill(slide.background.fill) if slide._element.find(".//p:bg", NS) is not None else None
         if bg:
@@ -292,7 +308,7 @@ def inventory(deck):
         for shape in _walk(slide.shapes):
             if shape.shape_type not in (MSO_SHAPE_TYPE.PICTURE, MSO_SHAPE_TYPE.GROUP, MSO_SHAPE_TYPE.LINE) \
                     and not getattr(shape, "has_chart", False) and not getattr(shape, "has_table", False):
-                colour = _fill(shape.fill)
+                colour = _fill(getattr(shape, "fill", None))  # a video has no fill
                 if colour:
                     fills[colour] += 1
             frames = [shape.text_frame] if shape.has_text_frame else []
@@ -308,7 +324,7 @@ def inventory(deck):
                         fonts[face] += 1
                         if run.font.size:
                             sizes[run.font.size.pt] += 1
-                            if run.font.size.pt < MIN_BODY_PT and run.text.strip():
+                            if run.font.size.pt < floor and run.text.strip():
                                 small[shape.name] = min(small.get(shape.name, 99), run.font.size.pt)
                         try:
                             colours[str(run.font.color.rgb)] += 1
@@ -332,24 +348,59 @@ def inventory(deck):
             out = max(-shape.left, -shape.top, shape.left + shape.width - sw, shape.top + shape.height - sh)
             if out > 0:
                 flags.append(f"{shape.name!r} runs {out / 914400:.2f} in off the slide")
-        flags += [f"text under {MIN_BODY_PT} pt in {n!r} ({pt:g} pt): fine for a source or caption only"
-                  for n, pt in small.items()]
+        if len(small) > 3:  # one line, or a small-type deck floods the report
+            flags.append(f"text under {floor:g} pt in {len(small)} shapes (smallest {min(small.values()):g} pt), "
+                         f"e.g. {', '.join(repr(n) for n in list(small)[:3])}: fine for sources and captions only")
+        else:
+            flags += [f"text under {floor:g} pt in {n!r} ({pt:g} pt): fine for a source or caption only"
+                      for n, pt in small.items()]
         effects, clicks = _slide_effects(slide)
         if clicks and len(_opening(slide)) <= 1:
             flags.append("opens with only the title visible: show the frame (labels, axes) at the start, "
                          "let clicks add data and conclusions")
+        ids = {n.get("id") for n in slide._element.iter(qn("p:cNvPr"))}
+        lost = {t.get("spid") for t in slide._element.iter(qn("p:spTgt"))} - ids
+        if lost:
+            flags.append(f"effects point to {len(lost)} shapes that are gone: PowerPoint repairs the file and "
+                         "drops them. Delete a shape and its effects together, or keep the shape")
         loud = sorted({n for n in effects if n.split(":", 1)[1] not in CALM})
+        kind = _transition(slide) or "none"
+        transitions[kind] += 1
         lines.append(f"slide {i}: {len(slide.shapes)} shapes, {words} words, transition "
-                     f"{_transition(slide) or 'none'}, {clicks} clicks, {sum(effects.values())} effects")
+                     f"{kind}, {clicks} clicks, {sum(effects.values())} effects")
         if loud:
             lines.append("  ! decorative effects: " + ", ".join(loud))
+        if kind not in ("none", "cut", "fade", "morph"):
+            lines.append(f"  ! old-style transition {kind!r}: guide 6 uses fade, Morph or none")
         lines += ["  ! " + f for f in flags]
-    top = [f"deck: {len(prs.slides)} slides, {sw / 914400:.2f} x {sh / 914400:.2f} in",
+    size_note = "" if floor == MIN_BODY_PT else f" (text floor {floor:g} pt at this height, guide 4)"
+    top = [f"deck: {len(prs.slides)} slides, {sw / 914400:.2f} x {sh / 914400:.2f} in{size_note}",
            f"fonts ({len(fonts)}): " + ", ".join(f"{k} x{v}" for k, v in fonts.most_common()),
            f"sizes ({len(sizes)}; guide 4 wants 3-6): " + ", ".join(f"{k:g}" for k in sorted(sizes)),
            f"text colours ({len(colours)}): " + ", ".join(f"{k} x{v}" for k, v in colours.most_common(8)),
-           f"fills ({len(fills)}): " + ", ".join(f"{k} x{v}" for k, v in fills.most_common(8))]
+           f"fills ({len(fills)}): " + ", ".join(f"{k} x{v}" for k, v in fills.most_common(8)),
+           "transitions: " + ", ".join(f"{k} x{v}" for k, v in transitions.most_common())]
+    many = [f"{n} on {c} slides" for n, c in on_slides.most_common() if c >= 4]
+    if many:
+        top.append("numbers on 4+ slides (guide 3: each key number has one home slide): " + ", ".join(many[:6]))
     return "\n".join(top + lines)
+
+
+def _key_numbers(text):
+    """Numbers worth tracking across slides: >= 100, decimals or percentages; not years or step numbers."""
+    keys = set()
+    for found in NUMBER.finditer(text):
+        m, pct = found.groups()
+        if found.start() and text[found.start() - 1].isalpha():  # part of a code: H422, T35
+            continue
+        v = m.replace(",", "") if re.fullmatch(r"\d{1,3}(,\d{3})+", m) else m.replace(",", ".")
+        try:
+            f = float(v)
+        except ValueError:
+            continue
+        if pct or "." in v or (f >= 100 and not (1900 <= f <= 2100 and len(m) == 4)):
+            keys.add(f"{f:g}" + ("%" if pct else ""))
+    return keys
 
 
 def _top_shapes(slide, names):
@@ -678,6 +729,104 @@ def unstretch(deck, slide_no, name, output, box=False):
     return r
 
 
+# ------------------------------------------------------------ a reference document to follow
+
+def _font_key(name):
+    """'ABCDEF+HelveticaNeueLTPro-Bd' and 'Helvetica Neue LT Pro' -> 'helveticaneueltpro'."""
+    key = re.sub(r"[^a-z0-9]", "", re.split(r"[-,]", name.split("+")[-1])[0].lower())
+    return re.sub(r"(psmt|mt|ps)$", "", key)
+
+
+def _pdf_family(name):
+    return re.split(r"[-,]", name.split("+")[-1])[0]
+
+
+def installed_fonts():
+    """Keys (see _font_key) of the font families installed on this machine."""
+    import os
+    from PIL import ImageFont
+    home = Path.home()
+    dirs = [Path(os.environ.get("WINDIR", "C:/Windows")) / "Fonts", home / "AppData/Local/Microsoft/Windows/Fonts",
+            Path("/Library/Fonts"), Path("/System/Library/Fonts"), home / "Library/Fonts",
+            Path("/usr/share/fonts"), home / ".fonts", home / ".local/share/fonts"]
+    keys = set()
+    for d in dirs:
+        if not d.is_dir():
+            continue
+        for f in d.rglob("*"):
+            if f.suffix.lower() in (".ttf", ".otf", ".ttc"):
+                for face in range(16 if f.suffix.lower() == ".ttc" else 1):  # a .ttc holds several families
+                    try:
+                        family = ImageFont.truetype(str(f), 12, index=face).getname()[0]
+                    except OSError:
+                        break
+                    if family:
+                        keys.add(_font_key(family))
+    return keys
+
+
+def sample(pdf, out_dir, pages=()):
+    """What a reference document is made of: real font names (and whether this machine has them),
+    the text sizes and colours it uses most, the colours of its filled shapes by area, and pictures of
+    its pages to look at. Needs PyMuPDF."""
+    try:
+        import fitz
+    except ImportError:
+        raise ValueError("sample reads PDFs with PyMuPDF: pip install pymupdf")
+    from PIL import Image
+    doc = fitz.open(pdf)
+    fonts, sizes, text, fills = Counter(), Counter(), Counter(), Counter()
+    for page in doc:
+        for block in page.get_text("dict")["blocks"]:
+            for line in block.get("lines", []):
+                for span in line["spans"]:
+                    n = len(span["text"].strip())
+                    if n:
+                        fonts[_pdf_family(span["font"])] += n
+                        sizes[round(span["size"] * 2) / 2] += n
+                        text[f"{span['color']:06X}"] += n
+        for d in page.get_drawings():
+            colour, r = d.get("fill"), d.get("rect")
+            if colour and len(colour) == 3 and r is not None and r.width * r.height > 0:
+                fills["%02X%02X%02X" % tuple(round(c * 255) for c in colour)] += r.width * r.height
+    have = installed_fonts()
+
+    def share(counter, k=8):
+        total = sum(counter.values()) or 1
+        return ", ".join(f"{key} {v / total:.0%}" for key, v in counter.most_common(k))
+    w, h = doc[0].rect.width, doc[0].rect.height
+    lines = [f"document: {len(doc)} pages, {w / 72 * 25.4:.0f} x {h / 72 * 25.4:.0f} mm "
+             f"({'landscape' if w > h else 'portrait'})",
+             "fonts by share of characters:"]
+    total = sum(fonts.values()) or 1
+    main_fonts = [(n, v) for n, v in fonts.most_common() if v / total >= 0.01]
+    for name, v in main_fonts:
+        mark = "installed here" if _font_key(name) in have else "NOT installed here: pick the nearest installed font (guide 2)"
+        lines.append(f"  {name} {v / total:.0%}  {mark}")
+    if len(fonts) > len(main_fonts):
+        lines.append(f"  + {len(fonts) - len(main_fonts)} more under 1% each")
+    lines += [f"text sizes, pt, by share: {share(sizes)}  (print sizes: keep the ratios, not the sizes)",
+              f"text colours: {share(text)}",
+              f"filled shapes by area: {share(fills)}"]
+    out = Path(out_dir)
+    out.mkdir(parents=True, exist_ok=True)
+    thumbs = [Image.frombytes("RGB", (p.width, p.height), p.samples)
+              for p in (page.get_pixmap(matrix=fitz.Matrix(320 / page.rect.width, 320 / page.rect.width)) for page in doc)]
+    th = max(t.height for t in thumbs)
+    for start in range(0, len(thumbs), 20):
+        batch = thumbs[start:start + 20]
+        sheet = Image.new("RGB", (5 * 330, ((len(batch) + 4) // 5) * (th + 10)), "white")
+        for k, t in enumerate(batch):
+            sheet.paste(t, ((k % 5) * 330, (k // 5) * (th + 10)))
+        sheet.save(out / f"sheet{start // 20 + 1}.jpg", quality=85)
+        lines.append(f"pages {start + 1}-{start + len(batch)}: {out / f'sheet{start // 20 + 1}.jpg'}")
+    for n in pages:
+        path = out / f"page{n}.png"
+        doc[n - 1].get_pixmap(dpi=110).save(str(path))
+        lines.append(f"page {n}: {path}")
+    return "\n".join(lines)
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sp = ap.add_subparsers(dest="cmd", required=True)
@@ -690,6 +839,10 @@ def main(argv=None):
     a.add_argument("-o", "--output", required=True)
     a = sp.add_parser("inventory", help="what an existing deck uses, and its measurable problems")
     a.add_argument("deck")
+    a = sp.add_parser("sample", help="what a reference PDF is made of: fonts, sizes, colours, pages")
+    a.add_argument("pdf")
+    a.add_argument("--pages", default="", help="pages to save large, e.g. 5,11")
+    a.add_argument("-o", "--output", default=None, help="folder (default: <pdf>-sample)")
     a = sp.add_parser("scale", help="shrink or grow shapes as one block, text and motion included")
     a.add_argument("deck")
     a.add_argument("slide", type=int)
@@ -724,6 +877,10 @@ def main(argv=None):
         if args.cmd == "inventory":
             print(inventory(args.deck))
             return 0
+        if args.cmd == "sample":
+            out = args.output or str(Path(args.pdf).with_suffix("")) + "-sample"
+            print(sample(args.pdf, out, [int(p) for p in args.pages.split(",") if p]))
+            return 0
         if args.cmd == "numbers":
             lost = missing_numbers(args.before, args.after)
             for i, nums in lost.items():
@@ -738,9 +895,10 @@ def main(argv=None):
             at = tuple(float(v) for v in args.at.split(",")) if args.at else None
             low = scale(args.deck, args.slide, args.names, args.by, args.output, at)
             print(f"scaled {len(args.names)} shapes by {args.by} -> {args.output}")
-            if low is not None and low < MIN_BODY_PT:
-                print(f"warning: smallest text is now {low:g} pt (guide 4 wants {MIN_BODY_PT}). Keep the "
-                      f"diagram's form: set its text back to {MIN_BODY_PT} pt and widen the text boxes. If it "
+            floor = _floor(Presentation(args.output))
+            if low is not None and low < floor:
+                print(f"warning: smallest text is now {low:g} pt (guide 4 wants {floor:g} at this slide size). Keep "
+                      f"the diagram's form: set its text back to {floor:g} pt and widen the text boxes. If it "
                       "still does not fit, split it over two slides. Never redraw it as another kind of diagram.")
             return 0
         if args.cmd == "rechart":

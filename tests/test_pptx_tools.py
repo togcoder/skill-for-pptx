@@ -206,5 +206,91 @@ class ExistingDeckTests(unittest.TestCase):
         self.assertAlmostEqual(pic.crop_left, 0.1, places=3)
 
 
+class SizeAndSampleTests(unittest.TestCase):
+    """T096: what the QCC v6 restyle found."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.dir = Path(self.tmp.name)
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def _deck(self, width, height, pt):
+        from pptx.util import Pt
+        prs = Presentation()
+        prs.slide_width, prs.slide_height = Inches(width), Inches(height)
+        box = prs.slides.add_slide(prs.slide_layouts[6]).shapes.add_textbox(Inches(1), Inches(1), Inches(6), Inches(1))
+        box.name, box.text_frame.text = "Body", "Glue does not cover the joint fully"
+        box.text_frame.paragraphs[0].runs[0].font.size = Pt(pt)
+        path = self.dir / f"{width}x{height}.pptx"
+        prs.save(path)
+        return path
+
+    def test_small_text_floor_follows_the_slide_height(self):
+        self.assertNotIn("text under", tools.inventory(self._deck(13.333, 7.5, 20)))
+        big = tools.inventory(self._deck(20, 11.25, 20))  # 20 pt here reads like 13 pt on a 7.5 in slide
+        self.assertIn("text floor 27 pt", big)
+        self.assertIn("text under 27 pt in 'Body' (20 pt)", big)
+
+    def test_critic_grades_body_size_for_the_slide_height(self):
+        import design_critic as dc
+        def small(path):
+            return {i["detail"] for i in dc.critique(path)["issues"] if i["code"] == "TYP-SMALL"}
+        self.assertEqual(small(self._deck(13.333, 7.5, 20)), set())
+        self.assertTrue(small(self._deck(20, 11.25, 20)))
+
+    def test_inventory_names_numbers_repeated_on_many_slides(self):
+        prs = Presentation()
+        for k in range(5):
+            box = prs.slides.add_slide(prs.slide_layouts[6]).shapes.add_textbox(0, 0, Inches(6), Inches(1))
+            box.text_frame.text = f"H422 step {k + 1}: 156,179 PPM" if k < 4 else "0 PPM in 2026"
+        path = self.dir / "repeat.pptx"
+        prs.save(path)
+        report = tools.inventory(path)
+        self.assertIn("156179 on 4 slides", report)
+        self.assertNotIn("422 on", report)   # part of a code
+        self.assertNotIn("2026 on", report)
+
+    def test_inventory_reads_a_rebuilt_deck_with_video_old_transitions_and_lost_targets(self):
+        from lxml import etree
+        src, mid = self.dir / "v.pptx", self.dir / "v2.pptx"
+        _deck(src)
+        tools.apply_motion(src, {"clicks": {"1": [["Card A"]]}}, mid)
+        prs = Presentation(mid)
+        clip = self.dir / "clip.mp4"
+        clip.write_bytes(b"\x00" * 64)
+        prs.slides[1].shapes.add_movie(str(clip), 0, 0, Inches(4), Inches(3), mime_type="video/mp4")
+        card = next(s for s in prs.slides[0].shapes if s.name == "Card A")
+        card._element.getparent().remove(card._element)    # its click effect stays behind
+        prs.slides[2]._element.append(etree.fromstring(
+            '<p:transition xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main">'
+            '<p:checker/></p:transition>'))
+        prs.save(mid)
+        report = tools.inventory(mid)                       # used to crash on the video
+        self.assertIn("transitions: none x2, checker x1", report)
+        self.assertIn("old-style transition 'checker'", report)
+        self.assertIn("effects point to 1 shapes that are gone", report)
+
+    @unittest.skipUnless(__import__("importlib").util.find_spec("fitz"), "PyMuPDF not installed")
+    def test_sample_reads_fonts_sizes_and_colours_of_a_pdf(self):
+        import fitz
+        doc = fitz.open()
+        page = doc.new_page(width=842, height=595)  # A4 landscape
+        page.insert_text((72, 100), "Highlights 2026", fontname="helv", fontsize=24, color=(0, 0.4, 0.8))
+        page.insert_text((72, 140), "Body text of the report", fontname="helv", fontsize=9, color=(0.2, 0.2, 0.2))
+        page.draw_rect(fitz.Rect(72, 200, 372, 400), color=None, fill=(1, 0, 0))
+        pdf = self.dir / "report.pdf"
+        doc.save(pdf)
+        report = tools.sample(pdf, self.dir / "look", [1])
+        self.assertIn("297 x 210 mm (landscape)", report)
+        self.assertIn("Helvetica 100%", report)
+        self.assertIn("0066CC", report)                        # title colour
+        self.assertIn("filled shapes by area: FF0000 100%", report)
+        self.assertIn("24.0", report)
+        self.assertTrue((self.dir / "look" / "sheet1.jpg").exists())
+        self.assertTrue((self.dir / "look" / "page1.png").exists())
+
+
 if __name__ == "__main__":
     unittest.main()

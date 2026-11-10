@@ -30,7 +30,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install requirements
-        run: python -m pip install lxml python-pptx Pillow python-docx openpyxl numpy pytest
+        run: python -m pip install lxml python-pptx Pillow python-docx openpyxl numpy pytest pymupdf
 
       - name: Compile every script
         run: python -m compileall -q scripts lab/tools

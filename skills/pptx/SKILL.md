@@ -16,9 +16,9 @@ kiểm tra chỉ để bắt lỗi, không chứng minh slide đẹp.
 
 | Bước | Việc | Đọc |
 |---|---|---|
-| 1 | Hiểu người nghe, mục đích, thời lượng. Thiếu thì hỏi tối đa 2 câu. Không bịa số liệu. | [guides/1-nguoi-nghe-va-dan-y.md](guides/1-nguoi-nghe-va-dan-y.md) |
+| 1 | Hiểu người nghe, mục đích, thời lượng; bộ này để **trình chiếu** (có người nói) hay để **gửi đọc**. Thiếu thì hỏi tối đa 2 câu. Không bịa số liệu. | [guides/1-nguoi-nghe-va-dan-y.md](guides/1-nguoi-nghe-va-dan-y.md) |
 | 2 | Viết **dàn ý tiêu đề**. Chỉ đọc tiêu đề phải hiểu câu chuyện. Bài nói có chuyển động phức tạp thì viết kịch bản trước (skill `script-writer`). | như trên |
-| 3 | Chọn nhận diện: lấy từ file, logo hoặc màu người dùng có. Không có thì chọn một phong cách. | [guides/2-nhan-dien.md](guides/2-nhan-dien.md) |
+| 3 | Chọn nhận diện: lấy từ file, logo hoặc màu người dùng có, hoặc theo một tài liệu mẫu (PDF) họ đưa. Không có thì chọn một phong cách. | [guides/2-nhan-dien.md](guides/2-nhan-dien.md) |
 | 4 | **Phác từng slide bằng một dòng chữ**: ý chính, vật chính, bố cục. | [guides/3-bo-cuc.md](guides/3-bo-cuc.md), [4-chu-va-mau.md](guides/4-chu-va-mau.md), [5-anh-so-do-bieu-do.md](guides/5-anh-so-do-bieu-do.md) |
 | 5 | Dựng **bản tĩnh** trước. Đặt tên cho mọi vật thể. | [guides/9-do-nghe.md](guides/9-do-nghe.md) |
 | 6 | **Mở ra xem** và sửa, cho tới khi bản tĩnh đã đẹp. | [guides/8-tu-kiem-tra.md](guides/8-tu-kiem-tra.md) |
@@ -27,9 +27,15 @@ kiểm tra chỉ để bắt lỗi, không chứng minh slide đẹp.
 
 Chuyển động thêm vào một bố cục xấu không làm nó đẹp lên. Vì vậy bản tĩnh phải đẹp trước.
 
+**Phong cách mới, hay dựng lại cả một bộ:** trước tiên làm **3 slide mẫu**: một slide số liệu, một slide
+so sánh, và slide dày nhất của bộ. Dựng lại một bộ có sẵn thì một trong 3 slide là slide **khó giữ nhất**:
+sơ đồ chuẩn, hoặc slide có hiệu ứng mô phỏng. Đưa người dùng duyệt 3 slide đó rồi mới làm cả bộ. Sửa 3
+slide rẻ hơn sửa 30.
+
 **Nhận một bộ slide có sẵn để làm cho đồng bộ** (đủ nội dung, chắp vá về hình thức): đi theo
 [guides/10-dong-bo-slide-co-san.md](guides/10-dong-bo-slide-co-san.md). Giữ ruột (số, chữ, ý, ảnh bằng
-chứng), thay vỏ (font, màu, bố cục, kiểu biểu đồ, chuyển động). Lập bảng ý trước khi sửa.
+chứng, hiệu ứng kể cơ chế, video), thay vỏ (font, màu, bố cục, kiểu biểu đồ, hiệu ứng trang trí). Lập
+bảng ý trước khi sửa.
 
 Chọn **mức** chuyển động theo phòng, không theo số hiệu ứng: một lớp học cần ít
 hơn một sân khấu hội nghị. Đơn giản mà vừa tốt hơn phức tạp mà gượng (guide 6).
@@ -77,6 +83,7 @@ Viết ngắn, bằng lời thường, theo thứ tự:
 | Bắt lỗi chữ tràn, chữ nhỏ, thẻ rỗng, tương phản | `python scripts/design_critic.py OUT.pptx` |
 | Tìm ảnh có giấy phép, kèm nguồn | `python scripts/forge_assets.py photos "từ khóa"` |
 | Kiểm tra kịch bản | `python scripts/motion_script.py check script.md` |
+| Tài liệu mẫu để theo (PDF): font thật, có trên máy không, cỡ chữ, màu, ảnh các trang | `python scripts/pptx_tools.py sample MAU.pdf --pages 5,11` |
 | Bộ có sẵn: kiểm kê font, cỡ, màu, biểu đồ 3D, ảnh méo, vật tràn, hiệu ứng trang trí | `python scripts/pptx_tools.py inventory GOC.pptx` |
 | Bộ có sẵn: dựng lại biểu đồ phẳng từ chính số của nó | `python scripts/pptx_tools.py rechart DECK 5 "Ten" --kind bar -o OUT` |
 | Bộ có sẵn: thu một cụm hình như một khối (chữ, nét, đường bay đi theo) | `python scripts/pptx_tools.py scale DECK 4 "A" "B" --by 0.7 -o OUT` |
