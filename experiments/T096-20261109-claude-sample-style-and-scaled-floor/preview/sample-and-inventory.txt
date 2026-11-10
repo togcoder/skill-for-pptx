@@ -1,0 +1,17 @@
+$ python scripts/pptx_tools.py sample "Report sample.pdf"   (78-page company report, kept local)
+document: 78 pages, 297 x 210 mm (landscape)
+fonts by share of characters:
+  HelveticaNeueLTPro 100%  NOT installed here: pick the nearest installed font (guide 2)
+  + 9 more under 1% each
+text sizes, pt, by share: 8.5 44%, 8.0 10%, 6.5 9%, 9.0 6%, 5.5 6%, 6.0 6%, 7.5 6%, 5.0 5%  (print sizes: keep the ratios, not the sizes)
+text colours: 231F20 80%, FFFFFF 6%, 0067AC 5%, 6D6E71 3%, 4C5762 2%, 005AAA 1%, 0062AC 1%, F68C47 0%
+filled shapes by area: FFFFFF 42%, BCBEC0 12%, F0F1F3 9%, 0067AC 8%, EDF7FC 3%, DDEFF8 3%, 0062AC 3%, B0DAEF 2%
+
+$ python scripts/pptx_tools.py inventory QCC_theme_cab_v6.pptx   (20 x 11.25 in theme deck, kept outside the repo; first lines)
+deck: 13 slides, 20.00 x 11.25 in (text floor 27 pt at this height, guide 4)
+fonts (1): Arial x347
+sizes (7; guide 4 wants 3-6): 13.5, 16.5, 19.5, 24, 37.5, 48, 90
+  ! text under 27 pt in 'Kicker' (16.5 pt): fine for a source or caption only
+  ! text under 27 pt in 'Cover subtitle' (19.5 pt): fine for a source or caption only
+  ! text under 27 pt in 23 shapes (smallest 13.5 pt), e.g. 'Subtitle', 'Stop 1', 'Stop label 1': fine for sources and captions only
+  ! text under 27 pt in 67 shapes (smallest 13.5 pt), e.g. '!!step1', '!!step2', '!!step3': fine for sources and captions only
