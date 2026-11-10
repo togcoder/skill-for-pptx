@@ -41,6 +41,11 @@ bảng ý trước khi sửa.
 [guides/11-dung-lai-ca-bo.md](guides/11-dung-lai-ca-bo.md): ba bước Hiểu → Làm → Kiểm, chỉ dừng hỏi người
 dùng ở ba chỗ; dựng trên bản sao bộ gốc; chấm hai tầng (cổng máy, rồi mắt).
 
+**Tách thành phần dùng lại** (khung xương cá, thanh bước, Gantt, icon trong bộ cũ): đừng chụp ảnh và đừng
+vẽ lại. `extract` chỉ lấy ảnh/video gốc + manifest, **không** lấy hình vector; `cutout` chỉ dành cho một ảnh
+có nền đơn giản. Dùng `components` → `ungroup` / `component` để tách ra một file một-slide, rồi `place` để
+dán lại: [guides/12-tach-thanh-phan.md](guides/12-tach-thanh-phan.md).
+
 Chọn **mức** chuyển động theo phòng, không theo số hiệu ứng: một lớp học cần ít
 hơn một sân khấu hội nghị. Đơn giản mà vừa tốt hơn phức tạp mà gượng (guide 6).
 
@@ -96,4 +101,8 @@ Viết ngắn, bằng lời thường, theo thứ tự:
 | Tách nền dính liền khỏi ảnh (khung sơ đồ, logo, icon) | `python scripts/pptx_tools.py cutout ANH.png -o TACH.png` |
 | Bộ có sẵn: số nào của bản gốc đã mất | `python scripts/pptx_tools.py numbers GOC.pptx MOI.pptx` |
 | Dựng lại cả bộ: ảnh, video gốc thành file, và `manifest.json` của từng slide | `python scripts/pptx_tools.py extract GOC.pptx -o DIR` |
+| Tách thành phần dùng lại: kiểm kê hình nào tách được (nhóm, sơ đồ, bảng, ảnh nền) | `python scripts/pptx_tools.py components GOC.pptx --slide 29` |
+| Làm phẳng nhóm hình (giữ toạ độ, từ chối nhóm có animation) | `python scripts/pptx_tools.py ungroup GOC.pptx 15 --name "Khung" -o OUT` |
+| Tách một thành phần thành file một-slide (cắt khung, bỏ nền/chrome, freeze theme) | `python scripts/pptx_tools.py component GOC.pptx 29 --exclude "Picture 85" --freeze -o VIEN.pptx` |
+| Dán thành phần vào slide của bộ khác | `python scripts/pptx_tools.py place VIEN.pptx DECK.pptx --slide 4 --at 1.6,1.0 -o OUT` |
 | Dựng lại cả bộ: cổng giữ ruột (chuyển slide, hiệu ứng, video, số, ảnh gốc) | `python scripts/pptx_tools.py check GOC.pptx MOI.pptx --map map.json` |
