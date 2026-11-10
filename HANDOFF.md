@@ -90,7 +90,7 @@ thay vì deck làm tay. Lab đa lĩnh vực phục vụ mục tiêu đó và đa
 | **T094** | Diễn tập mù: model khác họ đồng bộ cùng bộ chắp vá chỉ bằng mục 10 | DSH → Claude | **xong; chuyển động tốt, xương cá bị vẽ sang dạng khác** |
 | **T095** | Sửa mục 10 và đồ nghề theo T094: giữ hình sơ đồ chuẩn và notes của tác giả, slide không mở ra trắng | Claude → DSH | **xong; chờ dùng trên bộ slide thật** |
 | **T096** | Theo một tài liệu mẫu (PDF): lệnh `sample` + mục 2; mốc chữ nhỏ tính theo chiều cao slide (`inventory`, `design_critic`) | Claude → Claude (cùng họ, theo yêu cầu chủ dự án) | **đã gộp 10/11; phản biện `research/reviews/T096-claude-20261110.md`** |
-| **T097** | Dựng lại cả một bộ: `extract`, `check` (9 cổng), `retable`, `cutout`; mục 11; mục 1 "hỏi cho tới khi hiểu" | Claude → Claude (cùng họ, theo yêu cầu chủ dự án) | **đã phản biện (`research/reviews/T097-claude-20261110.md`), chờ CI Windows rồi gộp; chưa model nhỏ nào chạy thử quy trình** |
+| **T097** | Dựng lại cả một bộ: `extract`, `check` (9 cổng), `retable`, `cutout`; mục 11; mục 1 "hỏi cho tới khi hiểu" | Claude → Claude (cùng họ, theo yêu cầu chủ dự án) | **đã gộp 10/11; phản biện `research/reviews/T097-claude-20261110.md`** |
 | **T089** | Sửa mặc định gây hại: Forge (KPI 0, thu chữ 14 pt, trang trí cứng, `!!orb`), Director (bìa 6 lần bấm, Morph khắp nơi), báo tràn chữ sai khi thiếu font | OpenCode → Claude | **ngay** |
 | **T090** | Model nhỏ dùng skill: sửa theo mẫu đã duyệt, chủ dự án mở và chấm | DSH → Claude | **xong (merge #70); chủ dự án chấm** |
 | **T086** | **Nghiên cứu gu đám đông đa lĩnh vực → luật gu, mỗi luật kiểm chứng bằng một cặp `.pptx` chấm mù** ([ROADMAP](docs/ROADMAP.md)) | Claude hoặc Gemini → model khác họ | **ngay, song song** |

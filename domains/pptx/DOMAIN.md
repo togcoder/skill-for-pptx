@@ -104,6 +104,8 @@ unwired) `skills/deck-director`.
   clicks that change nothing. Rung 5b on T069a, T090, the T087 demo and the real QCC deck; 16 of 16
   runs identical to the on-screen show. Guide 8 tells agents how to read the strips. Not yet tried by
   a small model.
+- **Review follow-up (T099):** applied six concrete T096/T097 toolbox fixes: thousands-dot number parsing, clear PDF page errors, batched `sample` thumbnails, XML-safe table fill ordering, Pillow-safe image hashing, and linked-video extraction. Full suite 604 pass/10 skipped. `retable`'s palette semantics and the agent's click-by-click `watch` remain separate follow-ups; do not silently alter project colours.
+- **Reusable components (T098):** `components`, `ungroup`, `component`, `place` extract a diagram frame / step bar / Gantt from a finished deck into a one-slide component (group flattening with child-space geometry, background exclusion, theme freeze, picture rel remap, trimmed bounds) and put it back on another slide. Real QCC deck: Ver3-4 slide 29 has 40 free shapes (no group) on a full-slide picture; 37 become `fishbone_ver34` and 64 become `fishbone_ver5`; `place` verified in PowerPoint 16.0 (rung 4). Animations stay with the source slide; charts/SmartArt/video are refused with the right alternative. Guide 12. Tests: `tests/test_components.py` (9).
 - **Patchwork harmonisation (T094, guide 10):** DSH rehearsed T093's guide on the 10-slide patchwork
   deck and produced an 11-slide deck with 1 font family, 6 sizes, 6 text colours, flat charts,
   unstretched evidence photos, the 8-column table in an appendix, Fade on 2–11, **13 click groups /

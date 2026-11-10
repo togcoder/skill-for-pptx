@@ -253,6 +253,10 @@ class SizeAndSampleTests(unittest.TestCase):
         self.assertNotIn("422 on", report)   # part of a code
         self.assertNotIn("2026 on", report)
 
+    def test_key_numbers_keeps_thousands_dots_and_commas(self):
+        self.assertEqual(tools._key_numbers("còn 1.200 sp và 1,200 sp"), {"1200"})
+        self.assertEqual(tools._key_numbers("tỉ lệ 1.2%"), {"1.2%"})
+
     def test_inventory_reads_a_rebuilt_deck_with_video_old_transitions_and_lost_targets(self):
         from lxml import etree
         src, mid = self.dir / "v.pptx", self.dir / "v2.pptx"
@@ -272,6 +276,22 @@ class SizeAndSampleTests(unittest.TestCase):
         self.assertIn("transitions: none x2, checker x1", report)
         self.assertIn("old-style transition 'checker'", report)
         self.assertIn("effects point to 1 shapes that are gone", report)
+
+    @unittest.skipUnless(__import__("importlib").util.find_spec("fitz"), "PyMuPDF not installed")
+    def test_sample_rejects_empty_pdf_and_bad_page(self):
+        import fitz
+        empty = self.dir / "empty.pdf"
+        empty.write_bytes(b"not a real PDF")
+        from unittest.mock import patch
+        with patch("fitz.open", return_value=[]):
+            with self.assertRaisesRegex(ValueError, "0 pages"):
+                tools.sample(empty, self.dir / "empty-look")
+        one = fitz.open()
+        one.new_page()
+        one_pdf = self.dir / "one.pdf"
+        one.save(one_pdf)
+        with self.assertRaisesRegex(ValueError, "has 1 pages"):
+            tools.sample(one_pdf, self.dir / "one-look", [2])
 
     @unittest.skipUnless(__import__("importlib").util.find_spec("fitz"), "PyMuPDF not installed")
     def test_sample_reads_fonts_sizes_and_colours_of_a_pdf(self):
@@ -405,6 +425,21 @@ class TableAndCutoutTests(unittest.TestCase):
         pr = t.cell(1, 1)._tc.tcPr
         self.assertEqual([E_local(n) for n in pr][:5], ["lnL", "lnR", "lnT", "lnB", "solidFill"])  # schema order
         self.assertEqual(t.cell(0, 0).text_frame.paragraphs[0].runs[0].font.name, "Arial")
+
+    def test_retable_keeps_diagonal_border_after_fill(self):
+        from lxml import etree
+        prs = Presentation()
+        frame = prs.slides.add_slide(prs.slide_layouts[6]).shapes.add_table(1, 1, 0, 0, Inches(2), Inches(1))
+        frame.name = "Table"
+        tcPr = frame.table.cell(0, 0)._tc.get_or_add_tcPr()
+        diagonal = etree.Element(qn("a:lnTlToBr"))
+        tcPr.append(diagonal)
+        src, out = self.dir / "diagonal.pptx", self.dir / "diagonal-out.pptx"
+        prs.save(src)
+        tools.retable(src, 1, "Table", out)
+        pr = Presentation(out).slides[0].shapes[0].table.cell(0, 0)._tc.tcPr
+        tags = [E_local(n) for n in pr]
+        self.assertLess(tags.index("lnTlToBr"), tags.index("solidFill"))
 
     @unittest.skipUnless(__import__("importlib").util.find_spec("scipy"), "scipy not installed")
     def test_cutout_keeps_the_whole_subject_and_drops_the_background(self):

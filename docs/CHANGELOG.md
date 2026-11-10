@@ -24,6 +24,55 @@ were true at the time. Task IDs and their branches are listed in
   runs differed from the on-screen show, two false dead clicks); with 40 px left on screen, 0 of 16.
 - **Evidence:** rung 5b on T069a, T090, the T087 demo and two slides of the real QCC deck.
   `experiments/T073-20261110-claude-motion-eyes/REPORT.md`.
+## T099 [pptx] Follow-up fixes from T096/T097 review findings — 2026-11-10
+
+- Fixed six concrete toolbox hazards from the merged reviews: Vietnamese thousands-dot parsing (`1.200`), clear
+  `sample` errors for empty/out-of-range PDFs, batched PDF thumbnails, table fill ordering after diagonal borders,
+  Pillow-safe palette/image hashing, and linked-video extraction that skips unavailable embedded parts.
+- Added regressions in `tests/test_pptx_tools.py`; full suite **604 pass, 10 skipped**. `retable`'s default palette
+  was deliberately not changed: source-theme resolution and reporting of replaced semantic fills need a separate
+  API decision. Guide 10/11's "open the slideshow" wording remains pending T073's `watch` tool; `look` is the
+  available static fallback.
+
+## T098 follow-up [pptx] Fidelity gates after QCC Ver5 failure - 2026-11-10
+
+- **Why:** QCC Ver5 passed the old `check` 8/9 but the owner's `problem.docx` found missing evidence pictures,
+  wrong/missing charts, tables without borders, a monochrome Gantt without Actual, split video pairs,
+  white-on-ivory text and invented slogans. The old gates could not see any of these.
+- **`check`:** a `rebuild` row no longer skips the source-picture gate; it must carry the pictures or name them
+  in `drop`. Added `charts kept` (chart kind from chart XML, safe for 3D/unsupported types) and `tables kept`
+  gates for every mapped slide.
+- **`numbers`:** a dot group such as `814.332` is compared under both readings (literal decimal and hundreds
+  group); a formatting change is no longer reported as a lost number, while a real value change still is.
+- **Guide 11:** added 12 hard rules after the Ver5 lesson: the previous rebuild is not a source; asset table per
+  slide; `rebuild` cannot bypass picture/chart/table gates; evidence pictures, chart kind/data, native visible
+  tables, video pairs and source words are mandatory; `check` is not the quality bar; review 5-8 slides at a
+  time with old/new full-size images.
+- **Tests:** `tests/test_fidelity_gates.py` (2 tests) + existing `test_pptx_tools.py`: **25 passed**.
+- **Proof on failed Ver5:** new gates go from 8/9 to **7/12**, listing 27 slides with missing source pictures,
+  7 lost/changed chart types, 16 charts whose data changed, and 7 lost tables - matching the owner's document.
+  The faithful Ver6 reskin scores **11/12** (only the original small videos fail), showing the gates separate a
+  safe reskin from a broken rebuild.
+
+## T098 [pptx] Taking reusable components out of an existing deck — 2026-11-10
+
+- **Why:** the QCC owner asked why the fishbone in the rebuilt deck was redrawn instead of lifted from the old
+  deck. Answer: `extract` (T097) only exports original pictures/videos plus a manifest; the Ver3-4 fishbone is
+  **37 free shapes** on a full-slide background picture (slide 29: 40 top-level shapes, no group), and `cutout`
+  only handles one picture with a plain background. There was no tool to select shapes, ungroup, drop the
+  background and write a component, so the Ver5 samples redrew it.
+- **Toolbox (`scripts/pptx_tools.py`):** `components` (what on a slide could be a component: groups, tables,
+  charts, backgrounds, chrome), `ungroup` (flatten groups with child-space → slide geometry; refuses groups with
+  animation and non-representable transforms), `component` (one-slide component trimmed to bounds, background
+  dropped, picture rels re-pointed, `--freeze` bakes theme colours/fonts, PNG preview at the component's own
+  aspect, JSON manifest), `place` (put a component back on a slide, text editable, unique ids).
+- **Guide 12** `skills/pptx/guides/12-tach-thanh-phan.md`: group vs free shapes vs picture, extraction flow,
+  component library (`assets/components/` + manifest + preview), reuse and limits; linked from SKILL.md and
+  guides 9/10/11.
+- **Real evidence (outside the repo):** Ver3-4 slide 29 → `fishbone_ver34.pptx` (37 shapes, 16.09 × 9.03 in,
+  theme frozen); Ver5 sample slide 2 → `fishbone_ver5.pptx` (64 shapes, 15.54 × 9.19 in) and
+  `stepbar_ver5.pptx` (10 shapes, 9.16 × 1.0 in); `place` of the fishbone onto a dark slide verified in
+  PowerPoint 16.0. `tests/test_components.py`: 9 tests. Full suite green after this entry.
 
 ## T097 [pptx] Rebuild an existing deck with agents: extract, score, staged pipeline — 2026-11-09
 

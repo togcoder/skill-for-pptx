@@ -88,7 +88,8 @@ chọn font thay và màu; còn giọng của mẫu thì phải xem ảnh các t
 
 ## Bộ slide có sẵn (mục 10)
 
-Các lệnh `inventory`, `rechart`, `retable`, `scale`, `unstretch`, `cutout`, `numbers` đọc và ghi file; xem `python
+Các lệnh `inventory`, `rechart`, `retable`, `scale`, `unstretch`, `cutout`, `numbers`, `components`,
+`ungroup`, `component`, `place` đọc và ghi file; xem `python
 scripts/pptx_tools.py -h`. Ba việc còn lại làm bằng `python-pptx`, gọi hàm của đồ nghề:
 
 ```python

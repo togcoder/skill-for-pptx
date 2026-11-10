@@ -154,8 +154,10 @@ python scripts/pptx_tools.py cutout khung.png -o khung_tach.png
   ngưỡng: `--range 30,90`.
 - **Không tách bằng ngưỡng màu cứng và các ô chữ nhật cắt tay.** Cách đó chém mất phần vật chính (hàm cá,
   đuôi cá), đục lỗ chỗ sáng, và để lại viền.
-- Nền là ảnh chụp nhiều chi tiết thì `cutout` không làm được. Xin tác giả file gốc, hoặc vẽ lại khung bằng
-  hình PowerPoint với **đúng dạng** cũ (mục "Sơ đồ chuẩn").
+- Nền là ảnh chụp nhiều chi tiết thì `cutout` không làm được. Xin tác giả file gốc; nếu khung trong bộ cũ
+  là **hình PowerPoint** (nhiều shape hoặc một group), đừng chụp ảnh — tách thành phần bằng `components` /
+  `ungroup` / `component` (mục 12) để giữ chữ sửa được và dùng lại được. Chỉ khi không còn file gốc mới vẽ
+  lại khung bằng hình PowerPoint với **đúng dạng** cũ (mục "Sơ đồ chuẩn").
 
 ### Tổ hợp hình quá to
 
