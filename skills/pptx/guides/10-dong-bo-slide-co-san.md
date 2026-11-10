@@ -65,8 +65,9 @@ tràn ra ngoài slide, chữ dưới 18 pt, hiệu ứng trang trí (nảy, xoay
 tiêu đề; các kiểu chuyển slide đang dùng và số hiệu ứng của từng slide. Tên vật thể nó in ra là tên bạn
 dùng ở các bước sau. `look` cho bạn nhìn từng slide.
 
-Slide nào có nhiều hiệu ứng (vài chục trở lên), mở ra trình chiếu xem chúng kể gì. Nếu là cơ chế, ghi
-số hiệu ứng vào bảng ý: bản mới phải còn đúng số đó.
+Slide nào có nhiều hiệu ứng (vài chục trở lên), xem click-by-click bằng `watch --slides` nếu T073 đã được
+merge; nếu chưa có `watch`, dùng PowerPoint trình chiếu thủ công hoặc xem `look` để xác định phần khung và vật
+kể cơ chế. Nếu là cơ chế, ghi số hiệu ứng vào bảng ý: bản mới phải còn đúng số đó.
 
 ## Bước 3. Chia mỗi slide vào một nhóm
 
