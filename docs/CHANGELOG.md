@@ -42,6 +42,11 @@ were true at the time. Task IDs and their branches are listed in
   Rebuild; tables are native tables; a Gantt is a table; pictures with a baked background. 3 new tests.
 - **Evidence:** Ver3-4 against itself 6/8 (its own old transitions and small videos); Ver3-4 to Ver4
   2/8, the same faults the owner named. `experiments/T097-20261109-claude-rebuild-pipeline/REPORT.md`.
+- **Review fixes (2026-11-10, `research/reviews/T097-claude-20261110.md`):** `check` has a ninth gate,
+  `every slide accounted for`: each old slide is in a map row or under `"dropped"`, and rows point at
+  slides that exist (a map that left a slide out used to pass). A row may carry `"video": "small"` when
+  the user agreed to it. The motion row of the scoring table follows guide 6 (one click per spoken idea).
+
 
 ## T096 [pptx] Following a reference PDF; small-text floor scaled to slide height — 2026-11-09
 
@@ -73,6 +78,9 @@ were true at the time. Task IDs and their branches are listed in
   on a copy, never swap for a picture); video fills the slide by default; clear old transitions with
   `"default": "none"` as soon as the copy is made. Guide 3: the cover title says what the talk is
   about; a Video row. SKILL.md: one of the 3 sample slides is the hardest one to keep. 1 new test.
+- **Review fix (2026-11-10, `research/reviews/T096-claude-20261110.md`):** `installed_fonts` reads every
+  family of a `.ttc`, so `sample` no longer calls Cambria Math or MS PGothic "not installed".
+
 
 ## T095 [pptx] Guide 10 and toolbox fixes from the T094 rehearsal — 2026-11-09
 
