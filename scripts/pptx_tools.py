@@ -1112,12 +1112,13 @@ def installed_fonts():
             continue
         for f in d.rglob("*"):
             if f.suffix.lower() in (".ttf", ".otf", ".ttc"):
-                try:
-                    family = ImageFont.truetype(str(f), 12).getname()[0]
-                except OSError:
-                    continue
-                if family:
-                    keys.add(_font_key(family))
+                for face in range(16 if f.suffix.lower() == ".ttc" else 1):  # a .ttc holds several families
+                    try:
+                        family = ImageFont.truetype(str(f), 12, index=face).getname()[0]
+                    except OSError:
+                        break
+                    if family:
+                        keys.add(_font_key(family))
     return keys
 
 
@@ -1276,10 +1277,13 @@ def extract(deck, out_dir):
 def check(before, after, mapping=None):
     """Gates for a rebuilt deck: did the content survive? [(passed, gate, detail)]. mapping: {new slide:
     {"old": [old slides], "group": "keep" | "reskin" | "rebuild", "drop": [old picture names left out on
-    purpose]}} from the idea table."""
+    purpose], "video": "small" (the user agreed to a video that does not fill the slide)},
+    "dropped": [old slides left out on purpose]} from the idea table."""
     old, new = Presentation(before), Presentation(after)
     sw, sh = new.slide_width, new.slide_height
     gates = []
+    rows = {int(k): v for k, v in (mapping or {}).items() if k != "dropped"}
+    small_agreed = {n for n, row in rows.items() if row.get("video") == "small"}
 
     def gate(ok, name, detail):
         gates.append((ok, name, detail))
@@ -1315,7 +1319,8 @@ def check(before, after, mapping=None):
     gate(not gone, "videos kept", f"{len(old_vids)} of {len(old_vids)}" if not gone
          else f"{len(gone)} of {len(old_vids)} videos missing")
     small = [f"{i}: {max(s.width / sw, s.height / sh):.0%}" for i, m in enumerate(new_media, 1)
-             for s, k in m.values() if k == "video" and max(s.width / sw, s.height / sh) < 0.9]
+             for s, k in m.values() if k == "video" and max(s.width / sw, s.height / sh) < 0.9
+             and i not in small_agreed]
     gate(not small, "videos fill the slide", "every video >= 90% of the slide's width or height" if not small
          else "smaller: slide " + "; ".join(small))
     numbers_gone = missing_numbers(before, after)
@@ -1334,11 +1339,16 @@ def check(before, after, mapping=None):
     foreign = [f"{i}: {s.name!r}" for i, m in enumerate(new_media, 1) for h, (s, k) in m.items()
                if k == "picture" and h.startswith("new:") and spread[h] < 3]
     if mapping:
-        weak, missing = [], []
+        weak, missing, holes = [], [], []
         old_spread = Counter(h for m in old_media for h in m)  # the old theme's art, logos
-        for key, row in sorted(mapping.items(), key=lambda kv: int(kv[0])):
-            n, group, olds = int(key), row.get("group", "reskin"), row.get("old", [])
-            if not olds or group == "rebuild" or n > len(new.slides):
+        for n, row in sorted(rows.items()):
+            group, olds = row.get("group", "reskin"), row.get("old", [])
+            wrong = [o for o in olds if not 1 <= o <= len(old.slides)]
+            if n > len(new.slides):
+                holes.append(f"the map has new slide {n}, the deck has {len(new.slides)}")
+            if wrong:
+                holes.append(f"new slide {n} names old slide {wrong[0]}, the original has {len(old.slides)}")
+            if not olds or group == "rebuild" or n > len(new.slides) or wrong:
                 continue
             had = sum(sum(_slide_effects(old.slides[o - 1])[0].values()) for o in olds)
             has = sum(_slide_effects(new.slides[n - 1])[0].values())
@@ -1350,6 +1360,13 @@ def check(before, after, mapping=None):
             short = [pics[h] for h in pics if h not in new_media[n - 1]]
             if short:
                 missing.append(f"{n} (old {'+'.join(map(str, olds))}): {', '.join(map(repr, short))}")
+        used = {o for row in rows.values() for o in row.get("old", [])} | set(mapping.get("dropped", []))
+        unlisted = sorted(set(range(1, len(old.slides) + 1)) - used)
+        if unlisted:  # or a hard slide passes every gate by not being in the map
+            holes.append("old slides in no row: " + ", ".join(map(str, unlisted))
+                         + " (give each a row, or list it under \"dropped\")")
+        gate(not holes, "every slide accounted for", "each old slide has a row or is dropped on purpose"
+             if not holes else "; ".join(holes))
         gate(not weak, "keep slides keep their effects", "all there" if not weak else "; ".join(weak))
         gate(not missing, "source pictures on their slide",
              "every picture of the old slide is on the new one" if not missing
@@ -1398,7 +1415,7 @@ def main(argv=None):
     a.add_argument("before")
     a.add_argument("after")
     a.add_argument("--map", help='JSON: {"17": {"old": [15, 16], "group": "keep|reskin|rebuild", '
-                                 '"drop": ["Picture 65"]}}')
+                                 '"drop": ["Picture 65"]}, "dropped": [9]}')
     a = sp.add_parser("retable", help="restyle a native table in place: text and merges kept")
     a.add_argument("deck")
     a.add_argument("slide", type=int)

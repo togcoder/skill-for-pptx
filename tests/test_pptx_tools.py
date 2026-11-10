@@ -351,6 +351,9 @@ class RebuildTests(unittest.TestCase):
         failed = {name for ok, name, _ in tools.check(self.old, bad, self.map)[0] if not ok}
         self.assertEqual(failed, {"transitions", "videos fill the slide", "numbers kept", "pictures not cut",
                                   "keep slides keep their effects"})
+        agreed = {**self.map, "1": {**self.map["1"], "video": "small"}}   # the user asked for a small video
+        self.assertNotIn("videos fill the slide", {name for ok, name, _ in tools.check(self.old, bad, agreed)[0]
+                                                   if not ok})
         resaved = self.dir / "photo.jpg"                       # the same photo saved again still counts
         Image.open(self.photo).resize((300, 188)).save(resaved, quality=80)
         prs = Presentation(self.old)
@@ -360,6 +363,15 @@ class RebuildTests(unittest.TestCase):
         prs.save(bad)
         failed = {name for ok, name, _ in tools.check(self.old, bad, self.map)[0] if not ok}
         self.assertEqual(failed, set())
+
+    def test_check_fails_a_map_that_leaves_a_slide_out(self):
+        def failed(mapping):
+            return {name for ok, name, _ in tools.check(self.old, self.old, mapping)[0] if not ok}
+        one_row = {"1": self.map["1"]}
+        self.assertEqual(failed(one_row), {"every slide accounted for"})            # old slide 2 is in no row
+        self.assertEqual(failed({**one_row, "dropped": [2]}), set())               # left out on purpose
+        self.assertEqual(failed({**self.map, "9": {"old": [2], "group": "keep"}}), {"every slide accounted for"})
+        self.assertEqual(failed({**self.map, "2": {"old": [7], "group": "keep"}}), {"every slide accounted for"})
 
 
 class TableAndCutoutTests(unittest.TestCase):
