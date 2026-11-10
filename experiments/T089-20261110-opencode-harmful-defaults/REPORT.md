@@ -3,9 +3,9 @@
 - **Agent / model:** OpenCode (DeepSeek V4.1 Flash).
 - **Date:** 2026-11-10. **Branch:** `work/T089-opencode-harmful-defaults`.
 - **Status:** code change in product paths (`scripts/slide_forge.py`,
-  `scripts/motion_director.py`, `scripts/forge_qa.py`,
-  `scripts/data_motion_recipes.py`) plus one guide note. **Review requested**
-  from Claude (different model family) before merge.
+  `scripts/motion_director.py`, `scripts/motion_components.py`,
+  `scripts/forge_qa.py`, `scripts/data_motion_recipes.py`) plus one guide note.
+  **Review requested** from Claude (different model family) before merge.
 - **Addresses:** the T089 brief in `docs/ROADMAP.md`; F5/F8 (the owner sees
   decoration and Morph that nobody asked for); D011 (guidance first, code only
   for what words cannot do).
@@ -21,8 +21,10 @@ What to look for when flipping through it:
 
 1. **The cover** should start by itself once and then wait. It should not ask
    for four or six clicks to assemble the title.
-2. **Slide 4 (bento)** has a card whose number is **0**. It should simply read
-   "0"; the build should not stop.
+2. **Slide 4 (bento)** has a card whose number is **0**. At the start of the
+   slide the card must not be there yet; the `0` enters **with its card** on
+   the click that presents that card, never alone before it. The build should
+   not stop.
 3. **Slide 5 (KPI row)** also starts with 0. The three values reveal as text,
    not as count-up stacks.
 4. **Card titles** (slides 3 and 4) should be readable sizes — 28 pt and 20 pt —
@@ -68,8 +70,8 @@ lxml 6.1.1, Microsoft PowerPoint 16.0 build 17932.20130.
 
 | Artifact | SHA-256 |
 |---|---|
-| `artifacts/qcc-theme.pptx` | `9C1E321DED0A280E8CD2383E1E01B7CEABEA8B9DD0723265E2F3835CE5673EC3` |
-| `artifacts/qcc-theme.static.pptx` | `DC171B100C2EA279B7B0BA3FF7F7C6AF20DE5076686AFA0ABA02664131AA1052` |
+| `artifacts/qcc-theme.pptx` | `3DFBF2B2456EC9B223FFE16965CE663662AC7987B969225DE39C3EB473DB82B1` |
+| `artifacts/qcc-theme.static.pptx` | `4290917CF95AAC6B69688481864DB9D57B8652A6AE2B588FA13AA97FC1F8F721` |
 
 ## Method
 
@@ -85,6 +87,12 @@ lxml 6.1.1, Microsoft PowerPoint 16.0 build 17932.20130.
 5. Rebuild the QCC-style spec and inspect the result with `pptx_tools.py
    inventory` and PowerPoint's own render (`pptx_tools.py look`).
 6. Update the one guide paragraph that taught the old defaults.
+7. The owner opened the first acceptance build and found a new defect: slide 4
+   showed a lone `0` before its card. It was reproduced from the timing XML,
+   pinned with a test that failed on the shipped code, and fixed in the card
+   branch. The same inspection showed a second defect the owner had not named:
+   the counter mask painted a lighter band over the translucent KPI card.
+   Both are recorded below as findings 8 and 9.
 
 ## Findings
 
@@ -169,6 +177,40 @@ approximate") and does not claim overflow. Forge's own text fitter makes the
 same distinction: a missing font is a note, not an error. **Test:** the deck
 gets `FONT_MISSING` and no `TEXT_OVERFLOW`.
 
+### 8. A KPI of 0 was revealed alone, before its card (owner-found)
+
+**Before:** the first acceptance build opened slide 4 with the title, the red
+rule, and a lone `0` at the bottom-right card position. The card, its label and
+the other cards were hidden. The timing XML had no effect for the `0` shape at
+all: its card group contained only the card background and the label.
+
+**Cause:** the card branch of `draft_slide` lifted the number out of the card's
+reveal targets whenever counters were on, expecting a count-up beat to reveal
+it. For `0`, `number_counter_recipe` correctly returns no recipe (finding 1),
+so the counter beat was never created and the number was left with no entrance
+at all. The slide started with it visible.
+
+**Fix:** compute the recipe first. Only a number with an actual count-up is
+lifted out of the card reveal and given a counter beat. A `0` (or any number
+without a recipe) stays in the card's reveal group and enters with the card.
+**Test:** the `0` is not in the automatic first group, and it is in the same
+click group as its card background and label. This test failed on the shipped
+code with `{'10', '12'}` in the group and `11` (the `0`) missing.
+
+### 9. The counter mask painted a lighter band over a translucent card
+
+**Before:** the `12%` card on slide 4 had a visibly lighter rectangle behind the
+number in PowerPoint's own render. The counter mask used the card's raw fill
+colour, but the card is drawn at 75% alpha over the slide background, so the
+mask and the card did not match.
+
+**Fix:** `container_fill` accepts the slide background and composites a
+translucent container over it before returning the colour. The Director passes
+the background it already reads for masks and highlights, and `_expand_counters`
+passes it too. **Test:** the counter source fill equals the card colour
+composited over the slide background, not the raw colour. This test also failed
+on the shipped code (`1E293B` vs the expected `1A2437` on Forge's dark theme).
+
 ## Evidence
 
 Reproduction before the fix (scratch run, 2026-11-10):
@@ -182,24 +224,30 @@ Reproduction before the fix (scratch run, 2026-11-10):
 | cover | 4 click groups |
 | Morph reason | orb-only model → Morph |
 | missing font | `TEXT_OVERFLOW` error |
+| 0 revealed alone | slide 4 card group had spids 10 and 12, none for the `0` (spid 11); `t=0` showed the `0` |
+| counter mask | `12%` card had a lighter band from the raw `FEEBE8` mask over a 75%-alpha card |
 
 After the fix:
 
 | Check | Result |
 |---|---|
-| new regression tests | **10/10 pass** (8 of the first 9 failed before the fix; the ninth guards a real Morph) |
-| full suite | **600 run, 10 skipped, OK** |
+| new regression tests | **12/12 pass** (8 of the first 9 failed before the first fix; the ninth guards a real Morph; the two owner-found tests failed on the shipped build) |
+| full suite | **602 run, 10 skipped, OK** |
 | acceptance build | ok, 0 errors, 1 intended `LOGO_SKIPPED` note |
-| slides / effects / motion coverage | 7 / 92 / 1.0 |
+| slides / effects / motion coverage | 7 / 94 / 1.0 |
 | Morph transitions | 0 (no travelling content object) |
 | decoration / word logo shapes | none / none |
 | card title sizes | Major 28, Minor 20, Hero 28, TopRight 20 |
 | cover | 1 click group, first beat `on-slide-start` |
 | type sizes | 5 (14, 20, 24, 28, 44) |
+| slide 4 `t=0` | title and rule only; the `0` is hidden with its card |
+| slide 4 `0` group | card background, `0` and label enter together |
+| counter mask | matches the composited card colour; no band in the render |
 | PowerPoint render | 7 PNGs + contact sheet (`preview/`) |
 
 The acceptance deck's `0` values appear as text on slides 4 and 5; no counter
-stack was created.
+stack was created for either. The `12%` and `98.5%` values keep their count-up,
+now over a mask that matches the card.
 
 ## Limits / negative results
 
@@ -223,6 +271,9 @@ stack was created.
 - **The logo note is a warning, not an error.** A deck that passes a word as a
   logo still builds; it just has no logo. That is the chosen default (skip,
   say so) rather than guessing a mark.
+- **The counter mask assumes one layer.** A translucent card is composited over
+  the slide background. If a card sat on another translucent shape, the mask
+  would be close but not exact; that case is not modelled.
 
 ## Follow-ups (out of T089)
 
@@ -238,11 +289,12 @@ stack was created.
 | File | Change |
 |---|---|
 | `scripts/slide_forge.py` | `morph` default false; orbs removed; `card` type level; card-title boxes; logo image-only + note; missing-font note |
-| `scripts/motion_director.py` | cover detector; `shared_objects(ignore=)`; `_ubiquitous_names`; Morph reason excludes decoration/chrome |
+| `scripts/motion_director.py` | cover detector; `shared_objects(ignore=)`; `_ubiquitous_names`; Morph reason excludes decoration/chrome; a zero stays in its card reveal; background threaded to the counter mask |
+| `scripts/motion_components.py` | `container_fill` composites a translucent container over the slide background |
 | `scripts/forge_qa.py` | `FONT_MISSING` before any overflow verdict |
 | `scripts/data_motion_recipes.py` | counter target 0 returns no recipe |
 | `skills/pptx/guides/9-do-nghe.md` | old-tool paragraph now describes the fixed defaults |
-| `tests/test_harmful_defaults.py` | 10 new regression tests |
+| `tests/test_harmful_defaults.py` | 12 new regression tests |
 | `tests/test_slide_forge.py` | example deck expects 0 Morph (it has no travelling object) |
 | `tests/test_pptx_design_canon.py` | chrome test uses a real logo image |
 | `examples/pptx/forge/coffee_report.json` | no `morph: true` (no real continuity) |

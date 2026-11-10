@@ -540,8 +540,20 @@ def container_box(anchor,objects):
     return best
 
 
-def container_fill(root,anchor,objects):
-    """Solid fill of the smallest filled shape that contains the anchor."""
+def _blend_over(color,background,alpha):
+    """Paint ``color`` at ``alpha`` over an opaque ``background`` colour."""
+    a=max(0.0,min(1.0,alpha))
+    return "".join(
+        f"{round(int(color[i:i+2],16)*a+int(background[i:i+2],16)*(1-a)):02X}"
+        for i in (0,2,4))
+
+
+def container_fill(root,anchor,objects,background=None):
+    """Solid fill of the smallest filled shape that contains the anchor.
+
+    A translucent container is composited over ``background`` (the slide
+    background) so a mask painted with the result matches what the viewer sees;
+    without that the raw colour shows as a lighter band over the card (T089)."""
     cx,cy=_center(anchor)
     best=None
     for o in objects:
@@ -557,5 +569,11 @@ def container_fill(root,anchor,objects):
         props=node.find("./p:nvSpPr/p:cNvPr",NS)
         if props is not None and props.get("id")==best[1]["id"]:
             c=node.find("p:spPr/a:solidFill/a:srgbClr",NS)
-            return c.get("val") if c is not None else "NONSOLID"
+            if c is None:
+                return "NONSOLID"
+            color=c.get("val")
+            alpha=c.find("a:alpha",NS)
+            if background and alpha is not None:
+                color=_blend_over(color,background,int(alpha.get("val",100000))/100000)
+            return color
     return None

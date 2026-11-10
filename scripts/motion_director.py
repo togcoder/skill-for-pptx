@@ -793,20 +793,22 @@ def draft_slide(slide,style="modern",counters=False,continuing=(),outgoing=(),am
             preset,dur=fx["card"]
             members=[]
             number=next((m for m in card[1:] if m["standalone_number"] and (m["max_font_pt"] or 0)>=28),None)
-            reveal_targets=[m["token"] for m in card if not (counters and m is number)]
+            rec=number_counter_recipe(number["standalone_number"]) if (counters and number) else None
+            # Only a number that actually counts is lifted out of the card reveal.
+            # A zero has no count-up (T089), so it must enter with its card instead
+            # of being left visible alone at t=0.
+            reveal_targets=[m["token"] for m in card if not (rec and m is number)]
             b=_beat(nid("card"),f"Reveal the card '{_label(number or card[-1])}' as one unit.","reveal",reveal_targets,"on-click",preset,dur)
             beats.append(b)
             members.append(b["id"])
-            if counters and number:
-                rec=number_counter_recipe(number["standalone_number"])
-                if rec:
-                    cb=_beat(nid("count"),f"Count up to the hero metric {number['text']}.","kpi-highlight",[number["token"]],"with-previous",
-                             data_motion={"kind":"number-counter","recipe":rec["recipe"],"from_value":rec["from_value"],
-                                          "to_value":rec["to_value"],"duration_ms":rec["duration_ms"],"steps":rec["steps"],
-                                          "prefix":rec["prefix"],"suffix":rec["suffix"],"decimal_places":rec["decimal_places"],
-                                          "implementation":"stepped-text","rationale":"Hero KPI on its own card."})
-                    beats.append(cb)
-                    members.append(cb["id"])
+            if rec:
+                cb=_beat(nid("count"),f"Count up to the hero metric {number['text']}.","kpi-highlight",[number["token"]],"with-previous",
+                         data_motion={"kind":"number-counter","recipe":rec["recipe"],"from_value":rec["from_value"],
+                                      "to_value":rec["to_value"],"duration_ms":rec["duration_ms"],"steps":rec["steps"],
+                                      "prefix":rec["prefix"],"suffix":rec["suffix"],"decimal_places":rec["decimal_places"],
+                                      "implementation":"stepped-text","rationale":"Hero KPI on its own card."})
+                beats.append(cb)
+                members.append(cb["id"])
             clicks.append(_click(nid("click"),f"Present {_label(number or card[-1])}.",members,"Card fully visible.",
                                  "presenter-explanation","Each card is a separate talking point." if clicks else "First reveal on this slide."))
         elif kind=="process":
@@ -1310,7 +1312,7 @@ def compile_slide(plan_slide,slide_model,style="modern",prior_groups=()):
     return run(initial)
 
 
-def _expand_counters(root,clicks,objects=None):
+def _expand_counters(root,clicks,objects=None,background=None):
     """Insert stepped-text proxies for counter effects and replace each counter
     with appear/disappear effects inside the same time block.
 
@@ -1330,7 +1332,7 @@ def _expand_counters(root,clicks,objects=None):
             if objects:
                 anchor=next((o for o in objects if o["id"]==eff["spid"]),None)
                 if anchor is not None:
-                    mask=mc.container_fill(root,anchor,objects)
+                    mask=mc.container_fill(root,anchor,objects,background)
             if mask in (None,"NONSOLID"):
                 # No opaque container to mask the proxy stack: keep the value
                 # static but reveal it with its click, and say so in the receipt.
@@ -1404,11 +1406,12 @@ def apply(source,plan,destination,force=False,style=None):
             if policy=="replace" and not (ps.get("replace_reason") or "").strip():
                 raise ValueError(f"slide {sm['index']}: replacing existing timing requires replace_reason")
             root=E.fromstring(z.read(sm["part"]),PARSER)
+            bg_=mc.slide_background(z,sm["part"])
             specs=[dict(c["generate"],id=c["id"],role=c.get("role")) for c in ps.get("components",[]) if c.get("generate")]
             for spec in specs:
                 if spec["kind"]=="mask" and not spec.get("color"):
                     anchor=_resolve(sm,spec["anchors"][0])
-                    color=mc.container_fill(root,anchor,sm["objects"]) or mc.slide_background(z,sm["part"])
+                    color=mc.container_fill(root,anchor,sm["objects"],bg_) or bg_
                     clip=mc.container_box(anchor,sm["objects"])
                     if clip and color not in (None,"NONSOLID"):
                         spec["clip"]=list(clip)
@@ -1416,7 +1419,6 @@ def apply(source,plan,destination,force=False,style=None):
                         raise ValueError(f"slide {sm['index']}: rise mask needs a solid colour behind {anchor['name']!r}")
                     spec["color"]=color
             if specs:
-                bg_=mc.slide_background(z,sm["part"])
                 style_=mc.deck_style(model,background=bg_)
                 nodes_=anim.top_level_objects(root)
                 for spec in specs:
@@ -1424,7 +1426,7 @@ def apply(source,plan,destination,force=False,style=None):
                         anchor=_resolve(sm,spec["anchors"][0])
                         node=nodes_.get(anchor["id"])
                         text=mc.text_color(z,sm["part"],node) if node is not None else None
-                        back=mc.container_fill(root,anchor,sm["objects"]) or bg_
+                        back=mc.container_fill(root,anchor,sm["objects"],bg_) or bg_
                         if text and back and back!="NONSOLID":
                             bold=node.find(".//a:rPr[@b='1']",NS) is not None
                             need=ds.text_contrast_needed(anchor.get("max_font_pt"),bold)
@@ -1437,7 +1439,7 @@ def apply(source,plan,destination,force=False,style=None):
                 sm=dict(sm,objects=sm["objects"]+generated)
             prior=[] if policy=="replace" else me.effects_from_slide(root)[0]
             clicks=compile_slide(ps,sm,style,prior)
-            counters=_expand_counters(root,clicks,sm["objects"])
+            counters=_expand_counters(root,clicks,sm["objects"],bg_)
             receipt=anim.apply_timeline(root,clicks,mode="replace" if policy=="replace" else "extend")
             receipt["slide"]=sm["index"]
             receipt["counters"]=counters

@@ -10,12 +10,15 @@ Each test here failed on the code before T089:
 - a cover made of text boxes was split into several click groups;
 - any object that moved between slides caused a Morph, including decoration
   and objects present on every slide;
-- a deck font missing on this machine was reported as overflowing text.
+- a deck font missing on this machine was reported as overflowing text;
+- a KPI whose value is 0 was lifted out of its card for a count-up that never
+  happened, so the lone ``0`` sat on the slide before the first click.
 """
 import sys
 import tempfile
 import unittest
 from pathlib import Path
+from zipfile import ZipFile
 
 from PIL import Image
 from pptx import Presentation
@@ -25,7 +28,9 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/"scripts"))
 
 import forge_qa
+import motion_components as mc
 import motion_director as md
+import pptx_animator as anim
 import slide_forge as sf
 
 
@@ -69,6 +74,56 @@ class ForgeDefaultsTests(unittest.TestCase):
         out,verdict=self.build(spec)
         self.assertTrue(verdict["ok"],verdict.get("errors"))
         self.assertEqual([s.name for s in shapes(out) if s.name.startswith("__counter_")],[])
+
+    def test_kpi_zero_reveals_with_its_card_not_alone_at_start(self):
+        spec={"title":"KPI không","slides":[
+            {"layout":"title","title":"Bìa","subtitle":"Phụ đề"},
+            {"layout":"bento","title":"Bốn điểm cần nhìn",
+             "hero":{"title":"Ca đêm","text":"Tập trung 68% số tờ lỗi."},
+             "top_right":{"title":"Độ ẩm","text":"Thấp hơn ngưỡng 8%."},
+             "bottom_right_1":{"kpi":"0","label":"lần bảo trì trễ"},
+             "bottom_right_2":{"kpi":"12","label":"tờ lỗi"}}]}
+        out,verdict=self.build(spec,"zero.pptx")
+        self.assertTrue(verdict["ok"],verdict.get("errors"))
+        slide=Presentation(str(out)).slides[1]
+        ids={sh.name:str(sh.shape_id) for sh in slide.shapes}
+        zero_counter=f"__counter_{ids['BR1 KPI']}_"
+        self.assertEqual([s.name for s in shapes(out) if s.name.startswith(zero_counter)],[],
+                         "a zero has nothing to count up to")
+        groups=anim.read_main_sequence(slide._element)
+        auto={e["spid"] for g in groups if g["auto"] for e in g["effects"]}
+        self.assertNotIn(ids["BR1 KPI"],auto,"the 0 must not be visible at t=0")
+        card=next(g for g in groups if ids["Bottom Right 1"] in {e["spid"] for e in g["effects"]})
+        members={e["spid"] for e in card["effects"]}
+        self.assertIn(ids["BR1 KPI"],members,"the 0 enters with its card")
+        self.assertIn(ids["BR1 Label"],members)
+
+    def test_counter_mask_matches_a_translucent_card(self):
+        spec={"title":"Mask","slides":[
+            {"layout":"title","title":"Bìa","subtitle":"Phụ đề"},
+            {"layout":"bento","title":"Kết quả",
+             "hero":{"title":"Ca đêm","text":"Tập trung 68% số tờ lỗi."},
+             "top_right":{"title":"Độ ẩm","text":"Thấp hơn ngưỡng 8%."},
+             "bottom_right_1":{"kpi":"0","label":"lần bảo trì trễ"},
+             "bottom_right_2":{"kpi":"12","label":"tờ lỗi"}}]}
+        out,verdict=self.build(spec,"mask.pptx")
+        self.assertTrue(verdict["ok"],verdict.get("errors"))
+        ns={"a":"http://schemas.openxmlformats.org/drawingml/2006/main",
+            "p":"http://schemas.openxmlformats.org/presentationml/2006/main"}
+        slide=Presentation(str(out)).slides[1]
+        card=next(sh for sh in slide.shapes if sh.name=="Bottom Right 2")
+        kpi=next(sh for sh in slide.shapes if sh.name=="BR2 KPI")
+        raw=card._element.find("p:spPr/a:solidFill/a:srgbClr",ns)
+        alpha=raw.find("a:alpha",ns)
+        self.assertIsNotNone(alpha,"the card must be translucent for this test to mean anything")
+        with ZipFile(out) as z:
+            bg=mc.slide_background(z,"ppt/slides/slide2.xml")
+        a=int(alpha.get("val"))/100000
+        expected="".join(f"{round(int(raw.get('val')[i:i+2],16)*a+int(bg[i:i+2],16)*(1-a)):02X}"
+                         for i in (0,2,4))
+        fill=kpi._element.find("p:spPr/a:solidFill/a:srgbClr",ns)
+        self.assertEqual(fill.get("val").upper(),expected,
+                         "the counter mask must paint the card as seen, not its raw colour")
 
     def test_short_card_titles_keep_their_size(self):
         spec={"title":"Cards","slides":[

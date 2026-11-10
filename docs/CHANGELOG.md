@@ -24,14 +24,19 @@ were true at the time. Task IDs and their branches are listed in
   a cover and gets **one auto-start group**, not 4–6 clicks; `shared_objects` separates "rides
   along" from "justifies the cut": decoration and chrome never cause a Morph, names present on
   every slide are ignored, and a real content object that travels still does.
-- **Tests:** 10 new regression tests in `tests/test_harmful_defaults.py`. The first nine were
+- **Tests:** 12 new regression tests in `tests/test_harmful_defaults.py`. The first nine were
   written before the fix; eight failed on the old code, and the ninth guards that a real content
-  object still gets its Morph. A tenth covers the explicit `morph: true` path. Full suite
-  **600 run, 10 skipped, OK**. Two old tests were encoding the defect (example deck expected a
-  Morph per transition; the chrome test passed a word as a logo) and were corrected.
+  object still gets its Morph. A tenth covers the explicit `morph: true` path. After the owner
+  opened the first acceptance build, two more tests were written and both failed on that build: a
+  KPI of 0 must enter with its card (it had no entrance effect at all and sat alone at `t=0`), and
+  a counter mask must paint a translucent card as seen, not its raw colour (a lighter band showed
+  behind `12%`). Full suite **602 run, 10 skipped, OK**. Two old tests were encoding the defect
+  (example deck expected a Morph per transition; the chrome test passed a word as a logo) and were
+  corrected.
 - **Acceptance:** `experiments/T089-20261110-opencode-harmful-defaults/inputs/qcc-theme.json`
-  rebuilds as a 7-slide deck, 92 effects, motion coverage 1.0, **0 Morph**, no decoration, no word
-  logo, card titles 28/20, cover one auto-start group; PowerPoint 16.0 renders all seven slides.
+  rebuilds as a 7-slide deck, 94 effects, motion coverage 1.0, **0 Morph**, no decoration, no word
+  logo, card titles 28/20, cover one auto-start group; slide 4 opens with only its title and the
+  `0` enters with its card; PowerPoint 16.0 renders all seven slides with no mask band.
 - **Limits:** Forge still opens 4 of 7 slides with only the title visible and its bento/asymmetric
   cards hold large empty areas (T095's rule catching Forge; follow-up task needed). No owner score
   yet. Review requested from Claude (different family).
