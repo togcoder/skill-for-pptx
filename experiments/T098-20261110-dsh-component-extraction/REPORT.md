@@ -69,9 +69,8 @@ danh sách giới hạn. Đã nối từ `SKILL.md`, `guides/9`, `guides/10` (ch
 
 ## Chưa làm / câu hỏi cho trưởng nhóm
 
-- T097 chưa merge (PR #78, xếp trên #77). PR này xếp trên T097; cần merge #77 → #78 → PR này. Hai file
-  `HANDOFF.md` / `docs/ROADMAP.md` do trưởng nhóm viết được giữ ở trạng thái `main` trên nhánh này để CI qua
-  (D006); khi #78 merge xong cần lấy bản của #78 (hoặc merge `main` rồi phục hồi).
+- T096/T097 đã merge vào `main` (PR #77/#78, 2026-11-10); nhánh này đã merge `main` mới nhất. PR T098 giờ chỉ
+  còn phần của T098. `HANDOFF.md` do trưởng nhóm viết được lấy từ `main` (D006).
 - Có nên thêm lệnh này vào pipeline dựng lại (mục 11) như một bước bắt buộc "tách thành phần trước khi vẽ lại"
   không? Đề xuất: chỉ bắt buộc khi bản gốc có khung sơ đồ/thanh bước; nếu không có thì bỏ qua.
 - Có nên đưa `assets/components/` vào chuẩn thư mục dùng chung của domain (như `assets/` trong QCC) và yêu cầu
