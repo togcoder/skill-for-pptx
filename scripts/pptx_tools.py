@@ -755,12 +755,13 @@ def installed_fonts():
             continue
         for f in d.rglob("*"):
             if f.suffix.lower() in (".ttf", ".otf", ".ttc"):
-                try:
-                    family = ImageFont.truetype(str(f), 12).getname()[0]
-                except OSError:
-                    continue
-                if family:
-                    keys.add(_font_key(family))
+                for face in range(16 if f.suffix.lower() == ".ttc" else 1):  # a .ttc holds several families
+                    try:
+                        family = ImageFont.truetype(str(f), 12, index=face).getname()[0]
+                    except OSError:
+                        break
+                    if family:
+                        keys.add(_font_key(family))
     return keys
 
 
