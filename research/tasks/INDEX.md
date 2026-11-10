@@ -127,5 +127,5 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T095 | [pptx] Guide 10 fixes from T094: diagram form and notes are content, no blank opening; inventory theme fonts and fills; numbers per slide | claude | `work/T095-claude-guide10-fixes` | review requested | `experiments/T095-20261109-claude-guide10-fixes/REPORT.md` |
 | T096 | [pptx] Style from a reference PDF; small-text floor scaled to slide size | claude | `work/T096-claude-sample-style-and-scaled-floor` | review requested | `experiments/T096-20261109-claude-sample-style-and-scaled-floor/REPORT.md` |
 | T097 | [pptx] Rebuild an existing deck with agents: extract, score, staged pipeline | claude | `work/T097-claude-rebuild-pipeline` | review requested (stacked on T096) | `experiments/T097-20261109-claude-rebuild-pipeline/REPORT.md` |
-| T099 | [pptx] Apply actionable review findings: number parsing, sample errors, table fills, image API | lead | `work/T099-lead-followup-review-fixes` | claimed | `experiments/T099-20261110-lead-followup-review-fixes/REPORT.md` |
+| T099 | [pptx] Apply actionable review findings: number parsing, sample errors, table fills, image API | lead | `work/T099-lead-followup-review-fixes` | review requested | `experiments/T099-20261110-lead-followup-review-fixes/REPORT.md` |
 | T100 | *next free ID* | | | | |

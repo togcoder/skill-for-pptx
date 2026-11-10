@@ -407,13 +407,20 @@ def inventory(deck):
 
 
 def _key_numbers(text):
-    """Numbers worth tracking across slides: >= 100, decimals or percentages; not years or step numbers."""
+    """Numbers worth tracking across slides: >= 100, decimals or percentages; not years or step numbers.
+
+    A comma or dot followed by three digits is a thousands separator (``1.200`` and ``1,200``), not a
+    decimal point. This matters in Vietnamese QCC data: a false ``1.2`` can hide a missing ``1,200``.
+    """
     keys = set()
     for found in NUMBER.finditer(text):
         m, pct = found.groups()
         if found.start() and text[found.start() - 1].isalpha():  # part of a code: H422, T35
             continue
-        v = m.replace(",", "") if re.fullmatch(r"\d{1,3}(,\d{3})+", m) else m.replace(",", ".")
+        if re.fullmatch(r"\d{1,3}(?:[.,]\d{3})+", m):
+            v = re.sub(r"[.,]", "", m)
+        else:
+            v = m.replace(",", ".")
         try:
             f = float(v)
         except ValueError:
@@ -781,14 +788,17 @@ def style_table(table, font=None, size=None, ink="1D2433", head_rows=1, head_fil
                 if node.tag in fills or E.QName(node).localname in ("lnL", "lnR", "lnT", "lnB"):
                     pr.remove(node)
             side = rule if lines == "grid" else None
-            for k, (tag, colour) in enumerate((("lnL", side), ("lnR", side), ("lnT", rule), ("lnB", rule))):
-                pr.insert(k, _line(tag, colour, 0.75))
+            for tag, colour in (("lnL", side), ("lnR", side), ("lnT", rule), ("lnB", rule)):
+                pr.append(_line(tag, colour, 0.75))
+            # Fill belongs after every border/cell3D node, including diagonal borders that we preserve.
+            insert_at = max((i for i, node in enumerate(pr)
+                             if E.QName(node).localname.startswith("ln") or E.QName(node).localname == "cell3D"),
+                            default=-1) + 1
             colour = head_fill if head else fill_map.get(old, body_fill)
+            fill = E.Element(qn("a:solidFill")) if colour else E.Element(qn("a:noFill"))
             if colour:
-                E.SubElement(E.SubElement(pr, qn("a:solidFill")), qn("a:srgbClr"), val=colour)
-                pr.insert(4, pr[-1])  # a fill comes right after the four borders
-            else:
-                pr.insert(4, E.Element(qn("a:noFill")))
+                E.SubElement(fill, qn("a:srgbClr"), val=colour)
+            pr.insert(insert_at, fill)
             pr.set("anchor", "ctr")
             for para in cell.text_frame.paragraphs:
                 for run in para.runs:
@@ -901,6 +911,11 @@ def sample(pdf, out_dir, pages=()):
         raise ValueError("sample reads PDFs with PyMuPDF: pip install pymupdf")
     from PIL import Image
     doc = fitz.open(pdf)
+    if len(doc) == 0:
+        raise ValueError("the document has 0 pages")
+    bad_pages = [n for n in pages if n < 1 or n > len(doc)]
+    if bad_pages:
+        raise ValueError(f"the document has {len(doc)} pages; requested page(s) out of range: {bad_pages}")
     fonts, sizes, text, fills = Counter(), Counter(), Counter(), Counter()
     for page in doc:
         for block in page.get_text("dict")["blocks"]:
@@ -936,11 +951,12 @@ def sample(pdf, out_dir, pages=()):
               f"filled shapes by area: {share(fills)}"]
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
-    thumbs = [Image.frombytes("RGB", (p.width, p.height), p.samples)
-              for p in (page.get_pixmap(matrix=fitz.Matrix(320 / page.rect.width, 320 / page.rect.width)) for page in doc)]
-    th = max(t.height for t in thumbs)
-    for start in range(0, len(thumbs), 20):
-        batch = thumbs[start:start + 20]
+    for start in range(0, len(doc), 20):
+        batch = []
+        for page in doc[start:start + 20]:
+            pix = page.get_pixmap(matrix=fitz.Matrix(320 / page.rect.width, 320 / page.rect.width))
+            batch.append(Image.frombytes("RGB", (pix.width, pix.height), pix.samples))
+        th = max(t.height for t in batch)
         sheet = Image.new("RGB", (5 * 330, ((len(batch) + 4) // 5) * (th + 10)), "white")
         for k, t in enumerate(batch):
             sheet.paste(t, ((k % 5) * 330, (k // 5) * (th + 10)))
@@ -960,7 +976,11 @@ def _media(slide):
             link = shape._element.find(".//a:videoFile", NS)
             rid = link.get(qn("r:link")) if link is not None else None
             if rid:
-                part = slide.part.related_part(rid)
+                try:
+                    part = slide.part.related_part(rid)
+                except (KeyError, ValueError):
+                    # External/linked media has no embedded part to extract.
+                    continue
                 yield shape, "video", part.blob, part.partname.ext
         elif shape.shape_type == MSO_SHAPE_TYPE.PICTURE:
             try:
@@ -979,7 +999,12 @@ def _dhash(blob):
     import io
     from PIL import Image
     try:
-        px = list(Image.open(io.BytesIO(blob)).convert("L").resize((9, 8)).getdata())
+        im = Image.open(io.BytesIO(blob))
+        if im.mode in ("P", "PA"):
+            im = im.convert("RGBA")
+        im = im.convert("L").resize((9, 8))
+        data = im.get_flattened_data() if hasattr(im, "get_flattened_data") else im.getdata()
+        px = list(data)
     except Exception:  # noqa: BLE001  (EMF, WMF, broken files: no match)
         return None
     return sum(1 << i for i in range(64) if px[i // 8 * 9 + i % 8] > px[i // 8 * 9 + i % 8 + 1])

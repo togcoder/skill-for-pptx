@@ -99,6 +99,7 @@ unwired) `skills/deck-director`.
   see `experiments/T064-20261104-opencode-native-3d/REPORT.md`.
 
 ## State (2026-11-08)
+- **Review follow-up (T099):** applied six concrete T096/T097 toolbox fixes: thousands-dot number parsing, clear PDF page errors, batched `sample` thumbnails, XML-safe table fill ordering, Pillow-safe image hashing, and linked-video extraction. Full suite 604 pass/10 skipped. `retable`'s palette semantics and the agent's click-by-click `watch` remain separate follow-ups; do not silently alter project colours.
 - **Patchwork harmonisation (T094, guide 10):** DSH rehearsed T093's guide on the 10-slide patchwork
   deck and produced an 11-slide deck with 1 font family, 6 sizes, 6 text colours, flat charts,
   unstretched evidence photos, the 8-column table in an appendix, Fade on 2–11, **13 click groups /

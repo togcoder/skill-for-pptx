@@ -9,6 +9,16 @@ were true at the time. Task IDs and their branches are listed in
 
 
 
+## T099 [pptx] Follow-up fixes from T096/T097 review findings — 2026-11-10
+
+- Fixed six concrete toolbox hazards from the merged reviews: Vietnamese thousands-dot parsing (`1.200`), clear
+  `sample` errors for empty/out-of-range PDFs, batched PDF thumbnails, table fill ordering after diagonal borders,
+  Pillow-safe palette/image hashing, and linked-video extraction that skips unavailable embedded parts.
+- Added regressions in `tests/test_pptx_tools.py`; full suite **604 pass, 10 skipped**. `retable`'s default palette
+  was deliberately not changed: source-theme resolution and reporting of replaced semantic fills need a separate
+  API decision. Guide 10/11's "open the slideshow" wording remains pending T073's `watch` tool; `look` is the
+  available static fallback.
+
 ## T097 [pptx] Rebuild an existing deck with agents: extract, score, staged pipeline — 2026-11-09
 
 - **Why:** after DSH's rejected Ver4 rebuild of the QCC deck, the owner asked for research on how to
