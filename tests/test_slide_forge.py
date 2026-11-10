@@ -71,7 +71,9 @@ class BuildTests(unittest.TestCase):
         m=self.verdict["metrics"]
         self.assertEqual(m["motion_coverage"],1.0)
         self.assertEqual(m["pictures"],m["pictures_moving"])
-        self.assertEqual(m["morph_transitions"],m["slides"]-1)
+        # The example has no object that travels between slides, so it gets no
+        # Morph: decoration no longer causes one (T089).
+        self.assertEqual(m["morph_transitions"],0)
 
     def test_structures_are_choreographed(self):
         notes=self.verdict["director_notes"]

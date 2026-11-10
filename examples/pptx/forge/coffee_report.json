@@ -1,7 +1,7 @@
 {
  "title": "Northwind Roasters — Q3 review (synthetic data)",
  "theme": "midnight",
- "motion": {"style": "modern", "counters": true, "morph": true},
+ "motion": {"style": "modern", "counters": true},
  "slides": [
   {"layout": "title", "kicker": "Quarterly review", "title": "Coffee that travels well", "subtitle": "Northwind Roasters · Q3 2026 · synthetic data", "image": {"generate": "roasted beans warm light"}},
   {"layout": "statement", "kicker": "The headline", "text": "We doubled direct orders while cutting delivery time by a third."},

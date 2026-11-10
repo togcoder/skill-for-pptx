@@ -260,11 +260,14 @@ class SlideForgeCanonLayoutsTests(unittest.TestCase):
 
     def test_chrome_injection_progress_bar_and_logo(self):
         out = Path(self.tmp.name) / "chrome_deck.pptx"
+        from PIL import Image
+        logo = Path(self.tmp.name) / "logo.png"
+        Image.new("RGB", (48, 48), "#AA0000").save(logo)
         spec = {
             "title": "Chrome Deck",
             "theme": "midnight",
             "chrome": True,
-            "logo": "ARTCRAFT",
+            "logo": str(logo),
             "slides": [
                 {"layout": "title", "title": "Cover Slide"},
                 {"layout": "statement", "text": "Content Slide 1"},
@@ -279,12 +282,14 @@ class SlideForgeCanonLayoutsTests(unittest.TestCase):
         # Slide 1 (title): progress bar and logo should be suppressed
         s1_names = [sh.name for sh in prs.slides[0].shapes]
         self.assertNotIn("!!progress-bar", s1_names)
-        self.assertNotIn("Logo Watermark", s1_names)
+        self.assertNotIn("Logo", s1_names)
 
         # Slide 3 (kpis - content): progress bar and logo should be present
         s3_names = [sh.name for sh in prs.slides[2].shapes]
         self.assertIn("!!progress-bar", s3_names)
-        self.assertIn("Logo Watermark", s3_names)
+        self.assertIn("Logo", s3_names)
+        logo_shape = next(sh for sh in prs.slides[2].shapes if sh.name == "Logo")
+        self.assertEqual(logo_shape.shape_type, 13)  # a picture, not a text watermark
 
         # Progress bar position should sit at bottom edge (y >= 7.4 in)
         pbar = next(sh for sh in prs.slides[2].shapes if sh.name == "!!progress-bar")

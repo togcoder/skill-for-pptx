@@ -103,14 +103,11 @@ Ví dụ đầy đủ: `experiments/T093-20261108-claude-harmonize-deck/inputs/h
 
 ## Công cụ cũ: dùng có điều kiện
 
-- **Slide Forge** (`slide_forge.py`): dựng nhanh từ một bản mô tả, nhưng bố cục chung chung. Nếu
-  dùng, đặt `"motion": {"morph": false}` để nó không tự thêm hình tròn `!!orb` vào góc mọi slide
-  (nguyên nhân của Morph khắp nơi). Sau đó vẫn phải xem và sửa theo các mục 3–8.
-  Các lỗi đã biết, đang chờ sửa:
-  - giá trị KPI bằng 0 làm dừng bản dựng;
-  - tiêu đề thẻ bị thu xuống 14 pt;
-  - thanh tiến độ và logo bằng chữ bị gắn cứng.
+- **Slide Forge** (`slide_forge.py`): dựng nhanh từ một bản mô tả, nhưng bố cục chung chung. Mặc định
+  không trang trí và không Morph; logo chỉ nhận file ảnh (một chữ thì bị bỏ, có ghi chú). Muốn Morph
+  thì đặt `"motion": {"morph": true}`, và chỉ khi có một vật thể nội dung đi tiếp giữa hai slide.
+  Sau đó vẫn phải xem và sửa theo các mục 3–8.
 - **Motion Director** (`motion_director.py draft/apply`): tự đề xuất chuyển động cho bộ slide có sẵn.
-  Nó hay tạo quá nhiều lần bấm (bìa 6 lần bấm) và gắn Morph cho mọi lần chuyển slide. Nếu dùng, sửa
-  kế hoạch nó đề xuất theo mục 6–7 trước khi `apply`. Với bộ slide mới, `pptx_tools.py motion` đơn
-  giản hơn.
+  Bìa chỉ có một nhóm tự chạy, không cần bấm. Morph chỉ khi có vật không trang trí đi tiếp, và vật có
+  mặt trên mọi slide không tính. Nếu dùng, vẫn sửa kế hoạch nó đề xuất theo mục 6–7 trước khi `apply`.
+  Với bộ slide mới, `pptx_tools.py motion` đơn giản hơn.

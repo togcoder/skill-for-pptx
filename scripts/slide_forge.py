@@ -15,9 +15,9 @@ failure is a coded error with a fix hint, and the loop is
 Layouts: title, section, statement, bullets, image, kpis, process, cycle,
 chart, comparison, quote, closing. Layout geometry is chosen so the Motion
 Director recognises the structure (cards, process rows, cycles, charts) and
-choreographs it; pictures get Ken Burns and accents draw in (T024). Shared
-``!!`` background orbs move between slides so Morph adds a motion-graphic
-layer across the deck.
+choreographs it; pictures get Ken Burns and accents draw in (T024). Nothing
+decorative is added by default: a Morph happens only when a content object
+travels between two slides (T089).
 
 T063: type sizes come from the Office kit's ``type_scale_pt`` (3-6 sizes per
 deck), count-up stacks keep only the final value in print/PDF/Morph (the
@@ -150,6 +150,10 @@ def deck_type_scale(kit=None,spec=None):
     tokens=system.get("color_and_type_scales",{}).get("modular_scale",{}).get("tokens_pt",{})
     small=max(12,min(small,float(tokens.get("body_base",14))))
     scale={"title":title,"subhead":subhead,"body":body,"label":label,"small":small}
+    # Card titles: the design system's card_title token (18 pt), snapped to a
+    # size the deck already owns so the scale stays 3-6 sizes (T063).
+    card_raw=float(tokens.get("card_title",18))
+    scale["card"]=min(scale.values(),key=lambda v:(abs(v-card_raw),v))
     has_stats=(spec is not None and (_walk_keys(spec.get("slides") or [],"kpi")
                or any(isinstance(s,dict) and s.get("layout") in ("kpis","duarte_break") for s in spec.get("slides") or [])))
     if has_stats:
@@ -190,7 +194,7 @@ def schema():
                          "(OKLCH palette from one brand colour, AA guaranteed) or an object with the same color keys (hex)",
                 "fonts":{"head":"font family","body":"font family"},
                 "motion":{"style":"subtle|modern|bold|cinematic|dynamic (default modern; dynamic = PowerPoint's richer built-ins)","counters":"bool, count up KPI values (default true; the final value stays topmost in print/PDF/Morph)",
-                          "morph":"bool, background orbs glide between slides (default true)"},
+                          "morph":"bool, add Morph transitions where a content object travels between slides (default false)"},
                 "slides":"list of slide objects"},
         "slide":{"layout":{k:v for k,v in LAYOUTS.items()},"notes":"speaker notes; sequence words (first, then, finally) make process steps one click each"},
         "fields":{"image":"path, or {\"search\":\"english keywords\", \"pick\":n?, \"orientation\"?} for a licensed online photo "
@@ -352,6 +356,14 @@ def generated_art(seed,theme,w=1600,h=1000):
 # Builder
 
 
+def _logo_image(value):
+    """The logo only counts when it is a real image file (T089)."""
+    if not value:
+        return None
+    path=Path(str(value))
+    return path if path.is_file() else None
+
+
 class Builder:
     def __init__(self,spec):
         self.spec=spec
@@ -369,12 +381,13 @@ class Builder:
         self.fonts={**FONTS,**kit_fonts,**(spec.get("fonts") or {})}
         self.type_scale=deck_type_scale(self.kit,spec)
         self.scale_sizes=sorted(set(self.type_scale.values()),reverse=True)
-        self.motion={"style":"modern","counters":True,"morph":True,**(spec.get("motion") or {})}
+        self.motion={"style":"modern","counters":True,"morph":False,**(spec.get("motion") or {})}
         self.prs=Presentation()
         self.prs.slide_width=Inches(W)
         self.prs.slide_height=Inches(H)
         self.blank=self.prs.slide_layouts[6]
         self.receipts=[]  # TEXT_SHRUNK etc.
+        self.missing_fonts=set()  # one FONT_MISSING note per family, not per box
         self.generated=[]
         self.credits=[]
         self.icons=[]
@@ -416,9 +429,17 @@ class Builder:
             self.receipts.append({"code":"TEXT_SHRUNK","slide":idx,"object":name,"detail":f"{start}->{fitted} pt",
                                   "fix":"shorten the text if the smaller size hurts hierarchy"})
         if not ok:
-            self.receipts.append({"code":"TEXT_OVERFLOW","slide":idx,"object":name,
-                                  "detail":f"does not fit at {self.type_scale.get(floor,floor)} pt",
-                                  "fix":"shorten the text or split the slide","severity":"error"})
+            if text_metrics.font_path(family):
+                self.receipts.append({"code":"TEXT_OVERFLOW","slide":idx,"object":name,
+                                      "detail":f"does not fit at {self.type_scale.get(floor,floor)} pt",
+                                      "fix":"shorten the text or split the slide","severity":"error"})
+            elif family.lower() not in self.missing_fonts:
+                # Without the font file the width is a 0.55 em estimate, so a
+                # "does not fit" verdict would be a guess (T089).
+                self.missing_fonts.add(family.lower())
+                self.receipts.append({"code":"FONT_MISSING","slide":idx,"object":name,
+                                      "detail":f"font '{family}' is not installed; text measurements are approximate",
+                                      "fix":"install the deck font to check fit exactly"})
         box=slide.shapes.add_textbox(Inches(x),Inches(y),Inches(w),Inches(h))
         box.name=name
         tf=box.text_frame
@@ -508,24 +529,16 @@ class Builder:
         return pic
 
     def background(self,slide,idx,n):
+        # No automatic decoration (T089): a deck that wants ambient shapes
+        # authors them, and the Director must not read them as continuity.
         fill=slide.background.fill
         fill.solid()
         fill.fore_color.rgb=self.rgb("bg")
-        if not self.motion["morph"]:
-            return
-        # Two soft orbs with fixed names sit on opposite corners and rotate a
-        # corner per slide, so Morph glides them around the frame, never over content.
-        corners=[(0,0),(W,0),(W,H),(0,H)]
-        brand="seed" if "seed" in self.theme else "accent"  # decoration may wear the raw brand colour
-        for k,(key,r) in enumerate(((brand,2.0),("accent2",1.4))):
-            cx,cy=corners[(idx+2*k)%4]
-            orb=self.rect(slide,cx-r,cy-r,2*r,2*r,key,f"!!orb-{k+1}",MSO_SHAPE.OVAL)
-            _alpha(orb,12)
 
     def heading(self,slide,title,idx,kicker=None):
         y=0.45
         tw=W-2*MARGIN
-        if getattr(self,"spec",{}).get("logo") or getattr(self,"spec",{}).get("chrome"):
+        if _logo_image(getattr(self,"spec",{}).get("logo")) or getattr(self,"spec",{}).get("chrome"):
             tw-=1.3
         if kicker:
             self.text(slide,MARGIN,0.18,tw,0.38,[kicker.upper()],"Kicker",level="small",color="accent",bold=True,idx=idx)
@@ -745,13 +758,13 @@ class Builder:
         m_data=s.get("major",{})
         if isinstance(m_data,dict):
             if m_data.get("heading"):
-                self.text(slide,mx+0.35,my+0.3,mw-0.7,0.45,[m_data["heading"]],"Major Heading",level="subhead",role="head",bold=True,idx=idx)
+                self.text(slide,mx+0.35,my+0.25,mw-0.7,0.62,[m_data["heading"]],"Major Heading",level="subhead",role="head",bold=True,idx=idx)
             if m_data.get("text"):
-                self.text(slide,mx+0.35,my+0.85,mw-0.7,card_h-1.2,[m_data["text"]],"Major Text",level="label",idx=idx)
+                self.text(slide,mx+0.35,my+0.95,mw-0.7,card_h-1.3,[m_data["text"]],"Major Text",level="label",idx=idx)
             elif m_data.get("points"):
-                self.text(slide,mx+0.35,my+0.85,mw-0.7,card_h-1.2,["• "+p for p in m_data["points"]],"Major Points",level="label",gap=12,idx=idx)
+                self.text(slide,mx+0.35,my+0.95,mw-0.7,card_h-1.3,["• "+p for p in m_data["points"]],"Major Points",level="label",gap=12,idx=idx)
             if m_data.get("image"):
-                self.picture(slide,m_data["image"],mx+0.3,my+0.8,mw-0.6,card_h-1.1,"Major Picture",idx)
+                self.picture(slide,m_data["image"],mx+0.3,my+0.9,mw-0.6,card_h-1.2,"Major Picture",idx)
         else:
             self.text(slide,mx+0.35,my+0.4,mw-0.7,card_h-0.8,[str(m_data)],"Major Content",level="body",idx=idx)
         nx,ny,nw=minor["x"]/72,top+0.05,minor["w"]/72
@@ -760,7 +773,7 @@ class Builder:
         n_data=s.get("minor",{})
         if isinstance(n_data,dict):
             if n_data.get("heading"):
-                self.text(slide,nx+0.3,ny+0.3,nw-0.6,0.45,[n_data["heading"]],"Minor Heading",level="label",role="head",bold=True,idx=idx)
+                self.text(slide,nx+0.3,ny+0.25,nw-0.6,0.5,[n_data["heading"]],"Minor Heading",level="card",role="head",bold=True,idx=idx)
             if n_data.get("kpi"):
                 self.text(slide,nx+0.3,ny+0.8,nw-0.6,1.2,[n_data["kpi"]],"Minor KPI",level="display",role="head",color="accent",bold=True,idx=idx)
             if n_data.get("points"):
@@ -781,11 +794,11 @@ class Builder:
         h_data=s.get("hero",{})
         if isinstance(h_data,dict):
             if h_data.get("title"):
-                self.text(slide,hx+0.35,hy+0.3,hero_w-0.7,0.45,[h_data["title"]],"Hero Title",level="subhead",role="head",bold=True,idx=idx)
+                self.text(slide,hx+0.35,hy+0.25,hero_w-0.7,0.62,[h_data["title"]],"Hero Title",level="subhead",role="head",bold=True,idx=idx)
             if h_data.get("text"):
-                self.text(slide,hx+0.35,hy+0.85,hero_w-0.7,total_h-1.2,[h_data["text"]],"Hero Text",level="label",idx=idx)
+                self.text(slide,hx+0.35,hy+0.95,hero_w-0.7,total_h-1.3,[h_data["text"]],"Hero Text",level="label",idx=idx)
             elif h_data.get("image"):
-                self.picture(slide,h_data["image"],hx+0.25,hy+0.8,hero_w-0.5,total_h-1.05,"Hero Picture",idx)
+                self.picture(slide,h_data["image"],hx+0.25,hy+0.95,hero_w-0.5,total_h-1.2,"Hero Picture",idx)
         else:
             self.text(slide,hx+0.35,hy+0.4,hero_w-0.7,total_h-0.8,[str(h_data)],"Hero Content",level="body",idx=idx)
         rx,rw,gutter=564/72,348/72,20/72
@@ -795,9 +808,9 @@ class Builder:
         tr_data=s.get("top_right",{})
         if isinstance(tr_data,dict):
             if tr_data.get("title"):
-                self.text(slide,rx+0.3,hy+0.25,rw-0.6,0.4,[tr_data["title"]],"TopRight Title",level="label",role="head",bold=True,idx=idx)
+                self.text(slide,rx+0.3,hy+0.22,rw-0.6,0.5,[tr_data["title"]],"TopRight Title",level="card",role="head",bold=True,idx=idx)
             if tr_data.get("text"):
-                self.text(slide,rx+0.3,hy+0.7,rw-0.6,sub_h-0.9,[tr_data["text"]],"TopRight Text",level="small",color="muted",idx=idx)
+                self.text(slide,rx+0.3,hy+0.75,rw-0.6,sub_h-0.95,[tr_data["text"]],"TopRight Text",level="small",color="muted",idx=idx)
         else:
             self.text(slide,rx+0.3,hy+0.3,rw-0.6,sub_h-0.6,[str(tr_data)],"TopRight Content",level="small",idx=idx)
         by=hy+sub_h+gutter
@@ -836,7 +849,15 @@ class Builder:
 
     def chrome_elements(self,slide,s,idx,n,spec):
         lay=s.get("layout")
-        use_chrome=spec.get("chrome",False) or s.get("chrome",False) or spec.get("progress_bar",False) or spec.get("logo")
+        logo_val=spec.get("logo") or s.get("logo")
+        logo=_logo_image(logo_val)
+        if logo_val and logo is None and idx==1:
+            # A word is not a logo: skip it and say so instead of drawing a
+            # text watermark on every slide (T089).
+            self.receipts.append({"code":"LOGO_SKIPPED","slide":idx,"object":"Logo",
+                                  "detail":f"logo {logo_val!r} is not an image file",
+                                  "fix":"pass a PNG/JPG path, or leave logo out"})
+        use_chrome=spec.get("chrome",False) or s.get("chrome",False) or spec.get("progress_bar",False) or logo
         if not use_chrome:
             return
         if lay not in ("title","closing","duarte_break"):
@@ -847,18 +868,11 @@ class Builder:
             prog_w=W*(idx/n)
             bar=self.rect(slide,0,y_in,prog_w,h_in,"accent","!!progress-bar")
             _alpha(bar,100)
-        logo_val=spec.get("logo") or s.get("logo")
-        if logo_val and lay not in ("title","section","closing","statement","duarte_break"):
-            # Wide enough for the logo word at the smallest step, in the
-            # font this host has (Linux falls back to wider DejaVu).
-            need=text_metrics.width_pt(str(logo_val),self.fonts["head"],self.type_scale["small"],bold=True)/72
-            lw=max(1.3,need+0.3)
-            lh=0.42
+        if logo and lay not in ("title","section","closing","statement","duarte_break"):
+            lw,lh=1.3,0.42
             lx=W-0.7-lw
             ly=0.25
-            box=self.rect(slide,lx,ly,lw,lh,"surface","Logo Watermark")
-            _alpha(box,85)
-            _shape_text(self,box,str(logo_val),"accent",level="small")
+            self.picture(slide,str(logo),lx,ly,lw,lh,"Logo",idx)
 
     def build(self,spec,out):
         n=len(spec["slides"])

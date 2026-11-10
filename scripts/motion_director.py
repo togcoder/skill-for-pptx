@@ -328,12 +328,34 @@ def _implicit_title(slide):
 
 
 def _is_text_title_slide(slide):
-    """First slide made only of heading-like text (no placeholders)."""
-    if slide["index"]!=1 or not slide["objects"]:
+    """First slide made only of headings, with no card or data: a cover.
+
+    A cover can carry a kicker, title, subtitle, presenter, date and a logo,
+    so more than four text boxes. What it does not carry is body copy, a
+    standalone number or a filled card holding text: those make a content
+    slide that happens to be first (T089).
+    """
+    if slide["index"]!=1 or not slide["objects"] or len(slide["objects"])>8:
+        return False
+    if any(o["kind"] in ("chart","table") for o in slide["objects"]):
         return False
     texts=[o for o in slide["objects"] if o["text"]]
-    return bool(texts) and len(texts)<=4 and all(_is_heading(o) for o in texts) and not any(
-        o["kind"] in ("chart","table") for o in slide["objects"])
+    if not texts or not all(_is_heading(o) for o in texts):
+        return False
+    for card in (o for o in slide["objects"]
+                 if o["kind"]=="shape" and o.get("filled") and not o["text"] and o["geometry"]):
+        g=card["geometry"]
+        for o in texts:
+            og=o["geometry"]
+            if not og:
+                continue
+            cx,cy=og["x"]+og["w"]/2,og["y"]+og["h"]/2
+            if g["x"]<=cx<=g["x"]+g["w"] and g["y"]<=cy<=g["y"]+g["h"]:
+                # A filled card holding a number or body copy is data, not a
+                # cover panel behind the title.
+                if o["standalone_number"] or not _is_heading(o):
+                    return False
+    return True
 
 
 def _label_body_pairs(objs,used):
@@ -938,14 +960,20 @@ def _norm_text(t):
     return re.sub(r"\s+"," ",(t or "")).strip().lower()
 
 
-def shared_objects(prev,cur):
+def shared_objects(prev,cur,ignore=()):
     """Objects of ``cur`` that continue from ``prev`` (same text, same image or
-    the same !! Morph name) -> (ids, names of those whose geometry changes)."""
+    the same !! Morph name) -> (ids, names of those whose geometry changes).
+
+    Only content can justify a Morph: decoration (``!!`` names) and names in
+    ``ignore`` (objects present on every slide) may ride along, but do not
+    make the transition themselves (T089)."""
     moved=[]
     shared=[]
     for o in cur["objects"]:
         if not o["geometry"]:
             continue
+        if o["placeholder"] and o["placeholder"]["type"] in CHROME_TYPES:
+            continue  # slide number, footer, date: never a Morph reason
         for p in prev["objects"]:
             if not p["geometry"] or p["kind"]!=o["kind"]:
                 continue
@@ -955,21 +983,38 @@ def shared_objects(prev,cur):
             if not same:
                 continue
             shared.append(o["id"])
-            if max(abs(o["geometry"][k]-p["geometry"][k]) for k in ("x","y","w","h"))>0.02:
+            content=not (o["name"] or "").startswith("!!") and (o["name"] or "") not in ignore
+            if content and max(abs(o["geometry"][k]-p["geometry"][k]) for k in ("x","y","w","h"))>0.02:
                 moved.append(o["name"])
             break
     return shared,moved
 
 
+def _ubiquitous_names(slides):
+    """Names that appear on every slide: chrome, not continuity (T089).
+
+    A two-slide deck has no chrome by this definition: the cover portrait that
+    travels into slide 2 is the point of the Morph."""
+    if len(slides)<3:
+        return set()
+    common=None
+    for s in slides:
+        names={o["name"] for o in s["objects"] if o["geometry"] and o["name"]}
+        common=names if common is None else common & names
+    return common or set()
+
+
 def detect_morph_pairs(model):
-    """Consecutive slides sharing an object (same text or same image) whose
-    geometry changes: a Morph transition lets that object travel between them."""
+    """Consecutive slides sharing a content object whose geometry changes: a
+    Morph transition lets that object travel between them. Decoration and
+    objects present on every slide never cause one (T089)."""
     out=[]
     slides=model["slides"]
+    ignore=_ubiquitous_names(slides)
     for prev,cur in zip(slides,slides[1:]):
         if cur["has_transition"]:
             continue
-        shared,moved=shared_objects(prev,cur)
+        shared,moved=shared_objects(prev,cur,ignore)
         if moved:
             out.append({"slide":cur["index"],"kind":"morph","duration_ms":1500,"continuing_ids":shared,
                         "reason":"Continuity: "+", ".join(f"'{m}'" for m in moved[:4])+" moves/resizes from the previous slide."})
