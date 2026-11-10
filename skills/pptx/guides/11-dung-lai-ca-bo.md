@@ -34,7 +34,7 @@ dùng ở **ba chỗ** (cột cuối).
 |---|---|---|
 | **1. Hiểu** | (1) Bóc tách: `extract`, `inventory`, `look`; với slide từ 20 hiệu ứng, dùng `watch --slides` nếu T073 đã merge, hoặc trình chiếu thủ công; ghi mỗi slide kể cơ chế gì. (2) Hỏi cho tới khi hiểu (mục 1, phần cuối), viết **bản hiểu ý** và `map.json`. (3) Dựng **3 slide mẫu**, trong đó có slide khó giữ nhất (sơ đồ chuẩn, mô phỏng); `check` đạt trên 3 slide đó. | Duyệt bản hiểu ý. Duyệt 3 slide mẫu: chưa ổn thì sửa mẫu, không làm tiếp. |
 | **2. Làm** | Dựng trên bản sao bộ gốc, mỗi đợt một phần câu chuyện (không quá 8 slide). Sau mỗi đợt: `check --map`, `inventory`, `look`, và nhìn **từng** slide của đợt. Xong cả bộ thì làm chuyển động (mục 6, 7). | Không dừng, trừ khi gặp điều bản hiểu ý chưa nói: khi đó hỏi, đừng đoán. Người dùng góp ý giữa chừng: xếp loại theo mục 1, "Sau khi đã hiểu"; sửa nhỏ thì làm luôn, hiểu sai thì hỏi lại đúng phần sai. |
-| **3. Kiểm** | `check` đạt 9/9, rồi chấm tầng 2 (dưới đây). Tốt nhất là một phiên khác, model khác, chưa đọc báo cáo của người dựng. Không có thì agent tự chấm và ghi rõ "tự chấm". | Người dùng mở file, đọc bảng điểm. |
+| **3. Kiểm** | `check` đạt 12/12 khi có `--map` (6/6 khi chưa có map), rồi chấm tầng 2 (dưới đây). Tốt nhất là một phiên khác, model khác, chưa đọc báo cáo của người dựng. Không có thì agent tự chấm và ghi rõ "tự chấm". | Người dùng mở file, đọc bảng điểm. |
 
 Mỗi bước ghi kết quả ra file (bản hiểu ý, map, mẫu, bộ slide, bảng điểm). Vì vậy một phiên khác hoặc một
 agent khác đọc file là làm tiếp được, không cần nhớ phiên trước.
@@ -45,6 +45,9 @@ agent khác đọc file là làm tiếp được, không cần nhớ phiên trư
 - Slide **Giữ** và **Sửa vỏ** là chính slide cũ, thay vỏ tại chỗ (mục 10, "Slide có hiệu ứng").
 - Bảng thật, biểu đồ thật, khung sơ đồ là ảnh: sửa tại chỗ bằng `retable`, `rechart`, `cutout` (mục 10,
   bước 3 và 5), đừng dựng lại từ đầu.
+- **Khung sơ đồ vẽ bằng hình PowerPoint** (xương cá, thanh bước, Gantt): `extract` chỉ lấy ảnh/video gốc,
+  không lấy hình vector. Tách thành phần bằng `components` → `component` (và `ungroup` nếu nó là nhóm) rồi
+  `place` vào slide mới — mục 12. Chụp ảnh khung vector là mất chữ, mất hiệu ứng, và không dùng lại được.
 - Slide **Làm lại** và slide mới thì thêm vào cuối, rồi dời tới đúng chỗ. Ảnh và video lấy từ thư mục
   `extract/media`, **không bao giờ** cắt từ ảnh chụp màn hình slide cũ: ảnh chụp mờ, mất chữ, và mô
   phỏng trong đó không còn chạy.
@@ -145,3 +148,34 @@ Ví dụ đã chấm: bản dựng lại đầu tiên của bộ QCC chỉ qua 2
 
 Theo luật trên, bản đó không được đem chấm tầng 2. Người dùng xem bản đó và loại nó vì đúng những lý do
 này.
+
+## Luật cứng sau bài học QCC Ver5 (2026-11-10)
+
+Bản Ver5 được dựng bằng cách lấy **bộ Ver4 đã bị loại** làm nền cho 26/38 slide, chỉ thay 7 slide khó. Nó
+qua `check` 8/9 nhưng bị loại vì mất ảnh, đổi biểu đồ tròn thành cột, bịa thông số, bảng không khung, mất
+cặp video, chữ trắng trên nền ivory. Từ bài học đó, các luật sau là **bắt buộc**, không phải lời khuyên:
+
+1. **Bản rebuild cũ không phải nguồn.** Luôn bắt đầu từ bộ gốc; không lấy builder/bản đã bị loại làm nền.
+2. **Trước khi dựng, lập bảng tài sản từng slide**: ảnh bằng chứng, chart (loại + dữ liệu), bảng (ô gộp,
+   đường kẻ), video (cặp, thứ tự), hiệu ứng, câu chốt. Slide mới thiếu món nào phải ghi rõ lý do; không được
+   bỏ im lặng.
+3. **`rebuild` không được miễn cổng ảnh/chart/bảng.** Nếu bỏ ảnh/chart/bảng, khai `drop` + lý do; người
+   duyệt phải đồng ý. Không dùng nhãn `rebuild` để tắt cổng.
+4. **Ảnh bằng chứng bất khả xâm phạm**: không bỏ, không cắt mất chi tiết, không để dải màu/khung che lên.
+   Ảnh phải nằm đúng slide và đúng vai trò.
+5. **Chart giữ đúng loại và số**: chart tròn vẫn là tròn; chart cột vẫn là cột; dữ liệu lấy từ chart gốc,
+   không vẽ lại "gần đúng". Đổi loại phải có lý do và người duyệt.
+6. **Bảng phải là bảng thật và thấy ô**: giữ ô gộp, đường kẻ; không ẩn sạch khung; không ghép bảng bằng hộp
+   chữ. Bảng quá to thì tách phụ lục, không bóp chữ dưới ngưỡng.
+7. **Video giữ cặp/đúng vai trò**: hai video bổ trợ nhau ở cùng một slide hoặc cùng một cảnh; không tách
+   thành hai slide nếu mất nghĩa. Không thêm card trắng/caption nhỏ sau video tràn slide.
+8. **Không tự viết slogan/câu chốt.** Chữ trên slide lấy từ nguồn/bản hiểu ý; câu chốt thuộc lời nói. Những
+   câu như "Nine steps, one route" là bịa và bị loại.
+9. **Không cắt câu/cắt chữ để vừa khung** nếu làm mất nghĩa; sửa bố cục hoặc tách slide.
+10. **Mỗi đợt 5–8 slide**: dựng → render → mở **từng ảnh 1920×1080** → đặt ảnh cũ/mới cạnh nhau → sửa →
+    mới sang đợt sau. Không dựng cả bộ một lần rồi mới nhìn.
+11. **`check` không phải thước đo chất lượng.** `check` chỉ là cổng tối thiểu; phải chấm tầng 2 (mắt) và so
+    bản gốc từng slide. `check` pass mà ảnh mất/chart sai/bảng không khung thì vẫn là bản hỏng.
+12. **Tự quyết từ nguồn**: quan hệ cause–branch, cặp video, chart type... đọc từ sơ đồ/notes/bản gốc; chỉ hỏi
+    người dùng khi nguồn mâu thuẫn thật.
+
