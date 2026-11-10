@@ -34,7 +34,7 @@ dùng ở **ba chỗ** (cột cuối).
 |---|---|---|
 | **1. Hiểu** | (1) Bóc tách: `extract`, `inventory`, `look`; mở trình chiếu mọi slide có từ 20 hiệu ứng, ghi mỗi slide kể cơ chế gì. (2) Hỏi cho tới khi hiểu (mục 1, phần cuối), viết **bản hiểu ý** và `map.json`. (3) Dựng **3 slide mẫu**, trong đó có slide khó giữ nhất (sơ đồ chuẩn, mô phỏng); `check` đạt trên 3 slide đó. | Duyệt bản hiểu ý. Duyệt 3 slide mẫu: chưa ổn thì sửa mẫu, không làm tiếp. |
 | **2. Làm** | Dựng trên bản sao bộ gốc, mỗi đợt một phần câu chuyện (không quá 8 slide). Sau mỗi đợt: `check --map`, `inventory`, `look`, và nhìn **từng** slide của đợt. Xong cả bộ thì làm chuyển động (mục 6, 7). | Không dừng, trừ khi gặp điều bản hiểu ý chưa nói: khi đó hỏi, đừng đoán. Người dùng góp ý giữa chừng: xếp loại theo mục 1, "Sau khi đã hiểu"; sửa nhỏ thì làm luôn, hiểu sai thì hỏi lại đúng phần sai. |
-| **3. Kiểm** | `check` đạt 8/8, rồi chấm tầng 2 (dưới đây). Tốt nhất là một phiên khác, model khác, chưa đọc báo cáo của người dựng. Không có thì agent tự chấm và ghi rõ "tự chấm". | Người dùng mở file, đọc bảng điểm. |
+| **3. Kiểm** | `check` đạt 9/9, rồi chấm tầng 2 (dưới đây). Tốt nhất là một phiên khác, model khác, chưa đọc báo cáo của người dựng. Không có thì agent tự chấm và ghi rõ "tự chấm". | Người dùng mở file, đọc bảng điểm. |
 
 Mỗi bước ghi kết quả ra file (bản hiểu ý, map, mẫu, bộ slide, bảng điểm). Vì vậy một phiên khác hoặc một
 agent khác đọc file là làm tiếp được, không cần nhớ phiên trước.
@@ -72,18 +72,25 @@ agent khác đọc file là làm tiếp được, không cần nhớ phiên trư
 - `old`: các slide gốc mà slide này lấy nội dung.
 - `group`: `keep`, `reskin` hoặc `rebuild`.
 - `drop`: tên các ảnh của slide gốc cố ý không dùng (mặt cười, nền cũ). Lấy tên trong `manifest.json`.
+- `"video": "small"`: chỉ ghi khi **người dùng đã đồng ý** để video của slide này nhỏ hơn slide.
+- `dropped` (ở ngoài cùng): số các slide gốc cố ý bỏ hẳn. Bỏ slide nào thì người dùng phải đã duyệt
+  trong bản hiểu ý.
 
 ```json
 {
   "1":  {"old": [1], "group": "reskin", "drop": ["Picture 30"]},
   "18": {"old": [17], "group": "keep"},
   "17": {"old": [15, 16], "group": "rebuild"},
-  "16": {"old": [], "group": "rebuild"}
+  "16": {"old": [], "group": "rebuild"},
+  "12": {"old": [12], "group": "reskin", "video": "small"},
+  "dropped": [9]
 }
 ```
 
-`check` dùng map để kiểm hai điều:
+`check` dùng map để kiểm ba điều:
 
+- **mọi slide gốc đều có mặt trong map**: nằm trong `old` của một hàng, hoặc trong `dropped`. Không có
+  cách nào qua cổng bằng việc lờ đi một slide khó;
 - slide `keep` còn đủ hiệu ứng của slide gốc;
 - slide `keep` và `reskin` còn đủ ảnh của slide gốc, trừ những ảnh có tên trong `drop`.
 
@@ -96,16 +103,17 @@ python scripts/pptx_tools.py check goc.pptx moi.pptx --map map.json
 python scripts/pptx_tools.py inventory moi.pptx
 ```
 
-`check` có 8 cổng:
+`check` có 9 cổng:
 
 1. kiểu chuyển slide chỉ còn Fade, Morph hoặc không có;
 2. không hiệu ứng nào trỏ tới vật thể đã xóa;
 3. đủ video;
-4. video tràn slide;
+4. video tràn slide (trừ slide người dùng đã đồng ý để nhỏ);
 5. đủ số liệu;
 6. ảnh gốc không bị cắt chặt hơn bản gốc;
-7. slide `keep` đủ hiệu ứng;
-8. ảnh gốc nằm đúng slide.
+7. mọi slide gốc đều có mặt trong map;
+8. slide `keep` đủ hiệu ứng;
+9. ảnh gốc nằm đúng slide.
 
 Lệnh còn liệt kê những ảnh không lấy từ bộ gốc, để người chấm nhìn từng ảnh. `inventory` kiểm thêm: một
 hoặc hai font, 3–6 cỡ chữ, không chữ nào nhỏ hơn mốc.
@@ -123,13 +131,13 @@ tư là chuyển động. Chấm trên ảnh từng slide **và** khi trình chi
 | **Câu chuyện** | Chỉ đọc tiêu đề là hiểu bài; mỗi slide một ý; mỗi số chính có một slide chủ | Đa số slide rõ ý; vài slide hai ý hoặc tiêu đề chỉ là nhãn | Đọc tiêu đề không ra mạch; slide dồn ý |
 | **Giữ ruột** | Sơ đồ chuẩn đúng dạng; mô phỏng chạy như bản gốc; ảnh bằng chứng đủ và rõ | Còn đủ, nhưng có ảnh bị thu quá nhỏ hoặc sơ đồ lệch nét | Sơ đồ đổi dạng, mô phỏng thành ảnh, ảnh bị cắt mất chữ |
 | **Thiết kế** | Một hệ thống: font, màu, lưới, tiêu đề cùng chỗ; mỗi slide một điểm nhấn; ảnh đặt có vai trò | Hệ thống có, vài slide lệch lưới hoặc dày chữ | Mỗi slide một kiểu; chữ bay, mũi tên lệch, icon khác bộ |
-| **Chuyển động** | Morph chỉ ở chỗ có vật đi tiếp; tối đa 3 lần bấm; slide mở ra đã thấy khung | Đúng luật, nhưng có slide bấm thừa hoặc thiếu | Hiệu ứng cổ; chỗ có chỗ không; slide mở ra trống |
+| **Chuyển động** | Morph chỉ ở chỗ có vật đi tiếp; mỗi lần bấm là một ý người nói nói ra (mục 6); slide mở ra đã thấy khung | Đúng luật, nhưng có slide bấm thừa hoặc thiếu | Hiệu ứng cổ; chỗ có chỗ không; slide mở ra trống |
 
 Bảng điểm gồm điểm từng phần, rồi **3 slide tệ nhất**, mỗi slide kèm lý do và cách sửa. Không cộng bốn
 phần thành một con số chung: phần Giữ ruột được 1 điểm thì bộ slide không dùng được, dù ba phần kia được
 5 điểm.
 
-Ví dụ đã chấm: bản dựng lại đầu tiên của bộ QCC chỉ qua 2/8 cổng.
+Ví dụ đã chấm: bản dựng lại đầu tiên của bộ QCC chỉ qua 2 trong 8 cổng có lúc đó.
 
 - chuyển slide kiểu cũ;
 - thiếu một video;
