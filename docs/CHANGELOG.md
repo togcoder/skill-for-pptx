@@ -8,6 +8,72 @@ were true at the time. Task IDs and their branches are listed in
 [research/tasks/INDEX.md](../research/tasks/INDEX.md).
 
 
+
+## T097 [pptx] Rebuild an existing deck with agents: extract, score, staged pipeline — 2026-11-09
+
+- **Why:** after DSH's rejected Ver4 rebuild of the QCC deck, the owner asked for research on how to
+  score a rebuild, how to take the original apart, and how agents can restructure a deck end to end.
+  Sources skimmed: PPTAgent (edit reference slides; analysis then generation with execution feedback;
+  PPTEval content/design/coherence), SlidesBench, Auto-Slides and DeepPresenter (separate critic).
+- **Toolbox:** `extract DECK -o DIR` (original pictures and videos as files, `manifest.json` per slide:
+  text, notes, chart data, tables, media boxes, visible share, animated or not, transition, effects);
+  `check BEFORE AFTER [--map]` (8 pass/fail gates: transitions, dangling effects, videos kept, videos
+  full-slide, numbers, pictures cut tighter, keep slides keep their effects, source pictures on their
+  slide minus a `drop` list). Pictures match by look (64-bit dHash), since a rebuild re-saves them.
+- **Guide 11 (new):** three steps, Understand -> Build -> Check, one agent end to end, machine gates run by
+  the agent, three owner stops (intent brief, 3 sample slides, final); build on a copy, `map.json`,
+  two-tier scoring (machine gates, then 4 eye scores 1-5 with anchors and the 3 worst slides; no single
+  total, D001). A first draft had seven stages; the owner found it too long and asked for an agent that
+  asks until it understands. **Guide 1** gains "ask until you understand" for big jobs: read first, rounds
+  of 3-5 questions with a recommendation, show options for taste, offer ideas beyond the request as
+  choices, restate as a one-page intent brief, stop when nothing is marked "?" and the user says yes.
+  SKILL.md step 1 splits small and big jobs. Guide 1 also gains "after you understand: when to ask
+  again": two self-checks before any question, six kinds of feedback (owner's real words as examples:
+  small and clear, taste, vague, touches the intent, "go on anyway", misunderstood), targeted re-asking
+  when understanding was wrong, and a correction log so the user never says a thing twice. 2 new tests
+  (599 pass).
+- **From DSH's Ver5 sample slides (tables "clumsy", fishbone "would not cut out"):** the fishbone frame
+  was one picture baked onto a factory background, cut by DSH with hard colour thresholds and hand
+  rectangles (jaw, lower tail and spine chopped, eye holed, fringe); the Gantt was a native 32 x 21
+  table that DSH redrew from ~100 lines and text boxes. New `cutout` (soft matte from the border colour,
+  specks dropped, inner holes filled, edge colour decontaminated; needs scipy, now in CI),
+  `replace_picture`, `retable` / `style_table` (restyle a native table in place: text, merges and size
+  kept; old fills mapped, e.g. Gantt bars). Guide 10: look at the original object before choosing
+  Rebuild; tables are native tables; a Gantt is a table; pictures with a baked background. 3 new tests.
+- **Evidence:** Ver3-4 against itself 6/8 (its own old transitions and small videos); Ver3-4 to Ver4
+  2/8, the same faults the owner named. `experiments/T097-20261109-claude-rebuild-pipeline/REPORT.md`.
+
+## T096 [pptx] Following a reference PDF; small-text floor scaled to slide height — 2026-11-09
+
+- **Why:** the owner tested the skill on an outside job: restyle the QCC theme (20 x 11.25 in) after a
+  78-page printed report the boss called "plain". Three findings: `inventory` and `design_critic`
+  judged small text against a fixed 18 pt, so on a 20 x 11.25 in slide (shown at two thirds the size)
+  19.5 pt body text passed; the 3-6 sizes rule worked (21 sizes found, 7 after a type scale); the skill
+  had no way to read a sample's real fonts and colours.
+- **Toolbox:** `inventory` floor = 18 pt x slide height / 7.5 in, stated in the header, and more than 3
+  small shapes on a slide fold into one line; `scale` uses the same floor; `design_critic` `TYP-SMALL`
+  grades sizes normalised to a 7.5 in slide. New `sample DOC.pdf [--pages] [-o]`: fonts by share of
+  characters and whether installed here, text sizes, text colours, fill colours by area, page sheets.
+  Needs PyMuPDF (already used by chart_forge and document_forge; CI now installs it). 3 new tests (15/15).
+- **Guide 2:** new section "Khi có một tài liệu mẫu để theo" (7 steps: read with `sample`, note what
+  repeats across pages, ask what to take and what to keep, nearest installed font, print ratios not
+  sizes, data colours by convention, never copy). **Guide 4:** the type scale is for a 7.5 in tall
+  slide; scale by height. `experiments/T096-20261109-claude-sample-style-and-scaled-floor/REPORT.md`.
+- **From DSH's self-review of QCC theme v7/v8 (both 4/10, made without the skill):** guide 3 gains
+  "busy and empty at once" (fix the root with one line per slide, not by cutting text) and "each key
+  number has one home slide" (`inventory` lists numbers on 4+ slides); guide 2 takes a sample's system,
+  not its print accessories; SKILL.md asks presented-or-read and builds 3 sample slides before a whole
+  restyle. A left-edge count was tried and dropped: it did not separate gridded from ungridded decks.
+- **From DSH's Ver4 rebuild of the 37-slide QCC deck (rejected by the owner):** `inventory` crashed on
+  any deck with a video (`'Movie' object has no attribute 'fill'`, a T095 bug), so the agent never saw
+  the old transitions or the effect counts. Fixed; `inventory` now also prints a `transitions` line,
+  flags old-style ones (glitter, checker, peelOff…), and flags effects that point to deleted shapes.
+  On the real decks: Ver3-4 had 1,042 effects (648 on one machine simulation), Ver4 had 0. Guide 10:
+  effects that tell a mechanism, and video, are content; a "Slide có hiệu ứng" recipe (reskin in place
+  on a copy, never swap for a picture); video fills the slide by default; clear old transitions with
+  `"default": "none"` as soon as the copy is made. Guide 3: the cover title says what the talk is
+  about; a Video row. SKILL.md: one of the 3 sample slides is the hardest one to keep. 1 new test.
+
 ## T095 [pptx] Guide 10 and toolbox fixes from the T094 rehearsal — 2026-11-09
 
 - **Why:** the owner opened DSH's T094 deck: motion as good or slightly better than T093, but the

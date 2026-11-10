@@ -151,6 +151,12 @@ unwired) `skills/deck-director`.
   openings, and teaches `inventory` theme font names, fills and blank-opening detection, and `numbers`
   percent-vs-count and occurrence counts. Owner grades of both rehearsal decks pending.
   `experiments/T095-20261109-claude-guide10-fixes/REPORT.md`.
+- **A reference document to follow (T096):** found on a real outside job (restyling a 20 x 11.25 in QCC
+  theme after a 78-page printed report). Guide 2 now teaches following a sample's voice (charts, type,
+  numbers, tables) without copying it; `pptx_tools.py sample` reads a PDF's real fonts (and whether this
+  machine has them), sizes, text colours and fill colours. The small-text floor of `inventory` and
+  `design_critic` `TYP-SMALL` now scales with slide height (27 pt on a 20 x 11.25 in slide).
+  `experiments/T096-20261109-claude-sample-style-and-scaled-floor/REPORT.md`.
 
 ## Open questions / dissent
 - **T067 job vocabulary.** The nine beat jobs (`hook`, `name`, `define`, `contrast`,
