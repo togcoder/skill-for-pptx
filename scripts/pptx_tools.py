@@ -465,6 +465,295 @@ def watch_lines(report):
     return lines
 
 
+# ------------------------------------------------------------ what a viewer sees at once
+
+PICTURE, GROUP, PLACEHOLDER = 13, 6, 14          # MsoShapeType
+SOLID = {13: "picture", 11: "picture", 3: "chart", 19: "table", 16: "video"}
+MIN_PT = 12   # guide 4: nothing below 12 pt on a slide 7.5 in tall
+UNREADABLE = 1.6   # contrast ratio; white on ivory is 1.1, mid grey on white is 2.3
+BUSY = 28          # spread of the picture behind a title, 0-255; a soft glow is under 10
+
+
+def _box(row):
+    left, top, width, height = row
+    return left, top, left + width, top + height
+
+
+def _area(row):
+    return max(0.0, row[2]) * max(0.0, row[3])
+
+
+def _shared(a, b):
+    """Area two boxes (left, top, width, height) have in common."""
+    al, at, ar, ab = _box(a)
+    bl, bt, br, bb = _box(b)
+    w, h = min(ar, br) - max(al, bl), min(ab, bb) - max(at, bt)
+    return w * h if w > 0 and h > 0 else 0.0
+
+
+def _contrast(a, b):
+    def lum(rgb):
+        r, g, b_ = ((v / 255 / 12.92) if v / 255 <= 0.03928 else ((v / 255 + 0.055) / 1.055) ** 2.4 for v in rgb)
+        return 0.2126 * r + 0.7152 * g + 0.0722 * b_
+    hi, lo = sorted((lum(a), lum(b)), reverse=True)
+    return (hi + 0.05) / (lo + 0.05)
+
+
+def _behind(image, box, ink, k):
+    """What the slide looks like behind a piece of text: (colour, spread). The half of the pixels least
+    like the ink is the background; its median is the colour, its spread says plain or busy."""
+    left, top, right, bottom = _box(box)
+    edges = (max(0, round((left - 3) * k)), max(0, round((top - 3) * k)),
+             min(image.width, round((right + 3) * k)), min(image.height, round((bottom + 3) * k)))
+    if edges[2] - edges[0] < 4 or edges[3] - edges[1] < 4:   # off the slide, or a speck
+        return None, 0.0
+    crop = image.crop(edges)
+    crop = crop.resize((min(crop.width, 96), min(crop.height, 48)))
+    px = sorted(crop.get_flattened_data() if hasattr(crop, "get_flattened_data") else crop.getdata(),
+                key=lambda p: -sum(abs(p[j] - ink[j]) for j in range(3)))
+    far = px[:max(1, len(px) // 2)]
+    colour = tuple(sorted(p[j] for p in far)[len(far) // 2] for j in range(3))
+    grey = sorted(0.3 * p[0] + 0.59 * p[1] + 0.11 * p[2] for p in far)
+    return colour, grey[int(len(grey) * 0.9)] - grey[int(len(grey) * 0.1)]
+
+
+def _slots(slides, size):
+    """(slide, id) of every slide shape that sits at the same place on many slides: the title slot, the
+    step bar, the logo. `slides` is the list from _facts."""
+    tol = (0.04 * size[0], 0.04 * size[1])
+    groups = []  # [first box, type, [(slide, id)]]
+    for s in slides:
+        for r in s["shapes"]:
+            if r["layer"] != "slide" or r["depth"]:
+                continue
+            for g in groups:
+                if g[1] == r["type"] and all(abs(a - b) <= tol[j % 2] for j, (a, b) in enumerate(zip(g[0], r["box"]))):
+                    g[2].append((s["slide"], r["id"]))
+                    break
+            else:
+                groups.append([r["box"], r["type"], [(s["slide"], r["id"])]])
+    need = max(3, 0.3 * len(slides))
+    return {key for _, _, members in groups if len({m[0] for m in members}) >= need for key in members}
+
+
+def _glance_slide(s, size, slots, moving, image):
+    """Faults on one slide: [(kind, sentence, [boxes])]. Pure: rows from _facts, a PIL image of the slide."""
+    width, height = size
+    k = image.width / width
+    floor = MIN_PT * height / 540
+    rows = [r for r in s["shapes"] if r["visible"] and r["type"] != GROUP]
+    still = [r for r in rows if not (r["layer"] == "slide" and r["id"] in moving)]
+    texts = [r for r in still if r.get("text") and _area(r["text"]["box"]) > 0]
+    faults = []
+
+    def name(r):
+        return repr(r["text"]["sample"]) if r.get("text") else repr(r["name"])
+
+    for n, a in enumerate(texts):
+        for b in texts[n + 1:]:
+            both = _shared(a["text"]["box"], b["text"]["box"])
+            if both >= 0.25 * min(_area(a["text"]["box"]), _area(b["text"]["box"])):
+                faults.append(("text on text", f"{name(a)} and {name(b)} are printed over each other",
+                               [a["text"]["box"], b["text"]["box"]]))
+    for r in texts:
+        runs = Counter()
+        for chars, _, rgb in r["text"]["runs"]:
+            runs[rgb] += chars
+        if not runs:
+            continue
+        rgb = runs.most_common(1)[0][0]
+        ink = (rgb & 255, rgb >> 8 & 255, rgb >> 16 & 255)   # PowerPoint gives BGR
+        colour, spread = _behind(image, r["text"]["box"], ink, k)
+        if colour is None:
+            continue
+        if _contrast(ink, colour) < UNREADABLE:
+            faults.append(("cannot read", f"{name(r)}: text {'%02X%02X%02X' % ink} on {'%02X%02X%02X' % colour}",
+                           [r["text"]["box"]]))
+        elif r["layer"] == "slide" and (s["slide"], r["id"]) in slots and spread > BUSY:
+            under = [o for o in still if o is not r and o["type"] in SOLID and _area(o["box"]) < 0.5 * width * height
+                     and not (o["layer"] == "slide" and (s["slide"], o["id"]) in slots)
+                     and _shared(r["text"]["box"], o["box"]) >= 0.15 * _area(r["text"]["box"])]
+            if under:
+                faults.append(("title on content", f"the title {name(r)} lies across the {SOLID[under[0]['type']]} "
+                               f"{under[0]['name']!r}", [r["text"]["box"], under[0]["box"]]))
+        left, top, right, bottom = _box(r["text"]["box"])
+        if left < -2 or top < -2 or right > width + 2 or bottom > height + 2:
+            faults.append(("text off the slide", f"{name(r)} runs past the edge of the slide", [r["text"]["box"]]))
+    order = {id(r): n for n, r in enumerate(s["shapes"])}   # PowerPoint lists shapes from the back to the front
+    for r in texts:
+        if r["layer"] != "slide":
+            continue
+        over = [o for o in still if o["layer"] == "slide" and o["type"] in SOLID and order[id(o)] > order[id(r)]
+                and _shared(r["text"]["box"], o["box"]) >= 0.3 * _area(r["text"]["box"])]
+        if over:
+            faults.append(("text hidden", f"the {SOLID[over[0]['type']]} {over[0]['name']!r} covers {name(r)}",
+                           [r["text"]["box"], over[0]["box"]]))
+    pictures = [r for r in still if SOLID.get(r["type"]) == "picture" and _area(r["box"]) < 0.5 * width * height]
+    for n, a in enumerate(pictures):
+        for b in pictures[n + 1:]:
+            if a["layer"] == b["layer"] == "slide" and _shared(a["box"], b["box"]) >= 0.9 * max(_area(a["box"]), _area(b["box"])) > 0:
+                faults.append(("same picture twice", f"{a['name']!r} and {b['name']!r} are in the same place: "
+                               "was the shell applied twice?", [a["box"]]))
+    for a in (r for r in pictures if r["layer"] == "slide"):
+        for b in (r for r in pictures if r["layer"] != "slide"):
+            small, big = sorted((_area(a["box"]), _area(b["box"])))
+            if small and big / small <= 4 and _shared(a["box"], b["box"]) >= 0.3 * small:
+                faults.append(("picture on the master's picture",
+                               f"{a['name']!r} sits on {b['name']!r} of the slide {b['layer']}: an old logo under "
+                               "the new one? Old shell lives in the master; change it there (guide 13)",
+                               [a["box"], b["box"]]))
+    chars = tiny = 0
+    smallest = []
+    for r in texts:
+        if _box(r["text"]["box"])[1] > 0.92 * height or (r["layer"] == "slide" and (s["slide"], r["id"]) in slots):
+            continue   # footers, sources and the step bar may be small
+        for count, pt, _ in r["text"]["runs"]:
+            chars += count
+            if pt < floor:
+                tiny += count
+                smallest.append((pt, r))
+    if chars and tiny / chars > 0.2:
+        smallest.sort(key=lambda item: item[0])
+        faults.append(("tiny text", f"{tiny / chars:.0%} of the text is under {floor:g} pt (smallest "
+                       f"{smallest[0][0]:g} pt, e.g. {name(smallest[0][1])}): nobody in the room reads it",
+                       [r["text"]["box"] for _, r in smallest[:6]]))
+    return faults
+
+
+def _facts(deck, out_dir, slides=None, width=1600):
+    """PowerPoint's own account of a deck: for every shape of every slide (and of its layout and master)
+    where it is, where its text really is, the text's size and colour as drawn; plus a PNG of each slide."""
+    try:
+        import win32com.client as win32
+    except ImportError:
+        sys.exit("this command needs PowerPoint on Windows (pywin32)")
+    out_dir = Path(out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    def collect(shape, rows, layer, depth=0):
+        try:
+            kind = int(shape.Type)
+            row = {"id": int(shape.Id), "name": str(shape.Name), "type": kind, "layer": layer, "depth": depth,
+                   "box": [round(float(v), 1) for v in (shape.Left, shape.Top, shape.Width, shape.Height)],
+                   "visible": bool(shape.Visible)}
+        except Exception:  # noqa: BLE001  (a shape PowerPoint will not describe)
+            return
+        rows.append(row)
+        if kind == GROUP:
+            for n in range(1, shape.GroupItems.Count + 1):
+                collect(shape.GroupItems(n), rows, layer, depth + 1)
+            return
+        try:
+            if kind == PLACEHOLDER and int(shape.PlaceholderFormat.ContainedType) in SOLID:
+                row["type"] = int(shape.PlaceholderFormat.ContainedType)
+            if shape.HasTextFrame and shape.TextFrame.HasText:
+                whole = shape.TextFrame.TextRange
+                text = str(whole.Text).strip()
+                runs = []
+                for n in range(1, min(whole.Runs().Count, 12) + 1):
+                    run = whole.Runs(n)
+                    if str(run.Text).strip():
+                        runs.append([len(str(run.Text).strip()), round(float(run.Font.Size), 1), int(run.Font.Color.RGB)])
+                if len(text) >= 2 and runs:
+                    inked = whole.TrimText()   # without the empty lines at the end of the box
+                    row["text"] = {"sample": text.replace("\r", " ").replace("\x0b", " ")[:32], "runs": runs,
+                                   "box": [round(float(v), 1) for v in (inked.BoundLeft, inked.BoundTop,
+                                                                        inked.BoundWidth, inked.BoundHeight)]}
+        except Exception:  # noqa: BLE001  (charts, OLE objects: no text frame to read)
+            pass
+
+    app = win32.Dispatch("PowerPoint.Application")
+    was_open = app.Presentations.Count
+    pres = app.Presentations.Open(str(Path(deck).resolve()), True, False, False)
+    try:
+        size = (float(pres.PageSetup.SlideWidth), float(pres.PageSetup.SlideHeight))
+        data = {"size": size, "slides": []}
+        for number in range(1, pres.Slides.Count + 1):
+            if slides and number not in slides:
+                continue
+            slide = pres.Slides(number)
+            rows = []
+            for n in range(1, slide.Shapes.Count + 1):
+                collect(slide.Shapes(n), rows, "slide")
+            layers = [("layout", slide.CustomLayout.Shapes)]
+            if slide.DisplayMasterShapes and slide.CustomLayout.DisplayMasterShapes:
+                layers.append(("master", slide.Master.Shapes))
+            for layer, shapes in layers:
+                for n in range(1, shapes.Count + 1):
+                    if int(shapes(n).Type) != PLACEHOLDER:   # an empty placeholder is not drawn
+                        collect(shapes(n), rows, layer)
+            png = (out_dir / f"slide-{number:02d}.png").resolve()
+            slide.Export(str(png), "PNG", width, round(width * size[1] / size[0]))
+            data["slides"].append({"slide": number, "png": str(png), "shapes": rows})
+    finally:
+        pres.Close()
+        if not was_open:
+            app.Quit()
+    return data
+
+
+def _moving(prs, data):
+    """{slide: ids of the shapes an animation moves, with the children of animated groups}."""
+    out = {}
+    for s in data["slides"]:
+        ids = {int(t.get("spid")) for t in prs.slides[s["slide"] - 1]._element.iter(qn("p:spTgt")) if t.get("spid")}
+        inside = False
+        for r in s["shapes"]:
+            if r["layer"] != "slide":
+                continue
+            if not r["depth"]:
+                inside = r["id"] in ids
+            elif inside:
+                ids.add(r["id"])
+        out[s["slide"]] = ids
+    return out
+
+
+def glance(deck, out_dir, slides=None, data=None):
+    """The faults a person sees in the first second, slide by slide, from PowerPoint's own drawing.
+    -> [{"slide", "png", "faults": [(kind, sentence)], "marked": png with the faults boxed}]"""
+    from PIL import Image, ImageDraw
+    data = data or _facts(deck, out_dir, slides)
+    moving = _moving(Presentation(deck), data)
+    slots = _slots(data["slides"], data["size"])
+    report = []
+    for s in data["slides"]:
+        image = Image.open(s["png"]).convert("RGB")
+        faults = _glance_slide(s, data["size"], slots, moving[s["slide"]], image)
+        row = {"slide": s["slide"], "png": s["png"], "faults": [(kind, text) for kind, text, _ in faults]}
+        if faults:
+            k = image.width / data["size"][0]
+            draw = ImageDraw.Draw(image)
+            for n, (kind, _, boxes) in enumerate(faults, 1):
+                for box in boxes:
+                    left, top, right, bottom = (round(v * k) for v in _box(box))
+                    draw.rectangle([left - 3, top - 3, right + 3, bottom + 3], outline=(230, 0, 40), width=4)
+                    draw.rectangle([left - 3, top - 25, left + 22, top - 3], fill=(230, 0, 40))
+                    draw.text((left + 3, top - 22), str(n), fill=(255, 255, 255))
+            row["marked"] = str(Path(s["png"]).with_name(f"faults-{s['slide']:02d}.png"))
+            image.save(row["marked"])
+        report.append(row)
+    return report
+
+
+def glance_lines(report):
+    lines, bad = [], 0
+    for row in report:
+        if not row["faults"]:
+            continue
+        bad += 1
+        lines.append(f"slide {row['slide']}: {len(row['faults'])} fault(s), boxed in {row['marked']}")
+        lines += [f"  {n}. {kind}: {text}" for n, (kind, text) in enumerate(row["faults"], 1)]
+    folder = Path(report[0]["png"]).parent if report else ""
+    if bad:
+        lines.append(f"{bad} of {len(report)} slides have faults a viewer sees at once. Fix each one in the builder, "
+                     "build again, run glance again. Do not show this deck to anyone yet.")
+    else:
+        lines.append(f"no fault found on {len(report)} slides by measuring. That is not yet 'looked at': open every "
+                     f"slide-NN.png in {folder} at full size before you show the deck (guide 8).")
+    return lines
+
+
 # ------------------------------------------------------------ decks made by others
 
 C_NS = "http://schemas.openxmlformats.org/drawingml/2006/chart"
@@ -1981,6 +2270,10 @@ def main(argv=None):
     a.add_argument("deck")
     a.add_argument("--slides", default=None, help="slide numbers, e.g. 3,6 (default: all)")
     a.add_argument("-o", "--output", default=None, help="folder (default: <deck>-watch)")
+    a = sp.add_parser("glance", help="the faults a viewer sees at once, measured in PowerPoint and boxed on the slide")
+    a.add_argument("deck")
+    a.add_argument("--slides", default=None, help="slide numbers, e.g. 3,6 (default: all)")
+    a.add_argument("-o", "--output", default=None, help="folder (default: <deck>-glance)")
     a = sp.add_parser("motion", help="write clicks and transitions from a plan")
     a.add_argument("deck")
     a.add_argument("plan")
@@ -2158,6 +2451,11 @@ def main(argv=None):
             return 0
     except ValueError as exc:
         sys.exit(f"error: {exc}")
+    if args.cmd == "glance":
+        out = args.output or str(Path(args.deck).with_suffix("")) + "-glance"
+        report = glance(args.deck, out, [int(n) for n in args.slides.split(",")] if args.slides else None)
+        print("\n".join(glance_lines(report)))
+        return 1 if any(row["faults"] for row in report) else 0
     if args.cmd == "watch":
         out = args.output or str(Path(args.deck).with_suffix("")) + "-watch"
         picked = [int(n) for n in args.slides.split(",")] if args.slides else None
