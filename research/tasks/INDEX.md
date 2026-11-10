@@ -3,7 +3,7 @@
 Since T040: every new title starts with its domain in brackets: `[pptx]`, `[docx]`, `[xlsx]`, `[svg]` or `[cross]` (see `domains/README.md`). Lifecycle: `lab/PROTOCOL.md`. A row may carry `review requested` / `reviewed: <verdict>`.
 
 This file is the one place to take a task ID. Before starting, add a row with
-status `claimed`, using the next free ID (**T098**). Push the row before you do
+status `claimed`, using the next free ID (**T100**). Push the row before you do
 expensive work. IDs are never reused. T024 was taken three times in parallel,
 so those rows carry a suffix. The experiment folders keep the names they were
 created with.
@@ -127,4 +127,5 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T095 | [pptx] Guide 10 fixes from T094: diagram form and notes are content, no blank opening; inventory theme fonts and fills; numbers per slide | claude | `work/T095-claude-guide10-fixes` | review requested | `experiments/T095-20261109-claude-guide10-fixes/REPORT.md` |
 | T096 | [pptx] Style from a reference PDF; small-text floor scaled to slide size | claude | `work/T096-claude-sample-style-and-scaled-floor` | review requested | `experiments/T096-20261109-claude-sample-style-and-scaled-floor/REPORT.md` |
 | T097 | [pptx] Rebuild an existing deck with agents: extract, score, staged pipeline | claude | `work/T097-claude-rebuild-pipeline` | review requested (stacked on T096) | `experiments/T097-20261109-claude-rebuild-pipeline/REPORT.md` |
-| T098 | *next free ID* | | | | |
+| T099 | [pptx] Apply actionable review findings: number parsing, sample errors, table fills, image API | lead | `work/T099-lead-followup-review-fixes` | claimed | `experiments/T099-20261110-lead-followup-review-fixes/REPORT.md` |
+| T100 | *next free ID* | | | | |
