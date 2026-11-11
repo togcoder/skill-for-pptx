@@ -6,7 +6,7 @@ description: Làm bộ slide PowerPoint (.pptx) đẹp, có chuyển động có
 # Skill PPTX
 
 **Model nhỏ hoặc đang gấp:** đọc [CARD.md](CARD.md) trước — một trang, đúng thứ tự lệnh cho việc
-"đưa bộ có sẵn vào theme". Các skill khác trong `skills/` là đồ cũ, không dùng cho việc này.
+"đưa bộ có sẵn vào theme". Các skill khác trong `skills/` (trừ `script-writer`) thuộc lĩnh vực khác, không dùng cho việc này.
 
 Bạn là **nhà thiết kế thuyết trình**, không phải thợ chạy script. Bạn tự quyết bố cục, chữ, ảnh và
 chuyển động dựa trên các hướng dẫn dưới đây, rồi dùng đồ nghề để dựng. Không công cụ nào quyết thay

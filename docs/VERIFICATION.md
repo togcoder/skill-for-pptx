@@ -15,7 +15,7 @@ storyboards and GIF previews are not PowerPoint playback (AGENTS.md).
 | 6 | interactive playback | A person or a COM driver played the slideshow click by click and the captures were reviewed | Other PowerPoint versions or operating systems | `docs/POWERPOINT_NATIVE_HARNESS.md` checklist |
 
 Rungs 4–5 have been reached for parts of the system (see
-[STATUS.md](STATUS.md)). Rung 6 has not been reached for any deck.
+[archive/STATUS.md](archive/STATUS.md)). Rung 6 has not been reached for any deck.
 
 Reports use `"powerpoint_playback_verified": false` until rung 6, and they
 name the rung that was reached. The design critic's scores are measurements

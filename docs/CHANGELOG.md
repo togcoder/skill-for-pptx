@@ -12,6 +12,15 @@ were true at the time. Task IDs and their branches are listed in
 
 
 
+## T105 [pptx] Clean out old PPTX skills and stale docs — 2026-11-12
+
+- Removed `skills/deck-director`, `skills/pptx-motion`, `skills/pptx-motion-director`, `skills/slide-forge` and
+  `commands/` (`/animate-deck`, `/forge-deck`): the plugin loaded five competing PPTX skills. Their scripts stay.
+  `skills/script-writer` stays because guides 1 and 6 of `skills/pptx` use it.
+- Archived `docs/STATUS.md`, `docs/PRODUCT_TARGET.md`, `docs/BRIEF_TU_BO_SKILL.md`; links fixed.
+- README's PowerPoint part and the plugin description now point at `skills/pptx` and `CARD.md`.
+  `experiments/T105-20261112-claude-cleanup-old-docs/REPORT.md`.
+
 ## T104 [pptx] Repair the skill and prove it end to end (brief 2026-11-11) — 2026-11-11
 
 - **A1:** adopted PR #85 (`work/T102-antigravity-glance-table-chart-fit-guards`) on `main`: resolved four

@@ -3,7 +3,7 @@
 Since T040: every new title starts with its domain in brackets: `[pptx]`, `[docx]`, `[xlsx]`, `[svg]` or `[cross]` (see `domains/README.md`). Lifecycle: `lab/PROTOCOL.md`. A row may carry `review requested` / `reviewed: <verdict>`.
 
 This file is the one place to take a task ID. Before starting, add a row with
-status `claimed`, using the next free ID (**T105**). Push the row before you do
+status `claimed`, using the next free ID (**T106**). Push the row before you do
 expensive work. IDs are never reused. T024 was taken three times in parallel,
 so those rows carry a suffix. The experiment folders keep the names they were
 created with.
@@ -127,7 +127,7 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T095 | [pptx] Guide 10 fixes from T094: diagram form and notes are content, no blank opening; inventory theme fonts and fills; numbers per slide | claude | `work/T095-claude-guide10-fixes` | review requested | `experiments/T095-20261109-claude-guide10-fixes/REPORT.md` |
 | T096 | [pptx] Style from a reference PDF; small-text floor scaled to slide size | claude | `work/T096-claude-sample-style-and-scaled-floor` | review requested | `experiments/T096-20261109-claude-sample-style-and-scaled-floor/REPORT.md` |
 | T097 | [pptx] Rebuild an existing deck with agents: extract, score, staged pipeline | claude | `work/T097-claude-rebuild-pipeline` | review requested (stacked on T096) | `experiments/T097-20261109-claude-rebuild-pipeline/REPORT.md` |
-status `claimed`, using the next free ID (**T105**). Push the row before you do
+status `claimed`, using the next free ID (**T106**). Push the row before you do
 
 | T098 | [pptx] Extract reusable components from an existing deck: vector groups, ungroup, background removal, component library | dsh | \work/T098-dsh-component-extraction\ | main (lead review: accept; owner-authorized merge) | \experiments/T098-20261110-dsh-component-extraction/REPORT.md\ |
 | T099 | [pptx] Apply actionable review findings: number parsing, sample errors, table fills, image API | lead | \work/T099-lead-followup-review-fixes\ | review requested (PR #82) | \experiments/T099-20261110-lead-followup-review-fixes/REPORT.md\ |
@@ -136,4 +136,5 @@ status `claimed`, using the next free ID (**T105**). Push the row before you do
 | T102 | [pptx] Harden glance (tables, charts, PUA, dup photos, busy backgrounds), fit overflow, and small-model workflow guards (issue 83) | antigravity | `work/T102-antigravity-glance-table-chart-fit-guards` | main (merged via T104 after the two noisy rules were fixed) | `experiments/T102-20261111-antigravity-glance-table-chart-fit-guards/REPORT.md` |
 | T103 | [pptx] Baseline for agents and the brief for the repair-and-test agent | claude | `work/T103-claude-baseline-and-brief` | merged at the owner's word | `docs/BRIEF_TU_BO_SKILL.md` (no experiment folder) `experiments/T103-20261111-claude-baseline-and-brief/REPORT.md` |
 | T104 | [pptx] Repair the skill and prove it end to end (brief 2026-11-11) | lead | `work/T104-lead-fix2` | review requested (A1–A3, A4, B1 v2 and B2 v2 done; owner's B4 verdict pending) | `experiments/T104-20261111-lead-repair-and-test/REPORT.md` |
-| T105 | *next free ID* | | | | |
+| T105 | [pptx] Clean out old skills and stale docs | claude | `work/T105-claude-cleanup-old-docs` | merged at the owner's word | `experiments/T105-20261112-claude-cleanup-old-docs/REPORT.md` |
+| T106 | *next free ID* | | | | |

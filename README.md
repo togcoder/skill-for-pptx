@@ -28,84 +28,20 @@ kỹ thuật, đáp ứng đúng ý người dùng ngay từ lượt đầu.
 - Không file đầu ra nào được nằm ở thư mục gốc: kết quả của mỗi task vào
   `experiments/<ID>-…/artifacts/`, file nháp vào `workspace/`.
 
-Phần dưới đây mô tả domain **pptx**.
+## PowerPoint: dùng skill nào
 
-## Ba đường sản phẩm
+**Một skill duy nhất: [`skills/pptx/SKILL.md`](skills/pptx/SKILL.md).** Model nhỏ đọc
+[`skills/pptx/CARD.md`](skills/pptx/CARD.md) (một trang) trước. Skill là lời hướng dẫn; đồ nghề đi kèm là
+`scripts/pptx_tools.py` (`glance`, `shell`, `fit`, `arrange`, `compare`, `seen`, `watch`, `check`…).
 
-### 1. Motion Director cho deck có sẵn
+Việc skill làm tốt nhất hiện nay: **đưa một bộ slide có sẵn vào theme** và dựng lại bố cục từng slide, kiểm
+bằng ảnh (mục 13, 14 của skill). Các skill PPTX cũ (Motion Director, Morph Studio, Slide Forge, Deck
+Director) đã gỡ khỏi repo ngày 2026-11-12; mã của chúng vẫn nằm trong `scripts/` làm đồ nghề
+và lịch sử còn trong git.
 
-```bash
-pip install lxml python-pptx Pillow
-python3 scripts/motion_director.py inspect deck.pptx                       # AI đọc deck
-python3 scripts/motion_director.py auto deck.pptx -o out.pptx --style cinematic \
-        --script script.md --write-notes --preview previews/                # kịch bản → click → chuyển động
-python3 scripts/motion_director.py critique out.pptx --md critique.md      # chấm đẹp + kỹ thuật
-```
-
-Director giữ nguyên số slide, thứ tự, chữ, bố cục và animation có sẵn. Thứ tự
-nguồn kịch bản: kịch bản người dùng > speaker notes > animation có sẵn > tự
-suy luận, và thiếu thì tự viết đầy đủ (`motion_script.py draft`).
-
-Chuyển động có 3 lớp:
-
-- **Chính:** hiện dần, build biểu đồ, tụ lại, soi từng phần, đổi chỗ, hành
-  trình, zoom.
-- **Phụ:** quầng sáng đi theo tiêu điểm, đường ray và token, bút dạ quang, gạch
-  chân, chữ trồi lên từ một đường kẻ.
-- **Nền:** vòng quỹ đạo quay chậm, Ken Burns, nền trôi.
-
-Skill: [`skills/pptx-motion-director`](skills/pptx-motion-director/SKILL.md),
-lệnh `/animate-deck`.
-
-### 2. Morph Studio: Morph giữa slide kiểu chuyên nghiệp
-
-```bash
-python3 scripts/morph_studio.py propose out.pptx -o morph.json
-python3 scripts/morph_studio.py apply out.pptx morph.json -o final.pptx
-```
-
-Công cụ ghép cặp bằng tên `!!` dọc theo cả chuỗi slide và tạo các kiểu Morph:
-
-- tiêu đề trượt;
-- vật thể bay vào/ra từ ngoài slide;
-- camera zoom vào rồi lùi ra;
-- thẻ nở thành panel;
-- cuộn ngang.
-
-Danh mục 50 kỹ thuật:
-[`pro-techniques.md`](skills/pptx-motion-director/references/pro-techniques.md).
-
-### 3. Slide Forge: dựng deck mới
-
-```bash
-python3 scripts/slide_forge.py schema
-python3 scripts/slide_forge.py build examples/pptx/forge/coffee_report.json -o deck.pptx   # dựng + chuyển động + QA + critique
-```
-
-AI viết một spec ngữ nghĩa với 12 layout, rồi Forge tự lo:
-
-- bố cục và cỡ chữ đo thật;
-- theme Office, hoặc theme sinh từ một màu thương hiệu;
-- ảnh và icon có giấy phép;
-- chuyển động native.
-
-Skill: [`skills/slide-forge`](skills/slide-forge/SKILL.md), lệnh `/forge-deck`.
-
-## Thống nhất cái đẹp và kỹ thuật (T034)
-
-[`knowledge/design_system.json`](knowledge/design_system.json) là nguồn duy
-nhất cho các con số "đẹp": thời lượng theo vai trò, easing đã khớp vào
-PowerPoint, độ trễ so le, số click mỗi slide, số vật thể chuyển động cùng lúc,
-độ tương phản WCAG, thang cỡ chữ và mật độ chữ.
-
-Bộ sinh (engine, writer, Director, components, Forge) **đọc** các con số này.
-Bộ kiểm (validator, QA, `design_critic.py`) **chấm** đúng theo chúng. Mỗi phát
-hiện ghi rõ luật, giá trị đo, ngưỡng và công cụ sửa.
-
-Căn cứ gồm design token của IBM Carbon và Material 3, WCAG 2.2, nghiên cứu cảm
-nhận chuyển động (slow-in/slow-out, so le, giới hạn theo dõi khoảng 4 vật thể),
-nguyên lý học đa phương tiện, và các benchmark thẩm mỹ slide mới nhất
-(SlidesGen-Bench 2026). Chi tiết ở [docs/DESIGN_SYSTEM.md](docs/DESIGN_SYSTEM.md).
+Số "đẹp" (thời lượng, tương phản, thang chữ) nằm ở
+[`knowledge/design_system.json`](knowledge/design_system.json), chi tiết ở
+[docs/DESIGN_SYSTEM.md](docs/DESIGN_SYSTEM.md).
 
 ## Mức bằng chứng
 
@@ -122,7 +58,6 @@ phỏng.
 ```text
 /plugin marketplace add togcoder/skill-for-pptx
 /plugin install pptx-motion@togcoder-pptx
-/animate-deck deck.pptx      hoặc      /forge-deck spec.json
 ```
 
 Repo đang private nên trình cài cần quyền truy cập GitHub.
@@ -133,8 +68,7 @@ Repo đang private nên trình cài cần quyền truy cập GitHub.
 |---|---|
 | [AGENTS.md](AGENTS.md) | Quy tắc cho mọi agent |
 | [HANDOFF.md](HANDOFF.md) | Bắt đầu nhanh, việc tiếp theo, prompt giao việc |
-| [docs/STATUS.md](docs/STATUS.md) | Trạng thái hiện tại, ma trận năng lực × bằng chứng |
-| [docs/PRODUCT_TARGET.md](docs/PRODUCT_TARGET.md) | Đích sản phẩm và hợp đồng tự chủ |
+| [domains/pptx/DOMAIN.md](domains/pptx/DOMAIN.md) | Trạng thái hiện tại của domain PowerPoint |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Sơ đồ module và luồng dữ liệu |
 | [docs/DESIGN_SYSTEM.md](docs/DESIGN_SYSTEM.md) | Hệ thiết kế: token, luật, bằng chứng, critic |
 | [docs/VERIFICATION.md](docs/VERIFICATION.md) | Thang bằng chứng và quy trình kiểm chứng native |

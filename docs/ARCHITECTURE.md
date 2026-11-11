@@ -77,7 +77,7 @@ The scripts sit in `scripts/`, data in `knowledge/`, and the skills in
 ## Contracts
 
 - **Director plan v0.7:** layers, generated components and narration. The
-  essentials are in `skills/pptx-motion-director/SKILL.md`. The full v0.4
+  essentials were in `skills/pptx-motion-director/SKILL.md` (removed in T105; see git history). The full v0.4
   contract is in `skills/pptx-motion/references/existing-deck-director.md`
   (historical); later versions are additive.
 - **Morph plan** (`kind: "morph-scenes"`): continuity and scenes; see
