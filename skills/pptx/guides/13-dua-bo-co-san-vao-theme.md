@@ -7,22 +7,10 @@ cách tác giả đã sắp nội dung.
 
 ## Vì sao việc này hay hỏng
 
-Bài học thật: một bộ QCC 37 slide, bốn lần làm, bốn kiểu hỏng.
-
-| Lần | Agent đã làm | Người dùng thấy |
-|---|---|---|
-| 1, 2 | Vẽ lại từng slide từ đầu theo theme | Mất ảnh bằng chứng, biểu đồ bị đổi, chữ nhỏ như văn bản, câu tự bịa |
-| 3 | "Đừng làm hỏng nội dung" → không đụng gì, chỉ đổi vài chỗ vỏ | Gần như không khác bản gốc |
-| 4 | Dán vỏ mới lên trên slide cũ | Hai logo chồng nhau, tiêu đề đè lên bảng, chữ xanh trên nền tối |
-
-Cả bốn lần agent đều báo "đã kiểm". Ba nguyên nhân:
-
-1. **Không có thao tác ở giữa.** Agent chỉ biết hai cực: vẽ lại hết, hoặc để nguyên. Việc người dùng cần
-   nằm giữa hai cực đó.
-2. **Vỏ cũ không nằm trên slide.** Logo cũ và nền tối nằm trong *slide master*. Agent dò từng slide nên
-   không bao giờ thấy, sửa bao nhiêu lần cũng còn hai logo.
-3. **Không nhìn.** Agent chạy vài lệnh đếm, thấy "đạt", rồi giao. Lỗi mà người xem thấy trong một giây thì
-   không lệnh nào trong số đó đo.
+Bài học thật: bộ QCC 37 slide, bốn lần làm, bốn kiểu hỏng — vẽ lại từ đầu (mất ảnh, đổi biểu đồ, chữ nhỏ);
+"đừng làm hỏng nội dung" thành không đụng gì; dán vỏ mới lên slide cũ (hai logo, tiêu đề đè bảng, chữ
+sáng trên nền tối). Ba nguyên nhân: (1) không có thao tác ở giữa "vẽ lại hết" và "để nguyên"; (2) vỏ cũ
+nằm trong slide master chứ không nằm trên slide; (3) không nhìn — chạy vài lệnh đếm thấy "đạt" rồi giao.
 
 ## Ba mức cho mỗi slide
 
@@ -98,60 +86,33 @@ Dựng lại cả bộ 37 slide theo cách này mất khoảng hai phút. Vì v�
 
 ## Kiểm trước khi đưa cho ai xem
 
-Ba việc, theo thứ tự. Thiếu một việc thì chưa được nói "đã kiểm".
+Ba việc, theo thứ tự; thiếu một việc là chưa được nói "đã kiểm". Câu hỏi chi tiết ở mục 8.
 
-**1. `glance`: lỗi nhìn một giây là thấy.**
-
-```
-python scripts/pptx_tools.py glance 5_xong.pptx
-```
-
-Lệnh hỏi chính PowerPoint: chữ thật sự nằm ở đâu, màu gì, cỡ bao nhiêu, kể cả **ô bảng thật**, **biểu đồ** và các vật của master. Nó báo:
+**1. `glance`:** `python scripts/pptx_tools.py glance 5_xong.pptx` — lỗi người xem thấy trong một giây,
+khoanh đỏ trên `faults-NN.png`. Mở ảnh đó, sửa trong script, dựng lại, chạy lại cho tới khi hết; lỗi nào
+để lại (ví dụ có sẵn trong bản gốc) ghi vào bàn giao kèm lý do. `glance` không đo gu: hết lỗi chưa phải tốt.
 
 | Lệnh ghi | Nghĩa |
 |---|---|
 | `text on text` | hai dòng chữ in đè lên nhau (hai tiêu đề, vỏ gắn hai lần) |
-| `cannot read` | chữ gần trùng màu với nền phía sau nó, kể cả chữ trong biểu đồ và ô bảng |
+| `cannot read` | chữ gần trùng màu nền, kể cả chữ trong biểu đồ và ô bảng |
 | `picture on the master's picture` | logo mới nằm trên logo cũ của master |
-| `same picture twice` | một ảnh nằm hai lần đúng một chỗ, hoặc cùng một ảnh nội dung bị lặp ở nhiều khung trên slide |
-| `text hidden` | ảnh, video, bảng nằm đè lên chữ |
-| `text on picture` | chữ đặt lên ảnh, bảng hoặc biểu đồ có nền rối (độ tương phản nhiễu cao) |
-| `content under the shell` | ảnh, bảng, biểu đồ chui dưới thanh bước, logo, chân trang |
-| `text spills` | chữ dài hơn khung của nó và tràn sang vật bên cạnh |
-| `title on content` | tiêu đề nằm vắt qua ảnh, bảng |
-| `text off the slide`, `table off the slide` | tràn ra ngoài slide |
-| `tiny text` | hơn một phần năm số chữ nhỏ hơn mức tối thiểu, một đoạn chữ quá nhỏ (< 75% sàn), hoặc chữ trong **bảng / biểu đồ** dưới sàn |
-| `broken symbol` | ký tự biểu tượng Wingdings/PUA (`U+F000–U+F0FF`) bị rơi về font chữ thường thành ô vuông |
-| `draft text` | còn sót chữ mẫu hoặc câu chú thích nháp ("Lorem ipsum", `[TODO]`, "kept from...", "nothing redrawn") |
-| `missing` | slide này thiếu thứ mà hầu hết slide khác có (tiêu đề, thanh bước) |
+| `same picture twice` | một ảnh nằm hai lần, hoặc ảnh nội dung lặp ở nhiều khung |
+| `text hidden` / `content under the shell` | ảnh, video, bảng đè lên chữ / nội dung chui dưới vỏ |
+| `text on picture` / `title on content` | chữ hoặc tiêu đề đặt lên ảnh, bảng, biểu đồ có nền rối |
+| `text spills` / `text off the slide` | chữ tràn sang vật bên cạnh / ra ngoài slide |
+| `tiny text` | chữ dưới sàn (một phần năm số chữ, đoạn nhỏ hơn 75% sàn, hoặc chữ bảng/biểu đồ dưới sàn) |
+| `broken symbol` | ký tự Wingdings/PUA rơi về font thường thành ô vuông |
+| `draft text` | còn chữ mẫu/nháp ("Lorem ipsum", `[TODO]`, "kept from...") |
+| `missing` | slide thiếu thứ hầu hết slide khác có (tiêu đề, thanh bước) |
 
-Mỗi slide có lỗi có một ảnh `faults-NN.png` khoanh đỏ từng chỗ. **Mở ảnh đó ra.** Sửa trong script, dựng
-lại, chạy lại, cho tới khi hết. Lỗi nào quyết định để lại (ví dụ lỗi có sẵn trong bản gốc và người dùng
-chưa nhờ sửa) thì ghi vào bàn giao, kèm lý do.
+**2. Mở từng slide ở cỡ lớn.** Mở **từng** `slide-NN.png`, không xem ảnh ghép thu nhỏ; mỗi ảnh có mã nhìn
+ba ký tự ở dải dưới, nộp bằng `python scripts/pptx_tools.py seen <thư-mục> 3=U6G 4=K7P …` (mục 14).
 
-`glance` chỉ đo được những gì đo được. Nó **không** biết slide có đẹp không, có điểm nhấn không, có trống
-không. Hết lỗi `glance` chưa phải là tốt.
+**3. Đặt cũ cạnh mới.** `python scripts/pptx_tools.py compare goc.pptx 5_xong.pptx` — mỗi slide một ảnh cũ
+trên, mới dưới; trả lời: bản cũ có gì bản mới không còn, có gì mới tệ hơn, có gì mới không có trong gốc.
 
-Mỗi ảnh `slide-NN.png` có một **mã nhìn** ba ký tự ở dải dưới. Mở xong thì nộp các mã bằng lệnh `seen`
-(mục 14); slide nào không có mã đúng là slide chưa được nhìn.
-
-**2. Mở từng slide ở cỡ lớn.** `glance` đã xuất `slide-NN.png` cho mọi slide. Mở **từng ảnh một**, không
-xem ảnh ghép thu nhỏ: ở cỡ thu nhỏ, hai logo chồng nhau trông như một. Với mỗi slide, trả lời các câu hỏi
-của mục 8.
-
-**3. Đặt cũ cạnh mới.**
-
-```
-python scripts/pptx_tools.py compare goc.pptx 5_xong.pptx
-```
-
-Mỗi slide một ảnh: slide cũ ở trên, slide mới ở dưới. Với mỗi cặp, trả lời ba câu:
-
-- Slide cũ có gì mà slide mới **không còn** (một ảnh, một con số, một nhãn, một mũi tên)?
-- Có gì ở slide mới **tệ hơn** slide cũ (nhỏ hơn, mờ hơn, lệch hơn, khó đọc hơn)?
-- Có gì ở slide mới mà **không có trong bản gốc** (một câu, một con số, một hình)? Nếu có, ai cho thêm?
-
-Rồi mới chạy `check` (mục 11) cho phần giữ ruột.
+Rồi chạy `check` (mục 11) cho phần giữ ruột.
 
 ## Khi người dùng chê
 

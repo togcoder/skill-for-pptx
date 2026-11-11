@@ -151,31 +151,18 @@ này.
 
 ## Luật cứng sau bài học QCC Ver5 (2026-11-10)
 
-Bản Ver5 được dựng bằng cách lấy **bộ Ver4 đã bị loại** làm nền cho 26/38 slide, chỉ thay 7 slide khó. Nó
-qua `check` 8/9 nhưng bị loại vì mất ảnh, đổi biểu đồ tròn thành cột, bịa thông số, bảng không khung, mất
-cặp video, chữ trắng trên nền ivory. Từ bài học đó, các luật sau là **bắt buộc**, không phải lời khuyên:
+Ver5 lấy bộ Ver4 đã bị loại làm nền 26/38 slide, qua `check` 8/9 nhưng vẫn bị loại vì mất ảnh, đổi biểu
+đồ, bịa thông số, bảng không khung, mất cặp video, chữ trắng trên nền ivory. Từ đó, các luật sau là bắt buộc:
 
-1. **Bản rebuild cũ không phải nguồn.** Luôn bắt đầu từ bộ gốc; không lấy builder/bản đã bị loại làm nền.
-2. **Trước khi dựng, lập bảng tài sản từng slide**: ảnh bằng chứng, chart (loại + dữ liệu), bảng (ô gộp,
-   đường kẻ), video (cặp, thứ tự), hiệu ứng, câu chốt. Slide mới thiếu món nào phải ghi rõ lý do; không được
-   bỏ im lặng.
-3. **`rebuild` không được miễn cổng ảnh/chart/bảng.** Nếu bỏ ảnh/chart/bảng, khai `drop` + lý do; người
-   duyệt phải đồng ý. Không dùng nhãn `rebuild` để tắt cổng.
-4. **Ảnh bằng chứng bất khả xâm phạm**: không bỏ, không cắt mất chi tiết, không để dải màu/khung che lên.
-   Ảnh phải nằm đúng slide và đúng vai trò.
-5. **Chart giữ đúng loại và số**: chart tròn vẫn là tròn; chart cột vẫn là cột; dữ liệu lấy từ chart gốc,
-   không vẽ lại "gần đúng". Đổi loại phải có lý do và người duyệt.
-6. **Bảng phải là bảng thật và thấy ô**: giữ ô gộp, đường kẻ; không ẩn sạch khung; không ghép bảng bằng hộp
-   chữ. Bảng quá to thì tách phụ lục, không bóp chữ dưới ngưỡng.
-7. **Video giữ cặp/đúng vai trò**: hai video bổ trợ nhau ở cùng một slide hoặc cùng một cảnh; không tách
-   thành hai slide nếu mất nghĩa. Không thêm card trắng/caption nhỏ sau video tràn slide.
-8. **Không tự viết slogan/câu chốt.** Chữ trên slide lấy từ nguồn/bản hiểu ý; câu chốt thuộc lời nói. Những
-   câu như "Nine steps, one route" là bịa và bị loại.
-9. **Không cắt câu/cắt chữ để vừa khung** nếu làm mất nghĩa; sửa bố cục hoặc tách slide.
-10. **Mỗi đợt 5–8 slide**: dựng → render → mở **từng ảnh 1920×1080** → đặt ảnh cũ/mới cạnh nhau → sửa →
-    mới sang đợt sau. Không dựng cả bộ một lần rồi mới nhìn.
-11. **`check` không phải thước đo chất lượng.** `check` chỉ là cổng tối thiểu; phải chấm tầng 2 (mắt) và so
-    bản gốc từng slide. `check` pass mà ảnh mất/chart sai/bảng không khung thì vẫn là bản hỏng.
-12. **Tự quyết từ nguồn**: quan hệ cause–branch, cặp video, chart type... đọc từ sơ đồ/notes/bản gốc; chỉ hỏi
-    người dùng khi nguồn mâu thuẫn thật.
-
+1. **Bản rebuild cũ không phải nguồn.** Luôn bắt đầu từ bộ gốc; không lấy bản đã bị loại làm nền.
+2. **Lập bảng tài sản từng slide trước khi dựng:** ảnh bằng chứng, chart (loại + dữ liệu), bảng (ô gộp,
+   đường kẻ), video (cặp, thứ tự), hiệu ứng, câu chốt. Thiếu món nào phải khai `drop` + lý do, người duyệt đồng ý.
+3. **`rebuild` không được miễn cổng ảnh/chart/bảng;** không dùng nhãn `rebuild` để tắt cổng.
+4. **Ảnh bằng chứng bất khả xâm phạm:** không bỏ, không cắt mất chi tiết, không để dải màu/khung che lên.
+5. **Chart giữ đúng loại và số;** đổi loại phải có lý do và người duyệt. Bảng phải là bảng thật, thấy ô, giữ
+   ô gộp và đường kẻ; bảng quá to thì tách phụ lục, không bóp chữ dưới ngưỡng.
+6. **Video giữ cặp, đúng vai trò;** không thêm card trắng/caption nhỏ sau video tràn slide.
+7. **Không tự viết slogan/câu chốt, không cắt chữ để vừa khung** nếu mất nghĩa: sửa bố cục hoặc tách slide.
+8. **Mỗi đợt 5–8 slide:** dựng → render → mở **từng ảnh 1920×1080** → đặt cũ/mới cạnh nhau → sửa → đợt sau.
+9. **`check` không phải thước đo chất lượng;** phải chấm tầng 2 (mắt) và so bản gốc từng slide.
+10. **Tự quyết từ nguồn** (cause–branch, cặp video, chart type...): đọc sơ đồ/notes/bản gốc; chỉ hỏi khi nguồn mâu thuẫn thật.
