@@ -724,6 +724,7 @@ def _glance_slide(s, size, slots, moving, image, chart_inks=None, chart_sizes=No
         elif r["layer"] == "slide" and spread > BUSY:
             under = [o for o in still if o is not r and SOLID.get(o["type"]) in ("picture", "chart", "table")
                      and _area(o["box"]) < 0.5 * width * height
+                     and not o["name"].startswith("!!")   # theme decoration belongs behind content (guide 13)
                      and order[id(o)] < order[id(r)]
                      and _shared(r["text"]["box"], o["box"]) >= 0.25 * _area(r["text"]["box"])]
             if under:
@@ -2185,7 +2186,9 @@ def fit(deck, output, into, slides=None, skip=(), grow=1.0):
             continue
         targets = [s for s in slide.shapes if s.width and s.height and s.name not in skip
                    and not s.name.startswith("!!") and not s.is_placeholder
-                   and s.width * s.height < 0.85 * prs.slide_width * prs.slide_height]
+                   and (s.width * s.height < 0.85 * prs.slide_width * prs.slide_height
+                        or s.has_table or s.has_chart or s.shape_type == MSO_SHAPE_TYPE.GROUP)]
+        # ^ a big table/chart/group is content, not a ground: the old size test left the Gantt unfitted
         if not targets:
             continue
         before_min = {s.shape_id: _shape_min_pt(prs, slide, s) for s in targets}
