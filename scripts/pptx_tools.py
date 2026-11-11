@@ -494,6 +494,93 @@ SOLID = {13: "picture", 11: "picture", 3: "chart", 19: "table", 16: "video"}
 MIN_PT = 12   # guide 4: nothing below 12 pt on a slide 7.5 in tall
 UNREADABLE = 1.6   # contrast ratio; white on ivory is 1.1, mid grey on white is 2.3
 BUSY = 28          # spread of the picture behind a title, 0-255; a soft glow is under 10
+_SYMBOL_FONTS = ("wingding", "webding", "symbol", "marlett", "zapfdingbat", "icon", "mdl2", "fluent")
+_META_RE = re.compile(
+    r"\blorem ipsum\b"
+    r"|\b(?:charts?|diagrams?|images?|photos?|data|values?|slides?)\s+kept\s+from\b"
+    r"|\bnothing\s+(?:is\s+)?re-?drawn\b"
+    r"|\boriginal\s+slide\s+(?:photo|image)s?\b"
+    r"|\[\s*(?:insert|add|todo|tbd|placeholder)\b[^\]]*\]",
+    re.I,
+)
+
+
+def _pua_hits(text, font_name):
+    low = (font_name or "").lower()
+    if any(k in low for k in _SYMBOL_FONTS):
+        return []
+    return [(font_name or "(theme)", f"U+{ord(ch):04X}") for ch in (text or "") if 0xF000 <= ord(ch) <= 0xF0FF]
+
+
+def _meta_hit(text):
+    m = _META_RE.search(text or "")
+    return m.group(0) if m else None
+
+
+def _chart_xml_faults(space):
+    """ECMA-376 chart XML hazards that make PowerPoint repair or refuse the file."""
+    faults = []
+    area = space.find(f".//{{{C_NS}}}plotArea")
+    if area is None:
+        return faults
+    for node in area:
+        kind = E.QName(node).localname
+        if not kind.endswith("Chart"):
+            continue
+        grp = node.find(f"{{{C_NS}}}grouping")
+        gval = grp.get("val", "") if grp is not None else ""
+        if gval in ("stacked", "percentStacked") and ("bar" in kind or "area" in kind):
+            for pos in node.iter(f"{{{C_NS}}}dLblPos"):
+                if pos.get("val") == "outEnd":
+                    faults.append("stacked chart uses dLblPos='outEnd' (PowerPoint refuses to open; use ctr, inEnd, or inBase)")
+                    break
+    return faults
+
+
+def _invalid_chart_xml(prs):
+    out = []
+    for sn, slide in enumerate(prs.slides, 1):
+        for shape in _walk(slide.shapes):
+            if getattr(shape, "has_chart", False) and shape.has_chart:
+                for msg in _chart_xml_faults(shape.chart._chartSpace):
+                    out.append((sn, shape.name, msg))
+    return out
+
+
+def _chart_sizes(space):
+    """Visible font sizes (pt) declared inside chart XML (axes, legend, title, labels)."""
+    sizes = []
+    root_tx = space.find(f"{{{C_NS}}}txPr")
+    if root_tx is not None:
+        for pr in root_tx.iter(qn("a:rPr"), qn("a:defRPr")):
+            if pr.get("sz") and pr.get("sz").isdigit():
+                sizes.append(int(pr.get("sz")) / 100.0)
+    for holder in space.iter(qn("c:txPr"), qn("c:rich")):
+        if holder.getparent() is space:
+            continue
+        deleted = any(
+            (up.find(f"{{{C_NS}}}delete") is not None and up.find(f"{{{C_NS}}}delete").get("val") == "1")
+            for up in holder.iterancestors()
+        )
+        if deleted:
+            continue
+        tag = E.QName(holder.getparent()).localname if holder.getparent() is not None else ""
+        if tag == "tx" and holder.getparent().getparent() is not None:
+            owner = holder.getparent().getparent()
+            if E.QName(owner).localname == "title" and not "".join(t.text or "" for t in holder.iter(qn("a:t"))).strip():
+                continue
+        if tag == "dLbls":
+            parent = holder.getparent()
+            shown = any(
+                parent.find(f"{{{C_NS}}}{k}[@val='1']") is not None
+                for k in ("showVal", "showCatName", "showPercent", "showSerName", "showLegendKey")
+            )
+            if not shown and parent.find(f"{{{C_NS}}}dLbl") is None:
+                continue
+        for pr in holder.iter(qn("a:rPr"), qn("a:defRPr")):
+            if pr.get("sz") and pr.get("sz").isdigit():
+                sizes.append(int(pr.get("sz")) / 100.0)
+    return sizes
 
 
 def _box(row):
@@ -563,15 +650,18 @@ def _slots(slides, size):
     return keys, usual
 
 
-def _glance_slide(s, size, slots, moving, image, chart_inks=None):
+def _glance_slide(s, size, slots, moving, image, chart_inks=None, chart_sizes=None, pic_shas=None,
+                  repeated_shas=None, text_notes=None):
     """Faults on one slide: [(kind, sentence, [boxes])], and [(shape id, text colour)] of the text nobody
     can read. Pure: rows from _facts, a PIL image of the slide."""
     width, height = size
     k = image.width / width
     floor = MIN_PT * height / 540
+    micro = 0.75 * floor
     rows = [r for r in s["shapes"] if r["visible"] and r["type"] != GROUP]
     still = [r for r in rows if not (r["layer"] == "slide" and r["id"] in moving)]
     texts = [r for r in still if r.get("text") and _area(r["text"]["box"]) > 0]
+    order = {id(r): n for n, r in enumerate(s["shapes"])}   # PowerPoint lists shapes from the back to the front
     faults, unreadable = [], []
 
     def name(r):
@@ -613,6 +703,14 @@ def _glance_slide(s, size, slots, moving, image, chart_inks=None):
             if under:
                 faults.append(("title on content", f"the title {name(r)} lies across the {SOLID[under[0]['type']]} "
                                f"{under[0]['name']!r}", [r["text"]["box"], under[0]["box"]]))
+        elif r["layer"] == "slide" and spread > BUSY:
+            under = [o for o in still if o is not r and SOLID.get(o["type"]) in ("picture", "chart", "table")
+                     and _area(o["box"]) < 0.5 * width * height
+                     and order[id(o)] < order[id(r)]
+                     and _shared(r["text"]["box"], o["box"]) >= 0.25 * _area(r["text"]["box"])]
+            if under:
+                faults.append(("text on picture", f"{name(r)} crosses the busy {SOLID[under[0]['type']]} "
+                               f"{under[0]['name']!r}", [r["text"]["box"], under[0]["box"]]))
         left, top, right, bottom = _box(r["text"]["box"])
         if left < -2 or top < -2 or right > width + 2 or bottom > height + 2:
             faults.append(("text off the slide", f"{name(r)} runs past the edge of the slide", [r["text"]["box"]]))
@@ -626,11 +724,61 @@ def _glance_slide(s, size, slots, moving, image, chart_inks=None):
                 faults.append(("cannot read", f"the chart {r['name']!r}: its text {was} on {'%02X%02X%02X' % colour}",
                                [r["box"]]))
                 unreadable.append((r["id"], was))
+        ch_sizes = (chart_sizes or {}).get(r["id"], r.get("chart_sizes") or ())
+        if ch_sizes and min(ch_sizes) < floor:
+            faults.append(("tiny text", f"the chart {r['name']!r}: text at {min(ch_sizes):g} pt, under {floor:g} pt",
+                           [r["box"]]))
+    for r in still:
+        tbl = r.get("table")
+        if not tbl or SOLID.get(r["type"]) != "table":
+            continue
+        bad_cells, bad_boxes = [], []
+        tbl_chars = tbl_tiny = 0
+        tbl_small, tbl_micro = [], []
+        for cell in tbl.get("cells", []):
+            cbox = cell["box"]
+            if _area(cbox) <= 0:
+                continue
+            runs = Counter()
+            for chars, _, rgb in cell["runs"]:
+                runs[rgb] += chars
+            for rgb, chars in runs.most_common():
+                if chars < 3 and bad_cells:
+                    continue
+                ink = (rgb & 255, rgb >> 8 & 255, rgb >> 16 & 255)
+                colour, _ = _behind(image, cbox, ink, k)
+                if colour is not None and _contrast(ink, colour) < UNREADABLE:
+                    was = "%02X%02X%02X" % ink
+                    bad_cells.append((cell["sample"], was, "%02X%02X%02X" % colour, cbox))
+                    if r["layer"] == "slide":
+                        unreadable.append((r["id"], was))
+            if _box(cbox)[1] <= 0.92 * height:
+                cell_chars = 0
+                cell_min = None
+                for count, pt, _ in cell["runs"]:
+                    tbl_chars += count
+                    cell_chars += count
+                    if pt < floor:
+                        tbl_tiny += count
+                        tbl_small.append((pt, cbox))
+                        cell_min = pt if cell_min is None else min(cell_min, pt)
+                if cell_min is not None and cell_min < micro and cell_chars >= 3:
+                    tbl_micro.append((cell_min, cbox, cell["sample"]))
+        if bad_cells:
+            s0, w0, b0, _ = bad_cells[0]
+            faults.append(("cannot read", f"table {r['name']!r}: {s0!r} {w0} on {b0}",
+                           [b for _, _, _, b in bad_cells[:6]]))
+        if (tbl_chars and tbl_tiny / tbl_chars > 0.2) or tbl_micro:
+            tbl_small.sort(key=lambda item: item[0])
+            boxes = [b for _, b in tbl_small[:6]] if tbl_small else [b for _, b, _ in tbl_micro[:6]]
+            low_pt = tbl_small[0][0] if tbl_small else tbl_micro[0][0]
+            faults.append(("tiny text", f"table {r['name']!r} has text under {floor:g} pt (smallest {low_pt:g} pt): "
+                           "nobody in the room reads it", boxes))
     shell_marks = [o for o in still if o["layer"] == "slide" and (s["slide"], o["id"]) in slots
                    and (o.get("text") or (SOLID.get(o["type"]) == "picture" and _area(o["box"]) < 0.03 * width * height))]
     for r in still:
         if r["layer"] != "slide" or r["type"] not in SOLID or (s["slide"], r["id"]) in slots \
-                or r["name"].startswith("!!")                 or (SOLID[r["type"]] in ("picture", "video") and _area(r["box"]) >= 0.5 * width * height):
+                or r["name"].startswith("!!") or (SOLID[r["type"]] in ("picture", "video") and _area(r["box"]) >= 0.5 * width * height):
             continue   # a full-slide photo or video is a ground, not content that strayed
         under = [o for o in shell_marks if _shared(r["box"], o["box"]) >= 0.3 * _area(o["box"])]
         if under:
@@ -657,7 +805,6 @@ def _glance_slide(s, size, slots, moving, image, chart_inks=None):
                 faults.append(("text spills", f"{name(r)} is too long for its box and runs onto {o['name']!r}",
                                [words, o["box"]]))
                 break
-    order = {id(r): n for n, r in enumerate(s["shapes"])}   # PowerPoint lists shapes from the back to the front
     for r in texts:
         if r["layer"] != "slide":
             continue
@@ -667,11 +814,25 @@ def _glance_slide(s, size, slots, moving, image, chart_inks=None):
             faults.append(("text hidden", f"the {SOLID[over[0]['type']]} {over[0]['name']!r} covers {name(r)}",
                            [r["text"]["box"], over[0]["box"]]))
     pictures = [r for r in still if SOLID.get(r["type"]) == "picture" and _area(r["box"]) < 0.5 * width * height]
+    dup_shas = {}
     for n, a in enumerate(pictures):
         for b in pictures[n + 1:]:
             if a["layer"] == b["layer"] == "slide" and _shared(a["box"], b["box"]) >= 0.9 * max(_area(a["box"]), _area(b["box"])) > 0:
                 faults.append(("same picture twice", f"{a['name']!r} and {b['name']!r} are in the same place: "
                                "was the shell applied twice?", [a["box"]]))
+            elif a["layer"] == b["layer"] == "slide" and not a["name"].startswith("!!") and not b["name"].startswith("!!") \
+                    and (s["slide"], a["id"]) not in slots and (s["slide"], b["id"]) not in slots \
+                    and min(_area(a["box"]), _area(b["box"])) >= 0.015 * width * height:
+                sha_a = a.get("sha") or (pic_shas or {}).get(a["id"])
+                sha_b = b.get("sha") or (pic_shas or {}).get(b["id"])
+                if sha_a and sha_a == sha_b and sha_a not in (repeated_shas or ()):
+                    grp = dup_shas.setdefault(sha_a, [a["name"], []])
+                    for p_row in (a, b):
+                        if p_row["box"] not in grp[1]:
+                            grp[1].append(p_row["box"])
+    for sha_key, (first_name, boxes) in dup_shas.items():
+        faults.append(("same picture twice", f"{len(boxes)} frames show the same content photo (e.g. {first_name!r})",
+                       boxes[:6]))
     for a in (r for r in pictures if r["layer"] == "slide"):
         for b in (r for r in pictures if r["layer"] != "slide"):
             small, big = sorted((_area(a["box"]), _area(b["box"])))
@@ -681,32 +842,62 @@ def _glance_slide(s, size, slots, moving, image, chart_inks=None):
                                "the new one? Old shell lives in the master; change it there (guide 13)",
                                [a["box"], b["box"]]))
     chars = tiny = 0
-    smallest = []
+    smallest, micro_hits = [], []
     for r in texts:
         if _box(r["text"]["box"])[1] > 0.92 * height or (r["layer"] == "slide" and (s["slide"], r["id"]) in slots):
             continue   # footers, sources and the step bar may be small
+        shape_chars = 0
+        shape_min = None
         for count, pt, _ in r["text"]["runs"]:
             chars += count
+            shape_chars += count
             if pt < floor:
                 tiny += count
                 smallest.append((pt, r))
-    if chars and tiny / chars > 0.2:
-        smallest.sort(key=lambda item: item[0])
-        faults.append(("tiny text", f"{tiny / chars:.0%} of the text is under {floor:g} pt (smallest "
-                       f"{smallest[0][0]:g} pt, e.g. {name(smallest[0][1])}): nobody in the room reads it",
-                       [r["text"]["box"] for _, r in smallest[:6]]))
+                shape_min = pt if shape_min is None else min(shape_min, pt)
+        if shape_min is not None and shape_min < micro and shape_chars >= 12:
+            micro_hits.append((shape_min, r))
+    if (chars and tiny / chars > 0.2) or micro_hits:
+        all_small = sorted(smallest or micro_hits, key=lambda item: item[0])
+        note_pct = f"{tiny / chars:.0%} of the text is " if chars and tiny / chars > 0.2 else ""
+        faults.append(("tiny text", f"{note_pct}text under {floor:g} pt (smallest "
+                       f"{all_small[0][0]:g} pt, e.g. {name(all_small[0][1])}): nobody in the room reads it",
+                       [r["text"]["box"] for _, r in all_small[:6]]))
+    for r in still:
+        if r["layer"] != "slide":
+            continue
+        extra = (text_notes or {}).get(r["id"], {})
+        pua = list(r.get("pua") or []) + list((r.get("text") or {}).get("pua") or []) + list(extra.get("pua") or [])
+        for cell in (r.get("table") or {}).get("cells", []):
+            pua.extend(cell.get("pua") or [])
+        if pua:
+            f0, c0 = pua[0]
+            box0 = (r.get("text") or {}).get("box") or r["box"]
+            faults.append(("broken symbol", f"{name(r)} has missing-glyph symbol {c0} in font {f0!r}", [box0]))
+        meta_texts = [extra.get("full"), (r.get("text") or {}).get("full"), (r.get("text") or {}).get("sample")]
+        meta_texts += [c.get("full") or c.get("sample") for c in (r.get("table") or {}).get("cells", [])]
+        hit = next((m for t in meta_texts if t and (m := _meta_hit(t))), None)
+        if hit:
+            box0 = (r.get("text") or {}).get("box") or r["box"]
+            faults.append(("draft text", f"{name(r)} leaks placeholder/draft wording {hit!r}", [box0]))
     return faults, unreadable
 
 
 def _facts(deck, out_dir, slides=None, width=1600):
     """PowerPoint's own account of a deck: for every shape of every slide (and of its layout and master)
     where it is, where its text really is, the text's size and colour as drawn; plus a PNG of each slide."""
+    prs_pre = Presentation(deck)
+    bad_charts = _invalid_chart_xml(prs_pre)
+    if bad_charts:
+        details = "; ".join(f"slide {sn} {nm!r}: {msg}" for sn, nm, msg in bad_charts)
+        raise ValueError(f"invalid chart XML (fix before opening in PowerPoint): {details}")
     try:
         import win32com.client as win32
     except ImportError:
         sys.exit("this command needs PowerPoint on Windows (pywin32)")
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
+    picked = set(slides) if slides else None
 
     def collect(shape, rows, layer, depth=0):
         try:
@@ -724,19 +915,71 @@ def _facts(deck, out_dir, slides=None, width=1600):
         try:
             if kind == PLACEHOLDER and int(shape.PlaceholderFormat.ContainedType) in SOLID:
                 row["type"] = int(shape.PlaceholderFormat.ContainedType)
+            if kind == 19 or int(getattr(shape, "HasTable", 0)):
+                tbl = shape.Table
+                cells, seen_boxes = [], set()
+                for rr in range(1, tbl.Rows.Count + 1):
+                    for cc in range(1, tbl.Columns.Count + 1):
+                        try:
+                            cs = tbl.Cell(rr, cc).Shape
+                            cbox_raw = tuple(round(float(v), 1) for v in (cs.Left, cs.Top, cs.Width, cs.Height))
+                            if cbox_raw in seen_boxes:
+                                continue
+                            seen_boxes.add(cbox_raw)
+                            if not (cs.HasTextFrame and cs.TextFrame.HasText):
+                                continue
+                            whole = cs.TextFrame.TextRange
+                            text = str(whole.Text).strip()
+                            if not text:
+                                continue
+                            runs, pua = [], []
+                            for n in range(1, min(whole.Runs().Count, 12) + 1):
+                                run = whole.Runs(n)
+                                rt = str(run.Text).strip()
+                                if rt:
+                                    runs.append([len(rt), round(float(run.Font.Size), 1), int(run.Font.Color.RGB)])
+                                    pua.extend(_pua_hits(str(run.Text), str(run.Font.Name)))
+                            if not runs:
+                                continue
+                            inked = whole.TrimText()
+                            anc = int(cs.TextFrame.VerticalAnchor)
+                            mt, mb = float(cs.TextFrame.MarginTop), float(cs.TextFrame.MarginBottom)
+                            if anc in (1, 2):
+                                base_y = float(cs.Top) + mt
+                            elif anc == 4:
+                                base_y = float(cs.Top) + float(cs.Height) - mb
+                            else:
+                                base_y = float(cs.Top) + (float(cs.Height) + mt - mb) / 2.0
+                            bw, bh = float(inked.BoundWidth), float(inked.BoundHeight)
+                            cbox = [round(float(cs.Left) + float(inked.BoundLeft), 1),
+                                    round(base_y + float(inked.BoundTop), 1),
+                                    round(bw, 1), round(bh, 1)] if bw > 0 and bh > 0 else list(cbox_raw)
+                            cells.append({"sample": text.replace("\r", " ").replace("\x0b", " ")[:32],
+                                          "full": text.replace("\r", " ").replace("\x0b", " "),
+                                          "runs": runs, "box": cbox, "pua": pua})
+                        except Exception:  # noqa: BLE001
+                            pass
+                if cells:
+                    row["table"] = {"cells": cells}
             if shape.HasTextFrame and shape.TextFrame.HasText:
                 whole = shape.TextFrame.TextRange
                 text = str(whole.Text).strip()
-                runs = []
+                runs, pua = [], []
                 for n in range(1, min(whole.Runs().Count, 12) + 1):
                     run = whole.Runs(n)
-                    if str(run.Text).strip():
-                        runs.append([len(str(run.Text).strip()), round(float(run.Font.Size), 1), int(run.Font.Color.RGB)])
-                if len(text) >= 2 and runs:
+                    rt = str(run.Text).strip()
+                    if rt:
+                        runs.append([len(rt), round(float(run.Font.Size), 1), int(run.Font.Color.RGB)])
+                        pua.extend(_pua_hits(str(run.Text), str(run.Font.Name)))
+                if text and runs:
                     inked = whole.TrimText()   # without the empty lines at the end of the box
-                    row["text"] = {"sample": text.replace("\r", " ").replace("\x0b", " ")[:32], "runs": runs,
-                                   "box": [round(float(v), 1) for v in (inked.BoundLeft, inked.BoundTop,
-                                                                        inked.BoundWidth, inked.BoundHeight)]}
+                    tbox = [round(float(v), 1) for v in (inked.BoundLeft, inked.BoundTop,
+                                                         inked.BoundWidth, inked.BoundHeight)]
+                    if min(tbox[2], tbox[3]) <= 0:
+                        tbox = list(row["box"])
+                    row["text"] = {"sample": text.replace("\r", " ").replace("\x0b", " ")[:32],
+                                   "full": text.replace("\r", " ").replace("\x0b", " "),
+                                   "runs": runs, "box": tbox, "pua": pua}
         except Exception:  # noqa: BLE001  (charts, OLE objects: no text frame to read)
             pass
 
@@ -745,11 +988,27 @@ def _facts(deck, out_dir, slides=None, width=1600):
     pres = app.Presentations.Open(str(Path(deck).resolve()), True, False, False)
     try:
         size = (float(pres.PageSetup.SlideWidth), float(pres.PageSetup.SlideHeight))
-        data = {"size": size, "slides": []}
+        data = {"size": size, "count": int(pres.Slides.Count), "slides": [], "_slot_slides": []}
         for number in range(1, pres.Slides.Count + 1):
-            if slides and number not in slides:
-                continue
             slide = pres.Slides(number)
+            if picked and number not in picked:
+                srows = []
+                for n in range(1, slide.Shapes.Count + 1):
+                    try:
+                        sh = slide.Shapes(n)
+                        skind = int(sh.Type)
+                        if skind == PLACEHOLDER and int(sh.PlaceholderFormat.ContainedType) in SOLID:
+                            skind = int(sh.PlaceholderFormat.ContainedType)
+                        srow = {"id": int(sh.Id), "name": str(sh.Name), "type": skind, "layer": "slide", "depth": 0,
+                                "box": [round(float(v), 1) for v in (sh.Left, sh.Top, sh.Width, sh.Height)],
+                                "visible": bool(sh.Visible)}
+                        if sh.HasTextFrame and sh.TextFrame.HasText and str(sh.TextFrame.TextRange.Text).strip():
+                            srow["text"] = True
+                        srows.append(srow)
+                    except Exception:  # noqa: BLE001
+                        pass
+                data["_slot_slides"].append({"slide": number, "shapes": srows})
+                continue
             rows = []
             for n in range(1, slide.Shapes.Count + 1):
                 collect(slide.Shapes(n), rows, "slide")
@@ -763,6 +1022,7 @@ def _facts(deck, out_dir, slides=None, width=1600):
             png = (out_dir / f"slide-{number:02d}.png").resolve()
             slide.Export(str(png), "PNG", width, round(width * size[1] / size[0]))
             data["slides"].append({"slide": number, "png": str(png), "shapes": rows})
+            data["_slot_slides"].append({"slide": number, "shapes": rows})
     finally:
         pres.Close()
         if not was_open:
@@ -812,6 +1072,49 @@ def _chart_inks(space, ink=None, failing=()):
     return changed if ink else found
 
 
+def _pic_key(shape):
+    try:
+        blob = shape.image.blob
+    except (AttributeError, KeyError, ValueError):
+        return None
+    return (f"{_sha(blob)}:{round(shape.crop_left, 2)}:{round(shape.crop_top, 2)}:"
+            f"{round(shape.crop_right, 2)}:{round(shape.crop_bottom, 2)}")
+
+
+def _slide_text_notes(slide, faces):
+    """Per-shape XML scan of every text run (including >12 runs and table cells) -> {shape_id: {pua, full}}."""
+    head, body = faces
+    notes = {}
+    for shape in _walk(slide.shapes):
+        frames = [shape.text_frame] if shape.has_text_frame else []
+        if getattr(shape, "has_table", False):
+            for rw in shape.table.rows:
+                for cell in rw.cells:
+                    if cell._tc.get("hMerge") == "1" or cell._tc.get("vMerge") == "1":
+                        continue
+                    frames.append(cell.text_frame)
+        if not frames:
+            continue
+        pua, parts, seen_pua = [], [], set()
+        for frame in frames:
+            for para in frame.paragraphs:
+                for run in para.runs:
+                    rt = run.text or ""
+                    if not rt:
+                        continue
+                    parts.append(rt)
+                    face = run.font.name
+                    if face in (None, "+mn-lt", "+mj-lt"):
+                        face = head if face == "+mj-lt" or (face is None and _is_title(shape)) else body
+                    for hit in _pua_hits(rt, face):
+                        if hit not in seen_pua:
+                            seen_pua.add(hit)
+                            pua.append(hit)
+        if pua or parts:
+            notes[shape.shape_id] = {"pua": pua, "full": " ".join(parts)}
+    return notes
+
+
 def glance(deck, out_dir, slides=None, data=None):
     """The faults a person sees in the first second, slide by slide, from PowerPoint's own drawing.
     -> [{"slide", "png", "faults": [(kind, sentence)], "marked": png with the faults boxed}]"""
@@ -819,17 +1122,38 @@ def glance(deck, out_dir, slides=None, data=None):
     data = data or _facts(deck, out_dir, slides)
     prs = Presentation(deck)
     moving = _moving(prs, data)
-    slots, usual = _slots(data["slides"], data["size"])
-    numbers = [s["slide"] for s in data["slides"]]
+    slots, usual = _slots(data.get("_slot_slides") or data["slides"], data["size"])
+    total_slides = data.get("count") or len(prs.slides)
+    pic_spread = Counter()
+    for sl in prs.slides:
+        seen_keys = set()
+        for shape in _walk(sl.shapes):
+            if shape.shape_type == MSO_SHAPE_TYPE.PICTURE and not shape.name.startswith("!!"):
+                k_ = _pic_key(shape)
+                if k_:
+                    seen_keys.add(k_)
+        pic_spread.update(seen_keys)
+    repeated_shas = {k_ for k_, cnt in pic_spread.items() if cnt >= max(3, 0.3 * len(prs.slides))}
     report = []
     for s in data["slides"]:
         image = Image.open(s["png"]).convert("RGB")
-        inks = {}
-        for shape in _walk(prs.slides[s["slide"] - 1].shapes):
+        sl = prs.slides[s["slide"] - 1]
+        inks, sizes_map, pic_shas = {}, {}, {}
+        for shape in _walk(sl.shapes):
             if getattr(shape, "has_chart", False) and shape.has_chart:
                 inks[shape.shape_id] = _chart_inks(shape.chart._chartSpace)
-        faults, unreadable = _glance_slide(s, data["size"], slots, moving[s["slide"]], image, inks)
-        if s["slide"] not in (numbers[0], numbers[-1]):   # a cover and a closing slide may differ
+                sizes_map[shape.shape_id] = _chart_sizes(shape.chart._chartSpace)
+            elif shape.shape_type == MSO_SHAPE_TYPE.PICTURE:
+                k_ = _pic_key(shape)
+                if k_:
+                    pic_shas[shape.shape_id] = k_
+        text_notes = _slide_text_notes(sl, _theme_faces(sl))
+        faults, unreadable = _glance_slide(
+            s, data["size"], slots, moving[s["slide"]], image,
+            chart_inks=inks, chart_sizes=sizes_map, pic_shas=pic_shas,
+            repeated_shas=repeated_shas, text_notes=text_notes,
+        )
+        if s["slide"] not in (1, total_slides):   # a cover and a closing slide may differ
             gone = [(label, box) for label, box, on in usual if s["slide"] not in on]
             if gone:
                 faults.append(("missing", "most slides have " + ", ".join(repr(label) for label, _ in gone)
@@ -869,7 +1193,15 @@ def reink(deck, output, report, ink):
             if not node.get("id", "").isdigit() or int(node.get("id")) not in failing:
                 continue
             was = failing[int(node.get("id"))]
+            new_rgb = tuple(int(ink[j:j + 2], 16) for j in (0, 2, 4))
             for run in node.getparent().getparent().iter(qn("a:r")):
+                tc = next((u for u in run.iterancestors(qn("a:tc"))), None)
+                cell_bg = None
+                if tc is not None:
+                    tc_fill = tc.find("a:tcPr/a:solidFill/a:srgbClr", NS)
+                    if tc_fill is not None and len(tc_fill.get("val", "")) == 6:
+                        hx = tc_fill.get("val", "")
+                        cell_bg = tuple(int(hx[j:j + 2], 16) for j in (0, 2, 4))
                 pr = run.find(qn("a:rPr"))
                 if pr is None:
                     pr = E.Element(qn("a:rPr"))
@@ -877,6 +1209,11 @@ def reink(deck, output, report, ink):
                 own = pr.find("a:solidFill/a:srgbClr", NS)
                 if own is not None and own.get("val", "").upper() not in was:
                     continue
+                if cell_bg is not None and own is not None:
+                    cur_hx = own.get("val", "")
+                    cur_rgb = tuple(int(cur_hx[j:j + 2], 16) for j in (0, 2, 4))
+                    if _contrast(cur_rgb, cell_bg) >= UNREADABLE and _contrast(new_rgb, cell_bg) < _contrast(cur_rgb, cell_bg):
+                        continue
                 for old in [c for c in pr if E.QName(c).localname in ("solidFill", "gradFill", "noFill", "pattFill")]:
                     pr.remove(old)
                 fill = E.Element(qn("a:solidFill"))
@@ -1022,6 +1359,7 @@ def inventory(deck):
             frames = [shape.text_frame] if shape.has_text_frame else []
             if getattr(shape, "has_table", False):
                 frames += [cell.text_frame for row in shape.table.rows for cell in row.cells]
+            pua_flagged = False
             for frame in frames:
                 for para in frame.paragraphs:
                     for run in para.runs:
@@ -1030,6 +1368,11 @@ def inventory(deck):
                         if face in (None, "+mn-lt", "+mj-lt"):
                             face = head if face == "+mj-lt" or (face is None and _is_title(shape)) else body
                         fonts[face] += 1
+                        if not pua_flagged:
+                            hits = _pua_hits(run.text, face)
+                            if hits:
+                                flags.append(f"{shape.name!r} has missing-glyph symbol {hits[0][1]} in {hits[0][0]!r}")
+                                pua_flagged = True
                         if run.font.size:
                             sizes[run.font.size.pt] += 1
                             if run.font.size.pt < floor and run.text.strip():
@@ -1042,6 +1385,12 @@ def inventory(deck):
                 kinds = _plot_kinds(shape.chart)
                 hint = "  <- 3D: rechart" if any("3D" in k for k in kinds) else ""
                 flags.append(f"chart {shape.name!r}: {', '.join(kinds)}{hint}")
+                for msg in _chart_xml_faults(shape.chart._chartSpace):
+                    flags.append(f"chart {shape.name!r} invalid XML: {msg}")
+                ch_sizes = _chart_sizes(shape.chart._chartSpace)
+                hard_floor = round(MIN_PT * sh / REF_HEIGHT, 1)
+                if ch_sizes and min(ch_sizes) < hard_floor:
+                    flags.append(f"chart {shape.name!r} small text at {min(ch_sizes):g} pt (< {hard_floor:g} pt)")
             if getattr(shape, "has_table", False):
                 tb = shape.table
                 flags.append(f"table {shape.name!r}: {len(tb.rows)} rows x {len(tb.columns)} cols")
@@ -1723,17 +2072,82 @@ def unshell(deck, output, keys, background=None):
                    + (f", background {background.upper()}" if background else ""))
 
 
+def _shape_min_pt(prs, slide, shape):
+    """Smallest explicit or inherited text size (pt) on a shape or its table cells, or None."""
+    pts = []
+    for para in shape._element.iter(qn("a:p")):
+        ppr = para.find(qn("a:pPr"))
+        lvl = int(ppr.get("lvl", 0)) if ppr is not None else 0
+        for run in para:
+            if E.QName(run).localname in ("r", "fld"):
+                txt = (run.findtext(qn("a:t")) or "").strip()
+                if not txt:
+                    continue
+                rpr = run.find(qn("a:rPr"))
+                sz = int(rpr.get("sz")) if rpr is not None and rpr.get("sz") else _inherited_sz(prs, slide, shape._element, lvl)
+                pts.append(sz / 100.0)
+    return min(pts) if pts else None
+
+
+def _reclaim_clamped_boxes(slide, targets, into_emu, before_min, factor, floor_pt, slide_area):
+    """When `floor` clamps shrunk text larger than `factor`, expand each clamped text box or table into
+    adjacent whitespace inside `into` while maintaining at least 0.06 in clearance from siblings."""
+    if factor >= 1.0:
+        return
+    into_l, into_t, into_w, into_h = into_emu
+    into_r, into_b = into_l + into_w, into_t + into_h
+    gap = round(0.06 * 914400)
+    obstacles = [o for o in slide.shapes if o.width and o.height and o.name != "!!bg"
+                 and o.width * o.height < 0.85 * slide_area]
+    for s in targets:
+        pre = before_min.get(s.shape_id)
+        if pre is None or pre * factor >= floor_pt - 0.05:
+            continue
+        actual = min(pre, floor_pt)
+        need = min(1.35, actual / max(1.0, pre * factor))
+        if need <= 1.02 or not (s.width and s.height):
+            continue
+        if not ((s.has_text_frame and s.text_frame.text.strip()) or getattr(s, "has_table", False)):
+            continue
+        others = [o for o in obstacles if o is not s]
+        free_r = max(0, into_r - (s.left + s.width))
+        for o in others:
+            if o.top < s.top + s.height + gap and o.top + o.height > s.top - gap and o.left >= s.left + s.width - gap:
+                free_r = min(free_r, max(0, o.left - gap - (s.left + s.width)))
+        want_w = round(s.width * (need - 1.0))
+        dw = min(want_w, free_r)
+        if dw > 0:
+            old_w = s.width
+            s.width += dw
+            if getattr(s, "has_table", False):
+                for gc in s._element.iter(qn("a:gridCol")):
+                    gc.set("w", str(round(int(gc.get("w")) * s.width / old_w)))
+        free_d = max(0, into_b - (s.top + s.height))
+        for o in others:
+            if o.left < s.left + s.width + gap and o.left + o.width > s.left - gap and o.top >= s.top + s.height - gap:
+                free_d = min(free_d, max(0, o.top - gap - (s.top + s.height)))
+        want_h = round(s.height * (need - 1.0))
+        dh = min(want_h, free_d)
+        if dh > 0:
+            old_h = s.height
+            s.height += dh
+            if getattr(s, "has_table", False):
+                for tr in s._element.iter(qn("a:tr")):
+                    tr.set("h", str(round(int(tr.get("h")) * s.height / old_h)))
+
+
 def fit(deck, output, into, slides=None, skip=(), grow=1.0):
     """Scale each slide's content as one block so it sits inside `into` (x, y, width, height in inches):
     the content area the theme leaves free. Content is only made smaller unless `grow` is above 1 (a
     table is often taller on screen than its frame says, so growing one is a guess). Shapes named in `skip`, shapes whose name starts with "!!",
     placeholders and full-slide backgrounds stay where they are. Arrangement, ids and animation are kept.
-    Text is never shrunk below guide 4's minimum (12 pt on a slide 7.5 in tall); a box may then be a
-    little small for its words, which `glance` and your eyes catch.
+    Text is never shrunk below guide 4's minimum (12 pt on a slide 7.5 in tall); when shrunk text hits
+    that floor, constrained boxes reclaim available whitespace inside `into` without hitting siblings.
     -> [(slide, factor, smallest text pt or None)]"""
     prs = Presentation(deck)
     least = MIN_PT * prs.slide_height / REF_HEIGHT
-    left, top, width, height = (round(v * 914400) for v in into)
+    into_emu = tuple(round(v * 914400) for v in into)
+    left, top, width, height = into_emu
     out = []
     for n, slide in enumerate(prs.slides, 1):
         if slides and n not in slides:
@@ -1743,11 +2157,14 @@ def fit(deck, output, into, slides=None, skip=(), grow=1.0):
                    and s.width * s.height < 0.85 * prs.slide_width * prs.slide_height]
         if not targets:
             continue
+        before_min = {s.shape_id: _shape_min_pt(prs, slide, s) for s in targets}
         x0, y0 = min(s.left for s in targets), min(s.top for s in targets)
         x1, y1 = max(s.left + s.width for s in targets), max(s.top + s.height for s in targets)
         factor = min(width / (x1 - x0), height / (y1 - y0), grow)
         at = (left + (width - (x1 - x0) * factor) / 2, top + (height - (y1 - y0) * factor) / 2)
         low = _scale_block(prs, slide, targets, factor, tuple(round(v) for v in at), least)
+        _reclaim_clamped_boxes(slide, targets, into_emu, before_min, factor, least,
+                               prs.slide_width * prs.slide_height)
         out.append((n, factor, low))
     prs.save(output)
     return out
@@ -2020,6 +2437,10 @@ def check(before, after, mapping=None):
     def gate(ok, name, detail):
         gates.append((ok, name, detail))
 
+    bad_charts = _invalid_chart_xml(new)
+    gate(not bad_charts, "charts valid",
+         "every chart has valid XML" if not bad_charts
+         else "; ".join(f"slide {sn} {nm!r}: {msg}" for sn, nm, msg in bad_charts))
     odd = [f"{i}:{t}" for i, s in enumerate(new.slides, 1)
            if (t := _transition(s) or "none") not in ("none", "cut", "fade", "morph")]
     gate(not odd, "transitions", "only fade, Morph or none" if not odd else "old-style: " + ", ".join(odd))
@@ -2106,11 +2527,26 @@ def check(before, after, mapping=None):
                 if new_sigs.get(sig, 0) < have:
                     charts_data_missing.append(
                         f"{n} (old {'+'.join(map(str, olds))}): {sig[0]} data changed or gone")
-            old_tables = [sh_.name for sh_ in old_shapes if getattr(sh_, "has_table", False)
+            def _table_pop(tables):
+                total = 0
+                for tsh in tables:
+                    for tc in tsh._element.iter(qn("a:tc")):
+                        if tc.get("hMerge") == "1" or tc.get("vMerge") == "1":
+                            continue
+                        if "".join(t.text or "" for t in tc.iter(qn("a:t"))).strip():
+                            total += 1
+                return total
+
+            old_tables = [sh_ for sh_ in old_shapes if getattr(sh_, "has_table", False)
                           and sh_.name not in drop]
             new_tables = [sh_ for sh_ in new_shapes if getattr(sh_, "has_table", False)]
             if len(new_tables) < len(old_tables):
                 tables_missing.append(f"{n} (old {'+'.join(map(str, olds))}): {len(old_tables)} table(s)")
+            elif old_tables:
+                old_pop, new_pop = _table_pop(old_tables), _table_pop(new_tables)
+                if old_pop >= 4 and new_pop < 0.5 * old_pop:
+                    tables_missing.append(
+                        f"{n} (old {'+'.join(map(str, olds))}): empty/gutted table ({new_pop} of {old_pop} filled cells)")
         used = {o for row in rows.values() for o in row.get("old", [])} | set(mapping.get("dropped", []))
         unlisted = sorted(set(range(1, len(old.slides) + 1)) - used)
         if unlisted:  # or a hard slide passes every gate by not being in the map
@@ -2827,7 +3263,10 @@ def main(argv=None):
         sys.exit(f"error: {exc}")
     if args.cmd == "glance":
         out = args.output or str(Path(args.deck).with_suffix("")) + "-glance"
-        report = glance(args.deck, out, [int(n) for n in args.slides.split(",")] if args.slides else None)
+        try:
+            report = glance(args.deck, out, [int(n) for n in args.slides.split(",")] if args.slides else None)
+        except ValueError as exc:
+            sys.exit(f"error: {exc}")
         print("\n".join(glance_lines(report)))
         if args.ink:
             print(f"{reink(args.deck, args.ink[1], report, args.ink[0])} runs of unreadable text set to "

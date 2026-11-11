@@ -99,6 +99,16 @@ unwired) `skills/deck-director`.
   see `experiments/T064-20261104-opencode-native-3d/REPORT.md`.
 
 ## State (2026-11-11)
+- **Theme hardening & workflow guards (T102, issue 83, Antigravity):** Extended `scripts/pptx_tools.py`
+  `glance`/`_facts`/`reink` to inspect native table cells (with `VerticalAnchor`-calibrated `TrimText`
+  geometry), chart font sizes (`_chart_sizes`), PUA broken glyphs (`U+F000–U+F0FF`), cross-frame duplicate
+  content photos, high-variance busy backgrounds under text (`text on picture`), localized micro text blocks,
+  and draft/meta wording leaks; preserved full-deck `_slot_slides` on `glance --slides` and guarded COM against
+  stacked chart `dLblPos="outEnd"` before opening PowerPoint. Added neighbor-safe whitespace reclaim in `fit`
+  when `MIN_PT` clamps box scaling, plus `"charts valid"` and non-empty cell retention in `check`. Hardened
+  `SKILL.md`, `guides/8` and `guides/13` against custom check bypasses and unverified subagent reports
+  (orthogonal to `T101` and PR `#79`). Verified via synthetic suite + PowerPoint 16.0 COM (`PPTX_NATIVE=1`
+  29/29 pass) and visual PNG inspection (`experiments/T102-20261111-antigravity-glance-table-chart-fit-guards/REPORT.md`).
 - **Into a theme (T100, issue 83):** `glance` reports the faults a viewer sees at once from PowerPoint's own
   facts (drawn text bounds, drawn colours, the master's shapes) and boxes them on the slide; `shell` finds
   and strips the old shell where it lives (master, layouts, repeated shapes); `fit` scales a slide's content

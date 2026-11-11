@@ -10,6 +10,13 @@ were true at the time. Task IDs and their branches are listed in
 
 
 
+## T102 [pptx] Harden `glance`, `fit`, `check`, and small-model workflow guards (issue #83) — 2026-11-11
+
+- **Why (issue #83):** After `T100`, an agent failure audit exposed seven remaining gaps: `glance` ignored native table cells, chart font sizes, PUA missing glyphs (`U+F000–U+F0FF`), duplicate content photos, busy photo overlays, micro `<0.75*floor` boxes, and leaked meta/draft text; `glance --slides` dropped deck-wide `_slots` and broke cover/end detection; stacked charts with `<c:dLblPos val="outEnd"/>` crashed PowerPoint COM (`E_FAIL`); `fit` shrank clamped boxes tightly without reclaiming nearby slack; `check` allowed gutted empty tables (`len` only); small models bypassed `glance` with private scripts or trusted subagent claims without looking.
+- **Toolbox (`scripts/pptx_tools.py`):** Added native table cell geometry (`VerticalAnchor`-calibrated `TrimText` bounds, contrast, size floor, header-safe `reink`); added `_chart_sizes`, pre-COM `_invalid_chart_xml` guard, `_pua_hits` + `_slide_text_notes` (all runs & cells), cropped-SHA duplicate photo check, busy-photo `text on picture`, micro `tiny text`, draft wording detection, full-deck `_slot_slides` context during `--slides`, neighbor-safe `_reclaim_clamped_boxes` in `fit`, and non-empty cell retention + `"charts valid"` in `check`.
+- **Guidance (`skills/pptx/`):** Updated `SKILL.md` (rule 6 & small-model protocol: ban custom bypass/check scripts, fail-closed subagent inspection, 5–7 slide batches), `guides/8-tu-kiem-tra.md`, and `guides/13-dua-bo-co-san-vao-theme.md` (table checks, PUA glyph cleanup, stacked `outEnd` warning, updated fault table); kept orthogonal to `T101` (`arrange`/`seen`) and PR `#79` (`guides/6`, `guides/9`).
+- **Evidence:** Synthetic unit & gate tests + real PowerPoint 16.0 COM (`PPTX_NATIVE=1`: 29/29 pass across `tests.test_glance` and `tests.test_fidelity_gates`); visual inspection of synthetic `faults-02.png`, `faults-03.png`, and clean fixed renders in `experiments/T102-20261111-antigravity-glance-table-chart-fit-guards/REPORT.md`.
+
 ## T100 [pptx] Putting an existing deck into a theme: glance, shell, fit, compare — 2026-11-11
 
 - **Why (issue #83):** an agent put a 37-slide deck into a theme four times and reported "checked" each

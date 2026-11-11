@@ -1,0 +1,79 @@
+{
+  "broken": [
+    {
+      "slide": 1,
+      "faults": []
+    },
+    {
+      "slide": 2,
+      "faults": [
+        [
+          "cannot read",
+          "table 'AuditTable': '1200' FFFFFF on FFFFFF"
+        ],
+        [
+          "tiny text",
+          "table 'AuditTable' has text under 12 pt (smallest 8 pt): nobody in the room reads it"
+        ],
+        [
+          "same picture twice",
+          "2 frames show the same content photo (e.g. 'PartA')"
+        ],
+        [
+          "broken symbol",
+          "'\\uf0e8 Verify gasket seam torque' has missing-glyph symbol U+F0E8 in font 'Arial'"
+        ],
+        [
+          "draft text",
+          "'Charts kept from old slide [TODO' leaks placeholder/draft wording 'Charts kept from'"
+        ]
+      ]
+    },
+    {
+      "slide": 3,
+      "faults": [
+        [
+          "text on picture",
+          "'Inspection torque drift' crosses the busy picture 'BusyBg'"
+        ],
+        [
+          "tiny text",
+          "the chart 'QuarterChart': text at 8 pt, under 12 pt"
+        ],
+        [
+          "tiny text",
+          "65% of the text is text under 12 pt (smallest 8 pt, e.g. 'Detailed tolerance table appendi'): nobody in the room reads it"
+        ]
+      ]
+    },
+    {
+      "slide": 4,
+      "faults": []
+    }
+  ],
+  "fixed": [
+    {
+      "slide": 1,
+      "faults": []
+    },
+    {
+      "slide": 2,
+      "faults": []
+    },
+    {
+      "slide": 3,
+      "faults": []
+    },
+    {
+      "slide": 4,
+      "faults": []
+    }
+  ],
+  "fit": [
+    [
+      1,
+      0.5853658536585366,
+      12.0
+    ]
+  ]
+}
