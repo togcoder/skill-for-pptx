@@ -58,7 +58,25 @@ were true at the time. Task IDs and their branches are listed in
   only (inherited table/chart sizes). Its real miss was semantic: it copied the theme's own step names
   instead of the original deck's step names. Conclusion in the REPORT: the skill works for a strong
   model end to end; for a small model it works for level 1 with CARD, not for level-2 re-layout.
-- **Next:** the owner's verdict (B4) and, if agreed, A4 (mark the stale project-side docs).
+- **A4 (owner agreed 2026-11-11):** marked — not deleted — the stale project-side documents:
+  `docs/08_VER4_BRIEF.md` §3.4 (replace-all-charts rule contradicts guide 11 and the `charts kept` /
+  `chart data kept` gates) and `source/qcc_builders/build_theme_cab_v6.py` (generic STEPS, 13.5 pt
+  scale floor, sample 156,179 / 64,950 figures). No other content touched.
+- **B1 v2 (owner note 2026-11-11: the background car must move with a compositional purpose):** the
+  blurred car and glow are now placed per slide by measuring the fitted content box: candidates
+  left/right × five heights × three sizes are scored by text overlap (heavy) and picture overlap
+  (light), bottom line preferred, size follows the free band, glow on the opposite corner. The same
+  build also fixed the pipeline errors: chart text to the 18 pt floor (6 slides), slide 6 label
+  collision, Gantt and both verification tables kept above the footer/conclusions by cell spacing
+  (not smaller text), body text raised on slides 21/22/23/28, slide 32 stamp, closing slide chrome and
+  mascot fit. Three rounds of picture review by the team then caught cars still landing on charts/cards
+  and slide 28's labels wrapping; the car is now blocked from big cards (heavy penalty), shrunk
+  (900–1200 px) and only shows an edge when no clean corner exists, the glow is fixed in one corner, and
+  slide 28's INNER/OUTER labels are white 18 pt on one line. Final `glance`: 15 → **5 of 37** slides
+  (2, 5, 8, 17, 27), all inherited content or the author's own duplication; `check --map` 12/13; `seen`
+  redone 37/37 + 37/37 with the final pictures. B2 samples rebuilt from the final deck (glance 0/3,
+  seen 3/3 + 3/3).
+- **Next:** the owner's verdict (B4).
 
 ## T103 [pptx] Baseline for agents and the brief for the repair-and-test agent — 2026-11-11
 
