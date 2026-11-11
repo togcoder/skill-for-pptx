@@ -102,6 +102,19 @@ Cắt ở đâu: SKILL.md 150 → 116 (14 điều cấm mỗi điều một dòn
 dòng, phần chi tiết đã có ở guide 9); guide 13 171 → 132 (bỏ phần "kiểm" trùng guide 8, giữ bảng nghĩa các
 lỗi); guide 11 181 → 168 (10 luật cứng thay vì 12, gộp các ý trùng). Không cắt nội dung nào chỉ có một chỗ.
 
+## A4. Tài liệu sai trong thư mục dự án (chủ dự án đồng ý ngày 2026-11-11)
+
+Chỉ **đánh dấu là lỗi thời, không xoá**; hai file trong thư mục dự án (ngoài repo):
+
+1. `docs/08_VER4_BRIEF.md`, mục §3.4 "Biểu đồ: thay hết, cùng một kiểu": thêm khối **LỖI THỜI** ngay dưới
+   tiêu đề, nói rõ mục này trái với `guides/11` và cổng `charts kept` / `chart data kept`: chart gốc giữ
+   đúng loại và dữ liệu, chỉ đổi cách trình bày khi có người duyệt ghi trong `map.json`.
+2. `source/qcc_builders/build_theme_cab_v6.py`: thêm khối **LỖI THỜI** sau docstring (STEPS là tên bước
+   chung, không dùng cho QCC; SCALE bắt đầu 18 px = 13,5 pt trên khung 20×11,25 in, dưới sàn 18 pt; các số
+   156,179 / 64,950 là số mẫu, không phải số bộ gốc), kèm một dòng ngay trên `STEPS` và trên `SCALE`.
+
+Không sửa nội dung nào khác; không đụng file gốc 37 slide.
+
 ## B1. Vào theme, cả bộ (37 slide)
 
 **Cách làm.** Một script dựng `_scratch/lead/b1/build_b1.py` (trong thư mục dự án, ngoài repo), mỗi lần
@@ -153,6 +166,45 @@ cổng giữ ruột).
 Chưa làm được ở B1: **bìa (slide 1) và slide kết (37) giữ nội dung gốc, chưa có vỏ theme**; nội dung
 15 slide trên (chữ nhỏ, nhãn chồng) cần mức 2 mới sửa được — B2 làm 3 slide mẫu.
 
+### B1 v2 — theo góp ý của chủ dự án ngày 2026-11-11 (ô tô nền phải di chuyển có ý đồ)
+
+Chủ dự án: "tôi muốn phần ô tô ở background di chuyển đến những vị trí có ý đồ bổ trợ bố cục hơn là đứng
+im 1 chỗ" và yêu cầu sửa được các lỗi đã tìm ra. Đã sửa trong **cùng một script dựng** (vẫn đọc bộ gốc mỗi
+lần chạy, không vá file kết quả):
+
+**Ô tô nền (và quầng sáng) theo bố cục.** Với mỗi slide, script đo hộp nội dung sau khi co, rồi chấm các vị
+trí ứng viên (trái/phải × 4 mức dọc × 3 cỡ) trong dải giữa tiêu đề và chân trang — chỗ đè lên chữ bị phạt
+nặng, đè lên hình/card bị phạt vừa, chạm dải tiêu đề hoặc chân trang bị phạt nặng hơn — chọn chỗ trống gần
+nhất, cỡ xe theo khoảng trống, quầng sáng đặt ở góc đối diện. Kết quả: xe nằm ở nhiều vị trí khác nhau tuỳ
+nội dung từng slide (trái/phải, chân/đỉnh), không đứng im một chỗ, không chui dưới footer hay dưới thẻ
+chart; slide tràn hình (9, 14, 29) không có xe vì không có nền trống để đặt. Đây là chỗ sửa đúng ý "bổ trợ
+bố cục": nội dung lệch phải thì xe sang trái, slide trống bên phải thì xe to hơn, slide đầy chân trang thì xe
+nhỏ và nép góc trên.
+
+**Các lỗi đã sửa (glance 15 → 5 slide lỗi):**
+- toàn bộ lỗi "tiny text" của **chart** (slide 6, 12, 27, 28, 32, 35): chữ trong chart nâng lên sàn 18 pt;
+- slide 6: nhãn "x3pcs" dời ra khỏi nhãn "100mm 659841" (fit đã làm hai nhãn chạm nhau);
+- slide 8: bảng Gantt gốc 32×21 — bỏ margin ô và giãn dòng 84% để bảng kết thúc **trên** chân trang (trước đó
+  tràn xuống dưới footer);
+- slide 26: hai bảng kiểm chứng — cùng cách, hàng không còn đè lên kết luận; hết lỗi chữ không đọc được;
+- slide 21, 22, 23, 28: chữ thân bài dưới 18 pt nâng lên 18 pt (box đã đủ chỗ); slide 28 nới hộp hai nhãn
+  "INNER"/"OUTER" để 18 pt không xuống dòng;
+- slide 32: nhãn "ACHIEVE TARGET" 18 pt + nới hộp, chart không còn bị đè;
+- slide 37 (slide kết): thêm nền/logo/footer của theme, chữ "SHARP Team" đưa lên trên ảnh mascot, mascot co
+  lại để không chạy dưới footer;
+- bìa (slide 1) giữ nguyên làm **mức 0** (slide tràn hình video, theme cũng không đặt tiêu đề lên bìa).
+- qua bốn vòng soát ảnh của nhóm (mỗi vòng một người mở lại cả 37 ảnh), các chỗ xe còn đè chữ/card đã được
+  xử lý: xe bị chặn khỏi thẻ trắng/chart/table (phạt nặng khi đè), nhỏ lại (900–1200 px), và khi không còn
+  góc sạch thì chỉ để một mép xe thò vào; quầng sáng cố định một góc (quầng sáng di chuyển làm glance báo
+  "missing"); slide 28 nhãn INNER/OUTER đổi sang trắng 18 pt một dòng và đưa lên trên hình.
+
+**Kết quả B1 v2** (lệnh như cũ): `glance` → **5 / 37 slide lỗi** (2, 5, 8, 17, 27), tất cả là nội dung gốc
+hoặc ý tác giả: slide 2 chữ nằm trên ảnh sản phẩm của bố cục gốc; slide 5 timeline 15 pt; slide 8 bảng Gantt
+10,5 pt; slide 17 nhãn sơ đồ 15 pt; slide 27 ảnh before/after dùng lại cùng ảnh để so sánh. Sửa tiếp năm chỗ
+này là sửa nội dung/bố cục mức 2 (tách bảng, đổi bố cục), không phải việc "vào theme".
+`check --map` vẫn **12/13** (cổng trượt là video gốc nhỏ); `seen` lại 37/37 ảnh slide và 37/37 ảnh cặp với
+mã mới; `compare` xuất lại 37 cặp cũ/mới cho bộ v2.
+
 ## B2. Dựng lại bố cục, ba slide mẫu (mục 14)
 
 Ba slide chọn: **13** (ảnh bằng chứng — teardown SPK), **18** (số liệu + biểu đồ — before/after + chart),
@@ -179,6 +231,13 @@ vật trên 3 slide đều lấy từ slide gốc; ở slide 13 chữ của "Tex
 đề theme (giữ nguyên chữ, bỏ hộp — đúng mục 14: tiêu đề của tác giả thành tiêu đề theme).
 **Chưa làm được ở B2:** nhãn dữ liệu chart 43 ("134,61 5…", "0…") bị cắt — lỗi định dạng của chart gốc,
 sửa được nhưng sẽ đổi cách trình bày số của chart, ngoài phạm vi "chỉ sắp lại".
+
+**B2 (bản cuối, cùng đợt sửa):** ba slide mẫu dựng lại từ bản B1 cuối (nền theme mới, xe đặt theo bố cục,
+chữ chart 18 pt), cùng bố cục ba vòng đã duyệt; `glance` **0/3**, `seen` **3/3** ảnh slide và **3/3** ảnh
+cặp, `check` trên ba slide giữ đủ ảnh/chart/bảng/effect (11/13 cổng, hai cổng video/số không áp dụng cho
+file mẫu 3 slide). File `_scratch/lead/b2/QCC_SHARP_Team_B2_samples.pptx`; cặp cũ/mới
+`_scratch/lead/b2/pairs/pair-01..03.jpg`. Còn một chỗ chịu: nhãn số của chart 43 vẫn bị cắt ("134,61…",
+"0…") vì chart gốc có nhãn hẹp — sửa là sửa định dạng chart, ngoài "chỉ sắp lại".
 
 ## B3. Chạy mù bằng model nhỏ, đúng một lần
 
@@ -207,11 +266,11 @@ Chỉ chủ dự án nói "đạt". Bản giao: file B1, ba slide B2 + cặp cũ
 ## Kết luận thẳng
 
 - **Model mạnh: dùng được.** Bộ 37 slide vào theme bằng một script dựng từ bản gốc trong ~4 phút; `check`
-  giữ ruột 12/13 cổng (cổng trượt là video gốc nhỏ có sẵn); `glance` còn 15 slide lỗi, tất cả đều là nội
-  dung gốc (chữ nhỏ, bảng/chart gốc, nhãn lặp) hoặc giới hạn mức 1, khớp đúng bằng chứng mở ảnh. Ba slide
-  dựng lại bố cục đạt `glance` 0 lỗi sau 3 vòng, mọi ảnh/chart/bảng/effect của slide gốc còn đủ, `seen`
-  chứng minh 3/3 + 3/3 ảnh đã mở. Hai lỗi thật của đồ nghề lộ ra trong quá trình làm đã được sửa và gộp
-  (PR #91).
+  giữ ruột 12/13 cổng (cổng trượt là video gốc nhỏ có sẵn); sau vòng sửa theo góp ý chủ dự án, `glance` chỉ
+  còn **5 slide lỗi**, cả năm là nội dung gốc hoặc ý tác giả (chữ trên ảnh nền của bố cục gốc, timeline/bảng
+  Gantt chữ nhỏ có sẵn, nhãn sơ đồ 15 pt, ảnh before/after dùng lại) — sửa tiếp là mức 2; ô tô nền giờ đặt
+  theo bố cục từng slide thay vì đứng im. Ba slide dựng lại bố cục đạt `glance` 0 lỗi, `seen` chứng minh
+  3/3 + 3/3 ảnh đã mở. Hai lỗi thật của đồ nghề lộ ra trong quá trình làm đã được sửa và gộp (PR #91).
 - **Model nhỏ: dùng được cho mức 1, chưa dùng được cho mức 2.** Bằng chứng: một phiên mới của
   deepseek-v4.1-flash, chỉ có CARD.md + đồ nghề, đã tự làm xong 8 slide vào theme: đọc CARD, chạy đúng thứ
   tự lệnh, `glance` + `seen` đầy đủ (8/8), `check` 13/13, không tự viết script chấm. Nó còn 4/8 slide lỗi
