@@ -6,9 +6,14 @@ Bạn không được nói "xong" trước khi **nhìn thấy** từng slide. "�
 ## Vòng xem và sửa
 
 1. `python scripts/pptx_tools.py glance DECK.pptx`. Lệnh xuất ảnh từng slide bằng PowerPoint thật
-   (`slide-NN.png`) và báo những lỗi người xem thấy ngay: chữ đè chữ, chữ không đọc được trên nền của nó,
-   chữ bị ảnh che, hai logo chồng nhau, tràn khung, chữ quá nhỏ, slide thiếu tiêu đề. Slide có lỗi có thêm
-   ảnh `faults-NN.png` khoanh đỏ từng chỗ. Sửa hết các lỗi này trước.
+   (`slide-NN.png`) và báo những lỗi người xem thấy ngay: chữ đè chữ, chữ không đọc được trên nền của nó
+   (kể cả **ô bảng thật** và **biểu đồ**), chữ đặt lên ảnh rối (`text on picture`), chữ bị ảnh che, hai logo
+   hoặc cùng một ảnh dán lặp lại, tràn khung, chữ quá nhỏ (kể cả trong **bảng** và **biểu đồ**), ký hiệu
+   Wingdings/PUA vỡ font (`broken symbol`), chữ giữ chỗ còn sót (`draft text`), slide thiếu tiêu đề. Nếu
+   biểu đồ xếp chồng có XML lỗi (`dLblPos='outEnd'`), lệnh báo ngay trước khi mở PowerPoint. Slide có lỗi
+   có thêm ảnh `faults-NN.png` khoanh đỏ từng chỗ. Sửa hết các lỗi này trước.
+   (Khi sửa một vài slide bằng `--slides 3,6`, `glance` vẫn đọc khung tiêu đề/logo của toàn bộ để không bỏ
+   sót luật chồng shell; nhưng trước khi bàn giao cuối cùng luôn phải kiểm và mở toàn bộ deck.)
 2. **Mở và nhìn ảnh của từng slide, ở cỡ lớn.** Ảnh ghép thu nhỏ (`look` → `sheet.jpg`) chỉ để xem nhịp cả
    bộ; ở cỡ đó hai logo chồng nhau hay một dòng chữ bị che trông vẫn ổn. Đã có bộ slide bị giao bốn lần
    với lỗi rõ như vậy vì agent chỉ nhìn ảnh ghép.
@@ -98,3 +103,8 @@ python scripts/motion_script.py check script.md   # nếu có kịch bản: câu
   PowerPoint.
 - Lỗi do công cụ gây ra (công cụ tự thu chữ, tự thêm trang trí, dừng khi gặp giá trị 0) thì sửa trong
   file và ghi lại cho người dùng. Đừng lách bằng cách đổi nội dung.
+- **Không tự viết script kiểm tra riêng** (regex đếm nhanh, script chỉ đo toạ độ khung rồi bỏ qua ảnh
+  render) để thay `glance`, `compare`, hay `check`.
+- **Fail-closed với subagent:** nếu có subagent phụ trách dựng hoặc soát slide, báo cáo "đạt / 0 lỗi" của
+  subagent chỉ được tính là chưa kiểm tra cho tới khi chính bạn chạy `glance` và mở từng `slide-NN.png` xác
+  nhận trực tiếp.

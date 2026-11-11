@@ -99,6 +99,13 @@ unwired) `skills/deck-director`.
   see `experiments/T064-20261104-opencode-native-3d/REPORT.md`.
 
 ## State (2026-11-11)
+  - **Theme hardening & workflow guards (T102, issue 83; adopted in T104):** `glance` now reads native
+    table cells (geometry, contrast, size floor), chart font sizes, PUA broken glyphs, duplicate content
+    photos, busy photo backgrounds, micro text blocks and leaked draft wording; `glance --slides` keeps the
+    deck-wide slot context; stacked charts with `dLblPos="outEnd"` are refused before COM opens the file;
+    `fit` reclaims neighbour-safe slack when the font floor clamps; `check` fails on gutted tables and
+    invalid chart XML. Adopted only after T104 fixed the two noisy rules (intended dim step labels, symbols
+    in symbol fonts).
 - **Re-laying out a slide (T101):** guide 14 gives every element one job and seven steps for one slide
   with the picture opened each round; `arrange` places shapes by regions; `glance`/`compare` pictures
   carry a look code that `seen` checks. One real slide done in three rounds: the measuring command said

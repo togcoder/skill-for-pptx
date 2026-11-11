@@ -94,6 +94,55 @@ class FidelityGates(unittest.TestCase):
         failed = {name for ok, name, _ in tools.check(src, same, mapping)[0] if not ok}
         self.assertNotIn("chart data kept", failed)
 
+    def test_check_rejects_gutted_or_empty_table_replacement(self):
+        src, gutted, kept = (tempfile.mktemp(suffix=".pptx") for _ in range(3))
+        _deck(src)
+        prs = Presentation(src)
+        t_src = prs.slides[0].shapes.add_table(3, 3, Inches(1), Inches(1), Inches(6), Inches(2)).table
+        for r in range(3):
+            for c in range(2):
+                t_src.cell(r, c).text = f"R{r}C{c}"
+        prs.save(src)
+        _deck(gutted)
+        prs = Presentation(gutted)
+        t_gut = prs.slides[0].shapes.add_table(2, 2, Inches(1), Inches(1), Inches(6), Inches(2)).table
+        t_gut.cell(0, 0).text = "R0C0"
+        prs.save(gutted)
+        mapping = {"1": {"old": [1], "group": "rebuild"}}
+        failed = {name for ok, name, _ in tools.check(src, gutted, mapping)[0] if not ok}
+        self.assertIn("tables kept", failed)
+        _deck(kept)
+        prs = Presentation(kept)
+        t_ok = prs.slides[0].shapes.add_table(3, 3, Inches(1), Inches(1), Inches(6), Inches(2)).table
+        for r in range(3):
+            for c in range(2):
+                t_ok.cell(r, c).text = f"R{r}C{c}"
+        prs.save(kept)
+        failed = {name for ok, name, _ in tools.check(src, kept, mapping)[0] if not ok}
+        self.assertNotIn("tables kept", failed)
+
+    def test_check_fails_invalid_stacked_chart_outEnd(self):
+        from lxml import etree
+        src, broken = (tempfile.mktemp(suffix=".pptx") for _ in range(2))
+        _deck(src)
+        prs = Presentation(src)
+        data = CategoryChartData()
+        data.categories = ["Q1", "Q2"]
+        data.add_series("S1", (10, 20))
+        data.add_series("S2", (5, 10))
+        prs.slides[0].shapes.add_chart(XL_CHART_TYPE.COLUMN_CLUSTERED, Inches(1), Inches(1), Inches(6), Inches(4), data)
+        prs.save(src)
+        _deck(broken)
+        prs = Presentation(broken)
+        ch = prs.slides[0].shapes.add_chart(XL_CHART_TYPE.COLUMN_STACKED, Inches(1), Inches(1), Inches(6), Inches(4), data)
+        ch.name = "StackedBad"
+        ch.chart.plots[0].has_data_labels = True
+        dlbls = ch.chart._chartSpace.find(f".//{{{tools.C_NS}}}barChart/{{{tools.C_NS}}}dLbls")
+        dlbls.insert(0, etree.Element(f"{{{tools.C_NS}}}dLblPos", val="outEnd"))
+        prs.save(broken)
+        failed = {name for ok, name, _ in tools.check(src, broken)[0] if not ok}
+        self.assertIn("charts valid", failed)
+
 
 if __name__ == "__main__":
     unittest.main()
