@@ -1,5 +1,6 @@
 """T098: taking reusable parts out of a finished deck (groups, vectors, pictures, whole frames)."""
 import json
+import os
 import sys
 import tempfile
 import unittest
@@ -77,6 +78,28 @@ class UngroupTests(unittest.TestCase):
         self.assertAlmostEqual(shapes["Rect A"].width / 914400, 2.0, places=2)
         self.assertAlmostEqual(shapes["Rect B"].left / 914400, 7.0, places=2)
         self.assertAlmostEqual(shapes["Rect B"].width / 914400, 4.0, places=2)
+
+    @unittest.skipUnless(os.environ.get("PPTX_NATIVE") == "1",
+                         "set PPTX_NATIVE=1 on a desktop with PowerPoint")
+    def test_skewed_group_falls_back_to_powerpoint_ungroup(self):
+        prs = Presentation()
+        prs.slide_width, prs.slide_height = Inches(13.333), Inches(7.5)
+        slide = prs.slides.add_slide(prs.slide_layouts[6])
+        a = _rect(slide, 1, 1, 1, 1, "Rect A")
+        b = _rect(slide, 4, 1, 2, 1, "Rect B")
+        grp = slide.shapes.add_group_shape([a, b])
+        grp.name = "Skewed frame"
+        xfrm = grp._element.find("p:grpSpPr/a:xfrm", tools.NS)
+        ext = xfrm.find(qn("a:ext"))
+        ext.set("cx", str(int(int(ext.get("cx")) * 2)))       # unequal scaling: the maths refuses
+        rot = a._element.find("p:spPr/a:xfrm", tools.NS)
+        rot.set("rot", "2700000")                             # a rotated child inside the group
+        src, out = self.dir / "skew.pptx", self.dir / "skew-out.pptx"
+        prs.save(src)
+        text = tools.ungroup(str(src), 1, ["Skewed frame"], str(out))
+        self.assertIn("flattened by PowerPoint", text)
+        shapes = {sh.name for sh in Presentation(str(out)).slides[0].shapes}
+        self.assertEqual(shapes, {"Rect A", "Rect B"})
 
     def test_animated_group_is_refused_without_force(self):
         prs = Presentation()

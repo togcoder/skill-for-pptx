@@ -62,7 +62,24 @@ việc không tái tạo được trên máy này; ghi nhận thay vì sửa s�
 
 ## A2. Hai lỗi đã biết của đồ nghề
 
-(chờ làm)
+**1. `watch`: slide không xem được thì dòng báo cáo thiếu khóa `clicks`.** Sửa: dòng lỗi giờ có
+`"enter": "unknown", "clicks": []`, nên mọi dòng báo cáo đều có đủ khóa và bước đọc báo cáo không còn
+`KeyError`. Test PowerPoint thật `test_watch_the_real_show` qua.
+
+**2. `ungroup`: nhóm có vật xoay trong nhóm bị kéo không đều bị từ chối.** Sửa: khi phép biến đổi của
+python-pptx không biểu diễn được nhóm (skew, gương+xoay), `ungroup` giữ nguyên nhóm đó (sao lưu XML rồi
+khôi phục), ghi file, rồi gọi `Shape.Ungroup()` của PowerPoint trên chính file đầu ra; nếu PowerPoint cũng
+không tách được thì báo lỗi. Thêm test native `test_skewed_group_falls_back_to_powerpoint_ungroup` (nhóm
+lệch trục + vật con xoay) — qua.
+
+**Thử trên file thật:** `_scratch/lead/a2_group17.pptx`, lệnh
+`python scripts/pptx_tools.py ungroup "QCC - SHARP Team Ver3-4.pptx" 13 "Group 17" -o ...` →
+`flattened 0 group(s) on slide 13; 1 group(s) flattened by PowerPoint`; kiểm lại bằng python-pptx: group
+"Group 17" không còn, 6 vật con thành 6 vật mức trên (một vật là "Group 19" lồng bên trong, PowerPoint giữ
+nguyên). Đây là đúng nhóm mà T101 từng phải gọi COM tay.
+
+**Nghiệm thu A2:** `PPTX_NATIVE=1 python -m pytest tests -q` → **652 passed, 10 skipped, 63 subtests
+passed** (50 s) trên máy này.
 
 ## A3. Một trang cho model nhỏ
 

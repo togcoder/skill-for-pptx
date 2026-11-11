@@ -27,7 +27,12 @@ were true at the time. Task IDs and their branches are listed in
   original deck were opened as `faults-NN.png` and confirmed real.
 - **Tests:** `pytest tests -q` 648 passed / 13 skipped; native `glance` + fidelity 32 passed; layout and
   coordination checks OK. `test_watch_the_real_show` still fails (A2).
-- **Next:** A2 (`watch` clicks key, `ungroup` via PowerPoint), A3 (`CARD.md`, line-count neutral), then B.
+- **A2:** `watch` error rows now carry `enter`/`clicks` (a slide that cannot be watched no longer
+  breaks report readers); `ungroup` keeps a group it cannot solve mathematically and flattens it with
+  PowerPoint's own `Shape.Ungroup()` (skewed / mirrored+rotated groups). Native test added for the
+  fallback; the real `Group 17` on QCC slide 13 flattens with the new path. Evidence:
+  `PPTX_NATIVE=1 python -m pytest tests -q` → 652 passed, 10 skipped, 63 subtests.
+- **Next:** A3 (`CARD.md`, line-count neutral), then B.
 
 ## T103 [pptx] Baseline for agents and the brief for the repair-and-test agent — 2026-11-11
 

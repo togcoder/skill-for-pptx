@@ -429,7 +429,8 @@ def watch(deck, out_dir, slides=None, cell=640):
                         burst(view.Next)
                 frames, moved, _ = burst(view.Next)
             if view.Slide.SlideIndex != number:
-                report.append({"slide": number, "error": f"the show went to slide {view.Slide.SlideIndex}"})
+                report.append({"slide": number, "error": f"the show went to slide {view.Slide.SlideIndex}",
+                               "enter": "unknown", "clicks": []})
                 finished = None
                 continue
             entry = pres.Slides(number).SlideShowTransition
@@ -2901,18 +2902,60 @@ def ungroup(deck, slide_no, names=None, output=None, all_groups=False, force=Fal
         raise ValueError(f"these groups carry animation: {', '.join(blocked)}. Copy the group whole, or "
                          f"pass --force to flatten and break its animation")
     identity = _Mat()
+    deferred = []
     for g in groups:
         leaves = []
         _flatten_children(g._element, identity, leaves)
-        for el, mat in leaves:
-            _apply_to_leaf(el, mat)
+        backup = copy.deepcopy(g._element)
+        try:
+            for el, mat in leaves:
+                _apply_to_leaf(el, mat)
+        except ValueError as exc:
+            if "ungroup in PowerPoint" not in str(exc):
+                raise
+            # the maths cannot represent this group (skew, mirrored+rotated): PowerPoint can
+            deferred.append(g.name)
+            orig = g._element
+            orig.addprevious(backup)
+            orig.getparent().remove(orig)
+            continue
         for el, _ in leaves:
             g._element.addprevious(el)
         g._element.getparent().remove(g._element)
     _unique_top_names(slide)
     if output:
         prs.save(output)
-    return f"flattened {len(groups)} group(s) on slide {slide_no} -> {output or '(not saved)'}"
+        if deferred:
+            done = _ungroup_in_powerpoint(output, slide_no, deferred)
+            missed = sorted(set(deferred) - set(done))
+            if missed:
+                raise ValueError(f"PowerPoint could not ungroup: {', '.join(missed)}")
+    note = f"; {len(deferred)} group(s) flattened by PowerPoint" if deferred else ""
+    return f"flattened {len(groups) - len(deferred)} group(s) on slide {slide_no}{note} -> {output or '(not saved)'}"
+
+
+def _ungroup_in_powerpoint(path, slide_no, names):
+    """Let PowerPoint ungroup the groups its own maths cannot represent. -> names it flattened."""
+    import win32com.client as win32
+    app = win32.Dispatch("PowerPoint.Application")
+    was_open = app.Presentations.Count
+    pres = app.Presentations.Open(str(Path(path).resolve()), False, False, False)
+    done = []
+    try:
+        slide = pres.Slides(slide_no)
+        for name in names:
+            try:
+                slide.Shapes(name).Ungroup()
+                done.append(name)
+            except Exception:  # noqa: BLE001 - already flattened, or PowerPoint refused
+                continue
+        if done:
+            pres.Save()
+    finally:
+        pres.Close()
+        if not was_open:
+            app.Quit()
+    return done
 
 
 def _flatten_children(group_el, parent, leaves):
