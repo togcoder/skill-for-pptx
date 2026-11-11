@@ -33,7 +33,7 @@ SKILL.md: điều 12 (thêm thứ không có việc) và 13 (kiểm bằng lện
   có chủ ý, khối các vật đi cùng nhau). Ảnh và khối co vừa ô không méo, giữ mã và hiệu ứng; chữ trong khối
   không bị phóng to; ô chữ lấy bề ngang của ô. Agent không phải tính tọa độ.
 - **Mã nhìn**: mọi ảnh `glance` và `compare` xuất ra có một dải dưới ảnh mang mã ba ký tự ngẫu nhiên; mã chỉ
-  có trong ảnh (file đi kèm chỉ giữ bản băm có muối). **`seen FOLDER N=MÃ…`** kiểm các mã agent đọc được.
+  có trong ảnh (file đi kèm chỉ giữ bản băm có muối). **`seen FOLDER N=CODE…`** kiểm các mã agent đọc được.
 
 ## Bằng chứng
 

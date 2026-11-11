@@ -13,7 +13,7 @@ Bạn không được nói "xong" trước khi **nhìn thấy** từng slide. "�
    bộ; ở cỡ đó hai logo chồng nhau hay một dòng chữ bị che trông vẫn ổn. Đã có bộ slide bị giao bốn lần
    với lỗi rõ như vậy vì agent chỉ nhìn ảnh ghép.
 3. Trả lời bảng câu hỏi dưới đây cho từng slide. Sửa, rồi quay lại bước 1. Với mỗi slide viết ra một
-   dòng "đã thấy gì"; nộp mã nhìn của các ảnh bằng `python scripts/pptx_tools.py seen THU-MUC 3=MÃ 4=MÃ`
+   dòng "đã thấy gì"; nộp mã nhìn của các ảnh bằng `python scripts/pptx_tools.py seen THU-MUC 3=CODE 4=CODE`
    (mục 14).
 4. Tối đa ba vòng. Sau ba vòng còn chỗ chưa ổn thì **báo cho người dùng chỗ đó**, đừng tuyên bố đã
    đạt.
