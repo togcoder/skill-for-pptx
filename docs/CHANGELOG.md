@@ -38,8 +38,27 @@ were true at the time. Task IDs and their branches are listed in
   1907 lines (baseline) → 1938 (after A1) → **1890** (after A3), so the total did not grow; the cuts are
   duplicated verification prose in guides 13 and 11 and the 28-row command table in `SKILL.md` (now 11
   rows plus a pointer to guide 9). Tests unchanged: 648 passed, 13 skipped; `check_layout.py` OK.
-- **Next:** B — the trial itself (B1 the whole deck, B2 three re-laid-out slides, B3 one blind
-  small-model run, B4 the owner's verdict).
+- **B1:** the whole 37-slide original deck put into theme v6 by one build script from the source
+  (`shell` → clean transitions → titles → `fit` → theme shell → `glance --ink` → `glance`). `glance` leaves
+  15 of 37 slides with faults, every one inherited from the original content or a level-1 limit (table of
+  reasons in the REPORT); `check --map` passes 12/13 gates, the only miss being the original's small
+  videos. A teammate opened all 37 slide pictures and all 37 old/new pairs, wrote one "what I saw" line per
+  slide and three answers per pair, and `seen` proved 37 of 37 in both sets. Two tool defects found here
+  were fixed in PR #91 (a large table is content for `fit`; theme decoration is not "text on picture").
+- **B2:** three sample slides re-laid out by guide 14 — 13 (evidence photo), 18 (numbers + chart), 22
+  (table). Three rounds, each round rebuilt from the level-1 deck, the three worst things on the pictures
+  written down and fixed in the layout script; round 3 `glance` is clean (0/3), `seen` proves 3/3 slide
+  pictures and 3/3 old/new pairs, `check` on the three mapped slides keeps every picture, chart, table and
+  effect. Known limit: the chart's own data-label formatting still truncates "134,615" — outside
+  re-laying out.
+- **B3:** one blind run, one new session of a small model (`deepseek-v4.1-flash`) given only
+  `CARD.md`, the toolbox, the first 8 original slides and the theme sample. It read CARD, ran the
+  commands in CARD's order, used `glance`/`seen` (8 of 8 pictures proven seen) and wrote no private
+  scoring script; it finished 8 slides with `check` 13/13 and 4 of 8 slides left with `tiny text`
+  only (inherited table/chart sizes). Its real miss was semantic: it copied the theme's own step names
+  instead of the original deck's step names. Conclusion in the REPORT: the skill works for a strong
+  model end to end; for a small model it works for level 1 with CARD, not for level-2 re-layout.
+- **Next:** the owner's verdict (B4) and, if agreed, A4 (mark the stale project-side docs).
 
 ## T103 [pptx] Baseline for agents and the brief for the repair-and-test agent — 2026-11-11
 

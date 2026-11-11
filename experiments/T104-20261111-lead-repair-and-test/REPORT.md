@@ -102,6 +102,122 @@ Cắt ở đâu: SKILL.md 150 → 116 (14 điều cấm mỗi điều một dòn
 dòng, phần chi tiết đã có ở guide 9); guide 13 171 → 132 (bỏ phần "kiểm" trùng guide 8, giữ bảng nghĩa các
 lỗi); guide 11 181 → 168 (10 luật cứng thay vì 12, gộp các ý trùng). Không cắt nội dung nào chỉ có một chỗ.
 
-## B. Thử nghiệm
+## B1. Vào theme, cả bộ (37 slide)
 
-(chờ làm)
+**Cách làm.** Một script dựng `_scratch/lead/b1/build_b1.py` (trong thư mục dự án, ngoài repo), mỗi lần
+chạy đều đọc `QCC - SHARP Team Ver3-4.pptx` và ghi file mới. Các bước: `shell` gỡ vỏ cũ (2 vật master,
+2 vật lặp trên slide) → `motion {'transitions': {'default': 'none'}}` dọn 16 kiểu chuyển slide cũ → tiêu đề
+cũ thành tiêu đề theme (giữ chữ; slide không có tiêu đề lấy tên bước) → `fit --into 0.67,2.2,18.67,8.3` co
+nội dung → gắn vỏ theme (ver4_lib của dự án: nền, thanh bước, logo, tiêu đề, chân trang) → `glance --ink
+1D2433` đổi mực 204 run chữ không đọc được → `glance`. Cùng một lần chạy mất khoảng 4 phút.
+
+**Kết quả `glance`** (lệnh đã chạy, log `_scratch/lead/b1/glance.txt` trên máy):
+`python scripts/pptx_tools.py glance "_scratch/lead/b1/QCC_SHARP_Team_Ver3-4_in_v6.pptx"` →
+**15 / 37 slide còn lỗi**, tất cả đều là lỗi có sẵn của nội dung gốc hoặc giới hạn của mức 1; từng dòng lý
+do ở bảng dưới.
+
+**Kết quả `check`** (`python scripts/pptx_tools.py check GOC MOI --map map.json` với map 37 hàng `reskin`):
+**12/13 cổng đạt** — đạt đủ các cổng giữ ruột: `effects intact`, `videos kept 5/5`, `numbers kept`,
+`pictures not cut`, `source pictures on their slide`, `charts kept`, `chart data kept`, `tables kept`,
+`every slide accounted for`, `charts valid`, `transitions`, `keep slides keep their effects`. Cổng trượt:
+`videos fill the slide` (slide 12 = 26%, slide 15 = 52% — video gốc nhỏ, có sẵn trong bản gốc, không phải
+cổng giữ ruột).
+
+**Bằng chứng đã nhìn** (file `_scratch/lead/KIEM_B1.md` trên máy, do Lead dựng):
+- `glance` xuất 37 ảnh `slide-NN.png`; một bạn trong nhóm (slide-scout) mở **37/37** bằng `read_image`,
+  đọc mã nhìn từng ảnh, viết mỗi slide một dòng "đã thấy gì"; `seen` trả **"37 of 37 pictures proven seen"**.
+- `compare` xuất 37 ảnh cặp `pair-NN.jpg`; một bạn khác (pair-scout) mở **37/37**, mỗi cặp ghi ba cột
+  mất / tệ hơn / thêm; `seen` trả **"37 of 37 pictures proven seen"**.
+- Lead tự mở các ảnh lỗi chính: `faults-02/05/06/08/17/22/26/37.png` (mô tả trong KIEM_B1.md).
+
+**15 slide còn lỗi và lý do để lại:**
+
+| slide | lỗi glance | lý do |
+|---|---|---|
+| 2 | text on picture | bố cục gốc đặt dòng "Satisfy customer requirements" ngay trên ảnh sản phẩm (mức 1 giữ cách sắp xếp của tác giả) |
+| 5 | tiny text | bảng APQP/MLA/TQP gốc dùng chữ 15 pt — có sẵn trong bộ gốc |
+| 6 | text on text; tiny text (chart 14 pt) | nhãn "100mm/659841" và "x3pcs" chạm nhau sau khi co 0,93; chữ chart 14 pt có sẵn |
+| 8 | tiny text (bảng 10,5 pt); content under Footer | bảng Gantt gốc 32×21 cao hơn vùng nội dung theme; không giảm chữ thêm vì đã dưới sàn |
+| 12 | tiny text (chart 9 pt) | chart gốc, có sẵn |
+| 17 | tiny text | nhãn 15 pt của bản gốc |
+| 21 | tiny text | đoạn giải thích 16 pt của bản gốc |
+| 22 | tiny text | bảng so sánh máy 11 pt của bản gốc |
+| 23 | tiny text | nhãn INNER/OUTER 13,5 pt của bản gốc |
+| 26 | text on picture ×2; cannot read (bảng) | hai bảng gốc lớn hơn vùng nội dung, hàng tự nới; chữ bảng 8–9 pt có sẵn |
+| 27 | tiny text (chart 16 pt); same picture twice ×2 | chart và ảnh bằng chứng lặp có sẵn trong bố cục gốc |
+| 28 | tiny text (chart 12 pt + chữ 13,5 pt) | có sẵn |
+| 32 | tiny text (chart 16 pt + chữ 14 pt) | có sẵn |
+| 35 | tiny text (chart 16 pt) | có sẵn |
+| 37 | text hidden | ảnh chibi gốc che chữ "SHARP Team"; bìa và slide kết chưa gắn vỏ theme (để riêng như T100) |
+
+Chưa làm được ở B1: **bìa (slide 1) và slide kết (37) giữ nội dung gốc, chưa có vỏ theme**; nội dung
+15 slide trên (chữ nhỏ, nhãn chồng) cần mức 2 mới sửa được — B2 làm 3 slide mẫu.
+
+## B2. Dựng lại bố cục, ba slide mẫu (mục 14)
+
+Ba slide chọn: **13** (ảnh bằng chứng — teardown SPK), **18** (số liệu + biểu đồ — before/after + chart),
+**22** (bảng — so sánh 3 máy). Cách làm: `_scratch/lead/b2/build_b2.py` mỗi vòng lấy bản mức 1 (B1) làm
+nguồn, `ungroup` nhóm cần tách (A2 dùng `Shape.Ungroup` của PowerPoint cho nhóm 17), đặt lại bằng `arrange`
+với bố cục JSON theo vùng, xuất 3 slide thành một file mẫu, rồi `glance` + mở ảnh. Mỗi vòng tối đa 3 điều
+tệ nhất, sửa trong script, dựng lại từ bản mức 1 (không vá file kết quả).
+
+| Vòng | `glance` | Mắt thấy (ba điều tệ nhất) |
+|---|---|---|
+| 1 | 2/3 slide lỗi (slide 18: chữ banner tràn + đè ảnh; slide 22: 69% chữ dưới 18 pt) | 13: dải trống lớn dưới ảnh, công cụ nhỏ lệch trái; 18: ảnh before/after bị bóp còn 1/3, nhãn "Before/After" rơi xuống đáy, chart cắt nhãn "134,61…"; 22: tiêu đề cột 3 bị ảnh che, phụ đề "Dots = rating" 10 pt |
+| 2 | 1/3 slide lỗi (slide 22: phụ đề tràn xuống hàng 1) | 13: sạch; 18: bố cục before–after–chart đã rõ nhưng nhãn "Before/After" rời khỏi ảnh, chart vẫn cắt "134,61 5…"; 22: phụ đề 18 pt tràn khỏi ô header |
+| 3 | **0/3 slide lỗi** | 13: sạch; 18: ảnh before/after to, đúng cặp; còn chart cắt nhãn số "134,61 5…" và "0…" (định dạng chart gốc, muốn sửa phải sửa nhãn dữ liệu chart — không thuộc bố cục); 22: bảng đọc được, tiêu đề cột 3 vẫn sát mép nhưng không bị che; phụ đề 14 pt |
+
+**`glance` file mẫu:** `python scripts/pptx_tools.py glance "...B2_samples_round3.pptx"` → **0 slide lỗi**.
+**`seen`:** mở 3/3 ảnh slide + 3/3 ảnh cặp cũ/mới (`compare ... --map`), `seen` trả "3 of 3 pictures proven
+seen" cho cả hai bộ.
+**Giữ vật:** `check GOC B2 --map` (map 3 hàng `rebuild` + 34 slide `dropped` vì đây là file mẫu 3 slide) →
+11/13 cổng đạt; đạt `effects intact`, `pictures not cut`, `source pictures on their slide`, `charts kept`,
+`chart data kept`, `tables kept`, `every slide accounted for`, `transitions`; hai cổng `videos kept` và
+`numbers kept` không áp dụng cho file mẫu 3 slide (bộ gốc có 5 video/161 số ở 34 slide không lấy).
+**Không thêm vật:** ngoài vỏ theme (`!!*`, Logo, Title, Footer, Footer rule, Page number, Cause chip) mọi
+vật trên 3 slide đều lấy từ slide gốc; ở slide 13 chữ của "TextBox 37" ("Teardown SPK") được đưa lên tiêu
+đề theme (giữ nguyên chữ, bỏ hộp — đúng mục 14: tiêu đề của tác giả thành tiêu đề theme).
+**Chưa làm được ở B2:** nhãn dữ liệu chart 43 ("134,61 5…", "0…") bị cắt — lỗi định dạng của chart gốc,
+sửa được nhưng sẽ đổi cách trình bày số của chart, ngoài phạm vi "chỉ sắp lại".
+
+## B3. Chạy mù bằng model nhỏ, đúng một lần
+
+**Cách chạy.** Sandbox `_scratch/lead/b3/` chỉ có: `CARD.md` (38 dòng), `scripts/` (đồ nghề), `GOC_8.pptx`
+(8 slide đầu của bộ gốc), `THEME_v6.pptx` (bộ mẫu theme), `VIEC.md` (đề bài: đưa 8 slide đầu vào theme, tự
+kiểm theo CARD, không hỏi ai). Một phiên mới của model nhỏ (deepseek-v4.1-flash, subagent mới, không thấy
+gì của phiên Lead) làm một mình. Lead không giúp, không trả lời câu hỏi.
+
+**Kết quả (nguyên văn báo cáo của nó, đối chiếu với file trong sandbox):**
+
+| Câu hỏi | Kết quả |
+|---|---|
+| Có đọc `CARD.md` không? | **có** — thứ tự lệnh nó chạy đúng thứ tự trong CARD (shell → gỡ vỏ → tiêu đề → `fit` → vỏ theme → `glance --ink` → `glance` → `check` → `compare` → `seen`); nó đọc cả phần `fit`/`glance` trong `pptx_tools.py` |
+| Có chạy `glance` và `seen` không? | **có** — `glance` trên bản gốc và trên bản cuối; `seen out/glance_xong 1=N4Y … 8=4BW` trả **"8 of 8 pictures proven seen"** |
+| Có tự viết script chấm không? | **không** — chỉ script dựng (`a_titles.py`, `c_shell.py`) và script chỉ-đọc để xem XML; mọi phép đo bằng `glance`/`check`/`compare`/`seen` |
+| Còn bao nhiêu slide lỗi? | **4 / 8 slide** (5, 6, 7, 8), 6 dòng, **tất cả là `tiny text`**: slide 5 bảng 15 pt, slide 6 chart 14 pt, slide 7 và 8 nhãn dải bước 16,5 pt của chính theme, slide 8 bảng Gantt 8,3 pt — đều là chữ nhỏ có sẵn hoặc do bảng gốc quá lớn |
+| Hỏng/kẹt ở bước nào? | (1) nó **chép nguyên vỏ theme kể cả tên bước** ("Theme selection", "Current status"...) thay vì lấy tên bước từ thanh bước cũ của QCC — sai nghĩa bước; (2) bìa video và slide nền đá full-bleed phải để mức 0; (3) bảng Gantt phải `scale --by 0.79` trước `fit` mới không tràn chân trang; (4) 4 slide còn `tiny text`, phải mức 2 mới sửa; (5) phải tự viết script chép vỏ theme vì skill không có lệnh "áp theme" |
+
+Nó tự khai: `check` trên 8 slide của nó đạt **13/13 cổng**; file cuối
+`_scratch/lead/b3/out/5_xong.pptx` (8 slide, 20×11,25 in).
+
+## B4. Chủ dự án chấm
+
+Chỉ chủ dự án nói "đạt". Bản giao: file B1, ba slide B2 + cặp cũ/mới, bảng B3.
+
+## Kết luận thẳng
+
+- **Model mạnh: dùng được.** Bộ 37 slide vào theme bằng một script dựng từ bản gốc trong ~4 phút; `check`
+  giữ ruột 12/13 cổng (cổng trượt là video gốc nhỏ có sẵn); `glance` còn 15 slide lỗi, tất cả đều là nội
+  dung gốc (chữ nhỏ, bảng/chart gốc, nhãn lặp) hoặc giới hạn mức 1, khớp đúng bằng chứng mở ảnh. Ba slide
+  dựng lại bố cục đạt `glance` 0 lỗi sau 3 vòng, mọi ảnh/chart/bảng/effect của slide gốc còn đủ, `seen`
+  chứng minh 3/3 + 3/3 ảnh đã mở. Hai lỗi thật của đồ nghề lộ ra trong quá trình làm đã được sửa và gộp
+  (PR #91).
+- **Model nhỏ: dùng được cho mức 1, chưa dùng được cho mức 2.** Bằng chứng: một phiên mới của
+  deepseek-v4.1-flash, chỉ có CARD.md + đồ nghề, đã tự làm xong 8 slide vào theme: đọc CARD, chạy đúng thứ
+  tự lệnh, `glance` + `seen` đầy đủ (8/8), `check` 13/13, không tự viết script chấm. Nó còn 4/8 slide lỗi
+  `tiny text` — đều là chữ nhỏ có sẵn/giới hạn mức 1 — và mắc một lỗi nghĩa: chép nguyên tên bước của theme
+  thay vì tên bước của bộ gốc. Nghĩa là CARD đủ để model nhỏ làm đúng *quy trình* và không tự lừa mình,
+  nhưng kết quả vẫn cần người/máy kiểm, và việc "hiểu nghĩa" (tên bước, chỗ nào cần mức 2) vẫn là chỗ hỏng
+  của model nhỏ.
+- **Đồ nghề vẫn thiếu một lệnh**: không có lệnh "áp vỏ theme" (cả Lead lẫn model nhỏ đều phải tự viết
+  builder để chép vỏ). Đây là việc nên làm tiếp, cùng với cổng đo "thêm vật" cho file mẫu.
