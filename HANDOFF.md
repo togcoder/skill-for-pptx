@@ -92,6 +92,7 @@ thay vì deck làm tay. Lab đa lĩnh vực phục vụ mục tiêu đó và đa
 | **T096** | Theo một tài liệu mẫu (PDF): lệnh `sample` + mục 2; mốc chữ nhỏ tính theo chiều cao slide (`inventory`, `design_critic`) | Claude → Claude (cùng họ, theo yêu cầu chủ dự án) | **đã gộp 10/11; phản biện `research/reviews/T096-claude-20261110.md`** |
 | **T097** | Dựng lại cả một bộ: `extract`, `check` (9 cổng), `retable`, `cutout`; mục 11; mục 1 "hỏi cho tới khi hiểu" | Claude → Claude (cùng họ, theo yêu cầu chủ dự án) | **đã gộp 10/11; phản biện `research/reviews/T097-claude-20261110.md`** |
 | **T100** | Đưa một bộ có sẵn vào theme: `glance` (lỗi thấy ngay, khoanh đỏ), `shell`, `fit`, `compare`; [mục 13](skills/pptx/guides/13-dua-bo-co-san-vao-theme.md) | Claude | **đã gộp 11/11 theo lời chủ dự án (issue 83); bộ QCC dựng lại theo mục 13 là việc kế tiếp** |
+| **T101** | Dựng lại bố cục một slide: [mục 14](skills/pptx/guides/14-dung-lai-bo-cuc-mot-slide.md) (mỗi yếu tố một việc, bảy bước, nhìn ảnh mỗi vòng); `arrange` sắp bằng vùng; mã nhìn + `seen` | Claude | **đã gộp 11/11; chờ biết model nhỏ có đọc được ảnh không, và 2–3 slide mẫu được chủ dự án duyệt** |
 | **T089** | Sửa mặc định gây hại: Forge (KPI 0, thu chữ 14 pt, trang trí cứng, `!!orb`), Director (bìa 6 lần bấm, Morph khắp nơi), báo tràn chữ sai khi thiếu font | OpenCode → Claude | **ngay** |
 | **T090** | Model nhỏ dùng skill: sửa theo mẫu đã duyệt, chủ dự án mở và chấm | DSH → Claude | **xong (merge #70); chủ dự án chấm** |
 | **T086** | **Nghiên cứu gu đám đông đa lĩnh vực → luật gu, mỗi luật kiểm chứng bằng một cặp `.pptx` chấm mù** ([ROADMAP](docs/ROADMAP.md)) | Claude hoặc Gemini → model khác họ | **ngay, song song** |
@@ -108,7 +109,7 @@ thay vì deck làm tay. Lab đa lĩnh vực phục vụ mục tiêu đó và đa
 | T076 | Thư viện 10 nước Morph có khung hình mẫu | OpenCode → Claude | sau T074 |
 | T077 | Deck Director xuất cảnh; bỏ ánh xạ chuỗi con và giá trị bịa | Antigravity → Claude | **tạm dừng (D011)** |
 
-Mã trống kế tiếp: do `coord.py claim` tính (hiện là **T101**).
+Mã trống kế tiếp: do `coord.py claim` tính (hiện là **T102**).
 
 **Dừng ngay:**
 - vá thêm luật chuỗi con trong `deck_director.py`;

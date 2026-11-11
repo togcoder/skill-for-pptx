@@ -83,6 +83,16 @@ For putting an existing deck into a theme (skills/pptx/guides/13-dua-bo-co-san-v
     compare BEFORE AFTER [--map MAP.json] [-o DIR]
                                 one large picture per slide: old above, new below
 
+For re-laying out one slide (skills/pptx/guides/14-dung-lai-bo-cuc-mot-slide.md):
+
+    arrange DECK SLIDE LAYOUT.json -o OUT
+                                place shapes by regions: rows and columns with
+                                weights inside a box; pictures and blocks fit
+                                their cell unstretched, words take its width
+    seen FOLDER N=CODE ...      every picture glance and compare write carries a
+                                look code in its bottom strip; this proves the
+                                pictures were opened, not only measured
+
 For rebuilding a whole deck (skills/pptx/guides/11-dung-lai-ca-bo.md):
 
     extract DECK [-o DIR]       the original pictures and videos as files (never
@@ -821,9 +831,14 @@ def glance(deck, out_dir, slides=None, data=None):
     moving = _moving(prs, data)
     slots, usual = _slots(data["slides"], data["size"])
     numbers = [s["slide"] for s in data["slides"]]
-    report = []
+    report, codes = [], {}
     for s in data["slides"]:
         image = Image.open(s["png"]).convert("RGB")
+        if image.height == round(image.width * data["size"][1] / data["size"][0]):   # not stamped yet
+            stamped, codes[Path(s["png"]).name] = _stamp(image, f"slide {s['slide']}")
+            stamped.save(s["png"])
+        else:
+            image = image.crop((0, 0, image.width, image.height - 34))
         inks = {}
         for shape in _walk(prs.slides[s["slide"] - 1].shapes):
             if getattr(shape, "has_chart", False) and shape.has_chart:
@@ -848,6 +863,8 @@ def glance(deck, out_dir, slides=None, data=None):
             row["marked"] = str(Path(s["png"]).with_name(f"faults-{s['slide']:02d}.png"))
             image.save(row["marked"])
         report.append(row)
+    if codes:
+        _keep_codes(Path(data["slides"][0]["png"]).parent, codes)
     return report
 
 
@@ -902,6 +919,9 @@ def glance_lines(report):
     else:
         lines.append(f"no fault found on {len(report)} slides by measuring. That is not yet 'looked at': open every "
                      f"slide-NN.png in {folder} at full size before you show the deck (guide 8).")
+    lines.append(f"Each slide-NN.png has a three-letter look code in the strip under the slide. After you have opened "
+                 f"the pictures: python scripts/pptx_tools.py seen \"{folder}\" 1=CODE 2=CODE ...  and put its answer "
+                 "in your handoff (guide 14).")
     return lines
 
 
@@ -1199,14 +1219,14 @@ def scale(deck, slide_no, names, factor, output, at=None):
     return low
 
 
-def _scale_block(prs, slide, targets, factor, at=None, floor=None):
+def _scale_block(prs, slide, targets, factor, at=None, floor=None, grow_text=True):
     """Scale shapes of one slide as one block about its top-left corner, then move that corner to `at`
     (EMU). `floor`: see _scale_text. Returns the smallest text size left, in pt, or None."""
     x0, y0 = min(s.left for s in targets), min(s.top for s in targets)
     inside, low = set(), []
     for s in targets:
         el = s._element
-        pt = _scale_text(prs, slide, el, factor, floor)
+        pt = _scale_text(prs, slide, el, factor if grow_text else min(factor, 1.0), floor)
         if pt is not None:
             low.append(pt)
         for node in el.iter(qn("a:ln")):
@@ -1762,7 +1782,7 @@ def compare(before, after, out_dir, mapping=None):
     old, _ = look(before, out_dir / "old")
     new, _ = look(after, out_dir / "new")
     rows = {int(k): v for k, v in (mapping or {}).items() if k != "dropped"}
-    pairs = []
+    pairs, codes = [], {}
     for n, path in enumerate(new, 1):
         olds = [o for o in (rows[n].get("old", []) if n in rows else [n] if not mapping else []) if 1 <= o <= len(old)]
         below = Image.open(path).convert("RGB")
@@ -1777,9 +1797,136 @@ def compare(before, after, out_dir, mapping=None):
         draw.text((10, h + 39), f"NEW slide {n}", fill=(255, 255, 255))
         sheet.paste(below, (0, h + 60))
         target = out_dir / f"pair-{n:02d}.jpg"
+        sheet, codes[target.name] = _stamp(sheet, f"pair {n}")
         sheet.save(target, quality=88)
         pairs.append((n, olds, target))
+    _keep_codes(out_dir, codes)
     return pairs
+
+
+# ------------------------------------------------------------ laying a slide out by regions
+
+def _layout_cells(node, box, gap):
+    """Walk a layout tree and give every leaf its cell: [(leaf, (left, top, width, height))], in inches.
+    A node is {"row": [...]} (side by side), {"col": [...]} (stacked) or a leaf; any node may carry
+    "weight" (its share of the row or column, default 1)."""
+    kids = node.get("row") or node.get("col") if isinstance(node, dict) else None
+    if not kids:
+        return [(node, box)]
+    across = "row" in node
+    kids = [k if isinstance(k, dict) else {"item": k} for k in kids]
+    total = sum(k.get("weight", 1) for k in kids)
+    room = (box[2] if across else box[3]) - gap * (len(kids) - 1)
+    cells, at = [], box[0] if across else box[1]
+    for k in kids:
+        size = room * k.get("weight", 1) / total
+        cell = (at, box[1], size, box[3]) if across else (box[0], at, box[2], size)
+        cells += _layout_cells(k, cell, gap)
+        at += size + gap
+    return cells
+
+
+def arrange(deck, slide_no, layout, output):
+    """Place a slide's shapes by regions, so nobody has to compute coordinates.
+
+    layout = {"in": [x, y, w, h] (inches: the area to fill), "gap": 0.25, "row" or "col": [...]}. A leaf is
+    - "Name" or {"item": "Name"}: one top-level shape;
+    - {"block": ["Photo", "Arrow 1", "Label"]}: shapes that belong together and keep their arrangement
+      (a photo with its marks);
+    each with optional "weight", "align" ("l", "c", "r"; default "c") and "valign" ("t", "m", "b").
+    A picture, group, chart, table or block is scaled to fit its cell without being stretched (ids,
+    animation follow; text inside shrinks with it but never under the minimum, and never grows: a
+    caption does not become a headline because its photo grew). A text box takes the width of its cell
+    and keeps its type size. {"weight": 2} with no item is an empty cell. Shapes the layout does not name
+    stay where they are.
+    -> ([(names, factor)], [names left where they were])"""
+    prs = Presentation(deck)
+    slide = prs.slides[slide_no - 1]
+    least = MIN_PT * prs.slide_height / REF_HEIGHT
+    emu = 914400
+    placed, used = [], set()
+    for leaf, (left, top, width, height) in _layout_cells(layout, tuple(layout["in"]), layout.get("gap", 0.25)):
+        if "block" not in leaf and "item" not in leaf:
+            continue   # {"weight": 2} alone is an empty cell: room left on purpose
+        names = leaf.get("block") or [leaf["item"]]
+        targets = _top_shapes(slide, names)
+        used |= set(names)
+        x0, y0 = min(s.left for s in targets), min(s.top for s in targets)
+        w = max(s.left + s.width for s in targets) - x0
+        h = max(s.top + s.height for s in targets) - y0
+        only = targets[0]
+        words_only = len(targets) == 1 and only.has_text_frame and only.shape_type not in (
+            MSO_SHAPE_TYPE.PICTURE, MSO_SHAPE_TYPE.GROUP) and not only.is_placeholder
+        if words_only:   # words take the width they are given; their size is a decision, not a fit
+            only.left, only.top, only.width = round(left * emu), round(top * emu), round(width * emu)
+            if leaf.get("valign", "t") != "t":
+                only.top = round((top + (height - only.height / emu) / (2 if leaf["valign"] == "m" else 1)) * emu)
+            placed.append((names, 1.0))
+            continue
+        factor = min(width * emu / w, height * emu / h)
+        spare_x, spare_y = width * emu - w * factor, height * emu - h * factor
+        dx = {"l": 0, "c": spare_x / 2, "r": spare_x}[leaf.get("align", "c")]
+        dy = {"t": 0, "m": spare_y / 2, "b": spare_y}[leaf.get("valign", "m")]
+        _scale_block(prs, slide, targets, factor, (round(left * emu + dx), round(top * emu + dy)), least,
+                     grow_text=False)
+        placed.append((names, factor))
+    left_alone = [s.name for s in slide.shapes if s.name not in used and not s.name.startswith("!!")
+                  and not s.is_placeholder]
+    prs.save(output)
+    return placed, left_alone
+
+
+# ------------------------------------------------------------ proof of looking
+
+def _stamp(image, label):
+    """Add a strip under a review picture with a random three-letter code. Whoever reports the code has
+    opened the picture. -> (picture with the strip, code)"""
+    import secrets
+    from PIL import Image, ImageDraw
+    code = "".join(secrets.choice("ABCDEFGHJKLMNPQRSTUVWXYZ23456789") for _ in range(3))
+    out = Image.new("RGB", (image.width, image.height + 34), (20, 20, 20))
+    out.paste(image, (0, 0))
+    draw = ImageDraw.Draw(out)
+    from PIL import ImageFont
+    try:
+        big = ImageFont.load_default(size=22)
+    except TypeError:   # Pillow before 10.1 has one size only
+        big = ImageFont.load_default()
+    draw.text((12, image.height + 5), f"{label}  -  look code:", fill=(200, 200, 200), font=big)
+    x = 12 + draw.textlength(f"{label}  -  look code:  ", font=big)
+    for n, letter in enumerate(code):      # large and spaced, so it survives a scaled-down view
+        draw.text((x + 26 * n, image.height + 5), letter, fill=(255, 221, 0), font=big)
+    return out, code
+
+
+def _codes_file(folder):
+    return Path(folder) / "look-codes.json"
+
+
+def _keep_codes(folder, codes):
+    """Store the codes as salted hashes, so the file itself does not give them away."""
+    import hashlib
+    import secrets
+    salt = secrets.token_hex(8)
+    data = {"salt": salt, "pictures": {name: hashlib.sha256((salt + name + code).encode()).hexdigest()
+                                      for name, code in codes.items()}}
+    _codes_file(folder).write_text(json.dumps(data, indent=1), encoding="utf-8")
+
+
+def seen(folder, claims):
+    """Check the look codes an agent read off the pictures of a review folder.
+    claims: {"slide-03.png" or "3": "K7P"}. -> (pictures proven seen, pictures not proven)"""
+    import hashlib
+    data = json.loads(_codes_file(folder).read_text(encoding="utf-8"))
+    names = sorted(data["pictures"])
+    said = {}
+    for key, code in claims.items():
+        match = [n for n in names if n == key or re.sub(r"\D", "", n).lstrip("0") == str(key).lstrip("0")]
+        if len(match) == 1:
+            said[match[0]] = code.strip().upper()
+    ok = [n for n in names if n in said and
+          hashlib.sha256((data["salt"] + n + said[n]).encode()).hexdigest() == data["pictures"][n]]
+    return ok, [n for n in names if n not in ok]
 
 
 # ------------------------------------------------------------ a reference document to follow
@@ -2648,6 +2795,15 @@ def main(argv=None):
     a.add_argument("--slides", default=None, help="e.g. 2,3,5-9 (default: all)")
     a.add_argument("--skip", action="append", default=[], help="a shape name to leave alone (repeatable)")
     a.add_argument("-o", "--output", required=True)
+    a = sp.add_parser("arrange", help="place a slide's shapes by regions (rows and columns), no coordinates")
+    a.add_argument("deck")
+    a.add_argument("slide", type=int)
+    a.add_argument("layout", help='JSON file: {"in": [x, y, w, h], "gap": 0.25, "col": [{"row": ["A", "B"], '
+                                  '"weight": 3}, "Conclusion"]}')
+    a.add_argument("-o", "--output", required=True)
+    a = sp.add_parser("seen", help="prove the review pictures were opened: give the look codes read off them")
+    a.add_argument("folder", help="the folder glance or compare wrote")
+    a.add_argument("codes", nargs="+", help="N=CODE, e.g. 3=K7P 4=Q2M")
     a = sp.add_parser("motion", help="write clicks and transitions from a plan")
     a.add_argument("deck")
     a.add_argument("plan")
@@ -2833,6 +2989,24 @@ def main(argv=None):
             print(f"{reink(args.deck, args.ink[1], report, args.ink[0])} runs of unreadable text set to "
                   f"{args.ink[0].upper()} -> {args.ink[1]}; run glance on it and look")
         return 1 if any(row["faults"] for row in report) else 0
+    if args.cmd == "arrange":
+        try:
+            placed, left_alone = arrange(args.deck, args.slide,
+                                         json.loads(Path(args.layout).read_text(encoding="utf-8")), args.output)
+        except (ValueError, KeyError) as exc:
+            sys.exit(f"error: {exc}")
+        for names, factor in placed:
+            print(f"  {' + '.join(names)}: x{factor:.2f}")
+        if left_alone:
+            print("left where they were (name them in the layout, or decide they go): " + ", ".join(left_alone))
+        print(f"-> {args.output}. Now render this slide and look at it: glance {args.output} --slides {args.slide}")
+        return 0
+    if args.cmd == "seen":
+        ok, missing = seen(args.folder, dict(c.split("=", 1) for c in args.codes if "=" in c))
+        print(f"{len(ok)} of {len(ok) + len(missing)} pictures proven seen")
+        if missing:
+            print("not proven (open the picture and read the code in its bottom strip): " + ", ".join(missing))
+        return 0 if not missing else 1
     if args.cmd == "compare":
         out = args.output or str(Path(args.after).with_suffix("")) + "-compare"
         mapping = json.loads(Path(args.map).read_text(encoding="utf-8")) if args.map else None

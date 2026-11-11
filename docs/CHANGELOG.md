@@ -10,6 +10,24 @@ were true at the time. Task IDs and their branches are listed in
 
 
 
+
+## T101 [pptx] Re-laying out a slide: look at the picture, every element has a job, arrange by regions — 2026-11-11
+
+- **Why:** the owner, after a small model ran again with T100: agents check with code, not with pictures;
+  they are not taught what each element on a slide is for, so they add things with no job that fight each
+  other; content and assets exist and the layout still comes out wrong.
+- **Guidance:** new guide 14: one job per element (claim, evidence, label, pointer, method, shell,
+  decoration) with three tests; seven steps for one slide; what to ask when looking at the picture; "looked"
+  must be provable; a model that cannot read pictures says so and does not take layout work. SKILL.md rules
+  12 and 13.
+- **Toolbox:** `arrange DECK SLIDE LAYOUT.json` places shapes by regions (rows, columns, weights, empty
+  cells, blocks that stay together); nothing is stretched and text is never enlarged. Every picture `glance`
+  and `compare` write carries a random three-letter look code in a strip under it; `seen FOLDER N=CODE`
+  checks the codes an agent read.
+- **Evidence:** one real slide re-laid out in three rounds: `glance` said 0 faults each time, eyes found five
+  (dead bands, a caption on the next photo, a minor photo enlarged, a caption through the footer rule, content
+  on the theme's decoration). `experiments/T101-20261111-claude-look-meaning-arrange/REPORT.md`.
+
 ## T100 [pptx] Putting an existing deck into a theme: glance, shell, fit, compare — 2026-11-11
 
 - **Why (issue #83):** an agent put a 37-slide deck into a theme four times and reported "checked" each

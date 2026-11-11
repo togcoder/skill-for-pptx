@@ -46,6 +46,11 @@ dùng ở ba chỗ; dựng trên bản sao bộ gốc; chấm hai tầng (cổng
 nguyên, **vào theme** (mặc định: đổi vỏ, giữ cách sắp xếp của tác giả), hoặc dựng lại bố cục (phải được
 duyệt). Vỏ cũ nằm cả trong slide master. "Đừng làm hỏng nội dung" không có nghĩa là để nguyên bản gốc.
 
+**Nội dung và tài nguyên đã có, chỉ cần sắp lại cho chuyên nghiệp:** đi theo
+[guides/14-dung-lai-bo-cuc-mot-slide.md](guides/14-dung-lai-bo-cuc-mot-slide.md). Từng slide một: viết
+việc của **từng yếu tố** (luận điểm, bằng chứng, nhãn, dẫn mắt, cách làm, vỏ, trang trí), sắp bằng vùng
+(`arrange`), xuất ảnh, **mở ảnh ra nhìn**, viết ba điều tệ nhất, sửa, tối đa ba vòng.
+
 **Tách thành phần dùng lại** (khung xương cá, thanh bước, Gantt, icon trong bộ cũ): đừng chụp ảnh và đừng
 vẽ lại. `extract` chỉ lấy ảnh/video gốc + manifest, **không** lấy hình vector; `cutout` chỉ dành cho một ảnh
 có nền đơn giản. Dùng `components` → `ungroup` / `component` để tách ra một file một-slide, rồi `place` để
@@ -54,7 +59,7 @@ dán lại: [guides/12-tach-thanh-phan.md](guides/12-tach-thanh-phan.md).
 Chọn **mức** chuyển động theo phòng, không theo số hiệu ứng: một lớp học cần ít
 hơn một sân khấu hội nghị. Đơn giản mà vừa tốt hơn phức tạp mà gượng (guide 6).
 
-## Mười hai điều không làm (lỗi đã gặp thật trong dự án)
+## Mười bốn điều không làm (lỗi đã gặp thật trong dự án)
 
 1. **Bịa nội dung.** Không tự điền "100%", "Bước hoàn thiện", "Chỉ số 1" hay một con số không có
    nguồn. Thiếu thì hỏi.
@@ -73,7 +78,12 @@ hơn một sân khấu hội nghị. Đơn giản mà vừa tốt hơn phức t�
 11. **Đưa slide cho người dùng khi chưa nhìn.** Trước mỗi lần giao: chạy `glance`, mở **từng** slide ở cỡ
     lớn (không phải ảnh ghép thu nhỏ), và với bộ có sẵn thì đặt cũ cạnh mới bằng `compare`. Người dùng không
     phải là người tìm ra hai logo chồng nhau.
-12. **Vá chồng lên vá.** Lỗi thì sửa trong script dựng và dựng lại từ bản gốc. Không lấy một bản lỗi làm nền
+12. **Thêm thứ không có việc.** Mỗi yếu tố trên slide làm đúng một việc (mục 14). Câu tóm tắt tự viết,
+    khẩu hiệu, số to "cho có điểm nhấn", icon, khung thẻ, dải màu, ghi chú về cách mình làm: không có trong
+    bản gốc và không ai yêu cầu thì không lên slide.
+13. **Kiểm bằng lệnh thay cho mắt.** Lệnh đo chỉ là sàn. Slide có thể "0 lỗi" mà chú thích đè lên ảnh, ảnh
+    phụ to hơn ảnh chính, nửa slide trống. Mở ảnh, viết ra thấy gì, nộp mã nhìn (`seen`).
+14. **Vá chồng lên vá.** Lỗi thì sửa trong script dựng và dựng lại từ bản gốc. Không lấy một bản lỗi làm nền
     cho bản sau.
 
 ## Nếu bạn là model nhỏ hoặc nhanh
@@ -82,7 +92,10 @@ hơn một sân khấu hội nghị. Đơn giản mà vừa tốt hơn phức t�
   của người dùng, giữ bố cục và thay nội dung.
 - Làm **từng slide một**: dựng, mở ra xem, sửa, rồi mới sang slide tiếp.
 - Khi phân vân, chọn cách đơn giản hơn. Ít chuyển động mà đúng tốt hơn nhiều chuyển động mà sai.
-- Không được tuyên bố "đã kiểm tra" nếu chưa chạy `glance` và chưa thực sự mở ảnh **từng** slide. Có chuyển động thì
+- Không được tuyên bố "đã kiểm tra" nếu chưa chạy `glance` và chưa thực sự mở ảnh **từng** slide. Mỗi
+  ảnh có một mã nhìn ở dải dưới; nộp các mã đó bằng lệnh `seen`.
+- **Bạn không đọc được ảnh thì nói ngay ở câu đầu tiên.** Khi đó chỉ nhận việc đổi vỏ (mục 13, mức 1) và
+  các lệnh đo; không nhận việc dựng lại bố cục. Có chuyển động thì
   thêm `watch`: nhìn dải ảnh của từng slide có lần bấm hoặc Morph.
 
 ## Bàn giao cho người dùng
@@ -102,6 +115,8 @@ Viết ngắn, bằng lời thường, theo thứ tự:
 | Bộ có sẵn: slide cũ ở trên, slide mới ở dưới, mỗi slide một ảnh lớn | `python scripts/pptx_tools.py compare GOC.pptx MOI.pptx` |
 | Vào theme: vỏ cũ nằm ở đâu (master, layout, vật lặp lại), và gỡ nó | `python scripts/pptx_tools.py shell GOC.pptx [--strip m1,r1 --background F6F2EA -o OUT]` |
 | Vào theme: co cả khối nội dung vào vùng theme để trống | `python scripts/pptx_tools.py fit DECK --into 0.67,2.2,18.67,8.3 -o OUT` |
+| Sắp một slide bằng vùng (hàng, cột, phần chia), không tính tọa độ | `python scripts/pptx_tools.py arrange DECK 13 bo-cuc.json -o OUT` |
+| Chứng minh đã mở ảnh ra nhìn: nộp mã nhìn ở dải dưới từng ảnh | `python scripts/pptx_tools.py seen DECK-glance 13=U6G 14=K7P` |
 | Vào theme: đổi mực cho chữ không còn đọc được trên nền mới | `python scripts/pptx_tools.py glance DECK --ink 1D2433 OUT.pptx` |
 | Ghi lần bấm và chuyển slide theo tên vật thể | `python scripts/pptx_tools.py motion DECK.pptx plan.json -o OUT.pptx` |
 | Xem chuyển động: mỗi slide một dải ảnh (vừa mở, từng lần bấm, giữa cú Morph) | `python scripts/pptx_tools.py watch OUT.pptx [--slides 3,6]` |

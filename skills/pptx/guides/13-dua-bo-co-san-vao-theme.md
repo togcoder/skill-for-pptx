@@ -32,7 +32,7 @@ Trước khi làm, xếp **từng slide** vào một mức. Ghi vào bảng ý.
 |---|---|---|
 | **0. Để nguyên** | Chỉ đổi vỏ quanh nó. Không co, không dời. | Slide tràn hình (một cảnh, một video), slide mô phỏng nhiều hiệu ứng |
 | **1. Vào theme** (mặc định) | Gỡ vỏ cũ, gắn vỏ mới, co cả khối nội dung vào vùng theme để trống, đổi mực cho chữ không còn đọc được. **Cách sắp xếp của tác giả giữ nguyên.** | Hầu hết các slide |
-| **2. Dựng lại bố cục** | Sắp lại nội dung, vẫn đủ mọi ảnh, số, biểu đồ, bảng của slide gốc (mục 10). Làm mẫu trước, người dùng duyệt rồi mới làm. | Chỉ những slide người dùng chỉ ra, hoặc đã duyệt trên mẫu |
+| **2. Dựng lại bố cục** | Sắp lại nội dung theo [mục 14](14-dung-lai-bo-cuc-mot-slide.md), vẫn đủ mọi ảnh, số, biểu đồ, bảng của slide gốc (mục 10). Làm mẫu trước, người dùng duyệt rồi mới làm. | Chỉ những slide người dùng chỉ ra, hoặc đã duyệt trên mẫu |
 
 Hai câu người dùng hay nói, và nghĩa của chúng:
 
@@ -120,6 +120,9 @@ chưa nhờ sửa) thì ghi vào bàn giao, kèm lý do.
 
 `glance` chỉ đo được những gì đo được. Nó **không** biết slide có đẹp không, có điểm nhấn không, có trống
 không. Hết lỗi `glance` chưa phải là tốt.
+
+Mỗi ảnh `slide-NN.png` có một **mã nhìn** ba ký tự ở dải dưới. Mở xong thì nộp các mã bằng lệnh `seen`
+(mục 14); slide nào không có mã đúng là slide chưa được nhìn.
 
 **2. Mở từng slide ở cỡ lớn.** `glance` đã xuất `slide-NN.png` cho mọi slide. Mở **từng ảnh một**, không
 xem ảnh ghép thu nhỏ: ở cỡ thu nhỏ, hai logo chồng nhau trông như một. Với mỗi slide, trả lời các câu hỏi

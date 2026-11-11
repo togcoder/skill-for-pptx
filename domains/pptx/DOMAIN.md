@@ -99,6 +99,10 @@ unwired) `skills/deck-director`.
   see `experiments/T064-20261104-opencode-native-3d/REPORT.md`.
 
 ## State (2026-11-11)
+- **Re-laying out a slide (T101):** guide 14 gives every element one job and seven steps for one slide
+  with the picture opened each round; `arrange` places shapes by regions; `glance`/`compare` pictures
+  carry a look code that `seen` checks. One real slide done in three rounds: the measuring command said
+  0 faults each time, eyes found five. Not yet tried by a small model.
 - **Into a theme (T100, issue 83):** `glance` reports the faults a viewer sees at once from PowerPoint's own
   facts (drawn text bounds, drawn colours, the master's shapes) and boxes them on the slide; `shell` finds
   and strips the old shell where it lives (master, layouts, repeated shapes); `fit` scales a slide's content
