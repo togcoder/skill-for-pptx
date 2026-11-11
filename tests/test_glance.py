@@ -29,9 +29,14 @@ def row(shape_id, name, box, kind=1, text=None, runs=None, layer="slide", depth=
     return out
 
 
-def faults(rows, image=None, slots=frozenset(), moving=frozenset(), chart_inks=None):
+def faults(rows, image=None, slots=frozenset(), moving=frozenset(), chart_inks=None,
+           chart_sizes=None, pic_shas=None, repeated_shas=None, text_notes=None):
     image = image or Image.new("RGB", (960, 540), (246, 242, 234))
-    found, unreadable = tools._glance_slide({"slide": 2, "shapes": rows}, SIZE, slots, moving, image, chart_inks)
+    found, unreadable = tools._glance_slide(
+        {"slide": 2, "shapes": rows}, SIZE, slots, moving, image,
+        chart_inks=chart_inks, chart_sizes=chart_sizes, pic_shas=pic_shas,
+        repeated_shas=repeated_shas, text_notes=text_notes,
+    )
     return [kind for kind, _, _ in found], unreadable
 
 
@@ -104,6 +109,65 @@ class GlanceRules(unittest.TestCase):
         self.assertEqual(keys, {(n, 1) for n in (1, 2, 3, 5, 6)})
         self.assertEqual([(label, sorted(on)) for label, _, on in usual], [("Title", [1, 2, 3, 5, 6])])
 
+    def test_table_cells_unreadable_and_tiny_text_are_caught_and_reinkable(self):
+        tbl_row = {
+            "id": 7, "name": "Table 4", "type": 19, "layer": "slide", "depth": 0,
+            "box": [60.0, 120.0, 600.0, 220.0], "visible": True,
+            "table": {"cells": [
+                {"sample": "White cell", "runs": [[10, 16.0, WHITE]], "box": [70.0, 140.0, 180.0, 20.0]},
+                {"sample": "Tiny cell", "runs": [[12, 8.0, INK]], "box": [270.0, 200.0, 180.0, 20.0]},
+            ]},
+        }
+        kinds, unreadable = faults([tbl_row])
+        self.assertEqual(sorted(kinds), ["cannot read", "tiny text"])
+        self.assertEqual(unreadable, [(7, "FFFFFF")])
+        clean_tbl = {
+            "id": 8, "name": "Table 5", "type": 19, "layer": "slide", "depth": 0,
+            "box": [60.0, 120.0, 600.0, 220.0], "visible": True,
+            "table": {"cells": [
+                {"sample": "Dark cell", "runs": [[9, 14.0, INK]], "box": [70.0, 140.0, 180.0, 20.0]},
+            ]},
+        }
+        self.assertEqual(faults([clean_tbl]), ([], []))
+
+    def test_chart_small_text_and_micro_text_floor(self):
+        chart = row(5, "Chart 1", (100, 100, 600, 300), kind=3)
+        self.assertEqual(faults([chart], chart_sizes={5: [8.0, 18.0]})[0], ["tiny text"])
+        self.assertEqual(faults([chart], chart_sizes={5: [14.0, 18.0]})[0], [])
+        body = [row(1, "Hero", (60, 60, 700, 100), text="Big statement", runs=[[200, 28.0, INK]]),
+                row(2, "Card", (60, 200, 300, 80), text="Dense micro copy", runs=[[16, 8.0, INK]])]
+        self.assertEqual(faults(body)[0], ["tiny text"])
+
+    def test_text_on_busy_photo_is_flagged_while_smooth_background_passes(self):
+        busy = Image.new("RGB", (960, 540), (246, 242, 234))
+        draw = ImageDraw.Draw(busy)
+        palette = ((245, 245, 245), (140, 185, 235), (170, 95, 70))
+        for idx, y in enumerate(range(140, 360, 4)):
+            draw.line([(80, y), (460, y)], fill=palette[idx % 3], width=4)
+        rows = [row(1, "Photo", (80, 140, 380, 220), kind=13),
+                row(2, "Label", (120, 200, 240, 60), text="Machine step", runs=[[12, 16.0, INK]])]
+        self.assertIn("text on picture", faults(rows, busy)[0])
+        self.assertEqual(faults(rows)[0], [])
+
+    def test_same_content_photo_repeated_across_cards_vs_deck_wide_mark(self):
+        rows = [row(1, "PicA", (60, 140, 160, 120), kind=13),
+                row(2, "PicB", (300, 140, 160, 120), kind=13)]
+        shas = {1: "deadbeef0001:0:0:0:0", 2: "deadbeef0001:0:0:0:0"}
+        self.assertEqual(faults(rows, pic_shas=shas)[0], ["same picture twice"])
+        self.assertEqual(faults(rows, pic_shas=shas, repeated_shas={"deadbeef0001:0:0:0:0"})[0], [])
+        tiny_icons = [row(1, "IconA", (60, 140, 30, 30), kind=13),
+                      row(2, "IconB", (300, 140, 30, 30), kind=13)]
+        self.assertEqual(faults(tiny_icons, pic_shas=shas)[0], [])
+
+    def test_broken_pua_symbol_and_draft_meta_text(self):
+        self.assertEqual(tools._pua_hits("\uf0e8 Next", "Wingdings"), [])
+        self.assertEqual(tools._pua_hits("\uf0e8 Next", "Arial"), [("Arial", "U+F0E8")])
+        rows = [row(1, "Arrow", (60, 120, 200, 40), text="\uf0e8 Next"),
+                row(2, "Draft", (60, 220, 400, 40), text="Charts kept from slide 4 [TODO]")]
+        notes = {1: {"pua": [("Arial", "U+F0E8")], "full": "\uf0e8 Next"},
+                 2: {"pua": [], "full": "Charts kept from slide 4 [TODO]"}}
+        self.assertEqual(sorted(faults(rows, text_notes=notes)[0]), ["broken symbol", "draft text"])
+
 
 def old_deck(path):
     """A deck in an old shell: a dark panel on the master, a step bar on every slide, light text."""
@@ -153,6 +217,145 @@ class IntoATheme(unittest.TestCase):
         self.assertEqual(prs.slide_master._element.find(".//" + qn("a:srgbClr")).get("val"), "F6F2EA")
         with self.assertRaises(ValueError):
             tools.unshell(self.old, out, ["m9"])
+
+    def test_fit_reclaims_whitespace_for_clamped_boxes_without_hitting_neighbors(self):
+        prs = Presentation()
+        prs.slide_width, prs.slide_height = Inches(13.333), Inches(7.5)
+        slide = prs.slides.add_slide(prs.slide_layouts[6])
+        wide = slide.shapes.add_textbox(Inches(0.5), Inches(1.0), Inches(8.0), Inches(3.0))
+        wide.name, wide.text_frame.text = "Notes", "Line one wraps onto a taller frame when squeezed"
+        wide.text_frame.paragraphs[0].runs[0].font.size = Pt(14)
+        sibling = slide.shapes.add_textbox(Inches(9.0), Inches(1.0), Inches(12.0), Inches(3.0))
+        sibling.name, sibling.text_frame.text = "Metric", "42%"
+        sibling.text_frame.paragraphs[0].runs[0].font.size = Pt(28)
+        tall = slide.shapes.add_table(3, 2, Inches(0.5), Inches(4.5), Inches(8.0), Inches(4.5))
+        tall.name = "Grid"
+        for r in range(3):
+            for c in range(2):
+                tall.table.cell(r, c).text = f"R{r}C{c}"
+                tall.table.cell(r, c).text_frame.paragraphs[0].runs[0].font.size = Pt(14)
+        src, out = self.dir / "clamp.pptx", self.dir / "clamp-fit.pptx"
+        prs.save(src)
+        into = (0.7, 2.0, 12.0, 4.8)
+        done = tools.fit(src, out, into)
+        factor = done[0][1]
+        self.assertLess(factor, 0.7)
+        fitted = Presentation(out).slides[0]
+        notes = next(s for s in fitted.shapes if s.name == "Notes")
+        metric = next(s for s in fitted.shapes if s.name == "Metric")
+        grid = next(s for s in fitted.shapes if s.name == "Grid")
+        # Clamped text (14 pt -> clamped to 12 pt) reclaims slack without hitting sibling or leaving `into`
+        self.assertGreater(notes.width, round(Inches(8.0) * factor))
+        self.assertLessEqual(notes.left + notes.width, metric.left - round(Inches(0.05)))
+        self.assertGreater(grid.height, round(Inches(4.5) * factor))
+        self.assertLessEqual(grid.top + grid.height, Inches(into[1] + into[3]) + 10)
+        self.assertLessEqual(metric.left + metric.width, Inches(into[0] + into[2]) + 10)
+
+    def test_inventory_and_pre_com_guard_catch_stacked_outEnd_and_pua(self):
+        from lxml import etree
+        from pptx.chart.data import CategoryChartData
+        from pptx.enum.chart import XL_CHART_TYPE
+        prs = Presentation()
+        slide = prs.slides.add_slide(prs.slide_layouts[6])
+        box = slide.shapes.add_textbox(Inches(1), Inches(1), Inches(4), Inches(1))
+        box.name = "Step"
+        r = box.text_frame.paragraphs[0].add_run()
+        r.text, r.font.name, r.font.size = "\uf0e8 Broken", "Arial", Pt(20)
+        data = CategoryChartData()
+        data.categories = ["A", "B"]
+        data.add_series("S1", (10, 20))
+        data.add_series("S2", (5, 10))
+        ch = slide.shapes.add_chart(XL_CHART_TYPE.COLUMN_STACKED, Inches(1), Inches(2), Inches(5), Inches(3), data)
+        ch.name = "BadStack"
+        ch.chart.plots[0].has_data_labels = True
+        dlbls = ch.chart._chartSpace.find(f".//{{{tools.C_NS}}}barChart/{{{tools.C_NS}}}dLbls")
+        dlbls.insert(0, etree.Element(f"{{{tools.C_NS}}}dLblPos", val="outEnd"))
+        broken = self.dir / "broken_stack.pptx"
+        prs.save(broken)
+        inv = tools.inventory(broken)
+        self.assertIn("dLblPos='outEnd'", inv)
+        self.assertIn("U+F0E8 in 'Arial'", inv)
+        with self.assertRaisesRegex(ValueError, "dLblPos='outEnd'"):
+            tools.glance(broken, self.dir / "broken-glance")
+
+    @unittest.skipUnless(os.environ.get("PPTX_NATIVE") == "1", "set PPTX_NATIVE=1 on a desktop with PowerPoint")
+    def test_glance_native_tables_charts_pua_dup_photos_and_partial_slides(self):
+        from lxml import etree
+        from pptx.chart.data import CategoryChartData
+        from pptx.enum.chart import XL_CHART_TYPE
+        img_plain = self.dir / "dup.png"
+        im_p = Image.new("RGB", (240, 180), (40, 90, 160))
+        ImageDraw.Draw(im_p).rectangle((40, 40, 200, 140), fill=(220, 170, 50))
+        im_p.save(img_plain)
+        img_busy = self.dir / "busy.png"
+        im_b = Image.new("RGB", (400, 250), (255, 255, 255))
+        draw_b = ImageDraw.Draw(im_b)
+        for y in range(0, 250, 8):
+            draw_b.rectangle((0, y, 400, y + 3), fill=(25, 25, 25))
+        im_b.save(img_busy)
+        prs = Presentation()
+        prs.slide_width, prs.slide_height = Inches(13.333), Inches(7.5)
+        for n in range(1, 5):
+            sl = prs.slides.add_slide(prs.slide_layouts[6])
+            slot = sl.shapes.add_textbox(Inches(0.6), Inches(0.25), Inches(8.0), Inches(0.55))
+            slot.name = "Title"
+            r = slot.text_frame.paragraphs[0].add_run()
+            r.text, r.font.name, r.font.size = f"Slide {n}", "Arial", Pt(24)
+            r.font.color.rgb = RGBColor(0x1D, 0x24, 0x33)
+        # Slide 2: native table (dark header OK + white-on-white cell + tiny 8pt cell), PUA, draft text, dup photo
+        s2 = prs.slides[1]
+        tbl = s2.shapes.add_table(2, 2, Inches(0.8), Inches(1.2), Inches(5.0), Inches(1.8)).table
+        s2.shapes[-1].name = "Table 4"
+        tbl.cell(0, 0).fill.solid(); tbl.cell(0, 0).fill.fore_color.rgb = RGBColor(0x00, 0x62, 0xAC)
+        r0 = tbl.cell(0, 0).text_frame.paragraphs[0].add_run()
+        r0.text, r0.font.size, r0.font.color.rgb = "Header OK", Pt(16), RGBColor(0xFF, 0xFF, 0xFF)
+        tbl.cell(1, 0).fill.solid(); tbl.cell(1, 0).fill.fore_color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
+        r1 = tbl.cell(1, 0).text_frame.paragraphs[0].add_run()
+        r1.text, r1.font.size, r1.font.color.rgb = "White cell leak", Pt(16), RGBColor(0xFF, 0xFF, 0xFF)
+        tbl.cell(1, 1).fill.solid(); tbl.cell(1, 1).fill.fore_color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
+        r2 = tbl.cell(1, 1).text_frame.paragraphs[0].add_run()
+        r2.text, r2.font.size, r2.font.color.rgb = "Micro 8pt note", Pt(8), RGBColor(0x1D, 0x24, 0x33)
+        pua_box = s2.shapes.add_textbox(Inches(0.8), Inches(3.2), Inches(4.5), Inches(0.6))
+        pua_box.name = "Arrow"
+        rp = pua_box.text_frame.paragraphs[0].add_run()
+        rp.text, rp.font.name, rp.font.size = "\uf0e8 Cause leads here", "Arial", Pt(18)
+        rp.font.color.rgb = RGBColor(0x1D, 0x24, 0x33)
+        draft_box = s2.shapes.add_textbox(Inches(0.8), Inches(4.0), Inches(5.0), Inches(0.6))
+        draft_box.name = "DraftNote"
+        rd = draft_box.text_frame.paragraphs[0].add_run()
+        rd.text, rd.font.name, rd.font.size = "Charts kept from old slide", "Arial", Pt(18)
+        rd.font.color.rgb = RGBColor(0x1D, 0x24, 0x33)
+        s2.shapes.add_picture(str(img_plain), Inches(7.0), Inches(1.2), Inches(2.4)).name = "DupA"
+        s2.shapes.add_picture(str(img_plain), Inches(9.8), Inches(1.2), Inches(2.4)).name = "DupB"
+        # Slide 3: text on busy photo + chart tiny text
+        s3 = prs.slides[2]
+        s3.shapes.add_picture(str(img_busy), Inches(0.8), Inches(1.5), Inches(5.0), Inches(3.0)).name = "StripedPhoto"
+        over = s3.shapes.add_textbox(Inches(1.2), Inches(2.2), Inches(4.0), Inches(1.2))
+        over.name = "OnPhoto"
+        ro = over.text_frame.paragraphs[0].add_run()
+        ro.text, ro.font.name, ro.font.size = "Readable? No", "Arial", Pt(20)
+        ro.font.color.rgb = RGBColor(0x1D, 0x24, 0x33)
+        data = CategoryChartData()
+        data.categories = ["X", "Y"]
+        data.add_series("Rate", (10, 20))
+        ch = s3.shapes.add_chart(XL_CHART_TYPE.COLUMN_CLUSTERED, Inches(6.5), Inches(1.5), Inches(5.5), Inches(4.0), data)
+        ch.name = "SmallChart"
+        ch.chart.font.size = Pt(8)
+        deck = self.dir / "native_guards.pptx"
+        prs.save(deck)
+        report = tools.glance(deck, self.dir / "g-partial", slides=[2, 3])
+        self.assertEqual([r["slide"] for r in report], [2, 3])
+        k2 = {k for k, _ in report[0]["faults"]}
+        self.assertEqual(k2, {"cannot read", "tiny text", "broken symbol", "draft text", "same picture twice"})
+        self.assertNotIn("missing", k2)
+        k3 = {k for k, _ in report[1]["faults"]}
+        self.assertIn("tiny text", k3)
+        self.assertTrue("text on picture" in k3 or "cannot read" in k3)
+        reinked = self.dir / "reinked.pptx"
+        tools.reink(deck, reinked, report, "1D2433")
+        t_after = next(sh.table for sh in Presentation(reinked).slides[1].shapes if sh.name == "Table 4")
+        self.assertEqual(str(t_after.cell(0, 0).text_frame.paragraphs[0].runs[0].font.color.rgb), "FFFFFF")
+        self.assertEqual(str(t_after.cell(1, 0).text_frame.paragraphs[0].runs[0].font.color.rgb), "1D2433")
 
     def test_fit_puts_the_content_in_the_free_area_and_keeps_text_readable(self):
         out = self.dir / "fit.pptx"

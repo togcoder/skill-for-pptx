@@ -79,12 +79,20 @@ Viết cả sáu bước vào **một script dựng**, đọc từ bản gốc, 
    thiểu của mục 4. Slide mức 0 thì để ngoài `--slides`.
 4. **Gắn vỏ mới**: nền, thanh bước, logo, tiêu đề, chân trang của theme. Đặt tên các vật của vỏ bắt đầu
    bằng `!!`. Ảnh trang trí của nền phải nằm **dưới** nội dung.
+   - Nếu có dùng `follow_theme` xóa font gõ tay, kiểm tra ngay các ký tự mũi tên/ô đánh dấu kiểu Wingdings
+     (`U+F000–U+F0FF`): sang Arial/Calibri chúng biến thành ô vuông (``). Đổi sang Unicode chuẩn (`→`,
+     `▸`, `✓`) hoặc giữ font biểu tượng (`inventory` và `glance` sẽ bắt lỗi này ở mục `broken symbol`).
+   - Nếu dựng lại hoặc chỉnh XML **biểu đồ xếp chồng** (`stacked` / `percentStacked` bar/area), không bao
+     giờ dùng `dLblPos="outEnd"` — PowerPoint sẽ từ chối mở file (dùng `ctr`, `inEnd`, hoặc `inBase`).
 5. **Đổi mực.** Chữ trắng viết cho nền tối sẽ biến mất trên nền sáng:
    ```
    python scripts/pptx_tools.py glance 4_vo.pptx --ink 1D2433 5_xong.pptx
    ```
-   Chỉ chữ không đọc được mới đổi màu, kể cả chữ trong biểu đồ. Chữ đỏ, chữ xanh có nghĩa thì giữ.
-6. **Kiểm** (phần dưới). Còn lỗi thì sửa **trong script**, chạy lại từ bước 1.
+   Chỉ chữ không đọc được mới đổi màu, kể cả chữ trong biểu đồ và bảng. Chữ đỏ, chữ xanh có nghĩa thì giữ.
+   Nếu bảng cần đổi cả nền ô tiêu đề và lưới viền, dùng `retable` thay vì tự sửa từng ô bằng tay.
+6. **Kiểm** (phần dưới). Còn lỗi thì sửa **trong script**, chạy lại từ bước 1. Không tách kiểm tra riêng lẻ
+   trước khi chốt mà không nhìn đủ từng `slide-NN.png`, và không dán cùng một ảnh chứng cứ nhiều lần lên
+   cùng một slide hay đặt chữ trực tiếp lên vùng ảnh rối.
 
 Dựng lại cả bộ 37 slide theo cách này mất khoảng hai phút. Vì vậy không có lý do gì để vá tay.
 
@@ -98,20 +106,23 @@ Ba việc, theo thứ tự. Thiếu một việc thì chưa được nói "đã 
 python scripts/pptx_tools.py glance 5_xong.pptx
 ```
 
-Lệnh hỏi chính PowerPoint: chữ thật sự nằm ở đâu, màu gì, cỡ bao nhiêu, kể cả các vật của master. Nó báo:
+Lệnh hỏi chính PowerPoint: chữ thật sự nằm ở đâu, màu gì, cỡ bao nhiêu, kể cả **ô bảng thật**, **biểu đồ** và các vật của master. Nó báo:
 
 | Lệnh ghi | Nghĩa |
 |---|---|
 | `text on text` | hai dòng chữ in đè lên nhau (hai tiêu đề, vỏ gắn hai lần) |
-| `cannot read` | chữ gần trùng màu với nền phía sau nó, kể cả chữ trong biểu đồ |
+| `cannot read` | chữ gần trùng màu với nền phía sau nó, kể cả chữ trong biểu đồ và ô bảng |
 | `picture on the master's picture` | logo mới nằm trên logo cũ của master |
-| `same picture twice` | một ảnh nằm hai lần đúng một chỗ |
+| `same picture twice` | một ảnh nằm hai lần đúng một chỗ, hoặc cùng một ảnh nội dung bị lặp ở nhiều khung trên slide |
 | `text hidden` | ảnh, video, bảng nằm đè lên chữ |
+| `text on picture` | chữ đặt lên ảnh, bảng hoặc biểu đồ có nền rối (độ tương phản nhiễu cao) |
 | `content under the shell` | ảnh, bảng, biểu đồ chui dưới thanh bước, logo, chân trang |
 | `text spills` | chữ dài hơn khung của nó và tràn sang vật bên cạnh |
 | `title on content` | tiêu đề nằm vắt qua ảnh, bảng |
 | `text off the slide`, `table off the slide` | tràn ra ngoài slide |
-| `tiny text` | hơn một phần năm số chữ nhỏ hơn mức tối thiểu |
+| `tiny text` | hơn một phần năm số chữ nhỏ hơn mức tối thiểu, một đoạn chữ quá nhỏ (< 75% sàn), hoặc chữ trong **bảng / biểu đồ** dưới sàn |
+| `broken symbol` | ký tự biểu tượng Wingdings/PUA (`U+F000–U+F0FF`) bị rơi về font chữ thường thành ô vuông |
+| `draft text` | còn sót chữ mẫu hoặc câu chú thích nháp ("Lorem ipsum", `[TODO]`, "kept from...", "nothing redrawn") |
 | `missing` | slide này thiếu thứ mà hầu hết slide khác có (tiêu đề, thanh bước) |
 
 Mỗi slide có lỗi có một ảnh `faults-NN.png` khoanh đỏ từng chỗ. **Mở ảnh đó ra.** Sửa trong script, dựng

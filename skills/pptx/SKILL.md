@@ -70,7 +70,8 @@ hơn một sân khấu hội nghị. Đơn giản mà vừa tốt hơn phức t�
    đâu và vì sao.
 5. **Lấy trang trí mặc định làm thiết kế:** thanh tiến độ, nửa hình tròn ở góc, logo bằng chữ, ba thẻ
    giống nhau. Chỉ thêm khi nó phục vụ nội dung hoặc người dùng có sẵn.
-6. **Chữ quá nhỏ.** Nội dung dưới 18 pt, hay bất cứ thứ gì dưới 12 pt.
+6. **Chữ quá nhỏ.** Nội dung dưới 18 pt (tức dưới 27 pt trên khung 20×11.25 in), hay bất cứ thứ gì —
+   kể cả nhãn biểu đồ và ô bảng — dưới 12 pt (18 pt trên khung 20×11.25 in).
 7. **Thẻ rỗng, khung rỗng, ô chờ chữ** còn sót lại.
 8. **Slide thành trang tài liệu:** đoạn văn dài, 8 gạch đầu dòng. Phần giải thích thuộc về lời nói.
 9. **Tự khen.** Chỉ file mở ra mới tính. Chưa làm được gì thì nói rõ.
@@ -90,7 +91,16 @@ hơn một sân khấu hội nghị. Đơn giản mà vừa tốt hơn phức t�
 
 - **Đừng thiết kế từ trang trắng.** Mở một bộ mẫu đã duyệt ([examples.md](examples.md)) hoặc file mẫu
   của người dùng, giữ bố cục và thay nội dung.
-- Làm **từng slide một**: dựng, mở ra xem, sửa, rồi mới sang slide tiếp.
+- **Chỉ dùng đúng đồ nghề chuẩn** trong `scripts/pptx_tools.py` (`shell`, `fit`, `retable`, `rechart`,
+  `glance`, `compare`, `check`). Không tự viết script riêng để sửa XML hàng loạt rồi bỏ qua hay thay thế
+  `glance` / `check`.
+- Làm **từng slide một** (hoặc theo lô tối đa 5–7 slide): dựng, chạy `glance`, mở ảnh xem, sửa, rồi mới
+  sang slide tiếp.
+- **Không tin lời subagent nếu chưa tự nhìn.** Nếu giao subagent sửa hoặc kiểm, luôn coi kết quả là *chưa
+  kiểm* cho tới khi chính bạn chạy `glance` và mở từng `slide-NN.png` xác nhận.
+- Khi `fit` báo chữ đã chạm sàn mà khung chữ hoặc bảng vẫn tràn/chật, hoặc sau 3 vòng sửa vẫn còn lỗi khó
+  (`text spills`, `tiny text`), **dừng và hỏi người dùng** tách slide hay dựng lại bố cục (mức 2) — đừng
+  thu chữ xuống dưới sàn hay tự xóa bớt số liệu.
 - Khi phân vân, chọn cách đơn giản hơn. Ít chuyển động mà đúng tốt hơn nhiều chuyển động mà sai.
 - Không được tuyên bố "đã kiểm tra" nếu chưa chạy `glance` và chưa thực sự mở ảnh **từng** slide. Mỗi
   ảnh có một mã nhìn ở dải dưới; nộp các mã đó bằng lệnh `seen`.

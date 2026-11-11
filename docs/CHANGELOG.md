@@ -12,11 +12,35 @@ were true at the time. Task IDs and their branches are listed in
 
 
 
+## T104 [pptx] Repair the skill and prove it end to end (brief 2026-11-11) — 2026-11-11
+
+- **A1:** adopted PR #85 (`work/T102-antigravity-glance-table-chart-fit-guards`) on `main`: resolved four
+  conflicts with `T101`, kept `arrange`/`seen`/look codes and T102's table, chart-size, PUA,
+  duplicate-photo, busy-background and draft-text checks. Fixed the two noisy rules T102 still carried:
+  (1) single-character text rows are skipped again, so the step bar's intentionally dim one-digit labels
+  are no longer reported `cannot read` (57 → 0 lines on the original deck); (2) PUA detection now reads the
+  symbol face (`Font.NameOther` / `<a:sym>`) before calling a glyph broken, so Wingdings characters that
+  display correctly are no longer `broken symbol` (8 → 0 on the original deck) while genuinely font-less
+  PUA stays reported (Ver7, 1 line, checked on the fault picture). Four-deck `glance`: original 12 → 18 of
+  37 (limit 18), theme v6 8 → 9 of 13 (limit 9), Ver7 36 → 36 of 37, Ver5 22 → 22 of 39 (the brief's 23 was
+  not reproducible on this machine before the change either; no regression). New fault types on the
+  original deck were opened as `faults-NN.png` and confirmed real.
+- **Tests:** `pytest tests -q` 648 passed / 13 skipped; native `glance` + fidelity 32 passed; layout and
+  coordination checks OK. `test_watch_the_real_show` still fails (A2).
+- **Next:** A2 (`watch` clicks key, `ungroup` via PowerPoint), A3 (`CARD.md`, line-count neutral), then B.
+
 ## T103 [pptx] Baseline for agents and the brief for the repair-and-test agent — 2026-11-11
 
 - `docs/BRIEF_TU_BO_SKILL.md`: what a new agent repairs (PR #85's two noisy rules, two known tool bugs, a
   one-page card for small models) and how the skill is tested (whole deck into a theme, three re-laid-out
   slides, one blind small-model run, the owner's verdict), with acceptance numbers. Tag `baseline-2026-11-11`.
+
+## T102 [pptx] Harden `glance`, `fit`, `check`, and small-model workflow guards (issue #83) — 2026-11-11
+
+- **Why (issue #83):** After `T100`, an agent failure audit exposed seven remaining gaps: `glance` ignored native table cells, chart font sizes, PUA missing glyphs (`U+F000–U+F0FF`), duplicate content photos, busy photo overlays, micro `<0.75*floor` boxes, and leaked meta/draft text; `glance --slides` dropped deck-wide `_slots` and broke cover/end detection; stacked charts with `<c:dLblPos val="outEnd"/>` crashed PowerPoint COM (`E_FAIL`); `fit` shrank clamped boxes tightly without reclaiming nearby slack; `check` allowed gutted empty tables (`len` only); small models bypassed `glance` with private scripts or trusted subagent claims without looking.
+- **Toolbox (`scripts/pptx_tools.py`):** Added native table cell geometry (`VerticalAnchor`-calibrated `TrimText` bounds, contrast, size floor, header-safe `reink`); added `_chart_sizes`, pre-COM `_invalid_chart_xml` guard, `_pua_hits` + `_slide_text_notes` (all runs & cells), cropped-SHA duplicate photo check, busy-photo `text on picture`, micro `tiny text`, draft wording detection, full-deck `_slot_slides` context during `--slides`, neighbor-safe `_reclaim_clamped_boxes` in `fit`, and non-empty cell retention + `"charts valid"` in `check`.
+- **Guidance (`skills/pptx/`):** Updated `SKILL.md` (rule 6 & small-model protocol: ban custom bypass/check scripts, fail-closed subagent inspection, 5–7 slide batches), `guides/8-tu-kiem-tra.md`, and `guides/13-dua-bo-co-san-vao-theme.md` (table checks, PUA glyph cleanup, stacked `outEnd` warning, updated fault table); kept orthogonal to `T101` (`arrange`/`seen`) and PR `#79` (`guides/6`, `guides/9`).
+- **Evidence:** Synthetic unit & gate tests + real PowerPoint 16.0 COM (`PPTX_NATIVE=1`: 29/29 pass across `tests.test_glance` and `tests.test_fidelity_gates`); visual inspection of synthetic `faults-02.png`, `faults-03.png`, and clean fixed renders in `experiments/T102-20261111-antigravity-glance-table-chart-fit-guards/REPORT.md`. T104 adopted this work on `main` after fixing the two noisy rules it still carried (T104 entry).
 
 ## T101 [pptx] Re-laying out a slide: look at the picture, every element has a job, arrange by regions — 2026-11-11
 
