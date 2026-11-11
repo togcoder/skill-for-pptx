@@ -149,6 +149,16 @@ class GlanceRules(unittest.TestCase):
         self.assertIn("text on picture", faults(rows, busy)[0])
         self.assertEqual(faults(rows)[0], [])
 
+    def test_theme_decoration_behind_text_is_not_text_on_picture(self):
+        busy = Image.new("RGB", (960, 540), (246, 242, 234))
+        draw = ImageDraw.Draw(busy)
+        palette = ((245, 245, 245), (140, 185, 235), (170, 95, 70))
+        for idx, y in enumerate(range(140, 360, 4)):
+            draw.line([(80, y), (460, y)], fill=palette[idx % 3], width=4)
+        rows = [row(2, "Label", (120, 200, 240, 60), text="Machine step"),
+                row(3, "!!haze", (60, 120, 500, 280), kind=13)]
+        self.assertNotIn("text on picture", faults(rows, busy)[0])
+
     def test_same_content_photo_repeated_across_cards_vs_deck_wide_mark(self):
         rows = [row(1, "PicA", (60, 140, 160, 120), kind=13),
                 row(2, "PicB", (300, 140, 160, 120), kind=13)]
@@ -217,6 +227,22 @@ class IntoATheme(unittest.TestCase):
         self.assertEqual(prs.slide_master._element.find(".//" + qn("a:srgbClr")).get("val"), "F6F2EA")
         with self.assertRaises(ValueError):
             tools.unshell(self.old, out, ["m9"])
+
+    def test_fit_scales_a_table_that_covers_most_of_the_slide(self):
+        prs = Presentation()
+        prs.slide_width, prs.slide_height = Inches(20), Inches(11.25)
+        slide = prs.slides.add_slide(prs.slide_layouts[6])
+        grid = slide.shapes.add_table(4, 3, Inches(0.1), Inches(0.1), Inches(19.5), Inches(10.0))
+        grid.name = "Gantt"
+        for r in range(4):
+            for c in range(3):
+                grid.table.cell(r, c).text = f"R{r}C{c}"
+        src, out = self.dir / "bigtable.pptx", self.dir / "bigtable-fit.pptx"
+        prs.save(src)
+        done = tools.fit(src, out, (0.7, 2.2, 18.6, 8.3))
+        self.assertLess(done[0][1], 0.9)          # a big table is content, so it gets fitted
+        table = next(s for s in Presentation(out).slides[0].shapes if s.name == "Gantt")
+        self.assertLessEqual(table.top + table.height, Inches(2.2 + 8.3) + 10)
 
     def test_fit_reclaims_whitespace_for_clamped_boxes_without_hitting_neighbors(self):
         prs = Presentation()
