@@ -3,7 +3,7 @@
 Since T040: every new title starts with its domain in brackets: `[pptx]`, `[docx]`, `[xlsx]`, `[svg]` or `[cross]` (see `domains/README.md`). Lifecycle: `lab/PROTOCOL.md`. A row may carry `review requested` / `reviewed: <verdict>`.
 
 This file is the one place to take a task ID. Before starting, add a row with
-status `claimed`, using the next free ID (**T102**). Push the row before you do
+status `claimed`, using the next free ID (**T104**). Push the row before you do
 expensive work. IDs are never reused. T024 was taken three times in parallel,
 so those rows carry a suffix. The experiment folders keep the names they were
 created with.
@@ -127,10 +127,11 @@ owner's machine. The "Agent" column comes from claims and reports.
 | T095 | [pptx] Guide 10 fixes from T094: diagram form and notes are content, no blank opening; inventory theme fonts and fills; numbers per slide | claude | `work/T095-claude-guide10-fixes` | review requested | `experiments/T095-20261109-claude-guide10-fixes/REPORT.md` |
 | T096 | [pptx] Style from a reference PDF; small-text floor scaled to slide size | claude | `work/T096-claude-sample-style-and-scaled-floor` | review requested | `experiments/T096-20261109-claude-sample-style-and-scaled-floor/REPORT.md` |
 | T097 | [pptx] Rebuild an existing deck with agents: extract, score, staged pipeline | claude | `work/T097-claude-rebuild-pipeline` | review requested (stacked on T096) | `experiments/T097-20261109-claude-rebuild-pipeline/REPORT.md` |
-status `claimed`, using the next free ID (**T102**). Push the row before you do
+status `claimed`, using the next free ID (**T104**). Push the row before you do
 
 | T098 | [pptx] Extract reusable components from an existing deck: vector groups, ungroup, background removal, component library | dsh | \work/T098-dsh-component-extraction\ | main (lead review: accept; owner-authorized merge) | \experiments/T098-20261110-dsh-component-extraction/REPORT.md\ |
 | T099 | [pptx] Apply actionable review findings: number parsing, sample errors, table fills, image API | lead | \work/T099-lead-followup-review-fixes\ | review requested (PR #82) | \experiments/T099-20261110-lead-followup-review-fixes/REPORT.md\ |
 | T100 | [pptx] Putting an existing deck into a theme: glance faults, old/new pairs, the middle operation (issue 83) | claude | `work/T100-claude-glance-faults-into-theme` | merged without review at the owner's word (issue 83) | `experiments/T100-20261111-claude-glance-faults-into-theme/REPORT.md` |
 | T101 | [pptx] Re-laying out a slide the way a designer works: look at the picture, every element has a job, arrange by regions | claude | `work/T101-claude-look-meaning-arrange` | merged at the owner's word | `experiments/T101-20261111-claude-look-meaning-arrange/REPORT.md` |
-| T102 | *next free ID* | | | | |
+| T103 | [pptx] Baseline for agents and the brief for the repair-and-test agent | claude | `work/T103-claude-baseline-and-brief` | merged at the owner's word | `docs/BRIEF_TU_BO_SKILL.md` (no experiment folder) `experiments/T103-20261111-claude-baseline-and-brief/REPORT.md` |
+| T104 | *next free ID* | | | | |

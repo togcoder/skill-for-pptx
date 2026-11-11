@@ -1,5 +1,9 @@
 # Handoff — Design Research Lab
 
+> **Việc hiện tại (2026-11-11):** tu bổ và thử nghiệm skill PPTX. Agent mới đọc
+> [docs/BRIEF_TU_BO_SKILL.md](docs/BRIEF_TU_BO_SKILL.md) trước mọi thứ khác; bản chốt là nhãn `baseline-2026-11-11`.
+> Phần còn lại của tệp này viết từ 04/11 và đã cũ ở nhiều chỗ.
+
 Cập nhật: 04/11/2026 tối, sau **T070** (Claude, trưởng nhóm: tổng hợp T001–T069, phản biện, lộ
 trình). Tệp này được **viết lại** mỗi lần bàn giao, không ghi nối thêm. Lịch sử nằm ở
 [docs/CHANGELOG.md](docs/CHANGELOG.md).

@@ -11,6 +11,13 @@ were true at the time. Task IDs and their branches are listed in
 
 
 
+
+## T103 [pptx] Baseline for agents and the brief for the repair-and-test agent — 2026-11-11
+
+- `docs/BRIEF_TU_BO_SKILL.md`: what a new agent repairs (PR #85's two noisy rules, two known tool bugs, a
+  one-page card for small models) and how the skill is tested (whole deck into a theme, three re-laid-out
+  slides, one blind small-model run, the owner's verdict), with acceptance numbers. Tag `baseline-2026-11-11`.
+
 ## T101 [pptx] Re-laying out a slide: look at the picture, every element has a job, arrange by regions — 2026-11-11
 
 - **Why:** the owner, after a small model ran again with T100: agents check with code, not with pictures;
