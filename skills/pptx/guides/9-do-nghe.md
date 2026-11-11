@@ -146,6 +146,11 @@ python scripts/pptx_tools.py fit tran.pptx --into 0.67,2.2,18.67,8.3 --slides 2-
 python scripts/pptx_tools.py glance vo.pptx --ink 1D2433 xong.pptx # chữ không đọc được nhận mực của theme
 ```
 
+```
+python scripts/pptx_tools.py arrange deck.pptx 13 bo-cuc.json -o deck2.pptx   # sắp một slide bằng vùng (mục 14)
+python scripts/pptx_tools.py seen deck2-glance 13=U6G                         # nộp mã nhìn đọc trên ảnh
+```
+
 `glance` và `compare` cần PowerPoint trên Windows; `shell` và `fit` thì không. `glance` trả mã thoát 1 khi
 còn lỗi. Trong script dựng, gọi thẳng các hàm: `tools.unshell`, `tools.fit`, `tools.glance`, `tools.reink`,
 `tools.compare`. Thứ tự và cách đọc kết quả ở mục 13.

@@ -184,7 +184,67 @@ class IntoATheme(unittest.TestCase):
         self.assertEqual([r["faults"] for r in tools.glance(fixed, self.dir / "glance2")], [[]] * 4)
         pairs = tools.compare(self.old, fixed, self.dir / "pairs")
         self.assertEqual([(n, olds) for n, olds, _ in pairs], [(n, [n]) for n in range(1, 5)])
-        self.assertEqual(Image.open(pairs[0][2]).size, (1600, 1860))
+        self.assertEqual(Image.open(pairs[0][2]).size, (1600, 1894))          # two slides, labels, the code strip
+        ok, missing = tools.seen(self.dir / "pairs", {"1": "???"})
+        self.assertEqual((ok, len(missing)), ([], 4))                         # a guessed code proves nothing
+
+
+class ArrangeAndSeen(unittest.TestCase):
+    """T101: layout by regions, and proof that the review pictures were opened."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.dir = Path(self.tmp.name)
+        prs = Presentation()
+        prs.slide_width, prs.slide_height = Inches(13.333), Inches(7.5)
+        slide = prs.slides.add_slide(prs.slide_layouts[6])
+        photo = self.dir / "photo.png"
+        Image.new("RGB", (400, 200), (90, 90, 90)).save(photo)
+        for name, left in (("Photo A", 1), ("Photo B", 6)):
+            slide.shapes.add_picture(str(photo), Inches(left), Inches(5), Inches(2)).name = name
+        mark = slide.shapes.add_textbox(Inches(1.2), Inches(5.2), Inches(1), Inches(0.4))
+        mark.name = "Mark"
+        run = mark.text_frame.paragraphs[0].add_run()
+        run.text, run.font.size = "NG", Pt(14)
+        claim = slide.shapes.add_textbox(Inches(9), Inches(1), Inches(2), Inches(0.6))
+        claim.name = "Claim"
+        claim.text_frame.text = "The joint was not sealed"
+        self.deck = self.dir / "deck.pptx"
+        prs.save(self.deck)
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def test_cells_share_the_box_by_weight(self):
+        cells = tools._layout_cells({"col": ["Claim", {"row": ["A", {"item": "B", "weight": 3}], "weight": 3}]},
+                                    (0.0, 0.0, 10.0, 8.5), 0.5)
+        boxes = {leaf["item"]: tuple(round(v, 2) for v in box) for leaf, box in cells}
+        self.assertEqual(boxes, {"Claim": (0.0, 0.0, 10.0, 2.0), "A": (0.0, 2.5, 2.38, 6.0), "B": (2.88, 2.5, 7.12, 6.0)})
+
+    def test_arrange_fits_blocks_keeps_marks_on_their_photo_and_never_enlarges_text(self):
+        out = self.dir / "out.pptx"
+        layout = {"in": [0.5, 1.5, 12.3, 5.5], "gap": 0.3, "col": [
+            {"item": "Claim", "weight": 1},
+            {"row": [{"block": ["Photo A", "Mark"], "weight": 2}, {"weight": 1}, "Photo B"], "weight": 5}]}
+        placed, left_alone = tools.arrange(self.deck, 1, layout, out)
+        self.assertEqual(left_alone, [])
+        self.assertGreater(dict((tuple(n), f) for n, f in placed)[("Photo A", "Mark")], 2)    # the photo grew
+        shapes = {s.name: s for s in Presentation(out).slides[0].shapes}
+        self.assertEqual((shapes["Claim"].left, shapes["Claim"].width), (Inches(0.5), Inches(12.3)))
+        a, mark, b = shapes["Photo A"], shapes["Mark"], shapes["Photo B"]
+        self.assertAlmostEqual(a.width / a.height, 2.0, places=2)                              # not stretched
+        self.assertTrue(a.left <= mark.left and mark.top + mark.height <= a.top + a.height)    # the mark stayed on it
+        self.assertEqual(mark.text_frame.paragraphs[0].runs[0].font.size.pt, 14)               # text did not grow
+        self.assertGreater(b.left, a.left + a.width)
+        with self.assertRaises(ValueError):
+            tools.arrange(self.deck, 1, {"in": [0, 0, 5, 5], "row": ["No such shape"]}, out)
+
+    def test_a_look_code_is_proof_only_when_read_off_the_picture(self):
+        picture, code = tools._stamp(Image.new("RGB", (800, 450), (246, 242, 234)), "slide 3")
+        self.assertEqual((picture.size, len(code)), ((800, 484), 3))
+        tools._keep_codes(self.dir, {"slide-03.png": code, "slide-04.png": "ZZZ"})
+        self.assertNotIn(code, (self.dir / "look-codes.json").read_text(encoding="utf-8"))     # the file does not tell
+        self.assertEqual(tools.seen(self.dir, {"3": code.lower(), "4": "AAA"}), (["slide-03.png"], ["slide-04.png"]))
 
 
 if __name__ == "__main__":
