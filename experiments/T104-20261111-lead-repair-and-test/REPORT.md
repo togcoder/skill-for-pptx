@@ -83,7 +83,24 @@ passed** (50 s) trên máy này.
 
 ## A3. Một trang cho model nhỏ
 
-(chờ làm)
+**Đã làm.** `skills/pptx/CARD.md` — **38 dòng** (giới hạn 60): việc "đưa bộ có sẵn vào theme" từ đầu đến
+cuối, 7 lệnh theo đúng thứ tự (shell → tiêu đề → fit → gắn vỏ → glance --ink → glance → compare), ba việc
+kiểm trước khi giao (`glance` + mở từng ảnh, mỗi slide một dòng "đã thấy gì" + `seen`, `check --map` đủ cổng
+ruột), và danh sách cấm. `SKILL.md` trỏ tới CARD ngay dưới tiêu đề, cùng một dòng nói các skill khác trong
+`skills/` là đồ cũ (chỉ dùng cho việc này).
+
+**Luật 5 — tổng số dòng `skills/pptx/` không tăng.** Đo bằng:
+`python -c "from pathlib import Path; print(sum(len(p.read_text(encoding='utf-8').splitlines()) for p in Path('skills/pptx').rglob('*.md')))"`
+
+| Mốc | Số dòng | Ghi chú |
+|---|---|---|
+| Bản chốt `baseline-2026-11-11` | **1907** | 16 file |
+| Sau A1 (gộp PR #85) | 1938 | +31 dòng hướng dẫn của T102 |
+| Sau A3 | **1890** | 17 file (thêm CARD 38 dòng), thấp hơn bản chốt 17 dòng |
+
+Cắt ở đâu: SKILL.md 150 → 116 (14 điều cấm mỗi điều một dòng; mục model nhỏ còn 6 gạch; bảng lệnh còn 11
+dòng, phần chi tiết đã có ở guide 9); guide 13 171 → 132 (bỏ phần "kiểm" trùng guide 8, giữ bảng nghĩa các
+lỗi); guide 11 181 → 168 (10 luật cứng thay vì 12, gộp các ý trùng). Không cắt nội dung nào chỉ có một chỗ.
 
 ## B. Thử nghiệm
 

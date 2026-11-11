@@ -5,6 +5,9 @@ description: Làm bộ slide PowerPoint (.pptx) đẹp, có chuyển động có
 
 # Skill PPTX
 
+**Model nhỏ hoặc đang gấp:** đọc [CARD.md](CARD.md) trước — một trang, đúng thứ tự lệnh cho việc
+"đưa bộ có sẵn vào theme". Các skill khác trong `skills/` là đồ cũ, không dùng cho việc này.
+
 Bạn là **nhà thiết kế thuyết trình**, không phải thợ chạy script. Bạn tự quyết bố cục, chữ, ảnh và
 chuyển động dựa trên các hướng dẫn dưới đây, rồi dùng đồ nghề để dựng. Không công cụ nào quyết thay
 bạn. Mặc định của công cụ không phải là thiết kế.
@@ -61,52 +64,29 @@ hơn một sân khấu hội nghị. Đơn giản mà vừa tốt hơn phức t�
 
 ## Mười bốn điều không làm (lỗi đã gặp thật trong dự án)
 
-1. **Bịa nội dung.** Không tự điền "100%", "Bước hoàn thiện", "Chỉ số 1" hay một con số không có
-   nguồn. Thiếu thì hỏi.
-2. **Slide mở ra trống.** Lúc slide vừa hiện, tiêu đề và khung chính phải đọc được ngay.
-3. **Morph cho mọi lần chuyển slide.** Morph chỉ dùng khi cùng một vật có mặt ở hai slide và thay
-   đổi có ý nghĩa. Một bộ 15 slide thường chỉ cần 2–5 Morph.
-4. **Viết chuyển động bằng tên hiệu ứng** ("Teeter", "Fly Out") mà không nói mắt người xem nhìn vào
-   đâu và vì sao.
-5. **Lấy trang trí mặc định làm thiết kế:** thanh tiến độ, nửa hình tròn ở góc, logo bằng chữ, ba thẻ
-   giống nhau. Chỉ thêm khi nó phục vụ nội dung hoặc người dùng có sẵn.
-6. **Chữ quá nhỏ.** Nội dung dưới 18 pt (tức dưới 27 pt trên khung 20×11.25 in), hay bất cứ thứ gì —
-   kể cả nhãn biểu đồ và ô bảng — dưới 12 pt (18 pt trên khung 20×11.25 in).
-7. **Thẻ rỗng, khung rỗng, ô chờ chữ** còn sót lại.
-8. **Slide thành trang tài liệu:** đoạn văn dài, 8 gạch đầu dòng. Phần giải thích thuộc về lời nói.
-9. **Tự khen.** Chỉ file mở ra mới tính. Chưa làm được gì thì nói rõ.
+1. **Bịa nội dung.** Không tự điền số, "100%", "Bước hoàn thiện"; thiếu thì hỏi.
+2. **Slide mở ra trống.** Vừa hiện, tiêu đề và khung chính phải đọc được ngay.
+3. **Morph cho mọi lần chuyển slide.** Chỉ khi cùng một vật có ở hai slide và đổi có nghĩa; bộ 15 slide thường 2–5 Morph.
+4. **Viết chuyển động bằng tên hiệu ứng** mà không nói mắt người xem nhìn đâu, vì sao.
+5. **Lấy trang trí mặc định làm thiết kế:** thanh tiến độ, nửa hình tròn ở góc, logo bằng chữ, ba thẻ giống nhau.
+6. **Chữ quá nhỏ.** Nội dung dưới 18 pt (27 pt trên khung 20×11.25 in), bất cứ thứ gì — kể cả nhãn biểu đồ và ô bảng — dưới 12 pt (18 pt).
+7. **Thẻ rỗng, khung rỗng, ô chờ chữ** còn sót.
+8. **Slide thành trang tài liệu:** đoạn văn dài, 8 gạch đầu dòng; phần giải thích thuộc lời nói.
+9. **Tự khen.** Chỉ file mở ra mới tính; chưa làm được gì thì nói rõ.
 10. **Nói với người dùng bằng JSON, mã lỗi, số hiệu task.** Nói bằng lời thường.
-11. **Đưa slide cho người dùng khi chưa nhìn.** Trước mỗi lần giao: chạy `glance`, mở **từng** slide ở cỡ
-    lớn (không phải ảnh ghép thu nhỏ), và với bộ có sẵn thì đặt cũ cạnh mới bằng `compare`. Người dùng không
-    phải là người tìm ra hai logo chồng nhau.
-12. **Thêm thứ không có việc.** Mỗi yếu tố trên slide làm đúng một việc (mục 14). Câu tóm tắt tự viết,
-    khẩu hiệu, số to "cho có điểm nhấn", icon, khung thẻ, dải màu, ghi chú về cách mình làm: không có trong
-    bản gốc và không ai yêu cầu thì không lên slide.
-13. **Kiểm bằng lệnh thay cho mắt.** Lệnh đo chỉ là sàn. Slide có thể "0 lỗi" mà chú thích đè lên ảnh, ảnh
-    phụ to hơn ảnh chính, nửa slide trống. Mở ảnh, viết ra thấy gì, nộp mã nhìn (`seen`).
-14. **Vá chồng lên vá.** Lỗi thì sửa trong script dựng và dựng lại từ bản gốc. Không lấy một bản lỗi làm nền
-    cho bản sau.
+11. **Đưa slide khi chưa nhìn.** Trước khi giao: `glance`, mở **từng** `slide-NN.png` cỡ lớn, `compare` với bản gốc, nộp `seen`.
+12. **Thêm thứ không có việc.** Câu tóm tắt tự viết, khẩu hiệu, số to, icon, khung thẻ, dải màu, ghi chú cách làm: không lên slide.
+13. **Kiểm bằng lệnh thay cho mắt.** "0 lỗi" vẫn có thể sai bố cục; mở ảnh, viết ra thấy gì, nộp mã nhìn.
+14. **Vá chồng lên vá.** Sửa trong script dựng, dựng lại từ bản gốc; không lấy bản lỗi làm nền.
 
 ## Nếu bạn là model nhỏ hoặc nhanh
 
-- **Đừng thiết kế từ trang trắng.** Mở một bộ mẫu đã duyệt ([examples.md](examples.md)) hoặc file mẫu
-  của người dùng, giữ bố cục và thay nội dung.
-- **Chỉ dùng đúng đồ nghề chuẩn** trong `scripts/pptx_tools.py` (`shell`, `fit`, `retable`, `rechart`,
-  `glance`, `compare`, `check`). Không tự viết script riêng để sửa XML hàng loạt rồi bỏ qua hay thay thế
-  `glance` / `check`.
-- Làm **từng slide một** (hoặc theo lô tối đa 5–7 slide): dựng, chạy `glance`, mở ảnh xem, sửa, rồi mới
-  sang slide tiếp.
-- **Không tin lời subagent nếu chưa tự nhìn.** Nếu giao subagent sửa hoặc kiểm, luôn coi kết quả là *chưa
-  kiểm* cho tới khi chính bạn chạy `glance` và mở từng `slide-NN.png` xác nhận.
-- Khi `fit` báo chữ đã chạm sàn mà khung chữ hoặc bảng vẫn tràn/chật, hoặc sau 3 vòng sửa vẫn còn lỗi khó
-  (`text spills`, `tiny text`), **dừng và hỏi người dùng** tách slide hay dựng lại bố cục (mức 2) — đừng
-  thu chữ xuống dưới sàn hay tự xóa bớt số liệu.
-- Khi phân vân, chọn cách đơn giản hơn. Ít chuyển động mà đúng tốt hơn nhiều chuyển động mà sai.
-- Không được tuyên bố "đã kiểm tra" nếu chưa chạy `glance` và chưa thực sự mở ảnh **từng** slide. Mỗi
-  ảnh có một mã nhìn ở dải dưới; nộp các mã đó bằng lệnh `seen`.
-- **Bạn không đọc được ảnh thì nói ngay ở câu đầu tiên.** Khi đó chỉ nhận việc đổi vỏ (mục 13, mức 1) và
-  các lệnh đo; không nhận việc dựng lại bố cục. Có chuyển động thì
-  thêm `watch`: nhìn dải ảnh của từng slide có lần bấm hoặc Morph.
+- **Đừng thiết kế từ trang trắng:** mở bộ mẫu đã duyệt ([examples.md](examples.md)) hoặc file mẫu của người dùng.
+- **Đi theo [CARD.md](CARD.md)** cho việc "đưa bộ có sẵn vào theme": đúng thứ tự lệnh, ba việc kiểm.
+- **Chỉ dùng đồ nghề chuẩn** trong `scripts/pptx_tools.py`; không tự viết script sửa XML hay script chấm thay `glance`/`check`.
+- **Không tin lời subagent chưa nhìn:** báo cáo "0 lỗi" chỉ được tính sau khi chính bạn chạy `glance` và mở từng ảnh.
+- Kẹt (chữ chạm sàn mà vẫn tràn, sau 3 vòng còn lỗi): dừng, hỏi người dùng tách slide hay dựng lại bố cục.
+- **Không đọc được ảnh thì nói ngay:** chỉ nhận đổi vỏ + lệnh đo, không nhận dựng lại bố cục.
 
 ## Bàn giao cho người dùng
 
@@ -120,31 +100,17 @@ Viết ngắn, bằng lời thường, theo thứ tự:
 
 | Việc | Lệnh |
 |---|---|
-| Mở ra xem: ảnh từng slide + một tấm ảnh ghép | `python scripts/pptx_tools.py look DECK.pptx` |
-| **Lỗi người xem thấy ngay** (chữ đè chữ, chữ không đọc được, hai logo, chữ bị che, tràn, chữ quá nhỏ), khoanh đỏ trên ảnh từng slide | `python scripts/pptx_tools.py glance DECK.pptx` |
-| Bộ có sẵn: slide cũ ở trên, slide mới ở dưới, mỗi slide một ảnh lớn | `python scripts/pptx_tools.py compare GOC.pptx MOI.pptx` |
-| Vào theme: vỏ cũ nằm ở đâu (master, layout, vật lặp lại), và gỡ nó | `python scripts/pptx_tools.py shell GOC.pptx [--strip m1,r1 --background F6F2EA -o OUT]` |
-| Vào theme: co cả khối nội dung vào vùng theme để trống | `python scripts/pptx_tools.py fit DECK --into 0.67,2.2,18.67,8.3 -o OUT` |
-| Sắp một slide bằng vùng (hàng, cột, phần chia), không tính tọa độ | `python scripts/pptx_tools.py arrange DECK 13 bo-cuc.json -o OUT` |
-| Chứng minh đã mở ảnh ra nhìn: nộp mã nhìn ở dải dưới từng ảnh | `python scripts/pptx_tools.py seen DECK-glance 13=U6G 14=K7P` |
-| Vào theme: đổi mực cho chữ không còn đọc được trên nền mới | `python scripts/pptx_tools.py glance DECK --ink 1D2433 OUT.pptx` |
-| Ghi lần bấm và chuyển slide theo tên vật thể | `python scripts/pptx_tools.py motion DECK.pptx plan.json -o OUT.pptx` |
-| Xem chuyển động: mỗi slide một dải ảnh (vừa mở, từng lần bấm, giữa cú Morph) | `python scripts/pptx_tools.py watch OUT.pptx [--slides 3,6]` |
-| Kiểm tra Morph | `python scripts/morph_studio.py audit OUT.pptx` |
-| Bắt lỗi chữ tràn, chữ nhỏ, thẻ rỗng, tương phản | `python scripts/design_critic.py OUT.pptx` |
-| Tìm ảnh có giấy phép, kèm nguồn | `python scripts/forge_assets.py photos "từ khóa"` |
-| Kiểm tra kịch bản | `python scripts/motion_script.py check script.md` |
-| Tài liệu mẫu để theo (PDF): font thật, có trên máy không, cỡ chữ, màu, ảnh các trang | `python scripts/pptx_tools.py sample MAU.pdf --pages 5,11` |
-| Bộ có sẵn: kiểm kê font, cỡ, màu, biểu đồ 3D, ảnh méo, vật tràn, hiệu ứng trang trí | `python scripts/pptx_tools.py inventory GOC.pptx` |
-| Bộ có sẵn: dựng lại biểu đồ phẳng từ chính số của nó | `python scripts/pptx_tools.py rechart DECK 5 "Ten" --kind bar -o OUT` |
-| Bộ có sẵn: thu một cụm hình như một khối (chữ, nét, đường bay đi theo) | `python scripts/pptx_tools.py scale DECK 4 "A" "B" --by 0.7 -o OUT` |
-| Bộ có sẵn: sửa ảnh bị kéo méo | `python scripts/pptx_tools.py unstretch DECK 8 "Anh" [--box] -o OUT` |
-| Bộ có sẵn: đổi vỏ một bảng thật tại chỗ (Gantt, bảng kiểm), giữ chữ và ô gộp | `python scripts/pptx_tools.py retable DECK 8 "Table 4" --fill FFFF00=0062AC -o OUT` |
-| Tách nền dính liền khỏi ảnh (khung sơ đồ, logo, icon) | `python scripts/pptx_tools.py cutout ANH.png -o TACH.png` |
-| Bộ có sẵn: số nào của bản gốc đã mất | `python scripts/pptx_tools.py numbers GOC.pptx MOI.pptx` |
-| Dựng lại cả bộ: ảnh, video gốc thành file, và `manifest.json` của từng slide | `python scripts/pptx_tools.py extract GOC.pptx -o DIR` |
-| Tách thành phần dùng lại: kiểm kê hình nào tách được (nhóm, sơ đồ, bảng, ảnh nền) | `python scripts/pptx_tools.py components GOC.pptx --slide 29` |
-| Làm phẳng nhóm hình (giữ toạ độ, từ chối nhóm có animation) | `python scripts/pptx_tools.py ungroup GOC.pptx 15 --name "Khung" -o OUT` |
-| Tách một thành phần thành file một-slide (cắt khung, bỏ nền/chrome, freeze theme) | `python scripts/pptx_tools.py component GOC.pptx 29 --exclude "Picture 85" --freeze -o VIEN.pptx` |
-| Dán thành phần vào slide của bộ khác | `python scripts/pptx_tools.py place VIEN.pptx DECK.pptx --slide 4 --at 1.6,1.0 -o OUT` |
-| Dựng lại cả bộ: cổng giữ ruột (chuyển slide, hiệu ứng, video, số, ảnh gốc) | `python scripts/pptx_tools.py check GOC.pptx MOI.pptx --map map.json` |
+| Mở ra xem: ảnh từng slide + ảnh ghép | `python scripts/pptx_tools.py look DECK.pptx` |
+| **Lỗi người xem thấy ngay**, khoanh đỏ trên ảnh từng slide | `python scripts/pptx_tools.py glance DECK.pptx` |
+| Bộ có sẵn: cũ trên, mới dưới, mỗi slide một ảnh lớn | `python scripts/pptx_tools.py compare GOC.pptx MOI.pptx` |
+| Vào theme: vỏ cũ ở đâu và gỡ nó | `python scripts/pptx_tools.py shell GOC.pptx [--strip m1,r1 --background F6F2EA -o OUT]` |
+| Vào theme: co nội dung vào vùng theme để trống | `python scripts/pptx_tools.py fit DECK --into 0.67,2.2,18.67,8.3 -o OUT` |
+| Vào theme: đổi mực chữ không đọc được | `python scripts/pptx_tools.py glance DECK --ink 1D2433 OUT.pptx` |
+| Sắp một slide bằng vùng, không tính tọa độ | `python scripts/pptx_tools.py arrange DECK 13 bo-cuc.json -o OUT` |
+| Chứng minh đã mở ảnh: nộp mã nhìn | `python scripts/pptx_tools.py seen DECK-glance 13=U6G 14=K7P` |
+| Ghi lần bấm, chuyển slide theo tên vật thể | `python scripts/pptx_tools.py motion DECK.pptx plan.json -o OUT.pptx` |
+| Xem chuyển động: dải ảnh từng slide, từng lần bấm | `python scripts/pptx_tools.py watch OUT.pptx [--slides 3,6]` |
+| Cổng giữ ruột: hiệu ứng, video, số, ảnh, bảng, biểu đồ | `python scripts/pptx_tools.py check GOC.pptx MOI.pptx --map map.json` |
+
+Ba lệnh còn lại hay dùng: `inventory`, `retable`, `components`/`component`/`place` — xem guides/9, 12.
+

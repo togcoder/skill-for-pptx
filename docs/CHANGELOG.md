@@ -32,7 +32,14 @@ were true at the time. Task IDs and their branches are listed in
   PowerPoint's own `Shape.Ungroup()` (skewed / mirrored+rotated groups). Native test added for the
   fallback; the real `Group 17` on QCC slide 13 flattens with the new path. Evidence:
   `PPTX_NATIVE=1 python -m pytest tests -q` → 652 passed, 10 skipped, 63 subtests.
-- **Next:** A3 (`CARD.md`, line-count neutral), then B.
+- **A3:** added `skills/pptx/CARD.md` (38 lines, limit 60): the whole "existing deck into a theme" job
+  with the commands in order and the three checks before handover; `SKILL.md` points at it under the
+  title and says the other skills under `skills/` are legacy for this job. Rule 5: `skills/pptx/` went
+  1907 lines (baseline) → 1938 (after A1) → **1890** (after A3), so the total did not grow; the cuts are
+  duplicated verification prose in guides 13 and 11 and the 28-row command table in `SKILL.md` (now 11
+  rows plus a pointer to guide 9). Tests unchanged: 648 passed, 13 skipped; `check_layout.py` OK.
+- **Next:** B — the trial itself (B1 the whole deck, B2 three re-laid-out slides, B3 one blind
+  small-model run, B4 the owner's verdict).
 
 ## T103 [pptx] Baseline for agents and the brief for the repair-and-test agent — 2026-11-11
 
