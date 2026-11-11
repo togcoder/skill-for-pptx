@@ -1,7 +1,9 @@
 # Handoff — Design Research Lab
 
-> **Việc hiện tại (2026-11-11):** tu bổ và thử nghiệm skill PPTX. Agent mới đọc
-> [docs/BRIEF_TU_BO_SKILL.md](docs/BRIEF_TU_BO_SKILL.md) trước mọi thứ khác; bản chốt là nhãn `baseline-2026-11-11`.
+> **Tình trạng (2026-11-12):** đợt tu bổ và thử nghiệm (T104) đã xong, báo cáo ở
+> `experiments/T104-20261111-lead-repair-and-test/REPORT.md`. Skill PPTX duy nhất là `skills/pptx/`
+> (model nhỏ đọc `skills/pptx/CARD.md` trước). Các skill PPTX cũ (trừ `script-writer`, mục 1 và 6 dùng nó) và lệnh `/animate-deck`, `/forge-deck` đã gỡ
+> (T105). Việc còn mở: một lệnh "áp vỏ theme" (cả model mạnh lẫn model nhỏ đều phải tự viết builder).
 > Phần còn lại của tệp này viết từ 04/11 và đã cũ ở nhiều chỗ.
 
 Cập nhật: 04/11/2026 tối, sau **T070** (Claude, trưởng nhóm: tổng hợp T001–T069, phản biện, lộ

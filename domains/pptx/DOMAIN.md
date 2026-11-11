@@ -1,13 +1,13 @@
 # Domain: pptx (PowerPoint)
 
-> **Entry point since T087: [`skills/pptx/SKILL.md`](../../skills/pptx/SKILL.md).** It is written guidance (D011); the modules below are its toolbox. `slide-forge`, `pptx-motion-director` and `deck-director` are older skills: use them only as the guide's section 9 says.
+> **Entry point since T087: [`skills/pptx/SKILL.md`](../../skills/pptx/SKILL.md).** It is written guidance (D011); the modules below are its toolbox. The older PPTX skills (`slide-forge`, `pptx-motion`, `pptx-motion-director`, `deck-director`) were removed in T105 (`script-writer` stays: the guides use it for scripts); their scripts remain as toolbox.
 
 ## Scope
 - **Existing decks:** motion direction that preserves the source. Script →
   click rhythm → compound and layered motion → Morph.
 - **New decks:** Slide Forge, which builds from a spec, with layout,
   typography, themes and assets.
-- North star: `docs/PRODUCT_TARGET.md`.
+- North star (archived): `docs/archive/PRODUCT_TARGET.md`.
 
 ## Thesis
 A deck is presented. Motion must follow the presenter's narrative (one idea
@@ -45,7 +45,6 @@ desktop only, EXPERIMENTAL until reviewed).
 
 ## Docs
 In `docs/`:
-- `STATUS.md`
 - `DESIGN_SYSTEM.md`
 - `VERIFICATION.md` (the pptx evidence ladder)
 - `ARCHITECTURE.md`
@@ -53,8 +52,7 @@ In `docs/`:
 - `MOTION_PACKING.md`
 - `POWERPOINT_NATIVE_HARNESS.md`
 
-Skills: `skills/pptx-motion-director`, `skills/slide-forge`, and (draft,
-unwired) `skills/deck-director`.
+Skill: `skills/pptx` (the older skills were removed in T105).
 
 ## Domain rules
 - **Inventory first.** For an existing deck, inventory the source before
@@ -99,6 +97,8 @@ unwired) `skills/deck-director`.
   see `experiments/T064-20261104-opencode-native-3d/REPORT.md`.
 
 ## State (2026-11-11)
+- **Cleanup (T105):** `skills/pptx` is the only PPTX skill the plugin loads (plus `script-writer`); the
+  older skills and `/animate-deck`, `/forge-deck` were removed; stale docs archived.
   - **Theme hardening & workflow guards (T102, issue 83; adopted in T104):** `glance` now reads native
     table cells (geometry, contrast, size floor), chart font sizes, PUA broken glyphs, duplicate content
     photos, busy photo backgrounds, micro text blocks and leaked draft wording; `glance --slides` keeps the

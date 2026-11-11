@@ -21,7 +21,7 @@ tác giả mặc định của máy ("Tên của bạn"), nên git không cho bi
 |---|---|
 | `experiments/<ID>-…/REPORT.md` | Agent làm task viết; sau đó không sửa bằng chứng cũ |
 | `docs/CHANGELOG.md` | Thêm một mục cho mỗi task ở đầu tệp, chỉ ghi nối thêm |
-| `docs/STATUS.md`, `HANDOFF.md` | **Viết lại** theo trạng thái mới; không thêm mục nhật ký |
+| `HANDOFF.md` | **Viết lại** theo trạng thái mới; không thêm mục nhật ký |
 | `research/tasks/INDEX.md` | Cập nhật dòng của task mình |
 | `knowledge/design_system.json` | Đổi giá trị phải kèm nguồn trong `sources` và test đi kèm (`tests/test_design_system.py`) |
 

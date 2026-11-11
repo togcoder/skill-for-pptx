@@ -2,7 +2,7 @@
 
 These documents are superseded but kept for reproducibility, because older
 experiments and reports link to them. Do not treat them as current
-instructions. Current documents: [../STATUS.md](../STATUS.md),
+instructions. Current documents: [../../domains/pptx/DOMAIN.md](../../domains/pptx/DOMAIN.md),
 [../VERIFICATION.md](../VERIFICATION.md),
 [../DESIGN_SYSTEM.md](../DESIGN_SYSTEM.md),
 [../ARCHITECTURE.md](../ARCHITECTURE.md) and [../../HANDOFF.md](../../HANDOFF.md).
@@ -14,3 +14,5 @@ instructions. Current documents: [../STATUS.md](../STATUS.md),
 | `POWERPOINT_QA.md` | `docs/VERIFICATION.md` | Four evidence levels with no rung for PowerPoint-parsed or PowerPoint-rendered |
 | `GITHUB_HANDOFF.md`, `RECOVERY.md` | `docs/COLLABORATION.md` | Notes from the initial repository import and recovery |
 | `../CHANGELOG.md` (not archived) | — | The former `STATUS.md` log continues there |
+| `STATUS.md`, `PRODUCT_TARGET.md` | `domains/pptx/DOMAIN.md`, `skills/pptx/SKILL.md` | Archived in T105: written for the old Motion Director / Slide Forge products |
+| `BRIEF_TU_BO_SKILL.md` | `experiments/T104-20261111-lead-repair-and-test/REPORT.md` | The T104 brief; the task is done |

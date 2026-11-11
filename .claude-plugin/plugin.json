@@ -1,7 +1,7 @@
 {
   "name": "pptx-motion",
-  "version": "0.13.0",
-  "description": "AI Motion Director for PowerPoint: animates existing decks (script-driven click rhythm, compound and layered motion, pro Morph Studio) and builds new ones (Slide Forge), with one design system shared by the generators and a measurable design critic. Native, editable PowerPoint animation with honest evidence levels.",
+  "version": "0.14.0",
+  "description": "PowerPoint guidance skill (skills/pptx): put an existing deck into a theme, re-lay out slides, check every slide by looking at its picture; with a small toolbox (scripts/pptx_tools.py).",
   "author": {
     "name": "togcoder"
   },

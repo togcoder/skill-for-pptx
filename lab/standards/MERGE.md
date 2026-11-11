@@ -51,5 +51,5 @@ When two tasks give different values or rules:
 
 - One `docs/CHANGELOG.md` entry per task, appended.
 - The domain card's "State" section is rewritten.
-- `HANDOFF.md` and `docs/STATUS.md` are rewritten, not appended, when
+- `HANDOFF.md` and the domain card's "State" are rewritten, not appended, when
   lab-wide state changes.

@@ -33,7 +33,7 @@ PPTX Motion Lab; PowerPoint is now one domain among several.
 | `experiments/<ID>-<date>-<agent>-<slug>/` | One folder per task: REPORT, inputs, artifacts, previews |
 | `knowledge/` | Data that has passed review, with provenance |
 | `scripts/`, `tests/`, `skills/`, `commands/` | Code, tests, agent skills and slash commands (each module belongs to one domain, see the domain cards) |
-| `docs/` | PowerPoint-domain documentation plus lab history (`CHANGELOG.md`, `STATUS.md`) |
+| `docs/` | PowerPoint-domain documentation plus lab history (`CHANGELOG.md`) |
 | `workspace/` | Scratch output, git-ignored. Never committed |
 
 Nothing else belongs at the repository root. `lab/tools/check_layout.py`
